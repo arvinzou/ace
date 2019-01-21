@@ -1,13 +1,15 @@
 var classId = '1';
 var nowDate;
 var dateData;
+var mySwiper;
 var weekStr=['周日','周一','周二','周三','周四','周五','周六']
 
 $(function () {
     dateData=new Date();
+    initSwriper();
     initClassRoom();
     clock_12h();
-     initpdf();
+     // initpdf();
     initClock();
     initClassRoom();
     $('.info_box').on('click','.active_course',viewCourse);
@@ -20,7 +22,21 @@ $(function () {
     $('.content').on('click','.active_changeRoom',changeRoom);
     $('.classRoom').on('click','.roomItem',chooesRoom);
 
+
 })
+
+
+function initSwriper() {
+    mySwiper  = new Swiper ('.swiper-container', {
+        autoplay:true,
+        // 如果需要前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+    })
+}
 
 
 function viewStudent() {
@@ -35,6 +51,46 @@ function viewStudent() {
         }
     });
 }
+
+
+function getNotices() {
+    var url = contextPath + "/www/notice/findPublicNotice";
+    var data = {
+        classesId: classId,
+    }
+    $.getJSON(url, data, function (rst) {
+        if(rst.status==0){
+            mySwiper.removeAllSlides();
+            var datas=rst.data;
+            var temp;
+            for(var i=0;i<datas.length;i++){
+                var item=datas[i];
+                if(item.fileUrl){
+                    if(item.fileUrl.lastIndexOf('.pdf')!=-1){
+                        temp=pdfTemp.replace('#index#',i);
+                        mySwiper.appendSlide(temp);
+                        initpdf(item.fileUrl,i);
+                        continue;
+                    }else if(item.fileUrl.lastIndexOf('.jpg')!=-1||item.fileUrl.lastIndexOf('.png')!=-1||item.fileUrl.lastIndexOf('gif')!=-1){
+                        temp=imgTemps.replace('#url#',item.url);
+                        mySwiper.appendSlide(temp);
+                        continue;
+                    }
+                }
+                if(item.content){
+                    temp=txtTemp.replace('#text#',item.content)
+                    mySwiper.appendSlide(temp);
+                }
+            }
+        }
+    });
+}
+
+
+var imgTemps='<div class="swiper-slide"><div class="imgMessage"><img src="#url#" alt=""></div></div>';
+var txtTemp='<div class="swiper-slide"><div class="txtMessage">#text#</div></div>';
+var pdfTemp='<div class="swiper-slide"><div class="pdfMessage" id="fileMessage#index#"></div></div>';
+
 
 
 
@@ -236,6 +292,7 @@ var dayCourseE='     <div class="dayClass">\n' +
 function initData() {
     getClassinfo();
     getCourseList();
+    getNotices();
 }
 
 function getClassinfo() {
@@ -309,10 +366,10 @@ function initClock() {
     var myTime = setInterval("clock_12h()", 15000);
 }
 
-function initpdf() {
+function initpdf(url,index) {
     var success = new PDFObject({
-        url: "./img/高铁图.pdf"
-    }).embed("fileMessage");
+        url: url
+    }).embed("fileMessage"+index);
 }
 
 var PDFObject = function (y) {

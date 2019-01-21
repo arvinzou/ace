@@ -33,6 +33,10 @@ public interface NoticeDao {
                                     @Param("limit") int limit,
                                     @Param("orderBy") String orderBy);
 
+
+    List<NoticeVo> findPublicNoticeList(@Param("classesId") String classesId);
+
+
     int findCount(@Param("condition") NoticeQVo condition);
 
     int findUnreadCount(String id);

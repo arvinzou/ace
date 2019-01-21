@@ -209,11 +209,10 @@ public interface TraAccService {
     /**
      * 事故死亡人数同期对比 报表
      *
-     * @return Map<String,Object>
      * @param params params
+     * @return Map<String,Object>
      */
     Map<String, Object> contrastiveReport(Map<String, String> params);
-
 
 
     /**
@@ -227,6 +226,7 @@ public interface TraAccService {
      * @version: 2019-01-19
      */
     SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception;
+
     /**
      * @throws
      * @Title:getTraAccList
@@ -237,5 +237,14 @@ public interface TraAccService {
      * @author: 陈晓克
      * @version: 2019-01-21
      */
-    List<Map<String, Object>> getTraAccList(TraAccQVo condition)throws Exception;
+    List<Map<String, Object>> getTraAccList(TraAccQVo condition) throws Exception;
+
+    /**
+     * 掌上驾驶仓
+     *
+     * @param areaCode    行政区划
+     * @param dateTimeStr 查询年月;7位有效数据，默认当前年月
+     * @return Map<String, Object>
+     */
+    Map<String, Object> multipleReport(String areaCode, String dateTimeStr);
 }

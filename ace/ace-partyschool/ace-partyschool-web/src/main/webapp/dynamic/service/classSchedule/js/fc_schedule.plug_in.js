@@ -293,7 +293,9 @@ window.onload = function () {
                     jsons: JSON.stringify(insertDate)
                 }
                 $.post(url, jdata, function (rst) {
-                    if (rst.status != 0) {
+                    if (rst.status == 0) {
+                        formatDate($('#calendar').fullCalendar('getView').title);
+                    }else{
                         alert("排课失败，请刷新后重试！");
                     }
                 })

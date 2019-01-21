@@ -109,6 +109,22 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
+    <select id="findPublicNoticeList" parameterType="java.lang.String" resultMap="VoResultMap">
+        (	select
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
+        from notice n
+        WHERE n.classesId=#{classesId,jdbcType=VARCHAR} AND n.category='1'
+        ORDER BY pushDate desc
+        limit 0,1)
+        union all
+         (select
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
+        from notice n
+        WHERE n.classesId=#{classesId,jdbcType=VARCHAR} AND n.category='2'
+        ORDER BY pushDate desc
+        limit 0,1)
+    </select>
+
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content,(select count(1) from notice_status a where n.id=a.noticeId)

@@ -1,10 +1,10 @@
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.SortList;
 import org.junit.Test;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @Auther: Arvin
@@ -17,8 +17,20 @@ public class CommonTest {
     @Test
     public void test() {
 
-//        System.out.println(DateUtil.getNow().substring(0, 10));
-//        generatorGUID(1);
+        List<Demo> list = new LinkedList<>();
+        Demo p3 = new Demo(2);
+        list.add(p3);
+        Demo p1 = new Demo(4);
+        list.add(p1);
+        Demo p2 = new Demo(3);
+        list.add(p2);
+        Demo p4 = new Demo(1);
+        list.add(p4);
+
+        SortList<Demo> sortList = new SortList<>();
+        sortList.sort(list, "getDistance", "");
+
+        System.out.println(list.toString());
     }
 
 
