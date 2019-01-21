@@ -1,7 +1,9 @@
 package com.huacainfo.ace.taa.web.controller;
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.taa.service.TraAccService;
 import com.huacainfo.ace.taa.vo.TraAccQVo;
@@ -99,18 +101,41 @@ public class WReportController {
     /**
      * 事故死亡人数同期对比 报表
      *
+     * @param areaCode  行政区划
+     * @param roadManId 路长ID
+     * @param year      查询年限，四位有效数值;默认为当前日期年限
      * @return Map<String,Object>
      */
     @RequestMapping(value = "/contrastiveReport")
-    public SingleResult<Map<String, Object>> contrastiveReport(String areaCode) throws Exception {
+    public SingleResult<Map<String, Object>> contrastiveReport(String areaCode,
+                                                               String roadManId,
+                                                               String year) throws Exception {
 
         Map<String, String> params = new HashMap<>();
         params.put("areaCode", areaCode);
+        params.put("year", year);
+        params.put("roadManId", roadManId);
 
         Map<String, Object> data = traAccService.contrastiveReport(params);
         SingleResult<Map<String, Object>> rst = new SingleResult<>();
         rst.setValue(data);
         return rst;
+    }
+
+
+    /**
+     * 掌上驾驶仓 - 综合查询
+     *
+     * @param areaCode    行政区划
+     * @param dateTimeStr 查询年月;7位有效数据，默认当前年月
+     * @return Map<String, Object>
+     */
+    @RequestMapping(value = "/multipleReport")
+    public ResultResponse monthReport(String areaCode, String dateTimeStr) throws Exception {
+
+
+        Map<String, Object> rst = traAccService.multipleReport(areaCode, dateTimeStr);
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
     }
 }
 

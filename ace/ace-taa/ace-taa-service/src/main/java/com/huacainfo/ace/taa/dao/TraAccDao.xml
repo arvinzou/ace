@@ -315,6 +315,9 @@
         <if test='areaCode!=null and areaCode!=""'>
             and t.areaCode = #{areaCode,jdbcType=VARCHAR}
         </if>
+        <if test='roadManId!=null and roadManId!=""'>
+            and t.roadManId = #{roadManId,jdbcType=VARCHAR}
+        </if>
     </select>
     <select id="getLatLongByAreaCode" resultType="map">
         select gps_x longitude,gps_y latitude ,area_name areaName,area_code areaCode from portal.gps_chian where area_code=#{areaCode}
@@ -323,5 +326,55 @@
         select
          t.latitude, t.longitude
         <include refid="whereCondition"/>
+    </select>
+
+    <select id="monthReport" resultType="map">
+    select
+    (SELECT
+    count(1)
+    from taa.tra_acc t
+    where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+    and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+    ) as accTimes ,
+    (
+    SELECT
+    sum(t.deadthToll)
+    from taa.tra_acc t
+    where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+    and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+    ) as deathNum
+    from taa.tra_acc
+    LIMIT 1
+    </select>
+
+    <select id="top10Report" resultType="map">
+        select
+        rm.`name`, a.deathNum
+        from (
+        select
+        t.roadManId,sum(deadthToll) as deathNum
+        from taa.tra_acc t
+        where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+        and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+        GROUP by t.roadManId
+        )A
+        LEFT JOIN road_man rm on a.roadManId = rm.id
+        ORDER BY A.deathNum DESC
+        LIMIT 0,10
+    </select>
+
+    <select id="histogramReport" resultType="map">
+        select
+        p.`name` as areaCodeName,
+        A.deathNum
+        from (
+        select
+        t.areaCode ,SUM(deadthToll) as deathNum
+        from taa.tra_acc t
+        where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+        GROUP BY t.areaCode
+        )A
+        left join portal.province p on a.areaCode = p.`code`
+        order by A.areaCode
     </select>
 </mapper>
