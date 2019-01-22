@@ -487,12 +487,13 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-19
      */
     @Override
-   public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception{
-        SingleResult<Map<String, Object>> rst=new SingleResult();
-        String areaCode6=CommonUtils.rightPad(areaCode,6,"0");
+    public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception {
+        SingleResult<Map<String, Object>> rst = new SingleResult();
+        String areaCode6 = CommonUtils.rightPad(areaCode, 6, "0");
         rst.setValue(this.traAccDao.getLatLongByAreaCode(areaCode6));
-       return rst;
-   }
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:getTraAccList
@@ -504,16 +505,16 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-21
      */
     @Override
-    public List<Map<String, Object>> getTraAccList(TraAccQVo condition)throws Exception{
-        List<Map<String, Object>> rst=new ArrayList<Map<String, Object>>();
-        List<Map<String, Object>> list=this.traAccDao.getTraAccList(condition);
-        for(Map<String, Object> o:list){
-            double[] e= LatLonUtil.map_tx2bd(((java.math.BigDecimal)o.get("latitude")).doubleValue(),((java.math.BigDecimal)o.get("longitude")).doubleValue());
-            Map<String, Object> map=new HashMap<>();
-            map.put("latitude",e[0]);
-            map.put("longitude",e[1]);
-            map.put("deadthToll",o.get("deadthToll"));
-            map.put("injuries",o.get("injuries"));
+    public List<Map<String, Object>> getTraAccList(TraAccQVo condition) throws Exception {
+        List<Map<String, Object>> rst = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = this.traAccDao.getTraAccList(condition);
+        for (Map<String, Object> o : list) {
+            double[] e = LatLonUtil.map_tx2bd(((java.math.BigDecimal) o.get("latitude")).doubleValue(), ((java.math.BigDecimal) o.get("longitude")).doubleValue());
+            Map<String, Object> map = new HashMap<>();
+            map.put("latitude", e[0]);
+            map.put("longitude", e[1]);
+            map.put("deadthToll", o.get("deadthToll"));
+            map.put("injuries", o.get("injuries"));
             rst.add(map);
         }
         return rst;
@@ -534,14 +535,11 @@ public class TraAccServiceImpl implements TraAccService {
         Map<String, Object> month = traAccDao.monthReport(areaCode, dateTimeStr);
         //事故top10
         List<Map<String, Object>> top10 = traAccDao.top10Report(areaCode, dateTimeStr);
-        //事故柱形图
-        List<Map<String, Object>> histogram = traAccDao.histogramReport(dateTimeStr);
 
 //        return data
         Map<String, Object> rst = new HashMap<>();
         rst.put("month", month);//当月数据统计
         rst.put("top10", top10);//当月数据统计
-        rst.put("histogram", histogram);//当月数据统计
         return rst;
     }
 
@@ -554,6 +552,23 @@ public class TraAccServiceImpl implements TraAccService {
     @Override
     public List<Map<String, Object>> findDistrictList(String areaCode) {
         return traAccDao.findDistrictList(areaCode);
+    }
+
+    /**
+     * 掌上驾驶仓 - 事故柱形图
+     *
+     * @param category    查询类型 times-事故次数 ； death-死亡人数
+     * @param dateTimeStr 查询年月;7位有效数据，默认当前年月
+     * @return Map<String, Object>
+     */
+    @Override
+    public List<Map<String, Object>> histogramReport(String category, String dateTimeStr) {
+
+        Map<String, Object> p = new HashMap<>();
+        p.put("category", category);
+        p.put("dateTimeStr", dateTimeStr);
+        //事故柱形图
+        return traAccDao.histogramReport(p);
     }
 
 

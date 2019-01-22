@@ -254,4 +254,13 @@ public interface TraAccService {
      * @return Map<String, Object>
      */
     List<Map<String, Object>> findDistrictList(String areaCode);
+
+    /**
+     * 掌上驾驶仓 - 事故柱形图
+     *
+     * @param category    查询类型 times-事故次数 ； death-死亡人数
+     * @param dateTimeStr 查询年月;7位有效数据，默认当前年月
+     * @return Map<String, Object>
+     */
+    List<Map<String, Object>> histogramReport(String category, String dateTimeStr);
 }

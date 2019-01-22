@@ -364,18 +364,38 @@
     </select>
 
     <select id="histogramReport" resultType="map">
-        select
-        p.`name` as areaCodeName,
-        A.deathNum
-        from (
-        select
-        t.areaCode ,SUM(deadthToll) as deathNum
-        from taa.tra_acc t
-        where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
-        GROUP BY t.areaCode
-        )A
-        left join portal.province p on a.areaCode = p.`code`
-        order by A.areaCode
+
+        <choose>
+            <when test='category == "death"'>
+                select
+                p.`name` as areaCodeName,
+                A.deathNum as num
+                from (
+                select
+                t.areaCode ,SUM(deadthToll) as deathNum
+                from taa.tra_acc t
+                where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+                GROUP BY t.areaCode
+                )A
+                left join portal.province p on a.areaCode = p.`code`
+                order by A.areaCode
+
+            </when>
+            <otherwise>
+                select
+                p.`name` as areaCodeName,
+                A.accTimes as num
+                from (
+                select
+                t.areaCode ,count(1) as accTimes
+                from taa.tra_acc t
+                where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+                GROUP BY t.areaCode
+                )A
+                left join portal.province p on a.areaCode = p.`code`
+                order by A.areaCode
+            </otherwise>
+        </choose>
     </select>
 
     <select id="findDistrictList" resultType="map">
