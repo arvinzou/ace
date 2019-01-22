@@ -1,12 +1,12 @@
 <view class='index'>
     <view class='banner'>
-        <view class='header-box'><image class='header' src='../../image/default_header.png'></image></view>
+        <view class='header-box'><image class='header' src='{{userData.avatarUrl}}'></image></view>
         <view class='info-box'>
-            <text class='name'>陈思佳</text>
+            <text class='name'>{{userData.name}}</text>
             <image class='icon-edit' src='../../image/icon-edit.png' bindtap='edit'></image>
         </view>
         <view class='info-box'>
-            <text class='cardNo'>警号:436445</text>
+            <text class='cardNo'>警号:{{userData.copNo}}</text>
         </view>
     </view>
     <view class='menu'>
@@ -32,6 +32,6 @@
         </view>
     </view>
     <view class='footer'>
-        <button>退出登录</button>
+        <button bindtap='exitLogin'>退出登录</button>
     </view>
 </view>
