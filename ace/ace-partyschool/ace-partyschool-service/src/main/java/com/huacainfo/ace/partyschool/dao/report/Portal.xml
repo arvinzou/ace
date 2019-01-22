@@ -3,46 +3,67 @@
 <mapper namespace="com.huacainfo.ace.partyschool.dao.report.Portal">
     <select id="query" resultType="map">
         SELECT
-        'eva' id,
-        count(DISTINCT(t.classScheduleId))
-        VALUE
+        'person' id,
+        count(1) value
         FROM
-        evaluation_rst_content t
-        <if test='classId !=null'>
-            inner join student a on t.userId=a.id
-            WHERE
-            a.classId=#{classId}
-        </if>
-
-        UNION ALL
-        SELECT
-        'teacher' id,
-        count(1)
-        VALUE
-        FROM
-        teacher t
+        portal.users t
         WHERE
-        t. STATUS = '1'
-        UNION ALL
+        t.user_level='1' and t.stauts='1' and t.cur_syid ='partyschool'
+        union all
         SELECT
-        'student' id,
-        count(1)
-        VALUE
+        'org' id,
+        count(1) value
         FROM
-        student t  WHERE t.STATUS = '1'
-        <if test='classId !=null'>
-            and t.classId=#{classId}
-        </if>
-        UNION ALL
+        society_org_info t
+        WHERE
+        t.status='3'
+        union all
         SELECT
-        'notice' id,
-        count(1)
-        VALUE
+        'activityAll' id,
+        count(1) value
         FROM
-        notice t
-        WHERE t.STATUS = '1'
-        <if test='classId !=null'>
-            and t.classesId=#{classId}
-        </if>
+        activity t
+        WHERE
+        t.status='3'
+        union all
+        SELECT
+        'activityAudit' id,
+        count(1) value
+        FROM
+        activity t
+        WHERE
+        t.status='2'
+        union all
+        SELECT
+        'behavior' id,
+        count(1) value
+        FROM
+        behavior t
+        WHERE
+        t.status='3'
+        union all
+        SELECT
+        'subjectIdea' id,
+        count(1) value
+        FROM
+        subject_idea t
+        WHERE
+        t.status='3'
+        union all
+        SELECT
+        'live' id,
+        count(1) value
+        FROM
+        live.live t
+        WHERE
+        t.status='2'
+        union all
+        SELECT
+        'circle' id,
+        count(1) value
+        FROM
+        circle t
+        WHERE
+        t.status='2'
     </select>
 </mapper>
