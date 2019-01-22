@@ -1,18 +1,51 @@
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+      userData: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+    that.initData();
   },
+
+  /**
+   * 获取用户信息
+   */
+  initData: function () {
+      var that = this;
+      util.request(cfg.server + '/taa/www/register/findCustomerVo', {},
+          function (res) {
+              if (res.status == 0) {
+                  that.setData({
+                      userData: res.data
+                  });
+              } else {
+                  if (res.info == '用户尚未注册') {
+                      wx.navigateTo({
+                          url: '../regist/index',
+                      });
+                  } else {
+                      wx.showModal({
+                          title: '提示',
+                          content: res.info,
+                          success: function (res) { }
+                      });
+                  }
+              }
+
+          }
+      );
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
