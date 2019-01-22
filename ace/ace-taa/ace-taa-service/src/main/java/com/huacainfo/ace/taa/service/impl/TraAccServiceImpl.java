@@ -542,7 +542,7 @@ public class TraAccServiceImpl implements TraAccService {
         rst.put("month", month);//当月数据统计
         rst.put("top10", top10);//当月数据统计
         rst.put("histogram", histogram);//当月数据统计
-        return null;
+        return rst;
     }
 
     /**

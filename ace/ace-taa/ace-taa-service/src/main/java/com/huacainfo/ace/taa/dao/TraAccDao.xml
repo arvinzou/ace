@@ -384,7 +384,7 @@
         FROM
         portal.province t
         WHERE
-        CODE LIKE like concat(#{areaCode,jdbcType=VARCHAR},'%')
+        CODE LIKE concat(#{areaCode,jdbcType=VARCHAR},'%')
         AND (
         LENGTH(CODE) = 4
         OR LENGTH(CODE) = 6
