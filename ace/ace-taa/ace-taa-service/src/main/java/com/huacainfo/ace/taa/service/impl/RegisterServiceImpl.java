@@ -188,7 +188,9 @@ public class RegisterServiceImpl implements RegisterService {
     public CustomerVo findCustomerVo(String uid) {
 
         Map<String, Object> p = new HashMap<>();
+        p.put("sysId", "taa");
         p.put("uid", uid);
+
 
         return registerDao.findCustomerVo(p);
     }

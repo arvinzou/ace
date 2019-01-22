@@ -13,6 +13,10 @@ import com.huacainfo.ace.taa.model.TraAcc;
 import com.huacainfo.ace.taa.service.TraAccService;
 import com.huacainfo.ace.taa.vo.TraAccQVo;
 import com.huacainfo.ace.taa.vo.TraAccVo;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +37,17 @@ public class TraAccServiceImpl implements TraAccService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+    private SqlSession getSqlSession() {
+        SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+
+        return session;
+    }
+
 
     /**
      * @throws
@@ -50,13 +65,31 @@ public class TraAccServiceImpl implements TraAccService {
      */
     @Override
     public PageResult<TraAccVo> findTraAccList(TraAccQVo condition, int start, int limit, String orderBy) throws Exception {
+        //
         PageResult<TraAccVo> rst = new PageResult<>();
-        List<TraAccVo> list = this.traAccDao.findList(condition, start, limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.traAccDao.findCount(condition);
-            rst.setTotal(allRows);
+        //sql
+        SqlSession session = getSqlSession();
+        TraAccDao dao = session.getMapper(TraAccDao.class);
+        //
+        try {
+            List<TraAccVo> list = dao.findList(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (start <= 1) {
+                int allRows = traAccDao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+            return rst;
+        } catch (Exception e) {
+            logger.error("{}", e);
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
+
         return rst;
     }
 
@@ -152,7 +185,24 @@ public class TraAccServiceImpl implements TraAccService {
     @Override
     public SingleResult<TraAccVo> selectTraAccByPrimaryKey(String id) throws Exception {
         SingleResult<TraAccVo> rst = new SingleResult<>();
-        rst.setValue(this.traAccDao.selectVoByPrimaryKey(id));
+        //sql
+        SqlSession session = getSqlSession();
+        TraAccDao dao = session.getMapper(TraAccDao.class);
+        //
+        try {
+            rst.setValue(dao.selectVoByPrimaryKey(id));
+            return rst;
+        } catch (Exception e) {
+            logger.error("{}", e);
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
         return rst;
     }
 
@@ -487,12 +537,13 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-19
      */
     @Override
-   public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception{
-        SingleResult<Map<String, Object>> rst=new SingleResult();
-        String areaCode6=CommonUtils.rightPad(areaCode,6,"0");
+    public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception {
+        SingleResult<Map<String, Object>> rst = new SingleResult();
+        String areaCode6 = CommonUtils.rightPad(areaCode, 6, "0");
         rst.setValue(this.traAccDao.getLatLongByAreaCode(areaCode6));
-       return rst;
-   }
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:getTraAccList
@@ -504,16 +555,16 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-21
      */
     @Override
-    public List<Map<String, Object>> getTraAccList(TraAccQVo condition)throws Exception{
-        List<Map<String, Object>> rst=new ArrayList<Map<String, Object>>();
-        List<Map<String, Object>> list=this.traAccDao.getTraAccList(condition);
-        for(Map<String, Object> o:list){
-            double[] e= LatLonUtil.map_tx2bd(((java.math.BigDecimal)o.get("latitude")).doubleValue(),((java.math.BigDecimal)o.get("longitude")).doubleValue());
-            Map<String, Object> map=new HashMap<>();
-            map.put("latitude",e[0]);
-            map.put("longitude",e[1]);
-            map.put("deadthToll",o.get("deadthToll"));
-            map.put("injuries",o.get("injuries"));
+    public List<Map<String, Object>> getTraAccList(TraAccQVo condition) throws Exception {
+        List<Map<String, Object>> rst = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = this.traAccDao.getTraAccList(condition);
+        for (Map<String, Object> o : list) {
+            double[] e = LatLonUtil.map_tx2bd(((java.math.BigDecimal) o.get("latitude")).doubleValue(), ((java.math.BigDecimal) o.get("longitude")).doubleValue());
+            Map<String, Object> map = new HashMap<>();
+            map.put("latitude", e[0]);
+            map.put("longitude", e[1]);
+            map.put("deadthToll", o.get("deadthToll"));
+            map.put("injuries", o.get("injuries"));
             rst.add(map);
         }
         return rst;
@@ -534,14 +585,11 @@ public class TraAccServiceImpl implements TraAccService {
         Map<String, Object> month = traAccDao.monthReport(areaCode, dateTimeStr);
         //事故top10
         List<Map<String, Object>> top10 = traAccDao.top10Report(areaCode, dateTimeStr);
-        //事故柱形图
-        List<Map<String, Object>> histogram = traAccDao.histogramReport(dateTimeStr);
 
 //        return data
         Map<String, Object> rst = new HashMap<>();
         rst.put("month", month);//当月数据统计
         rst.put("top10", top10);//当月数据统计
-        rst.put("histogram", histogram);//当月数据统计
         return rst;
     }
 
@@ -554,6 +602,23 @@ public class TraAccServiceImpl implements TraAccService {
     @Override
     public List<Map<String, Object>> findDistrictList(String areaCode) {
         return traAccDao.findDistrictList(areaCode);
+    }
+
+    /**
+     * 掌上驾驶仓 - 事故柱形图
+     *
+     * @param category    查询类型 times-事故次数 ； death-死亡人数
+     * @param dateTimeStr 查询年月;7位有效数据，默认当前年月
+     * @return Map<String, Object>
+     */
+    @Override
+    public List<Map<String, Object>> histogramReport(String category, String dateTimeStr) {
+
+        Map<String, Object> p = new HashMap<>();
+        p.put("category", category);
+        p.put("dateTimeStr", dateTimeStr);
+        //事故柱形图
+        return traAccDao.histogramReport(p);
     }
 
 

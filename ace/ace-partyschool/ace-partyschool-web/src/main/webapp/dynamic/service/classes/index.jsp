@@ -26,17 +26,11 @@ pageEncoding="utf-8"%>
 
                 </div>
                 <div class="col-md-4">
-                    <div class="input-group" style="float: left;margin-right: 5px;width: 250px">
-                        <input type="text"
-                               name="crName"
-                               class="form-control"
-                               placeholder="请输入教室名称">
-                    </div>
                     <div class="input-group">
                         <input type="text"
-                               name="name"
+                               name="keyword"
                                class="form-control"
-                               placeholder="请输入班级名称">
+                               placeholder="请输入班级/教室名称">
                         <span class="input-group-btn">
 							<button class="btn  btn-default search_btn" id="btn-search"
                                     authority="false">

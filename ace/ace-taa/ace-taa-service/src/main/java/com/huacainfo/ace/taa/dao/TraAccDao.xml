@@ -23,8 +23,20 @@
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
-    <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.TraAccVo"
-               extends="BaseResultMap">
+    <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.TraAccVo" extends="BaseResultMap">
+
+        <collection property="causeList" column="detailId" javaType="ArrayList"
+                    ofType="com.huacainfo.ace.taa.model.TraAccCause">
+            <id column="causeId" jdbcType="VARCHAR" property="id"/>
+            <result column="itemCause" jdbcType="VARCHAR" property="cause"/>
+            <result column="causeName" jdbcType="VARCHAR" property="viewName"/>
+        </collection>
+        <collection property="mtypeList" column="detailId" javaType="ArrayList"
+                    ofType="com.huacainfo.ace.taa.model.TraAccMtype">
+            <id column="mtypeId" jdbcType="VARCHAR" property="id"/>
+            <result column="itemMtype" jdbcType="VARCHAR" property="vehicleType"/>
+            <result column="mtypeName" jdbcType="VARCHAR" property="viewName"/>
+        </collection>
     </resultMap>
     <sql id="Base_Column_List">
         id, address, latitude, longitude, areaCode, weather, vehicleType, status, accidentTime,
@@ -33,15 +45,28 @@
     </sql>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
+        tc.id as causeId, tc.cause as itemCause, tc.causeName,
+        tm.id as mtypeId, tm.vehicleType as itemMtype, tm.mtypeName,
+
         d.name as roadName,
         t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
-    t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
-    t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
+        t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
+        t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
     from tra_acc t
     inner join road_man a on t.roadManId=a.id
     inner join road_section b on t.roadSectionId=b.id
     inner join portal.province c on t.areaCode=c.code
     inner join road d on b.roadId=d.id
+        LEFT JOIN (
+        select c.id, c.accId, c.cause,d.`name` as causeName
+        from tra_acc_cause c ,portal.dict d
+        where d.category_id='173' and c.cause = d.`code`
+        )tc on t.id = tc.accId
+        LEFT JOIN (
+        select m.id, m.accId, m.vehicleType,d.`name` as mtypeName
+        from tra_acc_mtype m ,portal.dict d
+        where d.category_id='172' and m.vehicleType = d.`code`
+        )tm on t.id = tm.accId
     where t.id = #{id,jdbcType=VARCHAR}
   </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -91,6 +116,16 @@
         inner join road_section b on t.roadSectionId=b.id
         inner join portal.province c on t.areaCode=c.code
         inner join road d on b.roadId=d.id
+        LEFT JOIN (
+        select c.id, c.accId, c.cause,d.`name` as causeName
+        from tra_acc_cause c ,portal.dict d
+        where d.category_id='173' and c.cause = d.`code`
+        )tc on t.id = tc.accId
+        LEFT JOIN (
+        select m.id, m.accId, m.vehicleType,d.`name` as mtypeName
+        from tra_acc_mtype m ,portal.dict d
+        where d.category_id='172' and m.vehicleType = d.`code`
+        )tm on t.id = tm.accId
         where t.status='1'
         <if test='condition.roadManName!=null and condition.roadManName!=""'>
             and a.name like
@@ -158,11 +193,14 @@
     <select id="findList" resultMap="BaseResultMapVo">
         select * from (
         select
+        tc.id as causeId, tc.cause as itemCause, tc.causeName,
+        tm.id as mtypeId, tm.vehicleType as itemMtype, tm.mtypeName,
         d.name as roadName,
         t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
         t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
         t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName,d.category
-        <include refid="whereCondition"/>)m
+        <include refid="whereCondition"/>
+        )m
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
                 ORDER BY m.${orderBy}
@@ -324,7 +362,7 @@
     </select>
     <select id="getTraAccList" resultType="map">
         select
-         t.latitude, t.longitude,t.deadthToll,t.injuries
+        t.latitude, t.longitude,t.deadthToll,t.injuries
         <include refid="whereCondition"/>
     </select>
 
@@ -364,18 +402,38 @@
     </select>
 
     <select id="histogramReport" resultType="map">
-        select
-        p.`name` as areaCodeName,
-        A.deathNum
-        from (
-        select
-        t.areaCode ,SUM(deadthToll) as deathNum
-        from taa.tra_acc t
-        where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
-        GROUP BY t.areaCode
-        )A
-        left join portal.province p on a.areaCode = p.`code`
-        order by A.areaCode
+
+        <choose>
+            <when test='category == "death"'>
+                select
+                p.`name` as areaCodeName,
+                A.deathNum as num
+                from (
+                select
+                t.areaCode ,SUM(deadthToll) as deathNum
+                from taa.tra_acc t
+                where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+                GROUP BY t.areaCode
+                )A
+                left join portal.province p on a.areaCode = p.`code`
+                order by A.areaCode
+
+            </when>
+            <otherwise>
+                select
+                p.`name` as areaCodeName,
+                A.accTimes as num
+                from (
+                select
+                t.areaCode ,count(1) as accTimes
+                from taa.tra_acc t
+                where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+                GROUP BY t.areaCode
+                )A
+                left join portal.province p on a.areaCode = p.`code`
+                order by A.areaCode
+            </otherwise>
+        </choose>
     </select>
 
     <select id="findDistrictList" resultType="map">

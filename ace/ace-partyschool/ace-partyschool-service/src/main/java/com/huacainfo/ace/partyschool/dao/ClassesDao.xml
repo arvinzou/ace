@@ -98,17 +98,16 @@
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
-        <if test="condition.name !=null and condition.name !=&quot;&quot;">
-            and c.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
-        </if>
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and c.status =#{condition.status,jdbcType=VARCHAR}
         </if>
         <if test="condition.classroomId !=null and condition.classroomId !=&quot;&quot;">
             and c.classroomId =#{condition.classroomId,jdbcType=VARCHAR}
         </if>
-        <if test="condition.crName !=null and condition.crName !=&quot;&quot;">
-            and cr.name like concat('%',#{condition.crName,jdbcType=VARCHAR},'%')
+        <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+            and (c.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            or cr.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            )
         </if>
     </sql>
 
@@ -247,6 +246,7 @@
         from classes
         where
         name=#{name}
+        and id != #{id,jdbcType=VARCHAR}
     </select>
 
     <update id="updateStatus" parameterType="java.lang.String">
