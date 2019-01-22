@@ -13,6 +13,10 @@ import com.huacainfo.ace.taa.model.TraAcc;
 import com.huacainfo.ace.taa.service.TraAccService;
 import com.huacainfo.ace.taa.vo.TraAccQVo;
 import com.huacainfo.ace.taa.vo.TraAccVo;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +37,17 @@ public class TraAccServiceImpl implements TraAccService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+    private SqlSession getSqlSession() {
+        SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+
+        return session;
+    }
+
 
     /**
      * @throws
@@ -50,13 +65,31 @@ public class TraAccServiceImpl implements TraAccService {
      */
     @Override
     public PageResult<TraAccVo> findTraAccList(TraAccQVo condition, int start, int limit, String orderBy) throws Exception {
+        //
         PageResult<TraAccVo> rst = new PageResult<>();
-        List<TraAccVo> list = this.traAccDao.findList(condition, start, limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.traAccDao.findCount(condition);
-            rst.setTotal(allRows);
+        //sql
+        SqlSession session = getSqlSession();
+        TraAccDao dao = session.getMapper(TraAccDao.class);
+        //
+        try {
+            List<TraAccVo> list = dao.findList(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (start <= 1) {
+                int allRows = traAccDao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+            return rst;
+        } catch (Exception e) {
+            logger.error("{}", e);
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
+
         return rst;
     }
 
@@ -152,7 +185,24 @@ public class TraAccServiceImpl implements TraAccService {
     @Override
     public SingleResult<TraAccVo> selectTraAccByPrimaryKey(String id) throws Exception {
         SingleResult<TraAccVo> rst = new SingleResult<>();
-        rst.setValue(this.traAccDao.selectVoByPrimaryKey(id));
+        //sql
+        SqlSession session = getSqlSession();
+        TraAccDao dao = session.getMapper(TraAccDao.class);
+        //
+        try {
+            rst.setValue(dao.selectVoByPrimaryKey(id));
+            return rst;
+        } catch (Exception e) {
+            logger.error("{}", e);
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
         return rst;
     }
 

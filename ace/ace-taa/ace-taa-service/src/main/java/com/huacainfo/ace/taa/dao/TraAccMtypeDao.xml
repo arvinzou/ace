@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.taa.dao.TraAccMtypeDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.TraAccMtype">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="accId" jdbcType="VARCHAR" property="accId"/>
+        <result column="vehicleType" jdbcType="VARCHAR" property="vehicleType"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, accId, vehicleType, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tra_acc_mtype
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from tra_acc_mtype
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.taa.model.TraAccMtype">
+    insert into tra_acc_mtype (id, accId, vehicleType, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{accId,jdbcType=VARCHAR},
+    #{vehicleType,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.TraAccMtype">
+    update tra_acc_mtype
+    set accId = #{accId,jdbcType=VARCHAR},
+      vehicleType = #{vehicleType,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

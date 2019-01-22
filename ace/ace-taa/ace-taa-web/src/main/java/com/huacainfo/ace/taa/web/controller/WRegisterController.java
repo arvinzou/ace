@@ -191,13 +191,13 @@ public class WRegisterController extends TaaBaseController {
      */
     @RequestMapping("/updateMobile")
     public ResultResponse updateMobile(String mobile, String code, String uid) {
-        if (!StringUtil.areNotEmpty(mobile, code)) {
+        if (StringUtil.isEmpty(mobile)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
-        //验证码校验
-        if (!codeCheck(mobile, code)) {
-            return new ResultResponse(ResultCode.FAIL, "验证码输入有误");
-        }
+//        //验证码校验
+//        if (!codeCheck(mobile, code)) {
+//            return new ResultResponse(ResultCode.FAIL, "验证码输入有误");
+//        }
         //微信鉴权信息 --小程序
         WxUser user = getCurWxUser();
         if (StringUtil.isNotEmpty(uid)) {

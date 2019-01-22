@@ -104,4 +104,17 @@ public class WRoadController extends TaaBaseController {
         PageResult<RoadManVo> rst = roadManService.findRoadManList(condition, 0, 5000, "");
         return rst;
     }
+
+    /**
+     * 获取所有路长花名册 - 通讯录形式
+     *
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/roster")
+    public ResultResponse roster() throws Exception {
+        return roadManService.findRoster();
+    }
+
+
 }
