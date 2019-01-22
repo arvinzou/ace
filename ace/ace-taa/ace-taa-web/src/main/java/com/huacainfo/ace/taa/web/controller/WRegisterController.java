@@ -79,10 +79,11 @@ public class WRegisterController extends TaaBaseController {
         length = StringUtil.isEmpty(length) ? "4" : length;
         String randCode = CommonUtils.getIdentifyCode(Integer.valueOf(length), 0);
         // 保存进session
-        getRequest().getSession().setAttribute("j_captcha_cmcc_" + mobile, randCode);
+        redisSet("j_captcha_cmcc_" + mobile, randCode, 0);
+//        getRequest().getSession().setAttribute("j_captcha_cmcc_" + mobile, randCode);
         //发送内容
         String content = "本次提交验证码为" + randCode + "，请及时输入。";
-        logger.debug(mobile + "=>j_captcha_cmcc:{}", getSession("j_captcha_cmcc_" + mobile));
+        logger.debug(mobile + "=>j_captcha_cmcc:{}", redisGet("j_captcha_cmcc_" + mobile));
 
         return registerService.sendSms(mobile, content);
     }
@@ -96,11 +97,11 @@ public class WRegisterController extends TaaBaseController {
      */
     private boolean codeCheck(String mobile, String code) {
         //验证码校验
-        String sessionCode = String.valueOf(getSession("j_captcha_cmcc_" + mobile));
+        String checkCode = redisGet("j_captcha_cmcc_" + mobile);
 
-        logger.debug("[taa]SignController.codeCheck=>mobile:{},code:{}", mobile, code);
+        logger.debug("[taa]WRegisterController.codeCheck=>mobile:{},code:{}", mobile, code);
 
-        return code.equals(sessionCode);
+        return code.equals(checkCode);
     }
 
     /**

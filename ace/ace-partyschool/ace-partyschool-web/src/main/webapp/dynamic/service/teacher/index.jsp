@@ -21,29 +21,17 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-5 toolbar">
+                <div class="col-md-8 toolbar">
 
                     <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
 
                 </div>
-                <div class="col-md-7">
-                    <div class="input-group" style="float: left;margin-right: 5px;width: 175px">
-                        <input type="text"
-                               name="mobile"
-                               class="form-control"
-                               placeholder="请输入手机号码">
-                    </div>
-                    <div class="input-group" style="float: left;margin-right: 5px;width: 225px">
-                        <input type="text"
-                               name="idCard"
-                               class="form-control"
-                               placeholder="请输入身份证号码">
-                    </div>
+                <div class="col-md-4">
                     <div class="input-group">
                         <input type="text"
-                               name="name"
+                               name="keyWord"
                                class="form-control"
-                               placeholder="请输入教职工名称">
+                               placeholder="请输入姓名/身份证号/手机号">
                         <span class="input-group-btn">
 							<button class="btn  btn-default search_btn" id="btn-search"
                                     authority="false">

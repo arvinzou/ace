@@ -25,9 +25,11 @@ Page({
      
   },
   bindPickerChange(e) {
-    this.setData({
-        index: e.target.dataset.index
+    var that = this;
+    that.setData({
+        index: e.detail.value
     });
+    console.log("index================================="+that.data.index);
   }, 
   initDeptList: function(e){
       var that = this;
@@ -35,11 +37,11 @@ Page({
           function (res) {
               if (res.status == 0) {
                   var tempArr = [];
-                  var o = {};
                   var objArr = [];
                   var retData = res.rows;
                   for (var i = 0; i < retData.length; i++) {
                       tempArr.push(retData[i].departmentName);
+                      var o = {};
                       o.index = i;
                       o.id = retData[i].departmentId;
                       o.name = retData[i].departmentName;
@@ -65,6 +67,7 @@ Page({
       var mobile = e.detail.value.mobile;
       var copNo = e.detail.value.copNo;
       var dept = e.detail.value.dept;
+      var code = e.detail.value.code;
       if (name == undefined || name == '' || name == null) {
           wx.showModal({
               title: '提示',
@@ -76,7 +79,15 @@ Page({
       if (mobile == undefined || mobile == '' || mobile == null) {
           wx.showModal({
               title: '提示',
-              content: '请输入手机号码',
+              content: '请输入手机号码！',
+              success: function (res) { }
+          });
+          return;
+      }
+      if (code == undefined || code == '' || code == null){
+          wx.showModal({
+              title: '提示',
+              content: '请输入验证码！',
               success: function (res) { }
           });
           return;
@@ -84,7 +95,7 @@ Page({
       if (copNo == undefined || copNo == '' || copNo == null) {
           wx.showModal({
               title: '提示',
-              content: '请输入警号',
+              content: '请输入警号！',
               success: function (res) { }
           });
           return;
@@ -92,33 +103,23 @@ Page({
       if (dept == undefined || dept == '' || dept == null){
           wx.showModal({
               title: '提示',
-              content: '请选择所属单位',
+              content: '请选择所属单位！',
               success: function (res) { }
           });
           return;
       }
-      util.request(cfg.server + '/taa/www/register/findDeptList', {},
-          function (res) {
-              if (res.status == 0) {
-                  var tempArr = [];
-                  var o = {};
-                  var objArr = [];
-                  var retData = res.rows;
-                  for (var i = 0; i < retData.length; i++) {
-                      tempArr.push(retData[i].departmentName);
-                      o.index = i;
-                      o.id = retData[i].departmentId;
-                      o.name = retData[i].departmentName;
-                      objArr.push(o);
-                  }
-                  that.setData({
-                      array: tempArr,
-                      objectArray: objArr
+      util.request(cfg.server + '/taa/www/register/register', { name: name, mobile: mobile, copNo: copNo, deptId: dept, code: code},
+          function (ret) {
+              if (ret.status == 0) {
+                  wx.showModal({
+                      title: '提示',
+                      content: ret.info,
+                      success: function (res) { }
                   });
               } else {
                   wx.showModal({
                       title: '提示',
-                      content: ret.errorMessage,
+                      content: ret.info,
                       success: function (res) { }
                   });
               }

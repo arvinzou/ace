@@ -4,12 +4,15 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.taa.model.RoadGps;
 import com.huacainfo.ace.taa.service.RoadGpsService;
-import com.huacainfo.ace.taa.service.RoadService;
+import com.huacainfo.ace.taa.service.RoadManService;
+import com.huacainfo.ace.taa.vo.RoadManQVo;
+import com.huacainfo.ace.taa.vo.RoadManVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,10 +27,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/www/road")
 public class WRoadController extends TaaBaseController {
-    @Autowired
-    private RoadService roadService;
+
+
     @Autowired
     private RoadGpsService roadGpsService;
+    @Autowired
+    private RoadManService roadManService;
 
     /**
      * 路段采集
@@ -85,5 +90,18 @@ public class WRoadController extends TaaBaseController {
         } catch (NumberFormatException e) {
             return new ResultResponse(ResultCode.FAIL, "坐标转换失败");
         }
+    }
+
+
+    /**
+     * 获取所有路长列表
+     *
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/findRoadManList")
+    public PageResult<RoadManVo> findRoadManList(RoadManQVo condition) throws Exception {
+        PageResult<RoadManVo> rst = roadManService.findRoadManList(condition, 0, 5000, "");
+        return rst;
     }
 }
