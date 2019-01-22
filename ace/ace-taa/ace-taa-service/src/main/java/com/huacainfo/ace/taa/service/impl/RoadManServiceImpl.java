@@ -1,11 +1,9 @@
 package com.huacainfo.ace.taa.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -21,9 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
+
 @Service("roadManService")
 /**
  * @author: 陈晓克
@@ -305,12 +304,38 @@ public class RoadManServiceImpl implements RoadManService {
      * @version: 2019年1月04日 下午1:24:14
      */
     @Override
-    public Map<String, Object> getListByCondition(Map<String, Object> params){
+    public Map<String, Object> getListByCondition(Map<String, Object> params) {
         Map<String, Object> rst = new HashMap<String, Object>();
         List<Map<String, Object>> list = this.roadManDao.getListByCondition(params);
         rst.put("total", list.size());
         rst.put("rows", list);
         return rst;
+    }
+
+    /**
+     * 获取所有路长花名册 - 通讯录形式
+     *
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @Override
+    public ResultResponse findRoster() {
+        //库中所有路长信息
+        List<Map<String, Object>> list = roadManDao.findRoster();
+        //解析转换数据
+        String name;
+        String letter;
+        for (Map<String, Object> item : list) {
+            if (!CommonUtils.isBlank(item.get("name"))) {
+                name = String.valueOf(item.get("name"));
+                letter = CommonUtils.getPinYinHeadChar(name).substring(0, 1).toLowerCase();//A, B, C etc.
+                item.put("index", letter);
+            } else {
+                continue;
+            }
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "success", list);
     }
 
 }

@@ -138,6 +138,19 @@ public class WReportController {
         return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
     }
 
+    /**
+     * 掌上驾驶仓 - 事故柱形图
+     *
+     * @param category    查询类型 times-事故次数 ； death-死亡人数
+     * @param dateTimeStr 查询年月;7位有效数据，默认当前年月
+     * @return Map<String, Object>
+     */
+    @RequestMapping(value = "/histogramReport")
+    public ResultResponse histogramReport(String category, String dateTimeStr) throws Exception {
+
+        List<Map<String, Object>> rst = traAccService.histogramReport(category, dateTimeStr);
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
+    }
 
     /**
      * 查询行政区划列表

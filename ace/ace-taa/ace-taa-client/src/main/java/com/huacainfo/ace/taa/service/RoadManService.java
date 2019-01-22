@@ -1,10 +1,7 @@
 package com.huacainfo.ace.taa.service;
 
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.taa.model.RoadMan;
 import com.huacainfo.ace.taa.vo.RoadManVo;
 import com.huacainfo.ace.taa.vo.RoadManQVo;
@@ -140,4 +137,12 @@ public interface RoadManService {
      * @version: 2019年1月04日 下午1:24:14
      */
     public Map<String, Object> getListByCondition(Map<String, Object> params);
+
+    /**
+     * 获取所有路长花名册 - 通讯录形式
+     *
+     * @return ResultResponse
+     * @throws Exception
+     */
+    ResultResponse findRoster();
 }
