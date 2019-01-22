@@ -18,7 +18,7 @@
     },
     "window": {
         "navigationBarTextStyle": "black",
-        "navigationBarTitleText": "交通事故分析",
+        "navigationBarTitleText": "常德市路长制信息管理平台",
         "navigationBarBackgroundColor": "#fff",
         "backgroundColor": "#fff",
         "enablePullDownRefresh": true
