@@ -23,7 +23,7 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-4 toolbar">
+                <div class="col-md-5 toolbar">
                     <%--${pageContext.request.contextPath}/student/insertStudent--%>
                     <button type="button" class="btn  green" id="btn-view-add"
                             authority="false">添加
@@ -32,32 +32,21 @@
                             authority="false">批量导入
                     </button>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <div class="input-group" style="float: left;margin-top: 5px;margin-right: 5px;">
                         <label>班次 </label>
                     </div>
-                    <div class="input-group" style="float: left;margin-right: 5px;width: 175px">
+                    <div class="input-group" style="float: left;margin-right: 5px;">
                         <select id="cls-condition" class="easyui-combogrid form-control" name="classId"
-                                style="width:175px; height: 30px; line-height: 30px;">
+                                style="width:225px; height: 30px; line-height: 30px;">
                         </select>
                     </div>
-                    <div class="input-group" style="float: left;margin-right: 5px;width: 195px">
-                        <input type="text"
-                               name="mobile"
-                               class="form-control"
-                               placeholder="请输入手机号码">
-                    </div>
-                    <div class="input-group" style="float: left;margin-right: 5px;width: 195px">
-                        <input type="text"
-                               name="idCard"
-                               class="form-control"
-                               placeholder="请输入身份证号码">
-                    </div>
+
                     <div class="input-group">
                         <input type="text"
-                               name="name"
+                               name="keyWord"
                                class="form-control"
-                               placeholder="请输入姓名">
+                               placeholder="请输入姓名/身份证号/手机号">
                         <span class="input-group-btn">
                             <%--${pageContext.request.contextPath}/student/findStudentList--%>
 							<button class="btn  btn-default search_btn" id="btn-search" authority="false">搜索</button>

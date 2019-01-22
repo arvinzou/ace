@@ -10,6 +10,16 @@ public class StudentQVo extends Student {
      */
     private String clsName;
 
+    private String keyWord;
+
+    public String getKeyWord() {
+        return keyWord;
+    }
+
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
+    }
+
     public String getClsName() {
         return clsName;
     }
