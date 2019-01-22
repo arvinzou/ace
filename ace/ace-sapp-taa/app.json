@@ -38,7 +38,7 @@
                 "text": "掌上驾驶舱"
             },
             {
-                "pagePath": "page/regist/index",
+                "pagePath": "page/me/index",
                 "text": "个人中心"
             }
         ]

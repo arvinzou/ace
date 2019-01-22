@@ -8,28 +8,23 @@ Page({
    */
   data: {
       date: '2019-01',
-      region: ['湖南省', '常德市','武陵区'],
+      region: [],
+      regionArray: [],
       type: 0,
-      array: ['路长1', '路长2', '路长3', '路长4'],
+      array: [],
       objectArray: [
-          {
-              id: 0,
-              name: '路长1'
-          },
-          {
-              id: 1,
-              name: '路长2'
-          },
-          {
-              id: 2,
-              name: '路长3'
-          },
-          {
-              id: 3,
-              name: '路长4'
-          }
+         
       ],
-      index: 0
+      index: 0,
+      rIndex: 0,   //区域筛选索引
+      aIndex: 0,   //路长筛选索引
+      totalData : null,
+      areaCode: '4307',
+      areaCodeNameArray: [],
+      dithArray: [],
+      nowData: null,
+      pastData: null,
+      roadId: null
   },
 
   /**
@@ -37,41 +32,156 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
+      that.initRegionList();
+      that.initRoadList();
       that.initTrafficList();
       that.columnByAccident();
       that.columnByDiedNum();
-      that.trendLine();
-    
   },
   /**
-   * 获取事故Top10
+   * 获取行政区划列表
+   */
+  initRegionList: function(){
+      var that = this;
+      util.request(cfg.server + '/taa/www/report/findDistrictList', {},
+          function (res) {
+              if (res.status == 0) {
+                  var data = res.data;
+                  var tempArr = [];
+                  for(var i=0; i<data.length; i++){
+                      tempArr.push(data[i].name);
+                  }
+                  that.setData({
+                      region: tempArr,
+                      regionArray: data
+                  });
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: res.errorMessage,
+                      success: function (res) { }
+                  });
+              }
+
+          }
+      );
+  },
+  
+  /**
+   * 获取所有路长列表
+   */
+  initRoadList: function(){
+      var that = this;
+      util.request(cfg.server + '/taa/www/road/findRoadManList', { areaCode: that.data.areaCode},
+          function (res) {
+              if (res.status == 0) {
+                  that.initReport();
+                  var data = res.rows;
+                  var array = ['全部'];
+                  var arrayObject = [{'id':'','name':'全部'}];
+                  for(var i=0; i<data.length; i++){
+                      array.push(data[i].name);
+                      var o = {};
+                      o.id = data[i].id;
+                      o.name = data[i].name;
+                      arrayObject.push(o);
+                  }
+                  that.setData({
+                      array: array,
+                      objectArray: arrayObject
+                  });
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: res.errorMessage,
+                      success: function (res) { }
+                  });
+              }
+
+          }
+      );
+  },
+  /**
+   * 获取统计
    */
   initTrafficList: function(){
       var that = this;
-      util.request(cfg.server + '/taa/www/report/multipleReport', {
-          areaCode: '430702',
-          dateTimeStr: that.data.date
-      },
-          function (ret) {
-              console.log(ret);
-              wx.showModal({
-                  title: '提示',
-                  content: ret.info,
-                  success: function (res) { }
-              });
+      util.request(cfg.server + '/taa/www/report/multipleReport', { areaCode: that.data.areaCode, dateTimeStr: that.data.date},
+          function (res) {
+              if (res.status == 0) {
+                  var data = res.data;
+                  var columnData = res.data.histogram;
+                  var areaCodeNameArr = [];
+                  var dithArr = [];
+                  if (columnData != null && columnData != undefined && columnData.length>0){
+                      for(var i=0; i<columnData.length; i++){
+                          areaCodeNameArr.push(columnData[i].areaCodeName);
+                          dithArr.push(columnData[i].deathNum);
+                      }
+                  }
+                  that.setData({
+                      totalData: res.data,
+                      areaCodeNameArray: areaCodeNameArr,
+                      dithArray: dithArr
+                  });
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: res.errorMessage,
+                      success: function (res) { }
+                  });
+              }
+
+          }
+      );
+  },
+  initReport: function(){
+      var that = this;
+      util.request(cfg.server + '/taa/www/report/contrastiveReport', { areaCode: that.data.areaCode, roadManId: that.data.roadId},
+          function (res) {
+              if (res.status == 0) {
+                  var data = res.value;
+                  var nowData = res.value.now;
+                  var pastData = res.value.past;
+                  that.setData({
+                      nowData: nowData,
+                      pastData: pastData
+                  });
+                  that.trendLine();
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: res.errorMessage,
+                      success: function (res) { }
+                  });
+              }
+
           }
       );
   },
   bindRegionChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    var that = this;
+    var tempIndex = e.detail.value;
+    var areaArr = that.data.regionArray;
     this.setData({
-        region: e.detail.value
+        rIndex: tempIndex,
+        areaCode: areaArr[tempIndex].code
     });
+    console.log("areaCode==========================="+that.data.areaCode);
+      that.initRoadList();
+      that.initTrafficList();
+      that.columnByAccident();
+      that.columnByDiedNum();
   },
   bindMonthChange: function(e){
-      this.setData({
+      var that = this;
+      that.setData({
           date: e.detail.value
       });
+      that.initRoadList();
+      that.initTrafficList();
+      that.columnByAccident();
+      that.columnByDiedNum();
   },
   changeChartType: function(e){
       var that = this;
@@ -103,45 +213,50 @@ Page({
       });
   },
   columnByDiedNum: function(){
-      new Charts({
-          canvasId: 'diedNumColumn',
-          type: 'column',
-          categories: ['常德市', '武陵区', '鼎城区', '桃源县', '汉寿县', '石门县', '临澧县', '澧县', '津市市'],
-          series: [{
-              name: '人',
-              data: [2, 0, 3, 5, 4, 9, 4, 5, 1]
-          }],
-          yAxis: {
-              format: function (val) {
-                  return val + '人';
-              }
-          },
-          extra: {
-              column: {
-                  width: 15
-              }
-          },
-          width: 350,
-          height: 300,
-          dataLabel: false
-      });
+      var that = this;
+      console.log("================================" + that.data.areaCodeNameArray, +"=" + that.data.dithArr)
+      if (that.data.areaCodeNameArray.length > 0 && that.data.dithArray.length >0){
+          new Charts({
+              canvasId: 'diedNumColumn',
+              type: 'column',
+              categories: that.data.areaCodeNameArray,
+              series: [{
+                  name: '人',
+                  data: that.data.dithArray
+              }],
+              yAxis: {
+                  format: function (val) {
+                      return val + '人';
+                  }
+              },
+              extra: {
+                  column: {
+                      width: 15
+                  }
+              },
+              width: 350,
+              height: 300,
+              dataLabel: false
+          }); 
+      }
   },
   trendLine: function(){
+      var that = this;
       new Charts({
           canvasId: 'trendLine',
           type: 'line',
           categories: ['1月', '2月', '3月', '4月', '5月', '6月','7月','8月','9月','10月','11月','12月'],
           series: [{
-              name: '2018',
-              data: [15, 2, 45, 37, 4, 8, 18, 9, 23, 12, 34, 22],
+              name: '今年',
+              data: [that.data.nowData.January, that.data.nowData.February, that.data.nowData.March, that.data.nowData.April, that.data.nowData.May, that.data.nowData.June, that.data.nowData.July, that.data.nowData.August, that.data.nowData.September, that.data.nowData.October, that.data.nowData.November, that.data.nowData.December],
               format: function (val) {
-                  return val.toFixed(2) + '万';
+                  return val;
               }
           }, {
-              name: '2017',
-              data: [30, 37, 65, 7, 69, 9, 12, 14, 23, 22, 14, 16],
+              name: '去年',
+                  data: [that.data.pastData.January, that.data.pastData.February, that.data.pastData.March, that.data.pastData.April, that.data.pastData.May, that.data.pastData.June, that.data.pastData.July, that.data.pastData.August, that.data.pastData.September, that.data.pastData.October, that.data.pastData.November, that.data.pastData.December],
               format: function (val) {
-                  return val.toFixed(2) + '万';
+                  return val;
               }
           }],
           yAxis: {
@@ -156,10 +271,15 @@ Page({
       });
   },
     bindRoadChange(e) {
-        console.log('picker发送选择改变，携带值为', e.detail.value)
-        this.setData({
+        var that = this;
+        that.setData({
             index: e.detail.value
+        });
+        var road = that.data.objectArray[e.detail.value].id;
+        that.setData({
+            roadId: road
         })
+        that.initReport();
     },
   /**
    * 生命周期函数--监听页面初次渲染完成

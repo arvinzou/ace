@@ -8,9 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
 
-import java.io.Serializable;
-
-public class TaaBaseController extends BaseController implements Serializable {
+public class TaaBaseController extends BaseController {
     private static final long serialVersionUID = 1L;
     public Logger logger = LoggerFactory.getLogger(this.getClass());
 

@@ -22,7 +22,7 @@ var app = {};
 option = null;
 app.title = '热力图与百度地图扩展';
 
-$.get('/taa/traAcc/getTraAccList', function (data) {
+$.get('new_file.json', function (data) {
 
     var points = [].concat.apply([], data.map(function (track) {
         return track.map(function (seg) {
@@ -32,7 +32,7 @@ $.get('/taa/traAcc/getTraAccList', function (data) {
     myChart.setOption(option = {
         animation: false,
         bmap: {
-            center: [120.13066322374, 30.240018034923],
+            center: [120.14322240845, 30.236064370321],
             zoom: 14,
             roam: true
         },

@@ -1,8 +1,8 @@
 <view class='index'>
     <view class='screen'>
         <view class='select-box'>
-            <picker bindchange="bindRegionChange" mode='region' value="{{region}}">
-                <view class="picker">{{region[1]}}{{region[2]}}</view>
+            <picker bindchange="bindRegionChange"  value="{{regionArray[rIndex].code}}" range="{{region}}">
+                <view class="picker">{{regionArray[rIndex].name}}</view>
                 <view class='drop-down'><image src='../../image/icon-drop-down.png'></image></view>
             </picker>
         </view>
@@ -24,7 +24,7 @@
                     <image src='../../image/icon-accident.png'></image>
                 </view>
                 <view class='accident-right'>
-                    <view class='accident-num'>243</view>
+                    <view class='accident-num'>{{totalData.month.accTimes}}</view>
                     <view class='accident-title'>交通事故</view>
                 </view>
             </view>
@@ -33,7 +33,12 @@
                     <image src='../../image/icon-diednum.png'></image>
                 </view>
                 <view class='accident-right'>
-                    <view class='accident-num'>62</view>
+                    <view class='accident-num'>
+                    <block wx:if='{{totalData.month.deathNum}}'>
+                        {{totalData.month.deathNum}}
+                    </block>
+                    <block wx:else>0</block>
+                    </view>
                     <view class='accident-title'>死亡人数</view>
                 </view>
             </view>
@@ -46,26 +51,13 @@
             <view class='title'>事故Top10</view>
         </view>
         <view class='container'>
+        <block wx:for="{{totalData.top10}}" wx:for-index="idx" wx:for-item="item">
             <view class='row br'>
-                <view class='list-num'>1</view>
-                <view class='list-content'>陈思静</view>
-                <view class='list-total'>26</view>
+                <view class='list-num'>{{ idx +1 }}</view>
+                <view class='list-content'>{{item.name}}</view>
+                <view class='list-total'>{{item.deathNum}}</view>
             </view>
-            <view class='row br'>
-                <view class='list-num'>2</view>
-                <view class='list-content'>许黎明</view>
-                <view class='list-total'>24</view>
-            </view>
-            <view class='row br'>
-                <view class='list-num'>3</view>
-                <view class='list-content'>王凯</view>
-                <view class='list-total'>22</view>
-            </view>
-            <view class='row'>
-                <view class='list-num'>4</view>
-                <view class='list-content'>徐娘</view>
-                <view class='list-total'>20</view>
-            </view>
+        </block>
         </view>
     </view>
     <view class='box'>
@@ -92,8 +84,8 @@
         </view>
         <view class='road-box'>
             <view class='select-road'>
-                <picker bindchange="bindRoadChange" value="{{index}}" range='{{array}}'>
-                    <view class="picker roadPicker">{{array[index]}}</view>
+                <picker bindchange="bindRoadChange" value="{{objectArray[index].id}}" range='{{array}}'>
+                    <view class="picker roadPicker">{{objectArray[index].name}}</view>
                     <view class='drop'><image src='../../image/icon-drop-down.png'></image></view>
                 </picker>
             </view>
