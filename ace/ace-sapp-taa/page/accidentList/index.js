@@ -1,21 +1,52 @@
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tab: 0
+    list: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+    that.initAccidentList();
   },
   editAccident: function(){
       wx.navigateTo({
           url: '../accidentDetail/index',
+      });
+  },
+  initAccidentList: function(){
+      var that = this;
+      util.request(cfg.server + '/taa/www/report/findTraAccList', {start: 0, limit: 999},
+          function (res) {
+              if (res.status == 0) {
+                 that.setData({
+                     list: res.rows
+                 });
+              } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: res.info,
+                        success: function (res) { }
+                    });
+              }
+
+          }
+      );
+  },
+  revoke: function(e){
+      
+  },
+  editAccident: function(e){
+      var traAccId = e.target.dataset.id;
+      wx.navigateTo({
+          url: '../accidentDetail/index?id='+traAccId,
       });
   },
   /**
