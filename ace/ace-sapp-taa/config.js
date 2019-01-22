@@ -1,5 +1,5 @@
-var server = "https://zx.huacainfo.com";
-var serverfile = "https://zx.huacainfo.com/";
+var server = "https://api.huacainfo.com";
+var serverfile = "https://api.huacainfo.com/";
 var config = {
     server,
     serverfile,

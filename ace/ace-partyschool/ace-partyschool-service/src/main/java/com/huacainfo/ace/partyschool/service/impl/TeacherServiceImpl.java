@@ -88,7 +88,7 @@ public class TeacherServiceImpl implements TeacherService {
      */
     @Override
     public PageResult<TeacherVo> findHeadmasterList(TeacherQVo condition, int start,
-                                                 int limit, String orderBy) throws Exception {
+                                                    int limit, String orderBy) throws Exception {
         PageResult<TeacherVo> rst = new PageResult<>();
         List<TeacherVo> list = this.teacherDao.findHeadmasterList(condition, start, limit, orderBy);
         rst.setRows(list);
@@ -260,7 +260,7 @@ public class TeacherServiceImpl implements TeacherService {
         data.setId(uid);
 
         //注册portal.users
-        String regType = CommConstant.STUDENT;
+        String regType = CommConstant.TEACHER;
         String openId = "";
         String name = data.getName();
         String account = data.getMobile();

@@ -303,10 +303,18 @@ public class TraAccController extends TaaBaseController {
     @ResponseBody
     public JSONArray getTraAccList(TraAccQVo condition, PageParamNoChangeSord page) throws Exception {
         JSONArray rst=new JSONArray();
+        JSONArray items=new JSONArray();
         if (CommonUtils.isBlank(condition.getAreaCode())) {
             condition.setAreaCode(this.getCurUserProp().getAreaCode());
         }
-
+        List<Map<String, Object>> list=this.traAccService.getTraAccList(condition);
+        for(Map<String, Object> o:list){
+            JSONObject e=new JSONObject();
+            e.put("coord",new double[]{(Double)o.get("latitude"),(Double)o.get("longitude")});
+            e.put("elevation",o.get("deadthToll"));
+            items.add(e);
+        }
+        rst.add(items);
         return rst;
     }
 }

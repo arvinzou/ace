@@ -423,9 +423,7 @@ public class TraAccServiceImpl implements TraAccService {
     @Override
     public Map<String, Object> contrastiveReport(Map<String, String> params) {
         String nowDataTime = DateUtil.getNow();
-        String year = params.get("year");
-        String nowYear = StringUtil.isEmpty(year) ? nowDataTime.substring(0, 4) : year;
-
+        String nowYear = nowDataTime.substring(0, 4);
         Map<String, String> nowParams = getParams(Integer.parseInt(nowYear));
         nowParams.putAll(params);
         Map<String, String> pastParams = getParams(Integer.parseInt(nowYear) - 1);
@@ -489,13 +487,12 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-19
      */
     @Override
-    public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception {
-        SingleResult<Map<String, Object>> rst = new SingleResult();
-        String areaCode6 = CommonUtils.rightPad(areaCode, 6, "0");
+   public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception{
+        SingleResult<Map<String, Object>> rst=new SingleResult();
+        String areaCode6=CommonUtils.rightPad(areaCode,6,"0");
         rst.setValue(this.traAccDao.getLatLongByAreaCode(areaCode6));
-        return rst;
-    }
-
+       return rst;
+   }
     /**
      * @throws
      * @Title:getTraAccList
@@ -507,14 +504,16 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-21
      */
     @Override
-    public List<Map<String, Object>> getTraAccList(TraAccQVo condition) throws Exception {
-        List<Map<String, Object>> rst = new ArrayList<Map<String, Object>>();
-        List<Map<String, Object>> list = this.traAccDao.getTraAccList(condition);
-        for (Map<String, Object> o : list) {
-            double[] e = LatLonUtil.map_tx2bd(((java.math.BigDecimal) o.get("latitude")).doubleValue(), ((java.math.BigDecimal) o.get("longitude")).doubleValue());
-            Map<String, Object> map = new HashMap<>();
-            map.put("latitude", e[0]);
-            map.put("longitude", e[1]);
+    public List<Map<String, Object>> getTraAccList(TraAccQVo condition)throws Exception{
+        List<Map<String, Object>> rst=new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list=this.traAccDao.getTraAccList(condition);
+        for(Map<String, Object> o:list){
+            double[] e= LatLonUtil.map_tx2bd(((java.math.BigDecimal)o.get("latitude")).doubleValue(),((java.math.BigDecimal)o.get("longitude")).doubleValue());
+            Map<String, Object> map=new HashMap<>();
+            map.put("latitude",e[0]);
+            map.put("longitude",e[1]);
+            map.put("deadthToll",o.get("deadthToll"));
+            map.put("injuries",o.get("injuries"));
             rst.add(map);
         }
         return rst;
@@ -545,4 +544,17 @@ public class TraAccServiceImpl implements TraAccService {
         rst.put("histogram", histogram);//当月数据统计
         return null;
     }
+
+    /**
+     * 查询行政区划列表
+     *
+     * @param areaCode
+     * @return Map<String, Object>
+     */
+    @Override
+    public List<Map<String, Object>> findDistrictList(String areaCode) {
+        return traAccDao.findDistrictList(areaCode);
+    }
+
+
 }

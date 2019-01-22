@@ -49,25 +49,25 @@
 				<div class="content-box br">
 					<div class="content-title">班主任</div>
 					<div class="content">
-						<span class="name bj bd">张三三</span>
-						<span class="mobile bj bd">13719064337</span>
-						<a href="tel:13719064337"><img class="icon-phone" src="img/icon_phone.png"/></a>
+						<span class="name bj bd">\${data.list.teacher.name}</span>
+						<span class="mobile bj bd">\${data.list.teacher.mobile}</span>
+						<a href="tel:\${data.list.teacher.mobile}"><img class="icon-phone" src="img/icon_phone.png"/></a>
 					</div>
 				</div>
 				<div class="content-box br">
 					<div class="content-title">跟班老师</div>
 					<div class="content">
-						<span class="name bj bd">李四</span>
-						<span class="mobile bj bd">13719064337</span>
-						<a href="tel:13719064337"><img class="icon-phone" src="img/icon_phone.png"/></a>
+						<span class="name bj bd">\${data.list.clsteacher.name}</span>
+						<span class="mobile bj bd">\${data.list.clsteacher.mobile}</span>
+						<a href="tel:\${data.list.clsteacher.mobile}"><img class="icon-phone" src="img/icon_phone.png"/></a>
 					</div>
 				</div>
 				<div class="content-box br">
 					<div class="content-title">跟班干部</div>
 					<div class="content">
-						<span class="name bj bd">王五</span>
-						<span class="mobile bj bd">13719064337</span>
-						<a href="tel:13719064337"><img class="icon-phone" src="img/icon_phone.png"/></a>
+						<span class="name bj bd">\${data.list.student.name}</span>
+						<span class="mobile bj bd">\${data.list.student.mobile}</span>
+						<a href="tel:\${data.list.student.mobile}"><img class="icon-phone" src="img/icon_phone.png"/></a>
 					</div>
 				</div>
 				<div class="content-box br">

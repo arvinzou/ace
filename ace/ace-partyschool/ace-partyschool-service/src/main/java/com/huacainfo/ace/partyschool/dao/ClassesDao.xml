@@ -42,13 +42,13 @@
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.Classes">
         insert into classes (id, name, startDate,
-        endDate, photoUrl, classroomId,tid1,tid2,
+        endDate, fileUrl,photoUrl, classroomId,tid1,tid2,
         headmaster, remark, status,
         createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate,
         introduce)
         values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP},
-        #{endDate,jdbcType=TIMESTAMP}, #{photoUrl,jdbcType=VARCHAR},
+        #{endDate,jdbcType=TIMESTAMP}, #{fileUrl,jdbcType=VARCHAR},#{photoUrl,jdbcType=VARCHAR},
         #{classroomId,jdbcType=VARCHAR},
         #{tid1,jdbcType=TIMESTAMP}, #{tid2,jdbcType=VARCHAR},
         #{headmaster,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
@@ -62,6 +62,7 @@
         set name = #{name,jdbcType=VARCHAR},
         startDate = #{startDate,jdbcType=TIMESTAMP},
         endDate = #{endDate,jdbcType=TIMESTAMP},
+        fileUrl = #{fileUrl,jdbcType=VARCHAR},
         photoUrl = #{photoUrl,jdbcType=VARCHAR},
         tid1 = #{tid1,jdbcType=VARCHAR},
         tid2 = #{tid2,jdbcType=VARCHAR},
@@ -107,7 +108,7 @@
             and c.classroomId =#{condition.classroomId,jdbcType=VARCHAR}
         </if>
         <if test="condition.crName !=null and condition.crName !=&quot;&quot;">
-            and cr.name like concat(#{condition.crName,jdbcType=VARCHAR},'%')
+            and cr.name like concat('%',#{condition.crName,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 
@@ -126,7 +127,7 @@
         LEFT JOIN teacher t ON t.id = c.headmaster
         LEFT JOIN teacher t1 ON t1.id = c.tid1
         LEFT JOIN student s ON s.id = c.tid2
-        where c.id = #{c.id,jdbcType=VARCHAR}
+        where c.id = #{  id,jdbcType=VARCHAR}
     </select>
 
     <resultMap id="ClassesInfoResultMap" type="com.huacainfo.ace.partyschool.vo.ClassesVo">
@@ -135,6 +136,7 @@
         <result column="startDate" jdbcType="TIMESTAMP" property="startDate"/>
         <result column="endDate" jdbcType="TIMESTAMP" property="endDate"/>
         <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
+        <result column="fileUrl" jdbcType="VARCHAR" property="fileUrl"/>
         <result column="headmaster" jdbcType="VARCHAR" property="headmaster"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
@@ -190,7 +192,7 @@
         LEFT JOIN teacher t ON t.id = c.headmaster
         LEFT JOIN teacher t1 ON t1.id = c.tid1
         LEFT JOIN student s ON s.id = c.tid2
-        where c.id = #{c.id,jdbcType=VARCHAR}
+        where c.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">

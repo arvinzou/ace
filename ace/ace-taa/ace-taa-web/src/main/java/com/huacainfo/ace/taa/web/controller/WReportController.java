@@ -2,6 +2,7 @@ package com.huacainfo.ace.taa.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -133,8 +134,20 @@ public class WReportController {
     @RequestMapping(value = "/multipleReport")
     public ResultResponse monthReport(String areaCode, String dateTimeStr) throws Exception {
 
-
         Map<String, Object> rst = traAccService.multipleReport(areaCode, dateTimeStr);
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
+    }
+
+
+    /**
+     * 查询行政区划列表
+     *
+     * @return Map<String, Object>
+     */
+    @RequestMapping(value = "/findDistrictList")
+    public ResultResponse findDistrictList(String areaCode) throws Exception {
+        areaCode = StringUtil.isEmpty(areaCode) ? "4307" : areaCode;
+        List<Map<String, Object>> rst = traAccService.findDistrictList(areaCode);
         return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
     }
 }

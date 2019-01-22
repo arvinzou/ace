@@ -7,6 +7,10 @@ public class Files  implements Serializable {
     private  static final long serialVersionUID = 1L;
     private String id;
 
+    /**
+     * 1、班级文件
+     * 2、班级相册
+     */
     private String category;
 
     private String classesId;
