@@ -8,6 +8,19 @@ public class ClassesQVo extends Classes {
 
     private String crName;
 
+    /**
+     * 索引关键词
+     */
+    private String keyword;
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
     public String getCrName() {
         return crName;
     }
