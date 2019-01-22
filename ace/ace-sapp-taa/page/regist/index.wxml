@@ -1,7 +1,7 @@
 <view class='index'>
     <view class='banner'>
         <view class='logo'><image src='../../image/logo.png'></image></view>
-        <view class='title'><text>常德市交警事故采集分析平台</text></view>
+        <view class='title'><text>常德市路长制信息管理平台</text></view>
     </view>
     <form bindsubmit="formSubmit">
     <view class='form'>
@@ -27,7 +27,7 @@
         <view class='row'>
             <view class='form-title'>所属单位</view>
             <view class='form-input'>
-                 <picker  bindchange="bindPickerChange" value="{{objectArray[index].id}}" range="{{array}}" name='dept' data-index='{{objectArray[index].index}}'>
+                 <picker  bindchange="bindPickerChange" value="{{objectArray[index].id}}" range="{{array}}" name='dept'>
                     <view class="picker">{{objectArray[index].name}}</view>
                  </picker>
                  <image src='../../image/icon_rediret.png' class='select'></image>
