@@ -83,15 +83,17 @@ public class ClassroomServiceImpl implements ClassroomService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
+        //if (CommonUtils.isBlank(o.getStatus())) {
+        //    return new MessageResponse(1, "状态 不能为空！");
+        //}
 
 
         int temp = this.classroomDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "教室管理名称重复！");
         }
+
+        o.setStatus("1");
         o.setCreateDate(new Date());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
