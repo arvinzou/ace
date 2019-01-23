@@ -11,6 +11,7 @@ import com.huacainfo.ace.taa.vo.TraAccQVo;
 import com.huacainfo.ace.taa.vo.TraAccVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -138,6 +139,19 @@ public class WReportController {
         return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
     }
 
+    /**
+     * 掌上驾驶仓 - 事故柱形图
+     *
+     * @param category    查询类型 times-事故次数 ； death-死亡人数
+     * @param dateTimeStr 查询年月;7位有效数据，默认当前年月
+     * @return Map<String, Object>
+     */
+    @RequestMapping(value = "/histogramReport")
+    public ResultResponse histogramReport(String category, String dateTimeStr) throws Exception {
+
+        List<Map<String, Object>> rst = traAccService.histogramReport(category, dateTimeStr);
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
+    }
 
     /**
      * 查询行政区划列表
@@ -149,6 +163,32 @@ public class WReportController {
         areaCode = StringUtil.isEmpty(areaCode) ? "4307" : areaCode;
         List<Map<String, Object>> rst = traAccService.findDistrictList(areaCode);
         return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
+    }
+
+
+    /**
+     * 事故分析 报表
+     *
+     * @param roadManId     路长ID
+     * @param roadSectionId 路段ID
+     * @param category      查询类型 按年-year, 按季度-season, 按月-month
+     * @param dateTimeStr   时间字符串
+     * @param field         统计字段 deadthToll ,injuries
+     * @return Map<String,Object>
+     */
+    @ResponseBody
+    @RequestMapping(value = "/analysisReport")
+    public ResultResponse analysisReport(String category,
+                                         String dateTimeStr,
+                                         String roadManId,
+                                         String roadSectionId,
+                                         String field) throws Exception {
+        if (!StringUtil.areNotEmpty(category, field)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        List<Map<String, Object>> data = traAccService.analysisReport(category, dateTimeStr, roadManId, roadSectionId, field);
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", data);
     }
 }
 

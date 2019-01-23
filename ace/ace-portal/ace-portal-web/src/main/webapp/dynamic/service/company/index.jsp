@@ -43,7 +43,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label">
 
-                机构全称
+                全称
                 <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-10">
@@ -55,7 +55,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label">
 
-                机构简称
+                简称
                 <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-10">

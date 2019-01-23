@@ -1,37 +1,241 @@
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
+var dateTimePicker = require('../../util/dateTimePicker.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      items: [
-          { name: '1', value: '未按规定让行' },
-          { name: '2', value: '违反交通信号', checked: 'true' },
-          { name: '3', value: '酒后驾驶' },
-          { name: '4', value: '无证驾驶' },
-          { name: '5', value: '超速行驶' },
-          { name: '6', value: '违法倒车' },
-          { name: '7', value: '违法上道路行驶' },
-          { name: '8', value: '违法变道' },
-      ]
+      traffId: null,
+      detail: null,
+      wArray:[],
+      wArrayObject:[],
+      dictObject: null,
+      index: null,
+      carsList: null,
+      cIndex : null,
+      seasonList: [],
+      carTypeParam: [],
+      seasonParam: [],
+      dateTimeArray: null,
+      createDate: null,
+      accidentTime: null,
+      startYear: 2000,
+      endYear: 2050,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+      var that = this;
+      that.setData({
+          traffId: options.id
+      });
+      that.initDateTime();
+      that.initDict();
+      
   },
- 
+  initDateTime: function(){
+      var that = this;
+      var obj = dateTimePicker.dateTimePicker(that.data.startYear, that.data.endYear);
+      console.log("============================"+obj.dateTime);
+      that.setData({
+          dateTimeArray: obj.dateTimeArray,
+          createDate: obj.dateTime,
+          accidentTime: obj.dateTime,
+      });
+      console.log(obj);
+  },
+  initData: function(){
+      var that = this;
+      util.request(cfg.server + '/taa/www/report/selectTraAccInfo', { traAccId: that.data.traffId },
+          function (res) {
+              if (res.status == 0) {
+                  console.log("*****************************"+res.value.accidentTime);
+                 that.setData({
+                     detail: res.value,
+                     createDate: that.fotmatPicker(res.value.createDate),
+                     accidentTime: that.fotmatPicker(res.value.accidentTime),
+                 });
+                  that.convertCode(res.value.weather);
+                  that.initCarType(res.value.vehicleType);
+                  that.initSeason();
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: res.info,
+                      success: function (res) { }
+                  });
+              }
+
+          }
+      );
+  },
+  initDict: function(){
+      var that = this;
+      util.request(cfg.server + '/portal/content/common/js/dict_taa.js', { },
+          function (res) {
+                  var oIndex = res.indexOf("=");
+                  var retData = res.substring(oIndex + 1, res.length);
+                  var retObj = JSON.parse(retData);
+                  that.setData({
+                      dictObject: retObj
+                  });
+              that.initData();
+
+          }
+      );
+  },
+
+ convertCode: function(key){
+     var that = this;
+     var data = that.data.dictObject;
+     var weather = data['171'];
+     var wArray = [];
+     var wArrayObject = [];
+     for (var i in weather){
+         wArray.push(weather[i].NAME);
+         wArrayObject.push(weather[i]);
+         if (key == weather[i].CODE){
+            that.setData({
+                index: i,
+                wArray: wArray,
+                wArrayObject: wArrayObject
+            });
+            return i;
+         }
+
+     }
+ },
+  initCarType: function(key){
+      var that = this;
+      var data = that.data.dictObject;
+      var cars = data['172'];
+      for(var i in cars){
+          if (key == cars[i].CODE){
+              cars[i].checked = true;
+          }
+      }
+      that.setData({
+          carsList: cars
+      });
+  },
+  initSeason: function(){
+      var that = this;
+      var data = that.data.dictObject;
+      var cars = data['173'];
+      that.setData({
+          seasonList: cars
+      })
+  },
+  bindWeatherChange: function(e){
+      var that = this;
+      that.setData({
+          index: e.detail.value
+      });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
     
   },
-  checkboxChange(e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+  carTypeChange(e){
+      var that = this;
+      var param = [];
+      param.push(e.detail.value);
+      that.setData({
+          carTypeParam: param
+      });
   },
+  seasonChange(e) {
+    var that = this;
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
+    var param = [];
+    param.push(e.detail.value);
+    that.setData({
+        seasonParam: param
+    });
+  },
+ formSubmit: function(e){
+     var that = this;
+     var createDate = e.detail.value.createDate;
+     var weather = e.detail.value.weather;
+     var vehicleType = e.detail.value.vehicleType;
+     var accidentTime = e.detail.value.accidentTime;
+     var injuries = e.detail.value.injuries;
+     var deadthToll = e.detail.value.deadthToll;
+     var cause = e.detail.value.cause;
+     var causeList = [];
+     var mtypeList = [];
+     for(var i=0; i<cause.length; i++){
+         var traAccCause = {};
+         traAccCause.cause = cause[i];
+         causeList.push(traAccCause);
+     }
+     for(var i=0; i<vehicleType.length; i++){
+         var traAccMtype = {};
+         traAccMtype.vehicleType = vehicleType[i];
+         mtypeList.push(traAccMtype);
+     }
+     util.request(cfg.server + '/taa/www/traAcc/report', { data: JSON.stringify({ id: that.data.traffId, createDate: that.formatDT(createDate), weather: weather, accidentTime: that.formatDT(accidentTime), injuries: injuries, deadthToll: deadthToll, causeList: causeList, mtypeList: mtypeList, roadSectionId: that.data.detail.roadSectionId, roadManId: that.data.detail.roadManId, cause: '酒驾'})} ,
+         function (res) {
+             if (res.status == 0) {
+                wx.showModal({
+                    title: '提示',
+                    content: res.info,
+                    success: function(res){}
+                })
+             } else {
+                 wx.showModal({
+                     title: '提示',
+                     content: res.info,
+                     success: function (res) { }
+                 });
+             }
+
+         }
+     );
+ },
+    changeDateTime(e) {
+        let name = e.currentTarget.dataset.name;
+        let temp = {};
+        temp[name] = e.detail.value,
+        this.setData(temp);
+    },
+    changeDateTimeColumn(e) {
+        console.log(e);
+        let name = e.currentTarget.dataset.name;
+        var arr = this.data[name],
+            dateArr = this.data.dateTimeArray;
+
+        arr[e.detail.column] = e.detail.value;
+        dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
+
+        this.setData({
+            dateTimeArray: dateArr
+        });
+    },
+    fotmatPicker(dataTime) {
+        var val = [];
+        console.log(dataTime);
+        val.push(parseInt(dataTime.substring(2, 4)));
+        val.push(parseInt(dataTime.substring(5, 7) - 1));
+        val.push(parseInt(dataTime.substring(8, 10)) - 1);
+        val.push(parseInt(dataTime.substring(11, 13)));
+        val.push(parseInt(dataTime.substring(14, 16)));
+        val.push(parseInt(dataTime.substring(17,19)));
+        return val;
+    },
+    formatDT(arr) {
+        return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1] + 1) + '-' + this.FN(arr[2] + 1) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':'+this.FN(arr[5]);
+    },
+
+    FN(num) {
+        return num >= 10 ? num : '0' + num;
+    },
   /**
    * 生命周期函数--监听页面显示
    */

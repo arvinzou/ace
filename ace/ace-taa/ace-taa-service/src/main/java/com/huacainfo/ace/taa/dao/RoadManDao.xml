@@ -141,4 +141,12 @@
     order by t.createDate
     limit 0,20
   </select>
+
+    <select id="findRoster" resultType="map">
+        SELECT
+        t.id,
+        t.`name`
+        FROM taa.road_man t
+        ORDER BY CONVERT(t.`name` USING gbk)
+    </select>
 </mapper>

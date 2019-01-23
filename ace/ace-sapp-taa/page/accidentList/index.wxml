@@ -5,49 +5,23 @@
         </view>
     </view>
     <view class='list'>
-        <view class='list-box'>
-            <view class='item'>
-                <view class='title'>沅安路——临江公园至武陵阁西人民路</view>
-                <view class='item01'>
-                    <view class='item01-left'>路段:S205-汉寿沅水大桥</view>
-                    <view class='item01-right'>路长:万传明</view>
-                </view>
-                <view class='item02'>
-                    <view class='edit' bindtap='editAccident'>续报</view>
-                    <view class='revoke'>撤销</view>
-                    <view class='time'>最后续报时间:01/10 10:30:10</view>
-                </view>
-            </view>
-        </view>
 
-        <view class='list-box'>
+    <block wx:for="{{list}}" wx:for-index="idx" wx:for-item="item">
+        <view class='list-box' >
             <view class='item'>
-                <view class='title'>沅安路——临江公园至武陵阁西人民路</view>
+                <view class='title'>{{item.address}}</view>
                 <view class='item01'>
-                    <view class='item01-left'>路段:S205-汉寿沅水大桥</view>
-                    <view class='item01-right'>路长:万传明</view>
+                    <view class='item01-left'>路段:{{item.roadSectionName}}</view>
+                    <view class='item01-right'>路长:{{item.roadManName}}</view>
                 </view>
                 <view class='item02'>
-                    <view class='edit'  bindtap='editAccident'>续报</view>
-                    <view class='revoke'>撤销</view>
-                    <view class='time'>最后续报时间:01/10 10:30:10</view>
+                    <view class='edit' bindtap='editAccident' data-id='{{item.id}}'>续报</view>
+                    <view class='revoke' bindtap='revoke' data-id='{{item.id}}'>撤销</view>
+                    <view class='time'>最后续报时间:{{item.lastModifyDate}}</view>
                 </view>
             </view>
         </view>
-
-        <view class='list-box'>
-            <view class='item'>
-                <view class='title'>沅安路——临江公园至武陵阁西人民路</view>
-                <view class='item01'>
-                    <view class='item01-left'>路段:S205-汉寿沅水大桥</view>
-                    <view class='item01-right'>路长:万传明</view>
-                </view>
-                <view class='item02'>
-                    <view class='edit'  bindtap='editAccident'>续报</view>
-                    <view class='revoke'>撤销</view>
-                    <view class='time'>最后续报时间:01/10 10:30:10</view>
-                </view>
-            </view>
-        </view>
+    </block>
+       
     </view>
 </view>

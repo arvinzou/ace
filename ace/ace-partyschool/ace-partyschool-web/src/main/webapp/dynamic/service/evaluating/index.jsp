@@ -23,18 +23,18 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
+            <div class="col-md-8">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-4">
 
                 <form onsubmit="return t_query()">
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入直播名称">
+                               placeholder="请输入方案名称">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn" type="submit">
                                 搜索

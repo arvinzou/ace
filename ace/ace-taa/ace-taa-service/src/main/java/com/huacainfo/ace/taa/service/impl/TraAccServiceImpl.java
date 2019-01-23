@@ -7,16 +7,26 @@ import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.*;
+import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.taa.dao.TraAccCauseDao;
 import com.huacainfo.ace.taa.dao.TraAccDao;
+import com.huacainfo.ace.taa.dao.TraAccMtypeDao;
 import com.huacainfo.ace.taa.model.TraAcc;
+import com.huacainfo.ace.taa.model.TraAccCause;
+import com.huacainfo.ace.taa.model.TraAccMtype;
 import com.huacainfo.ace.taa.service.TraAccService;
 import com.huacainfo.ace.taa.vo.TraAccQVo;
 import com.huacainfo.ace.taa.vo.TraAccVo;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 
@@ -32,6 +42,23 @@ public class TraAccServiceImpl implements TraAccService {
     private TraAccDao traAccDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private TraAccCauseDao traAccCauseDao;
+    @Autowired
+    private TraAccMtypeDao traAccMtypeDao;
+    @Autowired
+    private AuthorityService authorityService;
+
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+    private SqlSession getSqlSession() {
+        SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+
+        return session;
+    }
 
 
     /**
@@ -50,13 +77,31 @@ public class TraAccServiceImpl implements TraAccService {
      */
     @Override
     public PageResult<TraAccVo> findTraAccList(TraAccQVo condition, int start, int limit, String orderBy) throws Exception {
+        //
         PageResult<TraAccVo> rst = new PageResult<>();
-        List<TraAccVo> list = this.traAccDao.findList(condition, start, limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.traAccDao.findCount(condition);
-            rst.setTotal(allRows);
+        //sql
+        SqlSession session = getSqlSession();
+        TraAccDao dao = session.getMapper(TraAccDao.class);
+        //
+        try {
+            List<TraAccVo> list = dao.findList(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (start <= 1) {
+                int allRows = traAccDao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+            return rst;
+        } catch (Exception e) {
+            logger.error("{}", e);
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
+
         return rst;
     }
 
@@ -79,16 +124,15 @@ public class TraAccServiceImpl implements TraAccService {
         if (CommonUtils.isBlank(o.getLongitude())) {
             return new MessageResponse(1, "经度不能为空！");
         }
-
         if (CommonUtils.isBlank(o.getWeather())) {
             return new MessageResponse(1, "天气不能为空！");
         }
-        if (CommonUtils.isBlank(o.getVehicleType())) {
-            return new MessageResponse(1, "车型不能为空！");
-        }
-        o.setId(GUIDUtil.getGUID());
-        o.setCreateDate(new Date());
+
+
+        String id = (StringUtil.isEmpty(o.getId()) || o.getId().length() < 32) ? GUIDUtil.getGUID() : o.getId();
+        o.setId(id);
         o.setStatus("1");
+        o.setCreateDate(new Date());
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         if (CommonUtils.isBlank(o.getAreaCode())) {
@@ -126,9 +170,8 @@ public class TraAccServiceImpl implements TraAccService {
         if (CommonUtils.isBlank(o.getWeather())) {
             return new MessageResponse(1, "天气不能为空！");
         }
-        if (CommonUtils.isBlank(o.getVehicleType())) {
-            return new MessageResponse(1, "车型不能为空！");
-        }
+
+
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -152,7 +195,24 @@ public class TraAccServiceImpl implements TraAccService {
     @Override
     public SingleResult<TraAccVo> selectTraAccByPrimaryKey(String id) throws Exception {
         SingleResult<TraAccVo> rst = new SingleResult<>();
-        rst.setValue(this.traAccDao.selectVoByPrimaryKey(id));
+        //sql
+        SqlSession session = getSqlSession();
+        TraAccDao dao = session.getMapper(TraAccDao.class);
+        //
+        try {
+            rst.setValue(dao.selectVoByPrimaryKey(id));
+            return rst;
+        } catch (Exception e) {
+            logger.error("{}", e);
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
         return rst;
     }
 
@@ -352,15 +412,43 @@ public class TraAccServiceImpl implements TraAccService {
     @Override
     public ResultResponse flashReport(WxUser user, TraAccVo params) throws Exception {
         //todo 根据经纬度自动获取所属：路段ID、路长ID
-
+        String id = GUIDUtil.getGUID();
+        params.setId(id);
         params.setAccidentTime(DateUtil.getNowDate());//事故发生时间 -- 默认为系统当前时间
 
         MessageResponse ms = insertTraAcc(params, parseUser(user));
         if (ms.getStatus() == ResultCode.FAIL) {
             return new ResultResponse(ms);
+        } else {
+            insertCauseMtype(id, params);
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "上报成功");
+    }
+
+    /**
+     * 插入 事故缘由 or 事故车型
+     *
+     * @param id     事故编码
+     * @param params 事故缘由 or 事故车型
+     */
+    private void insertCauseMtype(String id, TraAccVo params) {
+        if (!CollectionUtils.isEmpty(params.getCauseList())) {
+            for (TraAccCause item : params.getCauseList()) {
+                item.setId(GUIDUtil.getGUID());
+                item.setAccId(id);
+                item.setCreateDate(DateUtil.getNowDate());
+                traAccCauseDao.insert(item);
+            }
+        }
+        if (!CollectionUtils.isEmpty(params.getMtypeList())) {
+            for (TraAccMtype item : params.getMtypeList()) {
+                item.setId(GUIDUtil.getGUID());
+                item.setAccId(id);
+                item.setCreateDate(DateUtil.getNowDate());
+                traAccMtypeDao.insert(item);
+            }
+        }
     }
 
     /**
@@ -424,9 +512,9 @@ public class TraAccServiceImpl implements TraAccService {
     public Map<String, Object> contrastiveReport(Map<String, String> params) {
         String nowDataTime = DateUtil.getNow();
         String nowYear = nowDataTime.substring(0, 4);
-        Map<String, String> nowParams = getParams(Integer.parseInt(nowYear));
+        Map<String, String> nowParams = getMonthParams(Integer.parseInt(nowYear));
         nowParams.putAll(params);
-        Map<String, String> pastParams = getParams(Integer.parseInt(nowYear) - 1);
+        Map<String, String> pastParams = getMonthParams(Integer.parseInt(nowYear) - 1);
         pastParams.putAll(params);
 
         Map<String, Object> now = traAccDao.contrastiveReport(nowParams);
@@ -438,7 +526,7 @@ public class TraAccServiceImpl implements TraAccService {
         return rst;
     }
 
-    private Map<String, String> getParams(int year) {
+    private Map<String, String> getMonthParams(int year) {
         Map<String, String> params = new HashMap<>();
         params.put("Jan_S", year + "-01-01 00:00:00");
         params.put("Jan_E", year + "-01-31 23:59:59");
@@ -468,12 +556,10 @@ public class TraAccServiceImpl implements TraAccService {
         return params;
     }
 
-    private UserProp parseUser(WxUser user) {
-        UserProp u = new UserProp();
-        u.setUserId(user.getUnionId());
-        u.setName(user.getNickName());
+    private UserProp parseUser(WxUser user) throws Exception {
+        SingleResult<UserProp> rst = authorityService.getCurUserPropByOpenId(user.getUnionId());
 
-        return u;
+        return rst.getValue();
     }
 
     /**
@@ -487,12 +573,13 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-19
      */
     @Override
-   public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception{
-        SingleResult<Map<String, Object>> rst=new SingleResult();
-        String areaCode6=CommonUtils.rightPad(areaCode,6,"0");
+    public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception {
+        SingleResult<Map<String, Object>> rst = new SingleResult();
+        String areaCode6 = CommonUtils.rightPad(areaCode, 6, "0");
         rst.setValue(this.traAccDao.getLatLongByAreaCode(areaCode6));
-       return rst;
-   }
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:getTraAccList
@@ -504,16 +591,16 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-21
      */
     @Override
-    public List<Map<String, Object>> getTraAccList(TraAccQVo condition)throws Exception{
-        List<Map<String, Object>> rst=new ArrayList<Map<String, Object>>();
-        List<Map<String, Object>> list=this.traAccDao.getTraAccList(condition);
-        for(Map<String, Object> o:list){
-            double[] e= LatLonUtil.map_tx2bd(((java.math.BigDecimal)o.get("latitude")).doubleValue(),((java.math.BigDecimal)o.get("longitude")).doubleValue());
-            Map<String, Object> map=new HashMap<>();
-            map.put("latitude",e[0]);
-            map.put("longitude",e[1]);
-            map.put("deadthToll",o.get("deadthToll"));
-            map.put("injuries",o.get("injuries"));
+    public List<Map<String, Object>> getTraAccList(TraAccQVo condition) throws Exception {
+        List<Map<String, Object>> rst = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = this.traAccDao.getTraAccList(condition);
+        for (Map<String, Object> o : list) {
+            double[] e = LatLonUtil.map_tx2bd(((java.math.BigDecimal) o.get("latitude")).doubleValue(), ((java.math.BigDecimal) o.get("longitude")).doubleValue());
+            Map<String, Object> map = new HashMap<>();
+            map.put("latitude", e[0]);
+            map.put("longitude", e[1]);
+            map.put("deadthToll", o.get("deadthToll"));
+            map.put("injuries", o.get("injuries"));
             rst.add(map);
         }
         return rst;
@@ -534,15 +621,12 @@ public class TraAccServiceImpl implements TraAccService {
         Map<String, Object> month = traAccDao.monthReport(areaCode, dateTimeStr);
         //事故top10
         List<Map<String, Object>> top10 = traAccDao.top10Report(areaCode, dateTimeStr);
-        //事故柱形图
-        List<Map<String, Object>> histogram = traAccDao.histogramReport(dateTimeStr);
 
 //        return data
         Map<String, Object> rst = new HashMap<>();
         rst.put("month", month);//当月数据统计
         rst.put("top10", top10);//当月数据统计
-        rst.put("histogram", histogram);//当月数据统计
-        return null;
+        return rst;
     }
 
     /**
@@ -554,6 +638,70 @@ public class TraAccServiceImpl implements TraAccService {
     @Override
     public List<Map<String, Object>> findDistrictList(String areaCode) {
         return traAccDao.findDistrictList(areaCode);
+    }
+
+    /**
+     * 掌上驾驶仓 - 事故柱形图
+     *
+     * @param category    查询类型 times-事故次数 ； death-死亡人数
+     * @param dateTimeStr 查询年月;7位有效数据，默认当前年月
+     * @return Map<String, Object>
+     */
+    @Override
+    public List<Map<String, Object>> histogramReport(String category, String dateTimeStr) {
+
+        Map<String, Object> p = new HashMap<>();
+        p.put("category", category);
+        p.put("dateTimeStr", dateTimeStr);
+        //事故柱形图
+        return traAccDao.histogramReport(p);
+    }
+
+    /**
+     * 事故分析 报表
+     *
+     * @param category      查询类型 按年-year, 按季度-season, 按月-month
+     * @param dateTimeStr   时间字符串
+     * @param roadManId     路长ID
+     * @param roadSectionId 路段ID
+     * @param field         统计字段 deadthToll ,injuries
+     * @return Map<String,Object>
+     */
+    @Override
+    public List<Map<String, Object>> analysisReport(String category, String dateTimeStr,
+                                                    String roadManId, String roadSectionId, String field) {
+        dateTimeStr = StringUtil.isEmpty(dateTimeStr) ? DateUtil.getNow() : dateTimeStr;
+        String year = dateTimeStr.substring(0, 4);
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("roadManId", roadManId);
+        condition.put("roadSectionId", roadSectionId);
+        condition.put("field", field);
+        condition.put("category", category);
+
+        switch (category) {
+            case "year":
+                List<Map<String, Object>> yearList = traAccDao.yearList();
+                if (CollectionUtils.isEmpty(yearList)) {
+                    return null;
+                }
+                List<String> yearArray = new ArrayList<>();
+                for (Map<String, Object> item : yearList) {
+                    yearArray.add(String.valueOf(item.get("yearStr")));
+                }
+                condition.put("yearArray", yearArray);
+                break;
+            case "season":
+                condition.put("yearStr", year);
+                break;
+            case "month":
+                Map<String, String> p = getMonthParams(Integer.parseInt(year));
+                condition.putAll(p);
+                break;
+            default:
+                return null;
+        }
+
+        return traAccDao.analysisReport(condition);
     }
 
 

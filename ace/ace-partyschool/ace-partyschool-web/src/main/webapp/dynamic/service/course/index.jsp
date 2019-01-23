@@ -56,12 +56,12 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 名称</th>
-                    <th width="10%"> 类别</th>
-                    <th width="10%"> 评测方案</th>
+                    <th width="50%"> 名称</th>
+
+                    <th width="20%"> 评测方案</th>
                     <th width="10%"> 老师</th>
-                    <th width="10%"> 创建日期</th>
-                    <th width="15%">操作</th>
+
+                    <th width="20%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -88,10 +88,10 @@
     {@each data as item, index}
     <tr>
         <td>\${item.name}</td>
-        <td>\${item.codeName}</td>
+
         <td>\${item.evaluatingName}</td>
         <td>\${item.teacherName}</td>
-        <td>\${item.createDate}</td>
+
         <td>
             ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"

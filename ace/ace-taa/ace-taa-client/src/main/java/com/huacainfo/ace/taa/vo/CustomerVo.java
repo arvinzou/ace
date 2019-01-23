@@ -33,6 +33,31 @@ public class CustomerVo extends BaseModel {
      */
     private String mobile;
 
+    /**
+     * 事故列表数量
+     */
+    private String accCount;
+    /**
+     * 已采集路段数量
+     */
+    private String sectionCount;
+
+    public String getAccCount() {
+        return accCount;
+    }
+
+    public void setAccCount(String accCount) {
+        this.accCount = accCount;
+    }
+
+    public String getSectionCount() {
+        return sectionCount;
+    }
+
+    public void setSectionCount(String sectionCount) {
+        this.sectionCount = sectionCount;
+    }
+
     public String getNickName() {
         return nickName;
     }

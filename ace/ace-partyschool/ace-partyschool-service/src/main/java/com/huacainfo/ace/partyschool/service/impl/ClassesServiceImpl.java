@@ -157,6 +157,10 @@ public class ClassesServiceImpl implements ClassesService {
         //if (CommonUtils.isBlank(o.getStatus())) {
         //    return new MessageResponse(1, "状态 不能为空！");
         //}
+        int temp = this.classesDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "班级管理名称重复！");
+        }
 
         o.setStatus("1");
         o.setCreateDate(new Date());
@@ -244,7 +248,7 @@ public class ClassesServiceImpl implements ClassesService {
         classes.setStatus("2");
         classes.setClassroomId(classes.getClassroomId());
         classes.setHeadmaster(classes.getHeadmaster());
-        classes.setTid1(classes.getTid2());
+        classes.setTid1(classes.getTid1());
         classes.setTid2(classes.getTid2());
         classes.setLastModifyUserId(userProp.getUserId());
         classes.setLastModifyUserName(userProp.getName());
@@ -287,7 +291,7 @@ public class ClassesServiceImpl implements ClassesService {
         classes.setStatus("1");
         classes.setClassroomId(classes.getClassroomId());
         classes.setHeadmaster(classes.getHeadmaster());
-        classes.setTid1(classes.getTid2());
+        classes.setTid1(classes.getTid1());
         classes.setTid2(classes.getTid2());
         classes.setLastModifyUserId(curUserProp.getUserId());
         classes.setLastModifyUserName(curUserProp.getName());

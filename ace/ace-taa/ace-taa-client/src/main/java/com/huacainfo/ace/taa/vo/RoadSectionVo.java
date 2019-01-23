@@ -9,6 +9,18 @@ private static final long serialVersionUID = 1L;
     private String roadManName;
     private String areaName;
 
+    /**
+     * 查询类别  1-已采集 ; 0 - 未采集
+     */
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getRoadManName() {
         return roadManName;
