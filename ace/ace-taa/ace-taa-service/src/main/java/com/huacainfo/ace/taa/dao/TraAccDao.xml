@@ -133,11 +133,11 @@
         where t.status='1'
         <if test='condition.roadManName!=null and condition.roadManName!=""'>
             and a.name like
-            concat(#{condition.roadManName,jdbcType=VARCHAR},'%')
+            concat('%',#{condition.roadManName,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.keyword!=null and condition.keyword!=""'>
-            and (a.name like concat(#{condition.keyword,jdbcType=VARCHAR},'%') or t.address like
-            concat(#{condition.keyword,jdbcType=VARCHAR},'%'))
+            and (a.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%') or t.address like
+            concat('%',#{condition.keyword,jdbcType=VARCHAR},'%'))
         </if>
         <if test='condition.roadManId!=null and condition.roadManId!=""'>
             and t.roadManId =#{condition.roadManId,jdbcType=VARCHAR}
@@ -157,7 +157,7 @@
         </if>
         <if test='condition.areaCode!=null and condition.areaCode!=""'>
             and t.areaCode like
-            concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+            concat('%',#{condition.areaCode,jdbcType=VARCHAR},'%')
         </if>
 
         <if test='condition.upDeathNum!=null and condition.upDeathNum!=""'>
@@ -184,9 +184,9 @@
         </if>
         <if test='condition.roadName!=null and condition.roadName!=""'>
             and (
-            a.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
-            or d.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
-            or b.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
+            a.name like concat('%',#{condition.roadName,jdbcType=VARCHAR},'%')
+            or d.name like concat('%',#{condition.roadName,jdbcType=VARCHAR},'%')
+            or b.name like concat('%',#{condition.roadName,jdbcType=VARCHAR},'%')
             )
         </if>
     </sql>

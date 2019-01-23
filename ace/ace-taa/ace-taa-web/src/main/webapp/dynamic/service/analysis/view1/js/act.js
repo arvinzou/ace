@@ -59,6 +59,18 @@ function findTraAccList(params) {
 				if (result.rows) {
 					for (var i in result.rows) {
 						var o = result.rows[i];
+						var imgUrl;
+						var font;
+						if(o.deadthToll&&o.injuries){
+							imgUrl="img/icon01.png"
+                            font="<font style='color:#fff;font-size:10px'>" + o.deadthToll+"/"+o.injuries + "</font>"
+						}else if(o.deadthToll&&!o.injuries){
+                            imgUrl="img/icon1.png"
+                            font="<font style='color:#fff;font-size:10px'>" + o.deadthToll + "</font>"
+						}else if(!o.deadthToll&&o.injuries){
+                            imgUrl="img/icon0.png"
+                            font="<font style='color:#fff;font-size:10px'>" +o.injuries + "</font>"
+						}
 						var marker = new qq.maps.Marker({
 							//设置Marker的位置坐标
 							position: new qq.maps.LatLng(o.latitude, o.longitude),
@@ -75,11 +87,10 @@ function findTraAccList(params) {
 							//设置Marker可拖动
 							draggable: true,
 							//Marker的覆盖内容
-							decoration: new qq.maps.MarkerDecoration("<font style='color:#fff;font-size:10px'>" + o.deadthToll +
-								"</font>"),
+							decoration: new qq.maps.MarkerDecoration(font,new qq.maps.Point(0, -4)),
+							// decoration: new qq.maps.MarkerDecoration('<span class="demoSpan1">1</span>'),
 							//自定义Marker图标为大头针样式
-							icon: new qq.maps.MarkerImage(
-								"https://3gimg.qq.com/lightmap/api_v2/2/4/111/theme/default/imgs/markercluster/m1.png"),
+							icon: new qq.maps.MarkerImage(imgUrl),
 							//自定义Marker图标的阴影
 							// shadow: new qq.maps.MarkerImage("https://open.map.qq.com/doc/img/nilb.png"),
 							//设置Marker标题，鼠标划过Marker时显示
@@ -129,7 +140,6 @@ function getLatLongByAreaCode(data) {
 		data: data,
 		success: function(result) {
 			if (result.status == 0) {
-				console.log(result);
 				map.panTo(new qq.maps.LatLng(result.value.latitude, result.value.longitude));
 				$("input[name=areaCode]").val(result.value.areaName);
 			} else {
@@ -166,7 +176,33 @@ jQuery(function($) {
 		areaCode: userProp.areaCode
 	});
 	findTraAccList({});
+    $('#leftDiv').mouseover(setClass);
+    $('#Map').mouseover(moveClass);
+    $('#Header').mouseover(moveClass);
+	$('.accident_info').mouseover(clearTime);
+	$('.accident_info').mouseout(setTimeOut);
 });
+
+
+function clearTime() {
+    window.clearTimeout(timeOut);
+}
+
+function setTimeOut() {
+    timeOut = window.setTimeout(function () {
+        $(".accident_info").hide();
+    },3000);
+}
+
+function setClass() {
+    $('#leftDiv').addClass('leftIcon');
+    $('#leftDiv').removeClass('centerIcon');
+}
+function moveClass() {
+    $('#leftDiv').removeClass("leftIcon");
+    $('#leftDiv').addClass("centerIcon");
+}
+
 
 function initMap() {
 	map = new qq.maps.Map(document.getElementById("Map"), {
@@ -175,9 +211,9 @@ function initMap() {
 		//mapTypeId: "coordinate",
 		resizeKeepCenter: true,
 		mapTypeControl: true,
-		panControl: true,
-		zoomControl: true,
-		scaleControl: true,
+		panControl: false,
+		zoomControl: false,
+		scaleControl: false,
 		minZoom: 4,
 		maxZoom: 18,
 		//设置平移控件的位置
@@ -201,7 +237,8 @@ function initForm() {
 			$.each(formData, function(n, obj) {
 				params[obj.name] = obj.value;
 			});
-			console.log(params);
+			params.startDate=params.startDate+' 00:00:00';
+			params.endDate=params.endDate+' 00:00:00';
 			findTraAccList(params);
 			return false;
 		}
@@ -236,74 +273,46 @@ function initEvents() {
 	render($("#check-group-category"), data, "tpl-check-group");
 
 	$("input[name=startDate]").datetimepicker({
-		format: 'yyyy-mm-dd hh:ii:ss',
+        minView: "month",
+		format: 'yyyy-mm-dd',
 		language: 'zh-CN',
 		weekStart: 1,
 		todayBtn: 1, //显示‘今日’按钮
 		autoclose: 1,
 		todayHighlight: 1,
 		startView: 2,
-		minView: 'hour', //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
 		clearBtn: true, //清除按钮
 		forceParse: 0
-	});
+	}).on('changeDate', function(ev){
+        moveCSS();
+    });
+
 	$('input[name=startDate]').focus(function() {
 		$(this).blur(); //不可输入状态
 	})
 
 
 	$("input[name=endDate]").datetimepicker({
-		format: 'yyyy-mm-dd hh:ii:ss',
+        minView: "month",
+		format: 'yyyy-mm-dd',
 		language: 'zh-CN',
 		weekStart: 1,
 		todayBtn: 1, //显示‘今日’按钮
 		autoclose: 1,
 		todayHighlight: 1,
 		startView: 2,
-		minView: 'hour', //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
 		clearBtn: true, //清除按钮
 		forceParse: 0
-	});
+	}).on('changeDate', function(ev){
+        moveCSS();
+    });
 	$('input[name=endDate]').focus(function() {
 		$(this).blur(); //不可输入状态
 	})
-$('input[name=roadSectionId]').combogrid({
-		panelWidth: 500,
-		idField: 'id',
-		textField: 'name',
-		url: contextPath + '/roadSection/getListByCondition',
-		mode: 'remote',
-		fitColumns: true,
-		method: 'get',
-		columns: [
-			[{
-				field: 'name',
-				title: '路段名称',
-				width: 100
-			}, {
-				field: 'roadManName',
-				title: '路长',
-				width: 100
-			}, {
-				field: 'startName',
-				title: '路段起始',
-				width: 100
-			}, {
-				field: 'endName',
-				title: '路段截止',
-				width: 100
-			}]
-		],
-		onSelect:function  (rowIndex, rowData) {
-
-		}
-	});
-
 }
 
 function initPreview(id) {
 	startLoad();
-	$(".info").show();
 	$.ajax({
 		url: contextPath + "/traAcc/selectTraAccByPrimaryKey",
 		type: "post",
@@ -317,6 +326,11 @@ function initPreview(id) {
 				var data = {};
 				data['o'] = result.value;
 				render('#fm-preview', data, 'tpl-preview');
+                $(".accident_info").show();
+                window.clearTimeout(timeOut);
+                timeOut = window.setTimeout(function () {
+                    $(".accident_info").hide();
+                },3000);
 				
 			} else {
 				alert(result.errorMessage);
@@ -328,6 +342,12 @@ function initPreview(id) {
 		}
 	});
 }
+
+
+var timeOut;
+
+
+
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('rsd', rsd);
