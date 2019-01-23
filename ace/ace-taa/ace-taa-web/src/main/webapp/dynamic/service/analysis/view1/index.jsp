@@ -50,47 +50,49 @@
 
 <div id="leftDiv" class="leftIcon transitionDiv">
     <div class="content">
-        <div class="title">精确搜索</div>
-        <div class="seach morginBottom40">
-            <input class="easyui-combotree" style=" width: 120px;height: 46px;border:0; !important;" name="areaCode" data-options="url:'${portalPath}/system/selectProvinceTreeList.do',
+        <form id="fm">
+            <div class="title">精确搜索</div>
+            <div class="seach morginBottom40">
+                <input class="easyui-combotree" style=" width: 120px;height: 46px;border:0; !important;" name="areaCode"
+                       data-options="url:'${portalPath}/system/selectProvinceTreeList.do',
 					method:'get',
 					label:'',
 					labelPosition:'top',
 					onSelect:function  (node) {
-						console.log(node);
 						 setParams('areaCode', node.id);
 					}">
-            <input class="loadName" type="text">
-            <button class="active_seach"></button>
-        </div>
-        <div class="title">道路级别</div>
-        <div class="morginBottom40 chenckContent contentStyle" id="check-group-category">
+                <input class="loadName" name="roadName" type="text">
+                <button class="active_seach"></button>
+            </div>
+            <div class="title">道路级别</div>
+            <div class="morginBottom40 chenckContent contentStyle" id="check-group-category">
 
-        </div>
+            </div>
 
-        <div class="title">时间范围</div>
-        <div class="morginBottom40 timeContent contentStyle">
-            <input  type="text" size="16"  name="startDate" readonly="" class="form-control inputStyle">
-            <input  type="text" size="16" name="endDate" readonly="" class="form-control inputStyle">
-        </div>
-        <div class="title">死亡人数</div>
-        <div class="morginBottom40 chenckContent contentStyle">
-            <input type="text" size="16" name="downDeathNum" class="inputStyle form-control"
-                   style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
-            <input type="text" size="16" name="upDeathNum" class="inputStyle form-control"
-                   style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
-        </div>
-        <div class="title">受伤人数</div>
-        <div class="morginBottom40 chenckContent contentStyle">
-            <input type="text" size="16" name="downDeathNum" class="inputStyle form-control"
-                   style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
-            <input type="text" size="16" name="upDeathNum" class="inputStyle form-control"
-                   style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
-        </div>
-        <div class=" buttonStyle contentStyle" >
-            <button class="reset">重置</button>
-            <button class="submit">确定</button>
-        </div>
+            <div class="title">时间范围</div>
+            <div class="morginBottom40 timeContent contentStyle">
+                <input type="text" size="16" name="startDate" readonly="" class="form-control inputStyle">
+                <input type="text" size="16" name="endDate" readonly="" class="form-control inputStyle">
+            </div>
+            <div class="title">死亡人数</div>
+            <div class="morginBottom40 chenckContent contentStyle">
+                <input type="text" size="16" name="downDeathNum" class="inputStyle form-control"
+                       style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
+                <input type="text" size="16" name="upDeathNum" class="inputStyle form-control"
+                       style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
+            </div>
+            <div class="title">受伤人数</div>
+            <div class="morginBottom40 chenckContent contentStyle">
+                <input type="text" size="16" name="downInjuriesNum" class="inputStyle form-control"
+                       style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
+                <input type="text" size="16" name="upInjuriesNum" class="inputStyle form-control"
+                       style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
+            </div>
+            <div class=" buttonStyle contentStyle">
+                <button type="reset" class="reset">重置</button>
+                <button type="submit" class="submit">确定</button>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -102,7 +104,9 @@
             onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}
     </button>
     {@else}
-    <button type="button" authority="false" class="btn btn-default inputStyle" onclick="setParams('\${data.key}','');">全部</button>
+    <button type="button" authority="false" class="btn btn-default inputStyle" onclick="setParams('\${data.key}','');">
+        全部
+    </button>
     {@/if}
 
     {@/each}
