@@ -263,4 +263,17 @@ public interface TraAccService {
      * @return Map<String, Object>
      */
     List<Map<String, Object>> histogramReport(String category, String dateTimeStr);
+
+    /**
+     * 事故分析 报表
+     *
+     * @param category      查询类型 按年-year, 按季度-season, 按月-month
+     * @param dateTimeStr   时间字符串
+     * @param roadManId     路长ID
+     * @param roadSectionId 路段ID
+     * @param field         统计字段 deadthToll ,injuries
+     * @return Map<String,Object>
+     */
+    List<Map<String, Object>> analysisReport(String category, String dateTimeStr,
+                                             String roadManId, String roadSectionId, String field);
 }

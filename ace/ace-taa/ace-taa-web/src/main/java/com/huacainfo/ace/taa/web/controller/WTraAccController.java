@@ -96,9 +96,7 @@ public class WTraAccController extends TaaBaseController {
         if (CommonUtils.isBlank(params.getRoadSectionId())) {
             return new ResultResponse(ResultCode.FAIL, "归属路段" + "不能为空！");
         }
-        if (CommonUtils.isBlank(params.getCause())) {
-            return new ResultResponse(ResultCode.FAIL, "事故原因" + "不能为空！");
-        }
+
 
         //微信鉴权信息 --小程序
         WxUser user = getCurWxUser();

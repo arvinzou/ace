@@ -454,4 +454,277 @@
         )
         AND t.type is not null
     </select>
+
+    <select id="yearList" resultType="map">
+        SELECT
+        DISTINCT
+        SUBSTRING(DATE_FORMAT(t.accidentTime,"%Y-%m-%d %T") ,1,4) as yearStr
+        FROM tra_acc t
+        WHERE t.`status` = '1'
+    </select>
+
+    <select id="analysisReport" resultType="map">
+        <choose>
+            <when test='category == "year"'>
+
+                <choose>
+                    <when test='field == "deadthToll"'>
+                        SELECT
+                        <foreach collection="yearArray" item="item">
+                            CASE WHEN
+                            t.accidentTime >= CONCAT(#{item,jdbcType=VARCHAR},'01-01 00:00:00')
+                            AND t.accidentTime &lt;= CONCAT(#{item,jdbcType=VARCHAR},'12-31 23:59:59')
+                            THEN IFNULL(SUM(t.deadthToll), 0) ELSE 0 END AS ${item}年
+                        </foreach>
+                        FROM tra_acc t
+                        WHERE t.`status` = '1'
+                        <if test='roadManId!=null and roadManId!=""'>
+                            and t.roadManId = #{roadManId,jdbcType=VARCHAR}
+                        </if>
+                        <if test='roadSectionId!=null and roadSectionId!=""'>
+                            and t.roadSectionId = #{roadSectionId,jdbcType=VARCHAR}
+                        </if>
+
+                    </when>
+                    <otherwise>
+                        SELECT
+                        <foreach collection="yearArray" item="item">
+                            CASE WHEN
+                            t.accidentTime >= CONCAT(#{item,jdbcType=VARCHAR},'01-01 00:00:00')
+                            AND t.accidentTime &lt;= CONCAT(#{item,jdbcType=VARCHAR},'12-31 23:59:59')
+                            THEN IFNULL(SUM(t.injuries), 0) ELSE 0 END AS ${item}年
+                        </foreach>
+                        FROM tra_acc t
+                        WHERE t.`status` = '1'
+                        <if test='roadManId!=null and roadManId!=""'>
+                            and t.roadManId = #{roadManId,jdbcType=VARCHAR}
+                        </if>
+                        <if test='roadSectionId!=null and roadSectionId!=""'>
+                            and t.roadSectionId = #{roadSectionId,jdbcType=VARCHAR}
+                        </if>
+
+                    </otherwise>
+                </choose>
+
+            </when>
+            <when test='category == "season"'>
+                <choose>
+                    <when test='field == "deadthToll"'>
+                        SELECT
+                        CASE
+                        WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-01-01 00:00:00')
+                        AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-03-31 23:59:59') THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS 第一季度,
+                        CASE
+                        WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'04-01 00:00:00')
+                        AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-06-30 23:59:59') THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS 第二季度,
+                        CASE
+                        WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-07-01 00:00:00')
+                        AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-09-30 23:59:59') THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS 第三季度,
+                        CASE
+                        WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-10-01 00:00:00')
+                        AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-12-31 23:59:59') THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS 第四季度
+                        FROM tra_acc t
+                        WHERE t.`status` = '1'
+                        <if test='roadManId!=null and roadManId!=""'>
+                            and t.roadManId = #{roadManId,jdbcType=VARCHAR}
+                        </if>
+                        <if test='roadSectionId!=null and roadSectionId!=""'>
+                            and t.roadSectionId = #{roadSectionId,jdbcType=VARCHAR}
+                        </if>
+
+                    </when>
+                    <otherwise>
+                        SELECT
+                        CASE
+                        WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-01-01 00:00:00')
+                        AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-03-31 23:59:59') THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS 第一季度,
+                        CASE
+                        WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'04-01 00:00:00')
+                        AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-06-30 23:59:59') THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS 第二季度,
+                        CASE
+                        WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-07-01 00:00:00')
+                        AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-09-30 23:59:59') THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS 第三季度,
+                        CASE
+                        WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-10-01 00:00:00')
+                        AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-12-31 23:59:59') THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS 第四季度
+                        FROM tra_acc t
+                        WHERE t.`status` = '1'
+                        <if test='roadManId!=null and roadManId!=""'>
+                            and t.roadManId = #{roadManId,jdbcType=VARCHAR}
+                        </if>
+                        <if test='roadSectionId!=null and roadSectionId!=""'>
+                            and t.roadSectionId = #{roadSectionId,jdbcType=VARCHAR}
+                        </if>
+                    </otherwise>
+                </choose>
+
+            </when>
+
+            <otherwise>
+
+                <choose>
+                    <when test='field == "deadthToll"'>
+                        SELECT
+                        CASE
+                        WHEN t.accidentTime >= #{Jan_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Jan_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS January,
+                        CASE
+                        WHEN t.accidentTime >= #{Feb_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Feb_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS February,
+                        CASE
+                        WHEN t.accidentTime >= #{Mar_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Mar_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS March,
+                        CASE
+                        WHEN t.accidentTime >= #{Apr_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Apr_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS April,
+                        CASE
+                        WHEN t.accidentTime >= #{May_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{May_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS May,
+                        CASE
+                        WHEN t.accidentTime >= #{Jun_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Jun_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS June,
+                        CASE
+                        WHEN t.accidentTime >= #{Jul_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Jul_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS July,
+                        CASE
+                        WHEN t.accidentTime >= #{Aug_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Aug_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS August,
+                        CASE
+                        WHEN t.accidentTime >= #{Sep_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Sep_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS September,
+                        CASE
+                        WHEN t.accidentTime >= #{Oct_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Oct_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS October,
+                        CASE
+                        WHEN t.accidentTime >= #{Nov_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Nov_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS November,
+                        CASE
+                        WHEN t.accidentTime >= #{Dec_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Dec_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.deadthToll), 0)
+                        ELSE 0 END AS December
+                        FROM tra_acc t
+                        WHERE t.`status` = '1'
+                        <if test='roadManId!=null and roadManId!=""'>
+                            and t.roadManId = #{roadManId,jdbcType=VARCHAR}
+                        </if>
+                        <if test='roadSectionId!=null and roadSectionId!=""'>
+                            and t.roadSectionId = #{roadSectionId,jdbcType=VARCHAR}
+                        </if>
+                    </when>
+                    <otherwise>
+                        SELECT
+                        CASE
+                        WHEN t.accidentTime >= #{Jan_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Jan_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS January,
+                        CASE
+                        WHEN t.accidentTime >= #{Feb_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Feb_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS February,
+                        CASE
+                        WHEN t.accidentTime >= #{Mar_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Mar_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS March,
+                        CASE
+                        WHEN t.accidentTime >= #{Apr_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Apr_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS April,
+                        CASE
+                        WHEN t.accidentTime >= #{May_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{May_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS May,
+                        CASE
+                        WHEN t.accidentTime >= #{Jun_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Jun_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS June,
+                        CASE
+                        WHEN t.accidentTime >= #{Jul_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Jul_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS July,
+                        CASE
+                        WHEN t.accidentTime >= #{Aug_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Aug_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS August,
+                        CASE
+                        WHEN t.accidentTime >= #{Sep_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Sep_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS September,
+                        CASE
+                        WHEN t.accidentTime >= #{Oct_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Oct_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS October,
+                        CASE
+                        WHEN t.accidentTime >= #{Nov_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Nov_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS November,
+                        CASE
+                        WHEN t.accidentTime >= #{Dec_S,jdbcType=VARCHAR}
+                        AND t.accidentTime &lt;= #{Dec_E,jdbcType=VARCHAR} THEN
+                        IFNULL(SUM(t.injuries), 0)
+                        ELSE 0 END AS December
+                        FROM tra_acc t
+                        WHERE t.`status` = '1'
+                        <if test='roadManId!=null and roadManId!=""'>
+                            and t.roadManId = #{roadManId,jdbcType=VARCHAR}
+                        </if>
+                        <if test='roadSectionId!=null and roadSectionId!=""'>
+                            and t.roadSectionId = #{roadSectionId,jdbcType=VARCHAR}
+                        </if>
+                    </otherwise>
+                </choose>
+
+            </otherwise>
+        </choose>
+
+    </select>
 </mapper>

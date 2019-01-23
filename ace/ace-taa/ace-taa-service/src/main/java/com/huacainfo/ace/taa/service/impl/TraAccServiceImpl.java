@@ -512,9 +512,9 @@ public class TraAccServiceImpl implements TraAccService {
     public Map<String, Object> contrastiveReport(Map<String, String> params) {
         String nowDataTime = DateUtil.getNow();
         String nowYear = nowDataTime.substring(0, 4);
-        Map<String, String> nowParams = getParams(Integer.parseInt(nowYear));
+        Map<String, String> nowParams = getMonthParams(Integer.parseInt(nowYear));
         nowParams.putAll(params);
-        Map<String, String> pastParams = getParams(Integer.parseInt(nowYear) - 1);
+        Map<String, String> pastParams = getMonthParams(Integer.parseInt(nowYear) - 1);
         pastParams.putAll(params);
 
         Map<String, Object> now = traAccDao.contrastiveReport(nowParams);
@@ -526,7 +526,7 @@ public class TraAccServiceImpl implements TraAccService {
         return rst;
     }
 
-    private Map<String, String> getParams(int year) {
+    private Map<String, String> getMonthParams(int year) {
         Map<String, String> params = new HashMap<>();
         params.put("Jan_S", year + "-01-01 00:00:00");
         params.put("Jan_E", year + "-01-31 23:59:59");
@@ -655,6 +655,53 @@ public class TraAccServiceImpl implements TraAccService {
         p.put("dateTimeStr", dateTimeStr);
         //事故柱形图
         return traAccDao.histogramReport(p);
+    }
+
+    /**
+     * 事故分析 报表
+     *
+     * @param category      查询类型 按年-year, 按季度-season, 按月-month
+     * @param dateTimeStr   时间字符串
+     * @param roadManId     路长ID
+     * @param roadSectionId 路段ID
+     * @param field         统计字段 deadthToll ,injuries
+     * @return Map<String,Object>
+     */
+    @Override
+    public List<Map<String, Object>> analysisReport(String category, String dateTimeStr,
+                                                    String roadManId, String roadSectionId, String field) {
+        dateTimeStr = StringUtil.isEmpty(dateTimeStr) ? DateUtil.getNow() : dateTimeStr;
+        String year = dateTimeStr.substring(0, 4);
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("roadManId", roadManId);
+        condition.put("roadSectionId", roadSectionId);
+        condition.put("field", field);
+        condition.put("category", category);
+
+        switch (category) {
+            case "year":
+                List<Map<String, Object>> yearList = traAccDao.yearList();
+                if (CollectionUtils.isEmpty(yearList)) {
+                    return null;
+                }
+                List<String> yearArray = new ArrayList<>();
+                for (Map<String, Object> item : yearList) {
+                    yearArray.add(String.valueOf(item.get("yearStr")));
+                }
+                condition.put("yearArray", yearArray);
+                break;
+            case "season":
+                condition.put("yearStr", year);
+                break;
+            case "month":
+                Map<String, String> p = getMonthParams(Integer.parseInt(year));
+                condition.putAll(p);
+                break;
+            default:
+                return null;
+        }
+
+        return traAccDao.analysisReport(condition);
     }
 
 
