@@ -40,6 +40,7 @@ $(function () {
     $('#Map').mouseover(moveClass);
     $('#Header').mouseover(moveClass);
     $('.active_seach').click(searchRoadName);
+    $('#check-group-category').on('click','button',setParams);
 });
 
 
@@ -48,9 +49,12 @@ function searchRoadName() {
     getData();
 }
 
-function setParams(key, value) {
-    params[key] = value;
-    getData();
+function setParams() {
+    var that =$(this);
+    params.category = that.data('id');
+    findTraAccList(params);
+    that.siblings().removeClass('active_but');
+    that.addClass('active_but');
 }
 
 

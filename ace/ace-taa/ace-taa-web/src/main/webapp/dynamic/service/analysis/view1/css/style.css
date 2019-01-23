@@ -343,3 +343,9 @@ input {
     align-items: center;
     border-bottom: rgba(240, 239, 246, 1) solid 1px;
 }
+
+.active_but{
+    background: rgba(36, 48, 227, 1) !important;
+    border:0 !important;
+    color: #fff !important;
+}

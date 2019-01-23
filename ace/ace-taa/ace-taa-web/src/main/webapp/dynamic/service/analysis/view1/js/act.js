@@ -1,8 +1,7 @@
 var map = null;
 var markers = [];
 var params = {
-
-	limit: 200
+	limit: 99
 };
 
 
@@ -183,6 +182,7 @@ jQuery(function($) {
 	$('.accident_info').mouseover(clearTime);
 	$('.accident_info').mouseout(setTimeOut);
     $('.active_seach').click(searchRoadName);
+	$('#check-group-category').on('click','button',setParams);
 });
 
 function searchRoadName() {
@@ -252,9 +252,12 @@ function initForm() {
 	});
 }
 
-function setParams(key, value) {
-	params[key] = value;
+function setParams() {
+	var that =$(this);
+	params.category = that.data('id');
 	findTraAccList(params);
+	that.siblings().removeClass('active_but');
+	that.addClass('active_but');
 }
 
 function render(obj, data, tplId) {
