@@ -9,28 +9,37 @@
     <view class='tab01-content {{tab == 0? "":"hidden"}}'>
         <map id="myMap" show-location longitude='{{longitude}}'  latitude='{{latitude}}' scale='18' markers="{{current}}" style='width:100%; height:{{mapHeight}}'/>
         <view class='addForm'>
+        <form bindsubmit="xbSubmit">
             <view class='close-open-box'>
                 <image src='../../image/icon-open-close.png' class='close-open' bindtap='closeAndOpen'></image>
             </view>
-           <view class='locate-name'>常德市武陵区武陵阁</view>
-           <view class='locate-road'>沅安路-临江公园西至武陵阁</view>
+           <view class='locate-name'>{{address}}</view>
+           <view class='locate-road' wx:if='{{sectionFlag == true}}' bindtap='selectRoadSection'>{{sectionName}}</view>
+           <view class='locate-road' wx:if='{{sectionFlag == false}}' bindtap='selectRoadSection'>请选择路段</view>
            <view class='opt-form {{isEdit == true?"":"hidden"}}'>
                 <view class='row'>
                     <view class='row-left'>所属路长</view>
                     <view class='row-right'>
-                        <view  class='form-input {{isNull == 0?"form-default":"form-active"}}'>请选择路长</view>
-                        <image class='select-arrow' src='../../image/icon_rediret.png'></image>
+                        <input class='form-input' name='roadManName' type='text' value='{{roadManName}}' placeholder='请选择路长' disabled='true' ></input>
+                        <image class='select-arrow' src='../../image/icon_rediret.png' bindtap='selectRoadMan'></image>
                     </view>
                 </view>
                 <view class='row'>
                     <view class='row-left'>快报时间</view>
-                    <view class='row-right time'>2019-01-18</view>
+                    <view class='row-right'>
+                        <picker name='createDate' data-name='createDate' mode="multiSelector" value="{{createDate}}"           bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                            <view class="tui-picker-detail">
+                                {{dateTimeArray[0][createDate[0]]}}-{{dateTimeArray[1][createDate[1]]}}-{{dateTimeArray[2][createDate[2]]}} {{dateTimeArray[3][createDate[3]]}}:{{dateTimeArray[4][createDate[4]]}}:{{dateTimeArray[5][createDate[5]]}}
+                            </view>
+                            <image class='select-arrow' src='../../image/icon_rediret.png'></image>
+                        </picker>
+                    </view>
                 </view>
                  <view class='row'>
                     <view class='row-left'>天气情况</view>
                     <view class='row-right'>
-                        <picker bindchange="bindWeatherChange" value="{{wIndex}}" range="{{weather}}">
-                            <view  class='form-input form-active'>{{weather[wIndex]}}</view>
+                        <picker bindchange="bindWeatherChange" name='weather' value="{{weatherArray[wIndex].CODE}}" range="{{weather}}">
+                            <view  class='form-input form-active'>{{weatherArray[wIndex].NAME}}</view>
                             <image class='select-arrow' src='../../image/icon_rediret.png'></image>
                         </picker>
                     </view>
@@ -38,14 +47,22 @@
                 <view class='row'>
                     <view class='row-left'>车型</view>
                     <view class='row-right'>
-                        <picker bindchange="bindCarChange" value="{{cIndex}}" range="{{carType}}">
-                            <view  class='form-input form-active'>{{carType[cIndex]}}</view>
-                            <image class='select-arrow' src='../../image/icon_rediret.png'></image>
-                        </picker>
+                       
                     </view>
                 </view>
-                <view class='sendbtn default-btn'>确定报送</view>
+                <view  class='carCheckBox'>
+                    <checkbox-group name='vehicleType'>
+                    <block  wx:for="{{carTypes}}">
+                        <label  class="checkbox cartype" wx:if='{{item.CODE != ""}}'>
+                            <checkbox value="{{item.CODE}}" checked="{{item.checked}}" />
+                            {{item.NAME}}
+                        </label>
+                    </block>
+                    </checkbox-group>
+                </view>
+                <view class='sendbtn'><button class='active-btn' form-type="submit">确定报送</button></view>
            </view>
+           </form>
         </view>
     </view>
     <!--路段采集-->
@@ -61,3 +78,16 @@
         <cover-image src='../../image/icon_rediret.png'></cover-image>
     </cover-view>
 </cover-view>
+<cover-view class='form-content {{tab == 1 && startName!=null && startName!=""? "":"hidden"}}'>
+    <cover-view class='form-row'>
+        <cover-view class='form-row-left'>起点：</cover-view>
+        <cover-view class='form-row-right'>{{startName}}</cover-view>
+    </cover-view>
+    <cover-view class='form-row'>
+        <cover-view class='form-row-left'>终点：</cover-view>
+        <cover-view class='form-row-right'>{{endName}}</cover-view>
+    </cover-view>
+</cover-view>
+<cover-view class='cjBtn startBtn {{tab == 1 && startFlag == true? "":"hidden"}}' bindtap='start'>开始</cover-view>
+<cover-view class='cjBtn breakBtn {{tab == 1 && breakFlag == true? "":"hidden"}}' bindtap='break'>暂停</cover-view>
+<cover-view class='cjBtn endBtn {{tab == 1 && endFlag == true? "":"hidden"}}' bindtap='end'>结束</cover-view>

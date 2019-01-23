@@ -14,10 +14,14 @@ Page({
         fixedTop: 0,
         list: [
         
-        ]
+        ],
+        pageType: null
     },
-    onLoad: function () {
+    onLoad: function (options) {
         var that = this;
+        that.setData({
+            pageType : options.type
+        })
         that.initRoadList();
     },
     
@@ -150,5 +154,24 @@ Page({
             toView: id
         });
 
+    },
+    selectRoadMan: function(e){
+        var that = this;
+        var roadManId = e.currentTarget.dataset.id;
+        var roadManName = e.currentTarget.dataset.name;
+        var skipType = that.data.pageType;
+        wx.setStorageSync('roadManId', roadManId);
+        wx.setStorageSync('roadManName', roadManName);
+        if (skipType == 'kb'){
+            //快报选择路长
+            wx.switchTab({
+                url: '../index/index',
+            });
+        }else if(skipType == 'xb'){
+            //续报选择路长
+            wx.navigateTo({
+                url: '../accidentDetail/index',
+            });
+        }
     }
 })
