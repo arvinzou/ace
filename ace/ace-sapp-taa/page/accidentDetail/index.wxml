@@ -20,7 +20,12 @@
             <view class='row br'>
                 <view class='row-left'>快报时间</view>
                 <view class='row-right content'>
-                    <input type='text' value='{{detail.lastModifyDate}}' name='createDate'></input>
+                    <!--<input type='text' value='{{detail.lastModifyDate}}' name='createDate'></input>-->
+                    <picker class='datetime' name='createDate' data-name='createDate' mode="multiSelector" value="{{createDate}}"           bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                            <view class="tui-picker-detail">
+                                {{dateTimeArray[0][createDate[0]]}}-{{dateTimeArray[1][createDate[1]]}}-{{dateTimeArray[2][createDate[2]]}} {{dateTimeArray[3][createDate[3]]}}:{{dateTimeArray[4][createDate[4]]}}:{{dateTimeArray[5][createDate[5]]}}
+                            </view>
+                        </picker>
                     <image src='../../image/icon_rediret.png'></image>
                 </view>
             </view>
@@ -54,17 +59,21 @@
             <view class='row br'>
                 <view class='row-left'>事故时间</view>
                 <view class='row-right content'>
-                    <input type='text' value='{{detail.accidentTime}}' name='accidentTime'></input>
+                   <picker class='datetime' name='accidentTime' data-name='accidentTime' mode="multiSelector" value="{{accidentTime}}"           bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                            <view class="tui-picker-detail">
+                                {{dateTimeArray[0][accidentTime[0]]}}-{{dateTimeArray[1][accidentTime[1]]}}-{{dateTimeArray[2][accidentTime[2]]}} {{dateTimeArray[3][accidentTime[3]]}}:{{dateTimeArray[4][accidentTime[4]]}}:{{dateTimeArray[5][accidentTime[5]]}}
+                            </view>
+                        </picker>
                     <image src='../../image/icon_rediret.png'></image>
                 </view>
             </view>
             <view class='row br'>
                 <view class='row-left'>受伤人数</view>
-                <view class='row-right'><input type='number' name='injuries' placeholder='请输入受伤人数' placeholder-class='input-holder'></input></view>
+                <view class='row-right'><input type='number' name='injuries' value='{{detail.injuries}}' placeholder='请输入受伤人数' placeholder-class='input-holder'></input></view>
             </view>
             <view class='row br'>
                 <view class='row-left'>死亡人数</view>
-                <view class='row-right'><input type='number' name='deadthToll' placeholder='请输入死亡人数'  placeholder-class='input-holder'></input></view>
+                <view class='row-right'><input type='number' name='deadthToll' value='{{detail.deadthToll}}' placeholder='请输入死亡人数'  placeholder-class='input-holder'></input></view>
             </view>
             <view class='row row-title br'>
                 <text class='season-title'>事故原因</text>

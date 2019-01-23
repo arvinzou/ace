@@ -1,5 +1,6 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
+var dateTimePicker = require('../../util/dateTimePicker.js');
 Page({
 
   /**
@@ -16,7 +17,12 @@ Page({
       cIndex : null,
       seasonList: [],
       carTypeParam: [],
-      seasonParam: []
+      seasonParam: [],
+      dateTimeArray: null,
+      createDate: null,
+      accidentTime: null,
+      startYear: 2000,
+      endYear: 2050,
   },
 
   /**
@@ -27,16 +33,31 @@ Page({
       that.setData({
           traffId: options.id
       });
+      that.initDateTime();
       that.initDict();
       
+  },
+  initDateTime: function(){
+      var that = this;
+      var obj = dateTimePicker.dateTimePicker(that.data.startYear, that.data.endYear);
+      console.log("============================"+obj.dateTime);
+      that.setData({
+          dateTimeArray: obj.dateTimeArray,
+          createDate: obj.dateTime,
+          accidentTime: obj.dateTime,
+      });
+      console.log(obj);
   },
   initData: function(){
       var that = this;
       util.request(cfg.server + '/taa/www/report/selectTraAccInfo', { traAccId: that.data.traffId },
           function (res) {
               if (res.status == 0) {
+                  console.log("*****************************"+res.value.accidentTime);
                  that.setData({
-                     detail: res.value
+                     detail: res.value,
+                     createDate: that.fotmatPicker(res.value.createDate),
+                     accidentTime: that.fotmatPicker(res.value.accidentTime),
                  });
                   that.convertCode(res.value.weather);
                   that.initCarType(res.value.vehicleType);
@@ -122,6 +143,7 @@ Page({
     
   },
   carTypeChange(e){
+      var that = this;
       var param = [];
       param.push(e.detail.value);
       that.setData({
@@ -146,10 +168,26 @@ Page({
      var injuries = e.detail.value.injuries;
      var deadthToll = e.detail.value.deadthToll;
      var cause = e.detail.value.cause;
-     util.request(cfg.server + '/taa/www/traAcc/report', { id: that.data.traffId, createDate: createDate, weather: weather,  accidentTime: accidentTime, injuries: injuries, deadthToll: deadthToll},
+     var causeList = [];
+     var mtypeList = [];
+     for(var i=0; i<cause.length; i++){
+         var traAccCause = {};
+         traAccCause.cause = cause[i];
+         causeList.push(traAccCause);
+     }
+     for(var i=0; i<vehicleType.length; i++){
+         var traAccMtype = {};
+         traAccMtype.vehicleType = vehicleType[i];
+         mtypeList.push(traAccMtype);
+     }
+     util.request(cfg.server + '/taa/www/traAcc/report', { data: JSON.stringify({ id: that.data.traffId, createDate: that.formatDT(createDate), weather: weather, accidentTime: that.formatDT(accidentTime), injuries: injuries, deadthToll: deadthToll, causeList: causeList, mtypeList: mtypeList, roadSectionId: that.data.detail.roadSectionId, roadManId: that.data.detail.roadManId, cause: '酒驾'})} ,
          function (res) {
              if (res.status == 0) {
-                console.log(res);
+                wx.showModal({
+                    title: '提示',
+                    content: res.info,
+                    success: function(res){}
+                })
              } else {
                  wx.showModal({
                      title: '提示',
@@ -161,6 +199,43 @@ Page({
          }
      );
  },
+    changeDateTime(e) {
+        let name = e.currentTarget.dataset.name;
+        let temp = {};
+        temp[name] = e.detail.value,
+        this.setData(temp);
+    },
+    changeDateTimeColumn(e) {
+        console.log(e);
+        let name = e.currentTarget.dataset.name;
+        var arr = this.data[name],
+            dateArr = this.data.dateTimeArray;
+
+        arr[e.detail.column] = e.detail.value;
+        dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
+
+        this.setData({
+            dateTimeArray: dateArr
+        });
+    },
+    fotmatPicker(dataTime) {
+        var val = [];
+        console.log(dataTime);
+        val.push(parseInt(dataTime.substring(2, 4)));
+        val.push(parseInt(dataTime.substring(5, 7) - 1));
+        val.push(parseInt(dataTime.substring(8, 10)) - 1);
+        val.push(parseInt(dataTime.substring(11, 13)));
+        val.push(parseInt(dataTime.substring(14, 16)));
+        val.push(parseInt(dataTime.substring(17,19)));
+        return val;
+    },
+    formatDT(arr) {
+        return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1] + 1) + '-' + this.FN(arr[2] + 1) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':'+this.FN(arr[5]);
+    },
+
+    FN(num) {
+        return num >= 10 ? num : '0' + num;
+    },
   /**
    * 生命周期函数--监听页面显示
    */
