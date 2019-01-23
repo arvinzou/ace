@@ -248,10 +248,13 @@ input {
 
 #leftDiv .content .seach .active_seach {
     width: 47px;
-    background: rgba(67, 80, 252, 1);
+
     box-shadow: 0px 3px 13px 0px rgba(153, 173, 207, 0.3);
     outline: none;
     border: 0;
+    background: rgba(67, 80, 252, 1) url(../img/search.png) no-repeat;
+    background-size: 50%;
+    background-position: 50%;
 }
 
 #leftDiv .content .title {

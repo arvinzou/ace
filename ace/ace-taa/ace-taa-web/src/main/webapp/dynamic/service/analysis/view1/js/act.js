@@ -1,7 +1,8 @@
 var map = null;
 var markers = [];
 var params = {
-	limit: 9999999
+
+	limit: 200
 };
 
 
@@ -42,7 +43,7 @@ function rsd(value, kernelKey, staticDictObjects) {
 	}
 	return name;
 }
-function findTraAccList(params) {
+function findTraAccList() {
 	$.ajax({
 		url: contextPath + '/traAcc/findTraAccList',
 		type: "post",
@@ -181,7 +182,13 @@ jQuery(function($) {
     $('#Header').mouseover(moveClass);
 	$('.accident_info').mouseover(clearTime);
 	$('.accident_info').mouseout(setTimeOut);
+    $('.active_seach').click(searchRoadName);
 });
+
+function searchRoadName() {
+    params.roadName= $("input[name=roadName]").val();
+    getData();
+}
 
 
 function clearTime() {

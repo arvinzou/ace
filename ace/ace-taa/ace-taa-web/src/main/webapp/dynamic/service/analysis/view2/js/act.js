@@ -19,16 +19,16 @@ var option={
     series: [{
         type: 'heatmap',
         coordinateSystem: 'bmap',
-        pointSize: 5,
-        blurSize: 6
+        pointSize: 10,
+        blurSize: 12
     }]
 };
 
 var params = {
+    limit:9999
 };
 
 var myChart;
-
 
 $(function () {
     initEchart();
@@ -39,8 +39,14 @@ $(function () {
     $('#leftDiv').mouseover(setClass);
     $('#Map').mouseover(moveClass);
     $('#Header').mouseover(moveClass);
+    $('.active_seach').click(searchRoadName);
 });
 
+
+function searchRoadName() {
+    params.roadName= $("input[name=roadName]").val();
+    getData();
+}
 
 function setParams(key, value) {
     params[key] = value;
@@ -130,6 +136,7 @@ function initEchart() {
 
 function getData() {
 	var url=contextPath+'/traAcc/getTraAccList';
+	// var url='hangzhou-tracks.json';
     $.getJSON(url, params,function (rst) {
         var points = [].concat.apply([], rst.map(function (track) {
             return track.map(function (seg) {
