@@ -1,4 +1,5 @@
-//logs.js
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 const app = getApp()
 const TITLE_HEIGHT = 30
 const ANCHOR_HEIGHT = 18
@@ -12,70 +13,39 @@ Page({
         fixedTitle: '',
         fixedTop: 0,
         list: [
-            {
-                "index": "X",
-                "name": "薛之谦"
-            },
-            {
-                "index": "Z",
-                "name": "周杰伦"
-            },
-            {
-                "index": "B",
-                "name": "BIGBANG (빅뱅)"
-            },
-            {
-                "index": "C",
-                "name": "陈奕迅"
-            },
-            {
-                "index": "L",
-                "name": "林俊杰"
-            },
-            {
-                "index": "A",
-                "name": "Alan Walker (艾伦·沃克)"
-            },
-            {
-                "index": "B",
-                "name": "BIGBANG (빅뱅)"
-            },
-            {
-                "index": "Z",
-                "name": "张三"
-            },
-            {
-                "index": "L",
-                "name": "李四"
-            },
-            {
-                "index": "W",
-                "name": "王五"
-            },
-            {
-                "index": "Z",
-                "name": "赵柳"
-            },
-            {
-                "index": "L",
-                "name": "罗灿"
-            },
-            {
-                "index": "P",
-                "name": "彭磊"
-            }
+        
         ]
     },
     onLoad: function () {
-        var that = this,
-        list = that.data.list;
-        wx.hideLoading();
-        console.log("logs======================" + that._normalizeSinger(list));
-        that.setData({
-            logs: that._normalizeSinger(list)
-        });
-        
-        that._calculateHeight()
+        var that = this;
+        that.initRoadList();
+    },
+    
+    initRoadList: function(){
+        var that = this;
+        util.request(cfg.server + '/taa//www/road/roster', { },
+            function (res) {
+                if (res.status == 0) {
+                    that.setData({
+                        list: res.data
+                    });
+                    var list = res.data;
+                    wx.hideLoading();
+                    that.setData({
+                        logs: that._normalizeSinger(list)
+                    });
+
+                    that._calculateHeight()
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: res.info,
+                        success: function (res) { }
+                    });
+                }
+
+            }
+        );
     },
     _normalizeSinger(list) {
         //歌手列表渲染
@@ -91,7 +61,8 @@ Page({
                 }
             }
             map[key].items.push({
-                name: item.name
+                name: item.name,
+                id: item.id
             })
         })
         // 为了得到有序列表，我们需要处理 map
