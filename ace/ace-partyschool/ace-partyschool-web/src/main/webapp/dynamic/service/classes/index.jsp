@@ -30,7 +30,7 @@ pageEncoding="utf-8"%>
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入班级/教室名称">
+                               placeholder="请输入班级名称/教室名称">
                         <span class="input-group-btn">
 							<button class="btn  btn-default search_btn" id="btn-search"
                                     authority="false">
