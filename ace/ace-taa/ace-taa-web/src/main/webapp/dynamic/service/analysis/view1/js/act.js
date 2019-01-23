@@ -59,6 +59,18 @@ function findTraAccList(params) {
 				if (result.rows) {
 					for (var i in result.rows) {
 						var o = result.rows[i];
+						var imgUrl;
+						var font;
+						if(o.deadthToll&&o.injuries){
+							imgUrl="img/icon01.png"
+                            font="<font style='color:#fff;font-size:10px'>" + o.deadthToll+"/"+o.injuries + "</font>"
+						}else if(o.deadthToll&&!o.injuries){
+                            imgUrl="img/icon1.png"
+                            font="<font style='color:#fff;font-size:10px'>" + o.deadthToll + "</font>"
+						}else if(!o.deadthToll&&o.injuries){
+                            imgUrl="img/icon0.png"
+                            font="<font style='color:#fff;font-size:10px'>" +o.injuries + "</font>"
+						}
 						var marker = new qq.maps.Marker({
 							//设置Marker的位置坐标
 							position: new qq.maps.LatLng(o.latitude, o.longitude),
@@ -75,10 +87,10 @@ function findTraAccList(params) {
 							//设置Marker可拖动
 							draggable: true,
 							//Marker的覆盖内容
-							decoration: new qq.maps.MarkerDecoration("<font style='color:#fff;font-size:10px'>" + o.deadthToll + "</font>"),
+							decoration: new qq.maps.MarkerDecoration(font,new qq.maps.Point(0, -4)),
 							// decoration: new qq.maps.MarkerDecoration('<span class="demoSpan1">1</span>'),
 							//自定义Marker图标为大头针样式
-							//icon: new qq.maps.MarkerImage("https://3gimg.qq.com/lightmap/api_v2/2/4/111/theme/default/imgs/markercluster/m1.png"),
+							icon: new qq.maps.MarkerImage(imgUrl),
 							//自定义Marker图标的阴影
 							// shadow: new qq.maps.MarkerImage("https://open.map.qq.com/doc/img/nilb.png"),
 							//设置Marker标题，鼠标划过Marker时显示
@@ -128,7 +140,6 @@ function getLatLongByAreaCode(data) {
 		data: data,
 		success: function(result) {
 			if (result.status == 0) {
-				console.log(result);
 				map.panTo(new qq.maps.LatLng(result.value.latitude, result.value.longitude));
 				$("input[name=areaCode]").val(result.value.areaName);
 			} else {
@@ -165,10 +176,9 @@ jQuery(function($) {
 		areaCode: userProp.areaCode
 	});
 	findTraAccList({});
-	$('.datetimepicker').mouseover(setCSS);
-	$('.datetimepicker').mouseout(moveCSS);
-	$('.panel.combo-p').mouseover(setCSS);
-	$('.panel.combo-p').mouseout(moveCSS);
+    $('#leftDiv').mouseover(setClass);
+    $('#Map').mouseover(moveClass);
+    $('#Header').mouseover(moveClass);
 	$('.accident_info').mouseover(clearTime);
 	$('.accident_info').mouseout(setTimeOut);
 });
@@ -181,14 +191,16 @@ function clearTime() {
 function setTimeOut() {
     timeOut = window.setTimeout(function () {
         $(".accident_info").hide();
-    },5000);
+    },3000);
 }
 
-function setCSS() {
-    $('#leftDiv').css('left','0px');
+function setClass() {
+    $('#leftDiv').addClass('leftIcon');
+    $('#leftDiv').removeClass('centerIcon');
 }
-function moveCSS() {
-    $('#leftDiv').removeAttr("style");
+function moveClass() {
+    $('#leftDiv').removeClass("leftIcon");
+    $('#leftDiv').addClass("centerIcon");
 }
 
 
@@ -318,7 +330,7 @@ function initPreview(id) {
                 window.clearTimeout(timeOut);
                 timeOut = window.setTimeout(function () {
                     $(".accident_info").hide();
-                },5000);
+                },3000);
 				
 			} else {
 				alert(result.errorMessage);

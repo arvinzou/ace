@@ -48,7 +48,7 @@
 
 </div>
 
-<div id="leftDiv" class="leftIcon transitionDiv">
+<div id="leftDiv" class="<%--leftIcon--%> centerIcon">
     <div class="content">
         <form id="fm">
             <div class="title">精确搜索</div>

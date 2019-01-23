@@ -25,7 +25,6 @@ var option={
 };
 
 var params = {
-    limit: 9999999
 };
 
 var myChart;
@@ -37,24 +36,25 @@ $(function () {
     initRoadType();
     initEvents();
     initForm();
-    $('.datetimepicker').mouseover(setCSS);
-    $('.datetimepicker').mouseout(moveCSS);
-    $('.combo-p').mouseover(setCSS);
-    $('.combo-p').mouseout(moveCSS);
+    $('#leftDiv').mouseover(setClass);
+    $('#Map').mouseover(moveClass);
+    $('#Header').mouseover(moveClass);
 });
 
 
 function setParams(key, value) {
     params[key] = value;
-    findTraAccList(params);
+    getData();
 }
 
 
-function setCSS() {
-    $('#leftDiv').css('left','0px');
+function setClass() {
+    $('#leftDiv').addClass('leftIcon');
+    $('#leftDiv').removeClass('centerIcon');
 }
-function moveCSS() {
-    $('#leftDiv').removeAttr("style");
+function moveClass() {
+    $('#leftDiv').removeClass("leftIcon");
+    $('#leftDiv').addClass("centerIcon");
 }
 
 
@@ -117,7 +117,7 @@ function initForm() {
             });
             params.startDate=params.startDate+' 00:00:00';
             params.endDate=params.endDate+' 00:00:00';
-            findTraAccList(params);
+            getData();
             return false;
         }
     });
@@ -128,10 +128,9 @@ function initEchart() {
 }
 
 
-function getData(data) {
+function getData() {
 	var url=contextPath+'/traAcc/getTraAccList';
-    $.getJSON(url, data,function (rst) {
-
+    $.getJSON(url, params,function (rst) {
         var points = [].concat.apply([], rst.map(function (track) {
             return track.map(function (seg) {
                 return seg.coord.concat([1]);

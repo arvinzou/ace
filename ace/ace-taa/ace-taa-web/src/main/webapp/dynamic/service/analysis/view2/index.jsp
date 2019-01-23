@@ -19,6 +19,8 @@
           href="${portalPath}/content/common/assets/layouts/layout${SESSION_USERPROP_KEY.cfg.portalType}/css/custom.min.css?v=${cfg.version}"/>
     <link href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
           rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css"
+          href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript">
         var contextPath = '${pageContext.request.contextPath}';
