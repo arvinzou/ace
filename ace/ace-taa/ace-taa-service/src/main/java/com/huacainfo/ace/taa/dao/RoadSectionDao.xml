@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.taa.dao.RoadSectionDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.RoadSection">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="roadId" jdbcType="VARCHAR" property="roadId" />
-    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
-    <result column="roadMan" jdbcType="VARCHAR" property="roadMan" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="startName" jdbcType="VARCHAR" property="startName" />
-    <result column="endName" jdbcType="VARCHAR" property="endName" />
-    <result column="startNo" jdbcType="VARCHAR" property="startNo" />
-    <result column="endNo" jdbcType="VARCHAR" property="endNo" />
-    <result column="intro" jdbcType="VARCHAR" property="intro" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
-    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
-    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
-    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.RoadSection">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="roadId" jdbcType="VARCHAR" property="roadId"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="roadMan" jdbcType="VARCHAR" property="roadMan"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="startName" jdbcType="VARCHAR" property="startName"/>
+        <result column="endName" jdbcType="VARCHAR" property="endName"/>
+        <result column="startNo" jdbcType="VARCHAR" property="startNo"/>
+        <result column="endNo" jdbcType="VARCHAR" property="endNo"/>
+        <result column="intro" jdbcType="VARCHAR" property="intro"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
 
-  <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.RoadSectionVo" extends="BaseResultMap">
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.RoadSectionVo" extends="BaseResultMap">
+    </resultMap>
+    <sql id="Base_Column_List">
     id, roadId, areaCode, roadMan, name, startName, endName, startNo, endNo, intro, status, 
     createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
-  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select  t.id, t.roadId, t.areaCode, t.roadMan, t.name, t.startName, t.endName,
     t.startNo, t.endNo, t.status,a.name roadManName,b.name areaName
     from road_section t
@@ -35,11 +35,11 @@
     left join portal.province b on t.areaCode=b.code
     where t.id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from road_section
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.taa.model.RoadSection">
+    <insert id="insert" parameterType="com.huacainfo.ace.taa.model.RoadSection">
     insert into road_section (id, roadId, areaCode, 
       roadMan, name, startName, 
       endName, startNo, endNo, 
@@ -54,7 +54,7 @@
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.RoadSection">
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.RoadSection">
     update road_section
     set roadId = #{roadId,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
@@ -74,7 +74,7 @@
   </update>
 
 
-  <update id="updateByName" parameterType="com.huacainfo.ace.taa.model.RoadSection">
+    <update id="updateByName" parameterType="com.huacainfo.ace.taa.model.RoadSection">
     update road_section
     set roadId = #{roadId,jdbcType=VARCHAR},
     areaCode = #{areaCode,jdbcType=VARCHAR},
@@ -92,50 +92,62 @@
   </update>
 
 
+    <sql id="whereCondition">
+        from road_section t
+        inner join road_man a on t.roadMan=a.id
+        left join portal.province b on t.areaCode=b.code
+        where 0=0
+        <if test='condition.name!=null and condition.name!=""'>
+            and a.name like
+            concat(#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.roadId!=null and condition.roadId!=""'>
+            and t.roadId =#{condition.roadId,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.areaCode!=null and condition.areaCode!=""'>
+            and t.areaCode like
+            concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.category!=null and condition.category!=""'>
+            <choose>
+                <when test='condition.category =="1"'>
+                    and EXISTS (select 1 from road_gps rg where rg.roadSectionId = t.id)
+                </when>
+                <otherwise>
+                    and NOT EXISTS (select 1 from road_gps rg where rg.roadSectionId = t.id)
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultMap="BaseResultMapVo">
+        select * from (
+        select
+        case when (select count(1) from road_gps rg where rg.roadSectionId = t.id) >0
+        then '1'
+        else '0' end as category,
 
-  <sql id="whereCondition">
-    from road_section t
-    inner join road_man a on t.roadMan=a.id
-    left join portal.province b on t.areaCode=b.code
-    where 0=0
-    <if test='condition.name!=null and condition.name!=""'>
-      and a.name like
-      concat(#{condition.name,jdbcType=VARCHAR},'%')
-    </if>
+        t.id, t.roadId, t.areaCode, t.roadMan, t.name, t.startName, t.endName,
+        t.startNo, t.endNo, t.status,a.name roadManName,b.name areaName,t.createDate
+        <include refid="whereCondition"/>
+        )m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.createDate
+            </otherwise>
+        </choose>
 
-    <if test='condition.roadId!=null and condition.roadId!=""'>
-      and t.roadId =#{condition.roadId,jdbcType=VARCHAR}
-    </if>
-    <if test='condition.areaCode!=null and condition.areaCode!=""'>
-      and t.areaCode like
-      concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
-    </if>
-  </sql>
-  <select id="findCount" resultType="int">
-    SELECT COUNT(*)
-    <include refid="whereCondition" />
-  </select>
-  <select id="findList" resultMap="BaseResultMapVo">
-select * from (
-    select
-    t.id, t.roadId, t.areaCode, t.roadMan, t.name, t.startName, t.endName,
-    t.startNo, t.endNo, t.status,a.name roadManName,b.name areaName,t.createDate
-    <include refid="whereCondition" />
-    )m
-    <choose>
-      <when test='orderBy!=null and orderBy!=""'>
-        ORDER BY m.${orderBy}
-      </when>
-      <otherwise>
-        ORDER BY m.createDate
-      </otherwise>
-    </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
 
-    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 
-  </select>
-
-  <select id="isExit" resultType="int">
+    <select id="isExit" resultType="int">
     select count(*)
     from
     road_section where
@@ -143,54 +155,55 @@ select * from (
   </select>
 
 
-  <select id="getList" resultType="map">
-    select  t.id, t.roadId, t.areaCode, t.roadMan, t.name, t.startName, t.endName,
-    t.startNo, t.endNo, t.status,a.name roadManName,b.name areaName
-    from road_section t
-    left join road_man a on t.roadMan=a.id
-    left join portal.province b on t.areaCode=b.code
-    where 0=0
-    <if test='p.id!=null and p.id!=""'>
-      and t.roadId=#{p.id}
-    </if>
-    <if test='p.roadMan!=null and p.roadMan!=""'>
-      and t.roadMan=#{p.roadMan}
-    </if>
-    order by t.startNo
-  </select>
+    <select id="getList" resultType="map">
+        select t.id, t.roadId, t.areaCode, t.roadMan, t.name, t.startName, t.endName,
+        t.startNo, t.endNo, t.status,a.name roadManName,b.name areaName
+        from road_section t
+        left join road_man a on t.roadMan=a.id
+        left join portal.province b on t.areaCode=b.code
+        where 0=0
+        <if test='p.id!=null and p.id!=""'>
+            and t.roadId=#{p.id}
+        </if>
+        <if test='p.roadMan!=null and p.roadMan!=""'>
+            and t.roadMan=#{p.roadMan}
+        </if>
+        order by t.startNo
+    </select>
 
-  <select id="selectSectionCount" resultType="int">
+    <select id="selectSectionCount" resultType="int">
     select count(*)
     from
     road_section where
     roadId=#{id}
   </select>
-  <update id="updateSectionCount">
+    <update id="updateSectionCount">
     update road set sectionCount=#{num}  where id=#{id}
   </update>
 
 
-  <delete id="deleteByPrimaryKeys">
-    delete from road_section
-    where id in
-    <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
-                   #{item}
-           </foreach>
-  </delete>
+    <delete id="deleteByPrimaryKeys">
+        delete from road_section
+        where id in
+        <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 
 
-  <select id="getListByCondition" resultType="map">
-    select
-    t.id,t.name,t.startName, t.endName,t.status,b.name areaName,c.name roadManName,c.id roadManId,c.orgName,t.areaCode
-    from road_section t
-    left join portal.province b on t.areaCode=b.code
-    left join road_man c on t.roadMan=c.id
-    where 0=0
-    <if test='params.q !=null and params.q!=""'>
-      and (t.id=#{params.q} or t.name like
-      concat('%',#{params.q},'%'))
-    </if>
-    order by t.createDate
-    limit 0,20
-  </select>
+    <select id="getListByCondition" resultType="map">
+        select
+        t.id,t.name,t.startName, t.endName,t.status,b.name areaName,c.name roadManName,c.id
+        roadManId,c.orgName,t.areaCode
+        from road_section t
+        left join portal.province b on t.areaCode=b.code
+        left join road_man c on t.roadMan=c.id
+        where 0=0
+        <if test='params.q !=null and params.q!=""'>
+            and (t.id=#{params.q} or t.name like
+            concat('%',#{params.q},'%'))
+        </if>
+        order by t.createDate
+        limit 0,20
+    </select>
 </mapper>

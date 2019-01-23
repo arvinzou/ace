@@ -2,7 +2,9 @@ package com.huacainfo.ace.taa.web.controller;
 
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.web.controller.BaseController;
+import com.huacainfo.ace.portal.service.AuthorityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class TaaBaseController extends BaseController {
 
     @Autowired
     private RedisOperations<String, Object> redisClient;
+
+    @Autowired
+    private AuthorityService authorityService;
 
     /**
      * 设置redis的值
@@ -50,11 +55,8 @@ public class TaaBaseController extends BaseController {
         redisClient.delete(key);
     }
 
-    public UserProp parseUser(WxUser user) {
-        UserProp u = new UserProp();
-        u.setUserId(user.getUnionId());
-        u.setName(user.getNickName());
-
-        return u;
+    public UserProp parseUser(WxUser user) throws Exception {
+        SingleResult<UserProp> u = authorityService.getCurUserPropByOpenId(user.getUnionId());
+        return u.getValue();
     }
 }

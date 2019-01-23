@@ -20,4 +20,6 @@ public interface RoadGpsDao {
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
     List<RoadGpsVo> getAroundList(Map<String, Object> p);
+
+    int deleteBySectionId(String sectionId);
 }

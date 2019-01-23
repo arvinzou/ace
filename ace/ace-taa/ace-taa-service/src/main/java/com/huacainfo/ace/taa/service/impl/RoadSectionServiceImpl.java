@@ -330,5 +330,4 @@ public class RoadSectionServiceImpl implements RoadSectionService {
         rst.put("rows", list);
         return rst;
     }
-
 }

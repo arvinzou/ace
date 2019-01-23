@@ -67,4 +67,13 @@ public interface RoadGpsService {
      * @throws Exception
      */
     ResultResponse getCloseRoadSection(double lat, double lon, int radius);
+
+    /**
+     * 重置路段采集数据
+     *
+     * @param sectionId 路段ID
+     * @return ResultResponse
+     * @throws Exception
+     */
+    MessageResponse resetSectionGPS(String sectionId);
 }

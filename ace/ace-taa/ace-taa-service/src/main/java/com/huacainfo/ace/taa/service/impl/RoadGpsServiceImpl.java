@@ -159,4 +159,18 @@ public class RoadGpsServiceImpl implements RoadGpsService {
         return new ResultResponse(ResultCode.SUCCESS, "success", list.get(0));
     }
 
+    /**
+     * 重置路段采集数据
+     *
+     * @param sectionId 路段ID
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse resetSectionGPS(String sectionId) {
+        int i = roadGpsDao.deleteBySectionId(sectionId);
+
+        return new MessageResponse(ResultCode.SUCCESS, "重置成功");
+    }
+
 }

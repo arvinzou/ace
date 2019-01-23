@@ -1,6 +1,8 @@
 package com.huacainfo.ace.taa.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -11,8 +13,11 @@ import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.taa.model.RoadGps;
 import com.huacainfo.ace.taa.service.RoadGpsService;
 import com.huacainfo.ace.taa.service.RoadManService;
+import com.huacainfo.ace.taa.service.RoadSectionService;
 import com.huacainfo.ace.taa.vo.RoadManQVo;
 import com.huacainfo.ace.taa.vo.RoadManVo;
+import com.huacainfo.ace.taa.vo.RoadSectionQVo;
+import com.huacainfo.ace.taa.vo.RoadSectionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +38,9 @@ public class WRoadController extends TaaBaseController {
     private RoadGpsService roadGpsService;
     @Autowired
     private RoadManService roadManService;
+    @Autowired
+    private RoadSectionService roadSectionService;
+
 
     /**
      * 路段采集
@@ -116,5 +124,70 @@ public class WRoadController extends TaaBaseController {
         return roadManService.findRoster();
     }
 
+
+    /**
+     * 获取所有路长花名册 - 通讯录形式
+     *
+     * @param condition category 查询类别  1-已采集 ; 0 - 未采集
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/findSectionList")
+    public ResultResponse findSectionList(String uid, RoadSectionQVo condition,
+                                          PageParamNoChangeSord page) throws Exception {
+        if (StringUtil.isEmpty(condition.getCategory())) {
+            return new ResultResponse(ResultCode.FAIL, "请选择查询类别");
+        }
+
+        //微信鉴权信息 --小程序
+        WxUser user = getCurWxUser();
+        if (StringUtil.isNotEmpty(uid)) {
+            user = new WxUser();
+            user.setUnionId(uid);
+            user.setNickName("test");
+        }
+        if (user == null) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+        }
+        UserProp u = parseUser(user);
+        if (CommonUtils.isBlank(condition.getAreaCode())) {
+            condition.setAreaCode(u.getAreaCode());
+        }
+
+
+        PageResult<RoadSectionVo> rst = roadSectionService.findRoadSectionList(condition,
+                page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
+    }
+
+    /**
+     * 重置路段采集数据
+     *
+     * @param sectionId 路段ID
+     * @param uid       用户ID，可选
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/resetSectionGPS")
+    public ResultResponse resetSectionGPS(String sectionId, String uid) throws Exception {
+        //微信鉴权信息 --小程序
+        WxUser user = getCurWxUser();
+        if (StringUtil.isNotEmpty(uid)) {
+            user = new WxUser();
+            user.setUnionId(uid);
+            user.setNickName("test");
+        }
+        if (user == null) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+        }
+        UserProp u = parseUser(user);
+
+        MessageResponse m = roadGpsService.resetSectionGPS(sectionId);
+        return new ResultResponse(m);
+    }
 
 }

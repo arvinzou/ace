@@ -1,15 +1,16 @@
 package com.huacainfo.ace.taa.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.taa.model.RoadSection;
-import com.huacainfo.ace.taa.vo.RoadSectionVo;
 import com.huacainfo.ace.taa.vo.RoadSectionQVo;
-import java.util.Map;
+import com.huacainfo.ace.taa.vo.RoadSectionVo;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: 陈晓克
@@ -111,7 +112,7 @@ public interface RoadSectionService {
      * @author: 陈晓克
      * @version: 2019-01-04
      */
-    public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp,String roadId) throws Exception;
+    public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp, String roadId) throws Exception;
 
 
     /**
@@ -128,7 +129,6 @@ public interface RoadSectionService {
     public ListResult<Map<String, Object>> getList(Map<String, Object> p) throws Exception;
 
 
-
     /**
      * @throws
      * @Title:deleteRoadSectionByRoadSectionIds
@@ -140,7 +140,7 @@ public interface RoadSectionService {
      * @author: 陈晓克
      * @version: 2019-01-04
      */
-    MessageResponse deleteRoadSectionByRoadSectionIds(String [] id, UserProp userProp) throws Exception;
+    MessageResponse deleteRoadSectionByRoadSectionIds(String[] id, UserProp userProp) throws Exception;
 
 
     /**
@@ -153,5 +153,6 @@ public interface RoadSectionService {
      * @author: chenxiaoke
      * @version: 2019年1月04日 下午1:24:14
      */
-    public Map<String, Object> getListByCondition(Map<String, Object> params);
+    Map<String, Object> getListByCondition(Map<String, Object> params);
+
 }
