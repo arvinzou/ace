@@ -7,9 +7,14 @@ import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.*;
+import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.taa.dao.TraAccCauseDao;
 import com.huacainfo.ace.taa.dao.TraAccDao;
+import com.huacainfo.ace.taa.dao.TraAccMtypeDao;
 import com.huacainfo.ace.taa.model.TraAcc;
+import com.huacainfo.ace.taa.model.TraAccCause;
+import com.huacainfo.ace.taa.model.TraAccMtype;
 import com.huacainfo.ace.taa.service.TraAccService;
 import com.huacainfo.ace.taa.vo.TraAccQVo;
 import com.huacainfo.ace.taa.vo.TraAccVo;
@@ -21,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 
@@ -36,6 +42,12 @@ public class TraAccServiceImpl implements TraAccService {
     private TraAccDao traAccDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private TraAccCauseDao traAccCauseDao;
+    @Autowired
+    private TraAccMtypeDao traAccMtypeDao;
+    @Autowired
+    private AuthorityService authorityService;
 
     @Autowired
     private SqlSessionTemplate sqlSession;
@@ -112,16 +124,15 @@ public class TraAccServiceImpl implements TraAccService {
         if (CommonUtils.isBlank(o.getLongitude())) {
             return new MessageResponse(1, "经度不能为空！");
         }
-
         if (CommonUtils.isBlank(o.getWeather())) {
             return new MessageResponse(1, "天气不能为空！");
         }
-        if (CommonUtils.isBlank(o.getVehicleType())) {
-            return new MessageResponse(1, "车型不能为空！");
-        }
-        o.setId(GUIDUtil.getGUID());
-        o.setCreateDate(new Date());
+
+
+        String id = (StringUtil.isEmpty(o.getId()) || o.getId().length() < 32) ? GUIDUtil.getGUID() : o.getId();
+        o.setId(id);
         o.setStatus("1");
+        o.setCreateDate(new Date());
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         if (CommonUtils.isBlank(o.getAreaCode())) {
@@ -159,9 +170,8 @@ public class TraAccServiceImpl implements TraAccService {
         if (CommonUtils.isBlank(o.getWeather())) {
             return new MessageResponse(1, "天气不能为空！");
         }
-        if (CommonUtils.isBlank(o.getVehicleType())) {
-            return new MessageResponse(1, "车型不能为空！");
-        }
+
+
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -402,15 +412,43 @@ public class TraAccServiceImpl implements TraAccService {
     @Override
     public ResultResponse flashReport(WxUser user, TraAccVo params) throws Exception {
         //todo 根据经纬度自动获取所属：路段ID、路长ID
-
+        String id = GUIDUtil.getGUID();
+        params.setId(id);
         params.setAccidentTime(DateUtil.getNowDate());//事故发生时间 -- 默认为系统当前时间
 
         MessageResponse ms = insertTraAcc(params, parseUser(user));
         if (ms.getStatus() == ResultCode.FAIL) {
             return new ResultResponse(ms);
+        } else {
+            insertCauseMtype(id, params);
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "上报成功");
+    }
+
+    /**
+     * 插入 事故缘由 or 事故车型
+     *
+     * @param id     事故编码
+     * @param params 事故缘由 or 事故车型
+     */
+    private void insertCauseMtype(String id, TraAccVo params) {
+        if (!CollectionUtils.isEmpty(params.getCauseList())) {
+            for (TraAccCause item : params.getCauseList()) {
+                item.setId(GUIDUtil.getGUID());
+                item.setAccId(id);
+                item.setCreateDate(DateUtil.getNowDate());
+                traAccCauseDao.insert(item);
+            }
+        }
+        if (!CollectionUtils.isEmpty(params.getMtypeList())) {
+            for (TraAccMtype item : params.getMtypeList()) {
+                item.setId(GUIDUtil.getGUID());
+                item.setAccId(id);
+                item.setCreateDate(DateUtil.getNowDate());
+                traAccMtypeDao.insert(item);
+            }
+        }
     }
 
     /**
@@ -518,12 +556,10 @@ public class TraAccServiceImpl implements TraAccService {
         return params;
     }
 
-    private UserProp parseUser(WxUser user) {
-        UserProp u = new UserProp();
-        u.setUserId(user.getUnionId());
-        u.setName(user.getNickName());
+    private UserProp parseUser(WxUser user) throws Exception {
+        SingleResult<UserProp> rst = authorityService.getCurUserPropByOpenId(user.getUnionId());
 
-        return u;
+        return rst.getValue();
     }
 
     /**

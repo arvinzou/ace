@@ -62,16 +62,29 @@
         <result column="copNo" jdbcType="VARCHAR" property="copNo"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+
+        <result column="accCount" jdbcType="INTEGER" property="accCount"/>
+        <result column="sectionCount" jdbcType="INTEGER" property="sectionCount"/>
     </resultMap>
 
     <select id="findCustomerVo" resultMap="CustomerVoMap">
         select
-        w.nickName,
-        w.avatarUrl,
+        (
+        select count(1)
+        from tra_acc ta
+        left join portal.users u on ta.createUserId = u.user_id
+        where `status`='1'
+        and u.department_id = t.department_id
+        ) as accCount,
+        (
+        select count(1)
+        from road_section rs
+        where rs.id in ( select roadSectionId from road_gps )
+        and rs.areaCode = t.area_code
+        ) as sectionCount,
+        w.nickName, w.avatarUrl,
         d.department_name,
-        t.user_id as copNo,
-        t.`name`,
-        t.mobile
+        t.user_id as copNo, t.`name`, t.mobile
         from portal.users t
         left join portal.department d on t.department_id = d.department_id
         left join portal.wx_user w on t.appOpenId = w.unionId
