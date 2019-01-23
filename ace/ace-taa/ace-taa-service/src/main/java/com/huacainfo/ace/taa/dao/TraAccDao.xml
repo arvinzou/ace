@@ -24,7 +24,11 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.TraAccVo" extends="BaseResultMap">
-
+        <result column="roadName" jdbcType="VARCHAR" property="roadName"/>
+        <result column="roadManName" jdbcType="VARCHAR" property="roadManName"/>
+        <result column="roadSectionName" jdbcType="VARCHAR" property="roadSectionName"/>
+        <result column="areaName" jdbcType="VARCHAR" property="areaName"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
         <collection property="causeList" column="detailId" javaType="ArrayList"
                     ofType="com.huacainfo.ace.taa.model.TraAccCause">
             <id column="causeId" jdbcType="VARCHAR" property="id"/>
@@ -40,15 +44,15 @@
     </resultMap>
     <sql id="Base_Column_List">
         id, address, latitude, longitude, areaCode, weather, vehicleType, status, accidentTime,
-    roadSectionId, roadManId, deadthToll, injuries, cause, createUserId, createUserName,
-        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,d.category
+        roadSectionId, roadManId, deadthToll, injuries, cause, createUserId, createUserName,
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
     </sql>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
         tc.id as causeId, tc.cause as itemCause, tc.causeName,
         tm.id as mtypeId, tm.vehicleType as itemMtype, tm.mtypeName,
 
-        d.name as roadName,
+        d.name as roadName, d.category,
         t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
         t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
         t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
@@ -195,10 +199,11 @@
         select
         tc.id as causeId, tc.cause as itemCause, tc.causeName,
         tm.id as mtypeId, tm.vehicleType as itemMtype, tm.mtypeName,
-        d.name as roadName,
+
+        d.name as roadName, d.category,
         t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
         t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
-        t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName,d.category
+        t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
         <include refid="whereCondition"/>
         )m
         <choose>
