@@ -49,6 +49,29 @@ Page({
           url: '../accidentDetail/index?id='+traAccId,
       });
   },
+  revoke: function(e){
+      var traAccId = e.target.dataset.id;
+      var that = this;
+      util.request(cfg.server + '/taa/www/traAcc/repealReport', { traAccId: traAccId },
+          function (res) {
+              if (res.status == 0) {
+                  wx.showModal({
+                      title: '提示',
+                      content: res.info,
+                      success: function (res) { }
+                  });
+                  that.initAccidentList();
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: res.info,
+                      success: function (res) { }
+                  });
+              }
+
+          }
+      );
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

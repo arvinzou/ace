@@ -96,6 +96,16 @@
     font-weight: bold;
     float: left;
 }
+.datetime{
+     width: 90%;
+    height: 100%;
+    border: none;
+    text-align: right;
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: bold;
+    float: left;
+}
 .roadPicker{
      width: 90%;
     height: 100%;

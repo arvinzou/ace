@@ -16,7 +16,7 @@
                  <text class='menu-title'>事故列表</text>
             </view>
             <view class='menu-right'>
-                <text class='number'>12</text>
+                <text class='number'>{{userData.accCount}}</text>
                 <image src='../../image/icon_rediret.png' class='icon-redirect'></image>
             </view>
         </view>
@@ -26,7 +26,7 @@
                  <text class='menu-title'>路段采集</text>
             </view>
             <view class='menu-right'>
-                <text class='number'>34</text>
+                <text class='number'>{{userData.sectionCount}}</text>
                 <image src='../../image/icon_rediret.png' class='icon-redirect'></image>
             </view>
         </view>
