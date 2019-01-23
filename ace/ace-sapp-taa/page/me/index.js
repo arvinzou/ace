@@ -57,6 +57,11 @@ Page({
           // Do something when catch error
       }
   },
+  trafficList: function(){
+      wx.navigateTo({
+          url: '../accidentList/index',
+      });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
