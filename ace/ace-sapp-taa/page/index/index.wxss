@@ -86,7 +86,7 @@
     padding-right: 4%;
 }
 .form-row-left{
-    width: 20%;
+    width: 25%;
     height: 100rpx;
     line-height: 100rpx;
     color: #ABAEB9;
@@ -94,7 +94,7 @@
     float: left;
 }
 .form-row-right{
-    width: 80%;
+    width: 75%;
     height: 100rpx;
     line-height: 100rpx;
     color: #373F53;
@@ -301,7 +301,7 @@
     color: #FFFFFF;
     position: fixed;
     bottom: 0;
-    left: 300rpx;
+    left: 150rpx;
 }
 .breakBtn{
     background:rgba(255,255,255,1);
@@ -318,4 +318,27 @@
     position: fixed;
     bottom: 0;
     right: 150rpx;
+}
+.br{
+    border-bottom: 1px solid #F0EFF6;
+}
+.dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    float: left;
+    margin-top: 45rpx;
+}
+.start{
+    background:rgba(28,187,127,1);
+}
+.end{
+    background:rgba(254,76,70,1);
+}
+.dot-text{
+    width: auto;
+    height: 100%;
+    float: left;
+    line-height: 100rpx;
+    padding-left: 30rpx;
 }

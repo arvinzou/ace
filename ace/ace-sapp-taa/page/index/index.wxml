@@ -1,6 +1,13 @@
 <view class='index'>
     <view class='tab'>
-        <view class='header'><image src='../../image/default_header.png'></image></view>
+        <view class='header'>
+            <block wx:if='{{header}}'>
+                <image src='{{header}}'></image>
+            </block>
+            <block wx:else>
+                <image src='../../image/default_header.png'></image>
+            </block>
+        </view>
         <view class='tab01 {{tab == 0? "active": ""}}' bindtap='changeTab' data-index="0">事故快报</view>
         <view class='tab02 {{tab == 1? "active": ""}}' bindtap='changeTab' data-index="1">路段采集</view>
         <view class='column'><image src='../../image/icon-column.png'></image></view>
@@ -79,12 +86,18 @@
     </cover-view>
 </cover-view>
 <cover-view class='form-content {{tab == 1 && startName!=null && startName!=""? "":"hidden"}}'>
-    <cover-view class='form-row'>
-        <cover-view class='form-row-left'>起点：</cover-view>
+    <cover-view class='form-row br'>
+        <cover-view class='form-row-left'>
+            <cover-view class='dot start'></cover-view>
+            <cover-view class='dot-text'>起点：</cover-view>
+        </cover-view>
         <cover-view class='form-row-right'>{{startName}}</cover-view>
     </cover-view>
     <cover-view class='form-row'>
-        <cover-view class='form-row-left'>终点：</cover-view>
+        <cover-view class='form-row-left'>
+             <cover-view class='dot end'></cover-view>
+            <cover-view class='dot-text'>终点：</cover-view>
+        </cover-view>
         <cover-view class='form-row-right'>{{endName}}</cover-view>
     </cover-view>
 </cover-view>
