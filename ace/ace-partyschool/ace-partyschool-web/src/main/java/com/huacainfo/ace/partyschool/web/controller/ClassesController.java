@@ -134,8 +134,10 @@ public class ClassesController extends BisBaseController {
         Map<String, Object> params = new HashMap<>();
         params.put("q", id);
         if (!CommonUtils.isBlank(q)) {
+            params.put("status", "1");
             params.put("q", q);
         }
+
         return classesService.findByQ(params);
     }
 

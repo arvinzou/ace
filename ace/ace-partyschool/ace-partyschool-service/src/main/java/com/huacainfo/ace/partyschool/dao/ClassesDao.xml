@@ -263,7 +263,9 @@
         FROM classes t
         left join teacher ta on t.headmaster = ta.id
         WHERE 1=1
-        and t.status = '1'
+        <if test="params.status !=null and params.status !=&quot;&quot;">
+            and t.status = #{params.status,jdbcType=VARCHAR}
+        </if>
         <if test="params.q !=null and params.q !=&quot;&quot;">
             AND ( t.id = #{params.q,jdbcType=VARCHAR}
             or t.`name` LIKE concat('%',#{params.q,jdbcType=VARCHAR},'%')
