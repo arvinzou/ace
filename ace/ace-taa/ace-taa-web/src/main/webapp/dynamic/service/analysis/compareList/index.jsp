@@ -9,7 +9,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title>同期对比</title>
+    <title>事故分析</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
@@ -26,16 +26,36 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-4">
-                <%--行政区划--%>
-                <div class="input-group" style="float:left;padding-right:10px">
-                    行政区划 <input class="easyui-combotree" name="areaCode"
-                                data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
-                                style="width:220px;﻿line-height: 30px;height: 30px;">
+            <div class="col-md-12">
+
+                <label style="float: left;padding: 5px 0 0 5px;">查询类型 </label>
+                <div class="input-group" style="float:left;padding: 0 10px 0 2px;">
+                    <select id="category" class="form-control" style="height: 35px;line-height: 35px">
+                        <option value="year">按年份显示</option>
+                        <option value="season">按季度显示</option>
+                        <option value="month" selected>按月份显示</option>
+                    </select>
+                </div>
+
+                <label style="float: left;padding: 5px 0 0 5px;">分析类别 </label>
+                <div class="input-group" style="float:left;padding: 0 10px 0 2px;">
+                    <select id="field" class="form-control" style="height: 35px;line-height: 35px">
+                        <option value="deadthToll" selected>死亡人数分析</option>
+                        <option value="injuries">受伤人数分析</option>
+                    </select>
+                </div>
+
+                <label style="float: left;padding: 5px 0 0 5px;">所属路段 </label>
+                <div class="input-group" style="float:left;padding: 0 10px 0 2px;">
+                    <input type="text" class="form-control" style="width:235px" name="roadSectionId">
+                </div>
+                <label style="float: left;padding: 5px 0 0 5px;">所属路长 </label>
+                <div class="input-group" style="float:left;padding: 0 10px 0 2px;">
+                    <input type="text" class="form-control" style="width:235px" name="roadManId">
                 </div>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-0">
                 <div class="input-group hide">
                     <span class="input-group-btn" style="padding-right: 5px">
                         <button id="btn-render" class="btn  btn-default search_btn" type="submit"> 搜索</button>
