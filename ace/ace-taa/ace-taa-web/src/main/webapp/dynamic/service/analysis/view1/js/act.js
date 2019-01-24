@@ -182,8 +182,8 @@ jQuery(function ($) {
 });
 
 function searchRoadName() {
-    params.roadName = $("input[name=roadName]").val();
-    getData();
+    params.keyword = $("input[name=keyword]").val();
+    findTraAccList();
 }
 
 
@@ -252,7 +252,7 @@ function initForm() {
 function setParams() {
     var that = $(this);
     params.category = that.data('id');
-    findTraAccList(params);
+    findTraAccList();
     that.siblings().removeClass('active_but');
     that.addClass('active_but');
 }
