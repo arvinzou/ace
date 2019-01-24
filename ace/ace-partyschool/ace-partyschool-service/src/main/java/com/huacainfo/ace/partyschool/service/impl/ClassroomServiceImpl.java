@@ -87,7 +87,6 @@ public class ClassroomServiceImpl implements ClassroomService {
         //    return new MessageResponse(1, "状态 不能为空！");
         //}
 
-
         int temp = this.classroomDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "教室管理名称重复！");
