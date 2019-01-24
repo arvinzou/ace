@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ace-fundtown-web:war">
+    <output-path>$PROJECT_DIR$/ace-fundtown/ace-fundtown-web/target</output-path>
+    <root id="archive" name="ace-fundtown-web-1.0.war">
+      <element id="artifact" artifact-name="ace-fundtown-web:war exploded" />
+    </root>
+  </artifact>
+</component>

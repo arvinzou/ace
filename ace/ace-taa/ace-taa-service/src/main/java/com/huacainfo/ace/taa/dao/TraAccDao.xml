@@ -133,11 +133,11 @@
         where t.status='1'
         <if test='condition.roadManName!=null and condition.roadManName!=""'>
             and a.name like
-            concat(#{condition.roadManName,jdbcType=VARCHAR},'%')
+            concat('%',#{condition.roadManName,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.keyword!=null and condition.keyword!=""'>
-            and (a.name like concat(#{condition.keyword,jdbcType=VARCHAR},'%') or t.address like
-            concat(#{condition.keyword,jdbcType=VARCHAR},'%'))
+            and (a.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%') or t.address like
+            concat('%',#{condition.keyword,jdbcType=VARCHAR},'%'))
         </if>
         <if test='condition.roadManId!=null and condition.roadManId!=""'>
             and t.roadManId =#{condition.roadManId,jdbcType=VARCHAR}
@@ -157,7 +157,7 @@
         </if>
         <if test='condition.areaCode!=null and condition.areaCode!=""'>
             and t.areaCode like
-            concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+            concat('%',#{condition.areaCode,jdbcType=VARCHAR},'%')
         </if>
 
         <if test='condition.upDeathNum!=null and condition.upDeathNum!=""'>
@@ -184,9 +184,9 @@
         </if>
         <if test='condition.roadName!=null and condition.roadName!=""'>
             and (
-            a.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
-            or d.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
-            or b.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
+            a.name like concat('%',#{condition.roadName,jdbcType=VARCHAR},'%')
+            or d.name like concat('%',#{condition.roadName,jdbcType=VARCHAR},'%')
+            or b.name like concat('%',#{condition.roadName,jdbcType=VARCHAR},'%')
             )
         </if>
     </sql>
@@ -470,10 +470,10 @@
                 <choose>
                     <when test='field == "deadthToll"'>
                         SELECT
-                        <foreach collection="yearArray" item="item">
+                        <foreach collection="yearArray" item="item" separator=",">
                             CASE WHEN
-                            t.accidentTime >= CONCAT(#{item,jdbcType=VARCHAR},'01-01 00:00:00')
-                            AND t.accidentTime &lt;= CONCAT(#{item,jdbcType=VARCHAR},'12-31 23:59:59')
+                            t.accidentTime >= CONCAT(#{item,jdbcType=VARCHAR},'-01-01 00:00:00')
+                            AND t.accidentTime &lt;= CONCAT(#{item,jdbcType=VARCHAR},'-12-31 23:59:59')
                             THEN IFNULL(SUM(t.deadthToll), 0) ELSE 0 END AS ${item}年
                         </foreach>
                         FROM tra_acc t
@@ -488,12 +488,13 @@
                     </when>
                     <otherwise>
                         SELECT
-                        <foreach collection="yearArray" item="item">
+                        <foreach collection="yearArray" item="item" separator=",">
                             CASE WHEN
-                            t.accidentTime >= CONCAT(#{item,jdbcType=VARCHAR},'01-01 00:00:00')
-                            AND t.accidentTime &lt;= CONCAT(#{item,jdbcType=VARCHAR},'12-31 23:59:59')
-                            THEN IFNULL(SUM(t.injuries), 0) ELSE 0 END AS ${item}年
+                            t.accidentTime >= CONCAT(#{item,jdbcType=VARCHAR},'-01-01 00:00:00')
+                            AND t.accidentTime &lt;= CONCAT(#{item,jdbcType=VARCHAR},'-12-31 23:59:59')
+                            THEN IFNULL(SUM(t.injuries), 0) ELSE 0 END AS ${item}年 ,
                         </foreach>
+                        '0' as other
                         FROM tra_acc t
                         WHERE t.`status` = '1'
                         <if test='roadManId!=null and roadManId!=""'>
@@ -515,22 +516,22 @@
                         WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-01-01 00:00:00')
                         AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-03-31 23:59:59') THEN
                         IFNULL(SUM(t.deadthToll), 0)
-                        ELSE 0 END AS 第一季度,
+                        ELSE 0 END AS one,
                         CASE
                         WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'04-01 00:00:00')
                         AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-06-30 23:59:59') THEN
                         IFNULL(SUM(t.deadthToll), 0)
-                        ELSE 0 END AS 第二季度,
+                        ELSE 0 END AS two,
                         CASE
                         WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-07-01 00:00:00')
                         AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-09-30 23:59:59') THEN
                         IFNULL(SUM(t.deadthToll), 0)
-                        ELSE 0 END AS 第三季度,
+                        ELSE 0 END AS three,
                         CASE
                         WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-10-01 00:00:00')
                         AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-12-31 23:59:59') THEN
                         IFNULL(SUM(t.deadthToll), 0)
-                        ELSE 0 END AS 第四季度
+                        ELSE 0 END AS four
                         FROM tra_acc t
                         WHERE t.`status` = '1'
                         <if test='roadManId!=null and roadManId!=""'>
@@ -547,22 +548,22 @@
                         WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-01-01 00:00:00')
                         AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-03-31 23:59:59') THEN
                         IFNULL(SUM(t.injuries), 0)
-                        ELSE 0 END AS 第一季度,
+                        ELSE 0 END AS one,
                         CASE
                         WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'04-01 00:00:00')
                         AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-06-30 23:59:59') THEN
                         IFNULL(SUM(t.injuries), 0)
-                        ELSE 0 END AS 第二季度,
+                        ELSE 0 END AS two,
                         CASE
                         WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-07-01 00:00:00')
                         AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-09-30 23:59:59') THEN
                         IFNULL(SUM(t.injuries), 0)
-                        ELSE 0 END AS 第三季度,
+                        ELSE 0 END AS three,
                         CASE
                         WHEN t.accidentTime >= CONCAT(#{yearStr,jdbcType=VARCHAR},'-10-01 00:00:00')
                         AND t.accidentTime &lt;= CONCAT(#{yearStr,jdbcType=VARCHAR},'-12-31 23:59:59') THEN
                         IFNULL(SUM(t.injuries), 0)
-                        ELSE 0 END AS 第四季度
+                        ELSE 0 END AS four
                         FROM tra_acc t
                         WHERE t.`status` = '1'
                         <if test='roadManId!=null and roadManId!=""'>
