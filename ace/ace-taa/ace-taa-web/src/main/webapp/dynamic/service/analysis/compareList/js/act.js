@@ -1,11 +1,15 @@
 var colors = ['#5793f3', '#d14a61'];
 var params = {};
 window.onload = function () {
+    var windowWidth = $(".page-content").width();
+    $('#div-chart').attr('style', 'width: ' + windowWidth + ';height: 600px');
+
+
     //初始化监听事件
     initEvents();
     //初始参数查询
-    params['category'] = $("#category").val();
-    params['field'] = $("#field").val();
+    params['category'] = 'month';
+    params['field'] = 'deadthToll';
     initChart(params);
 }
 
@@ -15,7 +19,7 @@ function setParams(key, val) {
 }
 
 function initEvents() {
-    //所属路长
+    //路长
     $('input[name=roadManId]').combogrid({
         panelWidth: 500,
         idField: 'id',
@@ -41,7 +45,12 @@ function initEvents() {
 
         ],
         onSelect: function (rowIndex, rowData) {
-            console.log(rowData);
+
+            //清空路段控件值
+            $('#roadSectionId').combogrid('clear');
+            //清空路段条件
+            params['roadSectionId'] = '';
+
             setParams('roadManId', rowData.id);
         }
     });
@@ -74,26 +83,27 @@ function initEvents() {
             }]
         ],
         onSelect: function (rowIndex, rowData) {
-            console.log(rowData);
+            //清空路长控件值
+            $('#roadManId').combogrid('clear');
+            //清空路长条件
+            params['roadManId'] = '';
+            //塞入条件查询
             setParams('roadSectionId', rowData.id);
         }
     });
 
-    //查询类别
-    $("#category").change(function () {
-        setParams('category', $("#category").val());
+    $(".btn-group .btn").bind('click', function (event) {
+        $(event.target).siblings().removeClass("active");
+        $(event.target).addClass("active");
     });
-    //分析类别
-    $("#field").change(function () {
-        setParams('field', $("#field").val());
-    });
-
 
 }
 //初始化chart
 function initChart(p) {
     var category = p.category;
     var field = p.field;
+    console.log("*********** ajax request ***********");
+    console.log(JSON.stringify(p));
 
     var seriesData = [-1, 0, 1];
     var isContinue = true;
@@ -109,7 +119,6 @@ function initChart(p) {
             //*********** parse data ***********
             console.log("*********** ajax response ***********");
             console.log(JSON.stringify(rst));
-
             if (rst.status == 0) {
                 var data = rst.data;
                 if ('month' == category) {
@@ -148,21 +157,21 @@ function initChart(p) {
         return;
     }
     //变更 - 默认标题
-    chart_title.subtext = 'deadthToll' == field ? '死亡人数分析' : '受伤人数分析';
+    // chart_title.subtext = 'deadthToll' == field ? '死亡人数分析' : '受伤人数分析';
     //变更 - 导航标题
     var markTitle = '数据1';
     switch (category) {
         case 'year':
-            markTitle = '年度查询';
+            markTitle = '年度';
             break;
         case 'month':
-            markTitle = '月份查询';
+            markTitle = '月';
             break;
         case 'season':
-            markTitle = '季度查询';
+            markTitle = '季度';
             break;
         default:
-            markTitle = '月份查询';
+            markTitle = '月';
             break;
     }
     chart_legend.data = [markTitle];
@@ -176,18 +185,22 @@ function initChart(p) {
     loadChart();
 }
 
+var myChart;
 //加载图形
 function loadChart() {
+    if (myChart != null && myChart != "" && myChart != undefined) {
+        myChart.dispose();
+    }
     var dom = document.getElementById("div-chart");
-    var myChart = echarts.init(dom);
+    myChart = echarts.init(dom);
     if (option && typeof option === "object") {
         myChart.setOption(option, true);
     }
 }
 //图表 - 默认标题
 var chart_title = {
-    text: '交通事故分析',
-    subtext: '死亡人数分析'
+    text: '',
+    subtext: ''
 };
 //图表 - 导航栏标记
 var chart_legend = {

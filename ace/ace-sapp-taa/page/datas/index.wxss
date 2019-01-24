@@ -127,7 +127,7 @@
 }
 .accident-num{
     color: #4350FC;
-    font-size: 62rpx;
+    font-size: 48rpx;
     font-weight: bold;
 }
 .accident-title{

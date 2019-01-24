@@ -1,13 +1,13 @@
 <!--logs.wxml-->
 <view class='search'>
-    <input type='text' placeholder='搜索' placeholder-class='search-input'></input>
+    <input type='text' placeholder='搜索' placeholder-class='search-input' bindinput='searchRoad'></input>
 </view>
 <view class="container log-list">
 <scroll-view scroll-y style="height:90vh;white-space:nowrap;" scroll-into-view="{{toView}}" enable-back-to-top bindscroll="scroll" scroll-with-animation scroll-top="{{scrollTop}}">
   <view class="list-group" wx:for="{{logs}}" wx:for-item="group">
     <view class="title" id="{{group.title}}">{{group.title}}</view>
     <block wx:for="{{group.items}}" wx:for-item="user">
-      <view id="{{user.id}}" class="list-group-item">
+      <view id="{{user.id}}" data-id='{{user.id}}' data-name='{{user.name}}' class="list-group-item" bindtap='selectRoadMan'>
         <text class="log-item">{{user.name}}</text>
       </view>
     </block>

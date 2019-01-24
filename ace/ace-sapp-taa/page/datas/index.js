@@ -24,7 +24,9 @@ Page({
       dithArray: [],
       nowData: null,
       pastData: null,
-      roadId: null
+      roadId: null,
+      timesArray: [],
+      timesAreaArray: []
   },
 
   /**
@@ -35,8 +37,8 @@ Page({
       that.initRegionList();
       that.initRoadList();
       that.initTrafficList();
-      that.columnByAccident();
-      that.columnByDiedNum();
+      that.initDeathColumnReport();
+      that.initTimesColumnReport();
   },
   /**
    * 获取行政区划列表
@@ -110,20 +112,76 @@ Page({
           function (res) {
               if (res.status == 0) {
                   var data = res.data;
-                  var columnData = res.data.histogram;
-                  var areaCodeNameArr = [];
-                  var dithArr = [];
-                  if (columnData != null && columnData != undefined && columnData.length>0){
-                      for(var i=0; i<columnData.length; i++){
-                          areaCodeNameArr.push(columnData[i].areaCodeName);
-                          dithArr.push(columnData[i].deathNum);
+                  that.setData({
+                      totalData: res.data,
+                  });
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: res.errorMessage,
+                      success: function (res) { }
+                  });
+              }
+
+          }
+      );
+  },
+    /**
+     * 死亡人数柱状
+     */
+    initDeathColumnReport: function () {
+        var that = this;
+        util.request(cfg.server + '/taa/www/report/histogramReport', { category: 'death', dateTimeStr: that.data.date },
+            function (res) {
+                if (res.status == 0) {
+                    var columnData = res.data;
+                    var areaCodeNameArr = [];
+                    var dithArr = [];
+                    if (columnData != null && columnData != undefined && columnData.length > 0) {
+                        for (var i = 0; i < columnData.length; i++) {
+                            areaCodeNameArr.push(columnData[i].areaCodeName);
+                            dithArr.push(columnData[i].num);
+                        }
+                    }
+                    that.setData({
+                        areaCodeNameArray: areaCodeNameArr,
+                        dithArray: dithArr
+                    });
+                    that.columnByDiedNum();
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: res.errorMessage,
+                        success: function (res) { }
+                    });
+                }
+
+            }
+        );
+    },
+
+    /**
+     * 事故次数柱状图
+     */
+  initTimesColumnReport: function(){
+      var that = this;
+      util.request(cfg.server + '/taa/www/report/histogramReport', { category: 'times', dateTimeStr: that.data.date },
+          function (res) {
+              if (res.status == 0) {
+                  var columnData = res.data;
+                  var timesAreaArray = [];
+                  var timesArray = [];
+                  if (columnData != null && columnData != undefined && columnData.length > 0) {
+                      for (var i = 0; i < columnData.length; i++) {
+                          timesAreaArray.push(columnData[i].areaCodeName);
+                          timesArray.push(columnData[i].num);
                       }
                   }
                   that.setData({
-                      totalData: res.data,
-                      areaCodeNameArray: areaCodeNameArr,
-                      dithArray: dithArr
+                      timesAreaArray: timesAreaArray,
+                      timesArray: timesArray
                   });
+                  that.columnByAccident();
               } else {
                   wx.showModal({
                       title: '提示',
@@ -170,8 +228,6 @@ Page({
     console.log("areaCode==========================="+that.data.areaCode);
       that.initRoadList();
       that.initTrafficList();
-      that.columnByAccident();
-      that.columnByDiedNum();
   },
   bindMonthChange: function(e){
       var that = this;
@@ -180,8 +236,8 @@ Page({
       });
       that.initRoadList();
       that.initTrafficList();
-      that.columnByAccident();
-      that.columnByDiedNum();
+      that.initDeathColumnReport();
+      that.initTimesColumnReport();
   },
   changeChartType: function(e){
       var that = this;
@@ -189,13 +245,14 @@ Page({
       console.log(e);
   },
   columnByAccident: function(){
+      var that = this;
       new Charts({
           canvasId: 'accidentColumn',
           type: 'column',
-          categories: ['常德市', '武陵区', '鼎城区', '桃源县', '汉寿县', '石门县','临澧县','澧县','津市市'],
+          categories: that.data.timesAreaArray,
           series: [{
               name: '次',
-              data: [60, 20, 45, 37, 4, 56, 34, 25, 46]
+              data: that.data.timesArray
           }],
           yAxis: {
               format: function (val) {

@@ -60,7 +60,10 @@ Page({
                      accidentTime: that.fotmatPicker(res.value.accidentTime),
                  });
                   that.convertCode(res.value.weather);
-                  that.initCarType(res.value.vehicleType);
+                  var mtypeList = res.value.mtypeList;
+                  for(var i=0; i< mtypeList.length; i++){
+                      that.initCarType(mtypeList[i].vehicleType);
+                  }
                   that.initSeason();
               } else {
                   wx.showModal({

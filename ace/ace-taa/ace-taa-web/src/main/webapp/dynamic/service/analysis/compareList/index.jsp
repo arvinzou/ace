@@ -26,48 +26,49 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-12">
 
-                <label style="float: left;padding: 5px 0 0 5px;">查询类型 </label>
-                <div class="input-group" style="float:left;padding: 0 10px 0 2px;">
-                    <select id="category" class="form-control" style="height: 35px;line-height: 35px">
-                        <option value="year">按年份显示</option>
-                        <option value="season">按季度显示</option>
-                        <option value="month" selected>按月份显示</option>
-                    </select>
+            <form action="#" id="fm-search">
+                <div class="col-md-5">
+
+                    <div class="btn-group" role="group1" style="float:left;padding-right:10px">
+                        <button type="button" authority="false" class="btn btn-default"
+                                onclick="setParams('category','year');">年
+                        </button>
+                        <button type="button" authority="false" class="btn btn-default"
+                                onclick="setParams('category','season');">季度
+                        </button>
+                        <button type="button" authority="false" class="btn btn-default"
+                                onclick="setParams('category','month');">月
+                        </button>
+                    </div>
+
+                    <div class="btn-group" role="group2" style="float:left;">
+                        <button type="button" authority="false" class="btn btn-default"
+                                onclick="setParams('field','deadthToll');">死亡人数
+                        </button>
+                        <button type="button" authority="false" class="btn btn-default"
+                                onclick="setParams('field','injuries');">受伤人数
+                        </button>
+                    </div>
                 </div>
 
-                <label style="float: left;padding: 5px 0 0 5px;">分析类别 </label>
-                <div class="input-group" style="float:left;padding: 0 10px 0 2px;">
-                    <select id="field" class="form-control" style="height: 35px;line-height: 35px">
-                        <option value="deadthToll" selected>死亡人数分析</option>
-                        <option value="injuries">受伤人数分析</option>
-                    </select>
+                <div class="col-md-7">
+                    <div class="input-group" style="float: right;padding-right: 10px;">
+                        <span style="padding-right:15px">路段</span>    <input type="text" id="roadSectionId" class="form-control" style="width:235px;height:30px"
+                                 name="roadSectionId">
+                    </div>
+                    <div class="input-group" style="float: right;padding-right: 10px;">
+                        <span style="padding-right:15px">路长</span>    <input type="text" id="roadManId" class="form-control" style="width:235px;height:30px" name="roadManId">
+                    </div>
                 </div>
 
-                <label style="float: left;padding: 5px 0 0 5px;">所属路段 </label>
-                <div class="input-group" style="float:left;padding: 0 10px 0 2px;">
-                    <input type="text" class="form-control" style="width:235px" name="roadSectionId">
-                </div>
-                <label style="float: left;padding: 5px 0 0 5px;">所属路长 </label>
-                <div class="input-group" style="float:left;padding: 0 10px 0 2px;">
-                    <input type="text" class="form-control" style="width:235px" name="roadManId">
-                </div>
-            </div>
-
-            <div class="col-md-0">
-                <div class="input-group hide">
-                    <span class="input-group-btn" style="padding-right: 5px">
-                        <button id="btn-render" class="btn  btn-default search_btn" type="submit"> 搜索</button>
-                    </span>
-                </div>
-            </div>
+            </form>
 
         </div>
 
 
         <div class="table-scrollable" style="width: 100%;height:100%">
-            <div id="div-chart" style="width: 1200px;height: 600px">
+            <div id="div-chart">
 
             </div>
         </div>
@@ -82,6 +83,14 @@
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
+
+<script type="text/javascript">
+    window.onresize = function () {
+        var windowWidth = $(".page-content").width();
+        $('#div-chart').attr('style', 'width: ' + windowWidth + ';height: 600px');
+        initChart(params);
+    }
+</script>
 </body>
 
 <jsp:include page="/dynamic/common/footer.jsp"/>

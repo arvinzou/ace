@@ -492,9 +492,8 @@
                             CASE WHEN
                             t.accidentTime >= CONCAT(#{item,jdbcType=VARCHAR},'-01-01 00:00:00')
                             AND t.accidentTime &lt;= CONCAT(#{item,jdbcType=VARCHAR},'-12-31 23:59:59')
-                            THEN IFNULL(SUM(t.injuries), 0) ELSE 0 END AS ${item}年 ,
+                            THEN IFNULL(SUM(t.injuries), 0) ELSE 0 END AS ${item}年
                         </foreach>
-                        '0' as other
                         FROM tra_acc t
                         WHERE t.`status` = '1'
                         <if test='roadManId!=null and roadManId!=""'>
