@@ -91,25 +91,22 @@
 
 
 <script id="tpl-check-group" type="text/template">
-
     {@each data.list as item, index}
-    {@if item.CODE}
-    <button type="button" authority="false" class="btn btn-default inputStyle"
-            onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}
-    </button>
-    {@else}
-    <button type="button" authority="false" class="btn btn-default inputStyle" onclick="setParams('\${data.key}','');">
-        全部
-    </button>
-    {@/if}
-
+        {@if item.CODE}
+        <button type="button" authority="false" class=" btn btn-default inputStyle" data-id="\${item.CODE}">\${item.NAME}
+        </button>
+        {@else}
+        <button type="button" authority="false" class="btn active_but btn-default inputStyle" data-id="">
+            全部
+        </button>
+        {@/if}
     {@/each}
-
 </script>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript"
+        src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>

@@ -308,7 +308,7 @@ public class TraAccController extends TaaBaseController {
         List<Map<String, Object>> list = this.traAccService.getTraAccList(condition);
         for (Map<String, Object> o : list) {
             JSONObject e = new JSONObject();
-            e.put("coord", new double[]{(Double) o.get("latitude"), (Double) o.get("longitude")});
+            e.put("coord", new double[]{(Double) o.get("longitude"),(Double) o.get("latitude")});
             e.put("elevation", o.get("deadthToll"));
             items.add(e);
         }

@@ -100,11 +100,10 @@
 
     {@each data.list as item, index}
     {@if item.CODE}
-    <button type="button" authority="false" class="btn btn-default inputStyle"
-            onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}
+    <button type="button" authority="false" class=" btn btn-default inputStyle" data-id="\${item.CODE}" >\${item.NAME}
     </button>
     {@else}
-    <button type="button" authority="false" class="btn btn-default inputStyle" onclick="setParams('\${data.key}','');">
+    <button type="button" authority="false" class="btn active_but btn-default inputStyle" data-id="">
         全部
     </button>
     {@/if}

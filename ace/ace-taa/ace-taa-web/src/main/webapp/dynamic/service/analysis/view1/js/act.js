@@ -1,7 +1,7 @@
 var map = null;
 var markers = [];
 var params = {
-	limit: 9999999
+	limit: 99
 };
 
 
@@ -42,7 +42,7 @@ function rsd(value, kernelKey, staticDictObjects) {
 	}
 	return name;
 }
-function findTraAccList(params) {
+function findTraAccList() {
 	$.ajax({
 		url: contextPath + '/traAcc/findTraAccList',
 		type: "post",
@@ -181,7 +181,14 @@ jQuery(function($) {
     $('#Header').mouseover(moveClass);
 	$('.accident_info').mouseover(clearTime);
 	$('.accident_info').mouseout(setTimeOut);
+    $('.active_seach').click(searchRoadName);
+	$('#check-group-category').on('click','button',setParams);
 });
+
+function searchRoadName() {
+    params.roadName= $("input[name=roadName]").val();
+    getData();
+}
 
 
 function clearTime() {
@@ -245,9 +252,12 @@ function initForm() {
 	});
 }
 
-function setParams(key, value) {
-	params[key] = value;
+function setParams() {
+	var that =$(this);
+	params.category = that.data('id');
 	findTraAccList(params);
+	that.siblings().removeClass('active_but');
+	that.addClass('active_but');
 }
 
 function render(obj, data, tplId) {
