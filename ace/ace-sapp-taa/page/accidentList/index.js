@@ -72,6 +72,26 @@ Page({
           }
       );
   },
+  searchRoad: function(e){
+      var that = this;
+      var name = e.detail.value;
+      util.request(cfg.server + '/taa/www/report/findTraAccList', { address: name, start: 0, limit: 999 },
+          function (res) {
+              if (res.status == 0) {
+                  that.setData({
+                      list: res.rows
+                  });
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: res.info,
+                      success: function (res) { }
+                  });
+              }
+
+          }
+      );
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

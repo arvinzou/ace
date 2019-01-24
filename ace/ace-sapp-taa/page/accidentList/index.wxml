@@ -1,7 +1,7 @@
 <view class="index">
     <view class='box'>
         <view class='search-box'>
-            <input type='text' placeholder='道路名称/路段名称/路长' class='search-input'></input>
+            <input type='text' placeholder='搜索道路名称' class='search-input' bindinput='searchRoad'></input>
         </view>
     </view>
     <view class='list'>
