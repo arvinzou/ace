@@ -2,7 +2,7 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append(" <li><span>编辑评测管理</span></li>");
+        $(".breadcrumb").append(" <li><span>编辑测评管理</span></li>");
         initForm();
         initEvents();
         $('.addOption').on('click', '', addOption);
@@ -38,7 +38,7 @@ var optionTemp= '                        <div class="form-group">\n' +
     '                                <div class="col-md-4">\n' +
     '                                    <input type="text" class="form-control" name="evaluationIndex[#index#].name"\n' +
     '                                           maxlength="4"\n' +
-    '                                           placeholder="请输入评测指标（建议字数在6个字以内)">\n' +
+    '                                           placeholder="请输入测评指标（建议字数在6个字以内)">\n' +
     '                                    <span class="help-block"></span>\n' +
     '                                </div>\n' +
     '                                <label class="col-md-1 control-label">\n' +

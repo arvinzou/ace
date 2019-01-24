@@ -26,7 +26,7 @@
             <!--具体界面元素开始-->
             <form class="form-horizontal" id="fm-add" role="form">
                 <div class="form-body">
-                    <h4>评测内容</h4>
+                    <h4>测评内容</h4>
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-2 control-label">
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                     </div>
-                    <h4>评测指标 <span id="totlascore"></span></h4>
+                    <h4>测评指标 <span id="totlascore"></span></h4>
                     <div id="evaluatingRst">
                         <div class="form-group">
                             <div class="row">
@@ -77,7 +77,7 @@
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" name="evaluationIndex[0].name"
                                            maxlength="6"
-                                           placeholder="请输入评测指标（建议字数在6个字以内)">
+                                           placeholder="请输入测评指标（建议字数在6个字以内)">
                                     <span class="help-block"></span>
                                 </div>
 

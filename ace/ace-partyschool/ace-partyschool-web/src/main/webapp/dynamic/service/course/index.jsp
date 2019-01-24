@@ -23,17 +23,23 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-6">
 
                 <form onsubmit="return t_query()">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
                         <button type="button" class="btn btn-default" onclick="setParams('category','1');">现场教学</button>
                         <button type="button" class="btn btn-default" onclick="setParams('category','2');">室内教学</button>
+                    </div>
+                    <div class="input-group" style="float: left;margin-right: 5px;">
+                        <input type="text"
+                               name="keyword1"
+                               class="form-control"
+                               placeholder="请输入老师名字">
                     </div>
                     <div class="input-group">
                         <input type="text"
@@ -58,7 +64,8 @@
                 <tr>
                     <th width="50%"> 名称</th>
 
-                    <th width="20%"> 评测方案</th>
+                    <th width="10%"> 类型</th>
+                    <th width="15%"> 评测方案</th>
                     <th width="10%"> 老师</th>
 
                     <th width="20%">操作</th>
@@ -89,6 +96,7 @@
     <tr>
         <td>\${item.name}</td>
 
+        <td>\${item.codeName}</td>
         <td>\${item.evaluatingName}</td>
         <td>\${item.teacherName}</td>
 
@@ -135,7 +143,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">类别</label>
         <div class="col-md-10">
-            \${data.category}
+            \${data.codeName}
         </div>
     </div>
     <div class="form-group">

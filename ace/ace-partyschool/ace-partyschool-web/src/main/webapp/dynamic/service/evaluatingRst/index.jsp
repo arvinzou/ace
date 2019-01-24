@@ -53,11 +53,11 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 课程</th>
-                    <th width="10%"> 班级</th>
+                    <th width="30%"> 课程</th>
+                    <th width="25%"> 班级</th>
                     <th width="10%"> 老师</th>
-                    <th width="10%"> 平均分值</th>
-                    <th width="10%"> 未评测人数</th>
+                    <th width="5%"> 平均分值</th>
+                    <th width="5%"> 未评测人数</th>
                     <th width="10%"> 日期</th>
                     <th width="10%">操作</th>
                 </tr>
@@ -86,7 +86,7 @@
     {@each data as item, index}
     <tr>
         <td> \${item.course.name}</td>
-        <td> \${item.classesId}</td>
+        <td> \${item.classes.name}</td>
         <td> \${item.teacher.name}</td>
         <td> \${item.averageScore}</td>
         <td> \${item.studentNum-item.userNum}</td>

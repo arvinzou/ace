@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 5};
+var params = {limit: 15};
 window.onload = function () {
     initPage();
     initEvents();
@@ -40,6 +40,7 @@ function setParams(key, value) {
 function getPageList() {
     var url = contextPath + "/course/findCourseList";
     params['name'] = $("input[name=keyword]").val();
+    params['tName'] = $("input[name=keyword1]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();

@@ -143,7 +143,7 @@
             <result column="tName" property="name"/>
         </collection>
         <collection property="classes" ofType="com.huacainfo.ace.partyschool.model.Classes">
-        <id property="id" column="classId"/>
+        <id property="id" column="claId"/>
         <result column="claName" property="name"/>
         </collection>
     </resultMap>
