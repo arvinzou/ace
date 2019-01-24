@@ -1,7 +1,7 @@
 var map = null;
 var markers = [];
 var params = {
-	limit: 99
+	limit: 9999
 };
 
 

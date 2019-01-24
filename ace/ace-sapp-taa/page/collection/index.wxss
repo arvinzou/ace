@@ -68,7 +68,7 @@
 }
 .item{
     width: 90%;
-    height: 166rpx;
+    height: 146rpx;
     margin-left: 5%;
     margin-right: 5%;
     margin-bottom: 20rpx;
