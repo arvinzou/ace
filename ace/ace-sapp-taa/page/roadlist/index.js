@@ -22,12 +22,12 @@ Page({
         that.setData({
             pageType : options.type
         })
-        that.initRoadList();
+        that.initRoadList('');
     },
     
-    initRoadList: function(){
+    initRoadList: function(name){
         var that = this;
-        util.request(cfg.server + '/taa/www/road/roster', { },
+        util.request(cfg.server + '/taa/www/road/roster', { roadManName:name},
             function (res) {
                 if (res.status == 0) {
                     that.setData({
@@ -175,6 +175,9 @@ Page({
         }
     },
     searchRoad: function(e){
-        
+        var that = this;
+        var name = e.detail.value
+        that.initRoadList(name);
+        return;
     }
 })

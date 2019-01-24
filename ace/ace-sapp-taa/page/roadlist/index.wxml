@@ -1,6 +1,6 @@
 <!--logs.wxml-->
 <view class='search'>
-    <input type='text' placeholder='搜索' placeholder-class='search-input' bindinput='searchRoad'></input>
+    <input type='text' placeholder='搜索' placeholder-class='search-input'confirm-type="search" bindinput="searchRoad"></input>
 </view>
 <view class="container log-list">
 <scroll-view scroll-y style="height:90vh;white-space:nowrap;" scroll-into-view="{{toView}}" enable-back-to-top bindscroll="scroll" scroll-with-animation scroll-top="{{scrollTop}}">

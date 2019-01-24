@@ -10,6 +10,8 @@ Page({
     tab: 0,
     nList: [],
     yList: [],
+    nNum:0,
+    yNum:0,
     pageType: null
   },
 
@@ -28,8 +30,8 @@ Page({
           });
       }
      
-      that.initNList();
-      that.initYList();
+      that.initNList('');
+      that.initYList('');
   },
   changeTab: function(e){
       var that = this;
@@ -37,16 +39,28 @@ Page({
           tab: e.target.dataset.index
       });
   },
+
+searchSomeThing:function(e){
+    var that=this;
+    var name = e.detail.value
+    if(that.data.tab==0){
+        that.initNList(name);
+        return;
+    }
+    that.initYList(name);
+    return;
+},
   /**
    * 获取已采集路段信息
    */
-  initYList: function(){
+  initYList: function(rname){
       var that = this;
-      util.request(cfg.server + '/taa/www/road/findSectionList', { category: "1"},
+      util.request(cfg.server + '/taa/www/road/findSectionList', { category: "1", name:rname},
           function (res) {
               if (res.status == 0) {
                  that.setData({
-                     yList: res.data.rows
+                     yList: res.data.rows,
+                     yNum: res.data.total
                  });
               } else {
                   wx.showModal({
@@ -62,13 +76,14 @@ Page({
   /**
    * 获取未采集路段信息
    */
-  initNList: function(){
+    initNList: function (rname){
       var that = this;
-      util.request(cfg.server + '/taa/www/road/findSectionList', { category: "0" },
+      util.request(cfg.server + '/taa/www/road/findSectionList', { category: "0", name: rname },
           function (res) {
               if (res.status == 0) {
                   that.setData({
-                      nList: res.data.rows
+                      nList: res.data.rows,
+                      nNum: res.data.total
                   });
               } else {
                   wx.showModal({
