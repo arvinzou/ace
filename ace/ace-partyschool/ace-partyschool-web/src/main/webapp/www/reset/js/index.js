@@ -63,7 +63,7 @@ function save(){
         alert("请输入新密码！");
         return;
     }
-    if(password.length < 4){
+    if(password.length <=4){
         alert("密码输入必须4位以上！");
         return;
     }
