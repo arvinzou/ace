@@ -160,10 +160,10 @@ Page({
         var roadManId = e.currentTarget.dataset.id;
         var roadManName = e.currentTarget.dataset.name;
         var skipType = that.data.pageType;
-        wx.setStorageSync('roadManId', roadManId);
-        wx.setStorageSync('roadManName', roadManName);
         if (skipType == 'kb'){
             //快报选择路长
+            app.globalData.roadManId = roadManId;
+            app.globalData.roadManName = roadManName;
             wx.switchTab({
                 url: '../index/index',
             });

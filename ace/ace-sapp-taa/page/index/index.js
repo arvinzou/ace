@@ -3,6 +3,7 @@ var cfg = require("../../config.js");
 var dateTimePicker = require('../../util/dateTimePicker.js');
 
 var interval;
+var app = getApp();
 Page({
 
   /**
@@ -53,7 +54,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      
+      var that = this;
+      app.globalData.sectionId = null;
+      app.globalData.sectionName = null;
+      app.globalData.tab = null;
+      app.globalData.startName =  null;
+      app.globalData.endName = null;
+      app.globalData.cjSectionId = null;
+      app.globalData.roadManId = null;
+      app.globalData.roadManName = null;
+      if (!util.is_login()) {
+          wx.navigateTo({
+              url: "../userinfo/index?url=../index/index&type=switchTab"
+          });
+          return;
+      } 
   },
   selectRoad: function(){
       wx.navigateTo({
@@ -346,37 +361,44 @@ Page({
    */
   onShow: function () {
       var that = this;
+
       if (!util.is_login()) {
           wx.navigateTo({
               url: "../userinfo/index?url=../index/index&type=switchTab"
           });
           return;
-      } else {
-          that.getLocation();
-          if (wx.getStorageSync('roadSectionId')){
+      }else{
+          var sectionId = app.globalData.sectionId;
+          if (sectionId){
               that.setData({
-                  sectionFlag: true
+                  sectionFlag: true,
+                  sectionName: app.globalData.sectionName,
+                  sectionId: app.globalData.sectionId,
+                  tab: app.globalData.tab,
               });
           }
-          if (wx.getStorageSync('startName')){
+          var cjSectionId = app.globalData.cjSectionId;
+          if (cjSectionId){
               that.setData({
-                  startFlag: true
+                  startFlag: true,
+                  startName: app.globalData.startName,
+                  endName: app.globalData.endName,
+                  cjSectionId: app.globalData.cjSectionId
               });
           }
-          that.setData({
-              roadManId: wx.getStorageSync('roadManId'),
-              roadManName: wx.getStorageSync('roadManName'),
-              sectionName: wx.getStorageSync('roadSectionName'),
-              sectionId: wx.getStorageSync('roadSectionId'),
-              tab: wx.getStorageSync('tab'),
-              cjSectionId: wx.getStorageSync('roadSectionId'),
-              startName: wx.getStorageSync('startName'),
-              endName: wx.getStorageSync('endName')
-          });
-          that.initDateTime();
-          that.initDict();
-      }
-  },
+          if (app.globalData.roadManId){
+              that.setData({
+                  roadManId: app.globalData.roadManId,
+                  roadManName: app.globalData.roadManName
+              });
+          }
+      } 
+      that.getLocation();
+      that.initDict();
+      that.initDateTime();
+   }, 
+    
+      
 
  start: function(e){
      var locateList = [];

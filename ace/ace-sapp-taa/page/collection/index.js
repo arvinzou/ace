@@ -1,5 +1,6 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
+var app = getApp();
 Page({
 
   /**
@@ -79,23 +80,25 @@ Page({
       var roadSectionId = e.currentTarget.dataset.id;
       var roadSectionName = e.currentTarget.dataset.name;
       var skipType = that.data.pageType;
-      var startName = e.currentTarget.dataset.startname;
-      var endName = e.currentTarget.dataset.endname;
-      wx.setStorageSync('roadSectionId', roadSectionId);
-      wx.setStorageSync('roadSectionName', roadSectionName);
         if (skipType == 'kb') {
-            //快报选择路长
-            wx.setStorageSync('tab', 0);
+            //快报选择路段
+            app.globalData.sectionId = roadSectionId;
+            app.globalData.sectionName = roadSectionName;
+            app.globalData.tab = 0,
             wx.switchTab({
                 url: '../index/index',
             });
         } else if (skipType == 'cj'){
             //路段采集
-            wx.setStorageSync('tab', 1);
-            wx.setStorageSync('startName', startName);
-            wx.setStorageSync('endName', endName)
+            var startName = e.currentTarget.dataset.startname;
+            var endName = e.currentTarget.dataset.endname;
+
+            app.globalData.startName = startName;
+            app.globalData.endName = endName;
+            app.globalData.cjSectionId = roadSectionId;
+            app.globalData.tab = 1
             wx.switchTab({
-                url: '../index/index',
+                url:'../index/index'
             });
         } 
     },
