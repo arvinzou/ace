@@ -96,7 +96,7 @@
         <button type="button" authority="false" class=" btn btn-default inputStyle" data-id="\${item.CODE}">\${item.NAME}
         </button>
         {@else}
-        <button type="button" authority="false" class="btn active_but btn-default inputStyle" data-id="">
+        <button type="button" authority="false" class="btn active_but active_but btn-default inputStyle" data-id="">
             全部
         </button>
         {@/if}
