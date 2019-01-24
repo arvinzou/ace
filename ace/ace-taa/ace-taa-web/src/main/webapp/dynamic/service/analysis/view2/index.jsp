@@ -54,7 +54,7 @@
 					onSelect:function  (node) {
 						 setParams('areaCode', node.id);
 					}">
-                <input class="loadName" name="roadName" type="text">
+                <input class="loadName" name="keyword" type="text">
                 <button class="active_seach"></button>
             </div>
             <div class="title">道路级别</div>
