@@ -48,6 +48,7 @@ Page({
           width: 8,
           dottedLine: false
       }],
+      header: null
   },
 
   /**
@@ -56,13 +57,16 @@ Page({
   onLoad: function (options) {
       var that = this;
       app.globalData.sectionId = null;
-      app.globalData.sectionName = '请选择路段';
+      app.globalData.sectionName = '';
       app.globalData.tab = null;
       app.globalData.startName =  null;
       app.globalData.endName = null;
       app.globalData.cjSectionId = null;
       app.globalData.roadManId = null;
       app.globalData.roadManName = null;
+      that.setData({
+          sectionName: '请选择路段'
+      })
       if (!util.is_login()) {
           wx.navigateTo({
               url: "../userinfo/index?url=../index/index&type=switchTab"
@@ -133,7 +137,9 @@ Page({
               if (res.status == 0) {
                  console.log(res);
                  that.setData({
-                     sectionFlag: true 
+                     sectionFlag: true,
+                     sectionName: res.data.sectionName,
+                     sectionId: res.data.roadSectionId
                  });
               } else {
                   
@@ -252,8 +258,10 @@ Page({
                 var weather = [];
                 var weatherArray = [];
                 for (var i = 0; i < wObj.length; i++){
-                    weather.push(wObj[i].NAME);
-                    weatherArray.push(wObj[i]);
+                    if (wObj[i].CODE != ''){
+                        weather.push(wObj[i].NAME);
+                        weatherArray.push(wObj[i]);
+                    }
                 }
                 that.setData({
                     weather: weather,
@@ -357,6 +365,38 @@ Page({
   onReady: function () {
     
   },
+ 
+ /**
+  * 初始化用户信息
+  */
+  initUserData: function(){
+      var that = this;
+      util.request(cfg.server + '/taa/www/register/findCustomerVo', {},
+          function (res) {
+              if (res.status == 0) {
+                  that.setData({
+                      userData: res.data
+                  });
+              } else {
+                  if (res.info == '用户尚未注册') {
+                      wx.showModal({
+                          title: '对不起，您还没有注册，请前往个人中心进行注册！',
+                          content: res.info,
+                          success: function (res) { }
+                      });
+                      return;
+                  } else {
+                      wx.showModal({
+                          title: '提示',
+                          content: res.info,
+                          success: function (res) { }
+                      });
+                  }
+              }
+
+          }
+      );
+  },
 
   /**
    * 生命周期函数--监听页面显示
@@ -374,6 +414,11 @@ Page({
           });
           return;
       }else{
+          that.initUserData();
+          var userInfo = wx.getStorageSync("userinfo");
+          that.setData({
+              header: userInfo.avatarUrl
+          })
           var sectionId = app.globalData.sectionId;
           if (sectionId){
               that.setData({

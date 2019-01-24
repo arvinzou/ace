@@ -1,6 +1,13 @@
 <view class='index'>
     <view class='tab'>
-        <view class='header'><image src='../../image/default_header.png'></image></view>
+        <view class='header'>
+            <block wx:if='{{header}}'>
+                <image src='{{header}}'></image>
+            </block>
+            <block wx:else>
+                <image src='../../image/default_header.png'></image>
+            </block>
+        </view>
         <view class='tab01 {{tab == 0? "active": ""}}' bindtap='changeTab' data-index="0">事故快报</view>
         <view class='tab02 {{tab == 1? "active": ""}}' bindtap='changeTab' data-index="1">路段采集</view>
         <view class='column'><image src='../../image/icon-column.png'></image></view>
