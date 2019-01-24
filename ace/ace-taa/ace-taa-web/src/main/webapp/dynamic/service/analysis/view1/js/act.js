@@ -42,24 +42,31 @@ function rsd(value, kernelKey, staticDictObjects) {
     }
     return name;
 }
-
+var rst=null;
 function findTraAccList() {
     $.ajax({
-        url: contextPath + '/traAcc/findTraAccList',
+        url: contextPath + '/traAcc/getTraAccListTx',
         type: "post",
         async: false,
         data: params,
-        success: function (result) {
+        success: function (req) {
             if (params.areaCode) {
                 getLatLongByAreaCode({
                     areaCode: params.areaCode
                 });
             }
-            if (result.status == 0) {
-                clearMarkers(markers);
-                if (result.rows) {
-                    for (var i in result.rows) {
-                        var o = result.rows[i];
+            rst=req;
+            if (rst) {
+
+                Concurrent.Thread.create(function(){
+                 //clearMarkers(markers);
+                  var marker;
+                     while (marker = markers.pop()) {
+                         marker.setMap(null);
+                     }
+                if (rst) {
+                    for (var i in rst) {
+                        var o = rst[i];
                         var imgUrl;
                         var font;
                         if (o.deadthToll && o.injuries) {
@@ -109,9 +116,10 @@ function findTraAccList() {
                     }
                 }
                 //$("#modal-preview").modal("show");
+                 });
 
             } else {
-                alert(result.errorMessage);
+                alert(rst.errorMessage);
             }
         },
         error: function () {

@@ -582,7 +582,7 @@ public class TraAccServiceImpl implements TraAccService {
 
     /**
      * @throws
-     * @Title:getTraAccList
+     * @Title:getTraAccListBd
      * @Description: TODO(交通事故热力图)
      * @param: @param condition
      * @param: @throws Exception
@@ -591,7 +591,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-21
      */
     @Override
-    public List<Map<String, Object>> getTraAccList(TraAccQVo condition) throws Exception {
+    public List<Map<String, Object>> getTraAccListBd(TraAccQVo condition) throws Exception {
         List<Map<String, Object>> rst = new ArrayList<Map<String, Object>>();
         List<Map<String, Object>> list = this.traAccDao.getTraAccList(condition);
         for (Map<String, Object> o : list) {
@@ -605,7 +605,21 @@ public class TraAccServiceImpl implements TraAccService {
         }
         return rst;
     }
-
+    /**
+     * @throws
+     * @Title:getTraAccListTx
+     * @Description: TODO(交通事故热力图)
+     * @param: @param condition
+     * @param: @throws Exception
+     * @return: List<Map<String, Object>>
+     * @author: 陈晓克
+     * @version: 2019-01-21
+     */
+    @Override
+    public List<Map<String, Object>> getTraAccListTx(TraAccQVo condition) throws Exception {
+        List<Map<String, Object>> list = this.traAccDao.getTraAccList(condition);
+        return list;
+    }
     /**
      * 掌上驾驶仓
      *

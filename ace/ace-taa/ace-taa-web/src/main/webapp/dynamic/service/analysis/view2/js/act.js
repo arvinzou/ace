@@ -146,7 +146,7 @@ function initEchart() {
 
 
 function getData() {
-	var url=contextPath+'/traAcc/getTraAccList';
+	var url=contextPath+'/traAcc/getTraAccListBd';
 	// var url='hangzhou-tracks.json';
     $.getJSON(url, params,function (rst) {
         var points = [].concat.apply([], rst.map(function (track) {

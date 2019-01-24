@@ -229,7 +229,7 @@ public interface TraAccService {
 
     /**
      * @throws
-     * @Title:getTraAccList
+     * @Title:getTraAccListTx
      * @Description: TODO(交通事故热力图)
      * @param: @param condition
      * @param: @throws Exception
@@ -237,7 +237,19 @@ public interface TraAccService {
      * @author: 陈晓克
      * @version: 2019-01-21
      */
-    List<Map<String, Object>> getTraAccList(TraAccQVo condition) throws Exception;
+    List<Map<String, Object>> getTraAccListTx(TraAccQVo condition) throws Exception;
+
+    /**
+     * @throws
+     * @Title:getTraAccListTd
+     * @Description: TODO(交通事故热力图)
+     * @param: @param condition
+     * @param: @throws Exception
+     * @return: List<Map<String, Object>>
+     * @author: 陈晓克
+     * @version: 2019-01-21
+     */
+    List<Map<String, Object>> getTraAccListBd(TraAccQVo condition) throws Exception;
 
     /**
      * 掌上驾驶仓

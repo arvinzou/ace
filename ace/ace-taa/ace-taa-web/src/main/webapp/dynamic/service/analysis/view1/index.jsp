@@ -163,7 +163,7 @@
         src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript"
         src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
-
+<script src="js/Concurrent.Thread.js"></script>
 <script src="js/act.js?version=${cfg.version}"></script>
 
 </body>

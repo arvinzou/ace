@@ -366,9 +366,72 @@
         select gps_x longitude,gps_y latitude ,area_name areaName,area_code areaCode from portal.gps_chian where area_code=#{areaCode}
     </select>
     <select id="getTraAccList" resultType="map">
-        select
-        t.latitude, t.longitude,t.deadthToll,t.injuries
-        <include refid="whereCondition"/>
+        select  t.id, t.latitude, t.longitude,t.deadthToll, t.injuries,a.name roadManName
+        from tra_acc t
+        inner join road_man a on t.roadManId=a.id
+        inner join road_section b on t.roadSectionId=b.id
+        inner join portal.province c on t.areaCode=c.code
+        inner join road d on b.roadId=d.id
+
+        where t.status='1'
+        <if test='condition.roadManName!=null and condition.roadManName!=""'>
+            and a.name like
+            concat('%',#{condition.roadManName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.keyword!=null and condition.keyword!=""'>
+            and (a.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%') or t.address like
+            concat('%',#{condition.keyword,jdbcType=VARCHAR},'%'))
+        </if>
+        <if test='condition.roadManId!=null and condition.roadManId!=""'>
+            and t.roadManId =#{condition.roadManId,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.roadSectionId!=null and condition.roadSectionId!=""'>
+            and t.roadSectionId =#{condition.roadSectionId,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.startDate!=null and condition.startDate!=""'>
+            <![CDATA[
+			and t.accidentTime>=str_to_date(#{condition.startDate},'%Y-%m-%d')
+	  ]]>
+        </if>
+        <if test='condition.endDate!=null and condition.endDate!=""'>
+            <![CDATA[
+			and t.accidentTime<=str_to_date(#{condition.endDate},'%Y-%m-%d')
+	]]>
+        </if>
+        <if test='condition.areaCode!=null and condition.areaCode!=""'>
+            and t.areaCode like
+            concat('%',#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+
+        <if test='condition.upDeathNum!=null and condition.upDeathNum!=""'>
+            <![CDATA[
+          and IFNULL(t.deadthToll,0) <= #{condition.upDeathNum,jdbcType=INTEGER}
+          ]]>
+        </if>
+        <if test='condition.downDeathNum!=null and condition.downDeathNum!=""'>
+            and IFNULL(t.deadthToll,0) >= #{condition.downDeathNum,jdbcType=INTEGER}
+        </if>
+        <if test='condition.upInjuriesNum!=null and condition.upInjuriesNum!=""'>
+            <![CDATA[
+          and IFNULL(t.injuries,0) <= #{condition.upInjuriesNum,jdbcType=INTEGER}
+          ]]>
+        </if>
+        <if test='condition.downInjuriesNum!=null and condition.downInjuriesNum!=""'>
+            and IFNULL(t.injuries,0) >= #{condition.downInjuriesNum,jdbcType=INTEGER}
+        </if>
+        <if test='condition.category!=null and condition.category!=""'>
+            and d.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.roadId!=null and condition.roadId!=""'>
+            and d.id >= #{condition.roadId,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.roadName!=null and condition.roadName!=""'>
+            and (
+            a.name like concat('%',#{condition.roadName,jdbcType=VARCHAR},'%')
+            or d.name like concat('%',#{condition.roadName,jdbcType=VARCHAR},'%')
+            or b.name like concat('%',#{condition.roadName,jdbcType=VARCHAR},'%')
+            )
+        </if>
     </select>
 
     <select id="monthReport" resultType="map">
@@ -727,4 +790,7 @@
         </choose>
 
     </select>
+
+
+
 </mapper>
