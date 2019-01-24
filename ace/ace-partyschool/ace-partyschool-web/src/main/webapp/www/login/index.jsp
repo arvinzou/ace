@@ -30,6 +30,8 @@
 			</div>
 			<div class="regist-box"><a href="${pageContext.request.contextPath}/www/sign/index.jsp" class="regist">立即注册</a></div>
 		</div>
+
+		<div class="footer-box">
 		<form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post">
 			<div class="footer" onclick="wxLogin();">
 				<input type="hidden" value="WX_LOGIN"  name="action"/>
@@ -39,5 +41,6 @@
 				<p>微信登录</p>
 			</div>
 		</form>
+		</div>
 	</body>
 </html>

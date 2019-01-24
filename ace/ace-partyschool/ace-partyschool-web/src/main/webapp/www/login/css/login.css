@@ -32,13 +32,12 @@ input:-ms-input-placeholder{
 .logo{
 	width: 100%;
 	height: auto;
-	padding-top: 0.893333rem;
 	padding-bottom: 0.893333rem;
 	text-align: center;
 }
 .logo-image{
-	width: 5.28rem;
-	height: 2.226666rem;
+	width: 100%;
+	height: 3.346666rem;
 }
 .login-form{
 	padding-left: 1rem;
@@ -102,7 +101,7 @@ input:-ms-input-placeholder{
 	font-size: 0.4rem;
 	padding-bottom: 0.52rem;
 	margin: 0 auto;
-	padding-top: 2rem;
+	padding-top: 0.5rem;
 }
 .weixin{
 	width: 1.173333rem;
@@ -118,4 +117,12 @@ input:-ms-input-placeholder{
 	position: absolute;
 	bottom: 0.45rem;
 	right: 0.226rem;
+}
+.footer-box{
+	width: 100%;
+	height: 4.066666rem;
+	position: fixed;
+	bottom: 0;
+	background: url("../img/footer-bg.png") no-repeat;
+	background-size: 100% 100%;
 }
