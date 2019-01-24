@@ -82,6 +82,7 @@
         <!--<module>ace-operana</module>-->
         <!--<module>ace-fundtown</module>-->
         <module>ace-woc</module>
+        <module>ace-taa</module>
         <!---->
        <!--<module>ace-face</module>-->
         <!--<module>ace-jave</module>-->

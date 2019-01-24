@@ -32,33 +32,33 @@
 
                     <div class="btn-group" role="group1" style="float:left;padding-right:10px">
                         <button type="button" authority="false" class="btn btn-default"
-                                onclick="setParams('category','year');">年度查询
+                                onclick="setParams('category','year');">年
                         </button>
                         <button type="button" authority="false" class="btn btn-default"
-                                onclick="setParams('category','season');">季度查询
+                                onclick="setParams('category','season');">季度
                         </button>
                         <button type="button" authority="false" class="btn btn-default"
-                                onclick="setParams('category','month');">月份查询
+                                onclick="setParams('category','month');">月
                         </button>
                     </div>
 
                     <div class="btn-group" role="group2" style="float:left;">
                         <button type="button" authority="false" class="btn btn-default"
-                                onclick="setParams('field','deadthToll');">死亡人数分析
+                                onclick="setParams('field','deadthToll');">死亡人数
                         </button>
                         <button type="button" authority="false" class="btn btn-default"
-                                onclick="setParams('field','injuries');">受伤人数分析
+                                onclick="setParams('field','injuries');">受伤人数
                         </button>
                     </div>
                 </div>
 
-                <div class="col-md-5">
-                    <div class="input-group" style="float: right;padding: 10px;">
-                        路段<input type="text" id="roadSectionId" class="form-control" style="width:235px"
+                <div class="col-md-7">
+                    <div class="input-group" style="float: right;padding-right: 10px;">
+                        <span style="padding-right:15px">路段</span>    <input type="text" id="roadSectionId" class="form-control" style="width:235px;height:30px"
                                  name="roadSectionId">
                     </div>
-                    <div class="input-group" style="float: right;padding: 10px;">
-                        路长<input type="text" id="roadManId" class="form-control" style="width:235px" name="roadManId">
+                    <div class="input-group" style="float: right;padding-right: 10px;">
+                        <span style="padding-right:15px">路长</span>    <input type="text" id="roadManId" class="form-control" style="width:235px;height:30px" name="roadManId">
                     </div>
                 </div>
 
