@@ -86,12 +86,18 @@
     </cover-view>
 </cover-view>
 <cover-view class='form-content {{tab == 1 && startName!=null && startName!=""? "":"hidden"}}'>
-    <cover-view class='form-row'>
-        <cover-view class='form-row-left'>起点：</cover-view>
+    <cover-view class='form-row br'>
+        <cover-view class='form-row-left'>
+            <cover-view class='dot start'></cover-view>
+            <cover-view class='dot-text'>起点：</cover-view>
+        </cover-view>
         <cover-view class='form-row-right'>{{startName}}</cover-view>
     </cover-view>
     <cover-view class='form-row'>
-        <cover-view class='form-row-left'>终点：</cover-view>
+        <cover-view class='form-row-left'>
+             <cover-view class='dot end'></cover-view>
+            <cover-view class='dot-text'>终点：</cover-view>
+        </cover-view>
         <cover-view class='form-row-right'>{{endName}}</cover-view>
     </cover-view>
 </cover-view>

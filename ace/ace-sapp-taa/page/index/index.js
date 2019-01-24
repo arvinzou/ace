@@ -465,6 +465,7 @@ Page({
      }, 5000);
  },
 break: function(e){
+    var that = this;
     clearInterval(interval);
     that.setData({
         startFlag: true,

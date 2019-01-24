@@ -234,7 +234,6 @@ Page({
       that.setData({
           date: e.detail.value
       });
-      that.initRoadList();
       that.initTrafficList();
       that.initDeathColumnReport();
       that.initTimesColumnReport();
