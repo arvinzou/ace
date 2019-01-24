@@ -91,6 +91,10 @@ function regist(){
         alert("设置密码不能为空！");
         return;
     }
+    if(pwd.length <= 4){
+        alert("密码位数必须在4位以上！");
+        return;
+    }
     if(!isEmpty(singPwd)){
         alert("确认密码不能为空！");
         return;

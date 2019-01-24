@@ -75,7 +75,7 @@ function regist(){
         alert("处室不能为空！");
         return;
     }
-    if(!isEmpty(workUnitName)){
+    if(!isEmpty(postName)){
         alert("职务职称不能为空！");
         return;
     }
@@ -85,6 +85,10 @@ function regist(){
     }
     if(!isEmpty(pwd)){
         alert("设置密码不能为空！");
+        return;
+    }
+    if(pwd.length <=4){
+        alert("密码位数必须大于4位！");
         return;
     }
     if(!isEmpty(singPwd)){
