@@ -28,7 +28,7 @@
                 <view class='road-section'>{{item.startName}}-{{item.endName}}</view>
                 <view class='road-sign'>路段:{{item.name}}</view>
             </view>
-            <view class='item-right'>
+            <view class='item-right' data-id='{{item.id}}' bindtap='resetSection'>
                 <view class='status'>
                     <image src='../../image/icon-reset.png'></image>
                     <text class='reset'>重置</text>

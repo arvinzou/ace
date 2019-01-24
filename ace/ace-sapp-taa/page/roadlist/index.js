@@ -27,7 +27,7 @@ Page({
     
     initRoadList: function(){
         var that = this;
-        util.request(cfg.server + '/taa//www/road/roster', { },
+        util.request(cfg.server + '/taa/www/road/roster', { },
             function (res) {
                 if (res.status == 0) {
                     that.setData({
@@ -173,5 +173,8 @@ Page({
                 url: '../accidentDetail/index',
             });
         }
+    },
+    searchRoad: function(e){
+        
     }
 })

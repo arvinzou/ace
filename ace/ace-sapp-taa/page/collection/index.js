@@ -18,9 +18,16 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      that.setData({
-          pageType: options.type
-      });
+      var tabIndex = options.tab;
+      if(tabIndex){
+          tab: tabIndex
+      }
+      if (options.type){
+          that.setData({
+              pageType: options.type
+          });
+      }
+     
       that.initNList();
       that.initYList();
   },
@@ -101,6 +108,30 @@ Page({
                 url:'../index/index'
             });
         } 
+    },
+
+    resetSection: function(e){
+        var that = this;
+        var sectionId = e.currentTarget.dataset.id;
+        util.request(cfg.server + '/taa/www/road/resetSectionGPS', { sectionId: sectionId },
+            function (res) {
+                if (res.status == 0) {
+                    wx.showModal({
+                        title: '提示',
+                        content: res.info,
+                        success: function (res) { }
+                    });
+                    that.initYList();
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: res.info,
+                        success: function (res) { }
+                    });
+                }
+
+            }
+        );
     },
   /**
    * 生命周期函数--监听页面初次渲染完成

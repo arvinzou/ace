@@ -56,7 +56,7 @@ Page({
   onLoad: function (options) {
       var that = this;
       app.globalData.sectionId = null;
-      app.globalData.sectionName = null;
+      app.globalData.sectionName = '请选择路段';
       app.globalData.tab = null;
       app.globalData.startName =  null;
       app.globalData.endName = null;
@@ -132,7 +132,9 @@ Page({
           function (res) {
               if (res.status == 0) {
                  console.log(res);
-                 sectionFlag = true;
+                 that.setData({
+                     sectionFlag: true 
+                 });
               } else {
                   
               }
@@ -361,7 +363,11 @@ Page({
    */
   onShow: function () {
       var that = this;
-
+      that.setData({
+          startFlag: false,
+          breakFlag: false,
+          endFlag: false,
+      });
       if (!util.is_login()) {
           wx.navigateTo({
               url: "../userinfo/index?url=../index/index&type=switchTab"
@@ -436,6 +442,9 @@ end: function(e){
                     content: res.info,
                     success: function (res) { }
                 });
+                wx.navigateTo({
+                    url: '../collection/index?tab=1',
+                })
             } else {
                 wx.showModal({
                     title: '提示',
