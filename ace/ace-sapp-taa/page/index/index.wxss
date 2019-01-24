@@ -301,7 +301,7 @@
     color: #FFFFFF;
     position: fixed;
     bottom: 0;
-    left: 300rpx;
+    left: 150rpx;
 }
 .breakBtn{
     background:rgba(255,255,255,1);
