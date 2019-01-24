@@ -1,10 +1,10 @@
- var params = {category:'1'};
+var params = {category: '1'};
 jQuery(function ($) {
     //查询
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
-               
+
                 $.each(formData, function (n, obj) {
                     params[obj.name] = obj.value;
                 });
@@ -21,8 +21,8 @@ jQuery(function ($) {
     });
     //添加
     $('#btn-view-add').on('click', function () {
-         //加载导入
-         importXls("");
+        //加载导入
+        importXls("");
     });
     //初始化事件
     initEvents();
@@ -41,34 +41,33 @@ function render(obj, data, tplId) {
 
 function initEvents() {
     $('#modal-import').on('shown.bs.modal', function (event) {
-		var category=params.category;
-		var extensions=null;
-		if(category=='1'){
-			extensions="xls,xlsx,doc,docx,ppt,pptx,pdf";
-		}else{
-			extensions="jpg,gif,png,bmp";
-		}
-		var p={
-        runtimes: 'html5,flash,silverlight,html4',
-        chunk_size: '1mb',
-        unique_names: true,
-        multipart_params: {classesId:$("#classesId").val(),category:category},
-        filters: {
-            max_file_size: '10mb',
-            mime_types: [
-                { extensions: extensions}
-            ]
-        },
-        resize: {width: 1024, height: 1024, quality: 90},
-        url: contextPath + '/files/uploadFile'
-    };
-		init_uploader(p)
+        var category = params.category;
+        var extensions = null;
+        if (category == '1') {
+            extensions = "xls,xlsx,doc,docx,ppt,pptx,pdf";
+        } else {
+            extensions = "jpg,gif,png,bmp";
+        }
+        var p = {
+            runtimes: 'html5,flash,silverlight,html4',
+            chunked: false, unique_names:true,
+            multipart_params: {classesId: $("#classesId").val(), category: category},
+            filters: {
+                max_file_size: '10mb',
+                mime_types: [
+                    {extensions: extensions}
+                ]
+            },
+            resize: {width: 1024, height: 1024, quality: 90},
+            url: contextPath + '/files/uploadFile'
+        };
+        init_uploader(p)
     });
-	$(".btn-group .btn").bind('click', function(event) {
-		$(event.target).siblings().removeClass("active");
-		console.log(event);
-		$(event.target).addClass("active");
-	});
+    $(".btn-group .btn").bind('click', function (event) {
+        $(event.target).siblings().removeClass("active");
+        console.log(event);
+        $(event.target).addClass("active");
+    });
 }
 
 function initPreview(id) {
@@ -109,12 +108,13 @@ function edit(rowid) {
             form.closest('.ui-jqdialog')
                 .find('.ui-jqdialog-titlebar')
                 .wrapInner('<div class="widget-header" />');
-                appendUploadBtn("url");
+            appendUploadBtn("url");
         }
     });
 }
 
 var show = false;
+
 function del(rowid) {
     console.log(rowid);
     jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
@@ -138,28 +138,27 @@ function importXls() {
 }
 
 
-
 function initClassList() {
-	startLoad();
-	$.ajax({
-		url: contextPath + "/mailList/getClassList",
-		type: "post",
-		async: false,
-		data: {},
-		success: function(result) {
-			stopLoad();
-			if (result.status == 0) {
-				var data = {};
-				data = result.value;
-				render('#select1', data, 'tpl-select-list');
-				initGrid();
-			} else {
-				alert(result.errorMessage);
-			}
-		},
-		error: function() {
-			stopLoad();
-			alert("对不起出错了！");
-		}
-	});
+    startLoad();
+    $.ajax({
+        url: contextPath + "/mailList/getClassList",
+        type: "post",
+        async: false,
+        data: {},
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data = result.value;
+                render('#select1', data, 'tpl-select-list');
+                initGrid();
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }
