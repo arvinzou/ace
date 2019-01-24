@@ -466,6 +466,11 @@ Page({
  },
 break: function(e){
     clearInterval(interval);
+    that.setData({
+        startFlag: true,
+        breakFlag: false,
+        endFlag: true,
+    })
 },
 end: function(e){
     var that = this;
@@ -546,7 +551,18 @@ end: function(e){
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+    var that = this;
+    that.setData({
+        startFlag: false,
+        breakFlag: false,
+        endFlag: false,
+        sectionFlag: false,
+        sectionName: null,
+        sectionId: null,
+    });
+      that.getLocation();
+      that.initDict();
+      that.initDateTime();
   },
 
   /**
