@@ -75,7 +75,7 @@ function regist(){
         alert("处室不能为空！");
         return;
     }
-    if(!isEmpty(workUnitName)){
+    if(!isEmpty(postName)){
         alert("职务职称不能为空！");
         return;
     }
