@@ -114,7 +114,14 @@ function initEvents() {
     });
     $('input[name=endDate]').focus(function() {
         $(this).blur(); //不可输入状态
-    })
+    });
+    $('#tt').combotree({
+        onSelect: function (node) {
+            getLatLongByAreaCode({
+                areaCode: node.id
+            });
+        }
+    });
 }
 
 
