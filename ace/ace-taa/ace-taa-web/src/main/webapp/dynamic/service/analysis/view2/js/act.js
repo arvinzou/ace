@@ -45,14 +45,14 @@ $(function () {
 
 
 function searchRoadName() {
-    params.roadName= $("input[name=roadName]").val();
+    params.keyword = $("input[name=keyword]").val();
     getData();
 }
 
 function setParams() {
     var that =$(this);
     params.category = that.data('id');
-    findTraAccList(params);
+    getData();
     that.siblings().removeClass('active_but');
     that.addClass('active_but');
 }
