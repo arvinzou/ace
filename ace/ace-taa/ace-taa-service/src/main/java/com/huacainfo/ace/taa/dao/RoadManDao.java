@@ -40,8 +40,6 @@ public interface RoadManDao {
 
     List<Map<String, Object>> getListByCondition(@Param("params") Map<String, Object> params);
 
-    /**
-     * @return
-     */
-    List<Map<String, Object>> findRoster();
+
+    List<Map<String, Object>> findRoster(@Param("roadManName") String roadManName);
 }

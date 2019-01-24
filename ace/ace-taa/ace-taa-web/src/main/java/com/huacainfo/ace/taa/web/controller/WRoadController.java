@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: Arvin
@@ -69,7 +70,8 @@ public class WRoadController extends TaaBaseController {
             return new ResultResponse(ResultCode.FAIL, "微信授权失败");
         }
 
-        List<RoadGps> list = JsonUtil.toList(jsonData, RoadGps.class);
+        Map<String, Object> map = JsonUtil.toMap(jsonData);
+        List<RoadGps> list = JsonUtil.toList(String.valueOf(map.get("list")), RoadGps.class);
         MessageResponse ms = roadGpsService.insertRoadGps(list, parseUser(user));
 
         return new ResultResponse(ms);
@@ -120,8 +122,8 @@ public class WRoadController extends TaaBaseController {
      * @throws Exception
      */
     @RequestMapping("/roster")
-    public ResultResponse roster() throws Exception {
-        return roadManService.findRoster();
+    public ResultResponse roster(String roadManName) throws Exception {
+        return roadManService.findRoster(roadManName);
     }
 
 

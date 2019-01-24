@@ -80,7 +80,7 @@
         select count(1)
         from road_section rs
         where rs.id in ( select roadSectionId from road_gps )
-        and rs.areaCode = t.area_code
+        and rs.areaCode = d.area_code
         ) as sectionCount,
         w.nickName, w.avatarUrl,
         d.department_name,

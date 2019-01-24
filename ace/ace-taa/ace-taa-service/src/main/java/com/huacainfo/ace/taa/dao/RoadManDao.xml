@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.taa.dao.RoadManDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.RoadMan">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
-    <result column="orgName" jdbcType="VARCHAR" property="orgName" />
-    <result column="startName" jdbcType="VARCHAR" property="startName" />
-    <result column="endName" jdbcType="VARCHAR" property="endName" />
-    <result column="intro" jdbcType="VARCHAR" property="intro" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
-    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
-    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
-    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
-  <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.RoadManVo" extends="BaseResultMap">
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.RoadMan">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="orgName" jdbcType="VARCHAR" property="orgName"/>
+        <result column="startName" jdbcType="VARCHAR" property="startName"/>
+        <result column="endName" jdbcType="VARCHAR" property="endName"/>
+        <result column="intro" jdbcType="VARCHAR" property="intro"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.RoadManVo" extends="BaseResultMap">
+    </resultMap>
+    <sql id="Base_Column_List">
     id, areaCode, name, mobile, orgName, startName, endName, intro, status, createUserId, 
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
-  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
     t.areaCode, t.name, t.mobile, t.orgName, t.startName, t.endName, t.status,b.name areaName,t.createDate
     from road_man t
     left join portal.province b on t.areaCode=b.code
     where t.id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from road_man
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.taa.model.RoadMan">
+    <insert id="insert" parameterType="com.huacainfo.ace.taa.model.RoadMan">
     insert into road_man (id, areaCode, name, 
       mobile, orgName, startName, 
       endName, intro, status, 
@@ -50,7 +50,7 @@
       )
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.RoadMan">
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.RoadMan">
     update road_man
     set areaCode = #{areaCode,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
@@ -67,52 +67,51 @@
   </update>
 
 
-  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from road_man
-    where name = #{name,jdbcType=VARCHAR} limit 0,1
-  </select>
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from road_man
+        where name = #{name,jdbcType=VARCHAR} limit 0,1
+    </select>
 
 
+    <sql id="whereCondition">
+        from road_man t
+        left join portal.province b on t.areaCode=b.code
+        where 0=0
+        <if test='condition.name!=null and condition.name!=""'>
+            and t.name like
+            concat(#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.areaCode!=null and condition.areaCode!=""'>
+            and t.areaCode like
+            concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultMap="BaseResultMapVo">
+        select * from (
+        select
+        t.id,t.areaCode, t.name, t.mobile, t.orgName, t.startName, t.endName, t.status,b.name areaName,t.createDate
+        <include refid="whereCondition"/>
+        )m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.createDate
+            </otherwise>
+        </choose>
 
-  <sql id="whereCondition">
-    from road_man t
-    left join portal.province b on t.areaCode=b.code
-    where 0=0
-    <if test='condition.name!=null and condition.name!=""'>
-      and t.name like
-      concat(#{condition.name,jdbcType=VARCHAR},'%')
-    </if>
-    <if test='condition.areaCode!=null and condition.areaCode!=""'>
-      and t.areaCode like
-      concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
-    </if>
-  </sql>
-  <select id="findCount" resultType="int">
-    SELECT COUNT(*)
-    <include refid="whereCondition" />
-  </select>
-  <select id="findList" resultMap="BaseResultMapVo">
-    select * from (
-    select
-    t.id,t.areaCode, t.name, t.mobile, t.orgName, t.startName, t.endName, t.status,b.name areaName,t.createDate
-    <include refid="whereCondition" />
-    )m
-    <choose>
-      <when test='orderBy!=null and orderBy!=""'>
-        ORDER BY m.${orderBy}
-      </when>
-      <otherwise>
-        ORDER BY m.createDate
-      </otherwise>
-    </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
 
-    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 
-  </select>
-
-  <select id="isExit" resultType="int">
+    <select id="isExit" resultType="int">
     select count(*)
     from
     road_man where
@@ -120,7 +119,7 @@
   </select>
 
 
-  <select id="getList" resultType="map">
+    <select id="getList" resultType="map">
     select
     t.id,t.areaCode, t.name, t.mobile, t.orgName, t.startName, t.endName, t.status,b.name areaName,t.createDate
     from road_man t
@@ -128,25 +127,29 @@
     where t.areaCode like  concat(#{p.areaCode,jdbcType=VARCHAR},'%')
   </select>
 
-  <select id="getListByCondition" resultType="map">
-    select
-    t.id,t.name, t.mobile, t.orgName,t.status,b.name areaName
-    from road_man t
-    left join portal.province b on t.areaCode=b.code
-    where 0=0
-    <if test='params.q !=null and params.q!=""'>
-      and (t.id=#{params.q} or t.name like
-      concat('%',#{params.q},'%'))
-    </if>
-    order by t.createDate
-    limit 0,20
-  </select>
+    <select id="getListByCondition" resultType="map">
+        select
+        t.id,t.name, t.mobile, t.orgName,t.status,b.name areaName
+        from road_man t
+        left join portal.province b on t.areaCode=b.code
+        where 0=0
+        <if test='params.q !=null and params.q!=""'>
+            and (t.id=#{params.q} or t.name like
+            concat('%',#{params.q},'%'))
+        </if>
+        order by t.createDate
+        limit 0,20
+    </select>
 
-    <select id="findRoster" resultType="map">
+    <select id="findRoster" parameterType="java.lang.String" resultType="map">
         SELECT
         t.id,
         t.`name`
         FROM taa.road_man t
+        where 1=1
+        <if test='roadManName !=null and roadManName!=""'>
+            and t.name like concat(#{roadManName,jdbcType=VARCHAR},'%')
+        </if>
         ORDER BY CONVERT(t.`name` USING gbk)
     </select>
 </mapper>

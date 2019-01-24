@@ -319,9 +319,9 @@ public class RoadManServiceImpl implements RoadManService {
      * @throws Exception
      */
     @Override
-    public ResultResponse findRoster() {
+    public ResultResponse findRoster(String roadManName) {
         //库中所有路长信息
-        List<Map<String, Object>> list = roadManDao.findRoster();
+        List<Map<String, Object>> list = roadManDao.findRoster(roadManName);
         //解析转换数据
         String name;
         String letter;
