@@ -46,7 +46,7 @@
         <form id="fm">
             <div class="title">精确搜索</div>
             <div class="seach morginBottom40">
-                <input class="easyui-combotree" style=" width: 120px;height: 46px;border:0 !important;" name="areaCode"
+                <input id="tt" class="easyui-combotree" style=" width: 120px;height: 46px;border:0 !important;" name="areaCode"
                        data-options="url:'${portalPath}/system/selectProvinceTreeList.do',
 					method:'get',
 					label:'',

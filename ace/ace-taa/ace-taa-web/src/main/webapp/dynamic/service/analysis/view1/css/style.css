@@ -349,3 +349,23 @@ input {
     border:0 !important;
     color: #fff !important;
 }
+
+.halfStyle {
+    position: relative;
+    display: inline-block;
+    color: black; /* 任何颜色，或透明 */
+    overflow: hidden;
+    white-space: pre;
+    vertical-align: middle;
+}
+.halfStyle:before{
+    display: block;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50%;
+    content: attr(data-content);
+    overflow: hidden;
+    color: #fff;
+}
