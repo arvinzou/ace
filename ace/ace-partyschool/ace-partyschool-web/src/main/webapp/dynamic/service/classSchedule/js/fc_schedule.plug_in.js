@@ -330,20 +330,20 @@ window.onload = function () {
             //选择，可选择区域
             selectable: true,
             selectHelper: true,
-            select: function (start, end) {
-                var title = prompt('Event Title:');
-                var eventData;
-                if (title) {
-                    eventData = {
-                        title: title,
-                        start: start,
-                        end: end
-                    };
-                    $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-
-                }
-                $('#calendar').fullCalendar('unselect');
-            }
+            // select: function (start, end) {
+            //     var title = prompt('Event Title:');
+            //     var eventData;
+            //     if (title) {
+            //         eventData = {
+            //             title: title,
+            //             start: start,
+            //             end: end
+            //         };
+            //         $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+            //
+            //     }
+            //     $('#calendar').fullCalendar('unselect');
+            // }
         });
 
     }
