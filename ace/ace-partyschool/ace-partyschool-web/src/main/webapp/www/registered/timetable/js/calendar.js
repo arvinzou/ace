@@ -204,6 +204,15 @@ function jcalendar_week(options){
                     $(".calendar_day").eq(0).addClass("calendar_day_act").siblings().removeClass("calendar_day_act");
                     var defaultDate = $(".calendar_day").eq(0).attr("date");
                     initCourseList(defaultDate+" 00:00:00");
+				}else{
+                	var nowDate = new Date();
+                	var cYear = nowDate.getFullYear();
+                	var cMonth = nowDate.getMonth() +1;
+                	var cDay = nowDate.getDate();
+                	if(cMonth < 10){
+                        cMonth = "0"+cMonth;
+					}
+                    initCourseList(cYear+"-"+cMonth+"-"+cDay+" 00:00:00");
 				}
 			}
 		})
