@@ -155,9 +155,7 @@
         FROM partyschool.files f
         LEFT JOIN partyschool.student s on s.classId=f.classesId
         where
-        f.classesId=(
-        SELECT s.classId FROM partyschool.student s WHERE s.id=#{condition.userId,jdbcType=VARCHAR}
-        )
+        s.id=#{condition.userId,jdbcType=VARCHAR}
         <if test="condition.title !=null and condition.title !=&quot;&quot;">
             and f.`title` like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
