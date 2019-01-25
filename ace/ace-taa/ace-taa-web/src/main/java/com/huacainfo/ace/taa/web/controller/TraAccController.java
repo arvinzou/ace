@@ -335,7 +335,9 @@ public class TraAccController extends TaaBaseController {
     @RequestMapping(value = "/getTraAccListTx")
     @ResponseBody
     public List<Map<String, Object>> getTraAccListTx(TraAccQVo condition) throws Exception {
-        JSONArray rst = new JSONArray();
+        if (CommonUtils.isBlank(condition.getAreaCode())) {
+            condition.setAreaCode(this.getCurUserProp().getAreaCode());
+        }
         return this.traAccService.getTraAccListTx(condition);
     }
 
