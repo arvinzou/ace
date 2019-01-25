@@ -152,8 +152,7 @@ function isCardNo(card)
     var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
     if(reg.test(card) === false)
     {
-        alert("身份证输入不合法");
-        return;
+        return false;
     }
 }
 
@@ -163,7 +162,10 @@ function editStudent(){
     var workUnitName = $("input[name='workUnitName']").val();
     var postName = $("input[name='postName']").val();
     var politicalName = userInfo.student.political;
-    isCardNo(idCard);
+    if(!isCardNo(idCard)){
+        alert("身份证输入不合法！");
+        return;
+    }
     if(mobile == "" || mobile == undefined || mobile == null){
         alert("手机号码不能为空！");
         return;
