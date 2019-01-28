@@ -129,10 +129,7 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
             AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
             List<String> classList=new ArrayList<>();
             if ("teacher".equals(accountVo.getRegType())) {
-               List< ClassesVo> clist=this.classesDao.findMyClassesList(userProp.getUserId());
-               for(ClassesVo item:clist){
-                   classList.add(item.getId());
-               }
+                condition.setcTeacherId(userProp.getUserId());
             } else if ("student".equals(accountVo.getRegType())) {
                 classList.add(accountVo.getStudent().getClassId());
             } else {
@@ -140,7 +137,6 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
             }
             condition.setClassList(classList);
         }
-
         SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
         Configuration configuration = session.getConfiguration();
         configuration.setSafeResultHandlerEnabled(false);
