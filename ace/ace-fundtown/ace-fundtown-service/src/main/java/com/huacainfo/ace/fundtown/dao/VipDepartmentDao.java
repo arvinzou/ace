@@ -7,6 +7,7 @@ import com.huacainfo.ace.portal.model.Department;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface VipDepartmentDao {
 
@@ -33,6 +34,5 @@ public interface VipDepartmentDao {
 
     VipDepartmentVo findByMobile(String mobile);
 
-    List<VipDepartmentVo> findDepartment(@Param("condition") VipDepartmentQVo condition,
-                                         @Param("orderBy") String orderBy);
+    List<Map<String, String>> findByCondition(@Param("params") Map<String, Object> params);
 }

@@ -28,7 +28,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/vipDepartment")
@@ -256,17 +258,16 @@ public class VipDepartmentController extends BaseController {
         return vipDepartmentService.repealPublicity(deptId, getCurUserProp());
     }
 
-    @RequestMapping(value = "/findVipDepartment")
     @ResponseBody
-    public PageResult<VipDepartmentVo> findVipDepartment(VipDepartmentQVo condition, PageParamNoChangeSord page, String q) throws Exception {
-        condition.setSyid(getCurUserProp().getActiveSyId());
-        condition.setDepartmentName(CommonUtils.isBlank(q) ? condition.getDepartmentName() : q);
-        PageResult<VipDepartmentVo> rst =
-                vipDepartmentService.findDepartment(condition, page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
+    @RequestMapping(value = "/findByCondition")
+    public Map<String, Object> findByCondition(String q, String id) throws Exception {
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("q", id);
+        if (!CommonUtils.isBlank(q)) {
+            params.put("q", q);
         }
 
-        return rst;
+        return vipDepartmentService.findByCondition(params);
     }
 }

@@ -378,11 +378,14 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
     }
 
     @Override
-    public PageResult<VipDepartmentVo> findDepartment(VipDepartmentQVo condition,
-                                                      String orderBy) throws Exception {
-        PageResult<VipDepartmentVo> rst = new PageResult<>();
-        List<VipDepartmentVo> list = vipDepartmentDao.findDepartment(condition, orderBy);
-        rst.setRows(list);
+    public Map<String, Object> findByCondition(Map<String, Object> params) {
+        Map<String, Object> rst = new HashMap<>();
+        List<Map<String, String>> list = vipDepartmentDao.findByCondition(params);
+        rst.put("total", list.size());
+        rst.put("rows", list);
+
         return rst;
     }
+
+
 }
