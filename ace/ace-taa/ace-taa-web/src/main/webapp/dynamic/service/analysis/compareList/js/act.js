@@ -162,16 +162,16 @@ function initChart(p) {
     var markTitle = '数据1';
     switch (category) {
         case 'year':
-            markTitle = '年度查询';
+            markTitle = '年度';
             break;
         case 'month':
-            markTitle = '月份查询';
+            markTitle = '月';
             break;
         case 'season':
-            markTitle = '季度查询';
+            markTitle = '季度';
             break;
         default:
-            markTitle = '月份查询';
+            markTitle = '月';
             break;
     }
     chart_legend.data = [markTitle];

@@ -9,7 +9,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title>评测管理</title>
+    <title>测评管理</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
@@ -51,7 +51,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 名称</th>
+                    <th width="30%"> 名称</th>
                     <th width="10%"> 介绍</th>
                     <th width="10%"> 超时设定</th>
                     <th width="10%"> 创建日期</th>

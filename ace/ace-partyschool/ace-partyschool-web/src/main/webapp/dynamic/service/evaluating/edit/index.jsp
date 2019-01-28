@@ -38,7 +38,7 @@
 </body>
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
-        <h4>评测内容</h4>
+        <h4>测评内容</h4>
         <div class="form-group">
             <label class="col-md-2 control-label">
                 名称
@@ -72,13 +72,13 @@
                 <span class="help-block"></span>
             </div>
         </div>
-        <h4>评测选项内容</h4>
+        <h4>测评选项内容</h4>
         <div id="evaluatingRst">
             {@each data.evaluationIndexList as item, index}
             <%--<div class="form-group">--%>
                 <%--<input type="text" class="hide" name="evaluationIndex[\${index}].id" value="\${item.id}">--%>
                 <%--<label class="col-md-2 control-label">--%>
-                    <%--评测指标<span class="required" aria-required="true"> * </span>--%>
+                    <%--测评指标<span class="required" aria-required="true"> * </span>--%>
                 <%--</label>--%>
                 <%--<div class="col-md-10">--%>
                     <%--<input type="text" class="form-control" value="\${item.name}" name="evaluationIndex[\${index}].name"--%>
@@ -121,7 +121,7 @@
                         <input type="text" class="form-control" value="\${item.name}"
                                name="evaluationIndex[\${index}].name"
                                maxlength="6"
-                               placeholder="请输入评测指标（建议字数在6个字以内)">
+                               placeholder="请输入测评指标（建议字数在6个字以内)">
                         <span class="help-block"></span>
                     </div>
 

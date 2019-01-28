@@ -4,6 +4,8 @@ var account = null;
 var classesArr = [];
 var userInfo = {};
 var sex = null;
+var slen = 0;
+var student = null;
 $(function(){
 	var politicalArr = [{"id":"normal","value":"非党员"},{"id":"party","value":"党员"}];
     initClassList();
@@ -89,6 +91,10 @@ function regist(){
     }
     if(!isEmpty(pwd)){
         alert("设置密码不能为空！");
+        return;
+    }
+    if(pwd.length < 4){
+        alert("密码位数必须在4位以上！");
         return;
     }
     if(!isEmpty(singPwd)){
@@ -260,6 +266,8 @@ function searchByName(){
                 $("#nameModal").show();
                 $("body").addClass("modalhide");
                 renderPage('userInfo', result.data, 'user-tpl');
+                slen = result.data.length;
+                student = result.data;
             }else{
                 alert(result.info);
             }
@@ -290,9 +298,16 @@ function confirm(){
         alert("请确认选择报名信息，如有错误，可在注册进行编辑！");
         return;
     }
-    $("input[name='name']").val(userInfo.name);
-    $("input[name='workUnitName']").val(userInfo.workUnitName);
-    $("input[name='postName']").val(userInfo.postName);
+    if(slen == 1){
+        $("input[name='name']").val(student[0].name);
+        $("input[name='workUnitName']").val(student[0].workUnitName);
+        $("input[name='postName']").val(student[0].postName);
+    }else{
+        $("input[name='name']").val(userInfo.name);
+        $("input[name='workUnitName']").val(userInfo.workUnitName);
+        $("input[name='postName']").val(userInfo.postName);
+    }
+
     $("#nameModal").hide();
     $("body").removeClass("modalhide");
 }

@@ -18,18 +18,18 @@
 			</div>
 			<div class="login-form">
 				<div class="form-row">
-					<input class="login-input" name="username" type="number" placeholder="请输入手机号码"/>
+					<input class="login-input" name="username" type="number" placeholder="请输入手机号码" onfocus="hideFooter();" onblur="showFooter();"/>
 				</div>
 				<div class="form-row pwd">
-					<input  class="login-input" name="password" type="password" placeholder="请输入密码"/>
+					<input  class="login-input" name="password" type="password" placeholder="请输入密码" onfocus="hideFooter();" onblur="showFooter();"/>
 					<img src="img/fpwd.png" class="forget" onclick="resetPwd();">
 				</div>
 			</div>
-			<div class="login-btn">
-                <img src="img/login-active.png"  class="login-image"id="loginActive" onclick="login();"/>
-			</div>
+			<div class="login-btn loginActive" onclick="login();">登录</div>
 			<div class="regist-box"><a href="${pageContext.request.contextPath}/www/sign/index.jsp" class="regist">立即注册</a></div>
 		</div>
+
+		<div class="footer-box">
 		<form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post">
 			<div class="footer" onclick="wxLogin();">
 				<input type="hidden" value="WX_LOGIN"  name="action"/>
@@ -39,5 +39,6 @@
 				<p>微信登录</p>
 			</div>
 		</form>
+		</div>
 	</body>
 </html>

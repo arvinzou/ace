@@ -69,6 +69,43 @@
     border-radius: 10rpx;
     z-index: 500;
 }
+.form-content{
+    width: 90%;
+    height: auto;
+    background: #FFFFFF;
+    position: fixed;
+    top: 100rpx;
+    left: 5%;
+    border-radius: 10rpx;
+    z-index: 500;
+}
+.form-row{
+    width: 92%;
+    height: 100rpx;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+.form-row-left{
+    width: 25%;
+    height: 100rpx;
+    line-height: 100rpx;
+    color: #ABAEB9;
+    font-size: 34rpx;
+    float: left;
+}
+.form-row-right{
+    width: 75%;
+    height: 100rpx;
+    line-height: 100rpx;
+    color: #373F53;
+    font-size: 34rpx;
+    float: right;
+}
+.form-row::after{
+    content: '';
+    clear: both;
+    display: block;
+}
 .form::after{
     content: '';
     clear: both;
@@ -198,12 +235,21 @@
 .active-btn{
     background:rgba(67,80,252,1);
     box-shadow:0rpx 0rpx 10rpx 0rpx rgba(67, 252, 80, 0.35);
+    outline: none;
+    color: #FFFFFF;
 }
 .form-default{
     color: #ABAEB9;
     font-size: 32rpx;
 }
 .form-input{
+    width: 85%;
+    height: 110rpx;
+    line-height: 110rpx;
+    float: left;
+    text-align: right;
+}
+.datetime{
     width: 85%;
     height: 110rpx;
     line-height: 110rpx;
@@ -220,4 +266,79 @@
     width: 100%;
     height: auto;
     text-align: center;
+}
+.cartype{
+    width: 50%;
+    height: 60rpx;
+    line-height: 60rpx;
+    float: left;
+    font-size: 32rpx;
+    color: #373F53;
+}
+.carCheckBox{
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.carCheckBox::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.cjBtn{
+    width: 160rpx;
+    height: 160rpx;
+    line-height: 160rpx;
+    text-align: center;
+    border-radius: 80rpx;
+    font-size: 34rpx;
+    font-weight: bold;
+    z-index: 500;
+}
+.startBtn{
+    background:rgba(67,80,252,1);
+    box-shadow:0rpx 0rpx 18rpx 0rpx rgba(67,80,252,0.5);
+    color: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    left: 150rpx;
+}
+.breakBtn{
+    background:rgba(255,255,255,1);
+    box-shadow:0rpx 0rpx 18rpx 0rpx rgba(171,174,185,0.5);
+    color: #373F53;
+    position: fixed;
+    bottom: 0;
+    left: 150rpx;
+}
+.endBtn{
+    background:rgba(254,76,70,1);
+    box-shadow:0rpx 0rpx 18rpx 0rpx rgba(254,76,70,0.5);
+    color: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    right: 150rpx;
+}
+.br{
+    border-bottom: 1px solid #F0EFF6;
+}
+.dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    float: left;
+    margin-top: 45rpx;
+}
+.start{
+    background:rgba(28,187,127,1);
+}
+.end{
+    background:rgba(254,76,70,1);
+}
+.dot-text{
+    width: auto;
+    height: 100%;
+    float: left;
+    line-height: 100rpx;
+    padding-left: 30rpx;
 }

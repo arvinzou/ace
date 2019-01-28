@@ -84,7 +84,9 @@ function fileList(){
         type:"post",
         async:false,
         data:{
-            title: keyWord
+            title: keyWord,
+            start: 0,
+            limit: 999
         },
         success:function(result){
             if(result.status == 0) {
@@ -232,6 +234,8 @@ function addFiles(){
             if(result.status == 0) {
                 alert(result.info);
                 $("#uploadModal").hide();
+                $("#fileBox").html('<img src="img/icon_confirm_add.png" class="option-add" id="upload"/>');
+                fileUrl = null;
                 fileList();
             }else {
                 if(result.info){

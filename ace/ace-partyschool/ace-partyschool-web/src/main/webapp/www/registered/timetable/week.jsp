@@ -25,7 +25,7 @@
 
 		<script id="list-tpl" type="text/template">
 			{@each data as item, index}
-			{@if item.courseIndex == am}
+			{@if item.courseIndex == "am"}
 			<div class="course-box">
 				<div class="course">
 					<div class="course-left">

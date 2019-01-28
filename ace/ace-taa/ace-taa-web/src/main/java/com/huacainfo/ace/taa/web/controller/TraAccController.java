@@ -3,9 +3,11 @@ package com.huacainfo.ace.taa.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.*;
+import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.portal.vo.MongoFile;
@@ -286,7 +288,7 @@ public class TraAccController extends TaaBaseController {
 
     /**
      * @throws
-     * @Title:find!{bean.name}List
+     * @Title:find!{bean.name}ListBd
      * @Description: TODO(事故分页查询)
      * @param: @param condition
      * @param: @param page
@@ -297,15 +299,15 @@ public class TraAccController extends TaaBaseController {
      * @author: 陈晓克
      * @version: 2019-01-10
      */
-    @RequestMapping(value = "/getTraAccList")
+    @RequestMapping(value = "/getTraAccListBd")
     @ResponseBody
-    public JSONArray getTraAccList(TraAccQVo condition, PageParamNoChangeSord page) throws Exception {
+    public JSONArray getTraAccList(TraAccQVo condition) throws Exception {
         JSONArray rst = new JSONArray();
         JSONArray items = new JSONArray();
         if (CommonUtils.isBlank(condition.getAreaCode())) {
             condition.setAreaCode(this.getCurUserProp().getAreaCode());
         }
-        List<Map<String, Object>> list = this.traAccService.getTraAccList(condition);
+        List<Map<String, Object>> list = this.traAccService.getTraAccListBd(condition);
         for (Map<String, Object> o : list) {
             JSONObject e = new JSONObject();
             e.put("coord", new double[]{(Double) o.get("longitude"),(Double) o.get("latitude")});
@@ -314,6 +316,29 @@ public class TraAccController extends TaaBaseController {
         }
         rst.add(items);
         return rst;
+    }
+
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}ListBd
+     * @Description: TODO(事故分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult
+     * <TraAccVo>
+     * @author: 陈晓克
+     * @version: 2019-01-10
+     */
+    @RequestMapping(value = "/getTraAccListTx")
+    @ResponseBody
+    public List<Map<String, Object>> getTraAccListTx(TraAccQVo condition) throws Exception {
+        if (CommonUtils.isBlank(condition.getAreaCode())) {
+            condition.setAreaCode(this.getCurUserProp().getAreaCode());
+        }
+        return this.traAccService.getTraAccListTx(condition);
     }
 
 

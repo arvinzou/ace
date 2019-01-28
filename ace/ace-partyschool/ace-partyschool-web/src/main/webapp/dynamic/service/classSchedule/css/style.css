@@ -1,3 +1,8 @@
+input{
+    outline: none;
+    padding: 0 10px;
+}
+
 .fc-time-grid .fc-slats td {
      height:225px !important;
  }

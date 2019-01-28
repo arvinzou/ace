@@ -14,16 +14,20 @@ Page({
         fixedTop: 0,
         list: [
         
-        ]
+        ],
+        pageType: null
     },
-    onLoad: function () {
+    onLoad: function (options) {
         var that = this;
-        that.initRoadList();
+        that.setData({
+            pageType : options.type
+        })
+        that.initRoadList('');
     },
     
-    initRoadList: function(){
+    initRoadList: function(name){
         var that = this;
-        util.request(cfg.server + '/taa//www/road/roster', { },
+        util.request(cfg.server + '/taa/www/road/roster', { roadManName:name},
             function (res) {
                 if (res.status == 0) {
                     that.setData({
@@ -150,5 +154,30 @@ Page({
             toView: id
         });
 
+    },
+    selectRoadMan: function(e){
+        var that = this;
+        var roadManId = e.currentTarget.dataset.id;
+        var roadManName = e.currentTarget.dataset.name;
+        var skipType = that.data.pageType;
+        if (skipType == 'kb'){
+            //快报选择路长
+            app.globalData.roadManId = roadManId;
+            app.globalData.roadManName = roadManName;
+            wx.switchTab({
+                url: '../index/index',
+            });
+        }else if(skipType == 'xb'){
+            //续报选择路长
+            wx.navigateTo({
+                url: '../accidentDetail/index',
+            });
+        }
+    },
+    searchRoad: function(e){
+        var that = this;
+        var name = e.detail.value
+        that.initRoadList(name);
+        return;
     }
 })

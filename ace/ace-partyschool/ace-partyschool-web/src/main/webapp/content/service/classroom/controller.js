@@ -154,7 +154,7 @@ function initJuicerMethod() {
 }
 function parseStatus(val) {
     switch (val) {
-        case '0':
+        case '2':
             return "注销";
         case '1':
             return "正常";

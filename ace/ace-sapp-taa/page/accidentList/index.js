@@ -14,16 +14,16 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    that.initAccidentList();
+    that.initAccidentList('');
   },
   editAccident: function(){
       wx.navigateTo({
           url: '../accidentDetail/index',
       });
   },
-  initAccidentList: function(){
+  initAccidentList: function(name){
       var that = this;
-      util.request(cfg.server + '/taa/www/report/findTraAccList', {start: 0, limit: 999},
+      util.request(cfg.server + '/taa/www/report/findTraAccList', { start: 0, limit: 999, keyword:name},
           function (res) {
               if (res.status == 0) {
                  that.setData({
@@ -60,7 +60,7 @@ Page({
                       content: res.info,
                       success: function (res) { }
                   });
-                  that.initAccidentList();
+                  that.initAccidentList('');
               } else {
                   wx.showModal({
                       title: '提示',
@@ -71,6 +71,11 @@ Page({
 
           }
       );
+  },
+    searchRoad: function(e){
+      var that = this;
+      var name = e.detail.value;
+      that.initAccidentList(name);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

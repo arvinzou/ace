@@ -123,6 +123,24 @@
 
 	<script id="user-tpl" type="text/template">
 		{@each data as item, index}
+		{@if index == 0}
+		<div class="user-item user-active" onclick="select(this,'\${item.name}','\${item.workUnitName}','\${item.postName}');">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="25%">姓名：</td>
+					<td width="75%">\${item.name}</td>
+				</tr>
+				<tr>
+					<td width="25%">单位：</td>
+					<td width="75%">\${item.workUnitName}</td>
+				</tr>
+				<tr>
+					<td width="25%">职务：</td>
+					<td width="75%">\${item.postName}</td>
+				</tr>
+			</table>
+		</div>
+		{@else}
 		<div class="user-item user-unactive" onclick="select(this,'\${item.name}','\${item.workUnitName}','\${item.postName}');">
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
@@ -139,6 +157,7 @@
 				</tr>
 			</table>
 		</div>
+		{@/if}
 		{@/each}
 	</script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>

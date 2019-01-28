@@ -45,14 +45,14 @@ $(function () {
 
 
 function searchRoadName() {
-    params.roadName= $("input[name=roadName]").val();
+    params.keyword = $("input[name=keyword]").val();
     getData();
 }
 
 function setParams() {
     var that =$(this);
     params.category = that.data('id');
-    findTraAccList(params);
+    getData();
     that.siblings().removeClass('active_but');
     that.addClass('active_but');
 }
@@ -114,7 +114,14 @@ function initEvents() {
     });
     $('input[name=endDate]').focus(function() {
         $(this).blur(); //不可输入状态
-    })
+    });
+    $('#tt').combotree({
+        onSelect: function (node) {
+            getLatLongByAreaCode({
+                areaCode: node.id
+            });
+        }
+    });
 }
 
 
@@ -139,7 +146,7 @@ function initEchart() {
 
 
 function getData() {
-	var url=contextPath+'/traAcc/getTraAccList';
+	var url=contextPath+'/traAcc/getTraAccListBd';
 	// var url='hangzhou-tracks.json';
     $.getJSON(url, params,function (rst) {
         var points = [].concat.apply([], rst.map(function (track) {

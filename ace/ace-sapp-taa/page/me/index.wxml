@@ -20,7 +20,7 @@
                 <image src='../../image/icon_rediret.png' class='icon-redirect'></image>
             </view>
         </view>
-        <view class='menu-item'>
+        <view class='menu-item' bindtap='sectionList'>
             <view class='menu-left'>
                  <image src='../../image/icon-list.png' class='menu-icon'></image>
                  <text class='menu-title'>路段采集</text>

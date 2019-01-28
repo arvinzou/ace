@@ -19,10 +19,10 @@
 				<p>重置密码</p>
 			</div>
 			<div class="row">
-				<input class="nomal-input" name="mobile" type="text" placeholder="请输入手机号" />
+				<input class="nomal-input" name="mobile" type="number" placeholder="请输入手机号" />
 			</div>
 			<div class="row codebox">
-				<div class="input-text-box"><input name="code" class="input-text" type="text" placeholder="请输入验证码"/></div>
+				<div class="input-text-box"><input name="code" type="number" class="input-text" placeholder="请输入验证码"/></div>
 				<div class="code-text-box"><button id="getCode" class="code-button" onclick="getCode(this);">获取验证码</button></div>
 			</div>
 			<div class="row">

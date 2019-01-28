@@ -23,7 +23,15 @@ App({
     globalData: {
         hasLogin: false,
         socketConnectFail: false,
-        openid: null
+        openid: null,
+        sectionId: null,
+        sectionName: null,
+        tab: null,
+        startName: null,
+        endName: null,
+        cjSectionId: null,
+        roadManId: null,
+        roadManName : null
     },
     // lazy loading openid
     getUserOpenId: function (callback) {

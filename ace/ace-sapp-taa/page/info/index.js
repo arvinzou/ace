@@ -45,7 +45,31 @@ Page({
           }
       );
   },
+  /**
+   * 修改手机号码
+   */
+  formSubmit: function(e){
+      var that = this;
+      var mobile = e.detail.value.mobile;
+      if (mobile == "" || mobile == null || mobile == undefined){
+          wx.showModal({
+              title: '提示',
+              content: '手机号不能为空！',
+              success: function (res) { }
+          });
+      }
+      util.request(cfg.server + '/taa/www/register/updateMobile', { mobile: mobile},
+          function (res) {
+              wx.showModal({
+                  title: '提示',
+                  content: res.info,
+                  success: function (res) { }
+              });
 
+          }
+      );
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

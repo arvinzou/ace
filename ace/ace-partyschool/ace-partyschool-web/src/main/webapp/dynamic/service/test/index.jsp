@@ -33,8 +33,8 @@
 
                 <form onsubmit="return t_query()">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="getNotDoneTestList();">已评测</button>
-                        <button type="button" class="btn btn-default" onclick="getDoneTestList();">未评测</button>
+                        <button type="button" class="btn btn-default" onclick="getNotDoneTestList();">未评测</button>
+                        <button type="button" class="btn btn-default" onclick="getDoneTestList();">已评测</button>
                     </div>
                 </form>
             </div>

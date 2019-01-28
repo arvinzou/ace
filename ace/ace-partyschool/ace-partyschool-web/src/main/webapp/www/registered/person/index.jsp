@@ -34,12 +34,14 @@
 
 		<script id="course-tpl" type="text/template">
 			{@each data as item, index}
-			{@if item.courseIndex == am}
+			{@if item.courseIndex == "am"}
 			<div class="course morning">
 				<div class="course-left">上午</div>
 				<div class="course-right">
-					<span>\${item.course.name}</span>
-					<span>(主讲:\${item.teacher.name}）</span>
+                    <div class="inner-middle">
+					    <span>\${item.course.name}</span>
+					    <span>(主讲:\${item.teacher.name}）</span>
+                    </div>
 				</div>
 			</div>
 			{@else}
