@@ -84,7 +84,9 @@ function fileList(){
         type:"post",
         async:false,
         data:{
-            title: keyWord
+            title: keyWord,
+            start: 0,
+            limit: 999
         },
         success:function(result){
             if(result.status == 0) {

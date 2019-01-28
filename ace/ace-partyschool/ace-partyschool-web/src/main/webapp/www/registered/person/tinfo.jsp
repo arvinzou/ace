@@ -36,13 +36,13 @@
 		<div class="info">
 			<div class="ititle br">身份证号</div>
 			<div class="icontent br">
-				<input type="text" name="idCard"  value="\${data.teacher.idCard}"/>
+				<input type="text" name="idCard" maxlength="18"  value="\${data.teacher.idCard}"/>
 			</div>
 		</div>
 		<div class="info">
 			<div class="ititle br">手机号</div>
 			<div class="icontent br">
-				<input type="text" name="mobile"  value="\${data.teacher.mobile}"/>
+				<input type="text" name="mobile" maxlength="11"  value="\${data.teacher.mobile}"/>
 			</div>
 		</div>
 		<div class="info">

@@ -146,12 +146,30 @@ function selectSex(obj,value){
     sex = value;
 }
 
+function isCardNo(card)
+{
+// 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+    var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    if(reg.test(card) === false)
+    {
+        return false;
+    }
+}
+
 function editStudent(){
     var idCard = $("input[name='idCard']").val();
     var mobile = $("input[name='mobile']").val();
     var workUnitName = $("input[name='workUnitName']").val();
     var postName = $("input[name='postName']").val();
     var politicalName = userInfo.student.political;
+    if(!isCardNo(idCard)){
+        alert("身份证输入不合法！");
+        return;
+    }
+    if(mobile == "" || mobile == undefined || mobile == null){
+        alert("手机号码不能为空！");
+        return;
+    }
     $.ajax({
         url: contextPath+ "/www/sign/student/update",
         type:"post",
