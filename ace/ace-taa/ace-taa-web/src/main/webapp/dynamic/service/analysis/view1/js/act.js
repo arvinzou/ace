@@ -59,64 +59,64 @@ function findTraAccList() {
             if (rst) {
 
                 Concurrent.Thread.create(function(){
-                 //clearMarkers(markers);
-                  var marker;
-                     while (marker = markers.pop()) {
-                         marker.setMap(null);
-                     }
-                if (rst) {
-                    for (var i in rst) {
-                        var o = rst[i];
-                        var imgUrl;
-                        var font;
-                        if (o.deadthToll && o.injuries) {
-                            imgUrl = "img/icon01.png"
-                            font = "<font class='halfStyle' data-content='' style='font-weight: bold;color:#fff;font-size:10px'>" + o.deadthToll + "/" + o.injuries + "</font>"
-                        } else if (o.deadthToll && !o.injuries) {
-                            imgUrl = "img/icon1.png"
-                            font = "<font style='font-weight: bold;color:#fff;font-size:10px'>" + o.deadthToll + "</font>"
-                        } else if (!o.deadthToll && o.injuries) {
-                            imgUrl = "img/icon0.png"
-                            font = "<font style='font-weight: bold;color:#fff;font-size:10px'>" + o.injuries + "</font>"
-                        }
-                        var marker = new qq.maps.Marker({
-                            //设置Marker的位置坐标
-                            position: new qq.maps.LatLng(o.latitude, o.longitude),
-                            //设置Marker被添加到Map上时的动画效果为落下
-                            animation: qq.maps.MarkerAnimation.DOWN,
-                            //设置Marker被添加到Map上时的动画效果为反复弹跳
-                            //animation:qq.maps.MarkerAnimation.BOUNCE
-                            //设置Marker被添加到Map上时的动画效果为从天而降
-                            animation: qq.maps.MarkerAnimation.DROP,
-                            //设置Marker被添加到Map上时的动画效果为升起
-                            //animation:qq.maps.MarkerAnimation.UP
-                            //设置显示Marker的地图
-                            map: map,
-                            //设置Marker可拖动
-                            draggable: true,
-                            //Marker的覆盖内容
-                            decoration: new qq.maps.MarkerDecoration(font, new qq.maps.Point(0, -4)),
-                            // decoration: new qq.maps.MarkerDecoration('<span class="demoSpan1">1</span>'),
-                            //自定义Marker图标为大头针样式
-                            icon: new qq.maps.MarkerImage(imgUrl),
-                            //自定义Marker图标的阴影
-                            // shadow: new qq.maps.MarkerImage("https://open.map.qq.com/doc/img/nilb.png"),
-                            //设置Marker标题，鼠标划过Marker时显示
-                            title: o.roadManName,
-                            //设置Marker的可见性，为true时可见,false时不可见
-                            visible: true,
-                            o: o
-
-                        });
-                        qq.maps.event.addListener(marker, 'click', function (event) {
-                            console.log(event);
-                            initPreview(event.target.o.id);
-                        });
-                        markers.push(marker);
+                    //clearMarkers(markers);
+                    var marker;
+                    while (marker = markers.pop()) {
+                        marker.setMap(null);
                     }
-                }
-                //$("#modal-preview").modal("show");
-                 });
+                    if (rst) {
+                        for (var i in rst) {
+                            var o = rst[i];
+                            var imgUrl;
+                            var font;
+                            if (o.deadthToll && o.injuries) {
+                                imgUrl = "img/icon01.png"
+                                font = "<font class='halfStyle' data-content='' style='font-weight: bold;color:#fff;font-size:10px'>" + o.deadthToll + "/" + o.injuries + "</font>"
+                            } else if (o.deadthToll && !o.injuries) {
+                                imgUrl = "img/icon1.png"
+                                font = "<font style='font-weight: bold;color:#fff;font-size:10px'>" + o.deadthToll + "</font>"
+                            } else if (!o.deadthToll && o.injuries) {
+                                imgUrl = "img/icon0.png"
+                                font = "<font style='font-weight: bold;color:#fff;font-size:10px'>" + o.injuries + "</font>"
+                            }
+                            var marker = new qq.maps.Marker({
+                                //设置Marker的位置坐标
+                                position: new qq.maps.LatLng(o.latitude, o.longitude),
+                                //设置Marker被添加到Map上时的动画效果为落下
+                                animation: qq.maps.MarkerAnimation.DOWN,
+                                //设置Marker被添加到Map上时的动画效果为反复弹跳
+                                //animation:qq.maps.MarkerAnimation.BOUNCE
+                                //设置Marker被添加到Map上时的动画效果为从天而降
+                                animation: qq.maps.MarkerAnimation.DROP,
+                                //设置Marker被添加到Map上时的动画效果为升起
+                                //animation:qq.maps.MarkerAnimation.UP
+                                //设置显示Marker的地图
+                                map: map,
+                                //设置Marker可拖动
+                                draggable: true,
+                                //Marker的覆盖内容
+                                decoration: new qq.maps.MarkerDecoration(font, new qq.maps.Point(0, -4)),
+                                // decoration: new qq.maps.MarkerDecoration('<span class="demoSpan1">1</span>'),
+                                //自定义Marker图标为大头针样式
+                                icon: new qq.maps.MarkerImage(imgUrl),
+                                //自定义Marker图标的阴影
+                                // shadow: new qq.maps.MarkerImage("https://open.map.qq.com/doc/img/nilb.png"),
+                                //设置Marker标题，鼠标划过Marker时显示
+                                title: o.roadManName,
+                                //设置Marker的可见性，为true时可见,false时不可见
+                                visible: true,
+                                o: o
+
+                            });
+                            qq.maps.event.addListener(marker, 'click', function (event) {
+                                console.log(event);
+                                initPreview(event.target.o.id);
+                            });
+                            markers.push(marker);
+                        }
+                    }
+                    //$("#modal-preview").modal("show");
+                });
 
             } else {
                 alert(rst.errorMessage);
