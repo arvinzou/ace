@@ -1,6 +1,9 @@
 package com.huacainfo.ace.jxb.vo;
 
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.WithdrawRecord;
+
+import java.util.Map;
 
 
 public class WithdrawRecordVo extends WithdrawRecord {
@@ -12,7 +15,12 @@ public class WithdrawRecordVo extends WithdrawRecord {
     private String teacherName;
 
     /**
-     * 接口处理状态  SUCCESS:转账成功     FAILED:转账失败
+     * 微信接口提现日志
+     */
+    private String apiJson;
+
+    /**
+     * 接口处理状态  SUCCESS:转账成功     FAIL:转账失败
      */
     private String apiRst;
 
@@ -21,7 +29,24 @@ public class WithdrawRecordVo extends WithdrawRecord {
      */
     private String apiRemark;
 
+    private Map<String, Object> apiRstMap;
+
+    public String getApiJson() {
+        return apiJson;
+    }
+
+    public void setApiJson(String apiJson) {
+        this.apiJson = apiJson;
+    }
+
     public String getApiRemark() {
+        if (null == apiRstMap) {
+            apiRstMap = JsonUtil.toMap(getApiJson());
+        }
+        if (apiRstMap != null && null != apiRstMap.get("return_msg")) {
+            return String.valueOf(apiRstMap.get("return_msg"));
+        }
+
         return apiRemark;
     }
 
@@ -30,6 +55,12 @@ public class WithdrawRecordVo extends WithdrawRecord {
     }
 
     public String getApiRst() {
+        if (null == apiRstMap) {
+            apiRstMap = JsonUtil.toMap(getApiJson());
+        }
+        if (apiRstMap != null && null != apiRstMap.get("result_code")) {
+            return String.valueOf(apiRstMap.get("result_code"));
+        }
         return apiRst;
     }
 

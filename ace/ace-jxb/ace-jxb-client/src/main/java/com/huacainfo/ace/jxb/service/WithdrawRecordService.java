@@ -98,7 +98,7 @@ public interface WithdrawRecordService {
      * @author: Arvin
      * @version: 2018-11-14
      */
-    MessageResponse updateAudit(String id, String rst, String remark, UserProp userProp) throws Exception;
+    MessageResponse withdrawAudit(String id, String rst, String remark, UserProp userProp) throws Exception;
 
     /**
      * 余额提现申请

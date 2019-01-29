@@ -51,8 +51,8 @@ public class WithdrawRecordController extends JxbBaseController {
     public PageResult<WithdrawRecordVo> findWithdrawRecordList(WithdrawRecordQVo condition,
                                                                PageParamNoChangeSord page) throws Exception {
 
-        PageResult<WithdrawRecordVo> rst = this.withdrawRecordService
-                .findWithdrawRecordList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        PageResult<WithdrawRecordVo> rst =
+                withdrawRecordService.findWithdrawRecordList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -133,11 +133,11 @@ public class WithdrawRecordController extends JxbBaseController {
     @RequestMapping(value = "/audit")
     @ResponseBody
     public MessageResponse audit(String id, String rst, String message) throws Exception {
-        if (StringUtil.areNotEmpty(id, rst)) {
-
+        if (!StringUtil.areNotEmpty(id, rst)) {
+            return new MessageResponse(ResultCode.FAIL, "请选择审核结果");
         }
         try {
-            return withdrawRecordService.updateAudit(id, rst, message, this.getCurUserProp());
+            return withdrawRecordService.withdrawAudit(id, rst, message, this.getCurUserProp());
         } catch (CustomException e) {
             return new MessageResponse(ResultCode.FAIL, e.getMsg());
         }
