@@ -61,8 +61,9 @@ var _colModel = function() {
 			editable: true,
 			width: 100,
 			editoptions: {
-				size: "20",
-				maxlength: "50"
+                size: "20",
+                maxlength: "11",
+                oninput: "onlyInputInt(this);"
 			},
 			formoptions: {
 				elmprefix: "",
@@ -120,7 +121,7 @@ var _colModel = function() {
 			},
 		}, {
 			name: 'status',
-			editable: true,
+        editable: false,
 			width: 100,
 			edittype: "checkbox",
 			editoptions: {
@@ -244,4 +245,8 @@ function renderBtn(cur) {
 		'data-target="#modal-preview">查看</a>');
 
 	return opt.join(' ');
+}
+
+function onlyInputInt(obj) {
+    obj.value = obj.value.replace(/[^0-9-]+/, '');
 }

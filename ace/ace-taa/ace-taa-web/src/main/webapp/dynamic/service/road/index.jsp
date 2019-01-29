@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+         pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
@@ -12,16 +12,31 @@ pageEncoding="utf-8"%>
 <jsp:include page="/dynamic/common/header.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
 
-<link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen"/>
 
-<link href="${portalPath}/content/common/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-<link href="${portalPath}/content/common/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-<link href="${portalPath}/content/common/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+<link href="${portalPath}/content/common/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet"
+      type="text/css"/>
+<link href="${portalPath}/content/common/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css"
+      rel="stylesheet" type="text/css"/>
+<link href="${portalPath}/content/common/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css"/>
 
 <style type="text/css">
-		.excel{ background-color:#999; font-size:13px;}
-		.excel td{ background-color:#fff; white-space:nowrap;}
-		.excel th{ background-color:#E7E7E7; font-weight:normal;}
+    .excel {
+        background-color: #999;
+        font-size: 13px;
+    }
+
+    .excel td {
+        background-color: #fff;
+        white-space: nowrap;
+    }
+
+    .excel th {
+        background-color: #E7E7E7;
+        font-weight: normal;
+    }
 </style>
 
 <body>
@@ -40,7 +55,7 @@ pageEncoding="utf-8"%>
                 </div>
                 <div class="col-md-6">
 
-                    <div class="btn-group"   id="check-group-category" role="group"  style="float:left;padding-right:5px">
+                    <div class="btn-group" id="check-group-category" role="group" style="float:left;padding-right:5px">
 
                     </div>
 
@@ -117,7 +132,6 @@ pageEncoding="utf-8"%>
 <script id="tpl-preview" type="text/template">
 
 
-
     <div class="portlet light ">
         <div class="portlet-body">
             <div class="table-toolbar">
@@ -149,7 +163,7 @@ pageEncoding="utf-8"%>
                 <tr>
                     <th width="5%">
                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                            <input type="checkbox" class="group-checkable" data-set="#list1 .checkboxes" />
+                            <input type="checkbox" class="group-checkable" data-set="#list1 .checkboxes"/>
                             <span></span>
                         </label>
                     </th>
@@ -169,7 +183,7 @@ pageEncoding="utf-8"%>
                 <tr>
                     <td>
                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                            <input type="checkbox" class="checkboxes" value="\${item.id}" />
+                            <input type="checkbox" class="checkboxes" value="\${item.id}"/>
                             <span></span>
                         </label>
                     </td>
@@ -181,8 +195,8 @@ pageEncoding="utf-8"%>
                     <td>\${item.endNo}</td>
                     <td>\${item.roadManName}</td>
                     <td>
-                        <a href="javascript:previewGPS('\${item.id}')">GPS数据</a>  <a href="javascript:previewMap('\${item.id}')">地图</a>
-
+                        <a href="javascript:previewGPS('\${item.id}')">GPS数据</a>
+                        <a href="javascript:previewMap('\${item.id}')">地图</a>
                     </td>
                 </tr>
                 {@/each}
@@ -196,7 +210,6 @@ pageEncoding="utf-8"%>
 </script>
 
 <script id="tpl-preview-gps" type="text/template">
-
 
 
     <div class="portlet light ">
@@ -228,7 +241,7 @@ pageEncoding="utf-8"%>
                 <tr>
                     <th width="5%">
                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                            <input type="checkbox" class="group-checkable" data-set="#list2 .checkboxes" />
+                            <input type="checkbox" class="group-checkable" data-set="#list2 .checkboxes"/>
                             <span></span>
                         </label>
                     </th>
@@ -245,7 +258,7 @@ pageEncoding="utf-8"%>
                 <tr>
                     <td>
                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                            <input type="checkbox" class="checkboxes" value="\${item.id}" />
+                            <input type="checkbox" class="checkboxes" value="\${item.id}"/>
                             <span></span>
                         </label>
                     </td>
@@ -269,21 +282,24 @@ pageEncoding="utf-8"%>
 <script id="tpl-check-group" type="text/template">
 
     {@each data.list as item, index}
-        {@if item.CODE}
-            <button type="button" authority="false" class="btn btn-default"  onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}</button>
-        {@else}
-            <button type="button" authority="false" class="btn btn-default"  onclick="setParams('\${data.key}','');">全部</button>
-        {@/if}
+    {@if item.CODE}
+    <button type="button" authority="false" class="btn btn-default"
+            onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}
+    </button>
+    {@else}
+    <button type="button" authority="false" class="btn btn-default" onclick="setParams('\${data.key}','');">全部</button>
+    {@/if}
 
     {@/each}
 
 </script>
 
-<div class="modal fade"  role="dialog" id="modal-upload">
+<div class="modal fade" role="dialog" id="modal-upload">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close"  authority="false" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" class="close" authority="false" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">Excel导入</h4>
             </div>
@@ -301,8 +317,10 @@ pageEncoding="utf-8"%>
     </div>
 </div>
 <script src="${portalPath}/content/common/assets/global/scripts/datatable.js" type="text/javascript"></script>
-<script src="${portalPath}/content/common/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-<script src="${portalPath}/content/common/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/datatables/datatables.min.js"
+        type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"
+        type="text/javascript"></script>
 <%--easyui--%>
 <link rel="stylesheet" type="text/css"
       href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
@@ -320,9 +338,12 @@ pageEncoding="utf-8"%>
 <script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
 
 <script src="${pageContext.request.contextPath}/content/service/road/config.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/road/model.js?version=${cfg.version}"></script>

@@ -97,6 +97,9 @@
         inner join road_man a on t.roadMan=a.id
         left join portal.province b on t.areaCode=b.code
         where 0=0
+        <if test='condition.roadMan!=null and condition.roadMan!=""'>
+            and t.roadMan =#{condition.roadMan,jdbcType=VARCHAR}
+        </if>
         <if test='condition.name!=null and condition.name!=""'>
             and a.name like
             concat(#{condition.name,jdbcType=VARCHAR},'%')
