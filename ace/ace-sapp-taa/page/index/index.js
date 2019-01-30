@@ -32,16 +32,12 @@ Page({
       sectionName: null,
       sectionId: null,
       areaCode: null,
-
       weather: [],
-      weatherArray: [
-         
+      weatherArray: [ 
       ],
       carTypes:[],
       cjSectionId: null,
-      startFlag: false,
-      breakFlag: false,
-      endFlag: false,
+      isCollection:false,
       polyline: [{
           points: [],
           color: '#4350FC',
@@ -59,7 +55,7 @@ Page({
       app.globalData.sectionId = null;
       app.globalData.sectionName = '';
       app.globalData.tab = null;
-      app.globalData.startName =  null;
+      app.globalData.startName = '';
       app.globalData.endName = null;
       app.globalData.cjSectionId = null;
       app.globalData.roadManId = null;
@@ -167,14 +163,12 @@ Page({
       if (that.data.isEdit == false){
           //展开表单
           that.setData({
-              isEdit : true,
-              mapHeight : "0vh"
+              isEdit : true
           });
          
       }else{
           that.setData({
-              isEdit: false,
-              mapHeight: "100vh"
+              isEdit: false
           });
       }
   },
@@ -363,7 +357,10 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    var that=this;
+      that.animation1=wx.createAnimation();
+      that.animation2 = wx.createAnimation();
+      that.animation3 = wx.createAnimation();
   },
  
  /**
@@ -403,11 +400,6 @@ Page({
    */
   onShow: function () {
       var that = this;
-      that.setData({
-          startFlag: false,
-          breakFlag: false,
-          endFlag: false,
-      });
       if (!util.is_login()) {
           wx.navigateTo({
               url: "../userinfo/index?url=../index/index&type=switchTab"
@@ -431,7 +423,7 @@ Page({
           var cjSectionId = app.globalData.cjSectionId;
           if (cjSectionId){
               that.setData({
-                  startFlag: true,
+                  isCollection: false,
                   startName: app.globalData.startName,
                   endName: app.globalData.endName,
                   cjSectionId: app.globalData.cjSectionId
@@ -455,9 +447,8 @@ Page({
      var locateList = [];
      var that = this;
      that.setData({
-         startFlag: false,
-         breakFlag: true,
-         endFlag: true,
+         breakBtn: 'breakBtn',
+         activeBreak:'activeBreak',
      })
      interval = setInterval(() => {
          locateList.push(that.getLocate());
@@ -468,9 +459,7 @@ break: function(e){
     var that = this;
     clearInterval(interval);
     that.setData({
-        startFlag: true,
-        breakFlag: false,
-        endFlag: true,
+        activeBreak: '',
     })
 },
 end: function(e){
@@ -485,6 +474,9 @@ end: function(e){
         roadGps.longitude = pointList[i].longitude;
         list.push(roadGps);
     }
+    that.setData({
+        breakBtn: '',
+    })
     util.request(cfg.server + '/taa/www/road/gather', { jsonData: JSON.stringify({list}) },
         function (res) {
             if (res.status == 0) {
@@ -554,9 +546,6 @@ end: function(e){
   onPullDownRefresh: function () {
     var that = this;
     that.setData({
-        startFlag: false,
-        breakFlag: false,
-        endFlag: false,
         sectionFlag: false,
         sectionName: null,
         sectionId: null,
@@ -578,5 +567,16 @@ end: function(e){
    */
   onShareAppMessage: function () {
     
-  }
+  },
+    userInfo:function(){
+        wx.navigateTo({
+            url: '../me/index',
+        })
+    },
+
+    dataInfo: function () {
+        wx.navigateTo({
+            url: '../datas/index',
+        })
+    }
 })

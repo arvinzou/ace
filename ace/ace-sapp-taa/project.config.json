@@ -8,7 +8,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.7.0",
+	"libVersion": "2.5.1",
 	"appid": "wx70ba7c5dca85e4da",
 	"projectname": "%E5%B8%B8%E5%BE%B7%E5%B8%82%E8%B7%AF%E9%95%BF%E5%88%B6%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0",
 	"condition": {
@@ -20,9 +20,34 @@
 			"current": -1,
 			"list": []
 		},
-		"miniprogram": {
+		"plugin": {
 			"current": -1,
 			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 2,
+			"list": [
+				{
+					"id": -1,
+					"name": "page/collection/index",
+					"pathName": "page/collection/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "page/roadlist/index",
+					"pathName": "page/roadlist/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "page/accidentList/index",
+					"pathName": "page/accidentList/index"
+				}
+			]
 		}
 	}
 }

@@ -23,26 +23,7 @@
         "backgroundColor": "#fff",
         "enablePullDownRefresh": true
     },
-    "tabBar": {
-        "color": "#000000",
-        "selectedColor": "#FFAB32",
-        "borderStyle": "black",
-        "backgroundColor": "#fff",
-        "list": [
-            {
-                "pagePath": "page/index/index",
-                "text": "首页"
-            },
-            {
-                "pagePath": "page/datas/index",
-                "text": "掌上驾驶舱"
-            },
-            {
-                "pagePath": "page/me/index",
-                "text": "个人中心"
-            }
-        ]
-    },
+
     "networkTimeout": {
         "request": 10000,
         "connectSocket": 10000,
