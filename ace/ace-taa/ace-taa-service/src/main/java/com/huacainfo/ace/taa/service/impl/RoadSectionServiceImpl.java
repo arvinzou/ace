@@ -1,32 +1,31 @@
 package com.huacainfo.ace.taa.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.taa.dao.RoadManDao;
+import com.huacainfo.ace.taa.dao.RoadSectionDao;
 import com.huacainfo.ace.taa.model.RoadMan;
+import com.huacainfo.ace.taa.model.RoadSection;
+import com.huacainfo.ace.taa.service.RoadSectionService;
+import com.huacainfo.ace.taa.vo.RoadSectionQVo;
+import com.huacainfo.ace.taa.vo.RoadSectionVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.taa.dao.RoadSectionDao;
-import com.huacainfo.ace.taa.model.RoadSection;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.taa.service.RoadSectionService;
-import com.huacainfo.ace.taa.vo.RoadSectionVo;
-import com.huacainfo.ace.taa.vo.RoadSectionQVo;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("roadSectionService")
 /**
@@ -118,6 +117,10 @@ public class RoadSectionServiceImpl implements RoadSectionService {
         this.roadSectionDao.insert(o);
         this.dataBaseLogService.log("添加路段", "路段", "",
                 o.getId(), o.getId(), userProp);
+
+        //增加路段数量
+        int num = this.roadSectionDao.selectSectionCount(o.getRoadId());
+        roadSectionDao.updateSectionCount(o.getRoadId(), num);
 
         return new MessageResponse(0, "保存成功！");
     }
@@ -266,8 +269,8 @@ public class RoadSectionServiceImpl implements RoadSectionService {
             }
             i++;
         }
-        int num=this.roadSectionDao.selectSectionCount(roadId);
-        this.roadSectionDao.updateSectionCount(roadId,num);
+        int num = this.roadSectionDao.selectSectionCount(roadId);
+        this.roadSectionDao.updateSectionCount(roadId, num);
         this.dataBaseLogService.log("路段导入", "路段", "", "rs.xls", "rs.xls", userProp);
         return new MessageResponse(0, "导入成功！");
     }
@@ -323,7 +326,7 @@ public class RoadSectionServiceImpl implements RoadSectionService {
      * @version: 2019年1月04日 下午1:24:14
      */
     @Override
-    public Map<String, Object> getListByCondition(Map<String, Object> params){
+    public Map<String, Object> getListByCondition(Map<String, Object> params) {
         Map<String, Object> rst = new HashMap<String, Object>();
         List<Map<String, Object>> list = this.roadSectionDao.getListByCondition(params);
         rst.put("total", list.size());

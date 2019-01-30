@@ -120,16 +120,6 @@
         inner join road_section b on t.roadSectionId=b.id
         inner join portal.province c on t.areaCode=c.code
         inner join road d on b.roadId=d.id
-        LEFT JOIN (
-        select c.id, c.accId, c.cause,d.`name` as causeName
-        from tra_acc_cause c ,portal.dict d
-        where d.category_id='173' and c.cause = d.`code`
-        )tc on t.id = tc.accId
-        LEFT JOIN (
-        select m.id, m.accId, m.vehicleType,d.`name` as mtypeName
-        from tra_acc_mtype m ,portal.dict d
-        where d.category_id='172' and m.vehicleType = d.`code`
-        )tm on t.id = tm.accId
         where t.status='1'
         <if test='condition.roadManName!=null and condition.roadManName!=""'>
             and a.name like
@@ -148,12 +138,12 @@
         <if test='condition.startDate!=null and condition.startDate!=""'>
             <![CDATA[
 			and t.accidentTime>=str_to_date(#{condition.startDate},'%Y-%m-%d')
-	  ]]>
+        ]]>
         </if>
         <if test='condition.endDate!=null and condition.endDate!=""'>
             <![CDATA[
 			and t.accidentTime<=str_to_date(#{condition.endDate},'%Y-%m-%d')
-	]]>
+	    ]]>
         </if>
         <if test='condition.areaCode!=null and condition.areaCode!=""'>
             and t.areaCode like
@@ -163,7 +153,7 @@
         <if test='condition.upDeathNum!=null and condition.upDeathNum!=""'>
             <![CDATA[
           and IFNULL(t.deadthToll,0) <= #{condition.upDeathNum,jdbcType=INTEGER}
-          ]]>
+         ]]>
         </if>
         <if test='condition.downDeathNum!=null and condition.downDeathNum!=""'>
             and IFNULL(t.deadthToll,0) >= #{condition.downDeathNum,jdbcType=INTEGER}
@@ -171,7 +161,7 @@
         <if test='condition.upInjuriesNum!=null and condition.upInjuriesNum!=""'>
             <![CDATA[
           and IFNULL(t.injuries,0) <= #{condition.upInjuriesNum,jdbcType=INTEGER}
-          ]]>
+        ]]>
         </if>
         <if test='condition.downInjuriesNum!=null and condition.downInjuriesNum!=""'>
             and IFNULL(t.injuries,0) >= #{condition.downInjuriesNum,jdbcType=INTEGER}
@@ -195,28 +185,37 @@
         <include refid="whereCondition"/>
     </select>
     <select id="findList" resultMap="BaseResultMapVo">
-        select * from (
         select
         tc.id as causeId, tc.cause as itemCause, tc.causeName,
         tm.id as mtypeId, tm.vehicleType as itemMtype, tm.mtypeName,
-
+        m.*
+        from (
+        select
         d.name as roadName, d.category,
         t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
         t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
         t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
         <include refid="whereCondition"/>
-        )m
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
-                ORDER BY m.${orderBy}
+                ORDER BY t.${orderBy}
             </when>
             <otherwise>
-                ORDER BY m.createDate desc
+                ORDER BY t.createDate desc
             </otherwise>
         </choose>
-
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-
+        )m
+        LEFT JOIN (
+        select c.id, c.accId, c.cause,d.`name` as causeName
+        from tra_acc_cause c ,portal.dict d
+        where d.category_id='173' and c.cause = d.`code`
+        )tc on m.id = tc.accId
+        LEFT JOIN (
+        select m.id, m.accId, m.vehicleType,d.`name` as mtypeName
+        from tra_acc_mtype m ,portal.dict d
+        where d.category_id='172' and m.vehicleType = d.`code`
+        )tm on m.id = tm.accId
     </select>
 
     <select id="isExit" resultType="int">

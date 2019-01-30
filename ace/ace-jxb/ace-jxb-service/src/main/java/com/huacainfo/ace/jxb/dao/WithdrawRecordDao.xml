@@ -73,12 +73,15 @@
     <!--vo结果集-->
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.WithdrawRecordVo">
         <result column="teacherName" jdbcType="VARCHAR" property="teacherName"/>
+        <result column="apiJson" jdbcType="VARCHAR" property="apiJson"/>
         <result column="apiRst" jdbcType="VARCHAR" property="apiRst"/>
         <result column="apiRemark" jdbcType="VARCHAR" property="apiRemark"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
-        c.`name` as teacherName, 'FAILED' as apiRst, '接口权限尚未开通' as apiRemark,
+        c.`name` as teacherName,
+        (SELECT l.logTxt FROM withdraw_wx_log l where l.recordId=t.id ORDER BY l.createDate DESC limit 1) AS apiJson,
+        'FAILED' as apiRst, '获取接口日志失败' as apiRemark,
 
         t.id, t.counselorId, t.openId, t.realName, t.withdrawType, t.applyAmount,
         IFNULL(t.taxAmount,0) as taxAmount, IFNULL(t.actAmount, t.applyAmount) as actAmount,

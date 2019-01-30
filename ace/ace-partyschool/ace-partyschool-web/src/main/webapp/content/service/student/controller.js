@@ -75,15 +75,15 @@ function initEvents() {
     });
     //查询筛选列表
     $('#cls-condition').combogrid({
-        panelWidth: 300,
+        panelWidth: 450,
         idField: 'id',
         textField: 'name',
         url: contextPath + '/classes/findByQ',
         mode: 'remote',
         fitColumns: false,
         method: 'get', columns: [[
-            {field: 'name', title: '班级名称', width: 100, align: 'right'},
-            {field: 'headmasterName', title: '班主任', width: 100, align: 'right'}
+            {field: 'name', title: '班级名称', width: 230, align: 'right'},
+            {field: 'headmasterName', title: '班主任', width: 200, align: 'right'}
         ]],
         keyHandler: {
             up: function () {
@@ -105,15 +105,15 @@ function initEvents() {
 
     //班级数筛选列表
     $('#combogrid-cls-list').combogrid({
-        panelWidth: 460,
+        panelWidth: 450,
         idField: 'id',
         textField: 'name',
         url: contextPath + '/classes/findByQ',
         mode: 'remote',
         fitColumns: false,
         method: 'get', columns: [[
-            {field: 'name', title: '班级名称', width: 150, align: 'right'},
-            {field: 'headmasterName', title: '班主任', width: 150, align: 'right'}
+            {field: 'name', title: '班级名称', width: 230, align: 'right'},
+            {field: 'headmasterName', title: '班主任', width: 200, align: 'right'}
         ]],
         keyHandler: {
             up: function () {

@@ -13,7 +13,6 @@ import com.huacainfo.ace.jxb.service.AccountFlowRecordService;
 import com.huacainfo.ace.jxb.service.OrderCalculationService;
 import com.huacainfo.ace.jxb.vo.CounselorPostLevelVo;
 import com.huacainfo.ace.jxb.vo.OrderCalculationQVo;
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,7 +126,7 @@ public class OrderCalculationServiceImpl implements OrderCalculationService {
                 BigDecimal studioRatio = BigDecimal.ZERO;
                 //工作室获得金额
                 BigDecimal studioAmount = BigDecimal.ZERO;
-                if (StringUtil.isNotEmpty(counselor.getStudioId())) {
+                if (StringUtil.isNotEmpty(counselor.getStudioId()) && !"0".equals(counselor.getStudioId())) {
                     studioRatio = new BigDecimal(0.1);
                     studioAmount = payMoney.multiply(studioRatio);
                 }
@@ -218,7 +217,7 @@ public class OrderCalculationServiceImpl implements OrderCalculationService {
             counselor.setIncome(income.add(amount));
             counselor.setAccount(account.add(amount));
             //2、发放工作室负责人所获收益
-            if (StringUtil.isNotEmpty(counselor.getStudioId())
+            if (StringUtil.isNotEmpty(counselor.getStudioId()) && !"0".equals(counselor.getStudioId())
                     && record.getStudioAmount().compareTo(BigDecimal.ZERO) > 0) {
                 //工作室信息
                 Studio studio = studioDao.selectByPrimaryKey(counselor.getStudioId());

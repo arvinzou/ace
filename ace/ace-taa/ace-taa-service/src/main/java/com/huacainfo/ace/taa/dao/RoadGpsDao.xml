@@ -40,13 +40,14 @@
 
     <select id="getAroundList" resultMap="VoResultMap">
         SELECT
+        DISTINCT
         rm.`name` AS manName,
         r.`name` AS roadName,
         rs.`name` AS sectionName,
+        t.roadSectionId,
         t.latitude,
         t.longitude
-        FROM
-        `road_gps` t
+        FROM `road_gps` t
         LEFT JOIN road_section rs ON t.roadSectionId = rs.id
         LEFT JOIN road_man rm ON rs.roadMan = rm.id
         LEFT JOIN road r ON rs.roadId = r.id

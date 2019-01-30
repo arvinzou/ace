@@ -432,7 +432,7 @@
           t.contact_mobile = #{mobile,jdbcType=VARCHAR}
     </select>
 
-    <select id="findDepartment" resultMap="BaseResultMapVo">
+    <select id="findByCondition" resultMap="BaseResultMapVo">
         select
         IFNULL((select 1 from fundtown.vip_publicity vp where vp.deptId=t.department_id),'0') as publicStatus,
         d.department_name as parent_department_name,
@@ -450,14 +450,17 @@
         t.last_modify_time, t.last_modify_user_id, t.last_modify_user_name,
         t.latitude, t.longitude, t.serviceTimeStart, t.serviceTimeEnd, t.qrcode,
         t.serviceWay
-        <include refid="departmentPagingWhereCondition"/>
-        <choose>
-            <when test='orderBy!=null and orderBy!=""'>
-                ORDER BY ${orderBy}
-            </when>
-            <otherwise>
-                ORDER BY t.create_time desc
-            </otherwise>
-        </choose>
+        from portal.department t
+        left join portal.province on t.area_code =province.code
+        LEFT JOIN portal.department d on t.parent_department_id = t.department_id
+        where t.syid = 'fundtown'
+        and t.type = '0'
+        and t.status = '2'
+        <if test="params.q !=null and params.q !=&quot;&quot;">
+            AND ( t.department_id = #{params.q,jdbcType=VARCHAR}
+            or t.department_name LIKE concat('%',#{params.q,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        ORDER BY t.create_time desc
     </select>
 </mapper>

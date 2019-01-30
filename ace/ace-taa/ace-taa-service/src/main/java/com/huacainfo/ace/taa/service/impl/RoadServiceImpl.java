@@ -1,7 +1,6 @@
 package com.huacainfo.ace.taa.service.impl;
 
-import java.util.*;
-
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -14,13 +13,17 @@ import com.huacainfo.ace.taa.dao.RoadSectionDao;
 import com.huacainfo.ace.taa.model.Road;
 import com.huacainfo.ace.taa.service.RoadService;
 import com.huacainfo.ace.taa.vo.RoadQVo;
+import com.huacainfo.ace.taa.vo.RoadSectionQVo;
 import com.huacainfo.ace.taa.vo.RoadVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("roadService")
 /**
@@ -153,13 +156,12 @@ public class RoadServiceImpl implements RoadService {
      * @version: 2019-01-03
      */
     @Override
-    public SingleResult
-            <RoadVo> selectRoadByPrimaryKey(String id) throws Exception {
+    public SingleResult<RoadVo> selectRoadByPrimaryKey(String id) throws Exception {
         SingleResult<RoadVo> rst = new SingleResult<>();
-        Map<String,Object> p=new HashMap<>();
-        p.put("id",id);
-        List<Map<String,Object>> list=this.roadSectionDao.getList(p);
-        RoadVo o=this.roadDao.selectVoByPrimaryKey(id);
+        Map<String, Object> p = new HashMap<>();
+        p.put("id", id);
+        List<Map<String, Object>> list = this.roadSectionDao.getList(p);
+        RoadVo o = this.roadDao.selectVoByPrimaryKey(id);
         o.setList(list);
         rst.setValue(o);
         return rst;
@@ -177,13 +179,20 @@ public class RoadServiceImpl implements RoadService {
      * @version: 2019-01-03
      */
     @Override
-    public MessageResponse deleteRoadByRoadId(String id, UserProp userProp) throws
-            Exception {
+    public MessageResponse deleteRoadByRoadId(String id, UserProp userProp) throws Exception {
+        RoadSectionQVo condition = new RoadSectionQVo();
+        condition.setRoadId(id);
+        int iSection = roadSectionDao.findCount(condition);
+        if (iSection > 0) {
+            return new MessageResponse(ResultCode.FAIL, "存在路段信息，道路删除失败！");
+        }
+
         this.roadDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除道路", "道路", id, id,
                 "道路", userProp);
         return new MessageResponse(0, "道路删除完成！");
     }
+
     /**
      * @throws
      * @Title:getListByCondition
@@ -195,7 +204,7 @@ public class RoadServiceImpl implements RoadService {
      * @version: 2019年1月04日 下午1:24:14
      */
     @Override
-    public Map<String, Object> getListByCondition(Map<String, Object> params){
+    public Map<String, Object> getListByCondition(Map<String, Object> params) {
         Map<String, Object> rst = new HashMap<String, Object>();
         List<Map<String, Object>> list = this.roadDao.getListByCondition(params);
         rst.put("total", list.size());

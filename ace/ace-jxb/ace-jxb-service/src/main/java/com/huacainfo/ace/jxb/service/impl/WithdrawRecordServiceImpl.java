@@ -2,7 +2,6 @@ package com.huacainfo.ace.jxb.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
-import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.api.WeChatPayApi;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
@@ -211,8 +210,7 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
      * @version: 2018-11-14
      */
     @Override
-    public MessageResponse updateAudit(String id, String rst, String remark,
-                                       UserProp userProp) throws Exception {
+    public MessageResponse withdrawAudit(String id, String rst, String remark, UserProp userProp) throws Exception {
         WithdrawRecord record = withdrawRecordDao.selectByPrimaryKey(id);
         if (record == null) {
             return new MessageResponse(ResultCode.FAIL, "记录丢失");
@@ -225,27 +223,32 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
         }
         record.setActAmount(actAmount);
         record.setAuditRst(rst);
-        record.setAuditRemark(remark);
+        record.setAuditRemark(StringUtil.isEmpty(remark) ? "会员提现支取" : remark);
         record.setUpdateDate(DateUtil.getNowDate());
-        withdrawRecordDao.updateByPrimaryKey(record);
-        dataBaseLogService.log("审核提现申请记录", "提现申请记录", id, id, "提现申请记录", userProp);
-
+        //
+        MessageResponse rstMsg;
         //审核通过
         if (rst.equals(AuditConstant.PASS) && "1".equals(record.getWithdrawType())) {
             //调用微信企业支付接口
-            MessageResponse ms = saveWithdrawApiAction(record);
-            if (ms.getStatus() == ResultCode.FAIL) {
-                throw new CustomException(ms.getErrorMessage());
+            Map<String, String> respBody = saveWithdrawApiAction(record);
+            if (CommonUtils.isBlank(respBody.get("result_code"))
+                    || !"SUCCESS".equals(String.valueOf(respBody.get("result_code")))) {
+                rstMsg = new MessageResponse(ResultCode.FAIL, String.valueOf(respBody.get("err_code_des")));
+            } else {
+                rstMsg = new MessageResponse(ResultCode.SUCCESS, "提现成功");
             }
-            return ms;
-        }
-        //审核驳回
-        else if (rst.equals(AuditConstant.REJECT)) {
+        } else if (rst.equals(AuditConstant.REJECT)) {//审核驳回
             //退回已扣除申请金额
-            return withdrawRejectAction(record);
+            rstMsg = withdrawRejectAction(record);
         } else {
-            return new MessageResponse(ResultCode.SUCCESS, "未知审核类型");
+            rstMsg = new MessageResponse(ResultCode.FAIL, "未知审核类型");
         }
+        //反馈信息处理
+        if (rstMsg.getStatus() == ResultCode.SUCCESS) {
+            withdrawRecordDao.updateByPrimaryKey(record);
+        }
+        dataBaseLogService.log("审核提现申请记录", "提现申请记录", id, id, "提现申请记录", userProp);
+        return rstMsg;
     }
 
     /**
@@ -285,24 +288,25 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
      * @param record 申请记录
      * @return MessageResponse
      */
-    private MessageResponse saveWithdrawApiAction(WithdrawRecord record) {
-        Map<String, Object> apiRst;
+    private Map<String, String> saveWithdrawApiAction(WithdrawRecord record) {
+        Map<String, String> respBody;
         try {
-            apiRst = callMchPay(record);
+            Map<String, Object> apiRst = callMchPay(record);
+            respBody = (Map<String, String>) apiRst.get("body");
             logger.debug("微信提现结果反馈： {}", apiRst != null ? apiRst.toString() : "返回为空");
         } catch (Exception e) {
             logger.error("[" + record.getId() + "]企业付款调用异常：{}", e);
-            apiRst = new HashMap<>();
-            apiRst.put("result_code", "FAILED");
-            apiRst.put("err_code", "-1");
-            apiRst.put("err_code_des", "微信处理异常");
+            respBody = new HashMap<>();
+            respBody.put("result_code", "FAILED");
+            respBody.put("err_code", "-1");
+            respBody.put("err_code_des", "微信处理异常");
         }
         try {
             //接口日志记录
             WithdrawWxLog log = new WithdrawWxLog();
             log.setId(GUIDUtil.getGUID());
             log.setRecordId(record.getId());
-            log.setLogTxt(JsonUtil.toJson(apiRst));
+            log.setLogTxt(JsonUtil.toJson(respBody));
             log.setStatus("1");
             log.setCreateDate(DateUtil.getNowDate());
             withdrawWxLogDao.insert(log);
@@ -310,12 +314,7 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
             logger.error("[" + record.getId() + "]企业付款日志记录异常：{}", e);
         }
 
-        if (CommonUtils.isBlank(apiRst.get("result_code"))
-                || !"SUCCESS".equals(String.valueOf(apiRst.get("result_code")))) {
-            return new MessageResponse(ResultCode.FAIL, String.valueOf(apiRst.get("err_code_des")));
-        }
-
-        return new MessageResponse(ResultCode.SUCCESS, "提现成功");
+        return respBody;
     }
 
     /**
@@ -328,7 +327,7 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
         String outTradeNo = record.getId();
         String openId = record.getOpenId();//ogxN71k1hAUwgYDDIhzMplqWbo4U
         String realName = record.getRealName();//"罗灿";
-        String amount = record.getActAmount().toString();// "1";
+        String amount = record.getActAmount().toString();//单位：元
         String desc = record.getAuditRemark();//"企业付款测试";
 
         String mchAppId = PropertyUtil.getProperty("appid");
@@ -337,10 +336,6 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
         byte[] certBytes = FileUtil.File2byte(PropertyUtil.getProperty("cert_path"));
         Map<String, Object> rst = WeChatPayApi.mchPay(outTradeNo, openId, realName, amount, desc,
                 mchAppId, mchId, apiKey, certBytes);
-//        if ("SUCCESS".equals(rst.get("return_code"))
-//                && "200".equals(rst.get("rst_code"))) {
-//            Map<String, Object> map = (Map<String, Object>) rst.get("body");
-//        }
 
         return rst;
     }

@@ -69,7 +69,6 @@
                     <th width="10%"> 到账金额</th>
                     <th width="10%"> 申请时间</th>
                     <th width="10%"> 审核状态</th>
-                    <th width="10%"> 转账状态</th>
                     <th width="15%">操作</th>
                 </tr>
                 </thead>
@@ -124,23 +123,21 @@
             <span class="label label-lg label-info">\${parseAuditRst(item.auditRst)}</span>
             {@/if}
         </td>
+        <%--<td>--%>
+        <%--{@if item.apiRst == 'SUCCESS'}--%>
+        <%--<span class="label label-lg label-success">\${parseApiRst(item.apiRst)}</span>--%>
+        <%--{@else if item.apiRst == 'FAIL'}--%>
+        <%--<span class="label label-lg label-danger">\${parseApiRst(item.apiRst)}</span>--%>
+        <%--<div style="padding-top:10px">\${item.apiRemark}</div>--%>
+        <%--{@else}--%>
+        <%--<span class="label label-lg label-danger">\${parseApiRst(item.apiRst)}</span>--%>
+        <%--{@/if}--%>
+        <%--</td>--%>
         <td>
-            {@if item.apiRst == 'SUCCESS'}
-            <span class="label label-lg label-success">\${parseApiRst(item.apiRst)}</span>
-            {@else if item.apiRst == 'FAILED'}
-            <span class="label label-lg label-danger">\${parseApiRst(item.apiRst)}</span>
-            <div style="padding-top:10px">\${item.apiRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">\${parseApiRst(item.apiRst)}</span>
-            {@/if}
-        </td>
-        <td>
-            <%--<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>--%>
             {@if item.auditRst == 'temp'}
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
             {@else if item.auditRst=='pass'}
-            <a href="javaScript:transferInfo()">转账详情</a>
-            <%--<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-wx">转账详情</a>--%>
+            <%--<a href="javaScript:transferInfo()">转账详情</a>--%>
             {@/if}
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
@@ -151,7 +148,7 @@
 </script>
 <!--审核弹框-->
 <div class="modal fade" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document" style="width: 90%;">
+    <div class="modal-dialog" role="document" style="width: 50%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -246,7 +243,7 @@
             <label class="col-md-2 control-label">说明</label>
             <div class="col-md-10">
                 <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
+                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
             </div>
         </div>
     </div>

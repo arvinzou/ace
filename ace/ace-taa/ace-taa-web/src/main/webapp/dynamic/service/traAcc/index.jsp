@@ -132,7 +132,7 @@
 
 
 <script id="tpl-preview" type="text/template">
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">主键</label>
         <div class="col-md-10">
             \${data.o.id}

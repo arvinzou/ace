@@ -10,6 +10,8 @@ import com.huacainfo.ace.fundtown.model.VipMemberRes;
 import com.huacainfo.ace.fundtown.vo.VipDepartmentQVo;
 import com.huacainfo.ace.fundtown.vo.VipDepartmentVo;
 
+import java.util.Map;
+
 public interface VipDepartmentService {
     /**
      * @throws
@@ -160,5 +162,11 @@ public interface VipDepartmentService {
 
     MessageResponse repealPublicity(String deptId, UserProp curUserProp);
 
-    PageResult<VipDepartmentVo> findDepartment(VipDepartmentQVo condition, String orderBy) throws Exception;
+    /**
+     * 条件查询
+     *
+     * @param params
+     * @return
+     */
+    Map<String, Object> findByCondition(Map<String, Object> params);
 }

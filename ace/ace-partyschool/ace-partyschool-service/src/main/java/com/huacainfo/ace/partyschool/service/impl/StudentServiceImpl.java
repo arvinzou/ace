@@ -169,7 +169,10 @@ public class StudentServiceImpl implements StudentService {
         oldData.setPolitical(o.getPolitical());
         oldData.setWorkUnitName(o.getWorkUnitName());
         oldData.setPostName(o.getPostName());
-        oldData.setClassId(o.getClassId());
+        if (StringUtil.isNotEmpty(o.getClassId())) {
+            oldData.setClassId(o.getClassId());
+            oldData.setPid("0");//影响学员分组
+        }
         oldData.setRemark(o.getRemark());
         oldData.setLastModifyDate(new Date());
         oldData.setLastModifyUserName(userProp.getName());
@@ -382,9 +385,9 @@ public class StudentServiceImpl implements StudentService {
             e.put("classId", classId);
             e.put("role", "teacher");
             List<Map<String, String>> list = this.studentDao.selectTeacherClasses(userProp.getUserId());
-            if(list.size()==0){
-                Map<String, String> t=new HashMap();
-                e.put("classId","c000000999800009");
+            if (list.size() == 0) {
+                Map<String, String> t = new HashMap();
+                e.put("classId", "c000000999800009");
                 list.add(t);
             }
             e.put("list", list);

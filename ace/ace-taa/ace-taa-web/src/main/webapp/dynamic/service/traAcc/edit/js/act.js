@@ -18,6 +18,18 @@ function render(obj, data, tplId) {
 	$(obj).html(html);
 }
 
+/**
+ * 验证事故时间有效性
+ * @param val
+ */
+function validateAccTime(val) {
+    var nowTime = Date.parse(new Date());
+    var inputTime = Date.parse(val)
+    if (inputTime > nowTime) {
+        alert("事故时间不得晚于当前系统时间!");
+    }
+}
+
 function initPage() {
 $("input[name=accidentTime]").datetimepicker({
 		format: 'yyyy-mm-dd hh:ii:ss',
@@ -111,30 +123,30 @@ function initEvents() {
 		errorPlacement: function(error, element) {
              $(element).closest( "form" ).find( ".error-" + element.attr( "name" )).append( error );
         },
-		rules: {
-			address: {
-				required: true,
-				maxlength: 50
-			},
-			weather: {
-				required: true
-			},
-			vehicleType: {
-				required: true
-			}
-		},
-		messages: {
-			address: {
-				required: "请选择事故发生地点",
-				maxlength: "事故发生地点字符长度不能超过50"
-			},
-			weather: {
-				required: "请选择天气"
-			},
-			vehicleType: {
-				required: "请选择车型"
-			}
-		}
+        rules: {
+            address: {
+                required: true,
+                maxlength: 50
+            },
+            weather: {
+                required: true
+            },
+            vehicleType: {
+                required: true
+            },
+        },
+        messages: {
+            address: {
+                required: "请选择事故发生地点",
+                maxlength: "事故发生地点字符长度不能超过50"
+            },
+            weather: {
+                required: "请选择天气"
+            },
+            vehicleType: {
+                required: "请选择车型"
+            },
+        }
 	});
 	/*监听表单提交*/
 	$('#fm-edit').ajaxForm({

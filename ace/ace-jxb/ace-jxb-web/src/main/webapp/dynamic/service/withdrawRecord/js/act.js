@@ -124,7 +124,11 @@ function initEvents() {
                 time: new Date()
             });
             console.log(params);
-            audit(params);
+            if (params.rst == null) {
+                alert("请选择审核结果");
+            } else {
+                audit(params);
+            }
             return false;
         }
     });

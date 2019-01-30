@@ -8,11 +8,14 @@ import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.taa.dao.RoadDao;
 import com.huacainfo.ace.taa.dao.RoadManDao;
+import com.huacainfo.ace.taa.dao.RoadSectionDao;
 import com.huacainfo.ace.taa.model.RoadMan;
 import com.huacainfo.ace.taa.service.RoadManService;
 import com.huacainfo.ace.taa.vo.RoadManQVo;
 import com.huacainfo.ace.taa.vo.RoadManVo;
+import com.huacainfo.ace.taa.vo.RoadSectionQVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,10 @@ public class RoadManServiceImpl implements RoadManService {
     private RoadManDao roadManDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private RoadSectionDao roadSectionDao;
+    @Autowired
+    private RoadDao roadDao;
 
 
     /**
@@ -88,6 +95,9 @@ public class RoadManServiceImpl implements RoadManService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
+        if (CommonUtils.isValidMobile(o.getMobile())) {
+            return new MessageResponse(1, "手机号格式非法！");
+        }
         if (CommonUtils.isBlank(o.getStartName())) {
             return new MessageResponse(1, "管辖路段开始不能为空！");
         }
@@ -137,6 +147,9 @@ public class RoadManServiceImpl implements RoadManService {
         }
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
+        }
+        if (CommonUtils.isValidMobile(o.getMobile())) {
+            return new MessageResponse(1, "手机号格式非法！");
         }
         if (CommonUtils.isBlank(o.getStartName())) {
             return new MessageResponse(1, "管辖路段开始不能为空！");
@@ -190,6 +203,13 @@ public class RoadManServiceImpl implements RoadManService {
     @Override
     public MessageResponse deleteRoadManByRoadManId(String id, UserProp userProp) throws
             Exception {
+        RoadSectionQVo rs = new RoadSectionQVo();
+        rs.setRoadMan(id);
+        int iSection = roadSectionDao.findCount(rs);
+        if (iSection > 0) {
+            return new MessageResponse(ResultCode.FAIL, "存在路段绑定关系，删除失败！");
+        }
+
         this.roadManDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除路长", "路长", id, id,
                 "路长", userProp);
