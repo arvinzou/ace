@@ -33,13 +33,6 @@
                         <thead>
                         <tbody>
                         <tr>
-                            <td><%--行政区划--%>
-                                <div class="input-group" style="float:left;padding-right:10px">
-                                    行政区划 <input class="easyui-combotree" name="areaCode"
-                                                data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
-                                                style="width:220px;﻿line-height: 30px;height: 30px;">
-                                </div>
-                            </td>
                             <td>
                                 <%--道路级别--%>
                                 <div class="btn-group" id="check-group-category" role="group"
@@ -47,35 +40,41 @@
                                 </div>
                             </td>
                             <td>
+                                <%--行政区划--%>
+                                <div class="input-group" style="float:left;padding-right:10px">
+                                    行政区划 <input class="easyui-combotree" name="areaCode"
+                                                data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
+                                                style="width:258px;﻿line-height: 30px;height: 30px;">
+                                </div>
+                            </td>
+                            <td>
                                 <%--时间范围--%>
                                 <div class="input-group" role="group" style="float:left;padding-right:5px">
-                                    <div style="width:auto;float:left;line-height:30px"> 事故时间 </div>
-                                    <div class="date form_datetime"
-                                         style="width:auto;float:left;border: 1px solid #efefef;">
-                                        <input type="text" size="16" name="startDate" readonly="" class="form-control">
+                                    <div style="width:auto;float:left;line-height:30px"> 事故时间</div>
+                                    <div class="date form_datetime" style="float:left;border: 1px solid #efefef;">
+                                        <input type="text" style="width:142px;" size="16"
+                                               name="startDate" readonly="" class="form-control">
                                     </div>
                                     <span class="input-group-addon" style="width:10%;float:left;">
                                         <font style="vertical-align: inherit;">
                                             <font style="vertical-align: inherit;">至</font>
                                         </font>
                                     </span>
-                                    <div class="date form_datetime"
-                                         style="width:auto;float:left;border: 1px solid #efefef;">
-                                        <input type="text" size="16" name="endDate" readonly="" class="form-control">
+                                    <div class="date form_datetime" style="float:left;border: 1px solid #efefef;">
+                                        <input type="text" style="width:142px;" size="16"
+                                               name="endDate" readonly="" class="form-control">
                                     </div>
                                 </div>
                             </td>
-                            <td></td>
                         </tr>
-                        <tr style="height: 5px"></tr>
+                        <tr style="height: 3px"></tr>
                         <tr>
-
                             <td>
                                 <%--死亡人数区间--%>
                                 <div class="input-group" style="float: left">
                                     <div style="width:auto;float:left;line-height:30px;padding-right:5px"> 死亡人数</div>
                                     <input type="text" size="16" name="downDeathNum" class="form-control"
-                                           style="float:left;width:88px;padding-right:5px"
+                                           style="float:left;width:110px;padding-right:5px"
                                            oninput="value=value.replace(/[^\d]/g,'')">
                                     <span class="input-group-addon" style="width:auto;float:left;">
                                         <font style="vertical-align: inherit;">
@@ -83,7 +82,7 @@
                                         </font>
                                     </span>
                                     <input type="text" size="16" name="upDeathNum" class="form-control"
-                                           style="float:left;width:88px;padding-right:5px"
+                                           style="float:left;width:110px;padding-right:5px"
                                            oninput="value=value.replace(/[^\d]/g,'')">
                                 </div>
                             </td>
@@ -92,7 +91,7 @@
                                 <div class="input-group" style="float: left">
                                     <div style="width:auto;float:left;line-height:30px;padding-right:5px"> 受伤人数</div>
                                     <input type="text" size="16" name="downInjuriesNum" class="form-control"
-                                           style="float:left;width:88px;padding-right:5px"
+                                           style="float:left;width:110px;padding-right:5px"
                                            oninput="value=value.replace(/[^\d]/g,'')">
                                     <span class="input-group-addon" style="width:auto;float:left;">
                                         <font style="vertical-align: inherit;">
@@ -100,7 +99,7 @@
                                         </font>
                                     </span>
                                     <input type="text" size="16" name="upInjuriesNum" class="form-control"
-                                           style="float:left;width:88px;padding-right:5px"
+                                           style="float:left;width:110px;padding-right:5px"
                                            oninput="value=value.replace(/[^\d]/g,'')">
                                 </div>
                             </td>
@@ -127,17 +126,12 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
+                    <th width="35%"> 地点</th>
+                    <th width="10%"> 归属路长</th>
                     <th width="10%"> 快报时间</th>
                     <th width="10%"> 事故发生时间</th>
-                    <th width="10%"> 地点</th>
-                    <th width="10%"> 天气情况</th>
-                    <th width="10%"> 车型</th>
-                    <th width="10%"> 归属路长</th>
                     <th width="10%"> 死亡人数</th>
                     <th width="10%"> 受伤人数</th>
-                    <th width="10%"> 事故原因</th>
-                    <th width="10%"> 归属路段</th>
-                    <th width="10%"> 归属道路</th>
                     <th width="5%"> 操作</th>
                 </tr>
                 </thead>
@@ -179,17 +173,12 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
+        <td> \${item.address}</td>
+        <td> \${item.roadManName}</td>
         <td> \${item.createDate}</td>
         <td> \${item.accidentTime}</td>
-        <td> \${item.address}</td>
-        <td> \${rsd(item.weather,'171')}</td>
-        <td> \${rsd(item.vehicleType,'172')}</td>
-        <td> \${item.roadManName}</td>
         <td> \${item.deadthToll}</td>
         <td> \${item.injuries}</td>
-        <td> \${rsd(item.cause,'173')}</td>
-        <td> \${item.roadSectionName}</td>
-        <td> \${item.roadName}</td>
         <td>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
