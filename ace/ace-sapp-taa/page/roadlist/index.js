@@ -164,9 +164,7 @@ Page({
             //快报选择路长
             app.globalData.roadManId = roadManId;
             app.globalData.roadManName = roadManName;
-            wx.switchTab({
-                url: '../index/index',
-            });
+            wx.navigateBack({ changed: true });
         }else if(skipType == 'xb'){
             //续报选择路长
             wx.navigateTo({

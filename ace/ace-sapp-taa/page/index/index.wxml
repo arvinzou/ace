@@ -10,7 +10,7 @@
                 </block>
             </cover-view>
             <cover-view class='tab01 active' bindtap='changeTab' data-index="0">事故快报
-            <cover-view class='flag'></cover-view>
+                <cover-view class='flag'></cover-view>
             </cover-view>
             <cover-view class='tab01' bindtap='changeTab' data-index="1">路段采集</cover-view>
             <cover-view class='column' bindtap='dataInfo'>
@@ -86,15 +86,15 @@
             </cover-view>
             <cover-view class='tab01' bindtap='changeTab' data-index="0">事故快报</cover-view>
             <cover-view class='tab01 active' bindtap='changeTab' data-index="1">路段采集
-                    <cover-view class='flag'></cover-view>
+                <cover-view class='flag'></cover-view>
             </cover-view>
             <cover-view class='column' bindtap='dataInfo'>
                 <cover-image src='../../image/icon-column.png'></cover-image>
             </cover-view>
         </cover-view>
-        <cover-view class='form-content'>
+        <cover-view class='form-content' bindtap='{{flaging == false? "selectRoad":""}}'>
             <block wx:if='{{!startName}}'>
-                <cover-view class='form' bindtap='selectRoad'>
+                <cover-view class='form'>
                     <cover-view class='form-left'>请选择采集路段</cover-view>
                     <cover-view class='stext'>选择</cover-view>
                     <cover-image src='../../image/icon_rediret.png'></cover-image>
@@ -117,7 +117,7 @@
         </cover-view>
         <cover-view class='collectionBtn {{startName?"":"hidden"}}'>
             <cover-view class='cjBtn startBtn {{breakBtn}} {{activeBreak}}' bindtap='{{activeBreak?"break":"start"}}'>{{activeBreak?'暂停':'开始'}}</cover-view>
-            <cover-view class='cjBtn endBtn {{tab == 1 && endFlag == true? "":"hidden"}}' bindtap='end'>结束</cover-view>
+            <cover-view class='cjBtn endBtn {{tab == 1}}' bindtap='end'>结束</cover-view>
         </cover-view>
     </map>
 </view>
