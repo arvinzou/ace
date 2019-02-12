@@ -61,4 +61,13 @@
         delete from road_gps
         where roadSectionId = #{sectionId,jdbcType=VARCHAR}
     </delete>
+
+    <select id="findCount" resultType="int">
+        select count(*)
+        from road_gps
+        where roadSectionId in
+        <foreach collection="sectionIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

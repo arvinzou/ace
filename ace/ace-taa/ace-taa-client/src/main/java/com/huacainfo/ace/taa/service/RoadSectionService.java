@@ -140,7 +140,7 @@ public interface RoadSectionService {
      * @author: 陈晓克
      * @version: 2019-01-04
      */
-    MessageResponse deleteRoadSectionByRoadSectionIds(String[] id, UserProp userProp) throws Exception;
+    MessageResponse deleteRoadSectionByRoadSectionIds(String roadId, String[] id, UserProp userProp) throws Exception;
 
 
     /**

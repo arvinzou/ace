@@ -226,6 +226,7 @@ function initTable(table) {
 }
 
 function delTable(id) {
+    console.log("id=" + id);
     var ids = [];
     $.each($('input:checkbox'), function () {
         if (this.checked) {
@@ -245,7 +246,10 @@ function delByIds(ids, id) {
         url: contextPath + "/roadSection/deleteRoadSectionByRoadSectionIds",
         type: "post",
         async: false,
-        data: {ids: ids},
+        data: {
+            ids: ids,
+            roadId: id
+        },
         success: function (rst) {
             stopLoad();
             alert(rst.errorMessage);
