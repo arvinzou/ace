@@ -104,6 +104,12 @@
             and a.name like
             concat(#{condition.name,jdbcType=VARCHAR},'%')
         </if>
+        <if test='condition.keyWord!=null and condition.keyWord!=""'>
+            and a.name like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
+            or t.startName like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
+            or t.endName like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
+            or t.name like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
+        </if>
         <if test='condition.roadId!=null and condition.roadId!=""'>
             and t.roadId =#{condition.roadId,jdbcType=VARCHAR}
         </if>

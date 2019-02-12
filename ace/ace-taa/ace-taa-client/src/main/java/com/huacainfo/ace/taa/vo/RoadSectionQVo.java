@@ -10,6 +10,16 @@ public class RoadSectionQVo extends RoadSection {
      */
     private String category;
 
+    private String keyWord;
+
+    public String getKeyWord() {
+        return keyWord;
+    }
+
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
+    }
+
     public String getCategory() {
         return category;
     }

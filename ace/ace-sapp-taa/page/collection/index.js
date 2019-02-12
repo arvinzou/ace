@@ -19,6 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      console.log(2);
       var that = this;
       var tabIndex = options.tab;
       if(tabIndex){
@@ -119,9 +120,7 @@ searchSomeThing:function(e){
             app.globalData.endName = endName;
             app.globalData.cjSectionId = roadSectionId;
             app.globalData.tab = 1
-            wx.switchTab({
-                url:'../index/index'
-            });
+            wx.navigateBack({ changed: true });
         } 
     },
 
@@ -136,7 +135,7 @@ searchSomeThing:function(e){
                         content: res.info,
                         success: function (res) { }
                     });
-                    that.initYList();
+                    that.initYList('');
                 } else {
                     wx.showModal({
                         title: '提示',
@@ -159,7 +158,10 @@ searchSomeThing:function(e){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+      console.log(1);
+      app.globalData.startName = null;
+      app.globalData.endName = null;
+      app.globalData.cjSectionId = null;
   },
 
   /**
