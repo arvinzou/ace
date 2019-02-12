@@ -131,9 +131,9 @@ public class RoadServiceImpl implements RoadService {
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "级别不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
+//        if (CommonUtils.isBlank(o.getStatus())) {
+//            return new MessageResponse(1, "状态 不能为空！");
+//        }
 
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());

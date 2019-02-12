@@ -24,8 +24,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/roadSection")
 /**
@@ -57,7 +58,7 @@ public class RoadSectionController extends TaaBaseController {
     @RequestMapping(value = "/findRoadSectionList")
     @ResponseBody
     public PageResult<RoadSectionVo> findRoadSectionList(RoadSectionQVo condition, PageParamNoChangeSord page) throws Exception {
-        if(CommonUtils.isBlank(condition.getAreaCode())){
+        if (CommonUtils.isBlank(condition.getAreaCode())) {
             condition.setAreaCode(this.getCurUserProp().getAreaCode());
         }
 
@@ -198,7 +199,7 @@ public class RoadSectionController extends TaaBaseController {
                 list = utils.readExcelByPOI(obj.getInputStream(), 2);
             }
         }
-        return this.roadSectionService.importXls(list, this.getCurUserProp(),roadId);
+        return this.roadSectionService.importXls(list, this.getCurUserProp(), roadId);
     }
 
     /**
@@ -213,7 +214,7 @@ public class RoadSectionController extends TaaBaseController {
      */
     @RequestMapping(value = "/getList")
     @ResponseBody
-    public ListResult<Map<String,Object>> getList() throws Exception {
+    public ListResult<Map<String, Object>> getList() throws Exception {
         return this.roadSectionService.getList(this.getParams());
     }
 
@@ -230,9 +231,9 @@ public class RoadSectionController extends TaaBaseController {
      */
     @RequestMapping(value = "/deleteRoadSectionByRoadSectionIds")
     @ResponseBody
-    public MessageResponse deleteRoadSectionByRoadSectionIds(String ids) throws Exception {
-        String [] id=ids.split(",");
-        return this.roadSectionService.deleteRoadSectionByRoadSectionIds(id, this.getCurUserProp());
+    public MessageResponse deleteRoadSectionByRoadSectionIds(String roadId, String ids) throws Exception {
+        String[] id = ids.split(",");
+        return this.roadSectionService.deleteRoadSectionByRoadSectionIds(roadId, id, this.getCurUserProp());
     }
 
 
@@ -248,7 +249,7 @@ public class RoadSectionController extends TaaBaseController {
      */
     @RequestMapping(value = "/getListByCondition")
     @ResponseBody
-    public Map<String, Object> getListByCondition(){
+    public Map<String, Object> getListByCondition() {
         return this.roadSectionService.getListByCondition(this.getParams());
     }
 }

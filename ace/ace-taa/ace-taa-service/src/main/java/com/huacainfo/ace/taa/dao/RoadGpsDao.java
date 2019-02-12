@@ -22,4 +22,7 @@ public interface RoadGpsDao {
     List<RoadGpsVo> getAroundList(Map<String, Object> p);
 
     int deleteBySectionId(String sectionId);
+
+
+    int findCount(@Param("sectionIds") String[] sectionIds);
 }

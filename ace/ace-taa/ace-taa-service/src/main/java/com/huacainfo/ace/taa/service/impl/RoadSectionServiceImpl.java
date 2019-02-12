@@ -1,7 +1,9 @@
 package com.huacainfo.ace.taa.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -10,8 +12,10 @@ import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.taa.dao.RoadGpsDao;
 import com.huacainfo.ace.taa.dao.RoadManDao;
 import com.huacainfo.ace.taa.dao.RoadSectionDao;
+import com.huacainfo.ace.taa.dao.TraAccDao;
 import com.huacainfo.ace.taa.model.RoadMan;
 import com.huacainfo.ace.taa.model.RoadSection;
 import com.huacainfo.ace.taa.service.RoadSectionService;
@@ -42,6 +46,11 @@ public class RoadSectionServiceImpl implements RoadSectionService {
 
     @Autowired
     private RoadManDao roadManDao;
+
+    @Autowired
+    private RoadGpsDao roadGpsDao;
+    @Autowired
+    private TraAccDao traAccDao;
 
 
     /**
@@ -159,10 +168,8 @@ public class RoadSectionServiceImpl implements RoadSectionService {
         if (CommonUtils.isBlank(o.getEndName())) {
             return new MessageResponse(1, "路段截止不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
 
+        o.setStatus(StringUtil.isNotEmpty(o.getStatus()) ? o.getStatus() : "1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -202,14 +209,37 @@ public class RoadSectionServiceImpl implements RoadSectionService {
      * @version: 2019-01-04
      */
     @Override
-    public MessageResponse deleteRoadSectionByRoadSectionId(String id, UserProp userProp) throws
-            Exception {
+    public MessageResponse deleteRoadSectionByRoadSectionId(String id, UserProp userProp) throws Exception {
+        RoadSection rs = roadSectionDao.selectByPrimaryKey(id);
+        if (rs == null) {
+            return new MessageResponse(ResultCode.FAIL, "数据记录丢失");
+        }
+        MessageResponse ms = delCheck(new String[]{id});
+        if (ms.getStatus() == ResultCode.FAIL) {
+            return ms;
+        }
+
         this.roadSectionDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除路段", "路段", id, id,
-                "路段", userProp);
+        this.dataBaseLogService.log("删除路段", "路段", id, id, "路段", userProp);
+        //道路路段统计信息更改
+        int num = this.roadSectionDao.selectSectionCount(rs.getRoadId());
+        this.roadSectionDao.updateSectionCount(rs.getRoadId(), num);
+
         return new MessageResponse(0, "路段删除完成！");
     }
 
+    private MessageResponse delCheck(String[] ids) {
+        int gpsCount = roadGpsDao.findCount(ids);
+        if (gpsCount > 0) {
+            return new MessageResponse(ResultCode.FAIL, "存在路段采集信息，不允许删除");
+        }
+        int accCount = traAccDao.findCountBySectionIds(ids);
+        if (accCount > 0) {
+            return new MessageResponse(ResultCode.FAIL, "存在事故绑定信息，不允许删除");
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "允许删除！");
+    }
 
     /**
      * @throws
@@ -307,10 +337,18 @@ public class RoadSectionServiceImpl implements RoadSectionService {
      * @version: 2019-01-04
      */
     @Override
-    public MessageResponse deleteRoadSectionByRoadSectionIds(String[] id, UserProp userProp) throws
-            Exception {
+    public MessageResponse deleteRoadSectionByRoadSectionIds(String roadId, String[] id, UserProp userProp) throws Exception {
+        MessageResponse ms = delCheck(id);
+        if (ms.getStatus() == ResultCode.FAIL) {
+            return ms;
+        }
+        //批量删除
         this.roadSectionDao.deleteByPrimaryKeys(id);
         this.dataBaseLogService.log("批量删除路段", "路段", id[0], id[0], "路段", userProp);
+        //道路路段统计信息更改
+        int num = this.roadSectionDao.selectSectionCount(roadId);
+        this.roadSectionDao.updateSectionCount(roadId, num);
+
         return new MessageResponse(0, "删除成功！");
     }
 

@@ -791,5 +791,12 @@
     </select>
 
 
-
+    <select id="findCountBySectionIds" resultType="int">
+        select count(*)
+        from tra_acc
+        where roadSectionId in
+        <foreach collection="sectionIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

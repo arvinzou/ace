@@ -105,6 +105,19 @@ function edit(rowid) {
         closeAfterAdd: true,
         recreateForm: true,
         viewPagerButtons: true,
+        beforeSubmit: function (postdata) {
+            //验证
+            if (postdata.startName == postdata.endName) {
+                alert('"路段开始"与"路段截止"值不能相同');
+                return;
+            }
+            if (postdata.startNo == postdata.endNo) {
+                alert('"标号开始"与"标号截止"值不能相同');
+                return;
+            }
+
+            return [true, "", ""];
+        },
         beforeShowForm: function (e) {
             var form = $(e[0]);
             form.closest('.ui-jqdialog')
