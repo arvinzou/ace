@@ -3,6 +3,7 @@ package com.huacainfo.ace.taa.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
@@ -95,7 +96,7 @@ public class RoadManServiceImpl implements RoadManService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
-        if (CommonUtils.isValidMobile(o.getMobile())) {
+        if (!CommonUtils.isValidMobile(o.getMobile())) {
             return new MessageResponse(1, "手机号格式非法！");
         }
         if (CommonUtils.isBlank(o.getStartName())) {
@@ -161,6 +162,7 @@ public class RoadManServiceImpl implements RoadManService {
             return new MessageResponse(1, "状态 不能为空！");
         }
 
+        o.setStatus(StringUtil.isEmpty(o.getStatus()) ? "1" : o.getStatus());
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -182,8 +184,7 @@ public class RoadManServiceImpl implements RoadManService {
      * @version: 2019-01-04
      */
     @Override
-    public SingleResult
-            <RoadManVo> selectRoadManByPrimaryKey(String id) throws Exception {
+    public SingleResult<RoadManVo> selectRoadManByPrimaryKey(String id) throws Exception {
         SingleResult<RoadManVo> rst = new SingleResult<>();
         rst.setValue(this.roadManDao.selectVoByPrimaryKey(id));
         return rst;
@@ -201,8 +202,7 @@ public class RoadManServiceImpl implements RoadManService {
      * @version: 2019-01-04
      */
     @Override
-    public MessageResponse deleteRoadManByRoadManId(String id, UserProp userProp) throws
-            Exception {
+    public MessageResponse deleteRoadManByRoadManId(String id, UserProp userProp) throws Exception {
         RoadSectionQVo rs = new RoadSectionQVo();
         rs.setRoadMan(id);
         int iSection = roadSectionDao.findCount(rs);
@@ -211,8 +211,7 @@ public class RoadManServiceImpl implements RoadManService {
         }
 
         this.roadManDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除路长", "路长", id, id,
-                "路长", userProp);
+        this.dataBaseLogService.log("删除路长", "路长", id, id, "路长", userProp);
         return new MessageResponse(0, "删除成功！");
     }
 
