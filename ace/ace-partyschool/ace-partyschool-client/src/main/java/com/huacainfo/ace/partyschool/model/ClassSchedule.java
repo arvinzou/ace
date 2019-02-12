@@ -20,6 +20,7 @@ public class ClassSchedule  implements Serializable {
 
     private String courseId;
 
+    /*1、*/
     private String ifTest;
 
     public String getIfTest() {

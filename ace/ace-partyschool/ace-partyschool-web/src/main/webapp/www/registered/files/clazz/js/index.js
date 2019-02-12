@@ -125,10 +125,12 @@ function initClasses(){
             if(result.status == 0) {
               if(result.data.length <1 && regType == 'teacher'){
                   alert("对不起！您没有班级文件上传权限。");
+                  $("#uploadModal").hide();
                   return;
               }else{
                   if(regType == 'student'){
                       $("#classBox").hide();
+                      return;
                   }
                   var data = result.data;
                   var classesArr = [];

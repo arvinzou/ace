@@ -140,7 +140,7 @@ public class ClsFilesServiceImpl implements ClsFilesService {
         String strs = obj.getUrl();
         int start = strs.indexOf("?filename=");
         int ends = strs.lastIndexOf(".");
-        String strs1 = obj.getUrl().substring(start + 1, ends);
+        String strs1 = obj.getUrl().substring(start + 10, ends);
 
         obj.setTitle(strs1);
         obj.setCategory("1");

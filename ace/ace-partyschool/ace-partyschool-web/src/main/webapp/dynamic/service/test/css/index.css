@@ -83,6 +83,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 0.4rem;
+    cursor: pointer;
 }
 
 .temp .right {

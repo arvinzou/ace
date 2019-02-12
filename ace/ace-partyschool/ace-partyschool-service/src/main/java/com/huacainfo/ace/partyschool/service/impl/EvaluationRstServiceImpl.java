@@ -106,7 +106,7 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
             for(EvaluationRst item:list){
                 MessageResponse mr=insertEvaluationRst(item,userProp);
                 if(mr.getStatus()==1){
-                    new Exception();
+                   throw  new Exception(mr.getErrorMessage());
                 }
             }
             if(!CommonUtils.isBlank(obj.getContent())){
