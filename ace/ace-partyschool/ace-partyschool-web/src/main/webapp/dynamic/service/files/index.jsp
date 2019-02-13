@@ -72,7 +72,7 @@
 
 <script id="tpl-select-list" type="text/template">
 
-    <select name="classesId" id="classesId" class="form-control" style="height: 30px;line-height: 40px;">
+    <select name="classesId" id="classesId" class="form-control" style="height: 31px;line-height: 40px;">
         {@each data as item, index}
         <option value="\${item.id}">\${item.name}</option>
         {@/each}
