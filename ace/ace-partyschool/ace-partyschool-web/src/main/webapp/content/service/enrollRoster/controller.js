@@ -141,7 +141,7 @@ function initEvents() {
             panelWidth: 450,
             idField: 'id',
             textField: 'name',
-            url: contextPath + '/classes/findByQ',
+            url: contextPath + '/classes/findByQ?status=1',
             mode: 'remote',
             fitColumns: false,
             method: 'get', columns: [[

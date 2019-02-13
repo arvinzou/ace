@@ -127,8 +127,14 @@
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content,(select count(1) from notice_status a where n.id=a.noticeId)
-        pushed,(select count(1) from notice_status a where n.id=a.noticeId and a.status='2')viewed
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content,
+        (select count(1) from notice_status a
+        where n.id=a.noticeId
+        and a.userId in ( select user_id from portal.users where cur_syid='partyschool')
+        ) pushed,
+        (select count(1) from notice_status a
+        where n.id=a.noticeId and a.status='2'
+        and a.userId in ( select user_id from portal.users where cur_syid='partyschool') )viewed
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -172,7 +178,16 @@
         select t.file_name fileName,concat(#{server},t.file_url) fileUrl,t.file_size fileSize from portal.attach t where t.notice_id= #{id,jdbcType=VARCHAR}
     </select>
     <select id="selectUsersById" resultType="map">
-        select a.id userId,a.name,t.status from notice_status t left join (select name,id from student where status='1' union all select name,id from teacher where status='1') a on t.userId=a.id
-        where t.noticeId=#{id}
+        SELECT
+        a.id userId,
+        a.name,
+        t.status
+        FROM notice_status t
+        INNER JOIN (
+        SELECT name, id FROM student
+        UNION ALL
+        SELECT name, id FROM teacher
+        )a ON t.userId = a.id
+        where t.noticeId = #{id}
     </select>
 </mapper>

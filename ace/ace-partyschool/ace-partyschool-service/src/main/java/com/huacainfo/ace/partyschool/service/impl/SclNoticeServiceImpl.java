@@ -13,8 +13,8 @@ import com.huacainfo.ace.partyschool.model.Notice;
 import com.huacainfo.ace.partyschool.service.NoticeStatusService;
 import com.huacainfo.ace.partyschool.service.SclNoticeService;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
-import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import com.huacainfo.ace.partyschool.vo.NoticeStatusQVo;
+import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,10 +59,9 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      */
     @Override
     public PageResult<NoticeVo> findNoticeList(NoticeQVo condition, int start,
-                                                 int limit, String orderBy) throws Exception {
+                                               int limit, String orderBy) throws Exception {
         PageResult<NoticeVo> rst = new PageResult<>();
-        List<NoticeVo> list = this.noticeDao.findList(condition,
-                start, limit, orderBy);
+        List<NoticeVo> list = this.noticeDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.noticeDao.findCount(condition);
@@ -72,19 +71,19 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     }
 
     @Override
-    public ResultResponse findNoticeLists(NoticeStatusQVo condition,int start, int limit, String orderBy,UserProp userProp) throws Exception {
+    public ResultResponse findNoticeLists(NoticeStatusQVo condition, int start, int limit, String orderBy, UserProp userProp) throws Exception {
         condition.setUserId(userProp.getUserId());
-        List<NoticeVo> noticeVo=new ArrayList<>();
+        List<NoticeVo> noticeVo = new ArrayList<>();
         Map<String, Object> map = new HashMap<String, Object>();
-        noticeVo=this.noticeDao.findMyNoticeList(condition,start,limit,orderBy);
-            map.put("list", noticeVo);
-            map.put("count", this.noticeDao.findUnreadCount(userProp.getUserId()));
+        noticeVo = this.noticeDao.findMyNoticeList(condition, start, limit, orderBy);
+        map.put("list", noticeVo);
+        map.put("count", this.noticeDao.findUnreadCount(userProp.getUserId()));
         return new ResultResponse(0, "通知公告获取完成！", map);
     }
 
     @Override
     public ResultResponse findPulicNoticeLists(String classesId) throws Exception {
-        List<NoticeVo> list=this.noticeDao.findPublicNoticeList(classesId);
+        List<NoticeVo> list = this.noticeDao.findPublicNoticeList(classesId);
         return new ResultResponse(0, "通知公告获取完成！", list);
     }
 
@@ -101,17 +100,17 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      */
     @Override
     public MessageResponse insertNotice(Notice o, UserProp userProp) throws Exception {
-        if(CommonUtils.isBlank(o.getId())){
-            return new MessageResponse(1,"序号不能为空!");
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "序号不能为空!");
         }
-        if(CommonUtils.isBlank(o.getTitle())){
-            return new MessageResponse(1,"标题不能为空!");
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "标题不能为空!");
         }
-        if(CommonUtils.isBlank(o.getCategory())){
-            return new MessageResponse(1,"类别不能为空!");
+        if (CommonUtils.isBlank(o.getCategory())) {
+            return new MessageResponse(1, "类别不能为空!");
         }
-        if(CommonUtils.isBlank(o.getContent())){
-            return new MessageResponse(1,"内容不能为空!");
+        if (CommonUtils.isBlank(o.getContent())) {
+            return new MessageResponse(1, "内容不能为空!");
         }
         int temp = this.noticeDao.isExit(o);
         if (temp > 0) {
@@ -140,17 +139,17 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      */
     @Override
     public MessageResponse updateNotice(Notice o, UserProp userProp) throws Exception {
-        if(CommonUtils.isBlank(o.getId())){
-            return new MessageResponse(1,"序号不能为空!");
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "序号不能为空!");
         }
-        if(CommonUtils.isBlank(o.getTitle())){
-            return new MessageResponse(1,"标题不能为空!");
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "标题不能为空!");
         }
-        if(CommonUtils.isBlank(o.getCategory())){
-            return new MessageResponse(1,"类别不能为空!");
+        if (CommonUtils.isBlank(o.getCategory())) {
+            return new MessageResponse(1, "类别不能为空!");
         }
-        if(CommonUtils.isBlank(o.getContent())){
-            return new MessageResponse(1,"内容不能为空!");
+        if (CommonUtils.isBlank(o.getContent())) {
+            return new MessageResponse(1, "内容不能为空!");
         }
         this.noticeDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更通知公告", "通知公告", "",
@@ -170,17 +169,15 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      * @version: 2019-01-06
      */
     @Override
-    public SingleResult<NoticeVo> updateAndSelectNoticeVoById(String id,String server,UserProp userProp) throws Exception {
+    public SingleResult<NoticeVo> updateAndSelectNoticeVoById(String id, String server, UserProp userProp) throws Exception {
         SingleResult<NoticeVo> rst = new SingleResult<>();
-        NoticeVo o=this.noticeDao.selectVoByPrimaryKey(id);
-        o.setFiles(this.noticeDao.selectFilesById(id,server));
+        NoticeVo o = this.noticeDao.selectVoByPrimaryKey(id);
+        o.setFiles(this.noticeDao.selectFilesById(id, server));
         o.setUsers(this.noticeDao.selectUsersById(id));
         rst.setValue(o);
-        this.noticeDao.updateStatus(id,userProp.getUserId());
+        this.noticeDao.updateStatus(id, userProp.getUserId());
         return rst;
     }
-
-
 
 
     /**

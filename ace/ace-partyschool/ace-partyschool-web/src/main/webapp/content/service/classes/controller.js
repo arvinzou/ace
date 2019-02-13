@@ -24,9 +24,24 @@ jQuery(function ($) {
             closeAfterAdd: true,
             recreateForm: true,
             viewPagerButtons: false,
+            beforeSubmit: function (postdata) {
+                var beginDate = postdata.startDate;
+                var endDate = postdata.endDate;
+                var nowDate = new Date();
+                var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+                var d2 = new Date(endDate.replace(/\-/g, "\/"));
+                if (beginDate != "" && endDate != "" && d1 >= d2) {
+                    return [false, "开始时间不能大于结束时间", ""];
+                } else if (endDate != "" && nowDate > d2) {
+                    return [false, "结束时间不能小于当前系统时间", ""];
+                }
+                return [true, "", ""];
+            },
             beforeShowForm: function (e) {
-            appendUploadImageBtn("photoUrl");
-            appendUploadFileBtn("fileUrl");
+                appendUploadImageBtn("photoUrl");
+                appendUploadFileBtn("fileUrl");
+
+                //$('#headmaster').combogrid('grid').datagrid('reload');
             }
         })
     });
@@ -102,18 +117,32 @@ function loadText(id) {
 
 function edit(rowid) {
     console.log(rowid);
-    jQuery(cfg.grid_selector).jqGrid('setSelection',rowid);
+    jQuery(cfg.grid_selector).jqGrid('setSelection', rowid);
     jQuery(cfg.grid_selector).jqGrid('editGridRow', rowid, {
         closeAfterAdd: true,
         recreateForm: true,
         viewPagerButtons: true,
+        beforeSubmit: function (postdata) {
+            var beginDate = postdata.startDate;
+            var endDate = postdata.endDate;
+            var nowDate = new Date();
+            var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+            var d2 = new Date(endDate.replace(/\-/g, "\/"));
+            if (beginDate != "" && endDate != "" && d1 >= d2) {
+                return [false, "开始时间不能大于结束时间", ""];
+            } else if (endDate != "" && nowDate > d2) {
+                return [false, "结束时间不能小于当前系统时间", ""];
+            }
+
+            return [true, "", ""];
+        },
         beforeShowForm: function (e) {
             var form = $(e[0]);
             form.closest('.ui-jqdialog')
                 .find('.ui-jqdialog-titlebar')
                 .wrapInner('<div class="widget-header" />');
-                appendUploadImageBtn("photoUrl");
-                appendUploadFileBtn("fileUrl");
+            appendUploadImageBtn("photoUrl");
+            appendUploadFileBtn("fileUrl");
         }
     });
 }

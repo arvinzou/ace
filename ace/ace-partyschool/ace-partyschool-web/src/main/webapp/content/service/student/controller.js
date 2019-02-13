@@ -61,6 +61,36 @@ function render(obj, data, tplId) {
 
 function initEvents() {
     $('#modal-import').on('shown.bs.modal', function (event) {
+        //班级数筛选列表
+        $('#combogrid-cls-list').combogrid({
+            panelWidth: 450,
+            idField: 'id',
+            textField: 'name',
+            url: contextPath + '/classes/findByQ?status=1',
+            mode: 'remote',
+            fitColumns: false,
+            method: 'get', columns: [[
+                {field: 'name', title: '班级名称', width: 230, align: 'right'},
+                {field: 'headmasterName', title: '班主任', width: 200, align: 'right'}
+            ]],
+            keyHandler: {
+                up: function () {
+                },
+
+                down: function () {
+                },
+
+                enter: function () {
+                },
+                query: function (q) {
+                    $('#combogrid-cls-list').combogrid("grid").datagrid("reload", {'q': q});
+                    $('#combogrid-cls-list').combogrid("setValue", q);
+                }
+            },
+            onSelect: function (index, row) {
+                selectClasses(false);
+            }
+        });
         //
         selectClasses(true);
     });
@@ -100,37 +130,6 @@ function initEvents() {
             }
         },
         onSelect: function (index, row) {
-        }
-    });
-
-    //班级数筛选列表
-    $('#combogrid-cls-list').combogrid({
-        panelWidth: 450,
-        idField: 'id',
-        textField: 'name',
-        url: contextPath + '/classes/findByQ',
-        mode: 'remote',
-        fitColumns: false,
-        method: 'get', columns: [[
-            {field: 'name', title: '班级名称', width: 230, align: 'right'},
-            {field: 'headmasterName', title: '班主任', width: 200, align: 'right'}
-        ]],
-        keyHandler: {
-            up: function () {
-            },
-
-            down: function () {
-            },
-
-            enter: function () {
-            },
-            query: function (q) {
-                $('#combogrid-cls-list').combogrid("grid").datagrid("reload", {'q': q});
-                $('#combogrid-cls-list').combogrid("setValue", q);
-            }
-        },
-        onSelect: function (index, row) {
-            selectClasses(false);
         }
     });
 }
