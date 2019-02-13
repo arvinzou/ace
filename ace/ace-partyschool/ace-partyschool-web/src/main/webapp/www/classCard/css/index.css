@@ -131,6 +131,12 @@ body {
 	padding: 3px 13px;
 	font-weight: 400;
 	color: rgba(255, 255, 255, 1);
+	cursor: pointer;
+
+}
+
+.pointer{
+	cursor: pointer;
 }
 
 .body table .active_course {
@@ -220,6 +226,7 @@ body {
 	top: 0;
 	background: rgba(0, 0, 0, 0.5);
 	padding-top: 156px;
+	z-index: 999999;
 }
 
 .modal .classInfo {
@@ -301,7 +308,7 @@ body {
 
 .fontBlue {
 	color: rgba(0, 107, 207, 1);
-	;
+	cursor: pointer;
 }
 
 .modal .weeekClass {
@@ -401,7 +408,7 @@ body {
 	overflow: auto;
 }
 
-#weeekCourseList{
+#weeekCourseList, #roomTemp{
 	max-height: 666px;
 	overflow: auto;
 }
@@ -453,6 +460,7 @@ body {
 	font-size: 20px;
 	font-weight: bold;
 	margin-bottom: 20px;
+	cursor: pointer;
 }
 
 
