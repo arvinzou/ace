@@ -18,37 +18,39 @@
 			<div class="title">\${data.title}</div>
 			<div class="status">
 				<span class="publisher">\${data.publisher}</span>
-				<span class="date">2018-11-20 13:20:15</span>
+				<span class="date">\${data.pushDate}</span>
 			</div>
 			<div class="content">
 				\$\${data.content}
 			</div>
 			<div class="filelist-title">附件</div>
 			<div class="fileList">
+				{@each data.files as item, index}
 				<div class="item">
 					<div class="file-type">
-						{@if data.type == 'doc' || data.type == 'docx'}
+						{@if item.type == 'doc' || item.type == 'docx'}
 						<img src="img/icon_word.png" class="file-type-img" />
-						{@else if data.type == 'xls'|| data.type == 'xlsx'}
+						{@else if item.type == 'xls'|| item.type == 'xlsx'}
 						<img src="img/icon-excel.png" class="file-type-img" />
-						{@else if data.type == 'ppt'|| data.type == 'pptx'}
+						{@else if item.type == 'ppt'|| item.type == 'pptx'}
 						<img src="img/icon_ppt.png" class="file-type-img" />
-						{@else if data.type == 'jpg'|| data.type == 'png'}
+						{@else if item.type == 'jpg'|| item.type == 'png'}
 						<img src="img/icon-jpg.png" class="file-type-img" />
-						{@else if data.type == 'pdf'}
+						{@else if item.type == 'pdf'}
 						<img src="img/icon-pdf.png" class="file-type-img" />
-						{@else if data.type == 'txt'}
+						{@else if item.type == 'txt'}
 						<img src="img/icon-text.png" class="file-type-img" />
 						{@/if}
 					</div>
 					<div class="file-detail">
-						<div class="file-title">\${data.filename}</div>
+						<div class="file-title">\${item.fileName}</div>
 						<div class="file-footer">
-							<span>2018-11-20</span>
-							<a href="\${data.fileUrl}" download="\${data.filename}" class="download">下载</a>
+							<span>\${data.pushDate}</span>
+							<a href="\${item.fileUrl}" download="\${item.fileName}" class="download">下载</a>
 						</div>
 					</div>
 				</div>
+				{@/each}
 			</div>
 	    </script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
