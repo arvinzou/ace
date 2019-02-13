@@ -88,6 +88,11 @@ function regist(){
     if(!isEmpty(signAcct)){
         alert("手机号不能为空！");
         return;
+    }else{
+        if(signAcct.length != 11){
+            alert("手机号码必须为11位！");
+            return;
+        }
     }
     if(!isEmpty(pwd)){
         alert("设置密码不能为空！");
