@@ -15,7 +15,7 @@
 <body>
 <div class="content">
     <div class="head">
-        <div class="room_name active_changeRoom">一教室</div>
+        <div class="room_name active_changeRoom pointer">一教室</div>
         <img src="img/logo.png"/>
         <div class="dateTime" id="clock">
             <p>1921年7月1日 </p>
@@ -172,13 +172,13 @@
             </tr>
             <tr>
                 <td class="style5">跟班老师</td>
-                <td>\${data.list.clsteacher.name}</td>
-                <td>\${data.list.clsteacher.mobile}</td>
+                <td>\${data.list.clsteacher?data.list.clsteacher.name:''}</td>
+                <td>\${data.list.clsteacher?data.list.clsteacher.mobile:''}</td>
             </tr>
             <tr>
                 <td class="style5">跟班干部</td>
-                <td>\${data.list.student.name}</td>
-                <td>\${data.list.student.mobile}</td>
+                <td>\${data.list.student?data.list.student.name:''}</td>
+                <td>\${data.list.student?data.list.student.mobile:''}</td>
             </tr>
             <tr>
                 <td class="style5">班级学员</td>
@@ -191,7 +191,7 @@
 
 <script id="tpl-imgTemp" type="text/template">
     {@each data as item}
-    <li class="img">
+    <li class="img pointer">
         <img src="\${item.url}" alt=""/>
     </li>
     {@/each}
