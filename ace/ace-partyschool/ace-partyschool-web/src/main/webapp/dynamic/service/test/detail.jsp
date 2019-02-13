@@ -12,7 +12,7 @@
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<div class="title" id="title">
+<div class="title1" id="title">
 	<p>党史讲座：学党史、知党情</p>
 </div>
 <div class="testContent" id="test">
@@ -56,6 +56,5 @@
 <script id="tpl_title" type="text/template">
 	<p>\${data.name}</p>
 </script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="js/detail.js" type="text/javascript" charset="utf-8"></script>
 </html>

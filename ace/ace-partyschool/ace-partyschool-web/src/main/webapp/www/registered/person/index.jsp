@@ -125,7 +125,7 @@
 					</div>
 					<div class="item-right">
 						<div class="menu-title">教学评测</div>
-						<div class="menu-content">共有4个待评</div>
+						<div class="menu-content">共有\${data.test}个待评</div>
 					</div>
 				</div>
 				{@/if}
