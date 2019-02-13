@@ -21,6 +21,7 @@
 		</div>
 
         <script id="count-tpl" type="text/template">
+			{@if data.lCardNo}
             <div class="cardNo">卡号: \${data.lCardNo}
             </div>
             <div class="balance">
@@ -31,6 +32,11 @@
                 {@/if}
             </div>
             <div class="balance-title">累计刷卡次数</div>
+			{@else}
+			<div class="balance">
+				没有记录
+			</div>
+			{@/if}
         </script>
 
         <script id="list-tpl" type="text/template">
