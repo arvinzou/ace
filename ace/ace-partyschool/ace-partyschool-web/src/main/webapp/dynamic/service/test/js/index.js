@@ -35,16 +35,16 @@ function doTest() {
 /**没有做的测试列表*/
 function getNotDoneTests() {
 
-    $(this).siblings().removeClass('action');
-    $(this).addClass('action');
+    $(this).siblings().removeClass('active');
+    $(this).addClass('active');
     getNotDoneTestList();
 }
 
 
 /**做了的测试列表*/
 function getDoneTests() {
-    $(this).siblings().removeClass('action');
-    $(this).addClass('action');
+    $(this).siblings().removeClass('active');
+    $(this).addClass('active');
     getDoneTestList();
 }
 

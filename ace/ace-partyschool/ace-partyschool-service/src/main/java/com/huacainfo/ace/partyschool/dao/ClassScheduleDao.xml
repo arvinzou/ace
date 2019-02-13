@@ -293,6 +293,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
         <include refid="From_Statement"/>
         WHERE cs.courseDate <![CDATA[ < ]]> CURDATE()
         AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
+        AND cs.ifTest ='1'
         AND cs.id NOT IN
         (
         SELECT t.classScheduleId

@@ -40,6 +40,22 @@
         student t  WHERE t.STATUS = '1'
         and t.classId=#{classId}
         UNION ALL
+
+        SELECT
+        'test' id, COUNT(1)
+        FROM class_schedule cs
+        WHERE cs.courseDate <![CDATA[ < ]]> CURDATE()
+        AND cs.classesId = #{classId}
+        AND cs.ifTest ='1'
+        AND cs.id NOT IN
+        (
+        SELECT t.classScheduleId
+        FROM (SELECT classScheduleId, userId
+        FROM partyschool.evaluation_rst er
+        WHERE er.userId = #{userId}) t
+        GROUP BY t.classScheduleId
+        )
+        UNION ALL
         SELECT
         'file' id,
         count(1)

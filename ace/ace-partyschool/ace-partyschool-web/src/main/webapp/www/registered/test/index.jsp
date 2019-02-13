@@ -33,7 +33,7 @@
 
 <script id="tpl_userInfo" type="text/template">
     <div class="headImg">
-        <img src="http://suo.im/4C98Qc">
+        <img src="img/default_header.png">
     </div>
     <div class="name">
         \${data.student.name}

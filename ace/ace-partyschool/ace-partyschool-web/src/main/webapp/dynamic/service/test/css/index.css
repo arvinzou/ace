@@ -78,7 +78,7 @@
     width: 100%;
     padding: 0.4rem;
     box-shadow: 0px 0px 12px 6px rgba(215, 217, 223, 0.25);
-    border-radius: 0.133333rem;
+    border-radius: 0.133333rem !important;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

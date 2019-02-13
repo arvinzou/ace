@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+         pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
@@ -9,7 +9,9 @@ pageEncoding="utf-8"%>
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>教室管理</title>
 </head>
-<link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen"/>
 <jsp:include page="/dynamic/common/header.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
 
@@ -108,11 +110,12 @@ pageEncoding="utf-8"%>
     </div>
 </script>
 
-<div class="modal fade"  role="dialog" id="modal-upload">
+<div class="modal fade" role="dialog" id="modal-upload">
     <div class="modal-dialog" role="document" style="width: 830px;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button"  authority="false" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" authority="false" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">图片上传</h4>
             </div>
@@ -130,18 +133,17 @@ pageEncoding="utf-8"%>
 </div>
 
 
-<div class="modal fade"  role="dialog" id="modal-file">
-    <div class="modal-dialog" role="document" style="width: 830px;">
+<div class="modal fade" role="dialog" id="modal-file">
+    <div class="modal-dialog" role="document" style="width: 650px;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button"  authority="false" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" authority="false" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">图片</h4>
             </div>
             <div class="modal-body">
-
                 <div id="load" class="loading"></div>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
@@ -168,9 +170,12 @@ pageEncoding="utf-8"%>
 <script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
 
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
 
 
 <script src="${pageContext.request.contextPath}/content/service/classroom/config.js?version=${cfg.version}"></script>

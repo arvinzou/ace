@@ -42,4 +42,6 @@ public interface ClassesDao {
     int updateStatus(Classes record);
 
     List<Map<String, String>> findByQ(@Param("params") Map<String, Object> params);
+
+    int headmasterCount(String htId);
 }

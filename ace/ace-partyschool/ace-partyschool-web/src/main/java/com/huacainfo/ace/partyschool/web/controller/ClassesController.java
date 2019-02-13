@@ -130,12 +130,14 @@ public class ClassesController extends BisBaseController {
 
     @ResponseBody
     @RequestMapping(value = "/findByQ")
-    public Map<String, Object> findByQ(String q, String id) {
+    public Map<String, Object> findByQ(String q, String id, String status) {
         Map<String, Object> params = new HashMap<>();
         params.put("q", id);
         if (!CommonUtils.isBlank(q)) {
             params.put("status", "1");
             params.put("q", q);
+        } else if (!CommonUtils.isBlank(status)) {
+            params.put("status", status);
         }
 
         return classesService.findByQ(params);

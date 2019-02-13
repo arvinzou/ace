@@ -244,8 +244,7 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Classes">
         select count(*)
         from classes
-        where
-        name=#{name}
+        where name=#{name}
         and id != #{id,jdbcType=VARCHAR}
     </select>
 
@@ -273,5 +272,12 @@
         </if>
         ORDER BY t.createDate desc
         limit 0, 10
+    </select>
+
+    <select id="headmasterCount" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Classes">
+        select count(*)
+        from classes
+        where status = '1'
+        and headmaster = #{htId,jdbcType=VARCHAR}
     </select>
 </mapper>
