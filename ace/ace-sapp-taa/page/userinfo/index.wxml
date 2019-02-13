@@ -1,6 +1,7 @@
 <view class='page'>
-  
-      <button class="weui-btn" open-type="getUserInfo"  bindgetuserinfo="bindgetuserinfo">获取用户信息</button>
+      
+      <image src='../../image/auth-banner.png' class='banner'></image>
+      <button class="weui-btn" open-type="getUserInfo"  bindgetuserinfo="bindgetuserinfo">微信授权</button>
 
 
 </view>

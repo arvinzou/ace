@@ -107,24 +107,22 @@ public class ClassesServiceImpl implements ClassesService {
         if (CommonUtils.isBlank(o.getEndDate())) {
             return new MessageResponse(1, "结束日期不能为空！");
         }
-        //if (CommonUtils.isBlank(o.getStatus())) {
-        //    return new MessageResponse(1, "状态 不能为空！");
-        //}
 
-
+        int i = classesDao.headmasterCount(o.getHeadmaster());
+        if (i > 0) {
+            return new MessageResponse(1, "该班主任已绑定其他班级！");
+        }
         int temp = this.classesDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "班级管理名称重复！");
         }
-
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.classesDao.insert(o);
-        this.dataBaseLogService.log("添加班级管理", "班级管理", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("添加班级管理", "班级管理", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加班级管理完成！");
     }
@@ -154,9 +152,10 @@ public class ClassesServiceImpl implements ClassesService {
         if (CommonUtils.isBlank(o.getEndDate())) {
             return new MessageResponse(1, "结束日期不能为空！");
         }
-        //if (CommonUtils.isBlank(o.getStatus())) {
-        //    return new MessageResponse(1, "状态 不能为空！");
-        //}
+        int i = classesDao.headmasterCount(o.getHeadmaster());
+        if (i > 0) {
+            return new MessageResponse(1, "该班主任已绑定其他班级！");
+        }
         int temp = this.classesDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "班级管理名称重复！");
@@ -167,9 +166,8 @@ public class ClassesServiceImpl implements ClassesService {
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
-        this.classesDao.updateByPrimaryKey(o);
-        this.dataBaseLogService.log("变更班级管理", "班级管理", "",
-                o.getId(), o.getId(), userProp);
+        classesDao.updateByPrimaryKey(o);
+        dataBaseLogService.log("变更班级管理", "班级管理", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "变更班级管理完成！");
     }
@@ -202,8 +200,8 @@ public class ClassesServiceImpl implements ClassesService {
      * @version: 2019-01-03
      */
     @Override
-    public ResultResponse selectClassesByPrimaryKeyVo(UserProp userProp,String classId) throws Exception {
-        if(CommonUtils.isBlank(classId)) {
+    public ResultResponse selectClassesByPrimaryKeyVo(UserProp userProp, String classId) throws Exception {
+        if (CommonUtils.isBlank(classId)) {
             if (userProp == null) {
                 return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
             }
@@ -218,14 +216,13 @@ public class ClassesServiceImpl implements ClassesService {
         try {
             map.put("list", dao.getClassesInfo(classId));
             map.put("count", this.studentDao.findStudentCount(classId));
-            }
-        catch (Exception e){
+        } catch (Exception e) {
             session.close();
-        }finally {
+        } finally {
             session.close();
         }
-            return new ResultResponse(0, "班级须知获取完成！", map);
-        }
+        return new ResultResponse(0, "班级须知获取完成！", map);
+    }
 
     /**
      * @throws
@@ -241,7 +238,7 @@ public class ClassesServiceImpl implements ClassesService {
     @Override
     public MessageResponse deleteClassesByClassesId(String id, UserProp userProp) throws
             Exception {
-        Classes classes =classesDao.selectVoByPrimaryKey(id);
+        Classes classes = classesDao.selectVoByPrimaryKey(id);
         if (null == classes) {
             return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
         }
@@ -284,7 +281,7 @@ public class ClassesServiceImpl implements ClassesService {
      */
     @Override
     public MessageResponse recover(String id, UserProp curUserProp) throws Exception {
-        Classes classes =classesDao.selectVoByPrimaryKey(id);
+        Classes classes = classesDao.selectVoByPrimaryKey(id);
         if (null == classes) {
             return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
         }
