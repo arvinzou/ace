@@ -8,6 +8,7 @@ public class Notice implements Serializable {
     private static final long serialVersionUID = 1L;
     private String id;
 
+    /**1、学校公告，2、班级公告*/
     private String category;
 
     private String classesId;
