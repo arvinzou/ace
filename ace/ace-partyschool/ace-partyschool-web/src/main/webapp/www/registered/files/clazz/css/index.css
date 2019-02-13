@@ -69,6 +69,11 @@
 	word-break:break-all;
 	margin-top: 0.34rem;
 	overflow: hidden;
+	display: table;
+}
+.inner-middle{
+	display: table-cell;
+	vertical-align:middle;
 }
 .download{
 	color: #373F53;
