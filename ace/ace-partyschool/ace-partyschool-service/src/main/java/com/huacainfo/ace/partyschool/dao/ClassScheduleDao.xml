@@ -229,9 +229,12 @@ WHERE st.classId=cs.classesId) AS studentNum,
 
     <select id="notDoneTestList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
-        <include refid="Vo_Column_List"/>
+        cs.id, cs.classesId, cs.courseDate, cs.courseIndex, cs.teacherId, cs.courseId,cs.ifTest,
+        c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,
+        t.id as tId ,t.name as tName,
+        cla.id as claId ,cla.name as claName
         <include refid="From_Statement"/>
-        WHERE cs.courseDate <![CDATA[ < ]]> CURDATE()
+        WHERE cs.courseDate <![CDATA[ < ]]> NOW()
         AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
         AND cs.ifTest ='1'
         AND cs.id NOT IN
