@@ -52,7 +52,7 @@
                 <img class="icon" src="img/icon_person.png" alt="">
                 <span>\${item.teacher.name}</span></p>
         </div>
-        <div class="right view">评测</div>
+        <div class="right view">测评</div>
     </div>
     {@/each}
 </script>
