@@ -1,4 +1,4 @@
-var server = "http://f63981bf.ngrok.io";
+var server = "http://c6cb781a.ngrok.io";
 $(function(){
 	$('#calendar').calendar({
         data: [
