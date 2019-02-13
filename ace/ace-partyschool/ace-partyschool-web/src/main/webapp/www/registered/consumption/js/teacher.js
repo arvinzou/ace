@@ -1,5 +1,5 @@
 var lCardNo = null;
-var server = "http://f63981bf.ngrok.io";
+var server = "http://16865594.ngrok.io";
 $(function(){
 
     $.ajax({
