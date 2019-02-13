@@ -77,6 +77,18 @@
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
+.download{
+	color: #373F53;
+	text-decoration: none;
+}
+.download:link{
+	color: #373F53;
+	text-decoration: none;
+}
+.download:visited{
+	color: #373F53;
+	text-decoration: none;
+}
 .file-footer{
 	height: 0.6rem;
 	line-height: 0.6rem;
