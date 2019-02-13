@@ -42,7 +42,7 @@
                         <span class="required" aria-required="true"> * </span>
                     </label>
                     <div class="col-md-5">
-                        <input type="text" class="form-control" name="address" maxlength="200" placeholder="请选择事故发生地点"
+                        <input type="text" class="form-control" name="address" maxlength="200" readonly placeholder="请选择事故发生地点"
                                style="float:left;width:90%">
 
                         <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
