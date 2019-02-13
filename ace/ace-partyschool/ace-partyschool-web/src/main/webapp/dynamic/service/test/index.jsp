@@ -33,8 +33,8 @@
 
                 <form onsubmit="return t_query()">
                     <div class="btn-group" role="group" id="testNumber" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default notDoneBtn active" >未评测</button>
-                        <button type="button" class="btn btn-default doneBtn">已评测</button>
+                        <button type="button" class="btn btn-default notDoneBtn active" >未测评</button>
+                        <button type="button" class="btn btn-default doneBtn">已测评</button>
                     </div>
                 </form>
             </div>
@@ -70,7 +70,7 @@
                 <img class="icon" src="img/icon_person.png" alt="">
                 <span>\${item.teacher.name}</span></p>
         </div>
-        <div class="right view">评测</div>
+        <div class="right view">测评</div>
     </div>
     {@/each}
 </script>

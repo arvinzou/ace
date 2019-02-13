@@ -33,9 +33,13 @@
 			{@/each}
 		</script>
 		<script id="balance-tpl" type="text/template">
+			{@if data.lCardNo}
 			<div class="cardNo">卡号:\${data.lCardNo}</div>
 			<div class="balance">\${data.curBalance}</div>
 			<div class="balance-title">一卡通余额(元)</div>
+			{@/else}
+			<div class="balance">没有记录</div>
+			{@/if}
 		</script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>

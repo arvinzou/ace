@@ -44,7 +44,7 @@
         SELECT
         'test' id, COUNT(1)
         FROM class_schedule cs
-        WHERE cs.courseDate <![CDATA[ < ]]> CURDATE()
+        WHERE cs.courseDate <![CDATA[ < ]]> NOW()
         AND cs.classesId = #{classId}
         AND cs.ifTest ='1'
         AND cs.id NOT IN

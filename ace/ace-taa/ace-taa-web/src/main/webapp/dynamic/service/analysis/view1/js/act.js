@@ -78,6 +78,9 @@ function findTraAccList() {
                             } else if (!o.deadthToll && o.injuries) {
                                 imgUrl = "img/icon0.png"
                                 font = "<font style='font-weight: bold;color:#fff;font-size:10px'>" + o.injuries + "</font>"
+                            }else {
+                                imgUrl = "img/icon0.png"
+                                font = "<font style='font-weight: bold;color:#fff;font-size:10px'>" + 0 + "</font>"
                             }
                             var marker = new qq.maps.Marker({
                                 //设置Marker的位置坐标
