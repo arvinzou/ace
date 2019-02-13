@@ -163,6 +163,8 @@ function initAnalysis(){
                         data.student = temp[i].VALUE;
                     }else if(temp[i].id == 'file'){
                         data.file = temp[i].VALUE;
+                    }else if(temp[i].id == 'test'){
+                        data.test = temp[i].VALUE;
                     }
                     data.regType = regType;
                 }

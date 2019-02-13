@@ -91,8 +91,14 @@ function fileList(){
         success:function(result){
             if(result.status == 0) {
                 console.log(result);
+                var list = result.data;
+                for(var i=0; i<list.length; i++){
+                    if(list[i].title.length > 33){
+                        list[i].title = list[i].title.substring(0,35)+"...";
+                    }
+                }
                 juicer.register('fileType', fileTypes);
-                renderPage('fileList', result.data, 'list-tpl');
+                renderPage('fileList', list, 'list-tpl');
                 renderPage('fileParamList', result.data, 'list-tpl');
             }else {
                 if(result.info){
@@ -125,10 +131,12 @@ function initClasses(){
             if(result.status == 0) {
               if(result.data.length <1 && regType == 'teacher'){
                   alert("对不起！您没有班级文件上传权限。");
+                  $("#uploadModal").hide();
                   return;
               }else{
                   if(regType == 'student'){
                       $("#classBox").hide();
+                      return;
                   }
                   var data = result.data;
                   var classesArr = [];

@@ -117,7 +117,7 @@ public class FilesController extends BisBaseController {
             }
             fileNames[i] = PropertyUtil.getProperty("fastdfs_server") + this.fileSaver.saveFile(dest, o.getOriginalFilename());
             dest.delete();
-            clsFilesService.insertFiles(fileName,fileNames[i] ,classesId ,category,this.getCurUserProp());
+            clsFilesService.insertFiles(o.getName(),fileNames[i] ,classesId ,category,this.getCurUserProp());
             i++;
         }
 

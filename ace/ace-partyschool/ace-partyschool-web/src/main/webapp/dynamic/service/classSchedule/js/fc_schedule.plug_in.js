@@ -210,14 +210,13 @@ window.onload = function () {
                     text: '〈',
                     click: function () {
                         $('#calendar').fullCalendar('prev');
-                        formatDate($('#calendar').fullCalendar('getView').title);
                     }
                 },
                 next: {
                     text: '〉',
                     click: function () {
                         $('#calendar').fullCalendar('next');
-                        formatDate($('#calendar').fullCalendar('getView').title);
+
                     }
                 }
             },
@@ -246,8 +245,8 @@ window.onload = function () {
                 day: '日'
             },
 
-            viewRender: function () {
-                getEventData();
+            viewRender: function (e) {
+                formatDate(e.title);
             },
             //点击一天时触发
             dayClick: function (date, allDay, jsEvent, view) {

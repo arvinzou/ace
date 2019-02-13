@@ -11,7 +11,11 @@ function initData(){
         },
         success:function(result){
             if(result.status == 0) {
-                console.log(result);
+                var fileName = result.data.list.fileUrl;
+                var index01 = fileName.indexOf("filename=");
+                var index02 = fileName.lastIndexOf(".");
+                fileName = fileName.substring(index01+9, index02);
+                result.data.list.fileName = fileName;
                 renderPage('classNotice', result.data, 'class-tpl');
             }else {
                 if(result.info){

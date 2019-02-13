@@ -30,7 +30,7 @@ function submitTest() {
         }
         cell.name=$that.data('name');
         cell.introduce=$that.data('introduce');
-        cell.score=$that.find('.number').text();
+        cell.score=$that.find('.number').val();
         data.push(cell);
     }
     postData(data);
@@ -46,7 +46,7 @@ function postData(datas) {
             content:$('#textarea').val()
         })
     }
-    $.getJSON(url,data,function (rst) {
+    $.post(url,data,function (rst) {
         if(rst.status==0){
             alert("感谢您的评测");
             window.history.back();
