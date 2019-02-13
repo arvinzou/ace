@@ -31,13 +31,15 @@ function initData(noticeId){
         },
         success:function(result){
             if(result.status == 0) {
-                var fileUrl = result.data.fileUrl;
-                var nameIndex = fileUrl.indexOf('filename=');
-                var fileName = fileUrl.substring(nameIndex+9, fileUrl.length);
-                var typeIndex = fileUrl.lastIndexOf(".");
-                var type = fileUrl.substring(typeIndex+1, fileUrl.length);
-                result.data.filename = fileName;
-                result.data.type = type;
+                var fileList = result.data.files;
+                if(fileList.length > 0){
+                    for(var i=0; i<fileList.length; i++){
+                        var index = fileList[i].fileName.lastIndexOf(".");
+                        var fileType = fileList[i].fileName.substring(index+1, fileList[i].fileName.length);
+                        fileList[i].type = fileType.toLowerCase();
+                    }
+                }
+                result.data.files = fileList;
                 renderPage('detail', result.data, 'detail-tpl');
 
             }else {
