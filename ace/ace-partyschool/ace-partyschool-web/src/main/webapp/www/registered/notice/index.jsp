@@ -17,13 +17,13 @@
 		<script id="list-tpl" type="text/template">
 			<div class="title-box">
 				<span class="title">最新消息</span>
-				{@if data.newNotice.length > 0}
-				<span class="num">\${data.newNotice.length}</span>
+				{@if data.list.length > 0}
+				<span class="num">\${data.list.length}</span>
 				{@/if}
 			</div>
 			<div class="box">
-				{@if data.newNotice.length > 0}
-				{@each data.newNotice as item01, index01}
+				{@if data.list.length > 0}
+				{@each data.list as item01, index01}
 				<div class="content">
 					<div class="item">
 						<div class="item-left">
@@ -32,7 +32,7 @@
 						<div class="item-right">
 							<div class="notice-title">\${item01.title}</div>
 							<div class="notice-detail">
-								<span class="time">2018-11-20 13:20:15</span>
+								<span class="time">\${item01.pushDate}</span>
 								<span class="detail" onclick="findDetail('\${item01.id}');">查看详情</span>
 							</div>
 						</div>
@@ -49,8 +49,8 @@
 				<span class="title">历史消息</span>
 			</div>
 			<div class="box">
-				{@if data.oldNotice.length > 0}
-				{@each data.oldNotice as item02, index02}
+				{@if data.history.length > 0}
+				{@each data.history as item02, index02}
 				<div class="content">
 					<div class="item">
 						<div class="item-left">
@@ -59,8 +59,8 @@
 						<div class="item-right">
 							<div class="notice-title">\${item02.title}</div>
 							<div class="notice-detail">
-								<span class="time">2018-11-20 13:20:15</span>
-								<span class="detail" onclick="findDetail('\${item01.id}');">查看详情</span>
+								<span class="time">\${item02.pushDate}</span>
+								<span class="detail" onclick="findDetail('\${item02.id}');">查看详情</span>
 							</div>
 						</div>
 					</div>
