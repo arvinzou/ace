@@ -272,7 +272,6 @@ WHERE t.classScheduleId= #{classScheduleId,jdbcType=VARCHAR}
             FROM evaluation_rst er
             WHERE er.userId=#{condition.userId,jdbcType=VARCHAR}) t
             GROUP BY t.classScheduleId) e
-
         </select>
 
 
