@@ -2,6 +2,7 @@ package com.huacainfo.ace.taa.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -131,16 +132,14 @@ public class RoadServiceImpl implements RoadService {
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "级别不能为空！");
         }
-//        if (CommonUtils.isBlank(o.getStatus())) {
-//            return new MessageResponse(1, "状态 不能为空！");
-//        }
 
+
+        o.setStatus(StringUtil.isNotEmpty(o.getStatus()) ? o.getStatus() : "1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.roadDao.updateByPrimaryKey(o);
-        this.dataBaseLogService.log("变更道路", "道路", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("变更道路", "道路", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "变更道路完成！");
     }

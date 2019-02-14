@@ -127,7 +127,12 @@ public class TraAccServiceImpl implements TraAccService {
         if (CommonUtils.isBlank(o.getWeather())) {
             return new MessageResponse(1, "天气不能为空！");
         }
-
+        if (CommonUtils.isBlank(o.getRoadSectionId())) {
+            return new MessageResponse(1, "所属路段不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getRoadManId())) {
+            return new MessageResponse(1, "所属路长不能为空！");
+        }
 
         String id = (StringUtil.isEmpty(o.getId()) || o.getId().length() < 32) ? GUIDUtil.getGUID() : o.getId();
         o.setId(id);
@@ -139,8 +144,7 @@ public class TraAccServiceImpl implements TraAccService {
             o.setAreaCode(userProp.getAreaCode());
         }
         this.traAccDao.insert(o);
-        this.dataBaseLogService.log("添加事故", "事故", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("添加事故", "事故", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "保存成功！");
     }
@@ -605,6 +609,7 @@ public class TraAccServiceImpl implements TraAccService {
         }
         return rst;
     }
+
     /**
      * @throws
      * @Title:getTraAccListTx
@@ -620,6 +625,7 @@ public class TraAccServiceImpl implements TraAccService {
         List<Map<String, Object>> list = this.traAccDao.getTraAccList(condition);
         return list;
     }
+
     /**
      * 掌上驾驶仓
      *
