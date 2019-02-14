@@ -149,7 +149,7 @@ public class RoadManServiceImpl implements RoadManService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
-        if (CommonUtils.isValidMobile(o.getMobile())) {
+        if (!CommonUtils.isValidMobile(o.getMobile())) {
             return new MessageResponse(1, "手机号格式非法！");
         }
         if (CommonUtils.isBlank(o.getStartName())) {
@@ -158,17 +158,13 @@ public class RoadManServiceImpl implements RoadManService {
         if (CommonUtils.isBlank(o.getEndName())) {
             return new MessageResponse(1, "管辖路段截止不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
 
         o.setStatus(StringUtil.isEmpty(o.getStatus()) ? "1" : o.getStatus());
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.roadManDao.updateByPrimaryKey(o);
-        this.dataBaseLogService.log("变更路长", "路长", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("变更路长", "路长", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "保存成功！");
     }

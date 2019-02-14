@@ -42,7 +42,8 @@
                         <span class="required" aria-required="true"> * </span>
                     </label>
                     <div class="col-md-5">
-                        <input type="text" class="form-control" name="address" maxlength="200" readonly placeholder="请选择事故发生地点"
+                        <input type="text" class="form-control" name="address" maxlength="200" readonly
+                               placeholder="请选择事故发生地点"
                                style="float:left;width:90%">
 
                         <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
@@ -107,6 +108,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">
                         所属路段
+                        <span class="required" aria-required="true"> * </span>
                     </label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" style="width:450px" name="roadSectionId" maxlength="50"
@@ -117,6 +119,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">
                         所属路长
+                        <span class="required" aria-required="true"> * </span>
                     </label>
                     <div class="col-md-5">
                         <input id="roadManId" type="text" id="roadManId" class="form-control" style="width:450px"
