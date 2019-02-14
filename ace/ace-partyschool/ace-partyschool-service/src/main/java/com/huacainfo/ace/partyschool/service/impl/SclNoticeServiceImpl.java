@@ -75,8 +75,12 @@ public class SclNoticeServiceImpl implements SclNoticeService {
         condition.setUserId(userProp.getUserId());
         List<NoticeVo> noticeVo = new ArrayList<>();
         Map<String, Object> map = new HashMap<String, Object>();
+        condition.setnStatus("1");
         noticeVo = this.noticeDao.findMyNoticeList(condition, start, limit, orderBy);
         map.put("list", noticeVo);
+        condition.setnStatus("2");
+        noticeVo = this.noticeDao.findMyNoticeList(condition, start, limit, orderBy);
+        map.put("history", noticeVo);
         map.put("count", this.noticeDao.findUnreadCount(userProp.getUserId()));
         return new ResultResponse(0, "通知公告获取完成！", map);
     }
