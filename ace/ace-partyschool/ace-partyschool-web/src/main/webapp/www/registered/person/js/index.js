@@ -125,6 +125,10 @@ function initNoticeTop1(){
             if(result.status == 0) {
                 if(result.data.list.length>0){
                     renderPage('noticeTop', result.data.list[0], 'noticeTop-tpl');
+                    $("#more").append('<span class="new">'+result.data.list.length+'</span>');
+
+                }else{
+                    renderPage('noticeTop', result.data.history[0], 'noticeTop-tpl');
                 }
             }else {
                 if(result.info){

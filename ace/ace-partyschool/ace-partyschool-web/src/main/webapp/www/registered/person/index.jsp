@@ -77,7 +77,9 @@
 			<div class="notice">
 				<div class="notice-icon"><img src="img/icon-message.png"/></div>
 				<div class="notice-title">\${data.title}</div>
-				<div class="more" onclick="moreNotice();"><span>全部</span><img src="img/icon_select.png"/></div>
+				<div id="more" class="more" onclick="moreNotice();">
+					<span>全部</span><img src="img/icon_select.png"/>
+				</div>
 			</div>
 		</script>
 

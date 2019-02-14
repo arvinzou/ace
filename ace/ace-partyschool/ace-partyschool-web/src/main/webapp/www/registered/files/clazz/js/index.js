@@ -202,8 +202,8 @@ function upload(){
         filters: {
             max_file_size: '102400mb',
             mime_types: [
-                {title : "oppice files", extensions : "xls,xlsx,doc,docx,ppt,pptx,pdf,txt"},
-                {title : "image", extensions : "jpg,jpeg,png,bmp"}
+              //  {title : "oppice files", extensions : "xls,xlsx,doc,docx,ppt,pptx,pdf,txt"},
+                //{title : "image", extensions : "jpg,jpeg,png,bmp"}
             ]
         }
     });
