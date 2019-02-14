@@ -68,7 +68,7 @@
 				{@/each}
 				{@else}
 				<div class="content">
-					<div class="item blank">暂无最新通知</div>
+					<div class="item blank">暂无历史通知</div>
 				</div>
 				{@/if}
 			</div>
