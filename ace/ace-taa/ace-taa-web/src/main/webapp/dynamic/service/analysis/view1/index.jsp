@@ -36,7 +36,7 @@
 <script>
     var id = '${param.id}';
 </script>
-<link href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+<link href="${pageContext.request.contextPath}/content/common/js/datetimepicker/bootstrap-datetimepicker.css"
       rel="stylesheet" type="text/css"/>
 
 <div id="Header">
@@ -53,14 +53,7 @@
         <form id="fm">
             <div class="title">精确搜索</div>
             <div class="seach morginBottom40">
-                <input id="tt" class="easyui-combotree" style=" width: 120px;height: 46px;border:0; !important;" name="areaCode"
-                       data-options="url:'${portalPath}/system/selectProvinceTreeList.do',
-					method:'get',
-					label:'',
-					labelPosition:'top',
-					onSelect:function  (node) {
-						 setParams('areaCode', node.id);
-					}">
+                <input id="tt" class="easyui-combotree" style=" width: 120px;height: 46px;border:0; !important;" name="areaCode">
                 <input class="loadName" name="keyword" type="text">
                 <button class="active_seach"></button>
             </div>
@@ -160,9 +153,9 @@
 <script type="text/javascript"
         src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 <script type="text/javascript"
-        src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+        src="${pageContext.request.contextPath}/content/common/js/datetimepicker/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript"
-        src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/common/js/datetimepicker/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
 <script src="js/Concurrent.Thread.js"></script>
 <script src="js/act.js?version=${cfg.version}"></script>
 

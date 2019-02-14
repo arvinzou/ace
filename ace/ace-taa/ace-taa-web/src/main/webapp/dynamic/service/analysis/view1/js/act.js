@@ -178,6 +178,7 @@ jQuery(function ($) {
 
     initMap();
     initForm();
+    initCombotree();
     initEvents();
     getLatLongByAreaCode({
         areaCode: userProp.areaCode
@@ -191,6 +192,23 @@ jQuery(function ($) {
     $('.active_seach').click(searchRoadName);
     $('#check-group-category').on('click', 'button', setParams);
 });
+
+function initCombotree() {
+    $('#tt').combotree({
+        url:portalPath+"/system/selectProvinceTreeList.do" ,
+        valueField: 'id',
+        textField: 'text',
+        method: 'get',
+        // onChange :function(){
+        //     $val =  $("#tt").combotree('getValue');
+        //     $("#_EnvUnitCode").val($val);
+        // },
+        // onLoadSuccess:function(node,data){
+        //     $("#tt").combotree('setValue',data[0].text);
+        //
+        // }
+    });
+}
 
 function searchRoadName() {
     params.keyword = $("input[name=keyword]").val();
@@ -252,8 +270,11 @@ function initForm() {
             $.each(formData, function (n, obj) {
                 params[obj.name] = obj.value;
             });
-            params.startDate = params.startDate + ' 00:00:00';
-            params.endDate = params.endDate + ' 00:00:00';
+            if(params.startDate){
+                params.startDate = params.startDate + ' 00:00:00';
+            }if(params.endDate){
+                params.endDate = params.endDate + ' 23:59:59';
+            }
             findTraAccList(params);
             return false;
         }
@@ -295,14 +316,14 @@ function initEvents() {
         format: 'yyyy-mm-dd',
         language: 'zh-CN',
         weekStart: 1,
-        todayBtn: 1, //显示‘今日’按钮
-        autoclose: 1,
+        todayBtn: true, //显示‘今日’按钮
+        clearBtn: true, //清除按钮
+        autoclose: true,
         todayHighlight: 1,
         startView: 2,
-        clearBtn: true, //清除按钮
         forceParse: 0
     }).on('changeDate', function (ev) {
-        moveCSS();
+        // moveCSS();
     });
 
     $('input[name=startDate]').focus(function () {
@@ -315,14 +336,14 @@ function initEvents() {
         format: 'yyyy-mm-dd',
         language: 'zh-CN',
         weekStart: 1,
-        todayBtn: 1, //显示‘今日’按钮
-        autoclose: 1,
+        todayBtn: true, //显示‘今日’按钮
+        clearBtn: true, //清除按钮
+        autoclose: true,
         todayHighlight: 1,
         startView: 2,
-        clearBtn: true, //清除按钮
         forceParse: 0
     }).on('changeDate', function (ev) {
-        moveCSS();
+        // moveCSS();
     });
     $('input[name=endDate]').focus(function () {
         $(this).blur(); //不可输入状态

@@ -226,7 +226,7 @@ body {
 	top: 0;
 	background: rgba(0, 0, 0, 0.5);
 	padding-top: 156px;
-	z-index: 999999;
+	z-index: 2000;
 }
 
 .modal .classInfo {
