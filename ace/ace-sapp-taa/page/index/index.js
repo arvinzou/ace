@@ -65,7 +65,7 @@ Page({
         })
         if (!util.is_login()) {
             wx.navigateTo({
-                url: "../userinfo/index?url=../index/index&type=switchTab"
+                url: "../userinfo/index?url=../index/index&type=navigateTo"
             });
             return;
         }

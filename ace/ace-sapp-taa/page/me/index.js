@@ -49,7 +49,7 @@ Page({
       try {
           wx.clearStorage({success:function(){
               wx.navigateTo({
-                  url: "../userinfo/index?url=../me/index&type=switchTab"
+                  url: "../userinfo/index?url=../me/index&type=navigateTo"
               });
           }
           })
@@ -81,7 +81,7 @@ Page({
       var that = this;
       if (!util.is_login()) {
           wx.navigateTo({
-              url: "../userinfo/index?url=../me/index&type=switchTab"
+              url: "../userinfo/index?url=../me/index&type=navigateTo"
           });
           return;
       } else {
