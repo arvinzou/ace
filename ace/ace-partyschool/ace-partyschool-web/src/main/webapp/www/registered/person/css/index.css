@@ -171,7 +171,7 @@ body{
 	margin: 0.4rem auto;
 }
 .notice-title{
-	width: 7rem;
+	width: 6.8rem;
 	height: 1.333333rem;
 	float: left;
 	line-height: 1.333333rem;
@@ -183,18 +183,19 @@ body{
 	white-space: nowrap;
 }
 .more{
-	width: 1.4rem;
+	width: 1.6rem;
 	height: 1.333333rem;
 	line-height: 1.333333rem;
 	float: left;
 	color: #373F53;
 	font-size: 0.4rem;
 	font-weight: bold;
+	position: relative;
 }
 .more img{
 	width: 0.146666rem;
 	height: 0.266666rem;
-	margin-left: 0.4rem;
+	margin-left: 0.6rem;
 }
 .menu{
 	padding-left: 0.6rem;
@@ -259,4 +260,18 @@ body{
 	display: table-cell;
 	vertical-align:middle;
 	padding-left: 0.4rem;
+}
+.new{
+	width: 0.453333rem;
+	height: 0.32rem;
+	line-height: 0.32rem;
+	text-align: center;
+	background: linear-gradient(0deg,rgba(253,33,61,1) 0%,rgba(249,101,87,1) 100%);
+	color: #FFFFFF;
+	font-size: 0.16rem;
+	border-radius: 0.16rem;
+	display: block;
+	position: absolute;
+	top: 0.28rem;
+	right: 0.2rem;
 }
