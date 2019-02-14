@@ -137,7 +137,6 @@ function initEvents() {
         },
         messages: {
             address: {
-                required: "请选择事故发生地点",
                 maxlength: "事故发生地点字符长度不能超过50"
             },
             weather: {

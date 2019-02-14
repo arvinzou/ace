@@ -93,8 +93,8 @@
         <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
             AND ns.userId = #{condition.userId,jdbcType=VARCHAR}
         </if>
-        <if test="condition.nStatus !=null and condition.nStatus !=&quot;&quot;">
-            AND ns.status = #{condition.nStatus,jdbcType=VARCHAR}
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            AND ns.status = #{condition.status,jdbcType=VARCHAR}
         </if>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
