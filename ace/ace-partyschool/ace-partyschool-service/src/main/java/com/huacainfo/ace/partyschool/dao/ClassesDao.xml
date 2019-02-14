@@ -279,5 +279,6 @@
         from classes
         where status = '1'
         and headmaster = #{htId,jdbcType=VARCHAR}
+        and id != #{id,jdbcType=VARCHAR}
     </select>
 </mapper>

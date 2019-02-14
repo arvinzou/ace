@@ -1,7 +1,6 @@
 package com.huacainfo.ace.partyschool.dao;
 
 import com.huacainfo.ace.partyschool.model.Classes;
-import com.huacainfo.ace.partyschool.model.Teacher;
 import com.huacainfo.ace.partyschool.vo.ClassesQVo;
 import com.huacainfo.ace.partyschool.vo.ClassesVo;
 import org.apache.ibatis.annotations.Param;
@@ -26,9 +25,9 @@ public interface ClassesDao {
     ClassesVo getClassesInfo(String id);
 
     List<ClassesVo> findList(@Param("condition") ClassesQVo condition,
-                                 @Param("start") int start,
-                                 @Param("limit") int limit,
-                                 @Param("orderBy") String orderBy);
+                             @Param("start") int start,
+                             @Param("limit") int limit,
+                             @Param("orderBy") String orderBy);
 
 
     List<ClassesVo> findMyClassesList(String teacherId);
@@ -43,5 +42,5 @@ public interface ClassesDao {
 
     List<Map<String, String>> findByQ(@Param("params") Map<String, Object> params);
 
-    int headmasterCount(String htId);
+    int headmasterCount(@Param("id") String id, @Param("htId") String htId);
 }

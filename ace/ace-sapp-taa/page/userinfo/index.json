@@ -1,6 +1,6 @@
 {
     "navigationBarTitleText": "常德市交警事故采集分析平台",
-    "navigationBarBackgroundColor": "#2932BD",
-    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "black",
     "enablePullDownRefresh": false
 }

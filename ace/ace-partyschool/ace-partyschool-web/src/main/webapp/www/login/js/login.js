@@ -1,7 +1,7 @@
 var errorInfo = null;
 $(function(){
-    var locaUrl = window.location.href;
-    var url = window.location.href.substring(locaUrl.indexOf("?")+1);
+    var locaUrl = decodeURIComponent(window.location.href);
+    var url = locaUrl.substring(locaUrl.indexOf("?")+1);
     var paramArr = url.split("&");
     for(var i=0;i < paramArr.length;i++){
         num=paramArr[i].indexOf("=");
@@ -13,7 +13,7 @@ $(function(){
             }
         }
     }
-    if(errorInfo){
+    if(errorInfo != null){
         alert(errorInfo);
     }
 });
