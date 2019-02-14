@@ -3,6 +3,7 @@ package com.huacainfo.ace.partyschool.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -11,8 +12,13 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.ClassesDao;
+import com.huacainfo.ace.partyschool.dao.ClassroomDao;
 import com.huacainfo.ace.partyschool.dao.StudentDao;
+import com.huacainfo.ace.partyschool.dao.TeacherDao;
 import com.huacainfo.ace.partyschool.model.Classes;
+import com.huacainfo.ace.partyschool.model.Classroom;
+import com.huacainfo.ace.partyschool.model.Student;
+import com.huacainfo.ace.partyschool.model.Teacher;
 import com.huacainfo.ace.partyschool.service.ClassesService;
 import com.huacainfo.ace.partyschool.service.SignService;
 import com.huacainfo.ace.partyschool.vo.AccountVo;
@@ -51,6 +57,10 @@ public class ClassesServiceImpl implements ClassesService {
     private SignService signService;
     @Autowired
     private SqlSessionTemplate sqlSession;
+    @Autowired
+    private ClassroomDao classroomDao;
+    @Autowired
+    private TeacherDao teacherDao;
 
 
     /**
@@ -107,8 +117,14 @@ public class ClassesServiceImpl implements ClassesService {
         if (CommonUtils.isBlank(o.getEndDate())) {
             return new MessageResponse(1, "结束日期不能为空！");
         }
+        //外键约束条件限制
+        MessageResponse fms = fKeyCheck(o);
+        if (fms.getStatus() == 1) {
+            return fms;
+        }
 
-        int i = classesDao.headmasterCount(o.getHeadmaster());
+        String id = GUIDUtil.getGUID();
+        int i = classesDao.headmasterCount(id, o.getHeadmaster());
         if (i > 0) {
             return new MessageResponse(1, "该班主任已绑定其他班级！");
         }
@@ -116,7 +132,8 @@ public class ClassesServiceImpl implements ClassesService {
         if (temp > 0) {
             return new MessageResponse(1, "班级管理名称重复！");
         }
-        o.setId(GUIDUtil.getGUID());
+
+        o.setId(id);
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -152,7 +169,13 @@ public class ClassesServiceImpl implements ClassesService {
         if (CommonUtils.isBlank(o.getEndDate())) {
             return new MessageResponse(1, "结束日期不能为空！");
         }
-        int i = classesDao.headmasterCount(o.getHeadmaster());
+        //外键约束条件限制
+        MessageResponse fms = fKeyCheck(o);
+        if (fms.getStatus() == 1) {
+            return fms;
+        }
+
+        int i = classesDao.headmasterCount(o.getId(), o.getHeadmaster());
         if (i > 0) {
             return new MessageResponse(1, "该班主任已绑定其他班级！");
         }
@@ -170,6 +193,36 @@ public class ClassesServiceImpl implements ClassesService {
         dataBaseLogService.log("变更班级管理", "班级管理", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "变更班级管理完成！");
+    }
+
+    private MessageResponse fKeyCheck(Classes o) {
+        if (StringUtil.isNotEmpty(o.getClassroomId())) {
+            Classroom c = classroomDao.selectByPrimaryKey(o.getClassroomId());
+            if (c == null) {
+                return new MessageResponse(ResultCode.FAIL, "教室不存在");
+            }
+        }
+        if (StringUtil.isNotEmpty(o.getHeadmaster())) {
+            Teacher obj = teacherDao.selectByPrimaryKey(o.getHeadmaster());
+            if (obj == null) {
+                return new MessageResponse(ResultCode.FAIL, "班主任不存在");
+            }
+        }
+        if (StringUtil.isNotEmpty(o.getTid1())) {
+            Teacher obj = teacherDao.selectByPrimaryKey(o.getTid1());
+            if (obj == null) {
+                return new MessageResponse(ResultCode.FAIL, "跟班老师不存在");
+            }
+        }
+        if (StringUtil.isNotEmpty(o.getTid2())) {
+            Student obj = studentDao.selectByPrimaryKey(o.getTid2());
+            if (obj == null) {
+                return new MessageResponse(ResultCode.FAIL, "跟班干部不存在");
+            }
+        }
+
+
+        return new MessageResponse(ResultCode.SUCCESS, "SUCCESS");
     }
 
     /**

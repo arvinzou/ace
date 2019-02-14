@@ -19,16 +19,11 @@
     </resultMap>
     <sql id="Base_Column_List">
         id, name, photoUrl, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
-        lastModifyUserName, lastModifyDate
-    </sql>
-    <sql id="Blob_Column_List">
-        introduce
+        lastModifyUserName, lastModifyDate, introduce
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
         from classroom
         where id = #{id,jdbcType=VARCHAR}
     </select>
