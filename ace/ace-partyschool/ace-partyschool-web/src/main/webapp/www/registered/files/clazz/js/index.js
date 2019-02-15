@@ -192,6 +192,9 @@ function upload(){
         url: '/portal/www/upload.do',
         file_data_name: 'file',
         multi_selection: false,
+        max_file_size: '100mb',
+        //一次上传数据大小
+        chunk_size: '100mb',
         resize: {
             width: 1024,
             height: 1024,
@@ -199,13 +202,10 @@ function upload(){
             quality: 60,
             preserve_headers: false
         },
-        filters: {
-            max_file_size: '102400mb',
-            mime_types: [
-              //  {title : "oppice files", extensions : "xls,xlsx,doc,docx,ppt,pptx,pdf,txt"},
-                //{title : "image", extensions : "jpg,jpeg,png,bmp"}
-            ]
-        }
+        filters: [
+            {title : "文档文件", extensions : "xls,doc,ppt,pdf,txt"},
+            {title : "图片文件", extensions : "jpg,jpeg,png,bmp"}
+        ]
     });
     uploader.init();
     uploader.bind("FileFiltered",function(uploader,file){
