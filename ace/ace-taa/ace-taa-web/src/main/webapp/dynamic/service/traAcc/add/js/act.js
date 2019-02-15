@@ -40,6 +40,9 @@ function initEvents() {
             weather: {
                 required: true
             },
+            accidentTime: {
+                required: true
+            },
             vehicleType: {
                 required: true
             },
@@ -54,9 +57,11 @@ function initEvents() {
         },
         messages: {
             address: {
+                required: "请选择事故发生地点",
                 maxlength: "事故发生地点字符长度不能超过50"
             },
             weather: "请选择天气",
+            accidentTime: "请选择事故事件",
             vehicleType: "请选择车型",
             deadthToll: "请输入0~999区间的整数",
             injuries: "请输入0~999区间的整数"
