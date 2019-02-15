@@ -67,7 +67,7 @@ function fileTypes(fileName){
         fileType = "word";
     }else if(type.toLowerCase() == "ppt" || type.toLowerCase() == "pptx"){
         fileType = "ppt";
-    }else if(type.toLowerCase() == "png" || type.toLowerCase() == "jpg" || type.toLowerCase() == "jpeg" || type.toLowerCase() == "bmp"){
+    }else if(type.toLowerCase() == "png" || type.toLowerCase() == "jpg" || type.toLowerCase() == "jpeg" || type.toLowerCase() == "bmp" || type.toLowerCase() == "gif"){
         fileType = "img";
     }else if(type.toLowerCase() == "pdf"){
         fileType = "pdf";
