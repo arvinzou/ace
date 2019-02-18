@@ -203,8 +203,7 @@ function upload(){
             preserve_headers: false
         },
         filters: [
-            {title : "文档文件", extensions : "xls,doc,ppt,pdf,txt"},
-            {title : "图片文件", extensions : "jpg,jpeg,png,bmp"}
+
         ]
     });
     uploader.init();
