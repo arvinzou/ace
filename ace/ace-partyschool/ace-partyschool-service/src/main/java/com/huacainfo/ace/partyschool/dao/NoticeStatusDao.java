@@ -35,4 +35,7 @@ public interface NoticeStatusDao {
 
     public List<Map<String, Object>> getPushUsersList(String id);
 
- }
+    int findCount(@Param("userId") String userId,
+                  @Param("noticeId") String noticeId);
+
+}

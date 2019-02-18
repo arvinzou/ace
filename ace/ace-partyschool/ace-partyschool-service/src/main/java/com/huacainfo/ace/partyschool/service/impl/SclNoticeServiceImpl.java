@@ -206,11 +206,15 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      * @version: 2019-01-06
      */
     @Override
-    public MessageResponse deleteNoticeByNoticeId(String id, UserProp userProp) throws
-            Exception {
+    public MessageResponse deleteNoticeByNoticeId(String id, UserProp userProp) throws Exception {
+
+        int i = noticeStatusDao.findCount("", id);
+        if (i > 0) {
+            return new MessageResponse(ResultCode.FAIL, "公告存在发送记录，不允许删除");
+        }
+
         this.noticeDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除通知公告", "通知公告", id, id,
-                "通知公告", userProp);
+        this.dataBaseLogService.log("删除通知公告", "通知公告", id, id, "通知公告", userProp);
         return new MessageResponse(0, "通知公告删除完成！");
     }
 }
