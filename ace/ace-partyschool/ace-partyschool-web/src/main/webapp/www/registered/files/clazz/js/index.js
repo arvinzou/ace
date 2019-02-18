@@ -259,3 +259,26 @@ function addFiles(){
         }
     });
 }
+
+/**
+ * 下载查看班级文件
+ * @param id
+ */
+function downloadFile(id){
+    /*$.ajax({
+        url: contextPath+ "/www/download/file",
+        type:"post",
+        async:false,
+        data:{
+            id: id
+        },
+        success:function(result){
+
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });*/
+
+    window.location.href = contextPath+ "/www/download/file?id="+id;
+}
