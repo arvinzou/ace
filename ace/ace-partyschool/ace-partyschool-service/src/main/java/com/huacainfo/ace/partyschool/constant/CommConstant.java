@@ -9,7 +9,7 @@ public interface CommConstant {
     /**
      * 短信签名
      */
-    String SMS_SIGN_STR = "【中共市委党校】";
+    String SMS_SIGN_STR = "【中共常德市委党校】";
 
 
     /**
