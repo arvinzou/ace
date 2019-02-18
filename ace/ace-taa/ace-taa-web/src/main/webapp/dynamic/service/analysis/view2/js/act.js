@@ -36,6 +36,7 @@ $(function () {
     initRoadType();
     initEvents();
     initForm();
+    initCombotree();
     $('#leftDiv').mouseover(setClass);
     $('#Map').mouseover(moveClass);
     $('#Header').mouseover(moveClass);
@@ -43,6 +44,23 @@ $(function () {
     $('#check-group-category').on('click','button',setParams);
 });
 
+
+function initCombotree() {
+    $('#tt').combotree({
+        url:portalPath+"/system/selectProvinceTreeList.do" ,
+        valueField: 'id',
+        textField: 'text',
+        method: 'get',
+        // onChange :function(){
+        //     $val =  $("#tt").combotree('getValue');
+        //     $("#_EnvUnitCode").val($val);
+        // },
+        onLoadSuccess:function(node,data){
+            $('.combo .combo-value').val(data[0].id);
+        }
+
+    });
+}
 
 function searchRoadName() {
     params.keyword = $("input[name=keyword]").val();
