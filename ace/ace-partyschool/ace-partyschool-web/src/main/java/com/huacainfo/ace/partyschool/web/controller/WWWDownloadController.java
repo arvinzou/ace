@@ -59,6 +59,14 @@ public class WWWDownloadController extends BisBaseController {
         String downLoadPath = filesVo.getUrl();
         return CommentResponse(downLoadPath, response);
     }
+    @RequestMapping("/byUrl")
+    @ResponseBody
+    public String byUrl(String url, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        if (CommonUtils.isBlank(url)) {
+            return null;
+        }
+        return CommentResponse(url, response);
+    }
 
     @RequestMapping("/notice")
     @ResponseBody

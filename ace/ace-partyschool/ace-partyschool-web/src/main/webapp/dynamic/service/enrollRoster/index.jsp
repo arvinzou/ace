@@ -31,7 +31,7 @@
                             authority="false">批量导入
                     </button>
                     <button type="button" class="btn  green" id="btn-view-onoff"
-                            authority="false">批量开启/关闭
+                            authority="false">批量删除
                     </button>
                 </div>
                 <div class="col-md-8">
@@ -41,15 +41,16 @@
                                 onclick="setParams('status','');">全部
                         </button>
                         <button type="button" authority="false" class="btn btn-default"
-                                onclick="setParams('status','1');">已开启
+                                onclick="setParams('status','1');">正常
                         </button>
                         <button type="button" authority="false" class="btn btn-default"
-                                onclick="setParams('status','0');">已关闭
+                                onclick="setParams('status','0');">注销
                         </button>
                     </div>
-
-                    <div class="input-group" style="float: left;padding: 0px 5px 0px 5px" id="select1">
-
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <select name="classId" id="s-cls-list" class="form-control" style="height: 30px;"
+                                onchange="setParams('clsId',this.value)">
+                        </select>
                     </div>
 
                     <div class="input-group">
@@ -81,18 +82,19 @@
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 
-<script id="tpl-select-list" type="text/template">
-
-    <select name="clsId" id="classId" class="form-control" style="height: 35px; line-height: 35px;"
-            onchange="setParams('clsId',this.value)">
-        <option value="">全部</option>
-        {@each data as item, index}
-        <option value="\${item.id}">\${item.name}</option>
-        {@/each}
-    </select>
+<script id="tpl-cls-option" type="text/template">
+    {@each data as item, index}
+    <option value="\${item.id}">\${item.name}</option>
+    {@/each}
 </script>
 
-<%--批处理--%>
+<script id="tpl-del-cls-option" type="text/template">
+    {@each data as item, index}
+    <option value="\${item.clsId}">\${item.clsViewName}</option>
+    {@/each}
+</script>
+
+<%--批量删除--%>
 <div class="modal fade" role="dialog" id="modal-onoff">
     <div class="modal-dialog" role="document" style="width:45%;">
         <div class="modal-content">
@@ -100,7 +102,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">开启/关闭</h4>
+                <h4 class="modal-title">批量删除</h4>
             </div>
             <div class="modal-body">
 
@@ -108,26 +110,15 @@
                     <div class="form-body">
                         <div class="form-group">
                             <label class="col-md-2 control-label">
-                                修改班次<span style='color:red;'>*</span>
+                                删除班次<span style='color:red;'>*</span>
                             </label>
                             <div class="col-md-6">
-                                <select class="easyui-combogrid" style="width:375px; height: 35px; line-height: 35px;"
-                                        id="cls-list" name="clsId">
-
+                                <select name="classId" id="d-cls-list" class="form-control"
+                                        style="height: 30px;line-height: 30px">
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">操作 </label>
-                            <div class="col-md-6">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="radio" name="status" value="1"><span style="padding:10px">开启</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="0"><span style="padding:10px">关闭</span>
-                                    </label>
-                                </div>
+                            <div class="col-md-4" style="margin-top:10px">
+                                <a href="javascript:batchDel()">删除</a>
                             </div>
                         </div>
                     </div>
@@ -158,8 +149,10 @@
                         导入到目标班次<span style='color:red;'>*</span>
                     </label>
                     <div class="col-md-6">
-                        <select class="easyui-combogrid" style="width:460px; height: 35px; line-height: 35px;"
-                                id="combogrid-cls-list"></select>
+                        <select class="form-control" style="width:460px; height: 35px; line-height: 35px;"
+                                id="import-cls-list" onchange="importClsSelected(this.value)">
+
+                        </select>
                     </div>
                 </div>
                 <div id="uploader">

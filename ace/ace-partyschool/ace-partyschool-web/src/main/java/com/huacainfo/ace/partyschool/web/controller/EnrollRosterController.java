@@ -296,4 +296,18 @@ public class EnrollRosterController extends BisBaseController {
         }
         return this.enrollRosterService.updateStatusByClsId(clsId, status, this.getCurUserProp());
     }
+
+
+    /**
+     * 批量删除报名数据
+     *
+     * @param clsId 班级ID
+     * @return MessageResponse
+     */
+    @ResponseBody
+    @RequestMapping(value = "/batchDel")
+    public MessageResponse batchDel(String clsId) {
+
+        return this.enrollRosterService.batchDel(clsId);
+    }
 }

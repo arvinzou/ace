@@ -186,4 +186,12 @@ public interface EnrollRosterService {
      * @throws Exception
      */
     MessageResponse updateStatusByClsId(String clsId, String status, UserProp curUserProp);
+
+    /**
+     * 批量删除报名数据
+     *
+     * @param clsId 班级ID
+     * @return MessageResponse
+     */
+    MessageResponse batchDel(String clsId);
 }

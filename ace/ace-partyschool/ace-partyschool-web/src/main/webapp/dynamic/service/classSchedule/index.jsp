@@ -116,7 +116,7 @@
     </div>
     <p class="title">操作</p>
     <div>
-        <button type="button" data-id="\${data.id}" class="btn btn-default delete">取消</button>
+        <button type="button" data-id="\${data.id}" class="btn btn-default delete">删除</button>
     </div>
 </script>
 

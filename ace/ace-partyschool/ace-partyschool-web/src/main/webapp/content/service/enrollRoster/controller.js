@@ -47,26 +47,11 @@ jQuery(function ($) {
 //初始化事件
     initEvents();
     initJuicerMethod();
-    initClassList();
+    initClassList('s-cls-list');
 });
 
 
-function selectClasses(isFirst) {
-    if (isFirst) {
-        alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
-    }
-    else {
-        var g = $('#combogrid-cls-list').combogrid('grid'); // get datagrid object
-        var r = g.datagrid('getSelected'); // get the selected row
-        if (r && r.id) {
-            reset_uploader({clsId: r.id});
-        } else {
-            alert("请选择班级信息！");
-        }
-    }
-}
-
-function initClassList() {
+function initClassList(ctrlId) {
     startLoad();
     $.ajax({
         url: contextPath + "/mailList/getClassList",
@@ -78,7 +63,8 @@ function initClassList() {
             if (result.status == 0) {
                 var data = {};
                 data = result.value;
-                render('#select1', data, 'tpl-select-list');
+                render('#' + ctrlId, data, 'tpl-cls-option');
+                initGrid();
             } else {
                 alert(result.errorMessage);
             }
@@ -133,126 +119,17 @@ function initEvents() {
         console.log(relatedTarget);
         initPreview(id);
     });
-
     //导入功能
     $('#modal-import').on('shown.bs.modal', function (event) {
-        //班次列表
-        $('#combogrid-cls-list').combogrid({
-            panelWidth: 450,
-            idField: 'id',
-            textField: 'name',
-            url: contextPath + '/classes/findByQ?status=1',
-            mode: 'remote',
-            fitColumns: false,
-            method: 'get', columns: [[
-                {field: 'name', title: '班级名称', width: 230, align: 'right'},
-                {field: 'headmasterName', title: '班主任', width: 200, align: 'right'}
-            ]],
-            keyHandler: {
-                up: function () {
-                },
-
-                down: function () {
-                },
-
-                enter: function () {
-                },
-                query: function (q) {
-                    $('#combogrid-cls-list').combogrid("grid").datagrid("reload", {'q': q});
-                    $('#combogrid-cls-list').combogrid("setValue", q);
-                }
-            },
-            onSelect: function (index, row) {
-                selectClasses(false);
-            }
-        });
-        //
-        selectClasses(true);
-
+        initClassList('import-cls-list');
+        alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
+        var clsId = $('#import-cls-list option:selected').val();//选中的值;
+        importClsSelected(clsId);
     });
-
-    //批量开启/关闭功能
+    //批量删除
     $('#modal-onoff').on('shown.bs.modal', function (event) {
-        // 报名花名册中，所含班级
-        $('#cls-list').combogrid({
-            panelWidth: 460,
-            idField: 'clsId',
-            textField: 'clsViewName',
-            url: contextPath + '/enrollRoster/getListByCondition',
-            mode: 'remote',
-            fitColumns: false,
-            method: 'get', columns: [[
-                {field: 'clsViewName', title: '班次名称', width: 230, align: 'right'},
-                {field: 'headmasterName', title: '班主任姓名', width: 200, align: 'right'}
-            ]],
-            keyHandler: {
-                up: function () {
-                },
-
-                down: function () {
-                },
-
-                enter: function () {
-                },
-                query: function (q) {
-                    $('#cls-list').combogrid("grid").datagrid("reload", {'q': q});
-                    $('#cls-list').combogrid("setValue", q);
-                }
-            },
-            onSelect: function (index, row) {
-            }
-        });
-    });
-    //确认按钮提交事件
-    $('#modal-onoff .btn-primary').on('click', function () {
-        $('#modal-onoff form').submit();
-    });
-    /*监听表单提交*/
-    $('#modal-onoff form').ajaxForm({
-        beforeSubmit: function (formData, jqForm, options) {
-            console.log("12222222222");
-
-            var clsId = $('input[name="status"]:checked').val();
-            var rstVal = $('#modal-onoff form input[name="status"]:checked').val();
-            if (rstVal == undefined) {
-                alert("请选择操作方式!");
-                return;
-            }
-            var params = {};
-            $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
-            });
-            $.extend(params, {
-                time: new Date()
-            });
-            console.log(params);
-            onoff(params);
-            return false;
-        }
-    });
-}
-
-
-/*批量开启/关闭报名*/
-function onoff(p) {
-    startLoad();
-    $.ajax({
-        url: contextPath + "/enrollRoster/updateStatusByClsId",
-        type: "post",
-        async: false,
-        data: p,
-        success: function (rst) {
-            stopLoad();
-            $("#modal-onoff").modal('hide');
-            alert(rst.errorMessage);
-            if (rst.status == 0) {
-                jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
-        }
+        //可删除班级列表
+        initRosterClsList();
     });
 }
 
@@ -303,11 +180,43 @@ function edit(rowid) {
 }
 
 /**
- * 关闭报名
+ * 恢复
+ * @param rowid 行ID
+ */
+function online(rowid) {
+    if (confirm("确认恢复么？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + '/enrollRoster/updateStatus',
+            type: "post",
+            async: false,
+            data: {
+                id: rowid,
+                status: '1'
+            },
+            success: function (result) {
+                stopLoad();
+                if (result.status == 0) {
+                    alert("恢复成功");
+                    jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+                } else {
+                    alert(result.errorMessage);
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    }
+}
+
+/**
+ * 注销
  * @param rowid 行ID
  */
 function offline(rowid) {
-    if (confirm("确认关闭其报名权限么？")) {
+    if (confirm("确认注销么？")) {
         startLoad();
         $.ajax({
             url: contextPath + '/enrollRoster/updateStatus',
@@ -319,9 +228,12 @@ function offline(rowid) {
             },
             success: function (result) {
                 stopLoad();
-                alert(result.errorMessage);
-                if (rst.status == 0) {
+
+                if (result.status == 0) {
+                    alert("注销成功");
                     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+                } else {
+                    alert(result.errorMessage);
                 }
             },
             error: function () {
@@ -353,8 +265,48 @@ function setParams(key, value) {
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
 }
 
-function importXls(id) {
-    reset_uploader({roadId: id});
-    $('#modal-upload').modal('show');
+function importClsSelected(clsId) {
+    reset_uploader({clsId: clsId});
+}
 
+function batchDel() {
+    var clsId = $('#d-cls-list option:selected').val();//选中的值;
+    if (confirm("确认删除选中班级数据么？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/enrollRoster/batchDel",
+            type: "post",
+            async: false,
+            data: {clsId: clsId},
+            success: function (result) {
+                console.log(result);
+                stopLoad();
+                jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    }
+}
+
+
+function initRosterClsList() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/enrollRoster/getListByCondition",
+        type: "post",
+        async: false,
+        data: {},
+        success: function (result) {
+            console.log(result);
+            stopLoad();
+            render('#d-cls-list', result.rows, 'tpl-del-cls-option');
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }
