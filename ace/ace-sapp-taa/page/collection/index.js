@@ -136,6 +136,10 @@ searchSomeThing:function(e){
                         success: function (res) { }
                     });
                     that.initYList('');
+                    app.globalData.tab = 1,
+                    wx.navigateTo({
+                        url: '../index/index',
+                    });
                 } else {
                     wx.showModal({
                         title: '提示',

@@ -27,7 +27,7 @@
 					{@/if}
 				</div>
 			</div>
-			<div class="box pm">
+			<div class="box">
 				<div class="title02 br">学员须知</div>
 				<div class="notice-link">
 					<a href="\${data.list.fileUrl}">\${data.list.fileName}</a>
