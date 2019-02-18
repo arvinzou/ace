@@ -85,6 +85,7 @@ function save(){
         },
         success: function(result) {
             alert(result.info);
+            window.location.href = contextPath+"/www/login/index.jsp";
         },
         error: function() {
             alert("系统服务内部异常!");
