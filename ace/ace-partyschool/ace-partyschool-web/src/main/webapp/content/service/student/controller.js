@@ -61,38 +61,11 @@ function render(obj, data, tplId) {
 
 function initEvents() {
     $('#modal-import').on('shown.bs.modal', function (event) {
-        //班级数筛选列表
-        $('#combogrid-cls-list').combogrid({
-            panelWidth: 450,
-            idField: 'id',
-            textField: 'name',
-            url: contextPath + '/classes/findByQ?status=1',
-            mode: 'remote',
-            fitColumns: false,
-            method: 'get', columns: [[
-                {field: 'name', title: '班级名称', width: 230, align: 'right'},
-                {field: 'headmasterName', title: '班主任', width: 200, align: 'right'}
-            ]],
-            keyHandler: {
-                up: function () {
-                },
-
-                down: function () {
-                },
-
-                enter: function () {
-                },
-                query: function (q) {
-                    $('#combogrid-cls-list').combogrid("grid").datagrid("reload", {'q': q});
-                    $('#combogrid-cls-list').combogrid("setValue", q);
-                }
-            },
-            onSelect: function (index, row) {
-                selectClasses(false);
-            }
-        });
-        //
-        selectClasses(true);
+        //加载班级列表
+        initClassList('d-cls-list');
+        alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
+        var clsId = $('#d-cls-list option:selected').val();//选中的值;
+        importInit(clsId);
     });
 
     $('#modal-preview').on('show.bs.modal', function (event) {
@@ -103,33 +76,34 @@ function initEvents() {
         console.log(relatedTarget);
         initPreview(id);
     });
-    //查询筛选列表
-    $('#cls-condition').combogrid({
-        panelWidth: 450,
-        idField: 'id',
-        textField: 'name',
-        url: contextPath + '/classes/findByQ',
-        mode: 'remote',
-        fitColumns: false,
-        method: 'get', columns: [[
-            {field: 'name', title: '班级名称', width: 230, align: 'right'},
-            {field: 'headmasterName', title: '班主任', width: 200, align: 'right'}
-        ]],
-        keyHandler: {
-            up: function () {
-            },
 
-            down: function () {
-            },
+    //班级下拉筛选列表
+    initClassList('s-cls-list');
+}
 
-            enter: function () {
-            },
-            query: function (q) {
-                $('#cls-condition').combogrid("grid").datagrid("reload", {'q': q});
-                $('#cls-condition').combogrid("setValue", q);
+
+function initClassList(ctrlId) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/mailList/getClassList",
+        type: "post",
+        async: false,
+        data: {},
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data = result.value;
+                render('#' + ctrlId, data, 'tpl-cls-option');
+                params.category = '2';
+                initGrid();
+            } else {
+                alert(result.errorMessage);
             }
         },
-        onSelect: function (index, row) {
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
         }
     });
 }
@@ -215,19 +189,8 @@ function importXls() {
     $('#modal-import').modal('show');
 }
 
-function selectClasses(isFirst) {
-    if (isFirst) {
-        alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
-    }
-    else {
-        var g = $('#combogrid-cls-list').combogrid('grid'); // get datagrid object
-        var r = g.datagrid('getSelected'); // get the selected row
-        if (r && r.id) {
-            reset_uploader({clsId: r.id});
-        } else {
-            alert("请选择班级信息！");
-        }
-    }
+function importInit(clsId) {
+    reset_uploader({clsId: clsId});
 }
 
 //juicer自定义函数
@@ -261,11 +224,11 @@ function parsePolitical(val) {
 function parseStatus(status) {
     switch (status) {
         case '0':
-            return "已注销";
+            return "注销";
         case '1':
-            return "有效";
+            return "正常";
         default:
-            return "有效";
+            return "正常";
     }
 }
 

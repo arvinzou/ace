@@ -1,4 +1,4 @@
-jQuery(function($) {
+function initGrid() {
 	$(window).on('resize.jqGrid', function() {
 		resizeJqGrid();
 	})
@@ -42,7 +42,7 @@ jQuery(function($) {
 		caption: cfg.caption
 	});
 	resizeJqGrid();
-});
+};
 
 function resizeJqGrid() {
 	$(cfg.grid_selector).jqGrid('setGridWidth', $(".portlet-body").width());

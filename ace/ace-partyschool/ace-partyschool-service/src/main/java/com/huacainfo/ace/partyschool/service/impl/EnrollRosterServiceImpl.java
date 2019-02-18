@@ -255,7 +255,6 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
             t = enrollRosterDao.isExist(o);
             if (t > 0) {
                 this.enrollRosterDao.updateByPrimaryKey(o);
-
             } else {
                 this.enrollRosterDao.insert(o);
             }
@@ -379,6 +378,19 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         int i = enrollRosterDao.updateStatusByClsId(clsId, status);
         logger.info("已更新[" + i + "]条数据");
         return new MessageResponse(ResultCode.SUCCESS, "操作成功");
+    }
+
+    /**
+     * 批量删除报名数据
+     *
+     * @param clsId 班级ID
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse batchDel(String clsId) {
+        int i = enrollRosterDao.delByClsId(clsId);
+
+        return new MessageResponse(ResultCode.SUCCESS, "删除成功");
     }
 
 }

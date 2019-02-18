@@ -150,4 +150,9 @@
         set status = #{status,jdbcType=CHAR}
         where clsId = #{clsId,jdbcType=VARCHAR}
     </update>
+
+    <delete id="delByClsId" parameterType="java.lang.String">
+        delete from enroll_roster
+        where clsId = #{clsId,jdbcType=VARCHAR}
+    </delete>
 </mapper>
