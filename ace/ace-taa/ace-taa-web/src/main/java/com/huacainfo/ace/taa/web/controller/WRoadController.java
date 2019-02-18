@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -190,6 +192,22 @@ public class WRoadController extends TaaBaseController {
 
         MessageResponse m = roadGpsService.resetSectionGPS(sectionId);
         return new ResultResponse(m);
+    }
+
+
+    /**
+     * 获取路段已采集坐标列表
+     *
+     * @param sectionId 路段ID
+     * @return ListResult
+     * @throws Exception
+     */
+    @RequestMapping("/getGPSList")
+    public ListResult<Map<String, Object>> getGPSList(String sectionId) throws Exception {
+
+        Map<String, Object> p = new HashMap<>();
+        p.put("id", sectionId);
+        return this.roadGpsService.getList(p);
     }
 
 }
