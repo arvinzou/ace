@@ -6,10 +6,12 @@ $(function(){
     var unit = staticDictObject['156'];     //处室字典
     var unitArr = [];
     for(var i=0; i<unit.length; i++){
-        var o = {};
-        o.id = unit[i].CODE;
-        o.value = unit[i].NAME;
-        unitArr.push(o);
+        if(unit[i].CODE != "" && unit[i].NAME!=''){
+            var o = {};
+            o.id = unit[i].CODE;
+            o.value = unit[i].NAME;
+            unitArr.push(o);
+        }
     }
     var unitSelect= new MobileSelect({
         trigger: '#workUnit',

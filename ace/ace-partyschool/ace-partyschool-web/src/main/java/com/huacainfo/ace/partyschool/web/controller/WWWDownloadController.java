@@ -3,8 +3,14 @@ package com.huacainfo.ace.partyschool.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.partyschool.model.Files;
+import com.huacainfo.ace.partyschool.model.Notice;
+import com.huacainfo.ace.partyschool.service.ClsFilesService;
 import com.huacainfo.ace.partyschool.service.SclNoticeService;
+import com.huacainfo.ace.partyschool.vo.FilesVo;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import org.slf4j.Logger;
@@ -30,23 +36,22 @@ public class WWWDownloadController extends BisBaseController {
 
     @Autowired
     private SclNoticeService sclNoticeService;
+    @Autowired
+    private ClsFilesService clsFilesService;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RequestMapping("/file")
     @ResponseBody
-    public String downloadAttachment(NoticeQVo condition, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        if (CommonUtils.isBlank(condition.getId())) {
-          return null;
-        }
-        PageResult<NoticeVo> rs = sclNoticeService.findNoticeList(condition,0,1,null);
-        if (rs.getStatus() != ResultCode.SUCCESS) {
+    public String downloadAttachment(String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        SingleResult<FilesVo> rs = clsFilesService.selectFilesByPrimaryKey(id);
+        if (rs.getStatus()==ResultCode.FAIL) {
             return null;
         }
 
         //这里获取的下载链接 http://sk.sit.fosuntech.cn/group1/M00/00/72/CqYKHVn69wyAMl6YAAVf953sp4Y075.pdf
-        NoticeVo noticeVo = rs.getRows().get(0);
-        String downLoadPath = noticeVo.getFileUrl();
+        FilesVo filesVo = rs.getValue();
+        String downLoadPath = filesVo.getUrl();
         BufferedInputStream bis = null;
         BufferedOutputStream bos = null;
         try {

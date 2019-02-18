@@ -20,7 +20,7 @@
 				</div>
 				<div class="form-content">
 					<label class="form-label">身份证号</label>
-					<input class="form-input" maxlength="18" type="text" name="idCard" placeholder="识别/输入身份证号（选填）"/>
+					<input class="form-input" maxlength="18" type="text" name="idCard" placeholder="识别/输入身份证号(选填)"/>
 				</div>
                 <div class="camera-box">
                     <label for="file"><img src="img/camera.png" class="camera"/></label>
@@ -43,15 +43,15 @@
 				</div>
 				<div class="form-content form-border">
 					<label class="form-label">单位全称</label>
-					<input class="form-input" type="text" name="workUnitName" placeholder="请输入单位名称"/>
+					<input class="form-input" minlength="3" type="text" name="workUnitName" placeholder="例:中共常德市委统战部"/>
 				</div>
 				<div class="form-content form-border">
-					<label class="form-label"> 全称</label>
-					<input class="form-input" type="text" name="postName" placeholder="请输入所在单位职务"/>
+					<label class="form-label">职务全称</label>
+					<input class="form-input" minlength="3" type="text" name="postName" placeholder="例:干部科科长"/>
 				</div>
 				<div class="form-content">
 					<label class="form-label">班次</label>
-					<div class="form-select" type="text"  id="classes"><span class="unselect">请选择党校所分配的班级</span></div>
+					<div class="form-select" type="text"  id="classes"><span class="unselect">请选择班次</span></div>
 					<img src="img/icon_select.png" class="redirect" />
 				</div>
 			</div>

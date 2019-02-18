@@ -62,7 +62,7 @@
                         天气
                         <span class="required" aria-required="true"> * </span>
                     </label>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="radio-group-container">
                             {@each data['171'] as item, index}
                             {@if item.CODE!=''}
@@ -85,7 +85,7 @@
                         <div class="radio-group-container">
                             {@each data['172'] as item, index}
                             {@if item.CODE!=''}
-                            <label class="mt-radio mt-radio-outline" style="width: 150px;">
+                            <label class="mt-radio mt-radio-outline">
                                 <input type="radio" name="vehicleType" value="\${item.CODE}">\${item.NAME}
                                 <span></span>
                             </label>
@@ -98,6 +98,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">
                         事故时间
+                        <span class="required" aria-required="true"> * </span>
                     </label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="accidentTime"
@@ -154,7 +155,7 @@
                     <label class="col-md-2 control-label">
                         事故原因
                     </label>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
                         <div class="radio-group-container">
                             {@each data['173'] as item, index}
                             {@if item.CODE!=''}

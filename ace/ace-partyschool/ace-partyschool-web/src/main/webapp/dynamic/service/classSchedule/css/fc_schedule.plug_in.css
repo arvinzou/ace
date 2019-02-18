@@ -58,7 +58,7 @@
     cursor: pointer;
 }
 .external-events-box .hbg{
-    background:#3192cb ;
+    background:rgba(24,144,255,1);
     color: #fff;
 
 }

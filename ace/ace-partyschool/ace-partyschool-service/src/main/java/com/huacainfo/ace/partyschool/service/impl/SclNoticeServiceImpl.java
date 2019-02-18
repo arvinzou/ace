@@ -72,6 +72,15 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     }
 
     @Override
+    public ResultResponse findNoticeById(String id) throws Exception {
+        if (CommonUtils.isBlank(id)){
+            return new ResultResponse(1, "序号不能为空!");
+        }
+        Notice notice = this.noticeDao.selectByPrimaryKey(id);
+        return new ResultResponse(ResultCode.SUCCESS,"获取成功",notice);
+    }
+
+    @Override
     public ResultResponse findNoticeLists(NoticeStatusQVo condition, int start, int limit, String orderBy, UserProp userProp) throws Exception {
         condition.setUserId(userProp.getUserId());
         List<NoticeVo> noticeVo = new ArrayList<>();

@@ -20,7 +20,7 @@
 				</div>
 				<div class="form-content">
 					<label class="form-label">身份证号</label>
-					<input class="form-input" maxlength="18" type="text" name="idCard" placeholder="识别/输入身份证号（选填）"/>
+					<input class="form-input" maxlength="18" type="text" name="idCard" placeholder="识别/输入身份证号(选填)"/>
 				</div>
 				<div class="camera-box">
 					<label for="file"><img src="img/camera.png" class="camera"/></label>
@@ -48,7 +48,7 @@
 				</div>
 				<div class="form-content">
 					<label class="form-label">职务职称</label>
-					<input class="form-input" type="text" name="postName" placeholder="请输入所在单位职务"/>
+					<input class="form-input" minlength="3" type="text" name="postName" placeholder="请输入职务职称"/>
 				</div>
 			</div>
 			
