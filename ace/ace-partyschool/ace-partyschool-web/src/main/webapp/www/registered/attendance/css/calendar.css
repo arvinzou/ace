@@ -41,6 +41,7 @@
     transform: rotateY(0deg);
     visibility: visible;
     z-index: 2;
+    font-family:PingFang-SC-Medium;
 }
 .calendar-ct,
 .calendar-hd,

@@ -188,10 +188,10 @@ function initJuicerMethod() {
 function parseStatus(status) {
     switch (status) {
         case '0':
-            return "已注销";
+            return "注销";
         case '1':
-            return "有效";
+            return "正常";
         default:
-            return "有效";
+            return "正常";
     }
 }

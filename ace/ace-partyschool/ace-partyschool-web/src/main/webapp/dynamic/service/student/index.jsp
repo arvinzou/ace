@@ -33,15 +33,11 @@
                     </button>
                 </div>
                 <div class="col-md-7">
-                    <div class="input-group" style="float: left;margin-top: 5px;margin-right: 5px;">
-                        <label>班次 </label>
-                    </div>
-                    <div class="input-group" style="float: left;margin-right: 5px;">
-                        <select id="cls-condition" class="easyui-combogrid form-control" name="classId"
-                                style="width:225px; height: 30px; line-height: 30px;">
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <select name="classId" id="s-cls-list" class="form-control" style="height: 30px;"
+                                onchange="setParams('classId',this.value)">
                         </select>
                     </div>
-
                     <div class="input-group">
                         <input type="text"
                                name="keyWord"
@@ -69,6 +65,12 @@
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 
+<script id="tpl-cls-option" type="text/template">
+    {@each data as item, index}
+    <option value="\${item.id}">\${item.name}</option>
+    {@/each}
+</script>
+
 <%--学员导入--%>
 <div class="modal fade" role="dialog" id="modal-import">
     <div class="modal-dialog" role="document" style="width: 75%;">
@@ -85,8 +87,9 @@
                         导入到目标班次<span style='color:red;'>*</span>
                     </label>
                     <div class="col-md-6">
-                        <select class="easyui-combogrid" style="width:460px; height: 25px; line-height: 25px;"
-                                id="combogrid-cls-list"></select>
+                        <select name="classId" id="d-cls-list" class="form-control"
+                                style="height: 30px;line-height: 30px" onchange="importInit(this.value)">
+                        </select>
                     </div>
                 </div>
                 <div id="uploader">

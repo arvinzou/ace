@@ -50,4 +50,6 @@ public interface EnrollRosterDao {
      */
     int updateStatusByClsId(@Param("clsId") String clsId,
                             @Param("status") String status);
+
+    int delByClsId(String clsId);
 }
