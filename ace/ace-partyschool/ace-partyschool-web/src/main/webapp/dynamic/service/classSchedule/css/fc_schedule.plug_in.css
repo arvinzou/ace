@@ -140,7 +140,7 @@
 }
 /*应急类 颜色橙*/
 .bg-crew-yingji{
-    background: #fff3cb !important;
+    background: #52acff !important;
     border: none!important;
     color: #444!important;
 }
@@ -165,7 +165,7 @@
 
 }
 .event-item{
-    color: #777!important;
+    color: #fff!important;
     padding: 5px 3px;
 }
 

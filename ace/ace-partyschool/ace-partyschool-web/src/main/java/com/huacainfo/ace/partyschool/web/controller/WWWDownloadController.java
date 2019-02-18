@@ -6,10 +6,13 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.partyschool.model.Classes;
 import com.huacainfo.ace.partyschool.model.Files;
 import com.huacainfo.ace.partyschool.model.Notice;
+import com.huacainfo.ace.partyschool.service.ClassesService;
 import com.huacainfo.ace.partyschool.service.ClsFilesService;
 import com.huacainfo.ace.partyschool.service.SclNoticeService;
+import com.huacainfo.ace.partyschool.vo.ClassesVo;
 import com.huacainfo.ace.partyschool.vo.FilesVo;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
@@ -38,6 +41,8 @@ public class WWWDownloadController extends BisBaseController {
     private SclNoticeService sclNoticeService;
     @Autowired
     private ClsFilesService clsFilesService;
+    @Autowired
+    private ClassesService classesService;
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -45,13 +50,45 @@ public class WWWDownloadController extends BisBaseController {
     @ResponseBody
     public String downloadAttachment(String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
         SingleResult<FilesVo> rs = clsFilesService.selectFilesByPrimaryKey(id);
-        if (rs.getStatus()==ResultCode.FAIL) {
+        if (rs.getStatus() == ResultCode.FAIL) {
             return null;
         }
 
         //这里获取的下载链接 http://sk.sit.fosuntech.cn/group1/M00/00/72/CqYKHVn69wyAMl6YAAVf953sp4Y075.pdf
         FilesVo filesVo = rs.getValue();
         String downLoadPath = filesVo.getUrl();
+        return CommentResponse(downLoadPath, response);
+    }
+
+    @RequestMapping("/notice")
+    @ResponseBody
+    public String notice(String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ResultResponse rs = sclNoticeService.findNoticeById(id);
+        if (rs.getStatus() == ResultCode.FAIL) {
+            return null;
+        }
+
+        //这里获取的下载链接 http://sk.sit.fosuntech.cn/group1/M00/00/72/CqYKHVn69wyAMl6YAAVf953sp4Y075.pdf
+        Notice notice=(Notice)rs.getData();
+        String downLoadPath = notice.getFileUrl();
+        return CommentResponse(downLoadPath, response);
+    }
+
+    @RequestMapping("/classFile")
+    @ResponseBody
+    public String classFile(String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        SingleResult<ClassesVo> rs = classesService.selectClassesByPrimaryKey(id);
+        if (rs.getStatus() == ResultCode.FAIL) {
+            return null;
+        }
+        //这里获取的下载链接 http://sk.sit.fosuntech.cn/group1/M00/00/72/CqYKHVn69wyAMl6YAAVf953sp4Y075.pdf
+        ClassesVo classesVo = rs.getValue();
+        String downLoadPath = classesVo.getFileUrl();
+        return CommentResponse(downLoadPath, response);
+    }
+
+
+    private String CommentResponse(String downLoadPath, HttpServletResponse response) {
         BufferedInputStream bis = null;
         BufferedOutputStream bos = null;
         try {
@@ -106,6 +143,4 @@ public class WWWDownloadController extends BisBaseController {
         }
         return null;
     }
-
-
 }

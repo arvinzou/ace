@@ -202,7 +202,7 @@ window.onload = function () {
             defaultDate: crew_startDate,
             defaultView: "agendaWeek", //默认显示周
             //        defaultView: 'timelineDay',
-            height: 600,
+            height: 580,
             editable: true,
             customButtons: {
                 //自定义 按钮可以添加多个，自己命名  在header 部分调用即可 比如这里的myCustomButto
