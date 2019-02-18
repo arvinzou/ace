@@ -48,7 +48,7 @@
 				</div>
 				<div class="form-content">
 					<label class="form-label">职务职称</label>
-					<input class="form-input" type="text" name="postName" placeholder="请输入所在单位职务"/>
+					<input class="form-input" type="text" name="postName" placeholder="请输入职务职称"/>
 				</div>
 			</div>
 			
