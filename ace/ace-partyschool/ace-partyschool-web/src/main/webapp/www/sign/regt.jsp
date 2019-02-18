@@ -20,7 +20,7 @@
 				</div>
 				<div class="form-content">
 					<label class="form-label">身份证号</label>
-					<input class="form-input" maxlength="18" type="text" name="idCard" placeholder="识别/输入身份证号（选填）"/>
+					<input class="form-input" maxlength="18" type="text" name="idCard" placeholder="识别/输入身份证号(选填)"/>
 				</div>
 				<div class="camera-box">
 					<label for="file"><img src="img/camera.png" class="camera"/></label>
