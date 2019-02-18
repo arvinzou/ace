@@ -173,7 +173,9 @@
         userId = #{userId,jdbcType=VARCHAR}
     </update>
     <select id="selectFilesById" resultType="map">
-        select t.file_name fileName,concat(#{server},t.file_url) fileUrl,t.file_size fileSize from portal.attach t where t.notice_id= #{id,jdbcType=VARCHAR}
+        select t.file_name fileName,concat(#{server},t.file_url) fileUrl,t.file_size fileSize
+        from portal.attach t
+        where t.notice_id= #{id,jdbcType=VARCHAR}
     </select>
     <select id="selectUsersById" resultType="map">
         SELECT
