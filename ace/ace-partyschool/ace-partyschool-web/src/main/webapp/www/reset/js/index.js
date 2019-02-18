@@ -54,6 +54,12 @@ function save(){
     if(mobile == "" || password == undefined){
         alert("请输入手机号码！");
         return;
+    }else{
+        var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!myreg.test(mobile)) {
+            alert("手机号码输入不合法！");
+            return;
+        }
     }
     if(code == "" || password == undefined){
         alert("请输入验证码！");
@@ -64,7 +70,7 @@ function save(){
         return;
     }
     if(password.length <=4){
-        alert("密码输入必须4位以上！");
+        alert("密码输入必须是4位及以上！");
         return;
     }
     $.ajax({

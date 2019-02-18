@@ -80,6 +80,11 @@ function regist(){
     if(!isEmpty(postName)){
         alert("职务职称不能为空！");
         return;
+    }else{
+        if(postName.length < 3){
+            alert("职务职称输入在3个字符以上！");
+        }
+        return;
     }
     if(!isEmpty(signAcct)){
         alert("手机号不能为空！");
