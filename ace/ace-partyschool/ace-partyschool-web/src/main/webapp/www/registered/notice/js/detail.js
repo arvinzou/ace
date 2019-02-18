@@ -69,6 +69,6 @@ function renderPage(IDom, data, tempId) {
  * 下载查看文件
  * @param id
  */
-function downloadFile(id){
-    window.location.href = contextPath+ "/www/download/notice?id="+id;
+function downloadFile(url){
+    window.location.href = contextPath+ "/www/download/byUrl?url="+url;
 }
