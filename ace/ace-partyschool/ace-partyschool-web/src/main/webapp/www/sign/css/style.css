@@ -17,18 +17,22 @@ input{
 input::-webkit-input-placeholder{
 	font-size: 0.4rem;
 	color: #D7D9DF;
+	font-weight: 500;
 }    
 input:-moz-placeholder{
 	font-size: 0.4rem;
 	color: #D7D9DF;
+	font-weight: 500;
 }                
 input::-moz-placeholder{
 	font-size: 0.4rem;
 	color: #D7D9DF;
+	font-weight: 500;
 }                  
 input:-ms-input-placeholder{
 	font-size: 0.4rem;
 	color: #D7D9DF;
+	font-weight: 500;
 }   
 .index{
 	width: 100%;
@@ -82,7 +86,8 @@ input:-ms-input-placeholder{
 	outline: none;
 	float: left;
 	font-size: 0.4rem;
-	color: #ABAEB9;
+	color: #373F53;
+	font-weight: bold;
 }
 .radio-box{
 	width: 70%;
@@ -170,10 +175,11 @@ input:-ms-input-placeholder{
 	outline: none;
 	float: left;
 	font-size: 0.4rem;
-	color: #ABAEB9;
+	color: #373F53;
 	text-overflow:ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	font-weight: bold;
 }
 .redirect{
 	width: 0.2rem;
@@ -185,6 +191,7 @@ input:-ms-input-placeholder{
 	font-size: 0.4rem;
 	color: #D7D9DF;
 	line-height: 1.466666rem;
+	font-weight: 500;
 }
 
 

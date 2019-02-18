@@ -76,13 +76,13 @@
 			</div>
 		</div>
 		<div class="info">
-			<div class="ititle br">单位名称</div>
+			<div class="ititle br">单位全称</div>
 			<div class="icontent br">
 				<input type="text" name="workUnitName"  value="\${data.student.workUnitName}"/>
 			</div>
 		</div>
 		<div class="info">
-			<div class="ititle br">单位职务</div>
+			<div class="ititle br">单位全称</div>
 			<div class="icontent br">
 				<input type="text" name="postName"  value="\${data.student.postName}"/>
 			</div>

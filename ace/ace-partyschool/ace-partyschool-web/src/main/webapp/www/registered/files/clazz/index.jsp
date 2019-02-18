@@ -62,7 +62,7 @@
 					{@/if}
 				</div>
 				<div class="file-detail">
-					<div class="file-title"><div class="inner-middle"><a class="download" href="\${item.url}" title="\${item.title}" download="\${item.title}">\${item.title}</a></div></div>
+					<div class="file-title"><div class="inner-middle"><a class="download" onclick="downloadFile('\${item.id}');">\${item.title}</a></div></div>
 					<div class="file-footer">
 						<span>\${item.pushDate}</span>
 						<span>来自</span>
