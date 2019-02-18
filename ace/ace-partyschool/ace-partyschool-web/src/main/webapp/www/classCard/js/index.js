@@ -2,7 +2,8 @@ var classId = '1';
 var nowDate;
 var dateData;
 var mySwiper;
-var weekStr=['周日','周一','周二','周三','周四','周五','周六']
+var weekStr=['周日','周一','周二','周三','周四','周五','周六'];
+var timerModal;
 
 $(function () {
     dateData=new Date();
@@ -11,12 +12,12 @@ $(function () {
     clock_12h();
      // initpdf();
     initClock();
-    initClassRoom();
     $('.info_box').on('click','.active_course',viewCourse);
     $('.info_box').on('click','.active_classInfo',viewClassInfo);
     $('.weeekClass').on('click','.nextWeek',nextWeek);
     $('.weeekClass').on('click','.prevWeek',prevWeek);
     $('.modal').on('click','.hideModal',hideModal);
+    $('body').on('click','.modal',timerClearModal);
     $('.classInfo').on('click','.active_photos',viewPhotos);
     $('.classInfo').on('click','.active_student',viewStudent);
     $('.content').on('click','.active_changeRoom',changeRoom);
@@ -363,8 +364,19 @@ function revertClass() {
 
 /*initClock*/
 function initClock() {
-    var myTime = setInterval("clock_12h()", 15000);
+    var myTime = setInterval(clock_12h, 15000);
+    timerClearModal();
 }
+
+function timerClearModal() {
+    clearInterval(timerModal);
+    timerModal = setInterval(function () {
+        $('.modal').hide();
+        $('#imgTemp').viewer('hide');
+        initData();
+    }, 60000);
+}
+
 
 function initpdf(url,index) {
     var success = new PDFObject({
