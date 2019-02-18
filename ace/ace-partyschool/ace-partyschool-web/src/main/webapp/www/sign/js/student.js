@@ -76,9 +76,19 @@ function regist(){
     if(!isEmpty(workUnitName)){
         alert("单位全称不能为空！");
         return;
+    }else{
+        if(workUnitName.length < 3){
+            alert("单位全称输入在3个字符以上！");
+        }
+        return;
     }
     if(!isEmpty(postName)){
         alert("职务全称不能为空！");
+        return;
+    }else{
+        if(postName.length < 3){
+            alert("职务全称输入在3个字符以上！");
+        }
         return;
     }
     if(!isEmpty(clazz)){
