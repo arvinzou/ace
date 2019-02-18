@@ -113,11 +113,13 @@ function jcalendar_week(options){
 					'date="'+newdate.getFullYear()+'-'+(newdate.getMonth()+1)+'-'+newdate.getDate()+'">'+
 				'<span class="calendar_day_i">'+newdate.getDate()+'</span>'+
 			'</li>';
+                showbtn = false;
 			}else{
 				week_day+='<li class="calendar_day'+dayaddclass+'" '+
 					'date="'+newdate.getFullYear()+'-'+(newdate.getMonth()+1)+'-'+newdate.getDate()+'">'+
 				'<span class="calendar_day_i">'+newdate.getDate()+'</span>'+
 			'</li>';
+
 			}
 			
 		}
@@ -190,6 +192,7 @@ function jcalendar_week(options){
 			$(".calendar_day").eq(0).addClass("calendar_day_act").siblings().removeClass("calendar_day_act");
 			var defaultDate = $(".calendar_day").eq(0).attr("date");
             initCourseList(defaultDate+" 00:00:00");
+            $(".afterm_btn").attr('src','img/icon-next-active.png');
 		})
 		//下一周
 		calendarid.find(".afterm_btn").off("click").on("click",function(){
@@ -204,7 +207,7 @@ function jcalendar_week(options){
                     $(".calendar_day").eq(0).addClass("calendar_day_act").siblings().removeClass("calendar_day_act");
                     var defaultDate = $(".calendar_day").eq(0).attr("date");
                     initCourseList(defaultDate+" 00:00:00");
-				}else{
+                }else{
                 	var nowDate = new Date();
                 	var cYear = nowDate.getFullYear();
                 	var cMonth = nowDate.getMonth() +1;
@@ -212,6 +215,7 @@ function jcalendar_week(options){
                 	if(cMonth < 10){
                         cMonth = "0"+cMonth;
 					}
+                    $(".afterm_btn").attr('src','img/icon-next.png');
                     initCourseList(cYear+"-"+cMonth+"-"+cDay+" 00:00:00");
 				}
 			}

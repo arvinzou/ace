@@ -84,14 +84,15 @@
 		</script>
 
 		<script id="menu-tpl" type="text/template">
+			{@if data.regType == 'student'}
 			<div class="row">
-				<div class="item mr" onclick="attendtion();">
+				<div class="item mr" onclick="toTest();">
 					<div class="item-left">
-						<img src="img/icon-appear.png" class="menu-icon"/>
+						<img src="img/icon-test.png" class="menu-icon"/>
 					</div>
 					<div class="item-right">
-						<div class="menu-title">考勤信息</div>
-						<div class="menu-content">查看考勤记录</div>
+						<div class="menu-title">教学测评</div>
+						<div class="menu-content">共有\${data.test}个待评</div>
 					</div>
 				</div>
 				<div class="item" onclick="toMailList();">
@@ -120,20 +121,17 @@
 						<div class="menu-content">共\${data.file}个文件</div>
 					</div>
 				</div>
-				{@if data.regType == 'student'}
-				<div class="item" onclick="toTest();">
+				<div class="item" onclick="attendtion();">
 					<div class="item-left">
-						<img src="img/icon-test.png" class="menu-icon"/>
+						<img src="img/icon-appear.png" class="menu-icon"/>
 					</div>
 					<div class="item-right">
-						<div class="menu-title">教学测评</div>
-						<div class="menu-content">共有\${data.test}个待评</div>
+						<div class="menu-title">考勤信息</div>
+						<div class="menu-content">查看考勤记录</div>
 					</div>
 				</div>
-				{@/if}
 			</div>
 			<div class="row">
-				{@if data.regType == 'student'}
 				<div class="item mr" onclick="classNotice();">
 					<div class="item-left">
 						<img src="img/icon-notice.png" class="menu-icon"/>
@@ -143,8 +141,47 @@
 						<div class="menu-content">已绑定班级</div>
 					</div>
 				</div>
-				{@/if}
 			</div>
+			{@else}
+
+			<div class="row">
+				<div class="item mr" onclick="attendtion();">
+					<div class="item-left">
+						<img src="img/icon-appear.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">考勤信息</div>
+						<div class="menu-content">查看考勤记录</div>
+					</div>
+				</div>
+				<div class="item" onclick="toMailList();">
+					<div class="item-left">
+						<img src="img/icon-mail.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">通讯录</div>
+						<div class="menu-content">共
+							{@if data.regType == 'student'}
+							\${data.student}
+							{@else}
+							\${data.teacher}
+							{@/if}
+							人</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="item mr" onclick="toClassFiles();">
+					<div class="item-left">
+						<img src="img/icon-files.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">班级文件</div>
+						<div class="menu-content">共\${data.file}个文件</div>
+					</div>
+				</div>
+			</div>
+			{@/if}
 		</script>
 
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>

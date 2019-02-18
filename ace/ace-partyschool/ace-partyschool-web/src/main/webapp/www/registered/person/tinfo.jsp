@@ -82,7 +82,7 @@
 			</div>
 		</div>
 		<div class="info">
-			<div class="ititle br">单位职务</div>
+			<div class="ititle br">职务全称</div>
 			<div class="icontent br">
 				<input class="form-input" type="text" name="postName" value="\${data.teacher.postName}"/>
 			</div>
