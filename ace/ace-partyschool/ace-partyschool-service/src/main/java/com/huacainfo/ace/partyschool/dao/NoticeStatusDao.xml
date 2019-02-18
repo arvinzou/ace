@@ -153,4 +153,16 @@
     select a.id userId,a.name,t.status from notice_status t left join (select name,id from student where status='1' union all select name,id from teacher where status='1') a on t.userId=a.id
     where t.noticeId=#{id}
   </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        FROM notice_status t
+        where 1=1
+        <if test="userId !=null and userId !=&quot;&quot;">
+            and t.userId = #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="noticeId !=null and noticeId !=&quot;&quot;">
+            and t.noticeId = #{noticeId,jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>

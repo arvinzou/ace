@@ -61,7 +61,7 @@
 
 <%--查看详情--%>
 <div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document" style="width: 75%;">
+    <div class="modal-dialog" role="document" style="width: 60%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
@@ -190,5 +190,10 @@
 </body>
 <style>
     /* css code area*/
+    .cover {
+        max-width: 600px;
+        max-height: 600px;
+        object-fit: cover;
+    }
 </style>
 </html>
