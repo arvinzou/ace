@@ -124,13 +124,11 @@ padding: 0px 8px 0px 0px !important;
 }
 
 .bg-crew-good{
-    background:rgba(254,76,70,1) !important;
-    font-size:18px !important;
-    font-weight:400;
-    color:rgba(255,255,255,1) !important;
+    background: rgba(254,76,70,1) !important;
+    font-size: 18px !important;
+    font-weight: 400;
+    color: #fff !important;
     padding: 6px;
-    margin: 0;
-    border-width: 0px !important;
 
 }
 .classinfo{
@@ -265,10 +263,21 @@ padding: 0px 8px 0px 0px !important;
 
 
  .btn-default.delete {
-
     background-color: #FE7874;
-    border-color: #FE7874;
+    border-color: #fff;
     color: #fff;
      height: 36px;
      width: 66px;
+}
+
+.fc-event .fc-bg {
+    background:rgba(254,76,70,1) !important;
+    font-size:18px !important;
+    font-weight:400;
+    color:#fff !important;
+    padding: 6px;
+    margin: 0;
+    border-color: transparent !important;
+    border-bottom-width: 2px !important;
+    border-top-width: 2px !important;
 }
