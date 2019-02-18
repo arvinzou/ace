@@ -125,7 +125,7 @@ function initClasses(){
         type:"post",
         async:false,
         data:{
-
+            status: "1",
         },
         success:function(result){
             if(result.status == 0) {
