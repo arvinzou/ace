@@ -121,15 +121,15 @@ function activeSearch() {
 
 function initClasses(){
     $.ajax({
-        url: contextPath+ "/www/files/getMyClasses",
+        url: contextPath+ "/www/classes/findClassList",
         type:"post",
         async:false,
         data:{
-
+            status: "1",
         },
         success:function(result){
             if(result.status == 0) {
-              if(result.data.length <1 && regType == 'teacher'){
+              if(result.rows.length <1 && regType == 'teacher'){
                   alert("对不起！您没有班级文件上传权限。");
                   $("#uploadModal").hide();
                   return;
@@ -138,7 +138,7 @@ function initClasses(){
                       $("#classBox").hide();
                       return;
                   }
-                  var data = result.data;
+                  var data = result.rows;
                   var classesArr = [];
                   for(var i=0; i<data.length; i++){
                       var o = {};
@@ -203,8 +203,7 @@ function upload(){
             preserve_headers: false
         },
         filters: [
-            {title : "文档文件", extensions : "xls,doc,ppt,pdf,txt"},
-            {title : "图片文件", extensions : "jpg,jpeg,png,bmp"}
+
         ]
     });
     uploader.init();
@@ -265,20 +264,5 @@ function addFiles(){
  * @param id
  */
 function downloadFile(id){
-    /*$.ajax({
-        url: contextPath+ "/www/download/file",
-        type:"post",
-        async:false,
-        data:{
-            id: id
-        },
-        success:function(result){
-
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });*/
-
     window.location.href = contextPath+ "/www/download/file?id="+id;
 }

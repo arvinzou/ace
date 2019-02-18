@@ -46,14 +46,7 @@
         <form id="fm">
             <div class="title">精确搜索</div>
             <div class="seach morginBottom40">
-                <input id="tt" class="easyui-combotree" style=" width: 120px;height: 46px;border:0 !important;" name="areaCode"
-                       data-options="url:'${portalPath}/system/selectProvinceTreeList.do',
-					method:'get',
-					label:'',
-					labelPosition:'top',
-					onSelect:function  (node) {
-						 setParams('areaCode', node.id);
-					}">
+                <input id="tt" class="easyui-combotree" style=" width: 120px;height: 46px;border:0; !important;" name="areaCode">
                 <input class="loadName" name="keyword" type="text">
                 <button class="active_seach"></button>
             </div>

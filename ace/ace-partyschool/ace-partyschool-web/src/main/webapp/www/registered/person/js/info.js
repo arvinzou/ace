@@ -168,10 +168,13 @@ function editStudent(){
     var workUnitName = $("input[name='workUnitName']").val();
     var postName = $("input[name='postName']").val();
     var politicalName = userInfo.student.political;
-    if(isCardNo(idCard) != true){
-        alert(isCardNo(idCard));
-        return;
+    if(idCard !='' && idCard !=null && idCard != undefined){
+        if(isCardNo(idCard) != true){
+            alert(isCardNo(idCard));
+            return;
+        }
     }
+
     if(mobile == "" || mobile == undefined || mobile == null){
         alert("手机号码不能为空！");
         return;

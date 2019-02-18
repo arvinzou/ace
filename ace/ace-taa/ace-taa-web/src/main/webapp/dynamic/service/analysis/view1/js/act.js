@@ -203,10 +203,10 @@ function initCombotree() {
         //     $val =  $("#tt").combotree('getValue');
         //     $("#_EnvUnitCode").val($val);
         // },
-        // onLoadSuccess:function(node,data){
-        //     $("#tt").combotree('setValue',data[0].text);
-        //
-        // }
+        onLoadSuccess:function(node,data){
+            $('.combo .combo-value').val(data[0].id);
+        }
+
     });
 }
 
