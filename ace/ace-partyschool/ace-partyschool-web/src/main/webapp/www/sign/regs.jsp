@@ -43,11 +43,11 @@
 				</div>
 				<div class="form-content form-border">
 					<label class="form-label">单位全称</label>
-					<input class="form-input" type="text" name="workUnitName" placeholder="例:中共常德市委统战部"/>
+					<input class="form-input" minlength="3" type="text" name="workUnitName" placeholder="例:中共常德市委统战部"/>
 				</div>
 				<div class="form-content form-border">
 					<label class="form-label">职务全称</label>
-					<input class="form-input" type="text" name="postName" placeholder="例:干部科科长"/>
+					<input class="form-input" minlength="3" type="text" name="postName" placeholder="例:干部科科长"/>
 				</div>
 				<div class="form-content">
 					<label class="form-label">班次</label>
