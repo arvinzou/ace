@@ -1,6 +1,7 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -68,6 +69,15 @@ public class SclNoticeServiceImpl implements SclNoticeService {
             rst.setTotal(allRows);
         }
         return rst;
+    }
+
+    @Override
+    public ResultResponse findNoticeById(String id) throws Exception {
+        if (CommonUtils.isBlank(id)){
+            return new ResultResponse(1, "序号不能为空!");
+        }
+        Notice notice = this.noticeDao.selectByPrimaryKey(id);
+        return new ResultResponse(ResultCode.SUCCESS,"获取成功",notice);
     }
 
     @Override
