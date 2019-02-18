@@ -64,3 +64,11 @@ function renderPage(IDom, data, tempId) {
     });
     $("#" + IDom).html(html);
 }
+
+/**
+ * 下载查看文件
+ * @param id
+ */
+function downloadFile(id){
+    window.location.href = contextPath+ "/www/download/notice?id="+id;
+}

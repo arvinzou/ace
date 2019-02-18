@@ -46,7 +46,7 @@
 						<div class="file-title">\${item.fileName}</div>
 						<div class="file-footer">
 							<span>\${data.pushDate}</span>
-							<a href="\${item.fileUrl}" download="\${item.fileName}" class="download">下载</a>
+							<a href="#" class="download">下载</a>
 						</div>
 					</div>
 				</div>
