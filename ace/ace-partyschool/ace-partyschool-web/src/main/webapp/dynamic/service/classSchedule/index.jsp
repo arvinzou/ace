@@ -100,7 +100,7 @@
     <p class="text">\${data.course.name}</p>
     <p class="title">讲师</p>
     <p class="text">\${data.teacher.name}</p>
-    <p class="title">班级</p>
+    <p class="title">班次</p>
     <p class="text">\${data.classes.name}</p>
     <p class="title">是否测评</p>
     <div class="switch_box box_4">

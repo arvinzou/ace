@@ -44,13 +44,13 @@
                                     <div class="form-group">
                     <label class="col-md-2 control-label">
 
-                        班级
+                        班次
                                                     <span class="required" aria-required="true"> * </span>
                                             </label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" name="classesId"
                                value="\{data.o.classesId}" maxlength="50"
-                               placeholder="请输入班级（建议字数在14个字以内，不超过50个字)">
+                               placeholder="请输入班次（建议字数在14个字以内，不超过50个字)">
                         <span class="help-block"></span>
                     </div>
                 </div>
@@ -83,13 +83,13 @@
                             <div class="form-group">
                     <label class="col-md-2 control-label">
 
-                        老师
+                        讲师
                                                     <span class="required" aria-required="true"> * </span>
                                             </label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" name="teacherId"
                                value="\{data.o.teacherId}" maxlength="50"
-                               placeholder="请输入老师（建议字数在14个字以内，不超过50个字)">
+                               placeholder="请输入讲师（建议字数在14个字以内，不超过50个字)">
                         <span class="help-block"></span>
                     </div>
                 </div>

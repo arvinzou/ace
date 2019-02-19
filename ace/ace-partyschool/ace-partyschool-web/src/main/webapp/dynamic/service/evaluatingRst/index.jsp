@@ -39,7 +39,7 @@
                         <input style="height: 35px;" type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入直播名称">
+                               placeholder="请输入课程名称">
                         <span class="input-group-btn">
                             <button style="height: 35px;" class="btn  btn-default search_btn" type="submit">
                                     搜索
@@ -54,8 +54,8 @@
                 <thead>
                 <tr>
                     <th width="30%"> 课程</th>
-                    <th width="25%"> 班级</th>
-                    <th width="10%"> 老师</th>
+                    <th width="25%"> 班次</th>
+                    <th width="10%"> 讲师</th>
                     <th width="5%"> 平均分值</th>
                     <th width="5%"> 未测评人数</th>
                     <th width="10%"> 日期</th>
@@ -153,7 +153,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 view-label">班级</label>
+            <label class="col-md-2 view-label">班次</label>
             <div class="col-md-10">
                 \${classesId}
             </div>
@@ -171,7 +171,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 view-label">老师</label>
+            <label class="col-md-2 view-label">讲师</label>
             <div class="col-md-10">
                 \${teacherId}
             </div>
@@ -218,7 +218,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">班级</label>
+        <label class="col-md-2 view-label">班次</label>
         <div class="col-md-10">
             \${classesId}
         </div>
@@ -236,7 +236,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">老师</label>
+        <label class="col-md-2 view-label">讲师</label>
         <div class="col-md-10">
             \${teacherId}
         </div>

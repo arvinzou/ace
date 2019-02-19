@@ -382,7 +382,7 @@ window.onload = function () {
                 },
                 cache: true
             },
-            placeholder: '选择历史班级',
+            placeholder: '选择历史班次',
             escapeMarkup: function (markup) {
                 return markup;
             },

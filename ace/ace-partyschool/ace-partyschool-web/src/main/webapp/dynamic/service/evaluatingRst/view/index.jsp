@@ -32,17 +32,11 @@
                                 class="form-control js-example-basic-single js-example-basic-single2"
                                 name="teacherId"></select>
                     </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control"
-                               placeholder="请输入直播名称">
-                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入直播名称">
+                               placeholder="请输入关键词">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn" type="submit">
                                     搜索
