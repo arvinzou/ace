@@ -88,8 +88,9 @@ function regist(){
     }else{
         if(postName.length < 3){
             alert("职务全称输入在3个字符以上！");
+            return;
         }
-        return;
+
     }
     if(!isEmpty(clazz)){
         alert("所属班级不能为空！");
