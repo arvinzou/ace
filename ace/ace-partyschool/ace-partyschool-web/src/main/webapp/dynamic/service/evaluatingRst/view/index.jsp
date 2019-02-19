@@ -86,7 +86,7 @@
     {@each data as item, index}
     <tr>
         <td> \${item.course.name}</td>
-        <td> \${item.evaluationRstContent.content}</td>
+        <td> \${item.evaluationRstContent?item.evaluationRstContent.content:''}</td>
         <td> \${item.student.name}</td>
         <td> \${item.createDate}</td>
         <td>

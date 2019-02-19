@@ -151,12 +151,9 @@
 
     <sql id="Vo_Column_List">
      (
-SELECT COUNT(*)
-FROM (
-SELECT COUNT(*),er.classScheduleId
-FROM partyschool.evaluation_rst er
-GROUP BY er.userId) tt
-WHERE tt.classScheduleId=cs.id
+    SELECT  count(DISTINCT er.userId)
+	FROM partyschool.evaluation_rst er
+	WHERE er.classScheduleId=cs.id
 		) AS userNum,
 		 (
 SELECT COUNT(*)
