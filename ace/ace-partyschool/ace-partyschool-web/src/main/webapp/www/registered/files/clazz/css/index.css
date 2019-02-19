@@ -107,9 +107,9 @@ body{
 .upload{
 	width: 4.44rem;
 	height: 1.986666rem;
-	position: absolute;
+	position: fixed;
 	bottom: 0.933333rem;
-	left: 2.78rem;
+	left: 45%;
 }
 .icon-search{
 	width: 0.4rem;
