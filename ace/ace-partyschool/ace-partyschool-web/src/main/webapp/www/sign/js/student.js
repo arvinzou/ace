@@ -273,6 +273,10 @@ function initClassList(){
 
 function searchByName(){
     var name = $("input[name='name']").val();
+    if(name == "" || name == null || name == undefined ){
+        alert("姓名不能为空！");
+        return;
+    }
     $.ajax({
         url: contextPath + "/www/sign/searchByName",
         type: "post",
