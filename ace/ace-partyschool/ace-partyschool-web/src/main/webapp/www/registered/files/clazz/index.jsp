@@ -62,7 +62,13 @@
 					{@/if}
 				</div>
 				<div class="file-detail">
-					<div class="file-title"><div class="inner-middle"><a class="download" onclick="downloadFile('\${item.id}');">\${item.title}</a></div></div>
+					<div class="file-title"><div class="inner-middle">
+						{@if fileType(item.url)=='img'}
+						<a href="\${item.url}" class="download">\${item.title}</a>
+						{@else}
+						<a class="download" onclick="downloadFile('\${item.id}');">\${item.title}</a>
+						{@/if}
+					</div></div>
 					<div class="file-footer">
 						<span>\${item.pushDate}</span>
 						<span>来自</span>

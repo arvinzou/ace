@@ -43,3 +43,7 @@ function renderPage(IDom, data, tempId) {
 function toMailList(){
     window.location.href = contextPath + '/www/registered/maillist/index.jsp';
 }
+
+function downloadFile(url){
+    window.location.href = contextPath+ "/www/download/byUrl?url="+url;
+}

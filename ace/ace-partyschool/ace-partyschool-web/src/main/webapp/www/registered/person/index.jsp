@@ -59,7 +59,13 @@
 		</script>
 
 		<script id="userinfo-tpl" type="text/template">
-			<div class="header" onclick="showPersonInfo();"><img src="img/default_header.png"/></div>
+			<div class="header" onclick="showPersonInfo();">
+				{@if data.isBindWx == "1"}
+				<img src="\${data.avatarUrl}"/>
+				{@else}
+				<img src="img/default_header.png"/>
+				{@/if}
+			</div>
 			<div class="username" onclick="showPersonInfo();">
 				{@if data.regType == 'student'}
 				<span>\${data.student.name}</span>
