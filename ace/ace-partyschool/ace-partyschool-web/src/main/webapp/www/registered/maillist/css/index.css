@@ -133,7 +133,7 @@ ul,li{
 	font-family:PingFang-SC-Medium;
 }
 .item-left{
-	width: 56%;
+	width: 46%;
 	height: 100%;
 	padding-left: 4%;
 	float: left;
@@ -144,8 +144,19 @@ ul,li{
 	height: 100%;
 	line-height: 1.6rem;
 	text-align: right;
-	padding-right: 4%;
 	float: left;
+}
+.item-call{
+	width: 10%;
+	height: 100%;
+	padding-right: 4%;
+	text-align: right;
+	float: left;
+}
+.item-call img{
+	width: 0.64rem;
+	height: 0.64rem;
+	margin-top: 0.48rem;
 }
 .title{
 	height: 1.213333rem;
