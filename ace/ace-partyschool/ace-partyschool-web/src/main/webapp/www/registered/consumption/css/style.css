@@ -75,14 +75,17 @@ body{
 	width: 1.2rem;
 	height: 100%;
 	float: left;
+	text-align: right;
 }
 .record{
-	width: 8rem;
+	width: 7.6rem;
 	height: 1.866666rem;
+	float: left;
 	line-height: 1.866666rem;
 	color: #373F53;
 	font-size: 0.453333rem;
 	font-weight: bold;
+	padding-left: 0.4rem;
 }
 .icon img{
 	width: 0.906666rem;
