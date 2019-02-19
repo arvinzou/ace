@@ -106,9 +106,10 @@ function initData(){
 
 }
 
+/*
 function hideFooter(){
     $(".footer-box").hide();
 }
 function showFooter(){
     $(".footer-box").show();
-}
+}*/

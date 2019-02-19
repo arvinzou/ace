@@ -2,12 +2,19 @@
 	padding: 0;
 	margin: 0;
 }
+html{
+	height: 100%;
+}
 body{
 	font-family:PingFang-SC-Medium;
+	height: 100%;
 }
 .index{
 	width: 10rem;
 	margin: 0 auto;
+	min-height: 14rem;
+	max-height: 100%;
+	position: relative;
 }
 input{
 	-webkit-appearance: none;
@@ -82,6 +89,7 @@ input:-ms-input-placeholder{
 	height: 0.8rem;
 	line-height: 0.8rem;
 	text-align: right;
+	margin-bottom: 1.4rem;
 }
 .regist{
 	font-size: 0.506666rem;
@@ -128,8 +136,6 @@ input:-ms-input-placeholder{
 .footer-box{
 	width: 10rem;
 	height: 4.066666rem;
-	position: fixed;
-	bottom: 0;
 	background: url("../img/footer-bg.png") no-repeat;
 	background-size: 100% 100%;
 	margin: 0 auto;
