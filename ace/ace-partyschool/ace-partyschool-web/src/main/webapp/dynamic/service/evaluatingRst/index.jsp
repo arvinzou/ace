@@ -57,7 +57,7 @@
                     <th width="25%"> 班级</th>
                     <th width="10%"> 老师</th>
                     <th width="5%"> 平均分值</th>
-                    <th width="5%"> 未评测人数</th>
+                    <th width="5%"> 未测评人数</th>
                     <th width="10%"> 日期</th>
                     <th width="10%">操作</th>
                 </tr>

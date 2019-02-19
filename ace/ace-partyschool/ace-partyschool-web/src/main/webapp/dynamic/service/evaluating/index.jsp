@@ -186,7 +186,7 @@
 </div>
 
 <script id="tpl-preview" type="text/template">
-    <h4>评测内容</h4>
+    <h4>测评内容</h4>
     <div class="form-group">
         <label class="col-md-2 view-label">名称</label>
         <div class="col-md-10">
@@ -205,7 +205,7 @@
             \${data.timeout}
         </div>
     </div>
-    <h4>评测选项内容</h4>
+    <h4>测评选项内容</h4>
     {@each data.evaluationIndexList as item, index}
     <div class="form-group">
         <div class="row">
@@ -226,7 +226,7 @@
         </div>
     </div>
     {@/each}
-    <h4>评测其他信息</h4>
+    <h4>测评其他信息</h4>
     <div class="form-group">
         <label class="col-md-2 view-label">创建人姓名</label>
         <div class="col-md-10">

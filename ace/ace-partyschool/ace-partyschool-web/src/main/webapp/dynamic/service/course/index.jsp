@@ -65,7 +65,7 @@
                     <th width="50%"> 名称</th>
 
                     <th width="10%"> 类型</th>
-                    <th width="15%"> 评测方案</th>
+                    <th width="15%"> 测评方案</th>
                     <th width="10%"> 老师</th>
 
                     <th width="20%">操作</th>
@@ -147,7 +147,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">评测方案</label>
+        <label class="col-md-2 view-label">测评方案</label>
         <div class="col-md-10">
             \${data.evaluatingName}
         </div>

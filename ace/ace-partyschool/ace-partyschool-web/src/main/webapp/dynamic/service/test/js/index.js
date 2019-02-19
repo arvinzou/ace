@@ -9,7 +9,7 @@ $(function () {
 
 
 /**
- *查看测试过的评测*/
+ *查看测试过的测评*/
 
 function viewTestd() {
     var eid=$(this).data('eid');

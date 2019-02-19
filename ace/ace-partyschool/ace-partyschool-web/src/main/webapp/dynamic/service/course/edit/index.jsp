@@ -74,7 +74,7 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
-                评测方案
+                测评方案
             </label>
             <div class="col-md-10">
                 <select style="width: 100%;height: 34px" class="js-example-basic-single js-example-basic-single1"

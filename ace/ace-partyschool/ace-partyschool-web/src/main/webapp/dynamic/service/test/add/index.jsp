@@ -56,7 +56,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">
 
-                            评测方案
+                            测评方案
                             ﻿
                         </label>
                         <div class="col-md-6">
