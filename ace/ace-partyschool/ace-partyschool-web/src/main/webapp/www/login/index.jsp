@@ -18,10 +18,10 @@
 			</div>
 			<div class="login-form">
 				<div class="form-row">
-					<input class="login-input" name="username" type="number" placeholder="请输入手机号码" onfocus="hideFooter();" onblur="showFooter();"/>
+					<input class="login-input" name="username" type="number" placeholder="请输入手机号码" />
 				</div>
 				<div class="form-row pwd">
-					<input  class="login-input" name="password" type="password" placeholder="请输入密码" onfocus="hideFooter();" onblur="showFooter();"/>
+					<input  class="login-input" name="password" type="password" placeholder="请输入密码" />
 					<img src="img/fpwd.png" class="forget" onclick="resetPwd();">
 				</div>
 			</div>
