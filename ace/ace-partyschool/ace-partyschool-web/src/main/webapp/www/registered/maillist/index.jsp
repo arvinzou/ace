@@ -59,7 +59,7 @@
 							<span class="mobile">\${child.href}</span>
 						</div>
 						<div class="item-call">
-							<img src="img/icon_phone.png">
+							<a href="tel:\${child.href}"><img src="img/icon_phone.png"></a>
 						</div>
 					</div>
 					{@/each}
@@ -82,7 +82,7 @@
 					<span class="mobile">\${item.href}</span>
 				</div>
 				<div class="item-call">
-					<img src="img/icon_phone.png">
+					<a href="tel:\${item.href}"><img src="img/icon_phone.png"></a>
 				</div>
 			</div>
 			{@/if}
