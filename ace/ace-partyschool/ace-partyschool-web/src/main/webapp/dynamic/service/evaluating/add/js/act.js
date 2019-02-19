@@ -2,7 +2,7 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append(" <li><span>创建测评管理</span></li>");
+        $(".breadcrumb").append(" <li><span>创建测评</span></li>");
         initEvents();
         $('.addOption').on('click', '', addOption);
         $('#evaluatingRst ').on('click', '.removeOption', removeOption);
