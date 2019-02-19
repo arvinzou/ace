@@ -64,7 +64,7 @@ function initSelect() {
             delay: 250,
             language: "zh-CN",
             data: function (params) {
-                return {
+                return {status:1,
                     name: params.term, // search term
                     page: params.page
                 };

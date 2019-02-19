@@ -186,7 +186,7 @@
 </div>
 
 <script id="tpl-preview" type="text/template">
-    <h4>测评内容</h4>
+    <h4>基本信息</h4>
     <div class="form-group">
         <label class="col-md-2 view-label">名称</label>
         <div class="col-md-10">

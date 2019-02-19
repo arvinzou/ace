@@ -26,7 +26,7 @@
             <!--具体界面元素开始-->
             <form class="form-horizontal" id="fm-add" role="form">
                 <div class="form-body">
-                    <h4>测评内容</h4>
+                    <h4>基本信息</h4>
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-2 control-label">
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                     </div>
-                    <h4>测评指标 <span id="totlascore"></span></h4>
+                    <h4>指标项目 <span id="totlascore"></span></h4>
                     <div id="evaluatingRst">
                         <div class="form-group">
                             <div class="row">
