@@ -1,7 +1,7 @@
 var political = null;
 var clazz = null;
 var account = null;
-var pwd = null;
+var password = null;
 var classesArr = [];
 var userInfo = {};
 var sex = null;
@@ -145,7 +145,7 @@ function regist(){
             if(result.status == 0) {
                 alert(result.info);
                 account = signAcct;
-                pwd = singPwd;
+                password = singPwd;
                 $("#bindModal").show();
                 $("body").addClass("modalhide");
             }else {
@@ -238,32 +238,6 @@ function bindWx(){
     var o={};
     o.account=account.toString();
     $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
-
-    $.ajax({
-        url: contextPath+ "/www/sign/acctLogin",
-        type:"post",
-        async:false,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data:{
-            acct:  account,
-            pwd: pwd
-        },
-        success:function(result){
-            if(result.status == 0) {
-                window.location.href = contextPath + '/www/registered/person/index.jsp'
-            }else {
-                if(result.info){
-                    alert(result.info);
-                }else{
-                    alert(result.errorMessage);
-                }
-                return;
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
 
     $("#bindForm").submit();
 }
