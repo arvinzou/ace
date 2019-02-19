@@ -33,29 +33,35 @@
 		</div>
 
 		<script id="course-tpl" type="text/template">
-			{@each data as item, index}
-			{@if item.courseIndex == "am"}
-			<div class="course morning">
-				<div class="course-left">上午</div>
-				<div class="course-right">
-                    <div class="inner-middle">
-					    <span>\${item.course.name}</span>
-					    <span>(主讲:\${item.teacher.name}）</span>
-                    </div>
-				</div>
-			</div>
-			{@else}
-			<div class="course afternoon">
-				<div class="course-left">下午</div>
-				<div class="course-right">
-					<div class="inner-middle">
-						<span>\${item.course.name}</span>
-						<span>(主讲:\${item.teacher.name}）</span>
+			{@if data.length > 0}
+				{@each data as item, index}
+				{@if item.courseIndex == "am"}
+				<div class="course morning">
+					<div class="course-left">上午</div>
+					<div class="course-right">
+						<div class="inner-middle">
+							<span>\${item.course.name}</span>
+							<span>(主讲:\${item.teacher.name}）</span>
+						</div>
 					</div>
 				</div>
+				{@else}
+				<div class="course afternoon">
+					<div class="course-left">下午</div>
+					<div class="course-right">
+						<div class="inner-middle">
+							<span>\${item.course.name}</span>
+							<span>(主讲:\${item.teacher.name}）</span>
+						</div>
+					</div>
+				</div>
+				{@/if}
+				{@/each}
+			{@else}
+			<div class="course none">
+				暂无课程
 			</div>
 			{@/if}
-			{@/each}
 		</script>
 
 		<script id="userinfo-tpl" type="text/template">
@@ -80,6 +86,7 @@
 		</script>
 
 		<script id="noticeTop-tpl" type="text/template">
+			{@if data.title}
 			<div class="notice">
 				<div class="notice-icon"><img src="img/icon-message.png"/></div>
 				<div class="notice-title">\${data.title}</div>
@@ -87,6 +94,7 @@
 					<span>全部</span><img src="img/icon_select.png"/>
 				</div>
 			</div>
+			{@/if}
 		</script>
 
 		<script id="menu-tpl" type="text/template">
