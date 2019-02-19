@@ -6,8 +6,12 @@ body{
 	font-family:PingFang-SC-Medium;
 }
 .index{
-	padding-left: 0.146666rem;
-	padding-right: 0.146666rem;
+	padding-left: 0.15rem;
+	padding-right: 0.15rem;
+	width: 9.7rem;
+	height: auto;
+	margin: 0 auto;
+	position: relative;
 }
 .modal{
 	width: 100%;
@@ -103,7 +107,7 @@ body{
 .upload{
 	width: 4.44rem;
 	height: 1.986666rem;
-	position: fixed;
+	position: absolute;
 	bottom: 0.933333rem;
 	left: 2.78rem;
 }
@@ -118,9 +122,9 @@ body{
 	font-size: 0.346666rem;
 	color: #ABAEB9;
 	padding-left: 0.266666rem;
-	position: relative;
+	position: fixed;
     bottom: 1.48rem;
-    left: 3.6rem;
+    left: 45%;
 }
 
 /**上传班级文件模态框**/

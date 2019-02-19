@@ -1,5 +1,5 @@
 var lCardNo = null;
-var server = "http://c6cb781a.ngrok.io";
+var server = "http://api.huacainfo.com";
 $(function(){
 
     $.ajax({
@@ -29,6 +29,8 @@ $(function(){
     if(lCardNo) {
         initList(lCardNo);
         initCount(lCardNo);
+    }else{
+        $("#count").html('<div class="noneCard">未绑定卡信息</div>');
     }
 });
 

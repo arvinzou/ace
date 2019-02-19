@@ -20,9 +20,9 @@
 			<div class="list" id="fileList">
 
 			</div>
+
+			<img src="img/icon_upload.png" class="upload" onclick="startUpload();"/>
 		</div>
-		
-		<img src="img/icon_upload.png" class="upload" onclick="startUpload();"/>
 
 		<!--老师上传文件模态框层-->
 		<div class="modal" id="uploadModal" style="display: none;">

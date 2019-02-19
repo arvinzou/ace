@@ -193,7 +193,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
             and to_days(cs.courseDate) = TO_DAYS(#{condition.courseDateStr,jdbcType=VARCHAR})
         </if>
         <if test="condition.learned !=null and condition.learned !=&quot;&quot;">
-            AND cs.courseDate <![CDATA[ < ]]> CURDATE()
+            AND cs.courseDate <![CDATA[ < ]]> NOW()
         </if>
         <if test="condition.classList !=null and condition.classList.size > 0">
             and cs.classesId in
@@ -220,7 +220,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY cs.courseDate ASC ,cs.courseIndex ASC
+                ORDER BY cs.courseDate DESC ,cs.courseIndex ASC
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

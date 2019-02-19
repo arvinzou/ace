@@ -38,7 +38,7 @@
 </body>
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
-        <h4>测评内容</h4>
+        <h4>基本信息</h4>
         <div class="form-group">
             <label class="col-md-2 control-label">
                 名称
@@ -72,7 +72,7 @@
                 <span class="help-block"></span>
             </div>
         </div>
-        <h4>测评选项内容</h4>
+        <h4>指标项目</h4>
         <div id="evaluatingRst">
             {@each data.evaluationIndexList as item, index}
             <%--<div class="form-group">--%>
