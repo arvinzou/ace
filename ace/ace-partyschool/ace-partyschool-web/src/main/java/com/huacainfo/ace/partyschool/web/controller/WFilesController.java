@@ -60,7 +60,6 @@ public class WFilesController extends BisBaseController {
     @RequestMapping(value = "/findFilesList")
     @ResponseBody
     public ResultResponse findFilesListVo(FilesQVo condition, PageParamNoChangeSord page) throws Exception {
-
         UserProp userProp = this.getCurUserProp();
         if (userProp == null) {
             return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
