@@ -37,7 +37,7 @@ function view(evaluatingId, userId) {
 }
 
 
-/*评测管理初始化分页*/
+/*测评管理初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 1,
@@ -56,7 +56,7 @@ function initPage() {
 }
 
 
-/*评测管理加载表格数据*/
+/*测评管理加载表格数据*/
 function getPageList() {
     var url = contextPath + "/evaluationRst/findEvaluationRstListVo";
     params['name'] = $("input[name=keyword]").val();

@@ -48,7 +48,7 @@ function postData(datas) {
     }
     $.post(url,data,function (rst) {
         if(rst.status==0){
-            alert("感谢您的评测");
+            alert("感谢您的测评");
             window.history.back();
         }
         else {

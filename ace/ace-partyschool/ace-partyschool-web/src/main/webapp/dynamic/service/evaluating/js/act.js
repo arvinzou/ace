@@ -6,7 +6,7 @@ window.onload = function () {
 }
 
 
-/*评测管理初始化分页*/
+/*测评管理初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 1,
@@ -24,7 +24,7 @@ function initPage() {
     });
 }
 
-/*评测管理条件查询*/
+/*测评管理条件查询*/
 function t_query() {
     getPageList();
     return false;
@@ -35,7 +35,7 @@ function setParams(key, value) {
     getPageList();
 }
 
-/*评测管理加载表格数据*/
+/*测评管理加载表格数据*/
 function getPageList() {
     var url = contextPath + "/evaluating/findEvaluatingList";
     params['name'] = $("input[name=keyword]").val();
@@ -62,12 +62,12 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
-/*评测管理添加*/
+/*测评管理添加*/
 function add(type) {
     window.location.href = 'add/index.jsp?id=' + urlParams.id;
 }
 
-/*评测管理编辑*/
+/*测评管理编辑*/
 function edit(did) {
     window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
 }
@@ -128,7 +128,7 @@ function initEvents() {
 
 }
 
-/*评测管理审核*/
+/*测评管理审核*/
 function audit(params) {
     startLoad();
     $.ajax({
@@ -151,7 +151,7 @@ function audit(params) {
     });
 }
 
-/*评测管理上架*/
+/*测评管理上架*/
 function online(id) {
     if (confirm("确定要上架吗？")) {
         startLoad();
@@ -179,7 +179,7 @@ function online(id) {
     }
 }
 
-/*评测管理下架*/
+/*测评管理下架*/
 function outline(id) {
     if (confirm("确定要下架吗？")) {
         startLoad();
