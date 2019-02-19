@@ -6,13 +6,17 @@ body{
 	background: #F2F2F2;
 	font-family:PingFang-SC-Medium;
 }
+.container{
+	width: 10rem;
+	height: 100%;
+}
 .index{
 	width: 9.2rem;
 	height: 100%;
+	background: #FFFFFF;
 	padding-left: 0.4rem;
 	padding-right: 0.4rem;
-	background: #FFFFFF;
-	margin:0  0.266666rem auto;
+	margin-bottom: 0.266666rem;
 }
 .userinfo{
 	width: 10rem;
