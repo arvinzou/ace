@@ -109,7 +109,7 @@ body{
 	height: 1.986666rem;
 	position: fixed;
 	bottom: 0.933333rem;
-	left: 45%;
+	left: 30%;
 }
 .icon-search{
 	width: 0.4rem;
@@ -122,9 +122,9 @@ body{
 	font-size: 0.346666rem;
 	color: #ABAEB9;
 	padding-left: 0.266666rem;
-	position: fixed;
+	position: relative;
     bottom: 1.48rem;
-    left: 45%;
+    left: 3.6rem;
 }
 
 /**上传班级文件模态框**/

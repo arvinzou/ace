@@ -36,8 +36,9 @@ input:-ms-input-placeholder{
 	font-weight: 500;
 }   
 .index{
-	width: 100%;
+	width: 10rem;
 	height: 100%;
+	margin: 0 auto;
 }
 .form-title{
 	height: 1.306666rem;
