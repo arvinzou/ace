@@ -13,6 +13,17 @@ body{
 	background: #FFFFFF;
 	margin-bottom: 0.266666rem;
 }
+.userinfo{
+	width: 100%;
+	height: auto;
+	background: #FFFFFF;
+	border-bottom: 1px solid #F0EFF6;
+}
+.user-inner{
+	width: 9.2rem;
+	height: 1.6rem;
+	margin: 0 auto;
+}
 .box{
 	height: 1.6rem;
 }
@@ -107,7 +118,7 @@ body{
 	height: 2.666666rem;
 	border-radius: 0.266666rem;
 	color: #FFFFFF;
-	margin-bottom: 0.346666rem;
+	margin-bottom: 0.533333rem;
 }
 .course:after{
 	content: '';
@@ -123,17 +134,17 @@ body{
 	box-shadow:0px 0px 13px 0px rgba(81,189,254,0.25);
 }
 .course-left{
-	width: 1.8rem;
+	width: 1.4rem;
 	height: 2.666666rem;
 	line-height: 2.666666rem;
 	float: left;
 	color: #FFFFFF;
 	font-size: 0.64rem;
 	font-weight: bold;
-	text-align: center;
+	padding-left: 0.4rem;
 }
 .course-right{
-	width: 7rem;
+	width: 7.2rem;
 	height: 2.666666rem;
 	float: left;
 	word-wrap:break-word; 
@@ -141,7 +152,7 @@ body{
 	color: #FFFFFF;
 	font-size: 0.453333rem;
 	font-weight: bold;
-	padding-right: 0.4rem;
+	padding-right: 0.2rem;
 	display: table;
 }
 .scheal{
@@ -255,11 +266,12 @@ body{
 .menu-content{
 	color: #ABAEB9;
 	font-size: 0.32rem;
+	font-family:PingFang-SC-Medium;
 }
 .inner-middle{
 	display: table-cell;
 	vertical-align:middle;
-	padding-left: 0.4rem;
+	padding-left: 0.2rem;
 }
 .new{
 	width: 0.453333rem;

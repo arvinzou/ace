@@ -10,10 +10,10 @@
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
 	</head>
 	<body>
+		<div class="userinfo" >
+			<div class="user-inner" id="userInfo"></div>
+		</div>
 		<div class="index">
-			<div class="box br" id="userInfo">
-
-			</div>
 			<div class="box">
 				<div class="today">今日课程</div>
 				<div class="calendar" onclick="weekCourse();">

@@ -79,8 +79,8 @@ function regist(){
     }else{
         if(workUnitName.length < 3){
             alert("单位全称输入在3个字符以上！");
+            return;
         }
-        return;
     }
     if(!isEmpty(postName)){
         alert("职务全称不能为空！");
