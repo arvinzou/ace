@@ -76,7 +76,11 @@ function initData() {
 /**获取没有做的测试列表*/
 function getNotDoneTestList() {
     var url=contextPath+ "/www/classSchedule/notDoneTestList";
-    $.getJSON(url,function (rst) {
+    var data={
+        start:0,
+        limit:200
+    }
+    $.getJSON(url,data,function (rst) {
         if(rst.status==0){
             renderPage('testNumber',rst.data,'tpl_testNumber')
             renderPage('testList',rst.data.list,'tpl_notDoneTest')
@@ -90,7 +94,11 @@ function getNotDoneTestList() {
 /**获取做的测试列表*/
 function getDoneTestList() {
     var url=contextPath+ "/www/classSchedule/DoneTestList";
-    $.getJSON(url,function (rst) {
+    var data={
+        start:0,
+        limit:200
+    }
+    $.getJSON(url,data,function (rst) {
         if(rst.status==0){
             renderPage('testList',rst.data.list,'tpl_doneTest')
         }

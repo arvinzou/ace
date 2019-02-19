@@ -33,7 +33,11 @@
 
 <script id="tpl_userInfo" type="text/template">
     <div class="headImg">
-        <img src="img/default_header.png">
+        {@if data.isBindWx == "1"}
+            <img src="\${data.avatarUrl}"/>
+        {@else}
+            <img src="img/default_header.png"/>
+        {@/if}
     </div>
     <div class="name">
         \${data.student.name}
