@@ -71,7 +71,7 @@ function initSelect() {
             dataType: 'json',
             delay: 250,
             data: function (params) {
-                return {
+                return {status:1,
                     name: params.term, // search term
                     page: params.page
                 };

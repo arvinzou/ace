@@ -140,6 +140,7 @@ function initSelect(data) {
             delay: 250,
             data: function (params) {
                 return {
+                    status:1,
                     name: params.term, // search term
                     page: params.page
                 };
