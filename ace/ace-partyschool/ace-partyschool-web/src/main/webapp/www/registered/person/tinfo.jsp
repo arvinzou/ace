@@ -97,7 +97,7 @@
 				<form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post" onsubmit="bindWx();">
 					<input type="hidden" name="jsonData"/>
 					<input type="hidden" value="WX_BIND"  name="action"/>
-					<input type="hidden" value="/partyschool/www/registered/person/info.jsp" id="respUri" name="respUri"/>
+					<input type="hidden" value="/partyschool/www/registered/person/tinfo.jsp" id="respUri" name="respUri"/>
 					<button type="submit" class="bind-btn bindLink">绑定微信</button><img class="redirect" src="img/icon_select.png"/>
 				</form>
 				{@else}
