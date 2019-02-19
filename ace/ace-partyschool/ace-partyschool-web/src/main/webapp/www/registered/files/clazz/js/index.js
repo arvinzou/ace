@@ -26,7 +26,11 @@ $(function(){
             alert("系统服务内部异常！");
         }
     });
-    fileList();
+    if(regType == "student"){
+        fileList();
+    }else{
+        fileListByClass();
+    }
 });
 
 function focusInput(){
@@ -77,6 +81,44 @@ function fileTypes(fileName){
     return fileType;
 }
 
+function fileListByClass(){
+    var keyWord = $("input[name='keyWord']").val();
+    $.ajax({
+        url: contextPath+ "/www/files/findFilesListVo",
+        type:"post",
+        async:false,
+        data:{
+            title: keyWord,
+            start: 0,
+            limit: 999
+        },
+        success:function(result){
+            if(result.status == 0) {
+                console.log(result);
+                var list = result.rows;
+                for(var i=0; i<list.length; i++){
+                    if(list[i].title.length > 33){
+                        list[i].title = list[i].title.substring(0,35)+"...";
+                    }
+                }
+                juicer.register('fileType', fileTypes);
+                renderPage('fileList', list, 'list-tpl');
+                renderPage('fileParamList', result.rows, 'list-tpl');
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
 function fileList(){
     var keyWord = $("input[name='keyWord']").val();
     $.ajax({
@@ -116,7 +158,11 @@ function fileList(){
 }
 
 function activeSearch() {
-    fileList();
+    if(regType == "student"){
+        fileList();
+    }else{
+        fileListByClass();
+    }
 }
 
 function initClasses(){
@@ -177,6 +223,8 @@ function initClasses(){
 }
 
 function closeModal(){
+    $("#fileBox").html('<img src="img/icon_confirm_add.png" class="option-add" id="upload"/>');
+    fileUrl = null;
     $("#uploadModal").hide();
 }
 
@@ -216,7 +264,10 @@ function upload(){
         var rst = JSON.parse(responseObject.response);
         fileUrl = rst.file_path;
         $("#fileBox").html("<span>"+title+"</span>");
+
+        uploader.removeFile(file);
     });
+
 }
 
 function addFiles(){
