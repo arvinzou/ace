@@ -4,6 +4,7 @@
 }
 body{
 	background: #F2F2F2;
+	font-family:PingFang-SC-Medium;
 }
 .index{
 	width: 100%;
@@ -75,7 +76,7 @@ body{
 	margin-top: 1.68rem;
 }
 .br{
-	border-bottom: 1px solid #F0EFF6;
+	border-bottom: 0.5px solid #F0EFF6;
 }
 .title02{
 	height: 1.466666rem;

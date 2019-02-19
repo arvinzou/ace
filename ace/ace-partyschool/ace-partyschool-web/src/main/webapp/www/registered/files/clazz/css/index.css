@@ -2,6 +2,9 @@
 	padding: 0;
 	margin: 0;
 }
+body{
+	font-family:PingFang-SC-Medium;
+}
 .index{
 	padding-left: 0.146666rem;
 	padding-right: 0.146666rem;
@@ -137,7 +140,7 @@
 	top: -0.1rem;
 }
 .mbr{
-	border-bottom: 1px solid #F0EFF6;
+	border-bottom: 0.5px solid #F0EFF6;
 }
 .modal-title01{
 	width: 100%;

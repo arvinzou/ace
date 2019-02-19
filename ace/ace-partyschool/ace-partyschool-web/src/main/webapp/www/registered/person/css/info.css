@@ -4,6 +4,7 @@
 }
 body{
 	background: #F2F2F2;
+	font-family:PingFang-SC-Medium;
 }
 .index{
 	width: 100%;
@@ -55,7 +56,7 @@ input{
 	white-space: nowrap;
 }
 .br{
-	border-bottom: 1px solid #F0EFF6;
+	border-bottom: 0.5px solid #F0EFF6;
 }
 .redirect{
 	width: 0.2rem;
