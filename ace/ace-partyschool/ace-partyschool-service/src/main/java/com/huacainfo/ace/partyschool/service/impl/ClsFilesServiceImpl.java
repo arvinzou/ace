@@ -109,7 +109,7 @@ public class ClsFilesServiceImpl implements ClsFilesService {
         o.setClassesId(clsId);
         o.setCategory(category);
         o.setPushDate(new Date());
-        o.setPublisher(userProp.getName());
+        o.setPublisher(userProp.getUserId());
         o.setId(GUIDUtil.getGUID());
         o.setStatus("1");
         this.filesDao.insert(o);
@@ -145,7 +145,7 @@ public class ClsFilesServiceImpl implements ClsFilesService {
         obj.setTitle(strs1);
         obj.setCategory("1");
         obj.setPushDate(new Date());
-        obj.setPublisher(userProp.getName());
+        obj.setPublisher(userProp.getUserId());
         obj.setStatus("1");
         for (String item : classes) {
             obj.setId(GUIDUtil.getGUID());
