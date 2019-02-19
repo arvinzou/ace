@@ -129,6 +129,7 @@ function initNoticeTop1(){
 
                 }else{
                     renderPage('noticeTop', result.data.history[0], 'noticeTop-tpl');
+                    $("#more").append('<span class="new">'+0+'</span>');
                 }
             }else {
                 if(result.info){
