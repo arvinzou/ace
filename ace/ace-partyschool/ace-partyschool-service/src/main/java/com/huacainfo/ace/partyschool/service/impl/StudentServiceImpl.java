@@ -308,13 +308,13 @@ public class StudentServiceImpl implements StudentService {
             if (CommonUtils.isBlank(o.getMobile())) {
                 return new MessageResponse(1, "行" + i + ",手机号码不能为空！");
             }
-            if (CommonUtils.isBlank(o.getIdCard())) {
+            if (CommonUtils.isBlank(o.getPolitical())) {
                 return new MessageResponse(1, "行" + i + ",政治面貌不能为空！");
             }
-            if (CommonUtils.isBlank(o.getIdCard())) {
+            if (CommonUtils.isBlank(o.getPostName())) {
                 return new MessageResponse(1, "行" + i + ",职务全称不能为空！");
             }
-            if (CommonUtils.isBlank(o.getIdCard())) {
+            if (CommonUtils.isBlank(o.getWorkUnitName())) {
                 return new MessageResponse(1, "行" + i + ",单位全称不能为空！");
             }
             if (StringUtil.isNotEmpty(o.getSex())) {

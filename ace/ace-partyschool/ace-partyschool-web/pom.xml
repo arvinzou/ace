@@ -13,6 +13,13 @@
     <artifactId>ace-partyschool-web</artifactId>
     <packaging>war</packaging>
     <dependencies>
+        <!--access 数据访问jar包-->
+        <dependency>
+            <groupId>net.sf.ucanaccess</groupId>
+            <artifactId>ucanaccess</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+
         <dependency>
             <groupId>com.huacainfo</groupId>
             <artifactId>ace-partyschool-service</artifactId>

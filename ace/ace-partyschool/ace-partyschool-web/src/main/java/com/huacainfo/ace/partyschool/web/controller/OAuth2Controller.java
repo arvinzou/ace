@@ -126,6 +126,15 @@ public class OAuth2Controller extends BisBaseController {
                     rs = signService.wxBind((String) pageParams.get("account"), userinfo.getUnionid());
                     if (ResultCode.FAIL == rs.getStatus()) {
                         respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
+                    } else {
+                        //微信登录
+                        rs = signService.wxLogin(userinfo.getUnionid());
+                        if (ResultCode.FAIL == rs.getStatus()) {
+                            respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
+                        } else {
+                            //登录session注册
+                            registerSession((Users) rs.getData());
+                        }
                     }
                     break;
                 case "WX_LOGIN"://微信登录
