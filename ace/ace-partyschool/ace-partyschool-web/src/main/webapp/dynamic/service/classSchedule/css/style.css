@@ -147,7 +147,7 @@ padding: 0px 8px 0px 0px !important;
 .classinfo .head{
     height:54px;
     background:rgba(247,249,252,1);
-    font-size:22px;
+    font-size:18px;
     font-weight:bold;
     color:rgba(24,144,255,1);
     text-align: center;
@@ -242,7 +242,7 @@ padding: 0px 8px 0px 0px !important;
 
 /* Checked State */
 .input_wrapper input[type="checkbox"]:checked{
-    background: #23da87;
+    background: #1890ff;
 }
 
 .input_wrapper input[type="checkbox"]:checked:after{
