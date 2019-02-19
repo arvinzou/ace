@@ -4,6 +4,7 @@
 }
 body{
 	background: #F2F2F2;
+	font-family:PingFang-SC-Medium;
 }
 .index{
 	width: auto;
@@ -17,7 +18,7 @@ body{
 	width: 100%;
 	height: auto;
 	background: #FFFFFF;
-	border-bottom: 1px solid #F0EFF6;
+	border-bottom: 0.5px solid #F0EFF6;
 }
 .user-inner{
 	width: 9.2rem;
@@ -28,7 +29,7 @@ body{
 	height: 1.6rem;
 }
 .br{
-	border-bottom: 1px solid #F0EFF6;
+	border-bottom: 0.5px solid #F0EFF6;
 }
 .box:after{
 	content: '';

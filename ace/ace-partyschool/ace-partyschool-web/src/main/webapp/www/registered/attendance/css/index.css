@@ -1,4 +1,6 @@
-
+body{
+	font-family:PingFang-SC-Medium;
+}
 .box{
 	width: 100%;
 	height: 11rem;
