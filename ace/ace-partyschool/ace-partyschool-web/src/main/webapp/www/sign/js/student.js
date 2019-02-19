@@ -1,6 +1,7 @@
 var political = null;
 var clazz = null;
 var account = null;
+var password = null;
 var classesArr = [];
 var userInfo = {};
 var sex = null;
@@ -144,6 +145,7 @@ function regist(){
             if(result.status == 0) {
                 alert(result.info);
                 account = signAcct;
+                password = singPwd;
                 $("#bindModal").show();
                 $("body").addClass("modalhide");
             }else {
@@ -236,6 +238,7 @@ function bindWx(){
     var o={};
     o.account=account.toString();
     $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
+
     $("#bindForm").submit();
 }
 

@@ -1,5 +1,6 @@
 var political = null;
 var account = null;
+var pwd = null;
 var workUnit = null;
 var sex = null;
 $(function(){
@@ -133,6 +134,7 @@ function regist(){
             if(result.status == 0) {
                 alert(result.info);
                 account = signAcct;
+                pwd = singPwd;
                 $("#bindModal").show();
                 $("body").addClass("modalhide");
             }else {
@@ -226,5 +228,6 @@ function bindWx(){
     var o={};
     o.account=account.toString();
     $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
+
     $("#bindForm").submit();
 }
