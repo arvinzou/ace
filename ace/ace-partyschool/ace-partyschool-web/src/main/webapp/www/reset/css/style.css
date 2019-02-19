@@ -6,8 +6,9 @@ body{
 	font-family:PingFang-SC-Medium;
 }
 .index{
-	width: 100%;
+	width: 10rem;
 	height: 100%;
+	margin: 0 auto;
 }
 input{
 	-webkit-appearance: none;
@@ -102,10 +103,10 @@ input:-ms-input-placeholder{
 	color: #373F53;
 }
 .footer{
-	width: 100%;
+	width: 10rem;
 	height: auto;
 	text-align: center;
-	margin-top: 0.6rem;
+	margin: 0.6rem auto;
 }
 .footer img{
 	width: 8.4rem;

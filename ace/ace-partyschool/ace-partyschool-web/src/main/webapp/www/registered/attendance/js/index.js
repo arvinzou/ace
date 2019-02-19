@@ -1,4 +1,4 @@
-var server = "http://c6cb781a.ngrok.io";
+var server = "http://api.huacainfo.com";
 $(function(){
 	$('#calendar').calendar({
         data: [

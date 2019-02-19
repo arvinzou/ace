@@ -5,6 +5,11 @@
 body{
 	font-family:PingFang-SC-Medium;
 }
+.index{
+	width: 10rem;
+	height: 100%;
+	margin: 0 auto;
+}
 .title{
 	padding-top: 0.44rem ;
 	padding-left: 0.453333rem;
