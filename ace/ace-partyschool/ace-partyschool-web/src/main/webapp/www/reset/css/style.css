@@ -2,6 +2,9 @@
 	padding: 0;
 	margin: 0;
 }
+body{
+	font-family:PingFang-SC-Medium;
+}
 .index{
 	width: 100%;
 	height: 100%;
