@@ -2,8 +2,7 @@ var loading = {};
 var editor;
 window.onload = function (){
 jQuery(function ($) {
-$(".breadcrumb").append("
-<li><span>编辑课程表管理</span></li>");
+$(".breadcrumb").append("<li><span>编辑课程表管理</span></li>");
 initForm();
 initEvents();
 });
@@ -45,14 +44,14 @@ rules: {
             classesId: {required: true,maxlength:50},            courseIndex: {required: true,maxlength:20},            teacherId: {required: true,maxlength:50},            courseId: {required: true,maxlength:50}    },
 messages: {
             classesId: {
-    required: "请输入班级",
-    maxlength:"班级字符长度不能超过50"
+    required: "请输入班次",
+    maxlength:"班次字符长度不能超过50"
     },            courseIndex: {
     required: "请输入课节am:上午 pm:下午",
     maxlength:"课节am:上午 pm:下午字符长度不能超过20"
     },            teacherId: {
-    required: "请输入老师",
-    maxlength:"老师字符长度不能超过50"
+    required: "请输入讲师",
+    maxlength:"讲师字符长度不能超过50"
     },            courseId: {
     required: "请输入课程",
     maxlength:"课程字符长度不能超过50"

@@ -95,7 +95,7 @@
 			                
 			            </label>
 			            <label>
-			                <input type="radio" name="category" value="2" onclick="setClassGroup()"><span style="padding:10px">班级</span>
+			                <input type="radio" name="category" value="2" onclick="setClassGroup()"><span style="padding:10px">班次</span>
 			               
 			            </label>
 			            <div class="error-category"></div>
@@ -105,7 +105,7 @@
 			    <div class="form-group hide" id="classGroup">
 			        <label class="col-md-1 control-label">
 			           
-			            班级
+			            班次
 																	<span class="required" aria-required="true"> * </span>
 			        </label>
 			        <div class="col-md-10">

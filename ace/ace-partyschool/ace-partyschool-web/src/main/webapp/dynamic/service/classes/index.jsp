@@ -7,7 +7,7 @@ pageEncoding="utf-8"%>
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>班级管理</title>
+    <title>班次管理</title>
 </head>
 <link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
 <jsp:include page="/dynamic/common/header.jsp"/>
@@ -30,7 +30,7 @@ pageEncoding="utf-8"%>
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入班级名称/教室名称">
+                               placeholder="请输入班次名称/教室名称">
                         <span class="input-group-btn">
 							<button class="btn  btn-default search_btn" id="btn-search"
                                     authority="false">
@@ -105,7 +105,7 @@ pageEncoding="utf-8"%>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">班级须知</label>
+        <label class="col-md-2 view-label">班次须知</label>
         <div class="col-md-10">
             <a href="\${data.o.fileUrl}">\${data.o.fileUrl}</a>
         </div>
@@ -129,7 +129,7 @@ pageEncoding="utf-8"%>
         </div>
     </div>
      <div class="form-group">
-         <label class="col-md-2 view-label">跟班老师</label>
+         <label class="col-md-2 view-label">跟班讲师</label>
          <div class="col-md-10">
              \${data.o.t1Name}
          </div>

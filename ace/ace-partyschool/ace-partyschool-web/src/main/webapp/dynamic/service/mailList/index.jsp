@@ -41,7 +41,7 @@
 
 
             <div class="portlet light">
-                <div class="portlet-title">班级分组</div>
+                <div class="portlet-title">班次分组</div>
                 <div class="portlet-body">
 
                     <div class="row">

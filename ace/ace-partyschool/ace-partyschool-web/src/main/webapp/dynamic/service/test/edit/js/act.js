@@ -163,7 +163,7 @@ function initSelect(data) {
             },
             cache: true
         },
-        placeholder: '选择授课老师',
+        placeholder: '选择授课讲师',
         escapeMarkup: function (markup) {
             return markup;
         }, // let our custom formatter work

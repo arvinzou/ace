@@ -51,7 +51,7 @@ function initSelect() {
             },
             cache: true
         },
-        placeholder: '选择班级',
+        placeholder: '选择班次',
         escapeMarkup: function (markup) {
             return markup;
         },
@@ -91,7 +91,7 @@ function initSelect() {
             },
             cache: true
         },
-        placeholder: '选择授课老师',
+        placeholder: '选择授课讲师',
         escapeMarkup: function (markup) {
             return markup;
         }, // let our custom formatter work
