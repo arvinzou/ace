@@ -12,7 +12,7 @@
         WHERE
         a.classesId = #{classId}
         <![CDATA[
-        AND a.courseDate <= now()
+        AND a.courseDate <= NOW()
          ]]>
         AND a.id NOT IN (
         SELECT DISTINCT

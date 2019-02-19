@@ -48,7 +48,7 @@
                         </button>
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select name="classId" id="s-cls-list" class="form-control" style="height: 30px;"
+                        <select name="classId" id="s-cls-list" class="form-control" style="height: 31px;"
                                 onchange="setParams('clsId',this.value)">
                         </select>
                     </div>
