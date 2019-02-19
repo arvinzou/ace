@@ -29,6 +29,8 @@ $(function(){
     if(lCardNo){
         initList(lCardNo);
         initCount(lCardNo);
+    }else{
+        $("#count").html('<div class="noneCard">未绑定卡信息</div>');
     }
 });
 
