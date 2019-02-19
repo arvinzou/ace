@@ -121,6 +121,20 @@ body{
 	color: #FFFFFF;
 	margin-bottom: 0.533333rem;
 }
+.none{
+	width: 9.2rem;
+	height: 2.666666rem;
+	line-height: 2.666666rem;
+	margin-bottom: 0.533333rem;
+	background:rgba(215,217,223,0.5);
+	box-shadow:0px 0px 0.173333rem 0px rgba(235,236,239,0.25);
+	border-radius: 0.266666rem;
+	font-size:0.453333rem;
+	font-family:PingFang-SC-Bold;
+	font-weight:bold;
+	color:rgba(55,63,83,1);
+	text-align: center;
+}
 .course:after{
 	content: '';
 	clear: both;
