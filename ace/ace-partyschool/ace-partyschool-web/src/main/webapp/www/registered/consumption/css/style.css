@@ -6,8 +6,9 @@ body{
 	font-family:PingFang-SC-Medium;
 }
 .index{
-	width: 100%;
+	width: 10rem;
 	height: 100%;
+	margin: 0 auto;
 }
 .banner{
 	width: 100%;
@@ -28,6 +29,15 @@ body{
 	text-align: center;
 	color: #FFFFFF;
 	font-size: 1.333333rem;
+	font-weight: bold;
+}
+.noneCard{
+	width: 100%;
+	height: 4.106666rem;
+	line-height: 4.106666rem;
+	font-size: 0.45rem;
+	color: #ffffff;
+	text-align: center;
 	font-weight: bold;
 }
 .balance-title{
@@ -65,14 +75,17 @@ body{
 	width: 1.2rem;
 	height: 100%;
 	float: left;
+	text-align: right;
 }
 .record{
-	width: 8rem;
+	width: 7.6rem;
 	height: 1.866666rem;
+	float: left;
 	line-height: 1.866666rem;
 	color: #373F53;
 	font-size: 0.453333rem;
 	font-weight: bold;
+	padding-left: 0.4rem;
 }
 .icon img{
 	width: 0.906666rem;

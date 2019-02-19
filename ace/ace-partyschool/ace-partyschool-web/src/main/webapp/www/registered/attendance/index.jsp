@@ -17,7 +17,7 @@
 				
 				</div>
 			</div>
-			<div clas="attend">
+			<div class="attend">
 				<div id="list">
 
 				</div>

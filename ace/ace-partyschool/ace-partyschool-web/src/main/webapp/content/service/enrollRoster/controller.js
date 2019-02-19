@@ -61,8 +61,9 @@ function initClassList(ctrlId) {
         success: function (result) {
             stopLoad();
             if (result.status == 0) {
-                var data = {};
-                data = result.value;
+                var data = result.value;
+                var all = {id: "", name: "全部"};
+                data.unshift(all);
                 render('#' + ctrlId, data, 'tpl-cls-option');
                 initGrid();
             } else {

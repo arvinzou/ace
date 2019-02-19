@@ -6,8 +6,12 @@ body{
 	font-family:PingFang-SC-Medium;
 }
 .index{
-	padding-left: 0.146666rem;
-	padding-right: 0.146666rem;
+	padding-left: 0.15rem;
+	padding-right: 0.15rem;
+	width: 9.7rem;
+	height: auto;
+	margin: 0 auto;
+	position: relative;
 }
 .modal{
 	width: 100%;
@@ -96,6 +100,9 @@ body{
 	line-height: 0.6rem;
 	color: #ABAEB9;
 	font-size: 0.32rem;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .file-footer span{
 	padding-right: 0.266666rem;
@@ -105,7 +112,7 @@ body{
 	height: 1.986666rem;
 	position: fixed;
 	bottom: 0.933333rem;
-	left: 2.78rem;
+	left: 30%;
 }
 .icon-search{
 	width: 0.4rem;

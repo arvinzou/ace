@@ -6,8 +6,9 @@ body{
 	height: 11rem;
 }
 .attend{
-	padding-left: 0.65rem;
-	padding-right: 0.65rem;
+	width: 10rem;
+	height: auto;
+	margin: 0 auto;
 }
 .calendar{
 	margin: 0.4rem auto;

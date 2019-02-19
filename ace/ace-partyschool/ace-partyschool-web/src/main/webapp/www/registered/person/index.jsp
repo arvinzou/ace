@@ -10,26 +10,28 @@
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
 	</head>
 	<body>
-		<div class="userinfo" >
-			<div class="user-inner" id="userInfo"></div>
-		</div>
-		<div class="index">
-			<div class="box">
-				<div class="today">今日课程</div>
-				<div class="calendar" onclick="weekCourse();">
-					<div class="icon-calendar"><img src="img/icon-calendar.png" /></div>
-					<div class="calendar-title"><span>周课表</span></div>
+		<div class="container">
+			<div class="userinfo" >
+				<div class="user-inner" id="userInfo"></div>
+			</div>
+			<div class="index">
+				<div class="box">
+					<div class="today">今日课程</div>
+					<div class="calendar" onclick="weekCourse();">
+						<div class="icon-calendar"><img src="img/icon-calendar.png" /></div>
+						<div class="calendar-title"><span>周课表</span></div>
+					</div>
+				</div>
+				<div id="todayCourse">
+
+				</div>
+				<div  id="noticeTop">
+
 				</div>
 			</div>
-			<div id="todayCourse">
+			<div class="menu" id="menu">
 
 			</div>
-			<div  id="noticeTop">
-
-			</div>
-		</div>
-		<div class="menu" id="menu">
-
 		</div>
 
 		<script id="course-tpl" type="text/template">

@@ -6,16 +6,21 @@ body{
 	background: #F2F2F2;
 	font-family:PingFang-SC-Medium;
 }
-.index{
-	width: auto;
+.container{
+	width: 10rem;
 	height: 100%;
+	margin: 0 auto;
+}
+.index{
+	width: 9.2rem;
+	height: 100%;
+	background: #FFFFFF;
 	padding-left: 0.4rem;
 	padding-right: 0.4rem;
-	background: #FFFFFF;
 	margin-bottom: 0.266666rem;
 }
 .userinfo{
-	width: 100%;
+	width: 10rem;
 	height: auto;
 	background: #FFFFFF;
 	border-bottom: 0.5px solid #F0EFF6;
