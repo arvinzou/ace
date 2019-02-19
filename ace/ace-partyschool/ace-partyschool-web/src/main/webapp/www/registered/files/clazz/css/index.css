@@ -100,6 +100,9 @@ body{
 	line-height: 0.6rem;
 	color: #ABAEB9;
 	font-size: 0.32rem;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .file-footer span{
 	padding-right: 0.266666rem;
