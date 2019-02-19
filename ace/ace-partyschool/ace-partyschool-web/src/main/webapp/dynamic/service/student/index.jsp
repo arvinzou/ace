@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select name="classId" id="s-cls-list" class="form-control" style="height: 30px;"
+                        <select name="classId" id="s-cls-list" class="form-control" style="height: 31px;"
                                 onchange="setParams('classId',this.value)">
                         </select>
                     </div>
@@ -88,7 +88,7 @@
                     </label>
                     <div class="col-md-6">
                         <select name="classId" id="d-cls-list" class="form-control"
-                                style="height: 30px;line-height: 30px" onchange="importInit(this.value)">
+                                style="height: 31px;line-height: 30px" onchange="importInit(this.value)">
                         </select>
                     </div>
                 </div>

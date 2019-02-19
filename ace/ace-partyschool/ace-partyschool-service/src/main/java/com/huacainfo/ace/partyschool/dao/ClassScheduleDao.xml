@@ -261,7 +261,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
         select
         <include refid="Vo_Column_List"/>
         <include refid="From_Statement"/>
-        WHERE cs.courseDate <![CDATA[ < ]]> CURDATE()
+        WHERE 1=1
         AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
         AND cs.id IN
         (
