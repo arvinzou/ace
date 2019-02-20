@@ -266,12 +266,9 @@ GROUP BY e.NAME) t
 
 
         <select id="getDoneSize" resultType="int">
-            select COUNT(*)
-            FROM (SELECT t.classScheduleId
-            FROM   (   SELECT er.classScheduleId
-            FROM evaluation_rst er
-            WHERE er.userId=#{condition.userId,jdbcType=VARCHAR}) t
-            GROUP BY t.classScheduleId) e
+        SELECT count(distinct classScheduleId)
+        FROM partyschool.evaluation_rst er
+        WHERE er.userId ==#{condition.userId,jdbcType=VARCHAR}
         </select>
 
 
