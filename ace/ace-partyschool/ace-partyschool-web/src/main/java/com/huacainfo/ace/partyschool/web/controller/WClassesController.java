@@ -68,6 +68,26 @@ public class WClassesController extends BisBaseController {
 
     }
 
+    @RequestMapping(value = "/getMyClasses")
+    @ResponseBody
+    public ResultResponse getMyClasses() throws Exception {
+        UserProp userProp = this.getCurUserProp();
+        if (userProp == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+        }
+        return this.classesService.getMyClasses(this.getCurUserProp());
+    }
+
+    @RequestMapping(value = "/getAllClasses")
+    @ResponseBody
+    public ResultResponse getAllClasses() throws Exception {
+        UserProp userProp = this.getCurUserProp();
+        if (userProp == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+        }
+        return this.classesService.getAllClasses(this.getCurUserProp());
+    }
+
     @RequestMapping(value = "/findStudentList")
     @ResponseBody
     public PageResult<StudentVo> findStudentList(StudentQVo condition,

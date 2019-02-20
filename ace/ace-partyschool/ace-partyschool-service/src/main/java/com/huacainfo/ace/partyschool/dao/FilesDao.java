@@ -32,10 +32,10 @@ public interface FilesDao {
 
     int updateStatus(Files record);
 
-    List<FilesVo> findTeacherFileList(@Param("condition") FilesQVo condition,
-                                  @Param("start") int start,
-                                  @Param("limit") int limit,
-                                  @Param("orderBy") String orderBy);
+    List<FilesVo> findFileListAboutMe(@Param("condition") FilesQVo condition,
+                                      @Param("start") int start,
+                                      @Param("limit") int limit,
+                                      @Param("orderBy") String orderBy);
 
     List<FilesVo> findList(@Param("condition") FilesQVo condition,
                                    @Param("start") int start,

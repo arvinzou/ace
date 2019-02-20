@@ -78,15 +78,18 @@ public class ClsFilesServiceImpl implements ClsFilesService {
     @Override
     public ResultResponse findFilesListVo(FilesQVo condition, int start, int limit, String orderBy, UserProp userProp) throws Exception {
         AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
-        List<FilesVo> list;
+
         condition.setUserId(userProp.getUserId());
         if ("teacher".equals(accountVo.getRegType())) {
-            list = this.filesDao.findTeacherFileList(condition, start, limit, orderBy);
+            if(CommonUtils.isBlank(condition.getClassesId())){
+                return  new ResultResponse(ResultCode.FAIL,"没有班级主键");
+            }
         } else if ("student".equals(accountVo.getRegType())) {
-            list = this.filesDao.findStudentFileList(condition, start, limit, orderBy);
+            condition.setClassesId(accountVo.getStudent().getClassId());
         } else {
-            return new ResultResponse();
+            return new ResultResponse(ResultCode.FAIL,"没有查看文件权限");
         }
+        List<FilesVo> list=filesDao.findFileListAboutMe(condition,start,limit,orderBy);
         return new ResultResponse(0, "文件获取成功", list);
     }
     /**

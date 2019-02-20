@@ -32,10 +32,6 @@ public class WFilesController extends BisBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ClsFilesService clsFilesService;
-    @Autowired
-    private ClassesService classesService;
-    @Autowired
-    private SignService signService;
 
     /**
      * @throws
@@ -65,26 +61,6 @@ public class WFilesController extends BisBaseController {
             return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
         }
         return this.clsFilesService.findFilesListVo(condition, page.getStart(), page.getLimit(), page.getOrderBy(), userProp);
-    }
-
-    @RequestMapping(value = "/getMyClasses")
-    @ResponseBody
-    public ResultResponse getMyClasses() throws Exception {
-        UserProp userProp = this.getCurUserProp();
-        if (userProp == null) {
-            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
-        }
-        return this.classesService.getMyClasses(this.getCurUserProp());
-    }
-
-    @RequestMapping(value = "/getAllClasses")
-    @ResponseBody
-    public ResultResponse getAllClasses() throws Exception {
-        UserProp userProp = this.getCurUserProp();
-        if (userProp == null) {
-            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
-        }
-        return this.classesService.getAllClasses(this.getCurUserProp());
     }
 
 

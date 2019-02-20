@@ -220,9 +220,12 @@
         c.id, c.name, c.startDate, c.endDate, c.photoUrl, c.classroomId, c.headmaster, c.remark, c.status,
         c.createUserId,
         c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate, c.introduce
-        from teacher_cls_ship tcs
-        left join classes c on c.id=tcs.clsId
-        WHERE tcs.teacherId=#{teacherId,jdbcType=VARCHAR}
+        FROM classes c
+        WHERE c.id in (
+                SELECT DISTINCT cs.classesId
+                FROM partyschool.class_schedule cs
+                WHERE cs.teacherId=#{teacherId,jdbcType=VARCHAR}
+        )
     </select>
 
     <select id="findAllClassesList" parameterType="java.lang.String" resultMap="VoResultMap">
