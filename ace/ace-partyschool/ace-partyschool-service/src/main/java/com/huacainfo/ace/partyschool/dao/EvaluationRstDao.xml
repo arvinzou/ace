@@ -25,8 +25,8 @@
     SELECT  t.NAME,t.number
 FROM (SELECT e.classScheduleId AS classScheduleId, e.NAME AS name, sum(e.score)/COUNT(e.NAME) AS number
 FROM partyschool.evaluation_rst e
+WHERE e.classScheduleId= #{classScheduleId,jdbcType=VARCHAR}
 GROUP BY e.NAME) t
-WHERE t.classScheduleId= #{classScheduleId,jdbcType=VARCHAR}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -191,14 +191,14 @@ WHERE t.classScheduleId= #{classScheduleId,jdbcType=VARCHAR}
         select
         <include refid="Vo_Column_List"/>
         <include refid="From_Statement"/>
-        GROUP BY er.userId
-        HAVING 1=1
+        where 1=1
         <if test="condition.classScheduleId !=null and condition.classScheduleId !=&quot;&quot;">
             and er.classScheduleId=#{condition.classScheduleId,jdbcType=VARCHAR}
         </if>
         <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
             and er.userId=#{condition.userId,jdbcType=VARCHAR}
         </if>
+        GROUP BY er.userId
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}
