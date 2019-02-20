@@ -4,9 +4,10 @@
 }
 
 .index{
-	width: 100%;
+	width: 10rem;
 	height: 100%;
 	position: relative;
+	margin: 0 auto;
 }
 .banner{
 	width: 100%;
