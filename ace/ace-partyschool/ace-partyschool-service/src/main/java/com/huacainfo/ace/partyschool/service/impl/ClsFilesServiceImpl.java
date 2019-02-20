@@ -128,6 +128,10 @@ public class ClsFilesServiceImpl implements ClsFilesService {
         if (CommonUtils.isBlank(obj.getUrl())) {
             return new ResultResponse(ResultCode.FAIL, "没有文件路径");
         }
+        AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
+        if ("student".equals(accountVo.getRegType())) {
+            obj.setClassesId(accountVo.getStudent().getClassId());
+        }
         if (CommonUtils.isBlank(obj.getClassesId())) {
             return new ResultResponse(ResultCode.FAIL, "没有指定班级");
         }
