@@ -72,9 +72,9 @@
 				</div>
 				<div class="content-box br">
 					<div class="content-title">班级学员</div>
-					<div class="content">
+					<div class="content" onclick="toMailList();">
 						<div class="mail">查看班级通讯录(\${data.count}人)</div>
-						<div class="icon-mail" onclick="toMailList();"><img src="img/icon_select.png"/></div>
+						<div class="icon-mail" ><img src="img/icon_select.png"/></div>
 					</div>
 				</div>
 			</div>
