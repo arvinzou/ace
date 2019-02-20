@@ -49,11 +49,9 @@
         AND cs.ifTest ='1'
         AND cs.id NOT IN
         (
-        SELECT t.classScheduleId
-        FROM (SELECT classScheduleId, userId
+        SELECT distinct classScheduleId
         FROM partyschool.evaluation_rst er
-        WHERE er.userId = #{userId}) t
-        GROUP BY t.classScheduleId
+        WHERE er.userId= #{userId}
         )
         UNION ALL
         SELECT

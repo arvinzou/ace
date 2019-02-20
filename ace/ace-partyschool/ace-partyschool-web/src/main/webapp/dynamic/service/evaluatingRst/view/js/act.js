@@ -7,7 +7,7 @@ var params = {
 };
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("<li> <span> 创建课程表管理 </span></li>");
+        $(".breadcrumb").append("<li><span> 统计详情 </span></li>");
         initPage();
         initEchart();
     });
