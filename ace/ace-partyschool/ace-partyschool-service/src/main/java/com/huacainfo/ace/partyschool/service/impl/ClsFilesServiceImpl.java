@@ -129,32 +129,30 @@ public class ClsFilesServiceImpl implements ClsFilesService {
             return new ResultResponse(ResultCode.FAIL, "没有文件路径");
         }
         AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
-        List<String> classes = new ArrayList<String>();
         if ("student".equals(accountVo.getRegType())) {
-            classes.add(accountVo.getStudent().getClassId());
-        } else if ("teacher".equals(accountVo.getRegType())) {
-            if (CommonUtils.isBlank(obj.getClassesId())) {
-                return new ResultResponse(ResultCode.FAIL, "没有指定班级");
-            }
-            String[] strs = obj.getClassesId().split(",");
-            //将字符串数组转换成集合list
-            classes = Arrays.asList(strs);
+            obj.setClassesId(accountVo.getStudent().getClassId());
+        }
+        if (CommonUtils.isBlank(obj.getClassesId())) {
+            return new ResultResponse(ResultCode.FAIL, "没有指定班级");
         }
         String strs = obj.getUrl();
         int start = strs.indexOf("?filename=");
         int ends = strs.lastIndexOf(".");
         String strs1 = obj.getUrl().substring(start + 10, ends);
-
         obj.setTitle(strs1);
+        String fileType = strs.substring(strs.lastIndexOf(".") + 1, strs.length()).toLowerCase();
+        String img[] = { "jpg", "jpeg", "png" };
         obj.setCategory("1");
+        for (int i = 0; i < img.length; i++) {
+            if (img[i].equals(fileType)) {
+                obj.setCategory("2");
+            }
+        }
         obj.setPushDate(new Date());
         obj.setPublisher(userProp.getUserId());
         obj.setStatus("1");
-        for (String item : classes) {
-            obj.setId(GUIDUtil.getGUID());
-            obj.setClassesId(item);
-            this.filesDao.insert(obj);
-        }
+        obj.setId(GUIDUtil.getGUID());
+        this.filesDao.insert(obj);
         this.dataBaseLogService.log("添加班级文件", "班级文件", "",
                 obj.getId(), obj.getId(), userProp);
         return new ResultResponse(0, "添加班级文件完成！");

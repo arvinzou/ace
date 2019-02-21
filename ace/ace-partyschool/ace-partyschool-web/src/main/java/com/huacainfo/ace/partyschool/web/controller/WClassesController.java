@@ -94,8 +94,6 @@ public class WClassesController extends BisBaseController {
                                                  PageParamNoChangeSord page) throws Exception {
         PageResult<StudentVo> rst =
                 this.studentService.findStudentList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
-
-
         return rst;
     }
 }

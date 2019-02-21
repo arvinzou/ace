@@ -213,7 +213,7 @@
         LEFT JOIN partyschool.student s ON s.id=f.publisher
         where 1=1
         <if test="condition.classesId !=null and condition.classesId !=&quot;&quot;">
-            f.classesId=#{condition.classesId,jdbcType=VARCHAR}
+            and f.classesId=#{condition.classesId,jdbcType=VARCHAR}
         </if>
         <if test="condition.title !=null and condition.title !=&quot;&quot;">
             and f.`title` like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
