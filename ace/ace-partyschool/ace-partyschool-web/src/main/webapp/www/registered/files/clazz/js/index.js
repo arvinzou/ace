@@ -13,6 +13,7 @@ $(function(){
         success:function(result){
             if(result.status == 0) {
                 regType = result.data.regType;
+                initClasses();
             }else {
                 if(result.info){
                     alert(result.info);
@@ -26,11 +27,9 @@ $(function(){
             alert("系统服务内部异常！");
         }
     });
-    if(regType == "student"){
-        fileList();
-    }else{
-        fileListByClass();
-    }
+
+    fileList();
+
 });
 
 function focusInput(){
@@ -81,44 +80,6 @@ function fileTypes(fileName){
     return fileType;
 }
 
-function fileListByClass(){
-    var keyWord = $("input[name='keyWord']").val();
-    $.ajax({
-        url: contextPath+ "/www/files/findFilesListVo",
-        type:"post",
-        async:false,
-        data:{
-            title: keyWord,
-            start: 0,
-            limit: 999
-        },
-        success:function(result){
-            if(result.status == 0) {
-                console.log(result);
-                var list = result.rows;
-                for(var i=0; i<list.length; i++){
-                    if(list[i].title.length > 33){
-                        list[i].title = list[i].title.substring(0,35)+"...";
-                    }
-                }
-                juicer.register('fileType', fileTypes);
-                renderPage('fileList', list, 'list-tpl');
-                renderPage('fileParamList', result.rows, 'list-tpl');
-            }else {
-                if(result.info){
-                    alert(result.info);
-                }else{
-                    alert(result.errorMessage);
-                }
-                return;
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
-}
-
 function fileList(){
     var keyWord = $("input[name='keyWord']").val();
     $.ajax({
@@ -127,6 +88,7 @@ function fileList(){
         async:false,
         data:{
             title: keyWord,
+            classesId: clazz == null?null: clazz[0].id,
             start: 0,
             limit: 999
         },
@@ -167,7 +129,7 @@ function activeSearch() {
 
 function initClasses(){
     $.ajax({
-        url: contextPath+ "/www/classes/findClassList",
+        url: contextPath+ "/www/classes/getMyClasses",
         type:"post",
         async:false,
         data:{
@@ -175,16 +137,16 @@ function initClasses(){
         },
         success:function(result){
             if(result.status == 0) {
-              if(result.rows.length <1 && regType == 'teacher'){
-                  alert("对不起！您没有班级文件上传权限。");
-                  $("#uploadModal").hide();
+              if(result.data.length <1 && regType == 'teacher'){
+                  alert("对不起！您没有对应的班级文件。");
                   return;
               }else{
                   if(regType == 'student'){
-                      $("#classBox").hide();
+                      $("#classFilter").hide();
                       return;
                   }
-                  var data = result.rows;
+                  $("#clazz").text(result.data[0].name);
+                  var data = result.data;
                   var classesArr = [];
                   for(var i=0; i<data.length; i++){
                       var o = {};
@@ -192,6 +154,9 @@ function initClasses(){
                       o.value = data[i].name;
                       classesArr.push(o);
                   }
+                  var tempArr = [];
+                  tempArr.push(classesArr[0])
+                  clazz = tempArr;
                   var classesSelect= new MobileSelect({
                       trigger: '#clazz',
                       title: '党校班级选择',
@@ -231,7 +196,6 @@ function closeModal(){
 function startUpload(){
     $("#uploadModal").show();
     upload();
-    initClasses();
 }
 function upload(){
     var uploader = new plupload.Uploader({
