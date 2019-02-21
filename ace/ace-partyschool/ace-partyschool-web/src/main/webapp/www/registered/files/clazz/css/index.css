@@ -4,12 +4,11 @@
 }
 body{
 	font-family:PingFang-SC-Medium;
+	background: #ffffff;
 }
 .index{
-	padding-left: 0.15rem;
-	padding-right: 0.15rem;
 	width: 9.7rem;
-	height: auto;
+	height: 100%;
 	margin: 0 auto;
 	position: relative;
 }
