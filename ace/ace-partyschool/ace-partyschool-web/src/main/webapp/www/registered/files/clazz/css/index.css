@@ -2,6 +2,9 @@
 	padding: 0;
 	margin: 0;
 }
+body,html{
+	background: #ffffff;
+}
 body{
 	font-family:PingFang-SC-Medium;
 	background: #ffffff;
