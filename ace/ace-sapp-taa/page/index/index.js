@@ -65,7 +65,7 @@ Page({
         })
         if (!util.is_login()) {
             wx.navigateTo({
-                url: "../userinfo/index?url=../index/index&type=navigateTo"
+                url: "../userinfo/index?url=../regist/index&type=navigateTo"
             });
             return;
         }
@@ -415,7 +415,7 @@ Page({
         var that = this;
         if (!util.is_login()) {
             wx.navigateTo({
-                url: "../userinfo/index?url=../index/index&type=switchTab"
+                url: "../userinfo/index?url=../regist/index&type=switchTab"
             });
             return;
         } else {
