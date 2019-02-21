@@ -120,11 +120,7 @@ function fileList(){
 }
 
 function activeSearch() {
-    if(regType == "student"){
-        fileList();
-    }else{
-        fileListByClass();
-    }
+    fileList();
 }
 
 function initClasses(){
@@ -169,6 +165,7 @@ function initClasses(){
                       },
                       callback:function(indexArr, data){
                           clazz = data;
+                          fileList();
                       }
                   });
               }
