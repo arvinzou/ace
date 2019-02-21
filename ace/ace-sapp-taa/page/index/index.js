@@ -415,7 +415,7 @@ Page({
         var that = this;
         if (!util.is_login()) {
             wx.navigateTo({
-                url: "../userinfo/index?url=../regist/index&type=switchTab"
+                url: "../userinfo/index?url=../regist/index&type=navigateTo"
             });
             return;
         } else {
