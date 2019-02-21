@@ -193,7 +193,7 @@
 					</div>
 					<div class="item-right">
 						<div class="menu-title">班级文件</div>
-						<div class="menu-content">共\${data.file}个文件</div>
+						<div class="menu-content">查看文件</div>
 					</div>
 				</div>
 			</div>

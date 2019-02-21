@@ -27,6 +27,48 @@ body{
 	padding-right: 0.253333rem;
 	height: 1.88rem;
 }
+.classFilter{
+    padding-left: 0.253333rem;
+    padding-right: 0.253333rem;
+    height: auto;
+    padding-bottom: 0.4rem;
+}
+.classFilter:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.icon-class{
+    width: 0.96rem;
+    height: 0.906666rem;
+    float: left;
+}
+
+.class-select{
+    width: 7.613333rem;
+    height: 0.906666rem;
+    line-height: 0.906666rem;
+    padding-left: 0.2rem;
+    float: left;
+    color: #373F53;
+    font-size: 0.426666rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.class-right{
+    width: 0.2rem;
+    height: 0.346666rem;
+    margin-top: 0.28rem;
+    float: right;
+}
+
+.header{
+	width: 100%;
+	height: auto;
+	background: #ffffff;
+}
 .serach-input{
 	width: 96%;
 	height: 1.066666rem;
