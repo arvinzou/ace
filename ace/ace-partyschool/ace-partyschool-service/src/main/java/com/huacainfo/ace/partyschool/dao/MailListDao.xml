@@ -77,8 +77,28 @@
     </select>
     <select id="getTeacherTreeList" resultType="map">
         SELECT
-        t.ID,
+        t.code ID,
         '0' PID,
+        t.name TEXT,
+        NULL HREF,
+        (
+        SELECT
+        count(1)
+        FROM
+        partyschool.teacher a
+        WHERE
+        a.workUnitName = t.code
+        ) CHILD_COUNT,
+        'closed' STATE,
+        NULL ICON
+        FROM
+        portal.dict t
+        WHERE
+        t.category_id = '156'
+        UNION ALL
+        SELECT
+        t.ID,
+        t.workUnitName PID,
         t.name AS TEXT,
         t.mobile HREF,
         0 CHILD_COUNT,
@@ -86,9 +106,10 @@
         b.headimgurl ICON
         FROM
         teacher t
-        LEFT JOIN portal.users a on t.id=a.user_id
-        left join portal.userinfo b on a.openId=b.unionid
-        where t.status='1'
+        LEFT JOIN portal.users a ON t.id = a.user_id
+        LEFT JOIN portal.userinfo b ON a.openId = b.unionid
+        WHERE
+        t.status = '1'
         <if test='name!=null and name!=""'>
             and t.name like
             concat(#{name,jdbcType=VARCHAR},'%')
