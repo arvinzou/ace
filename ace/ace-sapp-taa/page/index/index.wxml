@@ -1,5 +1,5 @@
 <view class='accidentContent {{tab == 1? "hidden":""}}'>
-    <map id="accidentMap" class='{{isEdit == true?"activeEdit":""}}' show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' markers="{{current}}">
+    <map id="accidentMap" class='map {{isEdit == true?"activeEdit":""}}' show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' markers="{{current}}">
         <cover-view class='tab'>
             <cover-view class='header' bindtap='userInfo'>
                 <block wx:if='{{header}}'>
@@ -17,6 +17,8 @@
                 <cover-image src='../../image/icon-column.png'></cover-image>
             </cover-view>
         </cover-view>
+        
+        <cover-image src='../../image/icon-location.png' class='reset-locate' bindtap='resetData'></cover-image>
     </map>
     <view class='fromContent'>
         <view class='content'>

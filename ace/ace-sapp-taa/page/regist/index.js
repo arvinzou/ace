@@ -114,7 +114,12 @@ Page({
                   wx.showModal({
                       title: '提示',
                       content: ret.info,
-                      success: function (res) { }
+                      success: function (res) {
+                          wx.navigateTo({
+                              url: '../index/index',
+                          });
+                      }
+
                   });
               } else {
                   wx.showModal({

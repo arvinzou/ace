@@ -299,5 +299,15 @@ view, map, cover-view {
 .hidden{
     display: none;
 }
+.reset-locate{
+    width: 105rpx;
+    height: 105rpx;
+    position: absolute;
+    bottom: 42rpx;
+    right: 30rpx;
+}
+.map{
+    position: relative;
+}
 
 /* ******************************************** */

@@ -10,7 +10,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        tab: 1,
+        tab: 0,
         isNull: 0,
         wIndex: 0,
         cIndex: 0,
@@ -564,6 +564,20 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
+        var that = this;
+        that.setData({
+            sectionFlag: false,
+            sectionName: null,
+            sectionId: null,
+        });
+        that.getLocation();
+        that.initDict();
+        that.initDateTime();
+    },
+    /**
+     * 重新定位，重置数据
+     */
+    resetData: function(){
         var that = this;
         that.setData({
             sectionFlag: false,
