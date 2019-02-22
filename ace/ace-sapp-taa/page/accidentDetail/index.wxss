@@ -139,6 +139,11 @@
     padding-top:30rpx;
     padding-bottom: 30rpx;
 }
+.checkbox-container{
+    width: auto;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+}
 .checkbox-container::after{
     content: '';
     clear: both;

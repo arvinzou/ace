@@ -285,7 +285,8 @@ Page({
 
     xbSubmit: function(e) {
         var that = this;
-        var createDate = that.formatDT(e.detail.value.createDate);
+        //var createDate = that.formatDT(e.detail.value.createDate);
+        var createDate = util.formatDateTime(new Date());
         var weather = e.detail.value.weather;
         var vehicleType = e.detail.value.vehicleType;
         var mtypeList = [];
@@ -305,14 +306,14 @@ Page({
             });
             return;
         }
-        if (createDate == null || createDate == undefined || createDate == "") {
+        /*if (createDate == null || createDate == undefined || createDate == "") {
             wx.showModal({
                 title: '提示',
                 content: '请选择快报时间！',
                 success: function(res) {}
             });
             return;
-        }
+        }*/
         if (weather == null || weather == undefined || weather == "") {
             wx.showModal({
                 title: '提示',
@@ -356,6 +357,14 @@ Page({
                         content: res.info,
                         success: function(res) {}
                     });
+                    that.setData({
+                        sectionFlag: false,
+                        sectionName: null,
+                        sectionId: null,
+                        isEdit: false
+                    });
+                    that.getLocation();
+                    that.initDict();
                 } else {
                     wx.showModal({
                         title: '提示',
@@ -454,7 +463,7 @@ Page({
         }
         that.getLocation();
         that.initDict();
-        that.initDateTime();
+       // that.initDateTime();
     },
 
 
@@ -626,7 +635,7 @@ Page({
         });
         that.getLocation();
         that.initDict();
-        that.initDateTime();
+       // that.initDateTime();
     },
     /**
      * 重新定位，重置数据
@@ -640,7 +649,7 @@ Page({
         });
         that.getLocation();
         that.initDict();
-        that.initDateTime();
+        //that.initDateTime();
     },
     /**
      * 重新定位采集信息
