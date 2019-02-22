@@ -107,10 +107,10 @@ searchSomeThing:function(e){
             //快报选择路段
             app.globalData.sectionId = roadSectionId;
             app.globalData.sectionName = roadSectionName;
-            app.globalData.tab = 0,
-            wx.switchTab({
-                url: '../index/index',
-            });
+            app.globalData.tab = 0;
+            app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
+            app.globalData.roadManName = e.currentTarget.dataset.roadmanname;
+            wx.navigateBack({ changed: true });
         } else if (skipType == 'cj'){
             //路段采集
             var startName = e.currentTarget.dataset.startname;
