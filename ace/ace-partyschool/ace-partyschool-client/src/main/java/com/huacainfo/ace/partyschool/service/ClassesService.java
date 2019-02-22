@@ -106,4 +106,11 @@ public interface ClassesService {
     ResultResponse getMyClasses(UserProp userProp) throws Exception;
 
     ResultResponse getAllClasses(UserProp userProp) throws Exception;
+
+    /**
+     * 每天凌晨1点执行
+     * 1、关闭时间已到期的班级
+     * 2、注销已毕业班级的学员账户信息
+     */
+    void graduation();
 }

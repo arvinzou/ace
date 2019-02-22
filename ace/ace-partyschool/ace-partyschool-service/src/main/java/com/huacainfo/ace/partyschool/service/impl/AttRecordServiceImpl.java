@@ -92,7 +92,7 @@ public class AttRecordServiceImpl implements AttRecordService {
         }
 
 
-        int temp = this.attRecordDao.isExit(o);
+        int temp = this.attRecordDao.isExist(o);
         if (temp > 0) {
             return new MessageResponse(1, "学员考勤名称重复！");
         }
@@ -235,7 +235,7 @@ public class AttRecordServiceImpl implements AttRecordService {
                 return new MessageResponse(1, "考勤时间不能为空！");
             }
 
-            int t = attRecordDao.isExit(o);
+            int t = attRecordDao.isExist(o);
             if (t > 0) {
                 this.attRecordDao.updateByPrimaryKey(o);
 

@@ -362,5 +362,15 @@ public class ClassesServiceImpl implements ClassesService {
         return new ResultResponse(ResultCode.SUCCESS, "成功", this.classesDao.findAllClassesList());
     }
 
+    /**
+     * 每天凌晨1点执行
+     * 1、关闭时间已到期的班级
+     * 2、注销已毕业班级的学员账户信息
+     */
+    @Override
+    public void graduation() {
+        classesDao.graduation();
+    }
+
 
 }

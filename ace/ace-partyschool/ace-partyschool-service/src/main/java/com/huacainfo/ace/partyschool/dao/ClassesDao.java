@@ -43,4 +43,6 @@ public interface ClassesDao {
     List<Map<String, String>> findByQ(@Param("params") Map<String, Object> params);
 
     int headmasterCount(@Param("id") String id, @Param("htId") String htId);
+
+    void graduation();
 }
