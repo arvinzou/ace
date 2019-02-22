@@ -3,6 +3,7 @@ package com.huacainfo.ace.portal.model;
 import java.util.Date;
 
 public class Appeal implements java.io.Serializable {
+
     private static final long serialVersionUID = 1L;
     private String id;
 
