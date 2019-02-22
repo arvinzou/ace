@@ -37,7 +37,7 @@
                                 <input class='form-input middle' name='roadManName' type='text' bindtap='selectRoadMan' value='{{roadManName}}' placeholder='请选择路长' disabled='true'></input>
                                 <image class='select-arrow' src='../../image/icon_rediret.png' bindtap='selectRoadMan'></image>
                             </view>
-                            <view class='row'>
+                            <!--<view class='row'>
                                 <view class='row-left'>快报时间</view>
                                 <picker class='middle' name='createDate' data-name='createDate' mode="multiSelector" value="{{createDate}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
                                     <view class="tui-picker-detail">
@@ -45,7 +45,7 @@
                                     </view>
                                 </picker>
                                 <image class='select-arrow' src='../../image/icon_rediret.png'></image>
-                            </view>
+                            </view>-->
                             <view class='row'>
                                 <view class='row-left'>天气情况</view>
                                 <picker class='middle' bindchange="bindWeatherChange" name='weather' value="{{weatherArray[wIndex].CODE}}" range="{{weather}}">
