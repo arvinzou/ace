@@ -309,5 +309,16 @@ view, map, cover-view {
 .map{
     position: relative;
 }
+.control-map{
+    width: 105rpx;
+    height: auto;
+    position: fixed;
+    bottom: 280rpx;
+    right: 12rpx;
+}
+.icon-control-map{
+    width: 105rpx;
+    height: 105rpx;
+}
 
 /* ******************************************** */

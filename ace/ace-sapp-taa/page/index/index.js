@@ -45,6 +45,8 @@ Page({
         }],
         header: null,
         flaging:false,
+        frequency: 0,   //是否显示加减频率
+        timeInterval: 10000   //采集频率以10秒为单位
     },
 
     /**
@@ -463,17 +465,21 @@ Page({
         that.setData({
             breakBtn: 'breakBtn',
             activeBreak: 'activeBreak',
-            flaging:true
+            flaging:true,
+            frequency: 1
         })
         interval = setInterval(() => {
             locateList.push(that.getLocate());
-        }, 3000);
+            console.log("==================采集频率" + that.data.timeInterval);
+        }, that.data.timeInterval);
+       
     },
     break: function(e) {
         var that = this;
         clearInterval(interval);
         that.setData({
             activeBreak: '',
+            frequency: 0
         })
     },
     end: function(e) {
@@ -491,7 +497,8 @@ Page({
         that.setData({
             breakBtn: '',
             activeBreak: '',
-            flaging: false
+            flaging: false,
+            frequency: 0
         })
         util.post(cfg.server + '/taa/www/road/gather', {
                 jsonData: JSON.stringify({
@@ -503,11 +510,12 @@ Page({
                     wx.showModal({
                         title: '提示',
                         content: res.info,
-                        success: function(res) {}
+                        success: function(res) {
+                            wx.navigateTo({
+                                url: '../collection/index?tab=1',
+                            })
+                        }
                     });
-                    wx.navigateTo({
-                        url: '../collection/index?tab=1',
-                    })
                 } else {
                     wx.showModal({
                         title: '提示',
@@ -545,6 +553,52 @@ Page({
 
     locateLine: function() {
 
+    },
+
+    /**
+     * 减少采集频率 以1秒为单位
+     */
+    reduce: function(){
+        var that = this;
+        var time = that.data.timeInterval;
+        if (time > 1000){
+            time = time - 1000;
+            that.setData({
+                timeInterval: time
+            });
+            var interval = time / 1000;
+            wx.showModal({
+                title: '提示',
+                content: '采集频率开始以' + interval+'秒间隔采集！',
+                success: function (res) { }
+            });
+        }else{
+            wx.showModal({
+                title: '提示',
+                content: '采集频率已经减少到最低1秒采集了！',
+                success: function (res) { }
+            });
+        }
+    },
+
+    /**
+     * 增加采集频率，以1秒为单位
+     */
+    increase: function(){
+        var that = this;
+        var time = that.data.timeInterval;
+        if (time > 1000) {
+            time = time + 1000;
+            that.setData({
+                timeInterval: time
+            });
+            var interval = time / 1000;
+            wx.showModal({
+                title: '提示',
+                content: '采集频率开始以' + interval + '秒间隔采集！',
+                success: function (res) { }
+            });
+        } 
     },
     /**
      * 生命周期函数--监听页面隐藏
@@ -587,6 +641,28 @@ Page({
         that.getLocation();
         that.initDict();
         that.initDateTime();
+    },
+    /**
+     * 重新定位采集信息
+     */
+    resetCj: function(){
+        var that = this;
+        that.setData({
+            startName: null,
+            startName: null,
+            tab:1,
+            polyline: [{
+                points: [],
+                color: '#4350FC',
+                width: 8,
+                dottedLine: false
+            }],
+            flaging: false,
+            frequency: 0,   //是否显示加减频率
+            timeInterval: 10000,  //采集频率以10秒为单位
+            activeBreak: ''
+        });
+        that.getLocation();
     },
 
     /**

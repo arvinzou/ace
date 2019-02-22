@@ -121,5 +121,12 @@
             <cover-view class='cjBtn startBtn {{breakBtn}} {{activeBreak}}' bindtap='{{activeBreak?"break":"start"}}'>{{activeBreak?'暂停':'开始'}}</cover-view>
             <cover-view class='cjBtn endBtn {{tab == 1}}' bindtap='end'>结束</cover-view>
         </cover-view>
+
+        <!--加减采集速度-->
+        <cover-view class='control-map'>
+            <cover-image class='icon-control-map {{frequency == 0?"hidden":""}}' src='../../image/icon-reduce.png' bindtap='reduce'></cover-image>
+            <cover-image class='icon-control-map {{frequency == 0?"hidden":""}}' src='../../image/icon-increase.png' bindtap='increase'></cover-image>
+            <cover-image class='icon-control-map' src='../../image/icon-location.png' bindtap='resetCj'></cover-image>
+        </cover-view>
     </map>
 </view>
