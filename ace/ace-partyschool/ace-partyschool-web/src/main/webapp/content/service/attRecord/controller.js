@@ -33,6 +33,10 @@ jQuery(function ($) {
             }
         })
     });
+    //中控数据导入
+    $('#btn-view-import').on('click', function () {
+        $('#modal-upload').modal('show');
+    });
 
     //初始化事件
     initEvents();
@@ -80,12 +84,12 @@ function initEvents() {
         var modal = $(this);
         console.log(relatedTarget);
         initPreview(id);
-        var data = {};
-        data.key = 'category';
-        data.list = staticDictObject['170'];
-        render($("#check-group-category"), data, "tpl-check-group");
-
     })
+    //导入窗体
+    $('#modal-import').on('shown.bs.modal', function (event) {
+        var p = {};
+        reset_uploader(p);
+    });
 }
 
 function initPreview(id) {
@@ -155,5 +159,4 @@ function setParams(key, value) {
 function importXls(id) {
     reset_uploader({roadId: id});
     $('#modal-upload').modal('show');
-
 }

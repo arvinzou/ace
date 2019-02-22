@@ -11,7 +11,8 @@
 </head>
 <jsp:include page="/dynamic/common/header.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
-
+<link rel="stylesheet" type="text/css" media="screen"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"/>
 <body>
 
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -20,7 +21,6 @@
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
                 <div class="col-md-9 toolbar">
-
                     <button type="button" class="btn  green" id="btn-view-import"
                             authority="${pageContext.request.contextPath}/attRecord/insertAttRecord">中控数据导入
                     </button>
@@ -126,36 +126,18 @@
     </div>
 </script>
 
-
-<script id="tpl-check-group" type="text/template">
-
-    {@each data.list as item, index}
-    {@if item.CODE}
-    <button type="button" authority="false" class="btn btn-default"
-            onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}
-    </button>
-    {@else}
-    <button type="button" authority="false" class="btn btn-default" onclick="setParams('\${data.key}','');">全部</button>
-    {@/if}
-
-    {@/each}
-
-</script>
-
 <div class="modal fade" role="dialog" id="modal-upload">
-    <div class="modal-dialog" role="document" style="width: 90%;">
+    <div class="modal-dialog" role="document" style="width: 75%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" authority="false" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Excel导入</h4>
+                <h4 class="modal-title">Access数据库文件导入</h4>
             </div>
             <div class="modal-body">
                 <div id="uploader">
-                </div>
-                <div style="margin:5px">
-                    <a href="roadSection.xls" style="color:red">下载模板</a>.<br>
+
                 </div>
             </div>
             <div class="modal-footer">
@@ -183,12 +165,19 @@
 <script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
-
+<%--导入套件--%>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+<%--custom view js--%>
 <script src="${pageContext.request.contextPath}/content/service/attRecord/config.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/attRecord/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/attRecord/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/attRecord/view.js?version=${cfg.version}"></script>
-
+<script src="${pageContext.request.contextPath}/content/service/attRecord/upload.js?version=${cfg.version}"></script>
 <%--权限管理--%>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 

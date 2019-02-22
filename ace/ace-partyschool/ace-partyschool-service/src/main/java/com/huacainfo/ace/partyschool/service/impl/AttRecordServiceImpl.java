@@ -1,29 +1,30 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.plugins.access.AccessHelper;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.AttRecordDao;
+import com.huacainfo.ace.partyschool.dao.ZkAttDataDao;
 import com.huacainfo.ace.partyschool.model.AttRecord;
+import com.huacainfo.ace.partyschool.model.ZkAttData;
 import com.huacainfo.ace.partyschool.service.AttRecordService;
 import com.huacainfo.ace.partyschool.vo.AttRecordQVo;
 import com.huacainfo.ace.partyschool.vo.AttRecordVo;
+import com.huacainfo.ace.partyschool.vo.ZkAttDataQVo;
+import com.huacainfo.ace.partyschool.vo.ZkAttDataVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("attRecordService")
 /**
@@ -37,6 +38,8 @@ public class AttRecordServiceImpl implements AttRecordService {
     private AttRecordDao attRecordDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private ZkAttDataDao zkAttDataDao;
 
 
     /**
@@ -326,5 +329,126 @@ public class AttRecordServiceImpl implements AttRecordService {
         this.dataBaseLogService.log("跟新状态", "学员考勤", id, id, "学员考勤", userProp);
         return new MessageResponse(0, "成功！");
     }
+
+    /**
+     * 导入中控数据
+     *
+     * @param fileName db文件
+     * @param nowTime  当前操作时间
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse saveZkData(String fileName, String nowTime) {
+
+        //暂存zk导入数据
+        String sql = "select u.USERID, u.SSN, u.Name, c.CHECKTIME \n" +
+                "from CHECKINOUT c\n" +
+                "left join USERINFO u on c.USERID = u.USERID\n";
+        List<Map<String, Object>> accessList = AccessHelper.query(sql, fileName);
+        ZkAttData data;
+        zkAttDataDao.clearUp();//清理原有数据
+        for (Map<String, Object> map : accessList) {
+            data = new ZkAttData();
+            data.setId(GUIDUtil.getGUID());
+            data.setUserId((String) map.get("USERID"));
+            data.setAttTime(DateUtil.toDate((String) map.get("CHECKTIME")));
+            data.setSsn((String) map.get("SSN"));
+            data.setName((String) map.get("NAME"));
+            data.setStatus("1");
+            data.setRemark(nowTime + "导入");
+            data.setCreateDate(DateUtil.getNowDate());
+            zkAttDataDao.insert(data);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "导入成功");
+    }
+
+    /**
+     * 查询登录用户考勤信息 -- 查询某一天的考勤数据
+     *
+     * @param userId
+     * @param dateTimeStr 日期字符串 ，包含年月日；示例： 2019-02-21
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse findList(String userId, String dateTimeStr) {
+        Map<String, Object> config = attRecordDao.getAttSrc();
+        if (config == null) {
+            return new ResultResponse(ResultCode.FAIL, "未配置考勤数据来源");
+        }
+        //中控智慧来源
+        if ("ZK".equals(String.valueOf(config.get("config_value")))) {
+            ZkAttDataQVo condition = new ZkAttDataQVo();
+            condition.setDateTimeStr(dateTimeStr);
+            condition.setUserId(userId);
+            List<ZkAttDataVo> list = zkAttDataDao.findVoList(condition, 0, 100, "t.attTime asc");
+            //解析分组
+            Map<String, List<ZkAttDataVo>> view = new HashMap<>();
+            List<ZkAttDataVo> am = new LinkedList<>();
+            List<ZkAttDataVo> pm = new LinkedList<>();
+            List<ZkAttDataVo> night = new LinkedList<>();
+            view.put("am", am);
+            view.put("pm", pm);
+            view.put("night", night);
+            String hour;
+            int iHour;
+            String dtStr;
+            for (ZkAttDataVo item : list) {
+                dtStr = DateUtil.toStr(item.getAttTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
+                if (dtStr.length() == 19) {
+                    hour = dtStr.substring(11, 13);
+                    iHour = Integer.parseInt(hour);
+                    if (iHour < 12) {//上午
+                        am = view.get("am");
+                        am.add(item);
+                    } else if (iHour >= 18) {//晚上
+                        night = view.get("night");
+                        night.add(item);
+                    } else {
+                        pm = view.get("pm");
+                        pm.add(item);
+                    }
+                }
+            }
+            return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", view);
+        }
+        //手机定位来源
+        else {
+            AttRecordQVo condition = new AttRecordQVo();
+            condition.setDateTimeStr(dateTimeStr);
+            condition.setUserId(userId);
+            List<AttRecordVo> list = attRecordDao.findList(condition, 0, 100, "t.attTime asc");
+            //解析分组
+            Map<String, List<AttRecordVo>> view = new HashMap<>();
+            List<AttRecordVo> am = new LinkedList<>();
+            List<AttRecordVo> pm = new LinkedList<>();
+            List<AttRecordVo> night = new LinkedList<>();
+            view.put("am", am);
+            view.put("pm", pm);
+            view.put("night", night);
+            String hour;
+            int iHour;
+            String dtStr;
+            for (AttRecordVo item : list) {
+                dtStr = DateUtil.toStr(item.getAttTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
+                if (dtStr.length() == 19) {
+                    hour = dtStr.substring(11, 13);
+                    iHour = Integer.parseInt(hour);
+                    if (iHour < 12) {//上午
+                        am = view.get("am");
+                        am.add(item);
+                    } else if (iHour >= 18) {//晚上
+                        night = view.get("night");
+                        night.add(item);
+                    } else {
+                        pm = view.get("pm");
+                        pm.add(item);
+                    }
+                }
+            }
+            return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", view);
+        }
+    }
+
 
 }

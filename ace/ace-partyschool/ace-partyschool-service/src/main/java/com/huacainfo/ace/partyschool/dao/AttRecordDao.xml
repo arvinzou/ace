@@ -90,6 +90,9 @@
         <if test="condition.latitude !=null and condition.latitude !=&quot;&quot;">
             and t.latitude = #{condition.latitude,jdbcType=VARCHAR}
         </if>
+        <if test="condition.dateTimeStr !=null and condition.dateTimeStr !=&quot;&quot;">
+            and t.attTime like concat(#{condition.dateTimeStr,jdbcType=VARCHAR},'%')
+        </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -125,5 +128,13 @@
         select count(1)
         from student
         where mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="getAttSrc" parameterType="java.lang.String" resultType="map">
+       select *
+       from portal.config t
+       where t.syid='partyschool'
+        and t.config_key='att_src'
     </select>
 </mapper>
