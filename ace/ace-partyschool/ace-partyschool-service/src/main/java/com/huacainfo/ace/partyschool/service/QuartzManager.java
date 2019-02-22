@@ -36,5 +36,4 @@ public class QuartzManager {
          */
         classesService.graduation();
     }
-
 }
