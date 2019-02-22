@@ -21,7 +21,7 @@
                 <view class='row-left'>快报时间</view>
                 <view class='row-right content'>
                     <!--<input type='text' value='{{detail.lastModifyDate}}' name='createDate'></input>-->
-                    <picker class='datetime' name='createDate' data-name='createDate' mode="multiSelector" value="{{createDate}}"           bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                    <picker class='datetime' name='createDate' data-name='createDate' mode="multiSelector" value="{{createDate}}"           bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}" disabled='disabled'>
                             <view class="tui-picker-detail">
                                 {{dateTimeArray[0][createDate[0]]}}-{{dateTimeArray[1][createDate[1]]}}-{{dateTimeArray[2][createDate[2]]}} {{dateTimeArray[3][createDate[3]]}}:{{dateTimeArray[4][createDate[4]]}}:{{dateTimeArray[5][createDate[5]]}}
                             </view>
