@@ -111,7 +111,7 @@ searchSomeThing:function(e){
             app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
             app.globalData.roadManName = e.currentTarget.dataset.roadmanname;
             wx.navigateBack({ changed: true });
-        } else if (skipType == 'cj'){
+        }else if (skipType == 'cj'){
             //路段采集
             var startName = e.currentTarget.dataset.startname;
             var endName = e.currentTarget.dataset.endname;
@@ -121,7 +121,14 @@ searchSomeThing:function(e){
             app.globalData.cjSectionId = roadSectionId;
             app.globalData.tab = 1
             wx.navigateBack({ changed: true });
-        } 
+        }else if (skipType == 'xb'){
+            //续报选择路段
+            app.globalData.sectionId = roadSectionId;
+            app.globalData.sectionName = roadSectionName;
+            app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
+            app.globalData.roadManName = e.currentTarget.dataset.roadmanname;
+            wx.navigateBack({ changed: true });
+        }
     },
 
     resetSection: function(e){

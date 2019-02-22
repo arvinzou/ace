@@ -5,15 +5,15 @@
         <view class='box'>
             <view class='title02'>
                 <view class='locate'>{{detail.address}}</view>
-                <view class='locate-road'>
-                    <text>{{detail.roadSectionName}}</text>
+                <view class='locate-road' bindtap='selectRoadSection'>
+                    <text>{{sectionName}}</text>
                     <image src='../../image/icon_rediret.png'></image>
                 </view>
             </view>
             <view class='row br'>
                 <view class='row-left'>所属路长</view>
                 <view class='row-right content'>
-                    <input type='text' value='{{detail.roadManName}}'></input>
+                    <input type='text' value='{{roadManName}}' readonly bindtap='selectRoad'></input>
                     <image src='../../image/icon_rediret.png'></image>
                 </view>
             </view>
