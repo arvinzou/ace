@@ -307,10 +307,13 @@ GROUP BY e.NAME) t
            SELECT
           er.userId,er.name AS erName,er.introduce,er.score,
           s.name,s.sex,s.mobile,
-          erc.content as evaluationContent
+          t.content as evaluationContent
           FROM partyschool.evaluation_rst er
           LEFT JOIN partyschool.student s ON  er.userId=s.id
-          LEFT JOIN  partyschool.evaluation_rst_content erc ON  er.evaluatingId=erc.classScheduleId
+          LEFT JOIN  (select erc.content,erc.userId
+			 				from partyschool.evaluation_rst_content erc
+							WHERE erc.classScheduleId=#{id,jdbcType=VARCHAR}) t
+							ON er.userId=t.userId
           WHERE er.classScheduleId=#{id,jdbcType=VARCHAR}
           ORDER BY er.name
     </select>

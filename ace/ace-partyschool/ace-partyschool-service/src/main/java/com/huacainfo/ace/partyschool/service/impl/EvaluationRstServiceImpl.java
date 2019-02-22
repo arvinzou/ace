@@ -153,7 +153,7 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
     public Map<String, String> Object2Map(EvaluationExport obj) throws Exception {
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("名字", obj.getName());
-        map.put("性别", obj.getSex() == "1" ? "男" : "女");
+        map.put("性别", "1".equals(obj.getSex()) ? "男" : "女");
         map.put("电话", obj.getMobile());
         map.put("内容", obj.getEvaluationContent());
         Map<String, String> temp = new LinkedHashMap<String, String>();
