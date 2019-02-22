@@ -1,16 +1,20 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.ClassScheduleDao;
+import com.huacainfo.ace.partyschool.model.EvaluationExport;
 import com.huacainfo.ace.partyschool.model.EvaluationRstContent;
 import com.huacainfo.ace.partyschool.service.EvaluationRstContentService;
 import com.huacainfo.ace.partyschool.vo.ClassScheduleVo;
@@ -18,6 +22,11 @@ import com.huacainfo.ace.partyschool.vo.EvaluationRstContentQVo;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,8 +85,6 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
     }
 
 
-
-
     @Override
     public PageResult<EvaluationRstVo> findEvaluationRstListVo(EvaluationRstQVo condition, int start,
                                                                int limit, String orderBy) throws Exception {
@@ -102,18 +109,61 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
     }
 
     @Override
-    public ResultResponse insertEvaluationRstList(List<EvaluationRst> list, EvaluationRstContent obj, UserProp userProp) throws Exception{
-            for(EvaluationRst item:list){
-                MessageResponse mr=insertEvaluationRst(item,userProp);
-                if(mr.getStatus()==1){
-                   throw  new Exception(mr.getErrorMessage());
-                }
+    public ResultResponse insertEvaluationRstList(List<EvaluationRst> list, EvaluationRstContent obj, UserProp userProp) throws Exception {
+        for (EvaluationRst item : list) {
+            MessageResponse mr = insertEvaluationRst(item, userProp);
+            if (mr.getStatus() == 1) {
+                throw new Exception(mr.getErrorMessage());
             }
-            if(!CommonUtils.isBlank(obj.getContent())){
-                evaluationRstContentService.insertEvaluationRstContent(obj,userProp);
-            }
-            return new ResultResponse(ResultCode.SUCCESS,"提交成功");
+        }
+        if (!CommonUtils.isBlank(obj.getContent())) {
+            evaluationRstContentService.insertEvaluationRstContent(obj, userProp);
+        }
+        return new ResultResponse(ResultCode.SUCCESS, "提交成功");
     }
+
+    @Override
+    public SingleResult<List<Map<String, String>>> exportData(String id) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        EvaluationRstDao dao = session.getMapper(EvaluationRstDao.class);
+        List<EvaluationExport> list = new ArrayList<EvaluationExport>() {
+        };
+        try {
+            list = dao.exportData(id);
+//            WriteExcel(list);
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
+        }
+        List<Map<String, String>> listMap = new ArrayList<Map<String, String>>();
+        if (!CommonUtils.isBlank(list)) {
+            for (EvaluationExport item : list) {
+                Map<String, String> map = Object2Map(item);
+                listMap.add(map);
+            }
+        }
+        SingleResult<List<Map<String, String>>> rs = new SingleResult<List<Map<String, String>>>();
+        rs.setValue(listMap);
+        return rs;
+    }
+
+    public Map<String, String> Object2Map(EvaluationExport obj) throws Exception {
+        Map<String, String> map = new LinkedHashMap<String, String>();
+        map.put("名字", obj.getName());
+        map.put("性别", "1".equals(obj.getSex()) ? "男" : "女");
+        map.put("电话", obj.getMobile());
+        map.put("内容", obj.getEvaluationContent());
+        Map<String, String> temp = new LinkedHashMap<String, String>();
+        for (EvaluationRstVo item : obj.getEntityCounts()) {
+            temp.put(item.getName(), item.getScore().toString());
+        }
+        map.putAll(temp);
+        return map;
+    }
+
     /**
      * @throws
      * @Title:insertEvaluationRst
@@ -217,10 +267,9 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
 
     @Override
     public ResultResponse statistics(String classScheduleId) throws Exception {
-        List<Map<String,String>> map=this.evaluationRstDao.statistics(classScheduleId);
-        return new ResultResponse(0,"成功",map);
+        List<Map<String, String>> map = this.evaluationRstDao.statistics(classScheduleId);
+        return new ResultResponse(0, "成功", map);
     }
-
 
 
     /**

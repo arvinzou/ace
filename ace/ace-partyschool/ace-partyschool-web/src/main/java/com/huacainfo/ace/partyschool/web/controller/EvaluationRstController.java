@@ -1,6 +1,11 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.velocity.runtime.directive.MacroParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +25,14 @@ import com.huacainfo.ace.partyschool.service.EvaluationRstService;
 import com.huacainfo.ace.partyschool.vo.EvaluationRstVo;
 import com.huacainfo.ace.partyschool.vo.EvaluationRstQVo;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/evaluationRst")
@@ -149,5 +161,60 @@ public class EvaluationRstController extends BisBaseController {
         String id = json.getString("id");
         return this.evaluationRstService.deleteEvaluationRstByEvaluationRstId(id, this.getCurUserProp());
     }
+
+
+
+    @RequestMapping(value = "/exportData")
+    @ResponseBody
+    public ResultResponse exportData(String id,HttpServletResponse response) throws Exception {
+        SingleResult<List<Map<String,String>>> rr=evaluationRstService.exportData(id);
+        if(CommonUtils.isBlank(rr.getValue())){
+            return null;
+        }
+        WriteExcel(rr.getValue(),response);
+        return null;
+    }
+
+    public <T> void WriteExcel(List<Map<String,String>> data,HttpServletResponse response) throws Exception {
+        /*创建co*/
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("测评内容");
+        Field[] fields = null;
+        Set<String> set = data.get(0).keySet();
+        for (int i = 0; i < data.size(); i++) {
+            int j = 0;
+            if (i == 0) {
+                Row row = sheet.createRow(i);
+                for (String key:set) {
+                    Cell cell = row.createCell(j);
+                    cell.setCellValue(key);
+                    j++;
+                }
+                j=0;
+            }
+            Row row = sheet.createRow(i + 1);
+            Map<String,String> temp=data.get(i);
+            for (String key:set) {
+                Cell cell = row.createCell(j);
+                cell.setCellValue(temp.get(key));
+                j++;
+            }
+        }
+        try {
+            response.setHeader("Content-Disposition", "attachment;Filename=" + System.currentTimeMillis() + ".xlsx");
+            OutputStream outputStream = response.getOutputStream();
+            workbook.write(outputStream);
+            outputStream.close();
+            response.flushBuffer();
+//JOptionPane.showMessageDialog(null, "导出成功");
+        } catch (FileNotFoundException e) {
+//JOptionPane.showMessageDialog(null, "导出失败");
+            e.printStackTrace();
+        } catch (IOException e) {
+//JOptionPane.showMessageDialog(null, "导出失败");
+            e.printStackTrace();
+        }
+    }
+
 
 }

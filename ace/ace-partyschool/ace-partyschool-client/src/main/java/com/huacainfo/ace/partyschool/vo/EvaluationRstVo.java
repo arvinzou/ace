@@ -9,6 +9,7 @@ private Course course;
 private ClassSchedule classSchedule;
 
 private EvaluationRstContent evaluationRstContent;
+
 private Student student;
 
     public Student getStudent() {
@@ -42,4 +43,5 @@ private Student student;
     public void setEvaluationRstContent(EvaluationRstContent evaluationRstContent) {
         this.evaluationRstContent = evaluationRstContent;
     }
+
 }

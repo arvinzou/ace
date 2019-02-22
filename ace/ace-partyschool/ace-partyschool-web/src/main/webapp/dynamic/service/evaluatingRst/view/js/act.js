@@ -36,6 +36,10 @@ function view(evaluatingId, userId) {
     })
 }
 
+function exportData(){
+    window.location.href = contextPath + '/evaluationRst/exportData?id=' + urlParams.id;
+}
+
 
 /*测评管理初始化分页*/
 function initPage() {
