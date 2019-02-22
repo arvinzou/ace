@@ -3,6 +3,7 @@ package com.huacainfo.ace.partyschool.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.huacainfo.ace.partyschool.model.EvaluationExport;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.partyschool.model.EvaluationRst;
 import com.huacainfo.ace.partyschool.vo.EvaluationRstQVo;
@@ -42,5 +43,7 @@ public interface EvaluationRstDao {
     int isExit(EvaluationRst record);
 
     int updateStatus(EvaluationRst record);
+
+    List<EvaluationExport> exportData(@Param("id") String id);
 
 }

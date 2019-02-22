@@ -52,6 +52,7 @@ public interface EvaluationRstService {
     MessageResponse insertEvaluationRst(EvaluationRst obj, UserProp userProp) throws Exception;
 
     ResultResponse insertEvaluationRstList(List<EvaluationRst> list, EvaluationRstContent obj, UserProp userProp) throws Exception;
+    SingleResult<List<Map<String,String>>> exportData(String id) throws Exception;
 
     /**
      * @throws

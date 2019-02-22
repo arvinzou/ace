@@ -179,25 +179,25 @@
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="classesId" jdbcType="CHAR" property="classesId"/>
         <association property="teacher" column="teacher" javaType="com.huacainfo.ace.partyschool.model.Teacher">
-            <id column="tId" jdbcType="VARCHAR" property="id"/>
-            <result column="name" jdbcType="VARCHAR" property="name"/>
-            <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
-            <result column="idCard" jdbcType="CHAR" property="idCard"/>
-            <result column="workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
+            <id column="t_id" jdbcType="VARCHAR" property="id"/>
+            <result column="t_name" jdbcType="VARCHAR" property="name"/>
+            <result column="t_mobile" jdbcType="VARCHAR" property="mobile"/>
+            <result column="t_idCard" jdbcType="CHAR" property="idCard"/>
+            <result column="t_workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
             <result column="postName" jdbcType="VARCHAR" property="postName"/>
             <result column="introduce" jdbcType="VARCHAR" property="introduce"/>
-            <result column="category" jdbcType="VARCHAR" property="category"/>
+            <result column="t_category" jdbcType="VARCHAR" property="category"/>
             <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
         </association>
 
         <association property="student" column="student" javaType="com.huacainfo.ace.partyschool.model.Student">
-            <id column="sId" jdbcType="VARCHAR" property="id"/>
+            <id column="s_id" jdbcType="VARCHAR" property="id"/>
             <result column="pid" jdbcType="VARCHAR" property="pid"/>
-            <result column="name" jdbcType="VARCHAR" property="name"/>
-            <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
-            <result column="idCard" jdbcType="CHAR" property="idCard"/>
+            <result column="s_name" jdbcType="VARCHAR" property="name"/>
+            <result column="s_mobile" jdbcType="VARCHAR" property="mobile"/>
+            <result column="s_idCard" jdbcType="CHAR" property="idCard"/>
             <result column="political" jdbcType="VARCHAR" property="political"/>
-            <result column="workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
+            <result column="s_workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
             <result column="postName" jdbcType="VARCHAR" property="postName"/>
             <result column="classId" jdbcType="VARCHAR" property="classId"/>
         </association>
@@ -206,8 +206,8 @@
     <select id="findFileListAboutMe" parameterType="java.lang.String" resultMap="FilesResultMapVo">
         select
         f.id, f.category, f.classesId, f.title, f.url, f.pushDate, f.publisher, f.status,
-        t.id as tId, t.idCard, t.mobile, t.introduce, t.name, t.workUnitName, t.category, t.photoUrl, t.postName,
-        s.id as sId ,s.mobile, s.idCard, s.name, s.pid, s.political, s.workUnitName, s.classId
+        t.id as t_id, t.idCard as t_idCard, t.mobile as t_mobile, t.name as t_name,t.workUnitName as t_workUnitName, t.introduce,   t.category as t_category, t.photoUrl, t.postName,
+        s.id as s_id ,s.idCard as s_idCard, s.mobile as s_mobile, s.name as s_name,s.workUnitName as s_workUnitName, s.pid, s.political, s.classId
         FROM files f
         LEFT JOIN partyschool.teacher t ON t.id=f.publisher
         LEFT JOIN partyschool.student s ON s.id=f.publisher
