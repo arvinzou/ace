@@ -72,7 +72,7 @@ ul{
 }
 .list_item {
     display: block;
-    padding: 0.2rem 0.2rem 0.15rem 0.15rem;
+    padding: 0.15rem 0.4rem 0.15rem 0.4rem;
     overflow: hidden;
     position: relative;
     text-decoration: none;

@@ -12,11 +12,19 @@
 	</head>
 	<body>
 		<div class="index">
-			<div class="search">
-				<input class="serach-input" type="text" id="search" name="keyWord" onfocus="focusInput();" onblur="blurInput();" oninput="activeSearch();"/>
-				<img id="search-icon" src="img/icon_search.png" class="icon-search" onclick="searchIconClick();"/>
-				<span id="search-title" class="search-title" onclick="searchIconClick();">搜索</span>
+			<div class="header">
+				<div class="search">
+					<input class="serach-input" type="text" id="search" name="keyWord" onfocus="focusInput();" onblur="blurInput();" oninput="activeSearch();"/>
+					<img id="search-icon" src="img/icon_search.png" class="icon-search" onclick="searchIconClick();"/>
+					<span id="search-title" class="search-title" onclick="searchIconClick();">搜索</span>
+				</div>
+				<div class="classFilter" id="classFilter">
+					<img class="icon-class" src="img/icon-class.png">
+					<div class="class-select" type="text" id="clazz"></div>
+					<img class="class-right" src="img/icon_select.png" />
+				</div>
 			</div>
+
 			<div class="list" id="fileList">
 
 			</div>
@@ -27,11 +35,6 @@
 		<!--老师上传文件模态框层-->
 		<div class="modal" id="uploadModal" style="display: none;">
 			<div class="modal-index">
-				<div class="modal-title01 title01 mbr">上传班级文件</div>
-				<div class="modal-clazz mbr" id="classBox">
-					<div class="clazz title02" id="clazz">请选择班级</div>
-					<div class="select-box"><img src="img/icon_select.png"/></div>
-				</div>
                 <div class="modal-title02 title02 mbr">上传班级文件</div>
                 <div class="opt mbr" id="fileBox">
                     <img src="img/icon_confirm_add.png" class="option-add" id="upload"/>
@@ -72,7 +75,13 @@
 					<div class="file-footer">
 						<span>\${item.pushDate}</span>
 						<span>来自</span>
-						<span>\${item.publisher}</span>
+						<span>
+							{@if item.student.name}
+								\${item.student.name}
+							{@else}
+								\${item.teacher.name}
+							{@/if}
+						</span>
 					</div>
 				</div>
 			</div>
