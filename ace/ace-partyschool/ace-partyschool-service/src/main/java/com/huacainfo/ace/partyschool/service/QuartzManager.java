@@ -20,7 +20,7 @@ public class QuartzManager {
     /**
      * 每隔1分钟
      */
-//    @Scheduled(cron = "0 */1 * * * ?")
+    @Scheduled(cron = "0 */1 * * * ?")
     public void Quartz() {
         //todo 123
     }
