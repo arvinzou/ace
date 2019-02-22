@@ -4,12 +4,16 @@
 }
 body{
 	font-family:PingFang-SC-Medium;
+	background: #F2F2F2;
+}
+body,html{
+	height: 100%;
+
 }
 .index{
 	width: 10rem;
-	height: 100%;
+	height: auto;
 	margin: 0 auto;
-	background: #F2F2F2;
 }
 .title-box{
 	width: auto;

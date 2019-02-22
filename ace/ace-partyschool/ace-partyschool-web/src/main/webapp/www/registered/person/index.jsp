@@ -142,7 +142,7 @@
 						<img src="img/icon-appear.png" class="menu-icon"/>
 					</div>
 					<div class="item-right">
-						<div class="menu-title">考勤信息</div>
+						<div class="menu-title">考勤记录</div>
 						<div class="menu-content">查看考勤记录</div>
 					</div>
 				</div>
@@ -166,7 +166,7 @@
 						<img src="img/icon-appear.png" class="menu-icon"/>
 					</div>
 					<div class="item-right">
-						<div class="menu-title">考勤信息</div>
+						<div class="menu-title">考勤记录</div>
 						<div class="menu-content">查看考勤记录</div>
 					</div>
 				</div>
