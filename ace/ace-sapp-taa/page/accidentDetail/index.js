@@ -1,6 +1,7 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
 var dateTimePicker = require('../../util/dateTimePicker.js');
+var app = getApp();
 Page({
 
   /**
@@ -23,6 +24,10 @@ Page({
       accidentTime: null,
       startYear: 2000,
       endYear: 2050,
+      sectionName: null,
+      sectionId: null,
+      roadManId: null,
+      roadManName: null
   },
 
   /**
@@ -54,11 +59,21 @@ Page({
           function (res) {
               if (res.status == 0) {
                   console.log("*****************************"+res.value.accidentTime);
-                 that.setData({
-                     detail: res.value,
-                     createDate: that.fotmatPicker(res.value.createDate),
-                     accidentTime: that.fotmatPicker(res.value.accidentTime),
-                 });
+                  app.globalData.sectionName = res.value.roadSectionName;
+                  app.globalData.sectionId = res.value.roadSectionId;
+                  app.globalData.roadManId = res.value.roadManId;
+                  app.globalData.roadManName = res.value.roadManName;
+
+                  that.setData({
+                      detail: res.value,
+                      createDate: that.fotmatPicker(res.value.createDate),
+                      accidentTime: that.fotmatPicker(res.value.accidentTime),
+                      sectionName: app.globalData.sectionName,
+                      sectionId: app.globalData.sectionId,
+                      roadManId: app.globalData.roadManId,
+                      roadManName: app.globalData.roadManName
+                  });
+
                   that.convertCode(res.value.weather);
                   var mtypeList = res.value.mtypeList;
                   for(var i=0; i< mtypeList.length; i++){
@@ -101,13 +116,14 @@ Page({
      for (var i in weather){
          wArray.push(weather[i].NAME);
          wArrayObject.push(weather[i]);
+         that.setData({
+             wArray: wArray,
+             wArrayObject: wArrayObject
+         });
          if (key == weather[i].CODE){
             that.setData({
-                index: i,
-                wArray: wArray,
-                wArrayObject: wArrayObject
+                index: i
             });
-            return i;
          }
 
      }
@@ -239,11 +255,36 @@ Page({
     FN(num) {
         return num >= 10 ? num : '0' + num;
     },
+
+    /**
+     * 修改选择路段
+     */
+    selectRoadSection: function(){
+        wx.navigateTo({
+            url: '../collection/index?type=xb',
+        });
+    },
+
+    /**
+     * 修改选择路长
+     */
+    selectRoad: function(){
+        wx.navigateTo({
+            url: '../roadlist/index?type=xb',
+        });
+    },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+      var that = this;
+      that.setData({
+          sectionName: app.globalData.sectionName,
+          sectionId: app.globalData.sectionId,
+          roadManId: app.globalData.roadManId,
+          roadManName: app.globalData.roadManName
+      });
+
   },
 
   /**
