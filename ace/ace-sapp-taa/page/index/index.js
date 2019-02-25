@@ -54,7 +54,18 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        
+        var that = this;
+        app.globalData.sectionId = null;
+        app.globalData.sectionName = '';
+        app.globalData.tab = null;
+        app.globalData.startName = '';
+        app.globalData.endName = null;
+        app.globalData.cjSectionId = null;
+        app.globalData.roadManId = null;
+        app.globalData.roadManName = null;
+        that.setData({
+            sectionName: '请选择路段'
+        })
     },
     selectRoad: function() {
         wx.navigateTo({
@@ -432,17 +443,6 @@ Page({
      */
     onShow: function() {
         var that = this;
-        app.globalData.sectionId = null;
-        app.globalData.sectionName = '';
-        app.globalData.tab = null;
-        app.globalData.startName = '';
-        app.globalData.endName = null;
-        app.globalData.cjSectionId = null;
-        app.globalData.roadManId = null;
-        app.globalData.roadManName = null;
-        that.setData({
-            sectionName: '请选择路段'
-        })
         if (!util.is_login()) {
             wx.navigateTo({
                 url: "../userinfo/index?url=../index/index&type=navigateTo"
