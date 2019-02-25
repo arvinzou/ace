@@ -11,6 +11,19 @@ public class FilesVo extends Files {
 
     private Teacher teacher;
 
+    /**
+     * 发布者姓名
+     */
+    private String publisherName;
+
+    public String getPublisherName() {
+        return publisherName;
+    }
+
+    public void setPublisherName(String publisherName) {
+        this.publisherName = publisherName;
+    }
+
     public Teacher getTeacher() {
         return teacher;
     }

@@ -1,10 +1,7 @@
 package com.huacainfo.ace.partyschool.service;
 
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.partyschool.model.Classes;
 import com.huacainfo.ace.partyschool.vo.ClassesQVo;
 import com.huacainfo.ace.partyschool.vo.ClassesVo;
@@ -113,4 +110,6 @@ public interface ClassesService {
      * 2、注销已毕业班级的学员账户信息
      */
     void graduation();
+
+    ListResult<Map<String, Object>> getClassList();
 }

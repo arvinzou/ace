@@ -9,7 +9,7 @@ public class TeacherQVo extends Teacher {
     private String keyWord;
 
     public String getKeyWord() {
-        return keyWord;
+        return keyWord == null ? null : keyWord.trim();
     }
 
     public void setKeyWord(String keyWord) {
