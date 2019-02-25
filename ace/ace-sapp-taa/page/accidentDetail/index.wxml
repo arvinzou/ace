@@ -26,7 +26,6 @@
                                 {{dateTimeArray[0][createDate[0]]}}-{{dateTimeArray[1][createDate[1]]}}-{{dateTimeArray[2][createDate[2]]}} {{dateTimeArray[3][createDate[3]]}}:{{dateTimeArray[4][createDate[4]]}}:{{dateTimeArray[5][createDate[5]]}}
                             </view>
                         </picker>
-                    <image src='../../image/icon_rediret.png'></image>
                 </view>
             </view>
             <view class='row br'>
