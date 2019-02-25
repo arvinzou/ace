@@ -68,12 +68,12 @@
 }
 .item{
     width: 90%;
-    height: 146rpx;
+    height: 126rpx;
     margin-left: 5%;
     margin-right: 5%;
     margin-bottom: 20rpx;
     background:rgba(247,248,249,1);
-    border-radius:5rpx;
+    border-radius:10rpx;
     padding-top: 42rpx;
 } 
 .item::after{
@@ -113,6 +113,9 @@
 .status{
     color: #2430E3;
     font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;  
 }
 .status image{
     width: 30rpx;
