@@ -4,10 +4,7 @@ package com.huacainfo.ace.partyschool.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -370,6 +367,14 @@ public class ClassesServiceImpl implements ClassesService {
     @Override
     public void graduation() {
         classesDao.graduation();
+    }
+
+    @Override
+    public ListResult<Map<String, Object>> getClassList() {
+        ListResult<Map<String, Object>> rst = new ListResult<>();
+        rst.setValue(classesDao.getClassList());
+
+        return rst;
     }
 
 

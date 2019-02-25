@@ -310,4 +310,9 @@
         and `status`='1'
         ;
     </update>
+
+
+    <select id="getClassList" resultType="map">
+        select id, name from classes where 1=1 order by createDate desc
+    </select>
 </mapper>

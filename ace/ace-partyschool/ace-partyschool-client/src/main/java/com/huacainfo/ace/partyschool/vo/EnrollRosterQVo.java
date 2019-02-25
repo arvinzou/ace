@@ -11,7 +11,7 @@ public class EnrollRosterQVo extends EnrollRoster {
     private String keyword;
 
     public String getKeyword() {
-        return keyword;
+        return keyword == null ? null : keyword.trim();
     }
 
     public void setKeyword(String keyword) {

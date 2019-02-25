@@ -11,6 +11,19 @@ public class AttRecordQVo extends AttRecord {
      * 查询年月日
      */
     private String dateTimeStr;
+    /**
+     * 姓名
+     */
+    private String name;
+
+
+    public String getName() {
+        return name == null ? name : name.trim();
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getDateTimeStr() {
         return dateTimeStr;
