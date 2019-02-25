@@ -382,47 +382,45 @@ Page({
                     that.setData({
                         userData: res.data
                     });
+                    var userInfo = wx.getStorageSync("userinfo");
+                    that.setData({
+                        header: userInfo.avatarUrl,
+                        startName: app.globalData.startName
+                    })
+                    var sectionId = app.globalData.sectionId;
+                    if (sectionId) {
+                        that.setData({
+                            sectionFlag: true,
+                            sectionName: app.globalData.sectionName,
+                            sectionId: app.globalData.sectionId,
+                            tab: app.globalData.tab,
+                        });
+                    }
+                    var cjSectionId = app.globalData.cjSectionId;
+                    if (cjSectionId) {
+                        that.setData({
+                            isCollection: false,
+                            startName: app.globalData.startName,
+                            endName: app.globalData.endName,
+                            cjSectionId: app.globalData.cjSectionId
+                        });
+                    }
+                    if (app.globalData.roadManId) {
+                        that.setData({
+                            roadManId: app.globalData.roadManId,
+                            roadManName: app.globalData.roadManName
+                        });
+                    }
+
+                    that.getLocation();
+                    that.initDict();
                 } else {
                     if (res.info == '用户尚未注册') {
                         wx.navigateTo({
                             url: '../regist/index',
                         });
                         return;
-                    } else {
-                            var userInfo = wx.getStorageSync("userinfo");
-                            that.setData({
-                                header: userInfo.avatarUrl,
-                                startName: app.globalData.startName
-                            })
-                            var sectionId = app.globalData.sectionId;
-                            if (sectionId) {
-                                that.setData({
-                                    sectionFlag: true,
-                                    sectionName: app.globalData.sectionName,
-                                    sectionId: app.globalData.sectionId,
-                                    tab: app.globalData.tab,
-                                });
-                            }
-                            var cjSectionId = app.globalData.cjSectionId;
-                            if (cjSectionId) {
-                                that.setData({
-                                    isCollection: false,
-                                    startName: app.globalData.startName,
-                                    endName: app.globalData.endName,
-                                    cjSectionId: app.globalData.cjSectionId
-                                });
-                            }
-                            if (app.globalData.roadManId) {
-                                that.setData({
-                                    roadManId: app.globalData.roadManId,
-                                    roadManName: app.globalData.roadManName
-                                });
-                            }
-
-                            that.getLocation();
-                            that.initDict();
-                        
-                    }
+                    } 
                 }
 
             }
@@ -452,7 +450,6 @@ Page({
         } else {
             that.initUserData();
         }
-       // that.initDateTime();
     },
 
 
