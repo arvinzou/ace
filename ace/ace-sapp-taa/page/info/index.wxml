@@ -3,16 +3,11 @@
     <view class='form'>
         <view class='header-box br'>
             <view class='header'><image src='{{userData.avatarUrl}}'></image></view>
-            <view class='opt-title'></view>
-            <view class='opt'><image src='../../image/icon_rediret.png'></image></view>
-        </view>
-        <view class='row br'>
-            <view class='form-title'>姓名</view>
-            <view class='form-input'><input type='text' value='{{userData.name}}' disabled='true'></input></view>
+            <view class='opt-title'>{{userData.name}}</view>
         </view>
         <view class='row br'>
             <view class='form-title'>手机号</view>
-            <view class='form-input'><input name='mobile' type='number' value='{{userData.mobile}}'></input></view>
+            <view class='form-input'><input name='mobile' type='number' maxlength='11' value='{{userData.mobile}}'></input></view>
         </view>
         <view class='row br'>
             <view class='form-title'>警号</view>

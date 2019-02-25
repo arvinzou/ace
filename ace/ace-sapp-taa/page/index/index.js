@@ -67,9 +67,8 @@ Page({
         })
         if (!util.is_login()) {
             wx.navigateTo({
-                url: "../userinfo/index?url=../regist/index&type=navigateTo"
+                url: "../userinfo/index?url=../index/index&type=navigateTo"
             });
-            return;
         }
     },
     selectRoad: function() {
@@ -90,7 +89,7 @@ Page({
                 var latitude = res.latitude;
                 var longitude = res.longitude;
                 var o = {
-                    iconPath: '../../image/icon-locate.png',
+                    //iconPath: '../../image/icon-locate.png',
                     longitude: res.longitude,
                     latitude: res.latitude,
                     width: 25,
@@ -405,7 +404,9 @@ Page({
                             content: res.info,
                             success: function(res) {}
                         });
-                        return;
+                        wx.navigateTo({
+                            url: '../regist/index',
+                        });
                     } else {
                         wx.showModal({
                             title: '提示',
@@ -426,11 +427,10 @@ Page({
         var that = this;
         if (!util.is_login()) {
             wx.navigateTo({
-                url: "../userinfo/index?url=../regist/index&type=navigateTo"
+                url: "../userinfo/index?url=../index/index&type=navigateTo"
             });
-            return;
-        } else {
             that.initUserData();
+        } else {
             var userInfo = wx.getStorageSync("userinfo");
             that.setData({
                 header: userInfo.avatarUrl,
