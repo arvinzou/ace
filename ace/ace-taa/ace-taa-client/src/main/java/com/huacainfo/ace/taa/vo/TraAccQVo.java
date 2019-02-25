@@ -42,6 +42,18 @@ public class TraAccQVo extends TraAcc {
      * 道路/路长/路段名称
      */
     private String roadName;
+    /**
+     * 部门ID
+     */
+    private String deptId;
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
 
     public String getRoadName() {
         return roadName;
