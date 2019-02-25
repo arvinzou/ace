@@ -38,8 +38,9 @@
     height: 150rpx;
     float: left;
     line-height: 150rpx;
-    color: #ABAEB9;
+    color: #373F53;
     font-size: 32rpx;
+    font-weight: bold;
 }
 .opt{
     width: auto;
