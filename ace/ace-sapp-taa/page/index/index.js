@@ -90,7 +90,7 @@ Page({
                 var latitude = res.latitude;
                 var longitude = res.longitude;
                 var o = {
-                    iconPath: '../../image/icon-locate.png',
+                    //iconPath: '../../image/icon-locate.png',
                     longitude: res.longitude,
                     latitude: res.latitude,
                     width: 25,

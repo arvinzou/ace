@@ -16,7 +16,7 @@
     width: 574rpx;
     height: 520rpx;
     margin-top: 142rpx;
-    margin-left: 87rpx;
+    //margin-left: 87rpx;
     margin-bottom: 300rpx
 }
 
