@@ -113,6 +113,9 @@
 .status{
     color: #2430E3;
     font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;  
 }
 .status image{
     width: 30rpx;
