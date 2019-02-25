@@ -79,8 +79,9 @@
         (
         select count(1)
         from road_section rs
-        where rs.id in ( select roadSectionId from road_gps )
-        and rs.areaCode = d.area_code
+        where rs.id in ( select g.roadSectionId from road_gps g
+        left join portal.users u on u.user_id = g.createUserId
+        where u.department_id = t.department_id )
         ) as sectionCount,
         w.nickName, w.avatarUrl,
         d.department_name,
