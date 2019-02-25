@@ -28,7 +28,7 @@
   border-bottom: 1px solid #F0EFF6;
 }
 .list-group-item:last-child {
-  padding-bottom: 60rpx;
+  padding-bottom: 30rpx;
 }
 .list-group-item .icon {
   width:100rpx;
@@ -47,16 +47,18 @@
   top: 50%;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
-  width: 20px;
-  padding: 20px 0;
+  width: 26rpx;
+  padding: 20rpx 20rpx;
   border-radius: 10px;
   text-align: center;
   font-family: Helvetica;
 }
 .list-shortcut text {
+  width: 26rpx;
+  height: 26rpx;
+  line-height: 26rpx;
   display: block;
   padding: 3rpx;
-  line-height: 1;
   color: #ABAEB9;
   font-size: 20rpx;
   font-weight: bold;
