@@ -18,11 +18,16 @@
 .title:first-child {
   margin-top:0;
 }
+.list-group{
+    width: 88%;
+    height: auto;
+    margin: 0 auto;
+}
 .list-group-item {
   display: flex;
   -webkit-box-align: center;
   align-items: center;
-  padding: 40rpx 0 30rpx 30rpx;
+  padding: 30rpx 0;
   color: #373F53;
   font-size: 34rpx;
   border-bottom: 1px solid #F0EFF6;
