@@ -18,12 +18,15 @@ import com.huacainfo.ace.partyschool.vo.AttRecordQVo;
 import com.huacainfo.ace.partyschool.vo.AttRecordVo;
 import com.huacainfo.ace.partyschool.vo.ZkAttDataQVo;
 import com.huacainfo.ace.partyschool.vo.ZkAttDataVo;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service("attRecordService")
@@ -40,7 +43,8 @@ public class AttRecordServiceImpl implements AttRecordService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private ZkAttDataDao zkAttDataDao;
-
+    @Autowired
+    private UsersService usersService;
 
     /**
      * @throws
@@ -81,32 +85,34 @@ public class AttRecordServiceImpl implements AttRecordService {
     @Override
     public MessageResponse insertAttRecord(AttRecord o, UserProp userProp) throws Exception {
 
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getUserId())) {
-            return new MessageResponse(1, "用户编码不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getUserType())) {
-            return new MessageResponse(1, "用户类型不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getAttTime())) {
             return new MessageResponse(1, "考勤时间不能为空！");
         }
-
-
+        if (o.getLatitude().compareTo(BigDecimal.ZERO) == 0
+                || o.getLongitude().compareTo(BigDecimal.ZERO) == 0) {
+            return new MessageResponse(1, "考勤定位不能为空！");
+        }
+        Users user = usersService.selectUsersByPrimaryKey(userProp.getUserId()).getValue();
+        if (user == null) {
+            return new MessageResponse(ResultCode.FAIL, "用户数据丢失");
+        }
+        //重复签到筛选条件
+        o.setAttTimeStr(DateUtil.toStr(o.getAttTime()));
+        o.setUserId(userProp.getUserId());
         int temp = this.attRecordDao.isExist(o);
         if (temp > 0) {
-            return new MessageResponse(1, "学员考勤名称重复！");
+            return new MessageResponse(ResultCode.FAIL, "当日已签到");
         }
 
+        o.setUserType(user.getUserLevel());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         this.attRecordDao.insert(o);
         this.dataBaseLogService.log("添加学员考勤", "学员考勤", "", o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "保存成功！");
+        return new MessageResponse(0, "签到成功！");
     }
 
     /**
