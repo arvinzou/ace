@@ -1,15 +1,15 @@
 {
     "pages": [
         "page/index/index",
+        "page/regist/index",
+        "page/userinfo/index",
         "page/me/index",
         "page/roadlist/index",
         "page/info/index",
-        "page/regist/index",
         "page/datas/index",
         "page/collection/index",
         "page/accidentList/index",
-        "page/accidentDetail/index",
-        "page/userinfo/index"
+        "page/accidentDetail/index"
     ],
     "permission": {
         "scope.userLocation": {

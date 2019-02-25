@@ -46,30 +46,15 @@ Page({
         header: null,
         flaging:false,
         frequency: 0,   //是否显示加减频率
-        timeInterval: 10000   //采集频率以10秒为单位
+        timeInterval: 10000,   //采集频率以10秒为单位
+        isRegist: true
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        var that = this;
-        app.globalData.sectionId = null;
-        app.globalData.sectionName = '';
-        app.globalData.tab = null;
-        app.globalData.startName = '';
-        app.globalData.endName = null;
-        app.globalData.cjSectionId = null;
-        app.globalData.roadManId = null;
-        app.globalData.roadManName = null;
-        that.setData({
-            sectionName: '请选择路段'
-        })
-        if (!util.is_login()) {
-            wx.navigateTo({
-                url: "../userinfo/index?url=../index/index&type=navigateTo"
-            });
-        }
+        
     },
     selectRoad: function() {
         wx.navigateTo({
@@ -397,23 +382,45 @@ Page({
                     that.setData({
                         userData: res.data
                     });
+                    var userInfo = wx.getStorageSync("userinfo");
+                    that.setData({
+                        header: userInfo.avatarUrl,
+                        startName: app.globalData.startName
+                    })
+                    var sectionId = app.globalData.sectionId;
+                    if (sectionId) {
+                        that.setData({
+                            sectionFlag: true,
+                            sectionName: app.globalData.sectionName,
+                            sectionId: app.globalData.sectionId,
+                            tab: app.globalData.tab,
+                        });
+                    }
+                    var cjSectionId = app.globalData.cjSectionId;
+                    if (cjSectionId) {
+                        that.setData({
+                            isCollection: false,
+                            startName: app.globalData.startName,
+                            endName: app.globalData.endName,
+                            cjSectionId: app.globalData.cjSectionId
+                        });
+                    }
+                    if (app.globalData.roadManId) {
+                        that.setData({
+                            roadManId: app.globalData.roadManId,
+                            roadManName: app.globalData.roadManName
+                        });
+                    }
+
+                    that.getLocation();
+                    that.initDict();
                 } else {
                     if (res.info == '用户尚未注册') {
-                        wx.showModal({
-                            title: '对不起，您还没有注册，请前往个人中心进行注册！',
-                            content: res.info,
-                            success: function(res) {}
-                        });
                         wx.navigateTo({
                             url: '../regist/index',
                         });
-                    } else {
-                        wx.showModal({
-                            title: '提示',
-                            content: res.info,
-                            success: function(res) {}
-                        });
-                    }
+                        return;
+                    } 
                 }
 
             }
@@ -425,45 +432,24 @@ Page({
      */
     onShow: function() {
         var that = this;
+        app.globalData.sectionId = null;
+        app.globalData.sectionName = '';
+        app.globalData.tab = null;
+        app.globalData.startName = '';
+        app.globalData.endName = null;
+        app.globalData.cjSectionId = null;
+        app.globalData.roadManId = null;
+        app.globalData.roadManName = null;
+        that.setData({
+            sectionName: '请选择路段'
+        })
         if (!util.is_login()) {
             wx.navigateTo({
                 url: "../userinfo/index?url=../index/index&type=navigateTo"
             });
-            that.initUserData();
         } else {
-            var userInfo = wx.getStorageSync("userinfo");
-            that.setData({
-                header: userInfo.avatarUrl,
-                startName: app.globalData.startName
-            })
-            var sectionId = app.globalData.sectionId;
-            if (sectionId) {
-                that.setData({
-                    sectionFlag: true,
-                    sectionName: app.globalData.sectionName,
-                    sectionId: app.globalData.sectionId,
-                    tab: app.globalData.tab,
-                });
-            }
-            var cjSectionId = app.globalData.cjSectionId;
-            if (cjSectionId) {
-                that.setData({
-                    isCollection: false,
-                    startName: app.globalData.startName,
-                    endName: app.globalData.endName,
-                    cjSectionId: app.globalData.cjSectionId
-                });
-            }
-            if (app.globalData.roadManId) {
-                that.setData({
-                    roadManId: app.globalData.roadManId,
-                    roadManName: app.globalData.roadManName
-                });
-            }
+            that.initUserData();
         }
-        that.getLocation();
-        that.initDict();
-       // that.initDateTime();
     },
 
 

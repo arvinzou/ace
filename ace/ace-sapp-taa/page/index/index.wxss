@@ -123,11 +123,15 @@ view, map, cover-view {
     line-height: 100rpx;
 }
 
-.fromContent .content .close-open {
+.close-open{
     width: 30rpx;
     height: 16rpx;
-    display: block;
-    margin: 20rpx auto;
+}
+.close-open-box{
+    width: 100%;
+    height: 56rpx;
+    line-height: 56rpx;
+    text-align: center;
 }
 
 .fromContent .content .locate-name {
