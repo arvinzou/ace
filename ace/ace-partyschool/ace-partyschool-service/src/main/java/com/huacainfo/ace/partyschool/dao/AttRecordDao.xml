@@ -126,8 +126,9 @@
 
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.AttRecord">
         select count(1)
-        from student
-        where mobile = #{mobile,jdbcType=VARCHAR}
+        from att_record t
+        where t.attTime like concat(#{attTimeStr,jdbcType=VARCHAR},'%')
+        and t.userId = #{userId,jdbcType=VARCHAR}
     </select>
 
 
