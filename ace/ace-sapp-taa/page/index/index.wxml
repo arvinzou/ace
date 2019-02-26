@@ -1,6 +1,6 @@
 <view class='accidentContent ' wx:if="{{tab == 0}}">
   <!-- <view class='accidentContent {{tab == 1? "hidden":""}}' wx:if="{{tab == 1}}"> -->
-  <map id="accidentMap" class='map {{isEdit == true?"activeEdit":""}}' show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='14'>
+  <map id="accidentMap" class='map {{isEdit == true?"activeEdit":""}}' show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' markers='{{current}}'>
     <cover-view class='tab'>
       <cover-view class='header' bindtap='userInfo'>
         <block wx:if='{{header}}'>
@@ -79,7 +79,7 @@
 </view>
 <view class='collectionContent ' wx:elif="{{tab==1}}">
   <!-- <view class='collectionContent {{tab == 1? "":"hidden"}}'> -->
-  <map id="collectionMap" show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='14' polyline="{{polyline}}" style='width:100%; height:100%'>
+  <map id="collectionMap" show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' polyline="{{polyline}}" style='width:100%; height:100%' markers='{{current}}'>
     <cover-view class='tab'>
       <cover-view class='header' bindtap='userInfo'>
         <block wx:if='{{header}}'>
