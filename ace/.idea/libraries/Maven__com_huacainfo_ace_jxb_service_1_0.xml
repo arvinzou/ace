@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.huacainfo:ace-jxb-service:1.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ace-jxb/ace-jxb-service/pom.xml!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service-1.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service-1.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -41,6 +41,7 @@ App({
         if (self.globalData.openid) {
             callback(null, self.globalData.openid)
         } else {
+          console.log("--开始---")
             wx.login({
                 success: function (data) {
                     wx.request({

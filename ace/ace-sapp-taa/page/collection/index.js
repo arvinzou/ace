@@ -41,16 +41,16 @@ Page({
       var that = this;
       var index = e.target.dataset.index;
       that.setData({
-        tab: index
+          tab: e.target.dataset.index
       });
       if(index==0){
         wx.setNavigationBarTitle({
-          title: '待采集路段'
+          title: '待采集路段',
         });
-      }else {
+      }else{
         wx.setNavigationBarTitle({
-          title: '已采集路段'
-        });
+          title: '已采集路段',
+        }) ;
       }
   },
 
