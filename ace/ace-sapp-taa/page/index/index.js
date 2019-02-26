@@ -462,8 +462,8 @@ Page({
 
 
     start: function (e) {
-        var locateList = [];
         var that = this;
+        that.getLocate();
         that.setData({
             breakBtn: 'breakBtn',
             activeBreak: 'activeBreak',
@@ -471,7 +471,7 @@ Page({
             frequency: 1
         });
         interval = setInterval(function () {
-            locateList.push(that.getLocate());
+           that.getLocate();
             console.log("==================采集频率" + that.data.timeInterval);
         }, that.data.timeInterval);
     },
@@ -536,6 +536,7 @@ Page({
         var o = {};
         var that = this;
         wx.getLocation({
+            type: 'gcj02',
             success: function (res) {
                 var latitude = res.latitude;
                 var longitude = res.longitude;
