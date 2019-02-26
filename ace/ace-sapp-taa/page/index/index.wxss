@@ -123,11 +123,15 @@ view, map, cover-view {
     line-height: 100rpx;
 }
 
-.fromContent .content .close-open {
+.close-open{
     width: 30rpx;
     height: 16rpx;
-    display: block;
-    margin: 20rpx auto;
+}
+.close-open-box{
+    width: 100%;
+    height: 56rpx;
+    line-height: 56rpx;
+    text-align: center;
 }
 
 .fromContent .content .locate-name {
@@ -298,6 +302,27 @@ view, map, cover-view {
 
 .hidden{
     display: none;
+}
+.reset-locate{
+    width: 105rpx;
+    height: 105rpx;
+    position: absolute;
+    bottom: 42rpx;
+    right: 30rpx;
+}
+.map{
+    position: relative;
+}
+.control-map{
+    width: 105rpx;
+    height: auto;
+    position: fixed;
+    bottom: 280rpx;
+    right: 12rpx;
+}
+.icon-control-map{
+    width: 105rpx;
+    height: 105rpx;
 }
 
 /* ******************************************** */

@@ -10,7 +10,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        tab: 1,
+        tab: 0,
         isNull: 0,
         wIndex: 0,
         cIndex: 0,
@@ -45,6 +45,9 @@ Page({
         }],
         header: null,
         flaging:false,
+        frequency: 0,   //是否显示加减频率
+        timeInterval: 10000,   //采集频率以10秒为单位
+        isRegist: true
     },
 
     /**
@@ -63,12 +66,6 @@ Page({
         that.setData({
             sectionName: '请选择路段'
         })
-        if (!util.is_login()) {
-            wx.navigateTo({
-                url: "../userinfo/index?url=../regist/index&type=navigateTo"
-            });
-            return;
-        }
     },
     selectRoad: function() {
         wx.navigateTo({
@@ -88,7 +85,7 @@ Page({
                 var latitude = res.latitude;
                 var longitude = res.longitude;
                 var o = {
-                    iconPath: '../../image/icon-locate.png',
+                    //iconPath: '../../image/icon-locate.png',
                     longitude: res.longitude,
                     latitude: res.latitude,
                     width: 25,
@@ -283,7 +280,8 @@ Page({
 
     xbSubmit: function(e) {
         var that = this;
-        var createDate = that.formatDT(e.detail.value.createDate);
+        //var createDate = that.formatDT(e.detail.value.createDate);
+        var createDate = util.formatDateTime(new Date());
         var weather = e.detail.value.weather;
         var vehicleType = e.detail.value.vehicleType;
         var mtypeList = [];
@@ -303,14 +301,14 @@ Page({
             });
             return;
         }
-        if (createDate == null || createDate == undefined || createDate == "") {
+        /*if (createDate == null || createDate == undefined || createDate == "") {
             wx.showModal({
                 title: '提示',
                 content: '请选择快报时间！',
                 success: function(res) {}
             });
             return;
-        }
+        }*/
         if (weather == null || weather == undefined || weather == "") {
             wx.showModal({
                 title: '提示',
@@ -354,6 +352,14 @@ Page({
                         content: res.info,
                         success: function(res) {}
                     });
+                    that.setData({
+                        sectionFlag: false,
+                        sectionName: null,
+                        sectionId: null,
+                        isEdit: false
+                    });
+                    that.getLocation();
+                    that.initDict();
                 } else {
                     wx.showModal({
                         title: '提示',
@@ -387,21 +393,45 @@ Page({
                     that.setData({
                         userData: res.data
                     });
-                } else {
-                    if (res.info == '用户尚未注册') {
-                        wx.showModal({
-                            title: '对不起，您还没有注册，请前往个人中心进行注册！',
-                            content: res.info,
-                            success: function(res) {}
-                        });
-                        return;
-                    } else {
-                        wx.showModal({
-                            title: '提示',
-                            content: res.info,
-                            success: function(res) {}
+                    var userInfo = wx.getStorageSync("userinfo");
+                    that.setData({
+                        header: userInfo.avatarUrl,
+                        startName: app.globalData.startName
+                    })
+                    var sectionId = app.globalData.sectionId;
+                    if (sectionId) {
+                        that.setData({
+                            sectionFlag: true,
+                            sectionName: app.globalData.sectionName,
+                            sectionId: app.globalData.sectionId,
+                            tab: app.globalData.tab,
                         });
                     }
+                    var cjSectionId = app.globalData.cjSectionId;
+                    if (cjSectionId) {
+                        that.setData({
+                            isCollection: false,
+                            startName: app.globalData.startName,
+                            endName: app.globalData.endName,
+                            cjSectionId: app.globalData.cjSectionId
+                        });
+                    }
+                    if (app.globalData.roadManId) {
+                        that.setData({
+                            roadManId: app.globalData.roadManId,
+                            roadManName: app.globalData.roadManName
+                        });
+                    }
+
+                    that.getLocation();
+                    that.initDict();
+                } else {
+                    if (res.info == '用户尚未注册') {
+                        wx.navigateTo({
+                            url: '../regist/index',
+                        });
+                        return;
+                    } 
                 }
 
             }
@@ -415,44 +445,11 @@ Page({
         var that = this;
         if (!util.is_login()) {
             wx.navigateTo({
-                url: "../userinfo/index?url=../regist/index&type=navigateTo"
+                url: "../userinfo/index?url=../index/index&type=navigateTo"
             });
-            return;
         } else {
             that.initUserData();
-            var userInfo = wx.getStorageSync("userinfo");
-            that.setData({
-                header: userInfo.avatarUrl,
-                startName: app.globalData.startName
-            })
-            var sectionId = app.globalData.sectionId;
-            if (sectionId) {
-                that.setData({
-                    sectionFlag: true,
-                    sectionName: app.globalData.sectionName,
-                    sectionId: app.globalData.sectionId,
-                    tab: app.globalData.tab,
-                });
-            }
-            var cjSectionId = app.globalData.cjSectionId;
-            if (cjSectionId) {
-                that.setData({
-                    isCollection: false,
-                    startName: app.globalData.startName,
-                    endName: app.globalData.endName,
-                    cjSectionId: app.globalData.cjSectionId
-                });
-            }
-            if (app.globalData.roadManId) {
-                that.setData({
-                    roadManId: app.globalData.roadManId,
-                    roadManName: app.globalData.roadManName
-                });
-            }
         }
-        that.getLocation();
-        that.initDict();
-        that.initDateTime();
     },
 
 
@@ -463,17 +460,21 @@ Page({
         that.setData({
             breakBtn: 'breakBtn',
             activeBreak: 'activeBreak',
-            flaging:true
+            flaging:true,
+            frequency: 1
         })
         interval = setInterval(() => {
             locateList.push(that.getLocate());
-        }, 3000);
+            console.log("==================采集频率" + that.data.timeInterval);
+        }, that.data.timeInterval);
+       
     },
     break: function(e) {
         var that = this;
         clearInterval(interval);
         that.setData({
             activeBreak: '',
+            frequency: 0
         })
     },
     end: function(e) {
@@ -491,7 +492,8 @@ Page({
         that.setData({
             breakBtn: '',
             activeBreak: '',
-            flaging: false
+            flaging: false,
+            frequency: 0
         })
         util.post(cfg.server + '/taa/www/road/gather', {
                 jsonData: JSON.stringify({
@@ -503,11 +505,12 @@ Page({
                     wx.showModal({
                         title: '提示',
                         content: res.info,
-                        success: function(res) {}
+                        success: function(res) {
+                            wx.navigateTo({
+                                url: '../collection/index?tab=1',
+                            })
+                        }
                     });
-                    wx.navigateTo({
-                        url: '../collection/index?tab=1',
-                    })
                 } else {
                     wx.showModal({
                         title: '提示',
@@ -546,6 +549,52 @@ Page({
     locateLine: function() {
 
     },
+
+    /**
+     * 减少采集频率 以1秒为单位
+     */
+    reduce: function(){
+        var that = this;
+        var time = that.data.timeInterval;
+        if (time > 1000){
+            time = time - 1000;
+            that.setData({
+                timeInterval: time
+            });
+            var interval = time / 1000;
+            wx.showModal({
+                title: '提示',
+                content: '采集频率开始以' + interval+'秒间隔采集！',
+                success: function (res) { }
+            });
+        }else{
+            wx.showModal({
+                title: '提示',
+                content: '采集频率已经减少到最低1秒采集了！',
+                success: function (res) { }
+            });
+        }
+    },
+
+    /**
+     * 增加采集频率，以1秒为单位
+     */
+    increase: function(){
+        var that = this;
+        var time = that.data.timeInterval;
+        if (time > 1000) {
+            time = time + 1000;
+            that.setData({
+                timeInterval: time
+            });
+            var interval = time / 1000;
+            wx.showModal({
+                title: '提示',
+                content: '采集频率开始以' + interval + '秒间隔采集！',
+                success: function (res) { }
+            });
+        } 
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */
@@ -572,7 +621,43 @@ Page({
         });
         that.getLocation();
         that.initDict();
-        that.initDateTime();
+       // that.initDateTime();
+    },
+    /**
+     * 重新定位，重置数据
+     */
+    resetData: function(){
+        var that = this;
+        that.setData({
+            sectionFlag: false,
+            sectionName: null,
+            sectionId: null,
+        });
+        that.getLocation();
+        that.initDict();
+        //that.initDateTime();
+    },
+    /**
+     * 重新定位采集信息
+     */
+    resetCj: function(){
+        var that = this;
+        that.setData({
+            startName: null,
+            startName: null,
+            tab:1,
+            polyline: [{
+                points: [],
+                color: '#4350FC',
+                width: 8,
+                dottedLine: false
+            }],
+            flaging: false,
+            frequency: 0,   //是否显示加减频率
+            timeInterval: 10000,  //采集频率以10秒为单位
+            activeBreak: ''
+        });
+        that.getLocation();
     },
 
     /**

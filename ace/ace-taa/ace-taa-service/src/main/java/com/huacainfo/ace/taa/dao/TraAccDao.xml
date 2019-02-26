@@ -120,7 +120,11 @@
         inner join road_section b on t.roadSectionId=b.id
         inner join portal.province c on t.areaCode=c.code
         inner join road d on b.roadId=d.id
+        left join portal.users u on t.createUserId = u.user_id
         where t.status='1'
+        <if test='condition.deptId!=null and condition.deptId!=""'>
+            and u.department_id = #{condition.deptId,jdbcType=VARCHAR}
+        </if>
         <if test='condition.roadManName!=null and condition.roadManName!=""'>
             and a.name like
             concat('%',#{condition.roadManName,jdbcType=VARCHAR},'%')

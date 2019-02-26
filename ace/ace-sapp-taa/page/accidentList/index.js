@@ -70,11 +70,11 @@ Page({
 
   initAccidentList: function(name){
       var that = this;
-      util.request(cfg.server + '/taa/www/report/findTraAccList', { start: 0, limit: 999, keyword:name},
+      util.request(cfg.server + '/taa/www/traAcc/findList', { start: 0, limit: 999, keyword:name},
           function (res) {
               if (res.status == 0) {
                  that.setData({
-                     list: res.rows
+                     list: res.data.rows
                  });
               } else {
                     wx.showModal({

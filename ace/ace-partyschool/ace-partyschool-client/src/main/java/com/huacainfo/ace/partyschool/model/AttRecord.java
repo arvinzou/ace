@@ -26,6 +26,16 @@ public class AttRecord extends BaseModel {
 
     private Date createDate;
 
+    private String attTimeStr;
+
+    public String getAttTimeStr() {
+        return attTimeStr;
+    }
+
+    public void setAttTimeStr(String attTimeStr) {
+        this.attTimeStr = attTimeStr;
+    }
+
     public String getId() {
         return id;
     }

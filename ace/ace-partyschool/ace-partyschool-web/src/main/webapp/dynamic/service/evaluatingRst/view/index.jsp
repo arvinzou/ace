@@ -23,15 +23,12 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3"></div>
-            <div class="col-md-9">
+            <div class="col-md-6">
+                <button onclick="exportData()" class="btn green">导出数据</button>
+            </div>
+            <div class="col-md-6">
 
                 <form onsubmit="return t_query()">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select style="width: 200px"
-                                class="form-control js-example-basic-single js-example-basic-single2"
-                                name="teacherId"></select>
-                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"

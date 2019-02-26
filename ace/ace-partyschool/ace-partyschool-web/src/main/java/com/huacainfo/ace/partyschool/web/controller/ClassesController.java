@@ -3,12 +3,14 @@ package com.huacainfo.ace.partyschool.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.model.Classes;
 import com.huacainfo.ace.partyschool.service.ClassesService;
+import com.huacainfo.ace.partyschool.service.MailListService;
 import com.huacainfo.ace.partyschool.vo.ClassesQVo;
 import com.huacainfo.ace.partyschool.vo.ClassesVo;
 import org.slf4j.Logger;
@@ -35,6 +37,7 @@ public class ClassesController extends BisBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ClassesService classesService;
+
 
     /**
      * @throws
@@ -155,5 +158,12 @@ public class ClassesController extends BisBaseController {
 
         return classesService.recover(id, this.getCurUserProp());
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/getClassList")
+    public ListResult<Map<String, Object>> getClassList() {
+        return classesService.getClassList();
+    }
+
 }
 

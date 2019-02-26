@@ -284,4 +284,35 @@
         and headmaster = #{htId,jdbcType=VARCHAR}
         and id != #{id,jdbcType=VARCHAR}
     </select>
+
+
+    <update id="graduation" parameterType="java.lang.String">
+        update portal.users
+        set stauts = '0'
+        where user_id in (
+        select t.id from student t,classes c
+        where t.classId = c.id
+        and c.endDate &lt; NOW()
+        and c.`status`= '1'
+        ) ;
+
+        update student
+        set `status` = '0'
+        where classId in (
+        select c.id from classes c
+        where c.endDate &lt; NOW()
+        and c.`status`= '1'
+        ) ;
+
+        update classes
+        set `status` = '2'
+        where  endDate &lt; NOW()
+        and `status`='1'
+        ;
+    </update>
+
+
+    <select id="getClassList" resultType="map">
+        select id, name from classes where 1=1 order by createDate desc
+    </select>
 </mapper>

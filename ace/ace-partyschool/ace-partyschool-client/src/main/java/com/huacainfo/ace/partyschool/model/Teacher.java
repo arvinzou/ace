@@ -92,7 +92,7 @@ public class Teacher extends BaseModel {
     }
 
     public String getName() {
-        return name;
+        return name == null ? null : name.trim();
     }
 
     public void setName(String name) {
@@ -100,7 +100,7 @@ public class Teacher extends BaseModel {
     }
 
     public String getMobile() {
-        return mobile;
+        return mobile == null ? null : mobile.trim();
     }
 
     public void setMobile(String mobile) {
@@ -108,7 +108,7 @@ public class Teacher extends BaseModel {
     }
 
     public String getIdCard() {
-        return idCard;
+        return idCard == null ? null : idCard.trim();
     }
 
     public void setIdCard(String idCard) {

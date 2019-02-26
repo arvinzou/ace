@@ -1,5 +1,6 @@
 package com.huacainfo.ace.partyschool.dao;
 
+import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.partyschool.model.Classes;
 import com.huacainfo.ace.partyschool.vo.ClassesQVo;
 import com.huacainfo.ace.partyschool.vo.ClassesVo;
@@ -43,4 +44,8 @@ public interface ClassesDao {
     List<Map<String, String>> findByQ(@Param("params") Map<String, Object> params);
 
     int headmasterCount(@Param("id") String id, @Param("htId") String htId);
+
+    void graduation();
+
+    List<Map<String, Object>> getClassList();
 }

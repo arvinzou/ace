@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.model.Classroom;
 import com.huacainfo.ace.partyschool.model.EvaluationIndex;
 import com.huacainfo.ace.partyschool.model.EvaluationRst;
@@ -17,6 +18,10 @@ import com.huacainfo.ace.partyschool.service.ClassScheduleService;
 import com.huacainfo.ace.partyschool.service.EvaluationRstContentService;
 import com.huacainfo.ace.partyschool.service.EvaluationRstService;
 import com.huacainfo.ace.partyschool.vo.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +29,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.Field;
+import java.util.*;
 
 @Controller
 @RequestMapping("/www/evaluationRst")
@@ -99,8 +107,4 @@ public class WEvaluationRstController extends BisBaseController {
         EvaluationRstContent obj = JSON.parseObject(evaluationContent, EvaluationRstContent.class);
         return evaluationRstService.insertEvaluationRstList( list,  obj,this.getCurUserProp());
     }
-
-
-
-
 }

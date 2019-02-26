@@ -56,8 +56,7 @@ public class ZkAttDataServiceImpl implements ZkAttDataService {
     @Override
     public PageResult<ZkAttDataVo> findZkAttDataList(ZkAttDataQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<ZkAttDataVo> rst = new PageResult<>();
-        List<ZkAttDataVo> list = this.zkAttDataDao.findList(condition,
-                start, limit, orderBy);
+        List<ZkAttDataVo> list = this.zkAttDataDao.findVoList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.zkAttDataDao.findCount(condition);
@@ -88,12 +87,6 @@ public class ZkAttDataServiceImpl implements ZkAttDataService {
         }
         if (CommonUtils.isBlank(o.getAttTime())) {
             return new MessageResponse(1, "考勤时间不能为空！");
-        }
-
-
-        int temp = this.zkAttDataDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "中控考勤数据源名称重复！");
         }
 
         o.setId(GUIDUtil.getGUID());
@@ -233,7 +226,7 @@ public class ZkAttDataServiceImpl implements ZkAttDataService {
                 return new MessageResponse(1, "考勤时间不能为空！");
             }
 
-            int t = this.zkAttDataDao.isExit(o);
+            int t = 0;// this.zkAttDataDao.isExit(o);
             if (t > 0) {
                 this.zkAttDataDao.updateByPrimaryKey(o);
 
@@ -261,7 +254,7 @@ public class ZkAttDataServiceImpl implements ZkAttDataService {
     @Override
     public ListResult<Map<String, Object>> getList(Map<String, Object> p) throws Exception {
         ListResult<Map<String, Object>> rst = new ListResult<>();
-        rst.setValue(this.zkAttDataDao.getList(p));
+        // rst.setValue(this.zkAttDataDao.getList(p));
 
         return rst;
 
@@ -281,7 +274,7 @@ public class ZkAttDataServiceImpl implements ZkAttDataService {
     @Override
     public Map<String, Object> getListByCondition(Map<String, Object> params) {
         Map<String, Object> rst = new HashMap<String, Object>();
-        List<Map<String, Object>> list = this.zkAttDataDao.getListByCondition(params);
+        List<Map<String, Object>> list = null;//this.zkAttDataDao.getListByCondition(params);
         rst.put("total", list.size());
         rst.put("rows", list);
         return rst;
@@ -301,7 +294,7 @@ public class ZkAttDataServiceImpl implements ZkAttDataService {
     @Override
     public MessageResponse deleteZkAttDataByZkAttDataIds(String[] id, UserProp userProp) throws Exception {
 
-        this.zkAttDataDao.deleteByPrimaryKeys(id);
+        // this.zkAttDataDao.deleteByPrimaryKeys(id);
         this.dataBaseLogService.log("批量删除中控考勤数据源", "中控考勤数据源", id[0], id[0], "中控考勤数据源", userProp);
         return new MessageResponse(0, "删除成功！");
 
@@ -321,8 +314,8 @@ public class ZkAttDataServiceImpl implements ZkAttDataService {
      */
     @Override
     public MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception {
-        this.zkAttDataDao.updateStatus(id, status);
-        this.dataBaseLogService.log("跟新状态", "中控考勤数据源", id, id, "中控考勤数据源", userProp);
+        // this.zkAttDataDao.updateStatus(id, status);
+        this.dataBaseLogService.log("更新状态", "中控考勤数据源", id, id, "中控考勤数据源", userProp);
         return new MessageResponse(0, "成功！");
     }
 

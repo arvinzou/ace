@@ -114,7 +114,12 @@ Page({
                   wx.showModal({
                       title: '提示',
                       content: ret.info,
-                      success: function (res) { }
+                      success: function (res) {
+                          wx.navigateTo({
+                              url: '../index/index',
+                          });
+                      }
+
                   });
               } else {
                   wx.showModal({
@@ -199,7 +204,7 @@ Page({
       var that = this;
       if (!util.is_login()) {
           wx.navigateTo({
-              url: "../userinfo/index?url=../regist/index&type=switchTab"
+              url: "../userinfo/index?url=../regist/index&type=navigateTo"
           });
           return;
       }else{

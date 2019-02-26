@@ -160,17 +160,9 @@ Page({
         var roadManId = e.currentTarget.dataset.id;
         var roadManName = e.currentTarget.dataset.name;
         var skipType = that.data.pageType;
-        if (skipType == 'kb'){
-            //快报选择路长
-            app.globalData.roadManId = roadManId;
-            app.globalData.roadManName = roadManName;
-            wx.navigateBack({ changed: true });
-        }else if(skipType == 'xb'){
-            //续报选择路长
-            wx.navigateTo({
-                url: '../accidentDetail/index',
-            });
-        }
+        app.globalData.roadManId = roadManId;
+        app.globalData.roadManName = roadManName;
+        wx.navigateBack({ changed: true });
     },
     searchRoad: function(e){
         var that = this;

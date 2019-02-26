@@ -1,5 +1,5 @@
 <view class='accidentContent {{tab == 1? "hidden":""}}'>
-    <map id="accidentMap" class='{{isEdit == true?"activeEdit":""}}' show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' markers="{{current}}">
+    <map id="accidentMap" class='map {{isEdit == true?"activeEdit":""}}' show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='14'>
         <cover-view class='tab'>
             <cover-view class='header' bindtap='userInfo'>
                 <block wx:if='{{header}}'>
@@ -17,13 +17,15 @@
                 <cover-image src='../../image/icon-column.png'></cover-image>
             </cover-view>
         </cover-view>
+        
+        <cover-image src='../../image/icon-location.png' class='reset-locate' bindtap='resetData'></cover-image>
     </map>
     <view class='fromContent'>
         <view class='content'>
             <form bindsubmit="xbSubmit">
                 <view class='main'>
                     <view class='titile'>
-                        <image src='../../image/icon-open-close.png' class='close-open' bindtap='closeAndOpen'></image>
+                        <view class='close-open-box' bindtap='closeAndOpen'><image src='../../image/icon-open-close.png' class='close-open' ></image></view>
                         <view class='locate-name'>{{address}}</view>
                         <view class='locate-road' wx:if='{{sectionFlag == true}}' bindtap='selectRoadSection'>{{sectionName}}</view>
                         <view class='locate-road' wx:if='{{sectionFlag == false}}' bindtap='selectRoadSection'>请选择路段</view>
@@ -35,7 +37,7 @@
                                 <input class='form-input middle' name='roadManName' type='text' bindtap='selectRoadMan' value='{{roadManName}}' placeholder='请选择路长' disabled='true'></input>
                                 <image class='select-arrow' src='../../image/icon_rediret.png' bindtap='selectRoadMan'></image>
                             </view>
-                            <view class='row'>
+                            <!--<view class='row'>
                                 <view class='row-left'>快报时间</view>
                                 <picker class='middle' name='createDate' data-name='createDate' mode="multiSelector" value="{{createDate}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
                                     <view class="tui-picker-detail">
@@ -43,7 +45,7 @@
                                     </view>
                                 </picker>
                                 <image class='select-arrow' src='../../image/icon_rediret.png'></image>
-                            </view>
+                            </view>-->
                             <view class='row'>
                                 <view class='row-left'>天气情况</view>
                                 <picker class='middle' bindchange="bindWeatherChange" name='weather' value="{{weatherArray[wIndex].CODE}}" range="{{weather}}">
@@ -74,7 +76,7 @@
     </view>
 </view>
 <view class='collectionContent {{tab == 1? "":"hidden"}}'>
-    <map id="collectionMap" show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='14' markers="{{markers}}" polyline="{{polyline}}" style='width:100%; height:100%'>
+    <map id="collectionMap" show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='14' polyline="{{polyline}}" style='width:100%; height:100%'>
         <cover-view class='tab'>
             <cover-view class='header' bindtap='userInfo'>
                 <block wx:if='{{header}}'>
@@ -118,6 +120,13 @@
         <cover-view class='collectionBtn {{startName?"":"hidden"}}'>
             <cover-view class='cjBtn startBtn {{breakBtn}} {{activeBreak}}' bindtap='{{activeBreak?"break":"start"}}'>{{activeBreak?'暂停':'开始'}}</cover-view>
             <cover-view class='cjBtn endBtn {{tab == 1}}' bindtap='end'>结束</cover-view>
+        </cover-view>
+
+        <!--加减采集速度-->
+        <cover-view class='control-map'>
+            <cover-image class='icon-control-map {{frequency == 0?"hidden":""}}' src='../../image/icon-reduce.png' bindtap='reduce'></cover-image>
+            <cover-image class='icon-control-map {{frequency == 0?"hidden":""}}' src='../../image/icon-increase.png' bindtap='increase'></cover-image>
+            <cover-image class='icon-control-map' src='../../image/icon-location.png' bindtap='resetCj'></cover-image>
         </cover-view>
     </map>
 </view>
