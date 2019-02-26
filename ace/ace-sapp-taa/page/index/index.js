@@ -92,6 +92,33 @@ Page({
         that.setData({
             tab: e.target.dataset.index
         });
+        if (!app.globalData.collectionId) {
+            app.globalData.startName = '';
+            app.globalData.endName = null;
+            that.setData({
+                polyline: [{
+                    points: [],
+                    color: '#4350FC',
+                    width: 8,
+                    dottedLine: false
+                }]
+            });
+
+        } else {
+            that.setData({
+                collectionId: app.globalData.collectionId
+            });
+        }
+        app.globalData.sectionId = null;
+        app.globalData.sectionName = '';
+        app.globalData.tab = null;
+        app.globalData.cjSectionId = null;
+        app.globalData.roadManId = null;
+        app.globalData.roadManName = null;
+        that.setData({
+            sectionName: '请选择路段'
+        });
+        that.initUserData();
     },
     getLocation: function (e) {
         var that = this;
