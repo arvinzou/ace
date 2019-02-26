@@ -34,11 +34,24 @@ Page({
       that.initNList('');
       that.initYList('');
   },
+  /**
+   * 选项卡切换
+   */
   changeTab: function(e){
       var that = this;
+      var index = e.target.dataset.index;
       that.setData({
-          tab: e.target.dataset.index
+        tab: index
       });
+      if(index==0){
+        wx.setNavigationBarTitle({
+          title: '待采集路段'
+        });
+      }else {
+        wx.setNavigationBarTitle({
+          title: '已采集路段'
+        });
+      }
   },
 
 searchSomeThing:function(e){

@@ -4,20 +4,19 @@
     background: #FFFFFF;
 }
 .search{
-   width: auto;
-   height: auto;
-   padding: 8rpx 30rpx;
+  display: flex;
+  align-items: center;
+  height: 80rpx;
+  background-color: #f5f6f7;
+  padding-left: 30rpx;
+  margin: 0 30rpx;
+  border-radius: 10rpx;
 }
-.search-input{
-    width: 92%;
-    height: 80rpx;
-    line-height: 80rpx;
-    border-radius: 5rpx;
-    padding-left: 4%;
-    padding-right: 4%;
-    background: rgba(245,246,247,0.8);
-    color: #ABAEB9;
-    font-size: 26rpx;
+.search-road-input{
+  flex: 1;
+  font-size: 26rpx;
+  color: #ABAEB9;
+  margin-left: 20rpx;
 }
 .tab{
     width: 100%;
@@ -27,6 +26,8 @@
     font-weight: bold;
     color: #ABAEB9;
     margin-bottom: 20rpx;
+    padding-top: 10rpx;
+    border-bottom:2rpx solid #F7F8F9;
 }
 .tab::after{
     content: '';
