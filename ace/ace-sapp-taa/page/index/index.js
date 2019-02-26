@@ -10,7 +10,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        tab: 1,
+        tab: 1,   //0：事故快报，1：路段采集 默认显示1
         isNull: 0,
         wIndex: 0,
         cIndex: 0,
