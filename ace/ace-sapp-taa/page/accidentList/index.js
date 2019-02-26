@@ -10,6 +10,7 @@ Page({
       rIndex: 0, //区域筛选索引
       region: [],
       regionArray: [], // 行政区下拉数据
+      areaCode: '4307'
 
   },
 
@@ -37,6 +38,7 @@ Page({
             rIndex: tempIndex,
             areaCode: areaArr[tempIndex].code
         });
+        that.initAccidentList('');
         console.log("areaCode===========================" + that.data.areaCode);
     },
     /**
@@ -73,7 +75,8 @@ Page({
         util.request(cfg.server + '/taa/www/traAcc/findList', {
                 start: 0,
                 limit: 999,
-                keyword: name
+                keyword: name,
+                areaCode: that.data.areaCode
             },
             function (res) {
                 if (res.status == 0) {
