@@ -10,7 +10,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        tab: 1,   //0：事故快报，1：路段采集 默认显示1
+        tab: 1, //0：事故快报，1：路段采集 默认显示1
         isNull: 0,
         wIndex: 0,
         cIndex: 0,
@@ -44,16 +44,16 @@ Page({
             dottedLine: false
         }],
         header: null,
-        flaging:false,
-        frequency: 0,   //是否显示加减频率
-        timeInterval: 10000,   //采集频率以10秒为单位
+        flaging: false,
+        frequency: 0, //是否显示加减频率
+        timeInterval: 10000, //采集频率以10秒为单位
         isRegist: true
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         var that = this;
         app.globalData.sectionId = null;
         app.globalData.sectionName = '';
@@ -67,21 +67,21 @@ Page({
             sectionName: '请选择路段'
         })
     },
-    selectRoad: function() {
+    selectRoad: function () {
         wx.navigateTo({
             url: '../collection/index?type=cj',
         });
     },
-    changeTab: function(e) {
+    changeTab: function (e) {
         var that = this;
         that.setData({
             tab: e.target.dataset.index
         });
     },
-    getLocation: function(e) {
+    getLocation: function (e) {
         var that = this;
         wx.getLocation({
-            success: function(res) {
+            success: function (res) {
                 var latitude = res.latitude;
                 var longitude = res.longitude;
                 var o = {
@@ -102,13 +102,13 @@ Page({
             },
         })
     },
-    toAddress: function(latitude, longitude) {
+    toAddress: function (latitude, longitude) {
         var that = this;
         util.request(cfg.server + '/taa/www/mapApi/tx/reversePoint', {
                 lat: latitude,
                 lon: longitude
             },
-            function(res) {
+            function (res) {
                 if (res.status == 0) {
                     that.setData({
                         address: res.result.address,
@@ -119,7 +119,8 @@ Page({
                     wx.showModal({
                         title: '提示',
                         content: res.info,
-                        success: function(res) {}
+                        success: function (res) {
+                        }
                     });
                 }
 
@@ -148,12 +149,12 @@ Page({
             }
         );
     },
-    bindWeatherChange: function(e) {
+    bindWeatherChange: function (e) {
         this.setData({
             wIndex: e.detail.value
         })
     },
-    selectCarType: function(e) {
+    selectCarType: function (e) {
         var that = this;
         var flag = e.currentTarget.dataset.value;
         if (flag) {
@@ -166,7 +167,7 @@ Page({
             });
         }
     },
-    closeAndOpen: function() {
+    closeAndOpen: function () {
         var that = this;
         if (that.data.isEdit == false) {
             //展开表单
@@ -184,7 +185,7 @@ Page({
     /**
      * 事故快报选取路长信息
      */
-    selectRoadMan: function() {
+    selectRoadMan: function () {
         wx.navigateTo({
             url: '../roadlist/index?type=kb',
         })
@@ -192,12 +193,12 @@ Page({
     /**
      * 选择路段信息
      */
-    selectRoadSection: function() {
+    selectRoadSection: function () {
         wx.navigateTo({
             url: '../collection/index?type=kb',
         });
     },
-    initDateTime: function() {
+    initDateTime: function () {
         var that = this;
         var obj = dateTimePicker.dateTimePicker(that.data.startYear, that.data.endYear);
         console.log("============================" + obj.dateTime);
@@ -249,10 +250,10 @@ Page({
     /**
      * 字典
      */
-    initDict: function() {
+    initDict: function () {
         var that = this;
         util.request(cfg.server + '/portal/content/common/js/dict_taa.js', {},
-            function(res) {
+            function (res) {
                 var oIndex = res.indexOf("=");
                 var retData = res.substring(oIndex + 1, res.length);
                 var retObj = JSON.parse(retData);
@@ -278,7 +279,7 @@ Page({
         );
     },
 
-    xbSubmit: function(e) {
+    xbSubmit: function (e) {
         var that = this;
         //var createDate = that.formatDT(e.detail.value.createDate);
         var createDate = util.formatDateTime(new Date());
@@ -289,7 +290,8 @@ Page({
             wx.showModal({
                 title: '提示',
                 content: '请选择路段！',
-                success: function(res) {}
+                success: function (res) {
+                }
             });
             return;
         }
@@ -297,23 +299,25 @@ Page({
             wx.showModal({
                 title: '提示',
                 content: '请选择路长！',
-                success: function(res) {}
+                success: function (res) {
+                }
             });
             return;
         }
         /*if (createDate == null || createDate == undefined || createDate == "") {
-            wx.showModal({
-                title: '提示',
-                content: '请选择快报时间！',
-                success: function(res) {}
-            });
-            return;
-        }*/
+         wx.showModal({
+         title: '提示',
+         content: '请选择快报时间！',
+         success: function(res) {}
+         });
+         return;
+         }*/
         if (weather == null || weather == undefined || weather == "") {
             wx.showModal({
                 title: '提示',
                 content: '请选择天气！',
-                success: function(res) {}
+                success: function (res) {
+                }
             });
             return;
         }
@@ -321,7 +325,8 @@ Page({
             wx.showModal({
                 title: '提示',
                 content: '请选择车型！',
-                success: function(res) {}
+                success: function (res) {
+                }
             });
             return;
         } else {
@@ -345,12 +350,13 @@ Page({
                     areaCode: that.data.areaCode
                 })
             },
-            function(res) {
+            function (res) {
                 if (res.status == 0) {
                     wx.showModal({
                         title: '提示',
                         content: res.info,
-                        success: function(res) {}
+                        success: function (res) {
+                        }
                     });
                     that.setData({
                         sectionFlag: false,
@@ -364,7 +370,8 @@ Page({
                     wx.showModal({
                         title: '提示',
                         content: res.info,
-                        success: function(res) {}
+                        success: function (res) {
+                        }
                     });
                 }
 
@@ -375,7 +382,7 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function() {
+    onReady: function () {
         var that = this;
         that.animation1 = wx.createAnimation();
         that.animation2 = wx.createAnimation();
@@ -385,10 +392,10 @@ Page({
     /**
      * 初始化用户信息
      */
-    initUserData: function() {
+    initUserData: function () {
         var that = this;
         util.request(cfg.server + '/taa/www/register/findCustomerVo', {},
-            function(res) {
+            function (res) {
                 if (res.status == 0) {
                     that.setData({
                         userData: res.data
@@ -431,7 +438,7 @@ Page({
                             url: '../regist/index',
                         });
                         return;
-                    } 
+                    }
                 }
 
             }
@@ -441,7 +448,7 @@ Page({
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function() {
+    onShow: function () {
         var that = this;
         if (!util.is_login()) {
             wx.navigateTo({
@@ -453,23 +460,25 @@ Page({
     },
 
 
-
-    start: function(e) {
+    start: function (e) {
         var locateList = [];
         var that = this;
         that.setData({
             breakBtn: 'breakBtn',
             activeBreak: 'activeBreak',
-            flaging:true,
+            flaging: true,
             frequency: 1
         })
-        interval = setInterval(() => {
-            locateList.push(that.getLocate());
-            console.log("==================采集频率" + that.data.timeInterval);
-        }, that.data.timeInterval);
-       
+        interval = setInterval(() = > {
+                locateList.push(that.getLocate());
+        console.log("==================采集频率" + that.data.timeInterval);
     },
-    break: function(e) {
+        that.data.timeInterval
+        )
+        ;
+
+    },
+    break: function (e) {
         var that = this;
         clearInterval(interval);
         that.setData({
@@ -477,7 +486,7 @@ Page({
             frequency: 0
         })
     },
-    end: function(e) {
+    end: function (e) {
         var that = this;
         clearInterval(interval);
         var pointList = that.data.polyline[0].points;
@@ -500,12 +509,12 @@ Page({
                     list
                 })
             },
-            function(res) {
+            function (res) {
                 if (res.status == 0) {
                     wx.showModal({
                         title: '提示',
                         content: res.info,
-                        success: function(res) {
+                        success: function (res) {
                             wx.navigateTo({
                                 url: '../collection/index?tab=1',
                             })
@@ -515,7 +524,8 @@ Page({
                     wx.showModal({
                         title: '提示',
                         content: res.info,
-                        success: function(res) {}
+                        success: function (res) {
+                        }
                     });
                 }
 
@@ -525,11 +535,11 @@ Page({
     /**
      * 获取地址
      */
-    getLocate: function() {
+    getLocate: function () {
         var o = {};
         var that = this;
         wx.getLocation({
-            success: function(res) {
+            success: function (res) {
                 var latitude = res.latitude;
                 var longitude = res.longitude;
                 o = {
@@ -546,17 +556,17 @@ Page({
         return o;
     },
 
-    locateLine: function() {
+    locateLine: function () {
 
     },
 
     /**
      * 减少采集频率 以1秒为单位
      */
-    reduce: function(){
+    reduce: function () {
         var that = this;
         var time = that.data.timeInterval;
-        if (time > 1000){
+        if (time > 1000) {
             time = time - 1000;
             that.setData({
                 timeInterval: time
@@ -564,14 +574,16 @@ Page({
             var interval = time / 1000;
             wx.showModal({
                 title: '提示',
-                content: '采集频率开始以' + interval+'秒间隔采集！',
-                success: function (res) { }
+                content: '采集频率开始以' + interval + '秒间隔采集！',
+                success: function (res) {
+                }
             });
-        }else{
+        } else {
             wx.showModal({
                 title: '提示',
                 content: '采集频率已经减少到最低1秒采集了！',
-                success: function (res) { }
+                success: function (res) {
+                }
             });
         }
     },
@@ -579,7 +591,7 @@ Page({
     /**
      * 增加采集频率，以1秒为单位
      */
-    increase: function(){
+    increase: function () {
         var that = this;
         var time = that.data.timeInterval;
         if (time > 1000) {
@@ -591,28 +603,29 @@ Page({
             wx.showModal({
                 title: '提示',
                 content: '采集频率开始以' + interval + '秒间隔采集！',
-                success: function (res) { }
+                success: function (res) {
+                }
             });
-        } 
+        }
     },
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function() {
+    onHide: function () {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function() {
+    onUnload: function () {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function() {
+    onPullDownRefresh: function () {
         var that = this;
         that.setData({
             sectionFlag: false,
@@ -621,12 +634,12 @@ Page({
         });
         that.getLocation();
         that.initDict();
-       // that.initDateTime();
+        // that.initDateTime();
     },
     /**
      * 重新定位，重置数据
      */
-    resetData: function(){
+    resetData: function () {
         var that = this;
         that.setData({
             sectionFlag: false,
@@ -640,12 +653,12 @@ Page({
     /**
      * 重新定位采集信息
      */
-    resetCj: function(){
+    resetCj: function () {
         var that = this;
         that.setData({
             startName: null,
             startName: null,
-            tab:1,
+            tab: 1,
             polyline: [{
                 points: [],
                 color: '#4350FC',
@@ -653,8 +666,8 @@ Page({
                 dottedLine: false
             }],
             flaging: false,
-            frequency: 0,   //是否显示加减频率
-            timeInterval: 10000,  //采集频率以10秒为单位
+            frequency: 0, //是否显示加减频率
+            timeInterval: 10000, //采集频率以10秒为单位
             activeBreak: ''
         });
         that.getLocation();
@@ -663,23 +676,23 @@ Page({
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function() {
+    onReachBottom: function () {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
 
     },
-    userInfo: function() {
+    userInfo: function () {
         wx.navigateTo({
             url: '../me/index',
         })
     },
 
-    dataInfo: function() {
+    dataInfo: function () {
         wx.navigateTo({
             url: '../datas/index',
         })
