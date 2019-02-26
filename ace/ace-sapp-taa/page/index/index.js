@@ -10,7 +10,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        tab: 1, //0：事故快报，1：路段采集 默认显示1
+        tab: 1,   // 0:事故快报 1：路段采集 默认为1
         isNull: 0,
         wIndex: 0,
         cIndex: 0,
@@ -45,8 +45,8 @@ Page({
         }],
         header: null,
         flaging: false,
-        frequency: 0, //是否显示加减频率
-        timeInterval: 10000, //采集频率以10秒为单位
+        frequency: 0,   //是否显示加减频率
+        timeInterval: 10000,   //采集频率以10秒为单位
         isRegist: true
     },
 
@@ -438,7 +438,7 @@ Page({
                             url: '../regist/index',
                         });
                         return;
-                    }
+                    } 
                 }
 
             }
@@ -476,7 +476,7 @@ Page({
         that.data.timeInterval
         )
         ;
-
+       
     },
     break: function (e) {
         var that = this;
@@ -606,7 +606,7 @@ Page({
                 success: function (res) {
                 }
             });
-        }
+        } 
     },
     /**
      * 生命周期函数--监听页面隐藏
@@ -666,8 +666,8 @@ Page({
                 dottedLine: false
             }],
             flaging: false,
-            frequency: 0, //是否显示加减频率
-            timeInterval: 10000, //采集频率以10秒为单位
+            frequency: 0,   //是否显示加减频率
+            timeInterval: 10000,  //采集频率以10秒为单位
             activeBreak: ''
         });
         that.getLocation();
