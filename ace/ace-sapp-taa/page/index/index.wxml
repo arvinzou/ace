@@ -105,7 +105,8 @@
           <cover-image src='../../image/icon_rediret.png'></cover-image>
         </cover-view>
       </block>
-      <block wx:if='{{startName}}'>
+      <block wx:else>
+      <!-- <block wx:else='{{startName}}'> -->
         <cover-view class='form '>
           <cover-view class='dot start'></cover-view>
           <cover-view class='dot-text'>起点：</cover-view>
