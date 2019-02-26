@@ -100,10 +100,10 @@ public class AttRecordServiceImpl implements AttRecordService {
         //重复签到筛选条件
         o.setAttTimeStr(DateUtil.toStr(o.getAttTime()));
         o.setUserId(userProp.getUserId());
-        int temp = this.attRecordDao.isExist(o);
-        if (temp > 0) {
-            return new MessageResponse(ResultCode.FAIL, "当日已签到");
-        }
+//        int temp = this.attRecordDao.isExist(o);
+//        if (temp > 0) {
+//            return new MessageResponse(ResultCode.FAIL, "当日已签到");
+//        }
 
         o.setUserType(user.getUserLevel());
         o.setId(GUIDUtil.getGUID());
