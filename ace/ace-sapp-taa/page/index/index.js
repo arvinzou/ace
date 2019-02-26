@@ -535,6 +535,7 @@ Page({
         var o = {};
         var that = this;
         wx.getLocation({
+            type: 'gcj02',
             success: function (res) {
                 var latitude = res.latitude;
                 var longitude = res.longitude;
