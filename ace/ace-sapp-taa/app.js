@@ -31,7 +31,8 @@ App({
         endName: null,
         cjSectionId: null,
         roadManId: null,
-        roadManName : null
+        roadManName : null,
+        collectionId: null
     },
     // lazy loading openid
     getUserOpenId: function (callback) {
@@ -40,6 +41,7 @@ App({
         if (self.globalData.openid) {
             callback(null, self.globalData.openid)
         } else {
+          console.log("--开始---")
             wx.login({
                 success: function (data) {
                     wx.request({

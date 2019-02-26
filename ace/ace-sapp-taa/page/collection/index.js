@@ -8,205 +8,234 @@ Page({
    */
   data: {
     tab: 0,
-    nList: [],
-    yList: [],
-    nNum:0,
-    yNum:0,
+    nList: [], //未采集
+    yList: [], //已采集
+    nNum: 0,
+    yNum: 0,
     pageType: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-      console.log(2);
-      var that = this;
-      var tabIndex = options.tab;
-      if(tabIndex){
-          tab: tabIndex
-      }
-      if (options.type){
-          that.setData({
-              pageType: options.type
-          });
-      }
-     
-      that.initNList('');
-      that.initYList('');
-  },
-  changeTab: function(e){
-      var that = this;
+  onLoad: function(options) {
+    console.log(2);
+    var that = this;
+    var tabIndex = options.tab;
+    if (tabIndex) {
+      tab: tabIndex
+    }
+    if (options.type) {
       that.setData({
-          tab: e.target.dataset.index
+        pageType: options.type
       });
+    }
+
+    that.initNList('');
+    that.initYList('');
+  },
+  /**
+   * 选项卡切换
+   */
+  changeTab: function(e) {
+    var that = this;
+    var index = e.target.dataset.index;
+    that.setData({
+      tab: e.target.dataset.index
+    });
+    if (index == 0) {
+      wx.setNavigationBarTitle({
+        title: '待采集路段',
+      });
+    } else {
+      wx.setNavigationBarTitle({
+        title: '已采集路段',
+      });
+    }
   },
 
-searchSomeThing:function(e){
-    var that=this;
+  searchSomeThing: function(e) {
+    var that = this;
     var name = e.detail.value
-    if(that.data.tab==0){
-        that.initNList(name);
-        return;
+    if (that.data.tab == 0) {
+      that.initNList(name);
+      return;
     }
     that.initYList(name);
     return;
-},
+  },
   /**
    * 获取已采集路段信息
    */
-  initYList: function(rname){
-      var that = this;
-      util.request(cfg.server + '/taa/www/road/findSectionList', { category: "1", name:rname},
-          function (res) {
-              if (res.status == 0) {
-                 that.setData({
-                     yList: res.data.rows,
-                     yNum: res.data.total
-                 });
-              } else {
-                  wx.showModal({
-                      title: '提示',
-                      content: res.info,
-                      success: function (res) { }
-                  });
-              }
+  initYList: function(rname) {
+    var that = this;
+    util.request(cfg.server + '/taa/www/road/findSectionList', {
+        category: "1",
+        name: rname
+      },
+      function(res) {
+        if (res.status == 0) {
+          that.setData({
+            yList: res.data.rows,
+            yNum: res.data.total
+          });
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.info,
+            success: function(res) {}
+          });
+        }
 
-          }
-      );
+      }
+    );
   },
   /**
    * 获取未采集路段信息
    */
-    initNList: function (rname){
-      var that = this;
-      util.request(cfg.server + '/taa/www/road/findSectionList', { category: "0", name: rname },
-          function (res) {
-              if (res.status == 0) {
-                  that.setData({
-                      nList: res.data.rows,
-                      nNum: res.data.total
-                  });
-              } else {
-                  wx.showModal({
-                      title: '提示',
-                      content: res.info,
-                      success: function (res) { }
-                  });
-              }
-
-          }
-      );
-  },
-  selectRoadSection: function (e) {
-        var that = this;
-
-      var roadSectionId = e.currentTarget.dataset.id;
-      var roadSectionName = e.currentTarget.dataset.name;
-      var skipType = that.data.pageType;
-        if (skipType == 'kb') {
-            //快报选择路段
-            app.globalData.sectionId = roadSectionId;
-            app.globalData.sectionName = roadSectionName;
-            app.globalData.tab = 0;
-            app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
-            app.globalData.roadManName = e.currentTarget.dataset.roadmanname;
-            wx.navigateBack({ changed: true });
-        }else if (skipType == 'cj'){
-            //路段采集
-            var startName = e.currentTarget.dataset.startname;
-            var endName = e.currentTarget.dataset.endname;
-
-            app.globalData.startName = startName;
-            app.globalData.endName = endName;
-            app.globalData.cjSectionId = roadSectionId;
-            app.globalData.tab = 1
-            wx.navigateBack({ changed: true });
-        }else if (skipType == 'xb'){
-            //续报选择路段
-            app.globalData.sectionId = roadSectionId;
-            app.globalData.sectionName = roadSectionName;
-            app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
-            app.globalData.roadManName = e.currentTarget.dataset.roadmanname;
-            wx.navigateBack({ changed: true });
+  initNList: function(rname) {
+    var that = this;
+    util.request(cfg.server + '/taa/www/road/findSectionList', {
+        category: "0",
+        name: rname
+      },
+      function(res) {
+        if (res.status == 0) {
+          that.setData({
+            nList: res.data.rows,
+            nNum: res.data.total
+          });
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.info,
+            success: function(res) {}
+          });
         }
-    },
 
-    resetSection: function(e){
-        var that = this;
-        var sectionId = e.currentTarget.dataset.id;
-        util.request(cfg.server + '/taa/www/road/resetSectionGPS', { sectionId: sectionId },
-            function (res) {
-                if (res.status == 0) {
-                    wx.showModal({
-                        title: '提示',
-                        content: res.info,
-                        success: function (res) { }
-                    });
-                    that.initYList('');
-                    app.globalData.tab = 1,
-                    wx.navigateTo({
-                        url: '../index/index',
-                    });
-                } else {
-                    wx.showModal({
-                        title: '提示',
-                        content: res.info,
-                        success: function (res) { }
-                    });
-                }
+      }
+    );
+  },
+  /**
+   * 首页公用浮窗。显示与隐藏
+   */
+  selectRoadSection: function(e) {
+    var that = this;
 
+    var roadSectionId = e.currentTarget.dataset.id;
+    var roadSectionName = e.currentTarget.dataset.name;
+    var skipType = that.data.pageType;
+    if (skipType == 'kb') {
+      //快报选择路段
+      app.globalData.sectionId = roadSectionId;
+      app.globalData.sectionName = roadSectionName;
+      app.globalData.tab = 0;
+      app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
+      app.globalData.roadManName = e.currentTarget.dataset.roadmanname;
+      wx.navigateBack({
+        changed: true
+      });
+    } else if (skipType == 'cj') {
+      //路段采集
+      var startName = e.currentTarget.dataset.startname;
+      var endName = e.currentTarget.dataset.endname;
+
+      app.globalData.startName = startName;
+      app.globalData.endName = endName;
+      app.globalData.cjSectionId = roadSectionId;
+      app.globalData.tab = 1
+      wx.navigateBack({
+        changed: true
+      });
+    } else if (skipType == 'xb') {
+      //续报选择路段
+      app.globalData.sectionId = roadSectionId;
+      app.globalData.sectionName = roadSectionName;
+      app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
+      app.globalData.roadManName = e.currentTarget.dataset.roadmanname;
+      wx.navigateBack({
+        changed: true
+      });
+    }
+  },
+  /**
+   * 重置
+   */
+  resetSection: function(e) {
+    var that = this;
+    var sectionId = e.currentTarget.dataset.id;
+    util.request(cfg.server + '/taa/www/road/resetSectionGPS', { sectionId: sectionId },
+        function (res) {
+            if (res.status == 0) {
+                wx.showModal({
+                    title: '提示',
+                    content: res.info,
+                    success: function (res) { }
+                });
+              //设置已采集信息（浮窗）
+              that.initYList('');
+              that.data.pageType='cj';
+              that.selectRoadSection(e);
+            } else {
+                wx.showModal({
+                    title: '提示',
+                    content: res.info,
+                    success: function (res) { }
+                });
             }
-        );
-    },
+
+        }
+    );
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-      console.log(1);
-      app.globalData.startName = null;
-      app.globalData.endName = null;
-      app.globalData.cjSectionId = null;
+  onShow: function() {
+    console.log(1);
+    app.globalData.startName = null;
+    app.globalData.endName = null;
+    app.globalData.cjSectionId = null;
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-    
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-    
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    
+  onShareAppMessage: function() {
+
   }
 })
