@@ -31,7 +31,8 @@ App({
         endName: null,
         cjSectionId: null,
         roadManId: null,
-        roadManName : null
+        roadManName : null,
+        collectionId: null
     },
     // lazy loading openid
     getUserOpenId: function (callback) {

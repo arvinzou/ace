@@ -27,7 +27,7 @@
     <view class='tab02-content {{tab==1?"":"hidden"}}'>
         <block wx:for="{{yList}}" wx:for-index="idy" wx:for-item="item">
          <view class='item'>
-            <view class='item-left'>
+            <view class='item-left' bindtap='showRoadSection' data-startname='{{item.startName}}' data-endname='{{item.endName}}' data-id='{{item.id}}'>
                 <view class='road-section'>{{item.startName}}-{{item.endName}}</view>
                 <view class='road-sign'>路段:{{item.name}}</view>
             </view>

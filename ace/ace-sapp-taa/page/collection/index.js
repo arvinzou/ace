@@ -182,12 +182,19 @@ searchSomeThing:function(e){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      console.log(1);
       app.globalData.startName = null;
       app.globalData.endName = null;
       app.globalData.cjSectionId = null;
   },
-
+  showRoadSection: function(e){
+      app.globalData.startName = e.currentTarget.dataset.startname;
+      app.globalData.endName = e.currentTarget.dataset.endname;
+      app.globalData.collectionId = e.currentTarget.dataset.id;
+      console.log("选择================" + app.globalData.startName);
+      wx.navigateTo({
+          url: '../index/index',
+      });
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
