@@ -10,7 +10,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        tab: 1,  
+        tab: 1,
         isNull: 0,
         wIndex: 0,
         cIndex: 0,
@@ -45,7 +45,7 @@ Page({
         }],
         header: null,
         flaging: false,
-        frequency: 0,   //是否显示加减频率
+        frequency: 0,          //是否显示加减频率
         timeInterval: 10000,   //采集频率以10秒为单位
         isRegist: true
     },
@@ -127,14 +127,14 @@ Page({
             }
         );
     },
-    getRoadSection: function(latitude, longitude) {
+    getRoadSection: function (latitude, longitude) {
         var that = this;
         util.request(cfg.server + '/taa/www/road/getCloseRoadSection', {
                 lat: latitude,
                 lon: longitude,
                 radius: '10000'
             },
-            function(res) {
+            function (res) {
                 if (res.status == 0) {
                     console.log(res);
                     that.setData({
@@ -438,7 +438,7 @@ Page({
                             url: '../regist/index',
                         });
                         return;
-                    } 
+                    }
                 }
 
             }
@@ -476,7 +476,7 @@ Page({
         that.data.timeInterval
         )
         ;
-       
+
     },
     break: function (e) {
         var that = this;
@@ -606,7 +606,7 @@ Page({
                 success: function (res) {
                 }
             });
-        } 
+        }
     },
     /**
      * 生命周期函数--监听页面隐藏
