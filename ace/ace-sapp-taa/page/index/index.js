@@ -468,14 +468,11 @@ Page({
             activeBreak: 'activeBreak',
             flaging: true,
             frequency: 1
-        })
-        interval = setInterval(() = > {
-                locateList.push(that.getLocate());
-        console.log("==================采集频率" + that.data.timeInterval);
-    },
-        that.data.timeInterval
-        )
-        ;
+        });
+        interval = setInterval(function () {
+            locateList.push(that.getLocate());
+            console.log("==================采集频率" + that.data.timeInterval);
+        }, that.data.timeInterval);
     },
     break: function (e) {
         var that = this;
