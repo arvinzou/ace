@@ -6,7 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: []
+      list: [],
+      rIndex: 0, //区域筛选索引
+      region: [],
+      regionArray: [],  // 行政区下拉数据
+    
   },
 
   /**
@@ -15,12 +19,55 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.initAccidentList('');
+      that.initRegionList();
   },
   editAccident: function(){
       wx.navigateTo({
           url: '../accidentDetail/index',
       });
   },
+    /**
+     * 选择行政区
+     */
+    bindRegionChange(e) {
+        var that = this;
+        var tempIndex = e.detail.value;
+        var areaArr = that.data.regionArray;
+        this.setData({
+            rIndex: tempIndex,
+            areaCode: areaArr[tempIndex].code
+        });
+        console.log("areaCode===========================" + that.data.areaCode);
+    },
+    /**
+     * 获取行政区划列表
+     */
+    initRegionList: function () {
+        var that = this;
+        util.request(cfg.server + '/taa/www/report/findDistrictList', {},
+            function (res) {
+                if (res.status == 0) {
+                    var data = res.data;
+                    var tempArr = [];
+                    for (var i = 0; i < data.length; i++) {
+                        tempArr.push(data[i].name);
+                    }
+                    that.setData({
+                        region: tempArr,
+                        regionArray: data
+                    });
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: res.errorMessage,
+                        success: function (res) {
+                        }
+                    });
+                }
+            }
+        );
+    },
+
   initAccidentList: function(name){
       var that = this;
       util.request(cfg.server + '/taa/www/report/findTraAccList', { start: 0, limit: 999, keyword:name},
@@ -40,15 +87,16 @@ Page({
           }
       );
   },
-  revoke: function(e){
-      
-  },
+    /**
+     * 续报事件 */
   editAccident: function(e){
       var traAccId = e.target.dataset.id;
       wx.navigateTo({
           url: '../accidentDetail/index?id='+traAccId,
       });
   },
+    /**
+     * 撤销事件 */
   revoke: function(e){
       var traAccId = e.target.dataset.id;
       var that = this;
