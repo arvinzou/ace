@@ -227,9 +227,10 @@
 
 	<select id="selectRoleTypeListByUserId" resultType="map">
 		select TYPE
-		from role where role_id in(select T.role_id ROLE from users_role t
-		where t.user_id =
-		#{userId})
+		from role
+		where role_id in(
+		select t.role_id role from users_role t
+		where t.user_id = #{userId} )
 	</select>
 
 	<select id="selectDepartment" resultType="map">
