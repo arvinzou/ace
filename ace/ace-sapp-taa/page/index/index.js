@@ -54,18 +54,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
-    app.globalData.sectionId = null;
-    app.globalData.sectionName = '';
-    app.globalData.tab = null;
-    app.globalData.startName = '';
-    app.globalData.endName = null;
-    app.globalData.cjSectionId = null;
-    app.globalData.roadManId = null;
-    app.globalData.roadManName = null;
-    that.setData({
-      sectionName: '请选择路段'
-    });
+      var that = this;
+      if (!app.globalData.collectionId) {
+          app.globalData.startName = '';
+          app.globalData.endName = null;
+          that.setData({
+              polyline: [{
+                  points: [],
+                  color: '#4350FC',
+                  width: 8,
+                  dottedLine: false
+              }]
+          });
+
+      } else {
+          that.setData({
+              collectionId: app.globalData.collectionId
+          });
+      }
+      app.globalData.sectionId = null;
+      app.globalData.sectionName = '';
+      app.globalData.tab = null;
+      app.globalData.cjSectionId = null;
+      app.globalData.roadManId = null;
+      app.globalData.roadManName = null;
+      that.setData({
+          sectionName: '请选择路段'
+      })
   
   },
   selectRoad: function() {
@@ -82,6 +97,7 @@ Page({
   getLocation: function(e) {
     var that = this;
     wx.getLocation({
+      type: 'gcj02',
       success: function(res) {
         var latitude = res.latitude;
         var longitude = res.longitude;
@@ -443,22 +459,33 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var that = this;
-    if (!util.is_login()) {
-      wx.navigateTo({
-        url: "../userinfo/index?url=../index/index&type=navigateTo"
-      });
-    } else {
-      that.initUserData();
-    }
+      var that = this;
+      if (!util.is_login()) {
+          wx.navigateTo({
+              url: "../userinfo/index?url=../index/index&type=navigateTo"
+          });
+      } else {
+          that.getLocation();
+          that.initDict();
+          if (app.globalData.collectionId) {
+              that.setData({
+                  startName: app.globalData.startName,
+                  endName: app.globalData.endName
+              });
+              console.log("startName=========endName==============" + that.data.startName);
+              that.initGpsList(app.globalData.collectionId);
+          } else {
+              that.initUserData();
+          }
+      }
   },
 
   /**
    * 开始采集
    */
   start: function(e) {
-    var locateList = [];
     var that = this;
+    that.getLocate();
     that.setData({
       breakBtn: 'breakBtn',
       activeBreak: 'activeBreak',
@@ -466,7 +493,7 @@ Page({
       frequency: 1
     });
     interval = setInterval(function() {
-      locateList.push(that.getLocate());
+      that.getLocate();
       console.log("==================采集频率" + that.data.timeInterval);
     }, that.data.timeInterval);
   },
@@ -536,6 +563,7 @@ Page({
     var o = {};
     var that = this;
     wx.getLocation({
+      type: 'gcj02',
       success: function(res) {
         var latitude = res.latitude;
         var longitude = res.longitude;
@@ -667,6 +695,41 @@ Page({
     that.getLocation();
   },
 
+    /**
+      * 获取已采集的坐标点
+      */
+    initGpsList: function (sectionId) {
+        var that = this;
+        util.request(cfg.server + '/taa/www/road/getGPSList', { sectionId: sectionId },
+            function (res) {
+                if (res.status == 0) {
+                    var pointList = that.data.polyline[0].points;
+                    var retList = res.value;
+                    for (var i = 0; i < retList.length; i++) {
+                        var latitude = retList[i].latitude;
+                        var longitude = retList[i].longitude;
+                        var o = {
+                            longitude: longitude,
+                            latitude: latitude
+                        }
+                        pointList.push(o);
+                    }
+
+                    that.setData({
+                        ['polyline[0].points']: pointList
+                    });
+                    console.log("已经采集的信息==========================" + that.data.polyline[0].points);
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: res.info,
+                        success: function (res) { }
+                    });
+                }
+
+            }
+        );
+    },
   /**
    * 页面上拉触底事件的处理函数
    */
