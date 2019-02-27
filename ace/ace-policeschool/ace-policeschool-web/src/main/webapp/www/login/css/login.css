@@ -1,0 +1,166 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: PingFang-SC-Medium;
+    height: 100%;
+    background: #ffffff;
+}
+
+.index {
+    width: 10rem;
+    margin: 0 auto;
+    min-height: 14rem;
+    max-height: 100%;
+    position: relative;
+}
+
+input {
+    -webkit-appearance: none;
+    background: #ffffff;
+}
+
+input::-webkit-input-placeholder {
+    font-size: 0.426666rem;
+    color: #ABAEB9;
+    font-weight: 500;
+}
+
+input:-moz-placeholder {
+    font-size: 0.426666rem;
+    color: #ABAEB9;
+    font-weight: 500;
+}
+
+input::-moz-placeholder {
+    font-size: 0.426666rem;
+    color: #ABAEB9;
+    font-weight: 500;
+}
+
+input:-ms-input-placeholder {
+    font-size: 0.426666rem;
+    color: #ABAEB9;
+    font-weight: 500;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    padding-bottom: 0.893333rem;
+    text-align: center;
+}
+
+.logo-image {
+    width: 100%;
+    height: 3.346666rem;
+}
+
+.login-form {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: auto;
+}
+
+.form-row {
+    margin-bottom: 0.44rem;
+}
+
+.login-input {
+    width: 7.2rem;
+    height: 1.306666rem;
+    border-radius: 0.133333rem;
+    outline: none;
+    border: 1px solid #D7D9DF;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    font-size: 0.453333rem;
+    font-weight: bold;
+    color: #373F53;
+}
+
+.login-btn {
+    width: 8rem;
+    height: 1.333333rem;
+    line-height: 1.333333rem;
+    text-align: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 0.48rem;
+    margin-left: 1rem;
+    background: linear-gradient(90deg, rgba(253, 33, 61, 1) 0%, rgba(249, 101, 87, 1) 100%);
+    border-radius: 0.133333rem;
+}
+
+.regist-box {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: right;
+    margin-bottom: 1.4rem;
+}
+
+.regist {
+    font-size: 0.506666rem;
+    font-weight: bold;
+    color: #ABAEB9;
+    text-decoration: none;
+}
+
+.regist:active {
+    color: #ABAEB9;
+    text-decoration: none;
+}
+
+.regist:visited {
+    color: #ABAEB9;
+    text-decoration: none;
+}
+
+.regist:link {
+    color: #ABAEB9;
+    text-decoration: none;
+}
+
+.footer {
+    width: 3rem;
+    height: auto;
+    color: #373F53;
+    text-align: center;
+    font-size: 0.4rem;
+    padding-bottom: 0.52rem;
+    margin: 0 auto;
+}
+
+.weixin {
+    width: 1.173333rem;
+    height: 1.173333rem;
+    margin: 0 auto;
+}
+
+.pwd {
+    position: relative;
+}
+
+.forget {
+    width: 0.453333rem;
+    height: 0.453333rem;
+    position: absolute;
+    bottom: 0.45rem;
+    right: 0.226rem;
+}
+
+.footer-box {
+    width: 10rem;
+    height: 4.066666rem;
+    background: url("../img/footer-bg.png") no-repeat;
+    background-size: 100% 100%;
+    margin: 0 auto;
+}

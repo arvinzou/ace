@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.policeschool.dao.EnrollRosterDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.policeschool.model.EnrollRoster">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="clsName" jdbcType="VARCHAR" property="clsName"/>
+        <result column="clsId" jdbcType="VARCHAR" property="clsId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
+        <result column="postName" jdbcType="VARCHAR" property="postName"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, clsName, clsId, name, workUnitName, postName, status, remark, createDate, updateDate
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from enroll_roster
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from enroll_roster
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.EnrollRoster">
+        insert into enroll_roster (id, clsName, clsId,
+        name, workUnitName, postName,
+        status, remark, createDate,
+        updateDate)
+        values (#{id,jdbcType=VARCHAR}, #{clsName,jdbcType=VARCHAR}, #{clsId,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR}, #{workUnitName,jdbcType=VARCHAR}, #{postName,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{updateDate,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.EnrollRoster">
+        update enroll_roster
+        set clsName = #{clsName,jdbcType=VARCHAR},
+        clsId = #{clsId,jdbcType=VARCHAR},
+        name = #{name,jdbcType=VARCHAR},
+        workUnitName = #{workUnitName,jdbcType=VARCHAR},
+        postName = #{postName,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        updateDate = #{updateDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.EnrollRosterVo">
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        c.name as clsViewName,
+        t.id, t.clsName, t.clsId, t.name, t.workUnitName, t.postName,
+        t.status, t.remark, t.createDate, t.updateDate
+    </sql>
+    <sql id="From_Statement">
+        FROM enroll_roster t
+        left join classes c on t.clsId = c.id
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.clsName !=null and condition.clsName !=&quot;&quot;">
+            and c.`name` like concat('%',#{condition.clsName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.clsId !=null and condition.clsId !=&quot;&quot;">
+            and t.clsId = #{condition.clsId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name = #{condition.name,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+            and (t.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            or t.workUnitName like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            )
+        </if>
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc, t.`name`
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.EnrollRoster">
+        select count(1)
+        from enroll_roster
+        where name = #{name,jdbcType=VARCHAR}
+        and workUnitName = #{workUnitName,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateStatus" parameterType="java.lang.String">
+        update enroll_roster
+        set status = #{status,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <select id="getListByCondition" resultType="map">
+        select
+        DISTINCT t.clsId ,
+        c.`name` as clsViewName,
+        ta.`name` as headmasterName
+        from enroll_roster t
+        left join classes c on t.clsId = c.id
+        left join teacher ta on c.headmaster = ta.id
+        WHERE 1=1
+        <if test="params.q !=null and params.q !=&quot;&quot;">
+            AND ( t.clsId = #{params.q,jdbcType=VARCHAR}
+            or c.`name` LIKE concat('%',#{params.q,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        ORDER BY t.createDate desc
+        limit 0, 10
+    </select>
+
+    <update id="updateStatusByClsId" parameterType="java.lang.String">
+        update enroll_roster
+        set status = #{status,jdbcType=CHAR}
+        where clsId = #{clsId,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="delByClsId" parameterType="java.lang.String">
+        delete from enroll_roster
+        where clsId = #{clsId,jdbcType=VARCHAR}
+    </delete>
+</mapper>

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.policeschool.dao.ClassScheduleDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.policeschool.model.ClassSchedule">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="classesId" jdbcType="VARCHAR" property="classesId"/>
+        <result column="courseDate" jdbcType="TIMESTAMP" property="courseDate"/>
+        <result column="courseIndex" jdbcType="VARCHAR" property="courseIndex"/>
+        <result column="teacherId" jdbcType="VARCHAR" property="teacherId"/>
+        <result column="courseId" jdbcType="VARCHAR" property="courseId"/>
+        <result column="ifTest" jdbcType="VARCHAR" property="ifTest"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, classesId, courseDate, courseIndex, teacherId, courseId,ifTest
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from class_schedule
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from class_schedule
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.ClassSchedule">
+        insert into class_schedule (id, classesId, courseDate,
+        courseIndex, teacherId, courseId,ifTest
+        )
+        values (#{id,jdbcType=VARCHAR}, #{classesId,jdbcType=VARCHAR}, #{courseDate,jdbcType=TIMESTAMP},
+        #{courseIndex,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR},
+        #{courseId,jdbcType=VARCHAR},#{ifTest,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.policeschool.model.ClassSchedule">
+        insert into class_schedule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="classesId != null">
+                classesId,
+            </if>
+            <if test="courseDate != null">
+                courseDate,
+            </if>
+            <if test="courseIndex != null">
+                courseIndex,
+            </if>
+            <if test="teacherId != null">
+                teacherId,
+            </if>
+            <if test="courseId != null">
+                courseId,
+            </if>
+            <if test="ifTest != null">
+                ifTest,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="classesId != null">
+                #{classesId,jdbcType=VARCHAR},
+            </if>
+            <if test="courseDate != null">
+                #{courseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="courseIndex != null">
+                #{courseIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherId != null">
+                #{teacherId,jdbcType=VARCHAR},
+            </if>
+            <if test="courseId != null">
+                #{courseId,jdbcType=VARCHAR},
+            </if>
+            <if test="ifTest != null">
+                #{ifTest,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.policeschool.model.ClassSchedule">
+        update class_schedule
+        <set>
+            <if test="classesId != null">
+                classesId = #{classesId,jdbcType=VARCHAR},
+            </if>
+            <if test="courseDate != null">
+                courseDate = #{courseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="courseIndex != null">
+                courseIndex = #{courseIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherId != null">
+                teacherId = #{teacherId,jdbcType=VARCHAR},
+            </if>
+            <if test="courseId != null">
+                courseId = #{courseId,jdbcType=VARCHAR},
+            </if>
+            <if test="ifTest != null">
+                ifTest = #{ifTest,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.ClassSchedule">
+        update class_schedule
+        set classesId = #{classesId,jdbcType=VARCHAR},
+        courseDate = #{courseDate,jdbcType=TIMESTAMP},
+        courseIndex = #{courseIndex,jdbcType=VARCHAR},
+        teacherId = #{teacherId,jdbcType=VARCHAR},
+        courseId = #{courseId,jdbcType=VARCHAR},
+        courseId = #{courseId,jdbcType=VARCHAR},
+        ifTest = #{ifTest,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--#########################################3################-->
+
+    <resultMap id="VoResultMap" extends="BaseResultMap"
+               type="com.huacainfo.ace.policeschool.vo.ClassScheduleVo"></resultMap>
+
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.policeschool.vo.ClassScheduleVo">
+        <!--<association property="rpt" column="uid" javaType="com.huacainfo.ace.policeschool.model.Classes">-->
+        <!--<id property="openid" column="openid"/>-->
+        <!--<result property="headimgurl" column="headimgurl"/>-->
+        <!--<result property="nickname" column="nickname"/>-->
+        <!--</association>-->
+        <result column="userNum" jdbcType="DECIMAL" property="userNum"/>
+        <result column="studentNum" jdbcType="DECIMAL" property="studentNum"/>
+        <result column="averageScore" jdbcType="DECIMAL" property="averageScore"/>
+        <collection property="course" ofType="com.huacainfo.ace.policeschool.model.Course">
+            <id property="id" column="cId"/>
+            <result column="cName" property="name"/>
+            <result column="category" property="category"/>
+            <result column="cTeacherId" property="teacherId"/>
+            <result column="evaluatingId" property="evaluatingId"/>
+        </collection>
+        <collection property="teacher" ofType="com.huacainfo.ace.policeschool.model.Teacher">
+            <id property="id" column="tId"/>
+            <result column="tName" property="name"/>
+        </collection>
+        <collection property="classes" ofType="com.huacainfo.ace.policeschool.model.Classes">
+            <id property="id" column="claId"/>
+            <result column="claName" property="name"/>
+        </collection>
+    </resultMap>
+
+
+    <sql id="Vo_Column_List">
+        (
+        SELECT count(DISTINCT er.userId)
+        FROM policeschool.evaluation_rst er
+        WHERE er.classScheduleId=cs.id
+        ) AS userNum,
+        (
+        SELECT COUNT(*)
+        FROM policeschool.student st
+        WHERE st.classId=cs.classesId) AS studentNum,
+
+        (
+        SELECT (SELECT SUM(er.score)
+        FROM policeschool.evaluation_rst er
+        WHERE er.classScheduleId=cs.id)/userNum
+        ) AS averageScore,
+        cs.id, cs.classesId, cs.courseDate, cs.courseIndex, cs.teacherId, cs.courseId,cs.ifTest,
+        c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,
+        t.id as tId ,t.name as tName,
+        cla.id as claId ,cla.name as claName
+    </sql>
+
+    <sql id="Where_Condition">
+        where 1=1
+        <if test="condition.cName !=null and condition.cName !=&quot;&quot;">
+            and c.name LIKE concat('%',#{condition.cName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.classesId !=null and condition.classesId !=&quot;&quot;">
+            and cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.cTeacherId !=null and condition.cTeacherId !=&quot;&quot;">
+            and c.teacherId = #{condition.cTeacherId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.weekDate !=null and condition.weekDate !=&quot;&quot;">
+            AND WEEKOFYEAR(cs.courseDate) =WEEKOFYEAR(#{condition.weekDate,jdbcType=VARCHAR})
+            AND YEAR(cs.courseDate) =YEAR(#{condition.weekDate,jdbcType=VARCHAR})
+        </if>
+        <if test="condition.courseDateStr !=null and condition.courseDateStr !=&quot;&quot;">
+            and to_days(cs.courseDate) = TO_DAYS(#{condition.courseDateStr,jdbcType=VARCHAR})
+        </if>
+        <if test="condition.learned !=null and condition.learned !=&quot;&quot;">
+            AND cs.courseDate <![CDATA[ < ]]> NOW()
+        </if>
+        <if test="condition.classList !=null and condition.classList.size > 0">
+            and cs.classesId in
+            <foreach collection="condition.classList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </sql>
+
+    <sql id="From_Statement">
+        FROM class_schedule cs
+        LEFT JOIN policeschool.course c ON cs.courseId =c.id
+        LEFT JOIN policeschool.teacher t ON c.teacherId=t.id
+        LEFT JOIN policeschool.classes cla on cla.id=cs.classesId
+    </sql>
+
+    <select id="LearnedCourses" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY cs.courseDate DESC ,cs.courseIndex ASC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="notDoneTestList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        cs.id, cs.classesId, cs.courseDate, cs.courseIndex, cs.teacherId, cs.courseId,cs.ifTest,
+        c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,
+        t.id as tId ,t.name as tName,
+        cla.id as claId ,cla.name as claName
+        <include refid="From_Statement"/>
+        WHERE cs.courseDate <![CDATA[ < ]]> NOW()
+        AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
+        AND cs.ifTest ='1'
+        AND cs.id NOT IN
+        (
+        SELECT t.classScheduleId
+        FROM (SELECT classScheduleId, userId
+        FROM policeschool.evaluation_rst er
+        WHERE er.userId = #{condition.erUserId,jdbcType=VARCHAR}) t
+        GROUP BY t.classScheduleId
+        )
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY cs.courseDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="doneTestList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        WHERE 1=1
+        AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
+        AND cs.id IN
+        (
+        SELECT t.classScheduleId
+        FROM (SELECT classScheduleId, userId
+        FROM policeschool.evaluation_rst er
+        WHERE er.userId = #{condition.erUserId,jdbcType=VARCHAR}) t
+        GROUP BY t.classScheduleId
+        )
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY cs.courseDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+
+    <select id="notDoneTestSize" resultType="int">
+        SELECT COUNT(*)
+        FROM class_schedule cs
+        WHERE cs.courseDate <![CDATA[ < ]]> NOW()
+        AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
+        AND cs.ifTest ='1'
+        AND cs.id NOT IN
+        (
+        SELECT distinct classScheduleId
+        FROM policeschool.evaluation_rst er
+        WHERE er.userId = #{condition.erUserId,jdbcType=VARCHAR}
+        )
+    </select>
+
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Student">
+        select count(1)
+        from class_schedule cs
+        where c.status <![CDATA[ <> ]]> 0
+        and c.name = #{condition.name,jdbcType=VARCHAR}
+        and c.teacherId= #{condition.teacherId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where cs.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

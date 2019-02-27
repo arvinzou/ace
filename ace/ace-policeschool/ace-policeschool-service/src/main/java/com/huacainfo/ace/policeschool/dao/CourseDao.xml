@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.policeschool.dao.CourseDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.policeschool.model.Course">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="teacherId" jdbcType="VARCHAR" property="teacherId"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="evaluatingId" jdbcType="VARCHAR" property="evaluatingId"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, category, teacherId, status, evaluatingId, createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from course
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from course
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.Course">
+        insert into course (id, name, category,
+        teacherId, status, evaluatingId, createUserId,
+        createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate)
+        values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
+        #{teacherId,jdbcType=VARCHAR},#{status,jdbcType=CHAR}, #{evaluatingId,jdbcType=VARCHAR},
+        #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.policeschool.model.Course">
+        insert into course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="category != null">
+                category,
+            </if>
+            <if test="teacherId != null">
+                teacherId,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="evaluatingId != null">
+                evaluatingId,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherId != null">
+                #{teacherId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="evaluatingId != null">
+                #{evaluatingId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.policeschool.model.Course">
+        update course
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                category = #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherId != null">
+                teacherId = #{teacherId,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="evaluatingId != null">
+                evaluatingId = #{evaluatingId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.Course">
+        update course
+        set name = #{name,jdbcType=VARCHAR},
+        category = #{category,jdbcType=VARCHAR},
+        teacherId = #{teacherId,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        evaluatingId = #{evaluatingId,jdbcType=VARCHAR},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--#################################################################################################################################################-->
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.CourseVo"></resultMap>
+
+    <sql id="Vo_Column_List">
+        c.id, c.name, c.category, c.teacherId, c.status, c.evaluatingId, c.createUserId, c.createUserName, c.createDate,
+        c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,t.name as teacherName,e.name as evaluatingName
+        ,s.name as codeName
+    </sql>
+
+    <sql id="Where_Condition">
+        where c.status <![CDATA[ <> ]]> 0
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and c.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and c.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.tName !=null and condition.tName !=&quot;&quot;">
+            and t.name LIKE concat('%',#{condition.tName,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <sql id="From_Statement">
+        FROM course c
+        LEFT JOIN teacher t ON c.teacherId=t.id
+        LEFT JOIN evaluating e ON e.id=c.evaluatingId
+        LEFT JOIN (SELECT code,name FROM portal.dict WHERE category_id='154') s ON c.category=s.code
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Student">
+        select count(1)
+        from course c
+        where c.status <![CDATA[ <> ]]> 0
+        and c.name = #{condition.name,jdbcType=VARCHAR}
+        and c.teacherId= #{condition.teacherId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where c.id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>

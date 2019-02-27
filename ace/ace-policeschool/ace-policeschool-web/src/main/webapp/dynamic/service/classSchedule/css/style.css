@@ -1,0 +1,276 @@
+input {
+    outline: none;
+    padding: 0 10px;
+}
+
+.fc-time-grid .fc-slats td {
+    height: 225px !important;
+}
+
+#b_container .search {
+    width: 100%;
+    display: flex;
+
+}
+
+#b_container .search input {
+    width: 70%;
+    flex-grow: 1;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    height: 40px;
+    box-shadow: 0px 0px 12px 1px rgba(239, 243, 248, 0.51);
+    border: 0px solid black;
+}
+
+#b_container .search button {
+    width: 47px;
+    height: 40px;
+    background: rgba(24, 144, 255, 1) url(../img/search.png) no-repeat;
+    box-shadow: 0px 3px 13px 0px rgba(153, 173, 207, 0.3);
+    border-radius: 0px 2px 2px 0px;
+    background-size: 60%;
+    background-position: 50%;
+    border: none;
+}
+
+/*#b_container .search .searchIcon:after{*/
+/*display: block;*/
+/*content: '';*/
+/*width: 15px;*/
+/*height: 15px;*/
+/*border: 4px solid blue;*/
+/*}*/
+
+.fc-view-container thead tr {
+    height: 80px;
+    line-height: 80px;
+    background: rgba(247, 249, 252, 1);
+    font-size: 15px;
+    font-family: MicrosoftYaHei-Bold;
+    font-weight: bold;
+    color: rgba(91, 102, 128, 1);
+}
+
+.teacherNameList {
+    line-height: 40px;
+    margin: 0px !important;
+}
+
+.teacherNameList > i {
+    color: #D7D9DF;
+}
+
+.teacherNameList .fr {
+    line-height: 40px;
+}
+
+#calendar {
+    margin: 0px;
+}
+
+.fc-center > div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.fc-center h2 {
+    font-size: 26px;
+    font-family: MicrosoftYaHei-Bold;
+    font-weight: bold;
+    color: rgba(41, 59, 90, 1);
+}
+
+.fc-next-button, .fc-prev-button {
+    border-radius: 50%;
+    height: 36px !important;
+    width: 36px;
+    text-align: center;
+    font-weight: bolder;
+    border: 2px solid #B2B4BE;
+    background: #fff !important;
+    color: #B2B4BE !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    outline: none;
+}
+
+.fc-next-button {
+    padding: 0px 0px 0px 8px !important;
+    margin-left: 20px !important;
+}
+
+.fc-prev-button {
+    padding: 0px 8px 0px 0px !important;
+    margin-right: 20px !important;
+}
+
+.fc-today-button {
+    width: 60px;
+    height: 36px !important;
+    background: rgba(24, 144, 255, 1) !important;
+    border-radius: 18px 17px 17px 18px !important;
+    border-width: 0px;
+    opacity: 1 !important;
+    font-size: 16px;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1) !important;
+    margin-left: 20px;
+}
+
+.bg-crew-good {
+    background: rgba(254, 76, 70, 1) !important;
+    font-size: 16px !important;
+    font-weight: 400;
+    color: #fff !important;
+    padding: 6px;
+
+}
+
+.classinfo {
+    margin: 40px 0 0 10px;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 12px 1px rgba(239, 243, 248, 0.51);
+    border-radius: 4px;
+    overflow: hidden;
+
+}
+
+.classinfo .body {
+    padding: 0px 17px 20px;
+}
+
+.classinfo .head {
+    height: 54px;
+    background: rgba(247, 249, 252, 1);
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(24, 144, 255, 1);
+    text-align: center;
+    line-height: 54px;
+}
+
+.classinfo .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0 !important;
+    color: rgba(55, 63, 83, 1);
+}
+
+.custom-toolbar {
+    padding-bottom: 30px;
+}
+
+.select2-container--bootstrap .select2-selection--single {
+    height: 30px;
+    line-height: 1.42857;
+    padding: 4px 12px 4px 12px;
+    border-color: #EBEDF2;
+    box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.075), 0 0 0px rgba(147, 161, 187, 0.6);
+}
+
+/* Switch 4 Specific Style Start */
+
+.input_wrapper {
+    width: 60px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+.input_wrapper input[type="checkbox"] {
+    width: 60px;
+    height: 30px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #315e7f;
+    border-radius: 2px;
+    position: relative;
+    outline: 0;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+
+.input_wrapper input[type="checkbox"]:after {
+    position: absolute;
+    content: "";
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background: #dfeaec;
+    z-index: 2;
+    border-radius: 2px;
+    -webkit-transition: all .35s;
+    transition: all .35s;
+}
+
+.input_wrapper svg {
+    position: absolute;
+    top: 50%;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    fill: #fff;
+    -webkit-transition: all .35s;
+    transition: all .35s;
+    z-index: 1;
+}
+
+.input_wrapper .is_checked {
+    width: 18px;
+    left: 18%;
+    -webkit-transform: translateX(190%) translateY(-30%) scale(0);
+    transform: translateX(190%) translateY(-30%) scale(0);
+}
+
+.input_wrapper .is_unchecked {
+    width: 15px;
+    right: 10%;
+    -webkit-transform: translateX(0) translateY(-30%) scale(1);
+    transform: translateX(0) translateY(-30%) scale(1);
+}
+
+/* Checked State */
+.input_wrapper input[type="checkbox"]:checked {
+    background: #1890ff;
+}
+
+.input_wrapper input[type="checkbox"]:checked:after {
+    left: calc(100% - 27px);
+}
+
+.input_wrapper input[type="checkbox"]:checked + .is_checked {
+    -webkit-transform: translateX(0) translateY(-30%) scale(1);
+    transform: translateX(0) translateY(-30%) scale(1);
+}
+
+.input_wrapper input[type="checkbox"]:checked ~ .is_unchecked {
+    -webkit-transform: translateX(-190%) translateY(-30%) scale(0);
+    transform: translateX(-190%) translateY(-30%) scale(0);
+}
+
+/* Switch 4 Specific Style End */
+
+.btn-default.delete {
+    background-color: #FE7874;
+    border-color: #fff;
+    color: #fff;
+    height: 36px;
+    width: 66px;
+}
+
+.fc-event .fc-bg {
+    background: rgba(254, 76, 70, 1) !important;
+    font-size: 18px !important;
+    font-weight: 400;
+    color: #fff !important;
+    padding: 6px;
+    margin: 0;
+    border-color: transparent !important;
+    border-bottom-width: 2px !important;
+    border-top-width: 2px !important;
+}

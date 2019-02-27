@@ -1,0 +1,104 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.index {
+    width: 10rem;
+    height: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+
+.banner {
+    width: 100%;
+    height: 4.12rem;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+}
+
+.box {
+    width: 90%;
+    height: 3.693333rem;
+    margin-left: 5%;
+    margin-right: 5%;
+    position: absolute;
+    border-radius: 0.133333rem;
+    background: #FFFFFF;
+    top: 2.92rem;
+}
+
+.course-box {
+    width: 90%;
+    height: auto;
+    border-radius: 0.133333rem;
+    background: #FFFFFF;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 0.4rem;
+}
+
+.mt {
+    margin-top: 2.893333rem;
+}
+
+.course {
+    width: 95%;
+    height: auto;
+    margin-left: 5%;
+}
+
+.course:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.course-left {
+    width: 80%;
+    height: auto;
+    float: left;
+}
+
+.course-right {
+    width: 20%;
+    height: auto;
+    float: left;
+}
+
+.course-title {
+    padding-top: 0.466666rem;
+    padding-bottom: 0.28rem;
+    color: #373F53;
+    font-size: 0.426666rem;
+    font-weight: bold;
+}
+
+.course-teacher {
+    padding-bottom: 0.466666rem;
+    color: #ABAEB9;
+    font-size: 0.32rem;
+}
+
+.course-teacher img {
+    width: 0.32rem;
+    height: 0.32rem;
+    margin-right: 0.173333rem;
+}
+
+.morning {
+    width: 1.2rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    text-align: center;
+    display: block;
+    border-radius: 50%;
+    background: #FDF4F0;
+    color: #FE4C46;
+    font-size: 0.426666rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}

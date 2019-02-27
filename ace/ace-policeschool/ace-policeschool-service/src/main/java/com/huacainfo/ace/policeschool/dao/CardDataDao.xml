@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.policeschool.dao.CardDataDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.policeschool.model.CardData">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="cardData" jdbcType="VARCHAR" property="cardData"/>
+        <result column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, cardData, userId, status, createDate
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from card_data
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from card_data
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.CardData">
+        insert into card_data (id, cardData, userId,
+        status, createDate)
+        values (#{id,jdbcType=VARCHAR}, #{cardData,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+        #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.CardData">
+        update card_data
+        set cardData = #{cardData,jdbcType=VARCHAR},
+        userId = #{userId,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.CardDataVo">
+        <result column="regType" jdbcType="VARCHAR" property="regType"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="idCard" jdbcType="VARCHAR" property="idCard"/>
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        v.id, v.userId, v.cardData,
+        v.regType, v.`name`, v.mobile, v.idCard,
+        v.createDate
+    </sql>
+    <sql id="From_Statement">
+        FROM (
+        SELECT
+        t.id, s.id as userId, 'student' as regType,
+        t.cardData, s.`name`, s.mobile, s.idCard,
+        t.createDate
+        FROM card_data t, student s
+        WHERE t.userId = s.id
+        UNION ALL
+        SELECT
+        t.id, ta.id as userId, 'teacher' as regType,
+        t.cardData, ta.`name`, ta.mobile, ta.idCard,
+        t.createDate
+        FROM card_data t, teacher ta
+        WHERE t.userId = ta.id
+        )v
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test="condition.cardData !=null and condition.cardData !=&quot;&quot;">
+            and v.cardData = #{condition.cardData,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.regType !=null and condition.regType !=&quot;&quot;">
+            and v.regType = #{condition.regType,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.mobile !=null and condition.mobile !=&quot;&quot;">
+            and v.mobile like concat(#{condition.mobile,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.idCard !=null and condition.idCard !=&quot;&quot;">
+            and v.idCard like concat(#{condition.idCard,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and (
+            v.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+            or v.cardData like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+            )
+        </if>
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where v.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY v.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.CardData">
+        select count(1)
+        from card_data
+        where userId = #{userId,jdbcType=VARCHAR}
+        or cardData = #{cardData,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateStatus" parameterType="java.lang.String">
+        update card_data
+        set status = #{status,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findUserList" resultType="map">
+        select
+        v.regType, v.id, v.`name`, v.mobile, v.idCard
+        from (
+        SELECT
+        '学员' as regType, s.id,
+        s.`name`, s.mobile, s.idCard
+        FROM student s
+        UNION ALL
+        SELECT
+        '教职工' as regType, ta.id,
+        ta.`name`, ta.mobile, ta.idCard
+        FROM teacher ta
+        )v
+        where 1=1
+        <if test="q !=null and q !=&quot;&quot;">
+            AND ( v.id = #{q,jdbcType=CHAR}
+            or v.`name` LIKE concat('%', #{q,jdbcType=CHAR} ,'%')
+            or v.mobile like concat('%', #{q,jdbcType=CHAR} ,'%')
+            or v.idCard like concat('%', #{q,jdbcType=CHAR} ,'%')
+            )
+        </if>
+        order by v.`name`
+        LIMIT 10
+    </select>
+
+    <update id="updateByUserId" parameterType="com.huacainfo.ace.policeschool.vo.CardDataVo">
+        update card_data
+        set cardData = #{cardData,jdbcType=VARCHAR},
+        createDate = now()
+        where userId = #{userId,jdbcType=VARCHAR}
+    </update>
+</mapper>
