@@ -205,7 +205,11 @@ Page({
                 wx.showModal({
                     title: '提示',
                     content: res.info,
-                    success: function(res){}
+                    success: function(res){
+                        wx.navigateTo({
+                            url: '../accidentList/index',
+                        });
+                    }
                 })
              } else {
                  wx.showModal({
