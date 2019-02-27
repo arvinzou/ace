@@ -71,7 +71,7 @@ Page({
     var that = this;
     util.request(cfg.server + '/taa/www/road/findSectionList', {
         category: "1",
-        name: rname
+        keyWord: rname
       },
       function(res) {
         if (res.status == 0) {
@@ -97,7 +97,7 @@ Page({
     var that = this;
     util.request(cfg.server + '/taa/www/road/findSectionList', {
         category: "0",
-        name: rname
+        keyWord: rname
       },
       function(res) {
         if (res.status == 0) {
