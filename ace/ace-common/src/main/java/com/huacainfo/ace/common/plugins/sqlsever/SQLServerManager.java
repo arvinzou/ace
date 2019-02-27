@@ -1,6 +1,12 @@
 package com.huacainfo.ace.common.plugins.sqlsever;
 
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+
 import java.sql.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: Arvin
@@ -66,6 +72,10 @@ public class SQLServerManager {
      * @throws SQLException
      */
     public Connection getConnection() throws ClassNotFoundException, SQLException {
+        if (!StringUtil.areNotEmpty(connUrl, acct, pwd)) {
+            return null;
+        }
+
         Class.forName(DRIVER_STR);
         return DriverManager.getConnection(connUrl, acct, pwd);//"sa", "admin123456");
     }
@@ -75,19 +85,46 @@ public class SQLServerManager {
      *
      * @param sql
      */
-    public void query(String sql) {
+    public List<Map<String, Object>> query(String sql) {
         Connection con = null;
         PreparedStatement statement = null;
         ResultSet res = null;
+        ResultSetMetaData data;
         try {
             con = getConnection();
+            if (con == null) {
+
+            }
             statement = con.prepareStatement(sql);
             res = statement.executeQuery();
+            data = res.getMetaData();
+
+            List<Map<String, Object>> rst = new LinkedList<>();
+            Map<String, Object> row;
+
+            String colTypeName;
+            String colName;
             while (res.next()) {
-                String title = res.getString("Name");//获取test_name列的元素                                                                                                                                                    ;
-                System.out.println("姓名：" + title);
+                row = new HashMap<>();
+                for (int i = 1; i <= data.getColumnCount(); i++) {
+                    //获得指定列的数据类型名
+                    colTypeName = data.getColumnTypeName(i);
+                    colName = data.getColumnName(i);//.toUpperCase();
+                    //整型数据
+                    if ("int".equals(colTypeName)) {
+                        row.put(colName, res.getInt(i));
+                    }
+                    //浮点型数据
+                    else if ("money".equals(colTypeName)) {
+                        row.put(colName, res.getBigDecimal(i));
+                    } else {
+                        row.put(colName, res.getString(i));
+                    }
+                }
+                rst.add(row);
             }
 
+            return rst;
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -101,6 +138,8 @@ public class SQLServerManager {
                 e2.printStackTrace();
             }
         }
+
+        return null;
     }
 
 
