@@ -1,6 +1,7 @@
 package com.huacainfo.ace.common.plugins.sqlsever;
 
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.tools.JsonUtil;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class SQLServerManager {
         this.pwd = pwd;
     }
 
-    public static void main(String[] args) {
+    public static void test() {
         String connUrl = "jdbc:sqlserver://192.168.2.100:52006;DatabaseName=hnhr_currency";
         String sa = "sa";
         String pwd = "admin123";
@@ -43,10 +44,16 @@ public class SQLServerManager {
                 "where 1=1\n" +
                 "and t.Signs='未还'\n" +
                 "and u.ReaderBar in  ('Z0000012','','')\n" +
+                "and CONVERT(varchar(100), t.BorrowDate, 20) like '2014-10-17%'\n" +
                 "order by t.BorrowDate asc";//查询test表
 
         SQLServerManager manager = SQLServerManager.newInstance(connUrl, sa, pwd);
-        manager.query(sql);
+        List<Map<String, Object>> rs = manager.query(sql);
+        System.out.println(JsonUtil.toJson(rs));
+    }
+
+    public static void main(String[] args) {
+        test();
     }
 
     /**
