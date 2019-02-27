@@ -200,11 +200,13 @@ function is_login(){
 }
 
 function login(callback) {
+  console.log(11);
   var that = this;
   var _callback = callback;
   wx.getLocation({
     type: 'gcj02',
     success: function (rst) {
+      console.log(12);
       wx.login({
         success: function (o) {
           wx.getUserInfo({
@@ -237,7 +239,12 @@ function login(callback) {
             }
           })
         }
+
       })
+    },
+    fail:function(rst){
+      console.log(rst);
+
     }
   });
 }

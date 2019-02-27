@@ -5,15 +5,15 @@
         <view class='box'>
             <view class='title02'>
                 <view class='locate'>{{detail.address}}</view>
-                <view class='locate-road'>
-                    <text>{{detail.roadSectionName}}</text>
+                <view class='locate-road' bindtap='selectRoadSection'>
+                    <text>{{sectionName}}</text>
                     <image src='../../image/icon_rediret.png'></image>
                 </view>
             </view>
             <view class='row br'>
                 <view class='row-left'>所属路长</view>
                 <view class='row-right content'>
-                    <input type='text' value='{{detail.roadManName}}'></input>
+                    <input type='text' value='{{roadManName}}' readonly bindtap='selectRoad'></input>
                     <image src='../../image/icon_rediret.png'></image>
                 </view>
             </view>
@@ -21,12 +21,11 @@
                 <view class='row-left'>快报时间</view>
                 <view class='row-right content'>
                     <!--<input type='text' value='{{detail.lastModifyDate}}' name='createDate'></input>-->
-                    <picker class='datetime' name='createDate' data-name='createDate' mode="multiSelector" value="{{createDate}}"           bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                    <picker class='datetime' name='createDate' data-name='createDate' mode="multiSelector" value="{{createDate}}"           bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}" disabled='disabled'>
                             <view class="tui-picker-detail">
                                 {{dateTimeArray[0][createDate[0]]}}-{{dateTimeArray[1][createDate[1]]}}-{{dateTimeArray[2][createDate[2]]}} {{dateTimeArray[3][createDate[3]]}}:{{dateTimeArray[4][createDate[4]]}}:{{dateTimeArray[5][createDate[5]]}}
                             </view>
                         </picker>
-                    <image src='../../image/icon_rediret.png'></image>
                 </view>
             </view>
             <view class='row br'>

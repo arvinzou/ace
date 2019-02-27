@@ -13,7 +13,6 @@
     <artifactId>ace-partyschool-rest</artifactId>
     <packaging>war</packaging>
     <dependencies>
-
         <!--oracle驱动包-->
         <dependency>
             <groupId>com.oracle</groupId>

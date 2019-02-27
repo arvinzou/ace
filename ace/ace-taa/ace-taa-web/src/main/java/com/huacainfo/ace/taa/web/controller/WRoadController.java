@@ -157,7 +157,7 @@ public class WRoadController extends TaaBaseController {
         if (CommonUtils.isBlank(condition.getAreaCode())) {
             condition.setAreaCode(u.getAreaCode());
         }
-
+        condition.setDeptId(u.getCorpId());
 
         PageResult<RoadSectionVo> rst = roadSectionService.findRoadSectionList(condition,
                 page.getStart(), page.getLimit(), page.getOrderBy());

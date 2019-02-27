@@ -81,4 +81,11 @@ public interface ApiService {
                                           String dateTimeStr,
                                           int startNum,
                                           int endNum);
+
+    /**
+     * 查找借阅历史
+     *
+     * @return ResultResponse
+     */
+    List<Map<String, Object>> findBorrowList(String lCardNo);
 }

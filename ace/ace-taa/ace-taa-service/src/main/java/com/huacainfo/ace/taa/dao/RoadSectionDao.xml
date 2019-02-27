@@ -128,7 +128,10 @@
         <if test='condition.category!=null and condition.category!=""'>
             <choose>
                 <when test='condition.category =="1"'>
-                    and EXISTS (select 1 from road_gps rg where rg.roadSectionId = t.id)
+                    and EXISTS (select 1 from road_gps rg
+                    left join portal.users u on rg.createUserId = u.user_id
+                    where rg.roadSectionId = t.id
+                    and u.department_id= #{condition.deptId,jdbcType=VARCHAR} )
                 </when>
                 <otherwise>
                     and NOT EXISTS (select 1 from road_gps rg where rg.roadSectionId = t.id)

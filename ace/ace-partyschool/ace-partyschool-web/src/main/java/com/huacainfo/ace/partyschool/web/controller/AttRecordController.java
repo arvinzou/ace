@@ -7,7 +7,9 @@ import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.ExcelUtils;
+import com.huacainfo.ace.common.tools.FileUtil;
 import com.huacainfo.ace.partyschool.model.AttRecord;
 import com.huacainfo.ace.partyschool.service.AttRecordService;
 import com.huacainfo.ace.partyschool.vo.AttRecordQVo;
@@ -22,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -264,5 +269,31 @@ public class AttRecordController extends BisBaseController {
     @ResponseBody
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.attRecordService.updateStatus(id, status, this.getCurUserProp());
+    }
+
+    /**
+     * 上传中控考勤数据
+     *
+     * @param file 上传文件
+     * @return MessageResponse
+     */
+    @ResponseBody
+    @RequestMapping(value = "/uploadData")
+    public MessageResponse uploadData(@RequestParam MultipartFile[] file) throws IOException {
+        String nowTime = DateUtil.getNow()
+                .replace(" ", "")
+                .replace("-", "")
+                .replace(":", "");
+        //MultipartFile to InputStream
+        InputStream inputStream = file[0].getInputStream();
+        //存储文件件
+        String storePath = System.getProperties().getProperty("user.dir");
+        //文件完整路径
+        String fileName = storePath + File.separator + nowTime + ".mdb";
+        logger.info("access file store path: " + fileName);
+        File f = new File(fileName);
+        FileUtil.inputStreamToFile(inputStream, f);
+
+        return attRecordService.saveZkData(fileName, nowTime);
     }
 }

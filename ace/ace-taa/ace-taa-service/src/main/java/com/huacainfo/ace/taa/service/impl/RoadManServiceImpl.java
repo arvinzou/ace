@@ -12,11 +12,13 @@ import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.taa.dao.RoadDao;
 import com.huacainfo.ace.taa.dao.RoadManDao;
 import com.huacainfo.ace.taa.dao.RoadSectionDao;
+import com.huacainfo.ace.taa.dao.TraAccDao;
 import com.huacainfo.ace.taa.model.RoadMan;
 import com.huacainfo.ace.taa.service.RoadManService;
 import com.huacainfo.ace.taa.vo.RoadManQVo;
 import com.huacainfo.ace.taa.vo.RoadManVo;
 import com.huacainfo.ace.taa.vo.RoadSectionQVo;
+import com.huacainfo.ace.taa.vo.TraAccQVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,8 @@ public class RoadManServiceImpl implements RoadManService {
     private RoadSectionDao roadSectionDao;
     @Autowired
     private RoadDao roadDao;
+    @Autowired
+    private TraAccDao traAccDao;
 
 
     /**
@@ -199,6 +203,13 @@ public class RoadManServiceImpl implements RoadManService {
      */
     @Override
     public MessageResponse deleteRoadManByRoadManId(String id, UserProp userProp) throws Exception {
+
+        TraAccQVo c = new TraAccQVo();
+        c.setRoadManId(id);
+        int iTraAcc = traAccDao.findCount(c);
+        if (iTraAcc > 0) {
+            return new MessageResponse(ResultCode.FAIL, "存在事故绑定定关系，删除失败！");
+        }
         RoadSectionQVo rs = new RoadSectionQVo();
         rs.setRoadMan(id);
         int iSection = roadSectionDao.findCount(rs);
@@ -343,7 +354,7 @@ public class RoadManServiceImpl implements RoadManService {
         for (Map<String, Object> item : list) {
             if (!CommonUtils.isBlank(item.get("name"))) {
                 name = String.valueOf(item.get("name"));
-                letter = CommonUtils.getPinYinHeadChar(name).substring(0, 1).toLowerCase();//A, B, C etc.
+                letter = CommonUtils.getPinYinHeadChar(name).substring(0, 1).toUpperCase();//A, B, C etc.
                 item.put("index", letter);
             } else {
                 continue;

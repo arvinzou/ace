@@ -45,15 +45,25 @@
     </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.FilesVo">
-
+        <result column="publisherName" jdbcType="VARCHAR" property="publisherName"/>
     </resultMap>
 
 
     <sql id="Vo_Column_List">
-        id, category, classesId, title, url, pushDate, publisher, status
+        f.id, f.category, c.name as classesId,
+        f.title, f.url, f.pushDate, f.publisher, f.STATUS,
+        ifnull(m.`name`,'') as publisherName
     </sql>
     <sql id="From_Statement">
         FROM files f
+        LEFT JOIN classes c on c.id=f.classesId
+        left join (
+        select s.id,s.`name` from student s
+        UNION ALL
+        select t.id,t.`name` from teacher t
+        UNION ALL
+        select t.user_id,t.name from portal.users t where t.user_level ='1' and t.cur_syid='partyschool'
+        )m on f.publisher = m.id
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
@@ -70,31 +80,23 @@
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        t.id,
-        t.category,
-        c.name as classesId,
-        t.title,
-        t.url,
-        t.pushDate,
-        t.publisher,
-        t.STATUS
+        <include refid="Vo_Column_List"/>
         from files t
         LEFT JOIN classes c on c.id=t.classesId
+        left join (
+        select s.id,s.`name` from student s
+        UNION ALL
+        select t.id,t.`name` from teacher t
+        UNION ALL
+        select t.user_id,t.name from portal.users t where t.user_level ='1' and t.cur_syid='partyschool'
+        )m on f.publisher = m.id
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        f.id,
-        f.category,
-        c.name as classesId,
-        f.title,
-        f.url,
-        f.pushDate,
-        f.publisher,
-        f.STATUS
+        <include refid="Vo_Column_List"/>
         <include refid="From_Statement"/>
-        LEFT JOIN classes c on c.id=f.classesId
         <include refid="Where_Condition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -206,8 +208,10 @@
     <select id="findFileListAboutMe" parameterType="java.lang.String" resultMap="FilesResultMapVo">
         select
         f.id, f.category, f.classesId, f.title, f.url, f.pushDate, f.publisher, f.status,
-        t.id as t_id, t.idCard as t_idCard, t.mobile as t_mobile, t.name as t_name,t.workUnitName as t_workUnitName, t.introduce,   t.category as t_category, t.photoUrl, t.postName,
-        s.id as s_id ,s.idCard as s_idCard, s.mobile as s_mobile, s.name as s_name,s.workUnitName as s_workUnitName, s.pid, s.political, s.classId
+        t.id as t_id, t.idCard as t_idCard, t.mobile as t_mobile, t.name as t_name,t.workUnitName as t_workUnitName,
+        t.introduce, t.category as t_category, t.photoUrl, t.postName,
+        s.id as s_id ,s.idCard as s_idCard, s.mobile as s_mobile, s.name as s_name,s.workUnitName as s_workUnitName,
+        s.pid, s.political, s.classId
         FROM files f
         LEFT JOIN partyschool.teacher t ON t.id=f.publisher
         LEFT JOIN partyschool.student s ON s.id=f.publisher

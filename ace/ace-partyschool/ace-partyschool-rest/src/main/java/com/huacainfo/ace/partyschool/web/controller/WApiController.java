@@ -179,5 +179,18 @@ public class WApiController {
         return new ResultResponse(ResultCode.SUCCESS, "success", view);
     }
 
+    /**
+     * 查找借阅历史
+     *
+     * @return ResultResponse
+     */
+    @RequestMapping("/findBorrowList")
+    public ResultResponse findBorrowList(String lCardNo) {
+        if (!StringUtil.areNotEmpty(lCardNo)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
 
+        List<Map<String, Object>> view = apiService.findBorrowList(lCardNo);
+        return new ResultResponse(ResultCode.SUCCESS, "success", view);
+    }
 }

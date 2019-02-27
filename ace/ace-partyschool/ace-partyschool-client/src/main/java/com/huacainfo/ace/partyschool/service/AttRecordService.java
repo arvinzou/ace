@@ -1,16 +1,13 @@
 package com.huacainfo.ace.partyschool.service;
 
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.partyschool.model.AttRecord;
-import com.huacainfo.ace.partyschool.vo.AttRecordVo;
 import com.huacainfo.ace.partyschool.vo.AttRecordQVo;
+import com.huacainfo.ace.partyschool.vo.AttRecordVo;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -168,4 +165,21 @@ public interface AttRecordService {
      * @version: 2019-02-20
      */
     MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
+
+    /**
+     * 导入中控数据
+     *
+     * @param fileName db文件
+     * @param nowTime  当前操作时间
+     * @return MessageResponse
+     */
+    MessageResponse saveZkData(String fileName, String nowTime);
+
+    /**
+     * 查询登录用户考勤信息 -- 查询某一天的考勤数据
+     *
+     * @param dateTimeStr 日期字符串 ，包含年月日；示例： 2019-02-21
+     * @return ResultResponse
+     */
+    ResultResponse findList(String userId, String dateTimeStr);
 }
