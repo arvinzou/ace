@@ -80,8 +80,14 @@ Page({
             },
             function (res) {
                 if (res.status == 0) {
+                    var dataRows = res.data.rows;
+                    for (var i = 0; i < dataRows.length; i++){
+                        if (dataRows[i].lastModifyDate){
+                            dataRows[i].lastModifyDate = dataRows[i].lastModifyDate.substring(5, dataRows[i].lastModifyDate.length)
+                        }
+                    }
                     that.setData({
-                        list: res.data.rows
+                        list: dataRows
                     });
                 } else {
                     wx.showModal({
