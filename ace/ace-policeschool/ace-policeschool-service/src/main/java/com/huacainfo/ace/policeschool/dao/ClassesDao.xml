@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.policeschool.dao.ClassesDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.policeschool.model.Classes">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="startDate" jdbcType="TIMESTAMP" property="startDate"/>
+        <result column="endDate" jdbcType="TIMESTAMP" property="endDate"/>
+        <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
+        <result column="classroomId" jdbcType="VARCHAR" property="classroomId"/>
+        <result column="headmaster" jdbcType="VARCHAR" property="headmaster"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.policeschool.model.Classes">
+        <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, startDate, endDate, photoUrl, classroomId, headmaster, remark, status, createUserId,
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
+    <sql id="Blob_Column_List">
+        introduce
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from classes
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from classes
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.Classes">
+        insert into classes (id, name, startDate,
+        endDate, fileUrl,photoUrl, classroomId,tid1,tid2,
+        headmaster, remark, status,
+        createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate,
+        introduce)
+        values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP},
+        #{endDate,jdbcType=TIMESTAMP}, #{fileUrl,jdbcType=VARCHAR},#{photoUrl,jdbcType=VARCHAR},
+        #{classroomId,jdbcType=VARCHAR},
+        #{tid1,jdbcType=TIMESTAMP}, #{tid2,jdbcType=VARCHAR},
+        #{headmaster,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+        #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+        #{introduce,jdbcType=LONGVARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.Classes">
+        update classes
+        set name = #{name,jdbcType=VARCHAR},
+        startDate = #{startDate,jdbcType=TIMESTAMP},
+        endDate = #{endDate,jdbcType=TIMESTAMP},
+        fileUrl = #{fileUrl,jdbcType=VARCHAR},
+        photoUrl = #{photoUrl,jdbcType=VARCHAR},
+        tid1 = #{tid1,jdbcType=VARCHAR},
+        tid2 = #{tid2,jdbcType=VARCHAR},
+        introduce = #{introduce,jdbcType=VARCHAR},
+        classroomId = #{classroomId,jdbcType=VARCHAR},
+        headmaster = #{headmaster,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.ClassesVo">
+        <result column="crName" jdbcType="VARCHAR" property="crName"/>
+        <result column="tName" jdbcType="VARCHAR" property="tName"/>
+        <result column="t1Name" jdbcType="VARCHAR" property="t1Name"/>
+        <result column="sName" jdbcType="VARCHAR" property="sName"/>
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        id, name, startDate, endDate,introduce, photoUrl, classroomId, headmaster, remark, status, createUserId,
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
+    <sql id="From_Statement">
+        FROM classes c
+        LEFT JOIN classroom cr ON cr.id = c.classroomId
+        LEFT JOIN teacher t ON t.id = c.headmaster
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and c.status =#{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.classroomId !=null and condition.classroomId !=&quot;&quot;">
+            and c.classroomId =#{condition.classroomId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+            and (c.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            or cr.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            )
+        </if>
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        c.id, c.name, c.startDate, c.introduce,c.endDate, c.photoUrl, c.fileUrl, c.tid1,
+        c.tid2, classroomId, c.headmaster,
+        c.remark, c.status, c.createUserId,
+        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,
+        cr.name as crName,
+        t.name as tName,
+        t1.name as t1Name,
+        s.name as sName
+        from classes c
+        LEFT JOIN classroom cr ON cr.id = c.classroomId
+        LEFT JOIN teacher t ON t.id = c.headmaster
+        LEFT JOIN teacher t1 ON t1.id = c.tid1
+        LEFT JOIN student s ON s.id = c.tid2
+        where c.id = #{  id,jdbcType=VARCHAR}
+    </select>
+
+    <resultMap id="ClassesInfoResultMap" type="com.huacainfo.ace.policeschool.vo.ClassesVo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="startDate" jdbcType="TIMESTAMP" property="startDate"/>
+        <result column="endDate" jdbcType="TIMESTAMP" property="endDate"/>
+        <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
+        <result column="fileUrl" jdbcType="VARCHAR" property="fileUrl"/>
+        <result column="headmaster" jdbcType="VARCHAR" property="headmaster"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <association property="classroom" column="classroomId"
+                     javaType="com.huacainfo.ace.policeschool.model.Classroom">
+            <id column="id" jdbcType="VARCHAR" property="id"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+            <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
+            <result column="remark" jdbcType="VARCHAR" property="remark"/>
+            <result column="status" jdbcType="CHAR" property="status"/>
+            <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+            <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+            <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+            <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+            <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+            <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+            <result column="crIntroduce" jdbcType="VARCHAR" property="introduce"/>
+            <result column="crName" jdbcType="VARCHAR" property="name"/>
+        </association>
+        <association property="teacher" column="headmaster" javaType="com.huacainfo.ace.policeschool.model.Teacher">
+            <result column="tName" jdbcType="VARCHAR" property="name"/>
+            <result column="tMobile" jdbcType="VARCHAR" property="mobile"/>
+        </association>
+        <association property="clsTeacher" column="tid1" javaType="com.huacainfo.ace.policeschool.model.Teacher">
+            <result column="tName1" jdbcType="VARCHAR" property="name"/>
+            <result column="tMobile1" jdbcType="VARCHAR" property="mobile"/>
+        </association>
+        <association property="student" column="tid2" javaType="com.huacainfo.ace.policeschool.model.Student">
+            <result column="sName" jdbcType="VARCHAR" property="name"/>
+            <result column="sMobile" jdbcType="VARCHAR" property="mobile"/>
+        </association>
+    </resultMap>
+    <select id="getClassesInfo" parameterType="java.lang.String" resultMap="ClassesInfoResultMap">
+        select
+        c.id, c.name, c.startDate, c.introduce,c.endDate, c.photoUrl, c.fileUrl,
+        c.remark, c.status, c.createUserId,
+        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,
+
+        cr.introduce as crIntroduce,cr.name as crName,
+
+        t.name as tName,t.mobile as tMobile,
+
+        t1.name as tName1,t1.mobile as tMobile1,
+
+        s.name as sName,s.mobile as sMobile
+        from classes c
+        LEFT JOIN classroom cr ON cr.id = c.classroomId
+        LEFT JOIN teacher t ON t.id = c.headmaster
+        LEFT JOIN teacher t1 ON t1.id = c.tid1
+        LEFT JOIN student s ON s.id = c.tid2
+        where c.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        c.id, c.name, c.startDate, c.endDate, c.introduce,c.photoUrl, c.fileUrl, c.tid1,
+        c.tid2, c.classroomId, c.headmaster, c.remark,
+        c.status, c.createUserId,
+        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,
+        cr.name as crName,
+        t.name as tName
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findMyClassesList" parameterType="java.lang.String" resultMap="VoResultMap">
+        SELECT
+        c.id, c.name, c.startDate, c.endDate, c.photoUrl, c.classroomId, c.headmaster, c.remark, c.status,
+        c.createUserId,
+        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate, c.introduce
+        FROM classes c
+        WHERE c.id in (
+        SELECT DISTINCT cs.classesId
+        FROM policeschool.class_schedule cs
+        WHERE cs.teacherId=#{teacherId,jdbcType=VARCHAR}
+        )
+    </select>
+
+    <select id="findAllClassesList" parameterType="java.lang.String" resultMap="VoResultMap">
+        SELECT
+        c.id, c.name, c.startDate, c.endDate, c.photoUrl, c.classroomId, c.headmaster, c.remark, c.status,
+        c.createUserId,
+        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate, c.introduce
+        from teacher_cls_ship tcs
+        left join classes c on c.id=tcs.clsId
+        where 1=1
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Classes">
+        select count(*)
+        from classes
+        where name=#{name}
+        and id != #{id,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateStatus" parameterType="java.lang.String">
+        update classes
+        set status = #{status,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findByQ" resultType="map">
+        SELECT
+        t.id ,
+        t.`name`,
+        ta.`name` as headmasterName
+        FROM classes t
+        left join teacher ta on t.headmaster = ta.id
+        WHERE 1=1
+        <if test="params.status !=null and params.status !=&quot;&quot;">
+            and t.status = #{params.status,jdbcType=VARCHAR}
+        </if>
+        <if test="params.q !=null and params.q !=&quot;&quot;">
+            AND ( t.id = #{params.q,jdbcType=VARCHAR}
+            or t.`name` LIKE concat('%',#{params.q,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        ORDER BY t.createDate desc
+        limit 0, 10
+    </select>
+
+    <select id="headmasterCount" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Classes">
+        select count(*)
+        from classes
+        where status = '1'
+        and headmaster = #{htId,jdbcType=VARCHAR}
+        and id != #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <update id="graduation" parameterType="java.lang.String">
+        update portal.users
+        set stauts = '0'
+        where user_id in (
+        select t.id from student t,classes c
+        where t.classId = c.id
+        and c.endDate &lt; NOW()
+        and c.`status`= '1'
+        ) ;
+
+        update student
+        set `status` = '0'
+        where classId in (
+        select c.id from classes c
+        where c.endDate &lt; NOW()
+        and c.`status`= '1'
+        ) ;
+
+        update classes
+        set `status` = '2'
+        where endDate &lt; NOW()
+        and `status`='1'
+        ;
+    </update>
+
+
+    <select id="getClassList" resultType="map">
+        select id, name from classes where 1=1 order by createDate desc
+    </select>
+</mapper>

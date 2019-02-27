@@ -1,0 +1,305 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body, html {
+    background: #ffffff;
+}
+
+body {
+    font-family: PingFang-SC-Medium;
+    background: #ffffff;
+}
+
+.index {
+    width: 9.7rem;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.modal {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 500;
+}
+
+.search {
+    padding-left: 0.253333rem;
+    padding-right: 0.253333rem;
+    height: 1.88rem;
+}
+
+.classFilter {
+    padding-left: 0.253333rem;
+    padding-right: 0.253333rem;
+    height: auto;
+    padding-bottom: 0.4rem;
+}
+
+.classFilter:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.icon-class {
+    width: 0.96rem;
+    height: 0.906666rem;
+    float: left;
+}
+
+.class-select {
+    width: 7.613333rem;
+    height: 0.906666rem;
+    line-height: 0.906666rem;
+    padding-left: 0.2rem;
+    float: left;
+    color: #373F53;
+    font-size: 0.426666rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.class-right {
+    width: 0.2rem;
+    height: 0.346666rem;
+    margin-top: 0.28rem;
+    float: right;
+}
+
+.header {
+    width: 100%;
+    height: auto;
+    background: #ffffff;
+}
+
+.serach-input {
+    width: 96%;
+    height: 1.066666rem;
+    border-radius: 0.133333rem;
+    border: none;
+    outline: none;
+    background: #F5F6F7;
+    position: relative;
+    color: #373F53;
+    font-size: 0.4rem;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.item {
+    width: 100%;
+    height: 2.293333rem;
+    background: url('../img/file-bg.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+.item:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.file-type {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+
+.file-type-img {
+    width: 0.906666rem;
+    height: 0.906666rem;
+    margin: 0.693333rem 0.8rem;
+}
+
+.file-detail {
+    width: 80%;
+    height: 100%;
+    float: left;
+}
+
+.file-title {
+    height: 1rem;
+    line-height: 0.5rem;
+    color: #373F53;
+    font-size: 0.38rem;
+    font-weight: bold;
+    padding-right: 0.48rem;
+    word-break: break-all;
+    margin-top: 0.34rem;
+    overflow: hidden;
+    display: table;
+}
+
+.inner-middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.download {
+    color: #373F53;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.download:link {
+    color: #373F53;
+    text-decoration: none;
+}
+
+.download:visited {
+    color: #373F53;
+    text-decoration: none;
+}
+
+.file-footer {
+    height: 0.6rem;
+    line-height: 0.6rem;
+    color: #ABAEB9;
+    font-size: 0.32rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.file-footer span {
+    padding-right: 0.266666rem;
+}
+
+.upload {
+    width: 4.44rem;
+    height: 1.986666rem;
+    position: fixed;
+    bottom: 0.933333rem;
+    left: 30%;
+}
+
+.icon-search {
+    width: 0.4rem;
+    height: 0.4rem;
+    position: relative;
+    bottom: 1.4rem;
+    left: 4rem;
+}
+
+.search-title {
+    font-size: 0.346666rem;
+    color: #ABAEB9;
+    padding-left: 0.266666rem;
+    position: relative;
+    bottom: 1.48rem;
+    left: 3.6rem;
+}
+
+/**上传班级文件模态框**/
+.modal-index {
+    width: 8.6rem;
+    height: auto;
+    border-radius: 0.133333rem;
+    background: #ffffff;
+    margin: 2rem auto;
+    position: relative;
+}
+
+.close {
+    width: 0.56rem;
+    height: 0.56rem;
+    position: absolute;
+    right: -0.1rem;
+    top: -0.1rem;
+}
+
+.mbr {
+    border-bottom: 0.5px solid #F0EFF6;
+}
+
+.modal-title01 {
+    width: 100%;
+    height: 1.573333rem;
+    line-height: 1.573333rem;
+    text-align: center;
+}
+
+.modal-title02 {
+    width: 8.2rem;
+    height: 1.573333rem;
+    line-height: 1.573333rem;
+    padding-left: 0.4rem;
+}
+
+.title01 {
+    color: #373F53;
+    font-size: 0.48rem;
+    font-weight: bold;
+}
+
+.modal-clazz {
+    width: 100%;
+    height: 1.573333rem;
+}
+
+.modal-clazz:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.clazz {
+    width: 7rem;
+    height: 1.573333rem;
+    line-height: 1.573333rem;
+    float: left;
+    padding-left: 0.4rem;
+}
+
+.title02 {
+    color: #373F53;
+    font-size: 0.453333rem;
+}
+
+.select-box {
+    width: 0.8rem;
+    height: 1.573333rem;
+    float: left;
+    padding-right: 0.4rem;
+    text-align: right;
+}
+
+.select-box img {
+    width: 0.2rem;
+    height: 0.346666rem;
+}
+
+.option-add {
+    width: 7.626666rem;
+    height: 1.893333rem;
+    margin: 0 auto;
+}
+
+.option-upload {
+    width: 8.266666rem;
+    height: 2.08rem;
+    margin: 0 auto;
+}
+
+.opt {
+    width: auto;
+    height: auto;
+    padding-top: 0.4rem;
+    text-align: center;
+}
+
+#fileBox {
+    height: 1.893333rem;
+    color: #373F53;
+    font-weight: bold;
+    font-size: 0.453333rem;
+}
