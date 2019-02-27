@@ -72,7 +72,6 @@
         <div class="paginationbar">
             <ul class="pagination" id="pagination1"></ul>
         </div>
-
     </div>
 
 </div>
