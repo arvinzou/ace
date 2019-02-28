@@ -12,18 +12,21 @@ Page({
     yList: [], //已采集
     nNum: 0,
     yNum: 0,
-    pageType: null
+    pageType: null,
+    isCJ: false,  // 是否采集
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(2);
+    console.log('选项卡数字：'+ options.tab);
     var that = this;
     var tabIndex = options.tab;
     if (tabIndex) {
-      tab: tabIndex
+      that.setData({
+        tab: tabIndex
+      });
     }
     if (options.type) {
       that.setData({
@@ -121,8 +124,9 @@ Page({
    */
   selectRoadSection: function(e) {
     var that = this;
-
+    console.log(e);
     var roadSectionId = e.currentTarget.dataset.id;
+    var currentCollectionId = e.currentTarget.dataset.id;
     var roadSectionName = e.currentTarget.dataset.name;
     var skipType = that.data.pageType;
     if (skipType == 'kb') {
@@ -136,17 +140,19 @@ Page({
         changed: true
       });
     } else if (skipType == 'cj') {
-      //路段采集
-      var startName = e.currentTarget.dataset.startname;
-      var endName = e.currentTarget.dataset.endname;
+      console.log(app.globalData.collectionId)
+        //路段采集
+        var startName = e.currentTarget.dataset.startname;
+        var endName = e.currentTarget.dataset.endname;
 
-      app.globalData.startName = startName;
-      app.globalData.endName = endName;
-      app.globalData.cjSectionId = roadSectionId;
-      app.globalData.tab = 1
-      wx.navigateBack({
-        changed: true
-      });
+        app.globalData.startName = startName;
+        app.globalData.endName = endName;
+        app.globalData.cjSectionId = roadSectionId;
+        app.globalData.isCJ = false;  //是否是采集信息
+        app.globalData.tab = 1
+        wx.navigateBack({
+          changed: true
+        });
     } else if (skipType == 'xb') {
       //续报选择路段
       app.globalData.sectionId = roadSectionId;
@@ -170,6 +176,7 @@ Page({
                 wx.showModal({
                     title: '提示',
                     content: res.info,
+                    showCancel:false,
                     success: function (res) { }
                 });
               //设置已采集信息（浮窗）
@@ -204,12 +211,14 @@ Page({
     app.globalData.cjSectionId = null;
   },
   showRoadSection: function (e) {
+    var that = this;
     app.globalData.startName = e.currentTarget.dataset.startname;
     app.globalData.endName = e.currentTarget.dataset.endname;
     app.globalData.collectionId = e.currentTarget.dataset.id;
+    app.globalData.isCJ= true;   // 是否采集
     console.log("选择================" + app.globalData.startName);
     wx.navigateTo({
-        url: '../index/index',
+        url: '../index/index'
     });
   },
   /**
