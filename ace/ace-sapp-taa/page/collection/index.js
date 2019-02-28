@@ -127,7 +127,6 @@ Page({
     var that = this;
     console.log(e);
     var roadSectionId = e.currentTarget.dataset.id;
-    var currentCollectionId = e.currentTarget.dataset.id;
     var roadSectionName = e.currentTarget.dataset.name;
     var skipType = that.data.pageType;
     console.log(skipType)
@@ -216,7 +215,7 @@ Page({
     var that = this;
     app.globalData.startName = e.currentTarget.dataset.startname;
     app.globalData.endName = e.currentTarget.dataset.endname;
-    app.globalData.collectionId = e.currentTarget.dataset.id;
+    app.globalData.collectionId =  e.currentTarget.dataset.id;
     app.globalData.isCJ= true;   // 是否采集
     console.log("选择================" + app.globalData.startName);
     wx.navigateTo({
