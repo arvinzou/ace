@@ -10,7 +10,8 @@
   <view class='tab01-content ' wx:if="{{tab==0}}">
   <!-- <view class='tab01-content {{tab==0?"":"hidden"}}'> -->
     <block wx:for="{{nList}}" wx:for-index="idn" wx:for-item="item" wx:key="nList">
-      <view class='item' bindtap='selectRoadSection' data-id='{{item.id}}' data-name='{{item.name}}' data-roadManId='{{item.roadMan}}' data-roadManName='{{item.roadManName}}' data-startName='{{item.startName}}' data-endName='{{item.endName}}' >
+      <view class='item' bindtap='selectRoadSection' data-id='{{item.id}}' data-roadManId='{{item.roadMan}}' data-name='{{item.name}}'
+            data-roadManName='{{item.roadManName}}' data-startName='{{item.startName}}' data-endName='{{item.endName}}' >
         <view class='item-left'>
           <view class='road-section'>{{item.startName}}-{{item.endName}}</view>
           <view class='road-sign'>路段:{{item.name}}</view>

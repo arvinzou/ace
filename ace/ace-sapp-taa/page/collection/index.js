@@ -27,8 +27,6 @@ Page({
       that.setData({
         tab: tabIndex
       });
-      // tab: tabIndex
-      
     }
     if (options.type) {
       that.setData({
