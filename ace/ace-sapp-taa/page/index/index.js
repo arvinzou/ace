@@ -48,6 +48,8 @@ Page({
     frequency: 0, //是否显示加减频率
     timeInterval: 10000, //采集频率以10秒为单位
     isRegist: true,
+    isCJ: false, // 当前数据是否是采集数据的标志
+    
   },
 
   /**
@@ -88,6 +90,10 @@ Page({
       url: '../collection/index?type=cj',
     });
   },
+  /**
+   * 首页选项卡切换
+   */
+
   changeTab: function(e) {
     var that = this;
     that.setData({
@@ -491,7 +497,7 @@ Page({
           if (app.globalData.collectionId) {
               that.setData({
                   startName: app.globalData.startName,
-                  endName: app.globalData.endName
+                  endName: app.globalData.endName,
               });
               console.log("startName=========endName==============" + that.data.startName);
               that.initGpsList(app.globalData.collectionId);
@@ -499,6 +505,11 @@ Page({
               that.initUserData();
           }
       }
+      //设置采集标志，判断是否显示隐藏开始，暂停，结束按钮
+      that.setData({
+        isCJ:app.globalData.isCJ 
+      })
+
   },
 
   /**
@@ -560,6 +571,7 @@ Page({
           wx.showModal({
             title: '提示',
             content: res.info,
+            showCancel:false,
             success: function(res) {
               wx.navigateTo({
                 url: '../collection/index?tab=1',
@@ -620,12 +632,14 @@ Page({
       var interval = time / 1000;
       wx.showModal({
         title: '提示',
+        showCancel:false,
         content: '采集频率开始以' + interval + '秒间隔采集！',
         success: function(res) {}
       });
     } else {
       wx.showModal({
         title: '提示',
+        showCancel: false,
         content: '采集频率已经减少到最低1秒采集了！',
         success: function(res) {}
       });
