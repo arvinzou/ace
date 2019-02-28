@@ -133,7 +133,14 @@ view, map, cover-view {
     line-height: 56rpx;
     text-align: center;
 }
-
+.locate-name-wrapper{
+  display: flex;
+  align-items: center;
+}
+.select-arrow-div{
+  flex: 1;
+  padding-left:20rpx;
+}
 .fromContent .content .locate-name {
     color: #373f53;
     font-size: 36rpx;
@@ -310,6 +317,7 @@ view, map, cover-view {
     bottom: 42rpx;
     right: 30rpx;
 }
+
 .map{
     position: relative;
 }
@@ -323,6 +331,10 @@ view, map, cover-view {
 .icon-control-map{
     width: 105rpx;
     height: 105rpx;
+}
+.icon-dingwei{
+  width: 140rpx;
+  height: 140rpx;
 }
 
 /* ******************************************** */

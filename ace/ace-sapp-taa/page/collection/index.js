@@ -44,7 +44,8 @@ Page({
     var that = this;
     var index = e.target.dataset.index;
     that.setData({
-      tab: e.target.dataset.index
+      tab: e.target.dataset.index,
+      pageType:'cj'
     });
     if (index == 0) {
       wx.setNavigationBarTitle({
@@ -129,6 +130,7 @@ Page({
     var currentCollectionId = e.currentTarget.dataset.id;
     var roadSectionName = e.currentTarget.dataset.name;
     var skipType = that.data.pageType;
+    console.log(skipType)
     if (skipType == 'kb') {
       //快报选择路段
       app.globalData.sectionId = roadSectionId;
