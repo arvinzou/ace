@@ -121,6 +121,9 @@ Page({
       });
       that.initUserData();
   },
+  /**
+   * 得到当前位置信息(经纬度)
+   */
   getLocation: function(e) {
     var that = this;
     wx.getLocation({
@@ -146,6 +149,9 @@ Page({
       },
     })
   },
+  /**
+   * 获取地址信息
+   */
   toAddress: function(latitude, longitude) {
     var that = this;
     util.request(cfg.server + '/taa/www/mapApi/tx/reversePoint', {
@@ -170,6 +176,9 @@ Page({
       }
     );
   },
+  /**
+   * 获取街道信息
+   */
   getRoadSection: function(latitude, longitude) {
     var that = this;
     util.request(cfg.server + '/taa/www/road/getCloseRoadSection', {

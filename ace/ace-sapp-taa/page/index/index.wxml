@@ -135,7 +135,7 @@
     <cover-view class='control-map'>
       <cover-image class='icon-control-map {{frequency == 0?"hidden":""}}' src='../../image/icon-reduce.png' bindtap='reduce'></cover-image>
       <cover-image class='icon-control-map {{frequency == 0?"hidden":""}}' src='../../image/icon-increase.png' bindtap='increase'></cover-image>
-      <cover-image class='icon-control-map' src='../../image/icon-location.png' bindtap='resetCj'></cover-image>
+      <cover-image class='icon-control-map ' wx:if="{{isCJ}}" src='../../image/icon-location.png' bindtap='resetCj'></cover-image>
     </cover-view>
   </map>
 </view>
