@@ -4,21 +4,19 @@ import com.huacainfo.ace.common.model.BaseModel;
 
 import java.util.Date;
 
-public class Test extends BaseModel {
+public class Topic extends BaseModel {
     private String id;
 
-    private String name;
+    private String content;
 
-    private String introduce;
+    /**1、单选
+     * 2、多选
+     * 3、判断
+     * 4、问答
+     * 5、打分*/
+    private String type;
 
-    /**0、删除
-     * 1、暂存
-     * 2、发布*/
-    private String status;
-
-    private Date startTime;
-
-    private Date endTime;
+    private String analysis;
 
     private String createUserId;
 
@@ -30,6 +28,8 @@ public class Test extends BaseModel {
 
     private String lastModifyUserName;
 
+    private String answer;
+
     private Date lastModifyDate;
 
     public String getId() {
@@ -40,44 +40,36 @@ public class Test extends BaseModel {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getName() {
-        return name;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
-    public String getIntroduce() {
-        return introduce;
+    public String getContent() {
+        return content;
     }
 
-    public void setIntroduce(String introduce) {
-        this.introduce = introduce == null ? null : introduce.trim();
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
-    public String getStatus() {
-        return status;
+    public String getType() {
+        return type;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public String getAnalysis() {
+        return analysis;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setAnalysis(String analysis) {
+        this.analysis = analysis == null ? null : analysis.trim();
     }
 
     public String getCreateUserId() {
