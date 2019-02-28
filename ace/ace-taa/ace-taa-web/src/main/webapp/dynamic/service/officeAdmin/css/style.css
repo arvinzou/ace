@@ -1,0 +1,14 @@
+.layout-user {
+    width: 80px;
+    height: 80px;
+    float: left;
+    margin: 10px 10px 10px;
+    text-align:center;
+}
+.photo {
+    height: 60px;
+    max-height:60px;
+    max-width:60px;
+    vertical-align: middle;
+    border-radius:60px;
+}

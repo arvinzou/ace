@@ -45,8 +45,15 @@
     <sql id="Base_Column_List">
         id, address, latitude, longitude, areaCode, weather, vehicleType, status, accidentTime,
         roadSectionId, roadManId, deadthToll, injuries, cause, createUserId, createUserName,
-        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
     </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tra_acc
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
         tc.id as causeId, tc.cause as itemCause, tc.causeName,
@@ -122,6 +129,15 @@
         inner join road d on b.roadId=d.id
         left join portal.users u on t.createUserId = u.user_id
         where t.status='1'
+        <if test='condition.officeAdmin!=null and condition.deptId!=""'>
+            <choose>
+                <when test='condition.officeAdmin =="1"'>
+                </when>
+                <otherwise>
+                    and t.createUserId = #{condition.officeAdmin,jdbcType=VARCHAR}
+                </otherwise>
+            </choose>
+        </if>
         <if test='condition.deptId!=null and condition.deptId!=""'>
             and u.department_id = #{condition.deptId,jdbcType=VARCHAR}
         </if>

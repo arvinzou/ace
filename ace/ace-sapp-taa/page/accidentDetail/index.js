@@ -79,7 +79,10 @@ Page({
                   for(var i=0; i< mtypeList.length; i++){
                       that.initCarType(mtypeList[i].vehicleType);
                   }
-                  that.initSeason();
+                  var causeList = res.value.causeList;
+                  for(var i=0; i < causeList.length; i++){
+                      that.initSeason(causeList[i].cause);
+                  }
               } else {
                   wx.showModal({
                       title: '提示',
@@ -141,12 +144,17 @@ Page({
           carsList: cars
       });
   },
-  initSeason: function(){
+  initSeason: function(key){
       var that = this;
       var data = that.data.dictObject;
-      var cars = data['173'];
+      var cause = data['173'];
+      for (var i in cause){
+          if (key == cause[i].CODE){
+              cause[i].checked = true;
+          }
+      }
       that.setData({
-          seasonList: cars
+          seasonList: cause
       })
   },
   bindWeatherChange: function(e){
@@ -186,7 +194,7 @@ Page({
      var accidentTime = e.detail.value.accidentTime;
      var injuries = e.detail.value.injuries;
      var deadthToll = e.detail.value.deadthToll;
-     var cause = e.detail.value.cause;
+     var cause = e.detail.value.cause; 
      var causeList = [];
      var mtypeList = [];
      for(var i=0; i<cause.length; i++){
@@ -199,7 +207,7 @@ Page({
          traAccMtype.vehicleType = vehicleType[i];
          mtypeList.push(traAccMtype);
      }
-     util.request(cfg.server + '/taa/www/traAcc/report', { data: JSON.stringify({ id: that.data.traffId, createDate: that.formatDT(createDate), weather: weather, accidentTime: that.formatDT(accidentTime), injuries: injuries, deadthToll: deadthToll, causeList: causeList, mtypeList: mtypeList, roadSectionId: that.data.detail.roadSectionId, roadManId: that.data.detail.roadManId, cause: '酒驾'})} ,
+     util.request(cfg.server + '/taa/www/traAcc/report', { data: JSON.stringify({ id: that.data.traffId, createDate: that.formatDT(createDate), weather: weather, accidentTime: that.formatDT(accidentTime), injuries: injuries, deadthToll: deadthToll, causeList: causeList, mtypeList: mtypeList, roadSectionId: that.data.sectionId, roadManId: that.data.roadManId, cause: '酒驾'})} ,
          function (res) {
              if (res.status == 0) {
                 wx.showModal({

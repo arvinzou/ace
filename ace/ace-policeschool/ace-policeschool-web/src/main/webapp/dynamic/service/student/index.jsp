@@ -143,13 +143,25 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">单位全称</label>
+        <label class="col-md-2 view-label">籍贯</label>
+        <div class="col-md-10">
+            \${data.o.nativePlace}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">单位</label>
         <div class="col-md-10">
             \${data.o.workUnitName}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">职务全称</label>
+        <label class="col-md-2 view-label">出生年月</label>
+        <div class="col-md-10">
+            \${data.o.birthDate}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">职务</label>
         <div class="col-md-10">
             \${data.o.postName}
         </div>
@@ -161,9 +173,21 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 view-label">毕业院校</label>
+        <div class="col-md-10">
+            \${data.o.college}
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 view-label">手机号</label>
         <div class="col-md-10">
             \${data.o.mobile}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">警号</label>
+        <div class="col-md-10">
+            \${data.o.badgeNum}
         </div>
     </div>
     <div class="form-group">

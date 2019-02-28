@@ -6,22 +6,27 @@
         <result column="roadSectionId" jdbcType="VARCHAR" property="roadSectionId"/>
         <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
         <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="gatherTime" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
     <insert id="insert" parameterType="com.huacainfo.ace.taa.model.RoadGps">
     insert into road_gps (id, roadSectionId, latitude, 
-      longitude, createUserId, createUserName, 
-      createDate)
+      longitude, createUserId, createUserName, createDate, gatherTime)
     values (#{id,jdbcType=VARCHAR}, #{roadSectionId,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, 
       #{longitude,jdbcType=DECIMAL}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP})
+      #{createDate,jdbcType=TIMESTAMP}, #{gatherTime,jdbcType=TIMESTAMP})
   </insert>
     <select id="getList" resultType="map">
-    select   id, roadSectionId, latitude, longitude, createUserId, createUserName,  DATE_FORMAT(createDate,"%Y-%m-%d %T") createDate
+    select
+    id, roadSectionId, latitude, longitude,
+    createUserId, createUserName,
+    DATE_FORMAT(createDate,"%Y-%m-%d %T") createDate,
+    DATE_FORMAT(gatherTime,"%Y-%m-%d %T") gatherTime,
     from road_gps
-    where roadSectionId=#{p.id} order by createDate
+    where roadSectionId=#{p.id}
+    order by gatherTime
   </select>
     <delete id="deleteByPrimaryKeys">
         delete from road_gps

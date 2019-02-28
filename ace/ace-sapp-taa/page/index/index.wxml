@@ -18,7 +18,7 @@
         <cover-image src='../../image/icon-column.png'></cover-image>
       </cover-view>
     </cover-view>
-    <cover-image src='../../image/icon-location.png' class='reset-locate' bindtap='resetData'></cover-image>
+    <cover-image src='../../image/icon-location.png' class='reset-locate icon-dingwei' bindtap='resetData'></cover-image>
   </map>
   <view class='fromContent'>
     <view class='content'>
@@ -28,8 +28,10 @@
             <view class='close-open-box' bindtap='closeAndOpen'>
               <image src='../../image/icon-open-close.png' class='close-open'></image>
             </view>
-            <view class='locate-name'>{{address}}</view>
-            <view class='locate-road' wx:if='{{sectionFlag == true}}' bindtap='selectRoadSection'>{{sectionName}}</view>
+            <view class=' locate-name locate-name-wrapper' wx:if='{{sectionFlag == true}}' bindtap='selectRoadSection'>
+              {{sectionName}}<view class='select-arrow-div'><image class='select-arrow' src='../../image/icon_rediret.png' ></image></view>
+            </view>
+            <view class='locate-road'>{{address}}</view>
             <view class='locate-road' wx:if='{{sectionFlag == false}}' bindtap='selectRoadSection'>请选择路段</view>
           </view>
           <view class='fromInput'>
@@ -106,7 +108,7 @@
         </cover-view>
       </block>
       <block wx:else>
-      <!-- <block wx:else='{{startName}}'> -->
+        <!-- <block wx:else='{{startName}}'> -->
         <cover-view class='form '>
           <cover-view class='dot start'></cover-view>
           <cover-view class='dot-text'>起点：</cover-view>
@@ -121,18 +123,21 @@
         </cover-view>
       </block>
     </cover-view>
-    <block wx:if="{{collectionId==null || collectionId==undefined || collectionId==''}}">
-    <cover-view class='collectionBtn {{startName?"":"hidden"}}'>
-      <cover-view class='cjBtn startBtn {{breakBtn}} {{activeBreak}}' bindtap='{{activeBreak?"break":"start"}}'>{{activeBreak?'暂停':'开始'}}</cover-view>
-      <cover-view class='cjBtn endBtn {{tab == 1}}' bindtap='end'>结束</cover-view>
-    </cover-view>
+    <!-- <block wx:if="{{collectionId==null || collectionId==undefined || collectionId==''}}"> -->
+    <block wx:if="{{!isCJ}}">
+      <cover-view class='collectionBtn {{startName?"":"hidden"}}' data-id="{{collectionId}}">
+        <cover-view class='cjBtn startBtn {{breakBtn}} {{activeBreak}}' 
+              bindtap='{{activeBreak?"break":"start"}}'>{{activeBreak?'暂停':'开始'}}             
+        </cover-view>
+        <cover-view class='cjBtn endBtn {{tab == 1}}' bindtap='end'>结束</cover-view>
+      </cover-view>
     </block>
 
     <!--加减采集速度-->
     <cover-view class='control-map'>
       <cover-image class='icon-control-map {{frequency == 0?"hidden":""}}' src='../../image/icon-reduce.png' bindtap='reduce'></cover-image>
       <cover-image class='icon-control-map {{frequency == 0?"hidden":""}}' src='../../image/icon-increase.png' bindtap='increase'></cover-image>
-      <cover-image class='icon-control-map' src='../../image/icon-location.png' bindtap='resetCj'></cover-image>
+      <cover-image class='icon-control-map ' wx:if="{{isCJ}}" src='../../image/icon-location.png' bindtap='resetCj'></cover-image>
     </cover-view>
   </map>
 </view>

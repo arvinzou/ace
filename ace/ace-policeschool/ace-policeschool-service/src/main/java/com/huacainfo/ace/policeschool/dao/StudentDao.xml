@@ -5,13 +5,17 @@
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="pid" jdbcType="VARCHAR" property="pid"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="nativePlace" jdbcType="VARCHAR" property="nativePlace"/>
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
         <result column="idCard" jdbcType="CHAR" property="idCard"/>
         <result column="political" jdbcType="VARCHAR" property="political"/>
         <result column="workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
         <result column="postName" jdbcType="VARCHAR" property="postName"/>
         <result column="classId" jdbcType="VARCHAR" property="classId"/>
+        <result column="badgeNum" jdbcType="VARCHAR" property="badgeNum"/>
+        <result column="college" jdbcType="VARCHAR" property="college"/>
+        <result column="birthDate" jdbcType="TIMESTAMP" property="birthDate"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -22,9 +26,9 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, pid, name, sex, mobile, idCard, political, workUnitName, postName, classId, remark,
-        status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
-        lastModifyDate
+        id, pid, name, sex, nativePlace, mobile, idCard, political, workUnitName, postName,
+        classId, badgeNum, college, birthDate, remark, status, createUserId, createUserName,
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -37,40 +41,47 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.Student">
-        insert into student (id, pid, name, sex,
-        mobile, idCard, political,
-        workUnitName, postName, classId,
-        remark, status, createUserId,
-        createUserName, createDate, lastModifyUserId,
-        lastModifyUserName, lastModifyDate)
+        insert into student (id, pid, name,
+          sex, nativePlace, mobile,
+          idCard, political, workUnitName,
+          postName, classId, badgeNum,
+          college, birthDate, remark,
+          status, createUserId, createUserName,
+          createDate, lastModifyUserId, lastModifyUserName,
+          lastModifyDate)
         values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-        #{sex,jdbcType=VARCHAR},
-        #{mobile,jdbcType=VARCHAR}, #{idCard,jdbcType=CHAR}, #{political,jdbcType=VARCHAR},
-        #{workUnitName,jdbcType=VARCHAR}, #{postName,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR},
-        #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
-        #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
-        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+          #{sex,jdbcType=CHAR}, #{nativePlace,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+          #{idCard,jdbcType=CHAR}, #{political,jdbcType=VARCHAR}, #{workUnitName,jdbcType=VARCHAR},
+          #{postName,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR}, #{badgeNum,jdbcType=VARCHAR},
+          #{college,jdbcType=VARCHAR}, #{birthDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR},
+          #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+          #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+          #{lastModifyDate,jdbcType=TIMESTAMP})
     </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.Student">
         update student
         set pid = #{pid,jdbcType=VARCHAR},
-        name = #{name,jdbcType=VARCHAR},
-        sex = #{sex,jdbcType=VARCHAR},
-        mobile = #{mobile,jdbcType=VARCHAR},
-        idCard = #{idCard,jdbcType=CHAR},
-        political = #{political,jdbcType=VARCHAR},
-        workUnitName = #{workUnitName,jdbcType=VARCHAR},
-        postName = #{postName,jdbcType=VARCHAR},
-        classId = #{classId,jdbcType=VARCHAR},
-        remark = #{remark,jdbcType=VARCHAR},
-        status = #{status,jdbcType=CHAR},
-        createUserId = #{createUserId,jdbcType=VARCHAR},
-        createUserName = #{createUserName,jdbcType=VARCHAR},
-        createDate = #{createDate,jdbcType=TIMESTAMP},
-        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+          name = #{name,jdbcType=VARCHAR},
+          sex = #{sex,jdbcType=CHAR},
+          nativePlace = #{nativePlace,jdbcType=VARCHAR},
+          mobile = #{mobile,jdbcType=VARCHAR},
+          idCard = #{idCard,jdbcType=CHAR},
+          political = #{political,jdbcType=VARCHAR},
+          workUnitName = #{workUnitName,jdbcType=VARCHAR},
+          postName = #{postName,jdbcType=VARCHAR},
+          classId = #{classId,jdbcType=VARCHAR},
+          badgeNum = #{badgeNum,jdbcType=VARCHAR},
+          college = #{college,jdbcType=VARCHAR},
+          birthDate = #{birthDate,jdbcType=TIMESTAMP},
+          remark = #{remark,jdbcType=VARCHAR},
+          status = #{status,jdbcType=CHAR},
+          createUserId = #{createUserId,jdbcType=VARCHAR},
+          createUserName = #{createUserName,jdbcType=VARCHAR},
+          createDate = #{createDate,jdbcType=TIMESTAMP},
+          lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+          lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+          lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
@@ -83,10 +94,9 @@
     <sql id="Vo_Column_List">
         cd.cardData as lCardNo,
         c.`name` as clsName,
-        t.id, t.pid, t.name, t.sex, t.mobile, t.idCard, t.political,
-        t.workUnitName, t.postName, t.classId, t.remark,
-        t.status, t.createUserId, t.createUserName, t.createDate,
-        t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        t.id, t.pid, t.name, t.sex, t.nativePlace, t.mobile, t.idCard, t.political, t.workUnitName, t.postName,
+        t.classId, t.badgeNum, t.college, t.birthDate, t.remark, t.status, t.createUserId, t.createUserName,
+        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
     <sql id="From_Statement">
         FROM student t

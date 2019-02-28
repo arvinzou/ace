@@ -111,6 +111,10 @@ function toTest(){
     window.location.href = contextPath + '/www/registered/test/index.jsp';
 }
 
+function makeAttand(){
+    window.location.href = contextPath + '/www/registered/phoneCard/index.jsp';
+}
+
 function initNoticeTop1(){
     $.ajax({
         url: contextPath + "/www/notice/findNoticeLists",

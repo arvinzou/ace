@@ -10,4 +10,6 @@ public interface TraAccCauseDao {
     TraAccCause selectByPrimaryKey(String id);
 
     int updateByPrimaryKey(TraAccCause record);
+
+    int reset(String accId);
 }

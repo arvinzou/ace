@@ -11,6 +11,6 @@ cfg.pager_selector = "#grid-pager";
 cfg.rowNum = default_page_list[0];
 cfg.dataId = 'id';
 cfg.gridHeight = 'auto';
-cfg.jgridEditWinWidth = 1200;
+cfg.jgridEditWinWidth = 900;
 cfg.jgridAlertWidth = 400;
 cfg.jgrdInfoDialogWidth = 500;

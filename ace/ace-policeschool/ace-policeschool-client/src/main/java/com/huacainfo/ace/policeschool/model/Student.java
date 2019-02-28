@@ -4,12 +4,6 @@ import com.huacainfo.ace.common.model.BaseModel;
 
 import java.util.Date;
 
-/**
- * 功能描述: 学院信息 partyschool.Student
- *
- * @auther: Arvin Zou
- * @date: 2018/12/29 12:40
- */
 public class Student extends BaseModel {
     private String id;
 
@@ -18,6 +12,8 @@ public class Student extends BaseModel {
     private String name;
 
     private String sex;
+
+    private String nativePlace;
 
     private String mobile;
 
@@ -32,6 +28,12 @@ public class Student extends BaseModel {
     private String postName;
 
     private String classId;
+
+    private String badgeNum;
+
+    private String college;
+
+    private Date birthDate;
 
     private String remark;
     /**
@@ -51,14 +53,6 @@ public class Student extends BaseModel {
 
     private Date lastModifyDate;
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
     public String getId() {
         return id;
     }
@@ -76,15 +70,31 @@ public class Student extends BaseModel {
     }
 
     public String getName() {
-        return name == null ? null : name.trim();
+        return name;
     }
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
+    }
+
+    public String getNativePlace() {
+        return nativePlace;
+    }
+
+    public void setNativePlace(String nativePlace) {
+        this.nativePlace = nativePlace == null ? null : nativePlace.trim();
+    }
+
     public String getMobile() {
-        return mobile == null ? null : mobile.trim();
+        return mobile;
     }
 
     public void setMobile(String mobile) {
@@ -92,7 +102,7 @@ public class Student extends BaseModel {
     }
 
     public String getIdCard() {
-        return idCard == null ? null : idCard.trim();
+        return idCard;
     }
 
     public void setIdCard(String idCard) {
@@ -129,6 +139,30 @@ public class Student extends BaseModel {
 
     public void setClassId(String classId) {
         this.classId = classId == null ? null : classId.trim();
+    }
+
+    public String getBadgeNum() {
+        return badgeNum;
+    }
+
+    public void setBadgeNum(String badgeNum) {
+        this.badgeNum = badgeNum == null ? null : badgeNum.trim();
+    }
+
+    public String getCollege() {
+        return college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college == null ? null : college.trim();
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getRemark() {

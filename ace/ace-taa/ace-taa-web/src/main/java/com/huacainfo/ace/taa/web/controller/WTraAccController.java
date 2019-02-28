@@ -30,7 +30,7 @@ public class WTraAccController extends TaaBaseController {
     private TraAccService traAccService;
 
     /**
-     * 获取事故报表
+     * 获取事故报表 --小程序端展示
      *
      * @param condition 条件查询
      * @param page      分页条件
@@ -56,14 +56,8 @@ public class WTraAccController extends TaaBaseController {
         if (u == null) {
             return new ResultResponse(ResultCode.FAIL, "账户信息有误");
         }
-        condition.setDeptId(u.getCorpId());
 
-        PageResult<TraAccVo> rst = traAccService.findTraAccList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
-        }
-
-        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
+        return traAccService.findViewList(u, condition, page);
     }
 
     /**

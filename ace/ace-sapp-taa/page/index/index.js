@@ -48,46 +48,52 @@ Page({
     frequency: 0, //是否显示加减频率
     timeInterval: 10000, //采集频率以10秒为单位
     isRegist: true,
+    isCJ: false, // 当前数据是否是采集数据的标志
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-      var that = this;
-      if (!app.globalData.collectionId) {
-          app.globalData.startName = '';
-          app.globalData.endName = null;
-          that.setData({
-              polyline: [{
-                  points: [],
-                  color: '#4350FC',
-                  width: 8,
-                  dottedLine: false
-              }]
-          });
-
-      } else {
-          that.setData({
-              collectionId: app.globalData.collectionId
-          });
-      }
-      app.globalData.sectionId = null;
-      app.globalData.sectionName = '';
-      app.globalData.tab = null;
-      app.globalData.cjSectionId = null;
-      app.globalData.roadManId = null;
-      app.globalData.roadManName = null;
+    var that = this;
+    if (!app.globalData.collectionId) {
+      app.globalData.startName = '';
+      app.globalData.endName = null;
       that.setData({
-          sectionName: '请选择路段'
-      })
-  
+        polyline: [{
+          points: [],
+          color: '#4350FC',
+          width: 8,
+          dottedLine: false
+        }]
+      });
+
+    } else {
+      that.setData({
+        collectionId: app.globalData.collectionId
+      });
+    }
+    app.globalData.sectionId = null;
+    app.globalData.sectionName = '';
+    app.globalData.tab = null;
+    app.globalData.cjSectionId = null;
+    app.globalData.roadManId = null;
+    app.globalData.roadManName = null;
+    that.setData({
+      sectionName: '请选择路段'
+    })
+
   },
   selectRoad: function() {
     wx.navigateTo({
       url: '../collection/index?type=cj',
     });
   },
+  /**
+   * 首页选项卡切换
+   */
+
   changeTab: function(e) {
     var that = this;
     that.setData({
@@ -97,24 +103,27 @@ Page({
         color: '#4350FC',
         width: 8,
         dottedLine: false
-     }]
+      }]
     });
-     
-      app.globalData.startName = '';
-      app.globalData.endName = null;
-      app.globalData.sectionId = null;
-      app.globalData.sectionName = '';
-      app.globalData.tab = null;
-      app.globalData.cjSectionId = null;
-      app.globalData.roadManId = null;
-      app.globalData.roadManName = null;
-      app.globalData.collectionId = null;
-      that.setData({
-          sectionName: '请选择路段',
-          collectionId: app.globalData.collectionId
-      });
-      that.initUserData();
+
+    app.globalData.startName = '';
+    app.globalData.endName = null;
+    app.globalData.sectionId = null;
+    app.globalData.sectionName = '';
+    app.globalData.tab = null;
+    app.globalData.cjSectionId = null;
+    app.globalData.roadManId = null;
+    app.globalData.roadManName = null;
+    app.globalData.collectionId = null;
+    that.setData({
+      sectionName: '请选择路段',
+      collectionId: app.globalData.collectionId
+    });
+    that.initUserData();
   },
+  /**
+   * 得到当前位置信息(经纬度)
+   */
   getLocation: function(e) {
     var that = this;
     wx.getLocation({
@@ -140,6 +149,9 @@ Page({
       },
     })
   },
+  /**
+   * 获取地址信息
+   */
   toAddress: function(latitude, longitude) {
     var that = this;
     util.request(cfg.server + '/taa/www/mapApi/tx/reversePoint', {
@@ -164,6 +176,9 @@ Page({
       }
     );
   },
+  /**
+   * 获取街道信息
+   */
   getRoadSection: function(latitude, longitude) {
     var that = this;
     util.request(cfg.server + '/taa/www/road/getCloseRoadSection', {
@@ -480,25 +495,30 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-      var that = this;
-      if (!util.is_login()) {
-          wx.navigateTo({
-              url: "../userinfo/index?url=../index/index&type=navigateTo"
-          });
-      } else {
-          that.getLocation();
-          that.initDict();
-          if (app.globalData.collectionId) {
-              that.setData({
-                  startName: app.globalData.startName,
-                  endName: app.globalData.endName
-              });
-              console.log("startName=========endName==============" + that.data.startName);
-              that.initGpsList(app.globalData.collectionId);
-          } else {
-              that.initUserData();
-          }
+    var that = this;
+    if (!util.is_login()) {
+      wx.navigateTo({
+        url: "../userinfo/index?url=../index/index&type=navigateTo"
+      });
+    } else {
+      that.getLocation();
+      that.initDict();
+      that.initUserData(); // 重置后从定向首页，初始化用户信息
+      if (app.globalData.collectionId) {
+        that.setData({
+          startName: app.globalData.startName,
+          endName: app.globalData.endName,
+        });
+        console.log("startName=========endName==============" + that.data.startName);
+        that.initGpsList(app.globalData.collectionId);
       }
+      
+    }
+    //设置采集标志，判断是否显示隐藏开始，暂停，结束按钮
+    that.setData({
+      isCJ: app.globalData.isCJ
+    })
+
   },
 
   /**
@@ -560,6 +580,7 @@ Page({
           wx.showModal({
             title: '提示',
             content: res.info,
+            showCancel: false,
             success: function(res) {
               wx.navigateTo({
                 url: '../collection/index?tab=1',
@@ -620,12 +641,14 @@ Page({
       var interval = time / 1000;
       wx.showModal({
         title: '提示',
+        showCancel: false,
         content: '采集频率开始以' + interval + '秒间隔采集！',
         success: function(res) {}
       });
     } else {
       wx.showModal({
         title: '提示',
+        showCancel: false,
         content: '采集频率已经减少到最低1秒采集了！',
         success: function(res) {}
       });
@@ -716,41 +739,43 @@ Page({
     that.getLocation();
   },
 
-    /**
-      * 获取已采集的坐标点
-      */
-    initGpsList: function (sectionId) {
-        var that = this;
-        util.request(cfg.server + '/taa/www/road/getGPSList', { sectionId: sectionId },
-            function (res) {
-                if (res.status == 0) {
-                    var pointList = that.data.polyline[0].points;
-                    var retList = res.value;
-                    for (var i = 0; i < retList.length; i++) {
-                        var latitude = retList[i].latitude;
-                        var longitude = retList[i].longitude;
-                        var o = {
-                            longitude: longitude,
-                            latitude: latitude
-                        }
-                        pointList.push(o);
-                    }
-
-                    that.setData({
-                        ['polyline[0].points']: pointList
-                    });
-                    console.log("已经采集的信息==========================" + that.data.polyline[0].points);
-                } else {
-                    wx.showModal({
-                        title: '提示',
-                        content: res.info,
-                        success: function (res) { }
-                    });
-                }
-
+  /**
+   * 获取已采集的坐标点
+   */
+  initGpsList: function(sectionId) {
+    var that = this;
+    util.request(cfg.server + '/taa/www/road/getGPSList', {
+        sectionId: sectionId
+      },
+      function(res) {
+        if (res.status == 0) {
+          var pointList = that.data.polyline[0].points;
+          var retList = res.value;
+          for (var i = 0; i < retList.length; i++) {
+            var latitude = retList[i].latitude;
+            var longitude = retList[i].longitude;
+            var o = {
+              longitude: longitude,
+              latitude: latitude
             }
-        );
-    },
+            pointList.push(o);
+          }
+
+          that.setData({
+            ['polyline[0].points']: pointList
+          });
+          // console.log("已经采集的信息==========================" + that.data.polyline[0].points);
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: res.info,
+            success: function(res) {}
+          });
+        }
+
+      }
+    );
+  },
   /**
    * 页面上拉触底事件的处理函数
    */

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.taa.dao.OfficeAdminDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.OfficeAdmin">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="nickName" jdbcType="VARCHAR" property="nickName" />
+    <result column="headerImage" jdbcType="VARCHAR" property="headerImage" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, nickName, headerImage, status, remark, createUserId, createUserName, 
+    createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from office_admin
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from office_admin
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.taa.model.OfficeAdmin">
+    insert into office_admin (id, userId, nickName, 
+      headerImage, status, remark, 
+      createUserId, createUserName, createDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{headerImage,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.OfficeAdmin">
+    update office_admin
+    set userId = #{userId,jdbcType=VARCHAR},
+      nickName = #{nickName,jdbcType=VARCHAR},
+      headerImage = #{headerImage,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.taa.vo.OfficeAdminVo">
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        t.id, t.userId, t.nickName, t.headerImage, t.status, t.remark,
+        t.createUserId, t.createUserName, t.createDate
+    </sql>
+    <sql id="From_Statement">
+        FROM office_admin t
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.taa.model.OfficeAdmin">
+        select count(1)
+        from office_admin t
+        where t.userId = #{userId,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="selectList" resultType="map" parameterType="java.lang.String">
+        SELECT
+            n.unionId as unionid,
+            n.avatarUrl as headimgurl,
+            n.nickName as nickname
+        FROM portal.wx_user n
+        WHERE 1=1
+        <if test='nickname!=null and nickname!=""'>
+            and nickname like concat(#{nickname,jdbcType=VARCHAR},'%')
+        </if>
+        limit 0, 30
+    </select>
+
+    <select id="isExistByUserId" resultType="int">
+        select count(1)
+        from office_admin t
+        where t.userId = #{userId,jdbcType=VARCHAR}
+    </select>
+</mapper>
