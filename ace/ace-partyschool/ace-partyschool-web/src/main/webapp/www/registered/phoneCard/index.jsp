@@ -21,50 +21,10 @@
 
 			</div>
 			<div class="timeList">
-				<div class="time-title">今日已签到0/5</div>
+				<div class="time-title" id="count"></div>
 				<div class="timeList-inner">
-					<ul class="layui-timeline">
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis"></i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">上午</h3>
-								<p>上午签到08:00-08:30</p>
-								<p>上午签退08:00-08:30</p>
-								<div id="amBtn" class="qiandao" onclick="record();" style="display: none;">
-									<div class="cell">
-										<p class="qtitle">上午签到</p>
-										<p class="qtime" id="am"></p>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis"></i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">下午</h3>
-								<p>下午签到08:00-08:30</p>
-								<p>下午签退08:00-08:30</p>
-								<div id="pmBtn" class="qiandao"  onclick="record();" style="display: none;">
-									<div class="cell">
-										<p class="qtitle">下午签到</p>
-										<p class="qtime" id="pm"></p>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li class="layui-timeline-item">
-							<i class="layui-icon layui-timeline-axis"></i>
-							<div class="layui-timeline-content layui-text">
-								<h3 class="layui-timeline-title">晚上</h3>
-								<p>晚上签到08:00-08:30</p>
-								<div id="nightBtn" class="qiandao"  onclick="record();" style="display: none;">
-									<div class="cell">
-										<p class="qtitle">晚上签到</p>
-										<p class="qtime" id="night"></p>
-									</div>
-								</div>
-							</div>
-						</li>
+					<ul class="layui-timeline" id="recordList">
+
 					</ul>
 				</div>
 			</div>
@@ -86,6 +46,55 @@
 				{@/if}
 			</div>
 			<div class="currentDte">\${data.currentDate}</div>
+		</script>
+
+		<script type="text/template" id="record-tpl">
+			<li class="layui-timeline-item">
+				<i class="layui-icon layui-timeline-axis"></i>
+				<div class="layui-timeline-content layui-text">
+					<h3 class="layui-timeline-title">上午</h3>
+					{@if data.am.length > 0}
+						{@each data.am as am, index01}
+							<p>上午打卡\${am.attTime}</p>
+						{@/each}
+					{@/if}
+					<div id="amBtn" class="qiandao" onclick="record();" style="display: none;">
+						<div class="cell">
+							<p class="qtitle">上午签到</p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="layui-timeline-item">
+				<i class="layui-icon layui-timeline-axis"></i>
+				<div class="layui-timeline-content layui-text">
+					<h3 class="layui-timeline-title">下午</h3>
+					{@if data.pm.length > 0}
+					{@each data.pm as pm, index02}
+					<p>下午打卡\${pm.attTime}</p>
+					{@/each}
+					{@/if}
+					<div id="pmBtn" class="qiandao"  onclick="record();" style="display: none;">
+						<div class="cell">
+							<p class="qtitle">下午签到</p>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="layui-timeline-item">
+				<i class="layui-icon layui-timeline-axis"></i>
+				<div class="layui-timeline-content layui-text">
+					<h3 class="layui-timeline-title">晚上</h3>
+					{@if data.night[0]}
+					<p>晚上签到\${data.night[0].attTime}</p>
+					{@/if}
+					<div id="nightBtn" class="qiandao"  onclick="record();" style="display: none;">
+						<div class="cell">
+							<p class="qtitle">晚上签到</p>
+						</div>
+					</div>
+				</div>
+			</li>
 		</script>
 
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
