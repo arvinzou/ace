@@ -14,7 +14,7 @@ public interface TopicDao {
 
     int deleteByPrimaryKey(String id);
 
-    int insert(Topic record);
+    int insert(TopicQVo record);
 
 
     int updateByPrimaryKey(Topic record);

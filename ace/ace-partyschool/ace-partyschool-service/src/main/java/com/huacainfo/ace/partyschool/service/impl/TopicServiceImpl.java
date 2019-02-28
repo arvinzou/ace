@@ -9,6 +9,7 @@ import java.util.List;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.service.TopicOptService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,8 @@ public class TopicServiceImpl implements TopicService {
     private TopicDao topicDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private TopicOptService topicOptService;
 
 
     /**
@@ -79,7 +82,7 @@ public class TopicServiceImpl implements TopicService {
      * @version: 2019-02-27
      */
     @Override
-    public MessageResponse insertTopic(Topic o, UserProp userProp) throws Exception {
+    public MessageResponse insertTopic(TopicQVo o, UserProp userProp) throws Exception {
         o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
@@ -90,11 +93,6 @@ public class TopicServiceImpl implements TopicService {
         if (CommonUtils.isBlank(o.getType())) {
             return new MessageResponse(1, "题目类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getAnalysis())) {
-            return new MessageResponse(1, "测试分析不能为空！");
-        }
-
-
         int temp = this.topicDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "试题管理名称重复！");
@@ -103,6 +101,9 @@ public class TopicServiceImpl implements TopicService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.topicDao.insert(o);
+        if(o.getOptions().size()>0) {
+            this.topicOptService.insertTopicOptList(o.getOptions(), o.getId(), userProp);
+        }
         this.dataBaseLogService.log("添加试题管理", "试题管理", "",
                 o.getId(), o.getId(), userProp);
 
@@ -224,7 +225,7 @@ public class TopicServiceImpl implements TopicService {
     public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
         int i = 1;
         for (Map<String, Object> row : list) {
-            Topic o = new Topic();
+            TopicQVo o = new TopicQVo();
             CommonBeanUtils.copyMap2Bean(o, row);
             o.setCreateDate(new Date());
             o.setCreateUserId(userProp.getUserId());

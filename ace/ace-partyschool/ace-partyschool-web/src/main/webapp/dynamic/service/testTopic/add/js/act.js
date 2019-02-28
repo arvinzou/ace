@@ -1,121 +1,142 @@
 var loading = {};
 var editor;
+var abc = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 window.onload = function () {
     jQuery(function ($) {
         $(".breadcrumb").append("<li><span>创建试题管理</span></li>");
-        initEvents();
-        autoTestareaHeight();
+        initVue();
     });
 }
 
+function initVue() {
+    new Vue({
+        el: "#app",
+        data: {
+            type1: {
+                type: '1',
+                content: '',
+                options: [{
+                    answer: '0',
+                    content: '',
+                }, {
+                    answer: '0',
+                    content: '',
+                }]
+            },
+            type2: {
+                type: '2',
+                content: '',
+                options: [{
+                    answer: '0',
+                    content: '',
+                }, {
+                    answer: '0',
+                    content: '',
+                }]
+            },
+            type3: {
+                type: '3',
+                content: '',
+                options: [{
+                    answer: '0',
+                    content: '正确',
+                }, {
+                    answer: '0',
+                    content: '错误',
+                }]
+            },
+            type4: {
+                type: '4',
+                content: '',
+            },
+            type5: {
+                type: '5',
+                content: '',
+            }
+        },
 
-function autoTestareaHeight() {
-    $('textarea').each(function () {
-        this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-    }).on('input', function () {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
+        methods: {
+            submit1: function (type) {
+                const that = this;
+                const data = that[type];
+                var answer = $('.test input[name='+type+']:checked').val();
+                if (!answer) {
+                    alert("没有选择正确答案！");
+                }
+                data.options[answer].answer = 1;
+                that.postData(data);
+            },
+            submit2:function (type) {
+                const that = this;
+                const data = that[type];
+                var checkeds = $('.test input[name='+type+']:checked');
+                if (checkeds.length<1) {
+                    alert("没有选择正确答案！");
+                }
+                checkeds.each(function(i){
+                    data.options[$(this).val()].answer=1;
+                });
+                that.postData(data);
+            },
+            addOption: function (type) {
+                const options = this[type].options
+                if (options.length > 25) {
+                    alert("最多只能添加26个选项");
+                    return;
+                }
+                this[type].options.push({content: '', answer: '0'});
+            },
+            removeOption: function (type, index) {
+                this[type].options.splice(index, 1);
+            },
+            autoHeight: function (e) {
+                var thisDom = e.currentTarget;
+                thisDom.style.height = (thisDom.scrollHeight) + 'px';
+            },
+            verify: function (data) {
+                for (const item in data) {
+                    if (typeof(data[item]) == 'object') {
+                        var op = data[item];
+                        for (const i in op) {
+                            if (!op[i].content) {
+                                return false;
+                            }
+                        }
+                    } else {
+                        if (!data[item]) {
+                            return false;
+                        }
+                    }
+
+                }
+                return true;
+            },
+            postData:function (data) {
+                const  that=this;
+                if (that.verify(data)) {
+                    const url = contextPath + "/topic/insertTopic";
+                    const datas = {
+                        jsons: JSON.stringify(data)
+                    }
+                    $.post(url, datas, function () {
+
+                    })
+                } else {
+                    alert("还有内容没有填写");
+                }
+            }
+        },
+        mounted: {
+            initTestareaHeight: function () {
+                $('textarea').each(function () {
+                    this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+                })
+            }
+        }
     })
 }
 
 
-function initEditor() {
-    editor = new Simditor({
-        textarea: $('textarea[name=introduce]'),
-        toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
-            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
-        ],
-        upload: {
-            url: portalPath + '/files/uploadImage.do',
-            params: null,
-            fileKey: 'file',
-            connectionCount: 3,
-            leaveConfirm: '正在上传文件'
-        }
-    });
-}
 
-/*页面渲染*/
-function render(obj, data, tplId) {
-    var tpl = document.getElementById(tplId).innerHTML;
-    var html = juicer(tpl, {
-        data: data,
-    });
-    $(obj).html(html);
-}
 
-function initPage() {
-    initForm();
-}
 
-function initEvents() {
-    /*表单验证*/
-    $("#fm-add").validate({
-        onfocusout: function (element) {
-            $(element).valid();
-        },
-        rules: {
-            testId: {required: true, maxlength: 50},
-            content: {required: true, maxlength: 200},
-            analysis: {required: true, maxlength: 200}
-        },
-        messages: {
-            testId: {
-                required: "请输入测试主键",
-                maxlength: "测试主键字符长度不能超过50"
-            }, content: {
-                required: "请输入题目内容",
-                maxlength: "题目内容字符长度不能超过200"
-            }, analysis: {
-                required: "请输入测试分析",
-                maxlength: "测试分析字符长度不能超过200"
-            }
-        }
-    });
-    /*监听表单提交*/
-    $('#fm-add').ajaxForm({
-        beforeSubmit: function (formData, jqForm, options) {
-            var params = {};
-            $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
-            });
-            $.extend(params, {
-                time: new Date(),
-//coverUrl: $('#coverUrl').attr("src"),
-            });
-            console.log(params);
-            save(params);
-            return false;
-        }
-    });
-}
-
-/*保存表单**/
-function save(params) {
-    $.extend(params, {});
-    startLoad();
-    $.ajax({
-        url: contextPath + "/topic/insertTopic",
-        type: "post",
-        async: false,
-        data: {
-            jsons: JSON.stringify(params)
-        },
-        success: function (result) {
-            stopLoad();
-            alert(result.errorMessage);
-            if (result.status == 0) {
-                window.location.href = '../index.jsp?id=' + urlParams.id;
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
-        }
-    });
-}
-
-function initForm() {
-    var data = staticDictObject;
-    render('#fm-add-panel', data, 'tpl-fm-add');
-}
