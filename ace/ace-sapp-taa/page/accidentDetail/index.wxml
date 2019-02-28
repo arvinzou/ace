@@ -7,6 +7,7 @@
                 <view class='locate'>{{detail.address}}</view>
                 <view class='locate-road' bindtap='selectRoadSection'>
                     <text>{{sectionName}}</text>
+                    <input style='display:none;'  type='text' value='{{sectionId}}' name='roadSectionId'></input>
                     <image src='../../image/icon_rediret.png'></image>
                 </view>
             </view>
@@ -14,6 +15,7 @@
                 <view class='row-left'>所属路长</view>
                 <view class='row-right content'>
                     <input type='text' value='{{roadManName}}' readonly bindtap='selectRoad'></input>
+                    <input style='display:none;' type='text' value='{{roadManId}}' name='roadManId'></input>
                     <image src='../../image/icon_rediret.png'></image>
                 </view>
             </view>
@@ -82,7 +84,7 @@
                 <checkbox-group bindchange="seasonChange" name='cause'>
                 <block wx:for="{{seasonList}}">
                     <label class="checkbox cbox" wx:if='{{item.CODE != ""}}'>
-                        <checkbox value="{{item.CODE}}" />{{item.NAME}}
+                        <checkbox value="{{item.CODE}}" checked="{{item.checked}}"/>{{item.NAME}}
                     </label>
                 </block>
                 </checkbox-group>

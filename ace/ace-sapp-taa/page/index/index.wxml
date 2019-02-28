@@ -106,7 +106,7 @@
         </cover-view>
       </block>
       <block wx:else>
-      <!-- <block wx:else='{{startName}}'> -->
+        <!-- <block wx:else='{{startName}}'> -->
         <cover-view class='form '>
           <cover-view class='dot start'></cover-view>
           <cover-view class='dot-text'>起点：</cover-view>
@@ -121,11 +121,14 @@
         </cover-view>
       </block>
     </cover-view>
-    <block wx:if="{{collectionId==null || collectionId==undefined || collectionId==''}}">
-    <cover-view class='collectionBtn {{startName?"":"hidden"}}'>
-      <cover-view class='cjBtn startBtn {{breakBtn}} {{activeBreak}}' bindtap='{{activeBreak?"break":"start"}}'>{{activeBreak?'暂停':'开始'}}</cover-view>
-      <cover-view class='cjBtn endBtn {{tab == 1}}' bindtap='end'>结束</cover-view>
-    </cover-view>
+    <!-- <block wx:if="{{collectionId==null || collectionId==undefined || collectionId==''}}"> -->
+    <block wx:if="{{!isCJ}}">
+      <cover-view class='collectionBtn {{startName?"":"hidden"}}' data-id="{{collectionId}}">
+        <cover-view class='cjBtn startBtn {{breakBtn}} {{activeBreak}}' 
+              bindtap='{{activeBreak?"break":"start"}}'>{{activeBreak?'暂停':'开始'}}             
+        </cover-view>
+        <cover-view class='cjBtn endBtn {{tab == 1}}' bindtap='end'>结束</cover-view>
+      </cover-view>
     </block>
 
     <!--加减采集速度-->

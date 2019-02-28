@@ -11,6 +11,9 @@ public class Test extends BaseModel {
 
     private String introduce;
 
+    /**0、删除
+     * 1、暂存
+     * 2、发布*/
     private String status;
 
     private Date startTime;
