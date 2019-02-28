@@ -46,6 +46,18 @@ public class TraAccQVo extends TraAcc {
      * 部门ID
      */
     private String deptId;
+    /**
+     * 内勤人员  1-是； 0-否
+     */
+    private String officeAdmin;
+
+    public String getOfficeAdmin() {
+        return officeAdmin;
+    }
+
+    public void setOfficeAdmin(String officeAdmin) {
+        this.officeAdmin = officeAdmin;
+    }
 
     public String getDeptId() {
         return deptId;
