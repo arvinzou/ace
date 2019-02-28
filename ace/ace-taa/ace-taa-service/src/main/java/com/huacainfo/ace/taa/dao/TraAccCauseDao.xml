@@ -22,8 +22,8 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.taa.model.TraAccCause">
     insert into tra_acc_cause (id, accId, cause, createDate)
-    values (#{id,jdbcType=VARCHAR}, #{accId,jdbcType=VARCHAR},
-    #{cause,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+    values (#{id,jdbcType=VARCHAR}, #{accId,jdbcType=VARCHAR}, #{cause,jdbcType=VARCHAR},
+    #{createDate,jdbcType=TIMESTAMP})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.TraAccCause">
     update tra_acc_cause
@@ -32,4 +32,9 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <delete id="reset" parameterType="java.lang.String">
+        DELETE FROM `tra_acc_cause`
+        where accId = #{accId,jdbcType=VARCHAR};
+    </delete>
 </mapper>
