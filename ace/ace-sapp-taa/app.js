@@ -32,7 +32,8 @@ App({
         cjSectionId: null,
         roadManId: null,
         roadManName : null,
-        collectionId: null
+        collectionId: null,
+        isCJ: false, // 当前数据是否是采集数据的标志
     },
     // lazy loading openid
     getUserOpenId: function (callback) {
