@@ -15,12 +15,24 @@ public class RoadGps implements java.io.Serializable {
     private BigDecimal latitude;
 
     private BigDecimal longitude;
+    /**
+     * 采集时间
+     */
+    private Date gatherTime;
 
     private String createUserId;
 
     private String createUserName;
 
     private Date createDate;
+
+    public Date getGatherTime() {
+        return gatherTime;
+    }
+
+    public void setGatherTime(Date gatherTime) {
+        this.gatherTime = gatherTime;
+    }
 
     public String getId() {
         return id;

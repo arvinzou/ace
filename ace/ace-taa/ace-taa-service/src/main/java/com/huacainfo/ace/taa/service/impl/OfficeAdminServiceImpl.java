@@ -58,8 +58,7 @@ public class OfficeAdminServiceImpl implements OfficeAdminService {
     @Override
     public PageResult<OfficeAdminVo> findOfficeAdminList(OfficeAdminQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<OfficeAdminVo> rst = new PageResult<>();
-        List<OfficeAdminVo> list = this.officeAdminDao.findList(condition,
-                start, limit, orderBy);
+        List<OfficeAdminVo> list = this.officeAdminDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.officeAdminDao.findCount(condition);
@@ -271,7 +270,7 @@ public class OfficeAdminServiceImpl implements OfficeAdminService {
      * @param: @param p
      * @param: @return
      * @param: @throws Exception
-     * @return: ListResult<Map<String,Object>>
+     * @return: ListResult<Map < String, Object>>
      * @author: Arvin
      * @version: 2019-02-28
      */
@@ -291,7 +290,7 @@ public class OfficeAdminServiceImpl implements OfficeAdminService {
      * @Description: TODO(用于控件数据获取)
      * @param: @param params
      * @param: @return
-     * @return: Map<String,Object>
+     * @return: Map<String, Object>
      * @author: Arvin
      * @version: 2019-02-28
      */
@@ -307,7 +306,7 @@ public class OfficeAdminServiceImpl implements OfficeAdminService {
     /**
      * @throws
      * @Title:deleteRoadSectionByRoadSectionIds
-     * @Description: TODO(批量删除内勤人员）
+     * @Description: TODO(批量删除内勤人员 ）
      * @param: @param ids
      * @param: @param userProp
      * @param: @throws Exception
