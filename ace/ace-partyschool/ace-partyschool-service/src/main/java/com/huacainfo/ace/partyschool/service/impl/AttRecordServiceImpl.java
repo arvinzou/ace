@@ -84,8 +84,8 @@ public class AttRecordServiceImpl implements AttRecordService {
      */
     @Override
     public MessageResponse insertAttRecord(AttRecord o, UserProp userProp) throws Exception {
-
-
+        //系统考勤时间
+        o.setAttTime(DateUtil.getNowDate());
         if (CommonUtils.isBlank(o.getAttTime())) {
             return new MessageResponse(1, "考勤时间不能为空！");
         }
@@ -109,8 +109,8 @@ public class AttRecordServiceImpl implements AttRecordService {
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
-        this.attRecordDao.insert(o);
-        this.dataBaseLogService.log("添加学员考勤", "学员考勤", "", o.getId(), o.getId(), userProp);
+        attRecordDao.insert(o);
+        dataBaseLogService.log("添加学员考勤", "学员考勤", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "签到成功！");
     }
@@ -265,7 +265,7 @@ public class AttRecordServiceImpl implements AttRecordService {
      * @param: @param p
      * @param: @return
      * @param: @throws Exception
-     * @return: ListResult<Map<String,Object>>
+     * @return: ListResult<Map < String, Object>>
      * @author: Arvin
      * @version: 2019-02-20
      */
@@ -284,7 +284,7 @@ public class AttRecordServiceImpl implements AttRecordService {
      * @Description: TODO(用于控件数据获取)
      * @param: @param params
      * @param: @return
-     * @return: Map<String,Object>
+     * @return: Map<String, Object>
      * @author: Arvin
      * @version: 2019-02-20
      */
@@ -300,7 +300,7 @@ public class AttRecordServiceImpl implements AttRecordService {
     /**
      * @throws
      * @Title:deleteRoadSectionByRoadSectionIds
-     * @Description: TODO(批量删除学员考勤）
+     * @Description: TODO(批量删除学员考勤 ）
      * @param: @param ids
      * @param: @param userProp
      * @param: @throws Exception
