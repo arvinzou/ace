@@ -8,7 +8,7 @@ var sex = null;
 var slen = 0;
 var student = null;
 $(function () {
-    var politicalArr = [{"id": "normal", "value": "非党员"}, {"id": "party", "value": "党员"}];
+    var politicalArr = [{"id": "public", "value": "群众"}, {"id": "party", "value": "党员"}, {"id": "member", "value": "团员"}];
     initClassList();
     var politicalSelect = new MobileSelect({
         trigger: '#political',
@@ -26,7 +26,7 @@ $(function () {
     });
     var classesSelect = new MobileSelect({
         trigger: '#classes',
-        title: '党校班级选择',
+        title: '班级选择',
         wheels: [
             {data: classesArr}
         ],
@@ -58,43 +58,16 @@ function regist() {
     var signAcct = $("input[name='mobile']").val();
     var pwd = $("input[name='pwd']").val();                        //第一次输入的密码
     var singPwd = $("input[name='password']").val();
-
+    var nativePlace = $("input[name='nativePlace']").val();    //籍贯
+    var college = $("input[name='college']").val();            //毕业院校
+    var badgeNum = $("input[name='badgeNum']").val();          //警号
     if (!isEmpty(name)) {
         alert("姓名不能为空！");
         return;
     }
-    if (!isEmpty(sex)) {
-        alert("性别不能为空！");
-        return;
-    }
-    if (isEmpty(idCard)) {
-        isCardNo(idCard);
-    }
-    if (!isEmpty(political)) {
-        alert("政治面貌不能为空！");
-        return;
-    }
-    if (!isEmpty(workUnitName)) {
-        alert("单位全称不能为空！");
-        return;
-    } else {
-        if (workUnitName.length < 3) {
-            alert("单位全称输入在3个字符以上！");
-            return;
-        }
-    }
-    if (!isEmpty(postName)) {
-        alert("职务全称不能为空！");
-        return;
-    } else {
-        if (postName.length < 3) {
-            alert("职务全称输入在3个字符以上！");
-            return;
-        }
-
-    }
-    if (!isEmpty(clazz)) {
-        alert("所属班级不能为空！");
+    isCardNo(idCard);
+    if (!isEmpty(nativePlace)) {
+        alert("籍贯不能为空！");
         return;
     }
     if (!isEmpty(signAcct)) {
@@ -139,7 +112,10 @@ function regist() {
             postName: postName,
             classId: clazz[0].id,
             uid: new Date().getTime(),
-            sex: sex
+            sex: sex,
+            nativePlace: nativePlace,
+            college: college,
+            badgeNum: badgeNum
         },
         success: function (result) {
             if (result.status == 0) {
@@ -173,11 +149,13 @@ function isEmpty(str) {
 }
 
 function isCardNo(card) {
-// 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
-    var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-    if (reg.test(card) === false) {
-        alert("身份证输入不合法");
-        return;
+    if(card) {
+        // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (reg.test(card) === false) {
+            alert("身份证输入不合法");
+            return;
+        }
     }
 }
 

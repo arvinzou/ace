@@ -40,23 +40,35 @@
             </div>
         </div>
         <div class="form-content form-border">
+            <label class="form-label">籍贯</label>
+            <input class="form-input"  type="text" name="nativePlace" placeholder="请输入籍贯"/>
+        </div>
+        <div class="form-content form-border">
             <label class="form-label">政治面貌</label>
             <div class="form-select" type="text" name="political" id="political"><span class="unselect">请选择政治面貌</span>
             </div>
             <img src="img/icon_select.png" class="redirect"/>
         </div>
         <div class="form-content form-border">
-            <label class="form-label">单位全称</label>
-            <input class="form-input" minlength="3" type="text" name="workUnitName" placeholder="例:中共常德市委统战部"/>
+            <label class="form-label">单位</label>
+            <input class="form-input" minlength="3" type="text" name="workUnitName" placeholder="请输入单位名称"/>
         </div>
         <div class="form-content form-border">
-            <label class="form-label">职务全称</label>
-            <input class="form-input" minlength="3" type="text" name="postName" placeholder="例:干部科科长"/>
+            <label class="form-label">职务</label>
+            <input class="form-input" minlength="3" type="text" name="postName" placeholder="请输入职务名称"/>
         </div>
         <div class="form-content">
             <label class="form-label">班次</label>
             <div class="form-select" type="text" id="classes"><span class="unselect">请选择班次</span></div>
             <img src="img/icon_select.png" class="redirect"/>
+        </div>
+        <div class="form-content">
+            <label class="form-label">毕业院校</label>
+            <input class="form-input"  type="text" name="college" placeholder="请输入毕业院校"/>
+        </div>
+        <div class="form-content">
+            <label class="form-label">警号</label>
+            <input class="form-input"  type="text" name="badgeNum" placeholder="请输入警号"/>
         </div>
     </div>
 
@@ -93,7 +105,7 @@
     <form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post" onsubmit="bindWx();">
         <input type="hidden" name="jsonData"/>
         <input type="hidden" value="WX_BIND" name="action"/>
-        <input type="hidden" value="/partyschool/www/registered/person/index.jsp" id="respUri" name="respUri"/>
+        <input type="hidden" value="/policeschool/www/registered/person/index.jsp" id="respUri" name="respUri"/>
 
 
         <div class="modal-main">
