@@ -199,6 +199,11 @@ function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
     juicer.register('parsePolitical', parsePolitical);
     juicer.register('rsd', rsd);
+    juicer.register('formatDate', formatDate);
+}
+
+function formatDate(date) {
+    return date.substr(0, 10);
 }
 
 /**

@@ -297,36 +297,35 @@ public class StudentServiceImpl implements StudentService {
             CommonBeanUtils.copyMap2Bean(o, row);
             o.setClassId(clsId);//班级信息
             o.setRemark("批量导入学员：" + importDateTime);
-            logger.info(o.toString());
+
             if (CommonUtils.isBlank(o.getName())) {
-                continue;
-//                return new MessageResponse(1, "行" + i + ",名称不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getSex())) {
-                return new MessageResponse(1, "行" + i + ",性别不能为空！");
+                return new MessageResponse(1, "序号[" + o.getIndex() + "],姓名不能为空！");
             }
             if (CommonUtils.isBlank(o.getMobile())) {
-                return new MessageResponse(1, "行" + i + ",手机号码不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getPolitical())) {
-                return new MessageResponse(1, "行" + i + ",政治面貌不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getPostName())) {
-                return new MessageResponse(1, "行" + i + ",职务全称不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getWorkUnitName())) {
-                return new MessageResponse(1, "行" + i + ",单位全称不能为空！");
+                return new MessageResponse(1, "序号[" + o.getIndex() + "],籍贯不能为空！");
             }
             if (StringUtil.isNotEmpty(o.getSex())) {
                 o.setSex("男".equals(o.getSex().trim()) ? "1" : "2");
             }
             if (StringUtil.isNotEmpty(o.getPolitical())) {
-                o.setPolitical("党员".equals(o.getPolitical().trim()) ? "party" : "normal");
+                switch (o.getPolitical()) {
+                    case "党员":
+                        o.setPolitical("party");
+                        break;
+                    case "群众":
+                        o.setPolitical("public");
+                        break;
+                    case "团员":
+                        o.setPolitical("member");
+                        break;
+                    default:
+                        break;
+                }
             }
 
             int t = studentDao.isExist(o);
             if (t > 0) {
-                return new MessageResponse(1, "行" + i + ",该学员已被导入系统！");
+                return new MessageResponse(1, "序号[" + o.getIndex() + "],该学员已被导入系统！");
             } else {
                 try {
                     iMs = addStudent(o, userProp);
@@ -334,8 +333,8 @@ public class StudentServiceImpl implements StudentService {
                         return iMs;
                     }
                 } catch (CustomException e) {
-                    logger.info("学员导入异常：{}", e);
-                    return new MessageResponse(1, "行" + i + ",身份证号码不能为空！");
+                    logger.error("学员导入异常：{}", e);
+                    return new MessageResponse(1, "学员导入异常");
                 }
             }
             i++;

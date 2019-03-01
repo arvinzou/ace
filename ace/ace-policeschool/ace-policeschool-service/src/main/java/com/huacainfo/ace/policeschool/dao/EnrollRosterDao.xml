@@ -3,18 +3,26 @@
 <mapper namespace="com.huacainfo.ace.policeschool.dao.EnrollRosterDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.policeschool.model.EnrollRoster">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="clsName" jdbcType="VARCHAR" property="clsName"/>
-        <result column="clsId" jdbcType="VARCHAR" property="clsId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="idCard" jdbcType="CHAR" property="idCard"/>
+        <result column="political" jdbcType="VARCHAR" property="political"/>
         <result column="workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
         <result column="postName" jdbcType="VARCHAR" property="postName"/>
+        <result column="nativePlace" jdbcType="VARCHAR" property="nativePlace"/>
+        <result column="badgeNum" jdbcType="VARCHAR" property="badgeNum"/>
+        <result column="college" jdbcType="VARCHAR" property="college"/>
+        <result column="birthDate" jdbcType="TIMESTAMP" property="birthDate"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, clsName, clsId, name, workUnitName, postName, status, remark, createDate, updateDate
+      id, name, sex, mobile, idCard, political,
+      workUnitName, postName, nativePlace, badgeNum,
+      college, birthDate, status, remark, createDate, updateDate
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -27,26 +35,36 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.EnrollRoster">
-        insert into enroll_roster (id, clsName, clsId,
-        name, workUnitName, postName,
-        status, remark, createDate,
-        updateDate)
-        values (#{id,jdbcType=VARCHAR}, #{clsName,jdbcType=VARCHAR}, #{clsId,jdbcType=VARCHAR},
-        #{name,jdbcType=VARCHAR}, #{workUnitName,jdbcType=VARCHAR}, #{postName,jdbcType=VARCHAR},
-        #{status,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
-        #{updateDate,jdbcType=TIMESTAMP})
+        insert into enroll_roster (id, name, sex, mobile,
+          idCard, political, workUnitName,
+          postName, nativePlace, badgeNum,
+          college, birthDate, status,
+          remark, createDate, updateDate
+          )
+        values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR},
+          #{idCard,jdbcType=CHAR}, #{political,jdbcType=VARCHAR}, #{workUnitName,jdbcType=VARCHAR},
+          #{postName,jdbcType=VARCHAR}, #{nativePlace,jdbcType=VARCHAR}, #{badgeNum,jdbcType=VARCHAR},
+          #{college,jdbcType=VARCHAR}, #{birthDate,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR},
+          #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+          )
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.EnrollRoster">
         update enroll_roster
-        set clsName = #{clsName,jdbcType=VARCHAR},
-        clsId = #{clsId,jdbcType=VARCHAR},
-        name = #{name,jdbcType=VARCHAR},
-        workUnitName = #{workUnitName,jdbcType=VARCHAR},
-        postName = #{postName,jdbcType=VARCHAR},
-        status = #{status,jdbcType=CHAR},
-        remark = #{remark,jdbcType=VARCHAR},
-        createDate = #{createDate,jdbcType=TIMESTAMP},
-        updateDate = #{updateDate,jdbcType=TIMESTAMP}
+        set name = #{name,jdbcType=VARCHAR},
+          sex = #{sex,jdbcType=CHAR},
+          mobile = #{mobile,jdbcType=VARCHAR},
+          idCard = #{idCard,jdbcType=CHAR},
+          political = #{political,jdbcType=VARCHAR},
+          workUnitName = #{workUnitName,jdbcType=VARCHAR},
+          postName = #{postName,jdbcType=VARCHAR},
+          nativePlace = #{nativePlace,jdbcType=VARCHAR},
+          badgeNum = #{badgeNum,jdbcType=VARCHAR},
+          college = #{college,jdbcType=VARCHAR},
+          birthDate = #{birthDate,jdbcType=TIMESTAMP},
+          status = #{status,jdbcType=CHAR},
+          remark = #{remark,jdbcType=VARCHAR},
+          createDate = #{createDate,jdbcType=TIMESTAMP},
+          updateDate = #{updateDate,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
@@ -55,24 +73,18 @@
     </resultMap>
 
     <sql id="Vo_Column_List">
-        c.name as clsViewName,
-        t.id, t.clsName, t.clsId, t.name, t.workUnitName, t.postName,
-        t.status, t.remark, t.createDate, t.updateDate
+      t.id, t.name, t.sex, t.mobile, t.idCard, t.political,
+      t.workUnitName, t.postName, t.nativePlace, t.badgeNum,
+      t.college, DATE_FORMAT(t.birthDate,'%Y-%m-%d') birthDate,
+      t.status, t.remark, t.createDate, t.updateDate
     </sql>
     <sql id="From_Statement">
         FROM enroll_roster t
-        left join classes c on t.clsId = c.id
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.clsName !=null and condition.clsName !=&quot;&quot;">
-            and c.`name` like concat('%',#{condition.clsName,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="condition.clsId !=null and condition.clsId !=&quot;&quot;">
-            and t.clsId = #{condition.clsId,jdbcType=VARCHAR}
         </if>
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name = #{condition.name,jdbcType=VARCHAR}
@@ -117,7 +129,7 @@
         select count(1)
         from enroll_roster
         where name = #{name,jdbcType=VARCHAR}
-        and workUnitName = #{workUnitName,jdbcType=VARCHAR}
+        and nativePlace = #{nativePlace,jdbcType=VARCHAR}
     </select>
 
     <update id="updateStatus" parameterType="java.lang.String">
@@ -129,7 +141,8 @@
 
     <select id="getListByCondition" resultType="map">
         select
-        DISTINCT t.clsId ,
+        DISTINCT
+        t.clsId ,
         c.`name` as clsViewName,
         ta.`name` as headmasterName
         from enroll_roster t

@@ -58,8 +58,7 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
     @Override
     public PageResult<EnrollRosterVo> findEnrollRosterList(EnrollRosterQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<EnrollRosterVo> rst = new PageResult<>();
-        List<EnrollRosterVo> list = this.enrollRosterDao.findList(condition,
-                start, limit, orderBy);
+        List<EnrollRosterVo> list = this.enrollRosterDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.enrollRosterDao.findCount(condition);
@@ -81,18 +80,11 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
      */
     @Override
     public MessageResponse insertEnrollRoster(EnrollRoster o, UserProp userProp) throws Exception {
-
-        if (CommonUtils.isBlank(o.getClsId())) {
-            return new MessageResponse(1, "报名班次不能为空！");
-        }
         if (CommonUtils.isBlank(o.getName())) {
-            return new MessageResponse(1, "学员姓名不能为空！");
+            return new MessageResponse(1, "姓名不能为空！");
         }
         if (CommonUtils.isBlank(o.getWorkUnitName())) {
-            return new MessageResponse(1, "单位全称不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getPostName())) {
-            return new MessageResponse(1, "职务全称不能为空！");
+            return new MessageResponse(1, "籍贯不能为空！");
         }
 
         int temp = this.enrollRosterDao.isExist(o);
@@ -127,17 +119,17 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(o.getClsId())) {
-            return new MessageResponse(1, "报名班次不能为空！");
+        if (CommonUtils.isBlank(o.getNativePlace())) {
+            return new MessageResponse(1, "籍贯不能为空！");
         }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "学员姓名不能为空！");
         }
         if (CommonUtils.isBlank(o.getWorkUnitName())) {
-            return new MessageResponse(1, "单位全称不能为空！");
+            return new MessageResponse(1, "单位不能为空！");
         }
         if (CommonUtils.isBlank(o.getPostName())) {
-            return new MessageResponse(1, "职务全称不能为空！");
+            return new MessageResponse(1, "职务不能为空！");
         }
 
         EnrollRoster old = enrollRosterDao.selectByPrimaryKey(o.getId());
@@ -149,8 +141,7 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         o.setUpdateDate(DateUtil.getNowDate());
         o.setCreateDate(old.getCreateDate());
         this.enrollRosterDao.updateByPrimaryKey(o);
-        this.dataBaseLogService.log("变更报名花名册管理", "报名花名册管理", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("变更报名花名册管理", "报名花名册管理", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "保存成功！");
     }
@@ -231,36 +222,31 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
 
     @Override
     public MessageResponse importXls(String clsId, List<Map<String, Object>> list, UserProp userProp) throws Exception {
-        int i = 1;
+
         int t;
         for (Map<String, Object> row : list) {
             EnrollRoster o = new EnrollRoster();
             CommonBeanUtils.copyMap2Bean(o, row);
-            o.setClsId(clsId);
             o.setStatus("1");
             o.setId(GUIDUtil.getGUID());
             o.setCreateDate(new Date());
 
             this.logger.info(o.toString());
             if (CommonUtils.isBlank(o.getName())) {
-                return new MessageResponse(1, "第" + i + "行，" + "学员姓名不能为空！");
+                return new MessageResponse(1, "序号[" + o.getIndex() + "]，" + "姓名不能为空！");
             }
-            if (CommonUtils.isBlank(o.getWorkUnitName())) {
-                return new MessageResponse(1, "第" + i + "行，" + "单位全称不能为空！");
+            if (CommonUtils.isBlank(o.getNativePlace())) {
+                return new MessageResponse(1, "序号[" + o.getIndex() + "]，" + "籍贯不能为空！");
             }
-            if (CommonUtils.isBlank(o.getPostName())) {
-                return new MessageResponse(1, "第" + i + "行，" + "职务全称不能为空！");
-            }
-
             t = enrollRosterDao.isExist(o);
             if (t > 0) {
                 this.enrollRosterDao.updateByPrimaryKey(o);
             } else {
                 this.enrollRosterDao.insert(o);
             }
-            i++;
         }
-        this.dataBaseLogService.log("报名花名册管理导入", "报名花名册管理", "", "rs.xls", "rs.xls", userProp);
+        this.dataBaseLogService.log("报名花名册管理导入", "报名花名册管理",
+                "", "rs.xls", "rs.xls", userProp);
         return new MessageResponse(0, "导入成功！");
     }
 
@@ -272,7 +258,7 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
      * @param: @param p
      * @param: @return
      * @param: @throws Exception
-     * @return: ListResult<Map<String,Object>>
+     * @return: ListResult<Map < String, Object>>
      * @author: Arvin
      * @version: 2019-01-16
      */
@@ -292,7 +278,7 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
      * @Description: TODO(用于控件数据获取)
      * @param: @param params
      * @param: @return
-     * @return: Map<String,Object>
+     * @return: Map<String, Object>
      * @author: Arvin
      * @version: 2019-01-16
      */
@@ -308,7 +294,7 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
     /**
      * @throws
      * @Title:deleteRoadSectionByRoadSectionIds
-     * @Description: TODO(批量删除报名花名册管理）
+     * @Description: TODO(批量删除报名花名册管理 ）
      * @param: @param ids
      * @param: @param userProp
      * @param: @throws Exception
