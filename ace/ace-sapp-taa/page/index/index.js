@@ -723,42 +723,62 @@ Page({
    */
   resetData: function() {
     var that = this;
-    that.setData({
-      sectionFlag: false,
-      sectionName: null,
-      sectionId: null,
-      polyline: [{
-            points: [],
-            color: '#4350FC',
-            width: 8,
-            dottedLine: false
-      }]
-    });
-    that.getLocation();
-    that.initDict();
-    //that.initDateTime();
+    wx.showModal({
+          title: '提示',
+          content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
+          success(res) {
+              if (res.confirm) {
+                  that.setData({
+                      sectionFlag: false,
+                      sectionName: null,
+                      sectionId: null,
+                      polyline: [{
+                          points: [],
+                          color: '#4350FC',
+                          width: 8,
+                          dottedLine: false
+                      }]
+                  });
+                  that.getLocation();
+                  that.initDict();
+              } else if (res.cancel) {
+                  
+              }
+          }
+    })
   },
   /**
    * 重新定位采集信息
    */
   resetCj: function() {
     var that = this;
-    that.setData({
-      startName: null,
-      startName: null,
-      tab: 1,
-      polyline: [{
-        points: [],
-        color: '#4350FC',
-        width: 8,
-        dottedLine: false
-      }],
-      flaging: false,
-      frequency: 0, //是否显示加减频率
-      timeInterval: 10000, //采集频率以10秒为单位
-      activeBreak: ''
-    });
-    that.getLocation();
+      wx.showModal({
+          title: '提示',
+          content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
+          success(res) {
+              if (res.confirm) {
+                  that.setData({
+                      startName: null,
+                      startName: null,
+                      tab: 1,
+                      polyline: [{
+                          points: [],
+                          color: '#4350FC',
+                          width: 8,
+                          dottedLine: false
+                      }],
+                      flaging: false,
+                      frequency: 0, //是否显示加减频率
+                      timeInterval: 10000, //采集频率以10秒为单位
+                      activeBreak: ''
+                  });
+                  that.getLocation();
+              } else if (res.cancel) {
+
+              }
+          }
+      })
+   
   },
 
   /**
