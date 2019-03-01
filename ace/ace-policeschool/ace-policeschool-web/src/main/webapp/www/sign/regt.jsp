@@ -88,7 +88,7 @@
     <form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post" onsubmit="bindWx();">
         <input type="hidden" name="jsonData"/>
         <input type="hidden" value="WX_BIND" name="action"/>
-        <input type="hidden" value="/partyschool/www/login/index.jsp" id="respUri" name="respUri"/>
+        <input type="hidden" value="/policeschool/www/login/index.jsp" id="respUri" name="respUri"/>
         <div class="modal-main">
             <div class="modal-banner"><img src="img/bind.png" class='banner'/></div>
             <div class="modal-title">是否绑定微信</div>
