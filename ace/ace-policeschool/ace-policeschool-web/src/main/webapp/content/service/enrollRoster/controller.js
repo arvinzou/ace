@@ -47,7 +47,8 @@ jQuery(function ($) {
 //初始化事件
     initEvents();
     initJuicerMethod();
-    initClassList('s-cls-list');
+    // initClassList('s-cls-list');
+    initGrid();
 });
 
 
@@ -65,7 +66,6 @@ function initClassList(ctrlId) {
                 var all = {id: "", name: "全部"};
                 data.unshift(all);
                 render('#' + ctrlId, data, 'tpl-cls-option');
-                initGrid();
             } else {
                 alert(result.errorMessage);
             }
@@ -85,6 +85,9 @@ function initJuicerMethod() {
 }
 
 function formatDate(date) {
+    if (null == date) {
+        return "";
+    }
     return date.substr(0, 10);
 }
 
