@@ -11,7 +11,6 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.ExcelUtils;
-import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.policeschool.model.EnrollRoster;
 import com.huacainfo.ace.policeschool.service.EnrollRosterService;
 import com.huacainfo.ace.policeschool.vo.EnrollRosterQVo;
@@ -162,7 +161,7 @@ public class EnrollRosterController extends BisBaseController {
     /**
      * @throws
      * @Title:importXls
-     * @Description: TODO(导入!{bean.tableChineseName})
+     * @Description: TODO(导入 ! { bean.tableChineseName })
      * @param: @param file
      * @param: @param jsons
      * @param: @return
@@ -173,15 +172,7 @@ public class EnrollRosterController extends BisBaseController {
      */
     @RequestMapping(value = "/importXls")
     @ResponseBody
-    public MessageResponse importXls(@RequestParam MultipartFile[] file,
-                                     String jsons) throws Exception {
-        Map<String, Object> params = JsonUtil.toMap(jsons);
-        String clsId = String.valueOf(params.get("clsId"));
-        if (CommonUtils.isBlank(clsId)) {
-            return new MessageResponse(ResultCode.FAIL, "请选择班次信息");
-        }
-
-
+    public MessageResponse importXls(@RequestParam MultipartFile[] file, String jsons) throws Exception {
         ExcelUtils utils = new ExcelUtils();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         MongoFile[] files = new MongoFile[file.length];
@@ -193,8 +184,7 @@ public class EnrollRosterController extends BisBaseController {
             obj.setLength(o.getSize());
             files[i] = obj;
             i++;
-            String ext = obj.getFilename()
-                    .toLowerCase()
+            String ext = obj.getFilename().toLowerCase()
                     .substring(obj.getFilename().toLowerCase().lastIndexOf("."));
             this.logger.info(ext);
             if (ext.equals(".xls")) {
@@ -204,7 +194,7 @@ public class EnrollRosterController extends BisBaseController {
                 list = utils.readExcelByPOI(obj.getInputStream(), 2);
             }
         }
-        return this.enrollRosterService.importXls(clsId, list, this.getCurUserProp());
+        return this.enrollRosterService.importXls("", list, this.getCurUserProp());
     }
 
 
@@ -231,7 +221,7 @@ public class EnrollRosterController extends BisBaseController {
      * @Description: TODO(用于控件数据获取)
      * @param: @param params
      * @param: @return
-     * @return: Map<String,Object>
+     * @return: Map<String, Object>
      * @author: Arvin
      * @version:2019-01-16
      */
