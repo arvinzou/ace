@@ -38,71 +38,116 @@
                             </li>
                         </ul>
 
-                        <div class="tab-content">
+                        <div class="tab-content" id="app">
                             <div class="tab-pane fade active in" id="test1">
-                                <h4>创建单选题</h4>
                                 <div class="col-md-offset-3 col-md-6">
-                                    <form role="form">
-                                        <div class="test1 test">
-                                            <div class="title">
-                                                <textarea placeholder="题目" name="name" rows="1"></textarea>
-                                            </div>
-                                            <div class="option">
-                                                <input class="pointer" type="radio" name="option" value=""/>
-                                                <textarea rows="1" type="text" class="option-text option-margin" placeholder="选项1"></textarea>
-                                            </div>
-                                            <div class="option">
-                                                <input class="pointer" type="radio" name="option" value=""/>
-                                                <textarea rows="1" type="text" class="option-text" placeholder="选项1"></textarea>
-                                                <div class="remove pointer">×</div>
-                                            </div>
-                                            <div class="tool">
-                                                <ul>
-                                                    <li>添加选项</li>
-                                                    <li>删除</li>
-                                                </ul>
-                                            </div>
+                                    <div class="test1 test">
+                                        <div class="title">
+                                            <textarea placeholder="题目" v-model="type1.content" @input="autoHeight"
+                                                      name="content" rows="1">{{type1.content}}</textarea>
                                         </div>
-                                        <button type="submit" class="btn btn-default">Submit Button</button>
-                                        <button type="reset" class="btn btn-default">Reset Button</button>
-                                    </form>
+                                        <template v-for="(item,index) in type1.options">
+                                            <div class="option" v-if="index<2">
+                                                <input class="pointer" type="radio" name="type1" :value="index"/>
+                                                <textarea rows="1" type="text" class="option-text option-margin"
+                                                          @input="autoHeight" v-model="item.content"
+                                                          :placeholder="'选项'+(index+1)">{{item.content}}</textarea>
+                                            </div>
+                                            <div class="option" v-else>
+                                                <input class="pointer" type="radio" name="type1" :value="index"/>
+                                                <textarea rows="1" type="text" @input="autoHeight" class="option-text"
+                                                          v-model="item.content"
+                                                          :placeholder="'选项'+(index+1)">{{item.content}}</textarea>
+                                                <div class="remove pointer" @click="removeOption('type1',index)">×</div>
+                                            </div>
+                                        </template>
+                                        <div class="tool">
+                                            <ul>
+                                                <li @click="addOption('type1')">添加选项</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <button @click="submit1('type1')" class="btn btn-default">Submit Button</button>
+                                    <button type="reset" class="btn btn-default">Reset Button</button>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="test2">
-                                <h4>多选题 Tab</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                    deserunt mollit anim id est laborum.</p>
+
+                                <div class="col-md-offset-3 col-md-6">
+                                    <div class="test2 test">
+                                        <div class="title">
+                                            <textarea placeholder="题目" v-model="type2.content" @input="autoHeight"
+                                                      name="content" rows="1">{{type2.content}}</textarea>
+                                        </div>
+                                        <template v-for="(item,index) in type2.options">
+                                            <div class="option" v-if="index<2">
+                                                <input class="pointer" type="checkbox" name="type2" :value="index"/>
+                                                <textarea rows="1" type="text" class="option-text option-margin"
+                                                          @input="autoHeight" v-model="item.content"
+                                                          :placeholder="'选项'+(index+1)">{{item.content}}</textarea>
+                                            </div>
+                                            <div class="option" v-else>
+                                                <input class="pointer" type="checkbox" name="type2" :value="index"/>
+                                                <textarea rows="1" type="text" @input="autoHeight" class="option-text"
+                                                          v-model="item.content"
+                                                          :placeholder="'选项'+(index+1)">{{item.content}}</textarea>
+                                                <div class="remove pointer" @click="removeOption('type2',index)">×</div>
+                                            </div>
+                                        </template>
+                                        <div class="tool">
+                                            <ul>
+                                                <li @click="addOption('type2')">添加选项</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <button @click="submit2('type2')" class="btn btn-default">Submit Button</button>
+                                    <button type="reset" class="btn btn-default">Reset Button</button>
+                                </div>
+
                             </div>
                             <div class="tab-pane fade" id="test3">
-                                <h4>判断题 Tab</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                    deserunt mollit anim id est laborum.</p>
+
+                                <div class="col-md-offset-3 col-md-6">
+                                    <div class="test3 test">
+                                        <div class="title">
+                                            <textarea placeholder="题目" v-model="type3.content" @input="autoHeight"
+                                                      name="content" rows="1">{{type3.content}}</textarea>
+                                        </div>
+                                        <template v-for="(item,index) in type3.options">
+                                            <div class="option" v-if="index<2">
+                                                <input class="pointer" type="radio" name="type3" :value="index"/>
+                                                <div>{{item.content}}</div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <button @click="submit1('type3')" class="btn btn-default">Submit Button</button>
+                                    <button type="reset" class="btn btn-default">Reset Button</button>
+                                </div>
+
                             </div>
                             <div class="tab-pane fade" id="test4">
-                                <h4>问答题 Tab</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                    deserunt mollit anim id est laborum.</p>
+                                <div class="col-md-offset-3 col-md-6">
+                                    <div class="test4 test">
+                                        <div class="title">
+                                            <textarea placeholder="题目" v-model="type4.content" @input="autoHeight"
+                                                      name="content" rows="1">{{type4.content}}</textarea>
+                                        </div>
+                                    </div>
+                                    <button @click="submit('type4')" class="btn btn-default">Submit Button</button>
+                                    <button type="reset" class="btn btn-default">Reset Button</button>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="test5">
-                                <h4>打分题 Tab</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                                    deserunt mollit anim id est laborum.</p>
+                                <div class="col-md-offset-3 col-md-6">
+                                    <div class="test5 test">
+                                        <div class="title">
+                                            <textarea placeholder="题目" v-model="type5.content" @input="autoHeight"
+                                                      name="content" rows="1">{{type5.content}}</textarea>
+                                        </div>
+                                    </div>
+                                    <button @click="submit('type5')" class="btn btn-default">Submit Button</button>
+                                    <button type="reset" class="btn btn-default">Reset Button</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,4 +164,5 @@
 <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
+<script src="js/vue.js?v=${cfg.version}"></script>
 </html>

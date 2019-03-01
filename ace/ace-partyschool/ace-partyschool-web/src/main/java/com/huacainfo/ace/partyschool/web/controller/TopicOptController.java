@@ -16,10 +16,10 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
-import com.huacainfo.ace.partyschool.model.Topic;
-import com.huacainfo.ace.partyschool.service.TopicService;
-import com.huacainfo.ace.partyschool.vo.TopicVo;
-import com.huacainfo.ace.partyschool.vo.TopicQVo;
+import com.huacainfo.ace.partyschool.model.TopicOpt;
+import com.huacainfo.ace.partyschool.service.TopicOptService;
+import com.huacainfo.ace.partyschool.vo.TopicOptVo;
+import com.huacainfo.ace.partyschool.vo.TopicOptQVo;
 import org.springframework.web.multipart.MultipartFile;
 import com.huacainfo.ace.portal.vo.MongoFile;
 
@@ -28,37 +28,38 @@ import java.util.Map;
 import java.util.List;
 
 @Controller
-@RequestMapping("/topic")
+@RequestMapping("/topicOpt")
 /**
  * @author: 王恩
- * @version: 2019-02-27
- * @Description: TODO(试题管理)
+ * @version: 2019-02-28
+ * @Description: TODO(试题选项管理)
  */
-public class TopicController extends BisBaseController {
+public class TopicOptController extends BisBaseController {
 
 
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private TopicService topicService;
+    private TopicOptService topicOptService;
 
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(试题管理分页查询)
+     * @Description: TODO(试题选项管理分页查询)
      * @param: @param condition
      * @param: @param page
      * @param: @return
      * @param: @throws Exception
      * @return: PageResult
-     * <TopicVo>
+     * <TopicOptVo>
      * @author: 王恩
-     * @version: 2019-02-27
+     * @version: 2019-02-28
      */
-    @RequestMapping(value = "/findTopicList")
+    @RequestMapping(value = "/findTopicOptList")
     @ResponseBody
-    public PageResult<TopicVo> findTopicList(TopicQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult<TopicVo> rst = this.topicService.findTopicList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+    public PageResult<TopicOptVo> findTopicOptList(TopicOptQVo condition, PageParamNoChangeSord page) throws Exception {
+
+        PageResult<TopicOptVo> rst = this.topicOptService.findTopicOptList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -68,89 +69,89 @@ public class TopicController extends BisBaseController {
 
     /**
      * @throws
-     * @Title:insertTopic
-     * @Description: TODO(添加试题管理)
+     * @Title:insertTopicOpt
+     * @Description: TODO(添加试题选项管理)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: 王恩
-     * @version: 2019-02-27
+     * @version: 2019-02-28
      */
-    @RequestMapping(value = "/insertTopic")
+    @RequestMapping(value = "/insertTopicOpt")
     @ResponseBody
-    public MessageResponse insertTopic(String jsons) throws Exception {
-        TopicQVo obj = JSON.parseObject(jsons, TopicQVo.class);
-        return this.topicService.insertTopic(obj, this.getCurUserProp());
+    public MessageResponse insertTopicOpt(String jsons) throws Exception {
+        TopicOpt obj = JSON.parseObject(jsons, TopicOpt.class);
+        return this.topicOptService.insertTopicOpt(obj, this.getCurUserProp());
     }
 
     /**
      * @throws
-     * @Title:updateTopic
-     * @Description: TODO(更新试题管理)
+     * @Title:updateTopicOpt
+     * @Description: TODO(更新试题选项管理)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: 王恩
-     * @version: 2019-02-27
+     * @version: 2019-02-28
      */
-    @RequestMapping(value = "/updateTopic")
+    @RequestMapping(value = "/updateTopicOpt")
     @ResponseBody
-    public MessageResponse updateTopic(String jsons) throws Exception {
-        Topic obj = JSON.parseObject(jsons, Topic.class);
-        return this.topicService.updateTopic(obj, this.getCurUserProp());
+    public MessageResponse updateTopicOpt(String jsons) throws Exception {
+        TopicOpt obj = JSON.parseObject(jsons, TopicOpt.class);
+        return this.topicOptService.updateTopicOpt(obj, this.getCurUserProp());
     }
 
     /**
      * @throws
-     * @Title:selectTopicByPrimaryKey
-     * @Description: TODO(获取试题管理)
+     * @Title:selectTopicOptByPrimaryKey
+     * @Description: TODO(获取试题选项管理)
      * @param: @param id
      * @param: @throws Exception
-     * @return: SingleResult<Topic>
+     * @return: SingleResult<TopicOpt>
      * @author: 王恩
-     * @version: 2019-02-27
+     * @version: 2019-02-28
      */
-    @RequestMapping(value = "/selectTopicByPrimaryKey")
+    @RequestMapping(value = "/selectTopicOptByPrimaryKey")
     @ResponseBody
-    public SingleResult<TopicVo> selectTopicByPrimaryKey(String id) throws Exception {
-        return this.topicService.selectTopicByPrimaryKey(id);
+    public SingleResult<TopicOptVo> selectTopicOptByPrimaryKey(String id) throws Exception {
+        return this.topicOptService.selectTopicOptByPrimaryKey(id);
     }
 
     /**
      * @throws
-     * @Title:deleteTopicByTopicId
-     * @Description: TODO(删除试题管理)
+     * @Title:deleteTopicOptByTopicOptId
+     * @Description: TODO(删除试题选项管理)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: 王恩
-     * @version: 2019-02-27
+     * @version: 2019-02-28
      */
-    @RequestMapping(value = "/deleteTopicByTopicId")
+    @RequestMapping(value = "/deleteTopicOptByTopicOptId")
     @ResponseBody
-    public MessageResponse deleteTopicByTopicId(String jsons) throws Exception {
+    public MessageResponse deleteTopicOptByTopicOptId(String jsons) throws Exception {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
-        return this.topicService.deleteTopicByTopicId(id, this.getCurUserProp());
+        return this.topicOptService.deleteTopicOptByTopicOptId(id, this.getCurUserProp());
     }
 
     /**
      * @throws
      * @Title:audit
-     * @Description: TODO(审核试题管理)
+     * @Description: TODO(审核试题选项管理)
      * @param: @param id bean.id
      * @param: @param rst 审核结果 3-通过 4-拒绝
      * @param: @param message 审核说明
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: 王恩
-     * @version: 2019-02-27
+     * @version: 2019-02-28
      */
     @RequestMapping(value = "/audit")
     @ResponseBody
     public MessageResponse audit(String id, String rst, String message) throws Exception {
 
-        return this.topicService.audit(id, rst, message, this.getCurUserProp());
+        return this.topicOptService.audit(id, rst, message, this.getCurUserProp());
     }
 
 
@@ -164,7 +165,7 @@ public class TopicController extends BisBaseController {
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: 王恩
-     * @version:2019-02-27
+     * @version:2019-02-28
      */
     @RequestMapping(value = "/importXls")
     @ResponseBody
@@ -195,7 +196,7 @@ public class TopicController extends BisBaseController {
                 list = utils.readExcelByPOI(obj.getInputStream(), 2);
             }
         }
-        return this.topicService.importXls(list, this.getCurUserProp());
+        return this.topicOptService.importXls(list, this.getCurUserProp());
     }
 
 
@@ -207,12 +208,12 @@ public class TopicController extends BisBaseController {
      * @param: @throws Exception
      * @return: ListResult
      * @author: 王恩
-     * @version:2019-02-27
+     * @version:2019-02-28
      */
     @RequestMapping(value = "/getList")
     @ResponseBody
     public ListResult<Map<String, Object>> getList() throws Exception {
-        return this.topicService.getList(this.getParams());
+        return this.topicOptService.getList(this.getParams());
     }
 
 
@@ -224,30 +225,30 @@ public class TopicController extends BisBaseController {
      * @param: @return
      * @return: Map<String,Object>
      * @author: 王恩
-     * @version:2019-02-27
+     * @version:2019-02-28
      */
     @RequestMapping(value = "/getListByCondition")
     @ResponseBody
     public Map<String, Object> getListByCondition() {
-        return this.topicService.getListByCondition(this.getParams());
+        return this.topicOptService.getListByCondition(this.getParams());
     }
 
 
     /**
      * @throws
-     * @Title:deleteTopicByTopicIds
-     * @Description: TODO(批量删除试题管理)
+     * @Title:deleteTopicOptByTopicOptIds
+     * @Description: TODO(批量删除试题选项管理)
      * @param: @param ids
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: 王恩
-     * @version:2019-02-27
+     * @version:2019-02-28
      */
-    @RequestMapping(value = "/deleteTopicByTopicIds")
+    @RequestMapping(value = "/deleteTopicOptByTopicOptIds")
     @ResponseBody
-    public MessageResponse deleteTopicByTopicIds(String ids) throws Exception {
+    public MessageResponse deleteTopicOptByTopicOptIds(String ids) throws Exception {
         String[] id = ids.split(",");
-        return this.topicService.deleteTopicByTopicIds(id, this.getCurUserProp());
+        return this.topicOptService.deleteTopicOptByTopicOptIds(id, this.getCurUserProp());
     }
 
     /**
@@ -258,11 +259,11 @@ public class TopicController extends BisBaseController {
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: 王恩
-     * @version:2019-02-27
+     * @version:2019-02-28
      */
     @RequestMapping(value = "/updateStatus")
     @ResponseBody
     public MessageResponse updateStatus(String id, String status) throws Exception {
-        return this.topicService.updateStatus(id, status, this.getCurUserProp());
+        return this.topicOptService.updateStatus(id, status, this.getCurUserProp());
     }
 }

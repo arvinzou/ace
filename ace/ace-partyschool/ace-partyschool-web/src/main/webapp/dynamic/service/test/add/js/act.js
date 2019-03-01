@@ -4,7 +4,7 @@ window.onload = function () {
     jQuery(function ($) {
         $(".breadcrumb").append("<li><span>添加试卷</span></li>");
         initEvents();
-        initPage()
+        initPage();
     });
 }
 

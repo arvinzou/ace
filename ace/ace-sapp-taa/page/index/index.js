@@ -38,7 +38,9 @@ Page({
     cjSectionId: null,
     isCollection: false,
     polyline: [{
-      points: [],
+      points: [
+          
+      ],
       color: '#4350FC',
       width: 8,
       dottedLine: false
@@ -86,6 +88,7 @@ Page({
 
   },
   selectRoad: function() {
+    app.globalData.collectionId = null;
     wx.navigateTo({
       url: '../collection/index?type=cj',
     });
@@ -504,6 +507,7 @@ Page({
       that.getLocation();
       that.initDict();
       that.initUserData(); // 重置后从定向首页，初始化用户信息
+      
       if (app.globalData.collectionId) {
         that.setData({
           startName: app.globalData.startName,
@@ -511,6 +515,15 @@ Page({
         });
         console.log("startName=========endName==============" + that.data.startName);
         that.initGpsList(app.globalData.collectionId);
+      }else{
+          that.setData({
+              polyline: [{
+                  points: [],
+                  color: '#4350FC',
+                  width: 8,
+                  dottedLine: false
+              }]
+          })
       }
       
     }
@@ -562,6 +575,7 @@ Page({
       roadGps.roadSectionId = that.data.cjSectionId;
       roadGps.latitude = pointList[i].latitude;
       roadGps.longitude = pointList[i].longitude;
+      roadGps.gatherTime = pointList[i].gatherTime;
       list.push(roadGps);
     }
     that.setData({
@@ -604,6 +618,7 @@ Page({
   getLocate: function() {
     var o = {};
     var that = this;
+    var time = util.formatDateTime(new Date());
     wx.getLocation({
       type: 'gcj02',
       success: function(res) {
@@ -611,7 +626,8 @@ Page({
         var longitude = res.longitude;
         o = {
           longitude: res.longitude,
-          latitude: res.latitude
+          latitude: res.latitude,
+          gatherTime: time
         }
         var pointList = that.data.polyline[0].points;
         pointList.push(o);
@@ -711,6 +727,12 @@ Page({
       sectionFlag: false,
       sectionName: null,
       sectionId: null,
+      polyline: [{
+            points: [],
+            color: '#4350FC',
+            width: 8,
+            dottedLine: false
+      }]
     });
     that.getLocation();
     that.initDict();
