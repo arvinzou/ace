@@ -47,11 +47,11 @@
                                 onclick="setParams('status','0');">注销
                         </button>
                     </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select name="classId" id="s-cls-list" class="form-control" style="height: 31px;"
-                                onchange="setParams('clsId',this.value)">
-                        </select>
-                    </div>
+                    <%--<div class="btn-group" role="group" style="float:left;padding-right:5px">--%>
+                    <%--<select name="classId" id="s-cls-list" class="form-control" style="height: 31px;"--%>
+                    <%--onchange="setParams('clsId',this.value)">--%>
+                    <%--</select>--%>
+                    <%--</div>--%>
 
                     <div class="input-group">
                         <input type="text"
@@ -221,7 +221,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">政治面貌</label>
         <div class="col-md-10">
-            \${rsd(data.o.political,'157')}
+            \${rsd(data.o.political,'158')}
         </div>
     </div>
     <div class="form-group">

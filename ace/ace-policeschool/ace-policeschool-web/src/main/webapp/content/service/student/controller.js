@@ -203,6 +203,9 @@ function initJuicerMethod() {
 }
 
 function formatDate(date) {
+    if (null == date) {
+        return "";
+    }
     return date.substr(0, 10);
 }
 
