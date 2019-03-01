@@ -478,7 +478,6 @@ Page({
               roadManName: app.globalData.roadManName
             });
           }
-
           that.getLocation();
           that.initDict();
         } else {
@@ -795,7 +794,7 @@ Page({
           });
         }
 
-      }
+      },
     );
   },
   /**
