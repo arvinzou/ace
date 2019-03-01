@@ -159,7 +159,7 @@
 				</div>
 				<div class="item" onclick="makeAttand();">
 					<div class="item-left">
-						<img src="icon-phone-card.png" class="menu-icon"/>
+						<img src="img/icon-phone-card.png" class="menu-icon"/>
 					</div>
 					<div class="item-right">
 						<div class="menu-title">手机考勤</div>
