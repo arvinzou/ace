@@ -115,6 +115,10 @@ function makeAttand(){
     window.location.href = contextPath + '/www/registered/phoneCard/index.jsp';
 }
 
+function bookList(){
+    window.location.href = contextPath + '/www/registered/booksList/index.jsp';
+}
+
 function initNoticeTop1(){
     $.ajax({
         url: contextPath + "/www/notice/findNoticeLists",
