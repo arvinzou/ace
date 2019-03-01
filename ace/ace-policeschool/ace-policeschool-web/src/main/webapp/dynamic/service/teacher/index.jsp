@@ -139,7 +139,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">处室</label>
         <div class="col-md-10">
-            \${rsd(data.o.workUnitName,'156')}
+            \${rsd(data.o.workUnitName,'159')}
         </div>
     </div>
     <div class="form-group">
@@ -151,7 +151,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">政治面貌</label>
         <div class="col-md-10">
-            \${rsd(data.o.political,'155')}
+            \${rsd(data.o.political,'158')}
         </div>
     </div>
     <div class="form-group">
@@ -160,12 +160,12 @@
             \${data.o.mobile}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">身份证号</label>
-        <div class="col-md-10">
-            \${data.o.idCard}
-        </div>
-    </div>
+    <%--<div class="form-group">--%>
+    <%--<label class="col-md-2 view-label">身份证号</label>--%>
+    <%--<div class="col-md-10">--%>
+    <%--\${data.o.idCard}--%>
+    <%--</div>--%>
+    <%--</div>--%>
     <div class="form-group">
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
