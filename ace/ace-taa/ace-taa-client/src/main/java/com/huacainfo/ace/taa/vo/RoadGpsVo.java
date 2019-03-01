@@ -17,10 +17,28 @@ public class RoadGpsVo extends RoadGps {
      * 路段名称
      */
     private String sectionName;
+    private String startName;
+    private String endName;
     /**
      * 两点距离
      */
     private double distance;
+
+    public String getStartName() {
+        return startName;
+    }
+
+    public void setStartName(String startName) {
+        this.startName = startName;
+    }
+
+    public String getEndName() {
+        return endName;
+    }
+
+    public void setEndName(String endName) {
+        this.endName = endName;
+    }
 
     public String getManName() {
         return manName;

@@ -23,7 +23,7 @@
     id, roadSectionId, latitude, longitude,
     createUserId, createUserName,
     DATE_FORMAT(createDate,"%Y-%m-%d %T") createDate,
-    DATE_FORMAT(gatherTime,"%Y-%m-%d %T") gatherTime,
+    DATE_FORMAT(gatherTime,"%Y-%m-%d %T") gatherTime
     from road_gps
     where roadSectionId=#{p.id}
     order by gatherTime
@@ -40,7 +40,10 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.taa.vo.RoadGpsVo">
         <result column="manName" jdbcType="VARCHAR" property="manName"/>
         <result column="roadName" jdbcType="DECIMAL" property="roadName"/>
-        <result column="sectionName" jdbcType="DECIMAL" property="sectionName"/>
+        <result column="sectionName" jdbcType="VARCHAR" property="sectionName"/>
+        <result column="startName" jdbcType="VARCHAR" property="startName"/>
+        <result column="endName" jdbcType="VARCHAR" property="endName"/>
+
     </resultMap>
 
     <select id="getAroundList" resultMap="VoResultMap">
@@ -48,7 +51,7 @@
         DISTINCT
         rm.`name` AS manName,
         r.`name` AS roadName,
-        rs.`name` AS sectionName,
+        rs.`name` AS sectionName, rs.startName, rs.endName,
         t.roadSectionId,
         t.latitude,
         t.longitude

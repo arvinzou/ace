@@ -18,4 +18,9 @@ public interface CommConstant {
     String STUDENT = "student";//学员
     String TEACHER = "teacher";//教职工
 
+    /**
+     * 登录页面地址
+     */
+    String LOGIN_PAGE = "/policeschool/www/login/index.jsp?";
+
 }

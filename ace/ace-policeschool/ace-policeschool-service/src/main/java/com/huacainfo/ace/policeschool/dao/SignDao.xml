@@ -84,7 +84,7 @@
         s.pid as sPid, s.name as sName, s.mobile as sMobile, s.idCard as sIdCard,
         s.political as sPolitical, s.workUnitName as sWUName, s.postName as sPostName,
         s.classId as sClsId, '' as sClsName,
-        s.nativePlace, s.badgeNum, s.college, s.birthDate
+        s.nativePlace, s.badgeNum, s.college, s.birthDate,
 
         t.id as tid,
         t.category as tType, t.name as tName,

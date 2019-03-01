@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
+import com.huacainfo.ace.policeschool.constant.CommConstant;
 import com.huacainfo.ace.policeschool.service.SignService;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.OAuth2Service;
@@ -36,7 +37,7 @@ import java.util.Map;
 public class OAuth2Controller extends BisBaseController {
 
     private static final long serialVersionUID = 1L;
-    private final String LOGIN_PAGE = "/policeschool/www/login/index.jsp?";
+    private final String LOGIN_PAGE = CommConstant.LOGIN_PAGE;//"/policeschool/www/login/index.jsp?";
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Value("#{config[appid]}")
     private String appid;
