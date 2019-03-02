@@ -354,7 +354,9 @@ function indexOf(arr, item) {
   return arr.indexOf(item);
 }
 
-
+/**
+ * 设置用户授权信息
+ */
 function setSysUser(sysUserInfo) {
   wx.setStorageSync('sysUserInfo', sysUserInfo);
 }
