@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.security.spring.BasicUsers;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.SpringUtils;
 import com.huacainfo.ace.common.web.tools.WebUtils;
+import com.huacainfo.ace.policeschool.constant.CommConstant;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,17 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class WebLoginSecurityFilter implements Filter {
-    public static final Map<String, String> RESOURCE_AND_ROLE_MAP = new ConcurrentHashMap<String, String>();
+    public static final Map<String, String> RESOURCE_AND_ROLE_MAP = new ConcurrentHashMap<>();
     private static Logger LOGGER = LoggerFactory.getLogger(WebLoginSecurityFilter.class);
     Logger logger = LoggerFactory.getLogger(this.getClass());
     private RedisOperations<String, String> redisTemplateString = null;
-    private String redirectPage = "/partyschool/www/login/index.jsp";
+    private String redirectPage = CommConstant.LOGIN_PAGE;
     private Long localResourceAndRoleClearedTime = 0l;
     private Long localClearInterval = 0l;
     private boolean cachable = true;

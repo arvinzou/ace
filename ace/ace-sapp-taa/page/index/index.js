@@ -187,7 +187,7 @@ Page({
     util.request(cfg.server + '/taa/www/road/getCloseRoadSection', {
         lat: latitude,
         lon: longitude,
-        radius: '10000'
+        radius: '100'
       },
       function(res) {
         if (res.status == 0) {

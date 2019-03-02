@@ -81,10 +81,10 @@
         <span>\${data.teacher.name}</span>
         {@/if}
     </div>
-    <div class="show-card" onclick="toConsumption();">
+   <%-- <div class="show-card" onclick="toConsumption();">
         <span>查询一卡通</span>
         <img src="img/icon_select.png"/>
-    </div>
+    </div>--%>
 </script>
 
 <script id="noticeTop-tpl" type="text/template">
@@ -102,16 +102,27 @@
 <script id="menu-tpl" type="text/template">
     {@if data.regType == 'student'}
     <div class="row">
-        <div class="item mr" onclick="toTest();">
+        <div class="item mr" onclick="classNotice();">
             <div class="item-left">
-                <img src="img/icon-test.png" class="menu-icon"/>
+                <img src="img/icon-notice.png" class="menu-icon"/>
             </div>
             <div class="item-right">
-                <div class="menu-title">教学测评</div>
-                <div class="menu-content">共有\${data.test}个待评</div>
+                <div class="menu-title">学员须知</div>
+                <div class="menu-content">已绑定班级</div>
             </div>
         </div>
-        <div class="item" onclick="toMailList();">
+        <div class="item" onclick="toClassFiles();">
+            <div class="item-left">
+                <img src="img/icon-files.png" class="menu-icon"/>
+            </div>
+            <div class="item-right">
+                <div class="menu-title">班级文件</div>
+                <div class="menu-content">共\${data.file}个文件</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="item mr" onclick="toMailList();">
             <div class="item-left">
                 <img src="img/icon-mail.png" class="menu-icon"/>
             </div>
@@ -125,17 +136,6 @@
                     {@/if}
                     人
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="item mr" onclick="toClassFiles();">
-            <div class="item-left">
-                <img src="img/icon-files.png" class="menu-icon"/>
-            </div>
-            <div class="item-right">
-                <div class="menu-title">班级文件</div>
-                <div class="menu-content">共\${data.file}个文件</div>
             </div>
         </div>
         <div class="item" onclick="attendtion();">
@@ -149,26 +149,26 @@
         </div>
     </div>
     <div class="row">
-        <div class="item mr" onclick="classNotice();">
+        <div class="item mr" onclick="toTest();">
             <div class="item-left">
-                <img src="img/icon-notice.png" class="menu-icon"/>
+                <img src="img/icon-test.png" class="menu-icon"/>
             </div>
             <div class="item-right">
-                <div class="menu-title">学员须知</div>
-                <div class="menu-content">已绑定班级</div>
+                <div class="menu-title">教学测评</div>
+                <div class="menu-content">共有\${data.test}个待评</div>
             </div>
         </div>
     </div>
     {@else}
 
     <div class="row">
-        <div class="item mr" onclick="attendtion();">
+        <div class="item mr" onclick="toClassFiles();">
             <div class="item-left">
-                <img src="img/icon-appear.png" class="menu-icon"/>
+                <img src="img/icon-files.png" class="menu-icon"/>
             </div>
             <div class="item-right">
-                <div class="menu-title">考勤记录</div>
-                <div class="menu-content">查看考勤记录</div>
+                <div class="menu-title">班级文件</div>
+                <div class="menu-content">查看文件</div>
             </div>
         </div>
         <div class="item" onclick="toMailList();">
@@ -189,13 +189,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="item mr" onclick="toClassFiles();">
+        <div class="item mr" onclick="attendtion();">
             <div class="item-left">
-                <img src="img/icon-files.png" class="menu-icon"/>
+                <img src="img/icon-appear.png" class="menu-icon"/>
             </div>
             <div class="item-right">
-                <div class="menu-title">班级文件</div>
-                <div class="menu-content">查看文件</div>
+                <div class="menu-title">考勤记录</div>
+                <div class="menu-content">查看考勤记录</div>
             </div>
         </div>
     </div>

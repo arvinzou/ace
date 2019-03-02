@@ -57,11 +57,22 @@ input:-ms-input-placeholder {
     text-align: center;
 }
 
-.logo-image {
+.logo-img {
     width: 100%;
-    height: 3.346666rem;
+    height: auto;
 }
-
+.logo-img img{
+    width: 1.666666rem;
+    height: 1.8rem;
+    margin: 0.4rem auto;
+}
+.logo-title{
+    color: #373F53;
+    font-size: 0.56rem;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 0.8rem;
+}
 .login-form {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -160,7 +171,7 @@ input:-ms-input-placeholder {
 .footer-box {
     width: 10rem;
     height: 4.066666rem;
-    background: url("../img/footer-bg.png") no-repeat;
-    background-size: 100% 100%;
+  /*  background: url("../img/footer-bg.png") no-repeat;
+    background-size: 100% 100%;*/
     margin: 0 auto;
 }
