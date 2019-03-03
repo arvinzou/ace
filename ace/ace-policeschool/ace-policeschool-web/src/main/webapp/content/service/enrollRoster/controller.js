@@ -47,7 +47,8 @@ jQuery(function ($) {
 //初始化事件
     initEvents();
     initJuicerMethod();
-    initClassList('s-cls-list');
+    // initClassList('s-cls-list');
+    initGrid();
 });
 
 
@@ -65,7 +66,6 @@ function initClassList(ctrlId) {
                 var all = {id: "", name: "全部"};
                 data.unshift(all);
                 render('#' + ctrlId, data, 'tpl-cls-option');
-                initGrid();
             } else {
                 alert(result.errorMessage);
             }
@@ -81,6 +81,14 @@ function initClassList(ctrlId) {
 function initJuicerMethod() {
     juicer.register('rsd', rsd);
     juicer.register('parseStatus', parseStatus);
+    juicer.register('formatDate', formatDate);
+}
+
+function formatDate(date) {
+    if (null == date) {
+        return "";
+    }
+    return date.substr(0, 10);
 }
 
 /**
@@ -91,11 +99,11 @@ function initJuicerMethod() {
 function parseStatus(status) {
     switch (status) {
         case '0':
-            return "已关闭";
+            return "注销";
         case '1':
-            return "已开启";
+            return "正常";
         default:
-            return "已关闭";
+            return "正常";
     }
 }
 
@@ -122,10 +130,10 @@ function initEvents() {
     });
     //导入功能
     $('#modal-import').on('shown.bs.modal', function (event) {
-        initClassList('import-cls-list');
-        alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
-        var clsId = $('#import-cls-list option:selected').val();//选中的值;
-        importClsSelected(clsId);
+        // initClassList('import-cls-list');
+        // alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
+        // var clsId = $('#import-cls-list option:selected').val();//选中的值;
+        importClsSelected("");
     });
     //批量删除
     $('#modal-onoff').on('shown.bs.modal', function (event) {
@@ -246,6 +254,7 @@ function offline(rowid) {
 }
 
 var show = false;
+
 function del(rowid) {
     console.log(rowid);
     jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
@@ -311,3 +320,4 @@ function initRosterClsList() {
         }
     });
 }
+

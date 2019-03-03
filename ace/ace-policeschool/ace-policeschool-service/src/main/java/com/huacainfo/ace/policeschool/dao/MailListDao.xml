@@ -94,7 +94,7 @@
         FROM
         portal.dict t
         WHERE
-        t.category_id = '156'
+        t.category_id = '159'
         UNION ALL
         SELECT
         t.ID,

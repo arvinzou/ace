@@ -24,7 +24,8 @@ Page({
         imageCover: null,
         orgId: null,
         userinfo: null,
-        politicalStatus: "1"
+        politicalStatus: "1",
+        isGetVilidateCode:false,   // 是否获取验证码
     },
 
     /**
@@ -94,21 +95,29 @@ Page({
                 wx.showModal({
                     title: '提示',
                     content: ret.info,
+                    showCancel:false,
                     success: function(res) {}
                 })
             }
         );
         that.settime();
     },
+    // 设置时间
     settime: function() {
         var that = this;
         var btnName = "获取验证码";
         if (countdown == 0) {
-            btnName = "获取验证码";
+            btnName = "重新获取";
             countdown = 30;
             stop = true;
+            that.setData({
+              isGetVilidateCode:false
+            });
         } else {
             stop = false;
+            that.setData({
+              isGetVilidateCode: true
+            });
             btnName = "重新发送 " + countdown + "";
             countdown--;
         }

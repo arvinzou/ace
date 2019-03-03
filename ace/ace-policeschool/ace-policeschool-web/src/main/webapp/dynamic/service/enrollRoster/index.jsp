@@ -7,7 +7,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>报名花名册管理</title>
+    <title>报名管理</title>
 </head>
 <jsp:include page="/dynamic/common/header.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
@@ -30,9 +30,9 @@
                     <button type="button" class="btn  green" id="btn-view-import"
                             authority="false">批量导入
                     </button>
-                    <button type="button" class="btn  green" id="btn-view-onoff"
-                            authority="false">批量删除
-                    </button>
+                    <%--<button type="button" class="btn  green" id="btn-view-onoff"--%>
+                    <%--authority="false">批量删除--%>
+                    <%--</button>--%>
                 </div>
                 <div class="col-md-8">
 
@@ -47,11 +47,11 @@
                                 onclick="setParams('status','0');">注销
                         </button>
                     </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select name="classId" id="s-cls-list" class="form-control" style="height: 31px;"
-                                onchange="setParams('clsId',this.value)">
-                        </select>
-                    </div>
+                    <%--<div class="btn-group" role="group" style="float:left;padding-right:5px">--%>
+                    <%--<select name="classId" id="s-cls-list" class="form-control" style="height: 31px;"--%>
+                    <%--onchange="setParams('clsId',this.value)">--%>
+                    <%--</select>--%>
+                    <%--</div>--%>
 
                     <div class="input-group">
                         <input type="text"
@@ -144,17 +144,6 @@
                 <h4 class="modal-title">批量导入</h4>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label class="col-md-2 control-label">
-                        导入到目标班次<span style='color:red;'>*</span>
-                    </label>
-                    <div class="col-md-6">
-                        <select class="form-control" style="width:460px; height: 35px; line-height: 35px;"
-                                id="import-cls-list" onchange="importClsSelected(this.value)">
-
-                        </select>
-                    </div>
-                </div>
                 <div id="uploader">
                 </div>
                 <div style="margin:5px">
@@ -194,27 +183,69 @@
 <%--详情juicer模板--%>
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
-        <label class="col-md-2 view-label">班次</label>
-        <div class="col-md-10">
-            \${data.o.clsViewName}
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 view-label">姓名</label>
         <div class="col-md-10">
             \${data.o.name}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">单位全称</label>
+        <label class="col-md-2 view-label">性别</label>
+        <div class="col-md-10">
+            \${rsd(data.o.sex,'01')}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">籍贯</label>
+        <div class="col-md-10">
+            \${data.o.nativePlace}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">单位</label>
         <div class="col-md-10">
             \${data.o.workUnitName}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">职务全称</label>
+        <label class="col-md-2 view-label">出生年月</label>
+        <div class="col-md-10">
+            \${formatDate(data.o.birthDate)}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">职务</label>
         <div class="col-md-10">
             \${data.o.postName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">政治面貌</label>
+        <div class="col-md-10">
+            \${rsd(data.o.political,'158')}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">毕业院校</label>
+        <div class="col-md-10">
+            \${data.o.college}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">手机号</label>
+        <div class="col-md-10">
+            \${data.o.mobile}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">警号</label>
+        <div class="col-md-10">
+            \${data.o.badgeNum}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">身份证号</label>
+        <div class="col-md-10">
+            \${data.o.idCard}
         </div>
     </div>
     <div class="form-group">

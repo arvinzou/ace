@@ -157,7 +157,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">出生年月</label>
         <div class="col-md-10">
-            \${data.o.birthDate}
+            \${formatDate(data.o.birthDate)}
         </div>
     </div>
     <div class="form-group">
@@ -169,7 +169,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">政治面貌</label>
         <div class="col-md-10">
-            \${parsePolitical(data.o.political)}
+            \${rsd(data.o.political,'158')}
         </div>
     </div>
     <div class="form-group">

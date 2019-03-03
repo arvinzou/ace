@@ -38,7 +38,9 @@ Page({
     cjSectionId: null,
     isCollection: false,
     polyline: [{
-      points: [],
+      points: [
+          
+      ],
       color: '#4350FC',
       width: 8,
       dottedLine: false
@@ -86,6 +88,7 @@ Page({
 
   },
   selectRoad: function() {
+    app.globalData.collectionId = null;
     wx.navigateTo({
       url: '../collection/index?type=cj',
     });
@@ -184,7 +187,7 @@ Page({
     util.request(cfg.server + '/taa/www/road/getCloseRoadSection', {
         lat: latitude,
         lon: longitude,
-        radius: '10000'
+        radius: '100'
       },
       function(res) {
         if (res.status == 0) {
@@ -475,7 +478,6 @@ Page({
               roadManName: app.globalData.roadManName
             });
           }
-
           that.getLocation();
           that.initDict();
         } else {
@@ -504,6 +506,7 @@ Page({
       that.getLocation();
       that.initDict();
       that.initUserData(); // 重置后从定向首页，初始化用户信息
+      
       if (app.globalData.collectionId) {
         that.setData({
           startName: app.globalData.startName,
@@ -511,6 +514,15 @@ Page({
         });
         console.log("startName=========endName==============" + that.data.startName);
         that.initGpsList(app.globalData.collectionId);
+      }else{
+          that.setData({
+              polyline: [{
+                  points: [],
+                  color: '#4350FC',
+                  width: 8,
+                  dottedLine: false
+              }]
+          })
       }
       
     }
@@ -562,6 +574,7 @@ Page({
       roadGps.roadSectionId = that.data.cjSectionId;
       roadGps.latitude = pointList[i].latitude;
       roadGps.longitude = pointList[i].longitude;
+      roadGps.gatherTime = pointList[i].gatherTime;
       list.push(roadGps);
     }
     that.setData({
@@ -604,6 +617,7 @@ Page({
   getLocate: function() {
     var o = {};
     var that = this;
+    var time = util.formatDateTime(new Date());
     wx.getLocation({
       type: 'gcj02',
       success: function(res) {
@@ -611,7 +625,8 @@ Page({
         var longitude = res.longitude;
         o = {
           longitude: res.longitude,
-          latitude: res.latitude
+          latitude: res.latitude,
+          gatherTime: time
         }
         var pointList = that.data.polyline[0].points;
         pointList.push(o);
@@ -707,36 +722,62 @@ Page({
    */
   resetData: function() {
     var that = this;
-    that.setData({
-      sectionFlag: false,
-      sectionName: null,
-      sectionId: null,
-    });
-    that.getLocation();
-    that.initDict();
-    //that.initDateTime();
+    wx.showModal({
+          title: '提示',
+          content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
+          success(res) {
+              if (res.confirm) {
+                  that.setData({
+                      sectionFlag: false,
+                      sectionName: null,
+                      sectionId: null,
+                      polyline: [{
+                          points: [],
+                          color: '#4350FC',
+                          width: 8,
+                          dottedLine: false
+                      }]
+                  });
+                  that.getLocation();
+                  that.initDict();
+              } else if (res.cancel) {
+                  
+              }
+          }
+    })
   },
   /**
    * 重新定位采集信息
    */
   resetCj: function() {
     var that = this;
-    that.setData({
-      startName: null,
-      startName: null,
-      tab: 1,
-      polyline: [{
-        points: [],
-        color: '#4350FC',
-        width: 8,
-        dottedLine: false
-      }],
-      flaging: false,
-      frequency: 0, //是否显示加减频率
-      timeInterval: 10000, //采集频率以10秒为单位
-      activeBreak: ''
-    });
-    that.getLocation();
+      wx.showModal({
+          title: '提示',
+          content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
+          success(res) {
+              if (res.confirm) {
+                  that.setData({
+                      startName: null,
+                      startName: null,
+                      tab: 1,
+                      polyline: [{
+                          points: [],
+                          color: '#4350FC',
+                          width: 8,
+                          dottedLine: false
+                      }],
+                      flaging: false,
+                      frequency: 0, //是否显示加减频率
+                      timeInterval: 10000, //采集频率以10秒为单位
+                      activeBreak: ''
+                  });
+                  that.getLocation();
+              } else if (res.cancel) {
+
+              }
+          }
+      })
+   
   },
 
   /**
@@ -773,7 +814,7 @@ Page({
           });
         }
 
-      }
+      },
     );
   },
   /**

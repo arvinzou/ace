@@ -14,7 +14,8 @@
 <body>
 <div class="index">
     <div class="logo">
-        <img src="img/logo.png" class="logo-image"/>
+        <div class="logo-img"><img src="img/login-logo.png"/></div>
+        <div class="logo-title">常德警官学校</div>
     </div>
     <div class="login-form">
         <div class="form-row">
@@ -34,7 +35,7 @@
         <form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post">
             <div class="footer" onclick="wxLogin();">
                 <input type="hidden" value="WX_LOGIN" name="action"/>
-                <input type="hidden" value="/partyschool/www/registered/person/index.jsp" id="respUri" name="respUri"/>
+                <input type="hidden" value="/policeschool/www/registered/person/index.jsp" id="respUri" name="respUri"/>
                 <%--  <button type="submit">微信授权登录</button>--%>
                 <img src="img/icon-weixin.png" class="weixin"/>
                 <p>微信登录</p>

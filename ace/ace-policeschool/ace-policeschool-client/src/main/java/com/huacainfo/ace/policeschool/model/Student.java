@@ -5,6 +5,8 @@ import com.huacainfo.ace.common.model.BaseModel;
 import java.util.Date;
 
 public class Student extends BaseModel {
+    private String index;
+
     private String id;
 
     private String pid;
@@ -12,7 +14,9 @@ public class Student extends BaseModel {
     private String name;
 
     private String sex;
-
+    /**
+     * 籍贯
+     */
     private String nativePlace;
 
     private String mobile;
@@ -28,11 +32,17 @@ public class Student extends BaseModel {
     private String postName;
 
     private String classId;
-
+    /**
+     * 警号
+     */
     private String badgeNum;
-
+    /**
+     * 毕业院校
+     */
     private String college;
-
+    /**
+     * 出生年月
+     */
     private Date birthDate;
 
     private String remark;
@@ -40,6 +50,14 @@ public class Student extends BaseModel {
      * 1-正常 2-注销
      */
     private String status;
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
 
     private String createUserId;
 
