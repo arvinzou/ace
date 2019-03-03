@@ -20,6 +20,7 @@ int updateByPrimaryKey(Test record);
 
 
 TestVo selectVoByPrimaryKey(String id);
+TestVo findTopicsByTestId(String id);
 
 List<TestVo> findList(@Param("condition") TestQVo condition,
     @Param("start") int start,

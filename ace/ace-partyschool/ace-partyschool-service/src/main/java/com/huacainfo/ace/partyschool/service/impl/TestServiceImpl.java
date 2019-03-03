@@ -1,23 +1,27 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
-import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.dao.EvaluationRstDao;
+import com.huacainfo.ace.partyschool.dao.TestTopicDao;
+import com.huacainfo.ace.partyschool.model.EvaluationExport;
+import com.huacainfo.ace.partyschool.model.TestTopic;
+import com.huacainfo.ace.partyschool.vo.TestTopicQVo;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.dao.TestDao;
 import com.huacainfo.ace.partyschool.model.Test;
@@ -37,7 +41,11 @@ public class TestServiceImpl implements TestService {
     @Autowired
     private TestDao testDao;
     @Autowired
+    private TestTopicDao testTopicDao;
+    @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private SqlSessionTemplate sqlSession;
 
 
     /**
@@ -147,6 +155,28 @@ public class TestServiceImpl implements TestService {
         SingleResult<TestVo> rst = new SingleResult<>();
         rst.setValue(this.testDao.selectVoByPrimaryKey(id));
         return rst;
+    }
+
+    @Override
+    public ResultResponse findTopicsByTestId(String id) throws Exception {
+        if (CommonUtils.isBlank(id)) {
+            return new ResultResponse(ResultCode.FAIL, "testID为空");
+        }
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TestDao dao = session.getMapper(TestDao.class);
+        TestVo testVo=null;
+        try {
+            testVo = dao.findTopicsByTestId(id);
+//            WriteExcel(list);
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
+        }
+        return new ResultResponse(ResultCode.SUCCESS, "成功", testVo);
+
     }
 
     /**
@@ -318,6 +348,40 @@ public class TestServiceImpl implements TestService {
     public MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception {
         this.testDao.updateStatus(id, status);
         this.dataBaseLogService.log("跟新状态", "测评结果管理", id, id, "测评结果管理", userProp);
+        return new MessageResponse(0, "成功！");
+    }
+
+    @Override
+    public MessageResponse inserTopics(TestTopicQVo obj, UserProp userProp) throws Exception {
+        if(CommonUtils.isBlank(obj.getTestId())){
+            return new MessageResponse(ResultCode.FAIL,"缺失testId");
+        }
+        if(CommonUtils.isBlank(obj.getTopics())){
+            return new MessageResponse(ResultCode.FAIL,"没有选择试题");
+        }
+
+        obj.setScore((new BigDecimal(0)));
+        List<String> list=obj.getTopics();
+        int count=this.testTopicDao.findCount(obj);
+
+        for(int i=0;i<list.size();i++){
+            obj.setId(GUIDUtil.getGUID());
+            obj.setTopicId(list.get(i));
+            obj.setIndex(count+1+i);
+            testTopicDao.insert(obj);
+        }
+        this.dataBaseLogService.log("添加试题", "测评结果管理",obj.getTopics().toString() , obj.getTopics().toString(), "测评结果管理", userProp);
+        return new MessageResponse(ResultCode.SUCCESS, "成功！");
+    }
+    @Override
+    public MessageResponse  changeTestTopicIndex(String tid1, String tid2) throws Exception {
+        if (CommonUtils.isBlank(tid1)){
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数！");
+        }
+        if (CommonUtils.isBlank(tid1)){
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数！");
+        }
+        testTopicDao.changeIndex(tid1,tid2);
         return new MessageResponse(0, "成功！");
     }
 

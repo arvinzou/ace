@@ -9,6 +9,8 @@ import java.util.List;
 public class TopicQVo extends Topic {
     private static final long serialVersionUID = 1L;
 
+
+
     public List<TopicOpt> getOptions() {
         return options;
     }
@@ -18,4 +20,14 @@ public class TopicQVo extends Topic {
     }
 
     private  List<TopicOpt> options;
+
+    private String testId;
+
+    public String getTestId() {
+        return testId;
+    }
+
+    public void setTestId(String testId) {
+        this.testId = testId;
+    }
 }

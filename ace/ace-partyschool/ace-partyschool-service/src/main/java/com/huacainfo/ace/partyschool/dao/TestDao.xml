@@ -236,4 +236,32 @@
         status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
+
+
+    <resultMap extends="BaseResultMap" id="ResultMapTestTopic" type="com.huacainfo.ace.partyschool.vo.TestVo">
+        <collection property="topics" ofType="com.huacainfo.ace.partyschool.vo.TopicVo">
+            <result column="toId" property="id"/>
+            <result column="toContent" property="content"/>
+            <result column="toType" property="type"/>
+            <result column="ttId" property="tid"/>
+            <result column="ttIndex" property="tindex"/>
+            <result column="ttScore" property="tscore"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="findTopicsByTestId" parameterType="java.lang.String" resultMap="ResultMapTestTopic">
+        SELECT
+        t.id, t.name, t.introduce,
+        tt.id as ttId, tt.`index` as ttIndex,tt.score as ttScore,
+        top.id as toId,top.content as toContent,top.`type` as toType
+        FROM partyschool.test t
+        LEFT JOIN partyschool.test_topic tt ON tt.testId=t.id
+        LEFT JOIN partyschool.topic top ON top.id=tt.topicId
+        WHERE t.id=#{id,jdbcType=VARCHAR}
+        ORDER BY tt.`index` asc
+    </select>
+
+
+
 </mapper>
