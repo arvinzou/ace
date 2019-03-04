@@ -271,11 +271,24 @@
         <if test="condition.activityId !=null and condition.activityId !=&quot;&quot;">
             and t.activityId =#{condition.activityId,jdbcType=VARCHAR}
         </if>
+
     </sql>
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
         <include refid="whereCondition"/>
+    </select>
+
+    <!--查询实际参与人数-->
+    <select id="findRealNum" resultType="int">
+        SELECT
+        count(*)
+        FROM
+        activity_detail t
+        WHERE
+        t. STATUS <![CDATA[ <> ]]> 0
+        AND t.activityId =#{condition.activityId,jdbcType=VARCHAR}
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.Activity">
