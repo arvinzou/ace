@@ -185,12 +185,15 @@ public class WApiController {
      * @return ResultResponse
      */
     @RequestMapping("/findBorrowList")
-    public ResultResponse findBorrowList(String lCardNo) {
+    public ResultResponse findBorrowList(String lCardNo, String startNum, String endNum) {
         if (!StringUtil.areNotEmpty(lCardNo)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
 
-        List<Map<String, Object>> view = apiService.findBorrowList(lCardNo);
+        int s = StringUtil.isEmpty(startNum) ? 0 : Integer.parseInt(startNum);
+        int e = StringUtil.isEmpty(endNum) ? 5 : Integer.parseInt(endNum);
+
+        List<Map<String, Object>> view = apiService.findBorrowList(lCardNo, s, e);
         return new ResultResponse(ResultCode.SUCCESS, "success", view);
     }
 }

@@ -79,10 +79,16 @@ Page({
                   for(var i=0; i< mtypeList.length; i++){
                       that.initCarType(mtypeList[i].vehicleType);
                   }
+
                   var causeList = res.value.causeList;
-                  for(var i=0; i < causeList.length; i++){
-                      that.initSeason(causeList[i].cause);
+                  if(causeList.length < 1){
+                      that.initSeason();
+                  }else{
+                      for (var i = 0; i < causeList.length; i++) {
+                          that.initSeason(causeList[i].cause);
+                      }
                   }
+                  
               } else {
                   wx.showModal({
                       title: '提示',
@@ -148,11 +154,14 @@ Page({
       var that = this;
       var data = that.data.dictObject;
       var cause = data['173'];
-      for (var i in cause){
-          if (key == cause[i].CODE){
-              cause[i].checked = true;
+      if(key!=null && key != undefined && key !=''){
+          for (var i in cause) {
+              if (key == cause[i].CODE) {
+                  cause[i].checked = true;
+              }
           }
       }
+      
       that.setData({
           seasonList: cause
       })

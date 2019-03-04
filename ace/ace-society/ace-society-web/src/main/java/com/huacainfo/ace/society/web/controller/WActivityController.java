@@ -1,16 +1,12 @@
 package com.huacainfo.ace.society.web.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.WxUser;
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.society.model.Activity;
 import com.huacainfo.ace.society.model.ActivityDetail;
 import com.huacainfo.ace.society.model.ActivityReport;
@@ -23,7 +19,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("www/activity")
@@ -169,7 +167,7 @@ public class WActivityController extends SocietyBaseController {
     @RequestMapping(value = "/selectActivityByPrimaryKey")
     @ResponseBody
     public ResultResponse selectActivityByPrimaryKey(String id) throws Exception {
-        ActivityVo activityVo = this.activityService.selectActivityByPrimaryKey(id).getValue();
+        ActivityVo activityVo = this.activityService.selectActivityByPrimaryKey(id,0,10,null).getValue();
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", activityVo);
     }
 
