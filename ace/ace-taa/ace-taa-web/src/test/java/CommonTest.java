@@ -8,12 +8,10 @@ import org.junit.Test;
  */
 public class CommonTest {
 
-    public static void main(String[] args) {
 
-    }
     @Test
     public void test() {
-
+        generatorGUID(1);
     }
 
 

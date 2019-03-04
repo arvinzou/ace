@@ -16,7 +16,10 @@ import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.*;
-import com.huacainfo.ace.society.model.*;
+import com.huacainfo.ace.society.model.Activity;
+import com.huacainfo.ace.society.model.ActivityDetail;
+import com.huacainfo.ace.society.model.CoinConfig;
+import com.huacainfo.ace.society.model.PointsRecord;
 import com.huacainfo.ace.society.service.*;
 import com.huacainfo.ace.society.vo.ActivityDetailVo;
 import com.huacainfo.ace.society.vo.ActivityQVo;
@@ -378,8 +381,9 @@ public class ActivityServiceImpl implements ActivityService {
         if(!CommonUtils.isBlank(activityVo.getEndDate())){
             ActivityDetail activityDetail=new ActivityDetail();
             activityDetail.setActivityId(id);
-            List<ActivityDetailVo> list=activityDetailDao.findList(activityDetail,0,200,null);
-            activityVo.setTotal(list.size());
+            List<ActivityDetailVo> list=activityDetailDao.findList(activityDetail,0,10,null);
+            int realJoinNum=activityDetailDao.findRealNum(activityDetail,0,activityVo.getParterNum());
+            activityVo.setTotal(realJoinNum);
             int i=0;
             for(ActivityDetailVo item:list){
                 if("1".equals(item.getSignInState())){

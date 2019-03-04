@@ -6,8 +6,6 @@ import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.common.tools.LatLonUtil;
-import com.huacainfo.ace.common.tools.SortList;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.taa.dao.RoadGpsDao;
 import com.huacainfo.ace.taa.model.RoadGps;
@@ -88,7 +86,7 @@ public class RoadGpsServiceImpl implements RoadGpsService {
      * @param: @param p
      * @param: @return
      * @param: @throws Exception
-     * @return: ListResult<Map<String,Object>>
+     * @return: ListResult<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-08
      */
@@ -129,28 +127,33 @@ public class RoadGpsServiceImpl implements RoadGpsService {
      */
     @Override
     public ResultResponse getCloseRoadSection(double lat, double lon, int radius) {
-        double[] around = LatLonUtil.getAround(lat, lon, radius);
-        double minLat = around[0];
-        double minLng = around[1];
-        double maxLat = around[2];
-        double maxLng = around[3];
-//        坐标范围
+//        double[] around = LatLonUtil.getAround(lat, lon, radius);
+//        double minLat = around[0];
+//        double minLng = around[1];
+//        double maxLat = around[2];
+//        double maxLng = around[3];
+////        坐标范围
         Map<String, Object> p = new HashMap<>();
-        p.put("minLat", minLat);
-        p.put("minLng", minLng);
-        p.put("maxLat", maxLat);
-        p.put("maxLng", maxLng);
+//        p.put("minLat", minLat);
+//        p.put("minLng", minLng);
+//        p.put("maxLat", maxLat);
+//        p.put("maxLng", maxLng);
+        p.put("lat", lat);
+        p.put("lng", lon);
 //      筛选数据
         List<RoadGpsVo> list = roadGpsDao.getAroundList(p);
-        double distance;
-        for (RoadGpsVo item : list) {
-            distance = LatLonUtil.getDistance(lon, lat,
-                    item.getLongitude().doubleValue(), item.getLatitude().doubleValue());
-            item.setDistance(distance);
-        }
-        //距离排序
-        SortList<RoadGpsVo> sortList = new SortList<>();
-        sortList.sort(list, "getDistance", "");//正序排列：由小到大
+//        double distance;
+//        for (RoadGpsVo item : list) {
+//            distance = LatLonUtil.getDistance(
+//                    lon, lat,
+//                    item.getLongitude().doubleValue(),
+//                    item.getLatitude().doubleValue()
+//            );
+//            item.setDistance(distance);
+//        }
+//        //距离排序
+//        SortList<RoadGpsVo> sortList = new SortList<>();
+//        sortList.sort(list, "getDistance", "");//正序排列：由小到大
 
         if (CollectionUtils.isEmpty(list)) {
             return new ResultResponse(ResultCode.FAIL, "没找到匹配数据");

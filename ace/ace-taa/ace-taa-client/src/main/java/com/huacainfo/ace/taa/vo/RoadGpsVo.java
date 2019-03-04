@@ -9,6 +9,7 @@ public class RoadGpsVo extends RoadGps {
      * 路长姓名
      */
     private String manName;
+    private String roadManId;
     /**
      * 道路名称
      */
@@ -23,6 +24,14 @@ public class RoadGpsVo extends RoadGps {
      * 两点距离
      */
     private double distance;
+
+    public String getRoadManId() {
+        return roadManId;
+    }
+
+    public void setRoadManId(String roadManId) {
+        this.roadManId = roadManId;
+    }
 
     public String getStartName() {
         return startName;
