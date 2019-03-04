@@ -236,28 +236,21 @@ function updataStatus(id, status) {
 
 function initPreview(id) {
     startLoad();
-    $.ajax({
-        url: contextPath + "/test/selectTestByPrimaryKey",
-        type: "post",
-        async: false,
-        data: {
-            id: id
-        },
-        success: function (result) {
-            stopLoad();
-            if (result.status == 0) {
-                var data = {};
-                data['o'] = result.value;
-                render('#fm-preview', data, 'tpl-preview');
-            } else {
-                alert(result.errorMessage);
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
+    var url=contextPath + "/www/topic/findTopicFullList";
+    var data={
+        testId:id
+    }
+    $.getJSON(url,data,function (rst) {
+        stopLoad();
+        if(rst.status==0){
+            render('#fm-preview',rst.data,'tpl-preview');
         }
-    });
+        else {
+            alert("获取用户信息失败！");
+        }
+    })
+
+
 }
 
 function initForm(id) {

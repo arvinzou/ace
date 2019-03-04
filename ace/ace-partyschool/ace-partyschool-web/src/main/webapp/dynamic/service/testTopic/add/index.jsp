@@ -133,7 +133,7 @@
                                                       name="content" rows="1">{{type4.content}}</textarea>
                                         </div>
                                     </div>
-                                    <button @click="submit('type4')" class="btn btn-default">Submit Button</button>
+                                    <button @click="submit1('type4')" class="btn btn-default">Submit Button</button>
                                     <button type="reset" class="btn btn-default">Reset Button</button>
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                                                       name="content" rows="1">{{type5.content}}</textarea>
                                         </div>
                                     </div>
-                                    <button @click="submit('type5')" class="btn btn-default">Submit Button</button>
+                                    <button @click="submit1('type5')" class="btn btn-default">Submit Button</button>
                                     <button type="reset" class="btn btn-default">Reset Button</button>
                                 </div>
                             </div>

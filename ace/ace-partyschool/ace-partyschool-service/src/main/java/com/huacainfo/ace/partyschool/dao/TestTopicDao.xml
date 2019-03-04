@@ -58,7 +58,7 @@
                type="com.huacainfo.ace.partyschool.vo.TestTopicQVo"></resultMap>
 
     <select id="findCount" resultType="int" parameterType="com.huacainfo.ace.partyschool.vo.TestTopicQVo">
-    select count(*)
+    SELECT ifnull(MAX(`index`),0)
     from test_topic
     where testId=#{condition.testId,jdbcType=VARCHAR}
   </select>
@@ -75,7 +75,10 @@ SET
 
 
     <delete id="delTestTopic" parameterType="java.lang.String">
-        delete from test_topic
+       update
+partyschool.test_topic tt
+SET tt.testId=Null,
+tt.topicId =null
         where id = #{id,jdbcType=VARCHAR}
     </delete>
 

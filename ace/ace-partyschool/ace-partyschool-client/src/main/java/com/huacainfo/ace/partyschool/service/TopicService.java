@@ -1,10 +1,7 @@
 package com.huacainfo.ace.partyschool.service;
 
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.partyschool.model.Topic;
 import com.huacainfo.ace.partyschool.vo.TopicVo;
 import com.huacainfo.ace.partyschool.vo.TopicQVo;
@@ -33,6 +30,7 @@ public interface TopicService {
      * @version: 2019-02-27
      */
     PageResult<TopicVo> findTopicList(TopicQVo condition, int start, int limit, String orderBy) throws Exception;
+    ResultResponse findTopicFullList(String testId) throws Exception;
 
     /**
      * @throws

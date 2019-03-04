@@ -27,6 +27,8 @@ public interface TopicDao {
                            @Param("limit") int limit,
                            @Param("orderBy") String orderBy);
 
+    List<TopicVo> findTopicFullList(@Param("testId") String testId);
+
     int findCount(@Param("condition") TopicQVo condition);
 
     int isExit(Topic record);

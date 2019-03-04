@@ -15,6 +15,7 @@
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/test.css">
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -124,85 +125,18 @@
     {@/each}
 </script>
 ﻿
-<div class="modal fade " id="modal-status">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">$times;</span>
-                </button>
-                <h4 class="modal-title">设置状态</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-status" role="form">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="col-md-2 view-label">对象</label>
-                            <div class="col-md-10 status-title">
 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">状态</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <input type="hidden" name="id">
-                                    <label>
-                                        <input type="radio" name="status" value="1"><span style="padding:10px">预播</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="2"><span
-                                            style="padding:10px">直播中</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="3"><span style="padding:10px">历史</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green status">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!--审核弹框-->
-<div class="modal fade" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">$times;</span>
-                </button>
-                <h4 class="modal-title">审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green audit">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document" style="width: 90%;">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">$times;</span>
                 </button>
                 <h4 class="modal-title">详细</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="background-color: #eee">
                 <div class="form-horizontal" role="form">
-                    <div class="form-body" id="fm-preview">
+                    <div class="form-body" style="height: 600px;overflow: auto;" id="fm-preview">
 
                     </div>
                 </div>
@@ -213,186 +147,76 @@
         </div>
     </div>
 </div>
-<script id="tpl-fm" type="text/template">
-    <div class="form-body">
-
-        <div class="form-group">
-            <label class="col-md-2 view-label">主键</label>
-            <div class="col-md-10">
-                \${id}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">测试名称</label>
-            <div class="col-md-10">
-                \${name}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">测试介绍</label>
-            <div class="col-md-10">
-                \${introduce}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">测试状态</label>
-            <div class="col-md-10">
-                \${status}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">开始时间</label>
-            <div class="col-md-10">
-                \${startTime}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">结束时间</label>
-            <div class="col-md-10">
-                \${endTime}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建人编号</label>
-            <div class="col-md-10">
-                \${createUserId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建人姓名</label>
-            <div class="col-md-10">
-                \${createUserName}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建日期</label>
-            <div class="col-md-10">
-                \${createDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新人编号</label>
-            <div class="col-md-10">
-                \${lastModifyUserId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新人名称</label>
-            <div class="col-md-10">
-                \${lastModifyUserName}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新日期</label>
-            <div class="col-md-10">
-                \${lastModifyDate}
-            </div>
-        </div>
-
-
-        <h4>结果</h4>
-        <hr>
-        <div class="form-group " id="operation">
-            <label class="col-md-2 control-label">结果</label>
-            <div class="col-md-10">
-                <div class="radio-group-container">
-                    <label>
-                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">说明</label>
-            <div class="col-md-10">
-                <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-            </div>
-        </div>
-    </div>
-
-</script>
 
 <script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
+
+    {@each data as item, index}
+    {@if item.type==1||item.type==3}
+    <div class="testItem items testStyle2">
+        <div class="testTitle">
+            <span class="text">Q\${formatIndex(index)}、\${item.content} \${formatScore(item.tscore)}</span>
+        </div>
+        <div class="testScore">
+            {@each item.topicOptList as itm, idx}
+            <div class="option">
+                <input data-answer="\${itm.answer}" type="radio" name="test_\${index}" id="option_\${index}_\${idx}"/>
+                <label for="option_\${index}_\${idx}">\${itm.content}</label>
+            </div>
+            {@/each}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">测试名称</label>
-        <div class="col-md-10">
-            \${name}
+
+    {@else if item.type == 2}
+    <div class="testItem items testStyle2">
+        <div class="testTitle">
+            <span class="text">Q\${formatIndex(index)}、\${item.content} \${formatScore(item.tscore)}</span>
+        </div>
+        <div class="testScore">
+            {@each item.topicOptList as itm, idx}
+            <div class="option">
+                <input data-answer="\${itm.answer}" type="checkbox" name="test_\${index}"
+                       id="option_\${index}_\${idx}"/>
+                <label for="option_\${index}_\${idx}">\${itm.content}</label>
+            </div>
+            {@/each}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">测试介绍</label>
-        <div class="col-md-10">
-            \${introduce}
+    {@else if item.type == 4}
+    <div class="testItem">
+        <div class="testTitle">
+            <span class="text">Q\${formatIndex(index)}、\${item.content} \${formatScore(item.tscore)}</span>
+        </div>
+        <div class="input_text">
+            <textarea maxlength="200" class="message" placeholder="请在此输入您要填写的内容~200字以内"></textarea>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">测试状态</label>
-        <div class="col-md-10">
-            \${status}
+
+    {@else if item.type == 5}
+    <div class="testItem items" data-name="\${item.name}" data-introduce="\${item.introduce}">
+        <div class="testTitle">
+            <span class="text">Q\${formatIndex(index)}、\${item.content} \${formatScore(item.tscore)}</span>
+        </div>
+        <div class="testScore">
+            <div class="core">
+                <div class="button subBtn">
+                </div>
+                <div class="score">
+                    <p data-total="\${item.tscore}" class="number">\${item.tscore|parseIntF}</p>
+                </div>
+                <div class="button addBtn"></div>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">开始时间</label>
-        <div class="col-md-10">
-            \${startTime}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">结束时间</label>
-        <div class="col-md-10">
-            \${endTime}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建人编号</label>
-        <div class="col-md-10">
-            \${createUserId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建人姓名</label>
-        <div class="col-md-10">
-            \${createUserName}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建日期</label>
-        <div class="col-md-10">
-            \${createDate}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新人编号</label>
-        <div class="col-md-10">
-            \${lastModifyUserId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新人名称</label>
-        <div class="col-md-10">
-            \${lastModifyUserName}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新日期</label>
-        <div class="col-md-10">
-            \${lastModifyDate}
-        </div>
-    </div>
+    {@else}
+    <div>111</div>
+    {@/if}
+    {@/each}
+
 </script>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
+<script src="js/test.js?v=${cfg.version}"></script>
 </html>

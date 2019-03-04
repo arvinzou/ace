@@ -1,24 +1,25 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.dao.TestDao;
 import com.huacainfo.ace.partyschool.service.TopicOptService;
+import com.huacainfo.ace.partyschool.vo.TestVo;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.dao.TopicDao;
 import com.huacainfo.ace.partyschool.model.Topic;
@@ -39,6 +40,10 @@ public class TopicServiceImpl implements TopicService {
     private TopicDao topicDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
     @Autowired
     private TopicOptService topicOptService;
 
@@ -69,6 +74,29 @@ public class TopicServiceImpl implements TopicService {
         }
         return rst;
     }
+
+
+    @Override
+    public ResultResponse findTopicFullList(String testId) throws Exception {
+        if(CommonUtils.isBlank(testId)){
+            return new ResultResponse(ResultCode.FAIL,"test主键不能为空");
+        }
+
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TopicDao dao = session.getMapper(TopicDao.class);
+        List<TopicVo> list=new ArrayList<>();
+        try {
+            list = dao.findTopicFullList(testId);
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
+        }
+        return new ResultResponse(ResultCode.SUCCESS,"成功",list);
+    }
+
 
     /**
      * @throws
@@ -101,8 +129,8 @@ public class TopicServiceImpl implements TopicService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.topicDao.insert(o);
-        if(o.getOptions().size()>0) {
-            this.topicOptService.insertTopicOptList(o.getOptions(), o.getId(), userProp);
+        if(!CommonUtils.isBlank(o.getOptions())){
+                this.topicOptService.insertTopicOptList(o.getOptions(), o.getId(), userProp);
         }
         this.dataBaseLogService.log("添加试题管理", "试题管理", "",
                 o.getId(), o.getId(), userProp);

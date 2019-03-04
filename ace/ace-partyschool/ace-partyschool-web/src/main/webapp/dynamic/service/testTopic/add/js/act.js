@@ -60,20 +60,16 @@ function initVue() {
                 const that = this;
                 const data = that[type];
                 var answer = $('.test input[name='+type+']:checked').val();
-                if (!answer) {
-                    alert("没有选择正确答案！");
+                if(answer){
+                    data.options[answer].answer = 1;
                 }
-                data.options[answer].answer = 1;
                 that.postData(data);
             },
             submit2:function (type) {
                 const that = this;
                 const data = that[type];
                 var checkeds = $('.test input[name='+type+']:checked');
-                if (checkeds.length<1) {
-                    alert("没有选择正确答案！");
-                }
-                checkeds.each(function(i){
+                checkeds.each(function(){
                     data.options[$(this).val()].answer=1;
                 });
                 that.postData(data);
