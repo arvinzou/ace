@@ -1,11 +1,11 @@
 package com.huacainfo.ace.society.dao;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.society.model.ActivityDetail;
 import com.huacainfo.ace.society.vo.ActivityDetailQVo;
 import com.huacainfo.ace.society.vo.ActivityDetailVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ActivityDetailDao {
 
@@ -28,6 +28,7 @@ public interface ActivityDetailDao {
 
     List<ActivityDetailVo> findList(@Param("condition") ActivityDetail condition, @Param("start") int start, @Param("limit") int limit, @Param("orderBy") String orderBy);
 
+    int findRealNum(@Param("condition") ActivityDetail condition, @Param("start") int start, @Param("limit") int limit);
     int findCount(@Param("condition") ActivityDetailQVo condition);
 
     int isExit(ActivityDetail record);

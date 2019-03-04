@@ -11,6 +11,10 @@ public interface TestTopicDao {
 
     int findCount(@Param("condition") TestTopicQVo condition);
 
+    int setScore(TestTopic condition);
+
     int changeIndex(@Param("tid1") String tid1,@Param("tid2") String tid2);
-    int downIndex(TestTopic condition);
+
+    int delTestTopic(@Param("id") String id);
+
 }

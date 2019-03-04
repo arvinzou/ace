@@ -22,6 +22,7 @@
     </resultMap>
 
     <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.RoadSectionVo" extends="BaseResultMap">
+        <result column="gpsNum" jdbcType="INTEGER" property="gpsNum"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, roadId, areaCode, roadMan, name, startName, endName, startNo, endNo, intro, status, 
@@ -149,6 +150,7 @@
         case when (select count(1) from road_gps rg where rg.roadSectionId = t.id) >0
         then '1'
         else '0' end as category,
+        (select count(1) from road_gps where roadSectionId = t.id) as gpsNum,
 
         t.id, t.roadId, t.areaCode, t.roadMan, t.name, t.startName, t.endName,
         t.startNo, t.endNo, t.status,a.name roadManName,b.name areaName,t.createDate

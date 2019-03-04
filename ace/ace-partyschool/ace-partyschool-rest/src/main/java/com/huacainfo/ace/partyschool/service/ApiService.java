@@ -87,5 +87,5 @@ public interface ApiService {
      *
      * @return ResultResponse
      */
-    List<Map<String, Object>> findBorrowList(String lCardNo);
+    List<Map<String, Object>> findBorrowList(String lCardNo, int startNum, int endNum);
 }

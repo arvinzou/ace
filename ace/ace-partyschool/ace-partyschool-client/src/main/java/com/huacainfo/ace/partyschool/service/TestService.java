@@ -176,4 +176,6 @@ public interface TestService {
                            MessageResponse updateStatus(String id,String status, UserProp userProp) throws Exception;
                            MessageResponse inserTopics(TestTopicQVo obj, UserProp userProp) throws Exception;
                            MessageResponse changeTestTopicIndex(String tid1, String tid2) throws Exception;
+                           MessageResponse delTestTopic(String id) throws Exception;
+                           MessageResponse setScore(TestTopic obj) throws Exception;
  }

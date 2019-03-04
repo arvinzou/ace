@@ -13,6 +13,18 @@ private static final long serialVersionUID = 1L;
      * 查询类别  1-已采集 ; 0 - 未采集
      */
     private String category;
+    /**
+     * GPS采集条数
+     */
+    private int gpsNum;
+
+    public int getGpsNum() {
+        return gpsNum;
+    }
+
+    public void setGpsNum(int gpsNum) {
+        this.gpsNum = gpsNum;
+    }
 
     public String getCategory() {
         return category;

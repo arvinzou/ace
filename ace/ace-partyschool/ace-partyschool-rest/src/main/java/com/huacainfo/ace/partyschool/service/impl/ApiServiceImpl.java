@@ -149,19 +149,35 @@ public class ApiServiceImpl implements ApiService {
      * @return ResultResponse
      */
     @Override
-    public List<Map<String, Object>> findBorrowList(String lCardNo) {
+    public List<Map<String, Object>> findBorrowList(String lCardNo, int startNum, int endNum) {
         //数据库连接信息||登录账号&密码
         String connUrl = PropertyUtil.getProperty("dao.db.sqlserver.conn");
         String sa = PropertyUtil.getProperty("dao.db.sqlserver.acct");//"sa";
         String pwd = PropertyUtil.getProperty("dao.db.sqlserver.pwd");//"admin123";
 
-        String sql = "select  u.Name,  t.* from dbo.BorrowCurrency t \n" +
-                "left join dbo.ReaderCurrency u on t.ReaderCord = u.ReaderCord\n" +
-                "where 1=1\n" +
-                "and t.Signs='未还'\n" +
-                "and u.ReaderBar = '" + lCardNo + "' \n" +
-//                "and CONVERT(varchar(100), t.BorrowDate, 20) like '2014-10-17%'\n" +
-                "order by t.BorrowDate asc";//查询test表
+        String sql = "select * from (\n" +
+                "\tselect \n" +
+                "\t\trow_number() over(order by BorrowDate) as rowNum, \n" +
+                "\t\to.* \n" +
+                "\tfrom ( \n" +
+                "\t\tselect  \n" +
+                "\t\tu.Name,\n" +
+                "\t\tt.SerialNum,t.ReaderCord, t.BarCord, t.Getbooknum, t.StoreAddress, t.ReaderType, \n" +
+                "\t\tt.BuyType, t.SecondFirm, t.Title, t.Price, t.Signs, t.Staff, t.ReBorrowTime,\n" +
+                "\t\tt.BorrowDate, ISNULL(t.ReturnDate, '1900-01-01 00:00:00') as ReturnDate, \n" +
+                "\t\tDATEADD(day,2000,t.BorrowDate) as dueToDate\n" +
+                "\t\tfrom dbo.BorrowCurrency t\n" +
+                "\t\tleft join dbo.ReaderCurrency u on t.ReaderCord = u.ReaderCord\n" +
+                "\t\twhere u.ReaderBar = '" + lCardNo + "'\n" +
+                "\t)o\n" +
+                ")v\n" +
+                "where v.rowNum> " + startNum + " and v.rowNum<= " + endNum;
+//                "select  u.Name,  t.* from dbo.BorrowCurrency t \n" +
+//                "left join dbo.ReaderCurrency u on t.ReaderCord = u.ReaderCord\n" +
+//                "where 1=1\n" +
+//                "and t.Signs='未还'\n" +
+//                "and u.ReaderBar = '" + lCardNo + "' \n" +
+//                "order by t.BorrowDate asc";//查询test表
 
         SQLServerManager manager = SQLServerManager.newInstance(connUrl, sa, pwd);
         return manager.query(sql);

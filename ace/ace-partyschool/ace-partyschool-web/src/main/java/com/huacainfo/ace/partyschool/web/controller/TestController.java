@@ -296,5 +296,17 @@ public class TestController extends BisBaseController {
         return this.testService.changeTestTopicIndex(tid1,tid2);
     }
 
+    @RequestMapping(value = "/delTestTopic")
+    @ResponseBody
+    public MessageResponse delTestTopic(String id) throws Exception {
+        return this.testService.delTestTopic(id);
+    }
+
+    @RequestMapping(value = "/setScore")
+    @ResponseBody
+    public MessageResponse setScore(TestTopic obj) throws Exception {
+        return this.testService.setScore(obj);
+    }
+
 
 }
