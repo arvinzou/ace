@@ -27,30 +27,8 @@
                 <a href="javascript:addTopic();" class="btn green">添加试题</a>
             </div>
             <div class="col-md-9">
-                <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('type','');">添加试题</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('type','1');">单选题</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('type','2');">多选题</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('type','3');">判断题</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('type','4');">问答题</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('type','5');">打分题</button>
-                    </div>
-                    <div class="input-group">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control"
-                               placeholder="请输入直播名称">
-                        <span class="input-group-btn">
-                            <button class="btn  btn-default search_btn"
-                                    type="submit">
-                                    搜索
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            </div>
 
+            </div>
         </div>
 
 
@@ -175,11 +153,11 @@
     <tr>
         <td> \${item.content}</td>
         <td> \${item.type}</td>
-        <td><input type="text" value="\${item.tscore}"></td>
+        <td><input type="text"  onblur="setScore(this.value,'\${item.tid}')" value="\${item.tscore}"></td>
         <td>
             <a href="javascript:moveIndex('\${testTopicId(index,-1)}','\${item.tid}');">上移</a>
             <a href="javascript:moveIndex('\${testTopicId(index,1)}','\${item.tid}');">下移</a>
-            <a href="javascript:del('\${item.id}');">删除</a>
+            <a href="javascript:delTestTopic('\${item.tid}');">删除</a>
         </td>
     </tr>
     {@/each}
