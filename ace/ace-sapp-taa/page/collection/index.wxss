@@ -103,6 +103,13 @@
     overflow: hidden;
     white-space: nowrap;
 }
+.start-end{
+     color: #373F53;
+    font-size: 28rpx;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 .road-sign{
     color: #ABAEB9;
     font-size: 24rpx;
