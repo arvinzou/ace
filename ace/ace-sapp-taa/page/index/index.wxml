@@ -29,15 +29,18 @@
               <image src='../../image/icon-open-close.png' class='close-open'></image>
             </view>
             <view class=' locate-name locate-name-wrapper' wx:if='{{sectionFlag == true}}' bindtap='selectRoadSection'>
-              {{sectionName}} 
+              {{sectionName}}
               <block wx:if='{{sectionName}}'>
-                ({{sectionStartName}}-{{sectionEndName}})
-            </block ><view class='select-arrow-div'><image class='select-arrow' src='../../image/icon_rediret.png' ></image></view>
+               ({{sectionStartName}}-{{sectionEndName}})
+               </block>
+              <view class='select-arrow-div'><image class='select-arrow' src='../../image/icon_rediret.png' ></image></view>
             </view>
+
+            <view class=' locate-name locate-name-wrapper' wx:if='{{sectionFlag == false}}' bindtap='selectRoadSection'>请选择路段</view>
+
             <view class='locate-road'>
             {{address}}
             </view>
-            <view class='locate-road' wx:if='{{sectionFlag == false}}' bindtap='selectRoadSection'>请选择路段</view>
           </view>
           <view class='fromInput'>
             <view class='box'>

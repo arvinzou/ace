@@ -86,7 +86,7 @@ Page({
     that.setData({
       sectionName: '请选择路段'
     });
-    that.getLocation();
+    
   },
   selectRoad: function() {
     app.globalData.collectionId = null;
@@ -508,6 +508,7 @@ Page({
       });
     } else {
       that.initDict();
+      that.getLocation();
       that.initUserData(); // 重置后从定向首页，初始化用户信息     
       if (app.globalData.collectionId) {
         that.setData({
@@ -651,7 +652,9 @@ Page({
         var pointList = that.data.polyline[0].points;
         pointList.push(o);
         that.setData({
-          ['polyline[0].points']: pointList
+          ['polyline[0].points']: pointList,
+          latitude: res.latitude,
+          longitude: res.longitude
         });
       },
     });
