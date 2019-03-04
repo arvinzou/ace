@@ -56,11 +56,13 @@ Page({
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
                 that.data.activityInfo = rst.data;
+                
                 that.setBarTitleText(rst.data.title);
                 that.ifCreatBtn();
                 that.setData({
                     activityInfo: rst.data
                 });
+              console.log(that.data.activityInfo);
             }
         );
     },
