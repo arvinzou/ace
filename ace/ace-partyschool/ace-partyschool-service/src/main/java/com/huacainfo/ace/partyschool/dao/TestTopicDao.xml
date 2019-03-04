@@ -72,4 +72,16 @@ ON
 SET
 	c.`index` = cc.`index` , cc.`index` = c.`index`
   </update>
+
+
+    <delete id="delTestTopic" parameterType="java.lang.String">
+        delete from test_topic
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <update id="setScore" parameterType="com.huacainfo.ace.partyschool.model.TestTopic">
+        UPDATE  test_topic
+        set score= #{score,jdbcType=DECIMAL}
+        where id= #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

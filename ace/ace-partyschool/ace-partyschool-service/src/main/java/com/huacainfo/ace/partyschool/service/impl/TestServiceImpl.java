@@ -384,5 +384,25 @@ public class TestServiceImpl implements TestService {
         testTopicDao.changeIndex(tid1,tid2);
         return new MessageResponse(0, "成功！");
     }
+    @Override
+    public MessageResponse  delTestTopic(String id) throws Exception {
+        if (CommonUtils.isBlank(id)){
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数！");
+        }
+        testTopicDao.delTestTopic(id);
+        return new MessageResponse(0, "成功！");
+    }
+
+    @Override
+    public MessageResponse  setScore(TestTopic obj) throws Exception {
+        if (CommonUtils.isBlank(obj.getId())){
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数！");
+        }
+        if (CommonUtils.isBlank(obj.getScore())){
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数！");
+        }
+        testTopicDao.setScore(obj);
+        return new MessageResponse(0, "成功！");
+    }
 
 }

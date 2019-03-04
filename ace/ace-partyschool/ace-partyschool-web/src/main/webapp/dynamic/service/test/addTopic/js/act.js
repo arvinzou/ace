@@ -13,7 +13,6 @@ window.onload = function () {
 function initEvents() {
     $(".btn-group .btn").bind('click', function (event) {
         $(event.target).siblings().removeClass("active");
-        console.log(event);
         $(event.target).addClass("active");
     });
 
@@ -165,7 +164,6 @@ function submitTopics(){
 
 function testTopicId(index,num) {
     var idx=parseInt(index)+num;
-    console.log(idx);
     var len=topiclist.length;
     if(-1<idx&&idx<len){
         return topiclist[idx].tid;
@@ -212,7 +210,43 @@ function moveIndex(tid1,tid2) {
             initForm();
         }
         else {
-            alert("添加失败,刷新浏览器重试。")
+            alert("设置失败,刷新浏览器重试。")
         }
     });
+}
+
+function delTestTopic(id) {
+    if(!id){
+        return;
+    }
+    var url=contextPath + "/test/delTestTopic";
+    var data={
+        id:id
+    }
+    $.post(url,data,function (result) {
+        if(result.status==0){
+            initForm();
+        }
+        else {
+            alert("删除失败,刷新浏览器重试。")
+        }
+    });
+}
+
+
+function setScore(val,id) {
+    var url=contextPath + "/test/setScore";
+    var data={
+        score:val,
+        id:id
+    }
+    $.post(url,data,function (result) {
+        if(result.status==0){
+            initForm();
+        }
+        else {
+            // alert("删除失败,刷新浏览器重试。")
+        }
+    });
+
 }
