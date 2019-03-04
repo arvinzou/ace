@@ -1,5 +1,7 @@
-var _colNames = ['主键', '所属道路', '名称', '归属路长', '行政区划', '路段开始', '路段截止', '标号开始', '标号截止', '简介',
-    '状态 ', '创建人编号', '创建人姓名',
+var _colNames = ['主键',
+    '所属道路',
+    '名称', '归属路长', '行政区划', '路段开始', '路段截止', '标号开始', '标号截止', 'GPS采集条数',
+    '简介', '状态 ', '创建人编号', '创建人姓名',
     '创建日期', '更新人编号', '更新人名称', '更新日期', '操作'
 ];
 var _colModel = function () {
@@ -178,7 +180,20 @@ var _colModel = function () {
         editable: true,
         width: 60,
         editoptions: {
+            maxlength: "50"
+        },
+    }, {
+        name: 'gpsNum',
+        editable: true,
+        width: 60,
+        renderer: function (value) {
+            if (value == null) {
+                return 0;
+            }
 
+            return value;
+        },
+        editoptions: {
             maxlength: "50"
         },
     }, {
@@ -216,7 +231,6 @@ var _colModel = function () {
             }
             return rst;
         },
-
         formoptions: {
             elmprefix: "",
             elmsuffix: "<span style='color:red;'>*</span>"
@@ -274,6 +288,7 @@ function aceSwitch(cellvalue, options, cell) {
             '<span class="lbl"></span>');
     }, 0);
 }
+
 // enable datepicker
 function pickDate(cellvalue, options, cell) {
     setTimeout(function () {
