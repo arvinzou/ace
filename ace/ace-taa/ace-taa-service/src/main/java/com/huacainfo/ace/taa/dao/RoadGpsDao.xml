@@ -38,8 +38,9 @@
 
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.taa.vo.RoadGpsVo">
+        <result column="roadManId" jdbcType="VARCHAR" property="roadManId"/>
         <result column="manName" jdbcType="VARCHAR" property="manName"/>
-        <result column="roadName" jdbcType="DECIMAL" property="roadName"/>
+        <result column="roadName" jdbcType="VARCHAR" property="roadName"/>
         <result column="sectionName" jdbcType="VARCHAR" property="sectionName"/>
         <result column="startName" jdbcType="VARCHAR" property="startName"/>
         <result column="endName" jdbcType="VARCHAR" property="endName"/>
@@ -47,22 +48,32 @@
     </resultMap>
 
     <select id="getAroundList" resultMap="VoResultMap">
+    select m.* from (
         SELECT
         DISTINCT
+        rm.id as roadManId,
         rm.`name` AS manName,
         r.`name` AS roadName,
         rs.`name` AS sectionName, rs.startName, rs.endName,
         t.roadSectionId,
         t.latitude,
-        t.longitude
+        t.longitude,
+        round(
+            6378.138*2*asin(sqrt(
+              pow(sin((#{lat,jdbcType=DECIMAL}*pi()/180 - t.latitude * pi()/180)/2),2) +
+              cos(#{lat,jdbcType=DECIMAL}*pi()/180)*cos(t.latitude*pi()/180)*
+              pow(sin((#{lng,jdbcType=DECIMAL}*pi()/180 - t.longitude*pi()/180)/2),2)
+            ))*1000
+        ) as distance
         FROM `road_gps` t
         LEFT JOIN road_section rs ON t.roadSectionId = rs.id
         LEFT JOIN road_man rm ON rs.roadMan = rm.id
         LEFT JOIN road r ON rs.roadId = r.id
-        WHERE t.latitude >= #{minLat,jdbcType=DECIMAL}
-          AND t.latitude &lt;= #{maxLat,jdbcType=DECIMAL}
-          AND t.longitude >= #{minLng,jdbcType=DECIMAL}
-          AND t.longitude &lt;= #{maxLng,jdbcType=DECIMAL}
+    )m, portal.config c
+    where c.config_key= 'radius' and c.syid='taa'
+    and m.distance &lt;= c.config_value
+    order by distance
+    limit 0,5
     </select>
 
     <delete id="deleteBySectionId">

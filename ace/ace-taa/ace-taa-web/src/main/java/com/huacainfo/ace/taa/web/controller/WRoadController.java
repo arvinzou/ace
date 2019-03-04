@@ -84,20 +84,20 @@ public class WRoadController extends TaaBaseController {
      *
      * @param lat    纬度坐标
      * @param lon    经度坐标
-     * @param radius 扫描半径距离，单位：米
+     * @param radius 扫描半径距离，单位：米 弃用
      * @return ResultResponse
      * @throws Exception
      */
     @RequestMapping("/getCloseRoadSection")
     public ResultResponse getCloseRoadSection(String lat, String lon, String radius) throws Exception {
-        if (!StringUtil.areNotEmpty(lat, lon, radius)) {
+        if (!StringUtil.areNotEmpty(lat, lon)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
-
+        logger.info("lat=" + lat + ",lon=" + lon + ",radius=" + radius);
         try {
             double dLat = Double.parseDouble(lat);
             double dLon = Double.parseDouble(lon);
-            int iRadius = Integer.parseInt(radius);
+            int iRadius = 0;//Integer.parseInt(radius);
             return roadGpsService.getCloseRoadSection(dLat, dLon, iRadius);
         } catch (NumberFormatException e) {
             return new ResultResponse(ResultCode.FAIL, "坐标转换失败");
