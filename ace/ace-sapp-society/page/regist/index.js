@@ -1,7 +1,7 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
 
-var countdown = 30;
+var countdown = 59;
 var stop = true;
 Page({
 
@@ -108,7 +108,7 @@ Page({
         var btnName = "获取验证码";
         if (countdown == 0) {
             btnName = "重新获取";
-            countdown = 30;
+            countdown = 59;
             stop = true;
             that.setData({
               isGetVilidateCode:false
