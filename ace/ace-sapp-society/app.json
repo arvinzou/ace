@@ -1,6 +1,7 @@
 {
     "pages": [
         "page/index/index",
+        "page/userinfo/index",
         "page/mall/index",
         "page/me/index",
         "page/behavior/index",
@@ -25,7 +26,7 @@
         "page/settlement/index",
         "page/site/index",
         "page/siteChoose/index",
-        "page/userinfo/index",
+        
         "page/ideaDetail/index",
         "page/indexMore/index",
         "page/myBehavior/index",

@@ -73,6 +73,13 @@
         <if test="condition.type !=null and condition.type !=&quot;&quot;">
             and t.type=#{condition.type,jdbcType=CHAR}
         </if>
+        <if test="condition.testId !=null and condition.testId !=&quot;&quot;">
+            AND t.id NOT IN(
+              SELECT tt.topicId
+              FROM partyschool.test_topic tt
+              WHERE tt.testId=#{condition.testId,jdbcType=CHAR}
+            )
+        </if>
     </sql>
 
     <sql id="From_Statement">
@@ -94,6 +101,8 @@
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
+
+
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)

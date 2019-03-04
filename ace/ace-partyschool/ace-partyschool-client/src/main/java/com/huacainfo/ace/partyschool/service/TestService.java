@@ -1,10 +1,9 @@
 package com.huacainfo.ace.partyschool.service;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.partyschool.model.Test;
+import com.huacainfo.ace.partyschool.model.TestTopic;
+import com.huacainfo.ace.partyschool.vo.TestTopicQVo;
 import com.huacainfo.ace.partyschool.vo.TestVo;
 import com.huacainfo.ace.partyschool.vo.TestQVo;
 import java.util.Map;
@@ -72,6 +71,7 @@ public interface TestService {
         * @version: 2019-02-27
         */
         SingleResult<TestVo> selectTestByPrimaryKey(String id) throws Exception;
+        ResultResponse findTopicsByTestId(String id) throws Exception;
 
             /**
             *
@@ -174,4 +174,6 @@ public interface TestService {
                          * @version: 2019-02-27
                             */
                            MessageResponse updateStatus(String id,String status, UserProp userProp) throws Exception;
+                           MessageResponse inserTopics(TestTopicQVo obj, UserProp userProp) throws Exception;
+                           MessageResponse changeTestTopicIndex(String tid1, String tid2) throws Exception;
  }

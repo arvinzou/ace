@@ -12,7 +12,7 @@
             </view>
 
             <swiper interval="{{interval}}" style='height:200rpx' circular='true' autoplay='true' interval='5000'>
-                <block wx:for='{{activity}}' wx:for-index="idx">
+                <block wx:for='{{activity}}' wx:for-index="idx" wx:key="abc">
                     <swiper-item>
                         <view class='activity' bindtap='showActivityDetail' data-id='{{item.id}}'>
                             <view class='activity-left'>

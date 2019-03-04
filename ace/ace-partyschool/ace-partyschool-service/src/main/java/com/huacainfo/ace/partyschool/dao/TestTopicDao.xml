@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.TestTopicDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.TestTopic">
+        <result column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="testId" jdbcType="VARCHAR" property="testId"/>
+        <result column="topicId" jdbcType="VARCHAR" property="topicId"/>
+        <result column="index" jdbcType="INTEGER" property="index"/>
+        <result column="score" jdbcType="DECIMAL" property="score"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.huacainfo.ace.partyschool.vo.TestTopicQVo">
+    insert into
+    test_topic
+    (id, testId, topicId,
+      `index`, score)
+    values (#{id,jdbcType=VARCHAR}, #{testId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR}, 
+      #{index,jdbcType=INTEGER}, #{score,jdbcType=DECIMAL})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.partyschool.model.TestTopic">
+        insert into test_topic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="testId != null">
+                testId,
+            </if>
+            <if test="topicId != null">
+                topicId,
+            </if>
+            <if test="index != null">
+                index,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="testId != null">
+                #{testId,jdbcType=VARCHAR},
+            </if>
+            <if test="topicId != null">
+                #{topicId,jdbcType=VARCHAR},
+            </if>
+            <if test="index != null">
+                #{index,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap"
+               type="com.huacainfo.ace.partyschool.vo.TestTopicQVo"></resultMap>
+
+    <select id="findCount" resultType="int" parameterType="com.huacainfo.ace.partyschool.vo.TestTopicQVo">
+    select count(*)
+    from test_topic
+    where testId=#{condition.testId,jdbcType=VARCHAR}
+  </select>
+    <update id="changeIndex" parameterType="java.lang.String">
+     UPDATE
+	test_topic c
+JOIN
+	test_topic cc
+ON
+	(c.id = #{tid1,jdbcType=VARCHAR} AND cc.id = #{tid2,jdbcType=VARCHAR}) OR (c.id = #{tid2,jdbcType=VARCHAR} AND cc.id = #{tid1,jdbcType=VARCHAR})
+SET
+	c.`index` = cc.`index` , cc.`index` = c.`index`
+  </update>
+</mapper>

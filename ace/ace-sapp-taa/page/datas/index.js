@@ -18,15 +18,15 @@ Page({
     index: 0,
     rIndex: 0, //区域筛选索引
     aIndex: 0, //路长筛选索引
-    totalData: null,
+    totalData: null, //
     areaCode: '4307',
     areaCodeNameArray: [],
-    dithArray: [],
+    dithArray: [], // 死亡人数数组
     nowData: null,
     pastData: null,
     roadId: null,
-    timesArray: [],
-    timesAreaArray: []
+    timesArray: [], //事故次数数组
+    timesAreaArray: [] // 事故地区数组
   },
 
   /**
@@ -34,11 +34,11 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-    that.initRegionList();
-    that.initRoadList();
-    that.initTrafficList();
-    that.initDeathColumnReport();
-    that.initTimesColumnReport();
+    that.initRegionList(); // 初始化区域位置
+    that.initTrafficList(); //初始化本月交通事故
+    that.initTimesColumnReport(); //初始化事故次数柱状图
+    that.initDeathColumnReport(); //初始化死亡人数柱状图
+    that.initRoadList(); // 初始化路长对比图
   },
   /**
    * 获取行政区划列表
@@ -48,6 +48,7 @@ Page({
     util.request(cfg.server + '/taa/www/report/findDistrictList', {},
       function(res) {
         if (res.status == 0) {
+          console.log(res);
           var data = res.data;
           var tempArr = [];
           for (var i = 0; i < data.length; i++) {
@@ -68,7 +69,35 @@ Page({
       }
     );
   },
-
+  /**
+   * 选择绑定区域
+   */
+  bindRegionChange:function(e) {
+    var that = this;
+    var tempIndex = e.detail.value;
+    var areaArr = that.data.regionArray;
+    this.setData({
+      rIndex: tempIndex,
+      areaCode: areaArr[tempIndex].code
+    });
+    console.log("areaCode===========================" + that.data.areaCode);
+    that.initTrafficList();
+    that.initDeathColumnReport();
+    that.initTimesColumnReport();
+  },
+  /**
+   * 选择时间
+   */
+  bindMonthChange: function(e) {
+    console.log(e)
+    var that = this;
+    that.setData({
+      date: e.detail.value
+    });
+    that.initTrafficList(); //初始化本月交通事故
+    that.initDeathColumnReport(); //初始化死亡人数柱状图
+    that.initTimesColumnReport(); //初始化事故次数柱状图
+  },
   /**
    * 获取所有路长列表
    */
@@ -104,7 +133,6 @@ Page({
             success: function(res) {}
           });
         }
-
       }
     );
   },
@@ -130,7 +158,6 @@ Page({
             success: function(res) {}
           });
         }
-
       }
     );
   },
@@ -150,15 +177,24 @@ Page({
           var dithArr = [];
           if (columnData != null && columnData != undefined && columnData.length > 0) {
             for (var i = 0; i < columnData.length; i++) {
-              areaCodeNameArr.push(columnData[i].areaCodeName);
-              dithArr.push(columnData[i].num);
+              //判断是否有该字段返回
+              if (columnData[i].areaCodeName != null && columnData[i].areaCodeName != undefined) {
+                areaCodeNameArr.push(columnData[i].areaCodeName);
+              }
+              //判断是否有该字段返回
+              if (columnData[i].num != null && columnData[i].num != undefined) {
+                dithArr.push(columnData[i].num);
+              } else {
+                dithArr.push(0);
+              }
             }
+            console.log(dithArr);
+            that.setData({
+              areaCodeNameArray: areaCodeNameArr,
+              dithArray: dithArr
+            });
+            that.columnByDiedNum(); //死亡人数柱状绘图
           }
-          that.setData({
-            areaCodeNameArray: areaCodeNameArr,
-            dithArray: dithArr
-          });
-          that.columnByDiedNum();
         } else {
           wx.showModal({
             title: '提示',
@@ -166,7 +202,6 @@ Page({
             success: function(res) {}
           });
         }
-
       }
     );
   },
@@ -187,15 +222,23 @@ Page({
           var timesArray = [];
           if (columnData != null && columnData != undefined && columnData.length > 0) {
             for (var i = 0; i < columnData.length; i++) {
-              timesAreaArray.push(columnData[i].areaCodeName);
-              timesArray.push(columnData[i].num);
+              //判断是否有该字段返回
+              if (columnData[i].areaCodeName != null && columnData[i].areaCodeName != undefined) {
+                timesAreaArray.push(columnData[i].areaCodeName);
+              }
+              //判断是否有该字段返回
+              if (columnData[i].num != null && columnData[i].num != undefined) {
+                timesArray.push(columnData[i].num);
+              } else {
+                timesArray.push(0);
+              }
             }
+            that.setData({
+              timesAreaArray: timesAreaArray,
+              timesArray: timesArray
+            });
+            that.columnByAccident(); //事故次数绘图
           }
-          that.setData({
-            timesAreaArray: timesAreaArray,
-            timesArray: timesArray
-          });
-          that.columnByAccident();
         } else {
           wx.showModal({
             title: '提示',
@@ -203,10 +246,12 @@ Page({
             success: function(res) {}
           });
         }
-
       }
     );
   },
+  /**
+   * 初始化报告
+   */
   initReport: function() {
     var that = this;
     util.request(cfg.server + '/taa/www/report/contrastiveReport', {
@@ -234,27 +279,9 @@ Page({
       }
     );
   },
-  bindRegionChange(e) {
-    var that = this;
-    var tempIndex = e.detail.value;
-    var areaArr = that.data.regionArray;
-    this.setData({
-      rIndex: tempIndex,
-      areaCode: areaArr[tempIndex].code
-    });
-    console.log("areaCode===========================" + that.data.areaCode);
-    that.initRoadList();
-    that.initTrafficList();
-  },
-  bindMonthChange: function(e) {
-    var that = this;
-    that.setData({
-      date: e.detail.value
-    });
-    that.initTrafficList();
-    that.initDeathColumnReport();
-    that.initTimesColumnReport();
-  },
+  /**
+   * 柱状图切换
+   */
   changeChartType: function(e) {
     var that = this;
     that.setData({
@@ -262,34 +289,46 @@ Page({
     });
     console.log(e);
   },
+  /**
+   * 事故次数画图
+   */
   columnByAccident: function() {
     var that = this;
-    new Charts({
-      canvasId: 'accidentColumn',
-      type: 'column',
-      categories: that.data.timesAreaArray,
-      series: [{
-        name: '次',
-        data: that.data.timesArray
-      }],
-      yAxis: {
-        format: function(val) {
-          return val + '次';
-        }
-      },
-      extra: {
-        column: {
-          width: 15
-        }
-      },
-      width: 350,
-      height: 300,
-      dataLabel: false
-    });
+    var timesAreaArray = that.data.timesAreaArray;
+    var timesArray = that.data.timesArray;
+    console.log("================================" + timesAreaArray + "," + timesArray);
+    if (timesAreaArray.length != 0 && timesArray.length != 0) {
+      new Charts({
+        canvasId: 'accidentColumn',
+        type: 'column',
+        categories: timesAreaArray,
+        series: [{
+          name: '次',
+          data: timesArray
+        }],
+        yAxis: {
+          format: function(val) {
+            return val + '次';
+          }
+        },
+        extra: {
+          column: {
+            width: 15
+          }
+        },
+        width: 350,
+        height: 300,
+        dataLabel: false
+      });
+    }
+
   },
-  columnByDiedNum: function() {
+  /**
+   * 死亡人数画图
+   */
+  columnByDiedNum: function(areaCodeNameArray, dithArray) {
     var that = this;
-    console.log("================================" + that.data.areaCodeNameArray, +"=" + that.data.dithArr)
+    console.log("================================" + that.data.areaCodeNameArray + "," + that.data.dithArray);
     if (that.data.areaCodeNameArray.length > 0 && that.data.dithArray.length > 0) {
       new Charts({
         canvasId: 'diedNumColumn',
@@ -315,6 +354,10 @@ Page({
       });
     }
   },
+  /**
+   * 路长同期对比画图
+   * 
+   */
   trendLine: function() {
     var that = this;
     new Charts({
@@ -345,7 +388,10 @@ Page({
       height: 300
     });
   },
-  bindRoadChange(e) {
+  /**
+   * 切换路长
+   */
+  bindRoadChange:function(e) {
     var that = this;
     that.setData({
       index: e.detail.value

@@ -166,6 +166,19 @@ Page({
     }
   },
   /**
+   * 查看已采集详情
+   */
+  showRoadSection: function (e) {
+    app.globalData.startName = e.currentTarget.dataset.startname;
+    app.globalData.endName = e.currentTarget.dataset.endname;
+    app.globalData.collectionId = e.currentTarget.dataset.id;
+    app.globalData.isCJ = true;   // 是否采集
+    console.log("选择================" + app.globalData.startName);
+    wx.navigateTo({
+      url: '../index/index'
+    });
+  },
+  /**
    * 重置
    */
   resetSection: function(e) {
@@ -211,17 +224,7 @@ Page({
     app.globalData.endName = null;
     app.globalData.cjSectionId = null;
   },
-  showRoadSection: function (e) {
-    var that = this;
-    app.globalData.startName = e.currentTarget.dataset.startname;
-    app.globalData.endName = e.currentTarget.dataset.endname;
-    app.globalData.collectionId =  e.currentTarget.dataset.id;
-    app.globalData.isCJ= true;   // 是否采集
-    console.log("选择================" + app.globalData.startName);
-    wx.navigateTo({
-        url: '../index/index'
-    });
-  },
+  
   /**
    * 生命周期函数--监听页面隐藏
    */

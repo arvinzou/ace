@@ -1,6 +1,8 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,21 @@ public class TopicController extends BisBaseController {
     @RequestMapping(value = "/findTopicList")
     @ResponseBody
     public PageResult<TopicVo> findTopicList(TopicQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<TopicVo> rst = this.topicService.findTopicList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return rst;
+    }
+
+
+    @RequestMapping(value = "/findNoThisTopicList")
+    @ResponseBody
+    public PageResult<TopicVo> findNoThisTopicList(TopicQVo condition, PageParamNoChangeSord page) throws Exception {
+        if(CommonUtils.isBlank(condition.getTestId())){
+            return new PageResult<>(ResultCode.FAIL,"没有试卷主键");
+        }
         PageResult<TopicVo> rst = this.topicService.findTopicList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());

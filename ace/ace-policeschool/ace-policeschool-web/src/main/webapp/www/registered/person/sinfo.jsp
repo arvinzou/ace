@@ -98,7 +98,7 @@
                   onsubmit="bindWx();">
                 <input type="hidden" name="jsonData"/>
                 <input type="hidden" value="WX_BIND" name="action"/>
-                <input type="hidden" value="/partyschool/www/registered/person/sinfo.jsp" id="respUri" name="respUri"/>
+                <input type="hidden" value="/policeschool/www/registered/person/sinfo.jsp" id="respUri" name="respUri"/>
                 <button type="submit" class="bind-btn bindLink">绑定微信</button>
                 <img class="redirect" src="img/icon_select.png"/>
             </form>

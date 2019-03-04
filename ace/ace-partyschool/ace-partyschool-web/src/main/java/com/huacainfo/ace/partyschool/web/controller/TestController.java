@@ -1,6 +1,8 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
-import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.*;
+import com.huacainfo.ace.partyschool.model.TestTopic;
+import com.huacainfo.ace.partyschool.vo.TestTopicQVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.partyschool.model.Test;
 import com.huacainfo.ace.partyschool.service.TestService;
@@ -115,6 +114,22 @@ public class TestController extends BisBaseController {
     @ResponseBody
     public SingleResult<TestVo> selectTestByPrimaryKey(String id) throws Exception {
         return this.testService.selectTestByPrimaryKey(id);
+    }
+
+    /**
+     * @throws
+     * @Title:selectTestByPrimaryKey
+     * @Description: TODO(获取测评结果管理)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<Test>
+     * @author: 王恩
+     * @version: 2019-02-27
+     */
+    @RequestMapping(value = "/findTopicsByTestId")
+    @ResponseBody
+    public ResultResponse findTopicsByTestId(String id) throws Exception {
+        return this.testService.findTopicsByTestId(id);
     }
 
     /**
@@ -266,4 +281,20 @@ public class TestController extends BisBaseController {
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.testService.updateStatus(id, status, this.getCurUserProp());
     }
+
+
+    @RequestMapping(value = "/inserTopics")
+    @ResponseBody
+    public MessageResponse inserTopics(String jsons) throws Exception {
+        TestTopicQVo obj = JSON.parseObject(jsons, TestTopicQVo.class);
+        return this.testService.inserTopics(obj,this.getCurUserProp());
+    }
+
+    @RequestMapping(value = "/changeTestTopicIndex")
+    @ResponseBody
+    public MessageResponse changeTestTopicIndex(String tid1, String tid2) throws Exception {
+        return this.testService.changeTestTopicIndex(tid1,tid2);
+    }
+
+
 }
