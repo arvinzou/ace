@@ -51,11 +51,11 @@
     <view class='partner_list'>
         <view class='total'>
             参与人员：
-            <text class='number'>{{activityInfo.activityDetailVoList.length}}/{{activityInfo.parterNum}}人</text>
+            <text class='number'>{{activityInfo.total}}/{{activityInfo.parterNum}}人</text>
         </view>
         <view class='list' bindtap="viewParticipants" data-id='{{activityInfo.id}}'>
             <view class='headImage_list'>
-                <block wx:for="{{activityInfo.activityDetailVoList}}">
+                <block wx:for="{{activityInfo.activityDetailVoList}}" wx:key="def">
                    <image lazy-load="true" wx:if='{{index<8}}' class='headimage' src='{{item.headimgurl?item.headimgurl:"../../image/default_header.png"}}'></image>
                 </block>
             </view>
@@ -80,7 +80,7 @@
         </view>
     </view>
     <view class='btn_content bottm-btn {{showBtn?"btn-show":""}}' hidden='{{hiddenBtn}}'>
-        <view wx:if="{{activityInfo.activityDetailVoList.length>activityInfo.parterNum-1}}" class='btn btn-unClick'>
+        <view wx:if="{{activityInfo.total>activityInfo.parterNum-1}}" class='btn btn-unClick'>
             名额已满
         </view>
         <view bindtap="signIn" wx:elif="{{btnFlag==1}}" class='btn btn-clicking'>
