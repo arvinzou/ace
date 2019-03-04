@@ -48,10 +48,11 @@ Page({
     header: null,
     flaging: false,
     frequency: 0, //是否显示加减频率
-    timeInterval: 10000, //采集频率以10秒为单位
+    timeInterval: 5000, //采集频率以10秒为单位
     isRegist: true,
     isCJ: false, // 当前数据是否是采集数据的标志
-
+    sectionStartName: null,  //事故快报中路段的地点和终点
+    sectionEndName: null
   },
 
   /**
@@ -84,8 +85,8 @@ Page({
     app.globalData.roadManName = null;
     that.setData({
       sectionName: '请选择路段'
-    })
-
+    });
+    that.getLocation();
   },
   selectRoad: function() {
     app.globalData.collectionId = null;
@@ -187,7 +188,7 @@ Page({
     util.request(cfg.server + '/taa/www/road/getCloseRoadSection', {
         lat: latitude,
         lon: longitude,
-        radius: '100'
+        radius: '10000'
       },
       function(res) {
         if (res.status == 0) {
@@ -195,7 +196,11 @@ Page({
           that.setData({
             sectionFlag: true,
             sectionName: res.data.sectionName,
-            sectionId: res.data.roadSectionId
+            sectionId: res.data.roadSectionId,
+            roadManName: res.data.manName,
+            roadManId: res.data.roadManId,
+            sectionStartName: res.data.startName,
+            sectionEndName: res.data.endName
           });
         } else {
 
@@ -478,7 +483,6 @@ Page({
               roadManName: app.globalData.roadManName
             });
           }
-          that.getLocation();
           that.initDict();
         } else {
           if (res.info == '用户尚未注册') {
@@ -503,10 +507,8 @@ Page({
         url: "../userinfo/index?url=../index/index&type=navigateTo"
       });
     } else {
-      that.getLocation();
       that.initDict();
-      that.initUserData(); // 重置后从定向首页，初始化用户信息
-      
+      that.initUserData(); // 重置后从定向首页，初始化用户信息     
       if (app.globalData.collectionId) {
         that.setData({
           startName: app.globalData.startName,
@@ -521,8 +523,14 @@ Page({
                   color: '#4350FC',
                   width: 8,
                   dottedLine: false
-              }]
-          })
+              }],
+              sectionName: app.globalData.sectionName,
+              sectionId: app.globalData.sectionId,
+              roadManName: app.globalData.roadManName,
+              roadManId: app.globalData.roadManId,
+              sectionStartName: app.globalData.startName,
+              sectionEndName: app.globalData.endName
+          });
       }
       
     }
@@ -582,34 +590,46 @@ Page({
       activeBreak: '',
       flaging: false,
       frequency: 0
-    })
-    util.post(cfg.server + '/taa/www/road/gather', {
-        jsonData: JSON.stringify({
-          list
-        })
-      },
-      function(res) {
-        if (res.status == 0) {
-          wx.showModal({
-            title: '提示',
-            content: res.info,
-            showCancel: false,
-            success: function(res) {
-              wx.navigateTo({
-                url: '../collection/index?tab=1',
-              })
-            }
-          });
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: res.info,
-            success: function(res) {}
-          });
-        }
+    });
 
-      }
-    );
+      wx.showModal({
+          title: '提示',
+          content: '确定提交？',
+          success(res) {
+              if (res.confirm) {
+                  util.post(cfg.server + '/taa/www/road/gather', {
+                      jsonData: JSON.stringify({
+                          list
+                      })
+                  },
+                      function (res) {
+                          if (res.status == 0) {
+                              wx.showModal({
+                                  title: '提示',
+                                  content: res.info,
+                                  showCancel: false,
+                                  success: function (res) {
+
+                                  }
+                              });
+                              wx.navigateTo({
+                                  url: '../collection/index?tab=1',
+                              })
+                          } else {
+                              wx.showModal({
+                                  title: '提示',
+                                  content: res.info,
+                                  success: function (res) { }
+                              });
+                          }
+
+                      }
+                  );
+              } else if (res.cancel) {
+
+              }
+          }
+      });
   },
   /**
    * 获取地址
@@ -768,7 +788,7 @@ Page({
                       }],
                       flaging: false,
                       frequency: 0, //是否显示加减频率
-                      timeInterval: 10000, //采集频率以10秒为单位
+                      timeInterval: that.data.timeInterval, //采集频率以10秒为单位
                       activeBreak: ''
                   });
                   that.getLocation();
