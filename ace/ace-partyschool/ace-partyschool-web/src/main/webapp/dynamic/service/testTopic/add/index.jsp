@@ -67,8 +67,8 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <button @click="submit1('type1')" class="btn btn-default">Submit Button</button>
-                                    <button type="reset" class="btn btn-default">Reset Button</button>
+                                    <button @click="submit1('type1')" class="btn btn-default">提交</button>
+                                   
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="test2">
@@ -100,8 +100,8 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <button @click="submit2('type2')" class="btn btn-default">Submit Button</button>
-                                    <button type="reset" class="btn btn-default">Reset Button</button>
+                                    <button @click="submit2('type2')" class="btn btn-default">提交</button>
+                                    
                                 </div>
 
                             </div>
@@ -120,8 +120,7 @@
                                             </div>
                                         </template>
                                     </div>
-                                    <button @click="submit1('type3')" class="btn btn-default">Submit Button</button>
-                                    <button type="reset" class="btn btn-default">Reset Button</button>
+                                    <button @click="submit1('type3')" class="btn btn-default">提交</button>
                                 </div>
 
                             </div>
@@ -133,8 +132,8 @@
                                                       name="content" rows="1">{{type4.content}}</textarea>
                                         </div>
                                     </div>
-                                    <button @click="submit1('type4')" class="btn btn-default">Submit Button</button>
-                                    <button type="reset" class="btn btn-default">Reset Button</button>
+                                    <button @click="submit1('type4')" class="btn btn-default">提交</button>
+                                    
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="test5">
@@ -145,8 +144,8 @@
                                                       name="content" rows="1">{{type5.content}}</textarea>
                                         </div>
                                     </div>
-                                    <button @click="submit1('type5')" class="btn btn-default">Submit Button</button>
-                                    <button type="reset" class="btn btn-default">Reset Button</button>
+                                    <button @click="submit1('type5')" class="btn btn-default">提交</button>
+                                    
                                 </div>
                             </div>
                         </div>

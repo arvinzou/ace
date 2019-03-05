@@ -6,6 +6,7 @@
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="answer" jdbcType="VARCHAR" property="answer"/>
         <result column="type" jdbcType="CHAR" property="type"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
         <result column="analysis" jdbcType="VARCHAR" property="analysis"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
@@ -15,7 +16,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id,  content,answer, type,  analysis, createUserId, createUserName,
+    id,  content,answer, type, status,  analysis, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -34,6 +35,7 @@
       content = #{content,jdbcType=VARCHAR},
       answer = #{answer,jdbcType=VARCHAR},
       type = #{type,jdbcType=CHAR},
+      status = #{status,jdbcType=CHAR},
       analysis = #{analysis,jdbcType=VARCHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
@@ -45,12 +47,12 @@
   </update>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.vo.TopicQVo">
     insert into topic (id,
-      content,answer, type,
+      content,answer, type,status,
       analysis, createUserId, createUserName, 
       createDate, lastModifyUserId, lastModifyUserName, 
       lastModifyDate)
     values (#{id,jdbcType=VARCHAR},
-      #{content,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{type,jdbcType=CHAR},
+      #{content,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{type,jdbcType=CHAR},#{status,jdbcType=CHAR},
       #{analysis,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
       #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
       #{lastModifyDate,jdbcType=TIMESTAMP})
@@ -61,12 +63,12 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.TopicVo"></resultMap>
 
     <sql id="Vo_Column_List">
-   t.id, t.content,t.answer, t.type,  t.analysis, t.createUserId, t.createUserName,
+   t.id, t.content,t.answer, t.type, t.status,  t.analysis, t.createUserId, t.createUserName,
     t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
   </sql>
 
     <sql id="Where_Condition">
-        where 1=1
+        where t.status <![CDATA[ <> ]]> 0
         <if test="condition.content !=null and condition.content !=&quot;&quot;">
             and t.content LIKE concat('%',#{condition.content,jdbcType=VARCHAR},'%')
         </if>
@@ -118,7 +120,7 @@
 
     <select id="findTopicFullList" parameterType="java.lang.String" resultMap="ResultMapTestTopic">
         SELECT
-        top.id,  top.content,top.answer, top.type,  top.analysis, top.createUserId, top.createUserName,top.createDate, top.lastModifyUserId, top.lastModifyUserName, top.lastModifyDate,
+        top.id,  top.content,top.answer, top.type, top.status,  top.analysis, top.createUserId, top.createUserName,top.createDate, top.lastModifyUserId, top.lastModifyUserName, top.lastModifyDate,
         tt.score as ttScore,tt.index as ttIndex,
         t.name as tName,
         too.id as tooId, too.content as tooContent, too.answer as tooAnswer, too.createDate as tooCreateDate,too.answer as tooAnswer

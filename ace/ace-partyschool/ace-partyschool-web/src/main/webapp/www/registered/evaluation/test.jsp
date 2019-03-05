@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/test.css"/>
-    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/flexible.js"></script>
     <jsp:include page="../../common/common.jsp"/>
 </head>
 <body>
@@ -55,6 +55,6 @@
     <p>\${data.name}</p>
 </script>
 <script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 <script src="js/test.js" type="text/javascript" charset="utf-8"></script>
 </html>

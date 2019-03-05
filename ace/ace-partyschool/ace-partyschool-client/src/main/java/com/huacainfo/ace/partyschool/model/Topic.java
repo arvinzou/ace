@@ -16,6 +16,10 @@ public class Topic extends BaseModel {
      * 5、打分*/
     private String type;
 
+    /**0、删除
+     * 1、正常*/
+    private String status;
+
     private String analysis;
 
     private String createUserId;
@@ -31,6 +35,14 @@ public class Topic extends BaseModel {
     private String answer;
 
     private Date lastModifyDate;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getId() {
         return id;

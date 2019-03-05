@@ -295,3 +295,29 @@ function initForm(id) {
         }
     });
 }
+
+function del(id) {
+    var url = contextPath + "/topic/updateStatus";
+    var data={
+        id:id,
+        status:'0'
+    }
+    $.getJSON(url, data, function (rst) {
+        if (rst.status == 0) {
+            getPageListNotLoad();
+            return;
+        }
+        alert("删除失败，请刷新页面重试。")
+    })
+}
+
+
+function getPageListNotLoad() {
+    var url = contextPath + "/topic/findTopicList";
+    params['name'] = $("input[name=keyword]").val();
+    $.getJSON(url, params, function (rst) {
+        if (rst.status == 0) {
+            render($("#page-list"), rst.rows, "tpl-list");
+        }
+})
+}

@@ -126,6 +126,7 @@ public class TopicServiceImpl implements TopicService {
             return new MessageResponse(1, "试题管理名称重复！");
         }
         o.setCreateDate(new Date());
+        o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.topicDao.insert(o);
