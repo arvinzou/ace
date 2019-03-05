@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.SysInitDao">
+
+    <insert id="insertSyCfg" parameterType="com.huacainfo.ace.portal.model.SyCfg">
+        INSERT INTO `portal`.`sy_cfg` (`id`, `name`, `logo`, `iconCls`, `colorCls`,
+                    `createDate`, `createUserId`, `createUserName`,
+                    `lastModifyDate`, `lastModifyUserId`, `lastModifyUserName`)
+        VALUES (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},  '', 'fafa-gavel', 'btn-info',
+                NOW(), '1499142228336', 'root', NOW(), '1499142228336', 'root');
+    </insert>
+
+    <resultMap id="ResourcesMap" type="com.huacainfo.ace.portal.model.Resources">
+        <id column="RESOURCES_ID" property="resourcesId" jdbcType="VARCHAR"/>
+        <result column="parent_resources_id" property="parentResourcesId" jdbcType="VARCHAR"/>
+        <result column="resources_name" property="resourcesName" jdbcType="VARCHAR"/>
+        <result column="resources_url" property="resourcesUrl" jdbcType="VARCHAR"/>
+        <result column="resources_path" property="resourcesPath" jdbcType="VARCHAR"/>
+        <result column="resources_icon" property="resourcesIcon" jdbcType="VARCHAR"/>
+        <result column="resources_type" property="resourcesType" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user_id" property="createUserId" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="stauts" property="stauts" jdbcType="VARCHAR"/>
+        <result column="sequence" property="sequence" jdbcType="INTEGER"/>
+        <result column="syid" property="syid" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findResList" resultMap="ResourcesMap">
+        select
+            resources_id, parent_resources_id, resources_name, resources_url, resources_path,
+            resources_icon, resources_type, create_time, create_user_id, remark, stauts, sequence, syid
+        from portal.resources
+        where syid = 'sys'
+    </select>
+
+    <insert id="insertUsers">
+        insert into portal.users (user_id, account, password,
+        sex, id_card, name,
+        department_id, area_code, birthday,
+        stauts, last_login_time, mobile,
+        email, seat, user_level,
+        create_time, fax, telphone,
+        qq, openId, cur_syid,
+        appOpenId)
+        values (
+        #{user.userId,jdbcType=VARCHAR}, #{user.account,jdbcType=VARCHAR}, #{user.password,jdbcType=VARCHAR},
+        #{user.sex,jdbcType=VARCHAR}, #{user.idCard,jdbcType=VARCHAR}, #{user.name,jdbcType=VARCHAR},
+        #{user.departmentId,jdbcType=VARCHAR}, #{user.areaCode,jdbcType=VARCHAR}, #{user.birthday,jdbcType=DATE},
+        #{user.stauts,jdbcType=VARCHAR}, #{user.lastLoginTime,jdbcType=TIMESTAMP}, #{user.mobile,jdbcType=VARCHAR},
+        #{user.email,jdbcType=VARCHAR}, #{user.seat,jdbcType=VARCHAR}, #{user.userLevel,jdbcType=VARCHAR},
+        #{user.createTime,jdbcType=TIMESTAMP}, #{user.fax,jdbcType=VARCHAR}, #{user.telphone,jdbcType=VARCHAR},
+        #{user.qq,jdbcType=VARCHAR}, #{user.openId,jdbcType=VARCHAR}, #{user.curSyid,jdbcType=VARCHAR},
+        #{user.appOpenId,jdbcType=VARCHAR})
+        ;
+        insert into portal.users_role
+        (user_id, role_id, create_time)
+        values(#{user.userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, now())
+        ;
+        insert into portal.user_cfg (id, userId, cfgKey,cfgValue)
+        values (#{user.userId,jdbcType=VARCHAR}, #{user.userId,jdbcType=VARCHAR}, 'portalType','1');
+    </insert>
+</mapper>
