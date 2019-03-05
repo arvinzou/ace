@@ -61,7 +61,9 @@
 
         d.name as roadName, d.category,
         t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
-        t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
+        t.roadSectionId, t.roadManId,
+        ifnull(t.deadthToll, 0) deadthToll, ifnull(t.injuries, 0) injuries,
+        t.cause, t.createUserName,t.lastModifyUserName,
         t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
     from tra_acc t
     inner join road_man a on t.roadManId=a.id
@@ -213,7 +215,9 @@
         select
         d.name as roadName, d.category,
         t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
-        t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
+        t.roadSectionId, t.roadManId,
+        ifnull(t.deadthToll,0) as deadthToll, ifnull(t.injuries,0) as injuries,
+        t.cause, t.createUserName,t.lastModifyUserName,
         t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
         <include refid="whereCondition"/>
         <choose>
