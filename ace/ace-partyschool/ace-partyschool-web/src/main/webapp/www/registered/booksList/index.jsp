@@ -31,7 +31,7 @@
 					<div class="detail">
 						<div class="icon-box"><img src="img/icon_time.png" class="icon-time" /></div>
 						<div class="text-box"><span class="detail-title">请于</span></div>
-						<div class="text-box"><span class="light-title">2020/12/18</span></div>
+						<div class="text-box"><span class="light-title">\${item.dueToDate}</span></div>
 						<div class="text-box"><span class="detail-title">前还书</span></div>
 					</div>
 				</div>
