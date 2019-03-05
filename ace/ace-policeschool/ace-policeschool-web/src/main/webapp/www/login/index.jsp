@@ -15,7 +15,7 @@
 <div class="index">
     <div class="logo">
         <div class="logo-img"><img src="img/login-logo.png"/></div>
-        <div class="logo-title">常德警官学校</div>
+        <div class="logo-title">常德市警官培训中心</div>
     </div>
     <div class="login-form">
         <div class="form-row">
