@@ -57,12 +57,13 @@
                 <thead>
                 <tr>
 
-                    <th width="40%">事故发生地点</th>
+                    <th width="30%">事故发生地点</th>
                     <th width="15%">事故时间</th>
                     <th width="5%">死亡人数</th>
-
-                    <th width="10%">路长</th>
+                    <th width="8%">路长</th>
                     <th width="15%">快报时间</th>
+                    <th width="8%">快报人</th>
+                    <th width="8%">续报人</th>
                     <th width="15%">操作</th>
                 </tr>
                 </thead>
@@ -95,6 +96,8 @@
         <td> \${item.deadthToll}</td>
         <td> \${item.roadManName}</td>
         <td> \${item.createDate}</td>
+        <td> \${item.createUserName}</td>
+        <td> \${item.lastModifyUserName}</td>
         <td>
             ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">续报</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
@@ -214,7 +217,6 @@
             {@each data.o.causeList as item, index}
             \${rsd(item.cause,'173')} ,
             {@/each}
-            <%--\${rsd(data.o.cause,'173')}--%>
         </div>
     </div>
 

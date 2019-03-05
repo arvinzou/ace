@@ -162,6 +162,10 @@ public class StudentServiceImpl implements StudentService {
                 return m;
             }
         }
+        oldData.setBadgeNum(o.getBadgeNum());
+        oldData.setBirthDate(o.getBirthDate());
+        oldData.setCollege(o.getCollege());
+        oldData.setNativePlace(o.getNativePlace());
         oldData.setMobile(o.getMobile());
         oldData.setName(o.getName());
         oldData.setSex(o.getSex());

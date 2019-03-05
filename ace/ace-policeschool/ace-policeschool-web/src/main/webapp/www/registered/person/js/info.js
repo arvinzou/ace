@@ -125,7 +125,7 @@ function bindWx() {
 }
 
 function initPolitical() {
-    var politicalArr = [{"id": "normal", "value": "非党员"}, {"id": "party", "value": "党员"}];
+    var politicalArr = [{"id": "public", "value": "群众"}, {"id": "party", "value": "党员"}, {"id": "member", "value": "团员"}];
     var politicalSelect = new MobileSelect({
         trigger: '#political',
         title: '政治面貌选择',
@@ -201,6 +201,9 @@ function editStudent() {
     var workUnitName = $("input[name='workUnitName']").val();
     var postName = $("input[name='postName']").val();
     var politicalName = userInfo.student.political;
+    var nativePlace = $("input[name='nativePlace']").val(); //籍贯
+    var badgeNum = $("input[name='badgeNum']").val();       //警号
+    var college = $("input[name='college']").val();         //毕业院校
     if (idCard != '' && idCard != null && idCard != undefined) {
         if (isCardNo(idCard) != true) {
             alert(isCardNo(idCard));
@@ -210,6 +213,10 @@ function editStudent() {
 
     if (mobile == "" || mobile == undefined || mobile == null) {
         alert("手机号码不能为空！");
+        return;
+    }
+    if(nativePlace == "" || nativePlace == undefined || nativePlace == null){
+        alert("籍贯不能为空！");
         return;
     }
     $.ajax({
@@ -226,7 +233,10 @@ function editStudent() {
                 political: political == null ? politicalName : political[0].id,
                 workUnitName: workUnitName,
                 postName: postName,
-                classId: userInfo.student.classId
+                classId: userInfo.student.classId,
+                nativePlace: nativePlace,
+                badgeNum: badgeNum,
+                college: college
             })
         },
         success: function (result) {

@@ -337,7 +337,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @param: @param p
      * @param: @return
      * @param: @throws Exception
-     * @return: ListResult<Map<String,Object>>
+     * @return: ListResult<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-10
      */
@@ -357,7 +357,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @Description: TODO(用于控件数据获取)
      * @param: @param params
      * @param: @return
-     * @return: Map<String,Object>
+     * @return: Map<String, Object>
      * @author: 陈晓克
      * @version: 2019-01-10
      */
@@ -471,7 +471,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @date: 2019/1/12 11:15
      */
     @Override
-    public ResultResponse report(WxUser user, TraAccVo params) {
+    public ResultResponse report(WxUser user, TraAccVo params) throws Exception {
         TraAcc record = traAccDao.selectByPrimaryKey(params.getId());
         if (record == null) {
             return new ResultResponse(ResultCode.FAIL, "事故数据丢失");
@@ -486,9 +486,10 @@ public class TraAccServiceImpl implements TraAccService {
         record.setWeather(params.getWeather());
         record.setAccidentTime(params.getAccidentTime());
         //不可变更项
+        UserProp sysUser = parseUser(user);
         record.setCreateDate(record.getCreateDate());
-        record.setLastModifyUserId(user.getUnionId());
-        record.setLastModifyUserName(user.getNickName());
+        record.setLastModifyUserId(sysUser.getUserId());
+        record.setLastModifyUserName(sysUser.getName());
         record.setLastModifyDate(DateUtil.getNowDate());
         int i = traAccDao.updateByPrimaryKey(record);
         if (i == 1) {
@@ -510,7 +511,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @param orderBy 排序规则
      *                ORDER BY v.occurTimes DESC
      *                ORDER BY v.deathNum DESC
-     * @return List<Map<String, Object>>
+     * @return List<Map < String, Object>>
      */
     @Override
     public List<Map<String, Object>> reverseReport(Map<String, Object> params, int start, int limit, String orderBy) {
@@ -521,7 +522,7 @@ public class TraAccServiceImpl implements TraAccService {
      * 事故死亡人数同期对比 报表
      *
      * @param params
-     * @return Map<String,Object>
+     * @return Map<String, Object>
      */
     @Override
     public Map<String, Object> contrastiveReport(Map<String, String> params) {
@@ -601,7 +602,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @Description: TODO(交通事故热力图)
      * @param: @param condition
      * @param: @throws Exception
-     * @return: List<Map<String, Object>>
+     * @return: List<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-21
      */
@@ -627,7 +628,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @Description: TODO(交通事故热力图)
      * @param: @param condition
      * @param: @throws Exception
-     * @return: List<Map<String, Object>>
+     * @return: List<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-21
      */
@@ -696,7 +697,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @param roadManId     路长ID
      * @param roadSectionId 路段ID
      * @param field         统计字段 deadthToll ,injuries
-     * @return Map<String,Object>
+     * @return Map<String, Object>
      */
     @Override
     public List<Map<String, Object>> analysisReport(String category, String dateTimeStr,
