@@ -30,21 +30,20 @@ function submitTest() {
             });
         }else if(type==4){
             var val=$('.textTest_'+i).val();
-            item.textAnswer=val;
+            item.answer=val;
         }else if(type==5){
             var val=$('.textTest_'+i).text();
-            item.textAnswer=val;
+            item.answer=val;
         }
     }
-    console.log(postData);
-    // postData(data);
+    postDataMethod();
 }
 
 /**提交数据*/
-function postData(datas) {
-    var url=contextPath+ "/www/evaluationRst/insertEvaluationRstList";
+function postDataMethod() {
+    var url=contextPath+ "/www/topicRst/insertTopicRstList";
     var data={
-
+        jsons:JSON.stringify(postData)
     }
     $.post(url,data,function (rst) {
         if(rst.status==0){
