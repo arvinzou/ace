@@ -76,15 +76,33 @@
         </div>
     </div>
     <div class="info">
-        <div class="ititle br">单位全称</div>
+        <div class="ititle br">单位</div>
         <div class="icontent br">
             <input type="text" name="workUnitName" value="\${data.student.workUnitName}"/>
         </div>
     </div>
     <div class="info">
-        <div class="ititle br">职务全称</div>
+        <div class="ititle br">职务</div>
         <div class="icontent br">
             <input type="text" name="postName" value="\${data.student.postName}"/>
+        </div>
+    </div>
+    <div class="info">
+        <div class="ititle br">籍贯</div>
+        <div class="icontent br">
+            <input type="text" name="nativePlace" value="\${data.student.nativePlace}"/>
+        </div>
+    </div>
+    <div class="info">
+        <div class="ititle br">警号</div>
+        <div class="icontent br">
+            <input type="text" name="badgeNum" value="\${data.student.badgeNum}"/>
+        </div>
+    </div>
+    <div class="info">
+        <div class="ititle br">毕业院校</div>
+        <div class="icontent br">
+            <input type="text" name="college" value="\${data.student.college}"/>
         </div>
     </div>
 </script>
