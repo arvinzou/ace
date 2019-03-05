@@ -187,7 +187,7 @@ public interface TraAccService {
      * @auther: Arvin Zou
      * @date: 2019/1/12 11:15
      */
-    ResultResponse report(WxUser user, TraAccVo params);
+    ResultResponse report(WxUser user, TraAccVo params) throws Exception;
 
     /**
      * 交通事故倒序表

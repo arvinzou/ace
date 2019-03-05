@@ -146,5 +146,6 @@
     <dubbo:reference interface="com.huacainfo.ace.portal.service.WxAdminService"
                      id="wxAdminService"/>
 
-
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.SysInitService"
+                     id="sysInitService"/>
 </beans>

@@ -130,8 +130,10 @@
                     <th width="10%"> 归属路长</th>
                     <th width="10%"> 快报时间</th>
                     <th width="10%"> 事故发生时间</th>
-                    <th width="10%"> 死亡人数</th>
-                    <th width="10%"> 受伤人数</th>
+                    <th width="5%"> 死亡人数</th>
+                    <th width="5%"> 受伤人数</th>
+                    <th width="8%">快报人</th>
+                    <th width="8%">续报人</th>
                     <th width="5%"> 操作</th>
                 </tr>
                 </thead>
@@ -179,6 +181,8 @@
         <td> \${item.accidentTime}</td>
         <td> \${item.deadthToll}</td>
         <td> \${item.injuries}</td>
+        <td> \${item.createUserName}</td>
+        <td> \${item.lastModifyUserName}</td>
         <td>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
@@ -252,8 +256,9 @@
     <div class="form-group">
         <label class="col-md-2 view-label">车型</label>
         <div class="col-md-10">
-
-            \${rsd(data.o.vehicleType,'172')}
+            {@each data.o.mtypeList as item, index}
+            \${rsd(item.vehicleType,'172')} ,
+            {@/each}
         </div>
     </div>
 
@@ -290,8 +295,9 @@
     <div class="form-group">
         <label class="col-md-2 view-label">事故原因</label>
         <div class="col-md-10">
-
-            \${rsd(data.o.cause,'173')}
+            {@each data.o.causeList as item, index}
+            \${rsd(item.cause,'173')} ,
+            {@/each}
         </div>
     </div>
 
