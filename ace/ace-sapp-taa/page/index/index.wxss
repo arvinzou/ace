@@ -145,6 +145,10 @@ view, map, cover-view {
     color: #373f53;
     font-size: 36rpx;
     font-weight: bold;
+    width: 100%;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
 }
 
 .fromContent .content .locate-road {
@@ -186,8 +190,8 @@ view, map, cover-view {
 }
 
 .carCheckBox label {
+    width: 50%;
     display: inline-block;
-    width: 7em;
     margin-bottom: 20rpx;
 }
 

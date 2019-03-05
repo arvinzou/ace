@@ -96,8 +96,37 @@
                 <h4 class="modal-title">活动详情</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="fm-detail" role="form">
-                    <%--详情模板填充--%>
+                <form class="form-horizontal"  role="form">
+                    <div class="form-body" id="fm-detail">
+                        <%--详情模板填充--%>
+                    </div>
+                    <div class="form-body" id="fm-join-person">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-11">
+                            <div class="form-group">
+                                <%--参与人员表格数据模板填充--%>
+                                <div class="table-scrollable">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th width="20%">微信昵称</th>
+                                            <th width="20%">真实姓名</th>
+                                            <th width="20%">手机号码</th>
+                                            <th width="20%">签到时间</th>
+                                            <th width="20%">签到图片</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="page-joinPerson-list">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="paginationbar">
+                                    <ul class="pagination" id="pagination2"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -340,7 +369,7 @@
 
 <%--详情模板--%>
 <script id="tpl-detail" type="text/template">
-    <div class="form-body">
+    <div class="detail-group">
         <div class="form-group">
             <label class="col-md-2 view-label">活动名称</label>
             <div class="col-md-10">
@@ -422,50 +451,37 @@
             <div class="col-md-10">
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-1 view-label"></label>
-            <div class="col-md-11">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th width="20%">微信昵称</th>
-                        <th width="20%">真实姓名</th>
-                        <th width="20%">手机号码</th>
-                        <th width="20%">签到时间</th>
-                        <th width="20%">签到图片</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {@each data.activityDetailVoList as item, index}
-                    <tr>
-                        <td>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {@if item.headimgurl!=null && item.headimgurl !=''}
-                                    <img src="\${item.headimgurl}" class="cover"/>
-                                    {@else}
-                                    <img src="${pageContext.request.contextPath}/content/common/img/default_header.png"
-                                         class="cover"/>
-                                    {@/if}
-                                    <a>\${item.nickname}</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>\${item.name}</td>
-                        <td>\${item.mobile}</td>
-                        <td>\${item.signInDate}</td>
-                        <td>
-                            <div class="my-gallery">
-                                <img src="\${item.signImgUrl}" class="cover" alt="">
-                            </div>
-                        </td>
-                    </tr>
-                    {@/each}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+
     </div>
+</script>
+
+<%-- 参与者列表详情 --%>
+<script id="tpl-join-person" type="text/template">
+        {@each data as item, index}
+        <tr>
+            <td>
+                <div class="row">
+                    <div class="col-md-12">
+                        {@if item.headimgurl!=null && item.headimgurl !=''}
+                        <img src="\${item.headimgurl}" class="cover"/>
+                        {@else}
+                        <img src="${pageContext.request.contextPath}/content/common/img/default_header.png"
+                             class="cover"/>
+                        {@/if}
+                        <a>\${item.nickname}</a>
+                    </div>
+                </div>
+            </td>
+            <td>\${item.name}</td>
+            <td>\${item.mobile}</td>
+            <td>\${item.signInDate}</td>
+            <td>
+                <div class="my-gallery">
+                    <img src="\${item.signImgUrl}" class="cover" alt="">
+                </div>
+            </td>
+        </tr>
+        {@/each}
 </script>
 
 <script id="tpl-list" type="text/template">

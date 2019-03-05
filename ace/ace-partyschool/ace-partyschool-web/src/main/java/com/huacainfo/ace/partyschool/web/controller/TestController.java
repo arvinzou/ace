@@ -287,13 +287,13 @@ public class TestController extends BisBaseController {
     @ResponseBody
     public MessageResponse inserTopics(String jsons) throws Exception {
         TestTopicQVo obj = JSON.parseObject(jsons, TestTopicQVo.class);
-        return this.testService.inserTopics(obj,this.getCurUserProp());
+        return this.testService.inserTopics(obj, this.getCurUserProp());
     }
 
     @RequestMapping(value = "/changeTestTopicIndex")
     @ResponseBody
     public MessageResponse changeTestTopicIndex(String tid1, String tid2) throws Exception {
-        return this.testService.changeTestTopicIndex(tid1,tid2);
+        return this.testService.changeTestTopicIndex(tid1, tid2);
     }
 
     @RequestMapping(value = "/delTestTopic")

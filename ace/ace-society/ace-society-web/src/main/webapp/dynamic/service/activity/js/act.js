@@ -33,6 +33,28 @@ function loadCustom() {
         loader(urls[i]);
     }
 }
+/*查看详情*/
+function details(id) {
+    var url = contextPath + "/activity/selectActivityByPrimaryKey";
+    activityparams.id=id;
+    $.getJSON(url, activityparams, function (result) {
+        if (result.status == 0) {
+            $("#modal-detail").modal("show");
+            // 详情模板id, 获取DOM id初始数据，渲染页面
+            var navitem = document.getElementById('tpl-detail').innerHTML;  // 详情模板id
+            var html = juicer(navitem, {data: result.value});
+            $("#fm-detail").html(html);  // dom id
+
+            // 公益活动参与者列表id, 获取DOM id初始数据，渲染页面
+            var templateJoinPerson = document.getElementById('tpl-join-person').innerHTML;  // 详情模板id
+            var html = juicer(templateJoinPerson, {data: result.value['activityDetailVoList']});
+            $("#page-joinPerson-list").html(html);
+            initJoinPersonPage(result.value.total, id);   //初始化参与人数分页
+
+            initPhotoPreview(".my-gallery img");
+        }
+    });
+}
 
 /*线下活动初始化分页*/
 function initPage() {
@@ -52,6 +74,62 @@ function initPage() {
     });
 }
 
+/*线下活动加载表格数据*/
+function getPageList() {
+    var url = contextPath + "/activity/findActivityList";
+    params['title'] = $("input[name=keyword]").val();
+    startLoad();
+    $.getJSON(url, params, function (rst) {
+        stopLoad();
+        console.log(rst.rows);
+        if (rst.status == 0) {
+            if (params.initType == "init") {
+                $('#pagination1').jqPaginator('option', {
+                    totalCounts: rst.total
+                });
+            }
+            render($("#page-list"), rst.rows, "tpl-list");
+        }
+    })
+}
+
+/*参与者初始化分页加载表格数据*/
+function initJoinPersonPage(num,detailsId) {
+    $.jqPaginator('#pagination2', {
+        totalCounts:num,
+        pageSize: activityparams.limit,
+        visiblePages: 10,
+        currentPage: 1,
+        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        onPageChange: function (num, type) {
+            activityparams['start'] = (num - 1) * activityparams.limit;
+            activityparams['initType'] = type;
+            getJoinPersonPageList(detailsId);
+        }
+    });
+}
+/*参与者分页加载表格数据*/
+function getJoinPersonPageList(detailsId) {
+    var url = contextPath + "/activity/selectActivityByPrimaryKey";
+    activityparams['title'] = $("input[name=keyword]").val();
+    startLoad();
+    $.getJSON(url, activityparams, function (rst) {
+        stopLoad();
+        console.log(rst);
+        // console.log(rst.value['activityDetailVoList']);
+        if (rst.status == 0) {
+            if (activityparams.initType == "init") {
+                $('#pagination2').jqPaginator('option', {
+                    totalCounts: rst.total
+                });
+            }
+            render($("#page-joinPerson-list"), rst.value['activityDetailVoList'], "tpl-join-person");
+        }
+    })
+}
+
 /*选择参加者*/
 function optionPersonner() {
     var $that = $(this);
@@ -69,23 +147,9 @@ function t_query() {
     return false;
 }
 
-/*线下活动加载表格数据*/
-function getPageList() {
-    var url = contextPath + "/activity/findActivityList";
-    params['title'] = $("input[name=keyword]").val();
-    startLoad();
-    $.getJSON(url, params, function (rst) {
-        stopLoad();
-        if (rst.status == 0) {
-            if (params.initType == "init") {
-                $('#pagination1').jqPaginator('option', {
-                    totalCounts: rst.total
-                });
-            }
-            render($("#page-list"), rst.rows, "tpl-list");
-        }
-    })
-}
+
+
+
 
 /*页面渲染*/
 function render(obj, data, tplId) {
@@ -207,20 +271,12 @@ function deleteData(id) {
     }
 }
 
-
-/*查看详情*/
-function details(id) {
-    var url = contextPath + "/activity/selectActivityByPrimaryKey";
-    $.getJSON(url, {id: id}, function (result) {
-        if (result.status == 0) {
-            var navitem = document.getElementById('tpl-detail').innerHTML;
-            var html = juicer(navitem, {data: result.value});
-            $("#fm-detail").html(html);
-            $("#modal-detail").modal("show");
-            initPhotoPreview(".my-gallery img");
-        }
-    });
+var activityparams={
+    limit:10,
+    start:0
 }
+
+
 
 
 /*查看详情*/

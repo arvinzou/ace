@@ -363,7 +363,9 @@ public class TestServiceImpl implements TestService {
         obj.setScore((new BigDecimal(0)));
         List<String> list=obj.getTopics();
         int count=this.testTopicDao.findCount(obj);
-
+        if(CommonUtils.isBlank(count)){
+            count=0;
+        }
         for(int i=0;i<list.size();i++){
             obj.setId(GUIDUtil.getGUID());
             obj.setTopicId(list.get(i));

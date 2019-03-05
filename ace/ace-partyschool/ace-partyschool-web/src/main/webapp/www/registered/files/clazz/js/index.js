@@ -28,8 +28,6 @@ $(function(){
         }
     });
 
-    fileList();
-
 });
 
 function focusInput(){
@@ -134,7 +132,7 @@ function initClasses(){
         success:function(result){
             if(result.status == 0) {
               if(result.data.length <1 && regType == 'teacher'){
-                  alert("对不起！您没有对应的班级文件。");
+                  alert("对不起！您没有对班级进行授课，不能上传班级文件。");
                   return;
               }else{
                   if(regType == 'student'){
