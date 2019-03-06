@@ -27,7 +27,8 @@ Page({
       sectionName: null,
       sectionId: null,
       roadManId: null,
-      roadManName: null
+      roadManName: null,
+      linkid:'' //链接id, 0详情， 1续报
   },
 
   /**
@@ -38,10 +39,19 @@ Page({
       that.setData({
           traffId: options.id
       });
-      that.initDateTime();
+      that.initDateTime();    
       that.initDict();
+      // 获取linkid
+      if(options.linkid != undefined && options.linkid != null){
+        that.setData({
+          linkid: options.linkid
+        });
+      }
       
   },
+  /**
+   * 初始化日期时间
+   */
   initDateTime: function(){
       var that = this;
       var obj = dateTimePicker.dateTimePicker(that.data.startYear, that.data.endYear);
@@ -100,6 +110,9 @@ Page({
           }
       );
   },
+  /**
+   * 初始化字典
+   */
   initDict: function(){
       var that = this;
       util.request(cfg.server + '/portal/content/common/js/dict_taa.js', { },
@@ -178,7 +191,7 @@ Page({
   onReady: function () {
     
   },
-  carTypeChange(e){
+  carTypeChange:function(e){
       var that = this;
       var param = [];
       param.push(e.detail.value);
@@ -186,7 +199,7 @@ Page({
           carTypeParam: param
       });
   },
-  seasonChange(e) {
+  seasonChange:function(e) {
     var that = this;
     console.log('checkbox发生change事件，携带value值为：', e.detail.value);
     var param = [];
@@ -195,6 +208,9 @@ Page({
         seasonParam: param
     });
   },
+  /**
+   * 表单提交
+   */
  formSubmit: function(e){
      var that = this;
      var createDate = e.detail.value.createDate;
@@ -222,6 +238,7 @@ Page({
                 wx.showModal({
                     title: '提示',
                     content: res.info,
+                    showCancel:false,
                     success: function(res){
                         wx.navigateTo({
                             url: '../accidentList/index',
@@ -232,6 +249,7 @@ Page({
                  wx.showModal({
                      title: '提示',
                      content: res.info,
+                     showCancel: false,
                      success: function (res) { }
                  });
              }
@@ -239,15 +257,15 @@ Page({
          }
      );
  },
-    changeDateTime(e) {
-        let name = e.currentTarget.dataset.name;
-        let temp = {};
+    changeDateTime:function(e) {
+        var name = e.currentTarget.dataset.name;
+        var temp = {};
         temp[name] = e.detail.value,
         this.setData(temp);
     },
-    changeDateTimeColumn(e) {
+    changeDateTimeColumn:function(e) {
         console.log(e);
-        let name = e.currentTarget.dataset.name;
+        var name = e.currentTarget.dataset.name;
         var arr = this.data[name],
             dateArr = this.data.dateTimeArray;
 
@@ -258,7 +276,7 @@ Page({
             dateTimeArray: dateArr
         });
     },
-    fotmatPicker(dataTime) {
+    fotmatPicker:function(dataTime) {
         var val = [];
         console.log(dataTime);
         val.push(parseInt(dataTime.substring(2, 4)));
@@ -269,11 +287,11 @@ Page({
         val.push(parseInt(dataTime.substring(17,19)));
         return val;
     },
-    formatDT(arr) {
+    formatDT:function(arr){
         return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1] + 1) + '-' + this.FN(arr[2] + 1) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':'+this.FN(arr[5]);
     },
 
-    FN(num) {
+    FN:function(num) {
         return num >= 10 ? num : '0' + num;
     },
 
