@@ -45,7 +45,7 @@
             </view>
             <view class='checkbox-container'>
                 <checkbox-group bindchange="carTypeChange" name='vehicleType'>
-                    <block wx:for="{{carsList}}" wx:if='{{item.CODE!=""}}'>
+                    <block wx:for="{{carsList}}" wx:if='{{item.CODE!=""}}' wx:key="def">
                         <label class="checkbox cbox" >
                             <checkbox value="{{item.CODE}}" checked="{{item.checked}}"/>{{item.NAME}}
                         </label>
@@ -82,7 +82,7 @@
             </view>
             <view class='checkbox-container'>
                 <checkbox-group bindchange="seasonChange" name='cause'>
-                <block wx:for="{{seasonList}}">
+                <block wx:for="{{seasonList}}" wx:key="abc">
                     <label class="checkbox cbox" wx:if='{{item.CODE != ""}}'>
                         <checkbox value="{{item.CODE}}" checked="{{item.checked}}"/>{{item.NAME}}
                     </label>
@@ -91,6 +91,6 @@
             </view>
         </view>
     </view>
-    <view class='commit-btn'><button form-type="submit">提交</button></view>
+    <view class='commit-btn' wx:if="{{linkid=='1'}}"><button form-type="submit">提交</button></view>
     </form>
 </view>
