@@ -81,8 +81,8 @@
         (
         SELECT A.*, ROWNUM RN
         FROM (
-        select to_char(t.deal_time, 'yyyy-mm-dd HH24:mi:ss:ff') as DEAL_TIME,
-        to_char(t.receive_time, 'yyyy-mm-dd HH24:mi:ss:ff') as RECEIVE_TIME,
+        select to_char(t.deal_time, 'yyyy-mm-dd HH24:mi:ss') as DEAL_TIME,
+        to_char(t.receive_time, 'yyyy-mm-dd HH24:mi:ss') as RECEIVE_TIME,
         to_char(t.card_no) as CARD_NO,
         c.customerindustryno,
         c.customername,
