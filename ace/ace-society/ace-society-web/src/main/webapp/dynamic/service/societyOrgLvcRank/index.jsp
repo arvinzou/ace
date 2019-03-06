@@ -66,9 +66,6 @@
                     </tbody>
                 </table>
             </div>
-            <div class="paginationbar">
-                <ul class="pagination" id="pagination1"></ul>
-            </div>
 
     <%--=============common jsp-suffix===============--%>
     <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
