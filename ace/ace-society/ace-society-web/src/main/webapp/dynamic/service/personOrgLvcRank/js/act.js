@@ -1,7 +1,7 @@
 var loading = {};
-var params = {limit:10,orgType:1};
+var params = {start:0,limit:100,orgType:1};
 window.onload = function () {
-    initPage();
+    getPageList();
     initEvents();
     initJuicerMethod();
 }
@@ -18,23 +18,7 @@ function loadCustom() {
         loader(urls[i]);
     }
 }
-/*社会组织信息初始化分页*/
-function initPage() {
-    $.jqPaginator('#pagination1', {
-        totalCounts: 1,
-        pageSize: params.limit,
-        visiblePages: 10,
-        currentPage: 1,
-        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
-        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
-        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
-        onPageChange: function (num, type) {
-            params['start'] = (num - 1) * params.limit;
-            params['initType'] = type;
-            getPageList();
-        }
-    });
-}
+
 /*社会组织信息条件查询*/
 function t_query() {
     getPageList();
@@ -68,8 +52,9 @@ function render(obj, data, tplId) {
 }
 
 function initEvents() {
-    ﻿
-     $(".btn-group .btn").bind('click', function (event) {
+
+
+    $(".btn-group .btn").bind('click', function (event) {
             $(event.target).siblings().removeClass("active");
             console.log(event);
             $(event.target).addClass("active");
