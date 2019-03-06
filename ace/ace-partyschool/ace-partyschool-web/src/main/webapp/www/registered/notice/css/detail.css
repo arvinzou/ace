@@ -69,7 +69,7 @@ body{
 	float: left;
 }
 .file-title{
-	height: 0.986666rem;
+	/*height: 0.986666rem;*/
 	color: #373F53;
 	font-size: 0.4rem;
 	font-weight: bold;
