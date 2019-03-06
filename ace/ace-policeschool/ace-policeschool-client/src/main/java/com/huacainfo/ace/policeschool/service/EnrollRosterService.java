@@ -112,7 +112,7 @@ public interface EnrollRosterService {
      * @author: Arvin
      * @version: 2019-01-16
      */
-    public MessageResponse importXls(String clsId, List<Map<String, Object>> list, UserProp userProp) throws Exception;
+    public MessageResponse importXls(String areaCode, String clsId, List<Map<String, Object>> list, UserProp userProp) throws Exception;
 
 
     /**

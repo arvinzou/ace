@@ -18,8 +18,11 @@
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="clsId" jdbcType="VARCHAR" property="clsId"/>
     </resultMap>
     <sql id="Base_Column_List">
+      areaCode, clsId,
       id, name, sex, mobile, idCard, political,
       workUnitName, postName, nativePlace, badgeNum,
       college, birthDate, status, remark, createDate, updateDate
@@ -39,13 +42,14 @@
           idCard, political, workUnitName,
           postName, nativePlace, badgeNum,
           college, birthDate, status,
-          remark, createDate, updateDate
+          remark, createDate, updateDate, areaCode, clsId
           )
         values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR},
           #{idCard,jdbcType=CHAR}, #{political,jdbcType=VARCHAR}, #{workUnitName,jdbcType=VARCHAR},
           #{postName,jdbcType=VARCHAR}, #{nativePlace,jdbcType=VARCHAR}, #{badgeNum,jdbcType=VARCHAR},
           #{college,jdbcType=VARCHAR}, #{birthDate,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR},
-          #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+          #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},
+          #{areaCode,jdbcType=VARCHAR}, #{clsId,jdbcType=VARCHAR}
           )
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.EnrollRoster">
@@ -61,6 +65,8 @@
           badgeNum = #{badgeNum,jdbcType=VARCHAR},
           college = #{college,jdbcType=VARCHAR},
           birthDate = #{birthDate,jdbcType=TIMESTAMP},
+          areaCode = #{areaCode,jdbcType=VARCHAR},
+          clsId = #{clsId,jdbcType=VARCHAR},
           status = #{status,jdbcType=CHAR},
           remark = #{remark,jdbcType=VARCHAR},
           createDate = #{createDate,jdbcType=TIMESTAMP},
@@ -70,9 +76,16 @@
 
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.EnrollRosterVo">
+        <result column="regStatus" jdbcType="CHAR" property="regStatus"/>
+        <result column="clsName" jdbcType="VARCHAR" property="clsName"/>
+        <result column="areaCodeName" jdbcType="VARCHAR" property="areaCodeName"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
+      c.`name` as clsName,
+      p.`name` as areaCodeName,
+      IFNULL((select 2 from portal.users u where u.account = t.mobile),'1') as regStatus,
+      t.areaCode, t.clsId,
       t.id, t.name, t.sex, t.mobile, t.idCard, t.political,
       t.workUnitName, t.postName, t.nativePlace, t.badgeNum,
       t.college, DATE_FORMAT(t.birthDate,'%Y-%m-%d') birthDate,
@@ -80,6 +93,8 @@
     </sql>
     <sql id="From_Statement">
         FROM enroll_roster t
+        left join classes c on t.clsId = c.id
+        left join portal.province p on t.areaCode = p.`code`
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
@@ -89,9 +104,15 @@
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name = #{condition.name,jdbcType=VARCHAR}
         </if>
+        <if test="condition.areaCode !=null and condition.areaCode !=&quot;&quot;">
+            and t.areaCode = #{condition.areaCode,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.clsId !=null and condition.clsId !=&quot;&quot;">
+            and t.clsId = #{condition.clsId,jdbcType=VARCHAR}
+        </if>
         <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
-            and (t.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
-            or t.workUnitName like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            and (
+            t.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
             )
         </if>
     </sql>
@@ -168,4 +189,17 @@
         delete from enroll_roster
         where clsId = #{clsId,jdbcType=VARCHAR}
     </delete>
+
+    <select id="findByCondition" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from enroll_roster t
+        where 1 = 1
+        <if test="nativePlace !=null and nativePlace !=&quot;&quot;">
+            and t.nativePlace = #{nativePlace,jdbcType=VARCHAR}
+        </if>
+        <if test="name !=null and name !=&quot;&quot;">
+            and t.name = #{name,jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>

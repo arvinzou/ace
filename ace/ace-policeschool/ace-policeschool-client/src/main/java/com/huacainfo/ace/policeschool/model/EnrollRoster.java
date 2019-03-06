@@ -31,6 +31,10 @@ public class EnrollRoster extends BaseModel {
 
     private Date birthDate;
 
+    private String areaCode;
+
+    private String clsId;
+
     private String status;
 
     private String remark;
@@ -38,6 +42,22 @@ public class EnrollRoster extends BaseModel {
     private Date createDate;
 
     private Date updateDate;
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+
+    public String getClsId() {
+        return clsId;
+    }
+
+    public void setClsId(String clsId) {
+        this.clsId = clsId;
+    }
 
     public String getIndex() {
         return index;
