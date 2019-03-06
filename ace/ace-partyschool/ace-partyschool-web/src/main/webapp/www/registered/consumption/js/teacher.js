@@ -43,7 +43,7 @@ function initList(lCardNo){
     }
     var dateTimeStr = year+"-"+month;
     $.ajax({
-        url:  server+"/api/www/api/findTeacherFinDataList",
+        url:  "/api/www/api/findTeacherFinDataList",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -73,7 +73,7 @@ function initList(lCardNo){
 
 function initCount(lCardNo){
     $.ajax({
-        url: server+"/api/www/api/findTeacherBalance",
+        url: "/api/www/api/findTeacherBalance",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
