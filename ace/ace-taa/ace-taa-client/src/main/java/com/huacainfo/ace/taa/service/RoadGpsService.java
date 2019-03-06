@@ -8,6 +8,7 @@ import com.huacainfo.ace.taa.model.RoadGps;
 
 import java.util.Map;
 import java.util.List;
+
 /**
  * @author: 陈晓克
  * @version: 2019-01-08
@@ -37,7 +38,7 @@ public interface RoadGpsService {
      * @param: @param p
      * @param: @return
      * @param: @throws Exception
-     * @return: ListResult<Map<String,Object>>
+     * @return: ListResult<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-08
      */
@@ -72,8 +73,9 @@ public interface RoadGpsService {
      * 重置路段采集数据
      *
      * @param sectionId 路段ID
+     * @param userProp  操作员
      * @return ResultResponse
      * @throws Exception
      */
-    MessageResponse resetSectionGPS(String sectionId);
+    MessageResponse resetSectionGPS(String sectionId, UserProp userProp);
 }

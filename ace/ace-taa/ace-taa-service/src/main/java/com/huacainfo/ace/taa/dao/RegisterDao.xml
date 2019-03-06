@@ -69,13 +69,23 @@
 
     <select id="findCustomerVo" resultMap="CustomerVoMap">
         select
+        CASE when a.userId is NULL
+        THEN
+        (
+        select count(1)
+        from tra_acc ta
+        left join portal.users u on ta.createUserId = u.user_id
+        where `status`='1'
+        and u.department_id = t.department_id and ta.createUserId = t.user_id
+        )
+        ELSE
         (
         select count(1)
         from tra_acc ta
         left join portal.users u on ta.createUserId = u.user_id
         where `status`='1'
         and u.department_id = t.department_id
-        ) as accCount,
+        ) end as accCount,
         (
         select count(1)
         from road_section rs
@@ -89,6 +99,7 @@
         from portal.users t
         left join portal.department d on t.department_id = d.department_id
         left join portal.wx_user w on t.appOpenId = w.unionId
+        left join taa.office_admin a on a.userId = t.user_id
         where 1=1
         and t.cur_syid = #{sysId,jdbcType=VARCHAR}
         <if test="userId !=null and userId !=&quot;&quot;">
