@@ -13,7 +13,7 @@ view, map, cover-view {
 #accidentMap {
     padding: 80rpx 0 0rpx;
     width: 100%;
-    height: 87%;
+    height: 100%;
     transition: 0.2s;
 }
 
@@ -151,12 +151,41 @@ view, map, cover-view {
     overflow: hidden;
 }
 
-.fromContent .content .locate-road {
-    line-height: 40rpx;
+.locate-road {
     color: #abaeb9;
     font-size: 28rpx;
 }
 
+.locate-road::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.add-box{
+    width: 75%;
+    height: 40rpx;
+    line-height: 40rpx;
+    float: left;
+}
+.reset-section{
+    width: 25%;
+    height: 40rpx;
+    float: left;
+    text-align: right;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+}
+.reset-section image{
+    width: 34rpx;
+    height: 34rpx;
+}
+.reset-section text{
+    font-size: 24rpx;
+    color: #4350FC;
+    padding-left: 7rpx;
+}
 .select-arrow {
     width: 11rpx;
     height: 20rpx;
@@ -346,4 +375,100 @@ view, map, cover-view {
   bottom: 30prpx;
 }
 
-/* ******************************************** */
+/* ****************添加快报，路段选择弹框**************************** */
+.add-kb{
+    width: 159rpx;
+    height: 159rpx;
+    position: fixed;
+    bottom: 100rpx;
+    left: 296rpx;
+}
+.section-modal{
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.5);
+    position: relative;
+}
+.modal-content{
+    width: 88%;
+    height: 820rpx;
+    margin-top: 173rpx;
+    margin-left: 6%;
+    margin-right: 6%;
+    background: rgba(255,255,255,1);
+    border-radius: 10rpx;
+    position: relative;
+}
+.modal-content-title{
+    padding-top: 49rpx;
+    padding-left: 33rpx;
+    color: #373F53;
+    font-size: 33rpx;
+    font-weight: bold;
+}
+.modal-item{
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    border-bottom: 1px solid #F0EFF6;
+}
+.modal-item-name{
+    width: 100%;
+    height: auto;
+    color: 30rpx;
+    font-weight: bold;
+    padding-top: 30rpx;
+    word-wrap:break-word;
+}
+.modal-item-detail{
+    padding-top: 19rpx;
+    padding-bottom: 30rpx;
+}
+.modal-item-detail::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.distance{
+    color: #ABAEB9;
+    font-size: 30rpx;
+    float: left;
+}
+.section-flag{
+    width: 67rpx;
+    height: 36rpx;
+    line-height: 36rpx;
+    text-align: center;
+    background:rgba(230,232,255,0.8);
+    border-radius: 4rpx;
+    color: #2430E3;
+    font-size: 24rpx;
+    float: left;
+    margin-left: 30rpx;
+}
+
+.modal-confirm{
+    width: 80%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    background:rgba(67,80,252,1);
+    box-shadow:0rpx 0rpx 10rpx 0rpx rgba(67, 252, 80, 0.35);
+    border-radius:50rpx;
+    color: #FFFFFF;
+    position: absolute;
+    left: 10%;
+    bottom: 60rpx;
+}
+.close-modal{
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    bottom: 100rpx;
+    left: 345rpx;
+}
+.secion-check{
+    width: 28rpx;
+    height: 28rpx;
+    float: right;
+}
