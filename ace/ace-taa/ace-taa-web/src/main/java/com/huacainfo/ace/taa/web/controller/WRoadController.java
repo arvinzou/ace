@@ -188,9 +188,9 @@ public class WRoadController extends TaaBaseController {
         if (user == null) {
             return new ResultResponse(ResultCode.FAIL, "微信授权失败");
         }
-        UserProp u = parseUser(user);
+        UserProp userProp = parseUser(user);
 
-        MessageResponse m = roadGpsService.resetSectionGPS(sectionId);
+        MessageResponse m = roadGpsService.resetSectionGPS(sectionId, userProp);
         return new ResultResponse(m);
     }
 

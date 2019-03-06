@@ -1,5 +1,5 @@
+<!-- 事故快报 -->
 <view class='accidentContent ' wx:if="{{tab == 0}}">
-  <!-- <view class='accidentContent {{tab == 1? "hidden":""}}' wx:if="{{tab == 1}}"> -->
   <map id="accidentMap" class='map {{isEdit == true?"activeEdit":""}}' show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' markers='{{current}}'>
     <cover-view class='tab'>
       <cover-view class='header' bindtap='userInfo'>
@@ -18,7 +18,28 @@
         <cover-image src='../../image/icon-column.png'></cover-image>
       </cover-view>
     </cover-view>
-    <cover-image src='../../image/icon-location.png' class='reset-locate icon-dingwei' bindtap='resetData'></cover-image>
+    <!--<cover-image src='../../image/icon-location.png' class='reset-locate icon-dingwei' bindtap='resetData'></cover-image>-->
+    <cover-image wx-if='{{isEdit == false && showModal == false}}' src='../../image/icon-addkb.png' class='add-kb' bindtap='addKb'></cover-image>
+
+    <!--可选路段遮罩-->
+    <cover-view class='section-modal' wx:if='{{showModal == true}}'>
+        <cover-view class='modal-content'>
+            <cover-view class='modal-content-title'>可选路段</cover-view>
+            <block wx:for="{{sectionList}}" wx:for-index="idx" wx:for-item="itemName">
+                <cover-view class='modal-item' bindtap='selectModalSection' data-sectionid='{{itemName.roadSectionId}}' data-sectionname='{{itemName.sectionName}}'  data-roadmanid='{{itemName.roadManId}}' data-roadman='{{itemName.manName}}' data-startname='{{itemName.startName}}' data-endname='{{itemName.endName}}' data-index='{{idx}}'>
+                    <cover-view class='modal-item-name'>{{itemName.sectionName}}({{itemName.startName}}-{{itemName.endName}})</cover-view>
+                    <cover-view class='modal-item-detail'>
+                        <cover-view class='distance'>距此{{itemName.distance}}m</cover-view>
+                        <cover-view wx-if='{{idx == 0}}' class='section-flag'>当前</cover-view>
+                        <cover-image wx-if='{{modalSeclect == idx}}' class='secion-check' src='../../image/icon-modal-checked.png'></cover-image>
+                    </cover-view>
+                </cover-view>
+            </block>
+
+            <cover-view class='modal-confirm' bindtap='closeModal'>确定</cover-view>
+        </cover-view>
+        <cover-image src='../../image/icon-modal-close.png' class='close-modal' bindtap='closeModal'></cover-image>
+    </cover-view>
   </map>
   <view class='fromContent'>
     <view class='content'>
@@ -39,7 +60,11 @@
             <view class=' locate-name locate-name-wrapper' wx:if='{{sectionFlag == false}}' bindtap='selectRoadSection'>请选择路段</view>
 
             <view class='locate-road'>
-            {{address}}
+                <view class='add-box'>{{address}}</view>
+                <view class='reset-section' wx-if='sectionList.length>0' bindtap='resetSection'>
+                    <image src='../../image/icon-reset-section.png'></image>
+                    <text>重新定位</text>
+                </view>
             </view>
           </view>
           <view class='fromInput'>
@@ -49,22 +74,13 @@
                 <input class='form-input middle' name='roadManName' type='text' bindtap='selectRoadMan' value='{{roadManName}}' placeholder='请选择路长' disabled='true'></input>
                 <image class='select-arrow' src='../../image/icon_rediret.png' bindtap='selectRoadMan'></image>
               </view>
-              <!--<view class='row'>
-                                <view class='row-left'>快报时间</view>
-                                <picker class='middle' name='createDate' data-name='createDate' mode="multiSelector" value="{{createDate}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
-                                    <view class="tui-picker-detail">
-                                        {{dateTimeArray[0][createDate[0]]}}-{{dateTimeArray[1][createDate[1]]}}-{{dateTimeArray[2][createDate[2]]}} {{dateTimeArray[3][createDate[3]]}}:{{dateTimeArray[4][createDate[4]]}}:{{dateTimeArray[5][createDate[5]]}}
-                                    </view>
-                                </picker>
-                                <image class='select-arrow' src='../../image/icon_rediret.png'></image>
-                            </view>-->
-              <view class='row'>
+              <!-- <view class='row'>
                 <view class='row-left'>天气情况</view>
                 <picker class='middle' bindchange="bindWeatherChange" name='weather' value="{{weatherArray[wIndex].CODE}}" range="{{weather}}">
                   <view class='form-input form-active'>{{weatherArray[wIndex].NAME}}</view>
                 </picker>
                 <image class='select-arrow' src='../../image/icon_rediret.png'></image>
-              </view>
+              </view> -->
               <view class='row rows'>
                 <view class='row-left'>车型</view>
               </view>
@@ -87,8 +103,8 @@
     </view>
   </view>
 </view>
+<!-- 路段采集 -->
 <view class='collectionContent ' wx:elif="{{tab==1}}">
-  <!-- <view class='collectionContent {{tab == 1? "":"hidden"}}'> -->
   <map id="collectionMap" show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' polyline="{{polyline}}" style='width:100%; height:100%' markers='{{current}}'>
     <cover-view class='tab'>
       <cover-view class='header' bindtap='userInfo'>
@@ -116,7 +132,6 @@
         </cover-view>
       </block>
       <block wx:else>
-        <!-- <block wx:else='{{startName}}'> -->
         <cover-view class='form '>
           <cover-view class='dot start'></cover-view>
           <cover-view class='dot-text'>起点：</cover-view>

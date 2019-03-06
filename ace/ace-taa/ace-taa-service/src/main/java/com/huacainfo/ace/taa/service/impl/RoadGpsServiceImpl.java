@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -20,10 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("roadGpsService")
 /**
@@ -127,51 +125,42 @@ public class RoadGpsServiceImpl implements RoadGpsService {
      */
     @Override
     public ResultResponse getCloseRoadSection(double lat, double lon, int radius) {
-//        double[] around = LatLonUtil.getAround(lat, lon, radius);
-//        double minLat = around[0];
-//        double minLng = around[1];
-//        double maxLat = around[2];
-//        double maxLng = around[3];
 ////        坐标范围
         Map<String, Object> p = new HashMap<>();
-//        p.put("minLat", minLat);
-//        p.put("minLng", minLng);
-//        p.put("maxLat", maxLat);
-//        p.put("maxLng", maxLng);
         p.put("lat", lat);
         p.put("lng", lon);
 //      筛选数据
         List<RoadGpsVo> list = roadGpsDao.getAroundList(p);
-//        double distance;
-//        for (RoadGpsVo item : list) {
-//            distance = LatLonUtil.getDistance(
-//                    lon, lat,
-//                    item.getLongitude().doubleValue(),
-//                    item.getLatitude().doubleValue()
-//            );
-//            item.setDistance(distance);
-//        }
-//        //距离排序
-//        SortList<RoadGpsVo> sortList = new SortList<>();
-//        sortList.sort(list, "getDistance", "");//正序排列：由小到大
-
         if (CollectionUtils.isEmpty(list)) {
             return new ResultResponse(ResultCode.FAIL, "没找到匹配数据");
         }
+        //区分去取来的数据是否为同一路段
+        List<RoadGpsVo> rows = new LinkedList<>();
+        rows.add(list.get(0));
+        if (list.size() > 1 &&
+                !list.get(0).getRoadSectionId().equals(list.get(1).getRoadSectionId())) {
+            rows.add(list.get(1));
+        }
 
-        return new ResultResponse(ResultCode.SUCCESS, "success", list.get(0));
+        PageResult<RoadGpsVo> rst = new PageResult<>();
+        rst.setTotal(rows.size());
+        rst.setRows(rows);
+        return new ResultResponse(ResultCode.SUCCESS, "success", rst);
     }
 
     /**
      * 重置路段采集数据
      *
      * @param sectionId 路段ID
+     * @param userProp  操作员
      * @return ResultResponse
      * @throws Exception
      */
     @Override
-    public MessageResponse resetSectionGPS(String sectionId) {
+    public MessageResponse resetSectionGPS(String sectionId, UserProp userProp) {
         int i = roadGpsDao.deleteBySectionId(sectionId);
+
+        dataBaseLogService.log("路段", "路段重置", sectionId, sectionId, userProp.getName(), userProp);
 
         return new MessageResponse(ResultCode.SUCCESS, "重置成功");
     }

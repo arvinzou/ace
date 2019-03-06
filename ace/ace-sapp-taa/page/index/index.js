@@ -17,7 +17,7 @@ Page({
     latitude: null,
     longitude: null,
     current: [],
-    mapHeight: '70vh',
+    mapHeight: '100vh',
     isEdit: false,
     roadManId: null,
     roadManName: null,
@@ -52,7 +52,11 @@ Page({
     isRegist: true,
     isCJ: false, // 当前数据是否是采集数据的标志
     sectionStartName: null,  //事故快报中路段的地点和终点
-    sectionEndName: null
+    sectionEndName: null,
+    isAdd: false,     //点击添加事故快报按钮添加快报
+    showModal: false,  //是否显示路段选择模态框
+    sectionList: [],
+    modalSeclect: 0
   },
 
   /**
@@ -100,6 +104,7 @@ Page({
 
   changeTab: function(e) {
     var that = this;
+    that.getLocation();
     that.setData({
       tab: e.target.dataset.index,
       polyline: [{
@@ -186,22 +191,33 @@ Page({
   getRoadSection: function(latitude, longitude) {
     var that = this;
     util.request(cfg.server + '/taa/www/road/getCloseRoadSection', {
-        lat: latitude,
-        lon: longitude,
+        lat: latitude,  //latitude   29.014811
+        lon: longitude, //longitude   111.722444
         radius: '10000'
       },
       function(res) {
         if (res.status == 0) {
           console.log(res);
-          that.setData({
-            sectionFlag: true,
-            sectionName: res.data.sectionName,
-            sectionId: res.data.roadSectionId,
-            roadManName: res.data.manName,
-            roadManId: res.data.roadManId,
-            sectionStartName: res.data.startName,
-            sectionEndName: res.data.endName
-          });
+          var dataList = res.data.rows;
+          if (dataList.length > 0){
+              that.setData({
+                  sectionFlag: true,
+                  sectionName: dataList[0].sectionName,
+                  sectionId: dataList[0].roadSectionId,
+                  roadManName: dataList[0].manName,
+                  roadManId: dataList[0].roadManId,
+                  sectionStartName: dataList[0].startName,
+                  sectionEndName: dataList[0].endName,
+                  sectionList: dataList
+              });
+          }else{
+              wx.showModal({
+                  title: '提示',
+                  content: '没有获取到最近位置的路段！',
+                  success: function (res) { }
+              });
+          }
+          
         } else {
 
         }
@@ -227,6 +243,9 @@ Page({
       });
     }
   },
+  /**
+   * 弹框缩下去
+   */
   closeAndOpen: function() {
     var that = this;
     if (that.data.isEdit == false) {
@@ -242,6 +261,33 @@ Page({
     }
   },
 
+
+    /**
+     * 点击添加快报按钮
+     */
+    addKb: function(){
+        var that = this;
+        that.setData({
+            isEdit: true
+        })
+    },
+    /**
+     * 快报中，重新获取路段
+     */
+    resetSection: function(){
+        var that = this;
+        that.setData({
+            showModal: true,
+            isEdit: false
+        })
+    },
+    closeModal: function(){
+        var that = this;
+        that.setData({
+            showModal: false,
+            isEdit: true
+        });
+    },
   /**
    * 事故快报选取路长信息
    */
@@ -258,6 +304,29 @@ Page({
       url: '../collection/index?type=kb',
     });
   },
+  /**
+   * 快报弹框选择路段信息
+   */
+  selectModalSection: function(e){
+      var that = this;
+      app.globalData.sectionId = e.currentTarget.dataset.sectionid;
+      app.globalData.sectionName = e.currentTarget.dataset.sectionname;
+      app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
+      app.globalData.roadManName = e.currentTarget.dataset.roadman;
+      app.globalData.startName = e.currentTarget.dataset.startname;
+      app.globalData.endName = e.currentTarget.dataset.endname;
+    
+      that.setData({
+          sectionName: app.globalData.sectionName,
+          sectionId: app.globalData.sectionId,
+          roadManName: app.globalData.roadManName,
+          roadManId: app.globalData.roadManId,
+          sectionStartName: app.globalData.startName,
+          sectionEndName: app.globalData.endName,
+          modalSeclect: e.currentTarget.dataset.index
+      })
+     
+  },
   initDateTime: function() {
     var that = this;
     var obj = dateTimePicker.dateTimePicker(that.data.startYear, that.data.endYear);
@@ -269,15 +338,15 @@ Page({
     });
     console.log(obj);
   },
-  changeDateTime(e) {
-    let name = e.currentTarget.dataset.name;
-    let temp = {};
+  changeDateTime:function(e) {
+    var name = e.currentTarget.dataset.name;
+    var temp = {};
     temp[name] = e.detail.value,
       this.setData(temp);
   },
-  changeDateTimeColumn(e) {
+  changeDateTimeColumn:function(e) {
     console.log(e);
-    let name = e.currentTarget.dataset.name;
+    var name = e.currentTarget.dataset.name;
     var arr = this.data[name],
       dateArr = this.data.dateTimeArray;
 
@@ -288,7 +357,7 @@ Page({
       dateTimeArray: dateArr
     });
   },
-  fotmatPicker(dataTime) {
+  fotmatPicker:function(dataTime) {
     var val = [];
     console.log(dataTime);
     val.push(parseInt(dataTime.substring(2, 4)));
@@ -299,11 +368,11 @@ Page({
     val.push(parseInt(dataTime.substring(17, 19)));
     return val;
   },
-  formatDT(arr) {
+  formatDT:function(arr) {
     return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1] + 1) + '-' + this.FN(arr[2] + 1) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':' + this.FN(arr[5]);
   },
 
-  FN(num) {
+  FN:function(num) {
     return num >= 10 ? num : '0' + num;
   },
 
@@ -748,7 +817,7 @@ Page({
     wx.showModal({
           title: '提示',
           content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
-          success(res) {
+          success:function(res) {
               if (res.confirm) {
                   that.setData({
                       sectionFlag: false,
@@ -777,7 +846,7 @@ Page({
       wx.showModal({
           title: '提示',
           content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
-          success(res) {
+          success:function(res) {
               if (res.confirm) {
                   that.setData({
                       startName: null,
@@ -837,7 +906,7 @@ Page({
           });
         }
 
-      },
+      }
     );
   },
   /**
