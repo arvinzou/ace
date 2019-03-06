@@ -22,42 +22,44 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-4 toolbar">
-
-                    <button type="button" class="btn  green" id="btn-view-add"
+                <div class="col-md-3 toolbar">
+                    <button type="button" class="btn green" id="btn-view-add"
                             authority="${pageContext.request.contextPath}/enrollRoster/insertEnrollRoster">添加
                     </button>
-                    <button type="button" class="btn  green" id="btn-view-import"
+                    <button type="button" class="btn green" id="btn-view-import"
                             authority="false">批量导入
                     </button>
-                    <%--<button type="button" class="btn  green" id="btn-view-onoff"--%>
-                    <%--authority="false">批量删除--%>
-                    <%--</button>--%>
                 </div>
                 <div class="col-md-8">
-
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" authority="false" class="btn btn-default"
                                 onclick="setParams('status','');">全部
                         </button>
                         <button type="button" authority="false" class="btn btn-default"
-                                onclick="setParams('status','1');">正常
+                                onclick="setParams('status','1');">待注册
                         </button>
                         <button type="button" authority="false" class="btn btn-default"
-                                onclick="setParams('status','0');">注销
+                                onclick="setParams('status','2');">已注册
                         </button>
                     </div>
-                    <%--<div class="btn-group" role="group" style="float:left;padding-right:5px">--%>
-                    <%--<select name="classId" id="s-cls-list" class="form-control" style="height: 31px;"--%>
-                    <%--onchange="setParams('clsId',this.value)">--%>
-                    <%--</select>--%>
-                    <%--</div>--%>
-
+                    <div class="input-group" style="float:left;padding-right:5px">
+                        <label class="control-label" style="float: left;padding-top: 3px">籍贯</label>
+                        <input id="ctrl-areaCode" name="areaCode" class="easyui-combotree form-control"
+                               data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=4307', method:'get', animate: true, lines:false,"
+                               style='width: 150px; line-height: 30px; height: 30px;'>
+                        <a href="javascript:clearAreaCode()">清除</a>
+                    </div>
+                    <div class="input-group " style="float:left;padding-right:5px">
+                        <label class="control-label" style="float: left;padding-top: 3px">班次</label>
+                        <select name="clsId" id="cls-list-search" class="form-control"
+                                style="width: 220px; height: 30px;line-height: 30px">
+                        </select>
+                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入姓名/单位全称">
+                               placeholder="请输入姓名">
                         <span class="input-group-btn">
 							<button class="btn  btn-default search_btn" id="btn-search"
                                     authority="${pageContext.request.contextPath}/enrollRoster/findEnrollRosterList">
@@ -94,45 +96,6 @@
     {@/each}
 </script>
 
-<%--批量删除--%>
-<div class="modal fade" role="dialog" id="modal-onoff">
-    <div class="modal-dialog" role="document" style="width:45%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">批量删除</h4>
-            </div>
-            <div class="modal-body">
-
-                <form class="form-horizontal" id="fm-onoff" role="form">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">
-                                删除班次<span style='color:red;'>*</span>
-                            </label>
-                            <div class="col-md-6">
-                                <select name="classId" id="d-cls-list" class="form-control"
-                                        style="height: 30px;line-height: 30px">
-                                </select>
-                            </div>
-                            <div class="col-md-4" style="margin-top:10px">
-                                <a href="javascript:batchDel()">删除</a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" authority="false" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" authority="false">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <%--批量导入--%>
 <div class="modal fade" role="dialog" id="modal-import">
     <div class="modal-dialog" role="document" style="width: 75%;">
@@ -144,6 +107,26 @@
                 <h4 class="modal-title">批量导入</h4>
             </div>
             <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label class="col-md-2 control-label">籍贯<span style='color:red;'>*</span></label>
+                        <div class="col-md-10">
+                            <input id="ctrl-areaCode-import" name="areaCode" class="easyui-combotree form-control"
+                                   data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=4307', method:'get', animate: true, lines:false,"
+                                   style='width: 275px; line-height: 30px; height: 30px;'>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <label class="col-md-3 control-label">班次</label>
+                        <div class="col-md-9" style="float: left">
+                            <select name="clsId" id="cls-list-import" class="form-control"
+                                    style="width: 275px; height: 31px;line-height: 30px"
+                                    onchange="importInit()">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="uploader">
                 </div>
                 <div style="margin:5px">
@@ -197,7 +180,13 @@
     <div class="form-group">
         <label class="col-md-2 view-label">籍贯</label>
         <div class="col-md-10">
-            \${data.o.nativePlace}
+            \${data.o.areaCodeName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">班次</label>
+        <div class="col-md-10">
+            \${data.o.clsName}
         </div>
     </div>
     <div class="form-group">
@@ -240,12 +229,6 @@
         <label class="col-md-2 view-label">警号</label>
         <div class="col-md-10">
             \${data.o.badgeNum}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">身份证号</label>
-        <div class="col-md-10">
-            \${data.o.idCard}
         </div>
     </div>
     <div class="form-group">

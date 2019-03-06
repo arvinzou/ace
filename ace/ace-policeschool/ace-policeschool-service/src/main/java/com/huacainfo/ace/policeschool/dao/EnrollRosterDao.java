@@ -52,4 +52,6 @@ public interface EnrollRosterDao {
                             @Param("status") String status);
 
     int delByClsId(String clsId);
+
+    EnrollRoster findByCondition(EnrollRoster o);
 }

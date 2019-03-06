@@ -61,8 +61,8 @@ function render(obj, data, tplId) {
 
 function initEvents() {
     $('#modal-import').on('shown.bs.modal', function (event) {
-        //加载班级列表
-        initClassList('d-cls-list');
+        //加载班级列表 -- 导入列表
+        initImportClassList('d-cls-list');
         alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
         var clsId = $('#d-cls-list option:selected').val();//选中的值;
         importInit(clsId);
@@ -77,10 +77,36 @@ function initEvents() {
         initPreview(id);
     });
 
-    //班级下拉筛选列表
+    //班级下拉筛选列表 -- 查询班级列表
     initClassList('s-cls-list');
 }
 
+function initImportClassList(ctrlId) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/mailList/getClassList",
+        type: "post",
+        async: false,
+        data: {},
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = result.value;
+                var all = {id: "", name: ""};
+                data.unshift(all);
+                render('#' + ctrlId, data, 'tpl-cls-option');
+                params.category = '2';
+                initGrid();
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
 
 function initClassList(ctrlId) {
     startLoad();
@@ -156,6 +182,7 @@ function edit(rowid) {
 }
 
 var show = false;
+
 function del(rowid) {
 
     if (confirm("确认注销么？")) {
@@ -180,7 +207,9 @@ function del(rowid) {
         });
     }
 }
+
 var params = {};
+
 function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");

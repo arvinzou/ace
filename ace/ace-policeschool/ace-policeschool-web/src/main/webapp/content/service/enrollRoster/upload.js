@@ -3,12 +3,11 @@ jQuery(function ($) {
 });
 
 function init_uploader(p) {
-    var params = {jsons: JSON.stringify(p)};
     $("#uploader").pluploadQueue({
         runtimes: 'html5,flash,silverlight,html4',
         chunk_size: '1mb',
         unique_names: true,
-        multipart_params: params,
+        multipart_params: p,
         filters: {
             max_file_size: '10mb',
             mime_types: [
@@ -37,6 +36,11 @@ function init_uploader(p) {
 }
 
 function reset_uploader(p) {
+    if (p.areaCode == null || p.areaCode == '') {
+        alert("请先选择导入籍贯!");
+        return;
+    }
+
     var uploader = $('#uploader').pluploadQueue();
     uploader.splice();
     uploader.refresh();

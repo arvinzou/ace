@@ -221,12 +221,14 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
      */
 
     @Override
-    public MessageResponse importXls(String clsId, List<Map<String, Object>> list, UserProp userProp) throws Exception {
+    public MessageResponse importXls(String areaCode, String clsId, List<Map<String, Object>> list, UserProp userProp) throws Exception {
 
-        int t;
+        EnrollRoster record;
         for (Map<String, Object> row : list) {
             EnrollRoster o = new EnrollRoster();
             CommonBeanUtils.copyMap2Bean(o, row);
+            o.setAreaCode(areaCode);
+            o.setClsId(clsId);
             o.setStatus("1");
             o.setId(GUIDUtil.getGUID());
             o.setCreateDate(new Date());
@@ -235,11 +237,9 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
             if (CommonUtils.isBlank(o.getName())) {
                 return new MessageResponse(1, "序号[" + o.getIndex() + "]，" + "姓名不能为空！");
             }
-            if (CommonUtils.isBlank(o.getNativePlace())) {
-                return new MessageResponse(1, "序号[" + o.getIndex() + "]，" + "籍贯不能为空！");
-            }
-            t = enrollRosterDao.isExist(o);
-            if (t > 0) {
+            record = enrollRosterDao.findByCondition(o);
+            if (record != null) {
+                o.setId(record.getId());
                 this.enrollRosterDao.updateByPrimaryKey(o);
             } else {
                 this.enrollRosterDao.insert(o);
