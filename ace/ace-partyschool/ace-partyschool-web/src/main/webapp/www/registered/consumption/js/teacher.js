@@ -49,7 +49,7 @@ function initList(lCardNo){
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data:{
             lCardNo: lCardNo,
-            dateTimeStr: dateTimeStr,
+            dateTimeStr: '2018-12',
             startNum: 0,
             endNum: 999
         },

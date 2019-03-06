@@ -94,12 +94,13 @@ body{
 	margin: 0.48rem auto;
 }
 .content{
-	width: 6rem;
+	width: 5.75rem;
 	height: 1.866666rem;
 	float: left;
+	padding-left: 0.25rem;
 }
 .amount{
-	width: 2rem;
+	width: 1.6rem;
 	height: 1.866666rem;
 	line-height: 1.866666rem;
 	float: left;
