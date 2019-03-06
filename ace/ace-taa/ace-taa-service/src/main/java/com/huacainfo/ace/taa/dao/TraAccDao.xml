@@ -379,7 +379,7 @@
         FROM tra_acc t
         WHERE t.`status` = '1'
         <if test='areaCode!=null and areaCode!=""'>
-            and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+            and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
         </if>
         <if test='roadManId!=null and roadManId!=""'>
             and t.roadManId = #{roadManId,jdbcType=VARCHAR}
@@ -389,7 +389,7 @@
         select gps_x longitude,gps_y latitude ,area_name areaName,area_code areaCode from portal.gps_chian where area_code=#{areaCode}
     </select>
     <select id="getTraAccList" resultType="map">
-        select  t.id, t.latitude, t.longitude,t.deadthToll, t.injuries,a.name roadManName
+        select t.id, t.latitude, t.longitude,t.deadthToll, t.injuries,a.name roadManName
         from tra_acc t
         inner join road_man a on t.roadManId=a.id
         inner join road_section b on t.roadSectionId=b.id
@@ -463,14 +463,14 @@
     count(1)
     from taa.tra_acc t
     where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
-    and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+    and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
     ) as accTimes ,
     (
     SELECT
     sum(t.deadthToll)
     from taa.tra_acc t
     where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
-    and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+    and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
     ) as deathNum
     from taa.tra_acc
     LIMIT 1
@@ -484,7 +484,7 @@
         t.roadManId,sum(deadthToll) as deathNum
         from taa.tra_acc t
         where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
-        and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+        and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
         GROUP by t.roadManId
         )A
         LEFT JOIN road_man rm on a.roadManId = rm.id

@@ -18,7 +18,7 @@ view, map, cover-view {
 }
 
 .activeEdit {
-    height: 20% !important;
+    height: 32% !important;
 }
 
 .tab {
