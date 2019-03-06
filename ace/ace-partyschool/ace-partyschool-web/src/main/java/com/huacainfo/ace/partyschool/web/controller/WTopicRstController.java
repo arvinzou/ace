@@ -1,7 +1,7 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
 import com.alibaba.fastjson.JSONArray;
-import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.partyschool.model.TopicRst;
 import com.huacainfo.ace.partyschool.service.TopicRstService;
@@ -59,5 +56,11 @@ public class WTopicRstController extends BisBaseController {
     public MessageResponse insertTopicRst(String jsons) throws Exception {
         List<TopicRstQVo> listPram = (List<TopicRstQVo>) JSONArray.parseArray(jsons, TopicRstQVo.class);
         return this.topicRstService.insertTopicRstList(listPram, this.getCurUserProp());
+    }
+
+    @RequestMapping(value = "/findTopicRstFullList")
+    @ResponseBody
+    public ResultResponse findTopicRstFullList(String testId) throws Exception {
+        return this.topicRstService.findTopicFullRstList(testId);
     }
 }
