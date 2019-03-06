@@ -224,9 +224,15 @@ function details(id) {
 
 
 /*查看详情*/
-function signInfo(id) {
+/*查看详情*/
+function signInfo(id,total) {
     var url = contextPath + "/activity/selectActivityByPrimaryKey";
-    $.getJSON(url, {id: id}, function (result) {
+    var data={
+        id:id,
+        start:0,
+        limit:total
+    }
+    $.getJSON(url,data, function (result) {
         if (result.status == 0) {
             var navitem = document.getElementById('tpl-fm-sign').innerHTML;
             var html = juicer(navitem, {data: result.value});
