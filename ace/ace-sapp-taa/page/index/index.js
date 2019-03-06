@@ -227,6 +227,9 @@ Page({
       });
     }
   },
+  /**
+   * 弹框缩下去
+   */
   closeAndOpen: function() {
     var that = this;
     if (that.data.isEdit == false) {
@@ -269,15 +272,15 @@ Page({
     });
     console.log(obj);
   },
-  changeDateTime(e) {
-    let name = e.currentTarget.dataset.name;
-    let temp = {};
+  changeDateTime:function(e) {
+    var name = e.currentTarget.dataset.name;
+    var temp = {};
     temp[name] = e.detail.value,
       this.setData(temp);
   },
-  changeDateTimeColumn(e) {
+  changeDateTimeColumn:function(e) {
     console.log(e);
-    let name = e.currentTarget.dataset.name;
+    var name = e.currentTarget.dataset.name;
     var arr = this.data[name],
       dateArr = this.data.dateTimeArray;
 
@@ -288,7 +291,7 @@ Page({
       dateTimeArray: dateArr
     });
   },
-  fotmatPicker(dataTime) {
+  fotmatPicker:function(dataTime) {
     var val = [];
     console.log(dataTime);
     val.push(parseInt(dataTime.substring(2, 4)));
@@ -299,11 +302,11 @@ Page({
     val.push(parseInt(dataTime.substring(17, 19)));
     return val;
   },
-  formatDT(arr) {
+  formatDT:function(arr) {
     return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1] + 1) + '-' + this.FN(arr[2] + 1) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':' + this.FN(arr[5]);
   },
 
-  FN(num) {
+  FN:function(num) {
     return num >= 10 ? num : '0' + num;
   },
 
@@ -748,7 +751,7 @@ Page({
     wx.showModal({
           title: '提示',
           content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
-          success(res) {
+          success:function(res) {
               if (res.confirm) {
                   that.setData({
                       sectionFlag: false,
@@ -777,7 +780,7 @@ Page({
       wx.showModal({
           title: '提示',
           content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
-          success(res) {
+          success:function(res) {
               if (res.confirm) {
                   that.setData({
                       startName: null,
@@ -837,7 +840,7 @@ Page({
           });
         }
 
-      },
+      }
     );
   },
   /**

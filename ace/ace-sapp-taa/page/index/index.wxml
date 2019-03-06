@@ -1,5 +1,5 @@
+<!-- 事故快报 -->
 <view class='accidentContent ' wx:if="{{tab == 0}}">
-  <!-- <view class='accidentContent {{tab == 1? "hidden":""}}' wx:if="{{tab == 1}}"> -->
   <map id="accidentMap" class='map {{isEdit == true?"activeEdit":""}}' show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' markers='{{current}}'>
     <cover-view class='tab'>
       <cover-view class='header' bindtap='userInfo'>
@@ -49,22 +49,13 @@
                 <input class='form-input middle' name='roadManName' type='text' bindtap='selectRoadMan' value='{{roadManName}}' placeholder='请选择路长' disabled='true'></input>
                 <image class='select-arrow' src='../../image/icon_rediret.png' bindtap='selectRoadMan'></image>
               </view>
-              <!--<view class='row'>
-                                <view class='row-left'>快报时间</view>
-                                <picker class='middle' name='createDate' data-name='createDate' mode="multiSelector" value="{{createDate}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
-                                    <view class="tui-picker-detail">
-                                        {{dateTimeArray[0][createDate[0]]}}-{{dateTimeArray[1][createDate[1]]}}-{{dateTimeArray[2][createDate[2]]}} {{dateTimeArray[3][createDate[3]]}}:{{dateTimeArray[4][createDate[4]]}}:{{dateTimeArray[5][createDate[5]]}}
-                                    </view>
-                                </picker>
-                                <image class='select-arrow' src='../../image/icon_rediret.png'></image>
-                            </view>-->
-              <view class='row'>
+              <!-- <view class='row'>
                 <view class='row-left'>天气情况</view>
                 <picker class='middle' bindchange="bindWeatherChange" name='weather' value="{{weatherArray[wIndex].CODE}}" range="{{weather}}">
                   <view class='form-input form-active'>{{weatherArray[wIndex].NAME}}</view>
                 </picker>
                 <image class='select-arrow' src='../../image/icon_rediret.png'></image>
-              </view>
+              </view> -->
               <view class='row rows'>
                 <view class='row-left'>车型</view>
               </view>
@@ -87,8 +78,8 @@
     </view>
   </view>
 </view>
+<!-- 路段采集 -->
 <view class='collectionContent ' wx:elif="{{tab==1}}">
-  <!-- <view class='collectionContent {{tab == 1? "":"hidden"}}'> -->
   <map id="collectionMap" show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' polyline="{{polyline}}" style='width:100%; height:100%' markers='{{current}}'>
     <cover-view class='tab'>
       <cover-view class='header' bindtap='userInfo'>
@@ -116,7 +107,6 @@
         </cover-view>
       </block>
       <block wx:else>
-        <!-- <block wx:else='{{startName}}'> -->
         <cover-view class='form '>
           <cover-view class='dot start'></cover-view>
           <cover-view class='dot-text'>起点：</cover-view>
