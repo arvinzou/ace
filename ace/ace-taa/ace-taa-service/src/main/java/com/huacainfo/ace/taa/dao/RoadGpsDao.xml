@@ -73,7 +73,7 @@
     where c.config_key= 'radius' and c.syid='taa'
     and m.distance &lt;= c.config_value
     order by distance
-    limit 0,5
+    limit 0,2
     </select>
 
     <delete id="deleteBySectionId">
