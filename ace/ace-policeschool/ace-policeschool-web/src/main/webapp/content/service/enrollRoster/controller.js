@@ -47,10 +47,62 @@ jQuery(function ($) {
 //初始化事件
     initEvents();
     initJuicerMethod();
-    // initClassList('s-cls-list');
+    initClassList('cls-list-search');
     initGrid();
 });
 
+
+function importInit() {
+    var clsId = $('#cls-list-import option:selected').val();//选中的值;
+    //获取当前combotree选中值
+    var areaCode = $('#ctrl-areaCode-import').combotree('getValue');
+
+    //导入参数初始化
+    var importParams = {};
+    importParams.areaCode = areaCode;
+    importParams.clsId = clsId;
+    reset_uploader(importParams);
+}
+
+function initImportClassList(ctrlId) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/mailList/getClassList",
+        type: "post",
+        async: false,
+        data: {},
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = result.value;
+                var all = {id: "", name: ""};
+                data.unshift(all);
+                render('#' + ctrlId, data, 'tpl-cls-option');
+                params.category = '2';
+                initGrid();
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+function clearAreaCode() {
+    $('#ctrl-areaCode').combotree('setValue', '');
+    params.areaCode = '';
+    reloadGrid();
+}
+
+function reloadGrid() {
+    jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+        page: 1,
+        postData: params
+    }).trigger("reloadGrid");
+}
 
 function initClassList(ctrlId) {
     startLoad();
@@ -98,15 +150,17 @@ function formatDate(date) {
  */
 function parseStatus(status) {
     switch (status) {
-        case '0':
-            return "注销";
-        case '1':
-            return "正常";
-        default:
-            return "正常";
+        case '0' :
+            return "已删除";
+        case '1' :
+            return "待注册";
+        case '2' :
+            return "已注册";
+            break;
+        default :
+            return "待注册";
     }
 }
-
 
 /*页面渲染*/
 function render(obj, data, tplId) {
@@ -123,22 +177,27 @@ function initEvents() {
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
-        var title = relatedTarget.data('title');
-        var modal = $(this);
-        console.log(relatedTarget);
         initPreview(id);
     });
     //导入功能
     $('#modal-import').on('shown.bs.modal', function (event) {
-        // initClassList('import-cls-list');
-        // alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
-        // var clsId = $('#import-cls-list option:selected').val();//选中的值;
-        importClsSelected("");
+        //班级列表
+        initImportClassList('cls-list-import');
+        //初始化导入组件
+        importInit();
     });
-    //批量删除
-    $('#modal-onoff').on('shown.bs.modal', function (event) {
-        //可删除班级列表
-        initRosterClsList();
+    //查询籍贯onchange事件注册
+    $("#ctrl-areaCode").combotree({
+        onChange: function (newValue, oldValue) {
+            params.areaCode = newValue;
+            reloadGrid();
+        }
+    });
+    //导入籍贯onchange事件注册
+    $("#ctrl-areaCode-import").combotree({
+        onChange: function (newValue, oldValue) {
+            importInit();
+        }
     });
 }
 
@@ -275,49 +334,4 @@ function setParams(key, value) {
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
 }
 
-function importClsSelected(clsId) {
-    reset_uploader({clsId: clsId});
-}
-
-function batchDel() {
-    var clsId = $('#d-cls-list option:selected').val();//选中的值;
-    if (confirm("确认删除选中班级数据么？")) {
-        startLoad();
-        $.ajax({
-            url: contextPath + "/enrollRoster/batchDel",
-            type: "post",
-            async: false,
-            data: {clsId: clsId},
-            success: function (result) {
-                console.log(result);
-                stopLoad();
-                jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起出错了！");
-            }
-        });
-    }
-}
-
-
-function initRosterClsList() {
-    startLoad();
-    $.ajax({
-        url: contextPath + "/enrollRoster/getListByCondition",
-        type: "post",
-        async: false,
-        data: {},
-        success: function (result) {
-            console.log(result);
-            stopLoad();
-            render('#d-cls-list', result.rows, 'tpl-del-cls-option');
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
-        }
-    });
-}
 

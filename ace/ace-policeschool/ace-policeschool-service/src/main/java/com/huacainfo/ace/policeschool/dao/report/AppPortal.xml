@@ -50,7 +50,7 @@
         AND cs.id NOT IN
         (
         SELECT distinct classScheduleId
-        FROM partyschool.evaluation_rst er
+        FROM policeschool.evaluation_rst er
         WHERE er.userId= #{userId}
         )
         UNION ALL
