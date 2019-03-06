@@ -35,6 +35,7 @@ Page({
   onLoad: function(options) {
     var that = this;
     that.initRegionList(); // 初始化区域位置
+    that.initQueryTime()    //初始化查询时间
     that.initTrafficList(); //初始化本月交通事故
     that.initTimesColumnReport(); //初始化事故次数柱状图
     that.initDeathColumnReport(); //初始化死亡人数柱状图
@@ -72,7 +73,7 @@ Page({
   /**
    * 选择绑定区域
    */
-  bindRegionChange:function(e) {
+  bindRegionChange: function(e) {
     var that = this;
     var tempIndex = e.detail.value;
     var areaArr = that.data.regionArray;
@@ -85,6 +86,24 @@ Page({
     that.initDeathColumnReport();
     that.initTimesColumnReport();
   },
+
+  /**
+   * 初始化查询时间 
+   */
+  initQueryTime:function(e){
+    var that = this;
+    var d = new Date;
+    var year = d.getFullYear();
+    var month = d.getMonth() + 1;
+    if(month < 10){
+      month = '0' + month;
+    }
+    var ym = year + '-' + month;
+    that.setData({
+      date: ym
+    });
+  },
+
   /**
    * 选择时间
    */
@@ -391,7 +410,7 @@ Page({
   /**
    * 切换路长
    */
-  bindRoadChange:function(e) {
+  bindRoadChange: function(e) {
     var that = this;
     that.setData({
       index: e.detail.value

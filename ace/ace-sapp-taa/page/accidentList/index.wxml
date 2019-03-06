@@ -15,16 +15,21 @@
   <view class='road-ul'>
     <block wx:for="{{list}}" wx:for-index="idx" wx:key="unique" wx:for-item="item">
       <view class='li'>
-        <view class='up'>{{item.address}}</view>
-        <view class='middle'>
-          <text>路段:{{item.roadSectionName}}</text>
-          <text>路长:{{item.roadManName}}</text>
+        <view bindtap='linkAccidentDetails' data-id='{{item.id}}'  data-linkid="0">
+          <view class='up'>{{item.address}}</view>
+          <view class='middle'>
+            <text>路段:{{item.roadSectionName}}</text>
+            <text>路长:{{item.roadManName}}</text>
+          </view>
         </view>
         <view class='down'>
-          <view class='edit' bindtap='editAccident' data-id='{{item.id}}'>续报</view>
+          <view class='edit' bindtap='editAccident' data-id='{{item.id}}' data-linkid="1">续报</view>
           <view class='revoke' bindtap='revoke' data-id='{{item.id}}'>撤销</view>
           <block wx:if='{{item.lastModifyDate}}'>
           <text class='time'>最后续报时间:{{item.lastModifyDate}}</text>
+          </block>
+          <block wx:else>
+          <text class='time'>续报时间:{{item.accidentTime}}</text>
           </block>
         </view>
       </view>

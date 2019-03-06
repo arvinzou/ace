@@ -506,7 +506,7 @@
             <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@if item.status==32&&item.arStatus==3}
-            <a class="operation" href="#" onclick="signInfo('\${item.id}');">活动签到</a>
+            <a class="operation" href="#" onclick="signInfo('\${item.id}','\${item.amount}');">活动签到</a>
             {@/if}
             <%--{@if item.status == '2'}--%>
             <%--<a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>--%>

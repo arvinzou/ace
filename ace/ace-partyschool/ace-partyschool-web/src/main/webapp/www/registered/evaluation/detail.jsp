@@ -51,6 +51,6 @@
 		<p>\${data.name}</p>
 	</script>
 	<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
-	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 	<script src="js/detail.js" type="text/javascript" charset="utf-8"></script>
 </html>

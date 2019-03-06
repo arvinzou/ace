@@ -1,28 +1,21 @@
 package com.huacainfo.ace.partyschool.model;
 
-import com.huacainfo.ace.common.model.BaseModel;
-
 import java.util.Date;
 
-public class Topic extends BaseModel {
+public class TopicRst {
     private String id;
 
     private String content;
 
-    /**1、单选
-     * 2、多选
-     * 3、判断
-     * 4、问答
-     * 5、打分*/
     private String type;
-
-    /**0、删除
-     * 1、正常*/
-    private String status;
 
     private String analysis;
 
+    private String answer;
+
     private String createUserId;
+
+    private String status;
 
     private String createUserName;
 
@@ -32,17 +25,7 @@ public class Topic extends BaseModel {
 
     private String lastModifyUserName;
 
-    private String answer;
-
     private Date lastModifyDate;
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public String getId() {
         return id;
@@ -50,14 +33,6 @@ public class Topic extends BaseModel {
 
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
     }
 
     public String getContent() {
@@ -84,12 +59,28 @@ public class Topic extends BaseModel {
         this.analysis = analysis == null ? null : analysis.trim();
     }
 
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer == null ? null : answer.trim();
+    }
+
     public String getCreateUserId() {
         return createUserId;
     }
 
     public void setCreateUserId(String createUserId) {
         this.createUserId = createUserId == null ? null : createUserId.trim();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public String getCreateUserName() {
