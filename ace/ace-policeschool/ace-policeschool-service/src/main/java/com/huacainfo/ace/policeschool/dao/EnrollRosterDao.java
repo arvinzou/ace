@@ -54,4 +54,6 @@ public interface EnrollRosterDao {
     int delByClsId(String clsId);
 
     EnrollRoster findByCondition(EnrollRoster o);
+
+    List<EnrollRoster> findUnRegisterList();
 }

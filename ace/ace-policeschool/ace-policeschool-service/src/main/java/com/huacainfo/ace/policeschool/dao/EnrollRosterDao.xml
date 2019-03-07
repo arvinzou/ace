@@ -202,4 +202,17 @@
             and t.name = #{name,jdbcType=VARCHAR}
         </if>
     </select>
+
+    <select id="findUnRegisterList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from enroll_roster t
+        where 1=1
+        and t.areaCode is not NULL
+        and t.mobile is not NULL
+        and t.clsId is not null
+        and t.mobile not in (select u.account from portal.users u )
+        and t.mobile not in (select mobile from student )
+        and t.clsId in (SELECT id from classes where `status`= '1' )
+    </select>
 </mapper>
