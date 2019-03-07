@@ -74,13 +74,13 @@
                 <input class='form-input middle' name='roadManName' type='text' bindtap='selectRoadMan' value='{{roadManName}}' placeholder='请选择路长' disabled='true'></input>
                 <image class='select-arrow' src='../../image/icon_rediret.png' bindtap='selectRoadMan'></image>
               </view>
-              <!-- <view class='row'>
+              <view class='row'>
                 <view class='row-left'>天气情况</view>
                 <picker class='middle' bindchange="bindWeatherChange" name='weather' value="{{weatherArray[wIndex].CODE}}" range="{{weather}}">
                   <view class='form-input form-active'>{{weatherArray[wIndex].NAME}}</view>
                 </picker>
                 <image class='select-arrow' src='../../image/icon_rediret.png'></image>
-              </view> -->
+              </view>
               <view class='row rows'>
                 <view class='row-left'>车型</view>
               </view>
