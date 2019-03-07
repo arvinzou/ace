@@ -41,7 +41,6 @@ public class TopicRstServiceImpl implements TopicRstService {
     private TopicRstDao topicRstDao;
     @Autowired
     private TestRstDao testRstDao;
-
     @Autowired
     private SqlSessionTemplate sqlSession;
 

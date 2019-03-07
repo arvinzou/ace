@@ -108,6 +108,7 @@
     <resultMap extends="BaseResultMap" id="ResultMapTestTopic" type="com.huacainfo.ace.partyschool.vo.TopicVo">
         <result column="ttScore" property="tscore"/>
         <result column="tName" property="tname"/>
+        <result column="tId" property="tid"/>
         <result column="ttIndex" property="tindex"/>
         <collection property="topicOptList" ofType="com.huacainfo.ace.partyschool.model.TopicOpt">
             <result column="tooId" property="id"/>
@@ -123,7 +124,7 @@
         SELECT
         top.id,  top.content,top.answer, top.type, top.status,  top.analysis, top.createUserId, top.createUserName,top.createDate, top.lastModifyUserId, top.lastModifyUserName, top.lastModifyDate,
         tt.score as ttScore,tt.index as ttIndex,
-        t.name as tName,
+        t.name as tName, t.id as tId,
         too.id as tooId, too.content as tooContent, too.answer as tooAnswer, too.createDate as tooCreateDate,too.answer as tooAnswer,too.topicId as tooTopicId
         FROM partyschool.topic top
         LEFT JOIN partyschool.test_topic tt ON tt.topicId =top.id
