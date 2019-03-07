@@ -20,6 +20,16 @@ public class TopicRst {
 
     private String testRstId;
 
+    private  Integer tindex;
+
+    public Integer getTindex() {
+        return tindex;
+    }
+
+    public void setTindex(Integer tindex) {
+        this.tindex = tindex;
+    }
+
     public String getTestRstId() {
         return testRstId;
     }

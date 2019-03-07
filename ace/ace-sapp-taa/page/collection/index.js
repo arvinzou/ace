@@ -14,6 +14,7 @@ Page({
     yNum: 0,
     pageType: null,
     isCJ: false,  // 是否采集
+    tabIsShow:true, //选显卡是否显示
   },
 
   /**
@@ -24,6 +25,18 @@ Page({
     var that = this;
     var tabIndex = options.tab;
     if (tabIndex) {
+      if (tabIndex == 1) {
+        that.setData({
+          tabIsShow: false,
+        });
+        wx.setNavigationBarTitle({
+          title: '已采集路段',
+        });
+      }else{
+        wx.setNavigationBarTitle({
+          title: '待采集路段',
+        });
+      }
       that.setData({
         tab: tabIndex
       });
