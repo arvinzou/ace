@@ -24,18 +24,22 @@
     <!--可选路段遮罩开始-->
     <cover-view class='section-modal' wx:if='{{showModal == true}}'>
         <cover-view class='modal-content'>
-            <cover-view class='modal-content-title'>可选路段</cover-view>
-            <block wx:for="{{sectionList}}" wx:for-index="idx" wx:for-item="itemName">
-                <cover-view class='modal-item' bindtap='selectModalSection' data-sectionid='{{itemName.roadSectionId}}' data-sectionname='{{itemName.sectionName}}'  data-roadmanid='{{itemName.roadManId}}' data-roadman='{{itemName.manName}}' data-startname='{{itemName.startName}}' data-endname='{{itemName.endName}}' data-index='{{idx}}'>
-                    <cover-view class='modal-item-name'>{{itemName.sectionName}}({{itemName.startName}}-{{itemName.endName}})</cover-view>
-                    <cover-view class='modal-item-detail'>
-                        <cover-view class='distance'>距此{{itemName.distance}}m</cover-view>
-                        <cover-view wx-if='{{idx == 0}}' class='section-flag'>当前</cover-view>
-                        <cover-image wx-if='{{modalSeclect == idx}}' class='secion-check' src='../../image/icon-modal-checked.png'></cover-image>
+            <block wx:if='{{sectionList.length > 0}}'>
+                <cover-view class='modal-content-title'>可选路段</cover-view>
+                <block wx:for="{{sectionList}}" wx:for-index="idx" wx:for-item="itemName">
+                    <cover-view class='modal-item' bindtap='selectModalSection' data-sectionid='{{itemName.roadSectionId}}' data-sectionname='{{itemName.sectionName}}'  data-roadmanid='{{itemName.roadManId}}' data-roadman='{{itemName.manName}}' data-startname='{{itemName.startName}}' data-endname='{{itemName.endName}}' data-index='{{idx}}'>
+                        <cover-view class='modal-item-name'>{{itemName.sectionName}}({{itemName.startName}}-{{itemName.endName}})</cover-view>
+                        <cover-view class='modal-item-detail'>
+                            <cover-view class='distance'>距此{{itemName.distance}}m</cover-view>
+                            <cover-view wx-if='{{idx == 0}}' class='section-flag'>当前</cover-view>
+                            <cover-image wx-if='{{modalSeclect == idx}}' class='secion-check' src='../../image/icon-modal-checked.png'></cover-image>
+                        </cover-view>
                     </cover-view>
-                </cover-view>
+                </block>
             </block>
-
+            <block wx:else>
+                <view class='tips'>未查询到路段</view>
+            </block>
             <cover-view class='modal-confirm' bindtap='closeModal'>确定</cover-view>
         </cover-view>
         <cover-image src='../../image/icon-modal-close.png' class='close-modal' bindtap='closeModal'></cover-image>
