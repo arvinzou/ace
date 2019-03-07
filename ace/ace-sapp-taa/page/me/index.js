@@ -64,7 +64,7 @@ Page({
   },
   sectionList: function(){
       wx.navigateTo({
-          url: '../collection/index',
+          url: '../collection/index?tab=1',
       });
   },
   /**

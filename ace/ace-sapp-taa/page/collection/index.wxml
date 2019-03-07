@@ -4,8 +4,8 @@
     <input class='search-road-input' type='text' confirm-type="search" bindinput="searchSomeThing" placeholder='道路名称/路段名称/路长'></input>
   </view>
   <view class='tab'>
-    <view class='tab01 {{tab==0 ?"active":""}}' bindtap='changeTab' data-index="0">待采集（{{nNum}}）</view>
-    <view class='tab02 {{tab==1 ?"active":""}}' bindtap='changeTab' data-index="1">已采集（{{yNum}}）</view>
+    <view class='tab-child tab01 {{tab==0 ?"active":""}}' wx:if="{{tabIsShow}}" bindtap='changeTab' data-index="0">待采集（{{nNum}}）</view>
+    <view class='tab-child tab02 {{tab==1 ?"active":""}}' bindtap='changeTab' data-index="1">已采集（{{yNum}}）</view>
   </view>
   <view class='tab01-content ' wx:if="{{tab==0}}">
   <!-- <view class='tab01-content {{tab==0?"":"hidden"}}'> -->
