@@ -72,7 +72,7 @@
   </map>
   <view class='fromContent'>
     <view class='content'>
-      <form bindsubmit="xbSubmit">
+      <form bindsubmit="xbSubmit" bindreset="formReset">
         <view class='main'>
           <view class='titile'>
             <view class='close-open-box' bindtap='closeAndOpen'>
@@ -119,6 +119,7 @@
             </view>
           </view>
           <view class='sendbtn'>
+            <button class='cancel-btn' form-type="reset">取消</button>
             <button class='active-btn' form-type="submit">确定报送</button>
           </view>
         </view>
