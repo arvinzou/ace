@@ -65,6 +65,28 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+    <update id="computScore" parameterType="com.huacainfo.ace.partyschool.model.TestRst">
+    update test_rst
+    set
+      score = (
+        SELECT
+        ((
+        SELECT SUM(tscore)
+        FROM partyschool.topic_rst tr
+        WHERE tr.id NOT IN(
+        SELECT tor.topicId
+        FROM partyschool.topic_opt_rst tor
+        WHERE tor.answer <![CDATA[ <> ]]> tor.youAnswer
+        ) AND tr.`type` IN(1,2,3) AND tr.testRstId=#{id,jdbcType=VARCHAR})+
+        (
+        SELECT SUM(youScore)
+        FROM partyschool.topic_rst tr
+        WHERE tr.`type` IN(4,5) AND tr.testRstId=#{id,jdbcType=VARCHAR})) AS a
+        FROM DUAL
+      )
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
 
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.TestRstVo"></resultMap>

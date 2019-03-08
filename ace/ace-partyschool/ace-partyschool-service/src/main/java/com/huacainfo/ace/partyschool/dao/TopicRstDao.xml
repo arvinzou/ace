@@ -5,7 +5,7 @@
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="type" jdbcType="CHAR" property="type"/>
-        <result column="analysis" jdbcType="VARCHAR" property="analysis"/>
+        <result column="youScore" jdbcType="DECIMAL" property="youScore"/>
         <result column="answer" jdbcType="VARCHAR" property="answer"/>
         <result column="testRstId" jdbcType="VARCHAR" property="testRstId"/>
         <result column="status" jdbcType="CHAR" property="status"/>
@@ -13,7 +13,7 @@
         <result column="tindex" jdbcType="INTEGER" property="tindex"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, content, type, analysis, answer,testRstId, status,tscore,tindex
+    id, content, type, youScore, answer,testRstId, status,tscore,tindex
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -27,13 +27,13 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.TopicRst">
     insert into topic_rst (id, content, type,
-      analysis, answer,testRstId,status,tscore,tindex
+      youScore, answer,testRstId,status,tscore,tindex
       )
     values (
       #{id,jdbcType=VARCHAR},
       #{content,jdbcType=VARCHAR},
        #{type,jdbcType=CHAR},
-      #{analysis,jdbcType=VARCHAR},
+      #{youScore,jdbcType=DECIMAL},
       #{answer,jdbcType=VARCHAR},
       #{testRstId,jdbcType=VARCHAR},
       #{status,jdbcType=CHAR},
@@ -45,12 +45,18 @@
     update topic_rst
     set content = #{content,jdbcType=VARCHAR},
       type = #{type,jdbcType=CHAR},
-      analysis = #{analysis,jdbcType=VARCHAR},
+      youScore = #{youScore,jdbcType=DECIMAL},
       answer = #{answer,jdbcType=VARCHAR},
       testRstId = #{testRstId,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       tscore = #{tscore,jdbcType=DECIMAL}
       tindex = #{tindex,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updataTopicRstScore">
+    update topic_rst
+    set
+        youScore = #{youScore,jdbcType=DECIMAL}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -77,27 +83,27 @@
     </insert>
 
 
-    <!--<resultMap extends="BaseResultMap" id="ResultMapTestTopic" type="com.huacainfo.ace.partyschool.vo.TopicRstVo">-->
-        <!--<result column="ttScore" property="tscore"/>-->
-        <!--<result column="ttScore" property="tindex"/>-->
-        <!--<collection property="topicOptRstList" ofType="com.huacainfo.ace.partyschool.model.TopicOpt">-->
-            <!--<result column="tooId" property="id"/>-->
-            <!--<result column="tooContent" property="content"/>-->
-            <!--<result column="tooCreateDate" property="createDate"/>-->
-            <!--<result column="tooAnswer" property="answer"/>-->
-            <!--<result column="tooTopicId" property="topicId"/>-->
-        <!--</collection>-->
-    <!--</resultMap>-->
+    <resultMap extends="BaseResultMap" id="ResultMapTestTopic" type="com.huacainfo.ace.partyschool.vo.TopicRstVo">
+        <result column="trScore" property="trScore"/>
+        <result column="trName" property="trName"/>
+        <collection property="topicOptRstList" ofType="com.huacainfo.ace.partyschool.model.TopicOptRst">
+            <result column="tooId" property="id"/>
+            <result column="tooContent" property="content"/>
+            <result column="tooAnswer" property="answer"/>
+            <result column="youAnswer" property="youAnswer"/>
+        </collection>
+    </resultMap>
 
-
-    <!--<select id="findTopicFullRstList" parameterType="java.lang.String" resultMap="ResultMapTestTopic">-->
-        <!--SELECT-->
-        <!--id, content, type, analysis, answer,testRstId, status,tscore-->
-        <!--FROM partyschool.test_rst tr-->
-        <!--LEFT JOIN partyschool.topic_rst tor ON tor.testRstId=tr.id-->
-        <!--LEFT JOIN partyschool.topic_opt_rst too ON too.topicId=tor.id-->
-        <!--WHERE tr.id=#{testId,jdbcType=VARCHAR}-->
-        <!--ORDER BY tor.index ASC-->
-    <!--</select>-->
+    <select id="findTopicFullRstList" parameterType="java.lang.String" resultMap="ResultMapTestTopic">
+        SELECT
+        tr.score as trScore,tr.name as trName,
+        tor.id, tor.content, tor.type, tor.youScore, tor.answer,tor.testRstId, tor.status,tor.tscore,tor.tindex,
+        too.content as tooContent,too.answer as tooAnswer,too.youAnswer
+        FROM partyschool.test_rst tr
+        LEFT JOIN partyschool.topic_rst tor ON tor.testRstId=tr.id
+        LEFT JOIN partyschool.topic_opt_rst too ON too.topicId=tor.id
+        WHERE tr.id=#{testId,jdbcType=VARCHAR}
+        ORDER BY tor.tindex ASC
+    </select>
 
 </mapper>

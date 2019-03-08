@@ -18,7 +18,7 @@ view, map, cover-view {
 }
 
 .activeEdit {
-    height: 32% !important;
+    height: 42% !important;
 }
 
 .tab {
@@ -110,9 +110,10 @@ view, map, cover-view {
     height: 160rpx;
     padding-top: 38rpx;
 }
-
-.fromContent .content .main button {
+.active-btn{
+    width: 430rpx;
     height: 100rpx;
+    float: right;
     background: rgba(67, 80, 252, 1);
     box-shadow: 0px 0px 10px 0px rgba(67, 252, 80, 0.35);
     border-radius: 50px;
@@ -121,6 +122,18 @@ view, map, cover-view {
     font-weight: bold;
     color: rgba(255, 255, 255, 1);
     line-height: 100rpx;
+}
+.cancel-btn{
+    width: 240rpx;
+    height: 100rpx;
+    float: left;
+    line-height: 100rpx;
+    text-align: center;
+    border:1px solid rgba(215,217,223,1);
+    box-shadow:0rpx 0rpx 10rpx 0rpx rgba(215, 223, 217, 0.35);
+    border-radius:47rpx;
+    color: #ABAEB9;
+    font-size: 38rpx;
 }
 
 .close-open{
@@ -471,4 +484,129 @@ view, map, cover-view {
     width: 28rpx;
     height: 28rpx;
     float: right;
+}
+
+/************车型选择复选框弹框*****************/
+.carType-modal{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    bottom: 0;
+    transition: 0.2s;
+}
+.carType-content{
+    width: 100%;
+    height: 58%;
+    background: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    z-index: 500;
+}
+.carType-opts{
+    width: 100%;
+    height: 100rpx;
+    border: 1px solid #F0EFF6;
+}
+.carType-opts::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.carType-cancel{
+    width: 100rpx;
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    color: #ABAEB9;
+    font-size: 36rpx;
+    font-weight: bold;
+    float: left;
+}
+.carType-confirm{
+    width: 100rpx;
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    color: #2430E3;
+    font-size: 36rpx;
+    font-weight: bold;
+    float: right;
+}
+.carType-title{
+    width: 100%;
+    height: auto
+}
+.modal-title01{
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: bold;
+    padding-left: 20rpx;
+    float: left;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+}
+.modal-title02{
+    color: #ABAEB9;
+    font-size: 28rpx;
+    font-weight: bold;
+    float: left;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+}
+.carType-items{
+    width: 96%;
+    height: auto;
+    margin: 0 auto;
+}
+.carType-items::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.carType-item{
+    width: 33.33%;
+    height: 80rpx;
+    line-height: 80rpx;
+    float: left;
+}
+.carType-item::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.cartype-default{
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: 500;
+}
+.carType-active{
+    font-weight: bold;
+    color: #4350FC;
+}
+.form-input{
+    text-align: right;
+    padding-right: 30rpx;
+}
+.checkTypes{
+    width: 40rpx;
+    height: 40rpx;
+    float: left;
+    margin-right: 10rpx;
+}
+.checkName{
+    float: left;
+}
+.carTypeTips{
+    color: #ABAEB9;
+    font-size: 32rpx;
+}
+.tips{
+    width: 100%;
+    height: 200rpx;
+    text-align: center;
+    line-height: 200rpx;
+    color: #373F53;
+    font-size: 48rpx;
+    font-weight: bold;
 }

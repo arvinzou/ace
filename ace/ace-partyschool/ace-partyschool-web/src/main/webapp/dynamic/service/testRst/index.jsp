@@ -85,10 +85,10 @@
     {@each data as item, index}
     <tr>
 
-        <td> \${item.name}</td>
-        <td> \${item.score}</td>
-        <td> \${item.createUserName}</td>
-        <td> \${item.createDate}</td>
+        <td>\${item.name}</td>
+        <td>\${item.score}</td>
+        <td>\${item.createUserName}</td>
+        <td>\${item.createDate}</td>
         >
         <td>
             ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
@@ -103,7 +103,7 @@
 
 
 <div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog"  STYLE="width: 1100px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">$times;</span>
@@ -114,6 +114,16 @@
                 <div class="form-horizontal" role="form">
                     <div class="form-body" style="height: 600px;overflow: auto;" id="fm-preview">
 
+                    </div>
+                </div>
+                <div  class="rightBar">
+                    <h2>总分:<span>10</span></h2>
+                    <div>
+                        <p><span class="point bluepoint"></span>正确答案</p>
+                        <p><span class="point redpoint"></span>你的选择</p>
+                    </div>
+                    <div class="button">
+                        确定
                     </div>
                 </div>
             </div>
@@ -131,13 +141,13 @@
     {@if item.type==1||item.type==3}
     <div class="testItem items testStyle2">
         <div class="testTitle">
-            <span class="text">Q\${formatIndex(index)}、\${item.content} \${formatScore(item.tscore)}</span>
+            <span class="text">Q\${formatIndex(index)}、\${item.content} (得分:\${scored(item)})</span>
         </div>
         <div class="testScore">
-            {@each item.topicOptList as itm, idx}
+            {@each item.topicOptRstList as itm, idx}
             <div class="option">
-                <input data-answer="\${itm.answer}" type="radio" name="test_\${index}" id="option_\${index}_\${idx}"/>
-                <label for="option_\${index}_\${idx}">\${itm.content}</label>
+                <span class="radio \${isRight(itm)}"></span>
+                <label>\${itm.content}</label>
             </div>
             {@/each}
         </div>
@@ -145,43 +155,40 @@
 
     {@else if item.type == 2}
     <div class="testItem items testStyle2">
-        <div class="testTitle">
-            <span class="text">Q\${formatIndex(index)}、\${item.content} \${formatScore(item.tscore)}</span>
+    <div class="testTitle">
+        <span class="text">Q\${formatIndex(index)}、\${item.content} (得分:\${scored(item)})</span>
+    </div>
+    <div class="testScore">
+        {@each item.topicOptRstList as itm, idx}
+        <div class="option \${thisIsRight(item.topicOptRstList)}">
+            <span class="checkbox \${isRight(itm)}"></span>
+            <label>\${itm.content}</label>
         </div>
-        <div class="testScore">
-            {@each item.topicOptList as itm, idx}
-            <div class="option">
-                <input data-answer="\${itm.answer}" type="checkbox" name="test_\${index}"
-                       id="option_\${index}_\${idx}"/>
-                <label for="option_\${index}_\${idx}">\${itm.content}</label>
-            </div>
-            {@/each}
-        </div>
+        {@/each}
+    </div>
     </div>
     {@else if item.type == 4}
     <div class="testItem">
         <div class="testTitle">
-            <span class="text">Q\${formatIndex(index)}、\${item.content} \${formatScore(item.tscore)}</span>
+            <span class="text">Q\${formatIndex(index)}、\${item.content} (得分:\${item.tscore?'0':item.tscore})</span>
         </div>
         <div class="input_text">
-            <textarea maxlength="200" class="message" placeholder="请在此输入您要填写的内容~200字以内"></textarea>
+            <div  maxlength="200" class="message">\${item.answer}</div>
+            打分:<input step="0.1" name="inputScore" onblur="checkNumber(this,\${item.tscore})" min="0" max="\${item.tscore}" data-id='\${item.id}' type="number"/>
         </div>
     </div>
-
     {@else if item.type == 5}
     <div class="testItem items" data-name="\${item.name}" data-introduce="\${item.introduce}">
         <div class="testTitle">
-            <span class="text">Q\${formatIndex(index)}、\${item.content} \${formatScore(item.tscore)}</span>
+            <span class="text">Q\${formatIndex(index)}、\${item.content} (得分:\${item.tscore?'0':item.tscore})</span>
         </div>
         <div class="testScore">
             <div class="core">
-                <div class="button subBtn">
-                </div>
                 <div class="score">
-                    <p data-total="\${item.tscore}" class="number">\${item.tscore|parseIntF}</p>
+                    <p data-total="\${item.tscore}" class="number">\${item.answer}</p>
                 </div>
-                <div class="button addBtn"></div>
             </div>
+            打分:<input step="0.1" name="inputScore" onblur="checkNumber(this,\${item.tscore})" min="0" max="\${item.tscore}" data-id='\${item.id}' type="number"/>
         </div>
     </div>
     {@else}
@@ -200,5 +207,7 @@
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
+
 <script src="js/act.js?v=${cfg.version}"></script>
+<script src="js/test.js?v=${cfg.version}"></script>
 </html>

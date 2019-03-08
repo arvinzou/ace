@@ -21,29 +21,58 @@
     <!--<cover-image src='../../image/icon-location.png' class='reset-locate icon-dingwei' bindtap='resetData'></cover-image>-->
     <cover-image wx-if='{{isEdit == false && showModal == false}}' src='../../image/icon-addkb.png' class='add-kb' bindtap='addKb'></cover-image>
 
-    <!--可选路段遮罩-->
+    <!--可选路段遮罩开始-->
     <cover-view class='section-modal' wx:if='{{showModal == true}}'>
         <cover-view class='modal-content'>
-            <cover-view class='modal-content-title'>可选路段</cover-view>
-            <block wx:for="{{sectionList}}" wx:for-index="idx" wx:for-item="itemName">
-                <cover-view class='modal-item' bindtap='selectModalSection' data-sectionid='{{itemName.roadSectionId}}' data-sectionname='{{itemName.sectionName}}'  data-roadmanid='{{itemName.roadManId}}' data-roadman='{{itemName.manName}}' data-startname='{{itemName.startName}}' data-endname='{{itemName.endName}}' data-index='{{idx}}'>
-                    <cover-view class='modal-item-name'>{{itemName.sectionName}}({{itemName.startName}}-{{itemName.endName}})</cover-view>
-                    <cover-view class='modal-item-detail'>
-                        <cover-view class='distance'>距此{{itemName.distance}}m</cover-view>
-                        <cover-view wx-if='{{idx == 0}}' class='section-flag'>当前</cover-view>
-                        <cover-image wx-if='{{modalSeclect == idx}}' class='secion-check' src='../../image/icon-modal-checked.png'></cover-image>
+            <block wx:if='{{sectionList.length > 0}}'>
+                <cover-view class='modal-content-title'>可选路段</cover-view>
+                <block wx:for="{{sectionList}}" wx:for-index="idx" wx:for-item="itemName">
+                    <cover-view class='modal-item' bindtap='selectModalSection' data-sectionid='{{itemName.roadSectionId}}' data-sectionname='{{itemName.sectionName}}'  data-roadmanid='{{itemName.roadManId}}' data-roadman='{{itemName.manName}}' data-startname='{{itemName.startName}}' data-endname='{{itemName.endName}}' data-index='{{idx}}'>
+                        <cover-view class='modal-item-name'>{{itemName.sectionName}}({{itemName.startName}}-{{itemName.endName}})</cover-view>
+                        <cover-view class='modal-item-detail'>
+                            <cover-view class='distance'>距此{{itemName.distance}}m</cover-view>
+                            <cover-view wx-if='{{idx == 0}}' class='section-flag'>当前</cover-view>
+                            <cover-image wx-if='{{modalSeclect == idx}}' class='secion-check' src='../../image/icon-modal-checked.png'></cover-image>
+                        </cover-view>
                     </cover-view>
-                </cover-view>
+                </block>
             </block>
-
+            <block wx:else>
+                <view class='tips'>未查询到路段</view>
+            </block>
             <cover-view class='modal-confirm' bindtap='closeModal'>确定</cover-view>
         </cover-view>
         <cover-image src='../../image/icon-modal-close.png' class='close-modal' bindtap='closeModal'></cover-image>
     </cover-view>
+    <!--可选路段遮罩结束-->
+
+    <!--可选车型遮罩开始-->
+        <cover-view class='carType-modal' wx-if='{{carTypeModal == 1}}'>
+            <cover-view class='carType-content'>
+                <cover-view class='carType-opts'>
+                    <cover-view class='carType-cancel' bindtap='cancelCarTypes'>取消</cover-view>
+                    <cover-view class='carType-confirm' bindtap='confirmCarTypes'>确定</cover-view>
+                </cover-view>
+                <cover-view class='carType-title'>
+                    <cover-view  class='modal-title01'>请选择车型</cover-view>
+                    <cover-view  class='modal-title02'>(多选)</cover-view>
+                </cover-view>
+                <cover-view class='carType-items'>
+                    <block wx:for='{{carTypes}}' wx:for-index="index" wx:for-item="item">
+                        <cover-view class='carType-item'  wx:if='{{item.CODE!=""}}' data-id='{{item.CODE}}' data-obj='{{item}}' data-index='{{index}}' data-checked='{{item.checkFlag}}' bindtap='selectCarType'>
+                            <cover-image class='checkTypes' src='{{item.checkFlag?"../../image/icon-checked.png":"../../image/icon-unchecked.png"}}'></cover-image>
+                            <cover-view  class='checkName cartype-default' >{{item.NAME}}</cover-view>
+                        </cover-view>
+                    </block>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+    <!--可选车型遮罩结束-->
+
   </map>
   <view class='fromContent'>
     <view class='content'>
-      <form bindsubmit="xbSubmit">
+      <form bindsubmit="xbSubmit" bindreset="formReset">
         <view class='main'>
           <view class='titile'>
             <view class='close-open-box' bindtap='closeAndOpen'>
@@ -63,7 +92,7 @@
                 <view class='add-box'>{{address}}</view>
                 <view class='reset-section' wx-if='sectionList.length>0' bindtap='resetSection'>
                     <image src='../../image/icon-reset-section.png'></image>
-                    <text>重新定位</text>
+                    <!--<text>重新定位</text>-->
                 </view>
             </view>
           </view>
@@ -74,28 +103,23 @@
                 <input class='form-input middle' name='roadManName' type='text' bindtap='selectRoadMan' value='{{roadManName}}' placeholder='请选择路长' disabled='true'></input>
                 <image class='select-arrow' src='../../image/icon_rediret.png' bindtap='selectRoadMan'></image>
               </view>
-              <!-- <view class='row'>
+              <view class='row'>
                 <view class='row-left'>天气情况</view>
                 <picker class='middle' bindchange="bindWeatherChange" name='weather' value="{{weatherArray[wIndex].CODE}}" range="{{weather}}">
                   <view class='form-input form-active'>{{weatherArray[wIndex].NAME}}</view>
                 </picker>
                 <image class='select-arrow' src='../../image/icon_rediret.png'></image>
-              </view> -->
-              <view class='row rows'>
-                <view class='row-left'>车型</view>
               </view>
-              <view class='carCheckBox'>
-                <checkbox-group name='vehicleType'>
-                  <block wx:for="{{carTypes}}">
-                    <label class="checkbox cartype" wx:if='{{item.CODE != ""}}'>
-                      <checkbox value="{{item.CODE}}" checked="{{item.checked}}" /> {{item.NAME}}
-                    </label>
-                  </block>
-                </checkbox-group>
+              <view class='row rows' bindtap='openCarTypeModal'>
+                <view class='row-left'>车型</view>
+                <view class='form-input middle' wx-if='{{carTypeStr}}'>{{carTypeStr}}</view>
+                <input wx-if='{{carTypeStr=="" || carTypeStr==null || carTypeStr==undefined}}' class='form-input middle'type='text'  placeholder='请选择车型' disabled='true'></input>
+                <image class='select-arrow' src='../../image/icon_rediret.png' bindtap='selectRoadMan'></image>
               </view>
             </view>
           </view>
           <view class='sendbtn'>
+            <button class='cancel-btn' form-type="reset">取消</button>
             <button class='active-btn' form-type="submit">确定报送</button>
           </view>
         </view>

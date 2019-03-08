@@ -7,7 +7,7 @@ window.onload = function () {
 }
 
 
-/*测试答案管理初始化分页*/
+/*任务管理初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 1,
@@ -42,9 +42,9 @@ function setParams(key, value) {
     getPageList();
 }
 
-/*测试答案管理加载表格数据*/
+/*任务管理加载表格数据*/
 function getPageList() {
-    var url = contextPath + "/testRst/findTestRstList";
+    var url = contextPath + "/task/findTaskList";
     params['name'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
@@ -70,19 +70,19 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
-/*测试答案管理添加*/
+/*任务管理添加*/
 function add(type) {
     window.location.href = 'add/index.jsp?id=' + urlParams.id;
 }
 
-/*测试答案管理编辑*/
+/*任务管理编辑*/
 function edit(did) {
     window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
 }
 
 /*查看详情*/
 function detail(id) {
-    var url = contextPath + "/testRst/selectTestRstByPrimaryKey";
+    var url = contextPath + "/task/selectTaskByPrimaryKey";
     $.getJSON(url, {id: id}, function (result) {
         if (result.status == 0) {
             var navitem = document.getElementById('tpl-detail').innerHTML;
@@ -129,42 +129,15 @@ function initEvents() {
         console.log(event);
         $(event.target).addClass("active");
     });
-   $('#modal-preview').on('click','.button',submitScore);
+
 
 }
 
-
-function submitScore() {
-    var data=[];
-    var inputs=$('#modal-preview input[name=inputScore]');
-    inputs.each(function(){
-        var score=$(this).val();
-        if(!score){
-            alert("还有测评没有打分。")
-        }
-        var id=$(this).data('id')
-        data.push({
-            id:id,
-            youScore:score
-        })
-    });
-    var url= contextPath + '/topicRst/updataTopicRstScore'
-    var datas={
-        jsons:JSON.stringify({
-            testId:testId,
-            list:data
-        })
-    }
-    $.post(url,datas,function () {
-        
-    })
-}
-
-/*测试答案管理审核*/
+/*任务管理审核*/
 function audit(params) {
     startLoad();
     $.ajax({
-        url: contextPath + "/testRst/audit",
+        url: contextPath + "/task/audit",
         type: "post",
         async: false,
         data: params,
@@ -183,61 +156,6 @@ function audit(params) {
     });
 }
 
-/*测试答案管理上架*/
-function online(id) {
-    if (confirm("确定要上架吗？")) {
-        startLoad();
-        $.ajax({
-            url: contextPath + "/testRst/updateStatus",
-            type: "post",
-            async: false,
-            data: {
-                id: id,
-                status: '1'
-            },
-            success: function (rst) {
-                stopLoad();
-                if (rst.status == 0) {
-                    getPageList();
-                } else {
-                    alert(rst.errorMessage);
-                }
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起，出错了！");
-            }
-        });
-    }
-}
-
-/*测试答案管理下架*/
-function outline(id) {
-    if (confirm("确定要下架吗？")) {
-        startLoad();
-        $.ajax({
-            url: contextPath + "/testRst/updateStatus",
-            type: "post",
-            async: false,
-            data: {
-                id: id,
-                status: '0'
-            },
-            success: function (rst) {
-                stopLoad();
-                if (rst.status == 0) {
-                    getPageList();
-                } else {
-                    alert(rst.errorMessage);
-                }
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起，出错了！");
-            }
-        });
-    }
-}
 
 //juicer自定义函数
 function initJuicerMethod() {
@@ -269,30 +187,50 @@ function parseStatus(status) {
     }
 }
 
-var testId;
-
 function initPreview(id) {
-    var  url=contextPath + "/topicRst/findTopicRstFullList";
-    var data={
-        testId:id
-    }
-    testId=id;
-    $.getJSON(url,data,function (rst) {
-        stopLoad();
-        if(rst.status==0){
-            render('#fm-preview',rst.data,'tpl-preview');
+    startLoad();
+    $.ajax({
+        url: contextPath + "/task/selectTaskByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: id
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data =  result.value;
+                render('#fm-preview', data, 'tpl-preview');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
         }
-        else {
-            alert("获取用户信息失败！");
+    });
+}
+
+function  del(id) {
+    var url=contextPath + "/task/updateStatus";
+    var data={
+        id:id,
+        status:0,
+    }
+    $.post(url,data,function (rst) {
+        if(rst.status==0){
+            getPageList();
+        }else {
+            alert("删除失败，请刷新重试");
         }
     })
-
 }
 
 function initForm(id) {
     startLoad();
     $.ajax({
-        url: contextPath + "/testRst/selectTestRstByPrimaryKey",
+        url: contextPath + "/task/selectTaskByPrimaryKey",
         type: "post",
         async: false,
         data: {
