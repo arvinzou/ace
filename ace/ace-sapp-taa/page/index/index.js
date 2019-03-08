@@ -56,7 +56,9 @@ Page({
     isAdd: false,     //点击添加事故快报按钮添加快报
     showModal: false,  //是否显示路段选择模态框
     sectionList: [],
-    modalSeclect: 0
+    modalSeclect: 0,   //路段模态框选择
+    carTypeModal: 0,    //汽车类型选择
+    carTypeStr: ""
   },
 
   /**
@@ -141,11 +143,11 @@ Page({
         var latitude = res.latitude;
         var longitude = res.longitude;
         var o = {
-          //iconPath: '../../image/icon-locate.png',
+          iconPath: '../../image/icon-locate.png',
           longitude: res.longitude,
           latitude: res.latitude,
-          width: 25,
-          height: 25
+          width: 28,
+          height: 28
         }
         that.toAddress(latitude, longitude);
         var arr = [];
@@ -230,19 +232,77 @@ Page({
       wIndex: e.detail.value
     })
   },
+
+ /**
+  * 打开车辆选择模态框
+  */
+  openCarTypeModal: function(){
+      var that = this;
+      that.setData({
+          carTypeModal: 1,
+          isEdit: false
+      });
+  },
+
+/**
+ * 关闭车辆选择模态框
+ */
+ cancelCarTypes: function(){
+     var that = this;
+     var carTypeList = that.data.carTypes;
+     for(var i=0; i<carTypeList.length; i++){
+         if (carTypeList[i].checkFlag == true){
+             carTypeList[i].checkFlag = false;
+         }
+     }
+     that.setData({
+         carTypeModal: 0,
+         isEdit: true,
+         carTypes: carTypeList,
+         carTypeStr: ""
+     });
+ },
+  /**
+   * 选择车的类型
+   */
   selectCarType: function(e) {
     var that = this;
-    var flag = e.currentTarget.dataset.value;
-    if (flag) {
-      that.setData({
-        hidden: false
-      });
-    } else {
-      that.setData({
-        hidden: true
-      });
+    var obj = e.currentTarget.dataset.obj;
+    var checkFlag = e.currentTarget.dataset.checked;
+    if (checkFlag == true){
+        obj.checkFlag = false;
+    }else{
+        obj.checkFlag = true;
     }
+    var index = e.currentTarget.dataset.index;
+    var carTypeList = that.data.carTypes;
+    carTypeList[index] = obj;
+    that.setData({
+        carTypes: carTypeList
+    });
   },
+
+ /**
+  * 确定车辆选择
+  */
+ confirmCarTypes: function(e){
+     var that = this;
+     var carTypeStr = "";
+     var that = this;
+     var carTypeList = that.data.carTypes;
+     for(var i=0; i<carTypeList.length; i++){
+         if (carTypeList[i].checkFlag == true){
+             carTypeStr += carTypeList[i].NAME;
+         }
+         carTypeStr = carTypeStr+" ";
+     }
+    that.setData({
+        carTypeStr: carTypeStr,
+        carTypeModal: 0,
+        isEdit: true
+    });
+ }, 
+
   /**
    * 弹框缩下去
    */
@@ -276,6 +336,7 @@ Page({
      */
     resetSection: function(){
         var that = this;
+        that.getLocation();
         that.setData({
             showModal: true,
             isEdit: false
@@ -413,7 +474,7 @@ Page({
     //var createDate = that.formatDT(e.detail.value.createDate);
     var createDate = util.formatDateTime(new Date());
     var weather = e.detail.value.weather;
-    var vehicleType = e.detail.value.vehicleType;
+    var vehicleType = that.data.carTypes;
     var mtypeList = [];
     if (that.data.sectionId == null || that.data.sectionId == undefined || that.data.sectionId == "") {
       wx.showModal({
@@ -447,20 +508,24 @@ Page({
       });
       return;
     }
-    if (vehicleType.length < 1) {
-      wx.showModal({
-        title: '提示',
-        content: '请选择车型！',
-        success: function(res) {}
-      });
-      return;
-    } else {
+      var checkedCarType = false;
       for (var i = 0; i < vehicleType.length; i++) {
-        var traAccMtype = {};
-        traAccMtype.vehicleType = vehicleType[i];
-        mtypeList.push(traAccMtype);
+        if (vehicleType[i].checkFlag == true){
+            checkedCarType = true;
+            var traAccMtype = {};
+            traAccMtype.vehicleType = vehicleType[i].CODE;
+            mtypeList.push(traAccMtype);
+        }
       }
-    }
+
+      if (checkedCarType == false){
+          wx.showModal({
+              title: '提示',
+              content: '请选择车型！',
+              success: function (res) { }
+          });
+          return; 
+      }
 
     util.request(cfg.server + '/taa/www/traAcc/flashReport', {
         data: JSON.stringify({
