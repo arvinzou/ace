@@ -10,7 +10,7 @@ public class TopicRst {
 
     private String type;
 
-    private String analysis;
+    private  BigDecimal youScore;
 
     private String answer;
 
@@ -62,14 +62,6 @@ public class TopicRst {
         this.type = type;
     }
 
-    public String getAnalysis() {
-        return analysis;
-    }
-
-    public void setAnalysis(String analysis) {
-        this.analysis = analysis;
-    }
-
     public String getAnswer() {
         return answer;
     }
@@ -92,5 +84,13 @@ public class TopicRst {
 
     public void setTscore(BigDecimal tscore) {
         this.tscore = tscore;
+    }
+
+    public BigDecimal getYouScore() {
+        return youScore;
+    }
+
+    public void setYouScore(BigDecimal youScore) {
+        this.youScore = youScore;
     }
 }

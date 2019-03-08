@@ -19,4 +19,5 @@ public interface TopicRstService {
     MessageResponse insertTopicRstList(List<TopicRstQVo> listPram, UserProp userProp) throws Exception;
 
     ResultResponse findTopicFullRstList(String testId) throws Exception;
+    ResultResponse updataTopicRstScore(List<Map<String, String>> list,String testId) throws Exception;
 }

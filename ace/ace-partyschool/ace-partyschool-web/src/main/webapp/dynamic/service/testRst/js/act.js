@@ -97,9 +97,6 @@ function initEvents() {
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
-        var title = relatedTarget.data('title');
-        var modal = $(this);
-        console.log(relatedTarget);
         initPreview(id);
     })
     $('#modal-audit').on('show.bs.modal', function (event) {
@@ -132,8 +129,35 @@ function initEvents() {
         console.log(event);
         $(event.target).addClass("active");
     });
+   $('#modal-preview').on('click','.button',submitScore);
+
+}
 
 
+function submitScore() {
+    var data=[];
+    var inputs=$('#modal-preview input[name=inputScore]');
+    inputs.each(function(){
+        var score=$(this).val();
+        if(!score){
+            alert("还有测评没有打分。")
+        }
+        var id=$(this).data('id')
+        data.push({
+            id:id,
+            youScore:score
+        })
+    });
+    var url= contextPath + '/topicRst/updataTopicRstScore'
+    var datas={
+        jsons:JSON.stringify({
+            testId:testId,
+            list:data
+        })
+    }
+    $.post(url,datas,function () {
+        
+    })
 }
 
 /*测试答案管理审核*/
@@ -245,30 +269,24 @@ function parseStatus(status) {
     }
 }
 
+var testId;
+
 function initPreview(id) {
-    startLoad();
-    $.ajax({
-        url: contextPath + "/testRst/selectTestRstByPrimaryKey",
-        type: "post",
-        async: false,
-        data: {
-            id: id
-        },
-        success: function (result) {
-            stopLoad();
-            if (result.status == 0) {
-                var data = {};
-                data['o'] = result.value;
-                render('#fm-preview', data, 'tpl-preview');
-            } else {
-                alert(result.errorMessage);
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
+    var  url=contextPath + "/topicRst/findTopicRstFullList";
+    var data={
+        testId:id
+    }
+    testId=id;
+    $.getJSON(url,data,function (rst) {
+        stopLoad();
+        if(rst.status==0){
+            render('#fm-preview',rst.data,'tpl-preview');
         }
-    });
+        else {
+            alert("获取用户信息失败！");
+        }
+    })
+
 }
 
 function initForm(id) {

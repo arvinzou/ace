@@ -1,5 +1,6 @@
 package com.huacainfo.ace.partyschool.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,8 @@ public interface TopicRstDao {
 
 
     int updateByPrimaryKey(TopicRst record);
+
+    int updataTopicRstScore(@Param("id")String id,@Param("youScore") BigDecimal youScore);
 
     List<TopicVo> findTopicFullRstList(@Param("testId") String testId);
 

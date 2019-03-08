@@ -1,5 +1,6 @@
 package com.huacainfo.ace.partyschool.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ public interface TestRstDao {
     int deleteByPrimaryKey(String id);
 
     int insert(TestRst record);
+
+
 
 
     int updateByPrimaryKey(TestRst record);
@@ -41,5 +44,7 @@ public interface TestRstDao {
 
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
+
+    int computScore(String id);
 
 }

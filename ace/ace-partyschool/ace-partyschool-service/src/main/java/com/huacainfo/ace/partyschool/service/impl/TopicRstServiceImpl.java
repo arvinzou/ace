@@ -1,6 +1,7 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import com.huacainfo.ace.common.constant.ResultCode;
@@ -89,4 +90,21 @@ public class TopicRstServiceImpl implements TopicRstService {
         return new ResultResponse(ResultCode.SUCCESS,"成功",list);
     }
 
+    @Override
+    public ResultResponse updataTopicRstScore(List<Map<String, String>> list, String testId) throws Exception {
+        for(int i=0;i<list.size();i++){
+            Map<String, String> item =list.get(i);
+            String id=item.get("id");
+            String youScore=item.get("youScore");
+            if (CommonUtils.isBlank(id)){
+                return new ResultResponse(ResultCode.FAIL,"主键丢失。");
+            }
+            if (CommonUtils.isBlank(youScore)){
+                return new ResultResponse(ResultCode.FAIL,"分值丢失。");
+            }
+            this.topicRstDao.updataTopicRstScore(id,new BigDecimal(youScore));
+        }
+        testRstDao.computScore(testId);
+        return new ResultResponse(ResultCode.SUCCESS,"成功");
+    }
 }
