@@ -137,35 +137,37 @@ function initClasses(){
               }else{
                   if(regType == 'student'){
                       $("#classFilter").hide();
-                      return;
-                  }
-                  $("#clazz").text(result.data[0].name);
-                  var data = result.data;
-                  var classesArr = [];
-                  for(var i=0; i<data.length; i++){
-                      var o = {};
-                      o.id = data[i].id;
-                      o.value = data[i].name;
-                      classesArr.push(o);
-                  }
-                  var tempArr = [];
-                  tempArr.push(classesArr[0])
-                  clazz = tempArr;
-                  var classesSelect= new MobileSelect({
-                      trigger: '#clazz',
-                      title: '党校班级选择',
-                      wheels: [
-                          {data: classesArr}
-                      ],
-                      position:[1], //初始化定位 打开时默认选中的哪个 如果不填默认为0
-                      transitionEnd:function(indexArr, data){
-                          clazz = data;
-                      },
-                      callback:function(indexArr, data){
-                          clazz = data;
-                          fileList();
+                      fileList();
+                  }else{
+                      $("#clazz").text(result.data[0].name);
+                      var data = result.data;
+                      var classesArr = [];
+                      for(var i=0; i<data.length; i++){
+                          var o = {};
+                          o.id = data[i].id;
+                          o.value = data[i].name;
+                          classesArr.push(o);
                       }
-                  });
+                      var tempArr = [];
+                      tempArr.push(classesArr[0])
+                      clazz = tempArr;
+                      var classesSelect= new MobileSelect({
+                          trigger: '#clazz',
+                          title: '党校班级选择',
+                          wheels: [
+                              {data: classesArr}
+                          ],
+                          position:[1], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+                          transitionEnd:function(indexArr, data){
+                              clazz = data;
+                          },
+                          callback:function(indexArr, data){
+                              clazz = data;
+                              fileList();
+                          }
+                      });
+                  }
+
               }
             }else {
                 if(result.info){
