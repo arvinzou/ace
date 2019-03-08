@@ -141,11 +141,13 @@
         <include refid="Where_Condition"/>
     </select>
 
-    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapTestTopic">
         select
-        <include refid="Vo_Column_List"/>
-        <include refid="From_Statement"/>
-        where t.id = #{id,jdbcType=VARCHAR}
+        top.id,  top.content,top.answer, top.type, top.status,  top.analysis, top.createUserId, top.createUserName,top.createDate, top.lastModifyUserId, top.lastModifyUserName, top.lastModifyDate,
+        too.id as tooId, too.content as tooContent, too.answer as tooAnswer, too.createDate as tooCreateDate,too.answer as tooAnswer,too.topicId as tooTopicId
+        FROM partyschool.topic top
+        LEFT JOIN partyschool.topic_opt too ON too.topicId=top.id
+        where top.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Topic">

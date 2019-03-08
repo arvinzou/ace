@@ -59,8 +59,6 @@
                 <tr>
                     <th width="20%"> 测试名称</th>
                     <th width="30%"> 测试介绍</th>
-                    <th width="15%"> 开始时间</th>
-                    <th width="15%"> 结束时间</th>
                     <th width="5%"> 状态</th>
                     <th width="15%">操作</th>
                 </tr>
@@ -89,8 +87,6 @@
     <tr>
         <td>\${item.name}</td>
         <td>\${item.introduce}</td>
-        <td>\${item.startTime}</td>
-        <td>\${item.endTime}</td>
         <td>
             {@if item.status==0}
             <span class="label label-lg label-danger">删除</span>

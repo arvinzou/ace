@@ -12,6 +12,7 @@ public interface TopicOptDao {
 TopicOpt selectByPrimaryKey(String id);
 
 int deleteByPrimaryKey(String id);
+int deleteTopicOptByTopicId(String id);
 
 int insert(TopicOpt record);
 

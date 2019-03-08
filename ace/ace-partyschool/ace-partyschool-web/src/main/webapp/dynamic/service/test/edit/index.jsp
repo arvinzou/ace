@@ -63,28 +63,6 @@
                 <span class="help-block"></span>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                开始时间
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="startTime" value="\${data.o.startTime}"
-                       placeholder="请输入开始时间">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                结束时间
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="endTime" value="\${data.o.endTime}"
-                       placeholder="请输入结束时间">
-                <span class="help-block"></span>
-            </div>
-        </div>
     </div>
     <div class="form-actions">
         <div class="row">

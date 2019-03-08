@@ -23,6 +23,11 @@
     delete from topic_opt
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
+    <delete id="deleteTopicOptByTopicId" parameterType="java.lang.String">
+    delete from topic_opt
+    where topicId = #{id,jdbcType=VARCHAR}
+  </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.TopicOpt">
     insert into topic_opt (
     id,
