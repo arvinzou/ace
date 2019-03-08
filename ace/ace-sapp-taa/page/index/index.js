@@ -567,6 +567,16 @@ Page({
     );
   },
 
+/**
+ * 清空表单
+ */
+  formReset: function(){
+      var that = this;
+      var that = this;
+      that.setData({
+            isEdit: false
+        });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
