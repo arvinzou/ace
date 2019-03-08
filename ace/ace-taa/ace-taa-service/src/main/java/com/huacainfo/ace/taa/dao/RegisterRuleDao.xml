@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.taa.dao.RegisterRuleDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.RegisterRule">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="copNo" jdbcType="VARCHAR" property="copNo"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="deptId" jdbcType="VARCHAR" property="deptId"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, copNo, mobile, deptId, status, remark, createDate, updateDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from register_rule
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from register_rule
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.taa.model.RegisterRule">
+    insert into register_rule (id, name, copNo, 
+      mobile, deptId, status, 
+      remark, createDate, updateDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{copNo,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.RegisterRule">
+    update register_rule
+    set name = #{name,jdbcType=VARCHAR},
+      copNo = #{copNo,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      deptId = #{deptId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.taa.vo.RegisterRuleVo">
+        <result column="department_name" jdbcType="VARCHAR" property="deptName"/>
+        <result column="regStatus" jdbcType="VARCHAR" property="regStatus"/>
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        IFNULL((select 1 from portal.users u where u.user_id = t.copNo),'0') as regStatus,
+        d.department_name,
+        t.id, t.name, t.copNo, t.mobile, t.deptId, 
+        t.status, t.remark, t.createDate, t.updateDate
+    </sql>
+    <sql id="From_Statement">
+        FROM register_rule t
+        left join portal.department d on t.deptId = d.department_id
+        left join portal.users u on t.copNo = u.user_id
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test='condition.copNo!=null and condition.copNo!=""'>
+            and t.copNo like #{condition.copNo,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.mobile!=null and condition.mobile!=""'>
+            and t.mobile like #{condition.mobile,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.deptId!=null and condition.deptId!=""'>
+            and t.deptId like #{condition.deptId,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.keyWord!=null and condition.keyWord!=""'>
+            and (
+            t.name like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
+            or t.copNo like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        <if test='condition.regStatus!=null and condition.regStatus!=""'>
+            and IFNULL((select 1 from portal.users u where u.user_id = t.copNo),'0')
+            = #{condition.regStatus,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.taa.model.OfficeAdmin">
+        select count(1)
+        from register_rule t
+        where t.copNo = #{copNo,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findByCondition" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+</mapper>

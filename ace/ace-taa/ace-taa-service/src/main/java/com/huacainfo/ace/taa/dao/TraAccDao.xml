@@ -462,14 +462,16 @@
     (SELECT
     count(1)
     from taa.tra_acc t
-    where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+    where t.`status` = '1'
+    and t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
     and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
     ) as accTimes ,
     (
     SELECT
     sum(t.deadthToll)
     from taa.tra_acc t
-    where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+    where t.`status`='1'
+    and t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
     and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
     ) as deathNum
     from taa.tra_acc
@@ -483,8 +485,9 @@
         select
         t.roadManId,sum(deadthToll) as deathNum
         from taa.tra_acc t
-        where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
-        and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
+        where t.`status`='1'
+          and t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+          and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
         GROUP by t.roadManId
         )A
         LEFT JOIN road_man rm on a.roadManId = rm.id
@@ -503,7 +506,8 @@
                 select
                 t.areaCode ,SUM(deadthToll) as deathNum
                 from taa.tra_acc t
-                where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+                where t.`status`='1'
+                and t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
                 GROUP BY t.areaCode
                 )A
                 left join portal.province p on a.areaCode = p.`code`
@@ -518,7 +522,8 @@
                 select
                 t.areaCode ,count(1) as accTimes
                 from taa.tra_acc t
-                where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+                where t.`status`='1'
+                and t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
                 GROUP BY t.areaCode
                 )A
                 left join portal.province p on a.areaCode = p.`code`
