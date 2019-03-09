@@ -3,7 +3,7 @@
     <view class='head'>
     已报名参与者{{list.length}}人
     </view>
-    <view class='persons bottom-line' wx:for='{{list}}'>
+    <view class='persons bottom-line' wx:for='{{list}}' wx:key="abc">
         <view class='headImg'>
         <image lazy-load="true" mode='aspectFill' src='{{item.headimgurl}}'></image>
         </view>

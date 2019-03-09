@@ -51,10 +51,13 @@
     border-radius: 50%;
     overflow: hidden;
 }
-
+.zuzhi-name{
+    flex: 0 0 70%;
+}
 .head_card .base_info .organizer .remark {
     color: rgba(66, 93, 174, 1);
-    margin-left: 20rpx;
+    padding-left: 20rpx;
+    flex:0 0 30%;
 }
 
 .detailed_card .time {
@@ -210,4 +213,56 @@
     justify-content: space-around;
     align-items: center;
     background-color: #fff;
+}
+.title-share-wrapper{
+  display: flex;
+  align-items: center;
+}
+.shareActive{
+  min-width: 120rpx;
+  letter-spacing: 4rpx;
+  height:56rpx;
+  line-height: 56rpx;
+  margin-right: 20rpx;
+  border-radius:40rpx;
+  font-size: 24rpx;
+  padding: 0 18rpx;
+  color: #fff;
+  background-color: #FF9906;
+}
+button::after {
+  border: 0;
+}
+.share-img{
+  /* display: block; */
+  width: 240px;
+  height: 840rpx;
+  margin: 0 auto;
+}
+.share-img-tips{
+  text-align:center;
+  font-size:28rpx;
+  margin-top:10rpx;
+  color: #fff;
+}
+.share-model-bg{
+  position: fixed;
+  top:0;
+  left:0;
+  z-index:100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.8);
+}
+.canvas-wrap{
+  position: relative;
+}
+.icon-close{
+  position: absolute;
+  top: -18rpx;
+  right: -12rpx;
+
 }

@@ -1,5 +1,5 @@
 <view class="index">
-    <view class='singleActivity' wx:for="{{list}}">
+    <view class='singleActivity' wx:for="{{list}}" wx:key="abc">
         <view class='content' bindtap="viewContent" data-id='{{item.id}}' data-title='{{item.title}}'>
             <view class='cover {{item.status>31?"opacity":""}}'>
                 <image lazy-load="true" mode='aspectFill' src='{{item.coverUrl}}'></image>
