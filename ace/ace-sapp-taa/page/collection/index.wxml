@@ -26,7 +26,7 @@
       </view>
     </block>
   </view>
-  <view class='tab02-content ' wx:else>
+  <view class='tab02-content {{tabIsShow==false?"margin10":""}} ' wx:else>
   <!-- <view class='tab02-content {{tab==1?"":"hidden"}}' > -->
     <block wx:for="{{yList}}" wx:for-index="idy" wx:for-item="item" wx:key="yList">
       <view class='item' >
