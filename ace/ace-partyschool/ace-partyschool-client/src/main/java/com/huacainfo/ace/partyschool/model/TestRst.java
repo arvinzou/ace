@@ -10,7 +10,7 @@ public class TestRst {
 
     private String tId;
 
-    private String noticeId;
+    private String taskId;
 
     private String createUserId;
 
@@ -26,12 +26,22 @@ public class TestRst {
 
     private Date lastModifyDate;
 
-    public String getNoticeId() {
-        return noticeId;
+    private String status;
+
+    public String getStatus() {
+        return status;
     }
 
-    public void setNoticeId(String noticeId) {
-        this.noticeId = noticeId;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
     }
 
     public String gettId() {

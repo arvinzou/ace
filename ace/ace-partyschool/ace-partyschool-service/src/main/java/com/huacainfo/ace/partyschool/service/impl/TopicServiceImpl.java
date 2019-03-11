@@ -8,6 +8,9 @@ import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.TestDao;
+import com.huacainfo.ace.partyschool.dao.TestRstDao;
+import com.huacainfo.ace.partyschool.model.TestRst;
+import com.huacainfo.ace.partyschool.service.TestRstService;
 import com.huacainfo.ace.partyschool.service.TopicOptService;
 import com.huacainfo.ace.partyschool.vo.TestVo;
 import org.apache.ibatis.session.Configuration;
@@ -40,6 +43,9 @@ public class TopicServiceImpl implements TopicService {
     private TopicDao topicDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private TestRstDao testRstDao;
 
     @Autowired
     private SqlSessionTemplate sqlSession;
@@ -77,11 +83,45 @@ public class TopicServiceImpl implements TopicService {
 
 
     @Override
-    public ResultResponse findTopicFullList(String testId) throws Exception {
+    public ResultResponse findTopicFullList(String testId,String taskId,UserProp userProp) throws Exception {
+        if(CommonUtils.isBlank(testId)){
+            return new ResultResponse(ResultCode.FAIL,"test主键不能为空");
+        }
+        if(CommonUtils.isBlank(taskId)){
+            return new ResultResponse(ResultCode.FAIL,"任务id不能为空");
+        }
+        if(CommonUtils.isBlank(userProp.getUserId())){
+            return new ResultResponse(ResultCode.FAIL,"没有登陆，请重新登陆");
+        }
+
+        int item =this.testRstDao.isTest(taskId,userProp.getUserId());
+        if(item>0){
+            return new ResultResponse(ResultCode.FAIL,"已经提交了测试");
+        }
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TopicDao dao = session.getMapper(TopicDao.class);
+        List<TopicVo> list=new ArrayList<>();
+        try {
+            list = dao.findTopicFullList(testId);
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
+        }
+        return new ResultResponse(ResultCode.SUCCESS,"成功",list);
+    }
+
+    @Override
+    public ResultResponse findTopicFullList(String testId,UserProp userProp) throws Exception {
         if(CommonUtils.isBlank(testId)){
             return new ResultResponse(ResultCode.FAIL,"test主键不能为空");
         }
 
+        if(CommonUtils.isBlank(userProp.getUserId())){
+            return new ResultResponse(ResultCode.FAIL,"没有登陆，请重新登陆");
+        }
         SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
         Configuration configuration = session.getConfiguration();
         configuration.setSafeResultHandlerEnabled(false);

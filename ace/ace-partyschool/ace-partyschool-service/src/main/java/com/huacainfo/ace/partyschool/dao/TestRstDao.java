@@ -34,6 +34,8 @@ public interface TestRstDao {
 
     int isExit(TestRst record);
 
+    int isTest( @Param("taskId") String taskId, @Param("createUserId") String createUserId);
+
     int updateStatus(@Param("id") String id, @Param("status") String status);
 
 

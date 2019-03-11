@@ -30,7 +30,8 @@ public interface TopicService {
      * @version: 2019-02-27
      */
     PageResult<TopicVo> findTopicList(TopicQVo condition, int start, int limit, String orderBy) throws Exception;
-    ResultResponse findTopicFullList(String testId) throws Exception;
+    ResultResponse findTopicFullList(String testId,String taskId,UserProp userProp) throws Exception;
+    ResultResponse findTopicFullList(String testId,UserProp userProp) throws Exception;
 
     /**
      * @throws
