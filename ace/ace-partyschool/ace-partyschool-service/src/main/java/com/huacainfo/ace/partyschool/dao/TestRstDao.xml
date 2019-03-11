@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.TestRst">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <id column="tId" jdbcType="VARCHAR" property="tId"/>
+        <id column="noticeId" jdbcType="VARCHAR" property="noticeId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="score" jdbcType="DECIMAL" property="score"/>
@@ -14,7 +15,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id,tId, name, createUserId, score, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+    id,tId, noticeId, name, createUserId, score, createUserName, createDate, lastModifyUserId, lastModifyUserName,
     lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -28,21 +29,25 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.TestRst">
-        insert into test_rst (id, tId, name, createUserId,
+        insert into test_rst (id, tId,noticeId, name, createUserId,
         score, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate
         )
-        values (#{id,jdbcType=VARCHAR},#{tId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR},
+        values (#{id,jdbcType=VARCHAR},
+                #{tId,jdbcType=VARCHAR},
+                #{noticeId,jdbcType=VARCHAR},
+                 #{name,jdbcType=VARCHAR},
+                 #{createUserId,jdbcType=VARCHAR},
         (
-        SELECT SUM(tscore)
-        FROM partyschool.topic_rst tr
-        WHERE tr.id NOT IN(
-        SELECT tor.topicId
-        FROM partyschool.topic_opt_rst tor
-        WHERE tor.answer <![CDATA[ <> ]]> tor.youAnswer
-        )
-        AND tr.`type` IN(1,2,3)
-        AND tr.testRstId=#{id,jdbcType=VARCHAR}
+            SELECT SUM(tscore)
+            FROM partyschool.topic_rst tr
+            WHERE tr.id NOT IN(
+                SELECT tor.topicId
+                FROM partyschool.topic_opt_rst tor
+                WHERE tor.answer <![CDATA[ <> ]]> tor.youAnswer
+            )
+            AND tr.`type` IN(1,2,3)
+            AND tr.testRstId=#{id,jdbcType=VARCHAR}
         )
         ,
         #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
@@ -54,7 +59,7 @@
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.TestRst">
     update test_rst
     set name = #{name,jdbcType=VARCHAR},
-         tId = #{tId,jdbcType=VARCHAR},
+         tId = #{tId,jdbcType=VARCHAR}, noticeId = #{noticeId,jdbcType=VARCHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
       score = #{score,jdbcType=DECIMAL},
       createUserName = #{createUserName,jdbcType=VARCHAR},
@@ -92,7 +97,7 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.TestRstVo"></resultMap>
 
     <sql id="Vo_Column_List">
-        tr.id,tr.tId, tr.name, tr.createUserId, tr.score, tr.createUserName, tr.createDate, tr.lastModifyUserId, tr.lastModifyUserName,tr.lastModifyDate
+        tr.id,tr.tId,tr.noticeId, tr.name, tr.createUserId, tr.score, tr.createUserName, tr.createDate, tr.lastModifyUserId, tr.lastModifyUserName,tr.lastModifyDate
     </sql>
 
     <sql id="Where_Condition">

@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.taa.vo.CustomerVo;
+import com.huacainfo.ace.taa.vo.RegisterRuleQVo;
 
 /**
  * @Auther: Arvin
@@ -89,4 +90,13 @@ public interface RegisterService {
      * @return ResultResponse
      */
     ResultResponse updateMobile(String uid, String mobile);
+
+
+    /**
+     * 查询注册规则
+     *
+     * @param condition copNo-警号 必传
+     * @return ResultResponse
+     */
+    ResultResponse findRegisterInfo(RegisterRuleQVo condition);
 }
