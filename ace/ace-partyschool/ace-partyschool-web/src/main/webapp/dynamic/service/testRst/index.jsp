@@ -185,7 +185,7 @@
     {@else if item.type == 4}
     <div class="testItem">
         <div class="testTitle">
-            <span class="text">Q\${formatIndex(index)}、\${item.content} (得分:\${item.tscore?'0':item.tscore})</span>
+            <span class="text">Q\${formatIndex(index)}、\${item.content} (得分:\${item.youScore?item.youScore:0})</span>
         </div>
         <div class="input_text">
             <div maxlength="200" class="message">\${item.answer}</div>
@@ -198,7 +198,7 @@
     {@else if item.type == 5}
     <div class="testItem items" data-name="\${item.name}" data-introduce="\${item.introduce}">
         <div class="testTitle">
-            <span class="text">Q\${formatIndex(index)}、\${item.content} (得分:\${item.tscore?'0':item.tscore})</span>
+            <span class="text">Q\${formatIndex(index)}、\${item.content} (得分:\${item.youScore?item.youScore:0})</span>
         </div>
         <div class="testScore">
             <div class="core">
