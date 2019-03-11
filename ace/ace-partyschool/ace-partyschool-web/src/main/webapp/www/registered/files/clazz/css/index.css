@@ -28,6 +28,7 @@ body{
 	padding-left: 0.253333rem;
 	padding-right: 0.253333rem;
 	height: 1.88rem;
+	position: relative;
 }
 .classFilter{
     padding-left: 0.253333rem;
@@ -78,7 +79,6 @@ body{
 	border: none;
 	outline: none;
 	background: #F5F6F7;
-	position: relative;
 	color: #373F53;
 	font-size: 0.4rem;
 	padding-left: 2%;
@@ -161,17 +161,17 @@ body{
 .icon-search{
 	width: 0.4rem;
 	height: 0.4rem;
-	position: relative;
-    bottom: 1.4rem;
+	position: absolute;
+    top: 0.74rem;
     left: 4rem;
 }
 .search-title{
 	font-size: 0.346666rem;
 	color: #ABAEB9;
 	padding-left: 0.266666rem;
-	position: relative;
-    bottom: 1.48rem;
-    left: 3.6rem;
+	position: absolute;
+    top: 0.7rem;
+    left: 4.2rem;
 }
 
 /**上传班级文件模态框**/
