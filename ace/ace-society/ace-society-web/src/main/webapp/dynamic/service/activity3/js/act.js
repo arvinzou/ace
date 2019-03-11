@@ -363,6 +363,21 @@ function initPhotoPreview(imgSelector) {
     initPhotoSwipeFromDOM('.my-gallery');
 }
 
+
+/*查看详情*/
+function details(id) {
+    var url = contextPath + "/activity/selectActivityByPrimaryKey";
+    $.getJSON(url, {id: id}, function (result) {
+        if (result.status == 0) {
+            var navitem = document.getElementById('tpl-detail').innerHTML;
+            var html = juicer(navitem, {data: result.value});
+            $("#fm-detail").html(html);
+            $("#modal-detail").modal("show");
+            initPhotoPreview(".my-gallery img");
+        }
+    });
+}
+
 var initPhotoSwipeFromDOM = function (gallerySelector) {
     var parseThumbnailElements = function (el) {
         var thumbElements = el.childNodes,
