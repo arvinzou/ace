@@ -32,8 +32,14 @@
     <select id="isExistByMobile" resultType="int">
         select count(*)
         from portal.users
-        where mobile = #{tel}
-        or account = #{tel}
+        where mobile = #{mobile}
+        or account = #{mobile}
+    </select>
+
+    <select id="isExistByAccount" resultType="int">
+        select count(*)
+        from portal.users
+        where account = #{account}
     </select>
 
 

@@ -84,7 +84,7 @@
     <sql id="Vo_Column_List">
       c.`name` as clsName,
       p.`name` as areaCodeName,
-      IFNULL((select 2 from portal.users u where u.account = t.mobile),'1') as regStatus,
+      IFNULL((select 2 from portal.users u where u.account = t.badgeNum),'1') as regStatus,
       t.areaCode, t.clsId,
       t.id, t.name, t.sex, t.mobile, t.idCard, t.political,
       t.workUnitName, t.postName, t.nativePlace, t.badgeNum,
@@ -149,8 +149,9 @@
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.EnrollRoster">
         select count(1)
         from enroll_roster
-        where name = #{name,jdbcType=VARCHAR}
-        and nativePlace = #{nativePlace,jdbcType=VARCHAR}
+        where
+        badgeNum = #{badgeNum,jdbcType=VARCHAR}
+        or idCard = #{idCard,jdbcType=VARCHAR}
     </select>
 
     <update id="updateStatus" parameterType="java.lang.String">
@@ -209,10 +210,18 @@
         from enroll_roster t
         where 1=1
         and t.areaCode is not NULL
-        and t.mobile is not NULL
         and t.clsId is not null
-        and t.mobile not in (select u.account from portal.users u )
-        and t.mobile not in (select mobile from student )
+        and t.idCard is not null
+        and t.badgeNum is not NULL
+        and t.badgeNum not in (select u.account from portal.users u )
+        and t.badgeNum not in (select mobile from student )
         and t.clsId in (SELECT id from classes where `status`= '1' )
+    </select>
+
+    <select id="findByBadgeNum" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from enroll_roster
+        where badgeNum = #{badgeNum,jdbcType=VARCHAR}
     </select>
 </mapper>

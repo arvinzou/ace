@@ -3,6 +3,7 @@ package com.huacainfo.ace.policeschool.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -83,17 +84,22 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "姓名不能为空！");
         }
-        if (CommonUtils.isBlank(o.getWorkUnitName())) {
+        if (CommonUtils.isBlank(o.getAreaCode())) {
             return new MessageResponse(1, "籍贯不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getBadgeNum())) {
+            return new MessageResponse(1, "警号不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getIdCard())) {
+            return new MessageResponse(1, "身份证不能为空！");
         }
 
         int temp = this.enrollRosterDao.isExist(o);
         if (temp > 0) {
-            return new MessageResponse(1, "人员重复！");
+            return new MessageResponse(1, "警号或者身份证重复！");
         }
 
-        String id = CommonUtils.isBlank(o.getId()) || "_empty".equals(o.getId()) ?
-                GUIDUtil.getGUID() : o.getId();
+        String id = CommonUtils.isBlank(o.getId()) || "_empty".equals(o.getId()) ? GUIDUtil.getGUID() : o.getId();
         o.setId(id);
         o.setCreateDate(new Date());
         o.setStatus("1");
@@ -119,17 +125,14 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(o.getNativePlace())) {
+        if (CommonUtils.isBlank(o.getAreaCode())) {
             return new MessageResponse(1, "籍贯不能为空！");
         }
-        if (CommonUtils.isBlank(o.getName())) {
-            return new MessageResponse(1, "学员姓名不能为空！");
+        if (CommonUtils.isBlank(o.getBadgeNum())) {
+            return new MessageResponse(1, "警号不能为空！");
         }
-        if (CommonUtils.isBlank(o.getWorkUnitName())) {
-            return new MessageResponse(1, "单位不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getPostName())) {
-            return new MessageResponse(1, "职务不能为空！");
+        if (CommonUtils.isBlank(o.getIdCard())) {
+            return new MessageResponse(1, "身份证不能为空！");
         }
 
         EnrollRoster old = enrollRosterDao.selectByPrimaryKey(o.getId());
@@ -237,7 +240,17 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
             if (CommonUtils.isBlank(o.getName())) {
                 return new MessageResponse(1, "序号[" + o.getIndex() + "]，" + "姓名不能为空！");
             }
-            record = enrollRosterDao.findByCondition(o);
+            if (CommonUtils.isBlank(o.getBadgeNum())) {
+                return new MessageResponse(1, "序号[" + o.getIndex() + "]，" + "警号不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getIdCard())) {
+                return new MessageResponse(1, "序号[" + o.getIndex() + "]，" + "身份证不能为空！");
+            }
+            if (StringUtil.isNotEmpty(o.getSex())) {
+                o.setSex("男".equals(o.getSex().trim()) ? "1" : "2");
+            }
+
+            record = enrollRosterDao.findByBadgeNum(o.getBadgeNum());
             if (record != null) {
                 o.setId(record.getId());
                 this.enrollRosterDao.updateByPrimaryKey(o);
