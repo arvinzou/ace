@@ -2,7 +2,9 @@ package com.huacainfo.ace.taa.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -11,6 +13,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.portal.vo.MongoFile;
 import com.huacainfo.ace.taa.model.RoadSection;
+import com.huacainfo.ace.taa.service.RoadGpsService;
 import com.huacainfo.ace.taa.service.RoadSectionService;
 import com.huacainfo.ace.taa.vo.RoadSectionQVo;
 import com.huacainfo.ace.taa.vo.RoadSectionVo;
@@ -41,6 +44,8 @@ public class RoadSectionController extends TaaBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private RoadSectionService roadSectionService;
+    @Autowired
+    private RoadGpsService roadGpsService;
 
     /**
      * @throws
@@ -161,7 +166,7 @@ public class RoadSectionController extends TaaBaseController {
     /**
      * @throws
      * @Title:importXls
-     * @Description: TODO(导入!{bean.tableChineseName})
+     * @Description: TODO(导入 ! { bean.tableChineseName })
      * @param: @param file
      * @param: @param jsons
      * @param: @return
@@ -243,7 +248,7 @@ public class RoadSectionController extends TaaBaseController {
      * @Description: TODO(用于控件数据获取)
      * @param: @param params
      * @param: @return
-     * @return: Map<String,Object>
+     * @return: Map<String, Object>
      * @author: chenxiaoke
      * @version: 2019年1月04日 下午1:24:14
      */
@@ -252,4 +257,22 @@ public class RoadSectionController extends TaaBaseController {
     public Map<String, Object> getListByCondition() {
         return this.roadSectionService.getListByCondition(this.getParams());
     }
+
+    /**
+     * 重置路段采集信息
+     *
+     * @param sectionId 路段ID
+     * @return MessageResponse
+     */
+    @ResponseBody
+    @RequestMapping(value = "/reset")
+    public MessageResponse reset(String sectionId) {
+        if (StringUtil.isEmpty(sectionId)) {
+            return new MessageResponse(ResultCode.FAIL, "");
+        }
+
+        return roadGpsService.resetSectionGPS(sectionId, this.getCurUserProp());
+    }
+
+
 }
