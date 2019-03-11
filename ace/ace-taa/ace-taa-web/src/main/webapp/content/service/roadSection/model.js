@@ -309,6 +309,7 @@ function renderBtn(cur) {
     }
     if (authorConfig.hasOwnProperty(cfg.grid_delete_data_url)) {
         opt.push('<a href="javascript:del(\'' + rowid + '\')">删除</a>  ');
+        opt.push('<a href="javascript:reset(\'' + rowid + '\')">重置</a>  ');
     }
 
     opt.push('<a href="javascript:previewMap(\'' + rowid + '\')">查看</a>  ');

@@ -248,6 +248,7 @@ function delTable(id) {
     });
     delByIds(ids.join(","), id);
 }
+
 function delByIds(ids, id) {
     startLoad();
     $.ajax({
@@ -268,6 +269,30 @@ function delByIds(ids, id) {
         }
     });
 }
+
 function previewMap(id) {
     window.open(contextPath + "/dynamic/service/roadSection/map.jsp?id=" + id);
+}
+
+function reset(rowid) {
+    if (confirm("确认清空已采集GPS数据么？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/roadSection/reset",
+            type: "post",
+            async: false,
+            data: {sectionId: rowid},
+            success: function (rst) {
+                stopLoad();
+                alert(rst.errorMessage);
+                if (rst.status == 0) {
+                    initPreview(rowid);
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    }
 }
