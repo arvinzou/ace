@@ -8,6 +8,7 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.HttpUtils;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.portal.model.WxCfg;
 import com.huacainfo.ace.portal.service.WxCfgService;
 import com.huacainfo.ace.society.service.AuditNoticeService;
@@ -70,20 +71,20 @@ public class WUtilController extends SocietyBaseController {
     @RequestMapping(value = "/getwxacodeunlimit")
     public Map<String, Object> getwxacodeunlimit(String sysId, String page, String scene) throws Exception {
 
-//        Map<String, Object> rst = new HashMap<>();
-//        WxCfg wxCfg = wxCfgService.findBySysId(sysId);
-//        //失败可能原因：1、授权地址配置失败；2、IP白名单未配置
-//        if (null == wxCfg || StringUtil.isEmpty(wxCfg.getAccessToken())) {
-//            rst.put("success", false);
-//            rst.put("msg", "微信配置获取异常");
-//        }
-//        String access_token =wxCfg.getAccessToken();
+        Map<String, Object> rst = new HashMap<>();
+        WxCfg wxCfg = wxCfgService.findBySysId(sysId);
+        //失败可能原因：1、授权地址配置失败；2、IP白名单未配置
+        if (null == wxCfg || StringUtil.isEmpty(wxCfg.getAccessToken())) {
+            rst.put("success", false);
+            rst.put("msg", "微信配置获取异常");
+        }
+        String access_token =wxCfg.getAccessToken();
 
-        String access_token = "19_xUEemA2Z03XrhF42ak291Yv2kbTBuFmwgvsb1UZxki8sR6USFoY0Fhe9Uchy1zV1Bfn7mmz9GFs1IM_xDcEaRCPAg8m_cN4wYe1NXVel_jvfxFj0DFk1Tyax3-eQlVf9RwhI7tdLplAcrs3wYQKgAEAFXR";
-
-
-        String fastdfs_server = ((Map) this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("fastdfs_server").toString();
-        String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+//        String access_token = "19_CFgBp8AYwm1y49ALgWJqACYHCTiSIyTSsavR6BWbCggIeJJO9feD0XWi104DRx5bculu6QvVDofS826_0IfOyUsvEpkkmK3jSZdeqUF-kK8VStPdunaFkmshkHa9kc07ustP0aeL6nl7cCftQJVaAAATMY";
+        String fastdfs_server = PropertyUtil.getProperty("fastdfs_server");
+        //存储文件件
+        String storePath = System.getProperties().getProperty("user.dir");
+        String dir = storePath + File.separator + "tmp";
         File tmp = new File(dir);
         if (!tmp.exists()) {
             tmp.mkdirs();
@@ -101,8 +102,6 @@ public class WUtilController extends SocietyBaseController {
         out.close();
         if (status == 200) {
             String path = this.fileSaver.saveFile(dest, fileName);
-//            filesService.insertFiles(path, this.getCurUserProp());
-            rst.put("success", true);
             rst.put("msg", "成功");
             rst.put("file_path", fastdfs_server + path);
         } else {
