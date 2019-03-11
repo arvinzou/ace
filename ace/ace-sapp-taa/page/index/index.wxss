@@ -606,7 +606,35 @@ view, map, cover-view {
     height: 200rpx;
     text-align: center;
     line-height: 200rpx;
+    color: #ABAEB9;
+    font-size: 34rpx;
+    font-weight: 500;
+}
+
+/**********弹框未查询到路段样式****************/
+.section-blank{
+    width: 382rpx;
+    height: 230rpx;
+    margin: 135rpx 76rpx auto;
+}
+.tip-opts{
+    width: 540rpx;
+    height: 60rpx;
+    margin:60rpx auto;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    text-align: center;
+}
+.tip-opts::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.tips-detail{
     color: #373F53;
-    font-size: 48rpx;
-    font-weight: bold;
+    float: left;
+}
+.opts-detail{
+    color: #4350FC;
+    float: left;
 }
