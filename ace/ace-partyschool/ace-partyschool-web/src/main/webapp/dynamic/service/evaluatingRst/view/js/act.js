@@ -86,6 +86,12 @@ function getPageList() {
 }
 
 
+/*课程表管理条件查询*/
+function t_query() {
+    getPageList();
+    return false;
+}
+
 /*整理数据成Echart支持的格式*/
 function formateEchartData(data) {
     var xData = [];

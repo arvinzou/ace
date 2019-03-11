@@ -23,17 +23,16 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-6">
+            <div class="col-md-9">
                 <button onclick="exportData()" class="btn green">导出数据</button>
             </div>
-            <div class="col-md-6">
-
+            <div class="col-md-3">
                 <form onsubmit="return t_query()">
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入关键词">
+                               placeholder="按学员姓名搜索">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn" type="submit">
                                     搜索
