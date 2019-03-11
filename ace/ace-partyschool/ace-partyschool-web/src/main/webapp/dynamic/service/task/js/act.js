@@ -99,37 +99,14 @@ function initEvents() {
         var id = relatedTarget.data('id');
         initPreview(id);
     })
-    $('#modal-audit').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        var title = relatedTarget.data('title');
-        var modal = $(this);
-        console.log(relatedTarget);
-        initForm(id);
-    })
-    $('#modal-audit .audit').on('click', function () {
-        $('#modal-audit form').submit();
-    });
-    $('#modal-audit form').ajaxForm({
-        beforeSubmit: function (formData, jqForm, options) {
-            var params = {};
-            $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
-            });
-            $.extend(params, {
-                time: new Date()
-            });
-            console.log(params);
-            audit(params);
-            return false;
-        }
-    });
     $(".btn-group .btn").bind('click', function (event) {
         $(event.target).siblings().removeClass("active");
         console.log(event);
         $(event.target).addClass("active");
     });
-
+    $("#btn-view-save").bind('click', function(event) {
+        save();
+    });
 
 }
 
@@ -249,6 +226,58 @@ function initForm(id) {
         error: function () {
             stopLoad();
             alert("对不起出错了！");
+        }
+    });
+}
+
+function push(rowid) {
+    $("#modal-push").modal("show");
+    id=rowid;
+    initTree();
+}
+
+function initTree() {
+    $('#tt').tree({
+        url: contextPath + '/mailList/getTree',
+        method: 'get',
+        animate: true,
+        lines: false,
+        checkbox:true,
+        onLoadSuccess: function() {
+            //$("#tt").tree("expandAll");
+        }
+    })
+}
+
+
+function save() {
+    var nodes = $('#tt').tree('getChecked', ['checked','indeterminate']);
+    var s = '';
+    for(var i=0; i<nodes.length; i++){
+        if (s != '') s += ',';
+        s += nodes[i].id;
+    }
+    $.ajax({
+        type : "post",
+        url : contextPath + "/task/releaseTask",
+        data:{id:id,userIds:s},
+        beforeSend : function(XMLHttpRequest) {
+            startLoad();
+        },
+        success : function(rst, textStatus) {
+            if (rst) {
+                $('#modal-push').modal('hide');
+                alert(rst.errorMessage);
+                jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+                    postData: params
+                }).trigger("reloadGrid");
+            }
+        },
+        complete : function(XMLHttpRequest, textStatus) {
+            stopLoad();
+        },
+        error : function() {
+            stopLoad();
         }
     });
 }

@@ -8,6 +8,7 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.NoticeDao;
 import com.huacainfo.ace.partyschool.dao.NoticeStatusDao;
 import com.huacainfo.ace.partyschool.model.Notice;
@@ -114,6 +115,7 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      */
     @Override
     public MessageResponse insertNotice(Notice o, UserProp userProp) throws Exception {
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "序号不能为空!");
         }
@@ -136,7 +138,6 @@ public class SclNoticeServiceImpl implements SclNoticeService {
         this.noticeDao.insert(o);
         this.dataBaseLogService.log("添加通知公告", "通知公告", "",
                 o.getId(), o.getId(), userProp);
-
         return new MessageResponse(0, "保存成功！");
     }
 
