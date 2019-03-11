@@ -1,133 +1,150 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
 
-    <head>
-        <meta charset="utf-8" />
-        <title>${cfg.sys_name}</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="${cfg.sys_name}" name="${cfg.sys_name}" />
-        <jsp:include page="/dynamic/common/header.jsp"/>
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+<head>
+    <meta charset="utf-8"/>
+    <title>${cfg.sys_name}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="${cfg.sys_name}" name="${cfg.sys_name}"/>
+    <jsp:include page="/dynamic/common/header.jsp"/>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-        <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-    </head>
+<body>
 
-    <body>
-
-    <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 
 
-                                                <!-- BEGIN SAMPLE TABLE PORTLET-->
-                                                <div class="portlet light">
-
-                                                    <div class="portlet-body" id="courseSource">
-                                                        <div class="form-panel">
-                                                            <!--具体界面元素开始-->
-                                                            <form class="form-horizontal" id="fm-edit" role="form">
-
-                                                            </form>
-                                                        </div>
-                                                        <!--具体界面元素结束-->
-                                                    </div>
-                                                </div>
-
-    <%--=============common jsp-suffix===============--%>
-    <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-    <%--==============common jsp-suffix==============--%>
-    </body>
-    <script id="tpl-fm" type="text/template">
-    <div class="form-body">
-                             <div class="form-group">
-                <label class="col-md-2 control-label">
-
-                    测试主键
-                                                                                        <span class="required" aria-required="true"> * </span>
-                                                         </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="testId" value="\{data.o.testId}" maxlength="50" placeholder="请输入测试主键（建议字数在14个字以内，不超过50个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-                     <div class="form-group">
-                <label class="col-md-2 control-label">
-
-                    分值
-                                                         </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="score" value="\{data.o.score}" maxlength="10" placeholder="请输入分值（建议字数在14个字以内，不超过10个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-                     <div class="form-group">
-                <label class="col-md-2 control-label">
-
-                    题目内容
-                                                                                        <span class="required" aria-required="true"> * </span>
-                                                         </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="content" value="\{data.o.content}" maxlength="200" placeholder="请输入题目内容（建议字数在14个字以内，不超过200个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-                     <div class="form-group">
-                <label class="col-md-2 control-label">
-
-                    题目类型
-                                                                                        <span class="required" aria-required="true"> * </span>
-                                                         </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="type" value="\{data.o.type}" maxlength="1" placeholder="请输入题目类型（建议字数在14个字以内，不超过1个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-                     <div class="form-group">
-                <label class="col-md-2 control-label">
-
-                    题目序号
-                                                                                        <span class="required" aria-required="true"> * </span>
-                                                         </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="index" value="\{data.o.index}" maxlength="10" placeholder="请输入题目序号（建议字数在14个字以内，不超过10个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-                     <div class="form-group">
-                <label class="col-md-2 control-label">
-
-                    测试分析
-                                                                                        <span class="required" aria-required="true"> * </span>
-                                                         </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="analysis" value="\{data.o.analysis}" maxlength="200" placeholder="请输入测试分析（建议字数在14个字以内，不超过200个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-                     </div>
-    <div class="form-actions">
+<!-- BEGIN SAMPLE TABLE PORTLET-->
+<div class="portlet light">
+    <div class="portlet-body">
         <div class="row">
-            <div class="col-md-offset-3 col-md-7">
-                <button class="btn   green" type="submit" style="width:30%">保存</button>
+            <div class="col-md-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="tab-content" id="app">
+                            <div class="tab-pane fade" :class="{'active in':type1.type==1}" id="test1">
+                                <div class="col-md-offset-3 col-md-6">
+                                    <div class="test1 test">
+                                        <div class="title">
+                                            <textarea placeholder="题目" v-model="type1.content" @input="autoHeight"
+                                                      name="content" rows="1">{{type1.content}}</textarea>
+                                        </div>
+                                        <template v-for="(item,index) in type1.topicOptList">
+                                            <div class="option" v-if="index<2">
+                                                <input class="pointer" type="radio" :checked="item.answer==1" name="type1" :value="index"/>
+                                                <textarea rows="1" type="text" class="option-text option-margin"
+                                                          @input="autoHeight" v-model="item.content"
+                                                          :placeholder="'选项'+(index+1)">{{item.content}}</textarea>
+                                            </div>
+                                            <div class="option" v-else>
+                                                <input class="pointer" :checked="item.answer==1" type="radio" name="type1" :value="index"/>
+                                                <textarea rows="1" type="text" @input="autoHeight" class="option-text"
+                                                          v-model="item.content"
+                                                          :placeholder="'选项'+(index+1)">{{item.content}}</textarea>
+                                                <div class="remove pointer" @click="removeOption('type1',index)">×</div>
+                                            </div>
+                                        </template>
+                                        <div class="tool">
+                                            <ul>
+                                                <li @click="addOption('type1')">添加选项</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <button @click="submit1('type1')" class="btn btn-default">提交</button>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" :class="{'active in':type2.type==2}" id="test2">
+                                <div class="col-md-offset-3 col-md-6">
+                                    <div class="test2 test">
+                                        <div class="title">
+                                            <textarea placeholder="题目" v-model="type2.content" @input="autoHeight"
+                                                      name="content" rows="1">{{type2.content}}</textarea>
+                                        </div>
+                                        <template v-for="(item,index) in type2.topicOptList">
+                                            <div class="option" v-if="index<2">
+                                                <input class="pointer" :checked="item.answer==1" type="checkbox" name="type2" :value="index"/>
+                                                <textarea rows="1" type="text" class="option-text option-margin"
+                                                          @input="autoHeight" v-model="item.content"
+                                                          :placeholder="'选项'+(index+1)">{{item.content}}</textarea>
+                                            </div>
+                                            <div class="option" v-else>
+                                                <input class="pointer" :checked="item.answer==1" type="checkbox" name="type2" :value="index"/>
+                                                <textarea rows="1" type="text" @input="autoHeight" class="option-text"
+                                                          v-model="item.content"
+                                                          :placeholder="'选项'+(index+1)">{{item.content}}</textarea>
+                                                <div class="remove pointer" @click="removeOption('type2',index)">×</div>
+                                            </div>
+                                        </template>
+                                        <div class="tool">
+                                            <ul>
+                                                <li @click="addOption('type2')">添加选项</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <button @click="submit2('type2')" class="btn btn-default">提交</button>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" :class="{'active in':type3.type==3}" id="test3">
+
+                                <div class="col-md-offset-3 col-md-6">
+                                    <div class="test3 test">
+                                        <div class="title">
+                                            <textarea placeholder="题目" v-model="type3.content" @input="autoHeight"
+                                                      name="content" rows="1">{{type3.content}}</textarea>
+                                        </div>
+                                        <template v-for="(item,index) in type3.topicOptList">
+                                            <div class="option" v-if="index<2">
+                                                <input class="pointer" :checked="item.answer==1" type="radio" name="type3" :value="index"/>
+                                                <div>{{item.content}}</div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <button @click="submit1('type3')" class="btn btn-default">提交</button>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" :class="{'active in':type4.type==4}" id="test4">
+                                <div class="col-md-offset-3 col-md-6">
+                                    <div class="test4 test">
+                                        <div class="title">
+                                            <textarea placeholder="题目" v-model="type4.content" @input="autoHeight"
+                                                      name="content" rows="1">{{type4.content}}</textarea>
+                                        </div>
+                                    </div>
+                                    <button @click="submit1('type4')" class="btn btn-default">提交</button>
+
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" :class="{'active in':type5.type==5}" id="test5">
+                                <div class="col-md-offset-3 col-md-6">
+                                    <div class="test5 test">
+                                        <div class="title">
+                                            <textarea placeholder="题目" v-model="type5.content" @input="autoHeight"
+                                                      name="content" rows="1">{{type5.content}}</textarea>
+                                        </div>
+                                    </div>
+                                    <button @click="submit1('type5')" class="btn btn-default">提交</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </script>
+</div>
 
 
-    <jsp:include page="/dynamic/common/footer.jsp"/>
-
-    <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
-    <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
-    <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
-    <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-    <script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/cropUpload.js?version=${cfg.version}"></script>
-    <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
-    <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
-    <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
-    <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
-    <script src="js/act.js?v=${cfg.version}"></script>
-    </html>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+</body>
+<jsp:include page="/dynamic/common/footer.jsp"/>
+<script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
+<script src="js/vue.js?v=${cfg.version}"></script>
+</html>

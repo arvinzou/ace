@@ -33,7 +33,6 @@ Page({
         },
             function (rst) {
                 console.log(rst);
-                console.log();
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
                 that.setData({

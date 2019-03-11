@@ -361,6 +361,11 @@ Page({
    * 选择路段信息
    */
   selectRoadSection: function() {
+    var that = this;
+    that.setData({
+        showModal: false,
+        isEdit: true
+    });
     wx.navigateTo({
       url: '../collection/index?type=kb',
     });

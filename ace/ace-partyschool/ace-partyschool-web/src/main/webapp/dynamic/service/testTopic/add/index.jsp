@@ -46,7 +46,7 @@
                                             <textarea placeholder="题目" v-model="type1.content" @input="autoHeight"
                                                       name="content" rows="1">{{type1.content}}</textarea>
                                         </div>
-                                        <template v-for="(item,index) in type1.options">
+                                        <template v-for="(item,index) in type1.topicOptList">
                                             <div class="option" v-if="index<2">
                                                 <input class="pointer" type="radio" name="type1" :value="index"/>
                                                 <textarea rows="1" type="text" class="option-text option-margin"
@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
                                     <button @click="submit1('type1')" class="btn btn-default">提交</button>
-                                   
+
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="test2">
@@ -79,7 +79,7 @@
                                             <textarea placeholder="题目" v-model="type2.content" @input="autoHeight"
                                                       name="content" rows="1">{{type2.content}}</textarea>
                                         </div>
-                                        <template v-for="(item,index) in type2.options">
+                                        <template v-for="(item,index) in type2.topicOptList">
                                             <div class="option" v-if="index<2">
                                                 <input class="pointer" type="checkbox" name="type2" :value="index"/>
                                                 <textarea rows="1" type="text" class="option-text option-margin"
@@ -101,7 +101,7 @@
                                         </div>
                                     </div>
                                     <button @click="submit2('type2')" class="btn btn-default">提交</button>
-                                    
+
                                 </div>
 
                             </div>
@@ -113,7 +113,7 @@
                                             <textarea placeholder="题目" v-model="type3.content" @input="autoHeight"
                                                       name="content" rows="1">{{type3.content}}</textarea>
                                         </div>
-                                        <template v-for="(item,index) in type3.options">
+                                        <template v-for="(item,index) in type3.topicOptList">
                                             <div class="option" v-if="index<2">
                                                 <input class="pointer" type="radio" name="type3" :value="index"/>
                                                 <div>{{item.content}}</div>
@@ -133,7 +133,7 @@
                                         </div>
                                     </div>
                                     <button @click="submit1('type4')" class="btn btn-default">提交</button>
-                                    
+
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="test5">
@@ -145,7 +145,7 @@
                                         </div>
                                     </div>
                                     <button @click="submit1('type5')" class="btn btn-default">提交</button>
-                                    
+
                                 </div>
                             </div>
                         </div>

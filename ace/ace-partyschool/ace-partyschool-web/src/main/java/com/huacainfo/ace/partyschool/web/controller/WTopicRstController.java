@@ -53,9 +53,9 @@ public class WTopicRstController extends BisBaseController {
      */
     @RequestMapping(value = "/insertTopicRstList")
     @ResponseBody
-    public MessageResponse insertTopicRst(String jsons) throws Exception {
+    public MessageResponse insertTopicRst(String jsons,String noticeId) throws Exception {
         List<TopicRstQVo> listPram = (List<TopicRstQVo>) JSONArray.parseArray(jsons, TopicRstQVo.class);
-        return this.topicRstService.insertTopicRstList(listPram, this.getCurUserProp());
+        return this.topicRstService.insertTopicRstList(listPram,noticeId, this.getCurUserProp());
     }
 
     @RequestMapping(value = "/findTopicRstFullList")

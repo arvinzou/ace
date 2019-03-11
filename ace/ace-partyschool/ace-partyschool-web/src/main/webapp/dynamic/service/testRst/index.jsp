@@ -23,14 +23,12 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
-            </div>
-
             <div class="col-md-9">
 
-                <form id="fm-search">
+            </div>
 
+            <div class="col-md-3">
+                <form id="fm-search">
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
@@ -91,7 +89,6 @@
         <td>\${item.createDate}</td>
         >
         <td>
-            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
         </td>
@@ -101,9 +98,8 @@
 ﻿
 
 
-
 <div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog"  STYLE="width: 1100px;" role="document">
+    <div class="modal-dialog" STYLE="width: 1100px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">$times;</span>
@@ -116,7 +112,7 @@
 
                     </div>
                 </div>
-                <div  class="rightBar">
+                <div class="rightBar">
                     <h2>总分:<span>10</span></h2>
                     <div>
                         <p><span class="point bluepoint"></span>正确答案</p>
@@ -155,17 +151,17 @@
 
     {@else if item.type == 2}
     <div class="testItem items testStyle2">
-    <div class="testTitle">
-        <span class="text">Q\${formatIndex(index)}、\${item.content} (得分:\${scored(item)})</span>
-    </div>
-    <div class="testScore">
-        {@each item.topicOptRstList as itm, idx}
-        <div class="option \${thisIsRight(item.topicOptRstList)}">
-            <span class="checkbox \${isRight(itm)}"></span>
-            <label>\${itm.content}</label>
+        <div class="testTitle">
+            <span class="text">Q\${formatIndex(index)}、\${item.content} (得分:\${scored(item)})</span>
         </div>
-        {@/each}
-    </div>
+        <div class="testScore">
+            {@each item.topicOptRstList as itm, idx}
+            <div class="option \${thisIsRight(item.topicOptRstList)}">
+                <span class="checkbox \${isRight(itm)}"></span>
+                <label>\${itm.content}</label>
+            </div>
+            {@/each}
+        </div>
     </div>
     {@else if item.type == 4}
     <div class="testItem">
@@ -173,8 +169,9 @@
             <span class="text">Q\${formatIndex(index)}、\${item.content} (得分:\${item.tscore?'0':item.tscore})</span>
         </div>
         <div class="input_text">
-            <div  maxlength="200" class="message">\${item.answer}</div>
-            打分:<input step="0.1" name="inputScore" onblur="checkNumber(this,\${item.tscore})" min="0" max="\${item.tscore}" data-id='\${item.id}' type="number"/>
+            <div maxlength="200" class="message">\${item.answer}</div>
+            打分:<input step="0.1" name="inputScore" onblur="checkNumber(this,\${item.tscore})" min="0"
+                      max="\${item.tscore}" data-id='\${item.id}' type="number"/>
         </div>
     </div>
     {@else if item.type == 5}
@@ -188,7 +185,8 @@
                     <p data-total="\${item.tscore}" class="number">\${item.answer}</p>
                 </div>
             </div>
-            打分:<input step="0.1" name="inputScore" onblur="checkNumber(this,\${item.tscore})" min="0" max="\${item.tscore}" data-id='\${item.id}' type="number"/>
+            打分:<input step="0.1" name="inputScore" onblur="checkNumber(this,\${item.tscore})" min="0"
+                      max="\${item.tscore}" data-id='\${item.id}' type="number"/>
         </div>
     </div>
     {@else}
@@ -197,10 +195,6 @@
     {@/each}
 
 </script>
-
-
-
-
 
 
 <jsp:include page="/dynamic/common/footer.jsp"/>

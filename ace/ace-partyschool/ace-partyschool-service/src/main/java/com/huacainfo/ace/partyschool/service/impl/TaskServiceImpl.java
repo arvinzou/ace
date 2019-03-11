@@ -1,30 +1,34 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.dao.NoticeDao;
+import com.huacainfo.ace.partyschool.dao.TaskDao;
+import com.huacainfo.ace.partyschool.model.Notice;
+import com.huacainfo.ace.partyschool.model.Task;
+import com.huacainfo.ace.partyschool.service.NoticeStatusService;
+import com.huacainfo.ace.partyschool.service.TaskService;
+import com.huacainfo.ace.partyschool.vo.TaskQVo;
+import com.huacainfo.ace.partyschool.vo.TaskVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.partyschool.dao.TaskDao;
-import com.huacainfo.ace.partyschool.model.Task;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.partyschool.service.TaskService;
-import com.huacainfo.ace.partyschool.vo.TaskVo;
-import com.huacainfo.ace.partyschool.vo.TaskQVo;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("taskService")
 /**
@@ -36,6 +40,10 @@ public class TaskServiceImpl implements TaskService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private TaskDao taskDao;
+    @Autowired
+    private NoticeDao noticeDao;
+    @Autowired
+    private NoticeStatusService  noticeStatusService;
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -321,6 +329,27 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception {
         this.taskDao.updateStatus(id, status);
+        this.dataBaseLogService.log("跟新状态", "任务管理", id, id, "任务管理", userProp);
+        return new MessageResponse(0, "成功！");
+    }
+
+    @Override
+    public MessageResponse releaseTask(String id, String[] userIds,UserProp userProp,HttpServletRequest request) throws Exception {
+        Notice notice=new Notice();
+        TaskVo taskVo=this.taskDao.selectVoByPrimaryKey(id);
+        if(CommonUtils.isBlank(taskVo)){
+            return new MessageResponse(ResultCode.FAIL,"任务丢失");
+        }
+        String nid=GUIDUtil.getGUID();
+        notice.setId(nid);
+        notice.setTitle(taskVo.getName());
+        notice.setContent("<p>"+taskVo.getIntroduce()+" 点击下方链接开始：<a href=\"http://"+request.getHeader("host")+"/partyschool/www/registered/test/test.jsp?testId="+taskVo.getTid()+"\" target=\"_blank\" class=\"\">"+taskVo.getTname()+"</a></p>");
+        notice.setCategory("1");
+        notice.setStatus("1");
+        notice.setPublisher(userProp.getName());
+        notice.setPushDate(new java.util.Date());
+        this.noticeDao.insert(notice);
+        this.noticeStatusService.insertNoticeStatus(nid,userIds,userProp);
         this.dataBaseLogService.log("跟新状态", "任务管理", id, id, "任务管理", userProp);
         return new MessageResponse(0, "成功！");
     }

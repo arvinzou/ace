@@ -43,7 +43,8 @@ function submitTest() {
 function postDataMethod() {
     var url=contextPath+ "/www/topicRst/insertTopicRstList";
     var data={
-        jsons:JSON.stringify(postData)
+        jsons:JSON.stringify(postData),
+        noticeId:GetQueryString('nid')
     }
     $.post(url,data,function (rst) {
         if(rst.status==0){
@@ -72,15 +73,26 @@ function formatScore(num) {
     return '('+num+'分)';
 }
 
+/**解析url参数*/
+
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
 
 
 
 /**获取测试信息*/
 
 function getTestInfo() {
+    var tid=GetQueryString('tid');
     var url="http://localhost/partyschool/www/topic/findTopicFullList";
     var data={
-       testId:'9ed32879a7504937bfb6d1372ed287c1'
+       testId:tid
     }
     $.getJSON(url,data,function (rst) {
         if(rst.status==0){

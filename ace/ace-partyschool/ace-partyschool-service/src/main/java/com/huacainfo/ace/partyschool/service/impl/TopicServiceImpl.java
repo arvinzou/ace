@@ -130,8 +130,8 @@ public class TopicServiceImpl implements TopicService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.topicDao.insert(o);
-        if(!CommonUtils.isBlank(o.getOptions())){
-                this.topicOptService.insertTopicOptList(o.getOptions(), o.getId(), userProp);
+        if(!CommonUtils.isBlank(o.getTopicOptList())){
+                this.topicOptService.insertTopicOptList(o.getTopicOptList(), o.getId(), userProp);
         }
         this.dataBaseLogService.log("添加试题管理", "试题管理", "",
                 o.getId(), o.getId(), userProp);
@@ -151,7 +151,7 @@ public class TopicServiceImpl implements TopicService {
      * @version: 2019-02-27
      */
     @Override
-    public MessageResponse updateTopic(Topic o, UserProp userProp) throws Exception {
+    public MessageResponse updateTopic(TopicQVo o, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -161,15 +161,14 @@ public class TopicServiceImpl implements TopicService {
         if (CommonUtils.isBlank(o.getType())) {
             return new MessageResponse(1, "题目类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getAnalysis())) {
-            return new MessageResponse(1, "测试分析不能为空！");
-        }
-
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
-        this.topicDao.updateByPrimaryKey(o);
+        this.topicDao.updateByPrimaryKey((Topic)o);
+        this.topicOptService.deleteTopicOptByTopicId(o.getId(),userProp);
+        if(!CommonUtils.isBlank(o.getTopicOptList())){
+            this.topicOptService.insertTopicOptList(o.getTopicOptList(), o.getId(), userProp);
+        }
         this.dataBaseLogService.log("变更试题管理", "试题管理", "",
                 o.getId(), o.getId(), userProp);
 
@@ -189,7 +188,18 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public SingleResult<TopicVo> selectTopicByPrimaryKey(String id) throws Exception {
         SingleResult<TopicVo> rst = new SingleResult<>();
-        rst.setValue(this.topicDao.selectVoByPrimaryKey(id));
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TopicDao dao = session.getMapper(TopicDao.class);
+        try {
+            rst.setValue(dao.selectVoByPrimaryKey(id));
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
+        }
+
         return rst;
     }
 

@@ -119,7 +119,7 @@ public class TopicController extends BisBaseController {
     @RequestMapping(value = "/updateTopic")
     @ResponseBody
     public MessageResponse updateTopic(String jsons) throws Exception {
-        Topic obj = JSON.parseObject(jsons, Topic.class);
+        TopicQVo obj = JSON.parseObject(jsons, TopicQVo.class);
         return this.topicService.updateTopic(obj, this.getCurUserProp());
     }
 

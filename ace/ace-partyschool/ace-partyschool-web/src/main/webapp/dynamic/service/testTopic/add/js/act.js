@@ -1,11 +1,52 @@
 var loading = {};
 var editor;
-var abc = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 window.onload = function () {
     jQuery(function ($) {
         $(".breadcrumb").append("<li><span>创建试题管理</span></li>");
         initVue();
     });
+}
+
+var type1 = {
+    type: '1',
+    content: '',
+    topicOptList: [{
+        answer: '0',
+        content: '',
+    }, {
+        answer: '0',
+        content: '',
+    }]
+};
+var type2 = {
+    type: '2',
+    content: '',
+    topicOptList: [{
+        answer: '0',
+        content: '',
+    }, {
+        answer: '0',
+        content: '',
+    }]
+};
+var type3 = {
+    type: '3',
+    content: '',
+    topicOptList: [{
+        answer: '0',
+        content: '正确',
+    }, {
+        answer: '0',
+        content: '错误',
+    }]
+};
+var type4 = {
+    type: '4',
+    content: '',
+};
+var type5 = {
+    type: '5',
+    content: '',
 }
 
 function initVue() {
@@ -15,7 +56,7 @@ function initVue() {
             type1: {
                 type: '1',
                 content: '',
-                options: [{
+                topicOptList: [{
                     answer: '0',
                     content: '',
                 }, {
@@ -26,7 +67,7 @@ function initVue() {
             type2: {
                 type: '2',
                 content: '',
-                options: [{
+                topicOptList: [{
                     answer: '0',
                     content: '',
                 }, {
@@ -37,7 +78,7 @@ function initVue() {
             type3: {
                 type: '3',
                 content: '',
-                options: [{
+                topicOptList: [{
                     answer: '0',
                     content: '正确',
                 }, {
@@ -59,31 +100,31 @@ function initVue() {
             submit1: function (type) {
                 const that = this;
                 const data = that[type];
-                var answer = $('.test input[name='+type+']:checked').val();
-                if(answer){
-                    data.options[answer].answer = 1;
+                var answer = $('.test input[name=' + type + ']:checked').val();
+                if (answer) {
+                    data.topicOptList[answer].answer = 1;
                 }
-                that.postData(data);
+                that.postData(data,type);
             },
-            submit2:function (type) {
+            submit2: function (type) {
                 const that = this;
                 const data = that[type];
-                var checkeds = $('.test input[name='+type+']:checked');
-                checkeds.each(function(){
-                    data.options[$(this).val()].answer=1;
+                var checkeds = $('.test input[name=' + type + ']:checked');
+                checkeds.each(function () {
+                    data.topicOptList[$(this).val()].answer = 1;
                 });
-                that.postData(data);
+                that.postData(data,type);
             },
             addOption: function (type) {
-                const options = this[type].options
-                if (options.length > 25) {
+                const topicOptList = this[type].topicOptList
+                if (topicOptList.length > 25) {
                     alert("最多只能添加26个选项");
                     return;
                 }
-                this[type].options.push({content: '', answer: '0'});
+                this[type].topicOptList.push({content: '', answer: '0'});
             },
             removeOption: function (type, index) {
-                this[type].options.splice(index, 1);
+                this[type].topicOptList.splice(index, 1);
             },
             autoHeight: function (e) {
                 var thisDom = e.currentTarget;
@@ -107,26 +148,21 @@ function initVue() {
                 }
                 return true;
             },
-            postData:function (data) {
-                const  that=this;
+            postData: function (data,type) {
+                const that = this;
                 if (that.verify(data)) {
                     const url = contextPath + "/topic/insertTopic";
                     const datas = {
                         jsons: JSON.stringify(data)
                     }
-                    $.post(url, datas, function () {
-
+                    $.post(url, datas, function (rst) {
+                        if(rst.status==0){
+                            that[type]=window[type]
+                        }
                     })
                 } else {
                     alert("还有内容没有填写");
                 }
-            }
-        },
-        mounted: {
-            initTestareaHeight: function () {
-                $('textarea').each(function () {
-                    this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-                })
             }
         }
     })

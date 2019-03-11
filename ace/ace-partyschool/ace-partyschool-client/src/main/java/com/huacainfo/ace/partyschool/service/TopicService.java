@@ -56,7 +56,7 @@ public interface TopicService {
      * @author: 王恩
      * @version: 2019-02-27
      */
-    MessageResponse updateTopic(Topic obj, UserProp userProp) throws Exception;
+    MessageResponse updateTopic(TopicQVo obj, UserProp userProp) throws Exception;
 
     /**
      * @throws

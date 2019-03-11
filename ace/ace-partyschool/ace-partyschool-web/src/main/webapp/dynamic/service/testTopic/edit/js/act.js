@@ -1,125 +1,160 @@
 var loading = {};
 var editor;
-window.onload = function (){
+window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("<li><span>编辑试题管理</span></li>");
-       initForm();
-initEvents();
+        $(".breadcrumb").append("<li><span>创建试题管理</span></li>");
+        initVue();
     });
 }
 
-function initEditor() {
-        editor = new Simditor({
-        textarea: $('textarea[name=introduce]'),
-        toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
-            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
-        ],
-        upload: {
-            url: portalPath + '/files/uploadImage.do',
-            params: null,
-            fileKey: 'file',
-            connectionCount: 3,
-            leaveConfirm: '正在上传文件'
-        }
-    });
-}
-/*页面渲染*/
-function render(obj, data, tplId) {
-    var tpl = document.getElementById(tplId).innerHTML;
-    var html = juicer(tpl, {
-        data: data,
-    });
-    $(obj).html(html);
-}
-
-function initPage() {
-    initEditor();
-//   initUpload();
-}
-function initEvents(){
-    /*表单验证*/
-    $("#fm-edit").validate({
-        onfocusout: function(element) { $(element).valid(); },
-        rules: {
-                                         testId: {required: true,maxlength:50},                             content: {required: true,maxlength:200},                             analysis: {required: true,maxlength:200}                                 },
-        messages: {
-                                             testId: {
-                        required: "请输入测试主键",
-                        maxlength:"测试主键字符长度不能超过50"
-                    },                                 content: {
-                        required: "请输入题目内容",
-                        maxlength:"题目内容字符长度不能超过200"
-                    },                                 analysis: {
-                        required: "请输入测试分析",
-                        maxlength:"测试分析字符长度不能超过200"
-                    }                                 }
-    });
-     /*监听表单提交*/
-    $('#fm-edit').ajaxForm({
-        beforeSubmit: function (formData, jqForm, options) {
-            var params = {};
-            $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
-            });
-            $.extend(params, {
-time: new Date(),
-//coverUrl: $('#coverUrl').attr("src")
-            });
-            console.log(params);
-            save(params);
-            return false;
-        }
-    });
-}
-/*保存表单**/
-function save(params) {
-    $.extend(params, {
-    });
-    startLoad();
-    $.ajax({
-        url: contextPath + "/topic/updateTopic",
-        type: "post",
-        async: false,
+function initVue() {
+    new Vue({
+        el: "#app",
         data: {
-            jsons: JSON.stringify(params)
-        },
-        success: function (result) {
-            stopLoad();
-			alert(result.errorMessage);
-            if (result.status == 0) {
-                window.location.href ='../index.jsp?id='+urlParams.id;
+            type1: {
+                type: '',
+                content: '',
+                topicOptList: [{
+                    answer: '0',
+                    content: '',
+                }, {
+                    answer: '0',
+                    content: '',
+                }]
+            },
+            type2: {
+                type: '',
+                content: '',
+                topicOptList: [{
+                    answer: '0',
+                    content: '',
+                }, {
+                    answer: '0',
+                    content: '',
+                }]
+            },
+            type3: {
+                type: '',
+                content: '',
+                topicOptList: [{
+                    answer: '0',
+                    content: '正确',
+                }, {
+                    answer: '0',
+                    content: '错误',
+                }]
+            },
+            type4: {
+                type: '',
+                content: '',
+            },
+            type5: {
+                type: '',
+                content: '',
             }
         },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
+        created:function () {
+                const url = contextPath + "/topic/selectTopicByPrimaryKey";
+                const data = {
+                    id:urlParams.did
+                }
+                var that=this;
+            $.ajaxSettings.async = false;
+                $.getJSON(url, data, function (rst) {
+                    if(rst.status==0){
+                        var item=rst.value;
+                        that['type'+item.type]=item;
+                    }
+                    else {
+                        alert("没有获取到数据,刷新重试");
+                    }
+                })
+            $.ajaxSettings.async = true;
+        },
+        methods: {
+            submit1: function (type) {
+                const that = this;
+                const data = that[type];
+                var answer = $('.test input[name=' + type + ']:checked').val();
+                that.initAnswer(data.topicOptList);
+                if (answer) {
+                    data.topicOptList[answer].answer = 1;
+                }
+                that.postData(data);
+            },
+            submit2: function (type) {
+                const that = this;
+                const data = that[type];
+                var checkeds = $('.test input[name=' + type + ']:checked');
+                checkeds.each(function () {
+                    data.topicOptList[$(this).val()].answer = 1;
+                });
+                that.postData(data);
+            },
+            initAnswer:function (data) {
+                for(item in data){
+                    data[item].answer=0;
+                }
+            },
+            addOption: function (type) {
+                const topicOptList = this[type].topicOptList
+                if (topicOptList.length > 25) {
+                    alert("最多只能添加26个选项");
+                    return;
+                }
+                this[type].topicOptList.push({content: '', answer: '0'});
+            },
+            removeOption: function (type, index) {
+                this[type].topicOptList.splice(index, 1);
+            },
+            autoHeight: function (e) {
+                var thisDom = e.currentTarget;
+                thisDom.style.height = (thisDom.scrollHeight) + 'px';
+            },
+            verify: function (data) {
+                for (const item in data) {
+                    if (typeof(data[item]) == 'object') {
+                        var op = data[item];
+                        for (const i in op) {
+                            if (!op[i].content) {
+                                return false;
+                            }
+                        }
+                    } else {
+                        if (!data[item]) {
+                            return false;
+                        }
+                    }
+
+                }
+                return true;
+            },
+            postData: function (data) {
+                const that = this;
+                if (that.verify(data)) {
+                    const url = contextPath + "/topic/updateTopic";
+                    const datas = {
+                        jsons: JSON.stringify(data)
+                    }
+                    $.post(url, datas, function (rst) {
+                        if(rst.status==1){
+                            window.history.back();
+                        }
+                    })
+                } else {
+                    alert("还有内容没有填写");
+                }
+            },
+        },
+        mounted: function(){
+            $('textarea').each(function () {
+                this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+            })
         }
-    });
+    })
 }
 
-function initForm(){
- startLoad();
-    $.ajax({
-        url: contextPath + "/topic/selectTopicByPrimaryKey",
-        type:"post",
-        async:false,
-data:{ id: urlParams.did },
-        success:function(result){
-        stopLoad();
-            if(result.status == 0) {
-               var data={};
-               data['o']=result.value;
-render('#fm-edit',data,'tpl-fm');
-               initPage();
-//富文本填值
-//editor.setValue(data['o'].summary);
-            }else {
-                alert(result.errorMessage);
-            }
-        },
-        error:function(){
-        stopLoad();
-            alert("对不起出错了！");
-        }
-    });
-}
+
+
+
+

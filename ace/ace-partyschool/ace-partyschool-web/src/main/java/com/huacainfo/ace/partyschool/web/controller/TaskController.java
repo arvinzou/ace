@@ -1,5 +1,6 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.ListResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import com.huacainfo.ace.partyschool.vo.TaskQVo;
 import org.springframework.web.multipart.MultipartFile;
 import com.huacainfo.ace.portal.vo.MongoFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
@@ -265,5 +267,11 @@ public class TaskController extends BisBaseController {
     @ResponseBody
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.taskService.updateStatus(id, status, this.getCurUserProp());
+    }
+
+    @RequestMapping(value = "/releaseTask")
+    @ResponseBody
+    public MessageResponse releaseTask(String id,String  userIds,HttpServletRequest request) throws Exception {
+        return this.taskService.releaseTask(id,userIds.split(","),this.getCurUserProp(),request);
     }
 }

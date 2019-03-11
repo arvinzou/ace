@@ -84,6 +84,7 @@ public interface TopicOptService {
             * @version: 2019-02-28
             */
             MessageResponse deleteTopicOptByTopicOptId(String id,UserProp userProp) throws Exception;
+            MessageResponse deleteTopicOptByTopicId(String id,UserProp userProp) throws Exception;
 
             /**
             *

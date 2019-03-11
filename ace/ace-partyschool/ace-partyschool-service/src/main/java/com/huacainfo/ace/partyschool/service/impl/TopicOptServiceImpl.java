@@ -187,6 +187,15 @@ public class TopicOptServiceImpl implements TopicOptService {
         return new MessageResponse(0, "删除成功！");
     }
 
+    @Override
+    public MessageResponse deleteTopicOptByTopicId(String id, UserProp userProp) throws
+            Exception {
+        this.topicOptDao.deleteTopicOptByTopicId(id);
+        this.dataBaseLogService.log("删除试题选项管理", "试题选项管理", id, id,
+                "试题选项管理", userProp);
+        return new MessageResponse(0, "删除成功！");
+    }
+
 
     /**
      * @throws
