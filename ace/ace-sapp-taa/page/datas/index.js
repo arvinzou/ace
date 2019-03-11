@@ -127,9 +127,20 @@ Page({
       function(res) {
         if (res.status == 0) {
           var data = res.data;
-          console.log(data)
+          var top10 = res.data.top10;
+          var templateArr = [];
+          //处理返回来数据deathNum没有的情况，没有默认赋值为0
+          for (var i = 0; i < top10.length; i++){
+            if (top10[i].deathNum != undefined) {
+              templateArr.push(top10[i]);
+            } else {
+              templateArr.push({ deathNum: 0, name: top10[i].name });
+            }
+          }
+          console.log(templateArr);
+          data.top10 = templateArr;
           that.setData({
-            totalData: res.data,
+            totalData:data,
           });
         } else {
           wx.showModal({

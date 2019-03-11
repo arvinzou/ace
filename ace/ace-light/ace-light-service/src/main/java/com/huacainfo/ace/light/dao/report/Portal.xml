@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.light.dao.report.Portal">
+    <select id="query" resultType="map">
+        SELECT
+        'person' id,
+        count(1) value
+        FROM
+        portal.users t
+        WHERE
+        t.stauts='1' and t.cur_syid ='light'
+    </select>
+</mapper>

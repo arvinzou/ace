@@ -139,3 +139,6 @@
 .reset{
     color: #24C789;
 }
+.margin10{
+  margin-top:20rpx;
+}
