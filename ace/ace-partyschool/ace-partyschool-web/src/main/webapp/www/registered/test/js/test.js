@@ -16,24 +16,24 @@ $(function () {
 var postData;
 
 function submitTest() {
-    var len=postData.length;
-    for(var i=0;i<len;i++){
-        var item=postData[i];
-        var type=item.type;
-        if(type==1||type==3){
-            var val=$('input[name=test_'+i+']:checked').val();
-            item.topicOptList[val].youAnswer=1;
-        }else if(type==2){
-            var val=$('input[name=test_'+i+']:checked');
-            val.each(function(){
-                item.topicOptList[$(this).val()].youAnswer=1;
+    var len = postData.length;
+    for (var i = 0; i < len; i++) {
+        var item = postData[i];
+        var type = item.type;
+        if (type == 1 || type == 3) {
+            var val = $('input[name=test_' + i + ']:checked').val();
+            item.topicOptList[val].youAnswer = 1;
+        } else if (type == 2) {
+            var val = $('input[name=test_' + i + ']:checked');
+            val.each(function () {
+                item.topicOptList[$(this).val()].youAnswer = 1;
             });
-        }else if(type==4){
-            var val=$('.textTest_'+i).val();
-            item.answer=val;
-        }else if(type==5){
-            var val=$('.textTest_'+i).text();
-            item.answer=val;
+        } else if (type == 4) {
+            var val = $('.textTest_' + i).val();
+            item.answer = val;
+        } else if (type == 5) {
+            var val = $('.textTest_' + i).text();
+            item.answer = val;
         }
     }
     postDataMethod();
@@ -41,13 +41,13 @@ function submitTest() {
 
 /**提交数据*/
 function postDataMethod() {
-    var url=contextPath+ "/www/topicRst/insertTopicRstList";
-    var data={
-        jsons:JSON.stringify(postData),
-        noticeId:GetQueryString('nid')
+    var url = contextPath + "/www/topicRst/insertTopicRstList";
+    var data = {
+        jsons: JSON.stringify(postData),
+        taskId: GetQueryString('taskId')
     }
-    $.post(url,data,function (rst) {
-        if(rst.status==0){
+    $.post(url, data, function (rst) {
+        if (rst.status == 0) {
             alert("感谢您的评测");
             window.history.back();
         }
@@ -59,18 +59,18 @@ function postDataMethod() {
 
 /**计算并取整*/
 function parseIntF(num) {
-    return parseInt(num*0.9);
+    return parseInt(num * 0.9);
 }
 
 /**计算序列*/
 function formatIndex(num) {
-    return index=(parseInt(num)+1);
+    return index = (parseInt(num) + 1);
 }
 
 /**计算序列*/
 function formatScore(num) {
-	if(parseFloat(num)>0)
-    return '('+num+'分)';
+    if (parseFloat(num) > 0)
+        return '(' + num + '分)';
 }
 
 /**解析url参数*/
@@ -85,23 +85,25 @@ function GetQueryString(name) {
 }
 
 
-
 /**获取测试信息*/
 
 function getTestInfo() {
-    var tid=GetQueryString('tid');
-    var url="http://localhost/partyschool/www/topic/findTopicFullList";
-    var data={
-       testId:tid
+    var tid = GetQueryString('testId');
+    var taid = GetQueryString('taskId');
+    var url = "http://localhost/partyschool/www/topic/findTopicFullList";
+    var data = {
+        testId: tid,
+        taskId: taid
     }
-    $.getJSON(url,data,function (rst) {
-        if(rst.status==0){
-            renderPage('test',rst.data,'tpl_test');
-            renderPage('title',{name:rst.data[0].tname},'tpl_title');
-            postData=rst.data;
+    $.getJSON(url, data, function (rst) {
+        if (rst.status == 0) {
+            renderPage('test', rst.data, 'tpl_test');
+            renderPage('title', {name: rst.data[0].tname}, 'tpl_title');
+            postData = rst.data;
         }
         else {
-            alert("获取用户信息失败！");
+            alert(rst.info);
+            window.history.back();
         }
     })
 }

@@ -52,10 +52,11 @@
                 <thead>
                 <tr>
 
-                    <th width="40%"> 测试名称</th>
+                    <th width="10%"> 测试名称</th>
                     <th width="10%"> 总分</th>
                     <th width="10%"> 答卷人</th>
                     <th width="20%"> 创建日期</th>
+                    <th width="10%"> 状态</th>
                     <th width="20%">操作</th>
                 </tr>
                 </thead>
@@ -87,9 +88,27 @@
         <td>\${item.score}</td>
         <td>\${item.createUserName}</td>
         <td>\${item.createDate}</td>
-        >
+
         <td>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+            {@if item.status==0}
+            <span class="label label-lg label-danger">删除</span>
+            {@else if item.status==1}
+            <span class="label label-lg label-info">未评分</span>
+            {@else if item.status==2}
+            <span class="label label-lg label-success">已评分</span>
+            {@else if item.status==3}
+            <span class="label label-lg label-info">通过</span>
+            <div style="padding-top:10px">\${item.auditRemark}</div>
+            {@else if item.status==4}
+            <span class="label label-lg label-info">驳回</span>
+            <div style="padding-top:10px">\${item.auditRemark}</div>
+            {@else}
+            <span class="label label-lg label-danger">暂存</span>
+            {@/if}
+        </td>
+
+        <td>
+            <a href="#" data-toggle="modal" data-status="\${item.status}" data-id="\${item.id}" data-score="\${item.score}"
                data-target="#modal-preview">查看</a>
         </td>
     </tr>
@@ -113,7 +132,7 @@
                     </div>
                 </div>
                 <div class="rightBar">
-                    <h2>总分:<span>10</span></h2>
+                    <h2>总分:<span class="totalScore">10</span></h2>
                     <div>
                         <p><span class="point bluepoint"></span>正确答案</p>
                         <p><span class="point redpoint"></span>你的选择</p>
@@ -133,7 +152,7 @@
 
 <script id="tpl-preview" type="text/template">
 
-    {@each data as item, index}
+    {@each data.o as item, index}
     {@if item.type==1||item.type==3}
     <div class="testItem items testStyle2">
         <div class="testTitle">
@@ -170,8 +189,10 @@
         </div>
         <div class="input_text">
             <div maxlength="200" class="message">\${item.answer}</div>
-            打分:<input step="0.1" name="inputScore" onblur="checkNumber(this,\${item.tscore})" min="0"
+            {@if data.status==1}
+            打分:<input step="0.1" name="inputScore" onblur="checkNumber(this,'\${item.tscore}')" min="0"
                       max="\${item.tscore}" data-id='\${item.id}' type="number"/>
+            {@/if}
         </div>
     </div>
     {@else if item.type == 5}
@@ -185,8 +206,10 @@
                     <p data-total="\${item.tscore}" class="number">\${item.answer}</p>
                 </div>
             </div>
-            打分:<input step="0.1" name="inputScore" onblur="checkNumber(this,\${item.tscore})" min="0"
+            {@if data.status==1}
+            打分:<input step="0.1" name="inputScore" onblur="checkNumber(this,'\${item.tscore}')" min="0"
                       max="\${item.tscore}" data-id='\${item.id}' type="number"/>
+            {@/if}
         </div>
     </div>
     {@else}

@@ -27,7 +27,7 @@ public class WTestTopicController extends BisBaseController {
 
     @RequestMapping(value = "/findTopicFullList")
     @ResponseBody
-    public ResultResponse findTopicFullList(String testId) throws Exception {
-        return this.topicService.findTopicFullList(testId);
+    public ResultResponse findTopicFullList(String testId,String taskId) throws Exception {
+        return this.topicService.findTopicFullList(testId,taskId,this.getCurUserProp());
     }
 }

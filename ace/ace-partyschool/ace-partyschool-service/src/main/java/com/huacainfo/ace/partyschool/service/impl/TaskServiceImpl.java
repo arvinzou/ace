@@ -340,18 +340,17 @@ public class TaskServiceImpl implements TaskService {
         if(CommonUtils.isBlank(taskVo)){
             return new MessageResponse(ResultCode.FAIL,"任务丢失");
         }
-        String nid=GUIDUtil.getGUID();
-        notice.setId(nid);
+        //"+request.getHeader("host")+"
+        notice.setId(id);
         notice.setTitle(taskVo.getName());
-        notice.setContent("<p>"+taskVo.getIntroduce()+" 点击下方链接开始：<a href=\"http://"+request.getHeader("host")+"/partyschool/www/registered/test/test.jsp?testId="+taskVo.getTid()+"\" target=\"_blank\" class=\"\">"+taskVo.getTname()+"</a></p>");
+        notice.setContent("<p>"+taskVo.getIntroduce()+" 点击下方链接开始：<a href=\"http://localhost/partyschool/www/registered/test/test.jsp?testId="+taskVo.getTid()+"&taskId="+id+"\" target=\"_blank\" class=\"\">"+taskVo.getTname()+"</a></p>");
         notice.setCategory("1");
         notice.setStatus("1");
         notice.setPublisher(userProp.getName());
         notice.setPushDate(new java.util.Date());
         this.noticeDao.insert(notice);
-        this.noticeStatusService.insertNoticeStatus(nid,userIds,userProp);
+        this.noticeStatusService.insertNoticeStatus(id,userIds,userProp);
         this.dataBaseLogService.log("跟新状态", "任务管理", id, id, "任务管理", userProp);
         return new MessageResponse(0, "成功！");
     }
-
 }

@@ -97,7 +97,9 @@ function initEvents() {
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
-        initPreview(id);
+        var status = relatedTarget.data('status');
+        var score = relatedTarget.data('score');
+        initPreview(id,status,score);
     })
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
@@ -271,16 +273,20 @@ function parseStatus(status) {
 
 var testId;
 
-function initPreview(id) {
+function initPreview(id,status,score) {
     var  url=contextPath + "/topicRst/findTopicRstFullList";
     var data={
         testId:id
     }
+    $('#modal-preview .rightBar .totalScore').data('DataScore',score?score:0).text(score?score:0);
     testId=id;
     $.getJSON(url,data,function (rst) {
         stopLoad();
         if(rst.status==0){
-            render('#fm-preview',rst.data,'tpl-preview');
+            var data={}
+            data.o=rst.data;
+            data.status=status;
+            render('#fm-preview',data,'tpl-preview');
         }
         else {
             alert("获取用户信息失败！");

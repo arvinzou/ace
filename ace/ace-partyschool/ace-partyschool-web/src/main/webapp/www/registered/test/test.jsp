@@ -13,7 +13,7 @@
 
 	<body>
 		<div class="title" id="title">
-			<p>党史讲座：学党史、知党情</p>
+			<p></p>
 		</div>
 		<div class="testContent" id="test">
 
@@ -55,12 +55,14 @@
 				</div>
 		</div>
 		{@else if item.type == 4}
+
+
 			<div class="testItem">
 				<div class="testTitle">
 					<span class="text">Q\${formatIndex(index)}、\${item.content} \${formatScore(item.tscore)}</span>
 				</div>
 				<div class="input_text">
-					<textarea class="textTest_\${index}"  maxlength="200" class="message" placeholder="请在此输入您要填写的内容~200字以内"></textarea>
+					<textarea class="message textTest_\${index}"  maxlength="200"  placeholder="请在此输入您要填写的内容~200字以内"></textarea>
 				</div>
 			</div>
 		

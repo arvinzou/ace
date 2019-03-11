@@ -236,7 +236,7 @@ function updataStatus(id, status) {
 
 function initPreview(id) {
     startLoad();
-    var url=contextPath + "/www/topic/findTopicFullList";
+    var url=contextPath + "/topic/findTopicFullList";
     var data={
         testId:id
     }

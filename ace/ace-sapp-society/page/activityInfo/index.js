@@ -25,10 +25,14 @@ Page({
   onLoad: function(options) {
     var that = this;
     var id = options.id;
-    that.getToken();
+    console.log(options);
+    if (options.scene) {
+      id = decodeURIComponent(options.scene);
+    }
     that.setData({
       id: id
     });
+    that.getToken();
     //判断有没有鉴权
     if (!util.is_login()) {
       var u = '../activityInfo/index?id=' + id;
@@ -54,7 +58,7 @@ Page({
     var isCreatedImg = that.data.isCreatedImg;
     console.log(activeId);
     if (!isCreatedImg) { //没有生成图片
-      util.request('http://192.168.2.101/society/www/util/getwxacodeunlimit', {
+      util.request(cfg.getCodeUrl, {
           sysId: 'society', //系统id
           page: 'page/activityInfo/index', //分享的哪一个页面
           scene: activeId //页面参数
@@ -102,46 +106,6 @@ Page({
                       }
                     });
                   }, 500);
-                  // //封面图
-                  // wx.getImageInfo({
-                  //   src: postCover,
-                  //   success: function (res) {
-                  //     console.log(res);
-                  //     that.setData({
-                  //       coverImg: res.path,
-                  //       coverWidth: res.width, //封面图宽
-                  //       coverHeight: res.height //封面图高
-                  //     });
-                  //     that.generateImage(); //根据以上信息开始画图，合成一张图片
-                  //     //canvas画图需要时间而且还是异步的，所以加了个定时器
-                  //     setTimeout(function () {
-                  //       //将生成的canvas图片，转为真实图片
-                  //       wx.canvasToTempFilePath({
-                  //         x: 0,
-                  //         y: 0,
-                  //         canvasId: 'shareCanvas',
-                  //         success: function (res) {
-                  //           var shareImg = res.tempFilePath;
-                  //           console.log(res);
-                  //           that.setData({
-                  //             shareImg: shareImg,
-                  //             showModel: true,
-                  //             showShareModal: false,
-                  //             isCreatedImg:true
-                  //           });
-                  //           wx.hideLoading();
-                  //         },
-                  //         fail: function (res) {
-                  //           console.log(res);
-                  //           wx.hideLoading();
-                  //         }
-                  //       });
-                  //     }, 500);
-                  //   },
-                  //   fail: function (res) {
-                  //     console.log(res);
-                  //   }
-                  // });
                 }
               }
             });
@@ -314,10 +278,12 @@ Page({
   // 获取列表
   initdata: function() {
     var that = this;
+    console.log(that.data.id);
     util.request(cfg.findActivity, {
         id: that.data.id,
       },
       function(rst) {
+        console.log(rst);
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
         that.data.activityInfo = rst.data;
@@ -336,21 +302,13 @@ Page({
    */
   onShow: function() {
     var id = this.data.id;
+    console.log(id);
     var that = this;
     if (!id) {
       wx.navigateBack({})
       return;
     }
     this.initdata(); //初始化数据
-    // wx.getSystemInfo({
-    //   success: function(res) {
-    //     console.log(res);
-    //     that.setData({
-    //       sameWidth: res.screenWidth,
-    //       sameWidth: res.screenHeight
-    //     });
-    //   },
-    // });
   },
 
 
