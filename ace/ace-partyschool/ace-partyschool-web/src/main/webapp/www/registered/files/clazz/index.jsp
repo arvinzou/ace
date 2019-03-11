@@ -20,7 +20,7 @@
 				</div>
 				<div class="classFilter" id="classFilter">
 					<img class="icon-class" src="img/icon-class.png">
-					<div class="class-select" type="text" id="clazz"></div>
+					<div class="class-select" type="text" id="clazz">请选择班级</div>
 					<img class="class-right" src="img/icon_select.png" />
 				</div>
 			</div>
