@@ -42,6 +42,7 @@ public class QuartzManager {
      * 每隔5分钟 执行一次 :自动注册报名表中，符合要求的学员数据
      */
     @Scheduled(cron = "0 */5 * * * ?")
+//    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void autoRegister() {
         List<EnrollRoster> list = enrollRosterDao.findUnRegisterList();
         Student student;

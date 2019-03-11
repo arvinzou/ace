@@ -184,6 +184,24 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 view-label">警号</label>
+        <div class="col-md-10">
+            \${data.o.badgeNum}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">身份证号</label>
+        <div class="col-md-10">
+            \${data.o.idCard}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">出生年月</label>
+        <div class="col-md-10">
+            \${formatDate(data.o.birthDate)}
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 view-label">班次</label>
         <div class="col-md-10">
             \${data.o.clsName}
@@ -193,12 +211,6 @@
         <label class="col-md-2 view-label">单位</label>
         <div class="col-md-10">
             \${data.o.workUnitName}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">出生年月</label>
-        <div class="col-md-10">
-            \${formatDate(data.o.birthDate)}
         </div>
     </div>
     <div class="form-group">
@@ -223,12 +235,6 @@
         <label class="col-md-2 view-label">手机号</label>
         <div class="col-md-10">
             \${data.o.mobile}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">警号</label>
-        <div class="col-md-10">
-            \${data.o.badgeNum}
         </div>
     </div>
     <div class="form-group">

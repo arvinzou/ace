@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface SignDao {
 
-    int isExistByMobile(String mobile);
+    int isExistByMobile(@Param("mobile") String mobile);
 
     int insertReg(@Param("user") Users o,
                   @Param("roleId") String roleId);
@@ -33,4 +33,7 @@ public interface SignDao {
 
     int updateAccount(@Param("userId") String userId,
                       @Param("newAccount") String newAccount);
+
+
+    int isExistByAccount(@Param("account") String account);
 }

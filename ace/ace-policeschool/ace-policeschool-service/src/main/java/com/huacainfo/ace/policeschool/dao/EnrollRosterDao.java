@@ -56,4 +56,6 @@ public interface EnrollRosterDao {
     EnrollRoster findByCondition(EnrollRoster o);
 
     List<EnrollRoster> findUnRegisterList();
+
+    EnrollRoster findByBadgeNum(String badgeNum);
 }
