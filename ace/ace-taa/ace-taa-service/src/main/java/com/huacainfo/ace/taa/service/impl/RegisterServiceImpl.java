@@ -10,10 +10,12 @@ import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import com.huacainfo.ace.portal.service.UsersService;
-import com.huacainfo.ace.portal.vo.UsersVo;
 import com.huacainfo.ace.taa.dao.RegisterDao;
+import com.huacainfo.ace.taa.dao.RegisterRuleDao;
 import com.huacainfo.ace.taa.service.RegisterService;
 import com.huacainfo.ace.taa.vo.CustomerVo;
+import com.huacainfo.ace.taa.vo.RegisterRuleQVo;
+import com.huacainfo.ace.taa.vo.RegisterRuleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +41,8 @@ public class RegisterServiceImpl implements RegisterService {
     private TaskCmccService taskCmccService;
     @Autowired
     private UsersService usersService;
+    @Autowired
+    private RegisterRuleDao registerRuleDao;
 
     /**
      * 校验手机号码是否已注册
@@ -138,12 +142,18 @@ public class RegisterServiceImpl implements RegisterService {
     @Override
     public ResultResponse register(WxUser user, String name,
                                    String mobile, String copNo, String deptId) throws Exception {
+        RegisterRuleQVo condition = new RegisterRuleQVo();
+        condition.setCopNo(copNo);
+        ResultResponse rr = findRegisterInfo(condition);
+        if (ResultCode.FAIL == rr.getStatus()) {
+            return rr;
+        }
         //用户ID
         String uid = copNo;
-        UsersVo u = usersService.selectUsersByPrimaryKey(uid).getValue();
-        if (u != null) {
-            return new ResultResponse(ResultCode.FAIL, "该警号已被注册");
-        }
+//        UsersVo u = usersService.selectUsersByPrimaryKey(uid).getValue();
+//        if (u != null) {
+//            return new ResultResponse(ResultCode.FAIL, "该警号已被注册");
+//        }
         //注册portal.users
         String regType = "1";
         String openId = null == user ? "" : user.getUnionId();
@@ -214,6 +224,24 @@ public class RegisterServiceImpl implements RegisterService {
             return new ResultResponse(ResultCode.SUCCESS, "修改成功");
         }
         return new ResultResponse(ResultCode.FAIL, "修改失败");
+    }
+
+    /**
+     * 查询注册规则
+     *
+     * @param condition copNo-警号 必传
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse findRegisterInfo(RegisterRuleQVo condition) {
+        RegisterRuleVo ruleVo = registerRuleDao.findByCondition(condition);
+        if (null == ruleVo) {
+            return new ResultResponse(ResultCode.FAIL, "该警号不准许注册，请联系管理员");
+        } else if (ruleVo.getRegStatus().equals("1")) {
+            return new ResultResponse(ResultCode.FAIL, "该警号已经注册，请勿重复注册");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", ruleVo);
     }
 
 

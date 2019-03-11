@@ -543,16 +543,16 @@ view, map, cover-view {
     font-weight: bold;
     padding-left: 20rpx;
     float: left;
-    padding-top: 30rpx;
-    padding-bottom: 30rpx;
+    padding-top: 40rpx;
+    padding-bottom: 40rpx;
 }
 .modal-title02{
     color: #ABAEB9;
     font-size: 28rpx;
     font-weight: bold;
     float: left;
-    padding-top: 30rpx;
-    padding-bottom: 30rpx;
+    padding-top: 40rpx;
+    padding-bottom: 40rpx;
 }
 .carType-items{
     width: 96%;
@@ -566,8 +566,8 @@ view, map, cover-view {
 }
 .carType-item{
     width: 33.33%;
-    height: 80rpx;
-    line-height: 80rpx;
+    height: 90rpx;
+    line-height: 90rpx;
     float: left;
 }
 .carType-item::after{
@@ -606,7 +606,35 @@ view, map, cover-view {
     height: 200rpx;
     text-align: center;
     line-height: 200rpx;
+    color: #ABAEB9;
+    font-size: 34rpx;
+    font-weight: 500;
+}
+
+/**********弹框未查询到路段样式****************/
+.section-blank{
+    width: 382rpx;
+    height: 230rpx;
+    margin: 135rpx 76rpx auto;
+}
+.tip-opts{
+    width: 540rpx;
+    height: 60rpx;
+    margin:60rpx auto;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    text-align: center;
+}
+.tip-opts::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.tips-detail{
     color: #373F53;
-    font-size: 48rpx;
-    font-weight: bold;
+    float: left;
+}
+.opts-detail{
+    color: #4350FC;
+    float: left;
 }

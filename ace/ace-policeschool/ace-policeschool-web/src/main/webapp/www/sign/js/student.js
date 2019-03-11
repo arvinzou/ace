@@ -55,9 +55,8 @@ function regist() {
     var idCard = $("input[name='idCard']").val();
     var workUnitName = $("input[name='workUnitName']").val();     //单位名称
     var postName = $("input[name='postName']").val();              //单位职务
-    var signAcct = $("input[name='mobile']").val();
-    var pwd = $("input[name='pwd']").val();                        //第一次输入的密码
-    var singPwd = $("input[name='password']").val();
+    var signAcct = null;                                            //账号
+    var singPwd = null;                                             //密码
     var nativePlace = $("input[name='nativePlace']").val();    //籍贯
     var college = $("input[name='college']").val();            //毕业院校
     var badgeNum = $("input[name='badgeNum']").val();          //警号
@@ -65,36 +64,33 @@ function regist() {
         alert("姓名不能为空！");
         return;
     }
-    isCardNo(idCard);
+    if(!isEmpty(idCard)){
+        alert("身份证号不能为空！");
+        return;
+    }else{
+        isCardNo(idCard);
+    }
+
+    if(idCard.length == 15){  //15位身份证或者18位身份证
+        singPwd = idCard.substring(9, 15);
+    }else if(idCard.length == 18){
+        singPwd = idCard.substring(12, 18);
+    }
     if (!isEmpty(nativePlace)) {
         alert("籍贯不能为空！");
         return;
     }
-    if (!isEmpty(signAcct)) {
-        alert("手机号不能为空！");
-        return;
-    } else {
-        if (signAcct.length != 11) {
-            alert("手机号码必须为11位！");
-            return;
-        }
-    }
-    if (!isEmpty(pwd)) {
-        alert("设置密码不能为空！");
+    if(!isEmpty(clazz)){
+        alert("班次不能为空！");
         return;
     }
-    if (pwd.length < 4) {
-        alert("密码位数必须在4位以上！");
+    if(!isEmpty(badgeNum)){
+        alert("警号不能为空！");
         return;
+    }else{
+        signAcct = badgeNum;              //账号默认为警号
     }
-    if (!isEmpty(singPwd)) {
-        alert("确认密码不能为空！");
-        return;
-    }
-    if (pwd != singPwd) {
-        alert("设置密码和确认密码前后输入不一致！");
-        return;
-    }
+
     $.ajax({
         url: contextPath + "/www/sign/ssign",
         type: "post",

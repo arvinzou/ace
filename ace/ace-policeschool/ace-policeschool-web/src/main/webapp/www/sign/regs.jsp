@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <div class="form-title">账号密码设置</div>
+    <%--<div class="form-title">账号密码设置</div>
 
     <div class="form-box">
         <div class="form-content form-border">
@@ -92,7 +92,7 @@
     <div class="tips">
         <img class="tips-img" src="img/tips.png"/>
         <div class="tips-content">该手机号和密码用于登录此平台</div>
-    </div>
+    </div>--%>
 
     <div class="footer">
         <img src="img/regist.png" onclick="regist();"/>
