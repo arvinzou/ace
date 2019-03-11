@@ -10,6 +10,8 @@ public class TestRst {
 
     private String tId;
 
+    private String noticeId;
+
     private String createUserId;
 
     private BigDecimal score;
@@ -23,6 +25,14 @@ public class TestRst {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getNoticeId() {
+        return noticeId;
+    }
+
+    public void setNoticeId(String noticeId) {
+        this.noticeId = noticeId;
+    }
 
     public String gettId() {
         return tId;

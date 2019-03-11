@@ -47,7 +47,7 @@ public class TopicRstServiceImpl implements TopicRstService {
 
 
     @Override
-    public MessageResponse insertTopicRstList(List<TopicRstQVo> listPram, UserProp userProp) throws Exception {
+    public MessageResponse insertTopicRstList(List<TopicRstQVo> listPram,String noticeId, UserProp userProp) throws Exception {
         String id = GUIDUtil.getGUID();
         for (TopicRstQVo item : listPram) {
             item.setTestRstId(id);
@@ -60,6 +60,7 @@ public class TopicRstServiceImpl implements TopicRstService {
         }
         TestRst testRst = new TestRst();
         testRst.setId(id);
+        testRst.setNoticeId(noticeId);
         testRst.setName(listPram.get(0).getTname());
         testRst.settId(listPram.get(0).getTid());
         testRst.setCreateDate(new Date());
