@@ -73,5 +73,7 @@ var config = {
     delActivity: `${server}/society/www/activity/delActivity`,
     getCoin: `${server}/society/www/activity/getCoin`,
     feedBack: `${server}/society/www/user/feedBack`,
+    token: `${server}/portal/www/wx/jsapi/getWxCfg`,
+    getCodeUrl: `${server}/society/www/util/getwxacodeunlimit`
 };
 module.exports = config
