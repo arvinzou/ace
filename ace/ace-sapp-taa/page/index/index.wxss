@@ -543,16 +543,16 @@ view, map, cover-view {
     font-weight: bold;
     padding-left: 20rpx;
     float: left;
-    padding-top: 30rpx;
-    padding-bottom: 30rpx;
+    padding-top: 40rpx;
+    padding-bottom: 40rpx;
 }
 .modal-title02{
     color: #ABAEB9;
     font-size: 28rpx;
     font-weight: bold;
     float: left;
-    padding-top: 30rpx;
-    padding-bottom: 30rpx;
+    padding-top: 40rpx;
+    padding-bottom: 40rpx;
 }
 .carType-items{
     width: 96%;
@@ -566,8 +566,8 @@ view, map, cover-view {
 }
 .carType-item{
     width: 33.33%;
-    height: 80rpx;
-    line-height: 80rpx;
+    height: 90rpx;
+    line-height: 90rpx;
     float: left;
 }
 .carType-item::after{

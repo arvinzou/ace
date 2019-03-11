@@ -1,16 +1,17 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
-import java.math.BigDecimal;
-import java.util.*;
-
 import com.huacainfo.ace.common.constant.ResultCode;
-import com.huacainfo.ace.common.result.*;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.TestRstDao;
-import com.huacainfo.ace.partyschool.dao.TopicDao;
+import com.huacainfo.ace.partyschool.dao.TopicRstDao;
 import com.huacainfo.ace.partyschool.model.TestRst;
+import com.huacainfo.ace.partyschool.service.TopicRstService;
+import com.huacainfo.ace.partyschool.vo.TopicRstQVo;
 import com.huacainfo.ace.partyschool.vo.TopicVo;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
@@ -21,14 +22,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.partyschool.dao.TopicRstDao;
-import com.huacainfo.ace.partyschool.model.TopicRst;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.partyschool.service.TopicRstService;
-import com.huacainfo.ace.partyschool.vo.TopicRstVo;
-import com.huacainfo.ace.partyschool.vo.TopicRstQVo;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service("topicRstService")
 /**
@@ -47,7 +45,7 @@ public class TopicRstServiceImpl implements TopicRstService {
 
 
     @Override
-    public MessageResponse insertTopicRstList(List<TopicRstQVo> listPram,String noticeId, UserProp userProp) throws Exception {
+    public MessageResponse insertTopicRstList(List<TopicRstQVo> listPram,String taskId, UserProp userProp) throws Exception {
         String id = GUIDUtil.getGUID();
         for (TopicRstQVo item : listPram) {
             item.setTestRstId(id);
@@ -60,7 +58,8 @@ public class TopicRstServiceImpl implements TopicRstService {
         }
         TestRst testRst = new TestRst();
         testRst.setId(id);
-        testRst.setNoticeId(noticeId);
+        testRst.setStatus("1");
+        testRst.setTaskId(taskId);
         testRst.setName(listPram.get(0).getTname());
         testRst.settId(listPram.get(0).getTid());
         testRst.setCreateDate(new Date());

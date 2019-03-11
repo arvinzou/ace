@@ -69,7 +69,7 @@ public class TopicController extends BisBaseController {
     @RequestMapping(value = "/findTopicFullList")
     @ResponseBody
     public ResultResponse findTopicFullList(String testId) throws Exception {
-        return this.topicService.findTopicFullList(testId);
+        return this.topicService.findTopicFullList(testId,this.getCurUserProp());
     }
 
 

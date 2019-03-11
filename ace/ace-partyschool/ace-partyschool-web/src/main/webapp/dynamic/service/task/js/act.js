@@ -266,6 +266,7 @@ function save() {
         },
         success : function(rst, textStatus) {
             if (rst) {
+                stopLoad();
                 $('#modal-push').modal('hide');
                 alert(rst.errorMessage);
                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {

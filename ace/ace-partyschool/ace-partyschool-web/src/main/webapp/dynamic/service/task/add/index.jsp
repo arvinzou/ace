@@ -30,7 +30,68 @@
         <div class="form-panel" id="fm-add-panel">
             <!--具体界面元素开始-->
             <form class="form-horizontal" id="fm-add" role="form">
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            测试名称
+                            <span class="required" aria-required="true"> * </span>
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="name" maxlength="50"
+                                   placeholder="请输入任务名称（建议字数在14个字以内，不超过50个字)">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            测试介绍
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="introduce" maxlength="200"
+                                   placeholder="请输入测试介绍（建议字数在14个字以内，不超过200个字)">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            测评方案
+                        </label>
+                        <div class="col-md-6">
+                            <select style="width: 100%;height: 34px"
+                                    class="js-example-basic-single js-example-basic-single1" name="testId">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            开始时间
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="startTime"
+                                   placeholder="请输入开始时间">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            结束时间
+                        </label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="endTime"
+                                   placeholder="请输入结束时间">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-7">
+                            <button class="btn   green" type="submit" style="width:30%">保存</button>
+                        </div>
+                    </div>
+                </div>
             </form>
 
         </div>

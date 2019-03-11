@@ -86,6 +86,16 @@ function checkNumber(that,num){
 	}if(n<0){
 		that.value=0;
 	}
+	var num=0;
+	$('input[name=inputScore]').each(function () {
+        num+=parseInt($(this).val())?parseInt($(this).val()):0;
+    })
+    insertScore(num);
+}
+
+function insertScore(num){
+    var data=parseInt($('#modal-preview .rightBar .totalScore').data('DataScore'));
+    $('#modal-preview .rightBar .totalScore').text(num+data);
 }
 
 
