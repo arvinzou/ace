@@ -57,7 +57,7 @@
                         <text>*</text>
                     </view>
                     <input type='number' name='mobilePhone' style='width:45%' placeholder='请输入手机号码' placeholder-class='placeholder-text' bindinput='phoneInput'></input>
-                    <button class='code' bindtap='sendCode' style='width:25%;padding:0'>{{ btnName }}</button>
+                    <button class='code' bindtap='sendCode'  disabled="{{isGetVilidateCode}}" style='width:25%;padding:0'>{{ btnName }}</button>
                 </view>
                 <view class="input-style bottom-line">
                     <view  class="title" style='width:25%'>验证码

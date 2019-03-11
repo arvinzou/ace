@@ -1,6 +1,7 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
 var dateTimePicker = require('../../util/dateTimePicker.js');
+var app = getApp();
 Page({
 
   /**
@@ -23,6 +24,11 @@ Page({
       accidentTime: null,
       startYear: 2000,
       endYear: 2050,
+      sectionName: null,
+      sectionId: null,
+      roadManId: null,
+      roadManName: null,
+      linkid:'' //链接id, 0详情， 1续报
   },
 
   /**
@@ -33,10 +39,19 @@ Page({
       that.setData({
           traffId: options.id
       });
-      that.initDateTime();
+      that.initDateTime();    
       that.initDict();
+      // 获取linkid
+      if(options.linkid != undefined && options.linkid != null){
+        that.setData({
+          linkid: options.linkid
+        });
+      }
       
   },
+  /**
+   * 初始化日期时间
+   */
   initDateTime: function(){
       var that = this;
       var obj = dateTimePicker.dateTimePicker(that.data.startYear, that.data.endYear);
@@ -54,17 +69,36 @@ Page({
           function (res) {
               if (res.status == 0) {
                   console.log("*****************************"+res.value.accidentTime);
-                 that.setData({
-                     detail: res.value,
-                     createDate: that.fotmatPicker(res.value.createDate),
-                     accidentTime: that.fotmatPicker(res.value.accidentTime),
-                 });
+                  app.globalData.sectionName = res.value.roadSectionName;
+                  app.globalData.sectionId = res.value.roadSectionId;
+                  app.globalData.roadManId = res.value.roadManId;
+                  app.globalData.roadManName = res.value.roadManName;
+
+                  that.setData({
+                      detail: res.value,
+                      createDate: that.fotmatPicker(res.value.createDate),
+                      accidentTime: that.fotmatPicker(res.value.accidentTime),
+                      sectionName: app.globalData.sectionName,
+                      sectionId: app.globalData.sectionId,
+                      roadManId: app.globalData.roadManId,
+                      roadManName: app.globalData.roadManName
+                  });
+
                   that.convertCode(res.value.weather);
                   var mtypeList = res.value.mtypeList;
                   for(var i=0; i< mtypeList.length; i++){
                       that.initCarType(mtypeList[i].vehicleType);
                   }
-                  that.initSeason();
+
+                  var causeList = res.value.causeList;
+                  if(causeList.length < 1){
+                      that.initSeason();
+                  }else{
+                      for (var i = 0; i < causeList.length; i++) {
+                          that.initSeason(causeList[i].cause);
+                      }
+                  }
+                  
               } else {
                   wx.showModal({
                       title: '提示',
@@ -76,6 +110,9 @@ Page({
           }
       );
   },
+  /**
+   * 初始化字典
+   */
   initDict: function(){
       var that = this;
       util.request(cfg.server + '/portal/content/common/js/dict_taa.js', { },
@@ -101,13 +138,14 @@ Page({
      for (var i in weather){
          wArray.push(weather[i].NAME);
          wArrayObject.push(weather[i]);
+         that.setData({
+             wArray: wArray,
+             wArrayObject: wArrayObject
+         });
          if (key == weather[i].CODE){
             that.setData({
-                index: i,
-                wArray: wArray,
-                wArrayObject: wArrayObject
+                index: i
             });
-            return i;
          }
 
      }
@@ -125,12 +163,20 @@ Page({
           carsList: cars
       });
   },
-  initSeason: function(){
+  initSeason: function(key){
       var that = this;
       var data = that.data.dictObject;
-      var cars = data['173'];
+      var cause = data['173'];
+      if(key!=null && key != undefined && key !=''){
+          for (var i in cause) {
+              if (key == cause[i].CODE) {
+                  cause[i].checked = true;
+              }
+          }
+      }
+      
       that.setData({
-          seasonList: cars
+          seasonList: cause
       })
   },
   bindWeatherChange: function(e){
@@ -145,7 +191,7 @@ Page({
   onReady: function () {
     
   },
-  carTypeChange(e){
+  carTypeChange:function(e){
       var that = this;
       var param = [];
       param.push(e.detail.value);
@@ -153,7 +199,7 @@ Page({
           carTypeParam: param
       });
   },
-  seasonChange(e) {
+  seasonChange:function(e) {
     var that = this;
     console.log('checkbox发生change事件，携带value值为：', e.detail.value);
     var param = [];
@@ -162,6 +208,9 @@ Page({
         seasonParam: param
     });
   },
+  /**
+   * 表单提交
+   */
  formSubmit: function(e){
      var that = this;
      var createDate = e.detail.value.createDate;
@@ -170,7 +219,7 @@ Page({
      var accidentTime = e.detail.value.accidentTime;
      var injuries = e.detail.value.injuries;
      var deadthToll = e.detail.value.deadthToll;
-     var cause = e.detail.value.cause;
+     var cause = e.detail.value.cause; 
      var causeList = [];
      var mtypeList = [];
      for(var i=0; i<cause.length; i++){
@@ -183,18 +232,24 @@ Page({
          traAccMtype.vehicleType = vehicleType[i];
          mtypeList.push(traAccMtype);
      }
-     util.request(cfg.server + '/taa/www/traAcc/report', { data: JSON.stringify({ id: that.data.traffId, createDate: that.formatDT(createDate), weather: weather, accidentTime: that.formatDT(accidentTime), injuries: injuries, deadthToll: deadthToll, causeList: causeList, mtypeList: mtypeList, roadSectionId: that.data.detail.roadSectionId, roadManId: that.data.detail.roadManId, cause: '酒驾'})} ,
+     util.request(cfg.server + '/taa/www/traAcc/report', { data: JSON.stringify({ id: that.data.traffId, createDate: that.formatDT(createDate), weather: weather, accidentTime: that.formatDT(accidentTime), injuries: injuries, deadthToll: deadthToll, causeList: causeList, mtypeList: mtypeList, roadSectionId: that.data.sectionId, roadManId: that.data.roadManId, cause: '酒驾'})} ,
          function (res) {
              if (res.status == 0) {
                 wx.showModal({
                     title: '提示',
                     content: res.info,
-                    success: function(res){}
+                    showCancel:false,
+                    success: function(res){
+                        wx.navigateTo({
+                            url: '../accidentList/index',
+                        });
+                    }
                 })
              } else {
                  wx.showModal({
                      title: '提示',
                      content: res.info,
+                     showCancel: false,
                      success: function (res) { }
                  });
              }
@@ -202,15 +257,15 @@ Page({
          }
      );
  },
-    changeDateTime(e) {
-        let name = e.currentTarget.dataset.name;
-        let temp = {};
+    changeDateTime:function(e) {
+        var name = e.currentTarget.dataset.name;
+        var temp = {};
         temp[name] = e.detail.value,
         this.setData(temp);
     },
-    changeDateTimeColumn(e) {
+    changeDateTimeColumn:function(e) {
         console.log(e);
-        let name = e.currentTarget.dataset.name;
+        var name = e.currentTarget.dataset.name;
         var arr = this.data[name],
             dateArr = this.data.dateTimeArray;
 
@@ -221,7 +276,7 @@ Page({
             dateTimeArray: dateArr
         });
     },
-    fotmatPicker(dataTime) {
+    fotmatPicker:function(dataTime) {
         var val = [];
         console.log(dataTime);
         val.push(parseInt(dataTime.substring(2, 4)));
@@ -232,18 +287,43 @@ Page({
         val.push(parseInt(dataTime.substring(17,19)));
         return val;
     },
-    formatDT(arr) {
+    formatDT:function(arr){
         return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1] + 1) + '-' + this.FN(arr[2] + 1) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':'+this.FN(arr[5]);
     },
 
-    FN(num) {
+    FN:function(num) {
         return num >= 10 ? num : '0' + num;
+    },
+
+    /**
+     * 修改选择路段
+     */
+    selectRoadSection: function(){
+        wx.navigateTo({
+            url: '../collection/index?type=xb',
+        });
+    },
+
+    /**
+     * 修改选择路长
+     */
+    selectRoad: function(){
+        wx.navigateTo({
+            url: '../roadlist/index?type=xb',
+        });
     },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+      var that = this;
+      that.setData({
+          sectionName: app.globalData.sectionName,
+          sectionId: app.globalData.sectionId,
+          roadManId: app.globalData.roadManId,
+          roadManName: app.globalData.roadManName
+      });
+
   },
 
   /**

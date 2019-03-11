@@ -10,4 +10,6 @@ public interface TraAccMtypeDao {
     TraAccMtype selectByPrimaryKey(String id);
 
     int updateByPrimaryKey(TraAccMtype record);
+
+    int reset(String accId);
 }

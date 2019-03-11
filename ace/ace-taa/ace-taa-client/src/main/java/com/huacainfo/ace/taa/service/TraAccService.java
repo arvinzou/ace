@@ -1,5 +1,6 @@
 package com.huacainfo.ace.taa.service;
 
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.*;
@@ -186,7 +187,7 @@ public interface TraAccService {
      * @auther: Arvin Zou
      * @date: 2019/1/12 11:15
      */
-    ResultResponse report(WxUser user, TraAccVo params);
+    ResultResponse report(WxUser user, TraAccVo params) throws Exception;
 
     /**
      * 交通事故倒序表
@@ -288,4 +289,13 @@ public interface TraAccService {
      */
     List<Map<String, Object>> analysisReport(String category, String dateTimeStr,
                                              String roadManId, String roadSectionId, String field);
+    /**
+     * 获取事故报表 --小程序端展示
+     *
+     * @param condition 条件查询
+     * @param page      分页条件
+     * @return PageResult<TraAccVo>
+     * @throws Exception
+     */
+    ResultResponse findViewList(UserProp u, TraAccQVo condition, PageParamNoChangeSord page) throws Exception;
 }

@@ -268,7 +268,7 @@ GROUP BY e.NAME) t
         <select id="getDoneSize" resultType="int">
         SELECT count(distinct classScheduleId)
         FROM partyschool.evaluation_rst er
-        WHERE er.userId ==#{condition.userId,jdbcType=VARCHAR}
+        WHERE er.userId =#{condition.userId,jdbcType=VARCHAR}
         </select>
 
 
@@ -287,6 +287,37 @@ GROUP BY e.NAME) t
         <include refid="From_Statement"/>
         where c.id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <resultMap id="EvaluationExportDate" type="com.huacainfo.ace.partyschool.model.EvaluationExport">
+        <id column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="evaluationContent" jdbcType="VARCHAR" property="evaluationContent"/>
+        <collection property="entityCounts" ofType="com.huacainfo.ace.partyschool.vo.EvaluationRstVo">
+            <result column="erName" jdbcType="VARCHAR" property="name"/>
+            <result column="introduce" jdbcType="VARCHAR" property="introduce"/>
+            <result column="score" jdbcType="INTEGER" property="score"/>
+        </collection>
+    </resultMap>
+
+
+
+    <select id="exportData" parameterType="String" resultMap="EvaluationExportDate">
+           SELECT
+          er.userId,er.name AS erName,er.introduce,er.score,
+          s.name,s.sex,s.mobile,
+          t.content as evaluationContent
+          FROM partyschool.evaluation_rst er
+          LEFT JOIN partyschool.student s ON  er.userId=s.id
+          LEFT JOIN  (select erc.content,erc.userId
+			 				from partyschool.evaluation_rst_content erc
+							WHERE erc.classScheduleId=#{id,jdbcType=VARCHAR}) t
+							ON er.userId=t.userId
+          WHERE er.classScheduleId=#{id,jdbcType=VARCHAR}
+          ORDER BY er.name
+    </select>
+
 
 
 </mapper>

@@ -9,7 +9,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title>公益活动</title>
+    <title>创意活动</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
@@ -47,11 +47,11 @@
                                    class="form-control input-left"
                                    placeholder="请输入名称">
                             <span class="input-group-btn">
-                                                        <button class="btn btn-right btn-default search_btn"
-                                                                type="submit">
-                                                                搜索
-                                                        </button>
-                                                    </span>
+                                <button class="btn btn-right btn-default search_btn"
+                                        type="submit">
+                                        搜索
+                                </button>
+                            </span>
                         </div>
                     </form>
                 </div>
@@ -152,7 +152,6 @@
         </div>
     </div>
 </div>
-
 
 
 <div id="j-pswp" class="pswp" role="dialog" aria-hidden="true">
@@ -507,7 +506,7 @@
             <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@if item.status==32&&item.arStatus==3}
-            <a class="operation" href="#" onclick="signInfo('\${item.id}');">活动签到</a>
+            <a class="operation" href="#" onclick="signInfo('\${item.id}','\${item.amount}');">活动签到</a>
             {@/if}
             <%--{@if item.status == '2'}--%>
             <%--<a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>--%>

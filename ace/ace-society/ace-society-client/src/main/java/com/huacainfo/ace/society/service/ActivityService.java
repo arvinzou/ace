@@ -6,8 +6,8 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.Activity;
-import com.huacainfo.ace.society.vo.ActivityVo;
 import com.huacainfo.ace.society.vo.ActivityQVo;
+import com.huacainfo.ace.society.vo.ActivityVo;
 
 import java.util.List;
 
@@ -77,7 +77,8 @@ public interface ActivityService {
      * @author: huacai003
      * @version: 2018-09-11
      */
-    SingleResult<ActivityVo> selectActivityByPrimaryKey(String id) throws Exception;
+    SingleResult<ActivityVo> selectActivityByPrimaryKey(String id, int start,
+                                                        int limit, String orderBy) throws Exception;
 
     /**
      * @throws

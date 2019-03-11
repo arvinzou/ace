@@ -54,7 +54,7 @@ jQuery(function ($) {
 function initClassList(ctrlId) {
     startLoad();
     $.ajax({
-        url: contextPath + "/mailList/getClassList",
+        url: contextPath + "/classes/getClassList",
         type: "post",
         async: false,
         data: {},

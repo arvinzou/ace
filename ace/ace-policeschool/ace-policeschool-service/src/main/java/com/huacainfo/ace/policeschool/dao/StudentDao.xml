@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.policeschool.dao.StudentDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.policeschool.model.Student">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="nativePlace" jdbcType="VARCHAR" property="nativePlace"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="idCard" jdbcType="CHAR" property="idCard"/>
+        <result column="political" jdbcType="VARCHAR" property="political"/>
+        <result column="workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
+        <result column="postName" jdbcType="VARCHAR" property="postName"/>
+        <result column="classId" jdbcType="VARCHAR" property="classId"/>
+        <result column="badgeNum" jdbcType="VARCHAR" property="badgeNum"/>
+        <result column="college" jdbcType="VARCHAR" property="college"/>
+        <result column="birthDate" jdbcType="TIMESTAMP" property="birthDate"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, pid, name, sex, nativePlace, mobile, idCard, political, workUnitName, postName,
+        classId, badgeNum, college, birthDate, remark, status, createUserId, createUserName,
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from student
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.Student">
+        insert into student (id, pid, name,
+          sex, nativePlace, mobile,
+          idCard, political, workUnitName,
+          postName, classId, badgeNum,
+          college, birthDate, remark,
+          status, createUserId, createUserName,
+          createDate, lastModifyUserId, lastModifyUserName,
+          lastModifyDate)
+        values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+          #{sex,jdbcType=CHAR}, #{nativePlace,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+          #{idCard,jdbcType=CHAR}, #{political,jdbcType=VARCHAR}, #{workUnitName,jdbcType=VARCHAR},
+          #{postName,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR}, #{badgeNum,jdbcType=VARCHAR},
+          #{college,jdbcType=VARCHAR}, #{birthDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR},
+          #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
+          #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+          #{lastModifyDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.Student">
+        update student
+        set pid = #{pid,jdbcType=VARCHAR},
+          name = #{name,jdbcType=VARCHAR},
+          sex = #{sex,jdbcType=CHAR},
+          nativePlace = #{nativePlace,jdbcType=VARCHAR},
+          mobile = #{mobile,jdbcType=VARCHAR},
+          idCard = #{idCard,jdbcType=CHAR},
+          political = #{political,jdbcType=VARCHAR},
+          workUnitName = #{workUnitName,jdbcType=VARCHAR},
+          postName = #{postName,jdbcType=VARCHAR},
+          classId = #{classId,jdbcType=VARCHAR},
+          badgeNum = #{badgeNum,jdbcType=VARCHAR},
+          college = #{college,jdbcType=VARCHAR},
+          birthDate = #{birthDate,jdbcType=TIMESTAMP},
+          remark = #{remark,jdbcType=VARCHAR},
+          status = #{status,jdbcType=CHAR},
+          createUserId = #{createUserId,jdbcType=VARCHAR},
+          createUserName = #{createUserName,jdbcType=VARCHAR},
+          createDate = #{createDate,jdbcType=TIMESTAMP},
+          lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+          lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+          lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.StudentVo">
+        <result column="clsName" jdbcType="VARCHAR" property="clsName"/>
+        <result column="lCardNo" jdbcType="VARCHAR" property="lCardNo"/>
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        cd.cardData as lCardNo,
+        c.`name` as clsName,
+        t.id, t.pid, t.name, t.sex, t.nativePlace, t.mobile, t.idCard, t.political, t.workUnitName, t.postName,
+        t.classId, t.badgeNum, t.college, t.birthDate, t.remark, t.status, t.createUserId, t.createUserName,
+        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+    </sql>
+    <sql id="From_Statement">
+        FROM student t
+        left join classes c on t.classId = c.id
+        left join policeschool.card_data cd on t.id = cd.userId
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.mobile !=null and condition.mobile !=&quot;&quot;">
+            and t.mobile like concat(#{condition.mobile,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.political !=null and condition.political !=&quot;&quot;">
+            and t.political = #{condition.political,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.idCard !=null and condition.idCard !=&quot;&quot;">
+            and t.idCard like concat(#{condition.idCard,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.clsName !=null and condition.clsName !=&quot;&quot;">
+            and c.`name` like concat('%',#{condition.clsName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.classId !=null and condition.classId !=&quot;&quot;">
+            and t.classId = #{condition.classId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.keyWord !=null and condition.keyWord !=&quot;&quot;">
+            and (
+            t.name like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
+            or t.idCard like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
+            or t.mobile like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
+            )
+        </if>
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc, t.`name`
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="findStudentCount" resultType="int">
+        SELECT COUNT(*)
+        from student
+        WHERE classId = #{classId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Student">
+        select count(1)
+        from student
+        where badgeNum = #{badgeNum,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateStatus" parameterType="java.lang.String">
+        update student
+        set status = #{status,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="isExistByIdCard" resultType="int">
+        select count(1)
+        from student
+        where idCard = #{idCard,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExistOtherIdCard" resultType="int">
+        select count(1)
+        from student
+        where id != #{id,jdbcType=VARCHAR}
+        and idCard = #{idCard,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExistOtherMobile" resultType="int">
+        select count(1)
+        from student
+        where id != #{id,jdbcType=VARCHAR}
+        and mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUserClassInfo" resultType="map">
+        select t.user_level role,a.classId from portal.users t
+        LEFT join student a on t.user_id=a.id
+        where t.user_id=#{id}
+    </select>
+
+    <select id="selectTeacherClassInfoById" resultType="string">
+        select t.id as classId from classes t where t.headmaster=#{id}
+    </select>
+    <select id="selectTeacherClasses" resultType="map">
+        select t.clsId as classId from teacher_cls_ship t where t.teacherId=#{id}
+    </select>
+
+</mapper>

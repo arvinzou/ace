@@ -107,8 +107,12 @@ function initEvents() {
         startView: 2,
         clearBtn: true, //清除按钮
         forceParse: 0
-    }).on('changeDate', function(ev){
-        moveCSS();
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var startTime = event.date;
+        $("input[name=endDate]").datetimepicker('setStartDate', startTime);
+        $("input[name=endDate]").val("");
     });
 
     $('input[name=startDate]').focus(function() {
@@ -127,8 +131,11 @@ function initEvents() {
         startView: 2,
         clearBtn: true, //清除按钮
         forceParse: 0
-    }).on('changeDate', function(ev){
-        moveCSS();
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var endTime = event.date;
+        $("input[name=startDate]").datetimepicker('setEndDate', endTime);
     });
     $('input[name=endDate]').focus(function() {
         $(this).blur(); //不可输入状态

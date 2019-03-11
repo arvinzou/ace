@@ -42,4 +42,5 @@ public interface AttRecordDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    Map<String, Object> getAttSrc();
 }

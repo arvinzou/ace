@@ -50,8 +50,7 @@ public class RoadManController extends TaaBaseController {
      * @param: @param page
      * @param: @return
      * @param: @throws Exception
-     * @return: PageResult
-     * <RoadManVo>
+     * @return: PageResult<RoadManVo>
      * @author: 陈晓克
      * @version: 2019-01-04
      */

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 /**
- * @Auther: Arvin
+ * @author Arvin
  * @Date: 2019/1/23 14:13
  * @Description:
  */

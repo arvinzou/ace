@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.TopicRstDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.TopicRst">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="type" jdbcType="CHAR" property="type"/>
+        <result column="youScore" jdbcType="DECIMAL" property="youScore"/>
+        <result column="answer" jdbcType="VARCHAR" property="answer"/>
+        <result column="testRstId" jdbcType="VARCHAR" property="testRstId"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="tscore" jdbcType="DECIMAL" property="tscore"/>
+        <result column="tindex" jdbcType="INTEGER" property="tindex"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, content, type, youScore, answer,testRstId, status,tscore,tindex
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from topic_rst
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from topic_rst
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.TopicRst">
+    insert into topic_rst (id, content, type,
+      youScore, answer,testRstId,status,tscore,tindex
+      )
+    values (
+      #{id,jdbcType=VARCHAR},
+      #{content,jdbcType=VARCHAR},
+       #{type,jdbcType=CHAR},
+      #{youScore,jdbcType=DECIMAL},
+      #{answer,jdbcType=VARCHAR},
+      #{testRstId,jdbcType=VARCHAR},
+      #{status,jdbcType=CHAR},
+      #{tscore,jdbcType=DECIMAL},
+      #{tindex,jdbcType=INTEGER}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.TopicRst">
+    update topic_rst
+    set content = #{content,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      youScore = #{youScore,jdbcType=DECIMAL},
+      answer = #{answer,jdbcType=VARCHAR},
+      testRstId = #{testRstId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      tscore = #{tscore,jdbcType=DECIMAL}
+      tindex = #{tindex,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updataTopicRstScore">
+    update topic_rst
+    set
+        youScore = #{youScore,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <insert id="insertTopOptRstList" parameterType="java.util.List" useGeneratedKeys="false">
+        insert into
+        topic_opt_rst
+        (
+        id,topicId,content,answer,youAnswer
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (UUID(),#{tid,jdbcType=VARCHAR},#{item.content},#{item.answer},
+            <choose>
+                <when test="item.youAnswer != null">
+                    #{item.youAnswer}
+                </when>
+                <otherwise>
+                    '0'
+                </otherwise>
+            </choose>
+            )
+        </foreach>
+    </insert>
+
+
+    <resultMap extends="BaseResultMap" id="ResultMapTestTopic" type="com.huacainfo.ace.partyschool.vo.TopicRstVo">
+        <result column="trScore" property="trScore"/>
+        <result column="trName" property="trName"/>
+        <collection property="topicOptRstList" ofType="com.huacainfo.ace.partyschool.model.TopicOptRst">
+            <result column="tooId" property="id"/>
+            <result column="tooContent" property="content"/>
+            <result column="tooAnswer" property="answer"/>
+            <result column="youAnswer" property="youAnswer"/>
+        </collection>
+    </resultMap>
+
+    <select id="findTopicFullRstList" parameterType="java.lang.String" resultMap="ResultMapTestTopic">
+        SELECT
+        tr.score as trScore,tr.name as trName,
+        tor.id, tor.content, tor.type, tor.youScore, tor.answer,tor.testRstId, tor.status,tor.tscore,tor.tindex,
+        too.content as tooContent,too.answer as tooAnswer,too.youAnswer
+        FROM partyschool.test_rst tr
+        LEFT JOIN partyschool.topic_rst tor ON tor.testRstId=tr.id
+        LEFT JOIN partyschool.topic_opt_rst too ON too.topicId=tor.id
+        WHERE tr.id=#{testId,jdbcType=VARCHAR}
+        ORDER BY tor.tindex ASC
+    </select>
+
+</mapper>

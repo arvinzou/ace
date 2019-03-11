@@ -120,8 +120,8 @@ public class ActivityController extends SocietyBaseController {
      */
     @RequestMapping(value = "/selectActivityByPrimaryKey")
     @ResponseBody
-    public SingleResult<ActivityVo> selectActivityByPrimaryKey(String id) throws Exception {
-        return this.activityService.selectActivityByPrimaryKey(id);
+    public SingleResult<ActivityVo> selectActivityByPrimaryKey(String id,PageParamNoChangeSord page) throws Exception {
+        return this.activityService.selectActivityByPrimaryKey(id, page.getStart(),page.getLimit(),page.getOrderBy());
     }
 
     /**

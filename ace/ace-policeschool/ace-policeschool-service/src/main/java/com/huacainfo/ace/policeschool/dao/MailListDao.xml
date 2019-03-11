@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.policeschool.dao.MailListDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.policeschool.model.MailList">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="pid" jdbcType="VARCHAR" property="pid"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, pid, createDate
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from mail_list
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from mail_list
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.MailList">
+        insert into mail_list (id, name, pid,
+        createDate)
+        values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.MailList">
+        update mail_list
+        set name = #{name,jdbcType=VARCHAR},
+        pid = #{pid,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="getClassTreeList" resultType="map">
+        select m.* from (
+        SELECT
+        t.ID,
+        t.PID,
+        t.name AS TEXT,
+        t.mobile HREF,
+        0 CHILD_COUNT,
+        'closed' STATE,
+        b.headimgurl ICON
+        FROM
+        student t
+        LEFT JOIN portal.users a on t.id=a.user_id
+        left join portal.userinfo b on a.openId=b.unionid
+
+        WHERE
+        t.classId = #{classId} and t.status='1'
+        <if test='name!=null and name!=""'>
+            and t.name like
+            concat(#{name,jdbcType=VARCHAR},'%')
+        </if>
+        UNION ALL
+        SELECT
+        t.ID,
+        '0' PID,
+        t.name AS TEXT,
+        NULL HREF,
+        (
+        SELECT
+        count(1)
+        FROM
+        student a
+        WHERE
+        a.classId = #{classId} and a.status='1'
+        AND a.pid = t.id
+        ) CHILD_COUNT,
+        'closed' STATE,
+        null ICON
+        FROM
+        mail_list t where t.pid=#{classId} )m order by m.text
+    </select>
+    <select id="getTeacherTreeList" resultType="map">
+        SELECT
+        t.code ID,
+        '0' PID,
+        t.name TEXT,
+        NULL HREF,
+        (
+        SELECT
+        count(1)
+        FROM
+        policeschool.teacher a
+        WHERE
+        a.workUnitName = t.code
+        ) CHILD_COUNT,
+        'closed' STATE,
+        NULL ICON
+        FROM
+        portal.dict t
+        WHERE
+        t.category_id = '159'
+        UNION ALL
+        SELECT
+        t.ID,
+        t.workUnitName PID,
+        t.name AS TEXT,
+        t.mobile HREF,
+        0 CHILD_COUNT,
+        'closed' STATE,
+        b.headimgurl ICON
+        FROM
+        teacher t
+        LEFT JOIN portal.users a ON t.id = a.user_id
+        LEFT JOIN portal.userinfo b ON a.openId = b.unionid
+        WHERE
+        t.status = '1'
+        <if test='name!=null and name!=""'>
+            and t.name like
+            concat(#{name,jdbcType=VARCHAR},'%')
+        </if>
+
+    </select>
+
+
+    <select id="getList" resultType="map">
+        select id, name from student where classId=#{p.classId} and (pid is null or pid='0') order by name
+    </select>
+
+    <resultMap id="MailListContent" type="com.huacainfo.ace.policeschool.vo.MailListContent">
+        <id property="id" column="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <collection property="list" ofType="com.huacainfo.ace.policeschool.vo.Person">
+            <id property="id" column="personId"/>
+            <result property="name" column="personName"/>
+            <result property="mobile" column="mobile"/>
+            <result property="headimgurl" column="headimgurl"/>
+        </collection>
+    </resultMap>
+
+    <select id="getMailListContent" resultMap="MailListContent">
+        SELECT
+        t.id,
+        t.name,
+        s.id personId,
+        s.name personName,
+        s.mobile,
+        b.headimgurl
+        FROM mail_list t
+        left join (select id,pid,name,mobile from student where status='1') s on t.id=s.pid
+        LEFT JOIN portal.users a on s.id=a.user_id
+        left join portal.userinfo b on a.openId=b.unionid
+        where t.pid=#{classId} order by t.name ,s.name
+    </select>
+    <update id="updateClassesByIds">
+        update student t set t.pid=#{classId} where t.id =#{ids}
+
+    </update>
+
+
+    <select id="getClassList" resultType="map">
+        select id, name from classes where status='1'
+    </select>
+
+    <select id="getMeClassList" resultType="map">
+        select id,name from classes where headmaster=#{id} and status='1'
+    </select>
+
+    <select id="getTreeList" resultType="map">
+        select A.ID, A.PID, A.TEXT, A.CHILD_COUNT, A.HREF
+        from (
+        SELECT
+        '9999' ID,
+        '0' PID,
+        '教职工' TEXT,
+        1 CHILD_COUNT,
+        NULL HREF
+        FROM teacher t
+        LIMIT 1
+        )A
+        UNION ALL
+        SELECT
+        t.ID,
+        '0' PID,
+        t.`name` AS TEXT,
+        1 CHILD_COUNT,
+        NULL HREF
+        FROM
+        classes t
+        WHERE
+        t.`status` = '1'
+        UNION ALL
+        SELECT
+        t.ID,
+        t.classId PID,
+        t.`name` AS TEXT,
+        0 CHILD_COUNT,
+        t.mobile HREF
+        FROM
+        student t
+        WHERE
+        t.`status` = '1'
+        UNION ALL
+        SELECT
+        t.ID,
+        '9999' PID,
+        t.`name` AS TEXT,
+        0 CHILD_COUNT,
+        t.mobile HREF
+        FROM
+        teacher t
+        WHERE
+        t.`status` = '1'
+    </select>
+
+
+</mapper>

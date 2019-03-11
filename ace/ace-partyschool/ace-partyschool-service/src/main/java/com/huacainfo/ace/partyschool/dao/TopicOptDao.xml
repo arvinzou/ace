@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.TopicOptDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.TopicOpt">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="topicId" jdbcType="VARCHAR" property="topicId"/>
+        <result column="viewTag" jdbcType="VARCHAR" property="viewTag"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="answer" jdbcType="CHAR" property="answer"/>
+        <result column="index" jdbcType="INTEGER" property="index"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, topicId, viewTag, content, answer, index, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from topic_opt
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from topic_opt
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+    <delete id="deleteTopicOptByTopicId" parameterType="java.lang.String">
+    delete from topic_opt
+    where topicId = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.TopicOpt">
+    insert into topic_opt (
+    id,
+     topicId,
+     viewTag,
+      content,
+      answer,
+      `index`,
+      createDate
+      )
+    values (
+    #{id,jdbcType=VARCHAR},
+     #{topicId,jdbcType=VARCHAR},
+     #{viewTag,jdbcType=VARCHAR},
+      #{content,jdbcType=VARCHAR},
+      #{answer,jdbcType=CHAR},
+       #{index,jdbcType=INTEGER},
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.partyschool.model.TopicOpt">
+        insert into topic_opt
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="topicId != null">
+                topicId,
+            </if>
+            <if test="viewTag != null">
+                viewTag,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="answer != null">
+                answer,
+            </if>
+            <if test="index != null">
+                index,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="topicId != null">
+                #{topicId,jdbcType=VARCHAR},
+            </if>
+            <if test="viewTag != null">
+                #{viewTag,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                #{answer,jdbcType=CHAR},
+            </if>
+            <if test="index != null">
+                #{index,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.partyschool.model.TopicOpt">
+        update topic_opt
+        <set>
+            <if test="topicId != null">
+                topicId = #{topicId,jdbcType=VARCHAR},
+            </if>
+            <if test="viewTag != null">
+                viewTag = #{viewTag,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null">
+                answer = #{answer,jdbcType=CHAR},
+            </if>
+            <if test="index != null">
+                index = #{index,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.TopicOpt">
+    update topic_opt
+    set topicId = #{topicId,jdbcType=VARCHAR},
+      viewTag = #{viewTag,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=CHAR},
+      index = #{index,jdbcType=INTEGER},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

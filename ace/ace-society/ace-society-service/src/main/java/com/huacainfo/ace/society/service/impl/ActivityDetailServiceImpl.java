@@ -1,40 +1,37 @@
 package com.huacainfo.ace.society.service.impl;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.ActivityDao;
+import com.huacainfo.ace.society.dao.ActivityDetailDao;
 import com.huacainfo.ace.society.dao.PersonInfoDao;
 import com.huacainfo.ace.society.dao.PointsRecordDao;
+import com.huacainfo.ace.society.model.ActivityDetail;
 import com.huacainfo.ace.society.model.PointsRecord;
-import com.huacainfo.ace.society.service.ActivityService;
+import com.huacainfo.ace.society.service.ActivityDetailService;
+import com.huacainfo.ace.society.service.AuditRecordService;
+import com.huacainfo.ace.society.vo.ActivityDetailQVo;
+import com.huacainfo.ace.society.vo.ActivityDetailVo;
 import com.huacainfo.ace.society.vo.ActivityVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.society.dao.ActivityDetailDao;
-import com.huacainfo.ace.society.model.ActivityDetail;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.society.service.AuditRecordService;
-import com.huacainfo.ace.society.service.ActivityDetailService;
-import com.huacainfo.ace.society.vo.ActivityDetailVo;
-import com.huacainfo.ace.society.vo.ActivityDetailQVo;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Service("activityDetailService")
 /**
@@ -77,11 +74,8 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
     public PageResult
             <ActivityDetailVo> findActivityDetailList(ActivityDetailQVo condition, int start,
                                                       int limit, String orderBy) throws Exception {
-        PageResult
-                <ActivityDetailVo> rst = new PageResult<>();
-        List
-                <ActivityDetailVo> list = this.activityDetailDao.findList(condition,
-                start, limit, orderBy);
+        PageResult<ActivityDetailVo> rst = new PageResult<>();
+        List<ActivityDetailVo> list = this.activityDetailDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.activityDetailDao.findCount(condition);

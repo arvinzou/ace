@@ -13,9 +13,9 @@ import com.huacainfo.ace.portal.service.DepartmentService;
 import com.huacainfo.ace.portal.vo.DepartmentVo;
 import com.huacainfo.ace.taa.service.RegisterService;
 import com.huacainfo.ace.taa.vo.CustomerVo;
+import com.huacainfo.ace.taa.vo.RegisterRuleQVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -41,7 +41,6 @@ public class WRegisterController extends TaaBaseController {
      * @date: 2019/1/3 9:34
      */
     @RequestMapping("/isExistByMobile")
-    @ResponseBody
     public ResultResponse isExistByMobile(String mobile) throws Exception {
         boolean b = registerService.isExistByMobile(mobile);
         if (b) {
@@ -60,7 +59,6 @@ public class WRegisterController extends TaaBaseController {
      * @date: 2019/1/3 9:34
      */
     @RequestMapping("/sendSmsCode")
-    @ResponseBody
     public ResultResponse sendSmsCode(String mobile, String length) throws Exception {
         //参数验证
         if (CommonUtils.isBlank(mobile)) {
@@ -108,7 +106,6 @@ public class WRegisterController extends TaaBaseController {
      * 查询归属单位列表
      */
     @RequestMapping("/findDeptList")
-    @ResponseBody
     public PageResult<DepartmentVo> findDeptList(Department condition, PageParam page) throws Exception {
 
         condition.setSyid("taa");
@@ -131,7 +128,6 @@ public class WRegisterController extends TaaBaseController {
      * @return
      */
     @RequestMapping("/register")
-    @ResponseBody
     public ResultResponse register(String uid, String name, String mobile,
                                    String copNo, String deptId, String code) throws Exception {
         if (!StringUtil.areNotEmpty(name, mobile, copNo, deptId, code)) {
@@ -167,7 +163,6 @@ public class WRegisterController extends TaaBaseController {
      * @return ResultResponse
      */
     @RequestMapping("/findCustomerVo")
-    @ResponseBody
     public ResultResponse findCustomerVo(String uid) {
         //微信鉴权信息 --小程序
         WxUser user = getCurWxUser();
@@ -196,7 +191,6 @@ public class WRegisterController extends TaaBaseController {
      * @return ResultResponse
      */
     @RequestMapping("/updateMobile")
-    @ResponseBody
     public ResultResponse updateMobile(String mobile, String code, String uid) {
         if (StringUtil.isEmpty(mobile)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
@@ -220,6 +214,25 @@ public class WRegisterController extends TaaBaseController {
 
         return registerService.updateMobile(uid, mobile);
     }
+
+
+    /**
+     * 查询注册规则
+     *
+     * @param condition copNo-警号 必传
+     * @return ResultResponse
+     */
+    @RequestMapping("/findRegisterInfo")
+    public ResultResponse findRegisterInfo(RegisterRuleQVo condition) {
+
+
+        if (StringUtil.isEmpty(condition.getCopNo())) {
+            return new ResultResponse(ResultCode.FAIL, "缺少警号信息");
+        }
+
+        return registerService.findRegisterInfo(condition);
+    }
+
 }
 
 

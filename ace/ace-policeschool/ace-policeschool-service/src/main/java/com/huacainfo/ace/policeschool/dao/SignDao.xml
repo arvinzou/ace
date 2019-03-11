@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.policeschool.dao.SignDao">
+
+    <insert id="insertReg">
+        insert into portal.users (user_id, account, password,
+        sex, id_card, name,
+        department_id, area_code, birthday,
+        stauts, last_login_time, mobile,
+        email, seat, user_level,
+        create_time, fax, telphone,
+        qq, openId, cur_syid,
+        appOpenId)
+        values (
+        #{user.userId,jdbcType=VARCHAR}, #{user.account,jdbcType=VARCHAR}, #{user.password,jdbcType=VARCHAR},
+        #{user.sex,jdbcType=VARCHAR}, #{user.idCard,jdbcType=VARCHAR}, #{user.name,jdbcType=VARCHAR},
+        #{user.departmentId,jdbcType=VARCHAR}, #{user.areaCode,jdbcType=VARCHAR}, #{user.birthday,jdbcType=DATE},
+        #{user.stauts,jdbcType=VARCHAR}, #{user.lastLoginTime,jdbcType=TIMESTAMP}, #{user.mobile,jdbcType=VARCHAR},
+        #{user.email,jdbcType=VARCHAR}, #{user.seat,jdbcType=VARCHAR}, #{user.userLevel,jdbcType=VARCHAR},
+        #{user.createTime,jdbcType=TIMESTAMP}, #{user.fax,jdbcType=VARCHAR}, #{user.telphone,jdbcType=VARCHAR},
+        #{user.qq,jdbcType=VARCHAR}, #{user.openId,jdbcType=VARCHAR}, #{user.curSyid,jdbcType=VARCHAR},
+        #{user.appOpenId,jdbcType=VARCHAR})
+        ;
+        insert into portal.users_role
+        (user_id, role_id, create_time)
+        values(#{user.userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, now())
+        ;
+        insert into portal.user_cfg (id, userId, cfgKey,cfgValue)
+        values (#{user.userId,jdbcType=VARCHAR}, #{user.userId,jdbcType=VARCHAR}, 'portalType','1');
+    </insert>
+
+    <select id="isExistByMobile" resultType="int">
+        select count(*)
+        from portal.users
+        where mobile = #{mobile}
+        or account = #{mobile}
+    </select>
+
+    <select id="isExistByAccount" resultType="int">
+        select count(*)
+        from portal.users
+        where account = #{account}
+    </select>
+
+
+    <resultMap id="AcctResultMap" type="com.huacainfo.ace.policeschool.vo.AccountVo">
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="regType" jdbcType="VARCHAR" property="regType"/>
+        <result column="headimgurl" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <result column="isBindWx" jdbcType="VARCHAR" property="isBindWx"/>
+        <result column="lCardNo" jdbcType="VARCHAR" property="lCardNo"/>
+        <association property="student" column="sid" javaType="com.huacainfo.ace.policeschool.vo.StudentVo">
+            <id column="sid" jdbcType="VARCHAR" property="id"/>
+            <result column="sPid" jdbcType="VARCHAR" property="pid"/>
+            <result column="sName" jdbcType="VARCHAR" property="name"/>
+            <result column="sMobile" jdbcType="VARCHAR" property="mobile"/>
+            <result column="sIdCard" jdbcType="CHAR" property="idCard"/>
+            <result column="sPolitical" jdbcType="VARCHAR" property="political"/>
+            <result column="sWUName" jdbcType="VARCHAR" property="workUnitName"/>
+            <result column="sPostName" jdbcType="VARCHAR" property="postName"/>
+            <result column="sClsId" jdbcType="VARCHAR" property="classId"/>
+            <result column="sClsName" jdbcType="VARCHAR" property="clsName"/>
+            <result column="badgeNum" jdbcType="VARCHAR" property="badgeNum"/>
+            <result column="college" jdbcType="VARCHAR" property="college"/>
+            <result column="birthDate" jdbcType="TIMESTAMP" property="birthDate"/>
+            <result column="nativePlace" jdbcType="VARCHAR" property="nativePlace"/>
+        </association>
+        <association property="teacher" column="tid" javaType="com.huacainfo.ace.policeschool.vo.TeacherVo">
+            <id property="id" jdbcType="VARCHAR" column="tid"/>
+            <result column="tType" jdbcType="CHAR" property="category"/>
+            <result column="tName" jdbcType="VARCHAR" property="name"/>
+            <result column="tMobile" jdbcType="VARCHAR" property="mobile"/>
+            <result column="tIdCard" jdbcType="CHAR" property="idCard"/>
+            <result column="tPolitical" jdbcType="VARCHAR" property="political"/>
+            <result column="tWorkUnitName" jdbcType="VARCHAR" property="workUnitName"/>
+            <result column="tPostName" jdbcType="VARCHAR" property="postName"/>
+        </association>
+    </resultMap>
+
+    <select id="findByAcct" parameterType="java.lang.String" resultMap="AcctResultMap">
+        select
+        ui.nickname, ui.headimgurl,
+        ifnull(s.sex, t.sex) as sex,
+        u.user_level as regType, u.openId,
+        CASE when ISNULL(u.openId) || LENGTH(trim(u.openId)) &lt; 1 then '0' else '1' end as isBindWx,
+        cd.cardData as lCardNo,
+
+        s.id as sid,
+        s.pid as sPid, s.name as sName, s.mobile as sMobile, s.idCard as sIdCard,
+        s.political as sPolitical, s.workUnitName as sWUName, s.postName as sPostName,
+        s.classId as sClsId, '' as sClsName,
+        s.nativePlace, s.badgeNum, s.college, s.birthDate,
+
+        t.id as tid,
+        t.category as tType, t.name as tName,
+        t.mobile as tMobile, t.idCard as tIdCard,
+        t.political as tPolitical, d.name as tWorkUnitName, t.postName as tPostName
+        from portal.users u
+        left join portal.userinfo ui on u.openId = ui.unionid
+        left join policeschool.student s on u.user_id = s.id
+        left join policeschool.teacher t on u.user_id = t.id
+        left join policeschool.card_data cd on u.user_id = cd.userId
+        LEFT JOIN portal.dict d on d.category_id ='156' and t.workUnitName = d.code
+        where u.account = #{acct,jdbcType=VARCHAR}
+    </select>
+
+
+    <resultMap id="usersVo" type="com.huacainfo.ace.portal.vo.UsersVo">
+        <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="ACCOUNT" property="account" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="SEX" property="sex" jdbcType="CHAR"/>
+        <result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="DEPARTMENT_ID" property="departmentId" jdbcType="VARCHAR"/>
+        <result column="DEPARTMENT_NAME" property="departmentName" jdbcType="VARCHAR"/>
+        <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR"/>
+        <result column="AREA_NAME" property="areaName" jdbcType="VARCHAR"/>
+        <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="STAUTS" property="stauts" jdbcType="CHAR"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="TELPHONE" property="telphone" jdbcType="VARCHAR"/>
+        <result column="FAX" property="fax" jdbcType="VARCHAR"/>
+        <result column="QQ" property="qq" jdbcType="VARCHAR"/>
+        <result column="SEAT" property="seat" jdbcType="VARCHAR"/>
+        <result column="USER_LEVEL" property="userLevel" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="DEPARTMENT_NAME" property="departmentName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findByOpenId" parameterType="java.lang.String" resultMap="usersVo">
+        select
+
+        t.user_id, t.account, t.sex, t.openId, t.appOpenId,
+        t.id_card, t.name, t.department_id, s.department_name,
+        t.area_code, s2.name area_name,
+        t.birthday, t.stauts, t.last_login_time, t.mobile, t.email,
+        t.telphone, t.qq, t.fax, t.seat, t.user_level,
+        t.create_time, s3.nickname, s3.headimgurl,s4.nickName, s4.avatarUrl
+
+        from portal.users t
+        left join portal.department s on t.department_id=s.department_id
+        left join portal.province s2 on t.area_code=s2.code
+        left join portal.userinfo s3 on t.openId=s3.unionid
+        left join portal.wx_user s4 on t.appOpenId=s4.unionId
+        where t.openId = #{uid,jdbcType=VARCHAR}
+        and t.cur_syid= #{sysId,jdbcType=VARCHAR}
+    </select>
+
+    <update id="bindUserWx" parameterType="java.lang.String">
+        update portal.users
+        set openId = #{unionid,jdbcType=CHAR},
+        appOpenId = #{unionid,jdbcType=CHAR}
+        where cur_syid = #{sysId,jdbcType=VARCHAR}
+        and account = #{account,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updatePwd" parameterType="java.lang.String">
+        update portal.users
+        set `password` = #{newPwd,jdbcType=CHAR}
+        where account = #{account,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateUsersStatus" parameterType="java.lang.String">
+        update portal.users
+        set stauts = #{status,jdbcType=CHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateAccount" parameterType="java.lang.String">
+        update portal.users
+        set account = #{newAccount,jdbcType=CHAR},
+        mobile = #{newAccount,jdbcType=CHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+</mapper>

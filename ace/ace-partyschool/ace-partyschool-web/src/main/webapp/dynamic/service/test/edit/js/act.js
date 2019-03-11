@@ -2,21 +2,27 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("<li><span>编辑课程管理</span></li>");
+        $(".breadcrumb").append("<li><span>编辑测评结果管理</span></li>");
         initForm();
         initEvents();
     });
 }
 
-function formatState (state) {
-    if (!state.id) {
-        return state.text;
-    }
-    var $state = $(
-        '<div style="height: 50px; margin-bottom: 5px;"><img style="height: 50px;width: 50px;object-fit: cover; overflow: hidden;margin-right: 10px" src="'+state.photoUrl+'" class="img-flag" /> ' + state.text + '</div>'
-    );
-    return $state;
-};
+function initEditor() {
+    editor = new Simditor({
+        textarea: $('textarea[name=introduce]'),
+        toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
+            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
+        ],
+        upload: {
+            url: portalPath + '/files/uploadImage.do',
+            params: null,
+            fileKey: 'file',
+            connectionCount: 3,
+            leaveConfirm: '正在上传文件'
+        }
+    });
+}
 
 /*页面渲染*/
 function render(obj, data, tplId) {
@@ -27,6 +33,43 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
+function initPage() {
+    // $("input[name=startTime]").datetimepicker({
+    //     format: 'yyyy-mm-dd hh:ii:ss',
+    //     language: 'zh-CN',
+    //     weekStart: 1,
+    //     todayBtn: 1, //显示‘今日’按钮
+    //     autoclose: 1,
+    //     todayHighlight: 1,
+    //     startView: 2,
+    //     minView: 'hour', //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+    //     clearBtn: true, //清除按钮
+    //     forceParse: 0
+    // }).on('hide', function(event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    //     var startTime = event.date;
+    //     $("input[name=endTime]").datetimepicker('setStartDate',startTime);
+    //     $("input[name=endTime]").val("");
+    // });
+    // $("input[name=endTime]").datetimepicker({
+    //     format: 'yyyy-mm-dd hh:ii:ss',
+    //     language: 'zh-CN',
+    //     weekStart: 1,
+    //     todayBtn: 1, //显示‘今日’按钮
+    //     autoclose: 1,
+    //     todayHighlight: 1,
+    //     startView: 2,
+    //     minView: 'hour', //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+    //     clearBtn: true, //清除按钮
+    //     forceParse: 0
+    // }).on('hide', function(event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    //     var endTime = event.date;
+    //     $("input[name=startTime]").datetimepicker('setEndDate',endTime);
+    // });
+}
 
 function initEvents() {
     /*表单验证*/
@@ -35,15 +78,12 @@ function initEvents() {
             $(element).valid();
         },
         rules: {
-            name: {required: true, maxlength: 50}, category: {required: true, maxlength: 50}
+            name: {required: true, maxlength: 50}
         },
         messages: {
             name: {
-                required: "请输入名称",
-                maxlength: "名称字符长度不能超过50"
-            }, category: {
-                required: "请输入类别",
-                maxlength: "类别字符长度不能超过50"
+                required: "请输入测试名称",
+                maxlength: "测试名称字符长度不能超过50"
             }
         }
     });
@@ -56,7 +96,7 @@ function initEvents() {
             });
             $.extend(params, {
                 time: new Date(),
-                id: urlParams.did
+//coverUrl: $('#coverUrl').attr("src")
             });
             console.log(params);
             save(params);
@@ -68,9 +108,10 @@ function initEvents() {
 /*保存表单**/
 function save(params) {
     $.extend(params, {});
+    params.id=urlParams.did;
     startLoad();
     $.ajax({
-        url: contextPath + "/course/updateCourse",
+        url: contextPath + "/test/updateTest",
         type: "post",
         async: false,
         data: {
@@ -90,91 +131,10 @@ function save(params) {
     });
 }
 
-function initSelect(data) {
-    var select2=$(".js-example-basic-single1").select2({
-        ajax: {
-            url: contextPath + "/evaluating/findEvaluatingList",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                return {
-                    name: params.term, // search term
-                    page: params.page
-                };
-            },
-            processResults: function (data, params) {
-                params.page = params.page || 1;
-                var datas = $.map(data.rows, function (obj) {
-                    obj.text = obj.text || obj.name; // replace name with the property used for the text
-                    return obj;
-                });
-                datas = $.map(datas, function (obj) {
-                    obj.id = obj.id; // replace name with the property used for the text
-                    return obj;
-                });
-                return {
-                    results: datas,
-                    pagination: {
-                        more: (params.page * 30) < data.total_count
-                    },
-                    paginate: {
-                        more: true
-                    }
-                };
-            },
-            cache: true
-        },
-        placeholder: '选择测评模板',
-        escapeMarkup: function (markup) {
-            return markup;
-        }, // let our custom formatter work
-    });
-
-    var select3=$(".js-example-basic-single2").select2({
-        ajax: {
-            url: contextPath + '/teacher/findTeacherList',
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                return {status:1,
-                    name: params.term, // search term
-                    page: params.page
-                };
-            },
-            processResults: function (data, params) {
-                params.page = params.page || 1;
-                var datas = $.map(data.rows, function (obj) {
-                    obj.text = obj.text || obj.name; // replace name with the property used for the text
-                    return obj;
-                });
-                datas = $.map(datas, function (obj) {
-                    obj.id = obj.id; // replace name with the property used for the text
-                    return obj;
-                });
-                return {
-                    results: datas,
-                    pagination: {
-                        more: (params.page * 30) < data.total_count
-                    },
-                    paginate: {
-                        more: true
-                    }
-                };
-            },
-            cache: true
-        },
-        placeholder: '选择授课讲师',
-        escapeMarkup: function (markup) {
-            return markup;
-        }, // let our custom formatter work
-        templateResult: formatState
-    });
-}
-
 function initForm() {
     startLoad();
     $.ajax({
-        url: contextPath + "/course/selectCourseByPrimaryKey",
+        url: contextPath + "/test/selectTestByPrimaryKey",
         type: "post",
         async: false,
         data: {id: urlParams.did},
@@ -183,9 +143,10 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                data['dict154']=staticDictObject['154'];
                 render('#fm-edit', data, 'tpl-fm');
-                initSelect(data);
+                initPage();
+//富文本填值
+//editor.setValue(data['o'].summary);
             } else {
                 alert(result.errorMessage);
             }

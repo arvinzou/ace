@@ -6,22 +6,55 @@ $(function(){
 		],
         onSelected: function (view, date, data) {
             console.log(formatDate(date));
-            findAttDataByDay(formatDate(date));
+            initData(formatDate(date));
         }
     });
 
 	var nowDate =formatDate(new Date());
-    findAttDataByDay(nowDate);
+    initData(nowDate);
 });
 
-function  findAttDataByDay(date) {
+function initData(date){
     $.ajax({
-        url: server+"/api/www/api/findAttDataByDay",
+        url:  contextPath+ "/www/sign/getAcctInfo",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data:{
-            lCardNo: 'Z0000187',
+        },
+        success:function(result){
+            if(result.status == 0) {
+                lCardNo = result.data.lCardNo;
+                if(lCardNo){
+                    findAttDataByDay(date, lCardNo);
+                }else{
+                    alert("您还没有绑定卡的信息！");
+                }
+
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+
+}
+
+function  findAttDataByDay(date, cardId) {
+    $.ajax({
+        url: "/api/www/api/findAttDataByDay",
+        type:"post",
+        async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data:{
+            lCardNo: cardId,
             dateTimeStr: date
         },
         success:function(result){

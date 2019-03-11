@@ -60,7 +60,7 @@
 
     <sql id="Vo_Column_List">
         case
-        when t.userType= 'student' then (select name from student where id = userId)
+        when t.userType= 'student' then s.`name`
         when t.userType= 'teacher' then '教职工'
         ELSE '' end userName,
         case
@@ -72,6 +72,7 @@
     </sql>
     <sql id="From_Statement">
         FROM att_record t
+        left join student s on t.userType= 'student' and t.userId = s.id
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
@@ -82,13 +83,19 @@
             and t.userType = #{condition.userType,jdbcType=VARCHAR}
         </if>
         <if test="condition.attTime !=null and condition.attTime !=&quot;&quot;">
-            and t.attTime like concat(#{condition.attTime,jdbcType=VARCHAR},'%')
+            and t.attTime = #{condition.attTime,jdbcType=VARCHAR}
         </if>
         <if test="condition.longitude !=null and condition.longitude !=&quot;&quot;">
             and t.longitude = #{condition.longitude,jdbcType=VARCHAR}
         </if>
         <if test="condition.latitude !=null and condition.latitude !=&quot;&quot;">
             and t.latitude = #{condition.latitude,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.dateTimeStr !=null and condition.dateTimeStr !=&quot;&quot;">
+            and t.attTime like concat(#{condition.dateTimeStr,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and s.`name` like concat(#{condition.name,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 
@@ -123,7 +130,16 @@
 
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.AttRecord">
         select count(1)
-        from student
-        where mobile = #{mobile,jdbcType=VARCHAR}
+        from att_record t
+        where t.attTime like concat(#{attTimeStr,jdbcType=VARCHAR},'%')
+        and t.userId = #{userId,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="getAttSrc" parameterType="java.lang.String" resultType="map">
+       select *
+       from portal.config t
+       where t.syid='partyschool'
+        and t.config_key='att_src'
     </select>
 </mapper>

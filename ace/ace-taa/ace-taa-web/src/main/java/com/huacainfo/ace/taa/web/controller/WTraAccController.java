@@ -1,13 +1,17 @@
 package com.huacainfo.ace.taa.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.taa.service.TraAccService;
+import com.huacainfo.ace.taa.vo.TraAccQVo;
 import com.huacainfo.ace.taa.vo.TraAccVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +28,37 @@ public class WTraAccController extends TaaBaseController {
 
     @Autowired
     private TraAccService traAccService;
+
+    /**
+     * 获取事故报表 --小程序端展示
+     *
+     * @param condition 条件查询
+     * @param page      分页条件
+     * @return PageResult<TraAccVo>
+     * @throws Exception
+     */
+    @RequestMapping("/findList")
+    public ResultResponse findList(String uid,
+                                   TraAccQVo condition,
+                                   PageParamNoChangeSord page) throws Exception {
+        //微信鉴权信息 --小程序
+        WxUser user = getCurWxUser();
+        if (StringUtil.isNotEmpty(uid)) {
+            user = new WxUser();
+            user.setUnionId(uid);
+            user.setNickName("test");
+        }
+        if (user == null) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+        }
+        //同部门筛选条件
+        UserProp u = parseUser(user);
+        if (u == null) {
+            return new ResultResponse(ResultCode.FAIL, "账户信息有误");
+        }
+
+        return traAccService.findViewList(u, condition, page);
+    }
 
     /**
      * 功能描述: 事故快报
@@ -49,9 +84,6 @@ public class WTraAccController extends TaaBaseController {
         if (CommonUtils.isBlank(params.getWeather())) {
             return new ResultResponse(ResultCode.FAIL, "天气不能为空！");
         }
-//        if (CommonUtils.isBlank(params.getVehicleType())) {
-//            return new ResultResponse(ResultCode.FAIL, "车型不能为空！");
-//        }
         if (CommonUtils.isBlank(params.getAddress())) {
             return new ResultResponse(ResultCode.FAIL, "事故发生地点不能为空！");
         }
@@ -72,7 +104,7 @@ public class WTraAccController extends TaaBaseController {
     /**
      * 功能描述: 事故续报
      *
-     * @param uid    用户ID， 可选
+     * @param uid  用户ID， 可选
      * @param data 续报参数
      * @return: ResultResponse
      * @auther: Arvin Zou

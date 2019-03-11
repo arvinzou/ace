@@ -157,6 +157,26 @@
 						<div class="menu-content">已绑定班级</div>
 					</div>
 				</div>
+				<div class="item" onclick="makeAttand();">
+					<div class="item-left">
+						<img src="img/icon-phone-card.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">手机考勤</div>
+						<div class="menu-content">签到</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="item mr" onclick="bookList();">
+					<div class="item-left">
+						<img src="img/icon-bookList.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">借阅记录</div>
+						<div class="menu-content">查看记录</div>
+					</div>
+				</div>
 			</div>
 			{@else}
 
@@ -194,6 +214,15 @@
 					<div class="item-right">
 						<div class="menu-title">班级文件</div>
 						<div class="menu-content">查看文件</div>
+					</div>
+				</div>
+				<div class="item" onclick="bookList();">
+					<div class="item-left">
+						<img src="img/icon-bookList.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">借阅记录</div>
+						<div class="menu-content">查看记录</div>
 					</div>
 				</div>
 			</div>

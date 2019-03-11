@@ -209,15 +209,21 @@ function deleteData(id) {
 
 
 /*查看详情*/
-function details(id) {
+/*查看详情*/
+function signInfo(id,total) {
     var url = contextPath + "/activity/selectActivityByPrimaryKey";
-    $.getJSON(url, {id: id}, function (result) {
+    var data={
+        id:id,
+        start:0,
+        limit:total
+    }
+    $.getJSON(url,data, function (result) {
         if (result.status == 0) {
-            var navitem = document.getElementById('tpl-detail').innerHTML;
+            var navitem = document.getElementById('tpl-fm-sign').innerHTML;
             var html = juicer(navitem, {data: result.value});
-            $("#fm-detail").html(html);
-            $("#modal-detail").modal("show");
-            initPhotoPreview(".my-gallery img");
+            $("#fm-sign").html(html);
+            $("#preview").modal("show");
+            initPhotoPreview(".sign-content .imgBox img");
         }
     });
 }
@@ -355,6 +361,21 @@ function initPhotoPreview(imgSelector) {
     });
 
     initPhotoSwipeFromDOM('.my-gallery');
+}
+
+
+/*查看详情*/
+function details(id) {
+    var url = contextPath + "/activity/selectActivityByPrimaryKey";
+    $.getJSON(url, {id: id}, function (result) {
+        if (result.status == 0) {
+            var navitem = document.getElementById('tpl-detail').innerHTML;
+            var html = juicer(navitem, {data: result.value});
+            $("#fm-detail").html(html);
+            $("#modal-detail").modal("show");
+            initPhotoPreview(".my-gallery img");
+        }
+    });
 }
 
 var initPhotoSwipeFromDOM = function (gallerySelector) {

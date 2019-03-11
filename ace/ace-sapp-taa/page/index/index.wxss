@@ -13,12 +13,12 @@ view, map, cover-view {
 #accidentMap {
     padding: 80rpx 0 0rpx;
     width: 100%;
-    height: 87%;
+    height: 100%;
     transition: 0.2s;
 }
 
 .activeEdit {
-    height: 20% !important;
+    height: 42% !important;
 }
 
 .tab {
@@ -110,9 +110,10 @@ view, map, cover-view {
     height: 160rpx;
     padding-top: 38rpx;
 }
-
-.fromContent .content .main button {
+.active-btn{
+    width: 430rpx;
     height: 100rpx;
+    float: right;
     background: rgba(67, 80, 252, 1);
     box-shadow: 0px 0px 10px 0px rgba(67, 252, 80, 0.35);
     border-radius: 50px;
@@ -122,26 +123,82 @@ view, map, cover-view {
     color: rgba(255, 255, 255, 1);
     line-height: 100rpx;
 }
-
-.fromContent .content .close-open {
-    width: 30rpx;
-    height: 16rpx;
-    display: block;
-    margin: 20rpx auto;
+.cancel-btn{
+    width: 240rpx;
+    height: 100rpx;
+    float: left;
+    line-height: 100rpx;
+    text-align: center;
+    border:1px solid rgba(215,217,223,1);
+    box-shadow:0rpx 0rpx 10rpx 0rpx rgba(215, 223, 217, 0.35);
+    border-radius:47rpx;
+    color: #ABAEB9;
+    font-size: 38rpx;
 }
 
+.close-open{
+    width: 30rpx;
+    height: 16rpx;
+}
+.close-open-box{
+    width: 100%;
+    height: 56rpx;
+    line-height: 56rpx;
+    text-align: center;
+}
+.locate-name-wrapper{
+  display: flex;
+  align-items: center;
+}
+.select-arrow-div{
+  flex: 1;
+  padding-left:20rpx;
+}
 .fromContent .content .locate-name {
     color: #373f53;
     font-size: 36rpx;
     font-weight: bold;
+    width: 100%;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
 }
 
-.fromContent .content .locate-road {
-    line-height: 40rpx;
+.locate-road {
     color: #abaeb9;
     font-size: 28rpx;
 }
 
+.locate-road::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.add-box{
+    width: 75%;
+    height: 40rpx;
+    line-height: 40rpx;
+    float: left;
+}
+.reset-section{
+    width: 25%;
+    height: 40rpx;
+    float: left;
+    text-align: right;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+}
+.reset-section image{
+    width: 34rpx;
+    height: 34rpx;
+}
+.reset-section text{
+    font-size: 24rpx;
+    color: #4350FC;
+    padding-left: 7rpx;
+}
 .select-arrow {
     width: 11rpx;
     height: 20rpx;
@@ -175,8 +232,8 @@ view, map, cover-view {
 }
 
 .carCheckBox label {
+    width: 50%;
     display: inline-block;
-    width: 7em;
     margin-bottom: 20rpx;
 }
 
@@ -306,6 +363,7 @@ view, map, cover-view {
     bottom: 42rpx;
     right: 30rpx;
 }
+
 .map{
     position: relative;
 }
@@ -317,8 +375,266 @@ view, map, cover-view {
     right: 12rpx;
 }
 .icon-control-map{
+    position: relative;
     width: 105rpx;
     height: 105rpx;
 }
+.icon-dingwei{
+  width: 140rpx;
+  height: 140rpx;
+}
+.load-dingwei{
+  right:18rpx;
+  bottom: 30prpx;
+}
 
-/* ******************************************** */
+/* ****************添加快报，路段选择弹框**************************** */
+.add-kb{
+    width: 159rpx;
+    height: 159rpx;
+    position: fixed;
+    bottom: 100rpx;
+    left: 296rpx;
+}
+.section-modal{
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.5);
+    position: relative;
+}
+.modal-content{
+    width: 88%;
+    height: 820rpx;
+    margin-top: 173rpx;
+    margin-left: 6%;
+    margin-right: 6%;
+    background: rgba(255,255,255,1);
+    border-radius: 10rpx;
+    position: relative;
+}
+.modal-content-title{
+    padding-top: 49rpx;
+    padding-left: 33rpx;
+    color: #373F53;
+    font-size: 33rpx;
+    font-weight: bold;
+}
+.modal-item{
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    border-bottom: 1px solid #F0EFF6;
+}
+.modal-item-name{
+    width: 100%;
+    height: auto;
+    color: 30rpx;
+    font-weight: bold;
+    padding-top: 30rpx;
+    word-wrap:break-word;
+}
+.modal-item-detail{
+    padding-top: 19rpx;
+    padding-bottom: 30rpx;
+}
+.modal-item-detail::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.distance{
+    color: #ABAEB9;
+    font-size: 30rpx;
+    float: left;
+}
+.section-flag{
+    width: 67rpx;
+    height: 36rpx;
+    line-height: 36rpx;
+    text-align: center;
+    background:rgba(230,232,255,0.8);
+    border-radius: 4rpx;
+    color: #2430E3;
+    font-size: 24rpx;
+    float: left;
+    margin-left: 30rpx;
+}
+
+.modal-confirm{
+    width: 80%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    background:rgba(67,80,252,1);
+    box-shadow:0rpx 0rpx 10rpx 0rpx rgba(67, 252, 80, 0.35);
+    border-radius:50rpx;
+    color: #FFFFFF;
+    position: absolute;
+    left: 10%;
+    bottom: 60rpx;
+}
+.close-modal{
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    bottom: 100rpx;
+    left: 345rpx;
+}
+.secion-check{
+    width: 28rpx;
+    height: 28rpx;
+    float: right;
+}
+
+/************车型选择复选框弹框*****************/
+.carType-modal{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    bottom: 0;
+    transition: 0.2s;
+}
+.carType-content{
+    width: 100%;
+    height: 58%;
+    background: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    z-index: 500;
+}
+.carType-opts{
+    width: 100%;
+    height: 100rpx;
+    border: 1px solid #F0EFF6;
+}
+.carType-opts::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.carType-cancel{
+    width: 100rpx;
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    color: #ABAEB9;
+    font-size: 36rpx;
+    font-weight: bold;
+    float: left;
+}
+.carType-confirm{
+    width: 100rpx;
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    color: #2430E3;
+    font-size: 36rpx;
+    font-weight: bold;
+    float: right;
+}
+.carType-title{
+    width: 100%;
+    height: auto
+}
+.modal-title01{
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: bold;
+    padding-left: 20rpx;
+    float: left;
+    padding-top: 40rpx;
+    padding-bottom: 40rpx;
+}
+.modal-title02{
+    color: #ABAEB9;
+    font-size: 28rpx;
+    font-weight: bold;
+    float: left;
+    padding-top: 40rpx;
+    padding-bottom: 40rpx;
+}
+.carType-items{
+    width: 96%;
+    height: auto;
+    margin: 0 auto;
+}
+.carType-items::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.carType-item{
+    width: 33.33%;
+    height: 90rpx;
+    line-height: 90rpx;
+    float: left;
+}
+.carType-item::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.cartype-default{
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: 500;
+}
+.carType-active{
+    font-weight: bold;
+    color: #4350FC;
+}
+.form-input{
+    text-align: right;
+    padding-right: 30rpx;
+}
+.checkTypes{
+    width: 40rpx;
+    height: 40rpx;
+    float: left;
+    margin-right: 10rpx;
+}
+.checkName{
+    float: left;
+}
+.carTypeTips{
+    color: #ABAEB9;
+    font-size: 32rpx;
+}
+.tips{
+    width: 100%;
+    height: 200rpx;
+    text-align: center;
+    line-height: 200rpx;
+    color: #ABAEB9;
+    font-size: 34rpx;
+    font-weight: 500;
+}
+
+/**********弹框未查询到路段样式****************/
+.section-blank{
+    width: 382rpx;
+    height: 230rpx;
+    margin: 135rpx 76rpx auto;
+}
+.tip-opts{
+    width: 540rpx;
+    height: 60rpx;
+    margin:60rpx auto;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    text-align: center;
+}
+.tip-opts::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.tips-detail{
+    color: #373F53;
+    float: left;
+}
+.opts-detail{
+    color: #4350FC;
+    float: left;
+}

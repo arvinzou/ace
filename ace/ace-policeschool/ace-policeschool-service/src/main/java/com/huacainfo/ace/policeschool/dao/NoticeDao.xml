@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.policeschool.dao.NoticeDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.policeschool.model.Notice">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="category" jdbcType="CHAR" property="category"/>
+        <result column="classesId" jdbcType="VARCHAR" property="classesId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="fileUrl" jdbcType="VARCHAR" property="fileUrl"/>
+        <result column="pushDate" jdbcType="TIMESTAMP" property="pushDate"/>
+        <result column="publisher" jdbcType="VARCHAR" property="publisher"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.policeschool.model.Notice">
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, category, classesId, title, fileUrl, pushDate, publisher, status,content
+    </sql>
+    <sql id="Blob_Column_List">
+        content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from notice
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from notice
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.Notice">
+        insert into notice (id, category, classesId,
+        title, fileUrl, pushDate,
+        publisher, status, content
+        )
+        values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=CHAR}, #{classesId,jdbcType=VARCHAR},
+        #{title,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, #{pushDate,jdbcType=TIMESTAMP},
+        #{publisher,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{content,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.Notice">
+        update notice
+        set
+        title = #{title,jdbcType=VARCHAR},
+        status =#{status,jdbcType=VARCHAR},
+        content=#{content,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.NoticeVo">
+
+    </resultMap>
+
+
+    <sql id="whereCondition">
+        FROM notice n where 1 = 1
+        <if test='condition.title !=null and condition.title !=""'>
+            and n.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.status !=null and condition.status !=""'>
+            and n.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.classesId !=null and condition.category==2'>
+            and n.classesId = #{condition.classesId,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.category !=null'>
+            and n.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.id !=null'>
+            and n.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+
+
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
+        from notice n
+        where n.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findMyNoticeList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
+        from notice_status ns
+        LEFT JOIN notice n ON n.id = ns.noticeId
+        where 1=1
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            AND ns.userId = #{condition.userId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            AND ns.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY pushDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findPublicNoticeList" parameterType="java.lang.String" resultMap="VoResultMap">
+        ( select
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
+        from notice n
+        WHERE n.category='1'
+        ORDER BY pushDate desc
+        limit 0,1)
+        union all
+        (select
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
+        from notice n
+        WHERE n.classesId=#{classesId,jdbcType=VARCHAR} AND n.category='2'
+        ORDER BY pushDate desc
+        limit 0,1)
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content,
+        (select count(1) from notice_status a
+        where n.id=a.noticeId
+        and a.userId in ( select user_id from portal.users where cur_syid='policeschool')
+        ) pushed,
+        (select count(1) from notice_status a
+        where n.id=a.noticeId and a.status='2'
+        and a.userId in ( select user_id from portal.users where cur_syid='policeschool') )viewed
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY pushDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findUnreadCount" resultType="int">
+        SELECT COUNT(*)
+        from notice n
+        LEFT JOIN notice_status ns ON n.id = ns.noticeId
+        WHERE ns.`status`=1
+        and ns.userId=#{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Classroom">
+        select count(*)
+        from notice
+        where
+        title=#{title}
+    </select>
+
+    <update id="updateStatus">
+        update notice_status
+        set status = '2'
+        where noticeId = #{noticeId,jdbcType=VARCHAR}
+        and
+        userId = #{userId,jdbcType=VARCHAR}
+    </update>
+    <select id="selectFilesById" resultType="map">
+        select t.file_name fileName,concat(#{server},t.file_url) fileUrl,t.file_size fileSize
+        from portal.attach t
+        where t.notice_id= #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUsersById" resultType="map">
+        SELECT
+        a.id userId,
+        a.name,
+        t.status
+        FROM notice_status t
+        INNER JOIN (
+        SELECT name, id FROM student
+        UNION ALL
+        SELECT name, id FROM teacher
+        )a ON t.userId = a.id
+        where t.noticeId = #{id}
+    </select>
+</mapper>

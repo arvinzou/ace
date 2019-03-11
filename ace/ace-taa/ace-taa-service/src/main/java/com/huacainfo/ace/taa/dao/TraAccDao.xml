@@ -45,8 +45,15 @@
     <sql id="Base_Column_List">
         id, address, latitude, longitude, areaCode, weather, vehicleType, status, accidentTime,
         roadSectionId, roadManId, deadthToll, injuries, cause, createUserId, createUserName,
-        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
     </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tra_acc
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
         tc.id as causeId, tc.cause as itemCause, tc.causeName,
@@ -54,7 +61,9 @@
 
         d.name as roadName, d.category,
         t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
-        t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
+        t.roadSectionId, t.roadManId,
+        ifnull(t.deadthToll, 0) deadthToll, ifnull(t.injuries, 0) injuries,
+        t.cause, t.createUserName,t.lastModifyUserName,
         t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
     from tra_acc t
     inner join road_man a on t.roadManId=a.id
@@ -120,7 +129,20 @@
         inner join road_section b on t.roadSectionId=b.id
         inner join portal.province c on t.areaCode=c.code
         inner join road d on b.roadId=d.id
+        left join portal.users u on t.createUserId = u.user_id
         where t.status='1'
+        <if test='condition.officeAdmin!=null and condition.deptId!=""'>
+            <choose>
+                <when test='condition.officeAdmin =="1"'>
+                </when>
+                <otherwise>
+                    and t.createUserId = #{condition.officeAdmin,jdbcType=VARCHAR}
+                </otherwise>
+            </choose>
+        </if>
+        <if test='condition.deptId!=null and condition.deptId!=""'>
+            and u.department_id = #{condition.deptId,jdbcType=VARCHAR}
+        </if>
         <if test='condition.roadManName!=null and condition.roadManName!=""'>
             and a.name like
             concat('%',#{condition.roadManName,jdbcType=VARCHAR},'%')
@@ -193,7 +215,9 @@
         select
         d.name as roadName, d.category,
         t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
-        t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
+        t.roadSectionId, t.roadManId,
+        ifnull(t.deadthToll,0) as deadthToll, ifnull(t.injuries,0) as injuries,
+        t.cause, t.createUserName,t.lastModifyUserName,
         t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
         <include refid="whereCondition"/>
         <choose>
@@ -355,7 +379,7 @@
         FROM tra_acc t
         WHERE t.`status` = '1'
         <if test='areaCode!=null and areaCode!=""'>
-            and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+            and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
         </if>
         <if test='roadManId!=null and roadManId!=""'>
             and t.roadManId = #{roadManId,jdbcType=VARCHAR}
@@ -365,7 +389,7 @@
         select gps_x longitude,gps_y latitude ,area_name areaName,area_code areaCode from portal.gps_chian where area_code=#{areaCode}
     </select>
     <select id="getTraAccList" resultType="map">
-        select  t.id, t.latitude, t.longitude,t.deadthToll, t.injuries,a.name roadManName
+        select t.id, t.latitude, t.longitude,t.deadthToll, t.injuries,a.name roadManName
         from tra_acc t
         inner join road_man a on t.roadManId=a.id
         inner join road_section b on t.roadSectionId=b.id
@@ -438,15 +462,17 @@
     (SELECT
     count(1)
     from taa.tra_acc t
-    where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
-    and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+    where t.`status` = '1'
+    and t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+    and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
     ) as accTimes ,
     (
     SELECT
     sum(t.deadthToll)
     from taa.tra_acc t
-    where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
-    and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+    where t.`status`='1'
+    and t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+    and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
     ) as deathNum
     from taa.tra_acc
     LIMIT 1
@@ -459,8 +485,9 @@
         select
         t.roadManId,sum(deadthToll) as deathNum
         from taa.tra_acc t
-        where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
-        and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+        where t.`status`='1'
+          and t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+          and t.areaCode like concat(#{areaCode,jdbcType=VARCHAR},'%')
         GROUP by t.roadManId
         )A
         LEFT JOIN road_man rm on a.roadManId = rm.id
@@ -479,7 +506,8 @@
                 select
                 t.areaCode ,SUM(deadthToll) as deathNum
                 from taa.tra_acc t
-                where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+                where t.`status`='1'
+                and t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
                 GROUP BY t.areaCode
                 )A
                 left join portal.province p on a.areaCode = p.`code`
@@ -494,7 +522,8 @@
                 select
                 t.areaCode ,count(1) as accTimes
                 from taa.tra_acc t
-                where t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+                where t.`status`='1'
+                and t.accidentTime like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
                 GROUP BY t.areaCode
                 )A
                 left join portal.province p on a.areaCode = p.`code`

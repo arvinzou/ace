@@ -6,22 +6,27 @@
         <result column="roadSectionId" jdbcType="VARCHAR" property="roadSectionId"/>
         <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
         <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="gatherTime" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
     <insert id="insert" parameterType="com.huacainfo.ace.taa.model.RoadGps">
     insert into road_gps (id, roadSectionId, latitude, 
-      longitude, createUserId, createUserName, 
-      createDate)
+      longitude, createUserId, createUserName, createDate, gatherTime)
     values (#{id,jdbcType=VARCHAR}, #{roadSectionId,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, 
       #{longitude,jdbcType=DECIMAL}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP})
+      #{createDate,jdbcType=TIMESTAMP}, #{gatherTime,jdbcType=TIMESTAMP})
   </insert>
     <select id="getList" resultType="map">
-    select   id, roadSectionId, latitude, longitude, createUserId, createUserName,  DATE_FORMAT(createDate,"%Y-%m-%d %T") createDate
+    select
+    id, roadSectionId, latitude, longitude,
+    createUserId, createUserName,
+    DATE_FORMAT(createDate,"%Y-%m-%d %T") createDate,
+    DATE_FORMAT(gatherTime,"%Y-%m-%d %T") gatherTime
     from road_gps
-    where roadSectionId=#{p.id} order by createDate
+    where roadSectionId=#{p.id}
+    order by gatherTime
   </select>
     <delete id="deleteByPrimaryKeys">
         delete from road_gps
@@ -33,28 +38,42 @@
 
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.taa.vo.RoadGpsVo">
+        <result column="roadManId" jdbcType="VARCHAR" property="roadManId"/>
         <result column="manName" jdbcType="VARCHAR" property="manName"/>
-        <result column="roadName" jdbcType="DECIMAL" property="roadName"/>
-        <result column="sectionName" jdbcType="DECIMAL" property="sectionName"/>
+        <result column="roadName" jdbcType="VARCHAR" property="roadName"/>
+        <result column="sectionName" jdbcType="VARCHAR" property="sectionName"/>
+        <result column="startName" jdbcType="VARCHAR" property="startName"/>
+        <result column="endName" jdbcType="VARCHAR" property="endName"/>
+
     </resultMap>
 
     <select id="getAroundList" resultMap="VoResultMap">
+    select m.* from (
         SELECT
         DISTINCT
+        rm.id as roadManId,
         rm.`name` AS manName,
         r.`name` AS roadName,
-        rs.`name` AS sectionName,
+        rs.`name` AS sectionName, rs.startName, rs.endName,
         t.roadSectionId,
         t.latitude,
-        t.longitude
+        t.longitude,
+        round(
+            6378.138*2*asin(sqrt(
+              pow(sin((#{lat,jdbcType=DECIMAL}*pi()/180 - t.latitude * pi()/180)/2),2) +
+              cos(#{lat,jdbcType=DECIMAL}*pi()/180)*cos(t.latitude*pi()/180)*
+              pow(sin((#{lng,jdbcType=DECIMAL}*pi()/180 - t.longitude*pi()/180)/2),2)
+            ))*1000
+        ) as distance
         FROM `road_gps` t
         LEFT JOIN road_section rs ON t.roadSectionId = rs.id
         LEFT JOIN road_man rm ON rs.roadMan = rm.id
         LEFT JOIN road r ON rs.roadId = r.id
-        WHERE t.latitude >= #{minLat,jdbcType=DECIMAL}
-          AND t.latitude &lt;= #{maxLat,jdbcType=DECIMAL}
-          AND t.longitude >= #{minLng,jdbcType=DECIMAL}
-          AND t.longitude &lt;= #{maxLng,jdbcType=DECIMAL}
+    )m, portal.config c
+    where c.config_key= 'radius' and c.syid='taa'
+    and m.distance &lt;= c.config_value
+    order by distance
+    limit 0,2
     </select>
 
     <delete id="deleteBySectionId">

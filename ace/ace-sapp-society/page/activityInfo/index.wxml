@@ -1,99 +1,118 @@
 <view class='index'>
-    <view class="head_card">
-        <view class='imgage'>
-            <image lazy-load="true" mode='aspectFill' src='{{activityInfo.coverUrl}}'></image>
-        </view>
-        <view class='base_info'>
-            <text>{{activityInfo.title}}</text>
-            <view class='organizer'>
-                <image lazy-load="true" class='headimage' src='{{activityInfo.orgCover?activityInfo.orgCover:"../../image/default_header.png"}}'></image>
-                <text>{{activityInfo.orgName}}</text>
-                <text class='remark'>活动组织方</text>
-            </view>
-        </view>
+  <view class="head_card">
+    <view class='imgage'>
+      <image lazy-load="true" mode='aspectFill' src='{{activityInfo.coverUrl}}'></image>
     </view>
-    <view class='detailed_card'>
-        <view class='time bottom-line'>
-            <view>
-                <view class='title'>开始时间</view>
-                <view class='value'>{{activityInfo.startDate}}</view>
-            </view>
-            <view>
-                <view class='title'>结束时间</view>
-                <view class='value'>{{activityInfo.endDate}}</view>
-            </view>
-        </view>
-        <view class='add_type bottom-line'>
-            <view class='title'>活动地点：</view>
-            <view class='value'>{{activityInfo.location}}</view>
-        </view>
-        <view class='add_type'>
-            <view class='title'>活动类型：</view>
-            <view class='value' wx:if="{{activityInfo.category=='1'}}">公益活动</view>
-            <view class='value' wx:elif="{{activityInfo.category=='2'}}">普及活动</view>
-            <view class='value' wx:elif="{{activityInfo.category=='3'}}">创意活动</view>
-            <view class='value' wx:elif="{{activityInfo.category=='4'}}">党建活动</view>
-        </view>
-    </view>
-    <view class='help'>
-        活动积分
-    </view>
+    <view class='base_info'>
+      <view class='title-share-wrapper'>
+        <text>{{activityInfo.title}}</text>
+        <button class='shareActive' data-id = "{{activityInfo.id}}"  catchtap="shareFriends" >分享</button>
+      </view>
 
-    <view class='coin_assign'>
-        <block wx:if="{{activityInfo.participant>=0}}">
-            <view>参与者：</view><view class='coin_mark'>+{{activityInfo.participant}}爱心币</view>
-        </block>
-        <block wx:if="{{activityInfo.participant<0}}">
-            <view>参与者：</view><view class='coin_xf'>{{activityInfo.participant}}爱心币</view>
-        </block>
-    </view>
+      <view class='organizer'>
+        <image lazy-load="true" class='headimage' src='{{activityInfo.orgCover?activityInfo.orgCover:"../../image/default_header.png"}}'></image>
+        <text class='zuzhi-name'>{{activityInfo.orgName}}</text>
+        <text class='remark'>活动组织方</text>
 
-    <view class='partner_list'>
-        <view class='total'>
-            参与人员：
-            <text class='number'>{{activityInfo.activityDetailVoList.length}}/{{activityInfo.parterNum}}人</text>
-        </view>
-        <view class='list' bindtap="viewParticipants" data-id='{{activityInfo.id}}'>
-            <view class='headImage_list'>
-                <block wx:for="{{activityInfo.activityDetailVoList}}">
-                   <image lazy-load="true" wx:if='{{index<8}}' class='headimage' src='{{item.headimgurl?item.headimgurl:"../../image/default_header.png"}}'></image>
-                </block>
-            </view>
-            <view hidden='{{activityInfo.activityDetailVoList.length<8}}' class='ellipsis'></view>
-            <view class='more'></view>
-        </view>
+      </view>
     </view>
-    <view class='content'>
-        <view class='content_title bottom-line'>
-            活动目的
-        </view>
-        <view class='content_text'>
-            {{activityInfo.purpose}}
-        </view>
+  </view>
+  <view class='detailed_card'>
+    <view class='time bottom-line'>
+      <view>
+        <view class='title'>开始时间</view>
+        <view class='value'>{{activityInfo.startDate}}</view>
+      </view>
+      <view>
+        <view class='title'>结束时间</view>
+        <view class='value'>{{activityInfo.endDate}}</view>
+      </view>
     </view>
-    <view class='content'>
-        <view class='content_title bottom-line'>
-            活动方式
-        </view>
-        <view class='content_text'>
-            {{activityInfo.mode}}
-        </view>
+    <view class='add_type bottom-line'>
+      <view class='title'>活动地点：</view>
+      <view class='value'>{{activityInfo.location}}</view>
     </view>
-    <view class='btn_content bottm-btn {{showBtn?"btn-show":""}}' hidden='{{hiddenBtn}}'>
-        <view wx:if="{{activityInfo.activityDetailVoList.length>activityInfo.parterNum-1}}" class='btn btn-unClick'>
-            名额已满
-        </view>
-        <view bindtap="signIn" wx:elif="{{btnFlag==1}}" class='btn btn-clicking'>
-            立即报名
-        </view>
-        <view bindtap="apply" wx:elif="{{btnFlag==3}}" class='btn btn-clicking'>
-            立即报名
-        </view>
-        <view wx:elif="{{btnFlag==4}}" class='btn btn-noClick'>
-            已经报名
-        </view>
-        <view wx:elif="{{btnFlag==0}}" class='btn btn-unClick'>
-            报名结束
-        </view>
+    <view class='add_type'>
+      <view class='title'>活动类型：</view>
+      <view class='value' wx:if="{{activityInfo.category=='1'}}">公益活动</view>
+      <view class='value' wx:elif="{{activityInfo.category=='2'}}">普及活动</view>
+      <view class='value' wx:elif="{{activityInfo.category=='3'}}">创意活动</view>
+      <view class='value' wx:elif="{{activityInfo.category=='4'}}">党建活动</view>
     </view>
+  </view>
+  <view class='help'>
+    活动积分
+  </view>
+
+  <view class='coin_assign'>
+    <block wx:if="{{activityInfo.participant>=0}}">
+      <view>参与者：</view>
+      <view class='coin_mark'>+{{activityInfo.participant}}爱心币</view>
+    </block>
+    <block wx:if="{{activityInfo.participant<0}}">
+      <view>参与者：</view>
+      <view class='coin_xf'>{{activityInfo.participant}}爱心币</view>
+    </block>
+  </view>
+
+  <view class='partner_list'>
+    <view class='total'>
+      参与人员：
+      <text class='number'>{{activityInfo.total}}/{{activityInfo.parterNum}}人</text>
+    </view>
+    <view class='list' bindtap="viewParticipants" data-id='{{activityInfo.id}}'>
+      <view class='headImage_list'>
+        <block wx:for="{{activityInfo.activityDetailVoList}}" wx:key="def">
+          <image lazy-load="true" wx:if='{{index<8}}' class='headimage' src='{{item.headimgurl?item.headimgurl:"../../image/default_header.png"}}'></image>
+        </block>
+      </view>
+      <view hidden='{{activityInfo.activityDetailVoList.length<8}}' class='ellipsis'></view>
+      <view class='more'></view>
+    </view>
+  </view>
+  <view class='content'>
+    <view class='content_title bottom-line'>
+      活动目的
+    </view>
+    <view class='content_text'>
+      {{activityInfo.purpose}}
+    </view>
+  </view>
+  <view class='content'>
+    <view class='content_title bottom-line'>
+      活动方式
+    </view>
+    <view class='content_text'>
+      {{activityInfo.mode}}
+    </view>
+  </view>
+  <view class='btn_content bottm-btn {{showBtn?"btn-show":""}}' hidden='{{hiddenBtn}}'>
+    <view wx:if="{{activityInfo.total>activityInfo.parterNum-1}}" class='btn btn-unClick'>
+      名额已满
+    </view>
+    <view bindtap="signIn" wx:elif="{{btnFlag==1}}" class='btn btn-clicking'>
+      立即报名
+    </view>
+    <view bindtap="apply" wx:elif="{{btnFlag==3}}" class='btn btn-clicking'>
+      立即报名
+    </view>
+    <view wx:elif="{{btnFlag==4}}" class='btn btn-noClick'>
+      已经报名
+    </view>
+    <view wx:elif="{{btnFlag==0}}" class='btn btn-unClick'>
+      报名结束
+    </view>
+  </view>
 </view>
+<view class='share-model-bg' wx:if="{{showModel}}"  >
+  <!-- 长按保存图片事件 -->
+  <view class='canvas-wrap'  >
+     <view><image src="{{shareImg}}" class='share-img' style="width:{{sameWidth!=0?sameWidth:270}}px; height:{{screenHsameHeighteight!=0?sameHeight:360}}px;" catchlongtap='saveImg' ></image></view>
+     <view class='share-img-tips'>长按图片保存至相册，快去分享吧！</view>
+     <icon class='icon-close' type="clear" size="23" color="white" catchtap='hideModel'  />
+  </view> 
+</view>
+
+<!-- 画布 -->
+<canvas  canvas-id="shareCanvas"  style="width:{{sameWidth!=0?sameWidth:270}}px; height:{{screenHsameHeighteight!=0?sameHeight:380}}px;position:fixed;top:-10000px"></canvas>
+

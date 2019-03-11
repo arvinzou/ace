@@ -11,6 +11,18 @@ public class RoadSectionQVo extends RoadSection {
     private String category;
 
     private String keyWord;
+    /**
+     * 部门ID
+     */
+    private String deptId;
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
 
     public String getKeyWord() {
         return keyWord;

@@ -3,6 +3,52 @@
     height: 100%;
     background: #FAFAFA;
 }
+.accident-top{
+  display: flex;
+  align-items: center;
+  background-color: #f5f6f7;
+  padding-left: 30rpx;
+  margin: 0 30rpx;
+  border-radius: 10rpx;
+}
+.vertical-line{
+  width: 2rpx ;
+  height: 28rpx ;
+  border-left: 2rpx solid #D7D9DF;
+  margin-left: 40rpx;
+  vertical-align: middle;
+}
+.icon-search{
+  margin-left: 50rpx;
+}
+.search-road-input{
+  flex: 1;
+  font-size: 26rpx;
+  color: #ABAEB9;
+  margin-left: 20rpx;
+}
+
+.picker{
+    width: auto;
+    height: 100rpx;
+    line-height: 100rpx;
+    float: left;
+}
+.city-area{
+  font-size: 26rpx;
+  color: #ABAEB9;
+}
+.drop-down{
+    width: auto;
+    height: 100rpx;
+    float: left;
+    margin-left: 23rpx;
+}
+.drop-down image{
+    width: 14rpx;
+    height: 8rpx;
+    margin-top: 46rpx;
+}
 .box{
     width: 100%;
     height: 114rpx;
@@ -29,97 +75,81 @@
     border-radius: 10rpx;
     background:rgba(245,246,247,0.8);
 }
-.list{
-    width: 100%;
-    height: 100%;
+/* 事故列表 */
+.road-ul{
+  margin-top: 40rpx;
+  padding: 0 30rpx;
+  margin-bottom:20rpx;
 }
-.list-box{
-    width: 100%;
-    height: auto;
-    background: #FFFFFF;
-    margin-bottom: 20rpx;
+.road-ul>.li{
+  padding: 40rpx 32rpx;
+  border-radius: 10rpx;
+  background-color: #FFF;
+  box-shadow: 0rpx 0rpx  24rpx 12rpx  rgba(239, 239, 239, 0.5);
 }
-.item{
-    width: 90%;
-    height: auto;
-    margin: 0 auto;
+.road-ul>.li+.li{
+  margin-top:18rpx;
 }
-.title{
-    padding-top: 40rpx;
-    padding-bottom: 20rpx;
-    color: #373F53;
-    font-size: 32rpx;
-    font-weight: bold;
-    text-overflow:ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+.road-ul>.li .up{
+  font-size: 32rpx;
+  color: #373F53;
+  font-weight: bold;
+  width: 480rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
 }
-.item01{
-    width: 100%;
-    height: 24rpx;
-    line-height: 24rpx;
-    color: #ABAEB9;
-    font-size: 24rpx;
+.road-ul>.li .middle{
+  display: flex;
+  align-items: center;
+  height:24rpx;
+  line-height: 24rpx;
+  margin-top:24rpx;
 }
-.item01::after{
-    content: '';
-    clear: both;
-    display: block;
+.road-ul>.li .middle>text:nth-of-type(1){
+  flex: 0 0 59%;
+  font-size: 24rpx;
+  color: #ABAEB9;
+  border-right: 1px solid #D7D9DF;
 }
-.item01-left{
-    width: 59%;
-    height: 100%;
-    float: left;
-    border-right: 1px solid #D7D9DF;
+.road-ul>.li .middle>text:nth-of-type(2){
+  flex: 0 0 41%;
+  font-size: 24rpx;
+  color: #ABAEB9;
+  text-align: right
 }
-.item01-right{
-    width: 39%;
-    height: 100%;
-    float: left;
-    text-align: right;
+.road-ul>.li>.down{
+  display: flex;
+  align-items: center;
+  height: 54rpx;
+  line-height: 54rpx;
+  margin-top:30rpx;
 }
-.item02{
-    width: 100%;
-    height: 128rpx;
+.road-ul>.li>.down>view{
+  width: 134rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  font-size: 26rpx;
+  text-align: center;
+  border-radius:28rpx;
 }
-.item02::after{
-    content: '';
-    clear: both;
-    display: block;
+.road-ul>.li>.down>view+view{
+  margin-left: 14rpx;
 }
-.edit{
-    width: 134rpx;
-    height: 54rpx;
-    line-height: 54rpx;
-    text-align: center;
-    background: #D2D5FF;
-    border-radius: 27rpx;
-    border:1px solid rgba(210,213,255,1);
-    color: #2430E3;
-    font-size: 26rpx;
-    float: left;
-    margin-top: 37rpx;
-    margin-right: 14rpx;
+.road-ul>.li>.down>view.edit{
+  background-color:   #F5F6FF;
+  border:2rpx solid #D2D5FF;
+  color: #2430E3;
 }
-.revoke{
-    width: 134rpx;
-    height: 54rpx;
-    line-height: 54rpx;
-    text-align: center;
-    background: #FBE2E0;
-    border-radius: 27rpx;
-    border:1px solid rgba(251,226,224,1);
-    color: #FE4C46;
-    font-size: 26rpx;
-    float: left;
-    margin-top: 37rpx;
-    margin-right: 40rpx;
+.road-ul>.li>.down>view.revoke{
+  background-color:#FFF9F9;
+  border:2rpx solid #FBE2E0;
+  color: #FE4C46;
 }
-.time{
-    width: auto;
-    height: 128rpx;
-    line-height: 128rpx;
-    color: #D7D9DF;
-    font-size: 22rpx;
-    float: right;
+.road-ul>.li>.down>.time{
+  flex: 1;
+  margin-left: 24rpx;
+  font-size: 22rpx;
+  text-align: right;
+  color: #D7D9DF;
 }

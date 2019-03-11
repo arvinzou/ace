@@ -2,52 +2,52 @@ $(function () {
     // 为每一个textarea绑定事件使其高度自适应
     juicer.register('parseIntF', parseIntF);
     juicer.register('formatIndex', formatIndex);
+    juicer.register('formatScore', formatScore);
     getTestInfo();
     $.each($("textarea"), function (i, n) {
         autoTextarea($(n)[0]);
     });
-    $('#textarea').keyup(checkFontLength);
+    $('textarea').keyup(checkFontLength);
     $('.testContent').on('click', '.subBtn', subScore);
     $('.testContent').on('click', '.addBtn', addScore);
     $('.submit').click(submitTest);
 })
-var eid;
-var cid;
+
+var postData;
 
 function submitTest() {
-    var item=$('.items');
-    var data=[];
-    var cell={
-        evaluatingId:eid,
-        classScheduleId:cid
-    }
-    var length=item.length;
-    for(var i=0;i<length;i++){
-        var $that=$(item[i]);
-        var cell={
-            evaluatingId:eid,
-            classScheduleId:cid
+    var len = postData.length;
+    for (var i = 0; i < len; i++) {
+        var item = postData[i];
+        var type = item.type;
+        if (type == 1 || type == 3) {
+            var val = $('input[name=test_' + i + ']:checked').val();
+            item.topicOptList[val].youAnswer = 1;
+        } else if (type == 2) {
+            var val = $('input[name=test_' + i + ']:checked');
+            val.each(function () {
+                item.topicOptList[$(this).val()].youAnswer = 1;
+            });
+        } else if (type == 4) {
+            var val = $('.textTest_' + i).val();
+            item.answer = val;
+        } else if (type == 5) {
+            var val = $('.textTest_' + i).text();
+            item.answer = val;
         }
-        cell.name=$that.data('name');
-        cell.introduce=$that.data('introduce');
-        cell.score=$that.find('.number').text();
-        data.push(cell);
     }
-    postData(data);
+    postDataMethod();
 }
 
 /**提交数据*/
-function postData(datas) {
-    var url=contextPath+ "/www/evaluationRst/insertEvaluationRstList";
-    var data={
-        evaluationRst:JSON.stringify(datas),
-        evaluationContent:JSON.stringify({
-            classScheduleId:cid,
-            content:$('#textarea').val()
-        })
+function postDataMethod() {
+    var url = contextPath + "/www/topicRst/insertTopicRstList";
+    var data = {
+        jsons: JSON.stringify(postData),
+        taskId: GetQueryString('taskId')
     }
-    $.post(url,data,function (rst) {
-        if(rst.status==0){
+    $.post(url, data, function (rst) {
+        if (rst.status == 0) {
             alert("感谢您的评测");
             window.history.back();
         }
@@ -59,43 +59,51 @@ function postData(datas) {
 
 /**计算并取整*/
 function parseIntF(num) {
-    return parseInt(num*0.9);
+    return parseInt(num * 0.9);
 }
 
 /**计算序列*/
 function formatIndex(num) {
-    var index=''+(parseInt(num)+1);
-    return index>9?index:'0'+index;
+    return index = (parseInt(num) + 1);
+}
+
+/**计算序列*/
+function formatScore(num) {
+    if (parseFloat(num) > 0)
+        return '(' + num + '分)';
+}
+
+/**解析url参数*/
+
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
 }
 
 
 /**获取测试信息*/
 
 function getTestInfo() {
-    eid=GetQueryString('eid');
-    cid=GetQueryString('cid');
-    var url=contextPath+ "/www/classSchedule/selectClassScheduleByPrimaryKey";
-    var data={
-        id:cid
+    var tid = GetQueryString('testId');
+    var taid = GetQueryString('taskId');
+    var url = "http://localhost/partyschool/www/topic/findTopicFullList";
+    var data = {
+        testId: tid,
+        taskId: taid
     }
-    $.getJSON(url,data,function (rst) {
-        if(rst.status==0){
-            renderPage('title',rst.value.course,'tpl_title');
+    $.getJSON(url, data, function (rst) {
+        if (rst.status == 0) {
+            renderPage('test', rst.data, 'tpl_test');
+            renderPage('title', {name: rst.data[0].tname}, 'tpl_title');
+            postData = rst.data;
         }
         else {
-            alert("获取用户信息失败！");
-        }
-    })
-    url=contextPath+ "/www/evaluationIndex/findEvaluationIndexList";
-    data={
-        evaluatingId:eid
-    }
-    $.getJSON(url,data,function (rst) {
-        if(rst.status==0){
-            renderPage('test',rst.rows,'tpl_test');
-        }
-        else {
-            alert("获取用户信息失败！");
+            alert(rst.info);
+            window.history.back();
         }
     })
 }

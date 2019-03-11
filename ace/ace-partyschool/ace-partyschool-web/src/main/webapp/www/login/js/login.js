@@ -16,6 +16,18 @@ $(function(){
     if(errorInfo != null){
         alert(errorInfo);
     }
+
+
+    /**
+     * 获取焦点
+     */
+
+    $('.form-row input').blur(function(){
+        $('.footer-box').removeClass("cancle-fixed");
+    });
+    $('.form-row input').focus(function(){
+        $('.footer-box').addClass("cancle-fixed");
+    })
 });
 
 function login(){
@@ -105,6 +117,7 @@ function initData(){
     });
 
 }
+
 
 /*
 function hideFooter(){

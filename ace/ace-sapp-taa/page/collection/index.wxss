@@ -4,34 +4,41 @@
     background: #FFFFFF;
 }
 .search{
-   width: auto;
-   height: auto;
-   padding: 8rpx 30rpx;
+  display: flex;
+  align-items: center;
+  background-color: #f5f6f7;
+  padding-left: 30rpx;
+  margin: 0 30rpx;
+  border-radius: 10rpx;
+  height: 80rpx;
 }
-.search-input{
-    width: 92%;
-    height: 80rpx;
-    line-height: 80rpx;
-    border-radius: 5rpx;
-    padding-left: 4%;
-    padding-right: 4%;
-    background: rgba(245,246,247,0.8);
-    color: #ABAEB9;
-    font-size: 26rpx;
+.search-road-input{
+  flex: 1;
+  font-size: 26rpx;
+  color: #ABAEB9;
+  margin-left: 20rpx;
 }
 .tab{
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 80rpx;
     line-height: 80rpx;
     font-size: 32rpx;
     font-weight: bold;
     color: #ABAEB9;
-    margin-bottom: 20rpx;
+    margin-bottom: 30rpx;
+    padding-top: 20rpx;
+    border-bottom:2rpx solid #F7F8F9;
+    
 }
 .tab::after{
     content: '';
     clear: both;
     display: block;
+}
+.tab-child{
+  flex: 1;
 }
 .tab01{
     width: 50%;
@@ -68,12 +75,12 @@
 }
 .item{
     width: 90%;
-    height: 146rpx;
+    height: 126rpx;
     margin-left: 5%;
     margin-right: 5%;
     margin-bottom: 20rpx;
     background:rgba(247,248,249,1);
-    border-radius:5rpx;
+    border-radius:10rpx;
     padding-top: 42rpx;
 } 
 .item::after{
@@ -102,6 +109,13 @@
     overflow: hidden;
     white-space: nowrap;
 }
+.start-end{
+     color: #373F53;
+    font-size: 28rpx;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 .road-sign{
     color: #ABAEB9;
     font-size: 24rpx;
@@ -113,6 +127,9 @@
 .status{
     color: #2430E3;
     font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;  
 }
 .status image{
     width: 30rpx;
@@ -121,4 +138,7 @@
 }
 .reset{
     color: #24C789;
+}
+.margin10{
+  margin-top:20rpx;
 }

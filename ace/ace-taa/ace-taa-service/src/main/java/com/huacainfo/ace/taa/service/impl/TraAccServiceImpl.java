@@ -2,6 +2,7 @@ package com.huacainfo.ace.taa.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
@@ -9,6 +10,7 @@ import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.taa.dao.OfficeAdminDao;
 import com.huacainfo.ace.taa.dao.TraAccCauseDao;
 import com.huacainfo.ace.taa.dao.TraAccDao;
 import com.huacainfo.ace.taa.dao.TraAccMtypeDao;
@@ -48,6 +50,8 @@ public class TraAccServiceImpl implements TraAccService {
     private TraAccMtypeDao traAccMtypeDao;
     @Autowired
     private AuthorityService authorityService;
+    @Autowired
+    private OfficeAdminDao officeAdminDao;
 
     @Autowired
     private SqlSessionTemplate sqlSession;
@@ -180,8 +184,7 @@ public class TraAccServiceImpl implements TraAccService {
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.traAccDao.updateByPrimaryKey(o);
-        this.dataBaseLogService.log("变更事故", "事故", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("变更事故", "事故", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "保存成功！");
     }
@@ -334,7 +337,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @param: @param p
      * @param: @return
      * @param: @throws Exception
-     * @return: ListResult<Map<String,Object>>
+     * @return: ListResult<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-10
      */
@@ -354,7 +357,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @Description: TODO(用于控件数据获取)
      * @param: @param params
      * @param: @return
-     * @return: Map<String,Object>
+     * @return: Map<String, Object>
      * @author: 陈晓克
      * @version: 2019-01-10
      */
@@ -437,7 +440,9 @@ public class TraAccServiceImpl implements TraAccService {
      * @param params 事故缘由 or 事故车型
      */
     private void insertCauseMtype(String id, TraAccVo params) {
+
         if (!CollectionUtils.isEmpty(params.getCauseList())) {
+            traAccCauseDao.reset(id);//先清后插
             for (TraAccCause item : params.getCauseList()) {
                 item.setId(GUIDUtil.getGUID());
                 item.setAccId(id);
@@ -446,6 +451,7 @@ public class TraAccServiceImpl implements TraAccService {
             }
         }
         if (!CollectionUtils.isEmpty(params.getMtypeList())) {
+            traAccMtypeDao.reset(id);//先清后插
             for (TraAccMtype item : params.getMtypeList()) {
                 item.setId(GUIDUtil.getGUID());
                 item.setAccId(id);
@@ -465,23 +471,29 @@ public class TraAccServiceImpl implements TraAccService {
      * @date: 2019/1/12 11:15
      */
     @Override
-    public ResultResponse report(WxUser user, TraAccVo params) {
-        TraAccVo traAccVo = traAccDao.selectVoByPrimaryKey(params.getId());
-        if (traAccVo == null) {
+    public ResultResponse report(WxUser user, TraAccVo params) throws Exception {
+        TraAcc record = traAccDao.selectByPrimaryKey(params.getId());
+        if (record == null) {
             return new ResultResponse(ResultCode.FAIL, "事故数据丢失");
         }
 
         //事故发生时间、归属路段、死亡人数、受伤人数、事故原因。
-        traAccVo.setAccidentTime(params.getAccidentTime());
-        traAccVo.setRoadSectionId(params.getRoadSectionId());
-        traAccVo.setDeadthToll(params.getDeadthToll());
-        traAccVo.setInjuries(params.getInjuries());
-        traAccVo.setCause(params.getCause());
-        traAccVo.setLastModifyUserId(user.getUnionId());
-        traAccVo.setLastModifyUserName(user.getNickName());
-        traAccVo.setLastModifyDate(DateUtil.getNowDate());
-        int i = traAccDao.updateByPrimaryKey(traAccVo);
+        //可变更项
+        record.setRoadManId(params.getRoadManId());
+        record.setRoadSectionId(params.getRoadSectionId());
+        record.setDeadthToll(params.getDeadthToll());
+        record.setInjuries(params.getInjuries());
+        record.setWeather(params.getWeather());
+        record.setAccidentTime(params.getAccidentTime());
+        //不可变更项
+        UserProp sysUser = parseUser(user);
+        record.setCreateDate(record.getCreateDate());
+        record.setLastModifyUserId(sysUser.getUserId());
+        record.setLastModifyUserName(sysUser.getName());
+        record.setLastModifyDate(DateUtil.getNowDate());
+        int i = traAccDao.updateByPrimaryKey(record);
         if (i == 1) {
+            insertCauseMtype(record.getId(), params);//事故原因&事故车型变更
             return new ResultResponse(ResultCode.SUCCESS, "续报提交成功");
         }
 
@@ -499,7 +511,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @param orderBy 排序规则
      *                ORDER BY v.occurTimes DESC
      *                ORDER BY v.deathNum DESC
-     * @return List<Map<String, Object>>
+     * @return List<Map < String, Object>>
      */
     @Override
     public List<Map<String, Object>> reverseReport(Map<String, Object> params, int start, int limit, String orderBy) {
@@ -510,7 +522,7 @@ public class TraAccServiceImpl implements TraAccService {
      * 事故死亡人数同期对比 报表
      *
      * @param params
-     * @return Map<String,Object>
+     * @return Map<String, Object>
      */
     @Override
     public Map<String, Object> contrastiveReport(Map<String, String> params) {
@@ -590,7 +602,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @Description: TODO(交通事故热力图)
      * @param: @param condition
      * @param: @throws Exception
-     * @return: List<Map<String, Object>>
+     * @return: List<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-21
      */
@@ -616,7 +628,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @Description: TODO(交通事故热力图)
      * @param: @param condition
      * @param: @throws Exception
-     * @return: List<Map<String, Object>>
+     * @return: List<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-21
      */
@@ -685,7 +697,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @param roadManId     路长ID
      * @param roadSectionId 路段ID
      * @param field         统计字段 deadthToll ,injuries
-     * @return Map<String,Object>
+     * @return Map<String, Object>
      */
     @Override
     public List<Map<String, Object>> analysisReport(String category, String dateTimeStr,
@@ -722,6 +734,37 @@ public class TraAccServiceImpl implements TraAccService {
         }
 
         return traAccDao.analysisReport(condition);
+    }
+
+    /**
+     * 获取事故报表 --小程序端展示
+     *
+     * @param user      查询用户
+     * @param condition 条件查询
+     * @param page      分页条件
+     * @return PageResult<TraAccVo>
+     * @throws Exception
+     */
+    @Override
+    public ResultResponse findViewList(UserProp user, TraAccQVo condition, PageParamNoChangeSord page) throws Exception {
+        //部门筛选条件
+        condition.setDeptId(user.getCorpId());
+        //本人or内勤人员
+        int i = officeAdminDao.isExistByUserId(user.getUserId());
+        if (i == 1) {
+            //内勤人员，展示同部门所有数据
+            condition.setOfficeAdmin("1");
+        } else {
+            //非内勤人员，仅展示本人上报数据
+            condition.setOfficeAdmin(user.getUserId());
+        }
+
+        PageResult<TraAccVo> rst = findTraAccList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
     }
 
 

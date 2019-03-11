@@ -15,7 +15,7 @@ function initEditor() {
     editor = new Simditor({
         textarea: $('textarea[name=content]'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
-            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
+            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent','TEST'
         ],
         upload: {
             url: portalPath + '/files/uploadImage.do',
@@ -76,23 +76,26 @@ function initEvents() {
             }
         }
     });
-    /*监听表单提交*/
-    $('#fm-add').ajaxForm({
-        beforeSubmit: function (formData, jqForm, options) {
-            var params = {};
-            $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
-            });
-            $.extend(params, {
-                time: new Date(),
-                status: '1'
-            });
-            console.log(params);
-            save(params);
-            return false;
-        }
-    });
 }
+
+/*监听表单提交*/
+$('#fm-add').ajaxForm({
+    beforeSubmit: function (formData, jqForm, options) {
+        var params = {};
+        $.each(formData, function (n, obj) {
+            params[obj.name] = obj.value;
+        });
+        $.extend(params, {
+            time: new Date(),
+            status: '1'
+        });
+        console.log(params);
+        save(params);
+        return false;
+    }
+});
+
+
 /*保存表单**/
 function save(params) {
     startLoad();

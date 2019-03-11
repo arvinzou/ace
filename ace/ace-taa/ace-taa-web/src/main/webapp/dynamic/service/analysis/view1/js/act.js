@@ -79,7 +79,7 @@ function findTraAccList() {
                                 imgUrl = "img/icon0.png"
                                 font = "<font style='font-weight: bold;color:#fff;font-size:10px'>" + o.injuries + "</font>"
                             }else {
-                                imgUrl = "img/icon0.png"
+                                imgUrl = "img/icon00.png"
                                 font = "<font style='font-weight: bold;color:#fff;font-size:10px'>" + 0 + "</font>"
                             }
                             var marker = new qq.maps.Marker({
@@ -186,7 +186,7 @@ jQuery(function ($) {
     findTraAccList({});
     $('#leftDiv').mouseover(setClass);
     $('#Map').mouseover(moveClass);
-    $('#Header').mouseover(moveClass);
+    $('#Header').mouseover(moveClasss);
     $('.accident_info').mouseover(clearTime);
     $('.accident_info').mouseout(setTimeOut);
     $('.active_seach').click(searchRoadName);
@@ -322,8 +322,12 @@ function initEvents() {
         todayHighlight: 1,
         startView: 2,
         forceParse: 0
-    }).on('changeDate', function (ev) {
-        // moveCSS();
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var startTime = event.date;
+        $("input[name=endDate]").datetimepicker('setStartDate', startTime);
+        $("input[name=endDate]").val("");
     });
 
     $('input[name=startDate]').focus(function () {
@@ -342,8 +346,11 @@ function initEvents() {
         todayHighlight: 1,
         startView: 2,
         forceParse: 0
-    }).on('changeDate', function (ev) {
-        // moveCSS();
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var endTime = event.date;
+        $("input[name=startDate]").datetimepicker('setEndDate', endTime);
     });
     $('input[name=endDate]').focus(function () {
         $(this).blur(); //不可输入状态

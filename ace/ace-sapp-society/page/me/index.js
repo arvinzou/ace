@@ -25,6 +25,9 @@ Page({
     
 
     },
+    /**
+     * 初始用户信息
+     */
     initUserData: function() {
         var that = this;
         util.request(cfg.findUserInfo, {},
@@ -112,7 +115,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
-        let that = this;
+        var that = this;
         that.setData({
             num1: parseInt(Math.random() * 100),
             num2: parseInt(Math.random() * 100),
@@ -148,8 +151,8 @@ Page({
         })
     }, 
     formSubmit: function (e) {
-        let that = this;
-        let vals = e.detail.value;
+        var that = this;
+        var vals = e.detail.value;
         if (!vals.content) {
             wx.showModal({
                 title: '提示',
@@ -176,7 +179,7 @@ Page({
             });
     },
     hiddenComment: function (e) {
-        let that = this;
+        var that = this;
         if (that.data.commentVal) {
             wx.showModal({
                 title: '提示',

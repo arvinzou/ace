@@ -32,4 +32,9 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <delete id="reset" parameterType="java.lang.String">
+        DELETE FROM `tra_acc_mtype`
+        where accId = #{accId,jdbcType=VARCHAR} ;
+    </delete>
 </mapper>

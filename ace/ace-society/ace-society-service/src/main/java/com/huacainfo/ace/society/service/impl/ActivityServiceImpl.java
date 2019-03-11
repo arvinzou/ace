@@ -16,7 +16,10 @@ import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.*;
-import com.huacainfo.ace.society.model.*;
+import com.huacainfo.ace.society.model.Activity;
+import com.huacainfo.ace.society.model.ActivityDetail;
+import com.huacainfo.ace.society.model.CoinConfig;
+import com.huacainfo.ace.society.model.PointsRecord;
 import com.huacainfo.ace.society.service.*;
 import com.huacainfo.ace.society.vo.ActivityDetailVo;
 import com.huacainfo.ace.society.vo.ActivityQVo;
@@ -173,8 +176,8 @@ public class ActivityServiceImpl implements ActivityService {
             return new MessageResponse(1, "主键-GUID不能为空！");
         }
 
-        Activity activity=activityDao.selectByPrimaryKey(o.getId());
-        if(activity==null){
+        Activity activity = activityDao.selectByPrimaryKey(o.getId());
+        if (activity == null) {
             return new MessageResponse(1, "活动数据丢失");
         }
         if (CommonUtils.isBlank(o.getTitle())) {
@@ -183,7 +186,7 @@ public class ActivityServiceImpl implements ActivityService {
         if (CommonUtils.isBlank(o.getStartDate())) {
             return new MessageResponse(1, "开展时间不能为空！");
         }
-        if (!CommonUtils.isBlank(o.getClazz())){
+        if (!CommonUtils.isBlank(o.getClazz())) {
             activity.setClazz(o.getClazz());
         }
         activity.setTitle(o.getTitle());
@@ -200,7 +203,7 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setLastModifyUserName(wxUser.getName());
         activity.setLastModifyUserId(wxUser.getUnionId());
         this.activityDao.updateByPrimaryKeySelective(activity);
-        MessageResponse auditRs = auditRecordService.reaudit(BisType.ACTIVITY, activity.getId(),activity.getInitiatorId(), activity.getStatus(), "再次提交审核", wxUser);
+        MessageResponse auditRs = auditRecordService.reaudit(BisType.ACTIVITY, activity.getId(), activity.getInitiatorId(), activity.getStatus(), "再次提交审核", wxUser);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }
@@ -215,7 +218,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public MessageResponse insertActivity(Activity o,UserProp userProp) throws Exception {
+    public MessageResponse insertActivity(Activity o, UserProp userProp) throws Exception {
         o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键-GUID不能为空！");
@@ -289,30 +292,28 @@ public class ActivityServiceImpl implements ActivityService {
      * @version: 2018-09-11
      */
     @Override
-    public MessageResponse activitySign(String filePath,String type,String id, WxUser wxUser) throws Exception {
-        if (CommonUtils.isBlank(id)){
+    public MessageResponse activitySign(String filePath, String type, String id, WxUser wxUser) throws Exception {
+        if (CommonUtils.isBlank(id)) {
             return new MessageResponse(ResultCode.FAIL, "主键-GUID不能为空");
         }
-        if(CommonUtils.isBlank(type)){
+        if (CommonUtils.isBlank(type)) {
             return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
         }
-        Activity activity=activityDao.selectByPrimaryKey(id);
-        if(activity==null){
+        Activity activity = activityDao.selectByPrimaryKey(id);
+        if (activity == null) {
             return new MessageResponse(ResultCode.FAIL, "没有找到相关活动");
         }
-        if("activityStart".equals(type)){
+        if ("activityStart".equals(type)) {
             activity.setStartSignImgUrl(filePath);
             activity.setRealStartDate(new Date());
             activity.setStatus("31");
-        }
-        else if("activityEnd".equals(type)){
+        } else if ("activityEnd".equals(type)) {
             activity.setEndSignImgUrl(filePath);
             activity.setStatus("32");
             activity.setRealEndDate(new Date());
-        }
-        else if("selfSign".equals(type)){
-            ActivityDetail activityDetail=activityDetailDao.selectPersonaldetails(id,wxUser.getUnionId());
-            if(activityDetail==null){
+        } else if ("selfSign".equals(type)) {
+            ActivityDetail activityDetail = activityDetailDao.selectPersonaldetails(id, wxUser.getUnionId());
+            if (activityDetail == null) {
                 return new MessageResponse(ResultCode.FAIL, "在报名名单中没有找到报名记录");
             }
             activityDetail.setSignImgUrl(filePath);
@@ -323,7 +324,7 @@ public class ActivityServiceImpl implements ActivityService {
             activityDetail.setLastModifyUserId(wxUser.getUnionId());
             activityDetailDao.updateByPrimaryKey(activityDetail);
             return new MessageResponse(ResultCode.SUCCESS, "变更线下活动完成！");
-        }else {
+        } else {
             return new MessageResponse(ResultCode.FAIL, "参数错误");
         }
         activity.setLastModifyDate(new Date());
@@ -372,17 +373,19 @@ public class ActivityServiceImpl implements ActivityService {
      * @version: 2018-09-11
      */
     @Override
-    public SingleResult<ActivityVo> selectActivityByPrimaryKey(String id) throws Exception {
+    public SingleResult<ActivityVo> selectActivityByPrimaryKey(String id, int start,
+                                                               int limit, String orderBy) throws Exception {
         SingleResult<ActivityVo> rst = new SingleResult<>();
-        ActivityVo activityVo=this.activityDao.selectVoByPrimaryKeyVo(id);
-        if(!CommonUtils.isBlank(activityVo.getEndDate())){
-            ActivityDetail activityDetail=new ActivityDetail();
+        ActivityVo activityVo = this.activityDao.selectVoByPrimaryKeyVo(id);
+        if (!CommonUtils.isBlank(activityVo.getEndDate())) {
+            ActivityDetail activityDetail = new ActivityDetail();
             activityDetail.setActivityId(id);
-            List<ActivityDetailVo> list=activityDetailDao.findList(activityDetail,0,200,null);
-            activityVo.setTotal(list.size());
-            int i=0;
-            for(ActivityDetailVo item:list){
-                if("1".equals(item.getSignInState())){
+            List<ActivityDetailVo> list = activityDetailDao.findList(activityDetail, start, limit, orderBy);
+            int realJoinNum = activityDetailDao.findRealNum(activityDetail, 0, activityVo.getParterNum());
+            activityVo.setTotal(realJoinNum);
+            int i = 0;
+            for (ActivityDetailVo item : list) {
+                if ("1".equals(item.getSignInState())) {
                     i++;
                 }
             }
@@ -409,8 +412,8 @@ public class ActivityServiceImpl implements ActivityService {
         if (CommonUtils.isBlank(id)) {
             return new MessageResponse(1, "主键-GUID不能为空！");
         }
-        Activity activity=activityDao.selectByPrimaryKey(id);
-        if(null==activity){
+        Activity activity = activityDao.selectByPrimaryKey(id);
+        if (null == activity) {
             return new MessageResponse(ResultCode.FAIL, "线下活动信息丢失！");
         }
         activity.setStatus("0");
@@ -422,6 +425,7 @@ public class ActivityServiceImpl implements ActivityService {
                 String.valueOf(id), "线下活动", userProp);*/
         return new MessageResponse(0, "线下活动删除完成！");
     }
+
     /**
      * @throws
      * @Title:deleteActivityByActivityId
@@ -440,7 +444,7 @@ public class ActivityServiceImpl implements ActivityService {
         }
         this.activityDao.deleteByPrimaryKey(id);
 
-       this.dataBaseLogService.log("删除线下活动", "线下活动", String.valueOf(id),
+        this.dataBaseLogService.log("删除线下活动", "线下活动", String.valueOf(id),
                 String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动删除完成！");
     }
@@ -459,12 +463,12 @@ public class ActivityServiceImpl implements ActivityService {
      * @version: 2018-09-11
      */
     @Override
-    public MessageResponse audit(String id, String rst, String remark,String coinconfigId, UserProp userProp) throws Exception {
-        Activity activity=activityDao.selectByPrimaryKey(id);
-        if(null==activity){
+    public MessageResponse audit(String id, String rst, String remark, String coinconfigId, UserProp userProp) throws Exception {
+        Activity activity = activityDao.selectByPrimaryKey(id);
+        if (null == activity) {
             return new MessageResponse(ResultCode.FAIL, "线下活动信息丢失！");
         }
-        MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY, id,activity.getInitiatorId(), rst, remark, userProp);
+        MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY, id, activity.getInitiatorId(), rst, remark, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }
@@ -501,7 +505,6 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
 
-
     /**
      * @throws
      * @Title:audit
@@ -516,14 +519,14 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public MessageResponse endAudit(String id, String rst, String message, List list, UserProp userProp) throws Exception {
-        Activity activity=activityDao.selectByPrimaryKey(id);
-        if(null==activity){
+        Activity activity = activityDao.selectByPrimaryKey(id);
+        if (null == activity) {
             return new MessageResponse(ResultCode.FAIL, "线下活动信息丢失！");
         }
-        if(activity.getStatus().equals(rst)){
+        if (activity.getStatus().equals(rst)) {
             return new MessageResponse(ResultCode.FAIL, "活动状态重复修改");
         }
-        MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY, id,activity.getInitiatorId(), rst, message, userProp);
+        MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY, id, activity.getInitiatorId(), rst, message, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }
@@ -532,26 +535,26 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setLastModifyUserId(userProp.getUserId());
         activity.setLastModifyUserName(userProp.getName());
         activityDao.updateByPrimaryKey(activity);
-        if ("33".equals(rst)){
-            CoinConfig coinConfig=coinConfigService.selectCoinConfigByPrimaryKey(activity.getCoinconfigId()).getValue();
-            int oCoin=coinConfig.getHost();
-            int signNum=list.size();
-            int baseNum=coinConfig.getBaseNum();
-            int pCoin=coinConfig.getParticipant();
-            if(baseNum<signNum){
-                oCoin=oCoin+(signNum-baseNum)*coinConfig.getSubjoinNum();
+        if ("33".equals(rst)) {
+            CoinConfig coinConfig = coinConfigService.selectCoinConfigByPrimaryKey(activity.getCoinconfigId()).getValue();
+            int oCoin = coinConfig.getHost();
+            int signNum = list.size();
+            int baseNum = coinConfig.getBaseNum();
+            int pCoin = coinConfig.getParticipant();
+            if (baseNum < signNum) {
+                oCoin = oCoin + (signNum - baseNum) * coinConfig.getSubjoinNum();
             }
-            if (pCoin>0){
-                if(!CommonUtils.isBlank(list)){
-                    personInfoDao.addCoin(list,activity.getCoinconfigId(),pCoin,pCoin);
-                    for(Object item:list){
-                        addPeoplePointsRecord(activity.getCategory(),pCoin,(String)item,activity.getId());
+            if (pCoin > 0) {
+                if (!CommonUtils.isBlank(list)) {
+                    personInfoDao.addCoin(list, activity.getCoinconfigId(), pCoin, pCoin);
+                    for (Object item : list) {
+                        addPeoplePointsRecord(activity.getCategory(), pCoin, (String) item, activity.getId());
                     }
                 }
             }
-            CustomerVo vo=regService.findByUserId(activity.getInitiatorId());
-            String orgId=vo.getSocietyOrg().getId();
-            addOrgPointsRecord(activity.getCategory(),oCoin,orgId,activity.getId());
+            CustomerVo vo = regService.findByUserId(activity.getInitiatorId());
+            String orgId = vo.getSocietyOrg().getId();
+            addOrgPointsRecord(activity.getCategory(), oCoin, orgId, activity.getId());
             societyOrgInfoDao.addCoin(orgId, oCoin);
         }
         sendToCustomers(activity, rst, message);
@@ -581,20 +584,20 @@ public class ActivityServiceImpl implements ActivityService {
         }
     }
 
-    public ResultResponse addOrgPointsRecord(String type,int coin,String userId,  String bisId){
-        String bisType="";
+    public ResultResponse addOrgPointsRecord(String type, int coin, String userId, String bisId) {
+        String bisType = "";
         switch (type) {
             case "1":
-                bisType=BisType.POINTS_WELFARE_SPONSOR;
+                bisType = BisType.POINTS_WELFARE_SPONSOR;
                 break;
             case "2":
-                bisType=BisType.POINTS_ORDINARY_SPONSOR;
+                bisType = BisType.POINTS_ORDINARY_SPONSOR;
                 break;
             case "3":
-                bisType=BisType.POINTS_CREATIVE_SPONSOR;
+                bisType = BisType.POINTS_CREATIVE_SPONSOR;
                 break;
             case "4":
-                bisType=BisType.POINTS_PARTY_SPONSOR;
+                bisType = BisType.POINTS_PARTY_SPONSOR;
                 break;
             default:
                 break;
@@ -614,20 +617,20 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
 
-    public ResultResponse addPeoplePointsRecord(String type,int coin,String userId,  String bisId){
-        String bisType="";
+    public ResultResponse addPeoplePointsRecord(String type, int coin, String userId, String bisId) {
+        String bisType = "";
         switch (type) {
             case "1":
-                bisType=BisType.POINTS_WELFARE_PARTER_ADD;
+                bisType = BisType.POINTS_WELFARE_PARTER_ADD;
                 break;
             case "2":
-                bisType=BisType.POINTS_ORDINARY_PARTER_ADD;
+                bisType = BisType.POINTS_ORDINARY_PARTER_ADD;
                 break;
             case "3":
-                bisType=BisType.POINTS_CREATIVE_PARTER_ADD;
+                bisType = BisType.POINTS_CREATIVE_PARTER_ADD;
                 break;
             case "4":
-                bisType=BisType.POINTS_PARTY_PARTER_ADD;
+                bisType = BisType.POINTS_PARTY_PARTER_ADD;
                 break;
             default:
                 break;

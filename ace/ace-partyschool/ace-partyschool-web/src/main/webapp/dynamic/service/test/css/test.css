@@ -12,14 +12,6 @@ textarea {
     resize: none;
 }
 
-.title1 {
-    width: 9.2rem;
-    margin: 0.4rem auto 0.666666rem;
-    font-size: 0.506666rem;
-    font-weight: bold;
-    color: rgba(55, 63, 83, 1);
-    text-align: center;
-}
 
 .testContent {
     width: 100%;
@@ -28,9 +20,8 @@ textarea {
 .testItem {
     width: 9.2rem;
     margin: 0.4rem auto 0.666666rem;
-    border-radius: 10px !important;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0px 0px 12px 6px rgba(215, 217, 223, 0.25);
 }
 
 .testItem .testTitle {
@@ -55,7 +46,6 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .testItem .testScore .button {
@@ -112,8 +102,7 @@ textarea {
     color: rgba(55, 63, 83, 1);
     line-height: 0.973333rem;
     text-align: center;
-    width: 100%;
-    height: 100%;
+    margin: 0px;
 }
 
 .testItem .input_text .message {
@@ -160,15 +149,80 @@ textarea:-ms-input-placeholder {
     line-height: 0.666666rem;
 }
 
-.submit{
+.submit {
     width: 9.2rem;
     margin: 0rem auto 0.5rem;
-    height:1.33333333rem;
-    background:rgba(84,173,242,1);
-    border-radius:10px;
-    font-size:0.5rem;
-    font-weight:bold;
-    color:rgba(255,255,255,1);
+    height: 1.33333333rem;
+    background: rgba(84, 173, 242, 1);
+    border-radius: 10px;
+    font-size: 0.5rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
     text-align: center;
     line-height: 1.33333333rem;
+}
+
+.testStyle2 .option {
+    padding-left: 0.746666rem;
+    font-size: 0.4rem;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: rgba(55, 63, 83, 1);
+    position: relative;
+    margin-bottom: 0.4rem;
+}
+
+.testStyle2 .option label:before {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.testStyle2 .option input[type=radio]+label:before {
+    content: "\a0";
+    /*不换行空格*/
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.2rem;
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 50%;
+    border: 4px solid #D7D9DF;
+    background-color: transparent;
+    background-clip: content-box;
+    padding: .07rem;
+}
+
+.testStyle2 .option input[type=radio]:checked+label::before {
+    background-color: #98CEF7 !important;
+    background-clip: content-box;
+    padding: .07rem;
+    border-color:#54ADF2 ;
+}
+
+
+.testStyle2 .option input[type=checkbox] + label:before {
+    display: block;
+    content: "";
+    width: 0.44rem;
+    height: 0.44rem;
+    cursor: pointer;
+    border: 4px solid #D7D9DF;
+    border-radius: 5px;
+}
+
+
+.testStyle2 .option input[type="checkbox"]:checked+label::before {
+    content: "\2714";
+    text-align: center;
+    font-size: 0.35rem;
+    color: white;
+    border-color: #54ADF2;
+    background: #54ADF2;
+    line-height: 0.44rem;
+}
+
+input[type="radio"],input[type="checkbox"] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
 }
