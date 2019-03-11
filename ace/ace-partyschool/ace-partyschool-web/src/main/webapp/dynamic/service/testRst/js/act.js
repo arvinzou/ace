@@ -139,6 +139,9 @@ function initEvents() {
 function submitScore() {
     var data=[];
     var inputs=$('#modal-preview input[name=inputScore]');
+    if(inputs.length<1){
+        return;
+    }
     inputs.each(function(){
         var score=$(this).val();
         if(!score){
@@ -157,8 +160,12 @@ function submitScore() {
             list:data
         })
     }
-    $.post(url,datas,function () {
-        
+    $.post(url,datas,function (rst) {
+        if(rst.status==0){
+            window.history.back();
+        }else {
+            alert("提交失败。")
+        }
     })
 }
 

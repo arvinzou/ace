@@ -137,8 +137,11 @@ function initVue() {
                         jsons: JSON.stringify(data)
                     }
                     $.post(url, datas, function (rst) {
-                        if(rst.status==1){
+                        if(rst.status==0){
                             window.history.back();
+                        }
+                        else {
+                            alert("修改失败")
                         }
                     })
                 } else {

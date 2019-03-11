@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.partyschool.dao.NoticeDao;
 import com.huacainfo.ace.partyschool.dao.TaskDao;
 import com.huacainfo.ace.partyschool.model.Notice;
@@ -341,6 +342,7 @@ public class TaskServiceImpl implements TaskService {
             return new MessageResponse(ResultCode.FAIL,"任务丢失");
         }
         //"+request.getHeader("host")+"
+        PropertyUtil.getProperty("fastdfs_server");
         notice.setId(id);
         notice.setTitle(taskVo.getName());
         notice.setContent("<p>"+taskVo.getIntroduce()+" 点击下方链接开始：<a href=\"http://localhost/partyschool/www/registered/test/test.jsp?testId="+taskVo.getTid()+"&taskId="+id+"\" target=\"_blank\" class=\"\">"+taskVo.getTname()+"</a></p>");
