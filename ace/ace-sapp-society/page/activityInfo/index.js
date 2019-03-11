@@ -59,9 +59,9 @@ Page({
     console.log(activeId);
     if (!isCreatedImg) { //没有生成图片
       util.request(cfg.getCodeUrl, {
-          sysId: 'society', //系统id
-          page: 'page/activityInfo/index', //分享的哪一个页面
-          scene: activeId //页面参数
+        sysId: 'societyMiniApp', //系统id
+        page: 'page/activityInfo/index', //分享的哪一个页面
+        scene: activeId //页面参数
         },
         //获取二维码图片路径成功
         function(res) {
