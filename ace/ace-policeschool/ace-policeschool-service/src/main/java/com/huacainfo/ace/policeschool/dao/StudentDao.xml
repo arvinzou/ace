@@ -173,7 +173,7 @@
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Student">
         select count(1)
         from student
-        where mobile = #{mobile,jdbcType=VARCHAR}
+        where badgeNum = #{badgeNum,jdbcType=VARCHAR}
     </select>
 
     <update id="updateStatus" parameterType="java.lang.String">

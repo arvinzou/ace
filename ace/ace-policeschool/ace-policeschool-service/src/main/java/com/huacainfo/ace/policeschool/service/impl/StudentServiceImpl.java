@@ -98,9 +98,12 @@ public class StudentServiceImpl implements StudentService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
-//        if (CommonUtils.isBlank(o.getIdCard())) {
-//            return new MessageResponse(1, "身份证不能为空！");
-//        }
+        if (CommonUtils.isBlank(o.getIdCard())) {
+            return new MessageResponse(ResultCode.FAIL, "身份证不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getBadgeNum())) {
+            return new MessageResponse(ResultCode.FAIL, "警号不能为空！");
+        }
         if (CommonUtils.isBlank(o.getClassId())) {
             return new MessageResponse(1, "班级不能为空！");
         }
@@ -108,7 +111,7 @@ public class StudentServiceImpl implements StudentService {
 
         int temp = this.studentDao.isExist(o);
         if (temp > 0) {
-            return new MessageResponse(ResultCode.FAIL, "学员手机号码重复");
+            return new MessageResponse(ResultCode.FAIL, "警号重复！");
         }
 
         String sid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
@@ -139,25 +142,28 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public MessageResponse updateStudent(Student o, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
+            return new MessageResponse(ResultCode.FAIL, "主键不能为空！");
         }
         if (CommonUtils.isBlank(o.getName())) {
-            return new MessageResponse(1, "姓名不能为空！");
+            return new MessageResponse(ResultCode.FAIL, "姓名不能为空！");
         }
-        if (CommonUtils.isBlank(o.getMobile())) {
-            return new MessageResponse(1, "手机号不能为空！");
+        if (CommonUtils.isBlank(o.getIdCard())) {
+            return new MessageResponse(ResultCode.FAIL, "身份证不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getBadgeNum())) {
+            return new MessageResponse(ResultCode.FAIL, "警号不能为空！");
         }
         if (CommonUtils.isBlank(o.getClassId())) {
-            return new MessageResponse(1, "班级不能为空！");
+            return new MessageResponse(ResultCode.FAIL, "班级不能为空！");
         }
         //
         Student oldData = studentDao.selectByPrimaryKey(o.getId());
         if (oldData == null) {
-            return new MessageResponse(1, "数据丢失！");
+            return new MessageResponse(ResultCode.FAIL, "数据丢失！");
         }
         //号码有变动时，进行校验
-        if (!oldData.getMobile().equals(o.getMobile())) {
-            MessageResponse m = signService.updateAccount(o.getId(), o.getMobile());
+        if (!oldData.getBadgeNum().equals(o.getBadgeNum())) {
+            MessageResponse m = signService.updateAccount(o.getId(), o.getBadgeNum());
             if (m.getStatus() == ResultCode.FAIL) {
                 return m;
             }
@@ -261,8 +267,8 @@ public class StudentServiceImpl implements StudentService {
         String regType = CommConstant.STUDENT;
         String openId = "";
         String name = data.getName();
-        String account = data.getMobile();
-        String pwd = "123456";
+        String account = data.getBadgeNum();
+        String pwd = data.getIdCard().substring(data.getIdCard().length() - 7, data.getIdCard().length() - 1);
         String mobile = data.getMobile();
         String sex = data.getSex();//String.valueOf(signService.getCarInfo(data.getIdCard()).get("sex"));
         String sysId = "policeschool";

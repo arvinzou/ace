@@ -367,11 +367,11 @@ public class SignServiceImpl implements SignService {
         if (CommonUtils.isBlank(name)) {
             return new MessageResponse(ResultCode.FAIL, "名称不能为空！");
         }
-        if (CommonUtils.isBlank(mobile)) {
-            return new MessageResponse(ResultCode.FAIL, "手机号不能为空！");
+        if (CommonUtils.isBlank(account)) {
+            return new MessageResponse(ResultCode.FAIL, "账户不能为空！");
         }
-        if (isExistByMobile(mobile)) {
-            return new MessageResponse(ResultCode.FAIL, "手机号已注册过，请重新填写另一新的手机号!");
+        if (isExistByAccount(account)) {
+            return new MessageResponse(ResultCode.FAIL, "账号重复!");
         }
 //        String pwd = "123123";// CommonUtils.getIdentifyCode(6, 0);
         Users o = new Users();
@@ -417,20 +417,24 @@ public class SignServiceImpl implements SignService {
      */
     @Override
     public MessageResponse updateAccount(String userId, String newAccount) {
-        if (!CommonUtils.isValidMobile(newAccount)) {
-            return new MessageResponse(ResultCode.FAIL, "手机号格式不正确！");
-        }
+
         //验证账号是否重复
-        if (isExistByMobile(newAccount)) {
-            return new MessageResponse(ResultCode.FAIL, "该手机号已重复！");
+        if (isExistByAccount(newAccount)) {
+            return new MessageResponse(ResultCode.FAIL, "该账户已重复！");
         }
 
         int i = signDao.updateAccount(userId, newAccount);
         if (i != 1) {
-            return new MessageResponse(ResultCode.FAIL, "手机号更换失败！");
+            return new MessageResponse(ResultCode.FAIL, "账户变更失败！");
         }
 
-        return new MessageResponse(ResultCode.SUCCESS, "手机号更换成功！");
+        return new MessageResponse(ResultCode.SUCCESS, "账户变更成功！");
+    }
+
+    private boolean isExistByAccount(String newAccount) {
+        int temp = signDao.isExistByAccount(newAccount);
+
+        return temp > 0;
     }
 
     private void sendRegSmsNotice(Users o, String nickname, String mobile, String pwd) throws Exception {
