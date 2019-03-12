@@ -47,7 +47,7 @@
             <div class="title">精确搜索</div>
             <div class="seach morginBottom40">
                 <input id="tt" class="easyui-combotree" style=" width: 120px;height: 46px;border:0; !important;" name="areaCode">
-                <input class="loadName" name="keyword" type="text">
+                <input placeholder="按地址、路长模糊搜索" class="loadName" name="keyword" type="text">
                 <button class="active_seach"></button>
             </div>
             <div class="title">道路级别</div>
@@ -62,16 +62,16 @@
             </div>
             <div class="title">死亡人数</div>
             <div class="morginBottom40 chenckContent contentStyle">
-                <input type="text" size="16" name="downDeathNum" class="inputStyle form-control"
+                <input type="number" size="16" name="downDeathNum" class="inputStyle form-control"
                        style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
-                <input type="text" size="16" name="upDeathNum" class="inputStyle form-control"
+                <input type="number" size="16" name="upDeathNum" class="inputStyle form-control"
                        style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
             </div>
             <div class="title">受伤人数</div>
             <div class="morginBottom40 chenckContent contentStyle">
-                <input type="text" size="16" name="downInjuriesNum" class="inputStyle form-control"
+                <input type="number" size="16" name="downInjuriesNum" class="inputStyle form-control"
                        style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
-                <input type="text" size="16" name="upInjuriesNum" class="inputStyle form-control"
+                <input type="number" size="16" name="upInjuriesNum" class="inputStyle form-control"
                        style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
             </div>
             <div class=" buttonStyle contentStyle">

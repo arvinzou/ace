@@ -2,17 +2,60 @@ $(function () {
     // 为每一个textarea绑定事件使其高度自适应
     juicer.register('parseIntF', parseIntF);
     juicer.register('formatIndex', formatIndex);
-    juicer.register('formatScore', formatScore);
+    getTestInfo();
     $.each($("textarea"), function (i, n) {
         autoTextarea($(n)[0]);
     });
     $('#textarea').keyup(checkFontLength);
     $('.testContent').on('click', '.subBtn', subScore);
     $('.testContent').on('click', '.addBtn', addScore);
+    $('.submit').click(submitTest);
 })
+var eid;
+var cid;
 
+function submitTest() {
+    var item=$('.items');
+    var data=[];
+    var cell={
+        evaluatingId:eid,
+        classScheduleId:cid
+    }
+    var length=item.length;
+    for(var i=0;i<length;i++){
+        var $that=$(item[i]);
+        var cell={
+            evaluatingId:eid,
+            classScheduleId:cid
+        }
+        cell.name=$that.data('name');
+        cell.introduce=$that.data('introduce');
+        cell.score=$that.find('.number').val();
+        data.push(cell);
+    }
+    postData(data);
+}
 
-
+/**提交数据*/
+function postData(datas) {
+    var url=contextPath+ "/www/evaluationRst/insertEvaluationRstList";
+    var data={
+        evaluationRst:JSON.stringify(datas),
+        evaluationContent:JSON.stringify({
+            classScheduleId:cid,
+            content:$('#textarea').val()
+        })
+    }
+    $.post(url,data,function (rst) {
+        if(rst.status==0){
+            alert("感谢您的测评");
+            window.history.go(-1);
+        }
+        else {
+            alert("获取用户信息失败");
+        }
+    })
+}
 
 /**计算并取整*/
 function parseIntF(num) {
@@ -21,17 +64,41 @@ function parseIntF(num) {
 
 /**计算序列*/
 function formatIndex(num) {
-    return index=(parseInt(num)+1);
-}
-
-/**计算序列*/
-function formatScore(num) {
-    if(parseFloat(num)>0)
-        return '('+num+'分)';
+    var index=''+(parseInt(num)+1);
+    return index>9?index:'0'+index;
 }
 
 
 /**获取测试信息*/
+
+function getTestInfo() {
+    eid=GetQueryString('eid');
+    cid=GetQueryString('cid');
+    var url=contextPath+ "/www/classSchedule/selectClassScheduleByPrimaryKey";
+    var data={
+        id:cid
+    }
+    $.getJSON(url,data,function (rst) {
+        if(rst.status==0){
+            renderPage('title',rst.value.course,'tpl_title');
+        }
+        else {
+            alert("获取用户信息失败！");
+        }
+    })
+    url=contextPath+ "/www/evaluationIndex/findEvaluationIndexList";
+    data={
+        evaluatingId:eid
+    }
+    $.getJSON(url,data,function (rst) {
+        if(rst.status==0){
+            renderPage('test',rst.rows,'tpl_test');
+        }
+        else {
+            alert("获取用户信息失败！");
+        }
+    })
+}
 
 
 /**渲染方法*/
@@ -44,6 +111,16 @@ function renderPage(IDom, data, tempId) {
 }
 
 
+/**解析url参数*/
+
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
 
 
 /**
@@ -60,6 +137,16 @@ function subScore() {
 function addScore() {
     var that = $(this);
     changeSore(that, 1);
+}
+
+
+function checkNumber(that,nums){
+    var n=that.value;
+    if(n>nums){
+        that.value=nums;
+    }if(n<0){
+        that.value=0;
+    }
 }
 
 /**

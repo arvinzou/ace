@@ -14,10 +14,9 @@ function init_uploader(p) {
         if (!rst.state) {
             alert(rst.errorMessage);
         } else {
-            alert(rst.errorMessage);
+            // alert(rst.errorMessage);
             $('#modal-import').modal('hide');
             jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
-    
         }
     });
 }

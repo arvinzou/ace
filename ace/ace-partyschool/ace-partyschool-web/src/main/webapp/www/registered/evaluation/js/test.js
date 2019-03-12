@@ -6,7 +6,7 @@ $(function () {
     $.each($("textarea"), function (i, n) {
         autoTextarea($(n)[0]);
     });
-    $('#textarea').keyup(checkFontLength);
+    $('#test').on('keyup','#textarea',checkFontLength);
     $('.testContent').on('click', '.subBtn', subScore);
     $('.testContent').on('click', '.addBtn', addScore);
     $('.submit').click(submitTest);

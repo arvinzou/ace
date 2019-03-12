@@ -54,7 +54,7 @@
 				<div class="button subBtn">
 				</div>
 				<div class="score">
-					<input data-total="\${item.score}" class="number" value="\${item.score|parseIntF}">
+					<input type="number" onblur="checkNumber(this,'\${item.score}')" max="\${item.score}" data-total="\${item.score}" class="number" value="\${item.score|parseIntF}">
 				</div>
 				<div class="button addBtn"></div>
 			</div>
