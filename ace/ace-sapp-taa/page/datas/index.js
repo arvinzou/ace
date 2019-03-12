@@ -389,6 +389,7 @@ Page({
         }],
         yAxis: {
           format: function(val) {
+            val = val.toFixed(0);  //不保留小数点
             return val + '人';
           }
         },
