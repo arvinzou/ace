@@ -562,7 +562,7 @@ view, map, cover-view {
 .carType-items{
     width: 90%;
     height: auto;
-    margin: 20rpx auto;
+    margin: 30rpx auto;
 }
 .carType-items::after{
     content: '';
@@ -582,7 +582,7 @@ view, map, cover-view {
 }
 .cartype-default{
     color: #373F53;
-    font-size: 32rpx;
+    font-size: 34rpx;
     font-weight: 500;
 }
 .carType-active{
@@ -597,7 +597,7 @@ view, map, cover-view {
     width: 40rpx;
     height: 40rpx;
     float: left;
-    margin-right: 10rpx;
+    margin-right: 20rpx;
 }
 .checkName{
     float: left;

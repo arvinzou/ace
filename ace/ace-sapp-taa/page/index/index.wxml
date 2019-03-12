@@ -31,7 +31,7 @@
                         <cover-view class='modal-item-name'>{{itemName.sectionName}}({{itemName.startName}}-{{itemName.endName}})</cover-view>
                         <cover-view class='modal-item-detail'>
                             <cover-view class='distance'>距此{{itemName.distance}}m</cover-view>
-                            <cover-view wx-if='{{idx == 0}}' class='section-flag'>当前</cover-view>
+                            <cover-view wx-if='{{modalSeclect == idx}}' class='section-flag'>当前</cover-view>
                             <cover-image wx-if='{{modalSeclect == idx}}' class='secion-check' src='../../image/icon-modal-checked.png'></cover-image>
                         </cover-view>
                     </cover-view>
