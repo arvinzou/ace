@@ -88,7 +88,7 @@
             <view class=' locate-name locate-name-wrapper' wx:if='{{sectionFlag == true}}' bindtap='selectRoadSection'>
               {{sectionName}}
               <block wx:if='{{sectionName}}'>
-               ({{sectionStartName}}-{{sectionEndName}}){{distance}}m
+               ({{sectionStartName}}-{{sectionEndName}})
                </block>
               <view class='select-arrow-div'><image class='select-arrow' src='../../image/icon_rediret.png' ></image></view>
             </view>
@@ -107,7 +107,7 @@
             <view class='box'>
               <view class='row'>
                 <view class='row-left'>所属路长</view>
-                <input class='form-input middle' name='roadManName' type='text' bindtap='selectRoadMan' value='{{roadManName}}' placeholder='请选择路长' disabled='true'></input>
+                <input class='form-input middle' name='roadManName' type='text' bindtap='selectRoadMan' value='{{roadManName}}' placeholder='请选择路长' disabled='true' placeholder-class='placeholder-tips'></input>
                 <image class='select-arrow' src='../../image/icon_rediret.png' bindtap='selectRoadMan'></image>
               </view>
               <view class='row'>
@@ -117,10 +117,10 @@
                 </picker>
                 <image class='select-arrow' src='../../image/icon_rediret.png'></image>
               </view>
-              <view class='row rows' bindtap='openCarTypeModal'>
+              <view class='row' bindtap='openCarTypeModal'>
                 <view class='row-left'>车型</view>
                 <view class='form-input middle' wx-if='{{carTypeStr}}'>{{carTypeStr}}</view>
-                <input wx-if='{{carTypeStr=="" || carTypeStr==null || carTypeStr==undefined}}' class='form-input middle'type='text'  placeholder='请选择车型' disabled='true'></input>
+                <input wx-if='{{carTypeStr=="" || carTypeStr==null || carTypeStr==undefined}}' class='form-input middle'type='text'  placeholder='请选择车型' disabled='true' placeholder-class='placeholder-tips'></input>
                 <image class='select-arrow' src='../../image/icon_rediret.png' bindtap='selectRoadMan'></image>
               </view>
             </view>

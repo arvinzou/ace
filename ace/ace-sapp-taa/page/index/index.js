@@ -85,7 +85,6 @@ Page({
     }
     app.globalData.sectionId = null;
     app.globalData.sectionName = '';
-    app.globalData.tab = null;
     app.globalData.cjSectionId = null;
     app.globalData.roadManId = null;
     app.globalData.roadManName = null;
@@ -121,7 +120,6 @@ Page({
     app.globalData.endName = null;
     app.globalData.sectionId = null;
     app.globalData.sectionName = '';
-    app.globalData.tab = null;
     app.globalData.cjSectionId = null;
     app.globalData.roadManId = null;
     app.globalData.roadManName = null;
@@ -931,10 +929,11 @@ Page({
           content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
           success:function(res) {
               if (res.confirm) {
+                  app.globalData.tab = 1;
                   that.setData({
                       startName: null,
                       startName: null,
-                      tab: 1,
+                      tab: app.globalData.tab,
                       polyline: [{
                           points: [],
                           color: '#4350FC',
