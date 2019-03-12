@@ -1,6 +1,6 @@
 <!-- 事故快报 -->
 <view class='accidentContent ' wx:if="{{tab == 0}}">
-  <map id="accidentMap" class='map {{isEdit == true?"activeEdit":""}}' show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' markers='{{current}}'>
+  <map id="accidentMap" class='map {{isEdit == true?"activeEdit":""}} {{isSrink == true?"shrink":""}}' show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' markers='{{current}}'>
     <cover-view class='tab'>
       <cover-view class='header' bindtap='userInfo'>
         <block wx:if='{{header}}'>
@@ -27,7 +27,7 @@
             <block wx:if='{{sectionList.length > 0}}'>
                 <cover-view class='modal-content-title'>可选路段</cover-view>
                 <block wx:for="{{sectionList}}" wx:for-index="idx" wx:for-item="itemName">
-                    <cover-view class='modal-item' bindtap='selectModalSection' data-sectionid='{{itemName.roadSectionId}}' data-sectionname='{{itemName.sectionName}}'  data-roadmanid='{{itemName.roadManId}}' data-roadman='{{itemName.manName}}' data-startname='{{itemName.startName}}' data-endname='{{itemName.endName}}' data-index='{{idx}}'>
+                    <cover-view class='modal-item' bindtap='selectModalSection' data-sectionid='{{itemName.roadSectionId}}' data-sectionname='{{itemName.sectionName}}'  data-roadmanid='{{itemName.roadManId}}' data-roadman='{{itemName.manName}}' data-startname='{{itemName.startName}}' data-endname='{{itemName.endName}}' data-index='{{idx}}' data-distance='{{itemName.distance}}'>
                         <cover-view class='modal-item-name'>{{itemName.sectionName}}({{itemName.startName}}-{{itemName.endName}})</cover-view>
                         <cover-view class='modal-item-detail'>
                             <cover-view class='distance'>距此{{itemName.distance}}m</cover-view>
@@ -60,10 +60,10 @@
                     <cover-view class='carType-cancel' bindtap='cancelCarTypes'>取消</cover-view>
                     <cover-view class='carType-confirm' bindtap='confirmCarTypes'>确定</cover-view>
                 </cover-view>
-                <cover-view class='carType-title'>
+                <!--<cover-view class='carType-title'>
                     <cover-view  class='modal-title01'>请选择车型</cover-view>
                     <cover-view  class='modal-title02'>(多选)</cover-view>
-                </cover-view>
+                </cover-view>-->
                 <cover-view class='carType-items'>
                     <block wx:for='{{carTypes}}' wx:for-index="index" wx:for-item="item">
                         <cover-view class='carType-item'  wx:if='{{item.CODE!=""}}' data-id='{{item.CODE}}' data-obj='{{item}}' data-index='{{index}}' data-checked='{{item.checkFlag}}' bindtap='selectCarType'>
@@ -88,7 +88,7 @@
             <view class=' locate-name locate-name-wrapper' wx:if='{{sectionFlag == true}}' bindtap='selectRoadSection'>
               {{sectionName}}
               <block wx:if='{{sectionName}}'>
-               ({{sectionStartName}}-{{sectionEndName}})
+               ({{sectionStartName}}-{{sectionEndName}}){{distance}}m
                </block>
               <view class='select-arrow-div'><image class='select-arrow' src='../../image/icon_rediret.png' ></image></view>
             </view>
