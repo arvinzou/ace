@@ -6,10 +6,10 @@ var weekStr=['周日','周一','周二','周三','周四','周五','周六'];
 var timerModal;
 
 $(function () {
+    clock_12h();
     dateData=new Date();
     initSwriper();
     initClassRoom();
-    clock_12h();
      // initpdf();
     initClock();
     $('.info_box').on('click','.active_course',viewCourse);
@@ -44,6 +44,8 @@ function viewStudent() {
     var url = contextPath + "/www/classes/findStudentList";
     var data = {
         classId: classId,
+        start:0,
+        limit:500
     }
     $.getJSON(url, data, function (rst) {
         if(rst.status==0){

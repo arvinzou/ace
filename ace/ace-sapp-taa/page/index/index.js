@@ -17,7 +17,6 @@ Page({
     latitude: null,
     longitude: null,
     current: [],
-    mapHeight: '100vh',
     isEdit: false,
     roadManId: null,
     roadManName: null,
@@ -58,7 +57,8 @@ Page({
     sectionList: [],
     modalSeclect: 0,   //路段模态框选择
     carTypeModal: 0,    //汽车类型选择
-    carTypeStr: ""
+    carTypeStr: "",
+    isSrink: false      //表单是否收缩
   },
 
   /**
@@ -210,6 +210,7 @@ Page({
                   roadManId: dataList[0].roadManId,
                   sectionStartName: dataList[0].startName,
                   sectionEndName: dataList[0].endName,
+                  distance: dataList[0].distance,
                   sectionList: dataList
               });
           }else{
@@ -308,15 +309,15 @@ Page({
    */
   closeAndOpen: function() {
     var that = this;
-    if (that.data.isEdit == false) {
+      if (that.data.isSrink == false) {
       //展开表单
       that.setData({
-        isEdit: true
+          isSrink: true
       });
 
     } else {
       that.setData({
-        isEdit: false
+          isSrink: false
       });
     }
   },
@@ -389,7 +390,8 @@ Page({
           roadManId: app.globalData.roadManId,
           sectionStartName: app.globalData.startName,
           sectionEndName: app.globalData.endName,
-          modalSeclect: e.currentTarget.dataset.index
+          modalSeclect: e.currentTarget.dataset.index,
+          distance: e.currentTarget.dataset.distance
       })
      
   },
@@ -679,7 +681,8 @@ Page({
               roadManName: app.globalData.roadManName,
               roadManId: app.globalData.roadManId,
               sectionStartName: app.globalData.startName,
-              sectionEndName: app.globalData.endName
+              sectionEndName: app.globalData.endName,
+              distance: app.globalData.distance
           });
       }
       

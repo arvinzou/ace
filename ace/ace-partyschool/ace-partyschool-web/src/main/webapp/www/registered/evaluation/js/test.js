@@ -49,7 +49,7 @@ function postData(datas) {
     $.post(url,data,function (rst) {
         if(rst.status==0){
             alert("感谢您的评测");
-            window.history.back();
+            window.history.go(-1);
         }
         else {
             alert("获取用户信息失败");

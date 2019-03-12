@@ -30,10 +30,10 @@
 
                 <form onsubmit="return t_query()">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select style="width: 200px" class="form-control js-example-basic-single js-example-basic-single2" name="teacherId"></select>
+                        <select style="width: 300px" class="form-control js-example-basic-single js-example-basic-single2" name="teacherId"></select>
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select style="width: 200px" class="form-control js-example-basic-single js-example-basic-single1" name="classesId"></select>
+                        <select style="width: 300px" class="form-control js-example-basic-single js-example-basic-single1" name="classesId"></select>
                     </div>
                     <div class="input-group">
                         <input style="height: 35px;" type="text"

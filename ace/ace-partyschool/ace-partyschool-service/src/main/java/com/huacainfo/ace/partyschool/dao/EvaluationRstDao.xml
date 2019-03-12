@@ -198,6 +198,9 @@ GROUP BY e.NAME) t
         <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
             and er.userId=#{condition.userId,jdbcType=VARCHAR}
         </if>
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and s.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
         GROUP BY er.userId
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
