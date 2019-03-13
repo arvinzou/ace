@@ -268,8 +268,8 @@ public class TeacherServiceImpl implements TeacherService {
         String mobile = data.getMobile();
         String sex = data.getSex();//String.valueOf(signService.getCarInfo(data.getIdCard()).get("sex"));
         String sysId = "partyschool";
-        String deptId = "0004";
-        String roleId = "9f8f9043-73e1-4438-bf8a-ef681431df74";
+        String deptId = "7bccdbc14dc04d6d9926656d75e3c720";
+        String roleId = "c3a6ccc0-a78b-4244-8193-8444168868b6";
         ;//select * from portal.role t where t.syid='partyschool'
         MessageResponse ms2 = signService.insertUsers(regType, uid, openId, name, account, pwd,
                 mobile, sex, sysId, deptId, roleId, SignServiceImpl.ACCOUNT_VALID);

@@ -120,8 +120,8 @@ public class SignServiceImpl implements SignService {
         String mobile = data.getMobile();
         String sex = data.getSex();//String.valueOf(getCarInfo(data.getIdCard()).get("sex"));
         String sysId = "partyschool";
-        String deptId = "0004";
-        String roleId = "ede24712-e13c-47d5-8cab-fd54589e3fe1";//select * from portal.role t where t.syid='partyschool'
+        String deptId = "7bccdbc14dc04d6d9926656d75e3c720";
+        String roleId = "510fd9f9-9612-4415-9eac-2f361f96ee40";//select * from portal.role t where t.syid='partyschool'
         MessageResponse ms2 = insertUsers(regType, uid, openId, name, account, pwd,
                 mobile, sex, sysId, deptId, roleId, ACCOUNT_VALID);
         if (ResultCode.FAIL == ms2.getStatus()) {
@@ -163,8 +163,8 @@ public class SignServiceImpl implements SignService {
         String mobile = data.getMobile();
         String sex = data.getSex();//String.valueOf(getCarInfo(data.getIdCard()).get("sex"));
         String sysId = "partyschool";
-        String deptId = "0004";
-        String roleId = "9f8f9043-73e1-4438-bf8a-ef681431df74";//select * from portal.role t where t.syid='partyschool'
+        String deptId = "7bccdbc14dc04d6d9926656d75e3c720";
+        String roleId = "c3a6ccc0-a78b-4244-8193-8444168868b6a";//select * from portal.role t where t.syid='partyschool'
         MessageResponse ms2 = insertUsers(regType, uid, openId, name, account, pwd,
                 mobile, sex, sysId, deptId, roleId, ACCOUNT_INVALID);
         if (ResultCode.FAIL == ms2.getStatus()) {
