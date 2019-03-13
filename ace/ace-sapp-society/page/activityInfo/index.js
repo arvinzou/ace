@@ -135,12 +135,12 @@ Page({
    */
   generateImage: function() {
     var that = this;
-    const ctx = wx.createCanvasContext('shareCanvas'); //绘图上下文
-    const activityInfo = that.data.activityInfo; //获取活动信息
-    const title = activityInfo.title; //标题 
-    const startDate = activityInfo.startDate; // 开始时间
-    const endDate = activityInfo.endDate; // 结束时间
-    const location = activityInfo.location; //活动地点
+    var ctx = wx.createCanvasContext('shareCanvas'); //绘图上下文
+    var activityInfo = that.data.activityInfo; //获取活动信息
+    var title = activityInfo.title; //标题 
+    var startDate = activityInfo.startDate; // 开始时间
+    var endDate = activityInfo.endDate; // 结束时间
+    var location = activityInfo.location; //活动地点
     var initCanvasWidth = 270;
     var initCanvasHeight = 360;
     //屏幕高度
