@@ -52,6 +52,5 @@
 	</script>
 	<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/autoLogin.js"></script>
 	<script src="js/detail.js" type="text/javascript" charset="utf-8"></script>
 </html>
