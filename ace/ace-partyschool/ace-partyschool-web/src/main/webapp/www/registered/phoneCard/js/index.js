@@ -159,36 +159,39 @@ function findList(){
             dateTimeStr: time
         },
         success:function(result){
-            console.log(result);
-            var num = result.data.am.length + result.data.pm.length + result.data.night.length;
-            renderPage('recordList', result.data, 'record-tpl');
-            $("#count").text("今日已签到"+num+"/5");
-            var date = new Date();
-            var hour = date.getHours();
-            if(hour < 12){
-                if(result.data.am.length >1){
-                    $("#amBtn").hide();
-                    $("#pmBtn").show();
-                    $("#nightBtn").hide();
+            if(result.status == 0){
+
+                var num = result.data.am.length + result.data.pm.length + result.data.night.length;
+                renderPage('recordList', result.data, 'record-tpl');
+                $("#count").text("今日已签到"+num+"/5");
+                var date = new Date();
+                var hour = date.getHours();
+                if(hour < 12){
+                    if(result.data.am.length >1){
+                        $("#amBtn").hide();
+                        $("#pmBtn").show();
+                        $("#nightBtn").hide();
+                    }else{
+                        $("#amBtn").show();
+                        $("#pmBtn").hide();
+                        $("#nightBtn").hide();
+                    }
+                }else if(hour >=12 && hour < 19){
+                    if(result.data.pm.length >1){
+                        $("#amBtn").hide();
+                        $("#pmBtn").hide();
+                        $("#nightBtn").show();
+                    }else{
+                        $("#amBtn").hide();
+                        $("#pmBtn").show();
+                        $("#nightBtn").hide();
+                    }
                 }else{
-                    $("#amBtn").show();
-                    $("#pmBtn").hide();
-                    $("#nightBtn").hide();
-                }
-            }else if(hour >=12 && hour < 19){
-                if(result.data.pm.length >1){
                     $("#amBtn").hide();
                     $("#pmBtn").hide();
                     $("#nightBtn").show();
-                }else{
-                    $("#amBtn").hide();
-                    $("#pmBtn").show();
-                    $("#nightBtn").hide();
                 }
-            }else{
-                $("#amBtn").hide();
-                $("#pmBtn").hide();
-                $("#nightBtn").show();
+
             }
         },
         error:function(){

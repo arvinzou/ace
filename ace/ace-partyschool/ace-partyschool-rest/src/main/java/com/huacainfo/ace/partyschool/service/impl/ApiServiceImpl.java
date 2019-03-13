@@ -172,12 +172,6 @@ public class ApiServiceImpl implements ApiService {
                 "\t)o\n" +
                 ")v\n" +
                 "where v.rowNum> " + startNum + " and v.rowNum<= " + endNum;
-//                "select  u.Name,  t.* from dbo.BorrowCurrency t \n" +
-//                "left join dbo.ReaderCurrency u on t.ReaderCord = u.ReaderCord\n" +
-//                "where 1=1\n" +
-//                "and t.Signs='未还'\n" +
-//                "and u.ReaderBar = '" + lCardNo + "' \n" +
-//                "order by t.BorrowDate asc";//查询test表
 
         SQLServerManager manager = SQLServerManager.newInstance(connUrl, sa, pwd);
         return manager.query(sql);

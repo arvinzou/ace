@@ -262,8 +262,8 @@ public class StudentServiceImpl implements StudentService {
         String mobile = data.getMobile();
         String sex = data.getSex();//String.valueOf(signService.getCarInfo(data.getIdCard()).get("sex"));
         String sysId = "partyschool";
-        String deptId = "0004";
-        String roleId = "ede24712-e13c-47d5-8cab-fd54589e3fe1";//select * from portal.role t where t.syid='partyschool'
+        String deptId = "7bccdbc14dc04d6d9926656d75e3c720";
+        String roleId = "510fd9f9-9612-4415-9eac-2f361f96ee40";//select * from portal.role t where t.syid='partyschool'
         MessageResponse ms2 = signService.insertUsers(regType, uid, openId, name, account, pwd,
                 mobile, sex, sysId, deptId, roleId, SignServiceImpl.ACCOUNT_VALID);
         if (ResultCode.FAIL == ms2.getStatus()) {
