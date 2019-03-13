@@ -301,6 +301,7 @@ function pickDate(cellvalue, options, cell) {
 
 function renderBtn(cur) {
     var rowid = $.jgrid.getAccessor(cur, 'id');
+    var num = $.jgrid.getAccessor(cur, 'gpsNum');
     var title = $.jgrid.getAccessor(cur, 'name');
 
     var opt = [];
@@ -312,7 +313,7 @@ function renderBtn(cur) {
         opt.push('<a href="javascript:reset(\'' + rowid + '\')">重置</a>  ');
     }
 
-    opt.push('<a href="javascript:previewMap(\'' + rowid + '\')">查看</a>  ');
+    opt.push('<a href="javascript:previewMap(\'' + rowid +'\','+num+')">查看</a>  ');
 
     return opt.join(' ');
 }

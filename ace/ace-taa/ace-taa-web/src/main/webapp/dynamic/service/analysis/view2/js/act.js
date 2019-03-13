@@ -149,6 +149,27 @@ function initEvents() {
     });
 }
 
+function getLatLongByAreaCode(data) {
+    $.ajax({
+        url: contextPath + '/traAcc/getLatLongByAreaCode',
+        type: "post",
+        async: false,
+        data: data,
+        success: function (result) {
+            if (result.status == 0) {
+                option.bmap.center=[result.value.longitude,result.value.latitude];
+                myChart.setOption(option, true);
+                $("input[name=areaCode]").val(result.value.areaName);
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            alert("对不起出错了！");
+        }
+    });
+}
+
 
 
 function initForm() {
