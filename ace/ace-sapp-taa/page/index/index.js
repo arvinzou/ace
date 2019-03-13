@@ -66,7 +66,7 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-    that.onShow()
+    
     if (!app.globalData.collectionId) {
       app.globalData.startName = '';
       app.globalData.endName = null;
@@ -653,7 +653,6 @@ Page({
    */
   onShow: function() {
     var that = this;
-    // that.onLoad();
     if (!util.is_login()) {
       wx.navigateTo({
         url: "../userinfo/index?url=../index/index&type=navigateTo"
@@ -663,7 +662,6 @@ Page({
       that.getLocation();
       that.initUserData(); // 重置后从定向首页，初始化用户信息     
       if (app.globalData.collectionId) {
-        console.log(11);
         that.setData({
           startName: app.globalData.startName,
           endName: app.globalData.endName,
@@ -693,7 +691,6 @@ Page({
     that.setData({
       isCJ: app.globalData.isCJ
     });
-    
 
   },
 

@@ -90,6 +90,8 @@ function renderPage(IDom, data, tempId) {
 }
 
 function exit() {
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
     $.ajax({
         url: contextPath + "/www/sign/logout",
         type: "post",
