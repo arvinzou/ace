@@ -9,7 +9,6 @@ var slen = 0;
 var student = null;
 $(function () {
     var politicalArr = [{"id": "public", "value": "群众"}, {"id": "party", "value": "党员"}, {"id": "member", "value": "团员"}];
-    initClassList();
     var politicalSelect = new MobileSelect({
         trigger: '#political',
         title: '政治面貌选择',
@@ -24,20 +23,7 @@ $(function () {
             political = data;
         }
     });
-    var classesSelect = new MobileSelect({
-        trigger: '#classes',
-        title: '班级选择',
-        wheels: [
-            {data: classesArr}
-        ],
-        position: [1], //初始化定位 打开时默认选中的哪个 如果不填默认为0
-        transitionEnd: function (indexArr, data) {
-            clazz = data;
-        },
-        callback: function (indexArr, data) {
-            clazz = data;
-        }
-    });
+
 
     $("#close").click(function () {
         $("#nameModal").hide();
@@ -265,7 +251,7 @@ function searchByName() {
                 student = result.data;
 
                 if(student[0].clsId){
-                    var tempClass = [{"id": student[0].clsId, "value": student[0].clsViewName}];
+                    var tempClass = [{"id": student[0].clsId, "value": student[0].clsName}];
                     clazz = tempClass;
                     $("#classes").text(clazz[0].value);
                 }
