@@ -139,7 +139,7 @@ Page({
   selectRoadSection: function(e) {
     var that = this;
     console.log(e);
-    var roadSectionId = e.currentTarget.dataset.id;
+    var roadSectionId = app.globalData.collectionId = e.currentTarget.dataset.id;
     var roadSectionName = e.currentTarget.dataset.name;
     var skipType = that.data.pageType;
     console.log(skipType)
@@ -152,7 +152,6 @@ Page({
       app.globalData.roadManName = e.currentTarget.dataset.roadmanname;
       var startName = e.currentTarget.dataset.startname;
       var endName = e.currentTarget.dataset.endname;
-
      app.globalData.startName = startName;
      app.globalData.endName = endName;
       wx.navigateBack({
@@ -168,18 +167,20 @@ Page({
         app.globalData.cjSectionId = roadSectionId;
         app.globalData.isCJ = false;  //是否是采集信息
         app.globalData.tab = 1;
-        wx.navigateBack({
-          changed: true
-        });
+      wx.navigateTo({
+        url: '../index/index'
+      });
     } else if (skipType == 'xb') {
       //续报选择路段
+      console.log(e);
       app.globalData.sectionId = roadSectionId;
       app.globalData.sectionName = roadSectionName;
       app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
       app.globalData.roadManName = e.currentTarget.dataset.roadmanname;
-      wx.navigateTo({
-        url: '../index/index'
+      wx.navigateBack({
+        changed: true
       });
+     
     }
   },
   /**
@@ -204,7 +205,7 @@ Page({
       wx.showModal({
           title: '提示',
           content: '确定重置？',
-          success(res) {
+          success:function(res){
               if (res.confirm) {
                   util.request(cfg.server + '/taa/www/road/resetSectionGPS', { sectionId: sectionId },
                       function (res) {
