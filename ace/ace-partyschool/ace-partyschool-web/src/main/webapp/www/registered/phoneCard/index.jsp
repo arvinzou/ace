@@ -103,7 +103,6 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jweixin-1.2.0.js"></script>
 		<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=BYLBZ-HDYW4-WQNUU-XIH6N-XDPX7-44FGT"></script>
 		<script type="text/javascript" src="js/layui/layui.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/autoLogin.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 	</body>
 

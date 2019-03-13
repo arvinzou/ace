@@ -96,7 +96,11 @@
             <view class=' locate-name locate-name-wrapper' wx:if='{{sectionFlag == false}}' bindtap='selectRoadSection'>请选择路段</view>
 
             <view class='locate-road'>
-                <view class='add-box'>{{address}}</view>
+                <view class='add-box'>
+                    <block wx:if='{{address}}'>
+                    {{address}}
+                    </block>
+                </view>
                 <view class='reset-section' wx-if='sectionList.length>0' bindtap='resetSection'>
                     <image src='../../image/icon-reset-section.png'></image>
                     <!--<text>重新定位</text>-->

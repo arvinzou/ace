@@ -163,12 +163,11 @@ Page({
         //路段采集
         var startName = e.currentTarget.dataset.startname;
         var endName = e.currentTarget.dataset.endname;
-
         app.globalData.startName = startName;
         app.globalData.endName = endName;
         app.globalData.cjSectionId = roadSectionId;
         app.globalData.isCJ = false;  //是否是采集信息
-        app.globalData.tab = 1
+        app.globalData.tab = 1;
         wx.navigateBack({
           changed: true
         });
@@ -178,8 +177,8 @@ Page({
       app.globalData.sectionName = roadSectionName;
       app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
       app.globalData.roadManName = e.currentTarget.dataset.roadmanname;
-      wx.navigateBack({
-        changed: true
+      wx.navigateTo({
+        url: '../index/index'
       });
     }
   },

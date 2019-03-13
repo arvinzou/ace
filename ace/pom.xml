@@ -69,10 +69,10 @@
         <!--<module>ace-live</module>-->
 
         <!--<module>ace-cu</module>-->
-        <!--<module>ace-partyschool</module>-->
+        <module>ace-partyschool</module>
         <module>ace-codeGenerator</module>
         <!--<module>ace-autocode</module>-->
-        <!--<module>ace-gis</module>-->
+        <module>ace-society</module>
         <!--<module>ace-kernel</module>-->
         <!---->
         <!--<module>ace-iop</module>-->

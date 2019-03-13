@@ -1,4 +1,4 @@
-
+var server = "http://www.cdswdx.top";
 $(function(){
     $.ajax({
         url: contextPath+ "/www/sign/getAcctInfo",
@@ -33,7 +33,7 @@ $(function(){
 
 function findList(cardNo){
     $.ajax({
-        url:  "/api/www/api/findBorrowList",
+        url:  server+"/api/www/api/findBorrowList",
         type:"post",
         async:false,
         data:{
