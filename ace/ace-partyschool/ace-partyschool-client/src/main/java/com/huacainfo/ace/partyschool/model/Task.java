@@ -11,6 +11,7 @@ public class Task {
 
     private String introduce;
 
+    /**1、正常。2、发布*/
     private String status;
 
     private Date startTime;

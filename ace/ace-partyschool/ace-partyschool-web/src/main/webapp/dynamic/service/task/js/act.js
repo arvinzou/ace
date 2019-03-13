@@ -104,10 +104,6 @@ function initEvents() {
         console.log(event);
         $(event.target).addClass("active");
     });
-    $("#btn-view-save").bind('click', function(event) {
-        save();
-    });
-
 }
 
 /*任务管理审核*/
@@ -231,54 +227,16 @@ function initForm(id) {
 }
 
 function push(rowid) {
-    $("#modal-push").modal("show");
-    id=rowid;
-    initTree();
-}
-
-function initTree() {
-    $('#tt').tree({
-        url: contextPath + '/mailList/getTree',
-        method: 'get',
-        animate: true,
-        lines: false,
-        checkbox:true,
-        onLoadSuccess: function() {
-            //$("#tt").tree("expandAll");
+    var url = contextPath + "/task/releaseTask";
+    var data={
+        id:rowid
+    }
+    $.post(url,data,function (rst) {
+        if(rst.status==0){
+            alert("发布成功");
+            getPageList();
+        }else {
+            alert("删除失败，请刷新重试");
         }
     })
-}
-
-
-function save() {
-    var nodes = $('#tt').tree('getChecked', ['checked','indeterminate']);
-    var s = '';
-    for(var i=0; i<nodes.length; i++){
-        if (s != '') s += ',';
-        s += nodes[i].id;
-    }
-    $.ajax({
-        type : "post",
-        url : contextPath + "/task/releaseTask",
-        data:{id:id,userIds:s},
-        beforeSend : function(XMLHttpRequest) {
-            startLoad();
-        },
-        success : function(rst, textStatus) {
-            if (rst) {
-                stopLoad();
-                $('#modal-push').modal('hide');
-                alert(rst.errorMessage);
-                jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                    postData: params
-                }).trigger("reloadGrid");
-            }
-        },
-        complete : function(XMLHttpRequest, textStatus) {
-            stopLoad();
-        },
-        error : function() {
-            stopLoad();
-        }
-    });
 }

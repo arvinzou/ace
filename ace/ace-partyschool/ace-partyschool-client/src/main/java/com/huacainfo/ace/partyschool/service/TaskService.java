@@ -169,5 +169,5 @@ public interface TaskService {
      * @version: 2019-03-08
      */
     MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
-    MessageResponse releaseTask(String id, String[] userIds,UserProp userProp,HttpServletRequest request) throws Exception;
+    MessageResponse releaseTask(String id,UserProp userProp) throws Exception;
 }

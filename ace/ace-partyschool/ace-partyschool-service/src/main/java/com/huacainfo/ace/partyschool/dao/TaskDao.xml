@@ -49,6 +49,7 @@
       testId = #{testId,jdbcType=VARCHAR},
       introduce = #{introduce,jdbcType=VARCHAR},
       startTime = #{startTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=CHAR},
       endTime = #{endTime,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},

@@ -271,7 +271,7 @@ public class TaskController extends BisBaseController {
 
     @RequestMapping(value = "/releaseTask")
     @ResponseBody
-    public MessageResponse releaseTask(String id,String  userIds,HttpServletRequest request) throws Exception {
-        return this.taskService.releaseTask(id,userIds.split(","),this.getCurUserProp(),request);
+    public MessageResponse releaseTask(String id) throws Exception {
+        return this.taskService.releaseTask(id,this.getCurUserProp());
     }
 }
