@@ -37,7 +37,7 @@
                     <div class="input-group">
                         <input type="text" name="title" class="form-control" placeholder="请输入文件名称">
                         <span class="input-group-btn">
-                            <button class="btn  btn-default search_btn" id="btn-search" authority="false">
+                            <button type="button" class="btn  btn-default" id="btn-search" authority="false">
                                 搜索
                             </button>
                         </span>
@@ -168,7 +168,7 @@
 
 <script id="tpl-select-list" type="text/template">
 
-    <select name="classesId" id="classesId" class="form-control" style="height: 31px;">
+    <select onchange="searchActive()" name="classesId" id="classesId" class="form-control" style="height: 31px;">
         {@each data as item, index}
         <option value="\${item.id}">\${item.name}</option>
         {@/each}
