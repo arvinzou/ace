@@ -9,7 +9,6 @@ var slen = 0;
 var student = null;
 $(function(){
 	var politicalArr = [{"id":"normal","value":"非党员"},{"id":"party","value":"党员"}];
-    initClassList();
 	var politicalSelect= new MobileSelect({
 	    trigger: '#political',
 	    title: '政治面貌选择',
