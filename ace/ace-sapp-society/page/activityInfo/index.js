@@ -25,7 +25,6 @@ Page({
   onLoad: function(options) {
     var that = this;
     var id = options.id;
-    console.log(options);
     if (options.scene) {
       id = decodeURIComponent(options.scene);
     }
@@ -56,7 +55,6 @@ Page({
     var postCover = '../../image/share-bg.png'; //封面图，底图
     var activeId = e.currentTarget.dataset.id; //活动页面id
     var isCreatedImg = that.data.isCreatedImg;
-    console.log(activeId);
     if (!isCreatedImg) { //没有生成图片
       util.request(cfg.getCodeUrl, {
         sysId: 'societyMiniApp', //系统id
@@ -65,14 +63,14 @@ Page({
         },
         //获取二维码图片路径成功
         function(res) {
-          console.log(res);
           var filePath = res.file_path;
-          if (filePath !== undefined && filePath !== null) {
+          if (filePath) {
+            filePath = filePath.replace(/^http*/, 'https');  //正则匹配以http开头，s可选的字符串
+            console.log(filePath);
             //  下载文件（二维码路径）资源到本地
             wx.downloadFile({
               url: filePath, // 仅为示例，并非真实的资源
               success: function(res) {
-                console.log(res);
                 // 只要服务器有响应数据，就会把响应内容写入文件并进入 success 回调，业务需要自行判断是否下载到了想要的内容
                 if (res.statusCode === 200) {
                   wx.showLoading({
@@ -91,7 +89,6 @@ Page({
                       canvasId: 'shareCanvas',
                       success: function(res) {
                         var shareImg = res.tempFilePath;
-                        console.log(res);
                         that.setData({
                           shareImg: shareImg,
                           showModel: true,
@@ -107,6 +104,13 @@ Page({
                     });
                   }, 500);
                 }
+              },
+              fail:function(res){
+                console.log(res);
+                wx.showModal({
+                  title: '提示',
+                  content: '图片加入白名单失败',
+                })
               }
             });
           }
@@ -114,6 +118,10 @@ Page({
         //获取二维码失败
         function(res) {
           console.log(res);
+          wx.showModal({
+            title: '提示',
+            content: '获取二维码失败',
+          })
         }
       );
     } else { // 生成图片
@@ -121,20 +129,18 @@ Page({
         showModel: true
       });
     }
-
-
   },
   /**
    * 生成图片
    */
   generateImage: function() {
     var that = this;
-    const ctx = wx.createCanvasContext('shareCanvas'); //绘图上下文
-    const activityInfo = that.data.activityInfo; //获取活动信息
-    const title = activityInfo.title; //标题 
-    const startDate = activityInfo.startDate; // 开始时间
-    const endDate = activityInfo.endDate; // 结束时间
-    const location = activityInfo.location; //活动地点
+    var ctx = wx.createCanvasContext('shareCanvas'); //绘图上下文
+    var activityInfo = that.data.activityInfo; //获取活动信息
+    var title = activityInfo.title; //标题 
+    var startDate = activityInfo.startDate; // 开始时间
+    var endDate = activityInfo.endDate; // 结束时间
+    var location = activityInfo.location; //活动地点
     var initCanvasWidth = 270;
     var initCanvasHeight = 360;
     //屏幕高度
@@ -156,8 +162,11 @@ Page({
     ctx.setFillStyle('#ffffff'); // 文字颜色：白色
     ctx.setFontSize(13); // 文字字号：18px
     ctx.setTextAlign('center'); // 文字居中
-    ctx.font = 'normal bold sans-serif';
     // 在画布上绘制被填充的文本
+    if(title.length>20){
+      title = title.substring(0,20)+ '...';
+      console.log(title);
+    }
     ctx.fillText(title, initCanvasWidth / 2, 35);
 
     //活动地点
@@ -248,10 +257,8 @@ Page({
         sysId: 'societyMiniApp'
       },
       function(res) {
-        console.log(res.data.accessToken);
       },
       function(res) {
-        console.log(res);
       }
     );
   },
@@ -278,12 +285,10 @@ Page({
   // 获取列表
   initdata: function() {
     var that = this;
-    console.log(that.data.id);
     util.request(cfg.findActivity, {
         id: that.data.id,
       },
       function(rst) {
-        console.log(rst);
         wx.hideNavigationBarLoading() //完成停止加载
         wx.stopPullDownRefresh() //停止下拉刷新
         that.data.activityInfo = rst.data;
@@ -293,7 +298,6 @@ Page({
         that.setData({
           activityInfo: rst.data
         });
-        console.log(that.data.activityInfo);
       }
     );
   },
@@ -302,7 +306,6 @@ Page({
    */
   onShow: function() {
     var id = this.data.id;
-    console.log(id);
     var that = this;
     if (!id) {
       wx.navigateBack({})
@@ -345,9 +348,8 @@ Page({
     var flag = false;
     var sysUserInfo = util.getSysUser();
     //如果没有注册，尝试重新申请获取一次。
-    if (sysUserInfo) {
-      console.log(sysUserInfo);
-      flag = that.data.activityInfo.sId == sysUserInfo.person.id;
+    if (sysUserInfo || sysUserInfo.societyOrg) {
+        flag = that.data.activityInfo.sId == sysUserInfo.societyOrg.id;
     }
     wx.navigateTo({
       url: '../participants/index?id=' + p + "&flag=" + flag,
@@ -361,7 +363,6 @@ Page({
         title: '提示',
         content: "参加活动需要" + coin + "爱心币",
         success: function(res) {
-          console.log(res)
           if (res.confirm) {
             var user = util.getSysUser();
             if (user.person.validPoints > -coin) {
@@ -430,7 +431,6 @@ Page({
     var that = this;
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
     }
     var id = that.data.id;
     return {
@@ -438,12 +438,9 @@ Page({
       path: '/page/activityInfo/index?id=' + id,
       success: function(res) {
         // 转发成功
-        console.log(res);
-
       },
       fail: function(res) {
         // 转发失败
-        console.log(res);
       }
     }
   }

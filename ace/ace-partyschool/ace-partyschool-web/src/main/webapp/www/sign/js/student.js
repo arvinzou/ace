@@ -9,7 +9,6 @@ var slen = 0;
 var student = null;
 $(function(){
 	var politicalArr = [{"id":"normal","value":"非党员"},{"id":"party","value":"党员"}];
-    initClassList();
 	var politicalSelect= new MobileSelect({
 	    trigger: '#political',
 	    title: '政治面貌选择',
@@ -22,20 +21,6 @@ $(function(){
 	    },
 	    callback:function(indexArr, data){
             political = data;
-	    }
-	});
-	var classesSelect= new MobileSelect({
-	    trigger: '#classes',
-	    title: '党校班级选择',
-	    wheels: [
-	                {data: classesArr}
-	            ],
-	    position:[1], //初始化定位 打开时默认选中的哪个 如果不填默认为0
-	    transitionEnd:function(indexArr, data){
-            clazz = data;
-	    },
-	    callback:function(indexArr, data){
-            clazz = data;
 	    }
 	});
 
@@ -291,6 +276,27 @@ function searchByName(){
                 renderPage('userInfo', result.data, 'user-tpl');
                 slen = result.data.length;
                 student = result.data;
+                if(student[0].clsId){
+                    var tempClass = [{"id": student[0].clsId, "value": student[0].clsViewName}];
+                    clazz = tempClass;
+                    $("#classes").text(clazz[0].value);
+                }
+
+                var classesSelect= new MobileSelect({
+                    trigger: '#classes',
+                    title: '党校班级选择',
+                    wheels: [
+                        {data: classesArr}
+                    ],
+                    position:[0], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+                    transitionEnd:function(indexArr, data){
+                        clazz = data;
+                    },
+                    callback:function(indexArr, data){
+                        clazz = data;
+                    }
+                });
+
             }else{
                 alert(result.info);
             }

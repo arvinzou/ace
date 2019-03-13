@@ -20,6 +20,9 @@ view, map, cover-view {
 .activeEdit {
     height: 42% !important;
 }
+.shrink{
+    height: 86% !important;
+}
 
 .tab {
     width: 100%;
@@ -115,7 +118,7 @@ view, map, cover-view {
     height: 100rpx;
     float: right;
     background: rgba(67, 80, 252, 1);
-    box-shadow: 0px 0px 10px 0px rgba(67, 252, 80, 0.35);
+    box-shadow: 0px 0px 10px 0px rgba(67, 80, 252, 0.35);
     border-radius: 50px;
     font-size: 40rpx;
     font-family: PingFang-SC-Medium;
@@ -134,6 +137,8 @@ view, map, cover-view {
     border-radius:47rpx;
     color: #ABAEB9;
     font-size: 38rpx;
+    outline: none !important;
+    background: #FFFFFF;
 }
 
 .close-open{
@@ -209,7 +214,7 @@ view, map, cover-view {
     justify-content: space-between;
     align-items: center;
     height: 110rpx;
-    border-bottom: 1px rgba(240, 239, 246, 1) solid;
+    border-bottom: 0.5px rgba(240, 239, 246, 1) solid;
 }
 
 .row .row-left {
@@ -217,6 +222,7 @@ view, map, cover-view {
     font-family: PingFang-SC-Medium;
     font-weight: 500;
     width: 180rpx;
+    color: #373F53;
 }
 
 .row .middle {
@@ -497,7 +503,7 @@ view, map, cover-view {
 }
 .carType-content{
     width: 100%;
-    height: 58%;
+    height: 62%;
     background: #FFFFFF;
     position: fixed;
     bottom: 0;
@@ -514,7 +520,7 @@ view, map, cover-view {
     display: block;
 }
 .carType-cancel{
-    width: 100rpx;
+    width: 140rpx;
     height: 100rpx;
     text-align: center;
     line-height: 100rpx;
@@ -524,7 +530,7 @@ view, map, cover-view {
     float: left;
 }
 .carType-confirm{
-    width: 100rpx;
+    width: 140rpx;
     height: 100rpx;
     text-align: center;
     line-height: 100rpx;
@@ -555,9 +561,9 @@ view, map, cover-view {
     padding-bottom: 40rpx;
 }
 .carType-items{
-    width: 96%;
+    width: 90%;
     height: auto;
-    margin: 0 auto;
+    margin: 30rpx auto;
 }
 .carType-items::after{
     content: '';
@@ -565,7 +571,7 @@ view, map, cover-view {
     display: block;
 }
 .carType-item{
-    width: 33.33%;
+    width: 50%;
     height: 90rpx;
     line-height: 90rpx;
     float: left;
@@ -577,7 +583,7 @@ view, map, cover-view {
 }
 .cartype-default{
     color: #373F53;
-    font-size: 32rpx;
+    font-size: 34rpx;
     font-weight: 500;
 }
 .carType-active{
@@ -587,12 +593,14 @@ view, map, cover-view {
 .form-input{
     text-align: right;
     padding-right: 30rpx;
+    color: #373F53;
+    font-weight: bold;
 }
 .checkTypes{
     width: 40rpx;
     height: 40rpx;
     float: left;
-    margin-right: 10rpx;
+    margin-right: 20rpx;
 }
 .checkName{
     float: left;
@@ -637,4 +645,9 @@ view, map, cover-view {
 .opts-detail{
     color: #4350FC;
     float: left;
+}
+
+.placeholder-tips{
+    color: #ABAEB9;
+    font-weight: 500;
 }

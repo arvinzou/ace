@@ -1,5 +1,5 @@
 var lCardNo = null;
-var server = "http://api.huacainfo.com";
+var server = "http://www.cdswdx.top";
 $(function(){
 
     $.ajax({
@@ -43,13 +43,13 @@ function initList(lCardNo){
     }
     var dateTimeStr = year+"-"+month;
     $.ajax({
-        url:  "/api/www/api/findTeacherFinDataList",
+        url:  server+"/api/www/api/findTeacherFinDataList",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data:{
             lCardNo: lCardNo,
-            dateTimeStr: '2018-12',
+            dateTimeStr: dateTimeStr,
             startNum: 0,
             endNum: 999
         },
@@ -73,7 +73,7 @@ function initList(lCardNo){
 
 function initCount(lCardNo){
     $.ajax({
-        url: "/api/www/api/findTeacherBalance",
+        url: server+"/api/www/api/findTeacherBalance",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",

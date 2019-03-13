@@ -53,7 +53,7 @@
   <view class='box'>
     <view class='title-box'>
       <view class='title-icon'></view>
-      <view class='title'>事故Top10</view>
+      <view class='title'>事故前十</view>
     </view>
     <view class='container'>
       <view class='no-accident-tip ' wx:if="{{totalData.top10.length==0}}">暂无事故</view>

@@ -17,7 +17,6 @@ Page({
     latitude: null,
     longitude: null,
     current: [],
-    mapHeight: '100vh',
     isEdit: false,
     roadManId: null,
     roadManName: null,
@@ -39,7 +38,7 @@ Page({
     isCollection: false,
     polyline: [{
       points: [
-          
+
       ],
       color: '#4350FC',
       width: 8,
@@ -51,14 +50,15 @@ Page({
     timeInterval: 5000, //采集频率以10秒为单位
     isRegist: true,
     isCJ: false, // 当前数据是否是采集数据的标志
-    sectionStartName: null,  //事故快报中路段的地点和终点
+    sectionStartName: null, //事故快报中路段的地点和终点
     sectionEndName: null,
-    isAdd: false,     //点击添加事故快报按钮添加快报
-    showModal: false,  //是否显示路段选择模态框
+    isAdd: false, //点击添加事故快报按钮添加快报
+    showModal: false, //是否显示路段选择模态框
     sectionList: [],
-    modalSeclect: 0,   //路段模态框选择
-    carTypeModal: 0,    //汽车类型选择
-    carTypeStr: ""
+    modalSeclect: 0, //路段模态框选择
+    carTypeModal: 0, //汽车类型选择
+    carTypeStr: "",
+    isSrink: false //表单是否收缩
   },
 
   /**
@@ -66,6 +66,7 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+    
     if (!app.globalData.collectionId) {
       app.globalData.startName = '';
       app.globalData.endName = null;
@@ -77,7 +78,6 @@ Page({
           dottedLine: false
         }]
       });
-
     } else {
       that.setData({
         collectionId: app.globalData.collectionId
@@ -92,7 +92,7 @@ Page({
     that.setData({
       sectionName: '请选择路段'
     });
-    
+
   },
   selectRoad: function() {
     app.globalData.collectionId = null;
@@ -193,7 +193,7 @@ Page({
   getRoadSection: function(latitude, longitude) {
     var that = this;
     util.request(cfg.server + '/taa/www/road/getCloseRoadSection', {
-        lat: latitude,  //latitude   29.014811
+        lat: latitude, //latitude   29.014811
         lon: longitude, //longitude   111.722444
         radius: '10000'
       },
@@ -201,25 +201,26 @@ Page({
         if (res.status == 0) {
           console.log(res);
           var dataList = res.data.rows;
-          if (dataList.length > 0){
-              that.setData({
-                  sectionFlag: true,
-                  sectionName: dataList[0].sectionName,
-                  sectionId: dataList[0].roadSectionId,
-                  roadManName: dataList[0].manName,
-                  roadManId: dataList[0].roadManId,
-                  sectionStartName: dataList[0].startName,
-                  sectionEndName: dataList[0].endName,
-                  sectionList: dataList
-              });
-          }else{
-              wx.showModal({
-                  title: '提示',
-                  content: '没有获取到最近位置的路段！',
-                  success: function (res) { }
-              });
+          if (dataList.length > 0) {
+            that.setData({
+              sectionFlag: true,
+              sectionName: dataList[0].sectionName,
+              sectionId: dataList[0].roadSectionId,
+              roadManName: dataList[0].manName,
+              roadManId: dataList[0].roadManId,
+              sectionStartName: dataList[0].startName,
+              sectionEndName: dataList[0].endName,
+              distance: dataList[0].distance,
+              sectionList: dataList
+            });
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: '没有获取到最近位置的路段！',
+              success: function(res) {}
+            });
           }
-          
+
         } else {
 
         }
@@ -233,35 +234,35 @@ Page({
     })
   },
 
- /**
-  * 打开车辆选择模态框
-  */
-  openCarTypeModal: function(){
-      var that = this;
-      that.setData({
-          carTypeModal: 1,
-          isEdit: false
-      });
+  /**
+   * 打开车辆选择模态框
+   */
+  openCarTypeModal: function() {
+    var that = this;
+    that.setData({
+      carTypeModal: 1,
+      isEdit: false
+    });
   },
 
-/**
- * 关闭车辆选择模态框
- */
- cancelCarTypes: function(){
-     var that = this;
-     var carTypeList = that.data.carTypes;
-     for(var i=0; i<carTypeList.length; i++){
-         if (carTypeList[i].checkFlag == true){
-             carTypeList[i].checkFlag = false;
-         }
-     }
-     that.setData({
-         carTypeModal: 0,
-         isEdit: true,
-         carTypes: carTypeList,
-         carTypeStr: ""
-     });
- },
+  /**
+   * 关闭车辆选择模态框
+   */
+  cancelCarTypes: function() {
+    var that = this;
+    var carTypeList = that.data.carTypes;
+    for (var i = 0; i < carTypeList.length; i++) {
+      if (carTypeList[i].checkFlag == true) {
+        carTypeList[i].checkFlag = false;
+      }
+    }
+    that.setData({
+      carTypeModal: 0,
+      isEdit: true,
+      carTypes: carTypeList,
+      carTypeStr: ""
+    });
+  },
   /**
    * 选择车的类型
    */
@@ -269,86 +270,86 @@ Page({
     var that = this;
     var obj = e.currentTarget.dataset.obj;
     var checkFlag = e.currentTarget.dataset.checked;
-    if (checkFlag == true){
-        obj.checkFlag = false;
-    }else{
-        obj.checkFlag = true;
+    if (checkFlag == true) {
+      obj.checkFlag = false;
+    } else {
+      obj.checkFlag = true;
     }
     var index = e.currentTarget.dataset.index;
     var carTypeList = that.data.carTypes;
     carTypeList[index] = obj;
     that.setData({
-        carTypes: carTypeList
+      carTypes: carTypeList
     });
   },
 
- /**
-  * 确定车辆选择
-  */
- confirmCarTypes: function(e){
-     var that = this;
-     var carTypeStr = "";
-     var that = this;
-     var carTypeList = that.data.carTypes;
-     for(var i=0; i<carTypeList.length; i++){
-         if (carTypeList[i].checkFlag == true){
-             carTypeStr += carTypeList[i].NAME;
-         }
-         carTypeStr = carTypeStr+" ";
-     }
+  /**
+   * 确定车辆选择
+   */
+  confirmCarTypes: function(e) {
+    var that = this;
+    var carTypeStr = "";
+    var that = this;
+    var carTypeList = that.data.carTypes;
+    for (var i = 0; i < carTypeList.length; i++) {
+      if (carTypeList[i].checkFlag == true) {
+        carTypeStr += carTypeList[i].NAME;
+      }
+      carTypeStr = carTypeStr + " ";
+    }
     that.setData({
-        carTypeStr: carTypeStr,
-        carTypeModal: 0,
-        isEdit: true
+      carTypeStr: carTypeStr,
+      carTypeModal: 0,
+      isEdit: true
     });
- }, 
+  },
 
   /**
    * 弹框缩下去
    */
   closeAndOpen: function() {
     var that = this;
-    if (that.data.isEdit == false) {
+    if (that.data.isSrink == false) {
       //展开表单
       that.setData({
-        isEdit: true
+        isSrink: true
       });
 
     } else {
       that.setData({
-        isEdit: false
+        isSrink: false
       });
     }
   },
 
 
-    /**
-     * 点击添加快报按钮
-     */
-    addKb: function(){
-        var that = this;
-        that.setData({
-            isEdit: true
-        })
-    },
-    /**
-     * 快报中，重新获取路段
-     */
-    resetSection: function(){
-        var that = this;
-        that.getLocation();
-        that.setData({
-            showModal: true,
-            isEdit: false
-        })
-    },
-    closeModal: function(){
-        var that = this;
-        that.setData({
-            showModal: false,
-            isEdit: true
-        });
-    },
+  /**
+   * 点击添加快报按钮
+   */
+  addKb: function() {
+    var that = this;
+    that.setData({
+      isEdit: true
+    })
+  },
+  /**
+   * 快报中，重新获取路段
+   */
+  resetSection: function() {
+    var that = this;
+    that.getLocation();
+    that.setData({
+      showModal: true,
+      isEdit: false
+    })
+  },
+  closeModal: function() {
+    var that = this;
+    that.setData({
+      showModal: false,
+      isEdit: true
+    });
+  },
   /**
    * 事故快报选取路长信息
    */
@@ -363,8 +364,8 @@ Page({
   selectRoadSection: function() {
     var that = this;
     that.setData({
-        showModal: false,
-        isEdit: true
+      showModal: false,
+      isEdit: true
     });
     wx.navigateTo({
       url: '../collection/index?type=kb',
@@ -373,25 +374,26 @@ Page({
   /**
    * 快报弹框选择路段信息
    */
-  selectModalSection: function(e){
-      var that = this;
-      app.globalData.sectionId = e.currentTarget.dataset.sectionid;
-      app.globalData.sectionName = e.currentTarget.dataset.sectionname;
-      app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
-      app.globalData.roadManName = e.currentTarget.dataset.roadman;
-      app.globalData.startName = e.currentTarget.dataset.startname;
-      app.globalData.endName = e.currentTarget.dataset.endname;
-    
-      that.setData({
-          sectionName: app.globalData.sectionName,
-          sectionId: app.globalData.sectionId,
-          roadManName: app.globalData.roadManName,
-          roadManId: app.globalData.roadManId,
-          sectionStartName: app.globalData.startName,
-          sectionEndName: app.globalData.endName,
-          modalSeclect: e.currentTarget.dataset.index
-      })
-     
+  selectModalSection: function(e) {
+    var that = this;
+    app.globalData.sectionId = e.currentTarget.dataset.sectionid;
+    app.globalData.sectionName = e.currentTarget.dataset.sectionname;
+    app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
+    app.globalData.roadManName = e.currentTarget.dataset.roadman;
+    app.globalData.startName = e.currentTarget.dataset.startname;
+    app.globalData.endName = e.currentTarget.dataset.endname;
+
+    that.setData({
+      sectionName: app.globalData.sectionName,
+      sectionId: app.globalData.sectionId,
+      roadManName: app.globalData.roadManName,
+      roadManId: app.globalData.roadManId,
+      sectionStartName: app.globalData.startName,
+      sectionEndName: app.globalData.endName,
+      modalSeclect: e.currentTarget.dataset.index,
+      distance: e.currentTarget.dataset.distance
+    })
+
   },
   initDateTime: function() {
     var that = this;
@@ -404,13 +406,13 @@ Page({
     });
     console.log(obj);
   },
-  changeDateTime:function(e) {
+  changeDateTime: function(e) {
     var name = e.currentTarget.dataset.name;
     var temp = {};
     temp[name] = e.detail.value,
       this.setData(temp);
   },
-  changeDateTimeColumn:function(e) {
+  changeDateTimeColumn: function(e) {
     console.log(e);
     var name = e.currentTarget.dataset.name;
     var arr = this.data[name],
@@ -423,7 +425,7 @@ Page({
       dateTimeArray: dateArr
     });
   },
-  fotmatPicker:function(dataTime) {
+  fotmatPicker: function(dataTime) {
     var val = [];
     console.log(dataTime);
     val.push(parseInt(dataTime.substring(2, 4)));
@@ -434,11 +436,11 @@ Page({
     val.push(parseInt(dataTime.substring(17, 19)));
     return val;
   },
-  formatDT:function(arr) {
+  formatDT: function(arr) {
     return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1] + 1) + '-' + this.FN(arr[2] + 1) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':' + this.FN(arr[5]);
   },
 
-  FN:function(num) {
+  FN: function(num) {
     return num >= 10 ? num : '0' + num;
   },
 
@@ -513,24 +515,24 @@ Page({
       });
       return;
     }
-      var checkedCarType = false;
-      for (var i = 0; i < vehicleType.length; i++) {
-        if (vehicleType[i].checkFlag == true){
-            checkedCarType = true;
-            var traAccMtype = {};
-            traAccMtype.vehicleType = vehicleType[i].CODE;
-            mtypeList.push(traAccMtype);
-        }
+    var checkedCarType = false;
+    for (var i = 0; i < vehicleType.length; i++) {
+      if (vehicleType[i].checkFlag == true) {
+        checkedCarType = true;
+        var traAccMtype = {};
+        traAccMtype.vehicleType = vehicleType[i].CODE;
+        mtypeList.push(traAccMtype);
       }
+    }
 
-      if (checkedCarType == false){
-          wx.showModal({
-              title: '提示',
-              content: '请选择车型！',
-              success: function (res) { }
-          });
-          return; 
-      }
+    if (checkedCarType == false) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择车型！',
+        success: function(res) {}
+      });
+      return;
+    }
 
     util.request(cfg.server + '/taa/www/traAcc/flashReport', {
         data: JSON.stringify({
@@ -572,15 +574,15 @@ Page({
     );
   },
 
-/**
- * 清空表单
- */
-  formReset: function(){
-      var that = this;
-      var that = this;
-      that.setData({
-            isEdit: false
-        });
+  /**
+   * 清空表单
+   */
+  formReset: function() {
+    var that = this;
+    var that = this;
+    that.setData({
+      isEdit: false
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -666,28 +668,29 @@ Page({
         });
         console.log("startName=========endName==============" + that.data.startName);
         that.initGpsList(app.globalData.collectionId);
-      }else{
-          that.setData({
-              polyline: [{
-                  points: [],
-                  color: '#4350FC',
-                  width: 8,
-                  dottedLine: false
-              }],
-              sectionName: app.globalData.sectionName,
-              sectionId: app.globalData.sectionId,
-              roadManName: app.globalData.roadManName,
-              roadManId: app.globalData.roadManId,
-              sectionStartName: app.globalData.startName,
-              sectionEndName: app.globalData.endName
-          });
+      } else {
+        that.setData({
+          polyline: [{
+            points: [],
+            color: '#4350FC',
+            width: 8,
+            dottedLine: false
+          }],
+          sectionName: app.globalData.sectionName,
+          sectionId: app.globalData.sectionId,
+          roadManName: app.globalData.roadManName,
+          roadManId: app.globalData.roadManId,
+          sectionStartName: app.globalData.startName,
+          sectionEndName: app.globalData.endName,
+          distance: app.globalData.distance
+        });
       }
-      
+
     }
     //设置采集标志，判断是否显示隐藏开始，暂停，结束按钮
     that.setData({
       isCJ: app.globalData.isCJ
-    })
+    });
 
   },
 
@@ -742,44 +745,44 @@ Page({
       frequency: 0
     });
 
-      wx.showModal({
-          title: '提示',
-          content: '确定提交？',
-          success(res) {
-              if (res.confirm) {
-                  util.post(cfg.server + '/taa/www/road/gather', {
-                      jsonData: JSON.stringify({
-                          list
-                      })
-                  },
-                      function (res) {
-                          if (res.status == 0) {
-                              wx.showModal({
-                                  title: '提示',
-                                  content: res.info,
-                                  showCancel: false,
-                                  success: function (res) {
+    wx.showModal({
+      title: '提示',
+      content: '确定提交？',
+      success(res) {
+        if (res.confirm) {
+          util.post(cfg.server + '/taa/www/road/gather', {
+              jsonData: JSON.stringify({
+                list
+              })
+            },
+            function(res) {
+              if (res.status == 0) {
+                wx.showModal({
+                  title: '提示',
+                  content: res.info,
+                  showCancel: false,
+                  success: function(res) {
 
-                                  }
-                              });
-                              wx.navigateTo({
-                                  url: '../collection/index?tab=1',
-                              })
-                          } else {
-                              wx.showModal({
-                                  title: '提示',
-                                  content: res.info,
-                                  success: function (res) { }
-                              });
-                          }
-
-                      }
-                  );
-              } else if (res.cancel) {
-
+                  }
+                });
+                wx.navigateTo({
+                  url: '../collection/index?tab=1',
+                })
+              } else {
+                wx.showModal({
+                  title: '提示',
+                  content: res.info,
+                  success: function(res) {}
+                });
               }
-          }
-      });
+
+            }
+          );
+        } else if (res.cancel) {
+
+        }
+      }
+    });
   },
   /**
    * 获取地址
@@ -895,27 +898,27 @@ Page({
   resetData: function() {
     var that = this;
     wx.showModal({
-          title: '提示',
-          content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
-          success:function(res) {
-              if (res.confirm) {
-                  that.setData({
-                      sectionFlag: false,
-                      sectionName: null,
-                      sectionId: null,
-                      polyline: [{
-                          points: [],
-                          color: '#4350FC',
-                          width: 8,
-                          dottedLine: false
-                      }]
-                  });
-                  that.getLocation();
-                  that.initDict();
-              } else if (res.cancel) {
-                  
-              }
-          }
+      title: '提示',
+      content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
+      success: function(res) {
+        if (res.confirm) {
+          that.setData({
+            sectionFlag: false,
+            sectionName: null,
+            sectionId: null,
+            polyline: [{
+              points: [],
+              color: '#4350FC',
+              width: 8,
+              dottedLine: false
+            }]
+          });
+          that.getLocation();
+          that.initDict();
+        } else if (res.cancel) {
+
+        }
+      }
     })
   },
   /**
@@ -923,33 +926,33 @@ Page({
    */
   resetCj: function() {
     var that = this;
-      wx.showModal({
-          title: '提示',
-          content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
-          success:function(res) {
-              if (res.confirm) {
-                  that.setData({
-                      startName: null,
-                      startName: null,
-                      tab: 1,
-                      polyline: [{
-                          points: [],
-                          color: '#4350FC',
-                          width: 8,
-                          dottedLine: false
-                      }],
-                      flaging: false,
-                      frequency: 0, //是否显示加减频率
-                      timeInterval: that.data.timeInterval, //采集频率以10秒为单位
-                      activeBreak: ''
-                  });
-                  that.getLocation();
-              } else if (res.cancel) {
+    wx.showModal({
+      title: '提示',
+      content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
+      success: function(res) {
+        if (res.confirm) {
+          that.setData({
+            startName: null,
+            startName: null,
+            tab: 1,
+            polyline: [{
+              points: [],
+              color: '#4350FC',
+              width: 8,
+              dottedLine: false
+            }],
+            flaging: false,
+            frequency: 0, //是否显示加减频率
+            timeInterval: that.data.timeInterval, //采集频率以10秒为单位
+            activeBreak: ''
+          });
+          that.getLocation();
+        } else if (res.cancel) {
 
-              }
-          }
-      })
-   
+        }
+      }
+    })
+
   },
 
   /**

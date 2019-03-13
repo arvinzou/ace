@@ -26,7 +26,7 @@ App({
         openid: null,
         sectionId: null,
         sectionName: null,
-        tab: null,
+        tab: 1,
         startName: null,
         endName: null,
         cjSectionId: null,
@@ -34,6 +34,7 @@ App({
         roadManName : null,
         collectionId: null,
         isCJ: false, // 当前数据是否是采集数据的标志
+        distance: ''
     },
     // lazy loading openid
     getUserOpenId: function (callback) {

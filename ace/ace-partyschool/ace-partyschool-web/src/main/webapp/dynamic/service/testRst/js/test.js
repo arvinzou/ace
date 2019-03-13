@@ -79,10 +79,10 @@ function isRight(data){
 	return '';
 }
 
-function checkNumber(that,num){
+function checkNumber(that,nums){
 	var n=that.value;
-	if(n>num){
-		that.value=10;
+	if(n>nums){
+		that.value=nums;
 	}if(n<0){
 		that.value=0;
 	}

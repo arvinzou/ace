@@ -26,7 +26,7 @@
         <div class="info_box">
             <table id="" class="tftable" border="1">
                 <tr>
-                    <th class="style1">班次</th>
+                    <th class="style1">班&#8195;&#8195;次</th>
                     <th class="style2 class_name">第78期县处级干部进修班</th>
                     <th class="style1">应到人数</th>
                     <th class="style2 class_people">48人</th>
@@ -35,14 +35,14 @@
                 <tr>
                     <td class="style3">上午课程</td>
                     <td class="amClass"> 自习</td>
-                    <td class="style3"> 主讲</td>
+                    <td class="style3"> 主&#8195;&#8195;讲</td>
                     <td class="amClassTeacher">- -</td>
                     <td rowspan="2" class="style4"><span class="active_course">课表</span></td>
                 </tr>
                 <tr>
                     <td class="style3"> 下午课程</td>
                     <td class="pmClass">自习</td>
-                    <td class="style3"> 主讲</td>
+                    <td class="style3"> 主&#8195;&#8195;讲</td>
                     <td class="pmClassTeacher">- -</td>
                 </tr>
             </table>

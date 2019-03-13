@@ -1,4 +1,4 @@
-var server = "http://api.huacainfo.com";
+var server = "http://www.cdswdx.top";
 $(function(){
 	$('#calendar').calendar({
         data: [
@@ -49,7 +49,7 @@ function initData(date){
 
 function  findAttDataByDay(date, cardId) {
     $.ajax({
-        url: "/api/www/api/findAttDataByDay",
+        url: server+"/api/www/api/findAttDataByDay",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",

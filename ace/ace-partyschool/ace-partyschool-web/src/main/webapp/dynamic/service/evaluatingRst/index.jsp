@@ -54,11 +54,11 @@
                 <thead>
                 <tr>
                     <th width="30%"> 课程</th>
+                    <th width="10%"> 上课日期</th>
                     <th width="25%"> 班次</th>
                     <th width="10%"> 讲师</th>
                     <th width="5%"> 平均分值</th>
                     <th width="5%"> 未测评人数</th>
-                    <th width="10%"> 日期</th>
                     <th width="10%">操作</th>
                 </tr>
                 </thead>
@@ -86,11 +86,11 @@
     {@each data as item, index}
     <tr>
         <td> \${item.course.name}</td>
+        <td> \${formatdate(item.courseDate)}</td>
         <td> \${item.classes.name}</td>
         <td> \${item.teacher.name}</td>
         <td> \${item.averageScore}</td>
         <td> \${item.studentNum-item.userNum}</td>
-        <td> \${item.courseDate}</td>
         <td>
             <a href="javascript:view('\${item.id}');">查看</a>
         </td>
