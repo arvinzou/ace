@@ -331,7 +331,7 @@ Page({
     var flag = false;
     var sysUserInfo = util.getSysUser();
     //如果没有注册，尝试重新申请获取一次。
-    if (sysUserInfo) {
+    if (sysUserInfo || sysUserInfo.societyOrg) {
         flag = that.data.activityInfo.sId == sysUserInfo.societyOrg.id;
     }
     wx.navigateTo({
