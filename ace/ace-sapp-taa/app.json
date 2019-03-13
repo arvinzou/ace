@@ -1,6 +1,8 @@
 {
     "pages": [
+      
         "page/index/index",
+        "page/accidentList/index",
         "page/regist/index",
         "page/userinfo/index",
         "page/me/index",
@@ -8,7 +10,7 @@
         "page/info/index",
         "page/datas/index",
         "page/collection/index",
-        "page/accidentList/index",
+        
         "page/accidentDetail/index"
     ],
     "permission": {

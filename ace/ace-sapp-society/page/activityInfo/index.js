@@ -64,7 +64,9 @@ Page({
         //获取二维码图片路径成功
         function(res) {
           var filePath = res.file_path;
-          if (filePath !== undefined && filePath !== null) {
+          if (filePath) {
+            filePath = filePath.replace(/^http*/, 'https');  //正则匹配以http开头，s可选的字符串
+            console.log(filePath);
             //  下载文件（二维码路径）资源到本地
             wx.downloadFile({
               url: filePath, // 仅为示例，并非真实的资源
@@ -96,17 +98,30 @@ Page({
                         wx.hideLoading();
                       },
                       fail: function(res) {
+                        console.log(res);
                         wx.hideLoading();
                       }
                     });
                   }, 500);
                 }
+              },
+              fail:function(res){
+                console.log(res);
+                wx.showModal({
+                  title: '提示',
+                  content: '图片加入白名单失败',
+                })
               }
             });
           }
         },
         //获取二维码失败
         function(res) {
+          console.log(res);
+          wx.showModal({
+            title: '提示',
+            content: '获取二维码失败',
+          })
         }
       );
     } else { // 生成图片
@@ -114,20 +129,18 @@ Page({
         showModel: true
       });
     }
-
-
   },
   /**
    * 生成图片
    */
   generateImage: function() {
     var that = this;
-    const ctx = wx.createCanvasContext('shareCanvas'); //绘图上下文
-    const activityInfo = that.data.activityInfo; //获取活动信息
-    const title = activityInfo.title; //标题 
-    const startDate = activityInfo.startDate; // 开始时间
-    const endDate = activityInfo.endDate; // 结束时间
-    const location = activityInfo.location; //活动地点
+    var ctx = wx.createCanvasContext('shareCanvas'); //绘图上下文
+    var activityInfo = that.data.activityInfo; //获取活动信息
+    var title = activityInfo.title; //标题 
+    var startDate = activityInfo.startDate; // 开始时间
+    var endDate = activityInfo.endDate; // 结束时间
+    var location = activityInfo.location; //活动地点
     var initCanvasWidth = 270;
     var initCanvasHeight = 360;
     //屏幕高度
@@ -149,8 +162,11 @@ Page({
     ctx.setFillStyle('#ffffff'); // 文字颜色：白色
     ctx.setFontSize(13); // 文字字号：18px
     ctx.setTextAlign('center'); // 文字居中
-    ctx.font = 'normal bold sans-serif';
     // 在画布上绘制被填充的文本
+    if(title.length>20){
+      title = title.substring(0,20)+ '...';
+      console.log(title);
+    }
     ctx.fillText(title, initCanvasWidth / 2, 35);
 
     //活动地点
@@ -204,6 +220,7 @@ Page({
                   if (res.confirm) {
                     wx.openSetting({
                       success: function(res) {
+                        console.log(res);
                       }
                     });
                   }
@@ -331,7 +348,7 @@ Page({
     var flag = false;
     var sysUserInfo = util.getSysUser();
     //如果没有注册，尝试重新申请获取一次。
-    if (sysUserInfo) {
+    if (sysUserInfo || sysUserInfo.societyOrg) {
         flag = that.data.activityInfo.sId == sysUserInfo.societyOrg.id;
     }
     wx.navigateTo({

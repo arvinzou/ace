@@ -34,8 +34,6 @@
                     <div class="btn-group" id="select1" role="group" style="float:left;padding-right:5px">
 
                     </div>
-
-
                     <div class="input-group">
                         <input type="text" name="title" class="form-control" placeholder="请输入文件名称">
                         <span class="input-group-btn">

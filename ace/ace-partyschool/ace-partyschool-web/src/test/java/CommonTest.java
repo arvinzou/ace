@@ -1,4 +1,6 @@
 import com.huacainfo.ace.common.plugins.sqlsever.SQLServerManager;
+import com.huacainfo.ace.common.plugins.wechat.base.WxMsgController;
+import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
 
@@ -12,7 +14,11 @@ public class CommonTest {
 
     @Test
     public void test() {
-
+        String a =" https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=ACCESS_TOKEN";
+//        WxCfgController wc = new WxCfgController();
+//        String rst = HttpKit.post(a ,"");
+//
+//        System.out.println(rst);
     }
 
 
