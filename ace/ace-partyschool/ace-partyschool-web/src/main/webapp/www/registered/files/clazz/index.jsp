@@ -92,6 +92,7 @@
 		<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 		<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/mobileSelect.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/autoLogin.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 	</body>
 </html>

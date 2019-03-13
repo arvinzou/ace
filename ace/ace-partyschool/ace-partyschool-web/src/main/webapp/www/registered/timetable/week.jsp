@@ -62,6 +62,7 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 		<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 		<script type="text/javascript" src="js/calendar.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/autoLogin.js"></script>
 		<script type="text/javascript" src="js/week.js"></script>
 	</body>
 </html>
