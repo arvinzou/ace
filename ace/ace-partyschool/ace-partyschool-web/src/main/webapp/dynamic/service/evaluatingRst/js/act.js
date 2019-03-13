@@ -1,6 +1,7 @@
 var loading = {};
 var params = {limit: 15,learned:'learned'};
 window.onload = function () {
+    initJuicerMethod();
     initPage();
     initEvents();
     initSelect();
@@ -13,6 +14,23 @@ function teacherSearch() {
     getPageList();
 }
 
+
+//juicer自定义函数
+function initJuicerMethod() {
+    juicer.register('formatdate', formatdate);
+}
+
+/**
+ * 状态
+ * 0-删除
+ * 1-暂存
+ * 2-提交审核
+ * 3-审核通过
+ * 4-审核驳回
+ */
+function formatdate(date) {
+    return date.substring(0,10);
+}
 
 
 
