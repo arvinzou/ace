@@ -36,9 +36,12 @@ Page({
     that.initRegionList(); // 初始化区域位置
     that.initQueryTime() //初始化查询时间
     that.initTrafficList(); //初始化本月交通事故
-    that.initTimesColumnReport(); //初始化事故次数柱状图
-    that.initDeathColumnReport(); //初始化死亡人数柱状图
-    that.initRoadList(); // 初始化路长对比图
+    setTimeout(function(){
+      that.initTimesColumnReport(); //初始化事故次数柱状图
+      that.initDeathColumnReport(); //初始化死亡人数柱状图
+      that.initRoadList(); // 初始化路长对比图
+    },500);
+    
   },
   /**
    * 获取行政区划列表
@@ -157,7 +160,6 @@ Page({
    */
   initTimesColumnReport: function() {
     var that = this;
-    console.log(that.data.date)
     util.request(cfg.server + '/taa/www/report/histogramReport', {
         category: 'times',
         dateTimeStr: that.data.date
@@ -167,7 +169,17 @@ Page({
           var columnData = res.data;
           var timesAreaArray = [];
           var timesArray = [];
-          if (columnData != null && columnData != undefined && columnData.length > 0) { //查询无数据
+          var areaArray = that.data.regionArray;  //地区数组
+          var index = that.data.rIndex + 1;   // 默认初始值
+          // 删掉常德市该条数据
+          for (var i = 0; i < areaArray.length; i++) {
+            if (areaArray[i].code == '4307') {
+              areaArray.splice(0, 1);
+            }
+          }
+          // console.log(areaArray);
+           //返回有数据处理
+          if (columnData != null && columnData != undefined && columnData.length > 0) { 
             for (var i = 0; i < columnData.length; i++) {
               //判断是否有该字段返回
               if (columnData[i].areaCodeName != null && columnData[i].areaCodeName != undefined) {
@@ -180,21 +192,28 @@ Page({
                 timesArray.push(0);
               }
             }
+            for (var i = 0; i < areaArray.length; i++){
+              //如果传过来的数据没有该地区，那就默认push该地区，该地区数据为0
+              if (timesAreaArray[i] != areaArray[i].name){
+                timesAreaArray.push(areaArray[i].name);
+                timesArray.push(0);
+              }
+            }
             that.setData({
               timesAreaArray: timesAreaArray,
               timesArray: timesArray
             });
-          } else { //查询无数据
-            var regionArray = that.data.regionArray
-            var index = that.data.rIndex;
-            timesArray.push(0);
-            timesAreaArray.push(regionArray[index].name);
+          } else { //返回无数据处理
+            for (var i = 0; i < areaArray.length; i++) {
+              //如果传过来的数据没有该地区，那就默认push该地区，该地区数据为0
+              timesAreaArray.push(areaArray[i].name);
+              timesArray.push(0);
+            }
             that.setData({
               timesAreaArray: timesAreaArray,
               timesArray: timesArray
             });
           }
-          console.log(timesAreaArray, timesArray)
           that.columnByAccident(); //事故次数绘图
         } else {
           wx.showModal({
@@ -222,7 +241,16 @@ Page({
           var columnData = res.data;
           var areaCodeNameArray = [];
           var dithArray = [];
-          if (columnData != null && columnData != undefined && columnData.length > 0) {  //查询有数据
+          var areaArray = that.data.regionArray;   //地区数组
+          var index = that.data.rIndex + 1;   // 默认初始值
+          // 删掉常德市该条数据
+          for (var i = 0; i < areaArray.length; i++) {
+            if (areaArray[i].code == '4307') {
+              areaArray.splice(0, 1);
+            }
+          }
+          //返回有数据处理
+          if (columnData != null && columnData != undefined && columnData.length > 0) {  
             for (var i = 0; i < columnData.length; i++) {
               //判断是否有该字段返回
               if (columnData[i].areaCodeName != null && columnData[i].areaCodeName != undefined) {
@@ -235,22 +263,29 @@ Page({
                 dithArray.push(0);
               }
             }
+            for (var i = 0; i < areaArray.length; i++) {
+              //如果传过来的数据没有该地区，那就默认push该地区，该地区数据为0
+              if (areaCodeNameArray[i] != areaArray[i].name) {
+                areaCodeNameArray.push(areaArray[i].name);
+                dithArray.push(0);
+              }
+            }
             that.setData({
               areaCodeNameArray: areaCodeNameArray,
               dithArray: dithArray
             });
             
-          } else {   //查询无数据
-            var regionArray = that.data.regionArray;
-            var index = that.data.rIndex;
-            dithArray.push(0);
-            areaCodeNameArray.push(regionArray[index].name);
+          } else {   //返回无数据处理
+            for (var i = 0; i < areaArray.length; i++) {
+              //如果传过来的数据没有该地区，那就默认push该地区，该地区数据为0
+              areaCodeNameArray.push(areaArray[i].name);
+              dithArray.push(0);
+            }
             that.setData({
               areaCodeNameArray: areaCodeNameArray,
               dithArray: dithArray
             });
           }
-          console.log(areaCodeNameArray, dithArray)
           that.columnByDiedNum(); //死亡人数柱状绘图
         } else {
           wx.showModal({
@@ -429,6 +464,7 @@ Page({
       yAxis: {
         title: '次',
         format: function(val) {
+          val = val.toFixed(0);  //不保留小数点
           return val;
         },
         min: 0
