@@ -52,6 +52,8 @@ function login(){
         },
         success:function(result){
             if(result.status == 0) {
+                localStorage.setItem("username",acct);
+                localStorage.setItem("password", pwd);
                window.location.href = contextPath + '/www/registered/person/index.jsp'
             }else {
                 if(result.info){
