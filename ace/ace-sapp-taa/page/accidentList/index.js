@@ -112,7 +112,7 @@ Page({
     var traAccId = e.currentTarget.dataset.id;  //查询事故详情id
     var linkid = e.currentTarget.dataset.linkid;    //链接id
     wx.navigateTo({
-      url: '../accidentDetail/index?id=' + traAccId + '&linkid=' + linkid + '',
+      url: '../accidentDetail/index?id=' + traAccId + '&linkid=' + linkid + ''
     });
   },
 

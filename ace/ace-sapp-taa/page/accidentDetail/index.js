@@ -42,6 +42,7 @@ Page({
       that.initDateTime();    
       that.initDict();
       // 获取linkid
+    console.log(options.linkid)
       if(options.linkid != undefined && options.linkid != null){
         that.setData({
           linkid: options.linkid
@@ -303,6 +304,7 @@ Page({
             url: '../collection/index?type=xb',
         });
     },
+    
 
     /**
      * 修改选择路长
@@ -311,6 +313,9 @@ Page({
         wx.navigateTo({
             url: '../roadlist/index?type=xb',
         });
+    },
+    noSelectRoad:function(){
+      
     },
   /**
    * 生命周期函数--监听页面显示
