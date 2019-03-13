@@ -31,13 +31,11 @@ Page({
     onLoad: function(options) {
         let that = this;
         let id = options.id;
-        let tit = options.title;
         if (!id) {
             wx.navigateBack({})
             return;
         }
         that.data.id = id;
-        that.setBarTitleText(tit);
         that.initdata();
         that.getLikeNum();
         that.getCommentList();
@@ -110,6 +108,7 @@ Page({
                 let temp = rst.data;
                 temp.content=JSON.parse(temp.content);
                 var target=temp.content;
+                that.setBarTitleText(temp.title);
                 for(var item in target){
                     console.log(target[item].content);
                     if (target[item].type=='2'){

@@ -214,5 +214,4 @@
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
-<script src="js/test.js?v=${cfg.version}"></script>
 </html>

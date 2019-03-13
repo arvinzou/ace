@@ -200,7 +200,7 @@ Page({
         let p = data.id;
         let title = data.title;
         wx.navigateTo({
-            url: '../reportInfo/index?id=' + p + "&title=" + title
+            url: '../reportInfo/index?id=' + p
         })
     }
 });

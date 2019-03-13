@@ -42,14 +42,14 @@ body {
 }
 
 .content .head .room_name {
-	font-size: 100px;
+	font-size: 68px;
 	font-family: MicrosoftYaHei-Bold;
 	font-weight: bold;
 	color: rgba(255, 255, 255, 1);
 }
 
 .content .head .dateTime {
-	font-size: 36px;
+	font-size: 32px;
 	font-family: MicrosoftYaHei;
 	font-weight: 400;
 	color: rgba(255, 255, 255, 1);
@@ -108,6 +108,7 @@ body {
 
 .body table .style1 {
 	color: rgba(192, 225, 255, 1);
+	width: 200px
 }
 
 .body table .style3 {
@@ -157,17 +158,17 @@ body {
 }
 
 .body .message .title span {
-	width: 200px;
-	height: 60px;
+	width: 164px;
+	height: 56px;
 	background: rgba(0, 107, 207, 1);
 	margin: auto;
 	display: block;
 	border-radius: 30px;
-	font-size: 36px;
+	font-size: 30px;
 	font-family: MicrosoftYaHei-Bold;
 	font-weight: bold;
 	color: rgba(254, 254, 254, 1);
-	line-height: 60px;
+	line-height: 56px;
 }
 
 .body .message .fileMessage {
@@ -242,7 +243,7 @@ body {
 .modal .modal_content .modal_head {
 	height: 80px;
 	background: rgba(0, 107, 207, 1);
-	font-size: 36px;
+	font-size: 30px;
 	font-family: MicrosoftYaHei-Bold;
 	font-weight: bold;
 	color: rgba(255, 255, 255, 1);
@@ -254,7 +255,7 @@ body {
 
 .modal .modal_content .modal_body {
 	background: #fff;
-	padding: 30px 60px 30px;
+	padding: 30px 30px 30px 60px;
 }
 
 .modal .classInfo .title {
@@ -278,7 +279,7 @@ body {
 	width: 100%;
 	border-left: none;
 	border-right: none;
-	font-size: 24px;
+	font-size: 22px;
 	font-family: MicrosoftYaHei;
 	font-weight: 400;
 	color: rgba(55, 63, 83, 1);
@@ -329,7 +330,7 @@ body {
 }
 
 .weeekClass .dayClass .right {
-	width: 730px;
+	width: 720px;
 }
 
 .weeekClass .dayClass .right table {
@@ -406,11 +407,13 @@ body {
 	justify-content: space-between;
 	max-height: 666px;
 	overflow: auto;
+	padding-right: 30px;
 }
 
 #weeekCourseList, #roomTemp{
 	max-height: 666px;
 	overflow: auto;
+	padding-right: 30px;
 }
 
 
@@ -420,20 +423,18 @@ body {
 	object-position: 50%;
 }
 
-.photoWall .modal_body {
-	padding: 30px !important;
-}
 
 .modal .photoWall {
 	width: 1034px;
 }
 
 .weeekClass .prevWeek,.weeekClass .nextWeek{
-	border-top: 3px solid #4f4f4f;
-	border-left: 3px solid #4f4f4f;
+	border-top: 3px solid #006bcf;
+	border-left: 3px solid #006bcf;
 	position: absolute;
-	width: 50px;
-	height: 50px;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
 }
 .weeekClass .prevWeek{
 	transform: rotate(-45deg);
@@ -467,6 +468,7 @@ body {
 .addBook ul{
 	height: 666px;
 	overflow: auto;
+	padding-right: 30px;
 }
 
 .addBook ul li{
@@ -482,4 +484,8 @@ body {
 
 .swiper-container {
 	height: 100%;
+}
+
+.swiper-button-next, .swiper-button-prev{
+	height: 30px !important;
 }
