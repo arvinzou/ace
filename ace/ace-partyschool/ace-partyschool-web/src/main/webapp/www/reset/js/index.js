@@ -85,6 +85,8 @@ function save(){
         },
         success: function(result) {
             alert(result.info);
+            localStorage.removeItem("username");
+            localStorage.removeItem("password");
             window.location.href = contextPath+"/www/login/index.jsp";
         },
         error: function() {
