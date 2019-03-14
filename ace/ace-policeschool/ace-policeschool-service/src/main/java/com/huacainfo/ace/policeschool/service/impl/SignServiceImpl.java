@@ -334,6 +334,7 @@ public class SignServiceImpl implements SignService {
         if (users == null) {
             return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
         }
+        account = users.getAccount();
         //MD5加密
         newPwd = CommonUtils.getMd5(newPwd);
         //数据更新
