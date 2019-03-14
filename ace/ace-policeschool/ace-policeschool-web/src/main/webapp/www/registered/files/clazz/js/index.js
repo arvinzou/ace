@@ -141,7 +141,6 @@ function initClasses() {
                         fileList();
                         return;
                     }
-                    fileList();
                     $("#clazz").text(result.data[0].name);
                     var data = result.data;
                     var classesArr = [];
@@ -154,6 +153,7 @@ function initClasses() {
                     var tempArr = [];
                     tempArr.push(classesArr[0])
                     clazz = tempArr;
+                    fileList();
                     var classesSelect = new MobileSelect({
                         trigger: '#clazz',
                         title: '党校班级选择',
