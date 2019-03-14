@@ -224,8 +224,8 @@
       a.parent_department_id
       parentCorpId,
       a.department_name corpName
-    from users t
-    left join department a on t.department_id=a.department_id
+    from portal.users t
+    left join portal.department a on t.department_id=a.department_id
     where t.cur_syid = #{sysId,jdbcType=VARCHAR}
     and t.mobile = #{mobile,jdbcType=VARCHAR}
     </select>
