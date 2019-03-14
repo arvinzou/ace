@@ -205,16 +205,17 @@
         </association>
     </resultMap>
 
-    <select id="findFileListAboutMe" parameterType="java.lang.String" resultMap="FilesResultMapVo">
+    <select id="findFileListAboutMe" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        f.id, f.category, f.classesId, f.title, f.url, f.pushDate, f.publisher, f.status,
-        t.id as t_id, t.idCard as t_idCard, t.mobile as t_mobile, t.name as t_name,t.workUnitName as t_workUnitName,
-        t.introduce, t.category as t_category, t.photoUrl, t.postName,
-        s.id as s_id ,s.idCard as s_idCard, s.mobile as s_mobile, s.name as s_name,s.workUnitName as s_workUnitName,
-        s.pid, s.political, s.classId
+        f.id, f.category, f.classesId, f.title, f.url, f.pushDate, f.publisher, f.status,ifnull(m.`name`,'') as publisherName
         FROM files f
-        LEFT JOIN partyschool.teacher t ON t.id=f.publisher
-        LEFT JOIN partyschool.student s ON s.id=f.publisher
+        left join (
+        select s.id,s.`name` from student s
+        UNION ALL
+        select t.id,t.`name` from teacher t
+        UNION ALL
+        select t.user_id,t.name from portal.users t where t.user_level ='1' and t.cur_syid='partyschool'
+        )m on f.publisher = m.id
         where 1=1
         <if test="condition.classesId !=null and condition.classesId !=&quot;&quot;">
             and f.classesId=#{condition.classesId,jdbcType=VARCHAR}

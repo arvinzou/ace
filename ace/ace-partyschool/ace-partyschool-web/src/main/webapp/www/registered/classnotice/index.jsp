@@ -16,7 +16,11 @@
 		</div>
 
 		<script id="class-tpl" type="text/template">
-			<div class="banner"><img src="\${data.list.photoUrl}"/></div>
+			<div class="banner">
+				{@if data.list.photoUrl}
+				<img  src="\${data.list.photoUrl}"/>
+				{@/if}
+			</div>
 			<div class="container">
 				<div class="title">\${data.list.name}</div>
 				<div class="class-status">
