@@ -23,6 +23,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -147,7 +149,7 @@ public class ClsFilesServiceImpl implements ClsFilesService {
             }
         }
         obj.setPushDate(new Date());
-        obj.setPublisher(userProp.getName());
+        obj.setPublisher(userProp.getUserId());
         obj.setStatus("1");
         obj.setId(GUIDUtil.getGUID());
         this.filesDao.insert(obj);
