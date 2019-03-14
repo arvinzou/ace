@@ -1,6 +1,9 @@
 var loading = {};
 var params = {limit: 10};
 window.onload = function () {
+    juicer.register('parseIntF', parseIntF);
+    juicer.register('formatIndex', formatIndex);
+    juicer.register('formatScore', formatScore);
     initPage();
     initEvents();
 }
@@ -24,6 +27,23 @@ function initPage() {
     });
 
 }
+
+/**计算并取整*/
+function parseIntF(num) {
+    return parseInt(num * 0.9);
+}
+
+/**计算序列*/
+function formatIndex(num) {
+    return index = (parseInt(num) + 1);
+}
+
+/**计算序列*/
+function formatScore(num) {
+    if (parseFloat(num) > 0)
+        return '(' + num + '分)';
+}
+
 
 $('#fm-search').ajaxForm({
     beforeSubmit: function (formData, jqForm, options) {
