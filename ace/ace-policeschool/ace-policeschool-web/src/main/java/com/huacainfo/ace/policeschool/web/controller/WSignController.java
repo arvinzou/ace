@@ -277,9 +277,11 @@ public class WSignController extends BisBaseController {
         if (!codeCheck(mobile, code)) {
             return new ResultResponse(ResultCode.FAIL, "验证码输入有误");
         }
-        account = StringUtil.isEmpty(account) ? mobile : account;
+        if (StringUtil.isEmpty(mobile) && StringUtil.isEmpty(account)) {
+            return new ResultResponse(ResultCode.FAIL, "手机号码和账户不能同时为空");
+        }
 
-        return signService.updatePwd(account, newPwd);
+        return signService.updatePwd(account, mobile, newPwd);
     }
 
 

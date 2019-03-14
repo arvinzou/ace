@@ -1,5 +1,6 @@
 package com.huacainfo.ace.policeschool.service;
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.policeschool.dao.EnrollRosterDao;
@@ -10,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -41,8 +44,8 @@ public class QuartzManager {
     /**
      * 每隔5分钟 执行一次 :自动注册报名表中，符合要求的学员数据
      */
-    @Scheduled(cron = "0 */5 * * * ?")
-//    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Scheduled(cron = "0 */1 * * * ?")
+    @Transactional(propagation = Propagation.REQUIRED)
     public void autoRegister() {
         List<EnrollRoster> list = enrollRosterDao.findUnRegisterList();
         Student student;
@@ -63,7 +66,9 @@ public class QuartzManager {
             student.setBirthDate(item.getBirthDate());
             try {
                 ms = studentService.addStudent(student, userProp());
-                logger.info("自动注册学员失败[did={}]:{}", item.getId(), ms.getErrorMessage());
+                if (ms.getStatus() == ResultCode.FAIL) {
+                    logger.info("自动注册学员失败[did={}]:{}", item.getId(), ms.getErrorMessage());
+                }
             } catch (Exception e) {
                 logger.error("自动注册学员异常[did={}]: \n{}", item.getId(), e);
                 continue;

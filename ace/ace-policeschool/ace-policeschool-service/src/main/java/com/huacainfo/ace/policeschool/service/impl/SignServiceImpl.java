@@ -44,6 +44,8 @@ import java.util.Map;
  */
 @Service("signService")
 public class SignServiceImpl implements SignService {
+
+    public static final String SYS_ID = "policeschool";
     public static final String ACCOUNT_VALID = "1";//portal.users 账户可登陆
     public static final String ACCOUNT_INVALID = "0";//portal.users 账户不可登陆
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -316,12 +318,19 @@ public class SignServiceImpl implements SignService {
      * 修改密码
      *
      * @param account 账户
+     * @param mobile  手机号码
      * @param newPwd  新密码
      * @return ResultResponse
      */
     @Override
-    public ResultResponse updatePwd(String account, String newPwd) {
-        Users users = systemService.selectUsersByAccount(account);
+    public ResultResponse updatePwd(String account, String mobile, String newPwd) {
+
+        Users users;
+        if (StringUtil.isNotEmpty(account)) {
+            users = systemService.selectUsersByAccount(account);
+        } else {
+            users = signDao.findUsersByMobile(mobile, SYS_ID);
+        }
         if (users == null) {
             return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
         }

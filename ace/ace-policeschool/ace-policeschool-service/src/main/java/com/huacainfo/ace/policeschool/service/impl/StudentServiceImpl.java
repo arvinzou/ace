@@ -26,6 +26,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -258,6 +260,7 @@ public class StudentServiceImpl implements StudentService {
      * @param userProp operator
      * @return MessageResponse
      */
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public MessageResponse addStudent(Student data, UserProp userProp) throws Exception {
         String uid = GUIDUtil.getGUID();

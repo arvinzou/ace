@@ -1,6 +1,6 @@
-import com.huacainfo.ace.common.plugins.sqlsever.SQLServerManager;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
+import qyplugin.QYApiKit;
 
 /**
  * @Auther: Arvin
@@ -12,7 +12,14 @@ public class CommonTest {
 
     @Test
     public void test() {
-        generatorGUID(1);
+        String apiAcct = "511a92a59fe40d198cb60f6bf6b25078";
+        String apiKey = "lanni123456";
+        QYApiKit api = QYApiKit.getInstance(apiAcct, apiKey);
+        //2.1
+//        String a = api.getRecordLog("2019-03-01", "2019-03-14", "", "");
+//        System.out.println(a);
+//2.5
+        System.out.println(api.getEmployee(""));
     }
 
 
@@ -25,3 +32,5 @@ public class CommonTest {
 
 
 }
+
+
