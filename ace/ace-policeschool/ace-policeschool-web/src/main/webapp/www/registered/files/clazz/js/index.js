@@ -138,8 +138,10 @@ function initClasses() {
                 } else {
                     if (regType == 'student') {
                         $("#classFilter").hide();
+                        fileList();
                         return;
                     }
+                    fileList();
                     $("#clazz").text(result.data[0].name);
                     var data = result.data;
                     var classesArr = [];
