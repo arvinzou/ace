@@ -121,9 +121,7 @@ public class WSignController extends BisBaseController {
         if (!StringUtil.areNotEmpty(
                 data.getIsBindWx(),
                 data.getSignAcct(),
-                data.getSingPwd(),
-                data.getMobile(),
-                data.getMobile())) {
+                data.getSingPwd())) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
         //该手机号码已注册
@@ -158,8 +156,7 @@ public class WSignController extends BisBaseController {
         if (!StringUtil.areNotEmpty(
                 data.getIsBindWx(),
                 data.getSignAcct(),
-                data.getSingPwd(),
-                data.getMobile())) {
+                data.getSingPwd())) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
         //该手机号码已注册
