@@ -79,12 +79,13 @@ function save() {
         async: false,
         data: {
             mobile: mobile,
-            account: mobile,
             code: code,
             newPwd: password
         },
         success: function (result) {
             alert(result.info);
+            localStorage.removeItem("username");
+            localStorage.removeItem("password");
             window.location.href = contextPath + "/www/login/index.jsp";
         },
         error: function () {
