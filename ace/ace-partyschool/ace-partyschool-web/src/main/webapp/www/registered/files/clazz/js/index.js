@@ -139,6 +139,7 @@ function initClasses(){
                       $("#classFilter").hide();
                       fileList();
                   }else{
+                      fileList();
                       $("#clazz").text(result.data[0].name);
                       var data = result.data;
                       var classesArr = [];
