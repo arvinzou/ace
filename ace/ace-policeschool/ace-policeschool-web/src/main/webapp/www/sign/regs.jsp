@@ -70,6 +70,10 @@
             <label class="form-label">警号</label>
             <input class="form-input"  type="text" name="badgeNum" placeholder="请输入警号"/>
         </div>
+        <div class="form-content">
+            <label class="form-label">手机号码</label>
+            <input class="form-input"  type="text" name="mobile" placeholder="请输入手机号码"/>
+        </div>
     </div>
 
     <%--<div class="form-title">账号密码设置</div>
