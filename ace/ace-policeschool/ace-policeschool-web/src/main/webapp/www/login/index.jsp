@@ -19,7 +19,7 @@
     </div>
     <div class="login-form">
         <div class="form-row">
-            <input class="login-input" name="username" type="number" placeholder="请输入手机号码"/>
+            <input class="login-input" name="username" type="number" placeholder="请输入警号"/>
         </div>
         <div class="form-row pwd">
             <input class="login-input" name="password" type="password" placeholder="请输入密码"/>

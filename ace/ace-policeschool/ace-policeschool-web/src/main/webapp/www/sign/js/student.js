@@ -46,6 +46,7 @@ function regist() {
     var nativePlace = $("input[name='nativePlace']").val();    //籍贯
     var college = $("input[name='college']").val();            //毕业院校
     var badgeNum = $("input[name='badgeNum']").val();          //警号
+    var mobile = $("input[name='mobile']").val();              //手机号码
     if (!isEmpty(name)) {
         alert("姓名不能为空！");
         return;
@@ -76,6 +77,10 @@ function regist() {
     }else{
         signAcct = badgeNum;              //账号默认为警号
     }
+    if(!isEmpty(mobile)){
+        alert("手机号码不能为空！");
+        return;
+    }
 
     $.ajax({
         url: contextPath + "/www/sign/ssign",
@@ -87,7 +92,6 @@ function regist() {
             signAcct: signAcct,
             singPwd: singPwd,
             name: name,
-            mobile: signAcct,
             idCard: idCard,
             political: political[0].id,
             workUnitName: workUnitName,
@@ -97,7 +101,8 @@ function regist() {
             sex: sex,
             nativePlace: nativePlace,
             college: college,
-            badgeNum: badgeNum
+            badgeNum: badgeNum,
+            mobile: mobile
         },
         success: function (result) {
             if (result.status == 0) {

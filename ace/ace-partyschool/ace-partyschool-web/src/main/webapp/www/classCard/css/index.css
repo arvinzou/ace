@@ -2,6 +2,30 @@ html {
 	height: 100%;
 }
 
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 20px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 5px;
+	width: 10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+	border-radius: 5px;
+	background: #bbb;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: #eee;
+}
+
+
+
 * {
 	margin: 0;
 	padding: 0;
