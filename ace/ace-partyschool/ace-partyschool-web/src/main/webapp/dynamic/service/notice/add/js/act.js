@@ -15,7 +15,7 @@ function initEditor() {
     editor = new Simditor({
         textarea: $('textarea[name=content]'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
-            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent','TEST'
+            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
         ],
         upload: {
             url: portalPath + '/files/uploadImage.do',
