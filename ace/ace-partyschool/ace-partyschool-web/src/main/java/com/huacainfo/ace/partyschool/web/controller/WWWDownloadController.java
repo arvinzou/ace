@@ -56,7 +56,7 @@ public class WWWDownloadController extends BisBaseController {
 
         //这里获取的下载链接 http://sk.sit.fosuntech.cn/group1/M00/00/72/CqYKHVn69wyAMl6YAAVf953sp4Y075.pdf
         FilesVo filesVo = rs.getValue();
-        String downLoadPath = filesVo.getUrl();
+        String downLoadPath = filesVo.getUrl().replace("http://","https://");
         return CommentResponse(downLoadPath, response);
     }
     @RequestMapping("/byUrl")
