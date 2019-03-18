@@ -234,6 +234,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
         WHERE cs.courseDate <![CDATA[ < ]]> NOW()
         AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
         AND cs.ifTest ='1'
+        AND (c.evaluatingId IS NOT NULL OR c.evaluatingId <![CDATA[ <> ]]>'')
         AND cs.id NOT IN
         (
         SELECT t.classScheduleId
