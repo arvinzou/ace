@@ -344,7 +344,7 @@ public class TaskServiceImpl implements TaskService {
         //"+request.getHeader("host")+"
         notice.setId(GUIDUtil.getGUID());
         notice.setTitle(taskVo.getName());
-        notice.setContent("<p>"+taskVo.getIntroduce()+" 点击下方链接开始：<a href=\""+PropertyUtil.getProperty("fastdfs_server")+"/partyschool/www/registered/test/test.jsp?testId="+taskVo.getTid()+"&taskId="+id+"\" target=\"_blank\" class=\"\">"+taskVo.getTname()+"</a></p>");
+        notice.setContent("<p>"+taskVo.getIntroduce()+" 点击下方链接开始：<a href=\""+PropertyUtil.getProperty("fastdfs_server")+"partyschool/www/registered/test/test.jsp?testId="+taskVo.getTid()+"&taskId="+id+"\" target=\"_blank\" class=\"\">"+taskVo.getTname()+"</a></p>");
         notice.setCategory("3");
         notice.setStatus("1");
         notice.setPublisher(userProp.getName());

@@ -157,7 +157,8 @@ function initVue() {
                     }
                     $.post(url, datas, function (rst) {
                         if(rst.status==0){
-                            that[type]=window[type]
+                            that[type]=window[type];
+                            alert("添加成功");
                         }
                     })
                 } else {

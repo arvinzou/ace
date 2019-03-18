@@ -81,12 +81,157 @@ function initEvents() {
             $(element).valid();
         },
         rules: {
-            name: {required: true, maxlength: 50}
+            name: {required: true, maxlength: 30},
+            introduce: {required: true, maxlength: 200},
+            timeout: {required: true, digits:true},
+            'evaluationIndex[0].name': {required: true, maxlength: 6},
+            'evaluationIndex[0].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[0].score': {required: true, digits:true},
+            'evaluationIndex[1].name': {required: true, maxlength: 6},
+            'evaluationIndex[1].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[1].score': {required: true, digits: true},
+            'evaluationIndex[2].name': {required: true, maxlength: 6},
+            'evaluationIndex[2].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[2].score': {required: true, digits: true},
+            'evaluationIndex[3].name': {required: true, maxlength: 6},
+            'evaluationIndex[3].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[3].score': {required: true, digits: true},
+            'evaluationIndex[4].name': {required: true, maxlength: 6},
+            'evaluationIndex[4].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[4].score': {required: true, digits: true},
+            'evaluationIndex[5].name': {required: true, maxlength: 6},
+            'evaluationIndex[5].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[5].score': {required: true, digits: true},
+            'evaluationIndex[6].name': {required: true, maxlength: 6},
+            'evaluationIndex[6].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[6].score': {required: true, digits: true},
+            'evaluationIndex[7].name': {required: true, maxlength: 6},
+            'evaluationIndex[7].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[7].score': {required: true, digits: true},
+            'evaluationIndex[8].name': {required: true, maxlength: 6},
+            'evaluationIndex[8].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[8].score': {required: true, digits: true}
         },
         messages: {
             name: {
-                required: "请输入名称",
-                maxlength: "名称字符长度不能超过50"
+                required: "请输入",
+                maxlength: "字数不能超过30"
+            },
+            introduce: {
+                required: "请输入",
+                maxlength: "字数不能超过200"
+            },
+            timeout: {
+                required: "请输入",
+                digits:"必须为整数字",
+            },
+            'evaluationIndex[0].name': {
+                required: "请输入",
+                maxlength: "字数不能超过6"
+            },
+            'evaluationIndex[0].introduce': {
+                required: "请输入",
+                maxlength: "字数不能超过40"
+            },
+            'evaluationIndex[0].score': {
+                required: "请输入指标分值",
+                digits:"必须为整数字",
+            },
+            'evaluationIndex[1].name': {
+                required: "请输入",
+                maxlength: "字数不能超过6"
+            },
+            'evaluationIndex[1].introduce': {
+                required: "请输入",
+                maxlength: "字数不能超过120"
+            },
+            'evaluationIndex[1].score': {
+                required: "请输入指标分值",
+                digits: "必须为整数字",
+            },
+            'evaluationIndex[2].name': {
+                required: "请输入",
+                maxlength: "字数不能超过6"
+            },
+            'evaluationIndex[2].introduce': {
+                required: "请输入",
+                maxlength: "字数不能超过120"
+            },
+            'evaluationIndex[2].score': {
+                required: "请输入指标分值",
+                digits: "必须为整数字",
+            },
+            'evaluationIndex[3].name': {
+                required: "请输入",
+                maxlength: "字数不能超过6"
+            },
+            'evaluationIndex[3].introduce': {
+                required: "请输入",
+                maxlength: "字数不能超过120"
+            },
+            'evaluationIndex[3].score': {
+                required: "请输入指标分值",
+                digits: "必须为整数字",
+            },
+            'evaluationIndex[4].name': {
+                required: "请输入",
+                maxlength: "字数不能超过6"
+            },
+            'evaluationIndex[4].introduce': {
+                required: "请输入",
+                maxlength: "字数不能超过120"
+            },
+            'evaluationIndex[4].score': {
+                required: "请输入指标分值",
+                digits: "必须为整数字",
+            },
+            'evaluationIndex[5].name': {
+                required: "请输入",
+                maxlength: "字数不能超过6"
+            },
+            'evaluationIndex[5].introduce': {
+                required: "请输入",
+                maxlength: "字数不能超过120"
+            },
+            'evaluationIndex[5].score': {
+                required: "请输入指标分值",
+                digits: "必须为整数字",
+            },
+            'evaluationIndex[6].name': {
+                required: "请输入",
+                maxlength: "字数不能超过6"
+            },
+            'evaluationIndex[6].introduce': {
+                required: "请输入",
+                maxlength: "字数不能超过120"
+            },
+            'evaluationIndex[6].score': {
+                required: "请输入指标分值",
+                digits: "必须为整数字",
+            },
+            'evaluationIndex[7].name': {
+                required: "请输入",
+                maxlength: "字数不能超过6"
+            },
+            'evaluationIndex[7].introduce': {
+                required: "请输入",
+                maxlength: "字数不能超过120"
+            },
+            'evaluationIndex[7].score': {
+                required: "请输入指标分值",
+                digits: "必须为整数字",
+            },
+            'evaluationIndex[8].name': {
+                required: "请输入",
+                maxlength: "字数不能超过6"
+            },
+            'evaluationIndex[8].introduce': {
+                required: "请输入",
+                maxlength: "字数不能超过120"
+            },
+            'evaluationIndex[8].score': {
+                required: "请输入指标分值",
+                digits: "必须为整数字",
             }
         }
     });
