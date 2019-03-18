@@ -135,7 +135,7 @@
         left join portal.province s2 on t.area_code=s2.code
         left join portal.userinfo s3 on t.openId=s3.unionid
         left join portal.wx_user s4 on t.appOpenId=s4.unionId
-        where t.openId = #{uid,jdbcType=VARCHAR}
+        where ( t.openId = #{uid,jdbcType=VARCHAR} or t.appOpenId = #{uid,jdbcType=VARCHAR} )
         and t.cur_syid= #{sysId,jdbcType=VARCHAR}
     </select>
 
