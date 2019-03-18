@@ -220,13 +220,9 @@ function cancel(){
     $("body").removeClass("modalhide");
 }
 function bindWx(){
-    startLoad();
     var o={};
     o.account=account.toString();
     $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
-
-    $("#bindForm").submit();
-    stopLoad();
 }
 
 function initClassList(){

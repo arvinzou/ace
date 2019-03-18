@@ -297,7 +297,9 @@ public class SignServiceImpl implements SignService {
         if (users == null) {
             return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
         }
-        if (StringUtil.isNotEmpty(users.getOpenId())) {
+        Users u = signDao.findByOpenId(unionid, "partyschool");
+        if (u != null ||
+                StringUtil.isNotEmpty(users.getOpenId())) {
             return new ResultResponse(ResultCode.FAIL, "该账户已绑定过其他微信号");
         }
         if (users.getStauts().equals(ACCOUNT_INVALID)) {
