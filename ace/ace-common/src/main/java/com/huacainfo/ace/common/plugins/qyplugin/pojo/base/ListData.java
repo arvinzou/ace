@@ -10,37 +10,38 @@ public class ListData extends Data {
     /**
      * 总记录数
      */
-    private String totalpage;
+    private int totalpage;
     /**
      * 总页数
      */
-    private String total;
+    private int total;
     /**
      * 当前页
      */
-    private String page;
+    private int page;
 
-    public String getTotalpage() {
+
+    public int getTotalpage() {
         return totalpage;
     }
 
-    public void setTotalpage(String totalpage) {
+    public void setTotalpage(int totalpage) {
         this.totalpage = totalpage;
     }
 
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 
-    public String getPage() {
+    public int getPage() {
         return page;
     }
 
-    public void setPage(String page) {
+    public void setPage(int page) {
         this.page = page;
     }
 }
