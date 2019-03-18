@@ -1,4 +1,4 @@
-package qyplugin.pojo;
+package com.huacainfo.ace.common.plugins.qyplugin.pojo;
 
 /**
  * @program: ace

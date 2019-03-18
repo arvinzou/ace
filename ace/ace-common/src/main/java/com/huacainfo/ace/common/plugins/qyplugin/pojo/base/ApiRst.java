@@ -1,14 +1,14 @@
-package qyplugin.pojo;
+package com.huacainfo.ace.common.plugins.qyplugin.pojo.base;
 
 import com.huacainfo.ace.common.model.BaseModel;
 
 /**
- * @ClassName BaseApiResponse
+ * @ClassName ApiRst
  * @Description TODO
- * @Author HuaCai008
+ * @Author Arvin Zou
  * @Date 2019/3/14 11:44
  */
-public class BaseApiResponse extends BaseModel {
+public class ApiRst extends BaseModel {
     /**
      * 1为成功，其它失败
      */
@@ -43,4 +43,6 @@ public class BaseApiResponse extends BaseModel {
     public void setError(String error) {
         this.error = error;
     }
+
+
 }
