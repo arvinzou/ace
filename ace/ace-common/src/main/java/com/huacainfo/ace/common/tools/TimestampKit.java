@@ -89,6 +89,7 @@ public class TimestampKit {
      * 将时间戳转换为时间    --  10位数的时间戳（秒）
      */
     public static String stamp10ToDate(long stamp10, String dateRegex) {
+        dateRegex = isEmpty(dateRegex) ? DATE_TIME_REGEX : dateRegex;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateRegex);
         long timeLong = Long.valueOf(stamp10);
 
@@ -106,6 +107,7 @@ public class TimestampKit {
      * 将时间戳转换为时间    --  13位数的时间戳（毫秒）
      */
     public static String stamp13ToDate(long stamp13, String dateRegex) {
+        dateRegex = isEmpty(dateRegex) ? DATE_TIME_REGEX : dateRegex;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateRegex);
         long timeLong = Long.valueOf(stamp13);
 
