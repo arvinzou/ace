@@ -23,12 +23,10 @@ $(function(){
      */
 
     $('.login-input').blur(function(){
-        console.log("===========================================================removeClass");
         $('.footer-box').removeClass("cancle-fixed");
     });
     $('.login-input').focus(function(){
         $('.footer-box').addClass("cancle-fixed");
-        console.log("===========================================================addClass");
     })
 
     /**
