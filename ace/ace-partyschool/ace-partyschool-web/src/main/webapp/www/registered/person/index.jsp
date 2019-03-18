@@ -32,6 +32,9 @@
 			<div class="menu" id="menu">
 
 			</div>
+			<div class="copyright">
+				湘ICP备19000335号-1
+			</div>
 		</div>
 
 		<script id="course-tpl" type="text/template">
