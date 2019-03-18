@@ -83,6 +83,7 @@
 .qiandao{
 	width: 2.666666rem;
 	height: 2.666666rem;
+	line-height: 2.666666rem;
 	border-radius: 50%;
 	color: #FFFFFF;
 	background:linear-gradient(90deg,rgba(106,219,251,1) 0%,rgba(0,160,255,1) 100%);
@@ -101,6 +102,6 @@
 	font-weight: 500;
 }
 .cell{
-	display:table-cell; 
+	/*display:table-cell; */
 	vertical-align:middle;
 }

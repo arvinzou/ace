@@ -58,10 +58,8 @@
 							<p>上午打卡\${am.attTime}</p>
 						{@/each}
 					{@/if}
-					<div id="amBtn" class="qiandao" onclick="record();" style="display: none;">
-						<div class="cell">
-							<p class="qtitle">上午签到</p>
-						</div>
+					<div id="amBtn" >
+
 					</div>
 				</div>
 			</li>
@@ -74,10 +72,8 @@
 					<p>下午打卡\${pm.attTime}</p>
 					{@/each}
 					{@/if}
-					<div id="pmBtn" class="qiandao"  onclick="record();" style="display: none;">
-						<div class="cell">
-							<p class="qtitle">下午签到</p>
-						</div>
+					<div id="pmBtn">
+
 					</div>
 				</div>
 			</li>
@@ -88,10 +84,8 @@
 					{@if data.night[0]}
 					<p>晚上签到\${data.night[0].attTime}</p>
 					{@/if}
-					<div id="nightBtn" class="qiandao"  onclick="record();" style="display: none;">
-						<div class="cell">
-							<p class="qtitle">晚上签到</p>
-						</div>
+					<div id="nightBtn">
+
 					</div>
 				</div>
 			</li>

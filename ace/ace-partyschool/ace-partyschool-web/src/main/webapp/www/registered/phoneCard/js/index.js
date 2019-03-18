@@ -1,6 +1,7 @@
 var regType = null;
 var lat = null;
 var longt = null;
+var btnName = "上午签到"
 $(function(){
     findList();
     initUserData();
@@ -167,29 +168,24 @@ function findList(){
                 var date = new Date();
                 var hour = date.getHours();
                 if(hour < 12){
-                    if(result.data.am.length >1){
-                        $("#amBtn").hide();
-                        $("#pmBtn").show();
-                        $("#nightBtn").hide();
-                    }else{
-                        $("#amBtn").show();
-                        $("#pmBtn").hide();
-                        $("#nightBtn").hide();
+                    //上午签到
+                    if(result.data.am.length <1){
+                        $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签到</p></div>');
+                    }else if(result.data.am.length >=1 && result.data.am.length<=2){
+                        $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签退</p></div>');
                     }
                 }else if(hour >=12 && hour < 19){
-                    if(result.data.pm.length >1){
-                        $("#amBtn").hide();
-                        $("#pmBtn").hide();
-                        $("#nightBtn").show();
-                    }else{
-                        $("#amBtn").hide();
-                        $("#pmBtn").show();
-                        $("#nightBtn").hide();
+                   //下午签到
+                    if(result.data.pm.length <1){
+                        $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签到</p></div>');
+                    }else if(result.data.am.length >=1 && result.data.am.length<=2){
+                        $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签退</p></div>');
                     }
                 }else{
-                    $("#amBtn").hide();
-                    $("#pmBtn").hide();
-                    $("#nightBtn").show();
+                    //晚上签到
+                    if(result.data.night.length <1){
+                        $("#nightBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">晚上签到</p></div>');
+                    }
                 }
 
             }
