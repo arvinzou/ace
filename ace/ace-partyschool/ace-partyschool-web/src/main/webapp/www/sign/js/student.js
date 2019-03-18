@@ -8,7 +8,6 @@ var sex = null;
 var slen = 0;
 var student = null;
 $(function(){
-    startLoad();
 	var politicalArr = [{"id":"normal","value":"非党员"},{"id":"party","value":"党员"}];
 	var politicalSelect= new MobileSelect({
 	    trigger: '#political',
@@ -224,7 +223,6 @@ function bindWx(){
     var o={};
     o.account=account.toString();
     $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
-    stopLoad();
 }
 
 function initClassList(){
@@ -239,7 +237,6 @@ function initClassList(){
         },
         success: function(result) {
            if(result.status == 0){
-               startLoad();
                 var classList = result.rows;
                 for(var i=0; i<classList.length; i++){
                     var obj = {};
@@ -272,7 +269,6 @@ function searchByName(){
         },
         success: function(result) {
             if(result.status == 0){
-                startLoad();
                 $("#nameModal").show();
                 $("body").addClass("modalhide");
                 renderPage('userInfo', result.data, 'user-tpl');
