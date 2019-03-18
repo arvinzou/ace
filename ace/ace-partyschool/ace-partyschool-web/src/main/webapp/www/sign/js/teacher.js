@@ -228,6 +228,4 @@ function bindWx(){
     var o={};
     o.account=account.toString();
     $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
-
-    $("#bindForm").submit();
 }
