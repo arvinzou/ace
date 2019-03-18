@@ -1,5 +1,5 @@
 var lCardNo = null;
-var server = "http://www.cdswdx.top";
+var server = "https://www.cdswdx.top";
 $(function(){
 
     $.ajax({
