@@ -246,6 +246,7 @@ public class QYApiKit {
         return HttpKit.get(sb.toString());
     }
 
+
     /**
      * 2.6	获取员工详细 (/Api/Api/getUserDetail）
      *
@@ -307,20 +308,187 @@ public class QYApiKit {
         return HttpKit.get(sb.toString());
     }
 
-    public String updateEmployee(String page) {
+    /**
+     * 2.8	更新员工 (/Api/Api/updateEmployee）
+     *
+     * @param useraccount 员工考勤编号                     --必传
+     * @param realname 姓名                               --非必传
+     * @param password 所设密码md5加密后的字符串            --非必传
+     * @param mobile   手机                               --非必传
+     * @param email    邮箱-                              --非必传
+     * @param card     员工卡号（刷卡卡号）-int             --非必传
+     * @param deptid   部门id -int                        --非必传
+     * @param sex      性别:1男，2女 -int                  --非必传
+     * @param sn       要同步设备的SN，多个用英文逗号分隔    --非必传
+     * @return rst
+     */
+    public String updateEmployee(String useraccount,String realname, String password, String mobile,
+                                 String email, String card, String deptid, String sex, String sn) {
         //接口调用验证
         if (!apiCheck()) {
             return ERROR_JSON;
         }
         //参数处理
         params.clear();
-//        params.put("page", page);
-//        params.put("page", page);
-//        params.put("page", page);
+        params.put("useraccount", useraccount);
+        params.put("realname", realname);
+        params.put("password", MD5.md5Str(password));
+        params.put("mobile", mobile);
+        params.put("email", email);
+        params.put("card", card);
+        params.put("deptid", deptid);
+        params.put("sex", sex);
+        params.put("sn", sn);
         params = process(params);
-
         //http请求
         final String method = "/updateEmployee";
+        StringBuilder sb = new StringBuilder();
+        sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
+        return HttpKit.get(sb.toString());
+    }
+
+
+    /**
+     * 2.9	辞退员工  (/Api/Api/layoffEmployee）
+     *
+     * @param useraccount 员工的CC号,多个用英文逗号隔开（不可恢复）  --必传
+     * @return rst
+     */
+    public String layoffEmployee(String useraccount) {
+        //接口调用验证
+        if (!apiCheck()) {
+            return ERROR_JSON;
+        }
+        //参数处理
+        params.clear();
+        params.put("useraccount", useraccount);
+        params = process(params);
+        //http请求
+        final String method = "/layoffEmployee";
+        StringBuilder sb = new StringBuilder();
+        sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
+        return HttpKit.get(sb.toString());
+    }
+    /**
+     * 2.12	补签卡 (/Api/Api/reCheck）
+     *
+     * @param useraccount 员工的CC号,多个用英文逗号隔开（不可恢复）  --必传
+     * @param time  datetime 要补签的时间 2014-12-12 09:00:00  --必传
+     * @return rst
+     */
+    public String reCheck(String useraccount,String time) {
+        //接口调用验证
+        if (!apiCheck()) {
+            return ERROR_JSON;
+        }
+        //参数处理
+        params.clear();
+        params.put("useraccount", useraccount);
+        params.put("time", time);
+        params = process(params);
+        //http请求
+        final String method = "/reCheck";
+        StringBuilder sb = new StringBuilder();
+        sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
+        return HttpKit.get(sb.toString());
+    }
+    /**
+     * 2.13	添加申请单 (/Api/Api/Apply）
+     *
+     * @param useraccount 员工的CC号,多个用英文逗号隔开（不可恢复）  --必传
+     * @param starttime  申请开始时间 2014-12-12 09:00:00  --必传
+     * @param endtime  申请结束时间 2014-12-12 18:00:00  --必传
+     * @param type  1加班2调休3外出 其它代表见请假类型接口--必传
+     * @return rst
+     */
+    public String Apply(String useraccount,String starttime,String endtime,String type) {
+        //接口调用验证
+        if (!apiCheck()) {
+            return ERROR_JSON;
+        }
+        //参数处理
+        params.clear();
+        params.put("useraccount", useraccount);
+        params.put("starttime", starttime);
+        params.put("endtime", endtime);
+        params.put("type", type);
+        params = process(params);
+        //http请求
+        final String method = "/Apply";
+        StringBuilder sb = new StringBuilder();
+        sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
+        System.out.println(sb);
+        return HttpKit.get(sb.toString());
+    }
+    /**
+     * 2.14	请假类型 (/Api/Api/applyType）
+     *
+     * @param
+     * @return rst
+     * {"976":"事假（3天以上）","977":"事假（1天以上3天及以下）",
+     * "978":"病假（1天及1天以下）","22932":"病假（1天以上3天及3天以上）",
+     * "22933":"病假（3天以上）","22935":"年假（5天以上）",
+     * "22936":"婚假","22937":"丧假","22941":"工伤","23043":"事假",
+     * "28698":"带薪病假","29142":"公出","30453":"产假","31563":"离职",
+     * "0":"请假","1":"加班","2":"调休","3":"外出","4":"补签卡"}
+     */
+    public String applyType() {
+        //接口调用验证
+        if (!apiCheck()) {
+            return ERROR_JSON;
+        }
+        //参数处理
+        params.clear();
+        params = process(params);
+        //http请求
+        final String method = "/applyType";
+        StringBuilder sb = new StringBuilder();
+        sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
+        return HttpKit.get(sb.toString());
+    }
+
+    /**
+     * 2.16	员工日报表 (/Api/Api/dayReport）
+     *
+     * @param useraccount 员工的CC号,多个用英文逗号隔开（不可恢复）  --必传
+     * @param start  申请开始时间 2014-12-12  --必传
+     * @param end  申请结束时间 2014-12-12，开始与结束时间跨度不能大于31天。
+     * @return rst
+     */
+    public String dayReport(String useraccount,String start,String end) {
+        //接口调用验证
+        if (!apiCheck()) {
+            return ERROR_JSON;
+        }
+        //参数处理
+        params.clear();
+        params.put("useraccount", useraccount);
+        params.put("start", start);
+        params.put("end", end);
+        params = process(params);
+        //http请求
+        final String method = "/dayReport";
+        StringBuilder sb = new StringBuilder();
+        sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
+        return HttpKit.get(sb.toString());
+    }
+    /**
+     * 2.17	获取接入设备列表 (/Api/Api/getDevice）
+     *
+     * @param sn 序列号
+     * @return rst
+     */
+    public String getDevice(String sn) {
+        //接口调用验证
+        if (!apiCheck()) {
+            return ERROR_JSON;
+        }
+        //参数处理
+        params.clear();
+        params.put("sn", sn);
+        params = process(params);
+        //http请求
+        final String method = "/getDevice";
         StringBuilder sb = new StringBuilder();
         sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
         return HttpKit.get(sb.toString());

@@ -8,5 +8,4 @@ package qyplugin.pojo;
  */
 public class RecordLog extends BaseApiResponse {
 
-
 }
