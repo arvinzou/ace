@@ -171,14 +171,14 @@ function findList(){
                     //上午签到
                     if(result.data.am.length <1){
                         $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签到</p></div>');
-                    }else if(result.data.am.length >=1 && result.data.am.length<=2){
+                    }else if(result.data.am.length >0 && result.data.am.length<2){
                         $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签退</p></div>');
                     }
                 }else if(hour >=12 && hour < 19){
                    //下午签到
                     if(result.data.pm.length <1){
                         $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签到</p></div>');
-                    }else if(result.data.am.length >=1 && result.data.am.length<=2){
+                    }else if(result.data.pm.length >0 && result.data.pm.length<2){
                         $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签退</p></div>');
                     }
                 }else{
