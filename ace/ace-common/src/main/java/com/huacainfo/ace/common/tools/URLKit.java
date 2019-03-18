@@ -1,4 +1,4 @@
-package qyplugin;
+package com.huacainfo.ace.common.tools;
 
 import org.apache.commons.lang.StringUtils;
 

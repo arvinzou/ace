@@ -1,9 +1,10 @@
-package qyplugin;
+package com.huacainfo.ace.common.plugins.qyplugin;
 
 import com.huacainfo.ace.common.plugins.ccb.util.MD5;
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.TimestampKit;
+import com.huacainfo.ace.common.tools.URLKit;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -12,13 +13,13 @@ import java.util.TreeMap;
 /**
  * @ClassName QYApiKit
  * @Description 群英考勤机api工具类
- * @Author HuaCai008
+ * @Author Arvin Zou
  * @Date 2019/3/13 21:42
  */
 public class QYApiKit {
 
     /**
-     * 测试账户
+     * 测试账户资料
      * 访问地址：    yun.kqapi.com
      */
     private final String CC_ACCT = "2518276";
@@ -102,7 +103,7 @@ public class QYApiKit {
             p = new TreeMap<>();
         }
         p.put("account", apiAcct);
-        p.put("requesttime", DateUtil.getDateTime() + "");
+        p.put("requesttime", TimestampKit.getTimestamp10() + "");
         //拼接签名串
         StringBuilder signStr = new StringBuilder();
         Iterator<Map.Entry<String, String>> entries = p.entrySet().iterator();
@@ -311,18 +312,18 @@ public class QYApiKit {
     /**
      * 2.8	更新员工 (/Api/Api/updateEmployee）
      *
-     * @param useraccount 员工考勤编号                     --必传
-     * @param realname 姓名                               --非必传
-     * @param password 所设密码md5加密后的字符串            --非必传
-     * @param mobile   手机                               --非必传
-     * @param email    邮箱-                              --非必传
-     * @param card     员工卡号（刷卡卡号）-int             --非必传
-     * @param deptid   部门id -int                        --非必传
-     * @param sex      性别:1男，2女 -int                  --非必传
-     * @param sn       要同步设备的SN，多个用英文逗号分隔    --非必传
+     * @param useraccount 员工考勤编号                        --必传
+     * @param realname    姓名                               --非必传
+     * @param password    所设密码md5加密后的字符串            --非必传
+     * @param mobile      手机                               --非必传
+     * @param email       邮箱-                              --非必传
+     * @param card        员工卡号（刷卡卡号）-int             --非必传
+     * @param deptid      部门id -int                        --非必传
+     * @param sex         性别:1男，2女 -int                  --非必传
+     * @param sn          要同步设备的SN，多个用英文逗号分隔    --非必传
      * @return rst
      */
-    public String updateEmployee(String useraccount,String realname, String password, String mobile,
+    public String updateEmployee(String useraccount, String realname, String password, String mobile,
                                  String email, String card, String deptid, String sex, String sn) {
         //接口调用验证
         if (!apiCheck()) {
@@ -369,14 +370,64 @@ public class QYApiKit {
         sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
         return HttpKit.get(sb.toString());
     }
+
+    /**
+     * 2.10	同步员工到设备 (/Api/Api/syncEmployee）
+     *
+     * @param useraccount 员工的CC号,多个用英文逗号隔开（不可恢复）  --必传
+     * @param sn          要同步设备的SN，多个用英文逗号分隔         --必传
+     * @return rst
+     */
+    public String syncEmployee(String useraccount, String sn) {
+        //接口调用验证
+        if (!apiCheck()) {
+            return ERROR_JSON;
+        }
+        //参数处理
+        params.clear();
+        params.put("useraccount", useraccount);
+        params.put("sn", sn);
+        params = process(params);
+        //http请求
+        final String method = "/removeEmployee";
+        StringBuilder sb = new StringBuilder();
+        sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
+        return HttpKit.get(sb.toString());
+    }
+
+
+    /**
+     * 2.11	从设备删除员工(/Api/Api/removeEmployee）
+     *
+     * @param useraccount 员工的CC号,多个用英文逗号隔开（不可恢复）  --必传
+     * @param sn          要同步设备的SN，多个用英文逗号分隔         --必传
+     * @return rst
+     */
+    public String removeEmployee(String useraccount, String sn) {
+        //接口调用验证
+        if (!apiCheck()) {
+            return ERROR_JSON;
+        }
+        //参数处理
+        params.clear();
+        params.put("useraccount", useraccount);
+        params.put("sn", sn);
+        params = process(params);
+        //http请求
+        final String method = "/removeEmployee";
+        StringBuilder sb = new StringBuilder();
+        sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
+        return HttpKit.get(sb.toString());
+    }
+
     /**
      * 2.12	补签卡 (/Api/Api/reCheck）
      *
      * @param useraccount 员工的CC号,多个用英文逗号隔开（不可恢复）  --必传
-     * @param time  datetime 要补签的时间 2014-12-12 09:00:00  --必传
+     * @param time        datetime 要补签的时间 2014-12-12 09:00:00  --必传
      * @return rst
      */
-    public String reCheck(String useraccount,String time) {
+    public String reCheck(String useraccount, String time) {
         //接口调用验证
         if (!apiCheck()) {
             return ERROR_JSON;
@@ -392,16 +443,17 @@ public class QYApiKit {
         sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
         return HttpKit.get(sb.toString());
     }
+
     /**
      * 2.13	添加申请单 (/Api/Api/Apply）
      *
      * @param useraccount 员工的CC号,多个用英文逗号隔开（不可恢复）  --必传
-     * @param starttime  申请开始时间 2014-12-12 09:00:00  --必传
-     * @param endtime  申请结束时间 2014-12-12 18:00:00  --必传
-     * @param type  1加班2调休3外出 其它代表见请假类型接口--必传
+     * @param starttime   申请开始时间 2014-12-12 09:00:00  --必传
+     * @param endtime     申请结束时间 2014-12-12 18:00:00  --必传
+     * @param type        1加班2  调休3外出 其它代表见请假类型接口--必传
      * @return rst
      */
-    public String Apply(String useraccount,String starttime,String endtime,String type) {
+    public String apply(String useraccount, String starttime, String endtime, String type) {
         //接口调用验证
         if (!apiCheck()) {
             return ERROR_JSON;
@@ -420,6 +472,7 @@ public class QYApiKit {
         System.out.println(sb);
         return HttpKit.get(sb.toString());
     }
+
     /**
      * 2.14	请假类型 (/Api/Api/applyType）
      *
@@ -450,12 +503,12 @@ public class QYApiKit {
     /**
      * 2.16	员工日报表 (/Api/Api/dayReport）
      *
-     * @param useraccount 员工的CC号,多个用英文逗号隔开（不可恢复）  --必传
-     * @param start  申请开始时间 2014-12-12  --必传
-     * @param end  申请结束时间 2014-12-12，开始与结束时间跨度不能大于31天。
+     * @param useraccount 员工的CC号,只支持单个员工            --非必传
+     * @param start       申请开始时间 2014-12-12             --必传
+     * @param end         申请结束时间 2014-12-12，开始与结束时间跨度不能大于31天。   --必传
      * @return rst
      */
-    public String dayReport(String useraccount,String start,String end) {
+    public String dayReport(String useraccount, String start, String end) {
         //接口调用验证
         if (!apiCheck()) {
             return ERROR_JSON;
@@ -472,6 +525,7 @@ public class QYApiKit {
         sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
         return HttpKit.get(sb.toString());
     }
+
     /**
      * 2.17	获取接入设备列表 (/Api/Api/getDevice）
      *
