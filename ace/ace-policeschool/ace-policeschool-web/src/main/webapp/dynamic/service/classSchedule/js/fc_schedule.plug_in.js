@@ -279,12 +279,13 @@ window.onload = function () {
                 var time = dateTime.substring(13, 14);
                 if (time == 1) {
                     insertDate.courseIndex = 'am';
+                    insertDate.courseDate = date + ' 12:00:00';
                 } else if (time == 2) {
                     insertDate.courseIndex = 'pm';
+                    insertDate.courseDate = date + ' 16:00:00';
                 }
                 ;
                 insertDate.classesId = parameter.classesId;
-                insertDate.courseDate = date + ' 00:00:00';
                 insertDate.teacherId = data.teacherId;
                 insertDate.courseId = data.courseId;
                 var url = contextPath + "/classSchedule/insertClassSchedule"
