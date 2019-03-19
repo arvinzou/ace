@@ -45,6 +45,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">
                             测试介绍
+                            <span class="required" aria-required="true"> * </span>
                         </label>
                         <div class="col-md-6">
                             <textarea style="resize: none" class="form-control" name="introduce" maxlength="200"
@@ -56,6 +57,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">
                             测评方案
+                            <span class="required" aria-required="true"> * </span>
                         </label>
                         <div class="col-md-6">
                             <select style="width: 100%;height: 34px"

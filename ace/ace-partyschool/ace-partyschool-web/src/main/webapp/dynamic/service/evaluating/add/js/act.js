@@ -49,7 +49,7 @@ function addOption() {
 var optionTemp= '                        <div class="form-group">\n' +
     '                            <div class="row">\n' +
     '                                <label class="col-md-2 control-label">\n' +
-    '                                    指标名称\n' +
+    '                                    指标名称<span class="required" aria-required="true"> * </span>\n' +
     '                                </label>\n' +
     '                                <div class="col-md-4">\n' +
     '                                    <input type="text" class="form-control" name="evaluationIndex[#index#].name"\n' +
@@ -58,7 +58,7 @@ var optionTemp= '                        <div class="form-group">\n' +
     '                                    <span class="help-block"></span>\n' +
     '                                </div>\n' +
     '                                <label class="col-md-1 control-label">\n' +
-    '                                    指标分值\n' +
+    '                                    指标分值<span class="required" aria-required="true"> * </span>\n' +
     '                                </label>\n' +
     '                                <div class="col-md-1">\n' +
     '                                    <input type="text" class="form-control scores" name="evaluationIndex[#index#].score"\n' +
@@ -69,7 +69,7 @@ var optionTemp= '                        <div class="form-group">\n' +
     '                            </div>\n' +
     '                            <div class="row">\n' +
     '                                <label class="col-md-2 control-label">\n' +
-    '                                    指标内容\n' +
+    '                                    指标内容<span class="required" aria-required="true"> * </span>\n' +
     '                                </label>\n' +
     '                                <div class="col-md-6">\n' +
      ' <textarea name="evaluationIndex[#index#].introduce" id="" rows="3"></textarea>'+

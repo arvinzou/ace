@@ -1,6 +1,7 @@
 .removeOption{
     color: #0000f1;
-    line-height: 1.2rem
+    line-height: 1.2rem;
+    cursor: pointer;
 }
 
 textarea{
