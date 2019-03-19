@@ -33,7 +33,7 @@ function addOption() {
 var optionTemp= '                        <div class="form-group">\n' +
     '                            <div class="row">\n' +
     '                                <label class="col-md-2 control-label">\n' +
-    '                                    指标名称\n' +
+    '                                    指标名称<span class="required" aria-required="true"> * </span>\n' +
     '                                </label>\n' +
     '                                <div class="col-md-4">\n' +
     '                                    <input type="text" class="form-control" name="evaluationIndex[#index#].name"\n' +
@@ -42,7 +42,7 @@ var optionTemp= '                        <div class="form-group">\n' +
     '                                    <span class="help-block"></span>\n' +
     '                                </div>\n' +
     '                                <label class="col-md-1 control-label">\n' +
-    '                                    指标分值\n' +
+    '                                    指标分值<span class="required" aria-required="true"> * </span>\n' +
     '                                </label>\n' +
     '                                <div class="col-md-1">\n' +
     '                                    <input type="text" class="form-control scores" name="evaluationIndex[#index#].score"\n' +
@@ -53,7 +53,7 @@ var optionTemp= '                        <div class="form-group">\n' +
     '                            </div>\n' +
     '                            <div class="row">\n' +
     '                                <label class="col-md-2 control-label">\n' +
-    '                                    指标内容\n' +
+    '                                    指标内容<span class="required" aria-required="true"> * </span>\n' +
     '                                </label>\n' +
     '                                <div class="col-md-6">\n' +
     ' <textarea name="evaluationIndex[#index#].introduce" id="" rows="3"></textarea>'+
@@ -235,22 +235,22 @@ function initEvents() {
             }
         }
     });
-    /*监听表单提交*/
-    $('#fm-edit').ajaxForm({
-        beforeSubmit: function (formData, jqForm, options) {
-            var params = {};
-            $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
-            });
-            $.extend(params, {
-                time: new Date(),
-                id: urlParams.did
-            });
-            save(params);
-            return false;
-        }
-    });
 }
+/*监听表单提交*/
+$('#fm-edit').ajaxForm({
+    beforeSubmit: function (formData, jqForm, options) {
+        var params = {};
+        $.each(formData, function (n, obj) {
+            params[obj.name] = obj.value;
+        });
+        $.extend(params, {
+            time: new Date(),
+            id: urlParams.did
+        });
+        save(params);
+        return false;
+    }
+});
 
 /*保存表单**/
 function save(params) {
@@ -310,8 +310,6 @@ function initForm() {
                 var data = {};
                 data = result.value;
                 render('#fm-edit', data, 'tpl-fm');
-//富文本填值
-//editor.setValue(data['o'].summary);
             } else {
                 alert(result.errorMessage);
             }

@@ -44,6 +44,7 @@
                         <div class="row">
                         <label class="col-md-2 control-label">
                             介绍
+                            <span class="required" aria-required="true"> * </span>
                         </label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="introduce"
@@ -73,6 +74,7 @@
                             <div class="row">
                                 <label class="col-md-2 control-label">
                                     指标名称
+                                    <span class="required" aria-required="true"> * </span>
                                 </label>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" name="evaluationIndex[0].name"
@@ -84,6 +86,7 @@
 
                                 <label class="col-md-1 control-label">
                                     指标分值
+                                    <span class="required" aria-required="true"> * </span>
                                 </label>
                                 <div class="col-md-1">
                                     <input type="text" class="form-control scores" name="evaluationIndex[0].score"
@@ -95,6 +98,7 @@
                             <div class="row">
                                 <label class="col-md-2 control-label">
                                     指标内容
+                                    <span class="required" aria-required="true"> * </span>
                                 </label>
                                 <div class="col-md-6">
                                     <textarea name="evaluationIndex[0].introduce" id="" cols="30" rows="3"></textarea>

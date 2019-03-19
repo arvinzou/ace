@@ -92,6 +92,7 @@ public class WWWDownloadController extends BisBaseController {
 
 
     private String CommentResponse(String downLoadPath, HttpServletResponse response) {
+        downLoadPath=downLoadPath.replace("http://","https://");
         BufferedInputStream bis = null;
         BufferedOutputStream bos = null;
         try {
