@@ -17,6 +17,18 @@ $(function(){
         alert(errorInfo);
     }
 
+
+    /**
+     * 获取焦点
+     */
+
+    $('.login-input').blur(function(){
+        $('.footer-box').removeClass("cancle-fixed");
+    });
+    $('.login-input').focus(function(){
+        $('.footer-box').addClass("cancle-fixed");
+    })
+
     /**
      * 检测到有缓存就自动登录
      * @type {string | null}
@@ -42,16 +54,7 @@ $(function(){
             alert("系统服务内部异常！");
         }
     });
-    /**
-     * 获取焦点
-     */
 
-    $('.form-row input').blur(function(){
-        $('.footer-box').removeClass("cancle-fixed");
-    });
-    $('.form-row input').focus(function(){
-        $('.footer-box').addClass("cancle-fixed");
-    })
 });
 
 function login(){
