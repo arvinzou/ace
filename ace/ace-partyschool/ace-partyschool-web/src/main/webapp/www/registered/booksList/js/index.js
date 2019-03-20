@@ -38,7 +38,9 @@ function findList(cardNo){
         type:"post",
         async:false,
         data:{
-            lCardNo: cardNo
+            lCardNo: cardNo,
+            startNum: 0,
+            endNum: 999
         },
         success:function(result){
             if(result.status == 0) {
