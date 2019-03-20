@@ -33,9 +33,9 @@
         <div class="form-content form-border">
             <label class="form-label">性别</label>
             <div class="radio-box">
-                <div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio"
+                <div class="sex-box"><img id="nan" src="img/sex_unselect.png" class="sex-radio"
                                           onclick="selectSex(this,'1');"/><span class="radio-title">男</span></div>
-                <div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio"
+                <div class="sex-box"><img id="nv" src="img/sex_unselect.png" class="sex-radio"
                                           onclick="selectSex(this,'2');"/><span class="radio-title">女</span></div>
             </div>
         </div>
@@ -151,7 +151,7 @@
     {@each data as item, index}
     {@if index == 0}
     <div class="user-item user-active"
-         onclick="select(this,'\${item.name}','\${item.workUnitName}','\${item.postName}');">
+         onclick="select(this, '\${item.id}');">
         <table border="0" cellspacing="0" cellpadding="0">
             <tr>
                 <td width="25%">姓名：</td>
