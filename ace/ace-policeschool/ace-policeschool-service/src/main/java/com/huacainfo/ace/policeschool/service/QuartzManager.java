@@ -54,7 +54,7 @@ public class QuartzManager {
     /**
      * 每隔15分钟 执行一次 :自动注册报名表中，符合要求的学员数据
      */
-    @Scheduled(cron = "0 /5 * * * ? *")
+    @Scheduled(cron = "0 0/15 * * * ?")
     @Transactional(propagation = Propagation.REQUIRED)
     public void autoRegister() {
         List<EnrollRoster> list = enrollRosterDao.findUnRegisterList();
@@ -91,7 +91,7 @@ public class QuartzManager {
      * 1、每5min执行一次一次；
      * 2、数据更新形式为增量更新
      */
-    @Scheduled(cron = "0 /5 * * * ? *")
+//    @Scheduled(cron = "0 /5 * * * ?")
     public void downloadYunKQ() {
         //1.获取库中最近一次拉取数据时间
         String lastDate = "";//mysql search
