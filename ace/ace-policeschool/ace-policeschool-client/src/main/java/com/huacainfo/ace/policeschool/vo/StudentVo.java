@@ -23,16 +23,16 @@ public class StudentVo extends Student {
     private String clsName;
 
     /**
-     * 借阅证号
+     * 籍贯名称
      */
-    private String lCardNo;
+    private String areaName;
 
-    public String getlCardNo() {
-        return lCardNo;
+    public String getAreaName() {
+        return areaName;
     }
 
-    public void setlCardNo(String lCardNo) {
-        this.lCardNo = lCardNo;
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
     }
 
     public String getClsName() {

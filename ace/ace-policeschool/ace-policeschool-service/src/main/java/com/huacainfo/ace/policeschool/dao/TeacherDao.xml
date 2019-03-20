@@ -83,11 +83,11 @@
     </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.TeacherVo">
-        <result column="lCardNo" jdbcType="VARCHAR" property="lCardNo"/>
+        <result column="areaName" jdbcType="VARCHAR" property="areaName"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
-        cd.cardData as lCardNo,
+        cd.cardData as areaName,
         t.id, t.category, t.name, t.sex, t.political, t.mobile, t.idCard, t.photoUrl, t.remark,
         t.status, t.createUserId, t.createUserName, t.createDate,
         t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,

@@ -21,8 +21,8 @@
 </div>
 
 <script id="count-tpl" type="text/template">
-    {@if data.lCardNo}
-    <div class="cardNo">卡号: \${data.lCardNo}
+    {@if data.areaName}
+    <div class="cardNo">卡号: \${data.areaName}
     </div>
     <div class="balance">
         {@if data.acctNum}

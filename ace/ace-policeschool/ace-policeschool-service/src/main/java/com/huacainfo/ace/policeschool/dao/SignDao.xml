@@ -49,7 +49,7 @@
         <result column="headimgurl" jdbcType="VARCHAR" property="avatarUrl"/>
         <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
         <result column="isBindWx" jdbcType="VARCHAR" property="isBindWx"/>
-        <result column="lCardNo" jdbcType="VARCHAR" property="lCardNo"/>
+        <result column="areaName" jdbcType="VARCHAR" property="areaName"/>
         <association property="student" column="sid" javaType="com.huacainfo.ace.policeschool.vo.StudentVo">
             <id column="sid" jdbcType="VARCHAR" property="id"/>
             <result column="sPid" jdbcType="VARCHAR" property="pid"/>
@@ -84,7 +84,7 @@
         ifnull(s.sex, t.sex) as sex,
         u.user_level as regType, u.openId,
         CASE when ISNULL(u.openId) || LENGTH(trim(u.openId)) &lt; 1 then '0' else '1' end as isBindWx,
-        cd.cardData as lCardNo,
+        cd.cardData as areaName,
 
         s.id as sid,
         s.pid as sPid, s.name as sName, s.mobile as sMobile, s.idCard as sIdCard,
