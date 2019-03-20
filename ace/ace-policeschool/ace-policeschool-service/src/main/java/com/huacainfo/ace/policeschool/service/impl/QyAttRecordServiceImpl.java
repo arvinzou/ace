@@ -84,11 +84,6 @@ public class QyAttRecordServiceImpl implements QyAttRecordService {
         }
 
 
-        int temp = this.qyAttRecordDao.isExist(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "群英考勤数据名称重复！");
-        }
-
         o.setAttenId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         this.qyAttRecordDao.insert(o);
@@ -303,6 +298,16 @@ public class QyAttRecordServiceImpl implements QyAttRecordService {
         this.qyAttRecordDao.updateStatus(id, status);
         this.dataBaseLogService.log("跟新状态", "群英考勤数据", id, id, "群英考勤数据", userProp);
         return new MessageResponse(0, "成功！");
+    }
+
+    /**
+     * 取库中最近一次拉取数据时间
+     *
+     * @return String
+     */
+    @Override
+    public String findLastSyncDateTime() {
+        return this.qyAttRecordDao.findLastSyncDateTime();
     }
 
 }

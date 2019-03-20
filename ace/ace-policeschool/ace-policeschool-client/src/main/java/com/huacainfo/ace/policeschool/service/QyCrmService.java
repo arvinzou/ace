@@ -1,17 +1,18 @@
 package com.huacainfo.ace.policeschool.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.qyplugin.QYApiKit;
 import com.huacainfo.ace.common.plugins.qyplugin.pojo.DeviceRst;
+import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.policeschool.model.QyCrm;
-import com.huacainfo.ace.policeschool.vo.QyCrmVo;
 import com.huacainfo.ace.policeschool.vo.QyCrmQVo;
+import com.huacainfo.ace.policeschool.vo.QyCrmVo;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: ArvinZou
@@ -171,6 +172,13 @@ public interface QyCrmService {
     MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
 
     /**
+     * 获取群英API工具
+     *
+     * @return QYApiKit
+     */
+    QYApiKit getApi();
+
+    /**
      * 获取群英已介入设备列表
      *
      * @param sn 可选参数
@@ -188,4 +196,20 @@ public interface QyCrmService {
      * @throws Exception
      */
     MessageResponse syncData(String userId, String idStr);
+
+    /**
+     * 获取尚未同步员工数据
+     *
+     * @return List<QyCrmVo>
+     */
+    List<QyCrmVo> findUnSyncList();
+
+    /**
+     * 同步学员数据到考勤设备
+     *
+     * @param vo    vo
+     * @param idStr idStr设备串
+     * @return MessageResponse
+     */
+    MessageResponse addEmployee(QyCrmVo vo, String idStr);
 }

@@ -25,6 +25,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -331,7 +333,9 @@ public class QyCrmServiceImpl implements QyCrmService {
         return new MessageResponse(0, "成功！");
     }
 
-    private QYApiKit getApi() {
+
+    @Override
+    public QYApiKit getApi() {
         String apiAcct = PropertyUtil.getProperty("qy_api_acct");
         String apiKey = PropertyUtil.getProperty("qy_api_key");
         return QYApiKit.getInstance(apiAcct, apiKey);
@@ -387,6 +391,16 @@ public class QyCrmServiceImpl implements QyCrmService {
         }
     }
 
+    /**
+     * 获取尚未同步员工数据
+     *
+     * @return List<QyCrmVo>
+     */
+    @Override
+    public List<QyCrmVo> findUnSyncList() {
+        return this.qyCrmDao.findUnSyncList();
+    }
+
     /***
      * 同步员工数据到设备
      */
@@ -412,7 +426,9 @@ public class QyCrmServiceImpl implements QyCrmService {
     /***
      * 新增/更新员工数据 && 同步员工数据到设备
      */
-    private MessageResponse addEmployee(QyCrmVo vo, String idStr) {
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Override
+    public MessageResponse addEmployee(QyCrmVo vo, String idStr) {
         //新增员工数据
         QYApiKit api = getApi();
         String idCard = vo.getIdCard();

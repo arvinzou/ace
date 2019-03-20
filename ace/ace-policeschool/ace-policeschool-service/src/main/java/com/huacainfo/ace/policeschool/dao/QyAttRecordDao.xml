@@ -59,15 +59,15 @@
     where attenId = #{attenId,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.QyCrmVo">
-
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.QyAttRecordVo">
+        <result column="attenDateTime" jdbcType="VARCHAR" property="attenDateTime"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
-
-    t.attenId, t.companyId, t.attenDevice, t.deviceName,
-    t.attenUid, t.realname, t.departName, t.attenType,
-    t.attenStatus, t.attenTime, t.attenDate, t.remark, t.createDate
+      DATE_FORMAT(from_unixtime(t.attenTime),'%Y-%m-%d %H:%i:%S') as attenDateTime,
+      t.attenId, t.companyId, t.attenDevice, t.deviceName,
+      t.attenUid, t.realname, t.departName, t.attenType,
+      t.attenStatus, t.attenTime, t.attenDate, t.remark, t.createDate
   </sql>
     <sql id="From_Statement">
         FROM qy_att_record t
@@ -80,7 +80,7 @@
         select
         <include refid="Vo_Column_List"/>
         <include refid="From_Statement"/>
-        where t.id = #{id,jdbcType=VARCHAR}
+        where t.attenId = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -116,4 +116,12 @@
         set status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
+
+    <select id="findLastSyncDateTime" resultType="java.lang.String">
+        select
+          DATE_FORMAT(t.createDate,'%Y-%m-%d %H:%i:%S') last_sync_datetime
+        from qy_att_record t
+        order by t.createDate desc
+        limit 1
+    </select>
 </mapper>

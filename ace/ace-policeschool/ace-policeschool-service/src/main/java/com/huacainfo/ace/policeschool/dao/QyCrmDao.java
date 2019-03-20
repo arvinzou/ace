@@ -42,4 +42,5 @@ public interface QyCrmDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    List<QyCrmVo> findUnSyncList();
 }

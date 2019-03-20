@@ -107,4 +107,12 @@
         set status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
+
+    <select id="findUnSyncList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where s.`status` = '1'
+        and IFNULL(t.status,'UNDO') = 'UNDO'
+    </select>
 </mapper>

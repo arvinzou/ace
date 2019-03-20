@@ -42,4 +42,5 @@ public interface QyAttRecordDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    String findLastSyncDateTime();
 }

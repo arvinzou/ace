@@ -21,10 +21,6 @@
             <form action="#" id="fm-search">
                 <div class="col-md-9 toolbar">
 
-                    <button type="button" class="btn  green" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/qyAttRecord/insertQyAttRecord">添加
-                    </button>
-
                 </div>
                 <div class="col-md-3">
 

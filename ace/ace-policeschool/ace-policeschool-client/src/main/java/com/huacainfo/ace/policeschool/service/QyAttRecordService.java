@@ -167,4 +167,11 @@ public interface QyAttRecordService {
      * @version: 2019-03-19
      */
     MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
+
+    /**
+     * 取库中最近一次拉取数据时间
+     *
+     * @return String
+     */
+    String findLastSyncDateTime();
 }
