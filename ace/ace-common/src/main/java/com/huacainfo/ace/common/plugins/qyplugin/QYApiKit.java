@@ -389,7 +389,7 @@ public class QYApiKit {
         params.put("sn", sn);
         params = process(params);
         //http请求
-        final String method = "/removeEmployee";
+        final String method = "/syncEmployee";
         StringBuilder sb = new StringBuilder();
         sb.append(API_URL).append(method).append("?").append(URLKit.mapToStr(params));
         return HttpKit.get(sb.toString());

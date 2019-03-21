@@ -70,6 +70,9 @@
 	<bean id="lobHandler" lazy-init="true"
 		class="org.springframework.jdbc.support.lob.DefaultLobHandler" />
 
+	<!--添加注解驱动-->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
 	<!-- 配置事务特性，配置add，delete，update开始的方法，事务传播特性为required -->
 	<tx:advice id="txServiceAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
@@ -113,4 +116,5 @@
 		<aop:advisor advice-ref="txDaoAdvice" pointcut-ref="allDaoMethod" />
 		<aop:advisor advice-ref="txServiceAdvice" pointcut-ref="allServiceMethod" />
 	</aop:config>
+
 </beans>

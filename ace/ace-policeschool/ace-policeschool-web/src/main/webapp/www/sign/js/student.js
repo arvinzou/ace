@@ -8,27 +8,28 @@ var sex = null;
 var slen = 0;
 var student = null;
 $(function () {
-    var politicalArr = [{"id": "public", "value": "群众"}, {"id": "party", "value": "党员"}, {"id": "member", "value": "团员"}];
-    var politicalSelect = new MobileSelect({
-        trigger: '#political',
-        title: '政治面貌选择',
-        wheels: [
-            {data: politicalArr}
-        ],
-        position: [1], //初始化定位 打开时默认选中的哪个 如果不填默认为0
-        transitionEnd: function (indexArr, data) {
-            political = data;
-        },
-        callback: function (indexArr, data) {
-            political = data;
-        }
-    });
-
 
     $("#close").click(function () {
         $("#nameModal").hide();
         $("body").removeClass("modalhide");
     });
+
+    var mobileSelect = new MobileSelect({
+        trigger: '#nativePlacePicker',
+        title: '请选择地区',
+        wheels : city,
+        // position:[0, 1, 0, 1, 0],
+        transitionEnd:function(indexArr, data){
+            console.log(data)
+            // mobileSelect.setTitle(data[0].value+data[1].value+data[2].value)
+            $("#nativePlace").val(data[2].id);
+        },
+        callback:function(indexArr, data){
+            console.log(data);
+            $("#nativePlace").val(data[2].id);
+        }
+    });
+
     initClassList();
 });
 function selectSex(obj, value) {
@@ -293,27 +294,92 @@ function renderPage(IDom, data, tempId) {
     $("#" + IDom).html(html);
 }
 
-function select(obj, name, workUnitName, postName) {
-    $(obj).removeClass('user-unactive').addClass('user-active');
-    $(obj).siblings().removeClass('user-active').addClass('user-unactive');
-    userInfo.name = name;
-    userInfo.workUnitName = workUnitName;
-    userInfo.postName = postName;
+function select(o, id) {
+    $(o).removeClass('user-unactive').addClass('user-active');
+    $(o).siblings().removeClass('user-active').addClass('user-unactive');
+    userInfo.id = id;
 }
 function confirm() {
     if (!$(".user-active")) {
         alert("请确认选择报名信息，如有错误，可在注册进行编辑！");
         return;
     }
+    var sPolitical = null;
     if (slen == 1) {
+        //如果默认只有一条信息，默认选择第一条
         $("input[name='name']").val(student[0].name);
+        $("input[name='idCard']").val(student[0].idCard);
+        $("input[name='college']").val(student[0].college);
         $("input[name='workUnitName']").val(student[0].workUnitName);
         $("input[name='postName']").val(student[0].postName);
+        $("input[name='badgeNum']").val(student[0].badgeNum);
+        $("input[name='mobile']").val(student[0].mobile);
+        $("#nativePlace").val(student[0].areaCode);
+        if(student[0].areaCode){
+            $("#nativePlacePicker").text(student[0].areaCodeName);
+        }
+        sPolitical = student[0].political;
+        sex = student[0].sex;
     } else {
-        $("input[name='name']").val(userInfo.name);
-        $("input[name='workUnitName']").val(userInfo.workUnitName);
-        $("input[name='postName']").val(userInfo.postName);
+        var tempObj = null;
+        for(var i=0; i<student.length; i++){
+            if(userInfo.id == student[i].id){
+                tempObj = student[i];
+            }
+        }
+        $("input[name='name']").val(tempObj.name);
+        $("input[name='workUnitName']").val(tempObj.workUnitName);
+        $("input[name='postName']").val(tempObj.postName);
+        $("input[name='idCard']").val(tempObj.idCard);
+        $("input[name='college']").val(tempObj.college);
+        $("input[name='badgeNum']").val(tempObj.badgeNum);
+        $("input[name='mobile']").val(tempObj.mobile);
+        sPolitical = tempObj.political;
+        sex = tempObj.sex;
+
+        $("#nativePlace").val(tempObj.areaCode);
+        if(student[0].areaCode){
+            $("#nativePlacePicker").text(tempObj.areaCodeName);
+        }
     }
+
+    if(sPolitical == "public"){
+        political = [{"id": "public", "value": "群众"}];
+    }else if(sPolitical == "party"){
+        political = [{"id": "party", "value": "党员"}];
+    }else if(sPolitical == "member"){
+        political = [{"id": "member", "value": "团员"}];
+    }
+
+    if(sPolitical){
+        $("#political").text(political[0].value);
+    }
+
+    var politicalArr = [{"id": "public", "value": "群众"}, {"id": "party", "value": "党员"}, {"id": "member", "value": "团员"}];
+
+    var politicalSelect = new MobileSelect({
+        trigger: '#political',
+        title: '政治面貌选择',
+        wheels: [
+            {data: politicalArr}
+        ],
+        position: [0], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+        transitionEnd: function (indexArr, data) {
+            political = data;
+        },
+        callback: function (indexArr, data) {
+            political = data;
+        }
+    });
+
+    if(sex == "1"){
+        $("#nan").attr("src", 'img/icon-sex.png');
+        $("#nv").attr("src", 'img/sex_unselect.png');
+    }else if(sex == "2"){
+        $("#nv").attr("src", 'img/icon-sex.png');
+        $("#nan").attr("src", 'img/sex_unselect.png');
+    }
+
 
     $("#nameModal").hide();
     $("body").removeClass("modalhide");

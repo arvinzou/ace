@@ -34,7 +34,9 @@ public class EnrollRoster extends BaseModel {
     private String areaCode;
 
     private String clsId;
-
+    /**
+     * 是否自动注册 0-否 ，1-是
+     */
     private String status;
 
     private String remark;
