@@ -2,6 +2,8 @@ package com.huacainfo.ace.partyschool.model;
 
 import com.huacainfo.ace.common.model.BaseModel;
 
+import java.util.Date;
+
 /**
  * @Auther: Arvin
  * @Date: 2019/1/10 15:58
@@ -35,7 +37,7 @@ public class AttResultVo extends BaseModel {
     /**
      * 打卡时间
      */
-    private String dealTime;
+    private Date dealTime;
 
 
     public String getCustomerName() {
@@ -86,11 +88,12 @@ public class AttResultVo extends BaseModel {
         this.termName = termName;
     }
 
-    public String getDealTime() {
+
+    public Date getDealTime() {
         return dealTime;
     }
 
-    public void setDealTime(String dealTime) {
+    public void setDealTime(Date dealTime) {
         this.dealTime = dealTime;
     }
 }

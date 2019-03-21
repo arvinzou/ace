@@ -13,12 +13,7 @@
 <div class="headInfo">
     <div class="content">
         <div class="userInfo" id="userInfo">
-            <div class="headImg">
-                <img src="http://suo.im/4C98Qc">
-            </div>
-            <div class="name">
-                你的名字
-            </div>
+
         </div>
         <div class="listBtn" id="testNumber">
 
