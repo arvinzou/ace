@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.taa.dao.RoadDangerReportDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.RoadDangerReport">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="dptId" jdbcType="VARCHAR" property="dptId"/>
+        <result column="longitude" jdbcType="VARCHAR" property="longitude"/>
+        <result column="latitude" jdbcType="VARCHAR" property="latitude"/>
+        <result column="roadSectionId" jdbcType="VARCHAR" property="roadSectionId"/>
+        <result column="roadManId" jdbcType="VARCHAR" property="roadManId"/>
+        <result column="type" jdbcType="CHAR" property="type"/>
+        <result column="reportDate" jdbcType="TIMESTAMP" property="reportDate"/>
+        <result column="salesDate" jdbcType="TIMESTAMP" property="salesDate"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="reason" jdbcType="VARCHAR" property="reason"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.taa.model.RoadDangerReport">
+        <result column="takeSteps" jdbcType="LONGVARCHAR" property="takeSteps"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, userId, areaCode, dptId, longitude, latitude, roadSectionId, roadManId, type, 
+    reportDate, salesDate, status, remark, createDate, createUserId, createUserName, 
+    lastModifyDate, lastModifyUserId, lastModifyUserName,address,reason
+  </sql>
+    <sql id="Blob_Column_List">
+    takeSteps
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from road_danger_report
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from road_danger_report
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.taa.model.RoadDangerReport">
+        <selectKey resultType="java.lang.String" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        insert into road_danger_report (id, userId, areaCode,
+        dptId, longitude, latitude,
+        roadSectionId, roadManId, type,
+        reportDate, salesDate, status,
+        remark, createDate, createUserId,
+        createUserName, lastModifyDate, lastModifyUserId,
+        lastModifyUserName, takeSteps,address,reason)
+        values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR},
+        #{dptId,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR},
+        #{roadSectionId,jdbcType=VARCHAR}, #{roadManId,jdbcType=VARCHAR}, #{type,jdbcType=CHAR},
+        #{reportDate,jdbcType=TIMESTAMP}, #{salesDate,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR},
+        #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+        #{lastModifyUserName,jdbcType=VARCHAR}, #{takeSteps,jdbcType=LONGVARCHAR}, #{address,jdbcType=VARCHAR},
+        #{reason,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.taa.model.RoadDangerReport">
+    update road_danger_report
+    set userId = #{userId,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      dptId = #{dptId,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      roadSectionId = #{roadSectionId,jdbcType=VARCHAR},
+      roadManId = #{roadManId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      reportDate = #{reportDate,jdbcType=TIMESTAMP},
+      salesDate = #{salesDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      takeSteps = #{takeSteps,jdbcType=LONGVARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.RoadDangerReport">
+    update road_danger_report
+    set userId = #{userId,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      dptId = #{dptId,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      roadSectionId = #{roadSectionId,jdbcType=VARCHAR},
+      roadManId = #{roadManId,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      reportDate = #{reportDate,jdbcType=TIMESTAMP},
+      salesDate = #{salesDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      takeSteps = #{takeSteps,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap extends="BaseResultMap" id="VoResultMap" type="com.huacainfo.ace.taa.vo.RoadDangerReportVo">
+
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+    rdr.id, rdr.userId, rdr.areaCode, rdr.dptId, rdr.longitude, rdr.latitude, rdr.roadSectionId, rdr.roadManId, rdr.type,
+    rdr.reportDate, rdr.salesDate, rdr.status, rdr.remark, rdr.createDate, rdr.createUserId, rdr.createUserName,
+    rdr.lastModifyDate, rdr.lastModifyUserId, rdr.lastModifyUserName,rdr.address,rdr.reason,rdr.takeSteps,
+    u.name as uname ,de.department_name as departmentName,a.name as roadManName,b.name as roadSectionName,
+     p.name as areaName
+  </sql>
+
+    <sql id="From_Statement">
+    FROM road_danger_report rdr
+    LEFT JOIN portal.users u ON  rdr.userId =u.user_id
+    left join portal.department de on u.department_id=de.department_id
+    left join road_man a on rdr.roadManId=a.id
+    left join road_section b on rdr.roadSectionId=b.id
+    left join portal.province p on rdr.areaCode = p.code
+  </sql>
+
+    <sql id="Where_Condition">
+        where rdr.status <![CDATA[ <> ]]> 0
+        <if test='condition.officeAdmin!=null and condition.deptId!=""'>
+            <choose>
+                <when test='condition.officeAdmin =="1"'>
+                </when>
+                <otherwise>
+                    and rdr.createUserId = #{condition.officeAdmin,jdbcType=VARCHAR}
+                </otherwise>
+            </choose>
+        </if>
+        <if test='condition.keyword!=null and condition.keyword!=""'>
+            and (u.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            or de.department_name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            or a.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            or b.name like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%') )
+        </if>
+
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and rdr.status =#{condition.status,jdbcType=CHAR}
+        </if>
+        <if test="condition.areaCode !=null and condition.areaCode !=&quot;&quot;">
+            and rdr.areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            and rdr.userId =#{condition.userId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY rdr.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where rdr.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExit" resultType="int">
+    select count(*)
+    from
+    road_danger_report where
+    id=#{id}
+  </select>
+
+    <update id="updateStatus">
+    update road_danger_report set status=#{status} where id=#{id}
+  </update>
+
+    <update id="updateReason">
+    update road_danger_report set status=#{status},reason = #{reason} where id=#{id}
+  </update>
+
+    <select id="selectUserRole" parameterType="java.lang.String" resultType="map">
+    select role_id from  portal.users_role  r where user_id =#{userId}
+
+  </select>
+
+    <select id="selectUserRoadRole" parameterType="java.lang.String" resultType="map">
+     select r.id ,r.user_id,role_id,create_time from  portal.users_role  r where user_id =#{userId}  and  role_id='979b86e2-96ad-4d6b-bf54-0e1feea32ff3'
+  </select>
+
+
+</mapper>
