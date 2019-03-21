@@ -55,10 +55,6 @@ function regist(){
     if(isEmpty(idCard)){
         isCardNo(idCard);
     }
-    if(!isEmpty(political)){
-        alert("政治面貌不能为空！");
-        return;
-    }
     if(!isEmpty(workUnitName)){
         alert("单位全称不能为空！");
         return;
