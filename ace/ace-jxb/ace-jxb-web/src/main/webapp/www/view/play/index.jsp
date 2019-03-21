@@ -10,9 +10,6 @@
 		<title>课程详情</title>
 		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<link rel="stylesheet" type="text/css" href="../common/css/star-rating.css" />
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-			  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
-			  crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script type="text/javascript" src="../../common/js/loader.js"></script>
 	</head>
@@ -82,74 +79,43 @@
 	</script>
 
 	<script id="audioTemp" type="text/template">
-		<%--<div class="row">--%>
-		<%--<div class="col-xs-6 col-md-6">--%>
-		<%--<a href="javascript:void(0);" onclick="showCatalog('\${data.courseId}','\${data.partId}');">--%>
-		<%--<p><img src="img/icon_catalog.png" class="icon" style="margin-left: 0.08rem"/></p>--%>
-		<%--<p class="audioTitle">目录</p>--%>
-		<%--</a>--%>
-		<%--</div>--%>
-		<%--<div class="col-xs-6 col-md-6" style="text-align: right">--%>
-		<%--<a href="javascript:void(0);" onclick="showScripts('\${data.id}');">--%>
-		<%--<p><img src="img/icon_script.png" class="icon"/></p>--%>
-		<%--<p class="audioTitle">文稿</p>--%>
-		<%--</a>--%>
-		<%--</div>--%>
-		<%--</div>--%>
-		<%--<div class="row">--%>
-		<%--<div class="col-xs-12 col-md-12">--%>
-		<%--<audio src="\${data.mediUrl}" controls="controls" style="width: 100%;" currentTime duration>--%>
-		<%--您的设备不支持音频播放--%>
-		<%--</audio>--%>
-		<%--</div>--%>
-		<%--</div>--%>
-
-
-		<div class="" id="player">
-			<div class="p_left">
-				<a href="javascript:void(0);" onclick="showCatalog('\${data.courseId}','\${data.partId}');">
-					<p><img src="img/icon_catalog.png" class="icon" style="margin-left: 0.08rem"/></p>
-					<p class="audioTitle">目录</p>
-				</a>
-			</div>
-			<div class="p_center">
-
-
-				<div class="audio green-audio-player">
-					<div class="loading">
-						<div class="spinner"></div>
-					</div>
-					<div class="play-pause-btn">
-						<img src="img/play.png" class="play-pause-icon" id="playPause">
-					</div>
-
-					<div class="controls">
-						<span class="current-time">0:00</span>
-						<div class="slider" data-direction="horizontal">
-							<div class="progress" style="width: 0%;">
-								<div class="pin" id="progress-pin" data-method="rewind"></div>
-							</div>
+		<div class="music-play">
+			<div class="containers">
+				<div class="controls">
+					<span class="playTime">00:00</span>
+					<div class="slider">
+						<div class="progress">
+							<div class="pin"></div>
 						</div>
-                        <span class="total-time">0:00</span>
+					</div>
+					<span class="totalTime">00:00</span>
+				</div>
+				<div class="buttons">
+					<div class="bilateral">
+						<a href="javascript:void(0);" onclick="showCatalog('\${data.courseId}','\${data.partId}');">
+							<p><img src="img/icon_catalog.png" class="icon" style="margin-left: 0.08rem"/></p>
+							<p class="audioTitle">目录</p>
+						</a>
 					</div>
 
-					<audio crossorigin="" preload="auto">
-						<source src="\${data.mediUrl}" type="audio/mpeg">
-					</audio>
+					<div class="middle">
+						<i class="fas fa-play playPause"></i>
+						<i class="fas fa-pause"></i>
+						<i class="fas fa-circle-notch fa-spin"></i>
+					</div>
+					<div class="bilateral">
+						<a href="javascript:void(0);" onclick="showScripts('\${data.id}');">
+							<p><img src="img/icon_script.png" class="icon"/></p>
+							<p class="audioTitle">文稿</p>
+						</a>
+					</div>
 				</div>
 
-
 			</div>
-			<div class="p_right">
-				<a href="javascript:void(0);" onclick="showScripts('\${data.id}');">
-					<p><img src="img/icon_script.png" class="icon"/></p>
-					<p class="audioTitle">文稿</p>
-				</a>
-			</div>
-
+			<audio>
+				<source src="\${data.mediUrl}" type="audio/mp3">
+			</audio>
 		</div>
-
-
 	</script>
 
 <script id="commentListTemp" type="text/template">

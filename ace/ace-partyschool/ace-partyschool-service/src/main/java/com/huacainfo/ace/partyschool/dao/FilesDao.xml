@@ -59,10 +59,10 @@
         LEFT JOIN classes c on c.id=f.classesId
         left join (
         select s.id,s.`name` from student s
-        UNION ALL
+        UNION
         select t.id,t.`name` from teacher t
-        UNION ALL
-        select t.user_id,t.name from portal.users t where t.user_level ='1' and t.cur_syid='partyschool'
+        UNION
+        select t.user_id,t.name from portal.users t
         )m on f.publisher = m.id
     </sql>
     <sql id="Where_Condition">
@@ -85,10 +85,10 @@
         LEFT JOIN classes c on c.id=f.classesId
         left join (
         select s.id,s.`name` from student s
-        UNION ALL
+        UNION
         select t.id,t.`name` from teacher t
-        UNION ALL
-        select t.user_id,t.name from portal.users t where t.user_level ='1' and t.cur_syid='partyschool'
+        UNION
+        select t.user_id,t.name from portal.users t
         )m on f.publisher = m.id
         where f.id = #{id,jdbcType=VARCHAR}
     </select>
@@ -211,10 +211,10 @@
         FROM files f
         left join (
         select s.id,s.`name` from student s
-        UNION ALL
+        UNION
         select t.id,t.`name` from teacher t
-        UNION ALL
-        select t.user_id,t.name from portal.users t where t.user_level ='1' and t.cur_syid='partyschool'
+        UNION
+        select t.user_id,t.name from portal.users t
         )m on f.publisher = m.id
         where 1=1
         <if test="condition.classesId !=null and condition.classesId !=&quot;&quot;">
