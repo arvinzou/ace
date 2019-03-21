@@ -392,7 +392,7 @@ Page({
       sectionEndName: app.globalData.endName,
       modalSeclect: e.currentTarget.dataset.index,
       distance: e.currentTarget.dataset.distance
-    })
+    });
 
   },
   initDateTime: function() {

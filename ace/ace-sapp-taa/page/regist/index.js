@@ -62,6 +62,12 @@ Page({
           }
       );
   },
+  /**
+   * 注册提交
+   * 根据警号id获取信息
+   * 接口地址：/taa/www/register/findRegisterInfo  (后缀) 参数：copNo = 0009
+   * 
+   */
   formSubmit: function(e){
       var name = e.detail.value.name;
       var mobile = e.detail.value.mobile;
