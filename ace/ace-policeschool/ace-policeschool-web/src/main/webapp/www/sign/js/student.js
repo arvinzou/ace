@@ -13,6 +13,23 @@ $(function () {
         $("#nameModal").hide();
         $("body").removeClass("modalhide");
     });
+
+    var mobileSelect = new MobileSelect({
+        trigger: '#nativePlacePicker',
+        title: '请选择地区',
+        wheels : city,
+        // position:[0, 1, 0, 1, 0],
+        transitionEnd:function(indexArr, data){
+            console.log(data)
+            // mobileSelect.setTitle(data[0].value+data[1].value+data[2].value)
+            $("#nativePlace").val(data[2].id);
+        },
+        callback:function(indexArr, data){
+            console.log(data);
+            $("#nativePlace").val(data[2].id);
+        }
+    });
+
     initClassList();
 });
 function selectSex(obj, value) {
@@ -297,6 +314,10 @@ function confirm() {
         $("input[name='postName']").val(student[0].postName);
         $("input[name='badgeNum']").val(student[0].badgeNum);
         $("input[name='mobile']").val(student[0].mobile);
+        $("#nativePlace").val(student[0].areaCode);
+        if(student[0].areaCode){
+            $("#nativePlacePicker").text(student[0].areaCodeName);
+        }
         sPolitical = student[0].political;
         sex = student[0].sex;
     } else {
@@ -315,6 +336,11 @@ function confirm() {
         $("input[name='mobile']").val(tempObj.mobile);
         sPolitical = tempObj.political;
         sex = tempObj.sex;
+
+        $("#nativePlace").val(tempObj.areaCode);
+        if(student[0].areaCode){
+            $("#nativePlacePicker").text(tempObj.areaCodeName);
+        }
     }
 
     if(sPolitical == "public"){

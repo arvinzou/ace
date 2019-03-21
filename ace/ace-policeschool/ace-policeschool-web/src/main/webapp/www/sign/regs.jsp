@@ -9,6 +9,8 @@
     <jsp:include page="../common/common.jsp"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/www/common/css/mobileSelect.css"/>
+    <link rel="stylesheet" type="text/css" href="css/cityselect.css"/>
+
 </head>
 <body>
 <div class="index">
@@ -41,7 +43,8 @@
         </div>
         <div class="form-content form-border">
             <label class="form-label">籍贯</label>
-            <input class="form-input"  type="text" name="nativePlace" placeholder="请输入籍贯"/>
+            <input type="hidden" name="nativePlace" id="nativePlace">
+            <div class="form-select" type="text" id="nativePlacePicker"><span class="unselect">请选择籍贯</span></div>
         </div>
         <div class="form-content form-border">
             <label class="form-label">政治面貌</label>
@@ -57,16 +60,16 @@
             <label class="form-label">职务</label>
             <input class="form-input" minlength="3" type="text" name="postName" placeholder="请输入职务名称"/>
         </div>
-        <div class="form-content">
+        <div class="form-content form-border">
             <label class="form-label">班次</label>
             <div class="form-select" type="text" id="classes"><span class="unselect">请选择班次</span></div>
             <img src="img/icon_select.png" class="redirect"/>
         </div>
-        <div class="form-content">
+        <div class="form-content form-border">
             <label class="form-label">毕业院校</label>
             <input class="form-input"  type="text" name="college" placeholder="请输入毕业院校"/>
         </div>
-        <div class="form-content">
+        <div class="form-content form-border">
             <label class="form-label">警号</label>
             <input class="form-input"  type="text" name="badgeNum" placeholder="请输入警号"/>
         </div>
@@ -75,29 +78,6 @@
             <input class="form-input"  type="text" name="mobile" placeholder="请输入手机号码"/>
         </div>
     </div>
-
-    <%--<div class="form-title">账号密码设置</div>
-
-    <div class="form-box">
-        <div class="form-content form-border">
-            <label class="form-label">手机号</label>
-            <input class="form-input" maxlength="11" type="number" name="mobile" placeholder="请输入手机号码"/>
-        </div>
-        <div class="form-content form-border">
-            <label class="form-label">设置密码</label>
-            <input class="form-input" minlength="4" type="password" name="pwd" placeholder="请设置登录密码（4位以上)"/>
-        </div>
-        <div class="form-content">
-            <label class="form-label">确认密码</label>
-            <input class="form-input" minlength="4" type="password" name="password" placeholder="请再次输入登录密码"/>
-        </div>
-    </div>
-
-    <div class="tips">
-        <img class="tips-img" src="img/tips.png"/>
-        <div class="tips-content">该手机号和密码用于登录此平台</div>
-    </div>--%>
-
     <div class="footer">
         <img src="img/regist.png" onclick="regist();"/>
     </div>
@@ -193,5 +173,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/mobileSelect.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery.base64.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
+<script type="text/javascript" src="js/city.js"></script>
+<script type="text/javascript" src="js/city.js"></script>
 <script type="text/javascript" src="js/student.js"></script>
 </html>
