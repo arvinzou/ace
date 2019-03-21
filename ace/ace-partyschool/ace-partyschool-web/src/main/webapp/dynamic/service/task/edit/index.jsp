@@ -57,10 +57,11 @@
         <div class="form-group">
             <label class="col-md-2 control-label">
                 测试介绍
+                <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-6">
-                <input type="text" class="form-control" name="introduce" value="\${data.o.introduce}" maxlength="200"
-                       placeholder="请输入测试介绍（建议字数在14个字以内，不超过200个字)">
+                <textarea style="resize: none" class="form-control" name="introduce" maxlength="200"
+                          placeholder="请输入测试介绍（建议字数在14个字以内，不超过200个字)">\${data.o.introduce}</textarea>
                 <span class="help-block"></span>
             </div>
         </div>
@@ -68,6 +69,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label">
                 测评方案
+                <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-6">
                 <select style="width: 100%;height: 34px" class="js-example-basic-single js-example-basic-single1"
@@ -77,7 +79,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+<%--        <div class="form-group">
             <label class="col-md-2 control-label">
                 开始时间
             </label>
@@ -95,7 +97,7 @@
                 <input type="text" class="form-control" name="endTime" value="\${data.o.endTime}" placeholder="请输入结束时间">
                 <span class="help-block"></span>
             </div>
-        </div>
+        </div>--%>
     </div>
     <div class="form-actions">
         <div class="row">

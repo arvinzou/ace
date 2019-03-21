@@ -186,7 +186,7 @@ jQuery(function ($) {
     findTraAccList({});
     $('#leftDiv').mouseover(setClass);
     $('#Map').mouseover(moveClass);
-    $('#Header').mouseover(moveClasss);
+    $('#Header').mouseover(moveClass);
     $('.accident_info').mouseover(clearTime);
     $('.accident_info').mouseout(setTimeOut);
     $('.active_seach').click(searchRoadName);

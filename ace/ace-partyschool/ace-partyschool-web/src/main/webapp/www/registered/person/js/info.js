@@ -55,6 +55,8 @@ function renderPage(IDom, data, tempId) {
 }
 
 function exit(){
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
     $.ajax({
         url: contextPath+ "/www/sign/logout",
         type:"post",
@@ -87,7 +89,6 @@ function bindWx(){
     var o={};
     o.account=account.toString();
     $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
-    $("#bindForm").submit();
 }
 
 function initPolitical(){

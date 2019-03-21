@@ -9,7 +9,7 @@ window.onload = function () {
 }
 
 function initPage() {
-    $("input[name=startTime]").datetimepicker({
+/*    $("input[name=startTime]").datetimepicker({
         format: 'yyyy-mm-dd hh:ii:ss',
         language: 'zh-CN',
         weekStart: 1,
@@ -44,7 +44,7 @@ function initPage() {
         event.stopPropagation();
         var endTime = event.date;
         $("input[name=startTime]").datetimepicker('setEndDate', endTime);
-    });
+    });*/
 
     $(".js-example-basic-single1").select2({
         ajax: {
@@ -94,13 +94,21 @@ function initEvents() {
             $(element).valid();
         },
         rules: {
-            name: {required: true, maxlength: 50}, testId: {required: true, maxlength: 50}
+            name: {required: true, maxlength: 50},
+            introduce: {required: true, maxlength: 200},
+            testId: {required: true, maxlength: 50}
         },
         messages: {
             name: {
                 required: "请输入任务名称",
                 maxlength: "任务名称字符长度不能超过50"
-            }, testId: {
+            },
+            introduce: {
+                required: "请输入任务名称",
+                maxlength: "任务名称字符长度不能超过200"
+            },
+
+            testId: {
                 required: "请输入test主键",
                 maxlength: "test主键字符长度不能超过50"
             }

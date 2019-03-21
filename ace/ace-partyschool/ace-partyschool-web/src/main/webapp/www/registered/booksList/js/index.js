@@ -1,4 +1,4 @@
-
+var server = "https://www.cdswdx.top";
 $(function(){
     $.ajax({
         url: contextPath+ "/www/sign/getAcctInfo",
@@ -14,6 +14,7 @@ $(function(){
                    findList(cardNo);
                }else{
                    alert("您还没有绑定卡，查询不到借阅信息！");
+                   $(".defaultTips").show();
                }
             }else {
                 if(result.info){
@@ -33,26 +34,34 @@ $(function(){
 
 function findList(cardNo){
     $.ajax({
-        url:  "/api/www/api/findBorrowList",
+        url:  server+"/api/www/api/findBorrowList",
         type:"post",
         async:false,
         data:{
-            lCardNo: cardNo
+            lCardNo: cardNo,
+            startNum: 0,
+            endNum: 999
         },
         success:function(result){
             if(result.status == 0) {
                 var list = result.data;
-                var unReturnList = [];
-                var resurnedList = [];
-                for(var i=0; i<list.length; i++){
-                    if(list[i].Signs == "未还"){
-                        unReturnList.push(list[i]);
-                    }else{
-                        resurnedList.push(list[i]);
+                if(list.length > 0){
+                    $(".defaultTips").hide();
+                    var unReturnList = [];
+                    var resurnedList = [];
+                    for(var i=0; i<list.length; i++){
+                        if(list[i].Signs == "未还"){
+                            unReturnList.push(list[i]);
+                        }else{
+                            resurnedList.push(list[i]);
+                        }
                     }
+                    renderPage('unreturn', unReturnList, 'ulist-tpl');
+                    renderPage('return', resurnedList, 'list-tpl');
+                }else{
+                    $(".defaultTips").show();
                 }
-                renderPage('unreturn', unReturnList, 'ulist-tpl');
-                renderPage('return', resurnedList, 'list-tpl');
+
             }else {
                 if(result.info){
                     alert(result.info);

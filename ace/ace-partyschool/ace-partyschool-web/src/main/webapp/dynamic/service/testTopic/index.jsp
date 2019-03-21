@@ -89,7 +89,7 @@
     {@each data as item, index}
     <tr>
         <td> \${item.content}</td>
-        <td> \${item.type}</td>
+        <td> \${parseStatus(item.type)}</td>
         <td>
             ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"

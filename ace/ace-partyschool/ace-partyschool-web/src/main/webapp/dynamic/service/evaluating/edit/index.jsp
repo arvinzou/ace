@@ -53,6 +53,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label">
                 介绍
+                <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-10">
                 <input type="text" class="form-control" value="\${data.introduce}" name="introduce"
@@ -110,12 +111,12 @@
                 <%--{@/if}--%>
             <%--</div>--%>
 
-
             <div class="form-group">
                 <input type="text" class="hide" name="evaluationIndex[\${index}].id" value="\${item.id}">
                 <div class="row">
                     <label class="col-md-2 control-label">
                         指标名称
+                        <span class="required" aria-required="true"> * </span>
                     </label>
                     <div class="col-md-4">
                         <input type="text" class="form-control" value="\${item.name}"
@@ -128,6 +129,7 @@
 
                     <label class="col-md-1 control-label">
                         指标分值
+                        <span class="required" aria-required="true"> * </span>
                     </label>
                     <div class="col-md-1">
                         <input type="text" class="form-control scores" name="evaluationIndex[\${index}].score"
@@ -140,6 +142,7 @@
                 <div class="row">
                     <label class="col-md-2 control-label">
                         指标内容
+                        <span class="required" aria-required="true"> * </span>
                     </label>
                     <div class="col-md-6">
                         <textarea value="\${item.introduce}" name="evaluationIndex[\${index}].introduce" id="" cols="30"

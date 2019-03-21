@@ -65,7 +65,9 @@ function getNotDoneTestList() {
     $.getJSON(url,function (rst) {
         if(rst.status==0){
             // renderPage('testNumber',rst.data,'tpl_testNumber')
-            renderPage('testList',rst.data.list,'tpl_notDoneTest')
+            renderPage('testList',rst.data.list,'tpl_notDoneTest');
+            $('#notDoneTest').text(rst.data.notDoneSize);
+            $('#doneTest').text(rst.data.doneSize);
         }
         else {
             alert("获取用户信息失败！");

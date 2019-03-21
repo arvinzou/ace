@@ -256,7 +256,7 @@ page {
     line-height: 40rpx;
     text-align: center;
     position: relative;
-    margin-left: 40rpx;
+    margin-left: 10rpx;
 }
 
 .typeTag::before {

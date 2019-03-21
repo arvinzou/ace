@@ -270,7 +270,10 @@ function delByIds(ids, id) {
     });
 }
 
-function previewMap(id) {
+function previewMap(id,num) {
+    if(num<1){
+        alert("当前路段未采集，无法查看")
+    }
     window.open(contextPath + "/dynamic/service/roadSection/map.jsp?id=" + id);
 }
 

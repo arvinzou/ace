@@ -209,6 +209,7 @@
         <include refid="Base_Column_List"/>
         from enroll_roster t
         where 1=1
+        and t.`status` = '1'
         and t.areaCode is not NULL
         and t.clsId is not null
         and t.idCard is not null

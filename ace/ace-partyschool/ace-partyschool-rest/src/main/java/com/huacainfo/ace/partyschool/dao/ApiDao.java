@@ -19,7 +19,7 @@ public interface ApiDao {
     /**
      * 查询客户列表
      *
-     * @return List<Map<String, Object>>
+     * @return List<Map < String, Object>>
      */
     List<Map<String, Object>> findCustomerList();
 
@@ -64,7 +64,8 @@ public interface ApiDao {
      * @param lCardNo 借阅证号
      * @return TeacherFinRsVo
      */
-    TeacherFinRsVo findTeacherBalance(String lCardNo);
+    TeacherFinRsVo findTeacherBalance(@Param("lCardNo") String lCardNo,
+                                      @Param("tableName") String tableName);
 
     /**
      * 查询 学员 年分内刷卡累计次数

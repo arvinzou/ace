@@ -36,4 +36,7 @@ public interface SignDao {
 
 
     int isExistByAccount(@Param("account") String account);
+
+    Users findUsersByMobile(@Param("mobile") String mobile,
+                            @Param("sysId") String sysId);
 }

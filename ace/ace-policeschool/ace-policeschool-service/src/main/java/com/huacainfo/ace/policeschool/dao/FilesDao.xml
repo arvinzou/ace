@@ -59,10 +59,10 @@
         LEFT JOIN classes c on c.id=f.classesId
         left join (
         select s.id,s.`name` from student s
-        UNION ALL
+        UNION
         select t.id,t.`name` from teacher t
-        UNION ALL
-        select t.user_id,t.name from portal.users t where t.user_level ='1' and t.cur_syid='policeschool'
+        UNION
+        select t.user_id,t.name from portal.users t
         )m on f.publisher = m.id
     </sql>
     <sql id="Where_Condition">
@@ -81,16 +81,16 @@
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
-        from files t
-        LEFT JOIN classes c on c.id=t.classesId
+        from files f
+        LEFT JOIN classes c on c.id=f.classesId
         left join (
         select s.id,s.`name` from student s
-        UNION ALL
+        UNION
         select t.id,t.`name` from teacher t
-        UNION ALL
-        select t.user_id,t.name from portal.users t where t.user_level ='1' and t.cur_syid='policeschool'
+        UNION
+        select t.user_id,t.name from portal.users t
         )m on f.publisher = m.id
-        where t.id = #{id,jdbcType=VARCHAR}
+        where f.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -171,50 +171,17 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
-    <resultMap id="FilesResultMapVo" type="com.huacainfo.ace.policeschool.vo.FilesVo">
-        <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="category" jdbcType="CHAR" property="category"/>
-        <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="url" jdbcType="VARCHAR" property="url"/>
-        <result column="pushDate" jdbcType="TIMESTAMP" property="pushDate"/>
-        <result column="publisher" jdbcType="VARCHAR" property="publisher"/>
-        <result column="status" jdbcType="CHAR" property="status"/>
-        <result column="classesId" jdbcType="CHAR" property="classesId"/>
-        <association property="teacher" column="teacher" javaType="com.huacainfo.ace.policeschool.model.Teacher">
-            <id column="t_id" jdbcType="VARCHAR" property="id"/>
-            <result column="t_name" jdbcType="VARCHAR" property="name"/>
-            <result column="t_mobile" jdbcType="VARCHAR" property="mobile"/>
-            <result column="t_idCard" jdbcType="CHAR" property="idCard"/>
-            <result column="t_workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
-            <result column="postName" jdbcType="VARCHAR" property="postName"/>
-            <result column="introduce" jdbcType="VARCHAR" property="introduce"/>
-            <result column="t_category" jdbcType="VARCHAR" property="category"/>
-            <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
-        </association>
-
-        <association property="student" column="student" javaType="com.huacainfo.ace.policeschool.model.Student">
-            <id column="s_id" jdbcType="VARCHAR" property="id"/>
-            <result column="pid" jdbcType="VARCHAR" property="pid"/>
-            <result column="s_name" jdbcType="VARCHAR" property="name"/>
-            <result column="s_mobile" jdbcType="VARCHAR" property="mobile"/>
-            <result column="s_idCard" jdbcType="CHAR" property="idCard"/>
-            <result column="political" jdbcType="VARCHAR" property="political"/>
-            <result column="s_workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
-            <result column="postName" jdbcType="VARCHAR" property="postName"/>
-            <result column="classId" jdbcType="VARCHAR" property="classId"/>
-        </association>
-    </resultMap>
-
-    <select id="findFileListAboutMe" parameterType="java.lang.String" resultMap="FilesResultMapVo">
+    <select id="findFileListAboutMe" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        f.id, f.category, f.classesId, f.title, f.url, f.pushDate, f.publisher, f.status,
-        t.id as t_id, t.idCard as t_idCard, t.mobile as t_mobile, t.name as t_name,t.workUnitName as t_workUnitName,
-        t.introduce, t.category as t_category, t.photoUrl, t.postName,
-        s.id as s_id ,s.idCard as s_idCard, s.mobile as s_mobile, s.name as s_name,s.workUnitName as s_workUnitName,
-        s.pid, s.political, s.classId
+        f.id, f.category, f.classesId, f.title, f.url, f.pushDate, f.publisher, f.status,ifnull(m.`name`,'') as publisherName
         FROM files f
-        LEFT JOIN policeschool.teacher t ON t.id=f.publisher
-        LEFT JOIN policeschool.student s ON s.id=f.publisher
+        left join (
+        select s.id,s.`name` from student s
+        UNION
+        select t.id,t.`name` from teacher t
+        UNION
+        select t.user_id,t.name from portal.users t
+        )m on f.publisher = m.id
         where 1=1
         <if test="condition.classesId !=null and condition.classesId !=&quot;&quot;">
             and f.classesId=#{condition.classesId,jdbcType=VARCHAR}

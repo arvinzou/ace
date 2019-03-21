@@ -335,23 +335,23 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public MessageResponse releaseTask(String id, String[] userIds,UserProp userProp,HttpServletRequest request) throws Exception {
+    public MessageResponse releaseTask(String id,UserProp userProp) throws Exception {
         Notice notice=new Notice();
         TaskVo taskVo=this.taskDao.selectVoByPrimaryKey(id);
         if(CommonUtils.isBlank(taskVo)){
             return new MessageResponse(ResultCode.FAIL,"任务丢失");
         }
         //"+request.getHeader("host")+"
-        PropertyUtil.getProperty("fastdfs_server");
-        notice.setId(id);
+        notice.setId(GUIDUtil.getGUID());
         notice.setTitle(taskVo.getName());
-        notice.setContent("<p>"+taskVo.getIntroduce()+" 点击下方链接开始：<a href=\"http://localhost/partyschool/www/registered/test/test.jsp?testId="+taskVo.getTid()+"&taskId="+id+"\" target=\"_blank\" class=\"\">"+taskVo.getTname()+"</a></p>");
-        notice.setCategory("1");
+        notice.setContent("<p>"+taskVo.getIntroduce()+" 点击下方链接开始：<a href=\""+PropertyUtil.getProperty("fastdfs_server")+"partyschool/www/registered/test/test.jsp?testId="+taskVo.getTid()+"&taskId="+id+"\" target=\"_blank\" class=\"\">"+taskVo.getTname()+"</a></p>");
+        notice.setCategory("3");
         notice.setStatus("1");
         notice.setPublisher(userProp.getName());
         notice.setPushDate(new java.util.Date());
+        taskVo.setStatus("2");
         this.noticeDao.insert(notice);
-        this.noticeStatusService.insertNoticeStatus(id,userIds,userProp);
+        this.taskDao.updateByPrimaryKey(taskVo);
         this.dataBaseLogService.log("跟新状态", "任务管理", id, id, "任务管理", userProp);
         return new MessageResponse(0, "成功！");
     }

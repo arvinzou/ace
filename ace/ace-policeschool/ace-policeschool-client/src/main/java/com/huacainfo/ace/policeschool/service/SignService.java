@@ -104,10 +104,11 @@ public interface SignService {
      * 修改密码
      *
      * @param account 账户
+     * @param mobile  手机号码
      * @param newPwd  新密码
      * @return ResultResponse
      */
-    ResultResponse updatePwd(String account, String newPwd);
+    ResultResponse updatePwd(String account, String mobile, String newPwd);
 
     /**
      * 注册portal用户

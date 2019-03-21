@@ -1,6 +1,7 @@
 var regType = null;
 var lat = null;
 var longt = null;
+var btnName = "上午签到"
 $(function(){
     findList();
     initUserData();
@@ -49,7 +50,7 @@ function getConfig(){
         data:{"sysId": "partyschool", "url": window.location.href},
         success:function(result){
             if(result.status == 0) {
-                getLocation(result.data);
+                locate(result.data);
             }else {
                 alert(result.info);
             }
@@ -60,7 +61,7 @@ function getConfig(){
     });
 }
 
-function getLocation(data){
+function locate(data){
     wx.config({
         debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
         appId: data.appId, // 必填，
@@ -86,17 +87,19 @@ function getLocation(data){
                 });
                 var marker = new qq.maps.Marker({
                     position: center,
-                    map: map
+                    map: map,
+                    content: '常德市委党校'
                 });
                 var cirle = new qq.maps.Circle({
                     map: map,
                     center: center,
-                    radius: 100,
+                    radius: 500,
                     strokeWeight:1
                 });
                 var marker = new qq.maps.Marker({
                     position: locate,
-                    map: map
+                    map: map,
+                    content: '我'
                 });
             }
         });
@@ -117,25 +120,28 @@ function renderPage(IDom, data, tempId) {
  * 点击签到
  */
 function record(){
-    $.ajax({
-        url: contextPath+ "/www/att/record",
-        type:"post",
-        async:false,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data:{
-            json: JSON.stringify({
-                longitude: longt,
-                latitude: lat
-            })
-        },
-        success:function(result){
-            alert("签到成功！");
-            findList();
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+    var con=confirm("是否确定签到?");
+    if(con==true){
+        $.ajax({
+            url: contextPath+ "/www/att/record",
+            type:"post",
+            async:false,
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data:{
+                json: JSON.stringify({
+                    longitude: longt,
+                    latitude: lat
+                })
+            },
+            success:function(result){
+                alert("签到成功！");
+                findList();
+            },
+            error:function(){
+                alert("系统服务内部异常！");
+            }
+        });
+    }
 }
 
 /**
@@ -159,36 +165,34 @@ function findList(){
             dateTimeStr: time
         },
         success:function(result){
-            console.log(result);
-            var num = result.data.am.length + result.data.pm.length + result.data.night.length;
-            renderPage('recordList', result.data, 'record-tpl');
-            $("#count").text("今日已签到"+num+"/5");
-            var date = new Date();
-            var hour = date.getHours();
-            if(hour < 12){
-                if(result.data.am.length >1){
-                    $("#amBtn").hide();
-                    $("#pmBtn").show();
-                    $("#nightBtn").hide();
+            if(result.status == 0){
+
+                var num = result.data.am.length + result.data.pm.length + result.data.night.length;
+                renderPage('recordList', result.data, 'record-tpl');
+                $("#count").text("今日已签到"+num+"/5");
+                var date = new Date();
+                var hour = date.getHours();
+                if(hour < 12){
+                    //上午签到
+                    if(result.data.am.length <1){
+                        $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签到</p></div>');
+                    }else if(result.data.am.length >0 && result.data.am.length<2){
+                        $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签退</p></div>');
+                    }
+                }else if(hour >=12 && hour < 19){
+                   //下午签到
+                    if(result.data.pm.length <1){
+                        $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签到</p></div>');
+                    }else if(result.data.pm.length >0 && result.data.pm.length<2){
+                        $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签退</p></div>');
+                    }
                 }else{
-                    $("#amBtn").show();
-                    $("#pmBtn").hide();
-                    $("#nightBtn").hide();
+                    //晚上签到
+                    if(result.data.night.length <1){
+                        $("#nightBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">晚上签到</p></div>');
+                    }
                 }
-            }else if(hour >=12 && hour < 19){
-                if(result.data.pm.length >1){
-                    $("#amBtn").hide();
-                    $("#pmBtn").hide();
-                    $("#nightBtn").show();
-                }else{
-                    $("#amBtn").hide();
-                    $("#pmBtn").show();
-                    $("#nightBtn").hide();
-                }
-            }else{
-                $("#amBtn").hide();
-                $("#pmBtn").hide();
-                $("#nightBtn").show();
+
             }
         },
         error:function(){

@@ -67,26 +67,6 @@
 
 </div>
 
-<div class="modal fade" role="dialog" id="modal-push">
-    <div class="modal-dialog" role="document" style="width: 70%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">发布</h4>
-            </div>
-            <div class="modal-body" id="tt">
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-                <button type="button" class="btn green" authority="false" id="btn-view-save">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -105,7 +85,9 @@
             ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
+            {@if item.status==1}
             <a href="javascript:push('\${item.id}')">发布</a>
+            {@/if}
             <a href="javascript:del('\${item.id}');">删除</a>
         </td>
     </tr>

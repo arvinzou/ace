@@ -59,7 +59,6 @@
                 <tr>
                     <th width="20%"> 测试名称</th>
                     <th width="30%"> 测试介绍</th>
-                    <th width="5%"> 状态</th>
                     <th width="15%">操作</th>
                 </tr>
                 </thead>
@@ -88,34 +87,10 @@
         <td>\${item.name}</td>
         <td>\${item.introduce}</td>
         <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-success">发布</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
-        </td>
-        <td>
             ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             ﻿<a href="addTopic/index.jsp?id=${param.id}&did=\${item.id}">添加试题</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-            {@if item.status==1}
-            <a href="javascript:release('\${item.id}');">发布</a>
-            {@else}
-            <a href="javascript:storage('\${item.id}');">暂存</a>
-            {@/if}
-            <a href="javascript:del('\${item.id}');">删除</a>
-
         </td>
     </tr>
     {@/each}
@@ -214,5 +189,4 @@
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
-<script src="js/test.js?v=${cfg.version}"></script>
 </html>

@@ -121,9 +121,7 @@ public class WSignController extends BisBaseController {
         if (!StringUtil.areNotEmpty(
                 data.getIsBindWx(),
                 data.getSignAcct(),
-                data.getSingPwd(),
-                data.getMobile(),
-                data.getMobile())) {
+                data.getSingPwd())) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
         //该手机号码已注册
@@ -158,8 +156,7 @@ public class WSignController extends BisBaseController {
         if (!StringUtil.areNotEmpty(
                 data.getIsBindWx(),
                 data.getSignAcct(),
-                data.getSingPwd(),
-                data.getMobile())) {
+                data.getSingPwd())) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
         //该手机号码已注册
@@ -280,9 +277,11 @@ public class WSignController extends BisBaseController {
         if (!codeCheck(mobile, code)) {
             return new ResultResponse(ResultCode.FAIL, "验证码输入有误");
         }
-        account = StringUtil.isEmpty(account) ? mobile : account;
+        if (StringUtil.isEmpty(mobile) && StringUtil.isEmpty(account)) {
+            return new ResultResponse(ResultCode.FAIL, "手机号码和账户不能同时为空");
+        }
 
-        return signService.updatePwd(account, newPwd);
+        return signService.updatePwd(account, mobile, newPwd);
     }
 
 

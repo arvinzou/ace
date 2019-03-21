@@ -70,17 +70,11 @@ function regist(){
         alert("性别不能为空！");
         return;
     }
-    if(!isEmpty(political)){
-        alert("政治面貌不能为空！");
-        return;
-    }
     if(!isEmpty(workUnit)){
         alert("处室不能为空！");
         return;
     }
     if(!isEmpty(postName)){
-        alert("职务职称不能为空！");
-        return;
     }else{
         if(postName.length < 3){
             alert("职务职称输入在3个字符以上！");
@@ -228,6 +222,4 @@ function bindWx(){
     var o={};
     o.account=account.toString();
     $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
-
-    $("#bindForm").submit();
 }

@@ -5,10 +5,8 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.access.AccessHelper;
 import com.huacainfo.ace.common.result.*;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.*;
+import com.huacainfo.ace.partyschool.constant.CommConstant;
 import com.huacainfo.ace.partyschool.dao.AttRecordDao;
 import com.huacainfo.ace.partyschool.dao.ZkAttDataDao;
 import com.huacainfo.ace.partyschool.model.AttRecord;
@@ -18,7 +16,9 @@ import com.huacainfo.ace.partyschool.vo.AttRecordQVo;
 import com.huacainfo.ace.partyschool.vo.AttRecordVo;
 import com.huacainfo.ace.partyschool.vo.ZkAttDataQVo;
 import com.huacainfo.ace.partyschool.vo.ZkAttDataVo;
+import com.huacainfo.ace.portal.model.Config;
 import com.huacainfo.ace.portal.model.Users;
+import com.huacainfo.ace.portal.service.ConfigService;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
 import org.slf4j.Logger;
@@ -45,6 +45,8 @@ public class AttRecordServiceImpl implements AttRecordService {
     private ZkAttDataDao zkAttDataDao;
     @Autowired
     private UsersService usersService;
+    @Autowired
+    private ConfigService configService;
 
     /**
      * @throws
@@ -97,14 +99,15 @@ public class AttRecordServiceImpl implements AttRecordService {
         if (user == null) {
             return new MessageResponse(ResultCode.FAIL, "用户数据丢失");
         }
-        //重复签到筛选条件
+        //判断是否在扫描半径之内
+        MessageResponse posCheck = isInside(o.getLatitude(), o.getLongitude());
+        if (posCheck.getStatus() == ResultCode.FAIL) {
+            return posCheck;
+        }
+
+        //存储对象
         o.setAttTimeStr(DateUtil.toStr(o.getAttTime()));
         o.setUserId(userProp.getUserId());
-//        int temp = this.attRecordDao.isExist(o);
-//        if (temp > 0) {
-//            return new MessageResponse(ResultCode.FAIL, "当日已签到");
-//        }
-
         o.setUserType(user.getUserLevel());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
@@ -114,6 +117,42 @@ public class AttRecordServiceImpl implements AttRecordService {
 
         return new MessageResponse(0, "签到成功！");
     }
+
+    /**
+     * 腾讯地图坐标
+     *
+     * @param lat 纬度
+     * @param lng 经度
+     * @return MessageResponse
+     */
+    private MessageResponse isInside(BigDecimal lat, BigDecimal lng) {
+        //参考中心点
+        Config center = configService.findByKey(CommConstant.SYS_ID, "att_ponit");
+        if (center == null) {
+            return new MessageResponse(ResultCode.FAIL, "未配置考勤中心点");
+        }
+        String[] centerArray = center.getConfigValue().split(",");
+        if (centerArray.length != 2) {
+            return new MessageResponse(ResultCode.FAIL, "考勤中心点配置有误");
+        }
+        double cLat = Double.parseDouble(centerArray[0]);
+        double cLng = Double.parseDouble(centerArray[1]);
+        //参考半径
+        Config radius = configService.findByKey(CommConstant.SYS_ID, "att_radius");
+        if (radius == null) {
+            return new MessageResponse(ResultCode.FAIL, "未配置考勤有效范围");
+        }
+        //距离计算
+        MapKit.Point centerPoint = new MapKit.Point(cLat, cLng);
+        MapKit.Point attPoint = new MapKit.Point(lat.doubleValue(), lng.doubleValue());
+        double distance = MapKit.getDistance(centerPoint, attPoint);
+        //
+        if (distance > Double.parseDouble(radius.getConfigValue())) {
+            return new MessageResponse(ResultCode.FAIL, "ERROR_POINT", "无效定位点");
+        }
+        return new MessageResponse(ResultCode.SUCCESS, "SUCCESS");
+    }
+
 
     /**
      * @throws

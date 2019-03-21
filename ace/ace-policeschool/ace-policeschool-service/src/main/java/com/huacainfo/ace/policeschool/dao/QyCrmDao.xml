@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.policeschool.dao.QyCrmDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.policeschool.model.QyCrm">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="ccNum" jdbcType="VARCHAR" property="ccNum"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, userId, ccNum, remark, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from qy_crm
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from qy_crm
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.QyCrm">
+    insert into qy_crm (id, userId, ccNum, status, remark, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{ccNum,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.QyCrm">
+    update qy_crm
+    set userId = #{userId,jdbcType=VARCHAR},
+      ccNum = #{ccNum,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.QyCrmVo">
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="badgeNum" jdbcType="VARCHAR" property="badgeNum"/>
+        <result column="idCard" jdbcType="CHAR" property="idCard"/>
+        <result column="nativePlace" jdbcType="VARCHAR" property="nativePlace"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="classId" jdbcType="VARCHAR" property="classId"/>
+        <result column="clsName" jdbcType="VARCHAR" property="clsName"/>
+        <result column="areaName" jdbcType="VARCHAR" property="areaName"/>
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        p.`name` as  areaName,
+        s.id as userId,
+        s.name, s.badgeNum, s.idCard, s.nativePlace,
+        s.mobile, s.classId, c.name as clsName,
+        IFNULL(t.status,'UNDO') as status,
+        t.id, t.ccNum, t.remark, t.createDate
+    </sql>
+    <sql id="From_Statement">
+        FROM qy_crm t
+        RIGHT JOIN student s on t.userId = s.id
+        left join classes c on s.classId = c.id
+        left join portal.province p on s.nativePlace = p.`code`
+
+    </sql>
+    <sql id="Where_Condition">
+        where s.`status`  = '1'
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where s.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc, s.name
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Student">
+        select count(1)
+        from qy_crm
+        where args = #{args,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateStatus" parameterType="java.lang.String">
+        update qy_crm
+        set status = #{status,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findUnSyncList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where s.`status` = '1'
+        and IFNULL(t.status,'UNDO') = 'UNDO'
+    </select>
+</mapper>

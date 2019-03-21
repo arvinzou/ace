@@ -229,16 +229,16 @@ function initJuicerMethod() {
  */
 function parseStatus(status) {
     switch (status) {
-        case '0':
-            return "删除";
         case '1':
-            return "暂存";
+            return "单选题";
         case '2':
-            return "待审";
+            return "多选题";
         case '3':
-            return "通过";
+            return "判断题";
         case '4':
-            return "驳回";
+            return "问答题";
+        case '5':
+            return "打分题";
         default:
             return "";
     }

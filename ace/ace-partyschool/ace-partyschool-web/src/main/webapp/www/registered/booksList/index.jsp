@@ -19,6 +19,10 @@
 			<div class="return" id="return">
 
 			</div>
+			<div class="defaultTips" style="display: none;">
+				<img src="img/default.png">
+				<p>暂无借阅记录哦~</p>
+			</div>
 		</div>
 
 		<!--未归还列表-->

@@ -138,6 +138,7 @@ function initClasses() {
                 } else {
                     if (regType == 'student') {
                         $("#classFilter").hide();
+                        fileList();
                         return;
                     }
                     $("#clazz").text(result.data[0].name);
@@ -152,6 +153,7 @@ function initClasses() {
                     var tempArr = [];
                     tempArr.push(classesArr[0])
                     clazz = tempArr;
+                    fileList();
                     var classesSelect = new MobileSelect({
                         trigger: '#clazz',
                         title: '党校班级选择',

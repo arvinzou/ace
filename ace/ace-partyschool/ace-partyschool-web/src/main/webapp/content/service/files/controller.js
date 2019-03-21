@@ -1,24 +1,7 @@
 var params = {category: '1'};
 jQuery(function ($) {
     //查询
-    $('#btn-search').on('click', function () {
-        $('#fm-search').ajaxForm({
-            beforeSubmit: function (formData, jqForm, options) {
-
-                $.each(formData, function (n, obj) {
-                    params[obj.name] = obj.value;
-                });
-                $.extend(params, {
-                    time: new Date()
-                });
-                jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                    page: 1,
-                    postData: params
-                }).trigger("reloadGrid");
-                return false;
-            }
-        });
-    });
+    $('#btn-search').on('click',searchActive);
     //添加
     $('#btn-view-add').on('click', function () {
         //加载导入
@@ -28,6 +11,25 @@ jQuery(function ($) {
     initEvents();
     initClassList();
 });
+
+
+function searchActive() {
+    $('#fm-search').ajaxSubmit({
+        beforeSubmit: function(formData, jqForm, options) {
+            $.each(formData, function(n, obj) {
+                params[obj.name] = obj.value;
+            });
+            $.extend(params, {
+                time: new Date()
+            });
+            jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+                page: 1,
+                postData: params
+            }).trigger("reloadGrid");
+            return false;
+        }
+    });
+}
 
 /*页面渲染*/
 function render(obj, data, tplId) {

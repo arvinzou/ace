@@ -22,12 +22,39 @@ $(function(){
      * 获取焦点
      */
 
-    $('.form-row input').blur(function(){
+    $('.login-input').blur(function(){
         $('.footer-box').removeClass("cancle-fixed");
     });
-    $('.form-row input').focus(function(){
+    $('.login-input').focus(function(){
         $('.footer-box').addClass("cancle-fixed");
     })
+
+    /**
+     * 检测到有缓存就自动登录
+     * @type {string | null}
+     */
+    var acct = localStorage.getItem("username");
+    var pwd = localStorage.getItem("password");
+    if(acct == undefined || acct == null || pwd == undefined || pwd == null){
+        return;
+    }
+    $.ajax({
+        url: contextPath+ "/www/sign/acctLogin",
+        type:"post",
+        async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data:{
+            acct:  acct,
+            pwd: pwd
+        },
+        success:function(result){
+            window.location.href = contextPath + '/www/registered/person/index.jsp';
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+
 });
 
 function login(){
@@ -52,6 +79,8 @@ function login(){
         },
         success:function(result){
             if(result.status == 0) {
+                localStorage.setItem("username",acct);
+                localStorage.setItem("password", pwd);
                window.location.href = contextPath + '/www/registered/person/index.jsp'
             }else {
                 if(result.info){

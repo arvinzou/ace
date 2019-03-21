@@ -90,7 +90,7 @@ function GetQueryString(name) {
 function getTestInfo() {
     var tid = GetQueryString('testId');
     var taid = GetQueryString('taskId');
-    var url = "http://localhost/partyschool/www/topic/findTopicFullList";
+    var url = contextPath+"/www/topic/findTopicFullList";
     var data = {
         testId: tid,
         taskId: taid

@@ -1,6 +1,8 @@
-import com.huacainfo.ace.common.plugins.sqlsever.SQLServerManager;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.model.AttRecord;
 import org.junit.Test;
+
+import java.math.BigDecimal;
 
 /**
  * @Auther: Arvin
@@ -12,7 +14,10 @@ public class CommonTest {
 
     @Test
     public void test() {
-
+        AttRecord r = new AttRecord();
+        r.setLatitude(new BigDecimal(29.015656).setScale(6, BigDecimal.ROUND_HALF_DOWN));
+        r.setLongitude(new BigDecimal(111.729777).setScale(6, BigDecimal.ROUND_HALF_DOWN));
+        System.out.println(r.toString());
     }
 
 

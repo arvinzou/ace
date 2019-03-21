@@ -26,7 +26,7 @@ App({
         openid: null,
         sectionId: null,
         sectionName: null,
-        tab: null,
+        tab: 1,
         startName: null,
         endName: null,
         cjSectionId: null,
