@@ -87,17 +87,19 @@ function locate(data){
                 });
                 var marker = new qq.maps.Marker({
                     position: center,
-                    map: map
+                    map: map,
+                    content: '常德市委党校'
                 });
                 var cirle = new qq.maps.Circle({
                     map: map,
                     center: center,
-                    radius: 100,
+                    radius: 500,
                     strokeWeight:1
                 });
                 var marker = new qq.maps.Marker({
                     position: locate,
-                    map: map
+                    map: map,
+                    content: '我'
                 });
             }
         });
