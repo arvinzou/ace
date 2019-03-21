@@ -1,11 +1,11 @@
 {
   "pages": [
     "page/navbar/index",
-    "page/index/index",
     "page/roadHiddenDanger/index",
     "page/roadHiddenDangerList/index",
     "page/roadHiddenDangerDetails/index",
     "page/accidentList/index",
+    "page/index/index",
     "page/regist/index",
     "page/userinfo/index",
     "page/me/index",
