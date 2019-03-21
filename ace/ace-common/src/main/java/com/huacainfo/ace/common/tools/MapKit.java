@@ -8,16 +8,17 @@ import org.slf4j.LoggerFactory;
  * @Date: 2019/1/19 10:38
  * @Description:
  */
-public class LatLonUtil {
+public class MapKit {
 
-    private LatLonUtil() {
-
-    }
+    private static Logger logger = LoggerFactory.getLogger(MapKit.class);
 
     private static final double PI = 3.14159265;
     private static final double EARTH_RADIUS = 6378137;
     private static final double RAD = Math.PI / 180.0;
-    private static Logger logger = LoggerFactory.getLogger(LatLonUtil.class);
+
+    private MapKit() {
+
+    }
 
 
     /**
@@ -68,7 +69,7 @@ public class LatLonUtil {
     }
 
     public static void main(String[] args) {
-        Point p1 = new Point(29.047770, 111.598520);
+        Point p1 = new Point(29.047335, 111.598359);
         Point p2 = new Point(29.015656, 111.729777);
         System.out.println(getDistance(p1, p2));
     }
@@ -90,7 +91,7 @@ public class LatLonUtil {
         double theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
         bd_lon = z * Math.cos(theta) + 0.0065;
         bd_lat = z * Math.sin(theta) + 0.006;
-        LatLonUtil.logger.info("tx:{} {}=>bd:{} {}", lat, lng, bd_lat, bd_lon);
+        MapKit.logger.info("tx:{} {}=>bd:{} {}", lat, lng, bd_lat, bd_lon);
 
         return new double[]{bd_lat, bd_lon};
     }
@@ -120,7 +121,7 @@ public class LatLonUtil {
         private double lat;//纬度
         private double lng;//经度
 
-        private Point(double lat, double lng) {
+        public Point(double lat, double lng) {
             this.lat = lat;
             this.lng = lng;
         }
