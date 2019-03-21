@@ -141,185 +141,6 @@ body{
 	font-size: 0.293333rem;
 }
 
-#player {
-	width: 8.266666rem;
-	height: 2.266666rem;
-	margin: 1.066666rem auto 0 auto;
-}
-
-#player > div {
-	float: left;
-	height: 2.266666rem;
-}
-
-#player .p_left {
-	padding-top: 0.426666rem;
-	width: 0.8rem;
-
-}
-
-#player .p_center {
-
-	width: 6.666666rem;
-
-}
-
-#player .p_right {
-	width: 0.8rem;
-	padding-top: 0.426666rem;
-
-}
-
-#player .audio.green-audio-player {
-	/*height: 56px;*/
-	/*box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.07);*/
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding-left: 24px;
-	padding-right: 24px;
-	border-radius: 4px;
-	user-select: none;
-	-webkit-user-select: none;
-	background-color: #fff;
-	position: relative;
-}
-
-#player .audio.green-audio-player .play-pause-btn {
-	/*display: none;*/
-	cursor: pointer;
-	margin: auto;
-}
-
-#player .audio.green-audio-player .loading {
-    margin: 0.35rem auto 0;
-	display: none;
-}
-
-#player .audio.green-audio-player .play-pause-btn img {
-	width: 1.666666rem;
-	height: 1.666666rem;
-}
-
-#player .audio.green-audio-player .spinner {
-    width: 1rem;
-    height: 1rem;
-    background-image: url(../img/loading.png);
-	background-size: cover;
-	background-repeat: no-repeat;
-    animation: spin 1s linear infinite;
-}
-
-#player .audio.green-audio-player .slider {
-	flex-grow: 1;
-	background-color: #D8D8D8;
-	cursor: pointer;
-	position: relative;
-}
-
-#player .audio.green-audio-player .slider .progress {
-	background-color: #0EC8C4;
-	border-radius: inherit;
-	position: absolute;
-	pointer-events: none;
-}
-
-#player .audio.green-audio-player .slider .progress .pin {
-    height: 0.4rem;
-    width: 0.1rem;
-    background-color: #49D0C5;
-	position: absolute;
-	pointer-events: all;
-	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.32);
-}
-
-#player .audio.green-audio-player .controls {
-	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
-	line-height: 18px;
-	color: #0EC8C4;
-	display: flex;
-	flex-grow: 1;
-	justify-content: space-between;
-	align-items: center;
-	top: -0.7rem;
-	position: absolute;
-	width: 8rem;
-	left: -0.8rem;
-}
-
-#player .audio.green-audio-player .controls .slider {
-	margin-left: 16px;
-	margin-right: 16px;
-	border-radius: 2px;
-    height: 0.1rem;
-}
-
-#player .audio.green-audio-player .controls .slider .progress {
-	width: 0;
-	height: 100%;
-	overflow: visible;
-}
-
-#player .audio.green-audio-player .controls .slider .progress .pin {
-	right: -0px;
-    top: -0.15rem;
-}
-
-#player .audio.green-audio-player .controls span {
-	cursor: default;
-}
-
-#player .audio.green-audio-player .volume {
-	position: relative;
-}
-
-#player .audio.green-audio-player .volume .volume-btn {
-	cursor: pointer;
-}
-
-#player .audio.green-audio-player .volume .volume-btn.open path {
-    fill: #49D0C5;
-}
-
-#player .audio.green-audio-player .volume .volume-controls {
-	width: 30px;
-	height: 135px;
-	background-color: rgba(0, 0, 0, 0.62);
-	border-radius: 7px;
-	position: absolute;
-	left: -3px;
-	bottom: 52px;
-	flex-direction: column;
-	align-items: center;
-	display: flex;
-}
-
-#player .audio.green-audio-player .volume .volume-controls.hidden {
-	display: none;
-}
-
-#player .audio.green-audio-player .volume .volume-controls .slider {
-	margin-top: 12px;
-	margin-bottom: 12px;
-	width: 6px;
-	border-radius: 3px;
-}
-
-#player .audio.green-audio-player .volume .volume-controls .slider .progress {
-	bottom: 0;
-	height: 100%;
-	width: 6px;
-}
-
-#player .audio.green-audio-player .volume .volume-controls .slider .progress .pin {
-	left: -5px;
-	top: -8px;
-}
-
-#player svg, #player img {
-	display: block;
-}
 
 @keyframes spin {
 	from {
@@ -329,6 +150,87 @@ body{
 		transform: rotateZ(1turn);
 	}
 }
+
+
+.music-play {
+	width: 9.2rem;
+	margin: auto;
+	padding: 0.4rem;
+	border-radius: 0.4rem;
+	color:#0EC8C4
+
+}
+
+
+.music-play p{
+	margin: 0px;
+}
+
+.music-play audio {
+	display: none;
+}
+
+.music-play .containers .bilateral {
+	font-size: 0.8rem;
+}
+
+.music-play .containers .middle {
+	font-size: 1.3rem;
+}
+
+.music-play .containers .buttons{
+	height: 1.5rem;
+}
+
+.music-play .containers .buttons,.music-play .containers .controls {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.music-play .containers .buttons .fa-pause,
+.music-play .containers .buttons .fa-circle-notch
+{
+	display: none;
+}
+
+.music-play .containers .controls{
+	font-size: 0.4rem;
+	margin-bottom: 0.2rem;
+	font-weight: 600;
+}
+
+.music-play .containers .controls .slider{
+	width: 5.8rem;
+	height: 0.2rem;
+	border-radius: 0.1rem;
+	background: #C0C0C0;
+	cursor: pointer;
+}
+.controls .slider .progress{
+	width: 0%;
+	height: 100%;
+	border-radius: inherit;
+	background: #0EC8C4;
+	position: relative;
+	pointer-events: none;
+	overflow: inherit;
+}
+
+.controls .slider .progress .pin{
+	position: absolute;
+	width: 0.4rem;
+	height: 0.4rem;
+	border-radius: 50%;
+	right: -0.2rem;
+	top:calc(50% - 0.2rem);
+	background: #0EC8C4;
+}
+
+/*!
+ * Font Awesome Free 5.8.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */.fa,.fas,.far,.fal,.fab{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;line-height:1}.fa-lg{font-size:1.33333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fas.fa-pull-left,.far.fa-pull-left,.fal.fa-pull-left,.fab.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fas.fa-pull-right,.far.fa-pull-right,.fal.fa-pull-right,.fab.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-ms-filter:"progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-rotate-90,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-flip-both{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;line-height:2em;position:relative;vertical-align:middle;width:2.5em}.fa-stack-1x,.fa-stack-2x{left:0;position:absolute;text-align:center;width:100%}.fa-stack-1x{line-height:inherit}.fa-stack-2x{font-size:2em}.fa-inverse{color:#fff}.fa-play:before{content:"\f04b"}.fa-pause:before{content:"\f04c"}.fa-circle-notch:before{content:"\f1ce"}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}@font-face{font-family:'Font Awesome 5 Brands';font-style:normal;font-weight:normal;font-display:auto;src:url("../webfonts/fa-brands-400.eot");src:url("../webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"),url("../webfonts/fa-brands-400.woff2") format("woff2"),url("../webfonts/fa-brands-400.woff") format("woff"),url("../webfonts/fa-brands-400.ttf") format("truetype"),url("../webfonts/fa-brands-400.svg#fontawesome") format("svg")}.fab{font-family:'Font Awesome 5 Brands'}@font-face{font-family:'Font Awesome 5 Free';font-style:normal;font-weight:400;font-display:auto;src:url("../webfonts/fa-regular-400.eot");src:url("../webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"),url("../webfonts/fa-regular-400.woff2") format("woff2"),url("../webfonts/fa-regular-400.woff") format("woff"),url("../webfonts/fa-regular-400.ttf") format("truetype"),url("../webfonts/fa-regular-400.svg#fontawesome") format("svg")}.far{font-family:'Font Awesome 5 Free';font-weight:400}@font-face{font-family:'Font Awesome 5 Free';font-style:normal;font-weight:900;font-display:auto;src:url("../webfonts/fa-solid-900.eot");src:url("../webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"),url("../webfonts/fa-solid-900.woff2") format("woff2"),url("../webfonts/fa-solid-900.woff") format("woff"),url("../webfonts/fa-solid-900.ttf") format("truetype"),url("../webfonts/fa-solid-900.svg#fontawesome") format("svg")}
+.fa,.fas{font-family:'Font Awesome 5 Free';font-weight:900}
 
 
 

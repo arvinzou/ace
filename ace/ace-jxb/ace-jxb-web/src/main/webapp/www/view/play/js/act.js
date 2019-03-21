@@ -66,7 +66,7 @@ function initCourseInfo(courseId){
                     //系列课程
                     findSourceInfo(sourceId);
                 }
-                palyer();
+                initPlay();
                 initCommentsList();
                 // stopLoad();
             }else {
@@ -187,172 +187,6 @@ function initCommentsList(){
 }
 
 
-function palyer() {
-    var audioPlayer = document.querySelector('.green-audio-player');
-    var playPause = audioPlayer.querySelector('#playPause');
-    var playpauseBtn = audioPlayer.querySelector('.play-pause-btn');
-    var loading = audioPlayer.querySelector('.loading');
-    var progress = audioPlayer.querySelector('.progress');
-    var sliders = audioPlayer.querySelectorAll('.slider');
-    var player = audioPlayer.querySelector('audio');
-    var currentTime = audioPlayer.querySelector('.current-time');
-    var totalTime = audioPlayer.querySelector('.total-time');
-    var speaker = audioPlayer.querySelector('#speaker');
-
-    var draggableClasses = ['pin'];
-    var currentlyDragged = null;
-
-    window.addEventListener('mousedown', function (event) {
-
-        if (!isDraggable(event.target)) return false;
-
-        currentlyDragged = event.target;
-        var handleMethod = currentlyDragged.dataset.method;
-
-        this.addEventListener('mousemove', window[handleMethod], false);
-
-        window.addEventListener('mouseup', function () {
-            currentlyDragged = false;
-            window.removeEventListener('mousemove', window[handleMethod], false);
-        }, false);
-    });
-    player.addEventListener('waiting', makePlay);
-
-    player.addEventListener('canplay', canPlay);
-    playpauseBtn.addEventListener('click', togglePlay);
-    player.addEventListener('timeupdate', updateProgress);
-    player.addEventListener('volumechange', updateVolume);
-    player.addEventListener('loadedmetadata', function () {
-        totalTime.textContent = formatTime(player.duration);
-    });
-
-    player.addEventListener('ended', function () {
-        $('#playPause').prop('src', 'img/play.png');
-        player.currentTime = 0;
-    });
-       
-    $('.slider').click(rewind);
-    // sliders.forEach(function (slider) {
-    //     console.log(slider);
-    //     var pin = slider.querySelector('.pin');
-    //     slider.addEventListener('click', window[pin.dataset.method]);
-    // });
-
-
-    function isDraggable(el) {
-        var canDrag = false;
-        var classes = Array.from(el.classList);
-        draggableClasses.forEach(function (draggable) {
-            if (classes.indexOf(draggable) !== -1) canDrag = true;
-        });
-        return canDrag;
-    }
-
-    function inRange(event) {
-        var rangeBox = getRangeBox(event);
-        var rect = rangeBox.getBoundingClientRect();
-        var direction = rangeBox.dataset.direction;
-        if (direction == 'horizontal') {
-            var min = rangeBox.offsetLeft;
-            var max = min + rangeBox.offsetWidth;
-            if (event.clientX < min || event.clientX > max) return false;
-        } else {
-            var min = rect.top;
-            var max = min + rangeBox.offsetHeight;
-            if (event.clientY < min || event.clientY > max) return false;
-        }
-        return true;
-    }
-
-    function updateProgress() {
-        var current = player.currentTime;
-        var percent = current / player.duration * 100;
-        progress.style.width = percent + '%';
-
-        currentTime.textContent = formatTime(current);
-    }
-
-    function updateVolume() {
-        volumeProgress.style.height = player.volume * 100 + '%';
-        if (player.volume >= 0.5) {
-            speaker.attributes.d.value = 'M14.667 0v2.747c3.853 1.146 6.666 4.72 6.666 8.946 0 4.227-2.813 7.787-6.666 8.934v2.76C20 22.173 24 17.4 24 11.693 24 5.987 20 1.213 14.667 0zM18 11.693c0-2.36-1.333-4.386-3.333-5.373v10.707c2-.947 3.333-2.987 3.333-5.334zm-18-4v8h5.333L12 22.36V1.027L5.333 7.693H0z';
-        } else if (player.volume < 0.5 && player.volume > 0.05) {
-            speaker.attributes.d.value = 'M0 7.667v8h5.333L12 22.333V1L5.333 7.667M17.333 11.373C17.333 9.013 16 6.987 14 6v10.707c2-.947 3.333-2.987 3.333-5.334z';
-        } else if (player.volume <= 0.05) {
-            speaker.attributes.d.value = 'M0 7.667v8h5.333L12 22.333V1L5.333 7.667';
-        }
-    }
-
-    function getRangeBox(event) {
-        var rangeBox = event.target;
-        var el = currentlyDragged;
-        if (event.type == 'click' && isDraggable(event.target)) {
-            rangeBox = event.target.parentElement.parentElement;
-        }
-        if (event.type == 'mousemove') {
-            rangeBox = el.parentElement.parentElement;
-        }
-        return rangeBox;
-    }
-
-    function getCoefficient(event) {
-        var slider = getRangeBox(event);
-        var rect = slider.getBoundingClientRect();
-        var K = 0;
-        if (slider.dataset.direction == 'horizontal') {
-
-            var offsetX = event.offsetX;
-            var width = slider.clientWidth;
-            K = offsetX / width;
-        } else if (slider.dataset.direction == 'vertical') {
-
-            var height = slider.clientHeight;
-            var offsetY = event.clientY - rect.top;
-            K = 1 - offsetY / height;
-        }
-        return K;
-    }
-
-    function rewind(event) {
-        player.currentTime = player.duration * getCoefficient(event);
-    }
-
-    function changeVolume(event) {
-        if (inRange(event)) {
-            player.volume = getCoefficient(event);
-        }
-    }
-
-    function formatTime(time) {
-        var min = Math.floor(time / 60);
-        var sec = Math.floor(time % 60);
-        return min + ':' + (sec < 10 ? '0' + sec : sec);
-    }
-    var playNum = 0;
-    function togglePlay() {
-        if(playNum<1){
-            addPlayNums(courseId);
-        }
-        playNum++;
-        if (player.paused) {
-            $('#playPause').prop('src', 'img/stop.png');
-            player.play();
-        } else {
-            $('#playPause').prop('src', 'img/play.png');
-            player.pause();
-        }
-    }
-
-    function makePlay(c) {
-        playpauseBtn.style.display = 'none';
-        loading.style.display = 'block';
-    }
-
-    function canPlay(e) {
-        playpauseBtn.style.display = 'block';
-        loading.style.display = 'none';
-    }
-}
 
 /**
  * 增加点播量
@@ -378,4 +212,108 @@ function addPlayNums(courseId){
             alert("系统服务内部异常！");
         }
     });
+}
+
+function initPlay() {
+    var audioPlayer = document.querySelector('.music-play');
+    var audioButton = audioPlayer.querySelector('.buttons');
+    var audioControl = audioPlayer.querySelector('.controls');
+    var playPauseBtn = audioButton.querySelector('.playPause');
+    var waitBtn = audioButton.querySelector('.fa-circle-notch');
+    var totalTime = audioControl.querySelector('.totalTime');
+    var slider = audioControl.querySelector('.slider');
+    var playTime = audioControl.querySelector('.playTime');
+    var progress = audioControl.querySelector('.progress');
+    var media = audioPlayer.querySelector('audio');
+    playPauseBtn.addEventListener('click', togglePlay);
+    slider.addEventListener('click', changeProgress);
+    slider.addEventListener('touchmove', touchmove, false);
+    media.addEventListener('canplay', canPlay);
+    media.addEventListener('waiting', waiting);
+    media.addEventListener('loadedmetadata', loadedmetadata);
+    media.addEventListener('progress', progress);
+    media.addEventListener('timeupdate', updateProgress);
+    media.addEventListener('ended', ended);
+
+    function touchmove(e) {
+        var _x = e.touches[0].pageX;
+        var progressW=this.clientWidth;
+        var p=_x-this.getBoundingClientRect().left;
+        if(p<0){
+            p=0;
+        }
+        if(p>progressW){
+            p=progressW;
+        }
+        activeProgress(p,progressW);
+    }
+
+    function activeProgress(x,y){
+        var scale = x/y;
+        media.currentTime = parseInt(media.duration * scale);
+        var percent = scale * 100;
+        progress.style.width = percent + '%';
+    }
+
+    function changeProgress(e) {
+        activeProgress(e.offsetX,slider.offsetWidth)
+    }
+
+
+    function togglePlay() {
+        if(media.paused) {
+            playIcon();
+            media.play();
+        } else {
+            pausedIcon();
+            media.pause();
+        }
+
+    }
+    function playIcon(){
+        playPauseBtn.classList.remove("fa-play");
+        playPauseBtn.classList.add("fa-pause");
+    }
+    function pausedIcon(){
+        playPauseBtn.classList.add("fa-play");
+        playPauseBtn.classList.remove("fa-pause");
+    }
+
+    function togglePause() {
+        media.pause();
+    }
+
+    function canPlay() {
+        playPauseBtn.style.display = "block";
+        waitBtn.style.display = "none";
+    }
+
+    function loadedmetadata(e) {
+        totalTime.innerText = formatTime(media.duration);
+    }
+
+
+
+    function waiting() {
+        playPauseBtn.style.display = "none";
+        waitBtn.style.display = "block";
+    }
+
+    function updateProgress(e) {
+        var current = media.currentTime;
+        var percent = current / media.duration * 100;
+        progress.style.width = percent + '%';
+        playTime.textContent = formatTime(current);
+    }
+
+    function formatTime(time) {
+        var min = Math.floor(time / 60);
+        var sec = Math.floor(time % 60);
+        return   (min < 10 ? '0' + min : min) + ':' + (sec < 10 ? '0' + sec : sec);
+    }
+    function ended(){
+        media.currentTime=0;
+        progress.style.width = '0%';
+        pausedIcon();
+    }
 }
