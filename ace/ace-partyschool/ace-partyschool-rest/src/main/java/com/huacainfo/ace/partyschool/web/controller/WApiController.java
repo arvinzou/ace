@@ -3,6 +3,7 @@ package com.huacainfo.ace.partyschool.web.controller;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.partyschool.model.AttResultVo;
 import com.huacainfo.ace.partyschool.model.StudentFinVo;
 import com.huacainfo.ace.partyschool.model.TeacherFinRsVo;
@@ -72,9 +73,11 @@ public class WApiController {
         view.put("night", night);
         String hour;
         int iHour;
+        String time;
         for (AttResultVo item : data) {
-            if (item.getDealTime().length() == 19) {
-                hour = item.getDealTime().substring(11, 13);
+            time = DateUtil.toStr(item.getDealTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
+            if (time.length() == 19) {
+                hour = time.substring(11, 13);
                 iHour = Integer.parseInt(hour);
                 if (iHour < 12) {//上午
                     am = view.get("am");
