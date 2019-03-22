@@ -5,7 +5,6 @@ window.onload = function () {
         $(".breadcrumb").append("<li><span>编辑路况上报</span></li>");
         initForm();
         initEvents();
-        initJuicerMethod();
         appendUploadImageBtn();
     });
 }
@@ -60,26 +59,23 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
-//juicer自定义函数
-function initJuicerMethod() {
-    juicer.register('rsd', rsd);
-}
+
 
 function initPage() {
     //   initEditor();
 //   initUpload();
-    /* $("input[name=reportDate]").datetimepicker({
-         format: 'yyyy-mm-dd hh:ii:ss',
-         language: 'zh-CN',
-         weekStart: 1,
-         todayBtn: 1, //显示‘今日’按钮
-         autoclose: 1,
-         todayHighlight: 1,
-         startView: 2,
-         minView: 'hour', //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
-         clearBtn: true, //清除按钮
-         forceParse: 0
-     });*/
+    /*  $("input[name=reportDate]").datetimepicker({
+          format: 'yyyy-mm-dd hh:ii:ss',
+          language: 'zh-CN',
+          weekStart: 1,
+          todayBtn: 1, //显示‘今日’按钮
+          autoclose: 1,
+          todayHighlight: 1,
+          startView: 2,
+          minView: 'hour', //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+          clearBtn: true, //清除按钮
+          forceParse: 0
+      });*/
     $('input[name=reportDate]').focus(function () {
         $(this).blur(); //不可输入状态
     });
@@ -158,13 +154,13 @@ function initPage() {
 
 function initEvents() {
     /*表单验证*/
-    $("#fm-edit").validate({
+    /*$("#fm-edit").validate({
         onfocusout: function (element) {
             $(element).valid();
         },
         rules: {},
         messages: {}
-    });
+    });*/
     /*监听表单提交*/
     $('#fm-edit').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
