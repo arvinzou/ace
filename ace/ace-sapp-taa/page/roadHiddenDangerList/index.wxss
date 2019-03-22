@@ -1,0 +1,176 @@
+.index {
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+}
+
+.accident-top {
+  display: flex;
+  align-items: center;
+  background-color: #f5f6f7;
+  padding-left: 30rpx;
+  margin: 0 30rpx;
+  border-radius: 10rpx;
+}
+
+.vertical-line {
+  width: 2rpx;
+  height: 28rpx;
+  border-left: 2rpx solid #d7d9df;
+  margin-left: 40rpx;
+  vertical-align: middle;
+}
+
+.icon-search {
+  margin-left: 50rpx;
+}
+
+.search-road-input {
+  flex: 1;
+  font-size: 26rpx;
+  color: #abaeb9;
+  margin-left: 20rpx;
+}
+
+.picker {
+  width: auto;
+  height: 100rpx;
+  line-height: 100rpx;
+  float: left;
+}
+
+.city-area {
+  font-size: 26rpx;
+  color: #abaeb9;
+}
+
+.drop-down {
+  width: auto;
+  height: 100rpx;
+  float: left;
+  margin-left: 23rpx;
+}
+
+.drop-down image {
+  width: 14rpx;
+  height: 8rpx;
+  margin-top: 46rpx;
+}
+
+/* 路况隐患列表 */
+
+.road-ul {
+  margin-top: 40rpx;
+  padding: 0 30rpx;
+  padding-bottom: 20rpx;
+}
+
+.road-ul>.li {
+  padding: 40rpx 32rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+  box-shadow: 0rpx 0rpx 24rpx 12rpx rgba(239, 239, 239, 0.5);
+}
+
+.road-ul>.li+.li {
+  margin-top: 18rpx;
+}
+
+.road-ul>.li .up {
+  font-size: 32rpx;
+  color: #373f53;
+  font-weight: bold;
+  width: 480rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.road-ul>.li .middle {
+  display: flex;
+  align-items: center;
+  height: 24rpx;
+  line-height: 24rpx;
+  margin-top: 24rpx;
+}
+
+.road-ul>.li .middle>text:nth-of-type(1) {
+  flex: 0 0 59%;
+  font-size: 24rpx;
+  color: #abaeb9;
+  border-right: 1px solid #d7d9df;
+}
+
+.road-ul>.li .middle>text:nth-of-type(2) {
+  flex: 0 0 41%;
+  font-size: 24rpx;
+  color: #abaeb9;
+  text-align: right;
+}
+
+.road-ul>.li>.down {
+  display: flex;
+  align-items: center;
+  height: 54rpx;
+  line-height: 54rpx;
+  margin-top: 30rpx;
+}
+
+.road-ul>.li>.down>view {
+  width: 134rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  font-size: 26rpx;
+  text-align: center;
+  border-radius: 28rpx;
+}
+
+.road-ul>.li>.down>view+view {
+  margin-left: 14rpx;
+}
+
+.road-ul>.li>.down>view.edit {
+  background-color: #f5f6ff;
+  border: 2rpx solid #d2d5ff;
+  color: #2430e3;
+}
+
+.road-ul>.li>.down>view.revoke {
+  background-color: #FFF9F9;
+  border: 2rpx solid #FBE2E0;
+  color: #FE4C46;
+}
+
+.road-ul>.li>.down>.time {
+  flex: 1;
+  margin-left: 24rpx;
+  font-size: 22rpx;
+  text-align: right;
+  color: #d7d9df;
+}
+.pending{
+  color: #FF9906;
+  background-color: #FFF8EE;
+  border:2rpx solid #FFEBB8;
+}
+.register{
+ color: #2430E3;
+ border: 2rpx solid #D2D5FF;
+ background-color: #F5F6FF;
+}
+.cancel-number{
+  color: #ABAEB9;
+  border: 2rpx solid #E5E5E5;
+  background-color: #F8F8F8;
+}
+.go-back{
+  color: #F65246;
+  background-color: #FFF9F9;
+  border: 2rpx solid #FBE2E0;
+}
+.no-data-tip{
+  padding-top: 20rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #999;
+}

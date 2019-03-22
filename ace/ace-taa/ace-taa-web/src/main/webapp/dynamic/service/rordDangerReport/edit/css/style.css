@@ -1,0 +1,59 @@
+#images > ul {
+    list-style: none;
+    padding: 0px;
+}
+
+
+#images > ul li {
+    width: 200px;
+    height: 200px;
+    margin: 0 10px 10px;
+    float: left;
+}
+
+#images > ul li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+#image > ul {
+    list-style: none;
+    padding: 0px;
+}
+
+
+#image > ul li {
+    width: 200px;
+    height: 200px;
+    margin: 0 10px 10px;
+    float: left;
+}
+
+#image > ul li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+#changeimage > ul {
+    list-style: none;
+    padding: 0px;
+}
+
+
+#changeimage > ul li {
+    width: 200px;
+    height: 200px;
+    margin: 0 10px 10px;
+    float: left;
+}
+
+#changeimage > ul li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+}

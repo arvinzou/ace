@@ -8,8 +8,10 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.taa.service.TraAccService;
 import com.huacainfo.ace.taa.vo.TraAccQVo;
 import com.huacainfo.ace.taa.vo.TraAccVo;
@@ -28,6 +30,9 @@ public class WTraAccController extends TaaBaseController {
 
     @Autowired
     private TraAccService traAccService;
+
+    @Autowired
+    private AuthorityService authorityService;
 
     /**
      * 获取事故报表 --小程序端展示
@@ -154,6 +159,15 @@ public class WTraAccController extends TaaBaseController {
      */
     @RequestMapping("/repealReport")
     public ResultResponse repealReport(String uid, String traAccId) throws Exception {
+
+        SingleResult<UserProp> rst = this.authorityService.getCurUserPropByOpenId(this.getCurUserinfo().getUnionid());
+
+        if (rst.getStatus() == 0) {
+            UserProp userProp = rst.getValue();
+
+        } else {
+            return null;
+        }
         if (CommonUtils.isBlank(traAccId)) {
             return new ResultResponse(ResultCode.FAIL, "事故主键" + "不能为空！");
         }

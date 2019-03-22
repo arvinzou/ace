@@ -8,5 +8,6 @@ var config = {
     loginUrl: `${server}/portal/www/authority.do`,
     checkImageUrl: `${server}/society/www/captcha/image.do`,
     uploadUrl: `${server}/portal/www/upload.do`,
+    companyId:'0002'
 };
 module.exports = config

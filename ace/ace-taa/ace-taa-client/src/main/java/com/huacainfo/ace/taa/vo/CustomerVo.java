@@ -2,6 +2,8 @@ package com.huacainfo.ace.taa.vo;
 
 import com.huacainfo.ace.common.model.BaseModel;
 
+import java.util.List;
+
 /**
  * @Auther: Arvin
  * @Date: 2019/1/21 09:33
@@ -41,6 +43,19 @@ public class CustomerVo extends BaseModel {
      * 已采集路段数量
      */
     private String sectionCount;
+
+    /**
+     * 用户所有权限
+     */
+    private List<String> roleList;
+
+    public List<String> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<String> roleList) {
+        this.roleList = roleList;
+    }
 
     public String getAccCount() {
         return accCount;

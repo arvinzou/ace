@@ -634,6 +634,7 @@ public class TraAccServiceImpl implements TraAccService {
      */
     @Override
     public List<Map<String, Object>> getTraAccListTx(TraAccQVo condition) throws Exception {
+
         List<Map<String, Object>> list = this.traAccDao.getTraAccList(condition);
         return list;
     }
