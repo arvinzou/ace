@@ -85,7 +85,7 @@ Page({
     that.setData({
       sectionName: '请选择路段'
     });
-
+    that.getLocation();
   },
   
   /**
@@ -554,58 +554,20 @@ Page({
       });
     } else {
       that.initDict();
-      that.getLocation();
-      that.initUserData(); // 重置后从定向首页，初始化用户信息     
-     
-        that.setData({
-          sectionName: app.globalData.sectionName,
-          sectionId: app.globalData.sectionId,
-          roadManName: app.globalData.roadManName,
-          roadManId: app.globalData.roadManId,
-          sectionStartName: app.globalData.startName,
-          sectionEndName: app.globalData.endName,
-          distance: app.globalData.distance
-        });
-
+      that.setData({
+        sectionName: app.globalData.sectionName,
+        sectionId: app.globalData.sectionId,
+        roadManName: app.globalData.roadManName,
+        roadManId: app.globalData.roadManId,
+        sectionStartName: app.globalData.startName,
+        sectionEndName: app.globalData.endName,
+        distance: app.globalData.distance
+     });
     }
-    //设置采集标志，判断是否显示隐藏开始，暂停，结束按钮
-    that.setData({
-      isCJ: app.globalData.isCJ
-    });
 
   },
 
-  /**
-   * 获取地址
-   */
-  getLocate: function() {
-    var o = {};
-    var that = this;
-    var time = util.formatDateTime(new Date());
-    wx.getLocation({
-      type: 'gcj02',
-      success: function(res) {
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-        o = {
-          longitude: res.longitude,
-          latitude: res.latitude,
-          gatherTime: time
-        }
-        var pointList = that.data.polyline[0].points;
-        pointList.push(o);
-        that.setData({
-          ['polyline[0].points']: pointList,
-          latitude: res.latitude,
-          longitude: res.longitude
-        });
-      },
-    });
-    return o;
-  },
 
-
-  
   /**
    * 生命周期函数--监听页面隐藏
    */

@@ -43,10 +43,6 @@
                     <cover-view class='carType-cancel' bindtap='cancelCarTypes'>取消</cover-view>
                     <cover-view class='carType-confirm' bindtap='confirmCarTypes'>确定</cover-view>
                 </cover-view>
-                <!--<cover-view class='carType-title'>
-                    <cover-view  class='modal-title01'>请选择车型</cover-view>
-                    <cover-view  class='modal-title02'>(多选)</cover-view>
-                </cover-view>-->
                 <cover-view class='carType-items'>
                     <block wx:for='{{carTypes}}' wx:for-index="index" wx:for-item="item" wx:key="ads">
                         <cover-view class='carType-item'  wx:if='{{item.CODE!=""}}' data-id='{{item.CODE}}' data-obj='{{item}}' data-index='{{index}}' data-checked='{{item.checkFlag}}' bindtap='selectCarType'>
