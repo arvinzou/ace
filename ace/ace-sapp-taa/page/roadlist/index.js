@@ -148,13 +148,16 @@ Page({
             }
         }, 1000)
     },
-    scrollToview(e) {
+    scrollToview:function(e) {
         var id = e.target.dataset.id
         this.setData({
             toView: id
         });
 
     },
+    /**
+     * 选择路长
+     */
     selectRoadMan: function(e){
         var that = this;
         var roadManId = e.currentTarget.dataset.id;

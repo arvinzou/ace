@@ -13,15 +13,15 @@ Page({
     nNum: 0,
     yNum: 0,
     pageType: null,
-    isCJ: false,  // 是否采集
-    tabIsShow:true, //选显卡是否显示
+    isCJ: false, // 是否采集
+    tabIsShow: true, //选显卡是否显示
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('选项卡数字：'+ options.tab);
+    console.log('选项卡数字：' + options.tab);
     var that = this;
     var tabIndex = options.tab;
     if (tabIndex) {
@@ -32,7 +32,7 @@ Page({
         wx.setNavigationBarTitle({
           title: '已采集路段',
         });
-      }else{
+      } else {
         wx.setNavigationBarTitle({
           title: '待采集路段',
         });
@@ -58,7 +58,7 @@ Page({
     var index = e.target.dataset.index;
     that.setData({
       tab: e.target.dataset.index,
-      pageType:'cj'
+      pageType: 'cj'
     });
     if (index == 0) {
       wx.setNavigationBarTitle({
@@ -140,7 +140,9 @@ Page({
     var that = this;
     console.log(e);
     var roadSectionId = app.globalData.collectionId = e.currentTarget.dataset.id;
-    var roadSectionName = e.currentTarget.dataset.name;
+    var roadSectionName = e.currentTarget.dataset.name; //路段起点和结尾
+    var startName = e.currentTarget.dataset.startname;
+    var endName = e.currentTarget.dataset.endname;
     var skipType = that.data.pageType;
     console.log(skipType)
     if (skipType == 'kb') {
@@ -150,28 +152,35 @@ Page({
       app.globalData.tab = 0;
       app.globalData.roadManId = e.currentTarget.dataset.roadmanid;
       app.globalData.roadManName = e.currentTarget.dataset.roadmanname;
-      var startName = e.currentTarget.dataset.startname;
-      var endName = e.currentTarget.dataset.endname;
-     app.globalData.startName = startName;
-     app.globalData.endName = endName;
+      app.globalData.startName = startName;
+      app.globalData.endName = endName;
       wx.navigateBack({
         changed: true
       });
     } else if (skipType == 'cj') {
       console.log(app.globalData.collectionId)
-        //路段采集
-        var startName = e.currentTarget.dataset.startname;
-        var endName = e.currentTarget.dataset.endname;
-        app.globalData.startName = startName;
-        app.globalData.endName = endName;
-        app.globalData.cjSectionId = roadSectionId;
-        app.globalData.isCJ = false;  //是否是采集信息
-        app.globalData.tab = 1;
+      //路段采集
+      app.globalData.startName = startName;
+      app.globalData.endName = endName;
+      app.globalData.cjSectionId = roadSectionId;
+      app.globalData.isCJ = false; //是否是采集信息
+      app.globalData.tab = 1;
       wx.navigateTo({
         url: '../index/index'
       });
     } else if (skipType == 'xb') {
       //续报选择路段
+      console.log(e);
+      app.globalData.sectionId = roadSectionId; //路段id
+      app.globalData.sectionName = roadSectionName; // 路段名
+      app.globalData.roadManId = e.currentTarget.dataset.roadmanid; // 路长id
+      app.globalData.roadManName = e.currentTarget.dataset.roadmanname; // 路长姓名
+      wx.navigateBack({
+        changed: true
+      });
+
+    } else if (skipType == 'lh') {
+      // 路患上报
       console.log(e);
       app.globalData.sectionId = roadSectionId;
       app.globalData.sectionName = roadSectionName;
@@ -180,17 +189,16 @@ Page({
       wx.navigateBack({
         changed: true
       });
-     
     }
   },
   /**
    * 查看已采集详情
    */
-  showRoadSection: function (e) {
+  showRoadSection: function(e) {
     app.globalData.startName = e.currentTarget.dataset.startname;
     app.globalData.endName = e.currentTarget.dataset.endname;
     app.globalData.collectionId = e.currentTarget.dataset.id;
-    app.globalData.isCJ = true;   // 是否采集
+    app.globalData.isCJ = true; // 是否采集
     console.log("选择================" + app.globalData.startName);
     wx.navigateTo({
       url: '../index/index'
@@ -202,39 +210,41 @@ Page({
   resetSection: function(e) {
     var that = this;
     var sectionId = e.currentTarget.dataset.id;
-      wx.showModal({
-          title: '提示',
-          content: '确定重置？',
-          success:function(res){
-              if (res.confirm) {
-                  util.request(cfg.server + '/taa/www/road/resetSectionGPS', { sectionId: sectionId },
-                      function (res) {
-                          if (res.status == 0) {
-                              wx.showModal({
-                                  title: '提示',
-                                  content: res.info,
-                                  showCancel: false,
-                                  success: function (res) { }
-                              });
-                              //设置已采集信息（浮窗）
-                              that.initYList('');
-                              that.data.pageType = 'cj';
-                              that.selectRoadSection(e);
-                          } else {
-                              wx.showModal({
-                                  title: '提示',
-                                  content: res.info,
-                                  success: function (res) { }
-                              });
-                          }
-
-                      }
-                  );
-              } else if (res.cancel) {
-
+    wx.showModal({
+      title: '提示',
+      content: '确定重置？',
+      success: function(res) {
+        if (res.confirm) {
+          util.request(cfg.server + '/taa/www/road/resetSectionGPS', {
+              sectionId: sectionId
+            },
+            function(res) {
+              if (res.status == 0) {
+                wx.showModal({
+                  title: '提示',
+                  content: res.info,
+                  showCancel: false,
+                  success: function(res) {}
+                });
+                //设置已采集信息（浮窗）
+                that.initYList('');
+                that.data.pageType = 'cj';
+                that.selectRoadSection(e);
+              } else {
+                wx.showModal({
+                  title: '提示',
+                  content: res.info,
+                  success: function(res) {}
+                });
               }
-          }
-      });
+
+            }
+          );
+        } else if (res.cancel) {
+
+        }
+      }
+    });
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -252,7 +262,7 @@ Page({
     app.globalData.endName = null;
     app.globalData.cjSectionId = null;
   },
-  
+
   /**
    * 生命周期函数--监听页面隐藏
    */
