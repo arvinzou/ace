@@ -33,7 +33,7 @@
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入直播名称">
+                               placeholder="请输入测试名称">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn"
                                     type="submit">

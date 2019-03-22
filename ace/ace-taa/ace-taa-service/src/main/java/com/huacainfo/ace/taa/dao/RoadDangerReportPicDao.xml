@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.taa.dao.RoadDangerReportPicDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.RoadDangerReportPic">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="reportId" jdbcType="VARCHAR" property="reportId"/>
+        <result column="catgeory" jdbcType="CHAR" property="catgeory"/>
+        <result column="fileUrl" jdbcType="VARCHAR" property="fileUrl"/>
+        <result column="fileName" jdbcType="VARCHAR" property="fileName"/>
+        <result column="fileSize" jdbcType="INTEGER" property="fileSize"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, reportId, catgeory, fileUrl, fileName, fileSize, createDate, createUserId, createUserName
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from road_danger_report_pic
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from road_danger_report_pic
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.taa.model.RoadDangerReportPic">
+    insert into road_danger_report_pic (id, reportId, catgeory, 
+      fileUrl, fileName, fileSize, 
+      createDate, createUserId, createUserName
+      )
+    values (#{id,jdbcType=VARCHAR}, #{reportId,jdbcType=VARCHAR}, #{catgeory,jdbcType=CHAR}, 
+      #{fileUrl,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{fileSize,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.RoadDangerReportPic">
+    update road_danger_report_pic
+    set reportId = #{reportId,jdbcType=VARCHAR},
+      catgeory = #{catgeory,jdbcType=CHAR},
+      fileUrl = #{fileUrl,jdbcType=VARCHAR},
+      fileName = #{fileName,jdbcType=VARCHAR},
+      fileSize = #{fileSize,jdbcType=INTEGER},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectNochangedMethodImg" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from road_danger_report_pic
+        where reportId = #{reportId,jdbcType=VARCHAR} and catgeory = '1'
+    </select>
+
+    <select id="selectChangedMethodImg" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from road_danger_report_pic
+        where reportId = #{reportId,jdbcType=VARCHAR} and catgeory = '2'
+    </select>
+</mapper>

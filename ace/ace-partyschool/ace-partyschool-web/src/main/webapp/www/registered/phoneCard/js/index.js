@@ -87,17 +87,19 @@ function locate(data){
                 });
                 var marker = new qq.maps.Marker({
                     position: center,
-                    map: map
+                    map: map,
+                    content: '常德市委党校'
                 });
                 var cirle = new qq.maps.Circle({
                     map: map,
                     center: center,
-                    radius: 100,
+                    radius: 500,
                     strokeWeight:1
                 });
                 var marker = new qq.maps.Marker({
                     position: locate,
-                    map: map
+                    map: map,
+                    content: '我'
                 });
             }
         });
@@ -118,25 +120,28 @@ function renderPage(IDom, data, tempId) {
  * 点击签到
  */
 function record(){
-    $.ajax({
-        url: contextPath+ "/www/att/record",
-        type:"post",
-        async:false,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data:{
-            json: JSON.stringify({
-                longitude: longt,
-                latitude: lat
-            })
-        },
-        success:function(result){
-            alert("签到成功！");
-            findList();
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+    var con=confirm("是否确定签到?");
+    if(con==true){
+        $.ajax({
+            url: contextPath+ "/www/att/record",
+            type:"post",
+            async:false,
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data:{
+                json: JSON.stringify({
+                    longitude: longt,
+                    latitude: lat
+                })
+            },
+            success:function(result){
+                alert("签到成功！");
+                findList();
+            },
+            error:function(){
+                alert("系统服务内部异常！");
+            }
+        });
+    }
 }
 
 /**

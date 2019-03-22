@@ -6,6 +6,7 @@ package com.huacainfo.ace.partyschool.constant;
  * @Description:
  */
 public interface CommConstant {
+    String SYS_ID = "partyschool";
     /**
      * 短信签名
      */

@@ -78,8 +78,9 @@ public class ApiServiceImpl implements ApiService {
      */
     @Override
     public TeacherFinRsVo findTeacherBalance(String lCardNo) {
-
-        return aipDao.findTeacherBalance(lCardNo);
+        String nowMonth = DateUtil.getNow().substring(0, 7);
+        String tableName = "FIN_CUS_DEAL_HIS_" + nowMonth.replace("-", "_");
+        return aipDao.findTeacherBalance(lCardNo, tableName);
     }
 
     /**
@@ -157,7 +158,7 @@ public class ApiServiceImpl implements ApiService {
 
         String sql = "select * from (\n" +
                 "\tselect \n" +
-                "\t\trow_number() over(order by BorrowDate) as rowNum, \n" +
+                "\t\trow_number() over(order by BorrowDate desc) as rowNum, \n" +
                 "\t\to.* \n" +
                 "\tfrom ( \n" +
                 "\t\tselect  \n" +
