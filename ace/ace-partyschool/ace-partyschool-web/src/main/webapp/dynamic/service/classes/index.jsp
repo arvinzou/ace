@@ -129,7 +129,7 @@ pageEncoding="utf-8"%>
         </div>
     </div>
      <div class="form-group">
-         <label class="col-md-2 view-label">跟班讲师</label>
+         <label class="col-md-2 view-label">跟班授课人</label>
          <div class="col-md-10">
              \${data.o.t1Name}
          </div>

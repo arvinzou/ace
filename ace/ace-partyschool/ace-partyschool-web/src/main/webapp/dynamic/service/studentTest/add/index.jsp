@@ -68,7 +68,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">
 
-                            讲师
+                            授课人
                             ﻿
                         </label>
                         <div class="col-md-6">
