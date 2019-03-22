@@ -98,7 +98,7 @@
 <script id="tpl-courseDetail" type="text/template">
     <p class="title">课程名称</p>
     <p class="text">\${data.course.name}</p>
-    <p class="title">讲师</p>
+    <p class="title">授课人</p>
     <p class="text">\${data.teacher.name}</p>
     <p class="title">班次</p>
     <p class="text">\${data.classes.name}</p>

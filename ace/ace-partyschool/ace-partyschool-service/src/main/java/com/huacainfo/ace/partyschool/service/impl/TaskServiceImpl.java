@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -89,7 +88,8 @@ public class TaskServiceImpl implements TaskService {
      */
     @Override
     public MessageResponse insertTask(Task o, UserProp userProp) throws Exception {
-        o.setId(GUIDUtil.getGUID());
+        String taskId=GUIDUtil.getGUID();
+        o.setId(taskId);
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -98,16 +98,25 @@ public class TaskServiceImpl implements TaskService {
         }
         if (CommonUtils.isBlank(o.getTestId())) {
             return new MessageResponse(1, "test主键不能为空！");
+        }if (CommonUtils.isBlank(o.getIntroduce())) {
+            return new MessageResponse(1, "任务介绍不能为空！");
         }
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.taskDao.insert(o);
-        this.dataBaseLogService.log("添加任务管理", "任务管理", "",
-                o.getId(), o.getId(), userProp);
-
-        return new MessageResponse(0, "保存成功！");
+        Notice notice=new Notice();
+        notice.setId(taskId);
+        notice.setTitle(o.getName());
+        notice.setContent("<p>"+o.getIntroduce()+"：<a href=\""+PropertyUtil.getProperty("fastdfs_server")+"partyschool/www/registered/test/test.jsp?testId="+o.getTestId()+"&taskId="+taskId+"\" target=\"_blank\" class=\"\">点击开始</a></p>");
+        notice.setCategory("3");
+        notice.setStatus("1");
+        notice.setPublisher(userProp.getName());
+        notice.setPushDate(new java.util.Date());
+        this.noticeDao.insert(notice);
+        this.dataBaseLogService.log("添加任务管理", "任务管理", "", o.getId(), o.getId(), userProp);
+        return new MessageResponse(0, "成功！");
     }
 
     /**
@@ -123,7 +132,8 @@ public class TaskServiceImpl implements TaskService {
      */
     @Override
     public MessageResponse updateTask(Task o, UserProp userProp) throws Exception {
-        if (CommonUtils.isBlank(o.getId())) {
+        String taskId=o.getId();
+        if (CommonUtils.isBlank(taskId)) {
             return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(o.getName())) {
@@ -131,11 +141,20 @@ public class TaskServiceImpl implements TaskService {
         }
         if (CommonUtils.isBlank(o.getTestId())) {
             return new MessageResponse(1, "test主键不能为空！");
+        }if (CommonUtils.isBlank(o.getIntroduce())) {
+            return new MessageResponse(1, "任务介绍不能为空！");
         }
+        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.taskDao.updateByPrimaryKey(o);
+        Notice notice=new Notice();
+        notice.setId(taskId);
+        notice.setTitle(o.getName());
+        notice.setContent("<p>"+o.getIntroduce()+"：<a href=\""+PropertyUtil.getProperty("fastdfs_server")+"partyschool/www/registered/test/test.jsp?testId="+o.getTestId()+"&taskId="+taskId+"\" target=\"_blank\" class=\"\">点击开始</a></p>");
+        notice.setStatus("1");
+        this.noticeDao.updateByPrimaryKey(notice);
         this.dataBaseLogService.log("变更任务管理", "任务管理", "",
                 o.getId(), o.getId(), userProp);
 

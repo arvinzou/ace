@@ -1,0 +1,113 @@
+
+<!-- 事故快报 -->
+<view class='accidentContent '>
+  <map id="accidentMap" class='map  {{isEdit == true?"activeEdit":""}} {{isSrink == true?"shrink":""}}' show-location longitude='{{longitude}}' latitude='{{latitude}}' scale='18' markers='{{current}}'>
+    <!-- <cover-image wx-if='{{isEdit == false && showModal == false}}' src='../../image/icon-addkb.png' class='add-kb' bindtap='addKb'></cover-image> -->
+    <!--可选路段遮罩开始-->
+    <cover-view class='section-modal' wx:if='{{showModal == true}}'>
+      <cover-view class='modal-content'>
+        <block wx:if='{{sectionList.length > 0}}'>
+          <cover-view class='modal-content-title'>可选路段</cover-view>
+          <block wx:for="{{sectionList}}" wx:for-index="idx" wx:for-item="itemName" wx:key="ach">
+            <cover-view class='modal-item' bindtap='selectModalSection' data-sectionid='{{itemName.roadSectionId}}' data-sectionname='{{itemName.sectionName}}' data-roadmanid='{{itemName.roadManId}}' data-roadman='{{itemName.manName}}' data-startname='{{itemName.startName}}'
+              data-endname='{{itemName.endName}}' data-index='{{idx}}' data-distance='{{itemName.distance}}'>
+              <cover-view class='modal-item-name'>{{itemName.sectionName}}({{itemName.startName}}-{{itemName.endName}})</cover-view>
+              <cover-view class='modal-item-detail'>
+                <cover-view class='distance'>距此{{itemName.distance}}m</cover-view>
+                <cover-view wx-if='{{modalSeclect == idx}}' class='section-flag'>当前</cover-view>
+                <cover-image wx-if='{{modalSeclect == idx}}' class='secion-check' src='../../image/icon-modal-checked.png'></cover-image>
+              </cover-view>
+            </cover-view>
+          </block>
+          <cover-view class='modal-confirm' bindtap='closeModal'>确定</cover-view>
+        </block>
+        <block wx:else>
+          <!--未查询到路段-->
+          <cover-image src='../../image/section-blank.png' class='section-blank'></cover-image>
+          <cover-view class='tips'>糟糕~找不到路段~</cover-view>
+          <cover-view class='tip-opts'>
+            <cover-view class='tips-detail'>多走两步试试或前往</cover-view>
+            <cover-view class='opts-detail' bindtap='selectRoadSection'>待采集列表</cover-view>
+            <cover-view class='tips-detail'>选择路段</cover-view>
+          </cover-view>
+        </block>
+      </cover-view>
+      <cover-image src='../../image/icon-modal-close.png' class='close-modal' bindtap='closeModal'></cover-image>
+    </cover-view>
+    <!--可选路段遮罩结束-->
+  </map>
+  <!-- 上报弹窗 -->
+  <view class='fromContent'>
+    <view class='content'>
+      <form bindsubmit="xbSubmit" bindreset="formReset">
+        <view class='main'>
+          <view class='titile'>
+            <view class='close-open-box' bindtap='closeAndOpen'>
+              <image src='../../image/icon-open-close.png' class='close-open'></image>
+            </view>
+            <view class=' locate-name locate-name-wrapper' wx:if='{{sectionFlag == true}}' bindtap='selectRoadSection'>
+              {{sectionName}}
+              <block wx:if='{{sectionName}}'>
+                ({{sectionStartName}}-{{sectionEndName}})
+              </block>
+              <block wx:if='{{distance}}'>{{distance}}m</block>
+              <view class='select-arrow-div'>
+                <image class='select-arrow' src='../../image/icon_rediret.png'></image>
+              </view>
+            </view>
+            <view class=' locate-name locate-name-wrapper' wx:if='{{sectionFlag == false}}' bindtap='selectRoadSection'>请选择路段</view>
+            <view class='locate-road'>
+              <view class='add-box'>
+                <block wx:if='{{address}}'>
+                  {{address}}
+                </block>
+              </view>
+              <view class='reset-section' wx-if='sectionList.length>0' bindtap='resetSection'>
+                <image src='../../image/icon-reset-section.png'></image>
+                <!-- <text>重新定位</text> -->
+              </view>
+            </view>
+          </view>
+          <view class='fromInput'>
+            <view class='box'>
+              <view class='row'>
+                <view class='row-left'>所属路长</view>
+                <input class='form-input middle' name='roadManName' type='text' bindtap='selectRoadMan' value='{{roadManName}}' placeholder='请选择路长' disabled='true' placeholder-class='placeholder-tips'></input>
+                <image class='select-arrow' src='../../image/icon_rediret.png' bindtap='selectRoadMan'></image>
+              </view>
+              <view class='row'>
+                <view class='row-left'>隐患类型</view>
+                <picker class='middle' bindchange="bindYHTypeChange" name='yhType' value="{{yhTypeArray[yhIndex].CODE}}" range="{{yhType}}">
+                  <view class='form-input form-active'>{{yhTypeArray[yhIndex].NAME}}</view>
+                </picker>
+                <image class='select-arrow' src='../../image/icon_rediret.png'></image>
+              </view>
+              <view class='row row-placeholder'>
+                <textarea wx:if="{{!isShowFalseTextarea}}" placeholder-class="lh-placeholder" show-confirm-bar="{{!isShowFalseTextarea}}"
+                bindblur="showFalseTextarea" value='{{describe}}' auto-focus="{{!isShowFalseTextarea}}" placeholder='{{defaultDescribe}}' ></textarea>
+                <view class="textarea-false {{describe!=''?'color333':''}}" wx:else='{{isShowFalseTextarea}}' 
+                catchtap='tabTextarea'  data-value="{{describe}}">{{describe!=''?describe:defaultDescribe}}</view>
+              </view>
+              <view class='row image-ul-row'>
+                <view class='image-ul'  wx:if="{{noChangedImagesUrl.length >  0}}">
+                  <view class='li' wx:for="{{noChangedImagesUrl}}"  wx:for-index="idx" wx:key="abc">
+                    <image  class="img-url"  src='{{item}}'></image>
+                    <image class='icon-delete' src='../../image/icon-delete.png' catchtap='removeTempImgUrl' data-index="{{idx}}"></image>
+                  </view>
+                </view>
+                <view class='upload-tip-btn' wx:if="{{noChangedImagesUrl.length < 5}}">
+                  <text class='upload-tip'>最多上传五张照片</text>
+                  <image class='image-upload' src="../../image/icon-upload.png" catchtap="chooseImgResource"></image>
+                  <!-- <text class='btn-image-upload' catchtap="chooseImgResource">图片上传</text> -->
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class='sendbtn'>
+            <button class='btn-confirm-report active' form-type="submit">确定上报</button>
+          </view>
+        </view>
+      </form>
+    </view>
+  </view>
+</view>

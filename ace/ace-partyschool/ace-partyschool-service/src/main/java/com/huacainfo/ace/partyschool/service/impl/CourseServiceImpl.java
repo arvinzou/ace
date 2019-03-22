@@ -116,8 +116,7 @@ public class CourseServiceImpl implements CourseService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.courseDao.insert(o);
-        this.dataBaseLogService.log("添加课程管理", "课程管理", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("添加课程管理", "课程管理", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加课程管理完成！");
     }

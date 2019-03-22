@@ -46,7 +46,7 @@
           <text class='season-opt'>(可多选)</text>
         </view>
         <view class='checkbox-container'>
-          <checkbox-group bindchange="carTypeChange" name='vehicleType ' >
+          <checkbox-group bindchange="carTypeChange" name='vehicleType' >
             <block wx:for="{{carsList}}" wx:if='{{item.CODE!=""}}' wx:key="def">
               <label class="checkbox cbox">
                 <checkbox value="{{item.CODE}}" checked="{{item.checked}}" disabled='{{linkid==0}}' />{{item.NAME}}

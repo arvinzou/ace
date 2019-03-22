@@ -1,0 +1,653 @@
+view, map, cover-view {
+    box-sizing: border-box;
+}
+
+.accidentContent, .collectionContent {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#accidentMap {
+    /*padding: 80rpx 0 0rpx;*/
+    width: 100%;
+    height: 100%;
+    transition: 0.2s;
+}
+
+.activeEdit {
+    height: 42% !important;
+}
+.shrink{
+    height: 86% !important;
+}
+
+.tab {
+    width: 100%;
+    height: 80rpx;
+    color: #373f53;
+    font-size: 32rpx;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30rpx;
+}
+
+.header cover-image {
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 50%;
+}
+
+.column cover-image {
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.tab01.active {
+    color: rgba(67, 80, 252, 1);
+}
+
+.tab01 {
+    height: 100%;
+    position: relative;
+    line-height: 80rpx;
+}
+
+.active .flag {
+    content: '';
+    display: block;
+    width: 40rpx;
+    height: 6rpx;
+    background: rgba(67, 80, 252, 1);
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 20rpx);
+}
+
+.accidentContent .fromContent {
+    flex-grow: 1;
+    position: relative;
+}
+
+.fromContent .content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.fromContent .content .main {
+    width: 690rpx;
+    margin: auto;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.fromContent .content .main .title {
+    height: 170rpx;
+}
+
+.fromContent .content .main  .fromInput {
+    flex-grow: 1;
+    position: relative;
+}
+
+.fromContent .content .main  .box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.fromContent .content .main .sendbtn {
+    height: 160rpx;
+    padding-top: 38rpx;
+}
+.active-btn{
+    width: 430rpx;
+    height: 100rpx;
+    float: right;
+    background: rgba(67, 80, 252, 1);
+    box-shadow: 0px 0px 10px 0px rgba(67, 80, 252, 0.35);
+    border-radius: 50px;
+    font-size: 40rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    line-height: 100rpx;
+}
+.cancel-btn{
+    width: 240rpx;
+    height: 100rpx;
+    float: left;
+    line-height: 100rpx;
+    text-align: center;
+    border:1px solid rgba(215,217,223,1);
+    box-shadow:0rpx 0rpx 10rpx 0rpx rgba(215, 223, 217, 0.35);
+    border-radius:47rpx;
+    color: #ABAEB9;
+    font-size: 38rpx;
+    outline: none !important;
+    background: #FFFFFF;
+}
+
+.close-open{
+    width: 30rpx;
+    height: 16rpx;
+}
+.close-open-box{
+    width: 100%;
+    height: 56rpx;
+    line-height: 56rpx;
+    text-align: center;
+}
+.locate-name-wrapper{
+  display: flex;
+  align-items: center;
+}
+.select-arrow-div{
+  flex: 1;
+  padding-left:20rpx;
+}
+.fromContent .content .locate-name {
+    color: #373f53;
+    font-size: 36rpx;
+    font-weight: bold;
+    width: 100%;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: hidden;
+}
+
+.locate-road {
+    color: #abaeb9;
+    font-size: 28rpx;
+}
+
+.locate-road::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.add-box{
+    width: 75%;
+    height: 40rpx;
+    line-height: 40rpx;
+    float: left;
+}
+.reset-section{
+    width: 25%;
+    height: 40rpx;
+    float: left;
+    text-align: right;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+}
+.reset-section image{
+    width: 34rpx;
+    height: 34rpx;
+}
+.reset-section text{
+    font-size: 24rpx;
+    color: #4350FC;
+    padding-left: 7rpx;
+}
+.select-arrow {
+    width: 11rpx;
+    height: 20rpx;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 110rpx;
+    border-bottom: 0.5px rgba(240, 239, 246, 1) solid;
+}
+
+.row .row-left {
+    font-size: 32rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    width: 180rpx;
+    color: #373F53;
+}
+
+.row .middle {
+    flex-grow: 1;
+}
+
+.rows {
+    border-width: 0px;
+}
+
+.carCheckBox {
+    border-bottom: 1px rgba(240, 239, 246, 1) solid;
+}
+
+.carCheckBox label {
+    width: 50%;
+    display: inline-block;
+    margin-bottom: 20rpx;
+}
+
+/* ******************************************** */
+
+.form-content {
+    width: 690rpx;
+    background: #fff;
+    position: absolute;
+    top: 110rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+}
+
+.form-content .form {
+    height: 100rpx;
+    display: flex;
+    flex-direction: row;
+    font-size: 34rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: rgba(55, 63, 83, 1);
+    align-items: center;
+    padding: 0 34rpx;
+}
+
+
+
+
+.form-content .form cover-image {
+    width: 11rpx;
+    height: 20rpx;
+}
+
+.form-content .form .stext {
+    width: 100rpx;
+}
+
+.form-content .form .form-left {
+    flex-grow: 1;
+}
+
+.form-content .br{
+    background: #F0EFF6;
+    height: 1px;
+
+}
+.form-content .form .dot{
+    width:10rpx;
+    height:10rpx;
+    border-radius:50%;
+    margin-right: 30rpx;
+}
+.form-content .form .start{
+    background:rgba(28,187,127,1);
+}
+.form-content .form .end{
+    background:rgba(254,76,70,1);
+}
+
+.form-content .form .dot-text{
+    width: 100rpx;
+    color:#ABAEB9;
+}
+.form-content .form .form-row-right{
+    flex-grow: 1;
+}
+
+.collectionBtn {
+   max-width: 440rpx;
+   min-width: 160rpx;
+   position: fixed;
+    bottom: 60rpx;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.collectionBtn .cjBtn{
+    width: 160rpx;
+    height: 160rpx;
+    line-height: 160rpx;
+    text-align: center;
+    border-radius: 80rpx;
+    font-size: 34rpx;
+    font-weight: bold;
+    background: #fff;
+    display: inline-block;
+    color: #fff;
+    vertical-align: middle;
+}
+
+.collectionBtn .endBtn{
+    width: 0rpx;
+    height: 0rpx;
+    margin-left: 0rpx;
+    background:rgba(254,76,70,1);
+    overflow: hidden;
+}
+
+
+.collectionBtn .breakBtn + .endBtn{
+    width: 160rpx;
+    height: 160rpx;
+    margin-left: 120rpx;
+}
+
+.collectionBtn .startBtn{
+    background:rgba(67,80,252,1); 
+    color: #fff;
+}
+
+.collectionBtn  .activeBreak{
+    background:rgba(255,255,255,1);
+    color:rgba(55,63,83,1);
+}
+
+
+.hidden{
+    display: none;
+}
+.reset-locate{
+    width: 105rpx;
+    height: 105rpx;
+    position: absolute;
+    bottom: 42rpx;
+    right: 30rpx;
+}
+
+.map{
+    position: relative;
+}
+.control-map{
+    width: 105rpx;
+    height: auto;
+    position: fixed;
+    bottom: 280rpx;
+    right: 12rpx;
+}
+.icon-control-map{
+    position: relative;
+    width: 105rpx;
+    height: 105rpx;
+}
+.icon-dingwei{
+  width: 140rpx;
+  height: 140rpx;
+}
+.load-dingwei{
+  right:18rpx;
+  bottom: 30prpx;
+}
+
+/* ****************添加快报，路段选择弹框**************************** */
+.add-kb{
+    width: 159rpx;
+    height: 159rpx;
+    position: fixed;
+    bottom: 100rpx;
+    left: 296rpx;
+}
+.section-modal{
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.5);
+    position: relative;
+}
+.modal-content{
+    width: 88%;
+    height: 820rpx;
+    margin-top: 173rpx;
+    margin-left: 6%;
+    margin-right: 6%;
+    background: rgba(255,255,255,1);
+    border-radius: 10rpx;
+    position: relative;
+}
+.modal-content-title{
+    padding-top: 49rpx;
+    padding-left: 33rpx;
+    color: #373F53;
+    font-size: 33rpx;
+    font-weight: bold;
+}
+.modal-item{
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    border-bottom: 1px solid #F0EFF6;
+}
+.modal-item-name{
+    width: 100%;
+    height: auto;
+    color: 30rpx;
+    font-weight: bold;
+    padding-top: 30rpx;
+    word-wrap:break-word;
+}
+.modal-item-detail{
+    padding-top: 19rpx;
+    padding-bottom: 30rpx;
+}
+.modal-item-detail::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.distance{
+    color: #ABAEB9;
+    font-size: 30rpx;
+    float: left;
+}
+.section-flag{
+    width: 67rpx;
+    height: 36rpx;
+    line-height: 36rpx;
+    text-align: center;
+    background:rgba(230,232,255,0.8);
+    border-radius: 4rpx;
+    color: #2430E3;
+    font-size: 24rpx;
+    float: left;
+    margin-left: 30rpx;
+}
+
+.modal-confirm{
+    width: 80%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    background:rgba(67,80,252,1);
+    box-shadow:0rpx 0rpx 10rpx 0rpx rgba(67, 252, 80, 0.35);
+    border-radius:50rpx;
+    color: #FFFFFF;
+    position: absolute;
+    left: 10%;
+    bottom: 60rpx;
+}
+.close-modal{
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    bottom: 100rpx;
+    left: 345rpx;
+}
+.secion-check{
+    width: 28rpx;
+    height: 28rpx;
+    float: right;
+}
+
+/************车型选择复选框弹框*****************/
+.carType-modal{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+    bottom: 0;
+    transition: 0.2s;
+}
+.carType-content{
+    width: 100%;
+    height: 62%;
+    background: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    z-index: 500;
+}
+.carType-opts{
+    width: 100%;
+    height: 100rpx;
+    border: 1px solid #F0EFF6;
+}
+.carType-opts::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.carType-cancel{
+    width: 140rpx;
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    color: #ABAEB9;
+    font-size: 36rpx;
+    font-weight: bold;
+    float: left;
+}
+.carType-confirm{
+    width: 140rpx;
+    height: 100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    color: #2430E3;
+    font-size: 36rpx;
+    font-weight: bold;
+    float: right;
+}
+.carType-title{
+    width: 100%;
+    height: auto
+}
+.modal-title01{
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: bold;
+    padding-left: 20rpx;
+    float: left;
+    padding-top: 40rpx;
+    padding-bottom: 40rpx;
+}
+.modal-title02{
+    color: #ABAEB9;
+    font-size: 28rpx;
+    font-weight: bold;
+    float: left;
+    padding-top: 40rpx;
+    padding-bottom: 40rpx;
+}
+.carType-items{
+    width: 90%;
+    height: auto;
+    margin: 30rpx auto;
+}
+.carType-items::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.carType-item{
+    width: 50%;
+    height: 90rpx;
+    line-height: 90rpx;
+    float: left;
+}
+.carType-item::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.cartype-default{
+    color: #373F53;
+    font-size: 34rpx;
+    font-weight: 500;
+}
+.carType-active{
+    font-weight: bold;
+    color: #4350FC;
+}
+.form-input{
+    text-align: right;
+    padding-right: 30rpx;
+    color: #373F53;
+    font-weight: bold;
+}
+.checkTypes{
+    width: 40rpx;
+    height: 40rpx;
+    float: left;
+    margin-right: 20rpx;
+}
+.checkName{
+    float: left;
+}
+.carTypeTips{
+    color: #ABAEB9;
+    font-size: 32rpx;
+}
+.tips{
+    width: 100%;
+    height: 200rpx;
+    text-align: center;
+    line-height: 200rpx;
+    color: #ABAEB9;
+    font-size: 34rpx;
+    font-weight: 500;
+}
+
+/**********弹框未查询到路段样式****************/
+.section-blank{
+    width: 382rpx;
+    height: 230rpx;
+    margin: 135rpx 76rpx auto;
+}
+.tip-opts{
+    width: 540rpx;
+    height: 60rpx;
+    margin:60rpx auto;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    text-align: center;
+}
+.tip-opts::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.tips-detail{
+    color: #373F53;
+    float: left;
+}
+.opts-detail{
+    color: #4350FC;
+    float: left;
+}
+
+.placeholder-tips{
+    color: #ABAEB9;
+    font-weight: 500;
+}

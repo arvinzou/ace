@@ -157,6 +157,16 @@ function initVue() {
     })
 }
 
+function check(radio) {
+    if (radio.tag == 1) {
+        radio.checked = false;
+        radio.tag = 0;
+    }
+    else {
+        radio.checked = true;
+        radio.tag = 1
+    }
+}
 
 
 

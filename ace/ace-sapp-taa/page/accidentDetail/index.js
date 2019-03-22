@@ -215,6 +215,7 @@ Page({
    * 表单提交
    */
   formSubmit: function(e) {
+    console.log(e);
     var that = this;
     var createDate = e.detail.value.createDate;
     var weather = e.detail.value.weather;

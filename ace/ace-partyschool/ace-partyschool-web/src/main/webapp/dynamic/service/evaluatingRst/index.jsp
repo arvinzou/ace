@@ -56,7 +56,7 @@
                     <th width="30%"> 课程</th>
                     <th width="10%"> 上课日期</th>
                     <th width="25%"> 班次</th>
-                    <th width="10%"> 讲师</th>
+                    <th width="10%"> 授课人</th>
                     <th width="5%"> 平均分值</th>
                     <th width="5%"> 未测评人数</th>
                     <th width="10%">操作</th>
@@ -171,7 +171,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 view-label">讲师</label>
+            <label class="col-md-2 view-label">授课人</label>
             <div class="col-md-10">
                 \${teacherId}
             </div>
@@ -236,7 +236,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">讲师</label>
+        <label class="col-md-2 view-label">授课人</label>
         <div class="col-md-10">
             \${teacherId}
         </div>

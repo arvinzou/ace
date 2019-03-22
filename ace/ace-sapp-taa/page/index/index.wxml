@@ -100,6 +100,9 @@
                     <block wx:if='{{address}}'>
                     {{address}}
                     </block>
+                    <block wx:else>
+                     定位失败
+                    </block>
                 </view>
                 <view class='reset-section' wx-if='sectionList.length>0' bindtap='resetSection'>
                     <image src='../../image/icon-reset-section.png'></image>

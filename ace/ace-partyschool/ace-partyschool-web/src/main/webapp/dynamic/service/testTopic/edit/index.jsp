@@ -35,13 +35,13 @@
                                         </div>
                                         <template v-for="(item,index) in type1.topicOptList">
                                             <div class="option" v-if="index<2">
-                                                <input class="pointer" type="radio" :checked="item.answer==1" name="type1" :value="index"/>
+                                                <input class="pointer" type="radio" onclick="check(this);" :checked="item.answer==1" name="type1" :value="index"/>
                                                 <textarea rows="1" type="text" class="option-text option-margin"
                                                           @input="autoHeight" v-model="item.content"
                                                           :placeholder="'选项'+(index+1)">{{item.content}}</textarea>
                                             </div>
                                             <div class="option" v-else>
-                                                <input class="pointer" :checked="item.answer==1" type="radio" name="type1" :value="index"/>
+                                                <input class="pointer" onclick="check(this);" :checked="item.answer==1" type="radio" name="type1" :value="index"/>
                                                 <textarea rows="1" type="text" @input="autoHeight" class="option-text"
                                                           v-model="item.content"
                                                           :placeholder="'选项'+(index+1)">{{item.content}}</textarea>

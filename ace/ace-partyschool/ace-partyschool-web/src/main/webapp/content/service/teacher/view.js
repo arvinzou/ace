@@ -10,7 +10,7 @@ jQuery(function($) {
 			rows: "limit"
 		},
 		datatype: "json",
-		postData: {},
+		postData: {status:'1'},
 		formData: {},
 		url: cfg.grid_load_data_url,
 		jsonReader: {
