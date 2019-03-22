@@ -254,13 +254,13 @@ var dayCourse='     <div class="dayClass">\n' +
     '        <tr>\n' +
     '         <td class="style6">上午</td>\n' +
     '         <td class=" #dateString#amCourse">自习</td>\n' +
-    '         <td class="style6">主讲</td>\n' +
+    '         <td class="style6">授课人</td>\n' +
     '         <td class=" #dateString#amTeacher style7">- -</td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
     '         <td class="style6">下午</td>\n' +
     '         <td class=" #dateString#pmCourse">自习</td>\n' +
-    '         <td class="style6">主讲</td>\n' +
+    '         <td class="style6">授课人</td>\n' +
     '         <td class=" #dateString#pmTeacher  style7">- -</td>\n' +
     '        </tr>\n' +
     '       </table>\n' +
@@ -277,13 +277,13 @@ var dayCourseE='     <div class="dayClass">\n' +
     '        <tr>\n' +
     '         <td class="style6">上午</td>\n' +
     '         <td class=" #dateString#amCourse">休息</td>\n' +
-    '         <td class="style6">主讲</td>\n' +
+    '         <td class="style6">授课人</td>\n' +
     '         <td class=" #dateString#amTeacher style7">- -</td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
     '         <td class="style6">下午</td>\n' +
     '         <td class=" #dateString#pmCourse">休息</td>\n' +
-    '         <td class="style6">主讲</td>\n' +
+    '         <td class="style6">授课人</td>\n' +
     '         <td class=" #dateString#pmTeacher  style7">- -</td>\n' +
     '        </tr>\n' +
     '       </table>\n' +
