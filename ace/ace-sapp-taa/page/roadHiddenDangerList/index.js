@@ -72,10 +72,8 @@ Page({
    */
   initRoadHiddenDangerList: function(e) {
     var that = this;
-    // 测试查询隐患列表 http://192.168.2.124/taa/roadDangerReport/findReportList
-    //  util.request(cfg.server + '/taa/www/roadDangerReport/findReportList', {
-    util.request('http://192.168.2.124/taa/www/roadDangerReport/findReportList', {
-        uid: 'o6qFn1KS7IhLOOj477ykdx7vkw58',
+    // 测试查询隐患列表 
+     util.request(cfg.server + '/taa/www/roadDangerReport/findReportList', {
       },
       function(res) {
         if (res.status == 0) {
@@ -84,6 +82,10 @@ Page({
             that.setData({
               yhList: res.data.rows
             });
+          }else{
+            that.setData({
+              yhList: []
+            })
           }
         } else {
           wx.showModal({
@@ -123,10 +125,8 @@ Page({
       content: '确认撤销该条隐患信息？',
       success: function(res) {
         if (res.confirm) {
-          // 测试查询隐患列表 http://192.168.2.124/taa/www/roadDangerReport/repealReport
-          //  util.request(cfg.server + '/taa/www/roadDangerReport/repealReport', {
-          util.request('http://192.168.2.124/taa/www/roadDangerReport/repealReport', {
-              // uid: 'o6qFn1KS7IhLOOj477ykdx7vkw58',
+          // 测试查询隐患列表 
+           util.request(cfg.server + '/taa/www/roadDangerReport/repealReport', {
               reportId: reportId
             },
             function(res) {
@@ -137,6 +137,7 @@ Page({
                   content: '撤销' + res.errorMessage,
                   showCancel: false
                 });
+               
                 that.onShow();     //刷新页面
               } else {
                 wx.showModal({

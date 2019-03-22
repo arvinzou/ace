@@ -46,7 +46,7 @@
 					<div class="course-right">
 						<div class="inner-middle">
 							<span>\${item.course.name}</span>
-							<span>(主讲:\${item.teacher.name}）</span>
+							<span>(授课人:\${item.teacher.name}）</span>
 						</div>
 					</div>
 				</div>
@@ -56,7 +56,7 @@
 					<div class="course-right">
 						<div class="inner-middle">
 							<span>\${item.course.name}</span>
-							<span>(主讲:\${item.teacher.name}）</span>
+							<span>(授课人:\${item.teacher.name}）</span>
 						</div>
 					</div>
 				</div>

@@ -10,6 +10,7 @@ Page({
     reportId:'',   //隐患id
     detailsInfo:{},   //详情信息
     yhTypeArray:[],   //隐患类型
+    toView:'intoViewFind',    //默认值  
   },
 
   /**
@@ -47,10 +48,8 @@ Page({
     var reportId = that.data.reportId;
     var yhTypeArray = app.globalData.yhTypeArray;
     console.log(yhTypeArray)
-    // 测试查询隐患列表 http://192.168.2.124/taa/roadDangerReport/findReportList
-    //  util.request(cfg.server + '/taa/www/roadDangerReport/selectRoadDangerReportByPrimaryKey', {
-    util.request('http://192.168.2.124/taa/www/roadDangerReport/selectRoadDangerReportByPrimaryKey', {
-      uid: 'o6qFn1KS7IhLOOj477ykdx7vkw58',
+    // 测试查询隐患列表 
+     util.request(cfg.server + '/taa/www/roadDangerReport/selectRoadDangerReportByPrimaryKey', {
       reportId: reportId,
     },
       function (res) {
@@ -77,6 +76,16 @@ Page({
         }
       }
     );
+  },
+  /**
+   * 滚动指定区域
+   */
+  scrollToViewFn:function(e){
+    var that = this;
+    var id = e.target.dataset.id;
+    that.setData({
+      toView:id
+    });
   },
   /**
    * 生命周期函数--监听页面隐藏

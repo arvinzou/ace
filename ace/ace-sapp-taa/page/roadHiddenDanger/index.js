@@ -22,7 +22,7 @@ Page({
     isShowFalseTextarea: true, //是否显示假的textarea
     describe: '', //隐患描述 textarea输入内容
     defaultDescribe: '请描述情况', //默认提示描述
-    
+
     latitude: '',
     longitude: '',
     current: [],
@@ -48,7 +48,7 @@ Page({
     sectionList: [],
     modalSeclect: 0, //路段模态框选择
     isSrink: false, //表单是否收缩,
-    
+
   },
 
   /**
@@ -457,7 +457,9 @@ Page({
           },
           success: function(resp) {
             wx.hideLoading();
+            console.log(resp)
             var obj = JSON.parse(resp.data);
+            console.log(obj);
             var filePath = obj.file_path;
             filePath = filePath.replace(/^http*/, 'https'); //正则匹配以http开头，s可选的字符串
             noChangedServerImagesUrl.push(filePath);
@@ -574,10 +576,8 @@ Page({
     // 提交数据之前需要上传图片，延时处理
     setTimeout(function(e) {
       console.log(noChangedServerImagesUrl)
-      // 上报数据 http://192.168.2.124/taa/www/roadDangerReport/roadReport
-      // util.request(cfg.server + '/taa/www/roadDangerReport/roadReport', {
-      util.request('http://192.168.2.124/taa/www/roadDangerReport/roadReport', {
-          uid: 'o6qFn1KS7IhLOOj477ykdx7vkw58',
+      // 上报数据  
+      util.request(cfg.server + '/taa/www/roadDangerReport/roadReport', {
           data: JSON.stringify({
             latitude: that.data.latitude, //经度
             longitude: that.data.longitude, // 维度

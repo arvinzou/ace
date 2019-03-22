@@ -165,9 +165,9 @@ Page({
       app.globalData.cjSectionId = roadSectionId;
       app.globalData.isCJ = false; //是否是采集信息
       app.globalData.tab = 1;
-      wx.navigateTo({
-        url: '../index/index'
-      });
+        wx.navigateBack({
+            changed: true
+        });
     } else if (skipType == 'xb') {
       //续报选择路段
       console.log(e);
@@ -200,9 +200,9 @@ Page({
     app.globalData.collectionId = e.currentTarget.dataset.id;
     app.globalData.isCJ = true; // 是否采集
     console.log("选择================" + app.globalData.startName);
-    wx.navigateTo({
-      url: '../index/index'
-    });
+      wx.navigateBack({
+          changed: true
+      });
   },
   /**
    * 重置

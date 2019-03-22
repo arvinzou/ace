@@ -4,7 +4,6 @@
     "page/roadHiddenDangerList/index",
     "page/roadHiddenDanger/index",
     "page/roadHiddenDangerDetails/index",
-    
     "page/accidentList/index",
     "page/index/index",
     "page/regist/index",
@@ -14,7 +13,9 @@
     "page/info/index",
     "page/datas/index",
     "page/collection/index",
-    "page/accidentDetail/index"
+    "page/accidentDetail/index",
+    "page/accidentKb/index",
+    "page/sectionCj/index"
   ],
   "permission": {
     "scope.userLocation": {

@@ -1,95 +1,97 @@
-<view class='index'>
-  <form bindsubmit="formSubmit">
-    <view class='details-header {{detailsInfo.status==4?"go-back-color":""}}'>
-      <view class='left'>
-        <text wx:if="{{detailsInfo.status==1}}">待处理</text>
-        <text wx:elif="{{detailsInfo.status==2}}">登记</text>
-        <text wx:elif="{{detailsInfo.status==3}}">销号</text>
-        <text wx:elif="{{detailsInfo.status==4}}">退回</text>
-        <text>查看隐患处理结果</text>
-      </view>
-      <view class='right'>
-        <image wx:if="{{detailsInfo.status != 4}}" src="../../image/icon-xh-dj-dcl.png"></image>
-        <image wx:else src="../../image/icon-goback.png"></image>
-      </view>
-    </view>
-    <view class='form-box'>
-      <view class='box'>
-        <view class='title02'>
-          <view class='locate'>{{detailsInfo.address}}</view>
-          <view class='locate-road'>
-            <text>{{detailsInfo.roadSectionName}}</text>
-          </view>
+<scroll-view scroll-into-view="{{toView}}" scroll-y="true" scroll-with-animation="true" >
+  <view class='index'>
+    <form bindsubmit="formSubmit">
+      <view class='details-header {{detailsInfo.status==4?"go-back-color":""}}'>
+        <view class='left'>
+          <text wx:if="{{detailsInfo.status==1}}">待处理</text>
+          <text wx:elif="{{detailsInfo.status==2}}">登记</text>
+          <text wx:elif="{{detailsInfo.status==3}}">销号</text>
+          <text wx:elif="{{detailsInfo.status==4}}">退回</text>
+          <text catchtap="scrollToViewFn" data-id="intoViewDeal">查看隐患处理结果</text>
         </view>
-        <view class='row br'>
-          <view class='row-left'>所属路长</view>
-          <view class='row-right content'>
-            <text>{{detailsInfo.roadManName}}</text>
-          </view>
-        </view>
-        <view class='row br'>
-          <view class='row-left'>上报时间</view>
-          <view class='row-right content'>{{detailsInfo.createDate}}
-          </view>
-        </view>
-        <view class='row br'>
-          <view class='row-left'>上报单位</view>
-          <view class='row-right content'>{{detailsInfo.departmentName}}</view>
-        </view>
-        <view class='row br'>
-          <view class='row-left'>上报人</view>
-          <view class='row-right content'>{{detailsInfo.createUserName}}</view>
-        </view>
-        <view class='row br'>
-          <view class='row-left'>隐患类型</view>
-          <view class='row-right content'>{{detailsInfo.type}}</view>
-        </view>
-        <view class='row br'>
-          <view class='row-left'>路况描述</view>
-        </view>
-        <view class='row br'>
-          <view class='row-right content road-hidden-describe'>{{detailsInfo.remark}}</view>
-        </view>
-        <view class='row '>
-          <view class='row-left'>现场照片</view>
-        </view>
-        <view class='row ' wx:if="{{detailsInfo.picList.length > 0}}">
-          <view class='row-right content image-wrap'>
-            <block wx:for="{{detailsInfo.picList}}" wx:key="abd">
-              <image src='{{item.fileUrl}}'></image>
-            </block>
-          </view>
+        <view class='right'>
+          <image wx:if="{{detailsInfo.status != 4}}" src="../../image/icon-xh-dj-dcl.png"></image>
+          <image wx:else src="../../image/icon-goback.png"></image>
         </view>
       </view>
-    </view>
-    <view class='chuli-wrap' wx:if="{{detailsInfo.status!=1}}">
-      <view class='title'>隐患处理</view>
-      <view class='form-box' style='margin-top:20rpx'>
+      <view class='form-box'>
         <view class='box'>
-          <view class='row br'>
-            <view class='row-left'>登记时间</view>
-            <view class='row-right content'>{{detailsInfo.lastModifyDate}}</view>
+          <view class='title02'>
+            <view class='locate'>{{detailsInfo.address}}</view>
+            <view class='locate-road'>
+              <text>{{detailsInfo.roadSectionName}}</text>
+            </view>
           </view>
           <view class='row br'>
-            <view class='row-left'>整改措施</view>
+            <view class='row-left'>所属路长</view>
+            <view class='row-right content'>
+              <text>{{detailsInfo.roadManName}}</text>
+            </view>
           </view>
           <view class='row br'>
-            <view class='row-right content road-hidden-describe' wx:if="{{detailsInfo.reason != ''}}" >{{detailsInfo.reason}}</view>
-            <view class='row-right content road-hidden-describe' wx:else>{{detailsInfo.takeSteps}}</view>
+            <view class='row-left'>上报时间</view>
+            <view class='row-right content'>{{detailsInfo.createDate}}
+            </view>
           </view>
           <view class='row br'>
+            <view class='row-left'>上报单位</view>
+            <view class='row-right content'>{{detailsInfo.departmentName}}</view>
+          </view>
+          <view class='row br'>
+            <view class='row-left'>上报人</view>
+            <view class='row-right content'>{{detailsInfo.createUserName}}</view>
+          </view>
+          <view class='row br'>
+            <view class='row-left'>隐患类型</view>
+            <view class='row-right content'>{{detailsInfo.type}}</view>
+          </view>
+          <view class='row br'>
+            <view class='row-left'>路况描述</view>
+          </view>
+          <view class='row br'>
+            <view class='row-right content road-hidden-describe'>{{detailsInfo.remark}}</view>
+          </view>
+          <view class='row '>
             <view class='row-left'>现场照片</view>
           </view>
-          <view class='row' wx:if="{{detailsInfo.changedList.length > 0}}">
+          <view class='row ' wx:if="{{detailsInfo.picList.length > 0}}">
             <view class='row-right content image-wrap'>
-              <block wx:for="{{detailsInfo.changedList}}" wx:key="abd">
+              <block wx:for="{{detailsInfo.picList}}" wx:key="abd">
                 <image src='{{item.fileUrl}}'></image>
               </block>
             </view>
           </view>
         </view>
       </view>
-    </view>
+      <view class='chuli-wrap' wx:if="{{detailsInfo.status!=1}}" id="intoViewDeal">
+        <view class='title'>隐患处理</view>
+        <view class='form-box' style='margin-top:20rpx'>
+          <view class='box'>
+            <view class='row br'>
+              <view class='row-left'>登记时间</view>
+              <view class='row-right content'>{{detailsInfo.lastModifyDate}}</view>
+            </view>
+            <view class='row br'>
+              <view class='row-left'>整改措施</view>
+            </view>
+            <view class='row br'>
+              <view class='row-right content road-hidden-describe' wx:if="{{detailsInfo.reason != ''}}">{{detailsInfo.reason}}</view>
+              <view class='row-right content road-hidden-describe' wx:else>{{detailsInfo.takeSteps}}</view>
+            </view>
+            <view class='row br'>
+              <view class='row-left'>现场照片</view>
+            </view>
+            <view class='row' wx:if="{{detailsInfo.changedList.length > 0}}">
+              <view class='row-right content image-wrap'>
+                <block wx:for="{{detailsInfo.changedList}}" wx:key="abd">
+                  <image src='{{item.fileUrl}}'></image>
+                </block>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
 
-  </form>
-</view>
+    </form>
+  </view>
+</scroll-view>

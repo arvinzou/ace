@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    yhRole:false,    //隐患权限
-    dataRole:false,   // 事故分析
+    // yhRole: false,    //隐患权限
+    // dataRole: false,   // 事故分析
     yhRole: true,    //隐患权限
     dataRole: true    // 事故分析
 
@@ -19,7 +19,7 @@ Page({
   onLoad: function (options) {
 
   },
- 
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -34,19 +34,19 @@ Page({
     this.initUserData();     //初始化用户信息
     this.initAuthority();     //初始化权限信息
   },
-  
+
   /**
    *   链接事故快报
    */
-  linkSGKB:function(e){
+  linkSGKB: function (e) {
     wx.navigateTo({
-      url: '../index/index',
+      url: '../accidentKb/index',
     });
   },
   /**
    * 链接隐患上报
    */
-  linkYHSB:function(e){
+  linkYHSB: function (e) {
     var that = this;
     var yhRole = that.data.yhRole;
     if (yhRole) {
@@ -64,15 +64,15 @@ Page({
   /**
    * 链接路段采集
    */
-  linkLDCJ:function(e){
+  linkLDCJ: function (e) {
     wx.navigateTo({
-      url: '../collection/index',
+      url: '../sectionCj/index',
     });
   },
   /**
    * 链接事故列表
    */
-  linkSGLB:function(e){
+  linkSGLB: function (e) {
     wx.navigateTo({
       url: '../accidentList/index',
     });
@@ -83,18 +83,18 @@ Page({
   linkYHLB: function (e) {
     var that = this;
     var yhRole = that.data.yhRole;
-    if (yhRole){
+    if (yhRole) {
       wx.navigateTo({
         url: '../roadHiddenDangerList/index',
       });
-    }else{
+    } else {
       wx.showModal({
         title: '提示',
         showCancel: false,
         content: '无权限进入，请联系管理员',
       });
     }
-    
+
   },
   /**
   * 链接事故分析
@@ -102,11 +102,11 @@ Page({
   linkSGFX: function (e) {
     var that = this;
     var dataRole = that.data.dataRole;   //权限掌上驾驶舱
-    if (dataRole){
+    if (dataRole) {
       wx.navigateTo({
         url: '../datas/index',
       });
-    }else{
+    } else {
       wx.showModal({
         title: '提示',
         showCancel: false,
@@ -150,21 +150,19 @@ Page({
     var that = this;
     var yhRoleStr = '0763f1b1-437a-4d6f-af3f-ab46a0e0b60e';  //隐患管理员
     var dataRoleStr = '764a02db-4c20-4c31-8040-07a3d8dc01b9'; //掌上驾驶舱
-    // 测试查询隐患列表 http://192.168.2.124/taa/www/roadDangerReport/findUserRole
-    //  util.request(cfg.server + '/taa/www/roadDangerReport/findUserRole', {
-    util.request('http://192.168.2.124/taa/www/roadDangerReport/findUserRole', {
-      uid: '1497320052299',
+    // 测试查询隐患列表 
+     util.request(cfg.server + '/taa/www/roadDangerReport/findUserRole', {
     },
       function (res) {
-        // console.log(res);
-        if(res.length > 0){
-          for (var i = 0; i < res.length; i++ ){
-            if (yhRoleStr == res[i].role_id ){
+        console.log(res);
+        if (res.length > 0) {
+          for (var i = 0; i < res.length; i++) {
+            if (yhRoleStr == res[i].role_id) {
               that.setData({
-                yhRole:true
+                yhRole: true
               });
             }
-            if (dataRoleStr == res[i].role_id){
+            if (dataRoleStr == res[i].role_id) {
               that.setData({
                 dataRole: true
               });
@@ -173,9 +171,9 @@ Page({
           console.log(that.data.yhRole);
           console.log(that.data.dataRole);
         }
-       
+
       },
-      function(res){
+      function (res) {
         console.log(res);
       }
     );
