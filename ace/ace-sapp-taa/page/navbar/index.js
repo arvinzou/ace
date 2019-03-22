@@ -30,8 +30,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initUserData();     //初始化用户信息
-    this.initAuthority();     //初始化权限信息
+    if (!util.is_login()) {
+      wx.navigateTo({
+        url: "../userinfo/index?url=../navbar/index&type=navigateTo"
+      });
+    } else {
+      this.initUserData();     //初始化用户信息
+      this.initAuthority();     //初始化权限信息
+    }
   },
   /**
    *   链接事故快报
