@@ -40,7 +40,7 @@ Page({
    */
   linkSGKB:function(e){
     wx.navigateTo({
-      url: '../index/index',
+      url: '../accidentKb/index',
     });
   },
   /**
@@ -66,7 +66,7 @@ Page({
    */
   linkLDCJ:function(e){
     wx.navigateTo({
-      url: '../collection/index',
+      url: '../sectionCj/index',
     });
   },
   /**
