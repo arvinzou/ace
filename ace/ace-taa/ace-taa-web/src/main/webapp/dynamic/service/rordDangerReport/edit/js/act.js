@@ -160,13 +160,6 @@ function initPage() {
 
 function initEvents() {
     /*表单验证*/
-    /*$("#fm-edit").validate({
-        onfocusout: function (element) {
-            $(element).valid();
-        },
-        rules: {},
-        messages: {}
-    });*/
     /*监听表单提交*/
     $('#fm-edit').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
