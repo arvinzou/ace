@@ -1,0 +1,277 @@
+.index {
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+  margin-bottom: 71rpx;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  color: #4350fc;
+  border: 2px solid #4350fc;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+.title {
+  width: 90%;
+  height: 100rpx;
+  line-height: 100rpx;
+  margin: 0 auto;
+  color: #373f53;
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+.form-box {
+  width: 92%;
+  height: auto;
+  margin: 0 auto;
+  margin-top:-54rpx;
+}
+
+.box {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border-radius: 10rpx;
+ 
+  /* box-shadow: 0rpx 0rpx 24rpx 12rpx rgba(239, 239, 239, 0.5); */
+}
+
+.title02 {
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 1px solid #f0eff6;
+}
+
+.locate {
+  width: 100%;
+  color: #373f53;
+  font-size: 32rpx;
+  font-weight: bold;
+  padding-top: 48rpx;
+  padding-bottom: 19rpx;
+}
+
+.locate-road {
+  width: 100%;
+  color: #abaeb9;
+  font-size: 28rpx;
+  padding-bottom: 48rpx;
+}
+
+.locate-road image {
+  width: 11rpx;
+  height: 20rpx;
+  margin-left: 22rpx;
+}
+
+.row {
+  width: 90%;
+  padding: 25rpx 0;
+  margin: 0 auto;
+}
+
+.row::after {
+  content: '';
+  clear: both;
+  display: block;
+}
+
+.row-left {
+  width: 30%;
+  float: left;
+  color: #373f53;
+  font-size: 32rpx;
+}
+
+.row-right {
+  width: 70%;
+  float: left;
+}
+
+.content {
+  color: #373f53;
+  font-size: 32rpx;
+  font-weight: bold;
+  text-align: right;
+}
+
+.br {
+  border-bottom: 1px solid #f0eff6;
+}
+
+.icon-arrow {
+  width: 11rpx;
+  height: 20rpx;
+  margin-left: 17rpx;
+}
+
+.row-right input {
+  width: 90%;
+  height: 100%;
+  border: none;
+  text-align: right;
+  color: #373f53;
+  font-size: 32rpx;
+  font-weight: bold;
+  float: left;
+}
+
+.datetime {
+  width: 90%;
+  height: 100%;
+  border: none;
+  text-align: right;
+  color: #373f53;
+  font-size: 32rpx;
+  font-weight: bold;
+  float: left;
+}
+
+.roadPicker {
+  width: 90%;
+  height: 100%;
+  border: none;
+  text-align: right;
+  color: #373f53;
+  font-size: 32rpx;
+  font-weight: bold;
+  float: left;
+}
+
+.input-holder {
+  color: #abaeb9;
+  font-weight: 500;
+}
+
+.season-title {
+  color: #373f53;
+  font-size: 32rpx;
+  padding-right: 20rpx;
+}
+
+.season-opt {
+  font-size: 32rpx;
+  color: #abaeb9;
+}
+
+.row-title {
+  line-height: 110rpx;
+}
+
+.cbox {
+  width: 50%;
+  height: 30rpx;
+  float: left;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+}
+
+.checkbox-container {
+  width: auto;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+
+.checkbox-container::after {
+  content: '';
+  clear: both;
+  display: block;
+}
+
+.commit-btn {
+  width: 90%;
+  height: 100rpx;
+  margin: 77rpx 5%;
+}
+
+.commit-btn button {
+  width: 100%;
+  height: 100%;
+  line-height: 100rpx;
+  color: #fff;
+  font-size: 40rpx;
+  font-weight: bold;
+  text-align: center;
+  background: rgba(67, 80, 252, 1);
+  box-shadow: 0px 0px 10px 0px rgba(67, 80, 252, 0.35);
+  border-radius: 50rpx;
+  outline: none;
+}
+
+.cCheckBox {
+  width: 50%;
+  height: 110rpx;
+}
+
+.road-hidden-describe {
+  font-size: 28rpx;
+  font-weight: initial;
+  text-align: left;
+  white-space: pre-line;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.image-wrap,.road-hidden-describe {
+  text-align: left;
+  width: 100%;
+  font-size: 30rpx;
+  color: #373F53;
+  font-weight: bold;
+  padding: 10rpx 20rpx;
+}
+
+.image-wrap image {
+  width: 200rpx;
+  height: 200rpx;
+  margin-left:10rpx;
+}
+.image-wrap image:nth-of-type(3n+1){
+  margin-left:0;
+}
+.cancel-number {
+  display: inline-block;
+  width: 134rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  font-size: 26rpx;
+  text-align: center;
+  margin-left: 30rpx;
+  border-radius: 28rpx;
+  border: 2rpx solid #d2d5ff;
+}
+.details-header{
+  display: flex;
+  height:282rpx;
+  align-items: center;
+  background-color: #2932BD;
+}
+.details-header>.left{
+  flex: 1;
+  padding-left: 30rpx;
+}
+.details-header>.left>text{
+  display: block;
+  color: #fff;
+}
+.details-header>.left>text:nth-of-type(1){
+  font-size: 42rpx;
+  font-weight: bold;
+}
+.details-header>.left>text:nth-of-type(2){
+  font-size: 28rpx;
+}
+.details-header>.right{
+  flex: 1;
+  text-align: right;
+  padding-right: 60rpx;
+}
+.details-header>.right>image{
+  width: 106rpx;
+  height: 110rpx;
+}
+.go-back-color{
+  background-color: #FE4C46;
+}

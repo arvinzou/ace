@@ -1,0 +1,35 @@
+<view class="index">
+  <!-- <view class='screen accident-top'>
+    <view class='select-box'>
+      <picker bindchange="bindRegionChange" value="{{regionArray[rIndex].code}}" range="{{region}}">
+        <view class="picker city-area">{{regionArray[rIndex].name}}</view>
+        <view class='drop-down'>
+          <image src='../../image/icon-drop-down.png'></image>
+        </view>
+      </picker>
+    </view>
+    <text class='vertical-line'></text>
+    <icon class='icon-search' type="search" color="#abaeb9" size="12" />
+    <input class='search-road-input' type='text' placeholder='道路名称/路段名称/路长' confirm-type="search" bindinput='searchRoad'></input>
+  </view> -->
+  <view wx:if="{{yhList.length > 0}}" class='road-ul'>
+    <block  wx:for="{{yhList}}" wx:for-index="idx" wx:key="unique" wx:for-item="item">
+      <view class='li' bindtap='linkRoadHiddenDangerDetails' data-id = '{{item.id}}'>
+          <view class='up'>{{item.remark}}</view>
+          <view class='middle'>
+            <text>路段:{{item.roadSectionName}}</text>
+            <text>路长:{{item.roadManName}}</text>
+          </view>
+        <view class='down'>
+          <view class='pending'  wx:if="{{item.status==1}}" >待处理</view>
+          <view class='revoke' catchtap='revoke' wx:if="{{item.status==1}}" data-id = '{{item.id}}' >撤销</view>
+          <view class='register'  wx:elif="{{item.status==2}}" >登记</view>
+          <view class='cancel-number' wx:elif="{{item.status==3}}" >销号</view>
+          <view class='go-back'  wx:elif="{{item.status==4}}">退回</view>
+          <text class='time'>上报时间:{{item.createDate}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view wx:else class='no-data-tip'>暂无数据哦</view>
+</view>

@@ -1,0 +1,40 @@
+<view class='navbar-header'>
+  <view class='up'>
+    <image src='{{userData.avatarUrl}}'></image>
+  </view>
+  <view class='middle'>
+    <text>{{userData.name}}</text>
+    <image src="../../image/icon-edit.png"  catchtap='edit'></image>
+  </view>
+  <view class='down'>警号：{{userData.copNo}}</view>
+</view>
+<view class='navbar-ul'>
+   <view class='li' catchtap='linkSGKB'>
+     <image class='icon_sgkb' src='../../image/icon_sgkb.png'></image>
+     <text>事故快报</text>
+   </view>
+   <view class='li' catchtap='linkYHSB'>
+     <image class='icon_yhsb' src='../../image/icon_yhsb.png'></image>
+     <text>隐患上报</text>
+   </view>
+   <view class='li' catchtap='linkLDCJ'>
+     <image class='icon_ldcj' src='../../image/icon_ldcj.png'></image>
+     <text>路段采集</text>
+   </view>
+   <view class='li' catchtap='linkSGLB'>
+     <image class='icon_sglb' src='../../image/icon_sglb.png'></image>
+     <text>事故列表</text>
+   </view>
+   <view class='li' catchtap='linkYHLB'>
+     <image class='icon_yhlb' src='../../image/icon_yhlb.png'></image>
+     <text>隐患列表</text>
+   </view>
+   <view class='li' catchtap='linkSGFX'>
+     <image class='icon_sgfx' src='../../image/icon_sgfx.png'></image>
+     <text>事故分析</text>
+   </view>
+</view>
+<view class='navbar-footer'>
+  <!-- <image class='../../logo.png'></image> -->
+  <text>常德市交警支队</text>
+</view>
