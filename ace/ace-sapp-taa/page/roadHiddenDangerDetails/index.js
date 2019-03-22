@@ -10,7 +10,8 @@ Page({
     reportId:'',   //隐患id
     detailsInfo:{},   //详情信息
     yhTypeArray:[],   //隐患类型
-    toView:'intoViewFind',    //默认值  
+    headerHeight:0,    // id = 'header'高度  
+    boxHeight: 0,    // id = 'box'高度 
   },
 
   /**
@@ -22,6 +23,24 @@ Page({
     // 获取隐患id
     that.setData({
       reportId: reportId
+    });
+    //创建节点选择器
+    var query = wx.createSelectorQuery();
+    query.select('#header').boundingClientRect();
+    query.selectViewport().scrollOffset();
+    query.exec(function (res) {
+      that.setData({
+        headerHeight: res[0].height
+      })
+    });
+    //创建节点选择器
+      var query2 = wx.createSelectorQuery();
+    query2.select('#box').boundingClientRect();
+    query2.selectViewport().scrollOffset();
+    query2.exec(function (res) {
+      that.setData({
+        boxHeight: res[0].height
+      });
     });
   },
 
@@ -80,12 +99,15 @@ Page({
   /**
    * 滚动指定区域
    */
-  scrollToViewFn:function(e){
+  scrollToViewFn: function(e){
     var that = this;
-    var id = e.target.dataset.id;
-    that.setData({
-      toView:id
-    });
+    var headerHeight = that.data.headerHeight;
+    var boxHeight = that.data.boxHeight;
+    // 将页面滚动到目标位置
+    wx.pageScrollTo({
+      scrollTop: headerHeight + boxHeight ,
+      duration: 300
+    })
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -105,7 +127,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+       
   },
 
   /**
@@ -120,5 +142,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
 })

@@ -9,15 +9,14 @@ Page({
     // yhRole: false,    //隐患权限
     // dataRole: false,   // 事故分析
     yhRole: true,    //隐患权限
-    dataRole: true    // 事故分析
-
+    dataRole: true,    // 事故分析
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -34,7 +33,6 @@ Page({
     this.initUserData();     //初始化用户信息
     this.initAuthority();     //初始化权限信息
   },
-
   /**
    *   链接事故快报
    */
@@ -155,6 +153,7 @@ Page({
     },
       function (res) {
         console.log(res);
+        // 比较权限值
         if (res.length > 0) {
           for (var i = 0; i < res.length; i++) {
             if (yhRoleStr == res[i].role_id) {
