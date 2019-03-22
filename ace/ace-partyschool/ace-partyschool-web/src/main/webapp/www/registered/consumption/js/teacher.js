@@ -2,6 +2,22 @@ var lCardNo = null;
 var server = "https://www.cdswdx.top";
 $(function(){
 
+    new Mdate("dateShowBtn", {
+        acceptId: "dateSelectorOne",
+        beginYear: "2018",
+        beginMonth: "1",
+        beginDay: "24",
+        endYear: "2020",
+        endMonth: "12",
+        format: "-"
+    });
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    if(month < 10){
+        month = "0"+month;
+    }
+    $("#dateSelectorOne").val(year+"-"+month);
     $.ajax({
         url:  contextPath+ "/www/sign/getAcctInfo",
         type:"post",
@@ -34,14 +50,11 @@ $(function(){
     }
 });
 
-function initList(lCardNo){
-    var nowDate = new Date();
-    var year = nowDate.getFullYear();
-    var month = nowDate.getMonth() + 1;
-    if(month < 10){
-        month = "0"+month;
+function initList(lCardNo, dateTimeStr){
+    if(!dateTimeStr){
+        dateTimeStr = $("#dateSelectorOne").val();
     }
-    var dateTimeStr = year+"-"+month;
+
     $.ajax({
         url:  server+"/api/www/api/findTeacherFinDataList",
         type:"post",

@@ -8,6 +8,7 @@
 		<title>就餐记录</title>
 		<jsp:include page="../../common/common.jsp"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="js/Mdate/needcss/Mdate.css"/>
 	</head>
 	<body>
 		<div class="index">
@@ -17,8 +18,8 @@
 			<div class="title-box">
 				<div class="title">消费记录</div>
 				<div class="date-box">
-					<input type="text" id="dateSelectorOne" value="2019-02" readonly/>
-					<img src="img/icon-drop-down.png" class="icon-date-picker">
+					<input type="text" id="dateSelectorOne" placeholder="请选择" readonly/>
+					<img src="img/icon-drop-down.png" class="icon-date-picker" id="dateShowBtn">
 				</div>
 			</div>
 			<div class="list" id="list">
@@ -46,6 +47,8 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 		<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
+		<script type="text/javascript" src="js/Mdate/iScroll.js"></script>
+		<script type="text/javascript" src="js/Mdate/Mdate.js"></script>
 		<script type="text/javascript" src="js/teacher.js"></script>
 	</body>
 </html>
