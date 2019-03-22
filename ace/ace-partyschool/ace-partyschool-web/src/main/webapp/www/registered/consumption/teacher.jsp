@@ -14,7 +14,13 @@
 			<div class="banner" id="balance">
 
 			</div>
-			<div class="title">消费记录</div>
+			<div class="title-box">
+				<div class="title">消费记录</div>
+				<div class="date-box">
+					<input type="text" id="dateSelectorOne" value="2019-02" readonly/>
+					<img src="img/icon-drop-down.png" class="icon-date-picker">
+				</div>
+			</div>
 			<div class="list" id="list">
 
 			</div>

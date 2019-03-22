@@ -48,13 +48,47 @@ body{
 	color: #FFFFFF;
 	font-size: 0.346666rem;
 }
+.title-box{
+	width: 9.2rem;
+	height: 1.4rem;
+	margin: 0 auto;
+}
+.title-box:after{
+	content: '';
+	clear: both;
+	display: block;
+}
 .title{
-	padding-left: 0.426666rem;
-	padding-top: 0.293333rem;
-	padding-bottom: 0.52rem;
+	width: 4.2rem;
+	height: 1.4rem;
+	line-height: 1.4rem;
+	float: left;
 	color: #373F53;
 	font-size: 0.453333rem;
 	font-weight: bold;
+}
+.date-box{
+	width: 3rem;
+	height: 1.4rem;
+	float: right;
+}
+.date-box:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.date-box input{
+	width: 2.4rem;
+	height: 1.4rem;
+	display: block;
+	outline: none;
+	border: none;
+	border-radius: 0.4rem;
+	color: #373F53;
+	font-size: 0.4rem;
+	font-weight: bold;
+    float: left;
+    text-align: center;
 }
 .list{
 	padding-left: 0.4rem;
@@ -118,4 +152,10 @@ body{
 	color: #ABAEB9;
 	font-size: 0.32rem;
 	padding-top: 0.266666rem;
+}
+.icon-date-picker{
+    width: 0.373333rem;
+    height: 0.213333rem;
+    float: left;
+    margin-top: 0.59333rem;
 }
