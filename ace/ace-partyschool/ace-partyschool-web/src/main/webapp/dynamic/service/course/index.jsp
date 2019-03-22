@@ -39,7 +39,7 @@
                         <input type="text"
                                name="keyword1"
                                class="form-control"
-                               placeholder="请输入讲师名字">
+                               placeholder="请输入授课人名字">
                     </div>
                     <div class="input-group">
                         <input type="text"
@@ -66,7 +66,7 @@
 
                     <th width="10%"> 类型</th>
                     <th width="15%"> 测评方案</th>
-                    <th width="10%"> 讲师</th>
+                    <th width="10%"> 授课人</th>
 
                     <th width="20%">操作</th>
                 </tr>
@@ -153,7 +153,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">讲师id</label>
+        <label class="col-md-2 view-label">授课人id</label>
         <div class="col-md-10">
             \${data.teacherName}
         </div>

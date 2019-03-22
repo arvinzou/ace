@@ -100,7 +100,87 @@ function initSelect() {
             },
             cache: true
         },
-        placeholder: '选择授课讲师',
+        placeholder: '选择授课人',
+        escapeMarkup: function (markup) {
+            return markup;
+        }, // let our custom formatter work
+        templateResult: formatState
+    });
+    $(".js-example-basic-single3").select2({
+        ajax: {
+            url: contextPath + '/teacher/findTeacherList',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    status:1,
+                    name: params.term, // search term
+                    page: params.page
+                };
+            },
+            processResults: function (data, params) {
+                params.page = params.page || 1;
+                var datas = $.map(data.rows, function (obj) {
+                    obj.text = obj.text || obj.name; // replace name with the property used for the text
+                    return obj;
+                });
+                datas = $.map(datas, function (obj) {
+                    obj.id = obj.id; // replace name with the property used for the text
+                    return obj;
+                });
+                return {
+                    results: datas,
+                    pagination: {
+                        more: (params.page * 30) < data.total_count
+                    },
+                    paginate: {
+                        more: true
+                    }
+                };
+            },
+            cache: true
+        },
+        placeholder: '选择授课人',
+        escapeMarkup: function (markup) {
+            return markup;
+        }, // let our custom formatter work
+        templateResult: formatState
+    });
+    $(".js-example-basic-single4").select2({
+        ajax: {
+            url: contextPath + '/teacher/findTeacherList',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    status:1,
+                    name: params.term, // search term
+                    page: params.page
+                };
+            },
+            processResults: function (data, params) {
+                params.page = params.page || 1;
+                var datas = $.map(data.rows, function (obj) {
+                    obj.text = obj.text || obj.name; // replace name with the property used for the text
+                    return obj;
+                });
+                datas = $.map(datas, function (obj) {
+                    obj.id = obj.id; // replace name with the property used for the text
+                    return obj;
+                });
+                return {
+                    results: datas,
+                    pagination: {
+                        more: (params.page * 30) < data.total_count
+                    },
+                    paginate: {
+                        more: true
+                    }
+                };
+            },
+            cache: true
+        },
+        placeholder: '选择授课人',
         escapeMarkup: function (markup) {
             return markup;
         }, // let our custom formatter work

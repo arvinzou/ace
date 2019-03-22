@@ -48,13 +48,13 @@
                                         </div>
                                         <template v-for="(item,index) in type1.topicOptList">
                                             <div class="option" v-if="index<2">
-                                                <input class="pointer" type="radio" name="type1" :value="index"/>
+                                                <input class="pointer" type="radio" onclick="check(this);"  name="type1" :value="index"/>
                                                 <textarea rows="1" type="text" class="option-text option-margin"
                                                           @input="autoHeight" v-model="item.content"
                                                           :placeholder="'选项'+(index+1)">{{item.content}}</textarea>
                                             </div>
                                             <div class="option" v-else>
-                                                <input class="pointer" type="radio" name="type1" :value="index"/>
+                                                <input class="pointer" type="radio" onclick="check(this);" name="type1" :value="index"/>
                                                 <textarea rows="1" type="text" @input="autoHeight" class="option-text"
                                                           v-model="item.content"
                                                           :placeholder="'选项'+(index+1)">{{item.content}}</textarea>

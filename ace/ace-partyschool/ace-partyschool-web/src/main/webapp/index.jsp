@@ -69,7 +69,7 @@ pageEncoding="utf-8" %>
         <div class="col-md-3">
             <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">讲师</h4>
+                <h4 class="widget-thumb-heading">授课人</h4>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-purple fa fa-graduation-cap"></i>
                     <div class="widget-thumb-body">

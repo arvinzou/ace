@@ -50,8 +50,8 @@ messages: {
     required: "请输入课节am:上午 pm:下午",
     maxlength:"课节am:上午 pm:下午字符长度不能超过20"
     },            teacherId: {
-    required: "请输入讲师",
-    maxlength:"讲师字符长度不能超过50"
+    required: "请输入授课人",
+    maxlength:"授课人字符长度不能超过50"
     },            courseId: {
     required: "请输入课程",
     maxlength:"课程字符长度不能超过50"
