@@ -476,7 +476,9 @@ Page({
     var that = this;
     var that = this;
     that.setData({
-      isEdit: false
+      isEdit: false,
+      carTypes: [],
+      carTypeStr: ""
     });
   },
   /**
@@ -609,12 +611,6 @@ Page({
             sectionFlag: false,
             sectionName: null,
             sectionId: null,
-            polyline: [{
-              points: [],
-              color: '#4350FC',
-              width: 8,
-              dottedLine: false
-            }]
           });
           that.getLocation();
           that.initDict();
