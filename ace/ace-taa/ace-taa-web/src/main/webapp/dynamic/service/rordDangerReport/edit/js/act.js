@@ -6,6 +6,7 @@ window.onload = function () {
         initForm();
         initEvents();
         appendUploadImageBtn();
+
     });
 }
 
@@ -25,6 +26,10 @@ function appendUploadImageBtn() {
 
         });
 
+}
+
+function del(obj) {
+    $(obj).closest('li').remove();
 }
 
 function reset_uploader(config) {
@@ -79,6 +84,7 @@ function initPage() {
     $('input[name=reportDate]').focus(function () {
         $(this).blur(); //不可输入状态
     });
+
 
     $('input[name=roadManId]').combogrid({
         panelWidth: 500,
