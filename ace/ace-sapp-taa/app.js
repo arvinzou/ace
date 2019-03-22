@@ -35,7 +35,8 @@ App({
     roadManName: null,
     collectionId: null,
     isCJ: false, // 当前数据是否是采集数据的标志
-    distance: ''
+    distance: '',
+    yhTypeArray:null,  //字典隐患类型
   },
   // lazy loading openid
   getUserOpenId: function(callback) {
