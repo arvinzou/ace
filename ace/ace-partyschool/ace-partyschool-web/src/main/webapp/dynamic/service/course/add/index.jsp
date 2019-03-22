@@ -69,7 +69,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">
 
-                            授课人
+                            授课人Ⅰ
                             <span class="required" aria-required="true"> * </span>﻿
                             ﻿
                         </label>
@@ -81,25 +81,45 @@
 
                     <div class="form-group">
                         <label class="col-md-2 control-label">
-
-                            授课人
-                            ﻿
+                            授课人Ⅱ
+                            <span class="required" aria-required="true"> &nbsp;&nbsp; </span>﻿
                         </label>
                         <div class="col-md-6">
                             <select style="width: 100%;height: 34px"
-                                    class="js-example-basic-single js-example-basic-single3" name="teacherId1"></select>
+                                    class="js-example-basic-single js-example-basic-single2" name="teacherId1"></select>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-md-2 control-label">
-
-                            授课人
-                            ﻿
+                            授课人﻿Ⅲ
+                            <span class="required" aria-required="true"> &nbsp;&nbsp; </span>﻿
                         </label>
                         <div class="col-md-6">
                             <select style="width: 100%;height: 34px"
-                                    class="js-example-basic-single js-example-basic-single4" name="teacherId2"></select>
+                                    class="js-example-basic-single js-example-basic-single2" name="teacherId2"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            授课人﻿Ⅳ
+                            <span class="required" aria-required="true"> &nbsp;&nbsp; </span>﻿
+                        </label>
+                        <div class="col-md-6">
+                            <select style="width: 100%;height: 34px"
+                                    class="js-example-basic-single js-example-basic-single2" name="teacherId3"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            授课人﻿Ⅴ
+                            <span class="required" aria-required="true"> &nbsp;&nbsp; </span>﻿
+                        </label>
+                        <div class="col-md-6">
+                            <select style="width: 100%;height: 34px"
+                                    class="js-example-basic-single js-example-basic-single2" name="teacherId4"></select>
                         </div>
                     </div>
 
@@ -129,7 +149,7 @@
 <script id="tpl-categorys" type="text/template">
     {@each data as item, index}
     <div style="float:left;padding:2px;width: 150px;">
-        <input type="radio" checked id="category\${index}"  name="category" value="\${item.CODE}">
+        <input type="radio" checked id="category\${index}" name="category" value="\${item.CODE}">
         <label for="category\${index}">
             \${item.NAME}
         </label>
