@@ -50,8 +50,9 @@ body{
 }
 .title-box{
 	width: 9.2rem;
-	height: 1.4rem;
+	height: auto;
 	margin: 0 auto;
+	padding-bottom: 0.2rem;
 }
 .title-box:after{
 	content: '';
