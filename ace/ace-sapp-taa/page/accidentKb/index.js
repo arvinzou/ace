@@ -10,7 +10,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tab: 1, // 0:事故快报，1：路段采集 默认显示1
     isNull: 0,
     wIndex: 0,
     cIndex: 0,
@@ -67,9 +66,8 @@ Page({
   onLoad: function(options) {
     var that = this;
     
-    if (!app.globalData.collectionId) {
       app.globalData.startName = '';
-      app.globalData.endName = null;
+      app.globalData.endName = '';
       that.setData({
         polyline: [{
           points: [],
@@ -78,11 +76,6 @@ Page({
           dottedLine: false
         }]
       });
-    } else {
-      that.setData({
-        collectionId: app.globalData.collectionId
-      });
-    }
     app.globalData.sectionId = null;
     app.globalData.sectionName = '';
     app.globalData.tab = null;
@@ -94,44 +87,7 @@ Page({
     });
 
   },
-  selectRoad: function() {
-    app.globalData.collectionId = null;
-    wx.navigateTo({
-      url: '../collection/index?type=cj',
-    });
-  },
-  /**
-   * 首页选项卡切换
-   */
-
-  changeTab: function(e) {
-    var that = this;
-    that.getLocation();
-    that.setData({
-      tab: e.target.dataset.index,
-      polyline: [{
-        points: [],
-        color: '#4350FC',
-        width: 8,
-        dottedLine: false
-      }]
-    });
-
-    app.globalData.startName = '';
-    app.globalData.endName = null;
-    app.globalData.sectionId = null;
-    app.globalData.sectionName = '';
-    app.globalData.tab = null;
-    app.globalData.cjSectionId = null;
-    app.globalData.roadManId = null;
-    app.globalData.roadManName = null;
-    app.globalData.collectionId = null;
-    that.setData({
-      sectionName: '请选择路段',
-      collectionId: app.globalData.collectionId
-    });
-    that.initUserData();
-  },
+  
   /**
    * 得到当前位置信息(经纬度)
    */
@@ -395,54 +351,6 @@ Page({
     });
 
   },
-  initDateTime: function() {
-    var that = this;
-    var obj = dateTimePicker.dateTimePicker(that.data.startYear, that.data.endYear);
-    console.log("============================" + obj.dateTime);
-    that.setData({
-      dateTimeArray: obj.dateTimeArray,
-      createDate: obj.dateTime,
-      accidentTime: obj.dateTime,
-    });
-    console.log(obj);
-  },
-  changeDateTime: function(e) {
-    var name = e.currentTarget.dataset.name;
-    var temp = {};
-    temp[name] = e.detail.value,
-      this.setData(temp);
-  },
-  changeDateTimeColumn: function(e) {
-    console.log(e);
-    var name = e.currentTarget.dataset.name;
-    var arr = this.data[name],
-      dateArr = this.data.dateTimeArray;
-
-    arr[e.detail.column] = e.detail.value;
-    dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
-
-    this.setData({
-      dateTimeArray: dateArr
-    });
-  },
-  fotmatPicker: function(dataTime) {
-    var val = [];
-    console.log(dataTime);
-    val.push(parseInt(dataTime.substring(2, 4)));
-    val.push(parseInt(dataTime.substring(5, 7) - 1));
-    val.push(parseInt(dataTime.substring(8, 10)) - 1);
-    val.push(parseInt(dataTime.substring(11, 13)));
-    val.push(parseInt(dataTime.substring(14, 16)));
-    val.push(parseInt(dataTime.substring(17, 19)));
-    return val;
-  },
-  formatDT: function(arr) {
-    return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1] + 1) + '-' + this.FN(arr[2] + 1) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':' + this.FN(arr[5]);
-  },
-
-  FN: function(num) {
-    return num >= 10 ? num : '0' + num;
-  },
 
   /**
    * 字典
@@ -478,7 +386,6 @@ Page({
 
   xbSubmit: function(e) {
     var that = this;
-    //var createDate = that.formatDT(e.detail.value.createDate);
     var createDate = util.formatDateTime(new Date());
     var weather = e.detail.value.weather;
     var vehicleType = that.data.carTypes;
@@ -643,27 +550,14 @@ Page({
     var that = this;
     if (!util.is_login()) {
       wx.navigateTo({
-        url: "../userinfo/index?url=../index/index&type=navigateTo"
+        url: "../userinfo/index?url=../accidentKb/index&type=navigateTo"
       });
     } else {
       that.initDict();
       that.getLocation();
       that.initUserData(); // 重置后从定向首页，初始化用户信息     
-      if (app.globalData.collectionId) {
+     
         that.setData({
-          startName: app.globalData.startName,
-          endName: app.globalData.endName,
-        });
-        console.log("startName=========endName==============" + that.data.startName);
-        that.initGpsList(app.globalData.collectionId);
-      } else {
-        that.setData({
-          polyline: [{
-            points: [],
-            color: '#4350FC',
-            width: 8,
-            dottedLine: false
-          }],
           sectionName: app.globalData.sectionName,
           sectionId: app.globalData.sectionId,
           roadManName: app.globalData.roadManName,
@@ -672,7 +566,6 @@ Page({
           sectionEndName: app.globalData.endName,
           distance: app.globalData.distance
         });
-      }
 
     }
     //设置采集标志，判断是否显示隐藏开始，暂停，结束按钮
@@ -682,96 +575,6 @@ Page({
 
   },
 
-  /**
-   * 开始采集
-   */
-  start: function(e) {
-    var that = this;
-    that.getLocate();
-    that.setData({
-      breakBtn: 'breakBtn',
-      activeBreak: 'activeBreak',
-      flaging: true,
-      frequency: 1
-    });
-    interval = setInterval(function() {
-      that.getLocate();
-      console.log("==================采集频率" + that.data.timeInterval);
-    }, that.data.timeInterval);
-  },
-  /**
-   * 暂停采集
-   */
-  break: function(e) {
-    var that = this;
-    clearInterval(interval);
-    that.setData({
-      activeBreak: '',
-      frequency: 0
-    })
-  },
-  /**
-   * 结束采集
-   */
-  end: function(e) {
-    var that = this;
-    clearInterval(interval);
-    var pointList = that.data.polyline[0].points;
-    var list = [];
-    for (var i in pointList) {
-      var roadGps = {};
-      roadGps.roadSectionId = that.data.cjSectionId;
-      roadGps.latitude = pointList[i].latitude;
-      roadGps.longitude = pointList[i].longitude;
-      roadGps.gatherTime = pointList[i].gatherTime;
-      list.push(roadGps);
-    }
-    that.setData({
-      breakBtn: '',
-      activeBreak: '',
-      flaging: false,
-      frequency: 0
-    });
-
-    wx.showModal({
-      title: '提示',
-      content: '确定提交？',
-      success(res) {
-        if (res.confirm) {
-          util.post(cfg.server + '/taa/www/road/gather', {
-              jsonData: JSON.stringify({
-                list
-              })
-            },
-            function(res) {
-              if (res.status == 0) {
-                wx.showModal({
-                  title: '提示',
-                  content: res.info,
-                  showCancel: false,
-                  success: function(res) {
-
-                  }
-                });
-                wx.navigateTo({
-                  url: '../collection/index?tab=1',
-                })
-              } else {
-                wx.showModal({
-                  title: '提示',
-                  content: res.info,
-                  success: function(res) {}
-                });
-              }
-
-            }
-          );
-        } else if (res.cancel) {
-
-        }
-      }
-    });
-  },
   /**
    * 获取地址
    */
@@ -801,57 +604,8 @@ Page({
     return o;
   },
 
-  locateLine: function() {
 
-  },
-
-  /**
-   * 减少采集频率 以1秒为单位
-   */
-  reduce: function() {
-    var that = this;
-    var time = that.data.timeInterval;
-    if (time > 1000) {
-      time = time - 1000;
-      that.setData({
-        timeInterval: time
-      });
-      var interval = time / 1000;
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '采集频率开始以' + interval + '秒间隔采集！',
-        success: function(res) {}
-      });
-    } else {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '采集频率已经减少到最低1秒采集了！',
-        success: function(res) {}
-      });
-    }
-  },
-
-  /**
-   * 增加采集频率，以1秒为单位
-   */
-  increase: function() {
-    var that = this;
-    var time = that.data.timeInterval;
-    if (time > 1000) {
-      time = time + 1000;
-      that.setData({
-        timeInterval: time
-      });
-      var interval = time / 1000;
-      wx.showModal({
-        title: '提示',
-        content: '采集频率开始以' + interval + '秒间隔采集！',
-        success: function(res) {}
-      });
-    }
-  },
+  
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -878,7 +632,6 @@ Page({
     });
     that.getLocation();
     that.initDict();
-    // that.initDateTime();
   },
   /**
    * 重新定位，重置数据
@@ -909,77 +662,7 @@ Page({
       }
     })
   },
-  /**
-   * 重新定位采集信息
-   */
-  resetCj: function() {
-    var that = this;
-    wx.showModal({
-      title: '提示',
-      content: '确定要重新获取位置信息吗？重置后您当前的信息会被清空。',
-      success: function(res) {
-        if (res.confirm) {
-          that.setData({
-            startName: null,
-            startName: null,
-            tab: 1,
-            polyline: [{
-              points: [],
-              color: '#4350FC',
-              width: 8,
-              dottedLine: false
-            }],
-            flaging: false,
-            frequency: 0, //是否显示加减频率
-            timeInterval: that.data.timeInterval, //采集频率以10秒为单位
-            activeBreak: ''
-          });
-          that.getLocation();
-        } else if (res.cancel) {
 
-        }
-      }
-    })
-
-  },
-
-  /**
-   * 获取已采集的坐标点
-   */
-  initGpsList: function(sectionId) {
-    var that = this;
-    util.request(cfg.server + '/taa/www/road/getGPSList', {
-        sectionId: sectionId
-      },
-      function(res) {
-        if (res.status == 0) {
-          var pointList = that.data.polyline[0].points;
-          var retList = res.value;
-          for (var i = 0; i < retList.length; i++) {
-            var latitude = retList[i].latitude;
-            var longitude = retList[i].longitude;
-            var o = {
-              longitude: longitude,
-              latitude: latitude
-            }
-            pointList.push(o);
-          }
-
-          that.setData({
-            ['polyline[0].points']: pointList
-          });
-          // console.log("已经采集的信息==========================" + that.data.polyline[0].points);
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: res.info,
-            success: function(res) {}
-          });
-        }
-
-      }
-    );
-  },
   /**
    * 页面上拉触底事件的处理函数
    */
