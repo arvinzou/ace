@@ -195,15 +195,15 @@ function findList(){
                 //下午签到
                 if(result.data.pm.length <1){
                     //2:00~3:30允许签到
-                    if(hour >= 2 && hour <= 3.5){
+                    if(hour >= 14 && hour <= 15.5){
                         $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签到</p></div>');
-                    }else if(hour >3.5 && hour <= 6){
+                    }else if(hour >15.5 && hour <= 18){
                         //3:30~6:00允许签退
                         $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签退</p></div>');
                     }
 
                 }else if(result.data.pm.length >0 && result.data.pm.length<2){
-                    if(hour >=3.5 && hour <= 6){
+                    if(hour >=15.5 && hour <= 18){
                         $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签退</p></div>');
                     }
                 }
