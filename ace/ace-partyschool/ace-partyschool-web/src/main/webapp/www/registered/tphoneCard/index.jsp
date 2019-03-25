@@ -31,7 +31,7 @@
 		</div>
 
 		<script type="text/template" id="user-tpl">
-			<div class="headerImg">
+			<div class="headerImg" onclick="exitUserInfo();">
 				{@if data.isBindWx == "1"}
 				<img src="\${data.avatarUrl}"/>
 				{@else}

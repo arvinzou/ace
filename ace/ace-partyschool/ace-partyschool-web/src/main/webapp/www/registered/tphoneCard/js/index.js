@@ -195,3 +195,10 @@ function findList(){
         }
     });
 }
+
+/**
+ * 点击头像进入到个人中心页面
+ */
+function exitUserInfo(){
+    window.location.href = contextPath + '/www/registered/person/index.jsp';
+}
