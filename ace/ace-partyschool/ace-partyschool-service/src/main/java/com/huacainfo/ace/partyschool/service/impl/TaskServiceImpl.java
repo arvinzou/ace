@@ -13,22 +13,26 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.partyschool.dao.NoticeDao;
 import com.huacainfo.ace.partyschool.dao.TaskDao;
+import com.huacainfo.ace.partyschool.dao.TestRstDao;
 import com.huacainfo.ace.partyschool.model.Notice;
 import com.huacainfo.ace.partyschool.model.Task;
 import com.huacainfo.ace.partyschool.service.NoticeStatusService;
 import com.huacainfo.ace.partyschool.service.TaskService;
 import com.huacainfo.ace.partyschool.vo.TaskQVo;
 import com.huacainfo.ace.partyschool.vo.TaskVo;
+import com.huacainfo.ace.partyschool.vo.TestRstVo;
+import com.huacainfo.ace.partyschool.vo.TopicRstVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("taskService")
 /**
@@ -46,6 +50,8 @@ public class TaskServiceImpl implements TaskService {
     private NoticeStatusService  noticeStatusService;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private SqlSessionTemplate sqlSession;
 
 
     /**
@@ -374,4 +380,52 @@ public class TaskServiceImpl implements TaskService {
         this.dataBaseLogService.log("跟新状态", "任务管理", id, id, "任务管理", userProp);
         return new MessageResponse(0, "成功！");
     }
+
+
+
+    @Override
+    public SingleResult<List<Map<String, String>>> exportData(String id) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TestRstDao dao = session.getMapper(TestRstDao.class);
+        List<TestRstVo> list = new ArrayList<TestRstVo>() {
+        };
+        try {
+            list = dao.exportData(id);
+//            WriteExcel(list);
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
+        }
+        if(list.size()<1){
+            return new SingleResult<>(ResultCode.FAIL,null);
+        }
+        List<Map<String, String>> listMap = new ArrayList<Map<String, String>>();
+        if (!CommonUtils.isBlank(list)) {
+            for (TestRstVo item : list) {
+                Map<String, String> map = Object2Map(item);
+                listMap.add(map);
+            }
+        }
+        SingleResult<List<Map<String, String>>> rs = new SingleResult<List<Map<String, String>>>();
+        rs.setValue(listMap);
+        return rs;
+    }
+
+    public Map<String, String> Object2Map(TestRstVo obj) throws Exception {
+        Map<String, String> map = new LinkedHashMap<String, String>();
+        map.put("名字", obj.getCreateUserName());
+        map.put("问卷名",obj.getName());
+        map.put("分数",obj.getScore().toString());
+        Map<String, String> temp = new LinkedHashMap<String, String>();
+        for (TopicRstVo item : obj.getTopicRstVoList()) {
+            temp.put(item.getContent(), item.getAnswer());
+        }
+        map.putAll(temp);
+        return map;
+    }
+
+
 }

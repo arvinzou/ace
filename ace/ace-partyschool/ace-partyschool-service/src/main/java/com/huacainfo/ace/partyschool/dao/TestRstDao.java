@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import com.huacainfo.ace.partyschool.model.EvaluationExport;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.partyschool.model.TestRst;
 import com.huacainfo.ace.partyschool.vo.TestRstQVo;
@@ -48,5 +49,7 @@ public interface TestRstDao {
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
     int computScore(String id);
+
+    List<TestRstVo> exportData(@Param("taskId") String taskId);
 
 }

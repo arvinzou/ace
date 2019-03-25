@@ -162,22 +162,23 @@
             <result column="ttcontent" property="content"/>
             <result column="ttype" property="type"/>
             <result column="ttanswer" property="answer"/>
-            <result column="ttScore" property="tscore"/>
+            <!--<result column="ttScore" property="tscore"/>-->
         </collection>
     </resultMap>
 
 
-    <select id="exportXls" parameterType="java.lang.String" resultMap="ResultMapTestTopicRst">
+    <select id="exportData" parameterType="java.lang.String" resultMap="ResultMapTestTopicRst">
         SELECT
+        s.id,
         s.uname as createUserName,
         s.NAME AS name,
-        ifnull(s.score,0) as ttScore,
+        ifnull(s.score,0) as score,
         s.content as ttcontent,
         concat(group_concat(s.torcontent SEPARATOR ','),ifnull(s.answer,'')) AS ttanswer,
         IFNULL(s.youScore,0) AS youScore,
         s.type as ttype
         FROM
-        (SELECT m.uname, t.NAME,t.score,tr.content,tr.youScore,tor.content AS torcontent, tor.topicId,tr.`type`,tr.answer
+        (SELECT t.id, m.uname, t.NAME,t.score,tr.content,tr.youScore,tor.content AS torcontent, tor.topicId,tr.`type`,tr.answer
         FROM partyschool.test_rst t
         LEFT JOIN (
                 select s.id,s.`name` AS uname from partyschool.student s
