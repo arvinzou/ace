@@ -177,23 +177,41 @@ function findList(){
                 $("#count").text("今日已签到"+num+"/5");
                 var date = new Date();
                 var hour = date.getHours();
-                if(hour < 12){
-                    //上午签到
-                    if(result.data.am.length <1){
+                var minute = date.getMinutes();
+                //上午签到
+                if(result.data.am.length <1){
+                    if(hour >= 8 && hour <=10){
+                        //8:00~10:00允许签到
                         $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签到</p></div>');
-                    }else if(result.data.am.length >0 && result.data.am.length<2){
+                    }else if(hour >= 10 && hour <= 12.5){
+                        //10:00~12:30允许签退
                         $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签退</p></div>');
                     }
-                }else if(hour >=12 && hour < 19){
-                   //下午签到
-                    if(result.data.pm.length <1){
+                }else if(result.data.am.length >0 && result.data.am.length<2){
+                    if(hour >= 10 && hour <= 12.5){
+                        $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签退</p></div>');
+                    }
+                }
+                //下午签到
+                if(result.data.pm.length <1){
+                    //2:00~3:30允许签到
+                    if(hour >= 2 && hour <= 3.5){
                         $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签到</p></div>');
-                    }else if(result.data.pm.length >0 && result.data.pm.length<2){
+                    }else if(hour >3.5 && hour <= 6){
+                        //3:30~6:00允许签退
                         $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签退</p></div>');
                     }
-                }else{
-                    //晚上签到
-                    if(result.data.night.length <1){
+
+                }else if(result.data.pm.length >0 && result.data.pm.length<2){
+                    if(hour >=3.5 && hour <= 6){
+                        $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签退</p></div>');
+                    }
+                }
+
+                //晚上签到
+                if(result.data.night.length <1){
+                    //10:00~11:00允许签到
+                    if(hour >= 22 && hour <= 23){
                         $("#nightBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">晚上签到</p></div>');
                     }
                 }
