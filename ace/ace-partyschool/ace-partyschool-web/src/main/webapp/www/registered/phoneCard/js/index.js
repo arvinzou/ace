@@ -177,7 +177,8 @@ function findList(){
                 $("#count").text("今日已签到"+num+"/5");
                 var date = new Date();
                 var hour = date.getHours();
-                var minute = date.getMinutes();
+                var minute = date.getMinutes()/60;
+                hour = hour + minute;
                 //上午签到
                 if(result.data.am.length <1){
                     if(hour >= 8 && hour <=10){
