@@ -394,6 +394,7 @@ Page({
           for (var i = 0; i < tempFilePaths.length; i++) {
             noChangedImagesUrl.push(tempFilePaths[i]);
           }
+          that.imagesUploadServer(noChangedImagesUrl); //图片上传到服务器
           that.setData({
             noChangedImagesUrl: noChangedImagesUrl
           });
@@ -432,11 +433,11 @@ Page({
    * 提交确认后
    * 图片上传服务器
    */
-  imagesUploadServer: function() {
+  imagesUploadServer: function(noChangedImagesUrl) {
     var that = this;
-    var noChangedImagesUrl = that.data.noChangedImagesUrl;
-    var noChangedServerImagesUrl = that.data.noChangedServerImagesUrl;
-    console.log(noChangedImagesUrl)
+    // var noChangedImagesUrl = that.data.noChangedImagesUrl;
+    var noChangedServerImagesUrl = [];
+    // console.log(noChangedImagesUrl)
     if (noChangedImagesUrl.length > 0) {
       for (var i = 0; i < noChangedImagesUrl.length; i++) {
         wx.showLoading({
@@ -464,6 +465,9 @@ Page({
             var filePath = obj.file_path;
             filePath = filePath.replace(/^http*/, 'https'); //正则匹配以http开头，s可选的字符串
             noChangedServerImagesUrl.push(filePath);
+            that.setData({
+                noChangedServerImagesUrl:noChangedServerImagesUrl
+            });
           },
           fail: function(res) {
             wx.hideLoading();
@@ -477,6 +481,7 @@ Page({
       that.setData({
         noChangedServerImagesUrl: noChangedServerImagesUrl
       });
+      console.log("fileUrl============================="+that.data.noChangedServerImagesUrl);
     } else {
       wx.showModal({
         title: "提示",
@@ -520,6 +525,7 @@ Page({
     var describe = that.data.describe; //隐患详细情况
     var noChangedImagesUrl = that.data.noChangedImagesUrl; //未整改的图片url
     var noChangedServerImagesUrl = that.data.noChangedServerImagesUrl; //未整改的服务器图片url
+    console.log("************************************" + noChangedServerImagesUrl);
     // 验证路段
     if (sectionName == null || sectionName == '') {
       wx.showToast({
@@ -563,9 +569,9 @@ Page({
     // 验证隐患详细 和 图片
     if ((describe != '') || (noChangedImagesUrl.length > 0)) {
       console.log(describe, noChangedImagesUrl.length)
-      if (noChangedImagesUrl.length > 0) {
-        that.imagesUploadServer(); //图片上传服务器
-      }
+    //   if (noChangedImagesUrl.length > 0) {
+    //     that.imagesUploadServer(); //图片上传服务器
+    //   }
     } else {
       wx.showModal({
         title: '提示',
@@ -620,7 +626,7 @@ Page({
           console.log(res)
         }
       );
-    }, 500)
+    }, 1000)
 
   },
 
