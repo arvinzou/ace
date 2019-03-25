@@ -179,10 +179,14 @@ function findList(){
                 var hour = date.getHours();
                 //签到  6:30~11:00允许签到
                 if(hour >=6.5 && hour <= 11){
-                    $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">签到</p></div>');
+                    if(result.data.am.length <1){
+                        $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">签到</p></div>');
+                    }
                 }else if(hour >= 15.5 && hour <= 19.5){
                     //签退  3:30~7:30允许签退
-                    $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">签退</p></div>');
+                    if(result.data.pm.length <1){
+                        $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">签退</p></div>');
+                    }
                 }
             }
         },
