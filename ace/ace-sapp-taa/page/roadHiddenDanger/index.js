@@ -55,7 +55,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.initDict(); // 初始化字典
+    var that = this;
+    that.initDict(); // 初始化字典
+    that.getLocation();
   },
 
 
@@ -71,7 +73,6 @@ Page({
    */
   onShow: function() {
     var that = this;
-    that.getLocation(); // 获取地理位置
     var sectionId = app.globalData.sectionId; //  路段id
     var sectionName = app.globalData.sectionName; //路段名
     var roadManId = app.globalData.roadManId; // 路长id
@@ -599,16 +600,9 @@ Page({
               showCancel: false,
               success: function(res) {
                 if (res.confirm) {
-                  that.setData({
-                    sectionFlag: false,
-                    sectionId: '',
-                    sectionName: '',
-                    roadManId: '',
-                    roadManName: '',
-                    noChangedImagesUrl: [],
-                    describe: '',
-                  });
-                  that.onShow();
+                  wx.navigateTo({
+                      url: '../roadHiddenDangerList/index',
+                  })
                 }
               }
             });
