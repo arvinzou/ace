@@ -134,8 +134,13 @@ function record(){
                 })
             },
             success:function(result){
-                alert("签到成功！");
-                findList();
+                if(result.status  == 1 && result.info == "ERROR_POINT"){
+                    alert("对不起，您当前不在考勤区域内，不能签到！");
+                }
+                if(result.status == 0){
+                   alert("签到成功！");
+                    findList();
+                }
             },
             error:function(){
                 alert("系统服务内部异常！");
