@@ -229,6 +229,17 @@
 					</div>
 				</div>
 			</div>
+			<div class="row mr">
+				<div class="item" onclick="makeTattand();">
+					<div class="item-left">
+						<img src="img/icon-phone-card.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">手机考勤</div>
+						<div class="menu-content">签到</div>
+					</div>
+				</div>
+			</div>
 			{@/if}
 		</script>
 
