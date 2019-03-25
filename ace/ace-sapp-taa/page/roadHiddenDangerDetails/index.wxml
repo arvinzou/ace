@@ -74,17 +74,25 @@
             <view class='row-left'>整改措施</view>
           </view>
           <view class='row br'>
-            <view class='row-right content road-hidden-describe' wx:if="{{detailsInfo.reason != ''}}">{{detailsInfo.reason}}</view>
+            <view class='row-right content road-hidden-describe' wx:if="{{detailsInfo.takeSteps != ''}}">{{detailsInfo.takeSteps}}</view>
             <view class='row-right content road-hidden-describe' wx:else>{{detailsInfo.takeSteps}}</view>
           </view>
           <view class='row br'>
-            <view class='row-left'>现场照片</view>
+            <view class='row-left'>整改照片</view>
           </view>
-          <view class='row' wx:if="{{detailsInfo.changedList.length > 0}}">
+          <view class='row br' wx:if="{{detailsInfo.changedList.length > 0}}">
             <view class='row-right content image-wrap'>
               <block wx:for="{{detailsInfo.changedList}}" wx:key="abd">
                 <image src='{{item.fileUrl}}'></image>
               </block>
+            </view>
+          </view>
+          <view class='row br'>
+             <view class='row-left'>退回原因</view>
+          </view>
+          <view class='row br'>
+            <view class='content '>
+                {{detailsInfo.reason}}
             </view>
           </view>
         </view>
