@@ -123,7 +123,7 @@ function activeSearch() {
 
 function initClasses(){
     $.ajax({
-        url: contextPath+ "/www/classes/getMyClasses",
+        url: contextPath+ "/www/classes/findClassList",
         type:"post",
         async:false,
         data:{
@@ -131,16 +131,12 @@ function initClasses(){
         },
         success:function(result){
             if(result.status == 0) {
-              if(result.data.length <1 && regType == 'teacher'){
-                  alert("对不起！您没有对班级进行授课，不能上传班级文件。");
-                  return;
-              }else{
                   if(regType == 'student'){
                       $("#classFilter").hide();
                       fileList();
                   }else{
-                      $("#clazz").text(result.data[0].name);
-                      var data = result.data;
+                      $("#clazz").text(result.rows[0].name);
+                      var data = result.rows;
                       var classesArr = [];
                       for(var i=0; i<data.length; i++){
                           var o = {};
@@ -168,8 +164,6 @@ function initClasses(){
                           }
                       });
                   }
-
-              }
             }else {
                 if(result.info){
                     alert(result.info);
