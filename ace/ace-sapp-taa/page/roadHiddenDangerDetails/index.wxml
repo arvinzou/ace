@@ -87,14 +87,16 @@
               </block>
             </view>
           </view>
-          <view class='row br'>
-             <view class='row-left'>退回原因</view>
-          </view>
-          <view class='row br'>
-            <view class='content '>
-                {{detailsInfo.reason}}
+          <block wx:if='{{detailsInfo.reason}}'>
+            <view class='row br'>
+                <view class='row-left'>退回原因</view>
             </view>
-          </view>
+            <view class='row br'>
+                <view class='content '>
+                    {{detailsInfo.reason}}
+                </view>
+            </view>
+        </block>
         </view>
       </view>
     </view>
