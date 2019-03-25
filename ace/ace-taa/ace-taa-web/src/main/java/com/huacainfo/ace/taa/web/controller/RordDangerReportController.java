@@ -36,9 +36,6 @@ public class RordDangerReportController extends TaaBaseController {
     private RoadDangerReportService rordDangerReportService;
 
 
-    //  @Autowired
-    //  private RoadDangerReportPicService rordDangerReportPicService;
-
     /**
      * @throws
      * @Title:find!{bean.name}List

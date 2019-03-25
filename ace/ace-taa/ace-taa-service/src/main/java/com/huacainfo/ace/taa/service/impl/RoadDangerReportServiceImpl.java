@@ -326,17 +326,7 @@ public class RoadDangerReportServiceImpl implements RoadDangerReportService {
      */
     @Override
     public ResultResponse findViewList(UserProp user, RoadDangerReportQVo condition, PageParamNoChangeSord page) throws Exception {
-        //部门筛选条件
-        // condition.setDptId(user.getCorpId());
-        //本人or内勤人员
-      /*  int i = officeAdminDao.isExistByUserId(user.getUserId());
-        if (i == 1) {
-            //内勤人员，展示同部门所有数据
-            condition.setOfficeAdmin("1");
-        } else {
-            //非内勤人员，仅展示本人上报数据
-            condition.setOfficeAdmin(user.getUserId());
-        }*/
+
         //获取用户id
         condition.setUserId(user.getUserId());
 

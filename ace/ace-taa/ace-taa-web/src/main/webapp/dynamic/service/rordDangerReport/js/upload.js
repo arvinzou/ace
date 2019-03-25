@@ -30,6 +30,7 @@ function init_uploader(config) {
         url: config.url,
     });
     var uploader = $('#uploader').pluploadQueue();
+
     uploader.bind("UploadComplete", function () {
 
     });

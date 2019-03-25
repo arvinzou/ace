@@ -112,10 +112,8 @@
                     {@each data.dict['175'] as item, index}
                     {@if item.CODE!=''}
                     {@if item.CODE === data.o.type}
-                    <label class="mt-radio mt-radio-outline" style="width: 150px;">
-                        <input type="text" name="type" value="\${item.CODE}" readonly>\${item.NAME}
+                    <input type="hidden" class="form-control" name="type" value="\${item.CODE}">\${item.NAME}
                         <span></span>
-                    </label>
                     {@/if}
                     {@/if}
                     {@/each}

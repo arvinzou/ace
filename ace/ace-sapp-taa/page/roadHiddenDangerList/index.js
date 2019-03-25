@@ -19,7 +19,7 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-    that.initDict();    //初始化字典
+    that.initDict(); //初始化字典
   },
 
   /**
@@ -36,12 +36,12 @@ Page({
     this.initRoadHiddenDangerList(); // 初始化隐患列表
   },
   /**
-  *  初始化字典
-  */
-  initDict: function () {
+   *  初始化字典
+   */
+  initDict: function() {
     var that = this;
     util.request(cfg.server + '/portal/content/common/js/dict_taa.js', {},
-      function (res) {
+      function(res) {
         var oIndex = res.indexOf("=");
         var retData = res.substring(oIndex + 1, res.length);
         var retObj = JSON.parse(retData);
@@ -62,7 +62,7 @@ Page({
           app.globalData.yhTypeArray = yhTypeArray;
         }
       },
-      function (res) {
+      function(res) {
         console.log(res);
       }
     );
@@ -73,8 +73,7 @@ Page({
   initRoadHiddenDangerList: function(e) {
     var that = this;
     // 测试查询隐患列表 
-     util.request(cfg.server + '/taa/www/roadDangerReport/findReportList', {
-      },
+    util.request(cfg.server + '/taa/www/roadDangerReport/findReportList', {},
       function(res) {
         if (res.status == 0) {
           var yhList = res.data.rows;
@@ -82,7 +81,7 @@ Page({
             that.setData({
               yhList: res.data.rows
             });
-          }else{
+          } else {
             that.setData({
               yhList: []
             })
@@ -126,7 +125,7 @@ Page({
       success: function(res) {
         if (res.confirm) {
           // 测试查询隐患列表 
-           util.request(cfg.server + '/taa/www/roadDangerReport/repealReport', {
+          util.request(cfg.server + '/taa/www/roadDangerReport/repealReport', {
               reportId: reportId
             },
             function(res) {
@@ -137,8 +136,8 @@ Page({
                   content: '撤销' + res.errorMessage,
                   showCancel: false
                 });
-               
-                that.onShow();     //刷新页面
+
+                that.onShow(); //刷新页面
               } else {
                 wx.showModal({
                   title: '提示',

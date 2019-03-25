@@ -15,6 +15,11 @@
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
+    <script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+    <script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
+
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -51,7 +56,7 @@
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入上报单位/上报人/归属路段">
+                               placeholder="请输入上报单位/上报人/归属路段/归属路长">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn"
                                     type="submit">
@@ -159,14 +164,14 @@
                                 <div class="radio-group-container">
                                     <textarea name="reason" cols="80" rows="3" id="reason"> </textarea>
                                 </div>
-                                <div class="error-reason"></div>
+                                <div class="error-reason" id="error-reason" style="color: red" hidden>退回原因不能为空</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn" id="saveReason" onclick="saveReason();">确定</button>
+                <button type="button" class="" id="saveReason" onclick="saveReason();">确定</button>
 
 
                 <button type="button" class="btn " data-dismiss="modal">关闭</button>
@@ -264,11 +269,11 @@
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">现场照片</label>
-        <div class="col-md-10">
-            {@each data.o.picList as pic, index}
+        {@each data.o.picList as pic, index}
+        <div class="my-gallery" style="float:left;padding:5px;">
             <img src="\${pic.fileUrl}" class="cover"/>
-            {@/each}
         </div>
+        {@/each}
 
     </div>
     <div class="form-group">
@@ -279,19 +284,58 @@
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">整改照片</label>
-        <div class="col-md-10">
-            {@each data.o.changedList as pic1, index}
+        {@each data.o.changedList as pic1, index}
+        <div class="my-gallery" style="float:left;padding:5px">
             <img src="\${pic1.fileUrl}" class="cover"/>
-            {@/each}
+        </div>
+        {@/each}
+    </div>
+    {@if data.o.reason !=null && data.o.status==4}
+    <div class="form-group">
+        <label class="col-md-2 view-label">退回原因</label>
+        <div class="col-md-10">
+            \${data.o.reason}
         </div>
     </div>
 
-
+    {@/if}
     </div>
 
 </script>
 
-
+<div id="j-pswp" class="pswp" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
 <style>
     .cover {
         width: 70px;

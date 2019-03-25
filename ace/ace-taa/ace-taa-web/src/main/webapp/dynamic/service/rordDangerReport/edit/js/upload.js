@@ -40,8 +40,8 @@ function init_uploader(config) {
             alert(rst.errorMessage);
         } else {
             $('#images ul').append("<li>\n" +
-                "                            <img src=\"" + rst.file_path + "\" alt=\"\">\n" +
-                "                        </li>");
+                "  <img src=\"" + rst.file_path + "\" alt=\"\">\n" +
+                "   <button  class=\"art-remove\" onclick=\"del(this);\">删除</button></li>");
         }
         $('#modal-upload').modal('hide');
     });
