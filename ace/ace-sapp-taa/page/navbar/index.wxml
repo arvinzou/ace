@@ -35,6 +35,5 @@
    </view>
 </view>
 <view class='navbar-footer'>
-  <!-- <image class='../../logo.png'></image> -->
   <text>常德市交警支队</text>
 </view>
