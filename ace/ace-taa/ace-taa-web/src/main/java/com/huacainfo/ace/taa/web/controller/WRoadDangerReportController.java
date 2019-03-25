@@ -39,8 +39,7 @@ public class WRoadDangerReportController extends TaaBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private RoadDangerReportService roadDangerReportService;
-    @Autowired
-    private AuthorityService authorityService;
+
 
     /**
      * 获取路患列里 --小程序端展示
@@ -173,7 +172,7 @@ public class WRoadDangerReportController extends TaaBaseController {
      */
     @RequestMapping("/findUserRole")
     @ResponseBody
-    public List<Map<String, Object>> findUserRole(String uid) throws Exception {
+    public ResultResponse findUserRole(String uid) throws Exception {
         //微信鉴权信息 --小程序
         WxUser user = getCurWxUser();
         if (StringUtil.isNotEmpty(uid)) {
@@ -182,11 +181,10 @@ public class WRoadDangerReportController extends TaaBaseController {
             user.setNickName("test");
         }
         if (user == null) {
-            //     return new MessageResponse(ResultCode.FAIL, "微信授权失败");
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
         }
-
         List<Map<String, Object>> roleList = roadDangerReportService.selectUserRole(uid);
 
-        return roleList;
+        return new ResultResponse(ResultCode.SUCCESS, "", roleList);
     }
 }
