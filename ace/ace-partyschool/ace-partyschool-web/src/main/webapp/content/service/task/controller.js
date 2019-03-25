@@ -112,7 +112,7 @@ function del(rowid) {
 
 
 function exports(rowid){
-    window.location.href = contextPath + '/evaluationRst/exportData?id=' + urlParams.id;
+    window.location.href = contextPath + '/task/exportData?id=' +rowid;
 }
 
 function setParams(key, value) {

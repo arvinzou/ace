@@ -142,6 +142,8 @@ public interface TaskService {
      */
     public Map<String, Object> getListByCondition(Map<String, Object> params);
 
+    SingleResult<List<Map<String,String>>> exportData(String id) throws Exception;
+
 
     /**
      * @throws
