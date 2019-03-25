@@ -206,12 +206,9 @@ public class EvaluationRstController extends BisBaseController {
             workbook.write(outputStream);
             outputStream.close();
             response.flushBuffer();
-//JOptionPane.showMessageDialog(null, "导出成功");
         } catch (FileNotFoundException e) {
-//JOptionPane.showMessageDialog(null, "导出失败");
             e.printStackTrace();
         } catch (IOException e) {
-//JOptionPane.showMessageDialog(null, "导出失败");
             e.printStackTrace();
         }
     }

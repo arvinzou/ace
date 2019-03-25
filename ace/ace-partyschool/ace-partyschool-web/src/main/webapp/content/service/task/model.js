@@ -164,11 +164,11 @@ function pickDate(cellvalue, options, cell) {
 function renderBtn(cur) {
 	var rowid = $.jgrid.getAccessor(cur, 'id');
 	var title = $.jgrid.getAccessor(cur, 'title');
-
 	var opt = [];
 	opt.push('<a href="javascript:edit(\'' + rowid + '\')">编辑</a> ');
 	opt.push('<a href="javascript:push(\'' + rowid + '\')">发布</a> ');
 	opt.push('<a href="javascript:del(\'' + rowid + '\')">删除</a>  ');
+	opt.push('<a href="javascript:exports(\'' + rowid + '\')">导出成绩</a>');
 	opt.push('<a href="#" data-toggle="modal" data-id="' + rowid + '" data-title="' + title + '" ' +'data-target="#modal-preview">查看</a>');
 
 	return opt.join(' ');
