@@ -57,9 +57,11 @@
         <result column="userName" jdbcType="VARCHAR" property="userName"/>
         <result column="userTypeName" jdbcType="VARCHAR" property="userTypeName"/>
         <result column="userTypeName" jdbcType="VARCHAR" property="userTypeName"/>
+        <result column="attDate" jdbcType="VARCHAR" property="attDate"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
+        IFNULL(left(t.attTime,10), #{condition.nowDate,jdbcType=VARCHAR} ) as attDate,
         t.attTime, IFNULL(t.attState,'NO_SIGN') as attState,
         v.userId, v.userName, v.userType, v.clsId, v.clsName,
         case
@@ -132,7 +134,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY t.createDate desc
+                ORDER BY v.userType, v.userName, t.attTime desc
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
@@ -153,9 +155,18 @@
 
 
     <select id="getAttSrc" parameterType="java.lang.String" resultType="map">
-       select *
+       select
+        t.config_key,t.config_value,t.config_name,t.remark
        from portal.config t
        where t.syid='partyschool'
         and t.config_key='att_src'
+    </select>
+
+    <select id="findConfigList" parameterType="java.lang.String" resultType="map">
+       select
+        t.config_key,t.config_value,t.config_name,t.remark
+       from portal.config t
+       where t.syid= #{sysId,jdbcType=VARCHAR}
+        and t.config_key like concat(#{key,jdbcType=VARCHAR},'%')
     </select>
 </mapper>

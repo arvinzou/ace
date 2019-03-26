@@ -43,4 +43,7 @@ public interface AttRecordDao {
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
     Map<String, Object> getAttSrc();
+
+    List<Map<String, Object>> findConfigList(@Param("key") String key,
+                                             @Param("sysId") String sysId);
 }

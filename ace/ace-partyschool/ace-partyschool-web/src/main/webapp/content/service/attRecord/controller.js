@@ -180,6 +180,7 @@ function initExportModal() {
     });
     //form submit
     $('#modal-export .btn-primary').on('click', function () {
+        $('#export_info').addClass("hide");
         var clsId = $('#ext-cls-list option:selected').val();//选中的值;
         if (strIsEmpty(clsId)) {
             alert('请选择班次信息！');
@@ -196,7 +197,6 @@ function initExportModal() {
     });
     $('#modal-export form').form({
         beforeSubmit: function (formData, jqForm, options) {
-            $('#export_info').addClass("hide");
         },
         success: function (rst) {
             var obj = jQuery.parseJSON(rst);
