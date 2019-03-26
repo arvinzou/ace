@@ -3,6 +3,7 @@ package com.huacainfo.ace.partyschool.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -62,7 +63,12 @@ public class AttRecordController extends BisBaseController {
     @RequestMapping(value = "/findAttRecordList")
     @ResponseBody
     public PageResult<AttRecordVo> findAttRecordList(AttRecordQVo condition, PageParamNoChangeSord page) throws Exception {
-
+        if (StringUtil.isNotEmpty(condition.getStartDate())) {
+            condition.setStartDate(condition.getStartDate() + " 00:00:00");
+        }
+        if (StringUtil.isNotEmpty(condition.getEndDate())) {
+            condition.setEndDate(condition.getEndDate() + " 23:59:59");
+        }
         PageResult<AttRecordVo> rst = this.attRecordService.findAttRecordList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());

@@ -12,10 +12,7 @@ import com.huacainfo.ace.partyschool.dao.ZkAttDataDao;
 import com.huacainfo.ace.partyschool.model.AttRecord;
 import com.huacainfo.ace.partyschool.model.ZkAttData;
 import com.huacainfo.ace.partyschool.service.AttRecordService;
-import com.huacainfo.ace.partyschool.vo.AttRecordQVo;
-import com.huacainfo.ace.partyschool.vo.AttRecordVo;
-import com.huacainfo.ace.partyschool.vo.ZkAttDataQVo;
-import com.huacainfo.ace.partyschool.vo.ZkAttDataVo;
+import com.huacainfo.ace.partyschool.vo.*;
 import com.huacainfo.ace.portal.model.Config;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.ConfigService;
@@ -493,6 +490,23 @@ public class AttRecordServiceImpl implements AttRecordService {
             }
             return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", view);
         }
+    }
+
+    @Override
+    public List<AttRecordExcel> exportAttRecord(AttRecordQVo condition) {
+        List<AttRecordExcel> rst = new LinkedList<>();
+
+        AttRecordExcel data;
+        List<AttRecordVo> list = attRecordDao.findList(condition, 0, 65536, "t.attTime desc");
+        for (AttRecordVo item : list) {
+            data = new AttRecordExcel();
+            data.setName(item.getUserName());
+            data.setUserType(item.getUserTypeName());
+            data.setSrcType("2".equalsIgnoreCase(item.getStatus()) ? "中控考勤" : "手机考勤");
+            data.setAttTime(item.getAttTime());
+            rst.add(data);
+        }
+        return rst;
     }
 
 
