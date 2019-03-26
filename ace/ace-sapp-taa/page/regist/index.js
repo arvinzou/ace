@@ -122,7 +122,7 @@ Page({
                       content: ret.info,
                       success: function (res) {
                           wx.navigateTo({
-                              url: '../index/index',
+                              url: '../navbar/index',
                           });
                       }
 
