@@ -1,7 +1,13 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.*;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.partyschool.model.Task;
 import com.huacainfo.ace.partyschool.service.TaskService;
@@ -25,9 +28,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.huacainfo.ace.portal.vo.MongoFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/task")
@@ -274,4 +283,58 @@ public class TaskController extends BisBaseController {
     public MessageResponse releaseTask(String id) throws Exception {
         return this.taskService.releaseTask(id,this.getCurUserProp());
     }
+
+    @RequestMapping(value = "/exportData")
+    @ResponseBody
+    public ResultResponse exportData(String id, HttpServletResponse response) throws Exception {
+        SingleResult<List<Map<String,String>>> rr=taskService.exportData(id);
+        if(rr.getStatus()== ResultCode.FAIL){
+            return null;
+        }
+        if(CommonUtils.isBlank(rr.getValue())){
+            return null;
+        }
+        WriteExcel(rr.getValue(),response);
+        return null;
+    }
+
+    public <T> void WriteExcel(List<Map<String,String>> data,HttpServletResponse response) throws Exception {
+        /*创建co*/
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("测评内容");
+        Field[] fields = null;
+        Set<String> set = data.get(0).keySet();
+        for (int i = 0; i < data.size(); i++) {
+            int j = 0;
+            if (i == 0) {
+                Row row = sheet.createRow(i);
+                for (String key:set) {
+                    Cell cell = row.createCell(j);
+                    cell.setCellValue(key);
+                    j++;
+                }
+                j=0;
+            }
+            Row row = sheet.createRow(i + 1);
+            Map<String,String> temp=data.get(i);
+            for (String key:set) {
+                Cell cell = row.createCell(j);
+                cell.setCellValue(temp.get(key));
+                j++;
+            }
+        }
+        try {
+            response.setHeader("Content-Disposition", "attachment;Filename=" + System.currentTimeMillis() + ".xlsx");
+            OutputStream outputStream = response.getOutputStream();
+            workbook.write(outputStream);
+            outputStream.close();
+            response.flushBuffer();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

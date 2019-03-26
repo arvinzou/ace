@@ -96,7 +96,6 @@
   </update>
 
 
-
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.TestRstVo"></resultMap>
 
     <sql id="Vo_Column_List">
@@ -155,6 +154,45 @@
         <include refid="Vo_Column_List"/>
         <include refid="From_Statement"/>
         where tr.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+    <resultMap extends="VoResultMap" id="ResultMapTestTopicRst" type="com.huacainfo.ace.partyschool.vo.TestRstVo">
+        <collection property="topicRstVoList" ofType="com.huacainfo.ace.partyschool.vo.TopicRstVo">
+            <result column="ttcontent" property="content"/>
+            <result column="ttype" property="type"/>
+            <result column="ttanswer" property="answer"/>
+            <!--<result column="ttScore" property="tscore"/>-->
+        </collection>
+    </resultMap>
+
+
+    <select id="exportData" parameterType="java.lang.String" resultMap="ResultMapTestTopicRst">
+        SELECT
+        s.id,
+        s.uname as createUserName,
+        s.NAME AS name,
+        ifnull(s.score,0) as score,
+        s.content as ttcontent,
+        concat(group_concat(s.torcontent SEPARATOR ','),ifnull(s.answer,'')) AS ttanswer,
+        IFNULL(s.youScore,0) AS youScore,
+        s.type as ttype
+        FROM
+        (SELECT t.id, m.uname, t.NAME,t.score,tr.content,tr.youScore,tor.content AS torcontent, tor.topicId,tr.`type`,tr.answer
+        FROM partyschool.test_rst t
+        LEFT JOIN (
+                select s.id,s.`name` AS uname from partyschool.student s
+                UNION
+                select t.id,t.`name` AS uname from partyschool.teacher t
+                UNION
+                select t.user_id,t.NAME AS uname from portal.users t
+                )m ON t.createUserId = m.id
+        LEFT JOIN partyschool.topic_rst tr ON t.id= tr.testRstId
+        LEFT JOIN partyschool.topic_opt_rst tor ON tr.id= tor.topicId
+        WHERE t.taskId= #{taskId,jdbcType=VARCHAR}
+        AND tor.youAnswer='1') s
+        GROUP BY s.topicId
+        ORDER BY s.uname ASC , s.content asc
     </select>
 
 </mapper>

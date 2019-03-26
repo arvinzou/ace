@@ -167,5 +167,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/mobileSelect.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery.base64.js"></script>
 	<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
+	<script src="${portalPath}/content/common/js/dict_partyschool.js?version=${version}"></script>
 	<script type="text/javascript" src="js/student.js"></script>
 </html>

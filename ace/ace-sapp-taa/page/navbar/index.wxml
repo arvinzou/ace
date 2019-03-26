@@ -1,4 +1,5 @@
 <view class='navbar-header'>
+<block wx:if='{{userData.copNo}}'>
   <view class='up'>
     <image src='{{userData.avatarUrl}}'></image>
   </view>
@@ -7,6 +8,7 @@
     <image src="../../image/icon-edit.png"  catchtap='edit'></image>
   </view>
   <view class='down'>警号：{{userData.copNo}}</view>
+  </block>
 </view>
 <view class='navbar-ul'>
    <view class='li' catchtap='linkSGKB'>

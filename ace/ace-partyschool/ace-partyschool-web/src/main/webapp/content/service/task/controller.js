@@ -110,6 +110,11 @@ function del(rowid) {
 	});
 }
 
+
+function exports(rowid){
+    window.location.href = contextPath + '/task/exportData?id=' +rowid;
+}
+
 function setParams(key, value) {
 	params[key] = value;
 	jQuery(cfg.grid_selector).jqGrid('setGridParam', {
