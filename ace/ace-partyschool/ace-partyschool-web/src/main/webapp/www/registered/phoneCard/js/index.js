@@ -177,7 +177,8 @@ function findList(){
                 $("#count").text("今日已签到"+num+"/5");
                 var date = new Date();
                 var hour = date.getHours();
-                var minute = date.getMinutes();
+                var minute = date.getMinutes()/60;
+                hour = hour + minute;
                 //上午签到
                 if(result.data.am.length <1){
                     if(hour >= 8 && hour <=10){
@@ -222,4 +223,11 @@ function findList(){
             alert("系统服务内部异常！");
         }
     });
+}
+
+/**
+ * 点击头像进入到个人中心页面
+ */
+function exitUserInfo(){
+    window.location.href = contextPath + '/www/registered/person/index.jsp';
 }

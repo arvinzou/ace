@@ -18,7 +18,7 @@
 			<div class="title-box">
 				<div class="title">消费记录</div>
 				<div class="date-box">
-					<input type="text" id="dateSelectorOne" placeholder="请选择" readonly/>
+					<input type="text" id="dateSelectorOne" placeholder="请选择" readonly disabled/>
 					<img src="img/icon-drop-down.png" class="icon-date-picker" id="dateShowBtn">
 				</div>
 			</div>
