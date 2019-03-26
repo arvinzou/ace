@@ -104,62 +104,7 @@
 
 		<script id="menu-tpl" type="text/template">
 			{@if data.regType == 'student'}
-			<div class="row">
-				<div class="item mr" onclick="toTest();">
-					<div class="item-left">
-						<img src="img/icon-test.png" class="menu-icon"/>
-					</div>
-					<div class="item-right">
-						<div class="menu-title">教学测评</div>
-						<div class="menu-content">共有\${data.test}个待评</div>
-					</div>
-				</div>
-				<div class="item" onclick="toMailList();">
-					<div class="item-left">
-						<img src="img/icon-mail.png" class="menu-icon"/>
-					</div>
-					<div class="item-right">
-						<div class="menu-title">通讯录</div>
-						<div class="menu-content">共
-							{@if data.regType == 'student'}
-								\${data.student}
-							{@else}
-								\${data.teacher}
-							{@/if}
-							人</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="item mr" onclick="toClassFiles();">
-					<div class="item-left">
-						<img src="img/icon-files.png" class="menu-icon"/>
-					</div>
-					<div class="item-right">
-						<div class="menu-title">班级文件</div>
-						<div class="menu-content">共\${data.file}个文件</div>
-					</div>
-				</div>
-				<div class="item" onclick="attendtion();">
-					<div class="item-left">
-						<img src="img/icon-appear.png" class="menu-icon"/>
-					</div>
-					<div class="item-right">
-						<div class="menu-title">考勤记录</div>
-						<div class="menu-content">查看考勤记录</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="item mr" onclick="classNotice();">
-					<div class="item-left">
-						<img src="img/icon-notice.png" class="menu-icon"/>
-					</div>
-					<div class="item-right">
-						<div class="menu-title">学员须知</div>
-						<div class="menu-content">已绑定班级</div>
-					</div>
-				</div>
+			<div class="row mr">
 				<div class="item" onclick="makeAttand();">
 					<div class="item-left">
 						<img src="img/icon-phone-card.png" class="menu-icon"/>
@@ -169,6 +114,62 @@
 						<div class="menu-content">签到</div>
 					</div>
 				</div>
+				<div class="item" onclick="toTest();">
+					<div class="item-left">
+						<img src="img/icon-test.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">教学测评</div>
+						<div class="menu-content">共有\${data.test}个待评</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="item mr" onclick="toMailList();">
+					<div class="item-left">
+						<img src="img/icon-mail.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">通讯录</div>
+						<div class="menu-content">共
+							{@if data.regType == 'student'}
+							\${data.student}
+							{@else}
+							\${data.teacher}
+							{@/if}
+							人</div>
+					</div>
+				</div>
+				<div class="item" onclick="toClassFiles();">
+					<div class="item-left">
+						<img src="img/icon-files.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">班级文件</div>
+						<div class="menu-content">共\${data.file}个文件</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="item mr" onclick="attendtion();">
+					<div class="item-left">
+						<img src="img/icon-appear.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">考勤记录</div>
+						<div class="menu-content">查看考勤记录</div>
+					</div>
+				</div>
+				<div class="item" onclick="classNotice();">
+					<div class="item-left">
+						<img src="img/icon-notice.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">学员须知</div>
+						<div class="menu-content">已绑定班级</div>
+					</div>
+				</div>
+
 			</div>
 			<div class="row">
 				<div class="item mr" onclick="bookList();">
@@ -184,7 +185,16 @@
 			{@else}
 
 			<div class="row">
-				<div class="item mr" onclick="attendtion();">
+				<div class="item mr" onclick="makeTattand();">
+					<div class="item-left">
+						<img src="img/icon-phone-card.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">手机考勤</div>
+						<div class="menu-content">签到</div>
+					</div>
+				</div>
+				<div class="item" onclick="attendtion();">
 					<div class="item-left">
 						<img src="img/icon-appear.png" class="menu-icon"/>
 					</div>
@@ -193,7 +203,9 @@
 						<div class="menu-content">查看考勤记录</div>
 					</div>
 				</div>
-				<div class="item" onclick="toMailList();">
+			</div>
+			<div class="row">
+				<div class="item mr" onclick="toMailList();">
 					<div class="item-left">
 						<img src="img/icon-mail.png" class="menu-icon"/>
 					</div>
@@ -208,9 +220,7 @@
 							人</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="item mr" onclick="toClassFiles();">
+				<div class="item" onclick="toClassFiles();">
 					<div class="item-left">
 						<img src="img/icon-files.png" class="menu-icon"/>
 					</div>
@@ -219,6 +229,8 @@
 						<div class="menu-content">查看文件</div>
 					</div>
 				</div>
+			</div>
+			<div class="row mr">
 				<div class="item" onclick="bookList();">
 					<div class="item-left">
 						<img src="img/icon-bookList.png" class="menu-icon"/>
@@ -226,17 +238,6 @@
 					<div class="item-right">
 						<div class="menu-title">借阅记录</div>
 						<div class="menu-content">查看记录</div>
-					</div>
-				</div>
-			</div>
-			<div class="row mr">
-				<div class="item" onclick="makeTattand();">
-					<div class="item-left">
-						<img src="img/icon-phone-card.png" class="menu-icon"/>
-					</div>
-					<div class="item-right">
-						<div class="menu-title">手机考勤</div>
-						<div class="menu-content">签到</div>
 					</div>
 				</div>
 			</div>
