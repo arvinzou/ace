@@ -12,7 +12,6 @@ window.onload = function () {
 /**
  * 初始化类型*/
 function initcategory() {
-    console.log(staticDictObject['154']);
     render($("#categorys"), staticDictObject['154'].slice(1), "tpl-categorys");
 }
 
@@ -101,6 +100,8 @@ function initSelect() {
             cache: true
         },
         placeholder: '选择授课人',
+        multiple:true,
+        maximumSelectionLength:5,
         escapeMarkup: function (markup) {
             return markup;
         }, // let our custom formatter work
@@ -159,9 +160,8 @@ function initEvents() {
             });
             $.extend(params, {
                 time: new Date(),
-//coverUrl: $('#coverUrl').attr("src"),
             });
-            console.log(params);
+            params.teacherIds=$(".js-example-basic-single2").select2("val");
             save(params);
             return false;
         }

@@ -43,11 +43,10 @@
     <div class="form-body">
         <div class="form-group">
             <label class="col-md-2 control-label">
-
                 名称
                 <span class="required" aria-required="true"> * </span>
             </label>
-            <div class="col-md-10">
+            <div class="col-md-6">
                 <input type="text" class="form-control" name="name"
                        value="\${data.o.name}" maxlength="50"
                        placeholder="请输入名称（建议字数在14个字以内，不超过50个字)">
@@ -58,7 +57,7 @@
             <label class="col-md-2 control-label">
                 类别<span class="required" aria-required="true"> * </span>﻿
             </label>
-            <div class="col-md-10">
+            <div class="col-md-6">
                 {@each data.dict154 as item,index}
                 {@if item.CODE!=''}
                 <div style="float:left;padding:2px;width:150px">
@@ -76,7 +75,7 @@
             <label class="col-md-2 control-label">
                 测评方案
             </label>
-            <div class="col-md-10">
+            <div class="col-md-6">
                 <select style="width: 100%;height: 34px" class="js-example-basic-single js-example-basic-single1"
                         name="evaluatingId">
                     <option value="\${data.o.evaluatingId}">\${data.o.evaluatingName}</option>
@@ -87,14 +86,14 @@
             <label class="col-md-2 control-label">
                 授课人
             </label>
-            <div class="col-md-10">
-                <select style="width: 100%;height: 34px" class="js-example-basic-single js-example-basic-single2"
-                        name="teacherId">
-                    <option value="\${data.o.teacherId}">\${data.o.teacherName}</option>
+            <div class="col-md-6">
+                <select style="width: 100%;height: 34px" class="js-example-basic-single js-example-basic-single2" name="teacherId">
+                    {@each data.o.courseTeacherVoList as item, index}
+                        <option value="\${item.teacher_id}">\${item.name}</option>
+                    {@/each}
                 </select>
             </div>
         </div>
-
     </div>
     <div class="form-actions">
         <div class="row">

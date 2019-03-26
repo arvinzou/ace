@@ -43,7 +43,7 @@ public interface CourseService {
      * @author: 王恩
      * @version: 2019-01-02
      */
-    MessageResponse insertCourse(Course obj, UserProp userProp) throws Exception;
+    MessageResponse insertCourse(CourseQVo obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -56,7 +56,7 @@ public interface CourseService {
      * @author: 王恩
      * @version: 2019-01-02
      */
-    MessageResponse updateCourse(Course obj, UserProp userProp) throws Exception;
+    MessageResponse updateCourse(CourseQVo obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -68,8 +68,7 @@ public interface CourseService {
      * @author: 王恩
      * @version: 2019-01-02
      */
-    SingleResult
-            <CourseVo> selectCourseByPrimaryKey(String id) throws Exception;
+    SingleResult<CourseVo> selectCourseByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
