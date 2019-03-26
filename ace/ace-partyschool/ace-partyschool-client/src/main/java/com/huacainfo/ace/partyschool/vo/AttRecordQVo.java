@@ -18,8 +18,17 @@ public class AttRecordQVo extends AttRecord {
 
     private String startDate;
     private String endDate;
+    private String nowDate;//"yyyy-MM-dd"
 
     private String clsId;
+
+    public String getNowDate() {
+        return nowDate;
+    }
+
+    public void setNowDate(String nowDate) {
+        this.nowDate = nowDate;
+    }
 
     public String getClsId() {
         return clsId;
