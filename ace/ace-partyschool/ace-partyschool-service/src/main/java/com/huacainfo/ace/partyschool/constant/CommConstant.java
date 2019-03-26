@@ -25,5 +25,9 @@ public interface CommConstant {
     String ATT_STATE_BE_LATE = "BE_LATE";//"迟到";
     String ATT_STATE_LEAVE_EARLY = "LEAVE_EARLY";//"早退";
 
-
+    String STU_ATT_SCOPE_AM_IN = "STU_AM_IN";
+    String STU_ATT_SCOPE_AM_OUT = "STU_AM_OUT";
+    String STU_ATT_SCOPE_PM_IN = "STU_PM_IN";
+    String STU_ATT_SCOPE_PM_OUT = "STU_PM_OUT";
+    String STU_ATT_SCOPE_NIGHT_IN = "STU_NIGHT_IN";
 }
