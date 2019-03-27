@@ -32,7 +32,7 @@
 						<div class="course-title">\${item.course.name}</div>
 						<div class="course-teacher">
 							<img src="img/icon-teacher.png" />
-							<span>\${item.teacher.name}</span>
+							<span>\${item.course.teacherNames}</span>
 						</div>
 					</div>
 					<div class="course-right">
@@ -47,7 +47,7 @@
 						<div class="course-title">\${item.course.name}</div>
 						<div class="course-teacher">
 							<img src="img/icon-teacher.png" />
-							<span>\${item.teacher.name}</span>
+							<span>\${item.course.teacherNames}</span>
 						</div>
 					</div>
 					<div class="course-right">

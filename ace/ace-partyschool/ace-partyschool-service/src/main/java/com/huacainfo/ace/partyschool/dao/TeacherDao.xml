@@ -154,19 +154,13 @@
         t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
         t.introduce, t.workUnitName, t.postName
         from teacher t
-        where
+        where 1=1
         <choose>
             <when test="condition.id!=null and condition.id!=&quot;&quot;">
                 t.id = #{condition.id,jdbcType=VARCHAR}
             </when>
             <otherwise>
-                t.id NOT in (
-                SELECT
-                c.headmaster
-                FROM
-                classes c
-                WHERE c.status =1
-                )
+
             </otherwise>
         </choose>
 

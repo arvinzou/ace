@@ -98,7 +98,7 @@
 
         <td>\${item.codeName}</td>
         <td>\${item.evaluatingName}</td>
-        <td>\${item.teacherName}</td>
+        <td>\${item.teacherNames}</td>
 
         <td>
             ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>

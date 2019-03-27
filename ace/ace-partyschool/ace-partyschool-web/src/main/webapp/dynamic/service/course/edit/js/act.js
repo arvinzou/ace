@@ -61,7 +61,7 @@ function initEvents() {
                 time: new Date(),
                 id: urlParams.did
             });
-            console.log(params);
+            params.teacherIds=$(".js-example-basic-single2").select2("val");
             save(params);
             return false;
         }
@@ -167,6 +167,8 @@ function initSelect(data) {
             },
             cache: true
         },
+        multiple:true,
+        maximumSelectionLength:5,
         placeholder: '选择授课人',
         escapeMarkup: function (markup) {
             return markup;
@@ -190,6 +192,12 @@ function initForm() {
                 data['dict154']=staticDictObject['154'];
                 render('#fm-edit', data, 'tpl-fm');
                 initSelect(data);
+                var list=result.value.courseTeacherVoList;
+                var ids=[];
+                for(var i=0;i<list.length;i++){
+                    ids.push(list[i].teacher_id);
+                }
+                $('.js-example-basic-single2').val(ids).trigger('change');
             } else {
                 alert(result.errorMessage);
             }

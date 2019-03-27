@@ -109,7 +109,7 @@ window.onload = function () {
             event.className.push("bg-crew-good");
             event.id = item.id;
             event.title = item.course.name;
-            event.teacher = item.teacher.name;
+            event.teacher = item.course.teacherNames;
             event.courseId = item.id;
             event.teacherId = item.teacherId;
             var date = item.courseDate.substring(0, 10);
