@@ -90,6 +90,7 @@ body{
 	font-weight: bold;
     float: left;
     text-align: center;
+	background: none;
 }
 .list{
 	padding-left: 0.4rem;
