@@ -111,7 +111,6 @@ function updateSort(arr) {
             }
         },
         complete: function (XMLHttpRequest, textStatus) {
-
         },
         error: function () {
 
