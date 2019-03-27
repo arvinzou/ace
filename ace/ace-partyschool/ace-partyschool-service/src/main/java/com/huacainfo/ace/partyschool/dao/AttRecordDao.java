@@ -46,4 +46,10 @@ public interface AttRecordDao {
 
     List<Map<String, Object>> findConfigList(@Param("key") String key,
                                              @Param("sysId") String sysId);
+
+
+    List<AttRecordVo> findRecordList(@Param("condition") AttRecordQVo condition,
+                                     @Param("start") int start,
+                                     @Param("limit") int limit,
+                                     @Param("orderBy") String orderBy);
 }
