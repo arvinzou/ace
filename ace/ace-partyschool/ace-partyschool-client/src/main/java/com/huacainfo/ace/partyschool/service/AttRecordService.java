@@ -3,6 +3,7 @@ package com.huacainfo.ace.partyschool.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.partyschool.model.AttRecord;
+import com.huacainfo.ace.partyschool.vo.AttRecordExport;
 import com.huacainfo.ace.partyschool.vo.AttRecordQVo;
 import com.huacainfo.ace.partyschool.vo.AttRecordVo;
 
@@ -182,4 +183,6 @@ public interface AttRecordService {
      * @return ResultResponse
      */
     ResultResponse findList(String userId, String dateTimeStr);
+
+    List<AttRecordExport> exportAttRecord(AttRecordQVo condition);
 }

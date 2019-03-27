@@ -45,4 +45,7 @@ public interface TeacherDao {
 
     int isExistOtherMobile(@Param("id") String id,
                            @Param("mobile") String mobile);
+
+    int updateSort(@Param("id") String id,
+                   @Param("sort") int sort);
 }

@@ -29,7 +29,16 @@ $(function(){
         }
     });
 
-    var politicalArr = [{"id":"normal","value":"非党员"},{"id":"party","value":"党员"}];
+    var dictObj = staticDictObject['155'];     //处室字典
+    var politicalArr = [];
+    for(var i=0; i<dictObj.length; i++){
+        if(dictObj[i].CODE != "" && dictObj[i].NAME!=''){
+            var o = {};
+            o.id = dictObj[i].CODE;
+            o.value = dictObj[i].NAME;
+            politicalArr.push(o);
+        }
+    }
 	var politicalSelect= new MobileSelect({
 	    trigger: '#political',
 	    title: '政治面貌选择',

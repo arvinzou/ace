@@ -1,0 +1,107 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.index{
+	width: 10rem;
+	height: 100%;
+	margin: 0 auto;
+}
+.header{
+	width: 100%;
+	height: 1.333333rem;
+}
+.header:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.headerImg{
+	width: 1.066666rem;
+	height: 1.066666rem;
+	margin-left: 0.4rem;
+	float: left;
+	margin-top: 0.133333rem;
+}
+.headerImg img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.username{
+	width: auto;
+	height: 1.333333rem;
+	line-height: 1.333333rem;
+	color: #373F53;
+	font-size: 0.453333rem;
+	font-weight: bold;
+	padding-left: 0.4rem;
+	float: left;
+}
+.currentDte{
+	width: 2.666666rem;
+	height: 1.333333rem;
+	line-height: 1.333333rem;
+	color: #54ADF2;
+	font-size: 0.4rem;
+	font-weight: bold;
+	float: right;
+	margin-right: 0.4rem;
+	text-align: right;
+}
+.mapBox{
+	width: 100%;
+	height: 4rem;
+}
+.timeList{
+	width: 100%;
+	height: auto;
+}
+.time-title{
+	width: 9.2rem;
+	height: 1.333333rem;
+	line-height: 1.333333rem;
+	margin-left: 0.4rem;
+	margin-right: 0.4rem;
+	color: #373F53;
+	font-size: 0.453333rem;
+	font-weight: bold;
+}
+.timeList-inner{
+	width: 9.2rem;
+	height: auto;
+	margin-left: 0.4rem;
+	margin-right: 0.4rem;
+}
+.layui-icon{
+	color: #54ADF2!important;
+}
+.layui-text{
+	color: #ABAEB9 !important;
+	font-size: 0.373333rem;
+}
+.qiandao{
+	width: 2.666666rem;
+	height: 2.666666rem;
+	line-height: 2.666666rem;
+	border-radius: 50%;
+	color: #FFFFFF;
+	background:linear-gradient(90deg,rgba(106,219,251,1) 0%,rgba(0,160,255,1) 100%);
+	box-shadow:0rem 0rem 0.266666rem 0.053333rem rgba(84,173,242,0.2);
+	text-align: center;
+	margin: 0.4rem auto;
+	
+	display:table;
+}
+.qtitle{
+	font-size: 0.48rem;
+	font-weight: bold;
+}
+.qtime{
+	font-size: 0.373333rem;
+	font-weight: 500;
+}
+.cell{
+	/*display:table-cell; */
+	vertical-align:middle;
+}

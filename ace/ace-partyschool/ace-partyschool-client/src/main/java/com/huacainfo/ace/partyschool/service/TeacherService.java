@@ -8,6 +8,9 @@ import com.huacainfo.ace.partyschool.model.Teacher;
 import com.huacainfo.ace.partyschool.vo.TeacherQVo;
 import com.huacainfo.ace.partyschool.vo.TeacherVo;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author: Arvin
  * @version: 2019-01-02
@@ -124,4 +127,13 @@ public interface TeacherService {
      * @return MessageResponse
      */
     MessageResponse recover(String id, UserProp userProp) throws Exception;
+
+    /**
+     * 更新教职工排列顺序
+     *
+     * @param list 数据
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse updateSort(List<Map<String, Object>> list, UserProp curUserProp);
 }

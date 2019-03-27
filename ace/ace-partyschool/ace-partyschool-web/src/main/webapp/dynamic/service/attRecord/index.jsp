@@ -13,6 +13,9 @@
 <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
 <link rel="stylesheet" type="text/css" media="screen"
       href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"/>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+/>
 <body>
 
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -20,27 +23,52 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-9 toolbar">
-                    <button type="button" class="btn  green" id="btn-view-import"
-                            authority="${pageContext.request.contextPath}/attRecord/insertAttRecord">中控数据导入
+                <div class="col-md-2 toolbar">
+
+                    <button type="button" class="btn  green" id="btn-view-export"
+                            authority="${pageContext.request.contextPath}/attRecord/insertAttRecord">导出工具
                     </button>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-10">
 
-
-                    <div class="input-group">
-                        <input type="text"
-                               name="name"
-                               class="form-control"
-                               placeholder="请输入姓名">
-                        <span class="input-group-btn">
-							<button class="btn  btn-default search_btn" id="btn-search"
-                                    authority="${pageContext.request.contextPath}/attRecord/findAttRecordList">
-									搜索
-							</button>
-						</span>
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <button type="button" authority="false"
+                                class="btn btn-default active" onclick="setParams('userType','');">全部
+                        </button>
+                        <button type="button" authority="false"
+                                class="btn btn-default" onclick="setParams('userType','student');">学员
+                        </button>
+                        <button type="button" authority="false"
+                                class="btn btn-default" onclick="setParams('userType','teacher');">教职工
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <select id="s-cls-list" name="clsId" class="form-control" style="height: 31px;"
+                                onchange="setParams('classId',this.value)">
+                        </select>
                     </div>
 
+                    <div style="width:40px;float:left;line-height:30px"> 时间</div>
+                    <div class="input-group date form_datetime" style="width:10%;float:left;border: 1px solid #efefef;">
+                        <input id="p-startDt" type="text" size="16" name="startDate" readonly="" class="form-control">
+                    </div>
+                    <span class="input-group-addon" style="width:40px;float:left;"><font
+                            style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;"> 至 </font></font></span>
+                    <div class="input-group date form_datetime"
+                         style="width: 10%;float:left;border: 1px solid #efefef;">
+                        <input id="p-endDt" type="text" size="16" name="endDate" readonly="" class="form-control">
+                    </div>
+
+                    <div class="input-group" style="padding-right:5px">
+                        <input type="text" name="name" class="form-control" style="height: 31px;" placeholder="请输入姓名">
+                        <span class="input-group-btn">
+                            <button class="btn  btn-default search_btn" id="btn-search"
+                                    authority="${pageContext.request.contextPath}/attRecord/findAttRecordList">
+                                搜索
+                            </button>
+                        </span>
+                    </div>
                 </div>
 
             </form>
@@ -56,6 +84,82 @@
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
+
+<%--数据导出--%>
+<div class="modal fade" role="dialog" id="modal-export">
+    <div class="modal-dialog" role="document" style="width: 75%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">数据导出</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm-export">
+                        <form method="post" class="form-horizontal" role="form"
+                              action="${pageContext.request.contextPath}/exportExcel/exportAttRecord">
+                            <label id="export_info" class="view-label hide"></label>
+                            <div class="form-group">
+                                <label class="col-md-2 view-label">
+                                    身份类别<span style='color:red;font-size:16px;font-weight:800'>*</span>
+                                </label>
+                                <div class="col-md-7">
+                                    <select id="ext-userType" name="userType" class="form-control"
+                                            style="width:175px;height: 31px;">
+                                        <option value="student">学员</option>
+                                        <option value="teacher">教职工</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group cls-select">
+                                <label class="col-md-2 view-label">
+                                    班次<span style='color:red;font-size:16px;font-weight:800'>*</span>
+                                </label>
+                                <div class="col-md-7">
+                                    <select id="ext-cls-list" name="clsId" class="form-control"
+                                            style="width:275px;height: 31px;">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 view-label">
+                                    时间区间<span style='color:red;font-size:16px;font-weight:800'>*</span>
+                                </label>
+                                <div class="col-md-7">
+                                    <div class="date form_datetime" style="float:left;border: 1px solid #efefef;">
+                                        <input id="ext-startDt" type="text" style="width:175px;" size="16"
+                                               name="startDate" readonly="" class="form-control">
+                                    </div>
+                                    <span class="input-group-addon" style="width:50px;float:left;">
+                                        <font style="vertical-align: inherit;">
+                                            <font style="vertical-align: inherit;">~</font>
+                                        </font>
+                                    </span>
+                                    <div class="date form_datetime" style="float:left;border: 1px solid #efefef;">
+                                        <input id="ext-endDt" type="text" style="width:175px;" size="16"
+                                               name="endDate" readonly="" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+                <button type="button" class="btn btn-primary" authority="false">下载excel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="tpl-cls-option" type="text/template">
+    {@each data as item, index}
+    <option value="\${item.id}">\${item.name}</option>
+    {@/each}
+</script>
 
 <%--查看详情--%>
 <div class="modal fade" role="dialog" id="modal-preview">
@@ -125,7 +229,7 @@
         </div>
     </div>
 </script>
-
+<%--导入--%>
 <div class="modal fade" role="dialog" id="modal-upload">
     <div class="modal-dialog" role="document" style="width: 75%;">
         <div class="modal-content">
@@ -147,7 +251,10 @@
     </div>
 </div>
 
-
+<script type="text/javascript"
+        src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
 <%--easyui--%>
 <link rel="stylesheet" type="text/css"
       href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
@@ -160,11 +267,6 @@
 <script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
 <%--导出--%>
-<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
 <%--导入套件--%>
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
@@ -181,6 +283,13 @@
 <%--权限管理--%>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 
+<script type="text/javascript">
+
+    function startFormat(id) {
+        var obj = $('#' + 'p-startDate');
+        alert(obj.val());
+    }
+</script>
 </body>
 <style>
     /* css code area*/

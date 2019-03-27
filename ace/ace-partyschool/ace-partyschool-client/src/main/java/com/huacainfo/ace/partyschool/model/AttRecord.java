@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class AttRecord extends BaseModel {
+
     private String id;
 
     private String userId;
@@ -13,6 +14,8 @@ public class AttRecord extends BaseModel {
     private String userType;
 
     private Date attTime;
+
+    private String attState;
 
     private String attPhoto;
 
@@ -27,6 +30,14 @@ public class AttRecord extends BaseModel {
     private Date createDate;
 
     private String attTimeStr;
+
+    public String getAttState() {
+        return attState;
+    }
+
+    public void setAttState(String attState) {
+        this.attState = attState;
+    }
 
     public String getAttTimeStr() {
         return attTimeStr;

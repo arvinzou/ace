@@ -6,6 +6,7 @@
         <result column="userId" jdbcType="VARCHAR" property="userId"/>
         <result column="userType" jdbcType="VARCHAR" property="userType"/>
         <result column="attTime" jdbcType="TIMESTAMP" property="attTime"/>
+        <result column="attState" jdbcType="VARCHAR" property="attState"/>
         <result column="attPhoto" jdbcType="VARCHAR" property="attPhoto"/>
         <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
         <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
@@ -14,7 +15,7 @@
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, userId, userType, attTime, attPhoto, longitude, latitude, status, remark, createDate
+    id, userId, userType, attTime, attState, attPhoto, longitude, latitude, status, remark, createDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -27,12 +28,11 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.AttRecord">
-    insert into att_record (id, userId, userType, 
-      attTime, attPhoto, longitude, 
-      latitude, status, remark, 
-      createDate)
+    insert into att_record (id, userId, userType, attTime, attState,
+      attPhoto, longitude, latitude, status, remark,  createDate)
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, 
-      #{attTime,jdbcType=TIMESTAMP}, #{attPhoto,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
+      #{attTime,jdbcType=TIMESTAMP}, #{attState,jdbcType=VARCHAR}
+      #{attPhoto,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL},
       #{latitude,jdbcType=DECIMAL}, #{status,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
@@ -42,6 +42,7 @@
     set userId = #{userId,jdbcType=VARCHAR},
       userType = #{userType,jdbcType=VARCHAR},
       attTime = #{attTime,jdbcType=TIMESTAMP},
+      attState = #{attState,jdbcType=VARCHAR},
       attPhoto = #{attPhoto,jdbcType=VARCHAR},
       longitude = #{longitude,jdbcType=DECIMAL},
       latitude = #{latitude,jdbcType=DECIMAL},
@@ -55,47 +56,64 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.AttRecordVo">
         <result column="userName" jdbcType="VARCHAR" property="userName"/>
         <result column="userTypeName" jdbcType="VARCHAR" property="userTypeName"/>
-
+        <result column="userTypeName" jdbcType="VARCHAR" property="userTypeName"/>
+        <result column="attDate" jdbcType="VARCHAR" property="attDate"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
+        IFNULL(left(t.attTime,10), #{condition.nowDate,jdbcType=VARCHAR} ) as attDate,
+        t.attTime, IFNULL(t.attState,'NO_SIGN') as attState,
+        v.userId, v.userName, v.userType, v.clsId, v.clsName,
         case
-        when t.userType= 'student' then s.`name`
-        when t.userType= 'teacher' then '教职工'
-        ELSE '' end userName,
-        case
-        when t.userType= 'student' then '学员'
-        when t.userType= 'teacher' then '教职工'
-        ELSE '' end userTypeName,
-        t.id, t.userId, t.userType, t.attTime, t.attPhoto,
-        t.longitude, t.latitude, t.status, t.remark, t.createDate
+        when v.userType= 'student' then '学员'
+        when v.userType= 'teacher' then '教职工'
+        ELSE '' end userTypeName
     </sql>
     <sql id="From_Statement">
-        FROM att_record t
-        left join student s on t.userType= 'student' and t.userId = s.id
+        from (
+                SELECT
+                t.id as userId, 'student' as userType, t.`name` as userName,
+                c.id as clsId, c.`name` as clsName
+                from student t , classes c
+                where c.id = t.classId
+                and t.`status` = '1'
+                UNION ALL
+                select
+                    t.id as userId, 'teacher' as userType, t.`name` as userName,
+                    '' as clsId, '' as clsName
+                from teacher t
+                where t.`status` = '1'
+        )v
+        left join att_record t on v.userId = t.userId
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
         <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
-            and t.userId = #{condition.userId,jdbcType=VARCHAR}
+            and v.userId = #{condition.userId,jdbcType=VARCHAR}
         </if>
         <if test="condition.userType !=null and condition.userType !=&quot;&quot;">
-            and t.userType = #{condition.userType,jdbcType=VARCHAR}
+            and v.userType = #{condition.userType,jdbcType=VARCHAR}
         </if>
-        <if test="condition.attTime !=null and condition.attTime !=&quot;&quot;">
-            and t.attTime = #{condition.attTime,jdbcType=VARCHAR}
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and v.userName like concat(#{condition.name,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.longitude !=null and condition.longitude !=&quot;&quot;">
-            and t.longitude = #{condition.longitude,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.latitude !=null and condition.latitude !=&quot;&quot;">
-            and t.latitude = #{condition.latitude,jdbcType=VARCHAR}
+        <if test="condition.clsId!=null and condition.clsId!=&quot;&quot;">
+            and v.clsId = #{condition.clsId,jdbcType=VARCHAR}
         </if>
         <if test="condition.dateTimeStr !=null and condition.dateTimeStr !=&quot;&quot;">
             and t.attTime like concat(#{condition.dateTimeStr,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.name !=null and condition.name !=&quot;&quot;">
-            and s.`name` like concat(#{condition.name,jdbcType=VARCHAR},'%')
+        <if test='condition.startDate!=null and condition.startDate!=""'>
+            <![CDATA[
+              and IFNULL(t.attTime, str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S'))
+                  >= str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S')
+            ]]>
+        </if>
+        <if test='condition.endDate!=null and condition.endDate!=""'>
+            <![CDATA[
+              and  IFNULL(t.attTime,str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S'))
+                    <= str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S')
+            ]]>
         </if>
     </sql>
 
@@ -103,7 +121,7 @@
         select
         <include refid="Vo_Column_List"/>
         <include refid="From_Statement"/>
-        where t.id = #{id,jdbcType=VARCHAR}
+        where v.userId = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -116,7 +134,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY t.createDate desc
+                ORDER BY t.attTime desc, v.userType, v.userName
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
@@ -137,9 +155,18 @@
 
 
     <select id="getAttSrc" parameterType="java.lang.String" resultType="map">
-       select *
+       select
+        t.config_key,t.config_value,t.config_name,t.remark
        from portal.config t
        where t.syid='partyschool'
         and t.config_key='att_src'
+    </select>
+
+    <select id="findConfigList" parameterType="java.lang.String" resultType="map">
+       select
+        t.config_key,t.config_value,t.config_name,t.remark
+       from portal.config t
+       where t.syid= #{sysId,jdbcType=VARCHAR}
+        and t.config_key like concat(#{key,jdbcType=VARCHAR},'%')
     </select>
 </mapper>

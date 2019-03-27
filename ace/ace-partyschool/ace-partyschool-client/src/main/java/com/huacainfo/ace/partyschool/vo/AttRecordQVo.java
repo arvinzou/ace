@@ -16,6 +16,43 @@ public class AttRecordQVo extends AttRecord {
      */
     private String name;
 
+    private String startDate;
+    private String endDate;
+    private String nowDate;//"yyyy-MM-dd"
+
+    private String clsId;
+
+    public String getNowDate() {
+        return nowDate;
+    }
+
+    public void setNowDate(String nowDate) {
+        this.nowDate = nowDate;
+    }
+
+    public String getClsId() {
+        return clsId;
+    }
+
+    public void setClsId(String clsId) {
+        this.clsId = clsId;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     public String getName() {
         return name == null ? name : name.trim();

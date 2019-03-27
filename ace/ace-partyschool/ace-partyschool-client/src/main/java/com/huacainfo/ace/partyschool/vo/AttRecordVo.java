@@ -14,6 +14,38 @@ public class AttRecordVo extends AttRecord {
      */
     private String userTypeName;
 
+    private String clsId;
+
+    private String clsName;
+    /**
+     * 年月日
+     */
+    private String attDate;
+
+    public String getAttDate() {
+        return attDate;
+    }
+
+    public void setAttDate(String attDate) {
+        this.attDate = attDate;
+    }
+
+    public String getClsId() {
+        return clsId;
+    }
+
+    public void setClsId(String clsId) {
+        this.clsId = clsId;
+    }
+
+    public String getClsName() {
+        return clsName;
+    }
+
+    public void setClsName(String clsName) {
+        this.clsName = clsName;
+    }
+
     public String getUserName() {
         return userName;
     }
