@@ -904,6 +904,29 @@ public final class DateUtil {
         // System.out.println("所在周星期日的日期：" + imptimeEnd);
         return imptimeBegin + "," + imptimeEnd;
     }
+
+    /**
+     * @param time1 时间1 格式要求："HH:mm:ss"
+     * @param time2 时间2 格式要求："HH:mm:ss"
+     * @return int
+     * 1  -- time1 > time2
+     * 0  -- time1 = time2
+     * -1 -- time1 < time2
+     * -2 -- 格式错误转换异常
+     */
+    public static int compareTime(String time1, String time2) {
+        //创建日期转换对象HH:mm:ss为时分秒，年月日为yyyy-MM-dd
+        DateFormat df = new SimpleDateFormat("HH:mm:ss");
+        try {
+            //将字符串转换为date类型
+            Date dt1 = df.parse(time1);
+            Date dt2 = df.parse(time2);
+
+            return dt1.compareTo(dt2);
+        } catch (ParseException e) {
+            return -2;
+        }
+    }
 }
 
 class EPNDateFormat {
