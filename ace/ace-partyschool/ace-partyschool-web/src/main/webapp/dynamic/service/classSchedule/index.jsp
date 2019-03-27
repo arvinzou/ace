@@ -99,7 +99,7 @@
     <p class="title">课程名称</p>
     <p class="text">\${data.course.name}</p>
     <p class="title">授课人</p>
-    <p class="text">\${data.teacher.name}</p>
+    <p class="text">\${data.course.teacherNames}</p>
     <p class="title">班次</p>
     <p class="text">\${data.classes.name}</p>
     <p class="title">是否测评</p>

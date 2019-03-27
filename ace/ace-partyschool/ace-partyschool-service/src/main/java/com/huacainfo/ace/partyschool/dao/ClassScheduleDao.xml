@@ -160,7 +160,6 @@
 SELECT COUNT(*)
 FROM partyschool.student st
 WHERE st.classId=cs.classesId) AS studentNum,
-
 (
 	SELECT (SELECT SUM(er.score)
 	FROM partyschool.evaluation_rst er
@@ -208,7 +207,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
         FROM partyschool.course c
         LEFT JOIN partyschool.course_teacher ct ON c.id=ct.course_id
         left JOIN partyschool.teacher t ON ct.teacher_id = t.id
-        WHERE c.`status`<![CDATA[ <> ]]>'0'
+        WHERE 1=1
         GROUP BY c.id
         ORDER  by ct.type
     ) c ON cs.courseId =c.id
