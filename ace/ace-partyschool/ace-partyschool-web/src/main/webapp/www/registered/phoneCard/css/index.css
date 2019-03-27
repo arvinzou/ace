@@ -105,3 +105,9 @@
 	/*display:table-cell; */
 	vertical-align:middle;
 }
+.errorTips{
+	color: #FE4C46;
+}
+.normalTips{
+	color: #54ADF2;
+}
