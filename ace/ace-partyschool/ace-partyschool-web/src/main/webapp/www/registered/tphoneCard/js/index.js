@@ -120,7 +120,7 @@ function renderPage(IDom, data, tempId) {
  * 点击签到
  */
 function record(){
-    var con=confirm("是否确定签到?");
+    var con=confirm("是否确定提交?");
     if(con==true){
         $.ajax({
             url: contextPath+ "/www/att/record",
@@ -174,7 +174,7 @@ function findList(){
 
                 var num = result.data.am.length + result.data.pm.length + result.data.night.length;
                 renderPage('recordList', result.data, 'record-tpl');
-                $("#count").text("今日已签到"+num+"/5");
+                $("#count").text("今日已签到"+num+"/2");
                 var date = new Date();
                 var hour = date.getHours();
                 //签到  6:30~11:00允许签到

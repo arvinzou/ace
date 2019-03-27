@@ -105,3 +105,17 @@
 	/*display:table-cell; */
 	vertical-align:middle;
 }
+.errorTips{
+	color: #FE4C46;
+	font-size: 0.4rem;
+	font-weight: bold;
+	padding-top: 0.2rem;
+	padding-bottom: 0.2rem;
+}
+.normalTips{
+	color: #54ADF2;
+	font-size: 0.4rem;
+	font-weight: bold;
+	padding-top: 0.2rem;
+	padding-bottom: 0.2rem;
+}
