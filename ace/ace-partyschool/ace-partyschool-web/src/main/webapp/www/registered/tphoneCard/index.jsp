@@ -56,6 +56,15 @@
 					{@if data.am.length > 0}
 						{@each data.am as am, index01}
 							<p>上午打卡\${am.attTime}</p>
+							{@if am.attState == 'BE_LATE'}
+							<p class="errorTips">迟到</p>
+							{@else if am.attState == 'LEAVE_EARLY'}
+							<p class="errorTips">早退</p>
+							{@else if am.attState == 'NO_SIGN'}
+							<p class="errorTips">缺勤</p>
+							{@else if am.attState == 'ON_TIME'}
+							<p class="normalTips">正常</p>
+							{@/if}
 						{@/each}
 					{@/if}
 					<div id="amBtn" >
@@ -70,6 +79,15 @@
 					{@if data.pm.length > 0}
 					{@each data.pm as pm, index02}
 					<p>下午打卡\${pm.attTime}</p>
+					{@if pm.attState == 'BE_LATE'}
+					<p class="errorTips">迟到</p>
+					{@else if pm.attState == 'LEAVE_EARLY'}
+					<p class="errorTips">早退</p>
+					{@else if pm.attState == 'NO_SIGN'}
+					<p class="errorTips">缺勤</p>
+					{@else if pm.attState == 'ON_TIME'}
+					<p class="normalTips">正常</p>
+					{@/if}
 					{@/each}
 					{@/if}
 					<div id="pmBtn">
