@@ -20,6 +20,7 @@ public interface TopicRstDao {
     int insert(TopicRst record);
 
     int insertTopOptRstList(@Param("list")List<TopicOptRst> list,@Param("tid")String tid);
+    int insertTopOptRst(TopicOptRst obj);
 
 
     int updateByPrimaryKey(TopicRst record);

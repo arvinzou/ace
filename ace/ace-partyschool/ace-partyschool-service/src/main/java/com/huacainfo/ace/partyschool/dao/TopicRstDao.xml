@@ -61,6 +61,20 @@
   </update>
 
 
+    <insert id="insertTopOptRst" parameterType="com.huacainfo.ace.partyschool.model.TopicOptRst">
+        insert into
+        topic_opt_rst
+        (
+        id,topicId,content,answer,youAnswer
+        )
+        values
+            (#{id,jdbcType=VARCHAR},
+            #{topicId,jdbcType=VARCHAR},
+            #{content,jdbcType=VARCHAR},
+            #{answer,jdbcType=VARCHAR},
+            #{youAnswer,jdbcType=VARCHAR}
+            )
+    </insert>
     <insert id="insertTopOptRstList" parameterType="java.util.List" useGeneratedKeys="false">
         insert into
         topic_opt_rst

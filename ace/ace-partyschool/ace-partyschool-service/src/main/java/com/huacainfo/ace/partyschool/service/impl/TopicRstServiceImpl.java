@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.TestRstDao;
 import com.huacainfo.ace.partyschool.dao.TopicRstDao;
 import com.huacainfo.ace.partyschool.model.TestRst;
+import com.huacainfo.ace.partyschool.model.TopicOptRst;
 import com.huacainfo.ace.partyschool.service.TopicRstService;
 import com.huacainfo.ace.partyschool.vo.TopicRstQVo;
 import com.huacainfo.ace.partyschool.vo.TopicVo;
@@ -47,13 +48,22 @@ public class TopicRstServiceImpl implements TopicRstService {
     @Override
     public MessageResponse insertTopicRstList(List<TopicRstQVo> listPram,String taskId, UserProp userProp) throws Exception {
         String id = GUIDUtil.getGUID();
+
+        TopicOptRst topicOptRst=new TopicOptRst();
+        topicOptRst.setAnswer("0");
+        topicOptRst.setYouAnswer("1");
         for (TopicRstQVo item : listPram) {
-            item.setTestRstId(id);
             String tid=GUIDUtil.getGUID();
+            item.setTestRstId(id);
+            topicOptRst.setTopicId(tid);
             item.setId(tid);
             this.topicRstDao.insert(item);
             if (item.getTopicOptList().size() > 0) {
                 this.topicRstDao.insertTopOptRstList(item.getTopicOptList(),tid);
+            }else{
+                topicOptRst.setId(GUIDUtil.getGUID());
+                topicOptRst.setContent(item.getAnswer());
+                this.topicRstDao.insertTopOptRst(topicOptRst);
             }
         }
         TestRst testRst = new TestRst();
