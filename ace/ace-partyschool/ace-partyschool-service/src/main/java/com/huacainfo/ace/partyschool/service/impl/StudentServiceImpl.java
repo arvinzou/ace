@@ -397,4 +397,10 @@ public class StudentServiceImpl implements StudentService {
         return rst;
     }
 
+    @Override
+    public MessageResponse deleteStudents(List<String> students){
+        this.studentDao.deleteStudents(students);
+        return new MessageResponse(ResultCode.SUCCESS,"成功");
+    }
+
 }

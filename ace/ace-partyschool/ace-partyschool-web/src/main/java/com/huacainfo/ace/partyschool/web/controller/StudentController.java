@@ -67,7 +67,6 @@ public class StudentController extends BisBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 
@@ -195,5 +194,12 @@ public class StudentController extends BisBaseController {
     public MessageResponse recover(String id) throws Exception {
 
         return studentService.recover(id, this.getCurUserProp());
+    }
+
+    @RequestMapping(value = "/deleteStudents")
+    @ResponseBody
+    public MessageResponse deleteStudents(String students) throws Exception {
+        List<String> list=JSONObject.parseArray(students,String.class);
+        return studentService.deleteStudents(list);
     }
 }

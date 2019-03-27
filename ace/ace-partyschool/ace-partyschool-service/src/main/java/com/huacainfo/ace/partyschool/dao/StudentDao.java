@@ -1,6 +1,7 @@
 package com.huacainfo.ace.partyschool.dao;
 
 import com.huacainfo.ace.partyschool.model.Student;
+import com.huacainfo.ace.partyschool.model.TopicOptRst;
 import com.huacainfo.ace.partyschool.vo.StudentQVo;
 import com.huacainfo.ace.partyschool.vo.StudentVo;
 import org.apache.ibatis.annotations.Param;
@@ -49,5 +50,7 @@ public interface StudentDao {
 
 
     List<Map<String,String>> selectTeacherClasses(String id);
+
+    int deleteStudents(@Param("list")List<String> list);
 
 }

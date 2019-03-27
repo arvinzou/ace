@@ -79,6 +79,33 @@ function initEvents() {
 
     //班级下拉筛选列表
     initClassList('s-cls-list');
+    $('#delStudent').click(delStudent);
+}
+
+function delStudent() {
+    var checks=$('input[type=checkbox][name=studentId]:checked');
+    var students=[]
+    for(var i=0;i<checks.length;i++){
+        students.push($(checks[i]).data('id'));
+    }
+    if(students.length==0){
+        alert("没有选择删除对象")
+        return ;
+    }
+    if (confirm("你确定删除"+students.length+"位学员吗？")) {
+        var url=contextPath + "/student/deleteStudents";
+        var data={
+            students:JSON.stringify(students)
+        }
+        $.post(url,data,function (rst) {
+            if(rst.status==0){
+                jQuery("#grid-table").trigger("reloadGrid");
+            }
+            else {
+                alert("删除失败。")
+            }
+        })
+    }
 }
 
 

@@ -119,6 +119,7 @@ public interface StudentService {
      * @return MessageResponse
      */
     MessageResponse recover(String id, UserProp curUserProp) throws Exception;
+    MessageResponse deleteStudents(List<String> students) throws Exception;
     /**
      *
      *
