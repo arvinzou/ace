@@ -1,18 +1,14 @@
 package com.huacainfo.ace.partyschool.vo;
 
-import com.huacainfo.ace.common.model.BaseModel;
-
 /**
- * @ClassName AttRecordExcel
+ * @ClassName AttStudentExcel
  * @Description TODO
  * @Author Arvin Zou
  * @Date 2019/3/22 15:27
  */
-public class AttRecordExcel extends BaseModel {
-    //"姓名", "身份类型", "打卡时间",'班次',
+public class AttStudentExcel extends AttRecordExport {
+    //"姓名", "身份类型", "打卡日期",'班次',
     // '上午签到', '上午签退','下午签到','下午签退','晚上签到'(学员)
-    //'上午签到', '下午签退' （教职工）
-    // "数据来源"
 
     private String name;
     private String userType;

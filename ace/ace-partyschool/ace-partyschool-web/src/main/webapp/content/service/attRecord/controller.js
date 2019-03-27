@@ -144,6 +144,15 @@ function strIsEmpty(obj) {
 
 function initEvents() {
     //
+    $('#ext-userType').change(function () {
+        var p1 = $(this).children('option:selected').val();//这就是selected的值
+        if (p1 == 'student') {
+            $('#fm-export .cls-select').removeClass("hide");//显隐
+        } else {
+            $('#fm-export .cls-select').addClass("hide");//隐藏
+        }
+    });
+    //
     $(".btn-group .btn").bind('click', function (event) {
         $(event.target).siblings().removeClass("active");
         console.log(event);
@@ -170,19 +179,25 @@ function initEvents() {
 }
 
 function initExportModal() {
+    initClassList('ext-cls-list');
+
     //导出模态框
     $('#modal-export').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var title = relatedTarget.data('title');
         var modal = $(this);
-        initClassList('ext-cls-list');
     });
     //form submit
     $('#modal-export .btn-primary').on('click', function () {
-        $('#export_info').addClass("hide");
+        $('#export_info').addClass("hide");//隐藏信息框
+        var userType = $('#ext-userType option:selected').val();//选中的值;
+        if (strIsEmpty(userType)) {
+            alert('请选择身份类别！');
+            return false;
+        }
         var clsId = $('#ext-cls-list option:selected').val();//选中的值;
-        if (strIsEmpty(clsId)) {
+        if (strIsEmpty(clsId) && 'student' == userType) {
             alert('请选择班次信息！');
             return false;
         }

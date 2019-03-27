@@ -496,22 +496,22 @@ public class AttRecordServiceImpl implements AttRecordService {
     }
 
     @Override
-    public List<AttRecordExcel> exportAttRecord(AttRecordQVo condition) {
+    public List<AttRecordExport> exportAttRecord(AttRecordQVo condition) {
         String userType = condition.getUserType();
         Date startDate = DateUtil.getDate(condition.getStartDate(), DateUtil.DEFAULT_DATE_REGEX);
         Date endDate = DateUtil.getDate(condition.getEndDate(), DateUtil.DEFAULT_DATE_REGEX);
         //获取区间配置
-        Map<String, String> config = getConfigMap();
+        Map<String, String> config = getConfigMap(userType);
         if (CollectionUtils.isEmpty(config)) {
             throw new CustomException("考勤配置参数有误");
         }
         //返回参数
-        List<AttRecordExcel> rst = new LinkedList<>();
+        List<AttRecordExport> rst = new LinkedList<>();
         //循环日期
         Date nowDate = startDate;
         String nowDateStr;
         Calendar c = Calendar.getInstance();
-        List<AttRecordExcel> subList;
+        List<AttRecordExport> subList;
         while (nowDate.compareTo(endDate) <= 0) {
             nowDateStr = DateUtil.toStr(nowDate);
             condition.setNowDate(nowDateStr);
@@ -530,61 +530,114 @@ public class AttRecordServiceImpl implements AttRecordService {
 
     }
 
-    private List<AttRecordExcel> getOneDayList(String userType, Map<String, String> config, AttRecordQVo condition) {
+    private List<AttRecordExport> getOneDayList(String userType, Map<String, String> config, AttRecordQVo condition) {
         //1.数据库原始记录
         List<AttRecordVo> list = attRecordDao.findList(condition, 0, 65536, "");
         //2.转换为数据map
-        Map<String, AttRecordExcel> dataMap = convertDataMap(config, list);
+        Map<String, AttRecordExport> dataMap = convertDataMap(userType, config, list);
         //3.包装
         return packageExcelResult(userType, dataMap);
     }
 
-    private List<AttRecordExcel> packageExcelResult(String userType, Map<String, AttRecordExcel> dataMap) {
-        List<AttRecordExcel> rst = new LinkedList<>();
-        AttRecordExcel temp;
-        Map.Entry<String, AttRecordExcel> entry;
-        Iterator<Map.Entry<String, AttRecordExcel>> entries = dataMap.entrySet().iterator();
+    private List<AttRecordExport> packageExcelResult(String userType, Map<String, AttRecordExport> dataMap) {
+        List<AttRecordExport> rst = new LinkedList<>();
+        Map.Entry<String, AttRecordExport> entry;
+        Iterator<Map.Entry<String, AttRecordExport>> entries = dataMap.entrySet().iterator();
         while (entries.hasNext()) {
             entry = entries.next();
-            temp = dataMap.get(entry.getKey());
             if (CommConstant.STUDENT.equals(userType)) {
+                AttStudentExcel temp = (AttStudentExcel) dataMap.get(entry.getKey());
                 temp.setAmIn(StringUtil.isEmpty(temp.getAmIn()) ? "(缺勤)" : temp.getAmIn());
                 temp.setAmOut(StringUtil.isEmpty(temp.getAmOut()) ? "(缺勤)" : temp.getAmOut());
                 temp.setPmIn(StringUtil.isEmpty(temp.getPmIn()) ? "(缺勤)" : temp.getPmIn());
                 temp.setPmOut(StringUtil.isEmpty(temp.getPmOut()) ? "(缺勤)" : temp.getPmOut());
                 temp.setNightIn(StringUtil.isEmpty(temp.getNightIn()) ? "(缺勤)" : temp.getNightIn());
+                rst.add(temp);
             } else {
+                AttTeacherExcel temp = (AttTeacherExcel) dataMap.get(entry.getKey());
                 temp.setAmIn(StringUtil.isEmpty(temp.getAmIn()) ? "(缺勤)" : temp.getAmIn());
                 temp.setPmOut(StringUtil.isEmpty(temp.getPmOut()) ? "(缺勤)" : temp.getPmOut());
+                rst.add(temp);
             }
-            rst.add(temp);
         }
         return rst;
     }
 
-    private Map<String, AttRecordExcel> convertDataMap(Map<String, String> config, List<AttRecordVo> list) {
-        Map<String, AttRecordExcel> map = new HashMap<>();
-        AttRecordExcel stu;
-        String key;
-        Date date;
-        for (AttRecordVo item : list) {
-            date = item.getAttTime();
-            key = item.getAttDate() + "&" + item.getUserId();
-            stu = map.get(key);
-            stu = null == stu ? new AttRecordExcel() : stu;
-            stu.setName(item.getUserName());
-            stu.setUserType(item.getUserTypeName());
-            stu.setClsName(item.getClsName());
-            stu.setAttDate(item.getAttDate());
-            stu = setAttTime(config, date, item.getAttState(), stu);
-            map.put(key, stu);
+    private Map<String, AttRecordExport> convertDataMap(String userType,
+                                                        Map<String, String> config,
+                                                        List<AttRecordVo> list) {
+        //返回数据
+        Map<String, AttRecordExport> rst = new HashMap<>();
+        //逻辑分支
+        if (CommConstant.STUDENT.equals(userType)) {
+            Map<String, AttStudentExcel> sun = new HashMap<>();
+            AttStudentExcel student;
+            String key;
+            Date date;
+            for (AttRecordVo item : list) {
+                date = item.getAttTime();
+                key = item.getAttDate() + "&" + item.getUserId();
+                student = sun.get(key);
+                student = null == student ? new AttStudentExcel() : student;
+                student.setName(item.getUserName());
+                student.setUserType(item.getUserTypeName());
+                student.setClsName(item.getClsName());
+                student.setAttDate(item.getAttDate());
+                student = setStudentAttTime(config, date, item.getAttState(), student);
+                sun.put(key, student);
+            }
+            rst.putAll(sun);
+        } else {
+            Map<String, AttTeacherExcel> sun = new HashMap<>();
+            AttTeacherExcel teacher;
+            String key;
+            Date date;
+            for (AttRecordVo item : list) {
+                date = item.getAttTime();
+                key = item.getAttDate() + "&" + item.getUserId();
+                teacher = sun.get(key);
+                teacher = null == teacher ? new AttTeacherExcel() : teacher;
+                teacher.setName(item.getUserName());
+                teacher.setUserType(item.getUserTypeName());
+//                stu.setClsName(item.getClsName());
+                teacher.setAttDate(item.getAttDate());
+                teacher = setTeacherAttTime(config, date, item.getAttState(), teacher);
+                sun.put(key, teacher);
+            }
+            rst.putAll(sun);
         }
+        return rst;
 
-        return map;
     }
 
-    private AttRecordExcel setAttTime(Map<String, String> config,
-                                      Date attTime, String attState, AttRecordExcel stu) {
+    private AttTeacherExcel setTeacherAttTime(Map<String, String> config, Date attTime,
+                                              String attState, AttTeacherExcel teacher) {
+        String attStateName = parseState(attState);
+        if (attTime == null) {
+            return teacher;
+        }
+        //itemValue
+        String str = DateUtil.toStr(attTime, DateUtil.DEFAULT_DATE_TIME_REGEX) + "  (" + attStateName + ")";
+        //区间划分
+        String time = DateUtil.toStr(attTime, "HH:mm:ss");
+        //1.上午签到
+        String amIn_1 = config.get("amIn_1");//"08:00" + ":00";
+        String amIn_2 = config.get("amIn_2");//"10:00" + ":00";
+        //2.下午签退
+        String pmOut_1 = config.get("pmOut_1");//"15:30" + ":00";
+        String pmOut_2 = config.get("pmOut_2");//"16:00" + ":00";
+
+        if (DateUtil.compareTime(time, amIn_1) >= 0 && DateUtil.compareTime(time, amIn_2) < 0) {
+            teacher.setAmIn(str);
+        } else if (DateUtil.compareTime(time, pmOut_1) >= 0 && DateUtil.compareTime(time, pmOut_2) < 0) {
+            teacher.setPmOut(str);
+        }
+
+        return teacher;
+    }
+
+    private AttStudentExcel setStudentAttTime(Map<String, String> config,
+                                              Date attTime, String attState, AttStudentExcel stu) {
         String attStateName = parseState(attState);
         if (attTime == null) {
             return stu;
@@ -623,46 +676,63 @@ public class AttRecordServiceImpl implements AttRecordService {
         return stu;
     }
 
-    private Map<String, String> getConfigMap() {
-        //
+    private Map<String, String> getConfigMap(String userType) {
+        boolean isStudent = userType.equals(CommConstant.STUDENT);
+        String cfgKey = isStudent ? "STU" : "TEA";
+        //返回集合
         Map<String, String> rst = new HashMap<>();
-        //
-        List<Map<String, Object>> configs = attRecordDao.findConfigList("STU", CommConstant.SYS_ID);
+        //配置参数
+        List<Map<String, Object>> configs = attRecordDao.findConfigList(cfgKey, CommConstant.SYS_ID);
         String key;
         String value;
         String[] strArray;
         for (Map<String, Object> item : configs) {
             key = String.valueOf(item.get("config_key"));
             value = String.valueOf(item.get("config_value"));
-            if (CommConstant.STU_ATT_SCOPE_AM_IN.equals(key)) {
-                strArray = value.split("~");
-                rst.put("amIn_1", strArray[0] + ":00");
-                rst.put("amIn_2", strArray[1] + ":00");
-                continue;
-            }
-            if (CommConstant.STU_ATT_SCOPE_AM_OUT.equals(key)) {
-                strArray = value.split("~");
-                rst.put("amOut_1", strArray[0] + ":00");
-                rst.put("amOut_2", strArray[1] + ":00");
-                continue;
-            }
-            if (CommConstant.STU_ATT_SCOPE_PM_IN.equals(key)) {
-                strArray = value.split("~");
-                rst.put("pmIn_1", strArray[0] + ":00");
-                rst.put("pmIn_2", strArray[1] + ":00");
-                continue;
-            }
-            if (CommConstant.STU_ATT_SCOPE_PM_OUT.equals(key)) {
-                strArray = value.split("~");
-                rst.put("pmOut_1", strArray[0] + ":00");
-                rst.put("pmOut_2", strArray[1] + ":00");
-                continue;
-            }
-            if (CommConstant.STU_ATT_SCOPE_NIGHT_IN.equals(key)) {
-                strArray = value.split("~");
-                rst.put("nightIn_1", strArray[0] + ":00");
-                rst.put("nightIn_2", strArray[1] + ":00");
-                continue;
+            if (isStudent) {
+                if (CommConstant.STU_ATT_SCOPE_AM_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("amIn_1", strArray[0] + ":00");
+                    rst.put("amIn_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_SCOPE_AM_OUT.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("amOut_1", strArray[0] + ":00");
+                    rst.put("amOut_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_SCOPE_PM_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("pmIn_1", strArray[0] + ":00");
+                    rst.put("pmIn_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_SCOPE_PM_OUT.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("pmOut_1", strArray[0] + ":00");
+                    rst.put("pmOut_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_SCOPE_NIGHT_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("nightIn_1", strArray[0] + ":00");
+                    rst.put("nightIn_2", strArray[1] + ":00");
+                    continue;
+                }
+            } else {
+                if (CommConstant.TEA_ATT_SCOPE_AM_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("amIn_1", strArray[0] + ":00");
+                    rst.put("amIn_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.TEA_ATT_SCOPE_PM_OUT.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("pmOut_1", strArray[0] + ":00");
+                    rst.put("pmOut_2", strArray[1] + ":00");
+                    continue;
+                }
             }
         }
 

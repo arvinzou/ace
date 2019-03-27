@@ -24,7 +24,7 @@
                 <div class="col-md-4 toolbar">
 
                     <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
-
+                    <button type="button" class="btn  green" id="btn-view-sort" authority="false">排序</button>
                 </div>
                 <div class="col-md-8">
                     <div class="btn-group" role="group" style="float:left;padding-right:15px">
@@ -67,8 +67,32 @@
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 
+<div class="modal fade" role="dialog" id="modal-sort">
+    <div class="modal-dialog" role="document" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" authority="false" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">排序</h4>
+            </div>
+            <div class="modal-body">
+                <div class="sortable" id="sortable">
+                    <li class="dd-handle" id="1">第1项</li>
+                    <li class="dd-handle" id="2">第2项</li>
+                    <li class="dd-handle" id="3">第3项</li>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+                <button type="button" class="btn green upload" authority="false">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" role="dialog" id="modal-upload">
-    <div class="modal-dialog" role="document" style="width: 830px;">
+    <div class="modal-dialog" role="document" style="width: 60%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" authority="false" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -203,7 +227,9 @@
 <script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
-
+<%--Sortable--%>
+<script src="${portalPath}/content/common/assets/global/plugins/sortable/Sortable.min.js?version=${cfg.version}"></script>
+<%--plupload--%>
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
 <script type="text/javascript"

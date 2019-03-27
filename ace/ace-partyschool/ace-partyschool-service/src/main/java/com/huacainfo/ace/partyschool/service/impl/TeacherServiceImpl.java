@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service("teacherService")
 /**
@@ -305,6 +306,27 @@ public class TeacherServiceImpl implements TeacherService {
         teacherDao.updateStatus(id, SignServiceImpl.ACCOUNT_VALID);//已注销
 
         return new MessageResponse(0, "账户恢复成功！");
+    }
+
+    /**
+     * 更新教职工排列顺序
+     *
+     * @param list        数据
+     * @param curUserProp
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse updateSort(List<Map<String, Object>> list, UserProp curUserProp) {
+        String id = "";
+        int index = 0;
+        for (Map<String, Object> item : list) {
+            id = String.valueOf(item.get("id"));
+            index = (int) item.get("index");
+            teacherDao.updateSort(id, index);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "保存成功");
     }
 
 

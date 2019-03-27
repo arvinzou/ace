@@ -134,7 +134,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY v.userType, v.userName, t.attTime desc
+                ORDER BY t.attTime desc, v.userType, v.userName
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

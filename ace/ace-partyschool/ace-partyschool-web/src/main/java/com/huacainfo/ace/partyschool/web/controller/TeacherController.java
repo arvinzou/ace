@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.partyschool.model.Teacher;
 import com.huacainfo.ace.partyschool.service.TeacherService;
 import com.huacainfo.ace.partyschool.vo.TeacherQVo;
@@ -19,6 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/teacher")
@@ -176,6 +180,21 @@ public class TeacherController extends BisBaseController {
     public MessageResponse recover(String id) throws Exception {
 
         return this.teacherService.recover(id, this.getCurUserProp());
+    }
+
+    /**
+     * 更新教职工排列顺序
+     *
+     * @param json json数据串
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateSort")
+    public MessageResponse updateSort(String json) throws Exception {
+        List<Map<String, Object>> list = JsonUtil.toObject(json, List.class);
+
+        return teacherService.updateSort(list, this.getCurUserProp());
     }
 
 }
