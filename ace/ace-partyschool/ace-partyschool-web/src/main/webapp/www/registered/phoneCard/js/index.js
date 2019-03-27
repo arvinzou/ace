@@ -120,7 +120,7 @@ function renderPage(IDom, data, tempId) {
  * 点击签到
  */
 function record(){
-    var con=confirm("是否确定签到?");
+    var con=confirm("是否确定提交?");
     if(con==true){
         $.ajax({
             url: contextPath+ "/www/att/record",
