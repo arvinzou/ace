@@ -244,7 +244,7 @@ public class MailListServiceImpl implements MailListService {
      * @param: @param p
      * @param: @return
      * @param: @throws Exception
-     * @return: ListResult<Map<String,Object>>
+     * @return: ListResult<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-12
      */
@@ -264,7 +264,7 @@ public class MailListServiceImpl implements MailListService {
      * @Description: TODO(用于控件数据获取)
      * @param: @param params
      * @param: @return
-     * @return: Map<String,Object>
+     * @return: Map<String, Object>
      * @author: 陈晓克
      * @version: 2019-01-12
      */
@@ -280,7 +280,7 @@ public class MailListServiceImpl implements MailListService {
     /**
      * @throws
      * @Title:deleteRoadSectionByRoadSectionIds
-     * @Description: TODO(批量删除通讯录）
+     * @Description: TODO(批量删除通讯录 ）
      * @param: @param ids
      * @param: @param userProp
      * @param: @throws Exception
@@ -327,16 +327,15 @@ public class MailListServiceImpl implements MailListService {
      */
     @Override
     public ListResult<Tree> getTreeList(String name, UserProp userProp) {
-        List<Map<String, Object>> list = null;
+        List<Map<String, Object>> list;
         Map<String, String> o = studentDao.selectUserClassInfo(userProp.getUserId());
         if (o.get("role").equals("student")) {
             list = this.mailListDao.getClassTreeList(o.get("classId"), name);
         } else {
-
             list = this.mailListDao.getTeacherTreeList(name);
         }
         CommonTreeUtils treeUtils = new CommonTreeUtils(list);
-        ListResult rst=new ListResult();
+        ListResult rst = new ListResult();
         rst.setValue(treeUtils.getTreeList("0"));
         return rst;
     }
@@ -356,14 +355,14 @@ public class MailListServiceImpl implements MailListService {
         Configuration configuration = session.getConfiguration();
         configuration.setSafeResultHandlerEnabled(false);
         MailListDao dao = session.getMapper(MailListDao.class);
-        ListResult rst=new ListResult();
+        ListResult rst = new ListResult();
         try {
-            this.logger.info("getMailListContent {}",classId);
+            this.logger.info("getMailListContent {}", classId);
             rst.setValue(dao.getMailListContent(classId));
-        }catch (Exception e){
+        } catch (Exception e) {
             session.rollback();
-            this.logger.error("{}",e);
-        }finally {
+            this.logger.error("{}", e);
+        } finally {
             session.close();
         }
         return rst;
@@ -383,21 +382,22 @@ public class MailListServiceImpl implements MailListService {
         this.mailListDao.updateClassesByIds(classId, ids);
         return new MessageResponse(0, "成功！");
     }
+
     /**
      * @throws
      * @Title:getClassList
      * @Description: TODO(加载当前班级列表)
      * @param: @return
-     * @return: ListResult<Map<String, Object>>
+     * @return: ListResult<Map < String, Object>>
      * @author: chenxiaoke
      * @version: 2019-01-12
      */
     @Override
-    public ListResult<Map<String, Object>> getClassList(UserProp userProp){
-        ListResult<Map<String, Object>> rst=new ListResult<>();
-        List<Map<String,Object>> list=this.mailListDao.getMeClassList(userProp.getUserId());
-        if(list==null||list.size()==0){
-            list=this.mailListDao.getClassList();
+    public ListResult<Map<String, Object>> getClassList(UserProp userProp) {
+        ListResult<Map<String, Object>> rst = new ListResult<>();
+        List<Map<String, Object>> list = this.mailListDao.getMeClassList(userProp.getUserId());
+        if (list == null || list.size() == 0) {
+            list = this.mailListDao.getClassList();
         }
         rst.setValue(list);
         return rst;
@@ -429,7 +429,7 @@ public class MailListServiceImpl implements MailListService {
      * @version: 2019-01-16
      */
     @Override
-    public List<Tree> getTreeList(){
+    public List<Tree> getTreeList() {
         List<Map<String, Object>> list = list = this.mailListDao.getTreeList();
         CommonTreeUtils treeUtils = new CommonTreeUtils(list);
         return treeUtils.getTreeList("0");

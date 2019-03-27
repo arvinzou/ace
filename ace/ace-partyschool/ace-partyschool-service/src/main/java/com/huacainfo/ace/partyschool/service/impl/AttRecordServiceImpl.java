@@ -572,7 +572,7 @@ public class AttRecordServiceImpl implements AttRecordService {
             AttRecordQVo condition = new AttRecordQVo();
             condition.setDateTimeStr(dateTimeStr);
             condition.setUserId(userId);
-            List<AttRecordVo> list = attRecordDao.findList(condition, 0, 100, "t.attTime asc");
+            List<AttRecordVo> list = attRecordDao.findRecordList(condition, 0, 100, "");
             //解析分组
             Map<String, List<AttRecordVo>> view = new HashMap<>();
             List<AttRecordVo> am = new LinkedList<>();
