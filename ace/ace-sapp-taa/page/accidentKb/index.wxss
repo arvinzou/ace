@@ -409,14 +409,14 @@ view, map, cover-view {
     position: relative;
 }
 .modal-content{
-    width: 88%;
-    height: 820rpx;
-    margin-top: 173rpx;
-    margin-left: 6%;
-    margin-right: 6%;
-    background: rgba(255,255,255,1);
-    border-radius: 10rpx;
-    position: relative;
+    width:78%;
+    height:720rpx;
+    margin-top:173rpx;
+    margin-left:11%;
+    margin-right:11%;
+    background:rgba(255,255,255,1);
+    border-radius:10rpx;
+    position:relative;
 }
 .modal-content-title{
     padding-top: 49rpx;
@@ -483,7 +483,7 @@ view, map, cover-view {
     width: 60rpx;
     height: 60rpx;
     position: absolute;
-    bottom: 100rpx;
+    bottom: 200rpx;
     left: 345rpx;
 }
 .secion-check{
