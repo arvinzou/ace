@@ -73,18 +73,7 @@ public class AttRecordServiceImpl implements AttRecordService {
 
             rst.setTotal(allRows);
         }
-        return rst;
-    }
 
-    @Override
-    public PageResult<AttRecordVo> findAttRecordListExpor(AttRecordQVo condition, int start, int limit, String orderBy) throws Exception {
-        PageResult<AttRecordVo> rst = new PageResult<>();
-        List<AttRecordVo> list = this.attRecordDao.findListExpor(condition, start, limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.attRecordDao.findCount(condition);
-            rst.setTotal(allRows);
-        }
         return rst;
     }
 
@@ -295,7 +284,7 @@ public class AttRecordServiceImpl implements AttRecordService {
 
     private List<AttRecordExcel> getOneDayList(AttRecordQVo condition) {
         //1.数据库原始记录
-        List<AttRecordVo> list = attRecordDao.findList(condition, 0, 65536, "");
+        List<AttRecordVo> list = attRecordDao.findListExpor(condition, 0, 65536, "");
         //2.转换为数据map
         Map<String, AttRecordExcel> dataMap = convertDataMap(list);
         //3.包装
@@ -337,31 +326,6 @@ public class AttRecordServiceImpl implements AttRecordService {
     }
 
 
-    private List<AttRecordVo> getOneDayList1(AttRecordQVo condition, int start, int limit, String orderBy) throws Exception {
-        //1.数据库原始记录
-        List<AttRecordVo> list = attRecordDao.findListExpor(condition, start, limit, orderBy);
-        List<AttRecordVo> list1 = new ArrayList();
-        //2.转换为数据map
-        // Map<String, AttRecordVo> dataMap = convertDataMap1(list);
-        Map<String, AttRecordVo> map = new HashMap<>();
-        AttRecordVo stu = new AttRecordVo();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        for (AttRecordVo item : list) {
 
-            stu = null == stu ? new AttRecordVo() : stu;
-            stu.setUserName(item.getUserName());
-            String dat = item.getAttenDateTime();
-
-            if (!StringUtil.isEmpty(item.getAttenDateTime())) {
-
-                Date dt2 = sdf.parse((item.getAttenDateTime()));
-                ;
-                stu.setAttenTime(dt2.getTime() / 1000);
-            }
-            stu.setAttenDate(item.getAttDate());
-            list1.add(stu);
-        }
-        return list1;
-    }
 
 }

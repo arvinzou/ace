@@ -21,6 +21,7 @@ public class AttRecordQVo extends AttRecord {
     private String classId;
     private String userId;
     private String nowDate;//"yyyy-MM-dd"
+    private String clsName;
 
     public String getDateTimeStr() {
         return dateTimeStr;
@@ -77,5 +78,13 @@ public class AttRecordQVo extends AttRecord {
 
     public void setNowDate(String nowDate) {
         this.nowDate = nowDate;
+    }
+
+    public String getClsName() {
+        return clsName;
+    }
+
+    public void setClsName(String clsName) {
+        this.clsName = clsName;
     }
 }

@@ -22,7 +22,7 @@ public class AttRecordVo extends AttRecord {
     private String classId;
 
     private String attDate;
-
+    private String clsName;
     public String getUserName() {
         return userName;
     }
@@ -69,5 +69,13 @@ public class AttRecordVo extends AttRecord {
 
     public void setAttDate(String attDate) {
         this.attDate = attDate;
+    }
+
+    public String getClsName() {
+        return clsName;
+    }
+
+    public void setClsName(String clsName) {
+        this.clsName = clsName;
     }
 }

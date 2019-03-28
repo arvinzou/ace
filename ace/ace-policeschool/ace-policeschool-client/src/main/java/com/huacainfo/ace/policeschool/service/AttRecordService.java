@@ -186,7 +186,6 @@ public interface AttRecordService {
 
     List<AttRecordExcel> exportAttRecord(AttRecordQVo condition);
 
-    PageResult<AttRecordVo> findAttRecordListExpor(AttRecordQVo condition, int start, int limit, String orderBy) throws Exception;
 
     ;
 
