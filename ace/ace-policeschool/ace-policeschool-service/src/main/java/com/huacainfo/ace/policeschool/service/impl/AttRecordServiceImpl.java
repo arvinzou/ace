@@ -4,6 +4,7 @@ package com.huacainfo.ace.policeschool.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.access.AccessHelper;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
@@ -12,6 +13,7 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.policeschool.dao.AttRecordDao;
 import com.huacainfo.ace.policeschool.dao.ZkAttDataDao;
 import com.huacainfo.ace.policeschool.model.AttRecord;
+import com.huacainfo.ace.policeschool.model.AttRecordExcel;
 import com.huacainfo.ace.policeschool.model.ZkAttData;
 import com.huacainfo.ace.policeschool.service.AttRecordService;
 import com.huacainfo.ace.policeschool.vo.AttRecordQVo;
@@ -27,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service("attRecordService")
@@ -62,85 +65,19 @@ public class AttRecordServiceImpl implements AttRecordService {
     @Override
     public PageResult<AttRecordVo> findAttRecordList(AttRecordQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<AttRecordVo> rst = new PageResult<>();
+
         List<AttRecordVo> list = this.attRecordDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.attRecordDao.findCount(condition);
+
             rst.setTotal(allRows);
         }
+
         return rst;
     }
 
-    /**
-     * @throws
-     * @Title:insertAttRecord
-     * @Description: TODO(添加学员考勤)
-     * @param: @param o
-     * @param: @param userProp
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: Arvin
-     * @version: 2019-02-20
-     */
-    @Override
-    public MessageResponse insertAttRecord(AttRecord o, UserProp userProp) throws Exception {
 
-
-        if (CommonUtils.isBlank(o.getAttTime())) {
-            return new MessageResponse(1, "考勤时间不能为空！");
-        }
-        if (o.getLatitude().compareTo(BigDecimal.ZERO) == 0
-                || o.getLongitude().compareTo(BigDecimal.ZERO) == 0) {
-            return new MessageResponse(1, "考勤定位不能为空！");
-        }
-        Users user = usersService.selectUsersByPrimaryKey(userProp.getUserId()).getValue();
-        if (user == null) {
-            return new MessageResponse(ResultCode.FAIL, "用户数据丢失");
-        }
-        //重复签到筛选条件
-        o.setAttTimeStr(DateUtil.toStr(o.getAttTime()));
-        o.setUserId(userProp.getUserId());
-        o.setUserType(user.getUserLevel());
-        o.setId(GUIDUtil.getGUID());
-        o.setCreateDate(new Date());
-        o.setStatus("1");
-        this.attRecordDao.insert(o);
-        this.dataBaseLogService.log("添加学员考勤", "学员考勤", "", o.getId(), o.getId(), userProp);
-
-        return new MessageResponse(0, "签到成功！");
-    }
-
-    /**
-     * @throws
-     * @Title:updateAttRecord
-     * @Description: TODO(更新学员考勤)
-     * @param: @param o
-     * @param: @param userProp
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: Arvin
-     * @version: 2019-02-20
-     */
-    @Override
-    public MessageResponse updateAttRecord(AttRecord o, UserProp userProp) throws Exception {
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getUserId())) {
-            return new MessageResponse(1, "用户编码不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getUserType())) {
-            return new MessageResponse(1, "用户类型不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getAttTime())) {
-            return new MessageResponse(1, "考勤时间不能为空！");
-        }
-
-        this.attRecordDao.updateByPrimaryKey(o);
-        this.dataBaseLogService.log("变更学员考勤", "学员考勤", "", o.getId(), o.getId(), userProp);
-
-        return new MessageResponse(0, "保存成功！");
-    }
 
     /**
      * @throws
@@ -200,57 +137,7 @@ public class AttRecordServiceImpl implements AttRecordService {
     }
 
 
-    /**
-     * @throws
-     * @Title:importXls
-     * @Description: TODO(Excel导入资源数据)
-     * @param: @param list
-     * @param: @param userProp
-     * @param: @return
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: Arvin
-     * @version: 2019-02-20
-     */
 
-    @Override
-    public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
-        int i = 1;
-        for (Map<String, Object> row : list) {
-            AttRecord o = new AttRecord();
-            CommonBeanUtils.copyMap2Bean(o, row);
-            o.setCreateDate(new Date());
-            o.setStatus("1");
-
-            this.logger.info(o.toString());
-            if (true) {
-                return new MessageResponse(1, "行" + i + ",编号不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getId())) {
-                return new MessageResponse(1, "主键不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getUserId())) {
-                return new MessageResponse(1, "用户编码不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getUserType())) {
-                return new MessageResponse(1, "用户类型不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getAttTime())) {
-                return new MessageResponse(1, "考勤时间不能为空！");
-            }
-
-            int t = attRecordDao.isExist(o);
-            if (t > 0) {
-                this.attRecordDao.updateByPrimaryKey(o);
-
-            } else {
-                this.attRecordDao.insert(o);
-            }
-            i++;
-        }
-        this.dataBaseLogService.log("学员考勤导入", "学员考勤", "", "rs.xls", "rs.xls", userProp);
-        return new MessageResponse(0, "导入成功！");
-    }
 
 
     /**
@@ -365,91 +252,80 @@ public class AttRecordServiceImpl implements AttRecordService {
     }
 
     /**
-     * 查询登录用户考勤信息 -- 查询某一天的考勤数据
-     *
-     * @param userId
-     * @param dateTimeStr 日期字符串 ，包含年月日；示例： 2019-02-21
-     * @return ResultResponse
+     * 学员考勤导出
+     * @param condition
+     * @return
      */
     @Override
-    public ResultResponse findList(String userId, String dateTimeStr) {
-        Map<String, Object> config = attRecordDao.getAttSrc();
-        if (config == null) {
-            return new ResultResponse(ResultCode.FAIL, "未配置考勤数据来源");
+    public List<AttRecordExcel> exportAttRecord(AttRecordQVo condition) {
+        List<AttRecordExcel> rst = new LinkedList<>();
+        Date startDate = DateUtil.getDate(condition.getStartDate(), DateUtil.DEFAULT_DATE_REGEX);
+        Date endDate = DateUtil.getDate(condition.getEndDate(), DateUtil.DEFAULT_DATE_REGEX);
+
+        //循环日期
+        Date nowDate = startDate;
+        String nowDateStr;
+        Calendar c = Calendar.getInstance();
+        List<AttRecordExcel> subList;
+        while (nowDate.compareTo(endDate) <= 0) {
+            nowDateStr = DateUtil.toStr(nowDate);
+            condition.setNowDate(nowDateStr);
+            condition.setStartDate(nowDateStr + " 00:00:00");
+            condition.setEndDate(nowDateStr + " 23:59:59");
+            subList = getOneDayList(condition);
+            rst.addAll(subList);
+            //循环条件
+            c.setTime(nowDate);
+            c.add(Calendar.DAY_OF_MONTH, 1);
+            nowDate = c.getTime();
         }
-        //中控智慧来源
-        if ("ZK".equals(String.valueOf(config.get("config_value")))) {
-            ZkAttDataQVo condition = new ZkAttDataQVo();
-            condition.setDateTimeStr(dateTimeStr);
-            condition.setUserId(userId);
-            List<ZkAttDataVo> list = zkAttDataDao.findVoList(condition, 0, 100, "t.attTime asc");
-            //解析分组
-            Map<String, List<ZkAttDataVo>> view = new HashMap<>();
-            List<ZkAttDataVo> am = new LinkedList<>();
-            List<ZkAttDataVo> pm = new LinkedList<>();
-            List<ZkAttDataVo> night = new LinkedList<>();
-            view.put("am", am);
-            view.put("pm", pm);
-            view.put("night", night);
-            String hour;
-            int iHour;
-            String dtStr;
-            for (ZkAttDataVo item : list) {
-                dtStr = DateUtil.toStr(item.getAttTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
-                if (dtStr.length() == 19) {
-                    hour = dtStr.substring(11, 13);
-                    iHour = Integer.parseInt(hour);
-                    if (iHour < 12) {//上午
-                        am = view.get("am");
-                        am.add(item);
-                    } else if (iHour >= 18) {//晚上
-                        night = view.get("night");
-                        night.add(item);
-                    } else {
-                        pm = view.get("pm");
-                        pm.add(item);
-                    }
-                }
-            }
-            return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", view);
-        }
-        //手机定位来源
-        else {
-            AttRecordQVo condition = new AttRecordQVo();
-            condition.setDateTimeStr(dateTimeStr);
-            condition.setUserId(userId);
-            List<AttRecordVo> list = attRecordDao.findList(condition, 0, 100, "t.attTime asc");
-            //解析分组
-            Map<String, List<AttRecordVo>> view = new HashMap<>();
-            List<AttRecordVo> am = new LinkedList<>();
-            List<AttRecordVo> pm = new LinkedList<>();
-            List<AttRecordVo> night = new LinkedList<>();
-            view.put("am", am);
-            view.put("pm", pm);
-            view.put("night", night);
-            String hour;
-            int iHour;
-            String dtStr;
-            for (AttRecordVo item : list) {
-                dtStr = DateUtil.toStr(item.getAttTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
-                if (dtStr.length() == 19) {
-                    hour = dtStr.substring(11, 13);
-                    iHour = Integer.parseInt(hour);
-                    if (iHour < 12) {//上午
-                        am = view.get("am");
-                        am.add(item);
-                    } else if (iHour >= 18) {//晚上
-                        night = view.get("night");
-                        night.add(item);
-                    } else {
-                        pm = view.get("pm");
-                        pm.add(item);
-                    }
-                }
-            }
-            return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", view);
-        }
+        return rst;
     }
+
+    private List<AttRecordExcel> getOneDayList(AttRecordQVo condition) {
+        //1.数据库原始记录
+        List<AttRecordVo> list = attRecordDao.findListExpor(condition, 0, 65536, "");
+        //2.转换为数据map
+        Map<String, AttRecordExcel> dataMap = convertDataMap(list);
+        //3.包装
+        return packageExcelResult(dataMap);
+    }
+
+    private Map<String, AttRecordExcel> convertDataMap(List<AttRecordVo> list) {
+        Map<String, AttRecordExcel> map = new HashMap<>();
+        AttRecordExcel stu;
+        String key;
+        String date;
+        for (AttRecordVo item : list) {
+            date = item.getAttenDateTime();
+            key = item.getAttDate() + "&" + item.getUserId();
+            stu = map.get(key);
+            stu = null == stu ? new AttRecordExcel() : stu;
+            stu.setUserName(item.getUserName());
+
+            stu.setAttenTime(StringUtil.isEmpty(item.getAttenDateTime()) ? "(缺勤)" : item.getAttenDateTime());
+            stu.setAttenDate(item.getAttDate());
+            map.put(key, stu);
+        }
+
+        return map;
+    }
+
+    private List<AttRecordExcel> packageExcelResult(Map<String, AttRecordExcel> dataMap) {
+        List<AttRecordExcel> rst = new LinkedList<>();
+        AttRecordExcel temp;
+        Map.Entry<String, AttRecordExcel> entry;
+        Iterator<Map.Entry<String, AttRecordExcel>> entries = dataMap.entrySet().iterator();
+        while (entries.hasNext()) {
+            entry = entries.next();
+            temp = dataMap.get(entry.getKey());
+
+            rst.add(temp);
+        }
+        return rst;
+    }
+
+
 
 
 }

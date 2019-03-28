@@ -131,7 +131,7 @@ public class RoadDangerReportServiceImpl implements RoadDangerReportService {
         this.dataBaseLogService.log("添加路况上报", "路况上报", "",
                 obj.getId(), obj.getId(), userProp);
 
-        return new MessageResponse(0, "保存成功！");
+        return new MessageResponse(0, "隐患上报成功！");
     }
 
 

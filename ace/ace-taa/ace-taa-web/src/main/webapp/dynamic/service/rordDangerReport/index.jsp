@@ -128,7 +128,7 @@
         {@/if}
         {@if item.status==4}
 
-        <td width="15%">退回</td>
+        <td width="15%" style="color:#ff392f">退回</td>
         {@/if}
         <td>
             ﻿
