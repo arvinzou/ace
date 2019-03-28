@@ -2,108 +2,118 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.policeschool.dao.AttRecordDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.policeschool.model.AttRecord">
-        <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="userId" jdbcType="VARCHAR" property="userId"/>
-        <result column="userType" jdbcType="VARCHAR" property="userType"/>
-        <result column="attTime" jdbcType="TIMESTAMP" property="attTime"/>
-        <result column="attPhoto" jdbcType="VARCHAR" property="attPhoto"/>
-        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
-        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
-        <result column="status" jdbcType="CHAR" property="status"/>
+        <id column="attenId" jdbcType="VARCHAR" property="attenId"/>
+        <result column="companyId" jdbcType="VARCHAR" property="companyId"/>
+        <result column="attenDevice" jdbcType="VARCHAR" property="attenDevice"/>
+        <result column="deviceName" jdbcType="VARCHAR" property="deviceName"/>
+        <result column="attenUid" jdbcType="VARCHAR" property="attenUid"/>
+        <result column="realname" jdbcType="VARCHAR" property="realname"/>
+        <result column="departName" jdbcType="VARCHAR" property="departName"/>
+        <result column="attenType" jdbcType="VARCHAR" property="attenType"/>
+        <result column="attenStatus" jdbcType="VARCHAR" property="attenStatus"/>
+        <result column="attenTime" jdbcType="BIGINT" property="attenTime"/>
+        <result column="attenDate" jdbcType="VARCHAR" property="attenDate"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, userId, userType, attTime, attPhoto, longitude, latitude, status, remark, createDate
+        attenId, companyId, attenDevice, deviceName, attenUid, realname, departName, attenType,
+    attenStatus, attenTime, attenDate, remark, createDate
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from att_record
+        from qy_att_record
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from att_record
+        delete from qy_att_record
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.AttRecord">
-        insert into att_record (id, userId, userType,
-        attTime, attPhoto, longitude,
-        latitude, status, remark,
-        createDate)
-        values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR},
-        #{attTime,jdbcType=TIMESTAMP}, #{attPhoto,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL},
-        #{latitude,jdbcType=DECIMAL}, #{status,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR},
-        #{createDate,jdbcType=TIMESTAMP})
-    </insert>
+    insert into qy_att_record (attenId, companyId, attenDevice,
+      deviceName, attenUid, realname,
+      departName, attenType, attenStatus,
+      attenTime, attenDate, remark,
+      createDate)
+    values (#{attenId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{attenDevice,jdbcType=VARCHAR},
+      #{deviceName,jdbcType=VARCHAR}, #{attenUid,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR},
+      #{departName,jdbcType=VARCHAR}, #{attenType,jdbcType=VARCHAR}, #{attenStatus,jdbcType=VARCHAR},
+      #{attenTime,jdbcType=BIGINT}, #{attenDate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.policeschool.model.AttRecord">
-        update att_record
-        set userId = #{userId,jdbcType=VARCHAR},
-        userType = #{userType,jdbcType=VARCHAR},
-        attTime = #{attTime,jdbcType=TIMESTAMP},
-        attPhoto = #{attPhoto,jdbcType=VARCHAR},
-        longitude = #{longitude,jdbcType=DECIMAL},
-        latitude = #{latitude,jdbcType=DECIMAL},
-        status = #{status,jdbcType=CHAR},
-        remark = #{remark,jdbcType=VARCHAR},
-        createDate = #{createDate,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=VARCHAR}
-    </update>
-
+    update qy_att_record
+    set companyId = #{companyId,jdbcType=VARCHAR},
+      attenDevice = #{attenDevice,jdbcType=VARCHAR},
+      deviceName = #{deviceName,jdbcType=VARCHAR},
+      attenUid = #{attenUid,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      departName = #{departName,jdbcType=VARCHAR},
+      attenType = #{attenType,jdbcType=VARCHAR},
+      attenStatus = #{attenStatus,jdbcType=VARCHAR},
+      attenTime = #{attenTime,jdbcType=BIGINT},
+      attenDate = #{attenDate,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where attenId = #{attenId,jdbcType=VARCHAR}
+  </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.policeschool.vo.AttRecordVo">
         <result column="userName" jdbcType="VARCHAR" property="userName"/>
         <result column="userTypeName" jdbcType="VARCHAR" property="userTypeName"/>
-
+        <result column="attenDateTime" jdbcType="VARCHAR" property="attenDateTime"/>
+        <result column="attDate" jdbcType="VARCHAR" property="attDate"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
-        case
-        when t.userType= 'student' then s.`name`
-        when t.userType= 'teacher' then '教职工'
-        ELSE '' end userName,
-        case
-        when t.userType= 'student' then '学员'
-        when t.userType= 'teacher' then '教职工'
-        ELSE '' end userTypeName,
-        t.id, t.userId, t.userType, t.attTime, t.attPhoto,
-        t.longitude, t.latitude, t.status, t.remark, t.createDate
+
+       stu.id as userId,stu.name as userName,att.attenId,att.companyId,att.attenDevice,att.deviceName,att.departName,att.attenUid,att.realname,att.attenType,att.attenStatus,
+        DATE_FORMAT(from_unixtime(att.attenTime),'%Y-%m-%d %H:%i:%S') as attenDateTime,
+      att.attenDate,cls.id as classId
     </sql>
     <sql id="From_Statement">
-        FROM att_record t
-        left join student s on t.userType= 'student' and t.userId = s.id
+       FROM student stu
+
+      LEFT JOIN  qy_crm crm  on stu.id =crm.userId
+     LEFT JOIN qy_att_record att on att.attenUid =crm.ccNum
+     LEFT JOIN classes cls on stu.classId=cls.id
+
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
         <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
-            and t.userId = #{condition.userId,jdbcType=VARCHAR}
+            and v.id = #{condition.userId,jdbcType=VARCHAR}
         </if>
-        <if test="condition.userType !=null and condition.userType !=&quot;&quot;">
-            and t.userType = #{condition.userType,jdbcType=VARCHAR}
+
+        <if test="condition.userName !=null and condition.userName !=&quot;&quot;">
+            and v.name like concat(#{condition.userName,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.attTime !=null and condition.attTime !=&quot;&quot;">
-            and t.attTime = #{condition.attTime,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.longitude !=null and condition.longitude !=&quot;&quot;">
-            and t.longitude = #{condition.longitude,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.latitude !=null and condition.latitude !=&quot;&quot;">
-            and t.latitude = #{condition.latitude,jdbcType=VARCHAR}
+        <if test="condition.classId!=null and condition.classId!=&quot;&quot;">
+            and v.classId = #{condition.classId,jdbcType=VARCHAR}
         </if>
         <if test="condition.dateTimeStr !=null and condition.dateTimeStr !=&quot;&quot;">
-            and t.attTime like concat(#{condition.dateTimeStr,jdbcType=VARCHAR},'%')
+            and att.attTime like concat(#{condition.dateTimeStr,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.name !=null and condition.name !=&quot;&quot;">
-            and s.`name` like concat(#{condition.name,jdbcType=VARCHAR},'%')
+        <if test='condition.startDate!=null and condition.startDate!=""'>
+            <![CDATA[
+              and from_unixtime(att.attenTime)>= str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S')
+            ]]>
+        </if>
+        <if test='condition.endDate!=null and condition.endDate!=""'>
+            <![CDATA[
+              and  from_unixtime(att.attenTime) <= str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S')
+            ]]>
         </if>
     </sql>
+
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
         <include refid="From_Statement"/>
-        where t.id = #{id,jdbcType=VARCHAR}
+        where re.attenId = #{attenId,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -116,11 +126,12 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY t.createDate desc
+                ORDER BY att.createDate desc
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
+
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
@@ -135,11 +146,112 @@
         and t.userId = #{userId,jdbcType=VARCHAR}
     </select>
 
+    <sql id="Vo_Column_List_Expor">
+    IFNULL(left(att.attenDateTime,10),#{condition.nowDate,jdbcType=VARCHAR} ) as attDate,
+	stu.userName,
+	stu.userId,att.attenDateTime
 
-    <select id="getAttSrc" parameterType="java.lang.String" resultType="map">
-        select *
-        from portal.config t
-        where t.syid='policeschool'
-        and t.config_key='att_src'
+    </sql>
+    <sql id="From_Statement_Expor">
+       from (
+	    select
+           c.userId,
+           DATE_FORMAT(from_unixtime(r.attenTime),'%Y-%m-%d %H:%i:%S') as  attenDateTime
+	  from qy_crm c, qy_att_record r
+	   where c.ccNum = r.attenUid
+           )att
+         RIGHT JOIN (
+           select
+		s.id as userId,s.name as userName, cls.id as classId
+	FROM student s ,classes cls where s.status = '1' and  s.classId=cls.id
+        )stu on stu.userId = att.userId
+
+    </sql>
+    <sql id="Where_Condition_Expor">
+        where 1 = 1
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            and stu.id = #{condition.userId,jdbcType=VARCHAR}
+        </if>
+
+        <if test="condition.userName !=null and condition.userName !=&quot;&quot;">
+            and stu.name like concat(#{condition.userName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.classId!=null and condition.classId!=&quot;&quot;">
+            and stu.classId = #{condition.classId,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.startDate!=null and condition.startDate!=""'>
+            <![CDATA[
+              and IFNULL(att.attenDateTime, str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S'))
+                  >= str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S')
+            ]]>
+        </if>
+        <if test='condition.endDate!=null and condition.endDate!=""'>
+            <![CDATA[
+              and  IFNULL(att.attenDateTime,str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S'))
+                    <= str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S')
+            ]]>
+        </if>
+        UNION ALL
+        select
+        #{condition.nowDate,jdbcType=VARCHAR} as attDate, t.name userName, t.id as userId, '' as attenTime
+        from student t
+        where t.`status` = 1
+    </sql>
+    <sql id="Where_NotCondition_Expor">
+        and t.id not in (
+        select
+        stu.userId
+        from (
+        select
+        c.userId,
+        from_unixtime(r.attenTime) as attenTime
+        from qy_crm c, qy_att_record r
+        where c.ccNum = r.attenUid
+        )att
+        RIGHT JOIN (
+        select
+        s.id as userId,s.name as userName, cls.id as classId
+        FROM student s ,classes cls where s.status = '1' and s.classId=cls.id
+        )stu on stu.userId = att.userId
+        where 1=1
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            and stu.id = #{condition.userId,jdbcType=VARCHAR}
+        </if>
+
+        <if test="condition.userName !=null and condition.userName !=&quot;&quot;">
+            and stu.name like concat(#{condition.userName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.classId!=null and condition.classId!=&quot;&quot;">
+            and stu.classId = #{condition.classId,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.startDate!=null and condition.startDate!=""'>
+            <![CDATA[
+              and IFNULL(att.attenTime, str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S'))
+                  >= str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S')
+            ]]>
+        </if>
+        <if test='condition.endDate!=null and condition.endDate!=""'>
+            <![CDATA[
+              and  IFNULL(att.attenTime,str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S'))
+                    <= str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S')
+            ]]>
+        </if>
+        )
+    </sql>
+    <select id="findListExpor" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List_Expor"/>
+        <include refid="From_Statement_Expor"/>
+        <include refid="Where_Condition_Expor"/>
+        <include refid="Where_NotCondition_Expor"/>
+        <!--  <choose>
+              <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                  ORDER BY ${orderBy}
+              </when>
+              <otherwise>
+                  ORDER BY att.createDate desc
+              </otherwise>
+          </choose>-->
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 </mapper>

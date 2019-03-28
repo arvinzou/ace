@@ -6,98 +6,118 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class AttRecord extends BaseModel {
-    private String id;
+    private String attenId;
 
-    private String userId;
+    private String companyId;
 
-    private String userType;
+    private String attenDevice;
 
-    private Date attTime;
+    private String deviceName;
 
-    private String attPhoto;
+    private String attenUid;
 
-    private BigDecimal longitude;
+    private String realname;
 
-    private BigDecimal latitude;
+    private String departName;
 
-    private String status;
+    private String attenType;
+
+    private String attenStatus;
+
+    private Long attenTime;
+
+    private String attenDate;
 
     private String remark;
 
     private Date createDate;
 
-    private String attTimeStr;
-
-    public String getAttTimeStr() {
-        return attTimeStr;
+    public String getAttenId() {
+        return attenId;
     }
 
-    public void setAttTimeStr(String attTimeStr) {
-        this.attTimeStr = attTimeStr;
+    public void setAttenId(String attenId) {
+        this.attenId = attenId == null ? null : attenId.trim();
     }
 
-    public String getId() {
-        return id;
+    public String getCompanyId() {
+        return companyId;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId == null ? null : companyId.trim();
     }
 
-    public String getUserId() {
-        return userId;
+    public String getAttenDevice() {
+        return attenDevice;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setAttenDevice(String attenDevice) {
+        this.attenDevice = attenDevice == null ? null : attenDevice.trim();
     }
 
-    public String getUserType() {
-        return userType;
+    public String getDeviceName() {
+        return deviceName;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType == null ? null : userType.trim();
+    public void setDeviceName(String deviceName) {
+        this.deviceName = deviceName == null ? null : deviceName.trim();
     }
 
-    public Date getAttTime() {
-        return attTime;
+    public String getAttenUid() {
+        return attenUid;
     }
 
-    public void setAttTime(Date attTime) {
-        this.attTime = attTime;
+    public void setAttenUid(String attenUid) {
+        this.attenUid = attenUid == null ? null : attenUid.trim();
     }
 
-    public String getAttPhoto() {
-        return attPhoto;
+    public String getRealname() {
+        return realname;
     }
 
-    public void setAttPhoto(String attPhoto) {
-        this.attPhoto = attPhoto == null ? null : attPhoto.trim();
+    public void setRealname(String realname) {
+        this.realname = realname == null ? null : realname.trim();
     }
 
-    public BigDecimal getLongitude() {
-        return longitude;
+    public String getDepartName() {
+        return departName;
     }
 
-    public void setLongitude(BigDecimal longitude) {
-        this.longitude = longitude;
+    public void setDepartName(String departName) {
+        this.departName = departName == null ? null : departName.trim();
     }
 
-    public BigDecimal getLatitude() {
-        return latitude;
+    public String getAttenType() {
+        return attenType;
     }
 
-    public void setLatitude(BigDecimal latitude) {
-        this.latitude = latitude;
+    public void setAttenType(String attenType) {
+        this.attenType = attenType == null ? null : attenType.trim();
     }
 
-    public String getStatus() {
-        return status;
+    public String getAttenStatus() {
+        return attenStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setAttenStatus(String attenStatus) {
+        this.attenStatus = attenStatus == null ? null : attenStatus.trim();
+    }
+
+    public Long getAttenTime() {
+        return attenTime;
+    }
+
+    public void setAttenTime(Long attenTime) {
+        this.attenTime = attenTime;
+    }
+
+    public String getAttenDate() {
+        return attenDate;
+    }
+
+    public void setAttenDate(String attenDate) {
+        this.attenDate = attenDate == null ? null : attenDate.trim();
     }
 
     public String getRemark() {
@@ -115,4 +135,5 @@ public class AttRecord extends BaseModel {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
+
 }

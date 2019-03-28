@@ -14,6 +14,15 @@ public class AttRecordVo extends AttRecord {
      */
     private String userTypeName;
 
+    private String attenDateTime;
+
+
+    private String userId;
+
+    private String classId;
+
+    private String attDate;
+
     public String getUserName() {
         return userName;
     }
@@ -28,5 +37,37 @@ public class AttRecordVo extends AttRecord {
 
     public void setUserTypeName(String userTypeName) {
         this.userTypeName = userTypeName;
+    }
+
+    public String getAttenDateTime() {
+        return attenDateTime;
+    }
+
+    public void setAttenDateTime(String attenDateTime) {
+        this.attenDateTime = attenDateTime;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
+    public String getAttDate() {
+        return attDate;
+    }
+
+    public void setAttDate(String attDate) {
+        this.attDate = attDate;
     }
 }

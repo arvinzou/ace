@@ -3,6 +3,7 @@ package com.huacainfo.ace.policeschool.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.policeschool.model.AttRecord;
+import com.huacainfo.ace.policeschool.model.AttRecordExcel;
 import com.huacainfo.ace.policeschool.vo.AttRecordQVo;
 import com.huacainfo.ace.policeschool.vo.AttRecordVo;
 
@@ -42,7 +43,7 @@ public interface AttRecordService {
      * @author: Arvin
      * @version: 2019-02-20
      */
-    MessageResponse insertAttRecord(AttRecord obj, UserProp userProp) throws Exception;
+    //  MessageResponse insertAttRecord(AttRecord obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -55,7 +56,7 @@ public interface AttRecordService {
      * @author: Arvin
      * @version: 2019-02-20
      */
-    MessageResponse updateAttRecord(AttRecord obj, UserProp userProp) throws Exception;
+    //  MessageResponse updateAttRecord(AttRecord obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -109,7 +110,7 @@ public interface AttRecordService {
      * @author: Arvin
      * @version: 2019-02-20
      */
-    public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception;
+    //  public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception;
 
 
     /**
@@ -181,5 +182,12 @@ public interface AttRecordService {
      * @param dateTimeStr 日期字符串 ，包含年月日；示例： 2019-02-21
      * @return ResultResponse
      */
-    ResultResponse findList(String userId, String dateTimeStr);
+    //  ResultResponse findList(String userId, String dateTimeStr);
+
+    List<AttRecordExcel> exportAttRecord(AttRecordQVo condition);
+
+    PageResult<AttRecordVo> findAttRecordListExpor(AttRecordQVo condition, int start, int limit, String orderBy) throws Exception;
+
+    ;
+
 }
