@@ -88,7 +88,7 @@
         <td> \${item.course.name}</td>
         <td> \${formatdate(item.courseDate)}</td>
         <td> \${item.classes.name}</td>
-        <td> \${item.teacher.name}</td>
+        <td> \${item.course.teacherNames}</td>
         <td> \${item.averageScore}</td>
         <td> \${item.studentNum-item.userNum}</td>
         <td>
