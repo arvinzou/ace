@@ -30,4 +30,16 @@ public interface CommConstant {
     String STU_ATT_SCOPE_PM_IN = "STU_PM_IN";
     String STU_ATT_SCOPE_PM_OUT = "STU_PM_OUT";
     String STU_ATT_SCOPE_NIGHT_IN = "STU_NIGHT_IN";
+
+    String TEA_ATT_SCOPE_AM_IN = "TEA_AM_IN";
+    String TEA_ATT_SCOPE_PM_OUT = "TEA_PM_OUT";
+
+    String STU_ATT_AM_IN = "R_STU_AM_IN";
+    String STU_ATT_AM_OUT = "R_STU_AM_OUT";
+    String STU_ATT_PM_IN = "R_STU_PM_IN";
+    String STU_ATT_PM_OUT = "R_STU_PM_OUT";
+    String STU_ATT_NIGHT_IN = "R_STU_NIGHT_IN";
+
+    String TEA_ATT_AM_IN = "R_TEA_AM_IN";
+    String TEA_ATT_PM_OUT = "R_TEA_PM_OUT";
 }

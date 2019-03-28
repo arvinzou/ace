@@ -23,6 +23,8 @@ public class Teacher extends BaseModel {
 
     private String postName;
 
+    private int sort;
+
     private String remark;
 
     private String status;
@@ -42,6 +44,14 @@ public class Teacher extends BaseModel {
     private String introduce;
 
     private String political;
+
+    public int getSort() {
+        return sort;
+    }
+
+    public void setSort(int sort) {
+        this.sort = sort;
+    }
 
     public String getPolitical() {
         return political;

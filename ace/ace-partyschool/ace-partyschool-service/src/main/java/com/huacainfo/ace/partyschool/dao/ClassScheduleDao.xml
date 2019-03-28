@@ -131,20 +131,21 @@
         <result column="userNum" jdbcType="DECIMAL" property="userNum"/>
         <result column="studentNum" jdbcType="DECIMAL" property="studentNum"/>
         <result column="averageScore" jdbcType="DECIMAL" property="averageScore"/>
-        <collection property="course" ofType="com.huacainfo.ace.partyschool.model.Course">
+        <collection property="course" ofType="com.huacainfo.ace.partyschool.vo.CourseVo">
             <id property="id" column="cId"/>
             <result column="cName" property="name"/>
             <result column="category" property="category"/>
             <result column="cTeacherId" property="teacherId"/>
             <result column="evaluatingId" property="evaluatingId"/>
+            <result column="ctname" property="teacherNames"/>
         </collection>
         <collection property="teacher" ofType="com.huacainfo.ace.partyschool.model.Teacher">
             <id property="id" column="tId"/>
             <result column="tName" property="name"/>
         </collection>
         <collection property="classes" ofType="com.huacainfo.ace.partyschool.model.Classes">
-        <id property="id" column="claId"/>
-        <result column="claName" property="name"/>
+            <id property="id" column="claId"/>
+            <result column="claName" property="name"/>
         </collection>
     </resultMap>
 
@@ -159,14 +160,13 @@
 SELECT COUNT(*)
 FROM partyschool.student st
 WHERE st.classId=cs.classesId) AS studentNum,
-
 (
 	SELECT (SELECT SUM(er.score)
 	FROM partyschool.evaluation_rst er
 	WHERE er.classScheduleId=cs.id)/userNum
 ) AS averageScore,
     cs.id, cs.classesId, cs.courseDate, cs.courseIndex, cs.teacherId, cs.courseId,cs.ifTest,
-    c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,
+    c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,c.tname as ctname,
     t.id as tId ,t.name as tName,
     cla.id as claId ,cla.name as claName
   </sql>
@@ -180,7 +180,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
             and cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
         </if>
         <if test="condition.cTeacherId !=null and condition.cTeacherId !=&quot;&quot;">
-            and c.teacherId = #{condition.cTeacherId,jdbcType=VARCHAR}
+            and c.teacherId LIKE concat('%',#{condition.cTeacherId,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.weekDate !=null and condition.weekDate !=&quot;&quot;">
             AND WEEKOFYEAR(cs.courseDate) =WEEKOFYEAR(#{condition.weekDate,jdbcType=VARCHAR})
@@ -202,7 +202,15 @@ WHERE st.classId=cs.classesId) AS studentNum,
 
     <sql id="From_Statement">
     FROM class_schedule cs
-    LEFT JOIN partyschool.course c ON cs.courseId =c.id
+    LEFT JOIN (
+        SELECT c.id,c.NAME,c.category,c.evaluatingId,c.`status`,GROUP_CONCAT(ct.teacher_id) as teacherId,GROUP_CONCAT(t.name) as tname
+        FROM partyschool.course c
+        LEFT JOIN partyschool.course_teacher ct ON c.id=ct.course_id
+        left JOIN partyschool.teacher t ON ct.teacher_id = t.id
+        WHERE 1=1
+        GROUP BY c.id
+        ORDER  by ct.type
+    ) c ON cs.courseId =c.id
     LEFT JOIN partyschool.teacher t ON c.teacherId=t.id
     LEFT  JOIN partyschool.classes cla on cla.id=cs.classesId
   </sql>

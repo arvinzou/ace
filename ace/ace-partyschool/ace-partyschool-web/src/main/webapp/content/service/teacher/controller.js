@@ -34,12 +34,90 @@ jQuery(function ($) {
             }
         })
     });
-
+    //初始化按钮事件
+    initBtnEvent();
     //初始化事件
     initEvents();
     //
     initJuicerMethod();
 });
+
+function initBtnEvent() {
+    $("#btn-view-sort").on('click', function (e) {
+        e.preventDefault();
+        $('#modal-sort').modal('show');
+        getSortList();
+    });
+}
+
+function getSortList() {
+    $.ajax({
+        type: "post",
+        url: cfg.grid_load_data_url,
+        data: {status: 1, start: 0, limit: 9999},
+        success: function (rst, textStatus) {
+            console.log(rst);
+            var html = [];
+            $(rst.rows).each(function (i, o) {
+                html.push('<li draggable="false" data-id="' + o.id + '" data-name="' + o.name + '">' + o.name + '</li>');
+            });
+
+            $(".sortable").html(html.join(""));
+            var el = document.getElementById('sortable');// $("#sortable");//
+            var sortable = Sortable.create(el, {
+                group: "words",
+                animation: 150,
+                onAdd: function (evt) {
+                    console.log('onAdd.bar:', evt.item);
+                },
+                onUpdate: function (evt) {
+                    console.log('onUpdate.bar:', evt.item);
+                },
+                onRemove: function (evt) {
+                    console.log('onRemove.bar:', evt.item);
+                },
+                onStart: function (evt) {
+                    console.log('onStart.foo:', evt.item);
+                },
+                onEnd: function (evt) {
+                    console.log('onEnd.foo:', evt.item);
+                    console.log(sortable.toArray());
+                    updateSort(sortable.toArray());
+                }
+            });
+
+        },
+        error: function () {
+            alert("对不起，出差了。");
+        }
+    });
+}
+
+
+function updateSort(arr) {
+    var data = [];
+    for (var i = 0; i < arr.length; i++) {
+        data.push({id: arr[i], index: i});
+    }
+    $.ajax({
+        type: "post",
+        url: contextPath + "/teacher/updateSort",
+        data: {json: JSON.stringify(data)},
+        beforeSend: function (XMLHttpRequest) {
+        },
+        success: function (rst, textStatus) {
+            if (!rst.state) {
+                alert(rst.errorMessage);
+            }
+        },
+        complete: function (XMLHttpRequest, textStatus) {
+        },
+        error: function () {
+
+        }
+    });
+}
+
 
 /*页面渲染*/
 function render(obj, data, tplId) {
@@ -117,6 +195,7 @@ function edit(rowid) {
 }
 
 var show = false;
+
 function del(rowid) {
     // jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
     //     beforeShowForm: function (e) {
@@ -150,9 +229,11 @@ function del(rowid) {
         });
     }
 }
+
 var params = {
-    status:'1'
+    status: '1'
 };
+
 function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");

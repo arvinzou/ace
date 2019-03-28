@@ -78,7 +78,7 @@ public class CourseController extends BisBaseController {
     @RequestMapping(value = "/insertCourse")
     @ResponseBody
     public MessageResponse insertCourse(String jsons) throws Exception {
-        Course obj = JSON.parseObject(jsons, Course.class);
+        CourseQVo obj = JSON.parseObject(jsons, CourseQVo.class);
         return this.courseService.insertCourse(obj, this.getCurUserProp());
     }
 
@@ -95,7 +95,7 @@ public class CourseController extends BisBaseController {
     @RequestMapping(value = "/updateCourse")
     @ResponseBody
     public MessageResponse updateCourse(String jsons) throws Exception {
-        Course obj = JSON.parseObject(jsons, Course.class);
+        CourseQVo obj = JSON.parseObject(jsons, CourseQVo.class);
         return this.courseService.updateCourse(obj, this.getCurUserProp());
     }
 

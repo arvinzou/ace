@@ -204,4 +204,58 @@
         select t.clsId as classId from teacher_cls_ship t where t.teacherId=#{id}
     </select>
 
+
+    <insert id="deleteStudents" parameterType="java.util.List" useGeneratedKeys="false">
+        DELETE FROM portal.users_role
+        WHERE user_id in (
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        );
+
+        DELETE FROM portal.user_cfg
+        WHERE userId in (
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        );
+
+        DELETE FROM partyschool.card_data
+        WHERE userId in (
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        );
+
+        DELETE FROM partyschool.evaluation_rst
+        WHERE userId in (
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        );
+
+        DELETE FROM partyschool.evaluation_rst_content
+        WHERE userId in (
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        );
+
+        DELETE FROM partyschool.student
+        WHERE id in (
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        );
+
+        DELETE FROM portal.users
+        WHERE user_id in (
+        <foreach collection="list" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+        )
+
+    </insert>
+
+
 </mapper>

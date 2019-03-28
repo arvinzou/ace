@@ -17,14 +17,6 @@ public class Course implements Serializable {
 
     private String teacherId;
 
-    private String teacherId1;
-
-    private String teacherId2;
-
-    private String teacherId3;
-
-    private String teacherId4;
-
     private String evaluatingId;
 
     private String createUserId;
@@ -41,37 +33,6 @@ public class Course implements Serializable {
 
     private String status;
 
-    public String getTeacherId1() {
-        return teacherId1;
-    }
-
-    public void setTeacherId1(String teacherId1) {
-        this.teacherId1 = teacherId1;
-    }
-
-    public String getTeacherId2() {
-        return teacherId2;
-    }
-
-    public void setTeacherId2(String teacherId2) {
-        this.teacherId2 = teacherId2;
-    }
-
-    public String getTeacherId3() {
-        return teacherId3;
-    }
-
-    public void setTeacherId3(String teacherId3) {
-        this.teacherId3 = teacherId3;
-    }
-
-    public String getTeacherId4() {
-        return teacherId4;
-    }
-
-    public void setTeacherId4(String teacherId4) {
-        this.teacherId4 = teacherId4;
-    }
 
     public String getStatus() {
         return status;

@@ -87,7 +87,7 @@
 
 <%--数据导出--%>
 <div class="modal fade" role="dialog" id="modal-export">
-    <div class="modal-dialog" role="document" style="width: 60%;">
+    <div class="modal-dialog" role="document" style="width: 75%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
@@ -99,7 +99,7 @@
                 <div class="form-horizontal" role="form">
                     <div class="form-body" id="fm-export">
                         <form method="post" class="form-horizontal" role="form"
-                              action="${pageContext.request.contextPath}/exportExcel/exportAttRecord?userType=student">
+                              action="${pageContext.request.contextPath}/exportExcel/exportAttRecord">
                             <label id="export_info" class="view-label hide"></label>
                             <div class="form-group">
                                 <label class="col-md-2 view-label">
@@ -107,25 +107,25 @@
                                 </label>
                                 <div class="col-md-7">
                                     <select id="ext-userType" name="userType" class="form-control"
-                                            style="height: 31px;">
+                                            style="width:175px;height: 31px;">
                                         <option value="student">学员</option>
                                         <option value="teacher">教职工</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group cls-select">
                                 <label class="col-md-2 view-label">
                                     班次<span style='color:red;font-size:16px;font-weight:800'>*</span>
                                 </label>
                                 <div class="col-md-7">
                                     <select id="ext-cls-list" name="clsId" class="form-control"
-                                            style="height: 31px;">
+                                            style="width:275px;height: 31px;">
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 view-label">
-                                    时间段<span style='color:red;font-size:16px;font-weight:800'>*</span>
+                                    时间区间<span style='color:red;font-size:16px;font-weight:800'>*</span>
                                 </label>
                                 <div class="col-md-7">
                                     <div class="date form_datetime" style="float:left;border: 1px solid #efefef;">

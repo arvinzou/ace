@@ -31,6 +31,9 @@
                     <button type="button" class="btn  green" id="btn-view-import"
                             authority="false">批量导入
                     </button>
+                        <button type="button" class="btn  green" id="delStudent"
+                                authority="false">批量删除
+                        </button>
                 </div>
                 <div class="col-md-7">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
@@ -54,7 +57,9 @@
             </form>
         </div>
 
-        <table id="grid-table"></table>
+        <table id="grid-table">
+
+        </table>
 
         <div class="paginationbar">
             <ul id="grid-pager" class="pagination"></ul>

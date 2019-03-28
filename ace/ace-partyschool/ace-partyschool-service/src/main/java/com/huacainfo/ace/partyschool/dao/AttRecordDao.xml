@@ -31,7 +31,7 @@
     insert into att_record (id, userId, userType, attTime, attState,
       attPhoto, longitude, latitude, status, remark,  createDate)
     values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, 
-      #{attTime,jdbcType=TIMESTAMP}, #{attState,jdbcType=VARCHAR}
+      #{attTime,jdbcType=TIMESTAMP}, #{attState,jdbcType=VARCHAR},
       #{attPhoto,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL},
       #{latitude,jdbcType=DECIMAL}, #{status,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP})
@@ -84,7 +84,13 @@
                 from teacher t
                 where t.`status` = '1'
         )v
-        left join att_record t on v.userId = t.userId
+        LEFT JOIN (
+            select
+              a.userId, a.userType, a.attTime, a.attState
+            from att_record a
+            where a.attTime  >= str_to_date( #{condition.startDate} , '%Y-%m-%d %H:%i:%S')
+            AND a.attTime <![CDATA[<=]]> str_to_date( #{condition.endDate} , '%Y-%m-%d %H:%i:%S')
+        )t ON v.userId = t.userId
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
@@ -102,18 +108,6 @@
         </if>
         <if test="condition.dateTimeStr !=null and condition.dateTimeStr !=&quot;&quot;">
             and t.attTime like concat(#{condition.dateTimeStr,jdbcType=VARCHAR},'%')
-        </if>
-        <if test='condition.startDate!=null and condition.startDate!=""'>
-            <![CDATA[
-              and IFNULL(t.attTime, str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S'))
-                  >= str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S')
-            ]]>
-        </if>
-        <if test='condition.endDate!=null and condition.endDate!=""'>
-            <![CDATA[
-              and  IFNULL(t.attTime,str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S'))
-                    <= str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S')
-            ]]>
         </if>
     </sql>
 
@@ -134,7 +128,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY v.userType, v.userName, t.attTime desc
+                ORDER BY t.attTime desc, v.userType, v.userName
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
@@ -168,5 +162,40 @@
        from portal.config t
        where t.syid= #{sysId,jdbcType=VARCHAR}
         and t.config_key like concat(#{key,jdbcType=VARCHAR},'%')
+    </select>
+
+    <select id="findRecordList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        IFNULL(left(t.attTime,10), '') as attDate,
+        t.attTime, IFNULL(t.attState,'NO_SIGN') as attState,
+        v.userId, v.userName, v.userType, v.clsId, v.clsName,
+        case
+        when v.userType= 'student' then '学员'
+        when v.userType= 'teacher' then '教职工'
+        ELSE '' end userTypeName
+        from (
+        SELECT
+        t.id as userId, 'student' as userType, t.`name` as userName,
+        c.id as clsId, c.`name` as clsName
+        from student t , classes c
+        where c.id = t.classId
+        and t.`status` = '1'
+        UNION ALL
+        select
+        t.id as userId, 'teacher' as userType, t.`name` as userName,
+        '' as clsId, '' as clsName
+        from teacher t
+        where t.`status` = '1'
+        )v
+        LEFT JOIN att_record t ON v.userId = t.userId
+        where 1 = 1
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            and v.userId = #{condition.userId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.dateTimeStr !=null and condition.dateTimeStr !=&quot;&quot;">
+            and t.attTime like concat(#{condition.dateTimeStr},'%')
+        </if>
+        ORDER BY t.attTime desc, v.userType, v.userName
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 </mapper>

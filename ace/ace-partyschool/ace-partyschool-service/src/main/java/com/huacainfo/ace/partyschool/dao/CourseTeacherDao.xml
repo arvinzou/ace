@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.CourseTeacherDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.CourseTeacher">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="course_id" jdbcType="VARCHAR" property="course_id" />
+    <result column="teacher_id" jdbcType="VARCHAR" property="teacher_id" />
+    <result column="type" jdbcType="CHAR" property="type" />
+  </resultMap>
+  <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.CourseTeacher">
+    insert into course_teacher (id, course_id, teacher_id, 
+      type)
+    values (#{id,jdbcType=VARCHAR}, #{course_id,jdbcType=VARCHAR}, #{teacher_id,jdbcType=VARCHAR}, 
+      #{type,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.partyschool.model.CourseTeacher">
+    insert into course_teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="course_id != null">
+        course_id,
+      </if>
+      <if test="teacher_id != null">
+        teacher_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="course_id != null">
+        #{course_id,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher_id != null">
+        #{teacher_id,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from course_teacher
+    where course_id = #{cid,jdbcType=VARCHAR}
+  </delete>
+</mapper>

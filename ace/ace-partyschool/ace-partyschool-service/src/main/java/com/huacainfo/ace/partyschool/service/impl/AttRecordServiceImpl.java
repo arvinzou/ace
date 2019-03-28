@@ -91,8 +91,8 @@ public class AttRecordServiceImpl implements AttRecordService {
         if (CommonUtils.isBlank(o.getAttTime())) {
             return new MessageResponse(1, "考勤时间不能为空！");
         }
-        if (o.getLatitude().compareTo(BigDecimal.ZERO) == 0
-                || o.getLongitude().compareTo(BigDecimal.ZERO) == 0) {
+        if ((null == o.getLatitude() || o.getLatitude().compareTo(BigDecimal.ZERO) == 0)
+                || (null == o.getLongitude() || o.getLongitude().compareTo(BigDecimal.ZERO) == 0)) {
             return new MessageResponse(1, "考勤定位不能为空！");
         }
         Users user = usersService.selectUsersByPrimaryKey(userProp.getUserId()).getValue();
@@ -104,11 +104,23 @@ public class AttRecordServiceImpl implements AttRecordService {
         if (posCheck.getStatus() == ResultCode.FAIL) {
             return posCheck;
         }
-
+        //获取考勤配置参数
+        String userType = user.getUserLevel();
+        boolean isStudent = userType.equals(CommConstant.STUDENT);
+        String cfgKey = isStudent ? "STU" : "TEA";
+        Map<String, String> config = getConfigMap(isStudent, cfgKey);
+        String cfgKey2 = isStudent ? "R_STU" : "R_TEA";
+        Map<String, String> config2 = getConfigLimitMap(isStudent, cfgKey2);
+        if (CollectionUtils.isEmpty(config) || CollectionUtils.isEmpty(config2)) {
+            return new MessageResponse(ResultCode.FAIL, "考勤配置参数有误");
+        }
+        //设置状态值
+        String attState = setState(isStudent, o.getAttTime(), config, config2);
         //存储对象
-        o.setAttTimeStr(DateUtil.toStr(o.getAttTime()));
+        o.setAttState(attState);
+        o.setUserType(userType);
         o.setUserId(userProp.getUserId());
-        o.setUserType(user.getUserLevel());
+
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
@@ -116,6 +128,104 @@ public class AttRecordServiceImpl implements AttRecordService {
         dataBaseLogService.log("添加学员考勤", "学员考勤", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "签到成功！");
+    }
+
+    private String setState(boolean isStudent, Date attTime,
+                            Map<String, String> config, Map<String, String> config2) {
+        //区间划分
+        String time = DateUtil.toStr(attTime, "HH:mm:ss");
+        if (isStudent) {
+            //1.上午签到    08:00~08:30(8:00~10:00) -- 标准（范围）
+            String amIn_1 = config.get("amIn_1");//打卡范围
+            String amIn_2 = config.get("amIn_2");//打卡范围
+            String r_amIn_1 = config2.get("r_amIn_1");//签到标准
+            String r_amIn_2 = config2.get("r_amIn_2");//签到标准
+            //2.上午签退    11:00~12:30(10:00~12:30)
+            String amOut_1 = config.get("amOut_1");
+            String amOut_2 = config.get("amOut_2");
+            String r_amOut_1 = config2.get("r_amOut_1");
+            String r_amOut_2 = config2.get("r_amOut_2");
+            //3.下午签到    14:00~14:30(14:00~15:30)
+            String pmIn_1 = config.get("pmIn_1");
+            String pmIn_2 = config.get("pmIn_2");
+            String r_pmIn_1 = config2.get("r_pmIn_1");
+            String r_pmIn_2 = config2.get("r_pmIn_2");
+            //4.下午签退    16:30~18:00(15:30~18:00)
+            String pmOut_1 = config.get("pmOut_1");
+            String pmOut_2 = config.get("pmOut_2");
+            String r_pmOut_1 = config2.get("r_pmOut_1");
+            String r_pmOut_2 = config2.get("r_pmOut_2");
+            //5.晚上签到    22:00~23:00(22:00~23:00)
+            String nightIn_1 = config.get("nightIn_1");
+            String nightIn_2 = config.get("nightIn_2");
+            String r_nightIn_1 = config2.get("r_nightIn_1");
+            String r_nightIn_2 = config2.get("r_nightIn_2");
+            //1.上午签到--准点  08:00~08:30(8:00~10:00) -- 标准（范围）
+            if (DateUtil.compareTime(time, r_amIn_1) >= 0 && DateUtil.compareTime(time, r_amIn_2) < 0) {
+                return CommConstant.ATT_STATE_ON_TIME;
+            }
+            //1.上午签到--迟到
+            else if (DateUtil.compareTime(time, r_amIn_2) > 0 && DateUtil.compareTime(time, amIn_2) < 0) {
+                return CommConstant.ATT_STATE_BE_LATE;
+            }
+            //2.上午签退--早退  11:00~12:30(10:00~12:30)
+            else if (DateUtil.compareTime(time, amOut_1) >= 0 && DateUtil.compareTime(time, r_amOut_1) < 0) {
+                return CommConstant.ATT_STATE_LEAVE_EARLY;
+            }
+            //2.上午签退--准点
+            else if (DateUtil.compareTime(time, r_amOut_1) >= 0 && DateUtil.compareTime(time, r_amOut_2) < 0) {
+                return CommConstant.ATT_STATE_ON_TIME;
+            }
+            //3.下午签到--准点    14:00~14:30(14:00~15:30)
+            else if (DateUtil.compareTime(time, r_pmIn_1) >= 0 && DateUtil.compareTime(time, r_pmIn_2) < 0) {
+                return CommConstant.ATT_STATE_ON_TIME;
+            }
+            //3.下午签到--迟到
+            else if (DateUtil.compareTime(time, r_pmIn_2) >= 0 && DateUtil.compareTime(time, pmIn_2) < 0) {
+                return CommConstant.ATT_STATE_BE_LATE;
+            }
+            //4.下午签退--早退    16:30~18:00(15:30~18:00)
+            else if (DateUtil.compareTime(time, pmOut_1) >= 0 && DateUtil.compareTime(time, r_pmOut_1) < 0) {
+                return CommConstant.ATT_STATE_LEAVE_EARLY;
+            }
+            //4.下午签退--准点
+            else if (DateUtil.compareTime(time, r_pmOut_1) >= 0 && DateUtil.compareTime(time, r_pmOut_2) < 0) {
+                return CommConstant.ATT_STATE_ON_TIME;
+            }
+            //5.晚上签到    22:00~23:00
+            else if (DateUtil.compareTime(time, nightIn_1) >= 0 && DateUtil.compareTime(time, nightIn_2) < 0) {
+                return CommConstant.ATT_STATE_ON_TIME;
+            }
+        } else {
+            //1.上午签到    08:00~08:30(8:00~10:00) -- 标准（范围）
+            String amIn_1 = config.get("amIn_1");//打卡范围
+            String amIn_2 = config.get("amIn_2");//打卡范围
+            String r_amIn_1 = config2.get("r_amIn_1");//签到标准
+            String r_amIn_2 = config2.get("r_amIn_2");//签到标准
+            //4.下午签退    16:30~18:00(15:30~18:00)
+            String pmOut_1 = config.get("pmOut_1");
+            String pmOut_2 = config.get("pmOut_2");
+            String r_pmOut_1 = config2.get("r_pmOut_1");
+            String r_pmOut_2 = config2.get("r_pmOut_2");
+            //1.上午签到--准点  08:00~08:30(8:00~10:00) -- 标准（范围）
+            if (DateUtil.compareTime(time, r_amIn_1) >= 0 && DateUtil.compareTime(time, r_amIn_2) < 0) {
+                return CommConstant.ATT_STATE_ON_TIME;
+            }
+            //1.上午签到--迟到
+            else if (DateUtil.compareTime(time, r_amIn_2) > 0 && DateUtil.compareTime(time, amIn_2) < 0) {
+                return CommConstant.ATT_STATE_BE_LATE;
+            }
+            //2.下午签退--早退    16:30~18:00(15:30~18:00)
+            else if (DateUtil.compareTime(time, pmOut_1) >= 0 && DateUtil.compareTime(time, r_pmOut_1) < 0) {
+                return CommConstant.ATT_STATE_LEAVE_EARLY;
+            }
+            //2.下午签退--准点
+            else if (DateUtil.compareTime(time, r_pmOut_1) >= 0 && DateUtil.compareTime(time, r_pmOut_2) < 0) {
+                return CommConstant.ATT_STATE_ON_TIME;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -462,7 +572,7 @@ public class AttRecordServiceImpl implements AttRecordService {
             AttRecordQVo condition = new AttRecordQVo();
             condition.setDateTimeStr(dateTimeStr);
             condition.setUserId(userId);
-            List<AttRecordVo> list = attRecordDao.findList(condition, 0, 100, "t.attTime asc");
+            List<AttRecordVo> list = attRecordDao.findRecordList(condition, 0, 100, "");
             //解析分组
             Map<String, List<AttRecordVo>> view = new HashMap<>();
             List<AttRecordVo> am = new LinkedList<>();
@@ -496,22 +606,24 @@ public class AttRecordServiceImpl implements AttRecordService {
     }
 
     @Override
-    public List<AttRecordExcel> exportAttRecord(AttRecordQVo condition) {
+    public List<AttRecordExport> exportAttRecord(AttRecordQVo condition) {
         String userType = condition.getUserType();
         Date startDate = DateUtil.getDate(condition.getStartDate(), DateUtil.DEFAULT_DATE_REGEX);
         Date endDate = DateUtil.getDate(condition.getEndDate(), DateUtil.DEFAULT_DATE_REGEX);
         //获取区间配置
-        Map<String, String> config = getConfigMap();
+        boolean isStudent = userType.equals(CommConstant.STUDENT);
+        String cfgKey = isStudent ? "STU" : "TEA";
+        Map<String, String> config = getConfigMap(isStudent, cfgKey);
         if (CollectionUtils.isEmpty(config)) {
             throw new CustomException("考勤配置参数有误");
         }
         //返回参数
-        List<AttRecordExcel> rst = new LinkedList<>();
+        List<AttRecordExport> rst = new LinkedList<>();
         //循环日期
         Date nowDate = startDate;
         String nowDateStr;
         Calendar c = Calendar.getInstance();
-        List<AttRecordExcel> subList;
+        List<AttRecordExport> subList;
         while (nowDate.compareTo(endDate) <= 0) {
             nowDateStr = DateUtil.toStr(nowDate);
             condition.setNowDate(nowDateStr);
@@ -530,61 +642,114 @@ public class AttRecordServiceImpl implements AttRecordService {
 
     }
 
-    private List<AttRecordExcel> getOneDayList(String userType, Map<String, String> config, AttRecordQVo condition) {
+    private List<AttRecordExport> getOneDayList(String userType, Map<String, String> config, AttRecordQVo condition) {
         //1.数据库原始记录
         List<AttRecordVo> list = attRecordDao.findList(condition, 0, 65536, "");
         //2.转换为数据map
-        Map<String, AttRecordExcel> dataMap = convertDataMap(config, list);
+        Map<String, AttRecordExport> dataMap = convertDataMap(userType, config, list);
         //3.包装
         return packageExcelResult(userType, dataMap);
     }
 
-    private List<AttRecordExcel> packageExcelResult(String userType, Map<String, AttRecordExcel> dataMap) {
-        List<AttRecordExcel> rst = new LinkedList<>();
-        AttRecordExcel temp;
-        Map.Entry<String, AttRecordExcel> entry;
-        Iterator<Map.Entry<String, AttRecordExcel>> entries = dataMap.entrySet().iterator();
+    private List<AttRecordExport> packageExcelResult(String userType, Map<String, AttRecordExport> dataMap) {
+        List<AttRecordExport> rst = new LinkedList<>();
+        Map.Entry<String, AttRecordExport> entry;
+        Iterator<Map.Entry<String, AttRecordExport>> entries = dataMap.entrySet().iterator();
         while (entries.hasNext()) {
             entry = entries.next();
-            temp = dataMap.get(entry.getKey());
             if (CommConstant.STUDENT.equals(userType)) {
+                AttStudentExcel temp = (AttStudentExcel) dataMap.get(entry.getKey());
                 temp.setAmIn(StringUtil.isEmpty(temp.getAmIn()) ? "(缺勤)" : temp.getAmIn());
                 temp.setAmOut(StringUtil.isEmpty(temp.getAmOut()) ? "(缺勤)" : temp.getAmOut());
                 temp.setPmIn(StringUtil.isEmpty(temp.getPmIn()) ? "(缺勤)" : temp.getPmIn());
                 temp.setPmOut(StringUtil.isEmpty(temp.getPmOut()) ? "(缺勤)" : temp.getPmOut());
                 temp.setNightIn(StringUtil.isEmpty(temp.getNightIn()) ? "(缺勤)" : temp.getNightIn());
+                rst.add(temp);
             } else {
+                AttTeacherExcel temp = (AttTeacherExcel) dataMap.get(entry.getKey());
                 temp.setAmIn(StringUtil.isEmpty(temp.getAmIn()) ? "(缺勤)" : temp.getAmIn());
                 temp.setPmOut(StringUtil.isEmpty(temp.getPmOut()) ? "(缺勤)" : temp.getPmOut());
+                rst.add(temp);
             }
-            rst.add(temp);
         }
         return rst;
     }
 
-    private Map<String, AttRecordExcel> convertDataMap(Map<String, String> config, List<AttRecordVo> list) {
-        Map<String, AttRecordExcel> map = new HashMap<>();
-        AttRecordExcel stu;
-        String key;
-        Date date;
-        for (AttRecordVo item : list) {
-            date = item.getAttTime();
-            key = item.getAttDate() + "&" + item.getUserId();
-            stu = map.get(key);
-            stu = null == stu ? new AttRecordExcel() : stu;
-            stu.setName(item.getUserName());
-            stu.setUserType(item.getUserTypeName());
-            stu.setClsName(item.getClsName());
-            stu.setAttDate(item.getAttDate());
-            stu = setAttTime(config, date, item.getAttState(), stu);
-            map.put(key, stu);
+    private Map<String, AttRecordExport> convertDataMap(String userType,
+                                                        Map<String, String> config,
+                                                        List<AttRecordVo> list) {
+        //返回数据
+        Map<String, AttRecordExport> rst = new HashMap<>();
+        //逻辑分支
+        if (CommConstant.STUDENT.equals(userType)) {
+            Map<String, AttStudentExcel> sun = new HashMap<>();
+            AttStudentExcel student;
+            String key;
+            Date date;
+            for (AttRecordVo item : list) {
+                date = item.getAttTime();
+                key = item.getAttDate() + "&" + item.getUserId();
+                student = sun.get(key);
+                student = null == student ? new AttStudentExcel() : student;
+                student.setName(item.getUserName());
+                student.setUserType(item.getUserTypeName());
+                student.setClsName(item.getClsName());
+                student.setAttDate(item.getAttDate());
+                student = setStudentAttTime(config, date, item.getAttState(), student);
+                sun.put(key, student);
+            }
+            rst.putAll(sun);
+        } else {
+            Map<String, AttTeacherExcel> sun = new HashMap<>();
+            AttTeacherExcel teacher;
+            String key;
+            Date date;
+            for (AttRecordVo item : list) {
+                date = item.getAttTime();
+                key = item.getAttDate() + "&" + item.getUserId();
+                teacher = sun.get(key);
+                teacher = null == teacher ? new AttTeacherExcel() : teacher;
+                teacher.setName(item.getUserName());
+                teacher.setUserType(item.getUserTypeName());
+//                stu.setClsName(item.getClsName());
+                teacher.setAttDate(item.getAttDate());
+                teacher = setTeacherAttTime(config, date, item.getAttState(), teacher);
+                sun.put(key, teacher);
+            }
+            rst.putAll(sun);
         }
+        return rst;
 
-        return map;
     }
 
-    private AttRecordExcel setAttTime(Map<String, String> config,
-                                      Date attTime, String attState, AttRecordExcel stu) {
+    private AttTeacherExcel setTeacherAttTime(Map<String, String> config, Date attTime,
+                                              String attState, AttTeacherExcel teacher) {
+        String attStateName = parseState(attState);
+        if (attTime == null) {
+            return teacher;
+        }
+        //itemValue
+        String str = DateUtil.toStr(attTime, DateUtil.DEFAULT_DATE_TIME_REGEX) + "  (" + attStateName + ")";
+        //区间划分
+        String time = DateUtil.toStr(attTime, "HH:mm:ss");
+        //1.上午签到
+        String amIn_1 = config.get("amIn_1");//"08:00" + ":00";
+        String amIn_2 = config.get("amIn_2");//"10:00" + ":00";
+        //2.下午签退
+        String pmOut_1 = config.get("pmOut_1");//"15:30" + ":00";
+        String pmOut_2 = config.get("pmOut_2");//"16:00" + ":00";
+
+        if (DateUtil.compareTime(time, amIn_1) >= 0 && DateUtil.compareTime(time, amIn_2) < 0) {
+            teacher.setAmIn(str);
+        } else if (DateUtil.compareTime(time, pmOut_1) >= 0 && DateUtil.compareTime(time, pmOut_2) < 0) {
+            teacher.setPmOut(str);
+        }
+
+        return teacher;
+    }
+
+    private AttStudentExcel setStudentAttTime(Map<String, String> config,
+                                              Date attTime, String attState, AttStudentExcel stu) {
         String attStateName = parseState(attState);
         if (attTime == null) {
             return stu;
@@ -623,46 +788,125 @@ public class AttRecordServiceImpl implements AttRecordService {
         return stu;
     }
 
-    private Map<String, String> getConfigMap() {
-        //
+    private Map<String, String> getConfigLimitMap(boolean isStudent, String cfgKey) {
+        //返回集合
         Map<String, String> rst = new HashMap<>();
-        //
-        List<Map<String, Object>> configs = attRecordDao.findConfigList("STU", CommConstant.SYS_ID);
+        //配置参数
+        List<Map<String, Object>> configs = attRecordDao.findConfigList(cfgKey, CommConstant.SYS_ID);
         String key;
         String value;
         String[] strArray;
         for (Map<String, Object> item : configs) {
             key = String.valueOf(item.get("config_key"));
             value = String.valueOf(item.get("config_value"));
-            if (CommConstant.STU_ATT_SCOPE_AM_IN.equals(key)) {
-                strArray = value.split("~");
-                rst.put("amIn_1", strArray[0] + ":00");
-                rst.put("amIn_2", strArray[1] + ":00");
-                continue;
+            //学员
+            if (isStudent) {
+                if (CommConstant.STU_ATT_AM_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("r_amIn_1", strArray[0] + ":00");
+                    rst.put("r_amIn_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_AM_OUT.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("r_amOut_1", strArray[0] + ":00");
+                    rst.put("r_amOut_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_PM_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("r_pmIn_1", strArray[0] + ":00");
+                    rst.put("r_pmIn_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_PM_OUT.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("r_pmOut_1", strArray[0] + ":00");
+                    rst.put("r_pmOut_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_NIGHT_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("r_nightIn_1", strArray[0] + ":00");
+                    rst.put("r_nightIn_2", strArray[1] + ":00");
+                    continue;
+                }
             }
-            if (CommConstant.STU_ATT_SCOPE_AM_OUT.equals(key)) {
-                strArray = value.split("~");
-                rst.put("amOut_1", strArray[0] + ":00");
-                rst.put("amOut_2", strArray[1] + ":00");
-                continue;
+            //教职工
+            else {
+                if (CommConstant.TEA_ATT_AM_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("r_amIn_1", strArray[0] + ":00");
+                    rst.put("r_amIn_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.TEA_ATT_PM_OUT.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("r_pmOut_1", strArray[0] + ":00");
+                    rst.put("r_pmOut_2", strArray[1] + ":00");
+                    continue;
+                }
             }
-            if (CommConstant.STU_ATT_SCOPE_PM_IN.equals(key)) {
-                strArray = value.split("~");
-                rst.put("pmIn_1", strArray[0] + ":00");
-                rst.put("pmIn_2", strArray[1] + ":00");
-                continue;
-            }
-            if (CommConstant.STU_ATT_SCOPE_PM_OUT.equals(key)) {
-                strArray = value.split("~");
-                rst.put("pmOut_1", strArray[0] + ":00");
-                rst.put("pmOut_2", strArray[1] + ":00");
-                continue;
-            }
-            if (CommConstant.STU_ATT_SCOPE_NIGHT_IN.equals(key)) {
-                strArray = value.split("~");
-                rst.put("nightIn_1", strArray[0] + ":00");
-                rst.put("nightIn_2", strArray[1] + ":00");
-                continue;
+        }
+
+        return rst;
+    }
+
+    private Map<String, String> getConfigMap(boolean isStudent, String cfgKey) {
+        //返回集合
+        Map<String, String> rst = new HashMap<>();
+        //配置参数
+        List<Map<String, Object>> configs = attRecordDao.findConfigList(cfgKey, CommConstant.SYS_ID);
+        String key;
+        String value;
+        String[] strArray;
+        for (Map<String, Object> item : configs) {
+            key = String.valueOf(item.get("config_key"));
+            value = String.valueOf(item.get("config_value"));
+            if (isStudent) {
+                if (CommConstant.STU_ATT_SCOPE_AM_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("amIn_1", strArray[0] + ":00");
+                    rst.put("amIn_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_SCOPE_AM_OUT.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("amOut_1", strArray[0] + ":00");
+                    rst.put("amOut_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_SCOPE_PM_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("pmIn_1", strArray[0] + ":00");
+                    rst.put("pmIn_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_SCOPE_PM_OUT.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("pmOut_1", strArray[0] + ":00");
+                    rst.put("pmOut_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.STU_ATT_SCOPE_NIGHT_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("nightIn_1", strArray[0] + ":00");
+                    rst.put("nightIn_2", strArray[1] + ":00");
+                    continue;
+                }
+            } else {
+                if (CommConstant.TEA_ATT_SCOPE_AM_IN.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("amIn_1", strArray[0] + ":00");
+                    rst.put("amIn_2", strArray[1] + ":00");
+                    continue;
+                }
+                if (CommConstant.TEA_ATT_SCOPE_PM_OUT.equals(key)) {
+                    strArray = value.split("~");
+                    rst.put("pmOut_1", strArray[0] + ":00");
+                    rst.put("pmOut_2", strArray[1] + ":00");
+                    continue;
+                }
             }
         }
 

@@ -12,6 +12,7 @@
         <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
         <result column="workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
         <result column="postName" jdbcType="VARCHAR" property="postName"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -25,7 +26,8 @@
         <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, category, name, sex, political, mobile, idCard, photoUrl, remark, status, createUserId, createUserName,
+        id, category, name, sex, political, mobile, idCard, photoUrl, sort,
+        remark, status, createUserId, createUserName,
         createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, introduce, workUnitName, postName
     </sql>
 
@@ -43,7 +45,7 @@
 
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.Teacher">
         insert into teacher (id, category, name, sex, political,
-        mobile, idCard, photoUrl,
+        mobile, idCard, photoUrl, sort,
         remark, status, createUserId,
         createUserName, createDate, lastModifyUserId,
         lastModifyUserName, lastModifyDate, introduce,
@@ -52,6 +54,7 @@
         values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=CHAR}, #{name,jdbcType=VARCHAR},
         #{sex,jdbcType=VARCHAR}, #{political,jdbcType=VARCHAR},
         #{mobile,jdbcType=VARCHAR}, #{idCard,jdbcType=CHAR}, #{photoUrl,jdbcType=VARCHAR},
+        #{sort,jdbcType=INTEGER},
         #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
         #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
         #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{introduce,jdbcType=LONGVARCHAR},
@@ -71,6 +74,7 @@
         photoUrl = #{photoUrl,jdbcType=VARCHAR},
         workUnitName = #{workUnitName,jdbcType=VARCHAR},
         postName = #{postName,jdbcType=VARCHAR},
+        sort = #{sort,jdbcType=INTEGER},
         remark = #{remark,jdbcType=VARCHAR},
         status = #{status,jdbcType=CHAR},
         createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -91,7 +95,7 @@
         t.id, t.category, t.name, t.sex, t.political, t.mobile, t.idCard, t.photoUrl, t.remark,
         t.status, t.createUserId, t.createUserName, t.createDate,
         t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
-        t.introduce, t.workUnitName, t.postName
+        t.introduce, t.workUnitName, t.postName, t.sort
     </sql>
     <sql id="From_Statement">
         FROM teacher t
@@ -137,7 +141,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY t.createDate desc, t.`name`
+                ORDER BY t.sort asc, t.`name`
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
@@ -150,19 +154,13 @@
         t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
         t.introduce, t.workUnitName, t.postName
         from teacher t
-        where
+        where 1=1
         <choose>
             <when test="condition.id!=null and condition.id!=&quot;&quot;">
-                 t.id = #{condition.id,jdbcType=VARCHAR}
+                t.id = #{condition.id,jdbcType=VARCHAR}
             </when>
             <otherwise>
-                t.id NOT in (
-                SELECT
-                c.headmaster
-                FROM
-                classes c
-                WHERE c.status =1
-                )
+
             </otherwise>
         </choose>
 
@@ -217,4 +215,10 @@
         where id != #{id,jdbcType=VARCHAR}
         and mobile = #{mobile,jdbcType=VARCHAR}
     </select>
+
+    <update id="updateSort">
+        update teacher
+        set sort = #{sort,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

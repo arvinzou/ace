@@ -2,6 +2,7 @@ package com.huacainfo.ace.partyschool.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.JsonUtil;
@@ -31,11 +32,20 @@ public class WAttRecordController extends BisBaseController {
      */
     @RequestMapping("/record")
     public ResultResponse record(String json) throws Exception {
+        AttRecord data = null;
+        try {
+            data = JsonUtil.toObject(json, AttRecord.class);
+        } catch (Exception e) {
+            logger.error("[/www/att/record]json格式转换异常：{}", e);
+        }
+        if (StringUtil.isEmpty(json) || data == null) {
+            return new ResultResponse(ResultCode.FAIL, "参数获取异常");
+        }
         UserProp userProp = getCurUserProp();
         if (userProp == null) {
             return new ResultResponse(ResultCode.FAIL, "未获取登录信息");
         }
-        AttRecord data = JsonUtil.toObject(json, AttRecord.class);
+
 
         MessageResponse ms = attRecordService.insertAttRecord(data, userProp);
         return new ResultResponse(ms);

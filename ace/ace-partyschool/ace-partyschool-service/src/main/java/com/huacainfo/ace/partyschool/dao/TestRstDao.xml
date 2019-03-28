@@ -178,7 +178,7 @@
         IFNULL(s.youScore,0) AS youScore,
         s.type as ttype
         FROM
-        (SELECT t.id, m.uname, t.NAME,t.score,tr.content,tr.youScore,tor.content AS torcontent, tor.topicId,tr.`type`,tr.answer
+        (SELECT m.id AS MID, t.id, m.uname, t.NAME,t.score,tr.content,tr.youScore,tor.content AS torcontent, tor.topicId,tr.`type`,tr.answer
         FROM partyschool.test_rst t
         LEFT JOIN (
                 select s.id,s.`name` AS uname from partyschool.student s
@@ -190,9 +190,9 @@
         LEFT JOIN partyschool.topic_rst tr ON t.id= tr.testRstId
         LEFT JOIN partyschool.topic_opt_rst tor ON tr.id= tor.topicId
         WHERE t.taskId= #{taskId,jdbcType=VARCHAR}
-        AND tor.youAnswer='1') s
+        AND tor.youAnswer='1' ) s
         GROUP BY s.topicId
-        ORDER BY s.uname ASC , s.content asc
+        ORDER BY s.MID ASC, s.content asc
     </select>
 
 </mapper>

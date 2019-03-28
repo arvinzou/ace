@@ -8,8 +8,9 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.TimestampKit;
+import com.huacainfo.ace.partyschool.constant.CommConstant;
 import com.huacainfo.ace.partyschool.service.AttRecordService;
-import com.huacainfo.ace.partyschool.vo.AttRecordExcel;
+import com.huacainfo.ace.partyschool.vo.AttRecordExport;
 import com.huacainfo.ace.partyschool.vo.AttRecordQVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,13 +48,18 @@ public class ExportExcelController extends BisBaseController {
         if (StringUtil.isEmpty(userType)) {
             return new ResultResponse(ResultCode.FAIL, "请选择身份类型！");
         }
+        if (CommConstant.STUDENT.equals(userType) && StringUtil.isEmpty(condition.getClsId())) {
+            return new ResultResponse(ResultCode.FAIL, "请选择班次！");
+        } else if (CommConstant.TEACHER.equals(userType)) {
+            condition.setClsId("");
+        }
         Date startDate = DateUtil.getDate(condition.getStartDate(), DateUtil.DEFAULT_DATE_REGEX);
         Date endDate = DateUtil.getDate(condition.getEndDate(), DateUtil.DEFAULT_DATE_REGEX);
         if (startDate.compareTo(endDate) > 0) {
             return new ResultResponse(ResultCode.FAIL, "时间区间有误！");
         }
         //excel data
-        List<AttRecordExcel> list;
+        List<AttRecordExport> list;
         try {
             list = attRecordService.exportAttRecord(condition);
         } catch (CustomException e) {
@@ -62,12 +68,16 @@ public class ExportExcelController extends BisBaseController {
         if (CollectionUtils.isEmpty(list)) {
             return new ResultResponse(ResultCode.FAIL, "查无数据");
         }
-
-        // 准备数据
-        String[] columnNames = {"姓名", "身份类型", "班次", "日期",
-                "上午签到", "上午签退", "下午签到", "下午签退", "晚上签到"};
+        // excel 表格
+        String[] columnNames;
+        if (CommConstant.STUDENT.equals(userType)) {
+            columnNames = new String[]{"姓名", "身份类型", "班次", "日期",
+                    "上午签到", "上午签退", "下午签到", "下午签退", "晚上签到"};
+        } else {
+            columnNames = new String[]{"姓名", "身份类型", "日期", "上午签到", "下午签退"};
+        }
         String fileName = TimestampKit.getTimestamp10() + "";
-        ExportExcelWrapper<AttRecordExcel> util = new ExportExcelWrapper<>();
+        ExportExcelWrapper<AttRecordExport> util = new ExportExcelWrapper<>();
         util.exportExcel(fileName, fileName, columnNames, list, response, ExportExcelKit.EXCEL_FILE_2003);
 
         return new ResultResponse(ResultCode.SUCCESS, "导出成功");
