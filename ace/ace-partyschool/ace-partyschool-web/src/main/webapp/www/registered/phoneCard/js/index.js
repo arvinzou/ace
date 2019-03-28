@@ -123,7 +123,7 @@ function renderPage(IDom, data, tempId) {
  * 点击签到
  */
 function record(){
-    if(longitude){
+    if(longt){
         var con=confirm("是否确定提交?");
         if(con==true){
             $.ajax({
