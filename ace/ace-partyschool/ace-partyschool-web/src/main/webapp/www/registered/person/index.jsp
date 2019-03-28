@@ -104,8 +104,8 @@
 
 		<script id="menu-tpl" type="text/template">
 			{@if data.regType == 'student'}
-			<div class="row mr">
-				<div class="item" onclick="makeAttand();">
+			<div class="row">
+				<div class="item mr" onclick="makeAttand();">
 					<div class="item-left">
 						<img src="img/icon-phone-card.png" class="menu-icon"/>
 					</div>
