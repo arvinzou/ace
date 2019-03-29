@@ -1,41 +1,80 @@
-<view class='navbar-header'>
-<block wx:if='{{userData.copNo}}'>
-  <view class='up'>
-    <image src='{{userData.avatarUrl}}'></image>
-  </view>
-  <view class='middle'>
-    <text>{{userData.name}}</text>
-    <image src="../../image/icon-edit.png"  catchtap='edit'></image>
-  </view>
-  <view class='down'>警号：{{userData.copNo}}</view>
-  </block>
-</view>
-<view class='navbar-ul'>
-   <view class='li' catchtap='linkSGKB'>
-     <image class='icon_sgkb' src='../../image/icon_sgkb.png'></image>
-     <text>事故快报</text>
-   </view>
-   <view class='li' catchtap='linkYHSB'>
-     <image class='icon_yhsb' src='../../image/icon_yhsb.png'></image>
-     <text>隐患上报</text>
-   </view>
-   <view class='li' catchtap='linkLDCJ'>
-     <image class='icon_ldcj' src='../../image/icon_ldcj.png'></image>
-     <text>路段采集</text>
-   </view>
-   <view class='li' catchtap='linkSGLB'>
-     <image class='icon_sglb' src='../../image/icon_sglb.png'></image>
-     <text>事故列表</text>
-   </view>
-   <view class='li' catchtap='linkYHLB'>
-     <image class='icon_yhlb' src='../../image/icon_yhlb.png'></image>
-     <text>隐患列表</text>
-   </view>
-   <view class='li' catchtap='linkSGFX'>
-     <image class='icon_sgfx' src='../../image/icon_sgfx.png'></image>
-     <text>事故分析</text>
-   </view>
-</view>
-<view class='navbar-footer'>
-  <text>常德市交警支队</text>
+<view class='index'>
+    <view class='header'>
+        <view class='navbar-header'>
+            <image src='../../image/logo.png' class='header-logo'></image>
+            <text class='header-title'>常德市路长制信息管理平台</text>
+        </view>
+        <view class='userinfo'>
+            <view class='header-img-box'>
+                <block wx:if='{{userData.avatarUrl}}'>
+                    <image src='{{userData.avatarUrl}}'></image>
+                </block>
+                <block wx:else>
+                    <image src='../../image/default_header.png'></image>
+                </block>
+            </view>
+            <view class='username'>{{userData.name}}</view>
+            <view class='edit' catchtap='edit'>修改</view>
+        </view>
+    </view>
+    <view class='menu'>
+        <view class='menu-list' catchtap='linkSGKB'>
+            <view class='menu-icon'>
+                <image src='../../image/icon_sgkb.png' class='menu-icon-image'></image>
+            </view>
+            <view class='menu-detail bm'>
+                <view class='title'>事故快报</view>
+                <view class='detail'>快速上报事故发生基本情况</view>
+            </view>
+        </view>
+        <view class='menu-list' catchtap='linkYHSB'>
+            <view class='menu-icon'>
+                <image src='../../image/icon_yhsb.png' class='menu-icon-image'></image>
+            </view>
+            <view class='menu-detail bm'>
+                <view class='title'>隐患上报</view>
+                <view class='detail'>路况隐患上报</view>
+            </view>
+        </view>
+        <view class='menu-list' catchtap='linkLDCJ'>
+            <view class='menu-icon'>
+                <image src='../../image/icon_ldcj.png' class='menu-icon-image'></image>
+            </view>
+            <view class='menu-detail bm'>
+                <view class='title'>路段采集</view>
+                <view class='detail'>路段信息采集</view>
+            </view>
+        </view>
+        <view class='menu-list' catchtap='linkSGLB'>
+            <view class='menu-icon'>
+                <image src='../../image/icon_sglb.png' class='menu-icon-image'></image>
+            </view>
+            <view class='menu-detail bm'>
+                <view class='title'>事故列表</view>
+                <view class='detail'>查看及查询事故信息、事故续报</view>
+            </view>
+        </view>
+         <view class='menu-list' catchtap='linkYHLB'>
+            <view class='menu-icon'>
+                <image src='../../image/icon_yhlb.png' class='menu-icon-image'></image>
+            </view>
+            <view class='menu-detail bm'>
+                <view class='title'>隐患列表</view>
+                <view class='detail'>查看路况隐患信息</view>
+            </view>
+        </view>
+        <view class='menu-list' catchtap='linkSGFX'>
+            <view class='menu-icon'>
+                <image src='../../image/icon_sgfx.png' class='menu-icon-image'></image>
+            </view>
+            <view class='menu-detail'>
+                <view class='title'>事故分析</view>
+                <view class='detail'>查看系统重要指标统计、分析</view>
+            </view>
+        </view>
+    </view>
+    <view class='footer'>
+        <view class='copyright'>常德市交警支队主办</view>
+        <view class='support'>华彩伟业公司提供技术支持</view>
+    </view>
 </view>
