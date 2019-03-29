@@ -8,7 +8,6 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.NoticeDao;
 import com.huacainfo.ace.partyschool.dao.NoticeStatusDao;
 import com.huacainfo.ace.partyschool.model.Notice;
@@ -73,6 +72,18 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     }
 
     @Override
+    public PageResult<NoticeVo> findCardNoticeList(NoticeQVo condition, int start, int limit, String orderBy) throws Exception {
+        PageResult<NoticeVo> rst = new PageResult<>();
+        List<NoticeVo> list = this.noticeDao.findListVo(condition, start, limit, orderBy);
+        rst.setRows(list);
+        if (start <= 1) {
+            int allRows = this.noticeDao.findCount(condition);
+            rst.setTotal(allRows);
+        }
+        return rst;
+    }
+
+    @Override
     public ResultResponse findNoticeById(String id) throws Exception {
         if (CommonUtils.isBlank(id)){
             return new ResultResponse(1, "序号不能为空!");
@@ -97,8 +108,8 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     }
 
     @Override
-    public ResultResponse findPulicNoticeLists(String classesId) throws Exception {
-        List<NoticeVo> list = this.noticeDao.findPublicNoticeList(classesId);
+    public ResultResponse findPulicNoticeLists(String classesId,String server) throws Exception {
+        List<NoticeVo> list = this.noticeDao.findPublicNoticeList(classesId,server);
         return new ResultResponse(0, "通知公告获取完成！", list);
     }
 
@@ -115,7 +126,6 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      */
     @Override
     public MessageResponse insertNotice(Notice o, UserProp userProp) throws Exception {
-        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "序号不能为空!");
         }

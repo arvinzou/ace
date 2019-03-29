@@ -61,7 +61,7 @@ public class WNoticeController extends BisBaseController {
     @ResponseBody
     public ResultResponse findPublicNotice(String classesId)
             throws Exception {
-        return this.sclNoticeService.findPulicNoticeLists(classesId);
+        return this.sclNoticeService.findPulicNoticeLists(classesId,getServerHttp());
     }
 
 

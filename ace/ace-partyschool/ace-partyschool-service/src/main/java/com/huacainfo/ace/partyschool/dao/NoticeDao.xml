@@ -73,8 +73,6 @@
         <if test='condition.id !=null'>
             and n.id = #{condition.id,jdbcType=VARCHAR}
         </if>
-
-
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -108,19 +106,13 @@
     </select>
 
     <select id="findPublicNoticeList" parameterType="java.lang.String" resultMap="VoResultMap">
-        (	select
-        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
+        select
+        n.id, n.category, n.classesId, n.title, concat(#{server},a.file_url) as fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
         from notice n
-        WHERE  n.category='1'
+        LEFT join portal.attach a ON a.notice_id=n.id
+        WHERE  n.category='4' AND (n.classesId=#{classesId,jdbcType=VARCHAR} OR n.classesId IS NULL)
         ORDER BY pushDate desc
-        limit 0,1)
-        union all
-         (select
-        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
-        from notice n
-        WHERE n.classesId=#{classesId,jdbcType=VARCHAR} AND n.category='2'
-        ORDER BY pushDate desc
-        limit 0,1)
+        limit 0,6
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -144,6 +136,34 @@
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
+
+    <select id="findListVo" parameterType="java.lang.String" resultMap="VoResultMap">
+        SELECT n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
+        FROM Partyschool.notice n
+        WHERE n.category='4' AND (n.classesId=#{condition.classesId,jdbcType=VARCHAR} OR n.classesId IS NULL)
+        <if test='condition.title !=null and condition.title !=""'>
+            and n.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.status !=null and condition.status !=""'>
+            and n.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.id !=null'>
+            and n.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY pushDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+
+
 
     <select id="findUnreadCount" resultType="int">
         SELECT COUNT(*)

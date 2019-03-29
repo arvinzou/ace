@@ -20,12 +20,14 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-8 toolbar">
+                <div class="col-md-3 toolbar">
 
                     <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
 
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-9">
+                    <div class="btn-group" id="select1" role="group" style="float:left;padding-right:5px">
+                    </div>
                     <div class="input-group">
                         <input type="text" name="title" class="form-control" placeholder="请输入文件名称">
                         <span class="input-group-btn">
@@ -70,25 +72,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" role="dialog" id="modal-push">
-    <div class="modal-dialog" role="document" style="width: 70%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">发布</h4>
-            </div>
-            <div class="modal-body" id="tt">
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-                <button type="button" class="btn green" authority="false" id="btn-view-save">确定</button>
             </div>
         </div>
     </div>
@@ -142,6 +125,22 @@
 
 </script>
 
+
+<script id="tpl-check-group" type="text/template">
+
+    {@each data.list as item, index}
+    {@if item.CODE}
+    <button type="button" authority="false" class="btn btn-default {@if item.CODE==2}active{@/if}"
+            onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}
+    </button>
+    {@else}
+
+    {@/if}
+
+    {@/each}
+
+</script>
+
 <script id="tpl-select-list" type="text/template">
 
     <select onchange="searchActive()" name="classesId" id="classesId" class="form-control" style="height: 31px;">
@@ -164,10 +163,10 @@
         src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
 <script type="text/javascript"
         src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/task/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/task/model.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/task/controller.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/task/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/cardNotice/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/cardNotice/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/cardNotice/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/cardNotice/view.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 
 </body>

@@ -28,13 +28,18 @@ public interface NoticeDao {
                             @Param("limit") int limit,
                             @Param("orderBy") String orderBy);
 
+    List<NoticeVo> findListVo(@Param("condition") NoticeQVo condition,
+                            @Param("start") int start,
+                            @Param("limit") int limit,
+                            @Param("orderBy") String orderBy);
+
     List<NoticeVo> findMyNoticeList(@Param("condition") NoticeStatusQVo condition,
                                     @Param("start") int start,
                                     @Param("limit") int limit,
                                     @Param("orderBy") String orderBy);
 
 
-    List<NoticeVo> findPublicNoticeList(@Param("classesId") String classesId);
+    List<NoticeVo> findPublicNoticeList(@Param("classesId") String classesId,@Param("server") String server);
 
 
     int findCount(@Param("condition") NoticeQVo condition);

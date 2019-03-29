@@ -34,11 +34,14 @@ public interface SclNoticeService {
     PageResult<NoticeVo> findNoticeList(NoticeQVo condition,
                                         int start, int limit, String orderBy) throws Exception;
 
+    PageResult<NoticeVo> findCardNoticeList(NoticeQVo condition,
+                                        int start, int limit, String orderBy) throws Exception;
+
 
     ResultResponse findNoticeById(String id) throws Exception;
 
     ResultResponse findNoticeLists(NoticeStatusQVo condition, int start, int Limit, String orderBy, UserProp userProp) throws Exception;
-    ResultResponse findPulicNoticeLists(String classesId) throws Exception;
+    ResultResponse findPulicNoticeLists(String classesId,String server) throws Exception;
     /**
      * @throws
      * @Title:insertNotice
