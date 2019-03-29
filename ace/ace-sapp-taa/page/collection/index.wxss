@@ -61,7 +61,7 @@
     display: block;
     width:10%;
     height:6rpx;
-    background:rgba(67,80,252,1);
+    background:#366AE1
     position: absolute;
     bottom: 0;
     left: 45%;

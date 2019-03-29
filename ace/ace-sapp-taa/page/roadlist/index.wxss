@@ -75,7 +75,7 @@
   line-height: 26rpx;
   text-align: center;
   border-radius: 50%;
-  background: #4350FC;
+  background: #366AE1;
   color: #FFFFFF !important;
 }
 .list-fixed {
