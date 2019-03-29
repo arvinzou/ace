@@ -1,4 +1,4 @@
-var server = "http://api.huacainfo.com";
+
 $(function () {
     $('#calendar').calendar({
         data: [],
@@ -14,12 +14,11 @@ $(function () {
 
 function findAttDataByDay(date) {
     $.ajax({
-        url: server + "/api/www/api/findAttDataByDay",
+        url: contextPath + "/www/att/findList",
         type: "post",
         async: false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data: {
-            lCardNo: 'Z0000187',
             dateTimeStr: date
         },
         success: function (result) {
