@@ -91,10 +91,10 @@
     line-height: 110rpx;
     text-align: center;
     border-radius: 55rpx;
-    border: 1px solid rgba(67,80,252,1); 
+    border: 1px solid #366AE1; 
     position: fixed;
     bottom: 108rpx;
     left: 10%;
-    color: #2430E3;
+    color: #366AE1;
     font-size: 36rpx;
 }

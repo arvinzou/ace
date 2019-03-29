@@ -23,7 +23,7 @@
     width: 690rpx;
     height: 110rpx;
     color: #fff;
-    background-color: #4350FC;
+    background-color: #366AE1;
     border-radius: 55rpx;
     margin-left:32rpx; 
     line-height: 110rpx;

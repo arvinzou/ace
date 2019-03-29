@@ -95,7 +95,7 @@
   text-align: center;
   font-size: 36rpx;
   color: #fff;
-  background: #4350fc;
+  background: #366AE1;
 }
 
 .btn-submit::after {
@@ -160,7 +160,7 @@ view, map, cover-view {
 }
 
 .tab01.active {
-  color: rgba(67, 80, 252, 1);
+  color: #366AE1;
 }
 
 .tab01 {
@@ -174,7 +174,7 @@ view, map, cover-view {
   display: block;
   width: 40rpx;
   height: 6rpx;
-  background: rgba(67, 80, 252, 1);
+  background: #366AE1;
   position: absolute;
   bottom: 0;
   left: calc(50% - 20rpx);
@@ -226,7 +226,7 @@ view, map, cover-view {
   width: 430rpx;
   height: 100rpx;
   line-height: 100rpx;
-  background: rgba(67, 80, 252, 1);
+  background: #366AE1;
   box-shadow: 0px 0px 10px 0px rgba(67, 80, 252, 0.35);
   border-radius: 50px;
   font-size: 40rpx;
@@ -317,7 +317,7 @@ view, map, cover-view {
 
 .reset-section text {
   font-size: 24rpx;
-  color: #4350fc;
+  color: #366AE1;
   padding-left: 7rpx;
 }
 
@@ -475,7 +475,7 @@ view, map, cover-view {
 }
 
 .collectionBtn .startBtn {
-  background: rgba(67, 80, 252, 1);
+  background: #366AE1;
   color: #fff;
 }
 
@@ -600,7 +600,7 @@ view, map, cover-view {
   text-align: center;
   background: rgba(230, 232, 255, 0.8);
   border-radius: 4rpx;
-  color: #2430e3;
+  color: #366AE1;
   font-size: 24rpx;
   float: left;
   margin-left: 30rpx;
@@ -611,8 +611,8 @@ view, map, cover-view {
   height: 100rpx;
   line-height: 100rpx;
   text-align: center;
-  background: rgba(67, 80, 252, 1);
-  box-shadow: 0rpx 0rpx 10rpx 0rpx rgba(67, 252, 80, 0.35);
+  background: #366AE1;
+  box-shadow: 0rpx 0rpx 10rpx 0rpx rgba(67, 80, 252, 0.35);
   border-radius: 50rpx;
   color: #fff;
   position: absolute;
@@ -810,7 +810,7 @@ view, map, cover-view {
 }
 
 .opts-detail {
-  color: #4350fc;
+  color: #366AE1;
   float: left;
 }
 
@@ -922,6 +922,6 @@ view, map, cover-view {
   border: none;
 }
 .btn-confirm-report.active{
-  background-color: rgba(67, 80, 252, 1);
+  background-color: #366AE1;
    box-shadow: 0 0 2rpx rgba(67, 80, 252, .35);
 }
