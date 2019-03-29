@@ -235,8 +235,8 @@ WHERE st.classId=cs.classesId) AS studentNum,
     <select id="notDoneTestList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
         cs.id, cs.classesId, cs.courseDate, cs.courseIndex, cs.teacherId, cs.courseId,cs.ifTest,
-        c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,
-        t.id as tId ,t.name as tName,
+        c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,c.tname as ctname,
+        t.id as tId ,c.name as cname,
         cla.id as claId ,cla.name as claName
         <include refid="From_Statement"/>
         WHERE cs.courseDate <![CDATA[ < ]]> NOW()
@@ -264,7 +264,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
 
 
     <select id="doneTestList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
-        select
+      select
         <include refid="Vo_Column_List"/>
         <include refid="From_Statement"/>
         WHERE 1=1
