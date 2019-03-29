@@ -101,9 +101,6 @@ function locate(data){
                     map: map,
                     content: '我'
                 });
-            },
-            fail:function(e){
-                alert("定位失败，请确认是否开启网络或定位权限。");
             }
         });
     });
@@ -123,35 +120,32 @@ function renderPage(IDom, data, tempId) {
  * 点击签到
  */
 function record(){
-    if(longt){
-        if(confirm('是否确定提交？')) {
-            $.ajax({
-                url: contextPath + "/www/att/record",
-                type: "post",
-                async: false,
-                contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                data: {
-                    json: JSON.stringify({
-                        longitude: longt,
-                        latitude: lat
-                    })
-                },
-                success: function (result) {
-                    if (result.status == 1 && result.info == "ERROR_POINT") {
-                        alert("对不起，您当前不在考勤区域内，不能签到！");
-                    }
-                    if (result.status == 0) {
-                        alert("签到成功！");
-                        findList();
-                    }
-                },
-                error: function () {
-                    alert("系统服务内部异常！");
+    var con=confirm("是否确定提交?");
+    if(con==true){
+        $.ajax({
+            url: contextPath+ "/www/att/record",
+            type:"post",
+            async:false,
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data:{
+                json: JSON.stringify({
+                    longitude: longt,
+                    latitude: lat
+                })
+            },
+            success:function(result){
+                if(result.status  == 1 && result.info == "ERROR_POINT"){
+                    alert("对不起，您当前不在考勤区域内，不能签到！");
                 }
-            });
-        }
-    }else{
-        alert("您当前的定位失败，请确认您的设备网络和定位服务！");
+                if(result.status == 0){
+                   alert("签到成功！");
+                    findList();
+                }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
+            }
+        });
     }
 }
 

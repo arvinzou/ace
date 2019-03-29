@@ -43,4 +43,9 @@ public interface AttRecordDao {
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
     Map<String, Object> getAttSrc();
+
+    List<AttRecordVo> findListExpor(@Param("condition") AttRecordQVo condition,
+                                    @Param("start") int start,
+                                    @Param("limit") int limit,
+                                    @Param("orderBy") String orderBy);
 }

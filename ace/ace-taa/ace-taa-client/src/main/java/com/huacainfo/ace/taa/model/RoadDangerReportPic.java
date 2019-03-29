@@ -2,7 +2,8 @@ package com.huacainfo.ace.taa.model;
 
 import java.util.Date;
 
-public class RoadDangerReportPic {
+public class RoadDangerReportPic implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
     private String id;
 
     private String reportId;
