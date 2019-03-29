@@ -34,7 +34,7 @@ public interface NoticeDao {
                                     @Param("orderBy") String orderBy);
 
 
-    List<NoticeVo> findPublicNoticeList(@Param("classesId") String classesId);
+    List<NoticeVo> findPublicNoticeList(@Param("classesId") String classesId,@Param("server") String server);
 
 
     int findCount(@Param("condition") NoticeQVo condition);
