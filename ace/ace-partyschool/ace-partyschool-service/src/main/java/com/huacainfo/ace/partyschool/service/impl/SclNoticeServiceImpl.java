@@ -77,7 +77,7 @@ public class SclNoticeServiceImpl implements SclNoticeService {
         List<NoticeVo> list = this.noticeDao.findListVo(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.noticeDao.findCount(condition);
+            int allRows = this.noticeDao.findCountVo(condition);
             rst.setTotal(allRows);
         }
         return rst;

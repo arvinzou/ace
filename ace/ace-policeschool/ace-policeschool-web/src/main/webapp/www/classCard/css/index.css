@@ -2,6 +2,30 @@ html {
     height: 100%;
 }
 
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 20px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 5px;
+    width: 10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #bbb;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #eee;
+}
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -42,14 +66,14 @@ body {
 }
 
 .content .head .room_name {
-    font-size: 100px;
+    font-size: 68px;
     font-family: MicrosoftYaHei-Bold;
     font-weight: bold;
     color: rgba(255, 255, 255, 1);
 }
 
 .content .head .dateTime {
-    font-size: 36px;
+    font-size: 32px;
     font-family: MicrosoftYaHei;
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
@@ -90,7 +114,8 @@ body {
 }
 
 .body table.tftable th {
-    background-color: rgba(0, 107, 207, 1);;
+    background-color: rgba(0, 107, 207, 1);
+;
     border-width: 1px;
     padding: 8px;
     border-style: solid;
@@ -107,6 +132,7 @@ body {
 
 .body table .style1 {
     color: rgba(192, 225, 255, 1);
+    width: 200px
 }
 
 .body table .style3 {
@@ -134,7 +160,7 @@ body {
 
 }
 
-.pointer {
+.pointer{
     cursor: pointer;
 }
 
@@ -156,17 +182,17 @@ body {
 }
 
 .body .message .title span {
-    width: 200px;
-    height: 60px;
+    width: 164px;
+    height: 56px;
     background: rgba(0, 107, 207, 1);
     margin: auto;
     display: block;
     border-radius: 30px;
-    font-size: 36px;
+    font-size: 30px;
     font-family: MicrosoftYaHei-Bold;
     font-weight: bold;
     color: rgba(254, 254, 254, 1);
-    line-height: 60px;
+    line-height: 56px;
 }
 
 .body .message .fileMessage {
@@ -177,42 +203,46 @@ body {
     position: relative;
 }
 
-.body .message .fileMessage .swriper-box {
+.body .message .fileMessage .swriper-box{
     position: absolute;
     width: 100%;
     height: 100%;
 }
 
+
 #fileMessage object {
     flex-grow: 1;
 }
 
-.body .message .fileMessage .imgMessage {
+
+.body .message .fileMessage .imgMessage{
     text-align: center;
     overflow: auto;
     height: 100%;
 
 }
 
-.body .message .fileMessage .txtMessage {
+.body .message .fileMessage .txtMessage{
     text-indent: 2em;
     font-size: 34px;
     line-height: 1.5em;
     color: #373F53;
-    word-break: break-all;
-    word-wrap: break-word;
+    word-break:break-all;
+    word-wrap:break-word;
     height: 100%;
     overflow: auto;
 }
 
-.body .message .fileMessage .pdfMessage {
+.body .message .fileMessage .pdfMessage{
     height: 100%;
 }
 
-.fileMessage .imgMessage img {
+
+.fileMessage .imgMessage img{
     object-fit: cover;
     max-width: 100%;
 }
+
 
 .modal {
     width: 100%;
@@ -237,7 +267,7 @@ body {
 .modal .modal_content .modal_head {
     height: 80px;
     background: rgba(0, 107, 207, 1);
-    font-size: 36px;
+    font-size: 30px;
     font-family: MicrosoftYaHei-Bold;
     font-weight: bold;
     color: rgba(255, 255, 255, 1);
@@ -249,7 +279,7 @@ body {
 
 .modal .modal_content .modal_body {
     background: #fff;
-    padding: 30px 60px 30px;
+    padding: 30px 30px 30px 60px;
 }
 
 .modal .classInfo .title {
@@ -273,7 +303,7 @@ body {
     width: 100%;
     border-left: none;
     border-right: none;
-    font-size: 24px;
+    font-size: 22px;
     font-family: MicrosoftYaHei;
     font-weight: 400;
     color: rgba(55, 63, 83, 1);
@@ -310,9 +340,10 @@ body {
     width: 1000px;
 }
 
-.weeekClass .modal_body {
+.weeekClass .modal_body{
     position: relative;
 }
+
 
 .weeekClass .dayClass {
     display: flex;
@@ -323,7 +354,7 @@ body {
 }
 
 .weeekClass .dayClass .right {
-    width: 730px;
+    width: 720px;
 }
 
 .weeekClass .dayClass .right table {
@@ -395,17 +426,21 @@ body {
 }
 
 .photoWall .imgBox {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     max-height: 666px;
     overflow: auto;
 }
 
-#weeekCourseList, #roomTemp {
+.photoWall .imgBox>li {
+    float: left;
+    margin: 0px 20px 30px 0;
+}
+
+#weeekCourseList, #roomTemp{
     max-height: 666px;
     overflow: auto;
+    padding-right: 30px;
 }
+
 
 .photoWall .img img {
     width: 100%;
@@ -413,39 +448,36 @@ body {
     object-position: 50%;
 }
 
-.photoWall .modal_body {
-    padding: 30px !important;
-}
 
 .modal .photoWall {
-    width: 1034px;
+    width: 1100px;
 }
 
-.weeekClass .prevWeek, .weeekClass .nextWeek {
-    border-top: 3px solid #4f4f4f;
-    border-left: 3px solid #4f4f4f;
+.weeekClass .prevWeek,.weeekClass .nextWeek{
+    border-top: 3px solid #006bcf;
+    border-left: 3px solid #006bcf;
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
-
-.weeekClass .prevWeek {
+.weeekClass .prevWeek{
     transform: rotate(-45deg);
     top: 44%;
     left: 20px;
 }
 
-.weeekClass .nextWeek {
+.weeekClass .nextWeek{
     transform: rotate(135deg);
     top: 44%;
     right: 20px;
 }
 
-.modal .classRoom, .modal .addBook {
+.modal .classRoom,.modal .addBook{
     width: 720px;
 }
 
-.modal .classRoom .roomItem {
+.modal .classRoom .roomItem{
     padding: 30px 20px;
     background: #006BCF;
     border-radius: 10px;
@@ -457,21 +489,28 @@ body {
     cursor: pointer;
 }
 
-.addBook ul {
+
+.addBook ul{
     height: 666px;
     overflow: auto;
+    padding-right: 30px;
 }
 
-.addBook ul li {
+.addBook ul li{
     line-height: 80px;
     display: flex;
     justify-content: space-between;
-    font-size: 24px;
-    font-family: MicrosoftYaHei;
-    font-weight: 400;
-    color: rgba(55, 63, 83, 1);
+    font-size:24px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(55,63,83,1);
 }
+
 
 .swiper-container {
     height: 100%;
+}
+
+.swiper-button-next, .swiper-button-prev{
+    height: 30px !important;
 }

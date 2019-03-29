@@ -210,4 +210,20 @@
         )a ON t.userId = a.id
         where t.noticeId = #{id}
     </select>
+
+
+    <select id="findCountVo" resultType="int">
+        SELECT COUNT(*)
+        FROM notice n
+        WHERE n.category='4' AND (n.classesId=#{condition.classesId,jdbcType=VARCHAR} OR n.classesId IS NULL)
+        <if test='condition.title !=null and condition.title !=""'>
+            and n.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.status !=null and condition.status !=""'>
+            and n.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.id !=null'>
+            and n.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>

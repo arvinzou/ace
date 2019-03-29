@@ -155,15 +155,9 @@
         t.introduce, t.workUnitName, t.postName
         from teacher t
         where 1=1
-        <choose>
-            <when test="condition.id!=null and condition.id!=&quot;&quot;">
-                t.id = #{condition.id,jdbcType=VARCHAR}
-            </when>
-            <otherwise>
-
-            </otherwise>
-        </choose>
-
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>

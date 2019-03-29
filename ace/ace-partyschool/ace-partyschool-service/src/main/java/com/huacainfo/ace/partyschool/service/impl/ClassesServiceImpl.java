@@ -171,11 +171,6 @@ public class ClassesServiceImpl implements ClassesService {
         if (fms.getStatus() == 1) {
             return fms;
         }
-
-        int i = classesDao.headmasterCount(o.getId(), o.getHeadmaster());
-        if (i > 0) {
-            return new MessageResponse(1, "该班主任已绑定其他班级！");
-        }
         int temp = this.classesDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "班级管理名称重复！");

@@ -38,6 +38,12 @@ public interface NoticeDao {
 
 
     int findCount(@Param("condition") NoticeQVo condition);
+    int findCountVo(@Param("condition") NoticeQVo condition);
+
+    List<NoticeVo> findListVo(@Param("condition") NoticeQVo condition,
+                              @Param("start") int start,
+                              @Param("limit") int limit,
+                              @Param("orderBy") String orderBy);
 
     int findUnreadCount(String id);
 

@@ -20,15 +20,15 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-3 toolbar">
+                <div class="col-md-5 toolbar">
 
                     <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
 
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-7">
                     <div class="btn-group" id="select1" role="group" style="float:left;padding-right:5px">
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" >
                         <input type="text" name="title" class="form-control" placeholder="请输入文件名称">
                         <span class="input-group-btn">
                             <button type="button" class="btn  btn-default" id="btn-search" authority="false">
