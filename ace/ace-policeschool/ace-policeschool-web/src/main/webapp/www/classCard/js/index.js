@@ -519,6 +519,8 @@ function clock_12h() {
     var date = today.getDate();
     var hour = today.getHours();  //获得小时、分钟、秒
     var minute = today.getMinutes();
+    hour=hour>9?hour:'0'+hour;
+    minute=minute>9?minute:'0'+minute;
     // var second = today.getSeconds();
     nowDate = year + '-' + month + '-' + date + ' 00:00:00';
 // var apm="AM"; //默认显示上午: AM
