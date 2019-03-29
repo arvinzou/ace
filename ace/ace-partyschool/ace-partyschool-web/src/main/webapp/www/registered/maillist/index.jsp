@@ -37,7 +37,7 @@
 		<script id="tree-tpl" type="text/template">
 			{@each data as item, index}
 			<ul id="oneMenu">
-				{@if item.href == "" || item.href == null}
+				{@if item.href == "" || item.href == null || item.href == "null"}
 				<div class="row rb">
 					<div class="title02">
 						{@if item.children}
@@ -72,7 +72,7 @@
 		<script id="other-tpl" type="text/template">
 			<div class="title">未分组</div>
 			{@each data as item, index}
-			{@if item.href != "" && item.href != null}
+			{@if item.href != "" && item.href != null && item.href != "null"}
 			<div class="row rb">
 				<div class="item-left">
 					<img src="img/default_header.png" class="header" />
