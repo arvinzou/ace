@@ -350,7 +350,7 @@ function getCourseList() {
             for(var i=0;i<datas.length;i++){
                 var icon=datas[i].courseIndex;
                 $('.'+icon+'Class').text(datas[i].course.name);
-                $('.'+icon+'ClassTeacher').text(datas[i].teacher.name);
+                $('.'+icon+'ClassTeacher').text(datas[i].course.teacherNames);
             }
         }
     });
