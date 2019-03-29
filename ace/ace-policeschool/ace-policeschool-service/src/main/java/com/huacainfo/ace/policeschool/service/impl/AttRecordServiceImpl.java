@@ -2,6 +2,7 @@ package com.huacainfo.ace.policeschool.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.access.AccessHelper;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
@@ -280,6 +281,21 @@ public class AttRecordServiceImpl implements AttRecordService {
             nowDate = c.getTime();
         }
         return rst;
+    }
+
+    @Override
+    public ResultResponse findViewList(UserProp user, AttRecordQVo condition, PageParamNoChangeSord page) throws Exception {
+
+        PageResult<AttRecordVo> rst = new PageResult<>();
+        //获取用户id
+        condition.setUserId(user.getUserId());
+        List<AttRecordVo> list = this.attRecordDao.findList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        rst.setRows(list);
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
     }
 
     private List<AttRecordExcel> getOneDayList(AttRecordQVo condition) {

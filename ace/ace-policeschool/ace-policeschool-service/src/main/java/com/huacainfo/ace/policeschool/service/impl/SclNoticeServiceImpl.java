@@ -96,8 +96,8 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     }
 
     @Override
-    public ResultResponse findPulicNoticeLists(String classesId) throws Exception {
-        List<NoticeVo> list = this.noticeDao.findPublicNoticeList(classesId);
+    public ResultResponse findPulicNoticeLists(String classesId,String server) throws Exception {
+        List<NoticeVo> list = this.noticeDao.findPublicNoticeList(classesId,server);
         return new ResultResponse(0, "通知公告获取完成！", list);
     }
 
