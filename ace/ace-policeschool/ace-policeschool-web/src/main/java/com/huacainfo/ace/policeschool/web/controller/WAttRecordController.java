@@ -37,7 +37,7 @@ public class WAttRecordController extends BisBaseController {
         }
         AttRecord data = JsonUtil.toObject(json, AttRecord.class);
 
-        MessageResponse ms = attRecordService.insertAttRecord(data, userProp);
+        MessageResponse ms = null;//attRecordService.insertAttRecord(data, userProp);
         return new ResultResponse(ms);
     }
 
@@ -54,6 +54,6 @@ public class WAttRecordController extends BisBaseController {
             return new ResultResponse(ResultCode.FAIL, "未获取登录信息");
         }
 
-        return attRecordService.findList(userProp.getUserId(), dateTimeStr);
+        return null; //attRecordService.findList(userProp.getUserId(), dateTimeStr);
     }
 }
