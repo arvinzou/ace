@@ -154,7 +154,7 @@
 <script id="tpl-check-group" type="text/template">
 
     {@each data.list as item, index}
-    {@if item.CODE}
+    {@if item.CODE&&item.CODE!=3&&item.CODE!=4}
     <button type="button" authority="false" class="btn btn-default {@if item.CODE==2}active{@/if}"
             onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}
     </button>
@@ -170,7 +170,7 @@
 
     <select onchange="searchActive()" name="classesId" id="classesId" class="form-control" style="height: 31px;">
         {@each data as item, index}
-        <option value="\${item.id}">\${item.name}</option>
+            <option value="\${item.id}">\${item.name}</option>
         {@/each}
     </select>
 </script>
