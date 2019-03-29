@@ -125,7 +125,7 @@
     margin-top: 12rpx;
 }
 .status{
-    color: #2430E3;
+    color: #366AE1;
     font-size: 24rpx;
     display: flex;
     align-items: center;
