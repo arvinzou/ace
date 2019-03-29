@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <title>中共常德市委党校</title>
+    <title>常德警官培训中心</title>
     <jsp:include page="../../common/common.jsp"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>
