@@ -185,7 +185,8 @@ function findList(){
                 var date = new Date();
                 var hour = date.getHours();
                 var minute = date.getMinutes()/60;
-                hour = hour + minute;
+                var second = date.getSeconds()/3600;
+                hour = hour + minute + second;
                 //签到  6:30~11:00允许签到
                 if(hour >=6.5 && hour <=11){
                     if(result.data.am.length <1){

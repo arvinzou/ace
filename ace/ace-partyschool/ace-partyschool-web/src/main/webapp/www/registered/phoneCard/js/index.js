@@ -178,7 +178,8 @@ function findList(){
                 var date = new Date();
                 var hour = date.getHours();
                 var minute = date.getMinutes()/60;
-                hour = hour + minute;
+                var second = date.getSeconds()/3600;
+                hour = hour + minute + second;
                 //上午签到
                 if(result.data.am.length <1){
                     if(hour >= 8 && hour <=10){
