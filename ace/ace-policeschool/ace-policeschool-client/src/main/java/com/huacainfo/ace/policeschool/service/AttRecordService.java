@@ -1,10 +1,8 @@
 package com.huacainfo.ace.policeschool.service;
 
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.policeschool.model.AttRecordExcel;
 import com.huacainfo.ace.policeschool.vo.AttRecordQVo;
 import com.huacainfo.ace.policeschool.vo.AttRecordVo;
@@ -189,6 +187,6 @@ public interface AttRecordService {
     List<AttRecordExcel> exportAttRecord(AttRecordQVo condition);
 
 
-    ;
+    ResultResponse findViewList(UserProp user, AttRecordQVo condition, PageParamNoChangeSord page) throws Exception;
 
 }

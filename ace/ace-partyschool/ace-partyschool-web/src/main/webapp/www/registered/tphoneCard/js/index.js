@@ -184,8 +184,10 @@ function findList(){
                 $("#count").text("今日已签到"+num+"/2");
                 var date = new Date();
                 var hour = date.getHours();
+                var minute = date.getMinutes()/60;
+                hour = hour + minute;
                 //签到  6:30~11:00允许签到
-                if(hour >=6.5 && hour <= 11){
+                if(hour >=6.5 && hour <=11){
                     if(result.data.am.length <1){
                         $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">签到</p></div>');
                     }

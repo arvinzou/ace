@@ -1,12 +1,14 @@
 package com.huacainfo.ace.policeschool.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.policeschool.model.AttRecord;
 import com.huacainfo.ace.policeschool.service.AttRecordService;
+import com.huacainfo.ace.policeschool.vo.AttRecordQVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,12 +50,14 @@ public class WAttRecordController extends BisBaseController {
      * @return ResultResponse
      */
     @RequestMapping("/findList")
-    public ResultResponse findList(String dateTimeStr) {
+    public ResultResponse findList(AttRecordQVo condition,
+                                   PageParamNoChangeSord page) throws Exception {
         UserProp userProp = getCurUserProp();
         if (userProp == null) {
             return new ResultResponse(ResultCode.FAIL, "未获取登录信息");
         }
 
-        return null; //attRecordService.findList(userProp.getUserId(), dateTimeStr);
+        return attRecordService.findViewList(userProp, condition, page);
+
     }
 }
