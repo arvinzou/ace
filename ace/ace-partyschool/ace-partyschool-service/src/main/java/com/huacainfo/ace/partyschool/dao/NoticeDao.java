@@ -43,6 +43,7 @@ public interface NoticeDao {
 
 
     int findCount(@Param("condition") NoticeQVo condition);
+    int findCountVo(@Param("condition") NoticeQVo condition);
 
     int findUnreadCount(String id);
 

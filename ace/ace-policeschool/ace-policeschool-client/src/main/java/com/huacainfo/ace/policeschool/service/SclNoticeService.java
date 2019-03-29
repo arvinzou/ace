@@ -38,6 +38,9 @@ public interface SclNoticeService {
 
     ResultResponse findNoticeLists(NoticeStatusQVo condition, int start, int Limit, String orderBy, UserProp userProp) throws Exception;
 
+    PageResult<NoticeVo> findCardNoticeList(NoticeQVo condition,
+                                            int start, int limit, String orderBy) throws Exception;
+
     ResultResponse findPulicNoticeLists(String classesId,String server) throws Exception;
 
     /**

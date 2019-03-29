@@ -57,6 +57,16 @@ public class NoticeController extends BisBaseController {
         return rst;
     }
 
+    @RequestMapping(value = "/findCardNoticeList")
+    @ResponseBody
+    public PageResult<NoticeVo> findCardNoticeList(NoticeQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<NoticeVo> rst = this.sclNoticeService.findCardNoticeList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:insertNotice

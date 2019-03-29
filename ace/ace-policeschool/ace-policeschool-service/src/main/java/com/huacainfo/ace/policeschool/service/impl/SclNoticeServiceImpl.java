@@ -96,6 +96,18 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     }
 
     @Override
+    public PageResult<NoticeVo> findCardNoticeList(NoticeQVo condition, int start, int limit, String orderBy) throws Exception {
+        PageResult<NoticeVo> rst = new PageResult<>();
+        List<NoticeVo> list = this.noticeDao.findListVo(condition, start, limit, orderBy);
+        rst.setRows(list);
+        if (start <= 1) {
+            int allRows = this.noticeDao.findCountVo(condition);
+            rst.setTotal(allRows);
+        }
+        return rst;
+    }
+
+    @Override
     public ResultResponse findPulicNoticeLists(String classesId,String server) throws Exception {
         List<NoticeVo> list = this.noticeDao.findPublicNoticeList(classesId,server);
         return new ResultResponse(0, "通知公告获取完成！", list);
