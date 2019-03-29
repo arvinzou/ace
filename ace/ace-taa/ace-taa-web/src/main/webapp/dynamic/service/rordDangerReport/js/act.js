@@ -231,8 +231,7 @@ function saveReason(id) {
         alert("请填写退回原因");
         $("#reason").focus();
     } else {
-        alert("dsf");
-        /* $.ajax({
+        $.ajax({
               url: contextPath + "/rordDangerReport/withdrawReason",
               type: "post",
               async: false,
@@ -254,7 +253,7 @@ function saveReason(id) {
                   stopLoad();
                   alert("对不起，出错了！");
               }
-          });*/
+        });
     }
 }
 
