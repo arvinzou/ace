@@ -35,8 +35,8 @@ public class QuartzManager {
     /**
      * 每月1号中午12点开始推送，推送上一月报告给相应路长以及分路长；
      */
-//    @Scheduled(cron = "0 0 12 1 * ?") //每月1号中午12点
-    @Scheduled(cron = "0 0/2 * * * ?")//for debug
+    @Scheduled(cron = "0 0 12 1 * ?") //每月1号中午12点
+//    @Scheduled(cron = "0 0/2 * * * ?")//for debug
     public void autoSmsNotice() {
         //当前时间往上推一个月
         Date nowDateTime = DateUtil.getNowDate();
