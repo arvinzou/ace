@@ -29,14 +29,25 @@ $(function () {
 
 function initSwriper() {
     mySwiper = new Swiper('.swiper-container', {
-        autoplay: true,
-        // 如果需要前进后退按钮
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-
-    })
+            autoplay: {
+                delay: 10000,//1秒切换一次
+                disableOnInteraction: false,
+            },
+            // 如果需要前进后退按钮
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            on: {
+                touchStart: function (event) {
+                    this.autoplay.stop();
+                },
+                touchEnd: function (event) {
+                    this.autoplay.start();
+                }
+            }
+        }
+    );
 }
 
 
