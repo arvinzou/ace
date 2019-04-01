@@ -5,8 +5,8 @@
     margin-bottom: 71rpx;
 }
 checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
-    color: #4350FC;
-    border: 2px solid #4350FC;
+    color: #366AE1;
+    border: 2px solid #366AE1;
     transform:translate(-50%, -50%) scale(1);
    -webkit-transform:translate(-50%, -50%) scale(1);
 }
@@ -168,7 +168,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
     font-size: 40rpx;
     font-weight: bold;
     text-align: center;
-    background:#366AE1
+    background:#366AE1;
     box-shadow:0px 0px 10px 0px rgba(67, 80, 252, 0.35);
     border-radius: 50rpx;
     outline: none;
