@@ -67,7 +67,7 @@
   width: 8rpx;
   height: 30rpx;
   float: left;
-  background: rgba(67, 80, 252, 1);
+  background: #366AE1;
   border-radius: 4rpx;
   margin-top: 35rpx;
 }
@@ -125,7 +125,7 @@
   margin-left: 35rpx;
 }
 .accident-num {
-  color: #4350fc;
+  color: #366AE1;
   font-size: 48rpx;
   font-weight: bold;
 }
@@ -201,7 +201,7 @@
   border-radius: 0rpx 10rpx 10rpx 0rpx;
 }
 .tab-active {
-  background: rgba(67, 80, 252, 1);
+  background: #366AE1;
   color: #fff;
 }
 .tab-default {

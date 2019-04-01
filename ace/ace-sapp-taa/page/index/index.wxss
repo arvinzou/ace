@@ -349,7 +349,7 @@ view, map, cover-view {
 }
 
 .collectionBtn .startBtn{
-    background:#366AE1
+    background:#366AE1;
     color: #fff;
 }
 
@@ -471,7 +471,7 @@ view, map, cover-view {
     height: 100rpx;
     line-height: 100rpx;
     text-align: center;
-    background:#366AE1
+    background:#366AE1;
     box-shadow:0rpx 0rpx 10rpx 0rpx rgba(67, 252, 80, 0.35);
     border-radius:50rpx;
     color: #FFFFFF;
