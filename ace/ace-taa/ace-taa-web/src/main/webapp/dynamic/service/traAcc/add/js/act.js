@@ -70,13 +70,32 @@ function initEvents() {
     /*监听表单提交*/
     $('#fm-add').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
+            //事故车型
+            var mtypeList = [];
+            $("input[name='vehicleType']:checked").each(function (index, item) {
+                var item = {vehicleType: $(this).val()};
+                mtypeList.push(item);
+            });
+            //事故原因
+            var causeList = [];
+            $("input[name='cause']:checked").each(function (index, item) {
+                var item = {cause: $(this).val()};
+                causeList.push(item);
+            });
+            //for debug
+            // console.log(JSON.stringify(mtypeList));
+            // console.log(JSON.stringify(causeList));
+            // return false;
+
+            // post data
             var params = {};
             $.each(formData, function (n, obj) {
                 params[obj.name] = obj.value;
             });
             $.extend(params, {
                 time: new Date(),
-                //coverUrl: $('#coverUrl').attr("src"),
+                mtypeList: mtypeList,
+                causeList: causeList
             });
             console.log(params);
             save(params);
@@ -84,6 +103,7 @@ function initEvents() {
         }
     });
 }
+
 /*保存表单**/
 function save(params) {
     $.extend(params, {});
@@ -108,6 +128,7 @@ function save(params) {
         }
     });
 }
+
 /**
  * 验证事故时间有效性
  * @param val

@@ -57,7 +57,7 @@ public interface TraAccService {
      * @author: 陈晓克
      * @version: 2019-01-10
      */
-    MessageResponse updateTraAcc(TraAcc obj, UserProp userProp) throws Exception;
+    MessageResponse updateTraAcc(TraAccVo obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -121,7 +121,7 @@ public interface TraAccService {
      * @param: @param p
      * @param: @return
      * @param: @throws Exception
-     * @return: ListResult<Map<String,Object>>
+     * @return: ListResult<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-10
      */
@@ -134,7 +134,7 @@ public interface TraAccService {
      * @Description: TODO(用于控件数据获取)
      * @param: @param params
      * @param: @return
-     * @return: Map<String,Object>
+     * @return: Map<String, Object>
      * @author: 陈晓克
      * @version: 2019-01-10
      */
@@ -200,7 +200,7 @@ public interface TraAccService {
      * @param orderBy 排序规则
      *                ORDER BY v.occurTimes DESC
      *                ORDER BY v.deathNum DESC
-     * @return List<Map<String, Object>>
+     * @return List<Map < String, Object>>
      */
     List<Map<String, Object>> reverseReport(Map<String, Object> params,
                                             int start,
@@ -211,7 +211,7 @@ public interface TraAccService {
      * 事故死亡人数同期对比 报表
      *
      * @param params params
-     * @return Map<String,Object>
+     * @return Map<String, Object>
      */
     Map<String, Object> contrastiveReport(Map<String, String> params);
 
@@ -234,7 +234,7 @@ public interface TraAccService {
      * @Description: TODO(交通事故热力图)
      * @param: @param condition
      * @param: @throws Exception
-     * @return: List<Map<String, Object>>
+     * @return: List<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-21
      */
@@ -246,7 +246,7 @@ public interface TraAccService {
      * @Description: TODO(交通事故热力图)
      * @param: @param condition
      * @param: @throws Exception
-     * @return: List<Map<String, Object>>
+     * @return: List<Map < String, Object>>
      * @author: 陈晓克
      * @version: 2019-01-21
      */
@@ -285,10 +285,11 @@ public interface TraAccService {
      * @param roadManId     路长ID
      * @param roadSectionId 路段ID
      * @param field         统计字段 deadthToll ,injuries
-     * @return Map<String,Object>
+     * @return Map<String, Object>
      */
     List<Map<String, Object>> analysisReport(String category, String dateTimeStr,
                                              String roadManId, String roadSectionId, String field);
+
     /**
      * 获取事故报表 --小程序端展示
      *
@@ -298,4 +299,27 @@ public interface TraAccService {
      * @throws Exception
      */
     ResultResponse findViewList(UserProp u, TraAccQVo condition, PageParamNoChangeSord page) throws Exception;
+
+    MessageResponse insertRecord(TraAccVo obj, UserProp curUserProp) throws Exception;
+
+    /**
+     * 事故月报表（按路长统计），短信推送
+     *
+     * @param roadManName 路长名称
+     * @param dateTimeStr 发生事故时间，年月；2019年7月
+     * @param traAccNum   事故次数
+     * @param deathNum    死亡人数
+     * @param injuries    受伤人数
+     * @return ResultResponse
+     */
+    ResultResponse sendMonthReportSms(String mobile, String roadManName, String dateTimeStr,
+                                      int traAccNum, int injuries, int deathNum) throws Exception;
+
+    /**
+     * 按路长统计月报表
+     *
+     * @param mothDateTime 月份数据，7位字符串长度;2019-03
+     * @return List<Map < String, Object>>
+     */
+    List<Map<String, Object>> findMothReportList(String mothDateTime);
 }
