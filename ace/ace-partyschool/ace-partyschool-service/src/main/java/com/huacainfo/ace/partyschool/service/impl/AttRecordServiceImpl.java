@@ -553,7 +553,7 @@ public class AttRecordServiceImpl implements AttRecordService {
                 if (dtStr.length() == 19) {
                     hour = dtStr.substring(11, 13);
                     iHour = Integer.parseInt(hour);
-                    if (iHour < 12) {//上午
+                    if (iHour < 13) {//上午
                         am = view.get("am");
                         am.add(item);
                     } else if (iHour >= 18) {//晚上
