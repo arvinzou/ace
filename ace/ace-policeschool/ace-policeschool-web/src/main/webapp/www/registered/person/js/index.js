@@ -49,7 +49,7 @@ function initTodayCourse() {
         },
         success: function (result) {
             if (result.status == 0) {
-                renderPage('todayCourse', result.data, 'course-tpl');
+                renderPage('todayCourse', result.data.reverse(), 'course-tpl');
             } else {
                 if (result.info) {
                     alert(result.info);
