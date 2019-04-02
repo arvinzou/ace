@@ -61,8 +61,8 @@
                 <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="courseDate"
-                       value="\{data.o.courseDate}" maxlength=""
+                <input type="text" class="form-control" name="startTime"
+                       value="\{data.o.startTime}" maxlength=""
                        placeholder="请输入日期（建议字数在14个字以内，不超过个字)">
                 <span class="help-block"></span>
             </div>

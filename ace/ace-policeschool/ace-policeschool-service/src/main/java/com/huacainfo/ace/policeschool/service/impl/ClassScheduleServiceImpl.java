@@ -10,7 +10,6 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.policeschool.dao.ClassScheduleDao;
-import com.huacainfo.ace.policeschool.dao.ClassesDao;
 import com.huacainfo.ace.policeschool.dao.EvaluationRstDao;
 import com.huacainfo.ace.policeschool.model.ClassSchedule;
 import com.huacainfo.ace.policeschool.service.ClassScheduleService;
@@ -120,7 +119,7 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
 
     @Override
     public ResultResponse MyClassSchedule(ClassScheduleQVo condition, int start, int limit, String orderBy, UserProp userProp) throws Exception {
-        if (CommonUtils.isBlank(condition.getCourseDateStr()) && CommonUtils.isBlank(condition.getWeekDate())) {
+        if (CommonUtils.isBlank(condition.getStartTimeStr()) && CommonUtils.isBlank(condition.getWeekDate())) {
             new ResultResponse(ResultCode.FAIL, "没有传入时间");
         }
         if (CommonUtils.isBlank(condition.getClassList()) || condition.getClassList().size() == 0) {
@@ -246,11 +245,11 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
         if (CommonUtils.isBlank(o.getClassesId())) {
             return new MessageResponse(1, "班级不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCourseDate())) {
-            return new MessageResponse(1, "日期不能为空！");
+        if (CommonUtils.isBlank(o.getStartTime())) {
+            return new MessageResponse(1, "开始日期不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCourseIndex())) {
-            return new MessageResponse(1, "课节am:上午 pm:下午不能为空！");
+        if (CommonUtils.isBlank(o.getEndTime())) {
+            return new MessageResponse(1, "结束日期不能为空！");
         }
         if (CommonUtils.isBlank(o.getTeacherId())) {
             return new MessageResponse(1, "老师不能为空！");
@@ -262,7 +261,6 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
         this.classScheduleDao.insert(o);
         this.dataBaseLogService.log("添加课程表管理", "课程表管理", "",
                 o.getId(), o.getId(), userProp);
-
         return new MessageResponse(0, "添加课程表管理完成！");
     }
 
@@ -285,11 +283,11 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
         if (CommonUtils.isBlank(o.getClassesId())) {
             return new MessageResponse(1, "班级不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCourseDate())) {
-            return new MessageResponse(1, "日期不能为空！");
+        if (CommonUtils.isBlank(o.getStartTime())) {
+            return new MessageResponse(1, "开始日期不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCourseIndex())) {
-            return new MessageResponse(1, "课节am:上午 pm:下午不能为空！");
+        if (CommonUtils.isBlank(o.getEndTime())) {
+            return new MessageResponse(1, "结束日期不能为空！");
         }
         if (CommonUtils.isBlank(o.getTeacherId())) {
             return new MessageResponse(1, "老师不能为空！");

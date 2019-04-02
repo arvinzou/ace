@@ -44,8 +44,7 @@ public class WClassScheduleController extends BisBaseController {
     @RequestMapping(value = "/findMyClassSchedule")
     @ResponseBody
     public ResultResponse findClassScheduleList(ClassScheduleQVo condition, PageParamNoChangeSord page) throws Exception {
-        return this.classScheduleService
-                .MyClassSchedule(condition, page.getStart(), page.getLimit(), page.getOrderBy(), this.getCurUserProp());
+        return this.classScheduleService.MyClassSchedule(condition, page.getStart(), page.getLimit(), page.getOrderBy(), this.getCurUserProp());
     }
 
 

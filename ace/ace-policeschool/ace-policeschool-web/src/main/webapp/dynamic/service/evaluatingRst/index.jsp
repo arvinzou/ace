@@ -95,7 +95,7 @@
         <td> \${item.teacher.name}</td>
         <td> \${item.averageScore}</td>
         <td> \${item.studentNum-item.userNum}</td>
-        <td> \${item.courseDate}</td>
+        <td> \${item.startTime}</td>
         <td>
             <a href="javascript:view('\${item.id}');">查看</a>
         </td>
@@ -165,7 +165,7 @@
         <div class="form-group">
             <label class="col-md-2 view-label">日期</label>
             <div class="col-md-10">
-                \${courseDate}
+                \${startTime}
             </div>
         </div>
         <div class="form-group">
@@ -230,7 +230,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">日期</label>
         <div class="col-md-10">
-            \${courseDate}
+            \${startTime}
         </div>
     </div>
     <div class="form-group">

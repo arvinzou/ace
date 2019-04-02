@@ -45,7 +45,7 @@ function initTodayCourse() {
         async: false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data: {
-            courseDateStr: dateTime
+            startTimeStr: dateTime
         },
         success: function (result) {
             if (result.status == 0) {
