@@ -14,10 +14,10 @@ public class CommonTest {
 
     @Test
     public void test() {
-        AttRecord r = new AttRecord();
-        r.setLatitude(new BigDecimal(29.015656).setScale(6, BigDecimal.ROUND_HALF_DOWN));
-        r.setLongitude(new BigDecimal(111.729777).setScale(6, BigDecimal.ROUND_HALF_DOWN));
-        System.out.println(r.toString());
+        AttRecord a = new AttRecord();
+        a.setLatitude(new BigDecimal(29.015840).setScale(6, BigDecimal.ROUND_FLOOR));
+        a.setLongitude(new BigDecimal(111.7287706).setScale(6, BigDecimal.ROUND_FLOOR));
+        System.out.println(a.toString());
     }
 
 

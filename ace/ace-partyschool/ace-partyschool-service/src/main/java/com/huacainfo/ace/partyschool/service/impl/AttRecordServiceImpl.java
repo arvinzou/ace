@@ -64,7 +64,7 @@ public class AttRecordServiceImpl implements AttRecordService {
     @Override
     public PageResult<AttRecordVo> findAttRecordList(AttRecordQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<AttRecordVo> rst = new PageResult<>();
-        List<AttRecordVo> list = this.attRecordDao.findList(condition, start, limit, orderBy);
+        List<AttRecordVo> list = this.attRecordDao.findRecordList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.attRecordDao.findCount(condition);
