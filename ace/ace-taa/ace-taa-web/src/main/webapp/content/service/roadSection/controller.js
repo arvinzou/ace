@@ -25,15 +25,20 @@ jQuery(function ($) {
             recreateForm: true,
             viewPagerButtons: false,
             beforeSubmit: function (postdata) {
-                //验证
-                if (postdata.startName == postdata.endName) {
-                    alert('"路段开始"与"路段截止"值不能相同');
-                    return;
+                var checked = submitCheck(postdata);
+                if (!checked) {
+                    return [false, "", ""];
                 }
-                if (postdata.startNo == postdata.endNo) {
-                    alert('"标号开始"与"标号截止"值不能相同');
-                    return;
-                }
+                //
+                // //验证
+                // if (postdata.startName == postdata.endName) {
+                //     alert('"路段开始"与"路段截止"值不能相同');
+                //     return;
+                // }
+                // if (postdata.startNo == postdata.endNo) {
+                //     alert('"标号开始"与"标号截止"值不能相同');
+                //     return;
+                // }
 
                 return [true, "", ""];
             },
@@ -49,6 +54,28 @@ jQuery(function ($) {
     //初始化事件
     initEvents();
 });
+
+//字符串判空
+function strIsEmpty(obj) {
+    if (typeof obj == "undefined" || obj == null || obj == "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function submitCheck(data) {
+    //验证
+    if (data.startName == data.endName) {
+        alert('"路段开始"与"路段截止"值不能相同');
+        return false;
+    }
+    if ((!strIsEmpty(data.startNo) && !strIsEmpty(data.endNo)) && data.startNo == data.endNo) {
+        alert('"标号开始"与"标号截止"值不能相同');
+        return false;
+    }
+    return true;
+}
 
 /*页面渲染*/
 function render(obj, data, tplId) {
@@ -106,15 +133,19 @@ function edit(rowid) {
         recreateForm: true,
         viewPagerButtons: true,
         beforeSubmit: function (postdata) {
-            //验证
-            if (postdata.startName == postdata.endName) {
-                alert('"路段开始"与"路段截止"值不能相同');
-                return;
+            var checked = submitCheck(postdata);
+            if (!checked) {
+                return [false, "", ""];
             }
-            if (postdata.startNo == postdata.endNo) {
-                alert('"标号开始"与"标号截止"值不能相同');
-                return;
-            }
+            // //验证
+            // if (postdata.startName == postdata.endName) {
+            //     alert('"路段开始"与"路段截止"值不能相同');
+            //     return;
+            // }
+            // if (postdata.startNo == postdata.endNo) {
+            //     alert('"标号开始"与"标号截止"值不能相同');
+            //     return;
+            // }
 
             return [true, "", ""];
         },
@@ -270,8 +301,8 @@ function delByIds(ids, id) {
     });
 }
 
-function previewMap(id,num) {
-    if(num<1){
+function previewMap(id, num) {
+    if (num < 1) {
         alert("当前路段未采集，无法查看")
     }
     window.open(contextPath + "/dynamic/service/roadSection/map.jsp?id=" + id);

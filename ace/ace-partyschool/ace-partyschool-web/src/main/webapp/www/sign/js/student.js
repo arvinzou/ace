@@ -302,10 +302,12 @@ function searchByName(){
 
             }else{
                 alert(result.info);
+                return;
             }
         },
         error: function() {
             alert("出错了！");
+            return;
         }
     });
 }

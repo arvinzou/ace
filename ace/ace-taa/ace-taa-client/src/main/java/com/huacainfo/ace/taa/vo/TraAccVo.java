@@ -12,6 +12,7 @@ public class TraAccVo extends TraAcc {
     private static final long serialVersionUID = 1L;
 
     private String roadManName;
+    private String mobile;
 
     private String roadSectionName;
 
@@ -32,6 +33,14 @@ public class TraAccVo extends TraAcc {
      * 事故车型列表
      */
     private List<TraAccMtype> mtypeList;
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
     public List<TraAccCause> getCauseList() {
         return causeList;

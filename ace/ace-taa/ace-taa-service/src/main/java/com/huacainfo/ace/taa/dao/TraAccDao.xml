@@ -26,6 +26,7 @@
     <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.TraAccVo" extends="BaseResultMap">
         <result column="roadName" jdbcType="VARCHAR" property="roadName"/>
         <result column="roadManName" jdbcType="VARCHAR" property="roadManName"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
         <result column="roadSectionName" jdbcType="VARCHAR" property="roadSectionName"/>
         <result column="areaName" jdbcType="VARCHAR" property="areaName"/>
         <result column="category" jdbcType="VARCHAR" property="category"/>
@@ -64,7 +65,8 @@
         t.roadSectionId, t.roadManId,
         ifnull(t.deadthToll, 0) deadthToll, ifnull(t.injuries, 0) injuries,
         t.cause, t.createUserName,t.lastModifyUserName,
-        t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
+        t.createDate,t.lastModifyDate , a.name roadManName, b.name roadSectionName, c.name areaName,
+        a.mobile
     from tra_acc t
     inner join road_man a on t.roadManId=a.id
     inner join road_section b on t.roadSectionId=b.id
@@ -827,5 +829,25 @@
         <foreach collection="sectionIds" index="index" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
+    </select>
+
+    <select id="findMothReportList" resultType="map">
+        select
+            r.`name` as roadManName,
+            r.mobile,
+            v.roadManId,
+            (select count(1) from tra_acc i where i.roadManId = v.roadManId) as traAccNum,
+            sum(v.injuries) as injuries,
+            sum(v.injuries) as deathNum
+        from (
+            SELECT
+                t.roadManId,
+                IFNULL(t.injuries, 0) as injuries,
+                IFNULL(t.deadthToll ,0) as deathNum
+            FROM tra_acc t
+            where t.accidentTime like CONCAT( #{mothDateTime,jdbcType=VARCHAR} ,'%')
+        )v
+        left join road_man r on v.roadManId = r.id
+        GROUP BY r.`name` , r.mobile, v.roadManId
     </select>
 </mapper>

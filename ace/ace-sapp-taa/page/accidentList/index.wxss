@@ -138,7 +138,7 @@
 }
 .road-ul>.li>.down>view.edit{
   background-color:   #F5F6FF;
-  border:2rpx solid #D2D5FF;
+  border:2rpx solid rgba(54,106,225,0.2);
   color: #366AE1;
 }
 .road-ul>.li>.down>view.revoke{

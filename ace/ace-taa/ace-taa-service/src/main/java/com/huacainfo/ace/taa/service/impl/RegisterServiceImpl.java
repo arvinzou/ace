@@ -10,6 +10,7 @@ import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.taa.constant.CommConstant;
 import com.huacainfo.ace.taa.dao.RegisterDao;
 import com.huacainfo.ace.taa.dao.RegisterRuleDao;
 import com.huacainfo.ace.taa.service.RegisterService;
@@ -181,7 +182,7 @@ public class RegisterServiceImpl implements RegisterService {
         TaskCmcc obj = new TaskCmcc();
         Map<String, Object> msg = new HashMap<>();
         msg.put("taskName", "账号" + mobile);
-        msg.put("msg", content + "【常德市公安局交通警察支队】");
+        msg.put("msg", content + CommConstant.SMS_SIGN);
         msg.put("tel", mobile + "," + mobile + ";");
         CommonBeanUtils.copyMap2Bean(obj, msg);
 

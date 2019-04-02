@@ -64,7 +64,7 @@ public class AttRecordServiceImpl implements AttRecordService {
     @Override
     public PageResult<AttRecordVo> findAttRecordList(AttRecordQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<AttRecordVo> rst = new PageResult<>();
-        List<AttRecordVo> list = this.attRecordDao.findList(condition, start, limit, orderBy);
+        List<AttRecordVo> list = this.attRecordDao.findRecordList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.attRecordDao.findCount(condition);
@@ -553,7 +553,7 @@ public class AttRecordServiceImpl implements AttRecordService {
                 if (dtStr.length() == 19) {
                     hour = dtStr.substring(11, 13);
                     iHour = Integer.parseInt(hour);
-                    if (iHour < 12) {//上午
+                    if (iHour < 13) {//上午
                         am = view.get("am");
                         am.add(item);
                     } else if (iHour >= 18) {//晚上
