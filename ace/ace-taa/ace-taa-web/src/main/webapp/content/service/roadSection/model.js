@@ -314,6 +314,7 @@ function renderBtn(cur) {
     }
 
     opt.push('<a href="javascript:previewMap(\'' + rowid +'\','+num+')">查看</a>  ');
+    opt.push('<a href="javascript:branchRoadManList(\'' + rowid + '\')">添加分路长</a>  ');
 
     return opt.join(' ');
 }
