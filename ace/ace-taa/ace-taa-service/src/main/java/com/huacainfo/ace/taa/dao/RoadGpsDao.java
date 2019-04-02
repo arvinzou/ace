@@ -25,4 +25,6 @@ public interface RoadGpsDao {
 
 
     int findCount(@Param("sectionIds") String[] sectionIds);
+
+    RoadGpsVo getUndefined();
 }
