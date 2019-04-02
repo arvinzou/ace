@@ -11,7 +11,6 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.portal.vo.MongoFile;
-import com.huacainfo.ace.taa.model.TraAcc;
 import com.huacainfo.ace.taa.service.TraAccService;
 import com.huacainfo.ace.taa.vo.TraAccQVo;
 import com.huacainfo.ace.taa.vo.TraAccVo;
@@ -83,8 +82,8 @@ public class TraAccController extends TaaBaseController {
     @RequestMapping(value = "/insertTraAcc")
     @ResponseBody
     public MessageResponse insertTraAcc(String jsons) throws Exception {
-        TraAcc obj = JSON.parseObject(jsons, TraAcc.class);
-        return this.traAccService.insertTraAcc(obj, this.getCurUserProp());
+        TraAccVo obj = JSON.parseObject(jsons, TraAccVo.class);
+        return this.traAccService.insertRecord(obj, this.getCurUserProp());
     }
 
     /**
@@ -100,7 +99,7 @@ public class TraAccController extends TaaBaseController {
     @RequestMapping(value = "/updateTraAcc")
     @ResponseBody
     public MessageResponse updateTraAcc(String jsons) throws Exception {
-        TraAcc obj = JSON.parseObject(jsons, TraAcc.class);
+        TraAccVo obj = JSON.parseObject(jsons, TraAccVo.class);
         return this.traAccService.updateTraAcc(obj, this.getCurUserProp());
     }
 

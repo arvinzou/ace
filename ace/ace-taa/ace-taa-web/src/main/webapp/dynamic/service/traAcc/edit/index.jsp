@@ -47,7 +47,8 @@
                     <span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-5">
-                    <input type="text" class="form-control" name="address" value="\${data.o.address}" readonly maxlength="200"
+                    <input type="text" class="form-control" name="address" value="\${data.o.address}" readonly
+                           maxlength="200"
                            placeholder="请选择事故发生地点" style="float:left;width:90%">
 
                     <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
@@ -68,14 +69,13 @@
                     <span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-5">
-
-
                     <div class="radio-group-container">
                         {@each data.dict['171'] as item, index}
                         {@if item.CODE!=''}
                         <label class="mt-radio mt-radio-outline">
-                            <input type="radio" name="weather" value="\${item.CODE}" {@if
-                                   item.CODE==data.o.weather}checked{@/if}>\${item.NAME}
+                            <input type="radio" name="weather" value="\${item.CODE}"
+                                   {@if item.CODE==data.o.weather}checked{@/if}
+                            >\${item.NAME}
                             <span></span>
                         </label>
                         {@/if}
@@ -90,14 +90,12 @@
                     <span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-6">
-
-
-                    <div class="radio-group-container">
+                    <div class="checkbox-group-container">
                         {@each data.dict['172'] as item, index}
                         {@if item.CODE!=''}
-                        <label class="mt-radio mt-radio-outline" style="width: 150px;">
-                            <input type="radio" name="vehicleType" value="\${item.CODE}" {@if
-                                   item.CODE==data.o.vehicleType}checked{@/if}>\${item.NAME}
+                        <label class="mt-checkbox mt-checkbox-outline" style="width: 150px;">
+                            <input type="checkbox" name="vehicleType" value="\${item.CODE}"
+                                   \${isChecked(item.CODE,data.vehicleType)}>\${item.NAME}
                             <span></span>
                         </label>
                         {@/if}
@@ -162,12 +160,12 @@
                     事故原因
                 </label>
                 <div class="col-md-5">
-                    <div class="radio-group-container">
+                    <div class="checkbox-group-container">
                         {@each data.dict['173'] as item, index}
                         {@if item.CODE!=''}
-                        <label class="mt-radio mt-radio-outline">
-                            <input type="radio" name="cause" value="\${item.CODE}" {@if
-                                   item.CODE==data.o.cause}checked{@/if}>\${item.NAME}
+                        <label class="mt-checkbox mt-checkbox-outline">
+                            <input type="checkbox" name="cause" value="\${item.CODE}"
+                                   \${isChecked(item.CODE,data.cause)}>\${item.NAME}
                             <span></span>
                         </label>
                         {@/if}

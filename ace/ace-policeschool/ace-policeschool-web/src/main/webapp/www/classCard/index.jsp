@@ -28,11 +28,11 @@
                 <tr>
                     <th class="style1">班次</th>
                     <th class="style2 class_name">第78期县处级干部进修班</th>
-                    <th class="style1">应到人数</th>
-                    <th class="style2 class_people">48人</th>
+                    <%--<th class="style1">应到人数</th>
+                    <th class="style2 class_people">48人</th>--%>
                     <th class="style4"><span class="active_classInfo">详情</span></th>
                 </tr>
-                <tr>
+<%--                <tr>
                     <td class="style3">上午课程</td>
                     <td class="amClass"> 自习</td>
                     <td class="style3"> 主讲</td>
@@ -44,7 +44,7 @@
                     <td class="pmClass">自习</td>
                     <td class="style3"> 主讲</td>
                     <td class="pmClassTeacher">- -</td>
-                </tr>
+                </tr>--%>
             </table>
             <div class="message">
                 <div class="title">
@@ -53,7 +53,7 @@
                 <div class="fileMessage">
                     <div class="swriper-box">
 
-                        <div class="swiper-container">
+                        <div id="swiper_container" class="swiper-container">
                             <div class="swiper-wrapper">
                             </div>
                             <!-- 如果需要导航按钮 -->

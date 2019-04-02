@@ -82,11 +82,11 @@
                         <span class="required" aria-required="true"> * </span>
                     </label>
                     <div class="col-md-6">
-                        <div class="radio-group-container">
+                        <div class="checkbox-group-container">
                             {@each data['172'] as item, index}
                             {@if item.CODE!=''}
-                            <label class="mt-radio mt-radio-outline">
-                                <input type="radio" name="vehicleType" value="\${item.CODE}">\${item.NAME}
+                            <label class="mt-checkbox mt-checkbox-outline">
+                                <input type="checkbox" name="vehicleType" value="\${item.CODE}">\${item.NAME}
                                 <span></span>
                             </label>
                             {@/if}
@@ -156,11 +156,11 @@
                         事故原因
                     </label>
                     <div class="col-md-6">
-                        <div class="radio-group-container">
+                        <div class="checkbox-group-container">
                             {@each data['173'] as item, index}
                             {@if item.CODE!=''}
-                            <label class="mt-radio mt-radio-outline">
-                                <input type="radio" name="cause" value="\${item.CODE}">\${item.NAME}
+                            <label class="mt-checkbox mt-checkbox-outline">
+                                <input type="checkbox" name="cause" value="\${item.CODE}">\${item.NAME}
                                 <span></span>
                             </label>
                             {@/if}
