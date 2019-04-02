@@ -188,12 +188,12 @@
         where t.`status` = '1'
         )v
         LEFT JOIN att_record t ON v.userId = t.userId
-        where 1 = 1
-        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
-            and v.userId = #{condition.userId,jdbcType=VARCHAR}
+        <include refid="Where_Condition"/>
+        <if test="condition.startDate !=null and condition.startDate !=&quot;&quot;">
+            and t.attTime >= str_to_date( #{condition.startDate} , '%Y-%m-%d %H:%i:%S')
         </if>
-        <if test="condition.dateTimeStr !=null and condition.dateTimeStr !=&quot;&quot;">
-            and t.attTime like concat(#{condition.dateTimeStr},'%')
+        <if test="condition.endDate !=null and condition.endDate !=&quot;&quot;">
+            and t.attTime <![CDATA[<=]]> str_to_date( #{condition.endDate} , '%Y-%m-%d %H:%i:%S')
         </if>
         ORDER BY t.attTime desc, v.userType, v.userName
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

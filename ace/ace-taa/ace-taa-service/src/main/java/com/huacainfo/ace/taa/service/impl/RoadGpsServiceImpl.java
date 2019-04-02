@@ -132,7 +132,10 @@ public class RoadGpsServiceImpl implements RoadGpsService {
 //      筛选数据
         List<RoadGpsVo> list = roadGpsDao.getAroundList(p);
         if (CollectionUtils.isEmpty(list)) {
-            return new ResultResponse(ResultCode.FAIL, "没找到匹配数据");
+            RoadGpsVo undefined = roadGpsDao.getUndefined();
+            list = new ArrayList<>();
+            list.add(undefined);
+//            return new ResultResponse(ResultCode.FAIL, "没找到匹配数据");
         }
         //区分去取来的数据是否为同一路段
         List<RoadGpsVo> rows = new LinkedList<>();
