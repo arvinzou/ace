@@ -23,7 +23,7 @@ function findAttDataByDay(date) {
         },
         success: function (result) {
             if (result.status == 0) {
-                renderPage('list', result.data, 'list-tpl');
+                renderPage('list', result.data.rows, 'list-tpl');
             } else {
                 if (result.info) {
                     alert(result.info);
