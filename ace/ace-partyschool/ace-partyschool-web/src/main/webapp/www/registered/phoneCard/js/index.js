@@ -160,6 +160,9 @@ function findList(){
     if(month < 10){
         month = "0"+month;
     }
+    if(day < 10){
+        day = "0" +day;
+    }
     var time = year+"-"+month+"-"+day;
     $.ajax({
         url: contextPath+ "/www/att/findList",

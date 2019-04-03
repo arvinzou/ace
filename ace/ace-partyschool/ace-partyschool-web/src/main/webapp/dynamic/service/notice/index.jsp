@@ -35,7 +35,7 @@
 
                     </div>
                     <div class="input-group">
-                        <input type="text" name="title" class="form-control" placeholder="请输入文件名称">
+                        <input type="text" name="title" class="form-control" placeholder="请输入标题">
                         <span class="input-group-btn">
                             <button type="button" class="btn  btn-default" id="btn-search" authority="false">
                                 搜索

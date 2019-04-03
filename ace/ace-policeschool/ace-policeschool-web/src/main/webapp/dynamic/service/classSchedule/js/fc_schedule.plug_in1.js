@@ -3,9 +3,7 @@ window.onload = function () {
 
     var parameter = {
         weekDate: getdate(),
-        classesId: 2,
-        start:0,
-        limit:100
+        classesId: 2
     }
 
     $(function () {
@@ -92,7 +90,7 @@ window.onload = function () {
         var url = contextPath + "/classSchedule/LearnedCourses";
         $.getJSON(url, parameter, function (rst) {
             if (rst.status == 0) {
-                formatEventData(rst.rows);
+                // formatEventData(rst.rows);
                 $('#calendar').fullCalendar('removeEvent');
             }
         })
@@ -114,11 +112,14 @@ window.onload = function () {
             event.teacher = item.teacher.name;
             event.courseId = item.id;
             event.teacherId = item.teacherId;
-            event.start = item.startTime;
-            event.end = item.endTime;
-            event.courseId=item.courseId;
-            event.classesId=item.classesId;
-            event.ifTest=item.ifTest;
+            var date = item.courseDate.substring(0, 10);
+            if (item.courseIndex == 'am') {
+                event.start = date + ' 01:00';
+                event.end = date + ' 02:00';
+            } else {
+                event.start = date + ' 02:00';
+                event.end = date + ' 03:00';
+            }
             $('#calendar').fullCalendar('renderEvent', event, true);
         }
     }
@@ -192,8 +193,9 @@ window.onload = function () {
         //加载日历控件
         $('#calendar').fullCalendar({
             defaultDate: crew_startDate,
-            defaultView: "agendaWeek", //默认显示周
-            height: 700,
+            defaultView: "agendaDay", //默认显示周
+            //        defaultView: 'timelineDay',
+            height: 580,
             editable: true,
             customButtons: {
                 //自定义 按钮可以添加多个，自己命名  在header 部分调用即可 比如这里的myCustomButto
@@ -218,9 +220,16 @@ window.onload = function () {
             },
             eventOverlap: false,//不允许事件覆盖
             allDaySlot: false,//是否显示全天
+            // axisFormat: 'H:mm时',//修改日期前面显示内容默认为早上6点00分，改完后显示6:00时('H:mm时')
+            // slotDuration: '00:30:00', //时间间隔
+            // slotLabelFormat: '',
+            // crew_classTime_Arr: crew_classTime_Arr,
             scrollTime: '06:00:00', //滚动起始时间
             displayEventTime: true, //默认不显示事件上的时间
-            defaultTimedEventDuration: '01:00:00',//默认拖进事件 的时间间隔大小*/
+//          timeFormat: 'HH:mm',//事件上日期格式（默认事件不显示日期）
+/*            minTime: '06:00:00', //最小开始时间
+            maxTime: '22:00:00',//最大开始时间
+            defaultTimedEventDuration: '00:30:00',//默认拖进事件 的时间间隔大小*/
             buttonText: {
                 today: '今天',
                 week: '周',
@@ -235,6 +244,7 @@ window.onload = function () {
             },
             // 当点击某一个事件时触发此操作
             eventClick: function (calEvent, jsEvent, view) {
+                console.log(arguments);
                 var url = contextPath + "/classSchedule/selectClassScheduleByPrimaryKey"
                 var data = {
                     id: calEvent.id
@@ -245,11 +255,31 @@ window.onload = function () {
                     }
                 })
             },
+            //当鼠标悬停在一个事件上触发此操作
+            eventMouseover: function (calEvent, jsEvent, view) {
+                //
+            },
+            //当鼠标从一个事件上移开触发此操作
+            eventMouseout: function (event, jsEvent, view) {
+            },
+
             droppable: true, //允许拖拽放置
             eventReceive: function (data,d) {
-                var dataTime=formatEventTime(data);
-                var insertDate = {};
-                Object.assign(insertDate, dataTime);
+                console.error(2);
+                console.log(data);
+                console.log(d);
+                /*var insertDate = {};
+                var dateTime = JSON.stringify(data.start);
+                var date = dateTime.substring(1, 11);
+                var time = dateTime.substring(13, 14);
+                if (time == 1) {
+                    insertDate.courseIndex = 'am';
+                    insertDate.courseDate = date + ' 12:00:00';
+                } else if (time == 2) {
+                    insertDate.courseIndex = 'pm';
+                    insertDate.courseDate = date + ' 16:00:00';
+                }
+                ;
                 insertDate.classesId = parameter.classesId;
                 insertDate.teacherId = data.teacherId;
                 insertDate.courseId = data.courseId;
@@ -257,78 +287,66 @@ window.onload = function () {
                 var jdata = {
                     jsons: JSON.stringify(insertDate)
                 }
-                startLoad();
                 $.post(url, jdata, function (rst) {
                     if (rst.status == 0) {
                         formatDate($('#calendar').fullCalendar('getView').title);
                     } else {
                         alert("排课失败，请刷新后重试！");
                     }
-                    stopLoad();
-
-                })
+                })*/
             },
             eventRender: function (event, element) {
+                console.error(1);
                 element.find(".fc-title").html('《' + event.title + '》——' + event.teacher);//cxy修改后的，不确定会不会有其他问题
             },
-
-            /*调整时间范围触发*/
+            //浏览器大小改变是触发
             eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
-                updataCourseSchedule(event);
+
             },
             //拖拽之后触发（仅限控件内部事件）
             eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
-                updataCourseSchedule(event);
+                console.log('eventDrop');
+                console.log(arguments);
+            },
+            //事件被拖动之后触发
+            eventDragStop: function (event, jsEvent, ui, view) {
+                console.log('eventDragStop');
+                console.log(arguments);
+            },
+            //事件被拖动之前触发
+            eventDragStart: function (event, jsEvent, ui, view) {
+                //alert(event.id);
+                // alert(234);
+            },
+            drop: function (datas, allDay, jsEvent, ui) {
+                console.log('drop');
+                console.log(arguments);
+            },
+            eventResizeStop:function(){
+                console.log('eventResizeStop');
+                console.log(arguments);
             },
             //事件数据
             events: [],
             //选择，可选择区域
             selectable: true,
             selectHelper: true,
+            // select: function (start, end) {
+            //     var title = prompt('Event Title:');
+            //     var eventData;
+            //     if (title) {
+            //         eventData = {
+            //             title: title,
+            //             start: start,
+            //             end: end
+            //         };
+            //         $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+            //
+            //     }
+            //     $('#calendar').fullCalendar('unselect');
+            // }
         });
 
-    }
-
-
-    function updataCourseSchedule(data){
-        var url = contextPath + "/classSchedule/updateClassSchedule"
-        var dataTime=formatEventTime(data);
-        var updateDate = {};
-        updateDate.id=data.id;
-        updateDate.classesId = data.classesId;
-        updateDate.teacherId = data.teacherId;
-        updateDate.courseId = data.courseId;
-        updateDate.ifTest = data.ifTest;
-        Object.assign(updateDate, dataTime);
-        var jdata = {
-            jsons: JSON.stringify(updateDate)
-        }
-        startLoad();
-        $.post(url, jdata, function (rst) {
-            if (rst.status == 0) {
-                formatDate($('#calendar').fullCalendar('getView').title);
-            } else {
-                alert("排课失败，请刷新后重试！");
-            }
-            stopLoad();
-        })
-    }
-    
-    function formatEventTime(data) {
-        var rst={
-        };
-        var startTime = JSON.stringify(data.start).replace('T',' ').replace(/"/ig,'');
-        var endTime=data.end;
-        rst.startTime=startTime;
-        if(endTime){
-            rst.endTime=JSON.stringify(endTime).replace('T',' ').replace(/"/ig,'');
-        }else{
-            var item=startTime.substring(11,13);
-            var i=(parseInt(item)+1);
-            i=i>9?(' '+i):(' 0'+i);
-            rst.endTime=startTime.replace(' '+item,i);
-        }
-        return rst;
     }
 
     function initSelect() {
@@ -388,21 +406,6 @@ window.onload = function () {
         })
     }
 
-
-    Date.prototype.Format = function (fmt) { //author: meizz
-        var o = {
-            "M+": this.getMonth() + 1, //月份
-            "d+": this.getDate(), //日
-            "h+": this.getHours(), //小时
-            "m+": this.getMinutes(), //分
-            "s+": this.getSeconds(), //秒
-            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-            "S": this.getMilliseconds() //毫秒
-        };
-        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        for (var k in o)
-            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-        return fmt;
-    }
-
 }
+
+

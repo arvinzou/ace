@@ -181,18 +181,18 @@ body {
 }
 
 .course-left {
-    width: 1.4rem;
+    width: 3rem;
     height: 2.666666rem;
     line-height: 2.666666rem;
     float: left;
     color: #FFFFFF;
-    font-size: 0.64rem;
+    font-size: 0.4rem;
     font-weight: bold;
     padding-left: 0.4rem;
 }
 
 .course-right {
-    width: 7.2rem;
+    width: 5.6rem;
     height: 2.666666rem;
     float: left;
     word-wrap: break-word;

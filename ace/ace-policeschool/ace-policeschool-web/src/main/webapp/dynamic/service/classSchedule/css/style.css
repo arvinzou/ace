@@ -3,10 +3,6 @@ input {
     padding: 0 10px;
 }
 
-.fc-time-grid .fc-slats td {
-    height: 225px !important;
-}
-
 #b_container .search {
     width: 100%;
     display: flex;
@@ -273,4 +269,10 @@ input {
     border-color: transparent !important;
     border-bottom-width: 2px !important;
     border-top-width: 2px !important;
+}
+
+
+.fc-time-grid-event .fc-time {
+    font-size: .35em !important;
+    white-space: normal !important;
 }

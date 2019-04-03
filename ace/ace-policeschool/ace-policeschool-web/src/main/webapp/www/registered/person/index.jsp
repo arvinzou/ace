@@ -37,9 +37,11 @@
 <script id="course-tpl" type="text/template">
     {@if data.length > 0}
     {@each data as item, index}
-    {@if item.courseIndex == "am"}
     <div class="course morning">
-        <div class="course-left">上午</div>
+        <div class="course-left">
+            <span>\${item.startTime.substring(10,16)}-</span>
+            <span>\${item.endTime.substring(10,16)}</span>
+        </div>
         <div class="course-right">
             <div class="inner-middle">
                 <span>\${item.course.name}</span>
@@ -47,17 +49,6 @@
             </div>
         </div>
     </div>
-    {@else}
-    <div class="course afternoon">
-        <div class="course-left">下午</div>
-        <div class="course-right">
-            <div class="inner-middle">
-                <span>\${item.course.name}</span>
-                <span>(主讲:\${item.teacher.name}）</span>
-            </div>
-        </div>
-    </div>
-    {@/if}
     {@/each}
     {@else}
     <div class="course none">
