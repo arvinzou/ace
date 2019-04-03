@@ -29,14 +29,25 @@ $(function () {
 
 function initSwriper() {
     mySwiper = new Swiper('.swiper-container', {
-        autoplay: true,
-        // 如果需要前进后退按钮
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-
-    })
+            autoplay: {
+                delay: 10000,//1秒切换一次
+                disableOnInteraction: false,
+            },
+            // 如果需要前进后退按钮
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            on: {
+                touchStart: function (event) {
+                    this.autoplay.stop();
+                },
+                touchEnd: function (event) {
+                    this.autoplay.start();
+                }
+            }
+        }
+    );
 }
 
 
@@ -184,7 +195,7 @@ function viewCourse() {
             var len = datas.length;
             for (var i = 0; i < len; i++) {
                 var item = datas[i];
-                var f = item.courseDate.substring(6, 10);
+                var f = item.startTime.substring(6, 10);
                 $('.' + f + item.courseIndex + 'Teacher').text(item.teacher.name);
                 $('.' + f + item.courseIndex + 'Course').text(item.course.name);
             }
@@ -325,7 +336,7 @@ function addDate(dateData, day) {
 function getCourseList() {
     var url = contextPath + "/www/classSchedule/findMyClassSchedule";
     var data = {
-        courseDateStr: nowDate,
+        startTimeStr: nowDate,
         classList: classId
     }
     $.getJSON(url, data, function (rst) {

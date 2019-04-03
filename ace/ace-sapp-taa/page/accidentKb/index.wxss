@@ -349,7 +349,7 @@ view, map, cover-view {
 }
 
 .collectionBtn .startBtn{
-    background:#366AE1
+    background:#366AE1;
     color: #fff;
 }
 

@@ -61,7 +61,7 @@
             <p class="title">\${item.course.name}</p>
             <p class="otherInfo">
                 <img class="icon" src="img/icon_time.png" alt="">
-                <span class="margin30">\${item.courseDate|dateTimeToDate} \${item.courseIndex=='am'?'上午':'下午'}</span>
+                <span class="margin30">\${item.startTime|dateTimeToDate} \${item.courseIndex=='am'?'上午':'下午'}</span>
                 <img class="icon" src="img/icon_person.png" alt="">
                 <span>\${item.teacher.name}</span></p>
         </div>
@@ -78,7 +78,7 @@
             <p class="title">\${item.course.name}</p>
             <p class="otherInfo">
                 <img class="icon" src="img/icon_time.png" alt="">
-                <span class="margin30">\${item.courseDate|dateTimeToDate} \${item.courseIndex=='am'?'上午':'下午'}</span>
+                <span class="margin30">\${item.startTime|dateTimeToDate} \${item.courseIndex=='am'?'上午':'下午'}</span>
                 <img class="icon" src="img/icon_person.png" alt="">
                 <span>\${item.teacher.name}</span></p>
         </div>

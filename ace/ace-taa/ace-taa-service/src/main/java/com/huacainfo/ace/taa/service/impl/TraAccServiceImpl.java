@@ -10,6 +10,8 @@ import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.MessageTemplateService;
+import com.huacainfo.ace.taa.constant.CommConstant;
 import com.huacainfo.ace.taa.dao.OfficeAdminDao;
 import com.huacainfo.ace.taa.dao.TraAccCauseDao;
 import com.huacainfo.ace.taa.dao.TraAccDao;
@@ -52,6 +54,8 @@ public class TraAccServiceImpl implements TraAccService {
     private AuthorityService authorityService;
     @Autowired
     private OfficeAdminDao officeAdminDao;
+    @Autowired
+    MessageTemplateService messageTemplateService;
 
     @Autowired
     private SqlSessionTemplate sqlSession;
@@ -165,7 +169,7 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-10
      */
     @Override
-    public MessageResponse updateTraAcc(TraAcc o, UserProp userProp) throws Exception {
+    public MessageResponse updateTraAcc(TraAccVo o, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -179,12 +183,16 @@ public class TraAccServiceImpl implements TraAccService {
             return new MessageResponse(1, "天气不能为空！");
         }
 
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.traAccDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更事故", "事故", "", o.getId(), o.getId(), userProp);
+
+        //车型&事故原因变更
+        insertCauseMtype(o.getId(), o);
+        //短信通知
+        sendRealTimeSms(o.getId());
 
         return new MessageResponse(0, "保存成功！");
     }
@@ -418,7 +426,6 @@ public class TraAccServiceImpl implements TraAccService {
      */
     @Override
     public ResultResponse flashReport(WxUser user, TraAccVo params) throws Exception {
-        //todo 根据经纬度自动获取所属：路段ID、路长ID
         String id = GUIDUtil.getGUID();
         params.setId(id);
         params.setAccidentTime(DateUtil.getNowDate());//事故发生时间 -- 默认为系统当前时间
@@ -494,10 +501,80 @@ public class TraAccServiceImpl implements TraAccService {
         int i = traAccDao.updateByPrimaryKey(record);
         if (i == 1) {
             insertCauseMtype(record.getId(), params);//事故原因&事故车型变更
+            //短信通知
+            sendRealTimeSms(params.getId());
+
             return new ResultResponse(ResultCode.SUCCESS, "续报提交成功");
         }
 
         return new ResultResponse(ResultCode.FAIL, "续报提交失败");
+    }
+
+    private ResultResponse sendRealTimeSms(String traAccId) throws Exception {
+        TraAccVo vo = traAccDao.selectVoByPrimaryKey(traAccId);
+        if (vo == null || StringUtil.isEmpty(vo.getMobile())) {
+            return new ResultResponse(ResultCode.FAIL, "事故数据丢失");
+        }
+        //短信通知
+        return sendRealTimeSms(vo.getMobile(), vo.getRoadManName(),
+                DateUtil.toStr(vo.getAccidentTime(), DateUtil.DEFAULT_DATE_TIME_REGEX),
+                vo.getRoadSectionName(), vo.getDeadthToll());
+
+    }
+
+
+    /**
+     * 事故死亡人数，实时短信推送
+     *
+     * @param roadManName     路长名称
+     * @param dateTimeStr     发生事故时间，年月日 时分秒；
+     * @param roadSectionName 路段名称
+     * @param deathNum        死亡人数
+     * @return ResultResponse
+     */
+    private ResultResponse sendRealTimeSms(String mobile,
+                                           String roadManName, String dateTimeStr,
+                                           String roadSectionName, int deathNum) throws Exception {
+        //#roadManName#您好，于#dateTimeStr#，#roadSectionName#路段，发生一起交通事故，造成#deathNum#人死亡。
+        Map<String, Object> params = new HashMap<>();
+        params.put("mobile", mobile);
+
+        params.put("roadManName", roadManName);
+        params.put("dateTimeStr", dateTimeStr);//年月日 时分秒；
+        params.put("roadSectionName", roadSectionName);
+        params.put("deathNum", deathNum);
+        return messageTemplateService.send(CommConstant.SYS_ID, CommConstant.SMS_REAL_TIME, params);
+    }
+
+
+    @Override
+    public ResultResponse sendMonthReportSms(String mobile,
+                                             String roadManName,
+                                             String dateTimeStr,
+                                             int traAccNum, int injuries, int deathNum) throws Exception {
+        //#roadManName#您好，#dateTimeStr#，在您管辖区内，共计发生交通事故#traAccNum#起，其中受伤#injuries#人，死亡#deathNum#人。
+        Map<String, Object> params = new HashMap<>();
+        params.put("mobile", mobile);
+
+        params.put("roadManName", roadManName);
+        params.put("dateTimeStr", dateTimeStr);//年月；2019年7月
+        params.put("traAccNum", traAccNum);
+        params.put("injuries", injuries);
+        params.put("deathNum", deathNum);
+
+        return messageTemplateService.send(CommConstant.SYS_ID, CommConstant.SMS_MONTH_REPORT, params);
+    }
+
+    /**
+     * 按路长统计月报表
+     *
+     * @param mothDateTime 月份数据，7位字符串长度;2019-03
+     * @return List<Map < String, Object>>
+     */
+    @Override
+    public List<Map<String, Object>> findMothReportList(String mothDateTime) {
+
+        return traAccDao.findMothReportList(mothDateTime);
     }
 
     /**
@@ -611,7 +688,7 @@ public class TraAccServiceImpl implements TraAccService {
         List<Map<String, Object>> rst = new ArrayList<Map<String, Object>>();
         List<Map<String, Object>> list = this.traAccDao.getTraAccList(condition);
         for (Map<String, Object> o : list) {
-            double[] e = LatLonUtil.map_tx2bd(((java.math.BigDecimal) o.get("latitude")).doubleValue(), ((java.math.BigDecimal) o.get("longitude")).doubleValue());
+            double[] e = MapKit.map_tx2bd(((java.math.BigDecimal) o.get("latitude")).doubleValue(), ((java.math.BigDecimal) o.get("longitude")).doubleValue());
             Map<String, Object> map = new HashMap<>();
             map.put("latitude", e[0]);
             map.put("longitude", e[1]);
@@ -766,6 +843,22 @@ public class TraAccServiceImpl implements TraAccService {
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", rst);
+    }
+
+    @Override
+    public MessageResponse insertRecord(TraAccVo obj, UserProp curUserProp) throws Exception {
+        String id = GUIDUtil.getGUID();
+        obj.setId(id);
+        obj.setAccidentTime(DateUtil.getNowDate());//事故发生时间 -- 默认为系统当前时间
+
+        MessageResponse ms = insertTraAcc(obj, curUserProp);
+        if (ms.getStatus() == ResultCode.FAIL) {
+            return ms;
+        } else {
+            insertCauseMtype(id, obj);
+        }
+
+        return ms;
     }
 
 

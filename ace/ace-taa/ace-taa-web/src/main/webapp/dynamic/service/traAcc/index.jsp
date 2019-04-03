@@ -57,8 +57,9 @@
                 <thead>
                 <tr>
 
-                    <th width="30%">事故发生地点</th>
+                    <th width="28%">事故发生地点</th>
                     <th width="15%">事故时间</th>
+                    <th width="5%">受伤人数</th>
                     <th width="5%">死亡人数</th>
                     <th width="8%">路长</th>
                     <th width="15%">快报时间</th>
@@ -93,6 +94,7 @@
 
         <td> \${item.address}</td>
         <td> \${item.accidentTime}</td>
+        <td> \${item.injuries}</td>
         <td> \${item.deadthToll}</td>
         <td> \${item.roadManName}</td>
         <td> \${item.createDate}</td>

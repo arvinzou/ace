@@ -50,7 +50,7 @@
                             ﻿
                         </label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="courseDate"
+                            <input type="text" class="form-control" name="startTime"
                                    maxlength=""
                                    placeholder="请输入日期（建议字数在14个字以内，不超过个字)">
                             <span class="help-block"></span>

@@ -40,7 +40,7 @@
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入试卷名称">
+                               placeholder="请输入题目内容">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn"
                                     type="submit">

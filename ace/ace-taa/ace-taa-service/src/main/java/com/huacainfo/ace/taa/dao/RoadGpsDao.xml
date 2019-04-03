@@ -89,4 +89,23 @@
             #{item}
         </foreach>
     </select>
+
+    <select id="getUndefined" resultMap="VoResultMap">
+        select
+            t.id as roadSectionId,
+            t.`name` as sectionName ,
+            t.startName,
+            t.endName,
+            0 as latitude,
+            0 as longitude,
+            rm.id as roadManId,
+            rm.`name` as manName,
+            r.id as roadId,
+            r.`name` as roadName,
+            999999 as distance
+        from road_section t
+        left join road r on t.roadId = r.id
+        LEFT JOIN road_man rm on t.roadMan = rm .id
+        where t.`name` ='未采集'
+    </select>
 </mapper>

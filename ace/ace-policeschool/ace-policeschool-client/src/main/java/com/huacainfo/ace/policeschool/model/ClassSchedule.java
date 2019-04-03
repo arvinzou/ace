@@ -12,9 +12,9 @@ public class ClassSchedule implements Serializable {
     private String classesId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date courseDate;
-
-    private String courseIndex;
+    private Date startTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date endTime;
 
     private String teacherId;
 
@@ -47,21 +47,22 @@ public class ClassSchedule implements Serializable {
         this.classesId = classesId == null ? null : classesId.trim();
     }
 
-    public Date getCourseDate() {
-        return courseDate;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setCourseDate(Date courseDate) {
-        this.courseDate = courseDate;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
-    public String getCourseIndex() {
-        return courseIndex;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setCourseIndex(String courseIndex) {
-        this.courseIndex = courseIndex == null ? null : courseIndex.trim();
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
+
 
     public String getTeacherId() {
         return teacherId;

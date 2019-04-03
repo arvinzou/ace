@@ -25,7 +25,6 @@
 
 <script id="list-tpl" type="text/template">
     {@each data as item, index}
-    {@if item.courseIndex == "am"}
     <div class="course-box">
         <div class="course">
             <div class="course-left">
@@ -36,26 +35,10 @@
                 </div>
             </div>
             <div class="course-right">
-                <span class="morning">上午</span>
+                <span class="morning">\${item.startTime.substring(10,16)}-\${item.endTime.substring(10,16)}</span>
             </div>
         </div>
     </div>
-    {@else}
-    <div class="course-box">
-        <div class="course">
-            <div class="course-left">
-                <div class="course-title">\${item.course.name}</div>
-                <div class="course-teacher">
-                    <img src="img/icon-teacher.png"/>
-                    <span>\${item.teacher.name}</span>
-                </div>
-            </div>
-            <div class="course-right">
-                <span class="morning">下午</span>
-            </div>
-        </div>
-    </div>
-    {@/if}
     {@/each}
 </script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>

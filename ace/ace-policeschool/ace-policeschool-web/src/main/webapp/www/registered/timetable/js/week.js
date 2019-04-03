@@ -42,7 +42,7 @@ function initCourseList(date) {
         type: "post",
         async: false,
         data: {
-            courseDateStr: date
+            startTimeStr: date
         },
         success: function (result) {
             if (result.status == 0) {

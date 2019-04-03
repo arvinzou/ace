@@ -12,7 +12,7 @@ public class ClassScheduleQVo extends ClassSchedule {
 
     private String cTeacherId;
 
-    private String courseDateStr;
+    private String startTimeStr;
 
     private List<String> classList;
 
@@ -39,12 +39,13 @@ public class ClassScheduleQVo extends ClassSchedule {
         this.classList = classList;
     }
 
-    public String getCourseDateStr() {
-        return courseDateStr;
+
+    public String getStartTimeStr() {
+        return startTimeStr;
     }
 
-    public void setCourseDateStr(String courseDateStr) {
-        this.courseDateStr = courseDateStr;
+    public void setStartTimeStr(String startTimeStr) {
+        this.startTimeStr = startTimeStr;
     }
 
     public String getWeekDate() {

@@ -95,4 +95,6 @@ public interface TraAccDao {
     List<Map<String, Object>> yearList();
 
     int findCountBySectionIds(@Param("sectionIds") String[] sectionIds);
+
+    List<Map<String, Object>> findMothReportList(String mothDateTime);
 }
