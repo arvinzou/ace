@@ -8,6 +8,7 @@
 		<title>教职工注册</title>
         <jsp:include page="../common/common.jsp"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="js/loading/loading.css"/>
 		<link rel="stylesheet" type="text/css" href="../common/css/mobileSelect.css"/>
 	</head>
 	<body>
@@ -101,6 +102,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/mobileSelect.min.js"></script>
+	<script type="text/javascript" src="js/loading/loading.js"></script>
 	<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 	<script src="${portalPath}/content/common/js/dict_partyschool.js?version=${version}"></script>
 	<script type="text/javascript" src="js/teacher.js"></script>

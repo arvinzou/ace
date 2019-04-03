@@ -228,6 +228,7 @@ function bindWx(){
 }
 
 function upload(){
+    var load = new Loading();
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'upload',
@@ -251,12 +252,14 @@ function upload(){
     uploader.init();
     uploader.bind("FileFiltered",function(uploader,file){
         uploader.start();
+        load.start();
         return false;
     });
     uploader.bind("FileUploaded",function (uploader,file,responseObject) {
         var rst = JSON.parse(responseObject.response);
         var fileUrl = rst.file_path;
         imgChange(fileUrl);
+        load.stop();
         uploader.removeFile(file);
     });
 
