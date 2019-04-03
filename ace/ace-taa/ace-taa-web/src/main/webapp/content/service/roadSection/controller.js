@@ -238,8 +238,8 @@ function initTable(table) {
                 'targets': [0]
             },
             {
-                "searchable": false,
-                "targets": [0]
+                // "searchable": false,
+                // "targets": [0]
             },
             {
                 "className": "dt-right",
@@ -342,6 +342,7 @@ function reset(rowid) {
     }
 }
 
+//添加分路长
 function addBranchRoadMan(roadSectionId) {
     $("#modal-add").on("hide.bs.modal", function () {
         $("#fm-add").get(0).reset();//清除上一次添加的数据
@@ -352,7 +353,6 @@ function addBranchRoadMan(roadSectionId) {
     $('#reset').attr("disabled", false);
 
 }
-
 //分路长列表
 function branchRoadManList(rowid) {
     $("input[name='roadsId']").val(rowid);
@@ -360,7 +360,6 @@ function branchRoadManList(rowid) {
     initPreviewBranch(rowid);
 
 }
-
 function initPreviewBranch(rowid) {
     startLoad();
     $.ajax({
@@ -375,8 +374,6 @@ function initPreviewBranch(rowid) {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                // data['roadSectionId'] = roadSectionId;
-                console.log(result);
                 render('#fm2-preview', data, 'tp2-preview');
                 initTable($('#list2'));
             } else {
@@ -426,7 +423,6 @@ function initAddModal() {
 
     }
 }
-
 //删除分路长
 function delTab(id, roadSectionId) {
     if (confirm("确定要刪除吗？")) {
@@ -502,7 +498,17 @@ function editTab(rowid) {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                render('#fm4-preview', data, 'tp4-preview');
+                $('#id1').val(result.value.id);
+                $('#roadSectionId1').val(result.value.roadSectionId);
+                $('#name1').val(result.value.name);
+                $('#mobile1').val(result.value.mobile);
+                $('#areaCode1').combotree('setValue', result.value.areaCode);
+                $('#orgName1').val(result.value.orgName);
+                $('#postName1').val(result.value.postName);
+                $('#status1').val(result.value.status);
+                $('#createDate1').val(result.value.createDate);
+
+                //  render('#fm4-preview', data, 'tp4-preview');
 
             } else {
                 alert(result.errorMessage);
@@ -517,11 +523,12 @@ function editTab(rowid) {
 
 
 //提交修改
-function initUpdateModal(id) {
+function initUpdateModal() {
+    var id = $('#id1').val();
     var roadSectionId = $('#roadSectionId1').val();
     var name = $('#name1').val();
     var mobile = $('#mobile1').val();
-    var areaCode = $('#areaCode1').val();
+    var areaCode = $('#areaCode1').combotree('getValue');
     var orgName = $('#orgName1').val();
     var postName = $('#postName1').val();
     var status = $('#status1').val();
