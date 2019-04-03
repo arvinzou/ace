@@ -1,8 +1,11 @@
+import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.partyschool.model.AttRecord;
+import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.common.tools.URLKit;
 import org.junit.Test;
 
-import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Auther: Arvin
@@ -14,10 +17,15 @@ public class CommonTest {
 
     @Test
     public void test() {
-        AttRecord a = new AttRecord();
-        a.setLatitude(new BigDecimal(29.015840).setScale(6, BigDecimal.ROUND_FLOOR));
-        a.setLongitude(new BigDecimal(111.7287706).setScale(6, BigDecimal.ROUND_FLOOR));
-        System.out.println(a.toString());
+        Map<String, String> map = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        sb.append("http://www.cdswdx.top/group1/M00/00/00/wKgQJFykNg6ALVz9AAN4Zjxp6TY67.jpeg?filename=139F2236-4E0A-4759-A5B3-2CB9CA5AAACD.jpeg");
+        map.put("api_key", "-5Wf1CueJ8FffHLeEap4RtVOE77P6IQT");
+        map.put("api_secret", "dxWQqNdaXugnohd021ba1Cu_g4tfLmW3");
+        map.put("image_url", sb.toString());
+
+        String url = "https://api-cn.faceplusplus.com/cardpp/v1/ocridcard?" + URLKit.mapToStr(map);
+        System.out.println(JsonUtil.toObject(HttpKit.post(url, ""), OCRBean.class).getCards().get(0).getId_card_number());
     }
 
 
