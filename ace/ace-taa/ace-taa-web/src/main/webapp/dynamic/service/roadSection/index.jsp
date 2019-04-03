@@ -492,7 +492,6 @@ pageEncoding="utf-8"%>
 <script src="${pageContext.request.contextPath}/content/service/roadSection/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/roadSection/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/roadSection/view.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/roadSection/DateUtils.js?version=${cfg.version}"></script>
 
 <%--权限管理--%>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>

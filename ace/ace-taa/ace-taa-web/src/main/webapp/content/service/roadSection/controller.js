@@ -55,6 +55,28 @@ jQuery(function ($) {
     initEvents();
 });
 
+//字符串判空
+function strIsEmpty(obj) {
+    if (typeof obj == "undefined" || obj == null || obj == "") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function submitCheck(data) {
+    //验证
+    if (data.startName == data.endName) {
+        alert('"路段开始"与"路段截止"值不能相同');
+        return false;
+    }
+    if ((!strIsEmpty(data.startNo) && !strIsEmpty(data.endNo)) && data.startNo == data.endNo) {
+        alert('"标号开始"与"标号截止"值不能相同');
+        return false;
+    }
+    return true;
+}
+
 /*页面渲染*/
 function render(obj, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;
@@ -73,8 +95,12 @@ function initEvents() {
         var modal = $(this);
         console.log(relatedTarget);
         initPreview(id);
-    })
+
+    });
+
 }
+
+
 
 function initPreview(id) {
     startLoad();
@@ -91,7 +117,7 @@ function initPreview(id) {
                 var data = {};
                 data['o'] = result.value;
                 render('#fm-preview', data, 'tpl-preview');
-                initTable();
+                initTable($('#list1'));
             } else {
                 alert(result.errorMessage);
             }
@@ -111,15 +137,19 @@ function edit(rowid) {
         recreateForm: true,
         viewPagerButtons: true,
         beforeSubmit: function (postdata) {
-            //验证
-            if (postdata.startName == postdata.endName) {
-                alert('"路段开始"与"路段截止"值不能相同');
-                return;
+            var checked = submitCheck(postdata);
+            if (!checked) {
+                return [false, "", ""];
             }
-            if (postdata.startNo == postdata.endNo) {
-                alert('"标号开始"与"标号截止"值不能相同');
-                return;
-            }
+            // //验证
+            // if (postdata.startName == postdata.endName) {
+            //     alert('"路段开始"与"路段截止"值不能相同');
+            //     return;
+            // }
+            // if (postdata.startNo == postdata.endNo) {
+            //     alert('"标号开始"与"标号截止"值不能相同');
+            //     return;
+            // }
 
             return [true, "", ""];
         },
@@ -156,8 +186,8 @@ function setParams(key, value) {
 }
 
 
-function initTable() {
-    var table = $('#list1');
+function initTable(table) {
+    //var table = $('#list1');
 
     // begin first table
     table.dataTable({
@@ -170,7 +200,7 @@ function initTable() {
             },
             "emptyTable": "没有找到数据",
             "info": "显示 _START_ 到 _END_ 共 _TOTAL_ 记录",
-            "infoEmpty": "No records found",
+            "infoEmpty": "没有查找到数据",
             "infoFiltered": "(filtered1 from _MAX_ total records)",
             "lengthMenu": "显示 _MENU_",
             "search": "搜索:",
@@ -197,7 +227,7 @@ function initTable() {
 
         "lengthMenu": [
             [5, 15, 20, -1],
-            [5, 15, 20, "All"] // change per page values here
+            [5, 15, 20, "全部"] // change per page values here
         ],
         // set the initial value
         "pageLength": 5,
@@ -275,11 +305,18 @@ function delByIds(ids, id) {
     });
 }
 
-function previewMap(id,num) {
-    if(num<1){
+function previewMap(id, num) {
+    if (num < 1) {
         alert("当前路段未采集，无法查看")
     }
     window.open(contextPath + "/dynamic/service/roadSection/map.jsp?id=" + id);
+}
+
+
+function clearForm(obj) {
+    var form = $(obj).parents("form");
+    $(form)[0].reset();
+
 }
 
 function reset(rowid) {
@@ -303,4 +340,227 @@ function reset(rowid) {
             }
         });
     }
+}
+
+function addBranchRoadMan(roadSectionId) {
+    $("#modal-add").on("hide.bs.modal", function () {
+        $("#fm-add").get(0).reset();//清除上一次添加的数据
+    });
+    $("#modal-add").modal("show");
+    $('#roadSectionId').val($("input[name='roadsId']").val());
+    $('#addRoadMan').attr("disabled", false);
+    $('#reset').attr("disabled", false);
+
+}
+
+//分路长列表
+function branchRoadManList(rowid) {
+    $("input[name='roadsId']").val(rowid);
+    $("#moda2-preview").modal("show");
+    initPreviewBranch(rowid);
+
+}
+
+function initPreviewBranch(rowid) {
+    startLoad();
+    $.ajax({
+        url: contextPath + '/branchRoadMan/getList',
+        type: "post",
+        async: false,
+        data: {
+            roadSectionId: rowid
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                // data['roadSectionId'] = roadSectionId;
+                console.log(result);
+                render('#fm2-preview', data, 'tp2-preview');
+                initTable($('#list2'));
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+function initAddModal() {
+
+    var areaCode = $('#areaCode').combotree('getValue');
+    var roadSectionId = $('#roadSectionId').val();
+    var name = $('#name').val();
+    var mobile = $('#mobile').val();
+    if (strIsEmpty(areaCode)) {
+        alert('请选择行政区域！');
+    } else if (strIsEmpty(name)) {
+        alert('请填写姓名！');
+
+
+    } else if (strIsEmpty(mobile)) {
+        alert('请填写手机号！');
+
+    } else {
+        $.ajax({
+            url: contextPath + "/branchRoadMan/insertBranchRoadMan",
+            type: "post",
+            async: false,
+            data: $('#fm-add').serialize(),
+            success: function (rst) {
+                stopLoad();
+                alert(rst.errorMessage);
+                $("#modal-add").modal("hide");
+                branchRoadManList(roadSectionId);
+
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+
+    }
+}
+
+//删除分路长
+function delTab(id, roadSectionId) {
+    if (confirm("确定要刪除吗？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/branchRoadMan/deleteBranchRoadManByBranchRoadManId",
+            type: "post",
+            async: false,
+            data: {
+                id: id,
+            },
+            success: function (rst) {
+                stopLoad();
+                if (rst.status == 0) {
+                    branchRoadManList(roadSectionId);
+
+                } else {
+                    alert(rst.errorMessage);
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起，出错了！");
+            }
+        });
+    }
+}
+
+
+//查看分路长
+function findTab(rowid) {
+    $("#moda3-preview").modal("show");
+    startLoad();
+    $.ajax({
+        url: contextPath + '/branchRoadMan/selectBranchRoadManByPrimaryKey',
+        type: "post",
+        async: false,
+        data: {
+            id: rowid
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                render('#fm3-preview', data, 'tp3-preview');
+
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+function editTab(rowid) {
+    $("#modal-update").modal("show");
+    $('#updateRoadMan').attr("disabled", false);
+    $('#reset1').attr("disabled", false);
+    startLoad();
+    $.ajax({
+        url: contextPath + '/branchRoadMan/selectBranchRoadManByPrimaryKey',
+        type: "post",
+        async: false,
+        data: {
+            id: rowid
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                render('#fm4-preview', data, 'tp4-preview');
+
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+
+//提交修改
+function initUpdateModal(id) {
+    var roadSectionId = $('#roadSectionId1').val();
+    var name = $('#name1').val();
+    var mobile = $('#mobile1').val();
+    var areaCode = $('#areaCode1').val();
+    var orgName = $('#orgName1').val();
+    var postName = $('#postName1').val();
+    var status = $('#status1').val();
+    var createDate = $('#createDate1').val();
+    if (strIsEmpty(name)) {
+        alert('请填写姓名！');
+
+    } else if (strIsEmpty(mobile)) {
+        alert('请填写手机号！');
+
+    } else {
+        $.ajax({
+            url: contextPath + "/branchRoadMan/updateBranchRoadMan",
+            type: "post",
+            async: false,
+            dataType: "json",
+            data: {
+                id: id,
+                roadSectionId: roadSectionId,
+                name: name,
+                mobile: mobile,
+                areaCode: areaCode,
+                orgName: orgName,
+                postName: postName,
+                status: status,
+                createDate1: createDate,
+            },
+            success: function (rst) {
+                stopLoad();
+                alert(rst.errorMessage);
+                $("#modal-update").modal("hide");
+                branchRoadManList(roadSectionId);
+
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    }
+
 }
