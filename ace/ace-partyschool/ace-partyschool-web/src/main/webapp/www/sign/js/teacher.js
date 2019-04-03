@@ -127,7 +127,7 @@ function regist(){
             name: name,
             mobile: signAcct,
             idCard: idCard,
-            political: political[0].id,
+            political: political==null?null:political[0].id,
             workUnitName: workUnit[0].id,
             postName: postName,
             uid: new Date().getTime(),

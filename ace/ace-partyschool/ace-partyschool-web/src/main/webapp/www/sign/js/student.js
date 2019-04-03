@@ -124,7 +124,7 @@ function regist(){
             name: name,
             mobile: signAcct,
             idCard: idCard,
-            political: political[0].id,
+            political: political==null?null:political[0].id,
             workUnitName: workUnitName,
             postName: postName,
             classId: clazz[0].id,
@@ -223,6 +223,7 @@ function imgChange() {
 function cancel(){
     $("#bindModal").hide();
     $("body").removeClass("modalhide");
+    window.location.href = contextPath+"/www/login/index.jsp";
 }
 function bindWx(){
     var o={};

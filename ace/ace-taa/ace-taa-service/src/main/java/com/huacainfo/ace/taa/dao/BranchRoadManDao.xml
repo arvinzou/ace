@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.taa.dao.BranchRoadManDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.BranchRoadMan">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="roadSectionId" jdbcType="VARCHAR" property="roadSectionId"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="orgName" jdbcType="VARCHAR" property="orgName"/>
+        <result column="postName" jdbcType="VARCHAR" property="postName"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, roadSectionId, areaCode, name, mobile, orgName, postName, status, createDate, 
+    lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from branch_road_man
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from branch_road_man
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.taa.model.BranchRoadMan">
+    insert into branch_road_man (id, roadSectionId, areaCode, 
+      name, mobile, orgName, 
+      postName, status, createDate, 
+      lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{roadSectionId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, 
+      #{postName,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.BranchRoadMan">
+    update branch_road_man
+    set roadSectionId = #{roadSectionId,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      orgName = #{orgName,jdbcType=VARCHAR},
+      postName = #{postName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <sql id="whereCondition">
+        from branch_road_man where 0=0
+        <if test='condition.name!=null and condition.name!=""'>
+            and name like
+            concat(#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+
+        <if test='condition.roadSectionId!=null and condition.roadSectionId!=""'>
+            and roadSectionId =#{condition.roadSectionId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="getList" resultType="map">
+    select
+    m.id, m.roadSectionId, m.areaCode, m.name, m.mobile, m.orgName, m.postName, m.status, m.createDate,
+    m.lastModifyDate,p.name as areaName
+    from branch_road_man m,portal.province p
+    where m.areaCode=p.code and roadSectionId=#{roadSectionId,jdbcType=VARCHAR}
+    order by m.createDate DESC
+
+  </select>
+
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+
+        <include refid="whereCondition"/>
+    </select>
+
+    <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.BranchRoadManVo" extends="BaseResultMap">
+        <result column="areaName" jdbcType="VARCHAR" property="areaName"/>
+    </resultMap>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+   select  m.id, m.roadSectionId, m.areaCode, m.name, m.mobile, m.orgName, m.postName, m.status, m.createDate,
+    m.lastModifyDate,p.name as areaName
+    from branch_road_man m,portal.province p
+    where m.areaCode=p.code and m.id = #{id,jdbcType=VARCHAR}
+  </select>
+
+</mapper>
