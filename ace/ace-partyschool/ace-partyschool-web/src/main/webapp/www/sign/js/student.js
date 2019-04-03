@@ -355,6 +355,7 @@ function upload(){
         var fileUrl = rst.file_path;
         imgChange(fileUrl);
         load.stop();
+        searchByName();
         uploader.removeFile(file);
     });
 

@@ -49,29 +49,17 @@
 			if (ch < 100) {
 				loading.find('i').height(ch).width(ch);
 			}
-			var offset = $(content).offset();
-			loading.css({
-				top: offset.top,
-				left: offset.left
-			});
 			var icon = loading.find('i');
 			var h = ch,
 				w = cw,
 				top = 0,
 				left = 0;
-			if ($(target)[0].tagName == "HTML") {
-				h = $(window).height();
-				w = $(window).width();
-				top = (h - icon.height()) / 2 + $(window).scrollTop();
-				left = (w - icon.width()) / 2 + $(window).scrollLeft();
-			} else {
 				top = (h - icon.height()) / 2;
 				left = (w - icon.width()) / 2;
-			}
-			icon.css({
-				top: top,
-				left: left
-			})
+                icon.css({
+                    top: top,
+                    left: left
+                })
 		},
 		init: function (settings) {
 			settings = settings || {};
