@@ -65,6 +65,19 @@
     </sql>
     <sql id="Where_Condition">
         where s.`status`  = '1'
+        <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+            and ( s.name like concat(#{condition.keyword,jdbcType=VARCHAR},'%')
+            or s.idCard like concat(#{condition.keyword,jdbcType=VARCHAR},'%')
+            or s.mobile like concat(#{condition.keyword,jdbcType=VARCHAR},'%')
+            or s.badgeNum like concat(#{condition.keyword,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        <if test="condition.areaCode !=null and condition.areaCode !=&quot;&quot;">
+            and s.nativePlace = #{condition.areaCode,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.classId !=null and condition.classId !=&quot;&quot;">
+            and s.classId = #{condition.classId,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">

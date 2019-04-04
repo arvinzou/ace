@@ -49,6 +49,11 @@ jQuery(function ($) {
     initJuicerMethod();
 });
 
+function clearAreaCode() {
+    $('#p-areaCode').combotree('setValue', '');
+    setParams('areaCode', '');
+}
+
 /*页面渲染*/
 function render(obj, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;

@@ -12,6 +12,16 @@ public class StudentQVo extends Student {
 
     private String keyWord;
 
+    private String areaCode;
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+
     public String getKeyWord() {
         return keyWord == null ? null : keyWord.trim();
     }

@@ -65,7 +65,7 @@ public class QuartzManager {
     /**
      * 每隔15分钟 执行一次 :自动注册报名表中，符合要求的学员数据
      */
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "0 0/15 * * * ?")
     @Transactional(propagation = Propagation.REQUIRED)
     public void autoRegister() {
         List<EnrollRoster> list = enrollRosterDao.findUnRegisterList();
@@ -105,10 +105,10 @@ public class QuartzManager {
 
     /**
      * 自动下载群英云服务器考勤数据
-     * 1、每3min执行一次一次；
+     * 1、每 2min 执行一次一次；
      * 2、数据更新形式为增量更新
      */
-    @Scheduled(cron = "0 0/3 * * * ?")
+    @Scheduled(cron = "0 0/2 * * * ?")
     public void downloadYunKQ() {
         //1.获取库中最近一次拉取数据时间
         Date nowDate = DateUtil.getNowDate();
@@ -207,7 +207,6 @@ public class QuartzManager {
      * 1、每 半小时 执行一次；
      */
     @Scheduled(cron = "0 0/30 * * * ?")
-    @Transactional(propagation = Propagation.REQUIRED)
     public void autoAddEmployee() {
         DeviceRst rst = qyCrmService.getDevice("");
         if (rst.getStatus() != 1) {

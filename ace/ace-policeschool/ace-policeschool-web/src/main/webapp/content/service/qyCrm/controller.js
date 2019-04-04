@@ -37,7 +37,42 @@ jQuery(function ($) {
 //初始化事件
     initEvents();
     initJuicerMethod();
+    //班级下拉筛选列表 -- 查询班级列表
+    initClassList('s-cls-list');
+    initGrid();
 });
+
+function clearAreaCode() {
+    $('#p-areaCode').combotree('setValue', '');
+    setParams('areaCode', '');
+}
+
+function initClassList(ctrlId) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/classes/getClassList",
+        type: "post",
+        async: false,
+        data: {},
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = result.value;
+                var all = {id: "", name: "全部"};
+                data.unshift(all);
+                render('#' + ctrlId, data, 'tpl-cls-option');
+                params.category = '2';
+                initGrid();
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
 
 //juicer自定义函数
 function initJuicerMethod() {
