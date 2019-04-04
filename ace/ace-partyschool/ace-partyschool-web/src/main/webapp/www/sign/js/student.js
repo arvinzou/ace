@@ -8,6 +8,8 @@ var sex = null;
 var slen = 0;
 var student = null;
 $(function(){
+    upload();
+
     var dictObj = staticDictObject['155'];     //处室字典
     var politicalArr = [];
     for(var i=0; i<dictObj.length; i++){
@@ -38,6 +40,7 @@ $(function(){
         $("body").removeClass("modalhide");
     });
     initClassList();
+
 });
 function selectSex(obj,value){
     $(obj).attr("src",'img/icon-sex.png');
@@ -173,50 +176,22 @@ function isCardNo(card)
     }
 }
 
-function base64(file, callback) {
-    var coolFile = {};
-
-    function readerOnload(e) {
-        var base64 = btoa(e.target.result);
-        coolFile.base64 = base64;
-        callback(coolFile)
-    };
-    var reader = new FileReader();
-    reader.onload = readerOnload;
-
-    var file = file[0].files[0];
-    if(file){
-        coolFile.filetype = file.type;
-        coolFile.size = file.size;
-        coolFile.filename = file.name;
-        reader.readAsBinaryString(file);
-    }
-}
-
-function imgChange() {
-    var idCardData = "";
-    base64($('input[type="file"]'), function(data) {
-        idCardData = data.base64;
-        console.log("idCardData=================================="+idCardData);
-        $.ajax({
-            url: "https://api-cn.faceplusplus.com/cardpp/v1/ocridcard",
-            type: "post",
-            async: false,
-            data: {
-                "api_key": "-5Wf1CueJ8FffHLeEap4RtVOE77P6IQT",
-                "api_secret": "dxWQqNdaXugnohd021ba1Cu_g4tfLmW3",
-                "image_base64": idCardData
-            },
-            success: function(result) {
-                console.log("====================" + result);
-                $("input[name='name']").val(result.cards[0].name);
-                $("input[name='idCard']").val(result.cards[0].id_card_number);
-            },
-            error: function() {
-                console.log("出错了！");
-                alert("出错了！");
-            }
-        });
+function imgChange(fileUrl) {
+    $.ajax({
+        url: contextPath+"/www/toolKit/ocridcard",
+        type: "post",
+        async: false,
+        data: {
+            imgUrl: fileUrl
+        },
+        success: function(result) {
+            console.log("====================" + result);
+            $("input[name='name']").val(result.data.cards[0].name);
+            $("input[name='idCard']").val(result.data.cards[0].id_card_number);
+        },
+        error: function(e) {
+            alert("出错了！");
+        }
     });
 }
 
@@ -345,4 +320,43 @@ function confirm(){
 
     $("#nameModal").hide();
     $("body").removeClass("modalhide");
+}
+
+function upload(){
+    var load = new Loading();
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'upload',
+        url: '/portal/www/upload.do',
+        file_data_name: 'file',
+        multi_selection: false,
+        max_file_size: '100mb',
+        //一次上传数据大小
+        chunk_size: '100mb',
+        resize: {
+            width: 1024,
+            height: 1024,
+            crop: true,
+            quality: 60,
+            preserve_headers: false
+        },
+        filters: [
+
+        ]
+    });
+    uploader.init();
+    uploader.bind("FileFiltered",function(uploader,file){
+        uploader.start();
+        load.start();
+        return false;
+    });
+    uploader.bind("FileUploaded",function (uploader,file,responseObject) {
+        var rst = JSON.parse(responseObject.response);
+        var fileUrl = rst.file_path;
+        imgChange(fileUrl);
+        load.stop();
+        searchByName();
+        uploader.removeFile(file);
+    });
+
 }

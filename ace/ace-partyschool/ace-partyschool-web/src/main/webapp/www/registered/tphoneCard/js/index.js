@@ -138,8 +138,13 @@ function record(){
                     })
                 },
                 success:function(result){
-                    if(result.status  == 1 && result.info == "ERROR_POINT"){
-                        alert("对不起，您当前不在考勤区域内，不能签到！");
+                    if(result.status  == 1){
+                        if(result.info == "ERROR_POINT"){
+                            alert("对不起，您当前不在考勤区域内，不能签到！");
+                        }else{
+                            alert("定位失败！");
+                        }
+
                     }
                     if(result.status == 0){
                         alert("签到成功！");
