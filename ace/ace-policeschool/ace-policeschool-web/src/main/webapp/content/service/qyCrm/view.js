@@ -1,4 +1,4 @@
-jQuery(function ($) {
+function initGrid() {
     $(window).on('resize.jqGrid', function () {
         resizeJqGrid();
     })
@@ -42,8 +42,8 @@ jQuery(function ($) {
             deleteurl: cfg.grid_delete_data_url,
             caption: cfg.caption
         });
-﻿resizeJqGrid();
-});
+    resizeJqGrid();
+};
 
 function resizeJqGrid() {
     $(cfg.grid_selector).jqGrid('setGridWidth', $(".portlet-body").width());

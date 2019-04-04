@@ -533,76 +533,84 @@ public class AttRecordServiceImpl implements AttRecordService {
         }
         //中控智慧来源
         if ("ZK".equals(String.valueOf(config.get("config_value")))) {
-            ZkAttDataQVo condition = new ZkAttDataQVo();
-            condition.setDateTimeStr(dateTimeStr);
-            condition.setUserId(userId);
-            List<ZkAttDataVo> list = zkAttDataDao.findVoList(condition, 0, 100, "t.attTime asc");
-            //解析分组
-            Map<String, List<ZkAttDataVo>> view = new HashMap<>();
-            List<ZkAttDataVo> am = new LinkedList<>();
-            List<ZkAttDataVo> pm = new LinkedList<>();
-            List<ZkAttDataVo> night = new LinkedList<>();
-            view.put("am", am);
-            view.put("pm", pm);
-            view.put("night", night);
-            String hour;
-            int iHour;
-            String dtStr;
-            for (ZkAttDataVo item : list) {
-                dtStr = DateUtil.toStr(item.getAttTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
-                if (dtStr.length() == 19) {
-                    hour = dtStr.substring(11, 13);
-                    iHour = Integer.parseInt(hour);
-                    if (iHour < 13) {//上午
-                        am = view.get("am");
-                        am.add(item);
-                    } else if (iHour >= 18) {//晚上
-                        night = view.get("night");
-                        night.add(item);
-                    } else {
-                        pm = view.get("pm");
-                        pm.add(item);
-                    }
-                }
-            }
-            return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", view);
+            return getZkData(userId, dateTimeStr);
         }
         //手机定位来源
         else {
-            AttRecordQVo condition = new AttRecordQVo();
-            condition.setDateTimeStr(dateTimeStr);
-            condition.setUserId(userId);
-            List<AttRecordVo> list = attRecordDao.findRecordList(condition, 0, 100, "");
-            //解析分组
-            Map<String, List<AttRecordVo>> view = new HashMap<>();
-            List<AttRecordVo> am = new LinkedList<>();
-            List<AttRecordVo> pm = new LinkedList<>();
-            List<AttRecordVo> night = new LinkedList<>();
-            view.put("am", am);
-            view.put("pm", pm);
-            view.put("night", night);
-            String hour;
-            int iHour;
-            String dtStr;
-            for (AttRecordVo item : list) {
-                dtStr = DateUtil.toStr(item.getAttTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
-                if (dtStr.length() == 19) {
-                    hour = dtStr.substring(11, 13);
-                    iHour = Integer.parseInt(hour);
-                    if (iHour < 12) {//上午
-                        am = view.get("am");
-                        am.add(item);
-                    } else if (iHour >= 18) {//晚上
-                        night = view.get("night");
-                        night.add(item);
-                    } else {
-                        pm = view.get("pm");
-                        pm.add(item);
-                    }
+            return getMobileAttData(userId, dateTimeStr);
+        }
+    }
+
+    private ResultResponse getMobileAttData(String userId, String dateTimeStr) {
+        AttRecordQVo condition = new AttRecordQVo();
+        condition.setDateTimeStr(dateTimeStr);
+        condition.setUserId(userId);
+        List<AttRecordVo> list = attRecordDao.findRecordList(condition, 0, 100, "");
+        //解析分组
+        Map<String, List<AttRecordVo>> view = new HashMap<>();
+        List<AttRecordVo> am = new LinkedList<>();
+        List<AttRecordVo> pm = new LinkedList<>();
+        List<AttRecordVo> night = new LinkedList<>();
+        view.put("am", am);
+        view.put("pm", pm);
+        view.put("night", night);
+        String hour;
+        int iHour;
+        String dtStr;
+        for (AttRecordVo item : list) {
+            dtStr = DateUtil.toStr(item.getAttTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
+            if (dtStr.length() == 19) {
+                hour = dtStr.substring(11, 13);
+                iHour = Integer.parseInt(hour);
+                if (iHour < 13) {//上午
+                    am = view.get("am");
+                    am.add(item);
+                } else if (iHour >= 18) {//晚上
+                    night = view.get("night");
+                    night.add(item);
+                } else {
+                    pm = view.get("pm");
+                    pm.add(item);
                 }
             }
-            return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", view);
         }
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", view);
+    }
+
+    private ResultResponse getZkData(String userId, String dateTimeStr) {
+        ZkAttDataQVo condition = new ZkAttDataQVo();
+        condition.setDateTimeStr(dateTimeStr);
+        condition.setUserId(userId);
+        List<ZkAttDataVo> list = zkAttDataDao.findVoList(condition, 0, 100, "t.attTime asc");
+        //解析分组
+        Map<String, List<ZkAttDataVo>> view = new HashMap<>();
+        List<ZkAttDataVo> am = new LinkedList<>();
+        List<ZkAttDataVo> pm = new LinkedList<>();
+        List<ZkAttDataVo> night = new LinkedList<>();
+        view.put("am", am);
+        view.put("pm", pm);
+        view.put("night", night);
+        String hour;
+        int iHour;
+        String dtStr;
+        for (ZkAttDataVo item : list) {
+            dtStr = DateUtil.toStr(item.getAttTime(), DateUtil.DEFAULT_DATE_TIME_REGEX);
+            if (dtStr.length() == 19) {
+                hour = dtStr.substring(11, 13);
+                iHour = Integer.parseInt(hour);
+                if (iHour < 13) {//上午
+                    am = view.get("am");
+                    am.add(item);
+                } else if (iHour >= 18) {//晚上
+                    night = view.get("night");
+                    night.add(item);
+                } else {
+                    pm = view.get("pm");
+                    pm.add(item);
+                }
+            }
+        }
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", view);
     }
 
     @Override

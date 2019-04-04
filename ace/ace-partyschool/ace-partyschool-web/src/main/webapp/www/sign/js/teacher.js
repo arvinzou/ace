@@ -4,6 +4,8 @@ var pwd = null;
 var workUnit = null;
 var sex = null;
 $(function(){
+    upload();
+
     var unit = staticDictObject['156'];     //处室字典
     var unitArr = [];
     for(var i=0; i<unit.length; i++){
@@ -127,7 +129,7 @@ function regist(){
             name: name,
             mobile: signAcct,
             idCard: idCard,
-            political: political[0].id,
+            political: political==null?null:political[0].id,
             workUnitName: workUnit[0].id,
             postName: postName,
             uid: new Date().getTime(),
@@ -195,30 +197,22 @@ function base64(file, callback) {
     }
 }
 
-function imgChange() {
-    var idCardData = "";
-    base64($('input[type="file"]'), function(data) {
-        idCardData = data.base64;
-        console.log("idCardData=================================="+idCardData);
-        $.ajax({
-            url: "https://api-cn.faceplusplus.com/cardpp/v1/ocridcard",
-            type: "post",
-            async: false,
-            data: {
-                "api_key": "-5Wf1CueJ8FffHLeEap4RtVOE77P6IQT",
-                "api_secret": "dxWQqNdaXugnohd021ba1Cu_g4tfLmW3",
-                "image_base64": idCardData
-            },
-            success: function(result) {
-                console.log("====================" + result);
-                $("input[name='name']").val(result.cards[0].name);
-                $("input[name='idCard']").val(result.cards[0].id_card_number);
-            },
-            error: function() {
-                console.log("出错了！");
-                alert("出错了！");
-            }
-        });
+function imgChange(fileUrl) {
+    $.ajax({
+        url: contextPath+"/www/toolKit/ocridcard",
+        type: "post",
+        async: false,
+        data: {
+            imgUrl: fileUrl
+        },
+        success: function(result) {
+            console.log("====================" + result);
+            $("input[name='name']").val(result.data.cards[0].name);
+            $("input[name='idCard']").val(result.data.cards[0].id_card_number);
+        },
+        error: function(e) {
+            alert("出错了！");
+        }
     });
 }
 
@@ -231,4 +225,42 @@ function bindWx(){
     var o={};
     o.account=account.toString();
     $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
+}
+
+function upload(){
+    var load = new Loading();
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'upload',
+        url: '/portal/www/upload.do',
+        file_data_name: 'file',
+        multi_selection: false,
+        max_file_size: '100mb',
+        //一次上传数据大小
+        chunk_size: '100mb',
+        resize: {
+            width: 1024,
+            height: 1024,
+            crop: true,
+            quality: 60,
+            preserve_headers: false
+        },
+        filters: [
+
+        ]
+    });
+    uploader.init();
+    uploader.bind("FileFiltered",function(uploader,file){
+        uploader.start();
+        load.start();
+        return false;
+    });
+    uploader.bind("FileUploaded",function (uploader,file,responseObject) {
+        var rst = JSON.parse(responseObject.response);
+        var fileUrl = rst.file_path;
+        imgChange(fileUrl);
+        load.stop();
+        uploader.removeFile(file);
+    });
+
 }

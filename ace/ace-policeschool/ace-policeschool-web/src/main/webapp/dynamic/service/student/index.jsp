@@ -23,7 +23,7 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-5 toolbar">
+                <div class="col-md-3 toolbar">
                     <%--${pageContext.request.contextPath}/student/insertStudent--%>
                     <button type="button" class="btn  green" id="btn-view-add"
                             authority="false">添加
@@ -32,9 +32,17 @@
                             authority="false">批量导入
                     </button>
                 </div>
-                <div class="col-md-7">
+                <div class="col-md-9">
+                    <div class="input-group" role="group" style="float:left;padding-right:5px">
+                        籍贯 <input id="p-areaCode" name="areaCode"
+                                  class="easyui-combotree" style='width: 200px;height:30px'
+                                  data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=43',
+                                    method:'get',animate: true, lines:false,">
+                        <a href="javascript:clearAreaCode()">清除</a>
+                    </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select name="classId" id="s-cls-list" class="form-control" style="height: 31px;"
+                        <select name="classId" id="s-cls-list" class="form-control"
+                                style="width: 275px;height: 30px;line-height: 30px;"
                                 onchange="setParams('classId',this.value)">
                         </select>
                     </div>
@@ -42,9 +50,8 @@
                         <input type="text"
                                name="keyWord"
                                class="form-control"
-                               placeholder="请输入姓名/身份证号/手机号">
+                               placeholder="请输入姓名/警号/身份证号/手机号">
                         <span class="input-group-btn">
-                            <%--${pageContext.request.contextPath}/student/findStudentList--%>
 							<button class="btn  btn-default search_btn" id="btn-search" authority="false">搜索</button>
 						</span>
                     </div>

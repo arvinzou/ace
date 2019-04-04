@@ -117,7 +117,360 @@ pageEncoding="utf-8"%>
     </div>
 </script>
 
+<div class="modal fade" role="dialog" id="moda2-preview">
+    <div class="modal-dialog" role="document" style="width: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm2-preview">
+                        <input type="text" class="form-control" style="width:450px" name="roadSectionId" maxlength="50">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--详情juicer模板--%>
+<script id="tp2-preview" type="text/template">
+
+    <div class="portlet light ">
+        <div class="portlet-body">
+            <div class="table-toolbar">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <button id="btn-add" class="btn sbold green" onclick="addBranchRoadMan();">添加</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="list2">
+                <thead>
+                <tr>
+
+                    <th width="25%">行政区划</th>
+                    <th width="15%">姓名</th>
+                    <th width="15%">手机号</th>
+                    <th width="15%">单位名称</th>
+                    <th width="15%">职务名称</th>
+
+                    <th width="15%">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {@each data.o as item, index}
+                <tr>
+
+                    <td>\${item.areaName}</td>
+                    <td>\${item.name}</td>
+                    <td>\${item.mobile}</td>
+                    <td>\${item.orgName}</td>
+                    <td>\${item.postName}</td>
+                    <td>
+                        <a href="javascript:editTab('\${item.id}')">编辑</a>
+                        <a href="javascript:findTab('\${item.id}')">查看</a>
+                        <a href="javascript:delTab('\${item.id}','\${item.roadSectionId}')">刪除</a>
+                    </td>
+                </tr>
+                {@/each}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</script>
+<%--分路长添加--%>
+<div class="modal fade" role="dialog" id="modal-add">
+    <div class="modal-dialog" role="document" style="width: 70%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">添加分路长</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm-preview1">
+                        <form class="form-horizontal" id="fm-add" role="form">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    行政区域
+                                    <span class="required" aria-required="true"> * </span>
+                                </label>
+                                <div class="col-md-5">
+
+                                    <input class="easyui-combotree" name="areaCode" id="areaCode"
+                                           data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
+                                           style="width:200px;﻿line-height: 30px;height: 30px;">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+
+                            <input type="hidden" class="form-control" style="width:450px" id="roadSectionId"
+                                   name="roadSectionId" maxlength="50">
+                            <input type="hidden" class="form-control" id="roadsId" name="roadsId"/>
+
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    姓名
+                                    <span class="required" aria-required="true"> * </span>
+                                </label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" style="width:450px" id="name" name="name"
+                                           maxlength="20">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    手机号
+                                    <span class="required" aria-required="true"> * </span>
+                                </label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" style="width:450px" id="mobile"
+                                           name="mobile"
+                                           maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    单位名称
+                                </label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" style="width:450px" id="orgName"
+                                           name="orgName"
+                                           maxlength="50">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    职位名称
+                                </label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" style="width:450px" id="postName"
+                                           name="postName"
+                                           maxlength="50">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-3">
+                                        <button class="btn btn-primary" type="button" style="width:30%" id="addRoadMan"
+                                                onclick="initAddModal();">保存
+                                        </button>
+                                    </div>
+
+                                </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">
+                                    关闭
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<%--分路长修改--%>
+<div class="modal fade" role="dialog" id="modal-update">
+    <div class="modal-dialog" role="document" style="width: 70%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">修改分路长</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm4-preview">
+                        <form class="form-horizontal" id="fm-update" role="form">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    行政区域
+                                    <span class="required" aria-required="true"> * </span>
+                                </label>
+                                <div class="col-md-5">
+                                    <input class="easyui-combotree" name="areaCode" id="areaCode1"
+                                           data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
+                                           style="width:200px;﻿line-height: 30px;height: 30px;">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    姓名
+                                    <span class="required" aria-required="true"> * </span>
+                                </label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" style="width:450px" name="name"
+                                           maxlength="20" id="name1">
+                                    <input type="hidden" class="form-control" name="id" id="id1">
+                                    <input type="hidden" class="form-control" name="status" id="status1">
+                                    <input type="hidden" class="form-control" name="createDate" id="createDate1">
+                                    <input type="hidden" class="form-control" name="roadSectionId" id="roadSectionId1">
+
+
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    手机号
+                                    <span class="required" aria-required="true"> * </span>
+                                </label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" style="width:450px" name="mobile"
+                                           id="mobile1"
+                                           maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    单位名称
+                                </label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" style="width:450px" name="orgName"
+                                           maxlength="50" id="orgName1">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    职位名称
+                                </label>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" style="width:450px" name="postName"
+                                           maxlength="50" value="\${data.o.postName}" id="postName1">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-3">
+                                    <button class="btn btn-primary" type="button" style="width:30%" id="updateRoadMan"
+                                            onclick="initUpdateModal('\${data.o.id}');">保存
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">
+                                    关闭
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%--分路长详情--%>
+<div class="modal fade" role="dialog" id="moda3-preview">
+    <div class="modal-dialog" role="document" style="width: 75%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">详情</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm3-preview">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--详情juicer模板--%>
+<script id="tp3-preview" type="text/template">
+    <div class="form-group">
+        <label class="col-md-2 view-label">
+            行政区域
+            <span class="required" aria-required="true">  </span>
+        </label>
+        <div class="col-md-5">
+            \${data.o.areaName}
+            <span class="help-block"></span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-md-2 view-label">
+            姓名
+            <span class="required" aria-required="true">  </span>
+        </label>
+        <div class="col-md-5">
+            \${data.o.name}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">
+            手机号
+            <span class="required" aria-required="true">  </span>
+        </label>
+        <div class="col-md-5">
+            \${data.o.mobile}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">
+            单位名称
+        </label>
+        <div class="col-md-5">
+
+            \${data.o.orgName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">
+            职位名称
+        </label>
+        <div class="col-md-5">
+
+            \${data.o.postName}
+        </div>
+    </div>
+</script>
+
 <%--easyui--%>
+<script src="${portalPath}/content/common/assets/global/scripts/datatable.js" type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/datatables/datatables.min.js"
+        type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"
+        type="text/javascript"></script>
 <link rel="stylesheet" type="text/css"
       href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
 <link rel="stylesheet" type="text/css"

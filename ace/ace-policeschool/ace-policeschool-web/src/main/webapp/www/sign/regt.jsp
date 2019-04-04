@@ -9,6 +9,7 @@
     <jsp:include page="../common/common.jsp"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../common/css/mobileSelect.css"/>
+    <link rel="stylesheet" type="text/css" href="js/loading/loading.css"/>
 </head>
 <body>
 <div class="index">
@@ -23,9 +24,8 @@
             <input class="form-input" maxlength="18" type="text" name="idCard" placeholder="识别/输入身份证号(选填)"/>
         </div>
         <div class="camera-box">
-            <label for="file"><img src="img/camera.png" class="camera"/></label>
-            <input type="file" id="file" name="file" onchange="imgChange();"
-                   style="display: none;width: 100%;height: 100%;"/>
+            <label><img id="upload" src="img/camera.png" class="camera" onclick="upload();"/></label>
+            <%--                    <input type="file" id="file" name="file" accept="image/*" capture="camera" onchange="imgChange();" style="display: none;width: 100%;height: 100%;"/>--%>
         </div>
     </div>
 
@@ -108,5 +108,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/mobileSelect.min.js"></script>
 <script src="${portalPath}/content/common/js/dict_partyschool.js?version=${version}"></script>
+<script type="text/javascript" src="js/loading/loading.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="js/teacher.js"></script>
 </html>

@@ -25,8 +25,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -426,7 +424,6 @@ public class QyCrmServiceImpl implements QyCrmService {
     /***
      * 新增/更新员工数据 && 同步员工数据到设备
      */
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public MessageResponse addEmployee(QyCrmVo vo, String idStr) {
         //新增员工数据

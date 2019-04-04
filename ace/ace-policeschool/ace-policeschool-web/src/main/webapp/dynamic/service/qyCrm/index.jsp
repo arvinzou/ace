@@ -19,15 +19,28 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-9 toolbar">
+                <div class="col-md-3 toolbar">
 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-9">
+                    <div class="input-group" role="group" style="float:left;padding-right:5px">
+                        籍贯 <input id="p-areaCode" name="areaCode"
+                                  class="easyui-combotree" style='width: 200px;height:30px'
+                                  data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=43',
+                                    method:'get',animate: true, lines:false,">
+                        <a href="javascript:clearAreaCode()">清除</a>
+                    </div>
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <select name="classId" id="s-cls-list" class="form-control"
+                                style="width: 275px;height: 30px;line-height: 30px;"
+                                onchange="setParams('classId',this.value)">
+                        </select>
+                    </div>
                     <div class="input-group">
                         <input type="text"
-                               name="name"
+                               name="keyword"
                                class="form-control"
-                               placeholder="请输入名称">
+                               placeholder="请输入姓名/警号/身份证号/手机号">
                         <span class="input-group-btn">
 							<button class="btn  btn-default search_btn" id="btn-search"
                                     authority="${pageContext.request.contextPath}/qyCrm/findQyCrmList">
@@ -52,6 +65,12 @@
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 
+
+<script id="tpl-cls-option" type="text/template">
+    {@each data as item, index}
+    <option value="\${item.id}">\${item.name}</option>
+    {@/each}
+</script>
 
 <%--数据上传--%>
 <div class="modal fade" role="dialog" id="modal-sync">
