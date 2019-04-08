@@ -1,0 +1,507 @@
+html {
+    height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 20px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    width: 10px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #bbb;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #eee;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+body {
+    background: #0440A2 url(../img/BG.png);
+    background-position: center 0;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    min-width: 960px;
+    padding-bottom: 40px;
+}
+
+.content {
+    width: 95%;
+    height: 100%;
+    margin: auto;
+    min-width: 1300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.content .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0px;
+    flex-shrink: 0;
+}
+
+.content .head img {
+    width: 91px;
+    /* height: 170px; */
+    vertical-align: bottom;
+    margin-right: 20px;
+}
+
+.content .head .room_name {
+    font-size: 68px;
+    font-family: MicrosoftYaHei-Bold;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+}
+
+.content .head .dateTime {
+    font-size: 32px;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+}
+
+.content .body {
+    flex-grow: 1;
+    background: linear-gradient(45deg, rgba(5, 92, 195, 0.3) 0%, rgba(106, 180, 255, 0.3) 100%);
+    border-radius: 10px;
+    padding: 28px;
+    display: flex;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.content .body .info_box {
+    background: linear-gradient(180deg, rgba(227, 242, 253, 1) 0%, rgba(148, 206, 255, 1) 100%);
+    border-radius: 10px;
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.body table.tftable {
+    color: #333333;
+    width: 100%;
+    border-width: 1px;
+    border-color: rgba(118, 169, 215, 0.5);
+    border-collapse: collapse;
+    font-size: 28px;
+    font-family: FZZCHJW--GB1-0;
+    font-weight: 400;
+    color: rgba(55, 63, 83, 1);
+}
+
+.body table tr {
+    height: 76px;
+}
+
+.body table.tftable th {
+    background-color: rgba(0, 107, 207, 1);;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: rgba(118, 169, 215, 0.5);
+    text-align: left;
+}
+
+.body table.tftable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: rgba(118, 169, 215, 0.5);
+}
+
+.body table .style1 {
+    color: rgba(192, 225, 255, 1);
+    width: 200px
+}
+
+.body table .style3 {
+    color: rgba(55, 63, 83, 1);
+    font-weight: bold;
+}
+
+.body table .style2 {
+    color: rgba(255, 255, 255, 1);
+}
+
+.body table .style4 {
+    text-align: center !important;
+}
+
+.body table .active_classInfo,
+.body table .active_course {
+    border: 1px #fff solid;
+    border-radius: 5px;
+    font-size: 30px;
+    padding: 3px 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    cursor: pointer;
+
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.body table .active_course {
+    color: rgba(0, 107, 207, 1);
+    border-color: rgba(0, 107, 207, 1);
+}
+
+.body .message {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.body .message .title {
+    text-align: center;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.body .message .title span {
+    width: 164px;
+    height: 56px;
+    background: rgba(0, 107, 207, 1);
+    margin: auto;
+    display: block;
+    border-radius: 30px;
+    font-size: 30px;
+    font-family: MicrosoftYaHei-Bold;
+    font-weight: bold;
+    color: rgba(254, 254, 254, 1);
+    line-height: 56px;
+}
+
+.body .message .fileMessage {
+    width:100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.body .message .fileMessage .swriper-box {
+    width: 100%;
+    height: 100%;
+}
+
+#fileMessage object {
+    flex-grow: 1;
+}
+
+.body .message .fileMessage .imgMessage {
+    text-align: center;
+    overflow: auto;
+    height: 100%;
+
+}
+
+.body .message .fileMessage .txtMessage {
+    text-indent: 2em;
+    font-size: 34px;
+    line-height: 1.5em;
+    color: #373F53;
+    word-break: break-all;
+    word-wrap: break-word;
+    height: 100%;
+    overflow: auto;
+}
+
+.body .message .fileMessage .pdfMessage {
+    height: 100%;
+}
+
+.fileMessage .imgMessage img {
+    object-fit: cover;
+    max-width: 100%;
+}
+
+.modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding-top: 156px;
+    z-index: 2000;
+}
+
+.modal .classInfo {
+    width: 720px;
+}
+
+.modal .modal_content {
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.modal .modal_content .modal_head {
+    height: 80px;
+    background: rgba(0, 107, 207, 1);
+    font-size: 30px;
+    font-family: MicrosoftYaHei-Bold;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 28px;
+}
+
+.modal .modal_content .modal_body {
+    background: #fff;
+    padding: 30px 30px 30px 60px;
+}
+
+.modal .classInfo .title {
+    font-size: 26px;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal .classInfo .title img {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+}
+
+.classInfo .table .tftable {
+    border-width: 1px;
+    border-collapse: collapse;
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    font-size: 22px;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: rgba(55, 63, 83, 1);
+    border-color: rgba(240, 239, 246, 1) !important;
+}
+
+.classInfo .table .tftable tr {
+    height: 70px;
+}
+
+.classInfo .table .tftable td {
+    border-left: none;
+    border-right: none;
+}
+
+.modal .style5 {
+    color: rgba(171, 174, 185, 1);
+}
+
+.classInfo .titleMT {
+    margin-top: 20px;
+}
+
+.hide {
+    display: none;
+}
+
+.fontBlue {
+    color: rgba(0, 107, 207, 1);
+    cursor: pointer;
+}
+
+.modal .weeekClass {
+    width: 1000px;
+}
+
+.weeekClass .modal_body {
+    position: relative;
+}
+
+.weeekClass .dayClass {
+    display: flex;
+    justify-content: space-between;
+    height: 100px;
+    flex-direction: row;
+    margin-bottom: 32px;
+}
+
+.weeekClass .dayClass .right {
+    width: 720px;
+}
+
+.weeekClass .dayClass .right table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 22px;
+    font-weight: 400;
+    color: rgba(55, 63, 83, 1);
+    box-sizing: border-box;
+    /*border: 1px solid rgba(118, 169, 215, 0.5);*/
+}
+
+.weeekClass .dayClass .right table tr {
+    height: 50px;
+    border: 1px solid #F1F6FB;
+}
+
+.weeekClass .dayClass .right table td {
+    border: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 469px;
+}
+
+.weeekClass .style6 {
+    width: 80px;
+    font-weight: bold;
+    color: rgba(55, 63, 83, 1);
+    text-align: center;
+}
+
+.weeekClass .style7 {
+    width: 100px;
+}
+
+.weeekClass .dayClass .left {
+    padding-top: 14px;
+    font-size: 26px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    position: relative;
+    width: 120px;
+    height: 100px;
+    background: #3389D9;
+}
+
+.weeekClass .dayClass .left:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border: 12px solid #3389D9;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    position: absolute;
+    left: 119px;
+    top: 37px;
+}
+
+.photoWall .img {
+    width: 230px;
+    height: 130px;
+    background: rgba(103, 169, 239, 1);
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.photoWall .imgBox {
+    max-height: 666px;
+    overflow: auto;
+}
+
+.photoWall .imgBox > li {
+    float: left;
+    margin: 0px 20px 30px 0;
+}
+
+#weeekCourseList, #roomTemp {
+    max-height: 666px;
+    overflow: auto;
+    padding-right: 30px;
+}
+
+.photoWall .img img {
+    width: 100%;
+    object-fit: cover;
+    object-position: 50%;
+}
+
+.modal .photoWall {
+    width: 1100px;
+}
+
+.weeekClass .prevWeek, .weeekClass .nextWeek {
+    border-top: 3px solid #006bcf;
+    border-left: 3px solid #006bcf;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.weeekClass .prevWeek {
+    transform: rotate(-45deg);
+    top: 44%;
+    left: 20px;
+}
+
+.weeekClass .nextWeek {
+    transform: rotate(135deg);
+    top: 44%;
+    right: 20px;
+}
+
+.modal .classRoom, .modal .addBook {
+    width: 720px;
+}
+
+.modal .classRoom .roomItem {
+    padding: 30px 20px;
+    background: #006BCF;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.addBook ul {
+    height: 666px;
+    overflow: auto;
+    padding-right: 30px;
+}
+
+.addBook ul li {
+    line-height: 80px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: rgba(55, 63, 83, 1);
+}
+
+.swiper-container {
+    height: 100%;
+}
+
+.swiper-button-next, .swiper-button-prev {
+    height: 30px !important;
+}

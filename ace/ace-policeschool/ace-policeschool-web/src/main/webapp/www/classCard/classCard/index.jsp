@@ -32,19 +32,19 @@
                     <th class="style2 class_people">48人</th>--%>
                     <th class="style4"><span class="active_classInfo">详情</span></th>
                 </tr>
-<%--                <tr>
-                    <td class="style3">上午课程</td>
-                    <td class="amClass"> 自习</td>
-                    <td class="style3"> 主讲</td>
-                    <td class="amClassTeacher">- -</td>
-                    <td rowspan="2" class="style4"><span class="active_course">课表</span></td>
-                </tr>
-                <tr>
-                    <td class="style3"> 下午课程</td>
-                    <td class="pmClass">自习</td>
-                    <td class="style3"> 主讲</td>
-                    <td class="pmClassTeacher">- -</td>
-                </tr>--%>
+                <%--                <tr>
+                                    <td class="style3">上午课程</td>
+                                    <td class="amClass"> 自习</td>
+                                    <td class="style3"> 主讲</td>
+                                    <td class="amClassTeacher">- -</td>
+                                    <td rowspan="2" class="style4"><span class="active_course">课表</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="style3"> 下午课程</td>
+                                    <td class="pmClass">自习</td>
+                                    <td class="style3"> 主讲</td>
+                                    <td class="pmClassTeacher">- -</td>
+                                </tr>--%>
             </table>
             <div class="message">
                 <div class="title">
