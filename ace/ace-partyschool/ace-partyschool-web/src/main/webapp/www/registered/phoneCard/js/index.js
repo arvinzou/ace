@@ -3,7 +3,6 @@ var lat = null;
 var longt = null;
 var btnName = "上午签到"
 $(function(){
-    findList();
     initUserData();
     getConfig();
 });
@@ -77,30 +76,41 @@ function locate(data){
             success: function (res) {
                 lat = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                 longt = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                if(lat){
+                    var center = new qq.maps.LatLng(29.047770,111.598520);  //默认以常德市委党校为中心
+                    var locate = new qq.maps.LatLng(lat, longt);
+                    var map = new qq.maps.Map(document.getElementById("mapBox"), {
+                        // 地图的中心地理坐标。
+                        center: center,
+                        zoom: 14
+                    });
+                    var marker = new qq.maps.Marker({
+                        position: center,
+                        map: map,
+                        content: '常德市委党校'
+                    });
+                    var cirle = new qq.maps.Circle({
+                        map: map,
+                        center: center,
+                        radius: 500,
+                        strokeWeight:1
+                    });
+                    var marker = new qq.maps.Marker({
+                        position: locate,
+                        map: map,
+                        content: '我'
+                    });
 
-                var center = new qq.maps.LatLng(29.047770,111.598520);  //默认以常德市委党校为中心
-                var locate = new qq.maps.LatLng(lat, longt);
-                var map = new qq.maps.Map(document.getElementById("mapBox"), {
-                    // 地图的中心地理坐标。
-                    center: center,
-                    zoom: 14
-                });
-                var marker = new qq.maps.Marker({
-                    position: center,
-                    map: map,
-                    content: '常德市委党校'
-                });
-                var cirle = new qq.maps.Circle({
-                    map: map,
-                    center: center,
-                    radius: 500,
-                    strokeWeight:1
-                });
-                var marker = new qq.maps.Marker({
-                    position: locate,
-                    map: map,
-                    content: '我'
-                });
+                    findList();
+                }else{
+                    alert("微信获取当前位置失败！");
+                    return;
+                }
+
+            },
+            fail: function(){
+                alert("微信获取当前位置失败！");
+                return;
             }
         });
     });
@@ -158,80 +168,85 @@ function record(){
  * 查询签到列表
  */
 function findList(){
-    var date = new Date();
-    var year = date.getFullYear();
-    var month = date.getMonth()+1;
-    var day = date.getDate();
-    if(month < 10){
-        month = "0"+month;
-    }
-    if(day < 10){
-        day = "0" +day;
-    }
-    var time = year+"-"+month+"-"+day;
-    $.ajax({
-        url: contextPath+ "/www/att/findList",
-        type:"post",
-        async:false,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data:{
-            dateTimeStr: time
-        },
-        success:function(result){
-            if(result.status == 0){
-
-                var num = result.data.am.length + result.data.pm.length + result.data.night.length;
-                renderPage('recordList', result.data, 'record-tpl');
-                $("#count").text("今日已签到"+num+"/5");
-                var date = new Date();
-                var hour = date.getHours();
-                var minute = date.getMinutes()/60;
-                var second = date.getSeconds()/3600;
-                hour = hour + minute + second;
-                //上午签到
-                if(result.data.am.length <1){
-                    if(hour >= 8 && hour <=10){
-                        //8:00~10:00允许签到
-                        $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签到</p></div>');
-                    }else if(hour >= 10 && hour <= 12.5){
-                        //10:00~12:30允许签退
-                        $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签退</p></div>');
-                    }
-                }else if(result.data.am.length >0 && result.data.am.length<2){
-                    if(hour >= 10 && hour <= 12.5){
-                        $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签退</p></div>');
-                    }
-                }
-                //下午签到
-                if(result.data.pm.length <1){
-                    //2:00~3:30允许签到
-                    if(hour >= 14 && hour <= 15.5){
-                        $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签到</p></div>');
-                    }else if(hour >15.5 && hour <= 18){
-                        //3:30~6:00允许签退
-                        $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签退</p></div>');
-                    }
-
-                }else if(result.data.pm.length >0 && result.data.pm.length<2){
-                    if(hour >=15.5 && hour <= 18){
-                        $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签退</p></div>');
-                    }
-                }
-
-                //晚上签到
-                if(result.data.night.length <1){
-                    //10:00~11:00允许签到
-                    if(hour >= 22 && hour <= 23){
-                        $("#nightBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">晚上签到</p></div>');
-                    }
-                }
-
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
+    if(lat){
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth()+1;
+        var day = date.getDate();
+        if(month < 10){
+            month = "0"+month;
         }
-    });
+        if(day < 10){
+            day = "0" +day;
+        }
+        var time = year+"-"+month+"-"+day;
+        $.ajax({
+            url: contextPath+ "/www/att/findList",
+            type:"post",
+            async:false,
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data:{
+                dateTimeStr: time
+            },
+            success:function(result){
+                if(result.status == 0){
+
+                    var num = result.data.am.length + result.data.pm.length + result.data.night.length;
+                    renderPage('recordList', result.data, 'record-tpl');
+                    $("#count").text("今日已签到"+num+"/5");
+                    var date = new Date();
+                    var hour = date.getHours();
+                    var minute = date.getMinutes()/60;
+                    var second = date.getSeconds()/3600;
+                    hour = hour + minute + second;
+                    //上午签到
+                    if(result.data.am.length <1){
+                        if(hour >= 8 && hour <=10){
+                            //8:00~10:00允许签到
+                            $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签到</p></div>');
+                        }else if(hour >= 10 && hour <= 12.5){
+                            //10:00~12:30允许签退
+                            $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签退</p></div>');
+                        }
+                    }else if(result.data.am.length >0 && result.data.am.length<2){
+                        if(hour >= 10 && hour <= 12.5){
+                            $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">上午签退</p></div>');
+                        }
+                    }
+                    //下午签到
+                    if(result.data.pm.length <1){
+                        //2:00~3:30允许签到
+                        if(hour >= 14 && hour <= 15.5){
+                            $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签到</p></div>');
+                        }else if(hour >15.5 && hour <= 18){
+                            //3:30~6:00允许签退
+                            $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签退</p></div>');
+                        }
+
+                    }else if(result.data.pm.length >0 && result.data.pm.length<2){
+                        if(hour >=15.5 && hour <= 18){
+                            $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">下午签退</p></div>');
+                        }
+                    }
+
+                    //晚上签到
+                    if(result.data.night.length <1){
+                        //10:00~11:00允许签到
+                        if(hour >= 22 && hour <= 23){
+                            $("#nightBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">晚上签到</p></div>');
+                        }
+                    }
+
+                }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
+            }
+        });
+    }else{
+        alert("微信定位失败！请确认是否手机打卡，或者手机服务是否打开。");
+        return;
+    }
 }
 
 /**

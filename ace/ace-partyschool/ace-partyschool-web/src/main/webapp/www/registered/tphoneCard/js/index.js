@@ -3,7 +3,6 @@ var lat = null;
 var longt = null;
 var btnName = "上午签到"
 $(function(){
-    findList();
     initUserData();
     getConfig();
 });
@@ -101,6 +100,8 @@ function locate(data){
                     map: map,
                     content: '我'
                 });
+
+                findList();
             },
             fail:function(e){
                 alert("定位失败，请确认是否开启网络或定位权限。");
@@ -165,53 +166,58 @@ function record(){
  * 查询签到列表
  */
 function findList(){
-    var date = new Date();
-    var year = date.getFullYear();
-    var month = date.getMonth()+1;
-    var day = date.getDate();
-    if(month < 10){
-        month = "0"+month;
-    }
-    if(day < 10){
-        day = "0" +day;
-    }
-    var time = year+"-"+month+"-"+day;
-    $.ajax({
-        url: contextPath+ "/www/att/findList",
-        type:"post",
-        async:false,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data:{
-            dateTimeStr: time
-        },
-        success:function(result){
-            if(result.status == 0){
+    if(lat){
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth()+1;
+        var day = date.getDate();
+        if(month < 10){
+            month = "0"+month;
+        }
+        if(day < 10){
+            day = "0" +day;
+        }
+        var time = year+"-"+month+"-"+day;
+        $.ajax({
+            url: contextPath+ "/www/att/findList",
+            type:"post",
+            async:false,
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data:{
+                dateTimeStr: time
+            },
+            success:function(result){
+                if(result.status == 0){
 
-                var num = result.data.am.length + result.data.pm.length + result.data.night.length;
-                renderPage('recordList', result.data, 'record-tpl');
-                $("#count").text("今日已签到"+num+"/2");
-                var date = new Date();
-                var hour = date.getHours();
-                var minute = date.getMinutes()/60;
-                var second = date.getSeconds()/3600;
-                hour = hour + minute + second;
-                //签到  6:30~11:00允许签到
-                if(hour >=6.5 && hour <=11){
-                    if(result.data.am.length <1){
-                        $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">签到</p></div>');
-                    }
-                }else if(hour >= 15.5 && hour <= 19.5){
-                    //签退  3:30~7:30允许签退
-                    if(result.data.pm.length <1){
-                        $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">签退</p></div>');
+                    var num = result.data.am.length + result.data.pm.length + result.data.night.length;
+                    renderPage('recordList', result.data, 'record-tpl');
+                    $("#count").text("今日已签到"+num+"/2");
+                    var date = new Date();
+                    var hour = date.getHours();
+                    var minute = date.getMinutes()/60;
+                    var second = date.getSeconds()/3600;
+                    hour = hour + minute + second;
+                    //签到  6:30~11:00允许签到
+                    if(hour >=6.5 && hour <=11){
+                        if(result.data.am.length <1){
+                            $("#amBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">签到</p></div>');
+                        }
+                    }else if(hour >= 15.5 && hour <= 19.5){
+                        //签退  3:30~7:30允许签退
+                        if(result.data.pm.length <1){
+                            $("#pmBtn").html('<div class="cell qiandao" onclick="record();"><p class="qtitle">签退</p></div>');
+                        }
                     }
                 }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+        });
+    }else{
+        alert("微信定位失败！请确认是否手机打卡，或者手机服务是否打开。");
+        return;
+    }
 }
 
 /**
