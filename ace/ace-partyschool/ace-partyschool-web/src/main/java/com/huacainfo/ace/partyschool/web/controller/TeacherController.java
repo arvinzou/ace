@@ -56,7 +56,10 @@ public class TeacherController extends BisBaseController {
     @ResponseBody
     public PageResult<TeacherVo> findTeacherList(TeacherQVo condition,
                                                  PageParamNoChangeSord page, String q) throws Exception {
-        condition.setName(CommonUtils.isBlank(q) ? condition.getName() : q);
+        if (!CommonUtils.isBlank(q)) {
+            condition.setId("");
+            condition.setName(CommonUtils.isBlank(q) ? condition.getName() : q);
+        }
         PageResult<TeacherVo> rst = this.teacherService
                 .findTeacherList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
@@ -92,7 +95,6 @@ public class TeacherController extends BisBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 

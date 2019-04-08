@@ -61,7 +61,10 @@ public class StudentController extends BisBaseController {
     @ResponseBody
     public PageResult<StudentVo> findStudentList(StudentQVo condition,
                                                  PageParamNoChangeSord page, String q) throws Exception {
-        condition.setName(CommonUtils.isBlank(q) ? condition.getName() : q);
+        if (!CommonUtils.isBlank(q)) {
+            condition.setId("");
+            condition.setName(CommonUtils.isBlank(q) ? condition.getName() : q);
+        }
         PageResult<StudentVo> rst =
                 this.studentService.findStudentList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
