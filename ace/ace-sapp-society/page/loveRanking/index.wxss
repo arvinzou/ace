@@ -52,6 +52,11 @@
     margin: 0 auto;
     border-bottom: 0.5px solid #efefef;
 }
+.rank_item::after{
+    content: '';
+    clear: both;
+    display: block;
+}
 .top-image{
     width: 40rpx;
     height: 50rpx;
@@ -74,10 +79,16 @@
     border-radius: 50%;
 }
 .name{
+    width: 400rpx;
+    height: 120rpx;
+    display: block;
     color: #222222;
     font-size: 30rpx;
     line-height: 120rpx;
     float: left;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 .number{
     float: right;
