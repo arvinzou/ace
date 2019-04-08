@@ -111,7 +111,7 @@
 					</div>
 					<div class="item-right">
 						<div class="menu-title">手机考勤</div>
-						<div class="menu-content">签到</div>
+						<div class="menu-content">请用签到</div>
 					</div>
 				</div>
 				<div class="item" onclick="toTest();">
@@ -191,7 +191,7 @@
 					</div>
 					<div class="item-right">
 						<div class="menu-title">手机考勤</div>
-						<div class="menu-content">签到</div>
+						<div class="menu-content">请用签到</div>
 					</div>
 				</div>
 				<div class="item" onclick="attendtion();">

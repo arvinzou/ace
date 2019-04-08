@@ -15,8 +15,13 @@
 <body>
 <div class="content">
     <div class="head">
-        <div class="room_name active_changeRoom pointer">一教室</div>
-        <img src="img/logo.png"/>
+        <%--<div class="room_name active_changeRoom pointer">一教室</div>--%>
+        <span style="
+    font-size: 78px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.28);
+"><img src="./img/logo.png" alt="">常德警官培训中心</span>
         <div class="dateTime" id="clock">
             <p>1921年7月1日 </p>
             <p>12:00 星期六</p>
@@ -24,45 +29,37 @@
     </div>
     <div class="body">
         <div class="info_box">
-            <table id="" class="tftable" border="1">
-                <tr>
-                    <th class="style1">班次</th>
-                    <th class="style2 class_name">第78期县处级干部进修班</th>
-                    <%--<th class="style1">应到人数</th>
-                    <th class="style2 class_people">48人</th>--%>
-                    <th class="style4"><span class="active_classInfo">详情</span></th>
-                </tr>
-                <%--                <tr>
-                                    <td class="style3">上午课程</td>
-                                    <td class="amClass"> 自习</td>
-                                    <td class="style3"> 主讲</td>
-                                    <td class="amClassTeacher">- -</td>
-                                    <td rowspan="2" class="style4"><span class="active_course">课表</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="style3"> 下午课程</td>
-                                    <td class="pmClass">自习</td>
-                                    <td class="style3"> 主讲</td>
-                                    <td class="pmClassTeacher">- -</td>
-                                </tr>--%>
-            </table>
-            <div class="message">
-                <div class="title">
-                    <span>通知公告</span>
-                </div>
-                <div class="fileMessage">
-                    <div class="swriper-box">
+            <div STYLE="width: 60% ;    margin-right: 24px;">
+                <table id="" class="tftable" border="1">
+                    <thead>
+                    <tr>
+                        <th class="style1">班级</th>
+                        <th class="style2 active_changeRoom pointer class_name">课程</th>
+                        <th class="style4"><span class="active_classInfo">详情</span></th>
+                    </tr>
+                    </thead>
+                    <tbody id="classList">
 
-                        <div id="swiper_container" class="swiper-container">
-                            <div class="swiper-wrapper">
-                            </div>
-                            <!-- 如果需要导航按钮 -->
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-button-next"></div>
-                        </div>
-
+                    </tbody>
+                </table>
+            </div>
+            <div style="width: 40%">
+                <div class="message">
+                    <div class="title">
+                        <span>通知公告</span>
                     </div>
+                    <div class="fileMessage">
+                        <div class="swriper-box">
 
+                            <div id="swiper_container" class="swiper-container">
+                                <div class="swiper-wrapper">
+                                </div>
+                                <!-- 如果需要导航按钮 -->
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -206,6 +203,18 @@
     {@each data as item}
     <div class="roomItem" data-id="\${item.id}">\${item.name}</div>
     {@/each}
+</script>
+
+<script id="tpl-classList" type="text/template">
+    {@each data as item}
+    <tr>
+        <td class="style3">\${substringDate(item.startTime)}-\${substringDate(item.endTime)}</td>
+        <td class="amClass"> \${item.course.name}</td>
+        <td class="style3"> \${item.teacher.name}</td>
+    </tr>
+    {@/each}
+
+
 </script>
 
 <script type="text/javascript" src="${portalPath}/content/common/swiper/js/swiper.min.js"></script>
