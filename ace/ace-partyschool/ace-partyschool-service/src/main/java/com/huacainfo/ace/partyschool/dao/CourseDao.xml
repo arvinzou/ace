@@ -106,9 +106,12 @@
   </select>
 
   <select id="findCount" resultType="int">
-    SELECT COUNT(*)
+    SELECT COUNT(*) FROM (
+    SELECT c.id
     <include refid="From_Statement"/>
     <include refid="Where_Condition"/>
+    GROUP BY c.id
+    ) r
   </select>
 
   <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
