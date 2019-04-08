@@ -364,7 +364,7 @@ pageEncoding="utf-8"%>
                                 </label>
                                 <div class="col-md-5">
                                     <input type="text" class="form-control" style="width:450px" name="postName"
-                                           maxlength="50" value="\${data.o.postName}" id="postName1">
+                                           maxlength="50" id="postName1">
                                     <span class="help-block"></span>
                                 </div>
                             </div>
@@ -372,7 +372,7 @@ pageEncoding="utf-8"%>
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-3">
                                     <button class="btn btn-primary" type="button" style="width:30%" id="updateRoadMan"
-                                            onclick="initUpdateModal('\${data.o.id}');">保存
+                                            onclick="initUpdateModal();">保存
                                     </button>
                                 </div>
 
