@@ -125,6 +125,35 @@ function initForm() {
             alert("对不起出错了！");
         }
     });
+
+
+    $('input[name=subareaCode]').combogrid({
+        panelWidth: 500,
+        idField: 'code',
+        textField: 'name',
+        url: contextPath + '/topSubarea/findTopSubareaList',
+        mode: 'remote',
+        fitColumns: true,
+        method: 'get',
+        columns: [
+            [{
+                field: 'name',
+                title: '分区名称',
+                width: 100
+            }, {
+                field: 'code',
+                title: '分区编码',
+                width: 100
+            }]
+
+        ],
+
+        onSelect: function (rowIndex, rowData) {
+            console.log(rowData);
+            //   $("#subareaCode").val(rowData.code);
+        },
+
+    });
 }
 
 function latitude(latitude) {

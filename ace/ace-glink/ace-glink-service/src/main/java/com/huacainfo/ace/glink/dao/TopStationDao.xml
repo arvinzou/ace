@@ -78,6 +78,9 @@
     <if test='condition.name!=null and condition.name!=""'>
       and name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
     </if>
+      <if test='condition.address!=null and condition.address!=""'>
+          and address like concat('%',#{condition.address,jdbcType=VARCHAR},'%')
+      </if>
   </sql>
 
 

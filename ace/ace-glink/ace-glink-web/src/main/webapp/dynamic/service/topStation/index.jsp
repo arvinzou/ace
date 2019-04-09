@@ -31,7 +31,7 @@
 
                 <form id="fm-search">
 
-                    <div class="input-group" style="width: 30%;">
+                    <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
@@ -51,8 +51,9 @@
                 <thead>
                 <tr>
 
-                    <th width="15%"> 分区编码</th>
+                    <th width="10%"> 分区编码</th>
                     <th width="15%"> 站点名称</th>
+                    <th width="15%"> 站点地址</th>
                     <th width="15%"> 站点描述</th>
                     <th width="10%"> 状态</th>
 
@@ -87,6 +88,7 @@
 
         <td> \${item.subareaCode}</td>
         <td> \${item.name}</td>
+        <td> \${item.address}</td>
         <td> \${item.depict}</td>
         {@if item.status==1}
         <td> 正常</td>
