@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
+import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -290,10 +292,9 @@ public class TopStationServiceImpl implements TopStationService {
      * @version: 2019-04-09
      */
     @Override
-    public ListResult
-            <Map
-                    <String
-                            , Object>> getList(Map
+    public ListResult<Map
+                        <String
+                                , Object>> getList(Map
                                                        <String
                                                                , Object> p) throws Exception {
         ListResult

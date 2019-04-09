@@ -1,10 +1,12 @@
 package com.huacainfo.ace.glink.web.controller;
 
+import com.huacainfo.ace.common.result.ListResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -226,10 +228,9 @@ private TopBuildingService topBuildingService;
                 */
                 @RequestMapping(value = "/getList")
                 @ResponseBody
-                public ListResult
-                <Map
-                <String
-                ,Object>> getList() throws Exception {
+                public ListResult<Map
+                                <String
+                                ,Object>> getList() throws Exception {
                 return this.topBuildingService.getList(this.getParams());
                 }
 

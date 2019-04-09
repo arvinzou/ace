@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
