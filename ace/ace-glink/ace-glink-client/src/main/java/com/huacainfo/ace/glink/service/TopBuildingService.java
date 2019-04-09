@@ -124,64 +124,6 @@ public interface TopBuildingService {
             <String
             , Object>> list, UserProp userProp)throws Exception;
 
-
-            /**
-            *
-            * @Title:getList
-            * @Description: TODO(条件查询数据)
-            * @param: @param p
-            * @param: @return
-            * @param: @throws Exception
-            * @return: ListResult
-            <Map
-            <String
-            ,Object>>
-            * @throws
-            * @author: luocan
-            * @version: 2019-04-09
-            */
-            public ListResult
-            <Map
-            <String
-            ,Object>> getList(Map
-            <String
-            , Object> p) throws Exception;
-
-
-            /**
-            * @throws
-            * @Title:getListByCondition
-            * @Description: TODO(用于控件数据获取)
-            * @param: @param params
-            * @param: @return
-            * @return: Map
-            <String
-            ,Object>
-            * @author: luocan
-            * @version: 2019-04-09
-            */
-            public Map
-            <String
-            , Object> getListByCondition(Map
-            <String
-            , Object> params);
-
-
-            /**
-            * @throws
-            * @Title:deleteRoadSectionByRoadSectionIds
-            * @Description: TODO(批量删除建筑物管理）
-            * @param: @param ids
-            * @param: @param userProp
-            * @param: @throws Exception
-            * @return: MessageResponse
-            * @author: luocan
-            * @version: 2019-04-09
-            */
-            public MessageResponse deleteTopBuildingByTopBuildingIds(String [] id, UserProp userProp) throws
-            Exception;
-
-
             /**
             * @throws
             * @Title:updateStatus
