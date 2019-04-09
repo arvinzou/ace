@@ -55,14 +55,9 @@ public class TopNodeServiceImpl implements TopNodeService {
      * @version: 2019-04-09
      */
     @Override
-    public PageResult
-            <TopNodeVo> findTopNodeList(TopNodeQVo condition, int start, int limit, String orderBy) throws
-            Exception {
-        PageResult
-                <TopNodeVo> rst = new PageResult<>();
-        List
-                <TopNodeVo> list = this.topNodeDao.findList(condition,
-                start, limit, orderBy);
+    public PageResult<TopNodeVo> findTopNodeList(TopNodeQVo condition, int start, int limit, String orderBy) throws Exception {
+        PageResult<TopNodeVo> rst = new PageResult<>();
+        List<TopNodeVo> list = this.topNodeDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.topNodeDao.findCount(condition);
@@ -85,6 +80,7 @@ public class TopNodeServiceImpl implements TopNodeService {
     @Override
     public MessageResponse insertTopNode(TopNode o, UserProp userProp) throws Exception {
 
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -112,8 +108,6 @@ public class TopNodeServiceImpl implements TopNodeService {
         if (CommonUtils.isBlank(o.getStatus())) {
             return new MessageResponse(1, "状态 不能为空！");
         }
-
-
         int temp = this.topNodeDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "节点管理名称重复！");
@@ -171,8 +165,6 @@ public class TopNodeServiceImpl implements TopNodeService {
         if (CommonUtils.isBlank(o.getStatus())) {
             return new MessageResponse(1, "状态 不能为空！");
         }
-
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -194,11 +186,9 @@ public class TopNodeServiceImpl implements TopNodeService {
      * @version: 2019-04-09
      */
     @Override
-    public SingleResult
-            <TopNodeVo> selectTopNodeByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <TopNodeVo> rst = new SingleResult<>();
-        rst.setValue(this.topNodeDao.selectVoByPrimaryKey(id));
+    public SingleResult<TopNodeVo> selectTopNodeByPrimaryKey(String id) throws Exception {
+        SingleResult<TopNodeVo> rst = new SingleResult<>();
+        rst.setValue(this.topNodeDao.selectByPrimaryKeyVo(id));
         return rst;
     }
 
