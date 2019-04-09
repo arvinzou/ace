@@ -1,9 +1,11 @@
 package com.huacainfo.ace.glink.model;
 
+import com.huacainfo.ace.common.model.BaseModel;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class TopBuilding {
+public class TopBuilding extends BaseModel{
     private String id;
 
     private String code;
