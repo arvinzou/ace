@@ -29,7 +29,7 @@
 
             <div class="col-md-6">
                 <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                    <select name="subareaCode" id="s-cls-list" class="form-control" style="height: 31px;"
+                    <select id="subArea" name="subareaCode" id="s-cls-list" class="form-control" style="height: 31px;"
                             onchange="setParams('subareaCode',this.value)">
                     </select>
                 </div>
@@ -114,7 +114,13 @@
     </tr>
     {@/each}
 </script>
-﻿
+
+<script id="area-list" type="text/template">
+    {@each data as item, index}
+    <option value="\${item.code}">\${item.name}</option>
+    {@/each}
+</script>﻿
+
 <div class="modal fade " id="modal-status">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

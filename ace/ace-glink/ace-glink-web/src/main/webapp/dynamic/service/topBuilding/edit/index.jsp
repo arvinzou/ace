@@ -71,10 +71,9 @@
                 <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="type"
-                       value="\${data.o.type}" maxlength="2"
-                       placeholder="请输入建筑物类型（建议字数在14个字以内，不超过2个字)">
-                <span class="help-block"></span>
+                <select name="type" id="type" class="form-control">
+
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -146,13 +145,13 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
-                分区编码
+                所属分区
                 <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="subareaCode"
-                       value="\${data.o.subareaCode}" maxlength="50"
-                       placeholder="请输入分区编码（建议字数在14个字以内，不超过50个字)">
+                <select name="subareaCode" id="areaList" class="form-control">
+
+                </select>
                 <span class="help-block"></span>
             </div>
         </div>
@@ -177,6 +176,25 @@
     </div>
 </script>
 
+<script id="type-tpl" type="text/template">
+    {@each data as item, index}
+    {@if item.selected == "selected"}
+    <option value="\${item.CODE}" selected="\${item.selected}">\${item.NAME}</option>
+    {@else}
+    <option value="\${item.CODE}">\${item.NAME}</option>
+    {@/if}
+    {@/each}
+</script>
+
+<script id="area-tpl" type="text/template">
+    {@each data as item, index}
+    {@if item.selected == "selected"}
+        <option value="\${item.code}" selected="\${item.selected}">\${item.name}</option>
+    {@else}
+        <option value="\${item.code}">\${item.name}</option>
+    {@/if}
+    {@/each}
+</script>
 
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
