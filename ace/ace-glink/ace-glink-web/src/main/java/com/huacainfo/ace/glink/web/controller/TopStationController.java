@@ -222,7 +222,8 @@ public class TopStationController extends GLinkBaseController {
      */
     @RequestMapping(value = "/getList")
     @ResponseBody
-    public ListResult<Map
+    public ListResult
+            <Map
                         <String
                                 , Object>> getList() throws Exception {
         return this.topStationService.getList(this.getParams());

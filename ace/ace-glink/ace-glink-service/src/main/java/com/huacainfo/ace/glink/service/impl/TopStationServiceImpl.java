@@ -292,15 +292,9 @@ public class TopStationServiceImpl implements TopStationService {
      * @version: 2019-04-09
      */
     @Override
-    public ListResult<Map
-                        <String
-                                , Object>> getList(Map
-                                                       <String
-                                                               , Object> p) throws Exception {
-        ListResult
-                <Map
-                        <String
-                                , Object>> rst = new ListResult<>();
+
+    public ListResult<Map<String, Object>> getList(Map<String, Object> p) throws Exception {
+        ListResult<Map<String, Object>> rst = new ListResult<>();
         rst.setValue(this.topStationDao.getList(p));
 
         return rst;
@@ -384,3 +378,4 @@ public class TopStationServiceImpl implements TopStationService {
     }
 
 }
+
