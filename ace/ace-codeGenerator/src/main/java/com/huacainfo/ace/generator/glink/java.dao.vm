@@ -15,9 +15,7 @@ int deleteByPrimaryKey(String id);
 
 int insert($!{bean.name} record);
 
-
 int updateByPrimaryKey($!{bean.name} record);
-
 
 $!{bean.name}Vo selectVoByPrimaryKey(String id);
 

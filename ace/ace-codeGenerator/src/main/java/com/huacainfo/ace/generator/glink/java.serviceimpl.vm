@@ -53,8 +53,8 @@ private DataBaseLogService dataBaseLogService;
     */
     @Override
     public PageResult
-    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, int start,int limit, String orderBy) throws
-        Exception {
+    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition,
+        int start,int limit, String orderBy) throws Exception {
         PageResult
         <$!{bean.name}Vo> rst = new PageResult<>();
             List
@@ -297,9 +297,7 @@ private DataBaseLogService dataBaseLogService;
                         , Object> params){
                         Map
                         <String
-                        , Object> rst = new HashMap
-                        <String
-                        , Object>();
+                        , Object> rst = new HashMap<>();
                         List
                         <Map
                         <String

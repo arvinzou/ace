@@ -56,10 +56,12 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
     @RequestMapping(value = "/find$!{bean.name}List")
     @ResponseBody
     public PageResult
-    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition,PageParamNoChangeSord page) throws Exception {
+    <$!{bean.name}Vo>
+        find$!{bean.name}List($!{bean.name}QVo condition,PageParamNoChangeSord page) throws Exception {
 
         PageResult
-        <$!{bean.name}Vo> rst = this.$!{bean.lowerName}Service.find$!{bean.name}List(condition, page.getStart(),
+        <$!{bean.name}Vo> rst =
+            this.$!{bean.lowerName}Service.find$!{bean.name}List(condition, page.getStart(),
             page.getLimit(), page.getOrderBy());
             if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
@@ -177,16 +179,12 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                 */
                 @RequestMapping(value = "/importXls")
                 @ResponseBody
-                public MessageResponse importXls(@RequestParam MultipartFile[] file,
-                String jsons) throws Exception {
+                public MessageResponse importXls(@RequestParam MultipartFile[] file, String jsons) throws Exception {
                 ExcelUtils utils = new ExcelUtils();
                 List
                 <Map
                 <String
-                , Object>> list=new ArrayList
-                <Map
-                <String
-                , Object>>();
+                , Object>> list=new ArrayList<>();
                 MongoFile[] files = new MongoFile[file.length];
                 int i = 0;
                 for (MultipartFile o : file) {
@@ -196,12 +194,8 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                 obj.setLength(o.getSize());
                 files[i] = obj;
                 i++;
-                String ext = obj
-                .getFilename()
-                .toLowerCase()
-                .substring(
-                obj.getFilename().toLowerCase()
-                .lastIndexOf("."));
+                String ext = obj.getFilename().toLowerCase();
+                ext= ext.substring(obj.getFilename().toLowerCase().lastIndexOf("."));
                 this.logger.info(ext);
                 if (ext.equals(".xls")) {
                 list = utils.readExcelByJXL(obj.getInputStream(), 2);
