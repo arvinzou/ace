@@ -115,6 +115,18 @@ function save(params) {
 function initForm() {
     var data = staticDictObject;
     render('#fm-add-panel', data, 'tpl-fm-add');
+    $(".form-body input[name='buildingId']").combogrid({
+        url: contextPath + "/topBuilding/findTopBuildingList",
+        method:'get',
+        loadMsg:"正在获取...",
+        width:'100%',
+        mode:'remote',
+        idField:'id',
+        textField:'name',
+        columns:[[
+            {field:'name',title:'Name',width:200}
+        ]]
+    });
 }
 
 
