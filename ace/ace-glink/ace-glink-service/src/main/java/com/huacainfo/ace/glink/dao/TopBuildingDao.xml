@@ -120,7 +120,7 @@
       and b.status =#{condition.status,jdbcType=CHAR}
     </if>
     <if test="condition.subareaCode !=null and condition.subareaCode !=&quot;&quot;">
-      and b.subareaCode =#{condition.classroomId,jdbcType=VARCHAR}
+      and b.subareaCode =#{condition.subareaCode,jdbcType=VARCHAR}
     </if>
     <if test="condition.name !=null and condition.name !=&quot;&quot;">
       and (b.`name` like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
