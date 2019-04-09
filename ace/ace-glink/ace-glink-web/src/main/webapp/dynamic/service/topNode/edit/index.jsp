@@ -89,30 +89,12 @@
                 <input type="text" class="form-control" name="address"
                        value="\${data.o.address}" maxlength="200"
                        placeholder="请输入详细地址（建议字数在14个字以内，不超过200个字)">
+                <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
+                   style="float:right;line-height: 28px;">选择</a>
                 <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                经度
-            </label>
-            <div class="col-md-8">
-                <input type="text" class="form-control" name="longitude"
-                       value="\${data.o.longitude}" maxlength="10"
-                       placeholder="请输入经度（建议字数在14个字以内，不超过10个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                纬度
-            </label>
-            <div class="col-md-8">
-                <input type="text" class="form-control" name="latitude"
-                       value="\${data.o.latitude}" maxlength="10"
-                       placeholder="请输入纬度（建议字数在14个字以内，不超过10个字)">
+                <input name="latitude" value="\${data.o.latitude}" type="hidden"/>
+                <input name="longitude" value="\${data.o.longitude}" type="hidden"/>
+                <input name="areaCode" type="hidden"/>
                 <span class="help-block"></span>
             </div>
         </div>

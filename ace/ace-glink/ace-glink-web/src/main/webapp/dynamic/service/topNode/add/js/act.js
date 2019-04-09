@@ -116,3 +116,16 @@ function initForm() {
     var data = staticDictObject;
     render('#fm-add-panel', data, 'tpl-fm-add');
 }
+
+
+function latitude(latitude) {
+    $("input[name=latitude]").val(latitude);
+}
+
+function longitude(longitude) {
+    $("input[name=longitude]").val(longitude);
+}
+
+function addr(addr) {
+    $("input[name=address]").val(addr);
+}

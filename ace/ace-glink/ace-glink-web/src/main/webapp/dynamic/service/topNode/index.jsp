@@ -114,7 +114,7 @@
             {@if item.status==0}
             <span class="label label-lg label-danger">删除</span>
             {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
+            <span class="label label-lg label-success">正常</span>
             {@else if item.status==2}
             <span class="label label-lg label-warning">待审</span>
             {@else if item.status==3}
@@ -136,7 +136,6 @@
             {@/if}
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-
             <a href="javascript:del('\${item.id}');">删除</a>
 
         </td>
@@ -220,7 +219,7 @@
                 </button>
                 <h4 class="modal-title">详细</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 600px;overflow: auto">
                 <div class="form-horizontal" role="form">
                     <div class="form-body" id="fm-preview">
 
@@ -403,93 +402,87 @@
 
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 view-label">节点编号</label>
         <div class="col-md-10">
-            \${code}
+            \${data.code}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">节点名称</label>
         <div class="col-md-10">
-            \${name}
+            \${data.name}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">节点描述</label>
         <div class="col-md-10">
-            \${depict}
+            \${data.depict}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">详细地址</label>
         <div class="col-md-10">
-            \${address}
+            \${data.address}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">经度</label>
         <div class="col-md-10">
-            \${longitude}
+            \${data.longitude}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">纬度</label>
         <div class="col-md-10">
-            \${latitude}
+            \${data.latitude}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">IPV4地址</label>
         <div class="col-md-10">
-            \${ipv4}
+            \${data.ipv4}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">IPV6地址</label>
         <div class="col-md-10">
-            \${ipv6}
+            \${data.ipv6}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">端口号</label>
         <div class="col-md-10">
-            \${port}
+            \${data.port}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">分辨率-宽</label>
         <div class="col-md-10">
-            \${resolutionWidth}
+            \${data.resolutionWidth}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">分辨率-高</label>
         <div class="col-md-10">
-            \${resolutionHeight}
+            \${data.resolutionHeight}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">mac地址</label>
         <div class="col-md-10">
-            \${macAddr}
+            \${data.macAddr}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">控制器数量</label>
         <div class="col-md-10">
-            \${ctrlNum}
+            \${data.ctrlNum}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">建筑物ID</label>
         <div class="col-md-10">
-            \${buildingId}
+            \${data.buildingId}
         </div>
     </div>
     <div class="form-group">
@@ -501,43 +494,31 @@
     <div class="form-group">
         <label class="col-md-2 view-label">状态 </label>
         <div class="col-md-10">
-            \${status}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建人编号</label>
-        <div class="col-md-10">
-            \${createUserId}
+            \${data.status}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">创建人姓名</label>
         <div class="col-md-10">
-            \${createUserName}
+            \${data.createUserName}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">
-            \${createDate}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新人编号</label>
-        <div class="col-md-10">
-            \${lastModifyUserId}
+            \${data.createDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">更新人名称</label>
         <div class="col-md-10">
-            \${lastModifyUserName}
+            \${data.lastModifyUserName}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">更新日期</label>
         <div class="col-md-10">
-            \${lastModifyDate}
+            \${data.lastModifyDate}
         </div>
     </div>
 </script>
