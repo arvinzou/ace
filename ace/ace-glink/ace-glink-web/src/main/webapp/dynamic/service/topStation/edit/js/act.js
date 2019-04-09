@@ -2,9 +2,7 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("
-            < li > < span > 编辑站点管理 < /span></
-        li > ");
+        $(".breadcrumb").append("<li> <span> 编辑站点管理 </span></li > ");
         initForm();
         initEvents();
     });
@@ -115,7 +113,7 @@ function initForm() {
                 var data = {};
                 data['o'] = result.value;
                 render('#fm-edit', data, 'tpl-fm');
-                initPage();
+                //    initPage();
 //富文本填值
 //editor.setValue(data['o'].summary);
             } else {
@@ -127,4 +125,16 @@ function initForm() {
             alert("对不起出错了！");
         }
     });
+}
+
+function latitude(latitude) {
+    $("input[name=latitude]").val(latitude);
+}
+
+function longitude(longitude) {
+    $("input[name=longitude]").val(longitude);
+}
+
+function addr(addr) {
+    $("input[name=address]").val(addr);
 }

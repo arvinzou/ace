@@ -23,44 +23,25 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
             </div>
 
-            <div class="col-md-9">
-
+            <div class="col-md-6">
+                <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                    <select name="subareaCode" id="s-cls-list" class="form-control" style="height: 31px;"
+                            onchange="setParams('subareaCode',this.value)">
+                    </select>
+                </div>
                 <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
-                    </div>
                     <div class="input-group">
                         <input type="text"
-                               name="keyword"
+                               name="name"
                                class="form-control"
                                placeholder="请输入直播名称">
                         <span class="input-group-btn">
-                                                                        <button class="btn  btn-default search_btn"
-                                                                                type="submit">
-                                                                                搜索
-                                                                        </button>
-                                                                    </span>
+                            <button class="btn  btn-default search_btn" type="submit">搜索</button>
+                        </span>
                     </div>
                 </form>
             </div>
@@ -72,26 +53,15 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                                                                        <th width="10%"> 主键</th>
-                                                    <th width="10%"> 建筑编号</th>
-                                                    <th width="10%"> 建筑名称</th>
-                                                    <th width="10%"> 建筑物类型</th>
-                                                    <th width="10%"> 建筑描述</th>
-                                                    <th width="10%"> 所在地</th>
-                                                    <th width="10%"> 经度</th>
-                                                    <th width="10%"> 纬度</th>
-                                                    <th width="10%"> 重点建筑标记</th>
-                                                    <th width="10%"> 建筑物状态</th>
-                                                    <th width="10%"> 分区编码</th>
-                                                    <th width="10%"> 备注</th>
-                                                    <th width="10%"> 状态</th>
-                                                    <th width="10%"> 创建人编号</th>
-                                                    <th width="10%"> 创建人姓名</th>
-                                                    <th width="10%"> 创建日期</th>
-                                                    <th width="10%"> 更新人编号</th>
-                                                    <th width="10%"> 更新人名称</th>
-                                                    <th width="10%"> 更新日期</th>
-                                                                <th width="15%">操作</th>
+                    <th width="5%"> 建筑编号</th>
+                    <th width="20%"> 建筑名称</th>
+                    <th width="10%"> 建筑物类型</th>
+                    <th width="20%"> 所在地</th>
+                    <th width="10%"> 建筑物状态</th>
+                    <th width="10%"> 所属分区</th>
+                    <th width="5%"> 状态</th>
+                    <th width="10%"> 创建人姓名</th>
+                    <th width="10%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -117,54 +87,29 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-                                    <td> \&{item.id}</td>
-                            <td> \&{item.code}</td>
-                            <td> \&{item.name}</td>
-                            <td> \&{item.type}</td>
-                            <td> \&{item.depict}</td>
-                            <td> \&{item.address}</td>
-                            <td> \&{item.longitude}</td>
-                            <td> \&{item.latitude}</td>
-                            <td> \&{item.mainTag}</td>
-                            <td> \&{item.state}</td>
-                            <td> \&{item.subareaCode}</td>
-                            <td> \&{item.remark}</td>
-                            <td> \&{item.status}</td>
-                            <td> \&{item.createUserId}</td>
-                            <td> \&{item.createUserName}</td>
-                            <td> \&{item.createDate}</td>
-                            <td> \&{item.lastModifyUserId}</td>
-                            <td> \&{item.lastModifyUserName}</td>
-                            <td> \&{item.lastModifyDate}</td>
-                            <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">待审</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
+        <td width="5%"> \${item.code}</td>
+        <td width="20%">\${item.name}</td>
+        <td width="10%">\${item.type}</td>
+        <td width="20%">\${item.address}</td>
+        <td width="10%">
+            {@if item.state == '1'}
+                在线
             {@else}
-            <span class="label label-lg label-danger">暂存</span>
+                不在线
             {@/if}
         </td>
-        <td>
-            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-status">设置状态</a>
-            {@if item.auditStatus==1}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
+        <td width="10%">\${item.subareaName}</td>
+        <td width="5%">
+            {@if item.status == "1"}
+                正常
             {@/if}
+        </td>
+        <td width="10%">\${item.createUserName}</td>
+        <td>
+            ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-
             <a href="javascript:del('\${item.id}');">删除</a>
-
         </td>
     </tr>
     {@/each}
@@ -217,27 +162,7 @@
 </div>
 
 
-<!--审核弹框-->
-<div class="modal fade" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
 
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green audit">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" role="dialog" id="modal-preview">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
@@ -262,121 +187,121 @@
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
 
-                                    <div class="form-group">
-                    <label class="col-md-2 view-label">主键</label>
-                    <div class="col-md-10">
-                        \${id}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">建筑编号</label>
-                    <div class="col-md-10">
-                        \${code}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">建筑名称</label>
-                    <div class="col-md-10">
-                        \${name}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">建筑物类型</label>
-                    <div class="col-md-10">
-                        \${type}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">建筑描述</label>
-                    <div class="col-md-10">
-                        \${depict}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">所在地</label>
-                    <div class="col-md-10">
-                        \${address}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">经度</label>
-                    <div class="col-md-10">
-                        \${longitude}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">纬度</label>
-                    <div class="col-md-10">
-                        \${latitude}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">重点建筑标记</label>
-                    <div class="col-md-10">
-                        \${mainTag}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">建筑物状态</label>
-                    <div class="col-md-10">
-                        \${state}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">分区编码</label>
-                    <div class="col-md-10">
-                        \${subareaCode}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">备注</label>
-                    <div class="col-md-10">
-                        \${remark}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">状态</label>
-                    <div class="col-md-10">
-                        \${status}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">创建人编号</label>
-                    <div class="col-md-10">
-                        \${createUserId}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">创建人姓名</label>
-                    <div class="col-md-10">
-                        \${createUserName}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">创建日期</label>
-                    <div class="col-md-10">
-                        \${createDate}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">更新人编号</label>
-                    <div class="col-md-10">
-                        \${lastModifyUserId}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">更新人名称</label>
-                    <div class="col-md-10">
-                        \${lastModifyUserName}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">更新日期</label>
-                    <div class="col-md-10">
-                        \${lastModifyDate}
-                    </div>
-                </div>
-                    
+        <div class="form-group">
+            <label class="col-md-2 view-label">主键</label>
+            <div class="col-md-10">
+                \${id}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">建筑编号</label>
+            <div class="col-md-10">
+                \${code}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">建筑名称</label>
+            <div class="col-md-10">
+                \${name}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">建筑物类型</label>
+            <div class="col-md-10">
+                \${type}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">建筑描述</label>
+            <div class="col-md-10">
+                \${depict}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">所在地</label>
+            <div class="col-md-10">
+                \${address}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">经度</label>
+            <div class="col-md-10">
+                \${longitude}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">纬度</label>
+            <div class="col-md-10">
+                \${latitude}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">重点建筑标记</label>
+            <div class="col-md-10">
+                \${mainTag}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">建筑物状态</label>
+            <div class="col-md-10">
+                \${state}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">分区编码</label>
+            <div class="col-md-10">
+                \${subareaCode}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">状态</label>
+            <div class="col-md-10">
+                \${status}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人编号</label>
+            <div class="col-md-10">
+                \${createUserId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人姓名</label>
+            <div class="col-md-10">
+                \${createUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建日期</label>
+            <div class="col-md-10">
+                \${createDate}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新人编号</label>
+            <div class="col-md-10">
+                \${lastModifyUserId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新人名称</label>
+            <div class="col-md-10">
+                \${lastModifyUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新日期</label>
+            <div class="col-md-10">
+                \${lastModifyDate}
+            </div>
+        </div>
+
         <h4>结果</h4>
         <hr>
         <div class="form-group " id="operation">
@@ -404,121 +329,91 @@
 </script>
 
 <script id="tpl-preview" type="text/template">
-                                <div class="form-group">
-                <label class="col-md-2 view-label">主键</label>
-                <div class="col-md-10">
-                    \${id}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">建筑编号</label>
-                <div class="col-md-10">
-                    \${code}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">建筑名称</label>
-                <div class="col-md-10">
-                    \${name}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">建筑物类型</label>
-                <div class="col-md-10">
-                    \${type}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">建筑描述</label>
-                <div class="col-md-10">
-                    \${depict}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">所在地</label>
-                <div class="col-md-10">
-                    \${address}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">经度</label>
-                <div class="col-md-10">
-                    \${longitude}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">纬度</label>
-                <div class="col-md-10">
-                    \${latitude}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">重点建筑标记</label>
-                <div class="col-md-10">
-                    \${mainTag}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">建筑物状态</label>
-                <div class="col-md-10">
-                    \${state}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">分区编码</label>
-                <div class="col-md-10">
-                    \${subareaCode}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">备注</label>
-                <div class="col-md-10">
-                    \${remark}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">状态</label>
-                <div class="col-md-10">
-                    \${status}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">创建人编号</label>
-                <div class="col-md-10">
-                    \${createUserId}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">创建人姓名</label>
-                <div class="col-md-10">
-                    \${createUserName}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">创建日期</label>
-                <div class="col-md-10">
-                    \${createDate}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">更新人编号</label>
-                <div class="col-md-10">
-                    \${lastModifyUserId}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">更新人名称</label>
-                <div class="col-md-10">
-                    \${lastModifyUserName}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">更新日期</label>
-                <div class="col-md-10">
-                    \${lastModifyDate}
-                </div>
-            </div>
-                    </script>
+    <div class="form-group">
+        <label class="col-md-2 view-label">建筑编号</label>
+        <div class="col-md-10">
+            \${data.o.code}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">建筑名称</label>
+        <div class="col-md-10">
+            \${data.o.name}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">建筑物类型</label>
+        <div class="col-md-10">
+            \${data.o.type}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">建筑描述</label>
+        <div class="col-md-10">
+            \${data.o.depict}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">所在地</label>
+        <div class="col-md-10">
+            \${data.o.address}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">经度</label>
+        <div class="col-md-10">
+            \${data.o.longitude}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">纬度</label>
+        <div class="col-md-10">
+            \${data.o.latitude}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">重点建筑标记</label>
+        <div class="col-md-10">
+            \${data.o.mainTag}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">建筑物状态</label>
+        <div class="col-md-10">
+            \${data.o.state}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">分区编码</label>
+        <div class="col-md-10">
+            \${data.o.subareaCode}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">备注</label>
+        <div class="col-md-10">
+            \${data.o.remark}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">状态</label>
+        <div class="col-md-10">
+            \${data.o.status}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">创建人姓名</label>
+        <div class="col-md-10">
+            \${data.o.createUserName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">创建日期</label>
+        <div class="col-md-10">
+            \${data.o.createDate}
+        </div>
+    </div>
+</script>
 <style>
     .cover {
         width: 70px;

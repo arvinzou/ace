@@ -43,13 +43,17 @@
     <div class="form-body">
         <div class="form-group">
             <label class="col-md-2 control-label">
-
+                <input type="hidden" class="form-control" name="id" value="\${data.o.id}"/>
+                <input type="hidden" class="form-control" name="status" value="\${data.o.status}"/>
+                <input type="hidden" class="form-control" name="createDate" value="\${data.o.createDate}"/>
+                <input type="hidden" class="form-control" name="createUserId" value="\${data.o.createUserId}"/>
+                <input type="hidden" class="form-control" name="createUserName" value="\${data.o.createUserName}"/>
                 分区编码
                 <span class="required" aria-required="true"> * </span>
             </label>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <input type="text" class="form-control" name="subareaCode"
-                       value="\{data.o.subareaCode}" maxlength="50"
+                       value="\${data.o.subareaCode}" maxlength="50"
                        placeholder="请输入分区编码（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
             </div>
@@ -60,9 +64,9 @@
                 站点名称
                 <span class="required" aria-required="true"> * </span>
             </label>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <input type="text" class="form-control" name="name"
-                       value="\{data.o.name}" maxlength="50"
+                       value="\${data.o.name}" maxlength="50"
                        placeholder="请输入站点名称（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
             </div>
@@ -72,21 +76,38 @@
 
                 站点描述
             </label>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <input type="text" class="form-control" name="depict"
-                       value="\{data.o.depict}" maxlength="200"
+                       value="\${data.o.depict}" maxlength="200"
                        placeholder="请输入站点描述（建议字数在14个字以内，不超过200个字)">
                 <span class="help-block"></span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
+                详细地址
+                <span class="required" aria-required="true"> * </span>
+            </label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="address" maxlength="50" readonly
+                       placeholder="请选择详细地址" style="float:left;width:80%" value="\${data.o.address}">
+                <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
+                   style="float:right;line-height: 28px;">选择</a>
+                <span class="help-block"></span>
+                <input name="latitude" type="hidden" value="\${data.o.latitude}"/>
+                <input name="longitude" type="hidden" value="\${data.o.longitude}"/>
+                <span class="help-block"></span>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
 
                 备注
             </label>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <input type="text" class="form-control" name="remark"
-                       value="\{data.o.remark}" maxlength="200"
+                       value="\${data.o.remark}" maxlength="200"
                        placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
                 <span class="help-block"></span>
             </div>

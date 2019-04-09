@@ -2,9 +2,7 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("
-            < li > < span > 创建站点管理 < /span></
-        li > ");
+        $(".breadcrumb").append("<li> <span> 创建站点管理 </span></li > ");
         initPage();
         initEvents();
 
@@ -105,4 +103,16 @@ function save(params) {
 function initForm() {
     var data = staticDictObject;
     render('#fm-add-panel', data, 'tpl-fm-add');
+}
+
+function latitude(latitude) {
+    $("input[name=latitude]").val(latitude);
+}
+
+function longitude(longitude) {
+    $("input[name=longitude]").val(longitude);
+}
+
+function addr(addr) {
+    $("input[name=address]").val(addr);
 }

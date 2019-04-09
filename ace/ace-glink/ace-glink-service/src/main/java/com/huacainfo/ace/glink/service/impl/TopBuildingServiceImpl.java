@@ -55,14 +55,9 @@ public class TopBuildingServiceImpl implements TopBuildingService {
      * @version: 2019-04-09
      */
     @Override
-    public PageResult
-            <TopBuildingVo> findTopBuildingList(TopBuildingQVo condition, int start, int limit, String orderBy) throws
-            Exception {
-        PageResult
-                <TopBuildingVo> rst = new PageResult<>();
-        List
-                <TopBuildingVo> list = this.topBuildingDao.findList(condition,
-                start, limit, orderBy);
+    public PageResult<TopBuildingVo> findTopBuildingList(TopBuildingQVo condition, int start, int limit, String orderBy) throws Exception {
+        PageResult <TopBuildingVo> rst = new PageResult<>();
+        List<TopBuildingVo> list = this.topBuildingDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.topBuildingDao.findCount(condition);
@@ -85,9 +80,6 @@ public class TopBuildingServiceImpl implements TopBuildingService {
     @Override
     public MessageResponse insertTopBuilding(TopBuilding o, UserProp userProp) throws Exception {
 
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getCode())) {
             return new MessageResponse(1, "建筑编号不能为空！");
         }
@@ -103,19 +95,14 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         if (CommonUtils.isBlank(o.getSubareaCode())) {
             return new MessageResponse(1, "分区编码不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-
-
         int temp = this.topBuildingDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "建筑物管理名称重复！");
         }
-
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
+        o.setState("0");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.topBuildingDao.insert(o);
@@ -138,9 +125,6 @@ public class TopBuildingServiceImpl implements TopBuildingService {
      */
     @Override
     public MessageResponse updateTopBuilding(TopBuilding o, UserProp userProp) throws Exception {
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getCode())) {
             return new MessageResponse(1, "建筑编号不能为空！");
         }
@@ -156,11 +140,7 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         if (CommonUtils.isBlank(o.getSubareaCode())) {
             return new MessageResponse(1, "分区编码不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-
-
+        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -301,84 +281,6 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         this.dataBaseLogService.log("建筑物管理导入", "建筑物管理", "",
                 "rs.xls", "rs.xls", userProp);
         return new MessageResponse(0, "导入成功！");
-    }
-
-
-    /**
-     * @throws
-     * @Title:getList
-     * @Description: TODO(条件查询数据)
-     * @param: @param p
-     * @param: @return
-     * @param: @throws Exception
-     * @return: ListResult
-     * <Map
-     * <String
-     * ,Object>>
-     * @author: luocan
-     * @version: 2019-04-09
-     */
-    @Override
-    public ListResult<Map <String, Object>> getList(Map <String, Object> p) throws Exception {
-        ListResult<Map <String ,Object>> rst = new ListResult<>();
-        rst.setValue(this.topBuildingDao.getList(p));
-
-        return rst;
-    }
-
-
-    /**
-     * @throws
-     * @Title:getListByCondition
-     * @Description: TODO(用于控件数据获取)
-     * @param: @param params
-     * @param: @return
-     * @return: Map
-     * <String
-     * ,Object>
-     * @author: luocan
-     * @version: 2019-04-09
-     */
-    @Override
-    public Map
-            <String
-                    , Object> getListByCondition(Map
-                                                         <String
-                                                                 , Object> params) {
-        Map
-                <String
-                        , Object> rst = new HashMap
-                <String
-                        , Object>();
-        List
-                <Map
-                        <String
-                                , Object>> list = this.topBuildingDao.getListByCondition(params);
-        rst.put("total", list.size());
-        rst.put("rows", list);
-        return rst;
-    }
-
-    /**
-     * @throws
-     * @Title:deleteRoadSectionByRoadSectionIds
-     * @Description: TODO(批量删除建筑物管理 ）
-     * @param: @param ids
-     * @param: @param userProp
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: luocan
-     * @version: 2019-04-09
-     */
-    @Override
-    public MessageResponse deleteTopBuildingByTopBuildingIds(String[] id, UserProp userProp)
-            throws Exception {
-
-        this.topBuildingDao.deleteByPrimaryKeys(id);
-        this.dataBaseLogService.log("批量删除建筑物管理", "建筑物管理", id[0],
-                id[0], "建筑物管理", userProp);
-        return new MessageResponse(0, "删除成功！");
-
     }
 
 

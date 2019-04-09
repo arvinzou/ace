@@ -214,65 +214,6 @@ private TopBuildingService topBuildingService;
                 }
                 return this.topBuildingService.importXls(list, this.getCurUserProp());
                 }
-
-
-                /**
-                * @throws
-                * @Title:audit
-                * @Description: TODO(条件查询)
-                * @param: @param p
-                * @param: @throws Exception
-                * @return: ListResult
-                * @author: luocan
-                * @version:2019-04-09
-                */
-                @RequestMapping(value = "/getList")
-                @ResponseBody
-                public ListResult<Map
-                                <String
-                                ,Object>> getList() throws Exception {
-                return this.topBuildingService.getList(this.getParams());
-                }
-
-
-                /**
-                * @throws
-                * @Title:getListByCondition
-                * @Description: TODO(用于控件数据获取)
-                * @param: @param params
-                * @param: @return
-                * @return: Map
-                <String
-                ,Object>
-                * @author: luocan
-                * @version:2019-04-09
-                */
-                @RequestMapping(value = "/getListByCondition")
-                @ResponseBody
-                public Map
-                <String
-                , Object> getListByCondition() {
-                return this.topBuildingService.getListByCondition(this.getParams());
-                }
-
-
-                /**
-                * @throws
-                * @Title:deleteTopBuildingByTopBuildingIds
-                * @Description: TODO(批量删除建筑物管理)
-                * @param: @param ids
-                * @param: @throws Exception
-                * @return: MessageResponse
-                * @author: luocan
-                * @version:2019-04-09
-                */
-                @RequestMapping(value = "/deleteTopBuildingByTopBuildingIds")
-                @ResponseBody
-                public MessageResponse deleteTopBuildingByTopBuildingIds(String ids) throws Exception {
-                String [] id=ids.split(",");
-                return this.topBuildingService.deleteTopBuildingByTopBuildingIds(id, this.getCurUserProp());
-                }
-
                 /**
                 * @throws
                 * @Title:updateStatus
