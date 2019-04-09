@@ -105,6 +105,7 @@ function initForm(){
                 var data={};
                 data['o']=result.value;
                 render('#fm-edit',data,'tpl-fm');
+                initDict(result.value.type, result.value.subareaCode);
                 initPage();
                 //富文本填值
                 //editor.setValue(data['o'].summary);
@@ -115,6 +116,57 @@ function initForm(){
         error:function(){
         stopLoad();
         alert("对不起出错了！");
+        }
+    });
+}
+
+function initDict(type, subareaCode){
+    var data=staticDictObject['177'];
+    var dataList = [];
+    for(var i=0; i < data.length; i++){
+        if(data[i].CODE != ""){
+            if(type && type == data[i].CODE){
+                data[i].selected = "selected";
+            }
+            dataList.push(data[i]);
+        }
+    }
+    render('#type',dataList,'type-tpl');
+    initSubAreaList(subareaCode);
+}
+
+function initSubAreaList(subareaCode){
+    startLoad();
+    $.ajax({
+        url: contextPath + "/topSubarea/findTopSubareaList",
+        type: "post",
+        async: false,
+        data: {
+            start: 0,
+            limit: 999
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var dataList = result.rows;
+                var areaList = [];
+                    for(var i=0; i<dataList.length; i++){
+                        var o = {};
+                        if(subareaCode == dataList[i].code){
+                            o.selected = "selected";
+                        }
+                        o.code = dataList[i].code;
+                        o.name = dataList[i].name;
+                        areaList.push(o);
+                    }
+                render('#areaList',areaList, 'area-tpl');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
         }
     });
 }

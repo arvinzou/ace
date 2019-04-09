@@ -3,6 +3,7 @@ var params = {limit: 10};
 window.onload = function () {
     initPage();
     initEvents();
+    initSubAreaList();
     initJuicerMethod();
 }
 
@@ -179,22 +180,24 @@ function initEvents() {
         });
     }
 
-function initClassList(ctrlId) {
+function initSubAreaList(){
     startLoad();
     $.ajax({
-        url: contextPath + "/topBuilding/getClassList",
+        url: contextPath + "/topSubarea/findTopSubareaList",
         type: "post",
         async: false,
-        data: {},
+        data: {
+            start: 0,
+            limit: 999
+        },
         success: function (result) {
             stopLoad();
             if (result.status == 0) {
-                var data = result.value;
-                var all = {id: "", name: "全部"};
-                data.unshift(all);
-                render('#' + ctrlId, data, 'tpl-cls-option');
-                params.category = '2';
-                initGrid();
+
+                var dataList = result.rows;
+                var o = {code: "", name: "全部"};
+                dataList.unshift(o);
+                render('#subArea', dataList, 'area-list');
             } else {
                 alert(result.errorMessage);
             }
