@@ -85,24 +85,17 @@ public class TopStationServiceImpl implements TopStationService {
     @Override
     public MessageResponse insertTopStation(TopStation o, UserProp userProp) throws Exception {
 
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getSubareaCode())) {
             return new MessageResponse(1, "分区编码不能为空！");
         }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "站点名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
-
-
-        int temp = this.topStationDao.isExit(o);
+       /* int temp = this.topStationDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "站点管理名称重复！");
-        }
+        }*/
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
@@ -129,17 +122,12 @@ public class TopStationServiceImpl implements TopStationService {
      */
     @Override
     public MessageResponse updateTopStation(TopStation o, UserProp userProp) throws Exception {
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getSubareaCode())) {
             return new MessageResponse(1, "分区编码不能为空！");
         }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "站点名称不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
         }
 
 
@@ -169,6 +157,14 @@ public class TopStationServiceImpl implements TopStationService {
         SingleResult
                 <TopStationVo> rst = new SingleResult<>();
         rst.setValue(this.topStationDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+
+    @Override
+    public SingleResult<TopStation> selectByPrimaryKey(String id) throws Exception {
+        SingleResult
+                <TopStation> rst = new SingleResult<>();
+        rst.setValue(this.topStationDao.selectByPrimaryKey(id));
         return rst;
     }
 
@@ -292,15 +288,9 @@ public class TopStationServiceImpl implements TopStationService {
      * @version: 2019-04-09
      */
     @Override
-    public ListResult<Map
-                        <String
-                                , Object>> getList(Map
-                                                       <String
-                                                               , Object> p) throws Exception {
-        ListResult
-                <Map
-                        <String
-                                , Object>> rst = new ListResult<>();
+
+    public ListResult<Map<String, Object>> getList(Map<String, Object> p) throws Exception {
+        ListResult<Map<String, Object>> rst = new ListResult<>();
         rst.setValue(this.topStationDao.getList(p));
 
         return rst;
@@ -384,3 +374,4 @@ public class TopStationServiceImpl implements TopStationService {
     }
 
 }
+

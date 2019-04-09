@@ -41,7 +41,7 @@
                     分区编码
                     <span class="required" aria-required="true"> * </span>
                 </label>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <input type="text" class="form-control" name="subareaCode" maxlength="50"
                            placeholder="请输入分区编码（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
@@ -52,7 +52,7 @@
                     站点名称
                     <span class="required" aria-required="true"> * </span>
                 </label>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <input type="text" class="form-control" name="name" maxlength="50"
                            placeholder="请输入站点名称（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
@@ -60,9 +60,26 @@
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
+                    详细地址
+                    <span class="required" aria-required="true"> * </span>
+                </label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="address" maxlength="50" readonly
+                           placeholder="请选择详细地址" style="float:left;width:80%">
+                    <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
+                       style="float:right;line-height: 28px;">选择</a>
+                    <span class="help-block"></span>
+                    <input name="latitude" type="hidden"/>
+                    <input name="longitude" type="hidden"/>
+                    <span class="help-block"></span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
                     站点描述
                 </label>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <input type="text" class="form-control" name="depict" maxlength="200"
                            placeholder="请输入站点描述（建议字数在14个字以内，不超过200个字)">
                     <span class="help-block"></span>
@@ -72,7 +89,7 @@
                 <label class="col-md-2 control-label">
                     备注
                 </label>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <input type="text" class="form-control" name="remark" maxlength="200"
                            placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
                     <span class="help-block"></span>

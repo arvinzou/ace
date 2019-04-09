@@ -1,5 +1,6 @@
 package com.huacainfo.ace.glink.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TopStation implements java.io.Serializable {
@@ -27,6 +28,12 @@ public class TopStation implements java.io.Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    private String address;
+
+    private BigDecimal longitude;
+
+    private BigDecimal latitude;
 
     public String getId() {
         return id;
@@ -122,5 +129,29 @@ public class TopStation implements java.io.Serializable {
 
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
     }
 }

@@ -1,74 +1,225 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
-<html lang="cn">
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>节点管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="${cfg.sys_name}" name="description"/>
+    <jsp:include page="/dynamic/common/header.jsp"/>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<jsp:include page="/dynamic/common/header.jsp"/>
-<link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
-
 <body>
-
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<div class="portlet light ">
+<div class="portlet light">
+
     <div class="portlet-body">
+
         <div class="row custom-toolbar">
-            <form action="#" id="fm-search">
-                <div class="col-md-9 toolbar">
+            <div class="col-md-3">
+                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+            </div>
 
-                    <button type="button" class="btn  green" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/topNode/insertTopNode">添加
-                    </button>
+            <div class="col-md-9">
 
-                </div>
-                <div class="col-md-3">
-
-
+                <form id="fm-search">
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
+                    </div>
                     <div class="input-group">
                         <input type="text"
-                               name="name"
+                               name="keyword"
                                class="form-control"
-                               placeholder="请输入名称">
+                               placeholder="请输入节点名称和节点编号">
                         <span class="input-group-btn">
-							<button class="btn  btn-default search_btn" id="btn-search"
-                                    authority="${pageContext.request.contextPath}/topNode/findTopNodeList">
-									搜索
-							</button>
-						</span>
+                            <button class="btn  btn-default search_btn" type="submit">
+                                    搜索
+                            </button>
+                        </span>
                     </div>
+                </form>
+            </div>
 
-                </div>
-
-            </form>
         </div>
 
-        <table id="grid-table"></table>
 
+        <div class="table-scrollable">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th width="10%"> 节点编号</th>
+                    <th width="10%"> 节点名称</th>
+                    <%--<th width="10%"> 节点描述</th>--%>
+                    <%--<th width="10%"> 详细地址</th>--%>
+                    <%--<th width="10%"> IPV4地址</th>--%>
+                    <%--<th width="10%"> IPV6地址</th>--%>
+                    <%--<th width="10%"> 端口号</th>--%>
+                    <%--<th width="10%"> 分辨率-宽</th>--%>
+                    <%--<th width="10%"> 分辨率-高</th>--%>
+                    <%--<th width="10%"> mac地址</th>--%>
+                    <th width="10%"> 控制器数量</th>
+                    <th width="10%"> 建筑物ID</th>
+                    <th width="10%"> 备注</th>
+                    <th width="10%"> 状态</th>
+                    <th width="15%">操作</th>
+                </tr>
+                </thead>
+                <tbody id="page-list">
+
+                </tbody>
+            </table>
+        </div>
         <div class="paginationbar">
-            <ul id="grid-pager" class="pagination"></ul>
+            <ul class="pagination" id="pagination1"></ul>
+        </div>
+
+    </div>
+
+</div>
+
+
+<%--=============common jsp-suffix===============--%>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<%--==============common jsp-suffix==============--%>
+</body>
+
+<%--列表juicer模板--%>
+<script id="tpl-list" type="text/template">
+    {@each data as item, index}
+    <tr>
+        <td> \${item.code}</td>
+        <td> \${item.name}</td>
+        <%--<td> \${item.depict}</td>--%>
+        <%--<td> \${item.address}</td>--%>
+        <%--<td> \${item.ipv4}</td>--%>
+        <%--<td> \${item.ipv6}</td>--%>
+        <%--<td> \${item.port}</td>--%>
+        <%--<td> \${item.resolutionWidth}</td>--%>
+        <%--<td> \${item.resolutionHeight}</td>--%>
+        <%--<td> \${item.macAddr}</td>--%>
+        <td> \${item.ctrlNum}</td>
+        <td> \${item.buildingId}</td>
+        <td> \${item.remark}</td>
+        <td> \${item.status}</td>
+        <td>
+            {@if item.status==0}
+            <span class="label label-lg label-danger">删除</span>
+            {@else if item.status==1}
+            <span class="label label-lg label-success">正常</span>
+            {@else if item.status==2}
+            <span class="label label-lg label-warning">待审</span>
+            {@else if item.status==3}
+            <span class="label label-lg label-info">通过</span>
+            <div style="padding-top:10px">\${item.auditRemark}</div>
+            {@else if item.status==4}
+            <span class="label label-lg label-info">驳回</span>
+            <div style="padding-top:10px">\${item.auditRemark}</div>
+            {@else}
+            <span class="label label-lg label-danger">暂存</span>
+            {@/if}
+        </td>
+        <td>
+            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+               data-target="#modal-status">设置状态</a>
+            {@if item.auditStatus==1}
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
+            {@/if}
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+               data-target="#modal-preview">查看</a>
+            <a href="javascript:del('\${item.id}');">删除</a>
+
+        </td>
+    </tr>
+    {@/each}
+</script>
+﻿
+<div class="modal fade " id="modal-status">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">设置状态</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-status" role="form">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-2 view-label">对象</label>
+                            <div class="col-md-10 status-title">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">状态</label>
+                            <div class="col-md-10">
+                                <div class="radio-group-container">
+                                    <input type="hidden" name="id">
+                                    <label>
+                                        <input type="radio" name="status" value="1"><span style="padding:10px">预播</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="status" value="2"><span
+                                            style="padding:10px">直播中</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="status" value="3"><span style="padding:10px">历史</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green status">确定</button>
+            </div>
         </div>
     </div>
 </div>
 
-<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<jsp:include page="/dynamic/common/footer.jsp"/>
 
-<%--查看详情--%>
-<div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document" style="width: 75%;">
+<!--审核弹框-->
+<div class="modal fade" role="dialog" id="modal-audit">
+    <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">审核</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-audit" role="form">
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green audit">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" id="modal-preview">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">详细</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 600px;overflow: auto">
                 <div class="form-horizontal" role="form">
                     <div class="form-body" id="fm-preview">
 
@@ -76,112 +227,322 @@ pageEncoding="utf-8"%>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
 </div>
-<%--详情juicer模板--%>
+<script id="tpl-fm" type="text/template">
+    <div class="form-body">
+
+        <div class="form-group">
+            <label class="col-md-2 view-label">主键</label>
+            <div class="col-md-10">
+                \${id}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">节点编号</label>
+            <div class="col-md-10">
+                \${code}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">节点名称</label>
+            <div class="col-md-10">
+                \${name}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">节点描述</label>
+            <div class="col-md-10">
+                \${depict}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">详细地址</label>
+            <div class="col-md-10">
+                \${address}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">经度</label>
+            <div class="col-md-10">
+                \${longitude}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">纬度</label>
+            <div class="col-md-10">
+                \${latitude}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">IPV4地址</label>
+            <div class="col-md-10">
+                \${ipv4}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">IPV6地址</label>
+            <div class="col-md-10">
+                \${ipv6}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">端口号</label>
+            <div class="col-md-10">
+                \${port}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">分辨率-宽</label>
+            <div class="col-md-10">
+                \${resolutionWidth}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">分辨率-高</label>
+            <div class="col-md-10">
+                \${resolutionHeight}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">mac地址</label>
+            <div class="col-md-10">
+                \${macAddr}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">控制器数量</label>
+            <div class="col-md-10">
+                \${ctrlNum}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">建筑物ID</label>
+            <div class="col-md-10">
+                \${buildingId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">状态 </label>
+            <div class="col-md-10">
+                \${status}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人编号</label>
+            <div class="col-md-10">
+                \${createUserId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人姓名</label>
+            <div class="col-md-10">
+                \${createUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建日期</label>
+            <div class="col-md-10">
+                \${createDate}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新人编号</label>
+            <div class="col-md-10">
+                \${lastModifyUserId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新人名称</label>
+            <div class="col-md-10">
+                \${lastModifyUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新日期</label>
+            <div class="col-md-10">
+                \${lastModifyDate}
+            </div>
+        </div>
+
+        <h4>结果</h4>
+        <hr>
+        <div class="form-group " id="operation">
+            <label class="col-md-2 control-label">结果</label>
+            <div class="col-md-10">
+                <div class="radio-group-container">
+                    <label>
+                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">说明</label>
+            <div class="col-md-10">
+                <input type="hidden" name="id" value="\${data.o.id}">
+                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
+            </div>
+        </div>
+    </div>
+
+</script>
+
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
-        <label class="col-md-2 view-label">姓名</label>
+        <label class="col-md-2 view-label">节点编号</label>
         <div class="col-md-10">
-            {@if data.o.headimgurl!='' && data.o.headimgurl!=null && data.o.headimgurl!=undefined}
-            <img src="\${data.o.photoUrl}" class="cover"/>
-            {@else}
-            <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
-            {@/if}
-            <a>\${data.o.name}</a>
+            \${data.code}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">手机号码</label>
+        <label class="col-md-2 view-label">节点名称</label>
         <div class="col-md-10">
-            \${data.o.mobile}
+            \${data.name}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">身份证号码</label>
+        <label class="col-md-2 view-label">节点描述</label>
         <div class="col-md-10">
-            \${data.o.idCard}
+            \${data.depict}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">介绍</label>
+        <label class="col-md-2 view-label">详细地址</label>
         <div class="col-md-10">
-            \${data.o.introduce}
+            \${data.address}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">经度</label>
+        <div class="col-md-10">
+            \${data.longitude}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">纬度</label>
+        <div class="col-md-10">
+            \${data.latitude}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">IPV4地址</label>
+        <div class="col-md-10">
+            \${data.ipv4}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">IPV6地址</label>
+        <div class="col-md-10">
+            \${data.ipv6}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">端口号</label>
+        <div class="col-md-10">
+            \${data.port}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">分辨率-宽</label>
+        <div class="col-md-10">
+            \${data.resolutionWidth}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">分辨率-高</label>
+        <div class="col-md-10">
+            \${data.resolutionHeight}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">mac地址</label>
+        <div class="col-md-10">
+            \${data.macAddr}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">控制器数量</label>
+        <div class="col-md-10">
+            \${data.ctrlNum}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">建筑物ID</label>
+        <div class="col-md-10">
+            \${data.buildingId}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">备注</label>
+        <div class="col-md-10">
+            \${remark}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">状态 </label>
+        <div class="col-md-10">
+            \${data.status}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">创建人姓名</label>
+        <div class="col-md-10">
+            \${data.createUserName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">创建日期</label>
+        <div class="col-md-10">
+            \${data.createDate}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">更新人名称</label>
+        <div class="col-md-10">
+            \${data.lastModifyUserName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">更新日期</label>
+        <div class="col-md-10">
+            \${data.lastModifyDate}
         </div>
     </div>
 </script>
-
-
-<script id="tpl-check-group" type="text/template">
-
-    {@each data.list as item, index}
-    {@if item.CODE}
-    <button type="button" authority="false" class="btn btn-default"
-            onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}
-    </button>
-    {@else}
-    <button type="button" authority="false" class="btn btn-default" onclick="setParams('\${data.key}','');">全部</button>
-    {@/if}
-
-    {@/each}
-
-</script>
-
-<div class="modal fade" role="dialog" id="modal-upload">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" authority="false" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">Excel导入</h4>
-            </div>
-            <div class="modal-body">
-                <div id="uploader">
-                </div>
-                <div style="margin:5px">
-                    <a href="roadSection.xls" style="color:red">下载模板</a>.<br>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<%--easyui--%>
-<link rel="stylesheet" type="text/css"
-      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
-<link rel="stylesheet" type="text/css"
-      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
-<%--导出--%>
-<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
-
-<script src="${pageContext.request.contextPath}/content/service/topNode/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/topNode/model.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/topNode/controller.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/topNode/view.js?version=${cfg.version}"></script>
-
-<%--权限管理--%>
-<script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
-
-</body>
 <style>
-    /* css code area*/
+    .cover {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+    }
+
+    .describtion {
+        padding-left: 15px;
+        height: 50px;
+    }
+
+    .cost {
+        padding-top: 5px;
+        padding-left: 15px;
+        color: #FE6500;
+    }
 </style>
+<jsp:include page="/dynamic/common/footer.jsp"/>
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 </html>

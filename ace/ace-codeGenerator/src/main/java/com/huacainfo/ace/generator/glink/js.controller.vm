@@ -117,7 +117,9 @@ jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
 beforeShowForm: function (e) {
 var form = $(e[0]);
 if (!show) {
-form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('
+form.closest('.ui-jqdialog')
+.find('.ui-jqdialog-titlebar')
+.wrapInner('
 <div class="widget-header"/>');
 }
 show = true;

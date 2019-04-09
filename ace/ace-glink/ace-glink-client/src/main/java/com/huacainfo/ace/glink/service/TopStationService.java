@@ -72,8 +72,9 @@ public interface TopStationService {
      * @author: heshuang
      * @version: 2019-04-09
      */
-    SingleResult
-            <TopStationVo> selectTopStationByPrimaryKey(String id) throws Exception;
+    SingleResult<TopStationVo> selectTopStationByPrimaryKey(String id) throws Exception;
+
+    SingleResult<TopStation> selectByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -115,10 +116,7 @@ public interface TopStationService {
      * @author: heshuang
      * @version: 2019-04-09
      */
-    public MessageResponse importXls(List
-                                             <Map
-                                                     <String
-                                                             , Object>> list, UserProp userProp) throws Exception;
+    public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception;
 
 
     /**
@@ -135,12 +133,7 @@ public interface TopStationService {
      * @author: heshuang
      * @version: 2019-04-09
      */
-    public ListResult
-            <Map
-                    <String
-                            , Object>> getList(Map
-                                                       <String
-                                                               , Object> p) throws Exception;
+    public ListResult<Map<String, Object>> getList(Map<String, Object> p) throws Exception;
 
 
     /**
@@ -155,11 +148,7 @@ public interface TopStationService {
      * @author: heshuang
      * @version: 2019-04-09
      */
-    public Map
-            <String
-                    , Object> getListByCondition(Map
-                                                         <String
-                                                                 , Object> params);
+    public Map<String, Object> getListByCondition(Map<String, Object> params);
 
 
     /**

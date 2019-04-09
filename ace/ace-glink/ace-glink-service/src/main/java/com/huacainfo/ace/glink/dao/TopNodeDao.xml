@@ -59,223 +59,6 @@
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.huacainfo.ace.glink.model.TopNode">
-    insert into top_node
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="code != null">
-        code,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="depict != null">
-        depict,
-      </if>
-      <if test="address != null">
-        address,
-      </if>
-      <if test="longitude != null">
-        longitude,
-      </if>
-      <if test="latitude != null">
-        latitude,
-      </if>
-      <if test="ipv4 != null">
-        ipv4,
-      </if>
-      <if test="ipv6 != null">
-        ipv6,
-      </if>
-      <if test="port != null">
-        port,
-      </if>
-      <if test="resolutionWidth != null">
-        resolutionWidth,
-      </if>
-      <if test="resolutionHeight != null">
-        resolutionHeight,
-      </if>
-      <if test="macAddr != null">
-        macAddr,
-      </if>
-      <if test="ctrlNum != null">
-        ctrlNum,
-      </if>
-      <if test="buildingId != null">
-        buildingId,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="createUserId != null">
-        createUserId,
-      </if>
-      <if test="createUserName != null">
-        createUserName,
-      </if>
-      <if test="createDate != null">
-        createDate,
-      </if>
-      <if test="lastModifyUserId != null">
-        lastModifyUserId,
-      </if>
-      <if test="lastModifyUserName != null">
-        lastModifyUserName,
-      </if>
-      <if test="lastModifyDate != null">
-        lastModifyDate,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="code != null">
-        #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="depict != null">
-        #{depict,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="longitude != null">
-        #{longitude,jdbcType=DECIMAL},
-      </if>
-      <if test="latitude != null">
-        #{latitude,jdbcType=DECIMAL},
-      </if>
-      <if test="ipv4 != null">
-        #{ipv4,jdbcType=VARCHAR},
-      </if>
-      <if test="ipv6 != null">
-        #{ipv6,jdbcType=VARCHAR},
-      </if>
-      <if test="port != null">
-        #{port,jdbcType=VARCHAR},
-      </if>
-      <if test="resolutionWidth != null">
-        #{resolutionWidth,jdbcType=BIGINT},
-      </if>
-      <if test="resolutionHeight != null">
-        #{resolutionHeight,jdbcType=BIGINT},
-      </if>
-      <if test="macAddr != null">
-        #{macAddr,jdbcType=VARCHAR},
-      </if>
-      <if test="ctrlNum != null">
-        #{ctrlNum,jdbcType=INTEGER},
-      </if>
-      <if test="buildingId != null">
-        #{buildingId,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=CHAR},
-      </if>
-      <if test="createUserId != null">
-        #{createUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="createUserName != null">
-        #{createUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUserId != null">
-        #{lastModifyUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyUserName != null">
-        #{lastModifyUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyDate != null">
-        #{lastModifyDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.glink.model.TopNode">
-    update top_node
-    <set>
-      <if test="code != null">
-        code = #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="depict != null">
-        depict = #{depict,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="longitude != null">
-        longitude = #{longitude,jdbcType=DECIMAL},
-      </if>
-      <if test="latitude != null">
-        latitude = #{latitude,jdbcType=DECIMAL},
-      </if>
-      <if test="ipv4 != null">
-        ipv4 = #{ipv4,jdbcType=VARCHAR},
-      </if>
-      <if test="ipv6 != null">
-        ipv6 = #{ipv6,jdbcType=VARCHAR},
-      </if>
-      <if test="port != null">
-        port = #{port,jdbcType=VARCHAR},
-      </if>
-      <if test="resolutionWidth != null">
-        resolutionWidth = #{resolutionWidth,jdbcType=BIGINT},
-      </if>
-      <if test="resolutionHeight != null">
-        resolutionHeight = #{resolutionHeight,jdbcType=BIGINT},
-      </if>
-      <if test="macAddr != null">
-        macAddr = #{macAddr,jdbcType=VARCHAR},
-      </if>
-      <if test="ctrlNum != null">
-        ctrlNum = #{ctrlNum,jdbcType=INTEGER},
-      </if>
-      <if test="buildingId != null">
-        buildingId = #{buildingId,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=CHAR},
-      </if>
-      <if test="createUserId != null">
-        createUserId = #{createUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="createUserName != null">
-        createUserName = #{createUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        createDate = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastModifyUserId != null">
-        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyUserName != null">
-        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      </if>
-      <if test="lastModifyDate != null">
-        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.TopNode">
     update top_node
     set code = #{code,jdbcType=VARCHAR},
@@ -294,12 +77,66 @@
       buildingId = #{buildingId,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+  <!--#################################################################################################################################################-->
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.TopNodeVo"></resultMap>
+
+  <sql id="Vo_Column_List">
+   t.id, t.code, t.name, t.depict, t.address, t.longitude, t.latitude, t.ipv4, t.ipv6, t.port, t.resolutionWidth,
+    t.resolutionHeight, t.macAddr, t.ctrlNum, t.buildingId, t.remark, t.status, t.createUserId, t.createUserName,
+    t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+  </sql>
+
+  <sql id="From_Statement">
+    FROM top_node t
+  </sql>
+  <sql id="Where_Condition">
+    where t.status <![CDATA[ <> ]]> 0
+    <if test="condition.name !=null and condition.name !=&quot;&quot;">
+      and (t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') or
+       t.code LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') )
+    </if>
+  </sql>
+
+  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    <include refid="Vo_Column_List"/>
+    <include refid="From_Statement"/>
+    <include refid="Where_Condition"/>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="From_Statement"/>
+    <include refid="Where_Condition"/>
+  </select>
+
+  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopNode">
+    select count(*)
+    from top_node
+    where name=#{name,jdbcType=VARCHAR}
+    and code != #{code,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    <include refid="Vo_Column_List"/>
+    <include refid="From_Statement"/>
+    where t.id = #{id,jdbcType=VARCHAR}
+  </select>
 </mapper>

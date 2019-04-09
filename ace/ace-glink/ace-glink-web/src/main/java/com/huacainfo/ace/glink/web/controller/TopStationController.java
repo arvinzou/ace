@@ -60,8 +60,7 @@ public class TopStationController extends GLinkBaseController {
     public PageResult
             <TopStationVo> findTopStationList(TopStationQVo condition, PageParamNoChangeSord page) throws Exception {
 
-        PageResult
-                <TopStationVo> rst = this.topStationService.findTopStationList(condition, page.getStart(),
+        PageResult<TopStationVo> rst = this.topStationService.findTopStationList(condition, page.getStart(),
                 page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
@@ -117,8 +116,8 @@ public class TopStationController extends GLinkBaseController {
     @RequestMapping(value = "/selectTopStationByPrimaryKey")
     @ResponseBody
     public SingleResult
-            <TopStationVo> selectTopStationByPrimaryKey(String id) throws Exception {
-        return this.topStationService.selectTopStationByPrimaryKey(id);
+            <TopStation> selectTopStationByPrimaryKey(String id) throws Exception {
+        return this.topStationService.selectByPrimaryKey(id);
     }
 
     /**
@@ -133,9 +132,9 @@ public class TopStationController extends GLinkBaseController {
      */
     @RequestMapping(value = "/deleteTopStationByTopStationId")
     @ResponseBody
-    public MessageResponse deleteTopStationByTopStationId(String jsons) throws Exception {
-        JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("id");
+    public MessageResponse deleteTopStationByTopStationId(String id) throws Exception {
+        // JSONObject json = JSON.parseObject(jsons);
+        // String id = json.getString("id");
         return this.topStationService.deleteTopStationByTopStationId(id, this.getCurUserProp());
     }
 
@@ -222,7 +221,8 @@ public class TopStationController extends GLinkBaseController {
      */
     @RequestMapping(value = "/getList")
     @ResponseBody
-    public ListResult<Map
+    public ListResult
+            <Map
                         <String
                                 , Object>> getList() throws Exception {
         return this.topStationService.getList(this.getParams());
