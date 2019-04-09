@@ -89,7 +89,7 @@
     <tr>
         <td width="5%"> \${item.code}</td>
         <td width="20%">\${item.name}</td>
-        <td width="10%">\${item.type}</td>
+        <td width="10%"> \${parseType(item.type)}</td>
         <td width="20%">\${item.address}</td>
         <td width="10%">
             {@if item.state == '1'}
