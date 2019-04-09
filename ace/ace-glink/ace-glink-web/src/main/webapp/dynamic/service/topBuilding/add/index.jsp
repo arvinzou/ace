@@ -107,8 +107,8 @@
                             重点建筑标记
                         </label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="mainTag" maxlength="1"
-                                   placeholder="请输入重点建筑标记（建议字数在14个字以内，不超过1个字)">
+                            <input type="radio" value="0" name="mainTag">不重要
+                            <input type="radio" value="1" name="mainTag">重要
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -117,8 +117,8 @@
                             建筑物状态
                         </label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="state" maxlength="1"
-                                   placeholder="请输入建筑物状态（建议字数在14个字以内，不超过1个字)">
+                            <input type="radio" value="0" name="state">不在线
+                            <input type="radio" value="1" name="state">在线
                             <span class="help-block"></span>
                         </div>
                     </div>
