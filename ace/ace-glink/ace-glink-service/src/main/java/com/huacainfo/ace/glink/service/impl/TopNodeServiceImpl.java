@@ -81,9 +81,6 @@ public class TopNodeServiceImpl implements TopNodeService {
     public MessageResponse insertTopNode(TopNode o, UserProp userProp) throws Exception {
 
         o.setId(GUIDUtil.getGUID());
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getCode())) {
             return new MessageResponse(1, "节点编号不能为空！");
         }
@@ -105,9 +102,7 @@ public class TopNodeServiceImpl implements TopNodeService {
         if (CommonUtils.isBlank(o.getResolutionHeight())) {
             return new MessageResponse(1, "分辨率-高不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
+        o.setStatus("1");
         int temp = this.topNodeDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "节点管理名称重复！");

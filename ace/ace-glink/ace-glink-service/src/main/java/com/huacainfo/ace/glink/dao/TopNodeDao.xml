@@ -99,7 +99,8 @@
   <sql id="Where_Condition">
     where t.status <![CDATA[ <> ]]> 0
     <if test="condition.name !=null and condition.name !=&quot;&quot;">
-      and t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+      and (t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') or
+       t.code LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') )
     </if>
   </sql>
 
