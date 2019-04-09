@@ -38,23 +38,36 @@ initForm();
 function initEvents(){
 /*表单验证*/
 $("#fm-add").validate({
-onfocusout: function(element) { $(element).valid(); },
-rules: {
-            code: {required: true,maxlength:50},            name: {required: true,maxlength:50},            address: {required: true,maxlength:200},            subareaCode: {required: true,maxlength:50}    },
-messages: {
+    onfocusout: function(element) { $(element).valid(); },
+    rules: {
+            code: {required: true,maxlength:50},
+            name: {required: true,maxlength:50},
+            address: {required: true,maxlength:200},
+            subareaCode: {required: true,maxlength:50},
+            type: {required: true, maxlength:5}
+            },
+    messages: {
             code: {
-    required: "请输入建筑编号",
-    maxlength:"建筑编号字符长度不能超过50"
-    },            name: {
-    required: "请输入建筑名称",
-    maxlength:"建筑名称字符长度不能超过50"
-    },            address: {
-    required: "请输入所在地",
-    maxlength:"所在地字符长度不能超过200"
-    },            subareaCode: {
-    required: "请输入分区编码",
-    maxlength:"分区编码字符长度不能超过50"
-    }    }
+                required: "请输入建筑编号",
+                maxlength:"建筑编号字符长度不能超过50"
+            },
+            name: {
+                required: "请输入建筑名称",
+                maxlength:"建筑名称字符长度不能超过50"
+             },
+            address: {
+                required: "请输入所在地",
+                maxlength:"所在地字符长度不能超过200"
+            },
+            subareaCode: {
+                required: "请输入分区编码",
+                maxlength:"分区编码字符长度不能超过50"
+            },
+            type: {
+                required: "请选择建筑类型",
+                maxlength:"建筑类型字符长度不能超过5"
+            }
+}
 });
 /*监听表单提交*/
 $('#fm-add').ajaxForm({
@@ -100,6 +113,11 @@ alert("对不起出错了！");
 }
 
 function initForm(){
-var data=staticDictObject;
+var data=staticDictObject['177'];
+/*for(var i=0; i < data.length; i++){
+    if(data[i].CODE == ""){
+        data[i].NAME = "请选择建筑类型";
+    }
+}*/
 render('#fm-add-panel',data,'tpl-fm-add');
 }

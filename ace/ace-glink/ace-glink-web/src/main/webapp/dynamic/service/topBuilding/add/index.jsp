@@ -61,12 +61,14 @@
                                     <div class="form-group">
                         <label class="col-md-2 control-label">
                             建筑物类型
-                                                            <span class="required" aria-required="true"> * </span>
-                                                    </label>
+                            <span class="required" aria-required="true"> * </span>
+                        </label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="type" maxlength="2"
-                                   placeholder="请输入建筑物类型（建议字数在14个字以内，不超过2个字)">
-                            <span class="help-block"></span>
+                            <select name="type" id="type" class="form-control">
+                                {@each data as typeItem, index}
+                                <option value="\${typeItem.CODE}">\${typeItem.NAME}</option>
+                                {@/each}
+                            </select>
                         </div>
                     </div>
                                     <div class="form-group">
@@ -161,9 +163,8 @@
             </div>
         </div>
     </form>
-
-
 </script>
+
 
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>

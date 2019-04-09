@@ -122,30 +122,38 @@ function initPage() {
         });
     }
 
-    function initEvents() {
-    ﻿   $('#modal-preview').on('show.bs.modal', function (event) {
-            var relatedTarget = $(event.relatedTarget);
-            var id = relatedTarget.data('id');
-            var title = relatedTarget.data('title');
-            var modal = $(this);
-            console.log(relatedTarget);
-            initPreview(id);
-        });
-        $(".btn-group .btn").bind('click', function (event) {
-            $(event.target).siblings().removeClass("active");
-            console.log(event);
-            $(event.target).addClass("active");
-        });
-    }
 
+function initEvents() {
+﻿   $('#modal-preview').on('show.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var id = relatedTarget.data('id');
+        var title = relatedTarget.data('title');
+        var modal = $(this);
+        console.log(relatedTarget);
+        initPreview(id);
+    });
+    $(".btn-group .btn").bind('click', function (event) {
+        $(event.target).siblings().removeClass("active");
+        console.log(event);
+        $(event.target).addClass("active");
+    });
+}
 
 
 //juicer自定义函数
     function initJuicerMethod() {
-        juicer.register('parseStatus', parseStatus);
+        juicer.register('parseType', parseType);
     }
 
-﻿function initPreview(id) {
+    function parseType(type){
+        var typeList = staticDictObject['177'];
+        for(var i=0; i<typeList.length; i++){
+            if(type == typeList[i].CODE){
+                return typeList[i].NAME;
+            }
+        }
+    }
+﻿   function initPreview(id) {
         startLoad();
         $.ajax({
             url: contextPath + "/topBuilding/selectTopBuildingByPrimaryKey",
