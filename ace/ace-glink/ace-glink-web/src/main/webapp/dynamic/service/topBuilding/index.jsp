@@ -190,149 +190,7 @@
         </div>
     </div>
 </div>
-<script id="tpl-fm" type="text/template">
-    <div class="form-body">
 
-        <div class="form-group">
-            <label class="col-md-2 view-label">主键</label>
-            <div class="col-md-10">
-                \${id}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">建筑编号</label>
-            <div class="col-md-10">
-                \${code}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">建筑名称</label>
-            <div class="col-md-10">
-                \${name}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">建筑物类型</label>
-            <div class="col-md-10">
-                \${type}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">建筑描述</label>
-            <div class="col-md-10">
-                \${depict}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">所在地</label>
-            <div class="col-md-10">
-                \${address}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">经度</label>
-            <div class="col-md-10">
-                \${longitude}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">纬度</label>
-            <div class="col-md-10">
-                \${latitude}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">重点建筑标记</label>
-            <div class="col-md-10">
-                \${mainTag}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">建筑物状态</label>
-            <div class="col-md-10">
-                \${state}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">分区编码</label>
-            <div class="col-md-10">
-                \${subareaCode}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">备注</label>
-            <div class="col-md-10">
-                \${remark}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">状态</label>
-            <div class="col-md-10">
-                \${status}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建人编号</label>
-            <div class="col-md-10">
-                \${createUserId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建人姓名</label>
-            <div class="col-md-10">
-                \${createUserName}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建日期</label>
-            <div class="col-md-10">
-                \${createDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新人编号</label>
-            <div class="col-md-10">
-                \${lastModifyUserId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新人名称</label>
-            <div class="col-md-10">
-                \${lastModifyUserName}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新日期</label>
-            <div class="col-md-10">
-                \${lastModifyDate}
-            </div>
-        </div>
-
-        <h4>结果</h4>
-        <hr>
-        <div class="form-group " id="operation">
-            <label class="col-md-2 control-label">结果</label>
-            <div class="col-md-10">
-                <div class="radio-group-container">
-                    <label>
-                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">说明</label>
-            <div class="col-md-10">
-                <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-            </div>
-        </div>
-    </div>
-
-</script>
 
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
@@ -350,7 +208,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">建筑物类型</label>
         <div class="col-md-10">
-            \${data.o.type}
+            \${parseType(data.o.type)}
         </div>
     </div>
     <div class="form-group">
@@ -380,13 +238,21 @@
     <div class="form-group">
         <label class="col-md-2 view-label">重点建筑标记</label>
         <div class="col-md-10">
-            \${data.o.mainTag}
+            {@if data.o.mainTag == "0"}
+                不重要
+            {@else if data.o.mainTag == "1"}
+                重要
+            {@/if}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">建筑物状态</label>
         <div class="col-md-10">
-            \${data.o.state}
+            {@if item.state == '1'}
+            在线
+            {@else}
+            不在线
+            {@/if}
         </div>
     </div>
     <div class="form-group">
@@ -404,7 +270,9 @@
     <div class="form-group">
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
-            \${data.o.status}
+            {@if data.o.status == "1"}
+                正常
+            {@/if}
         </div>
     </div>
     <div class="form-group">
@@ -421,22 +289,6 @@
     </div>
 </script>
 <style>
-    .cover {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
-
-    .describtion {
-        padding-left: 15px;
-        height: 50px;
-    }
-
-    .cost {
-        padding-top: 5px;
-        padding-left: 15px;
-        color: #FE6500;
-    }
 </style>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
