@@ -42,7 +42,7 @@ jQuery(function ($) {
             deleteurl: cfg.grid_delete_data_url,
             caption: cfg.caption
         });
-﻿resizeJqGrid();
+    resizeJqGrid();
 });
 
 function resizeJqGrid() {
