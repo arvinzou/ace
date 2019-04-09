@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.TopStationDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.TopStation">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="subareaCode" jdbcType="VARCHAR" property="subareaCode"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="depict" jdbcType="VARCHAR" property="depict"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, subareaCode, name, depict, remark, status, createUserId, createUserName, createDate, 
+    lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from top_station
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from top_station
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.TopStation">
+    insert into top_station (id, subareaCode, name, 
+      depict, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{subareaCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{depict,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.TopStation">
+    update top_station
+    set subareaCode = #{subareaCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      depict = #{depict,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -98,6 +98,9 @@
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
+        <if test="condition.id !=null and condition.id !=&quot;&quot;">
+            and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
         <if test="condition.mobile !=null and condition.mobile !=&quot;&quot;">
             and t.mobile like concat(#{condition.mobile,jdbcType=VARCHAR},'%')
         </if>
