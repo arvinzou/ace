@@ -67,7 +67,7 @@
                     <%--<th width="10%"> 分辨率-高</th>--%>
                     <%--<th width="10%"> mac地址</th>--%>
                     <th width="10%"> 控制器数量</th>
-                    <th width="10%"> 建筑物ID</th>
+                    <th width="10%"> 建筑物</th>
                     <th width="10%"> 备注</th>
                     <th width="10%"> 状态</th>
                     <th width="15%">操作</th>
@@ -107,7 +107,7 @@
         <%--<td> \${item.resolutionHeight}</td>--%>
         <%--<td> \${item.macAddr}</td>--%>
         <td> \${item.ctrlNum}</td>
-        <td> \${item.buildingId}</td>
+        <td> \${item.tbName}</td>
         <td> \${item.remark}</td>
         <td> \${item.status}</td>
         <td>

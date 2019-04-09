@@ -1,5 +1,6 @@
 var loading = {};
 var editor;
+var qq;
 window.onload = function () {
     jQuery(function ($) {
         $(".breadcrumb").append("<li> <span>编辑节点管理</span></li>");
@@ -35,7 +36,7 @@ function render(obj, data, tplId) {
 
 function initPage() {
     $(".form-body input[name='buildingId']").combogrid({
-        url: contextPath + "/topBuilding/findTopBuildingList",
+        url: contextPath + "/topBuilding/findTopBuildingList?name="+qq,
         method: 'get',
         loadMsg: "正在获取...",
         width: '100%',
@@ -137,6 +138,7 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
+                qq=result.value.tbName;
                 render('#fm-edit', data, 'tpl-fm');
                 initPage();
 //富文本填值
