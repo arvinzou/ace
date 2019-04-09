@@ -41,9 +41,9 @@
                     分区编码
                     <span class="required" aria-required="true"> * </span>
                 </label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control" name="subareaCode" maxlength="50"
-                           placeholder="请输入分区编码（建议字数在14个字以内，不超过50个字)">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" name="subareaCode" id="subareaCode" maxlength="50"
+                           placeholder="请选择分区编码" style="width:450px">
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -122,5 +122,14 @@
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
+
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>

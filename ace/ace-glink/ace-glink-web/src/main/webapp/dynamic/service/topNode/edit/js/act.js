@@ -34,8 +34,20 @@ function render(obj, data, tplId) {
 }
 
 function initPage() {
-    // initEditor();
-  // initUpload();
+    $(".form-body input[name='buildingId']").combogrid({
+        url: contextPath + "/topBuilding/findTopBuildingList",
+        method: 'get',
+        loadMsg: "正在获取...",
+        width: '100%',
+        mode: 'remote',
+        // fitColumns: true,
+        idField: 'id',
+        textField: 'name',
+        pageSize: 100,
+        columns: [[
+            {field: 'name', title: 'Name', width: 200}
+        ]]
+    });
 }
 
 function initEvents() {

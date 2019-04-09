@@ -49,7 +49,7 @@ function initEvents() {
         },
         messages: {
             subareaCode: {
-                required: "请输入分区编码",
+                required: "请选择分区编码",
                 maxlength: "分区编码字符长度不能超过50"
             }, name: {
                 required: "请输入站点名称",
@@ -103,6 +103,34 @@ function save(params) {
 function initForm() {
     var data = staticDictObject;
     render('#fm-add-panel', data, 'tpl-fm-add');
+
+    $('input[name=subareaCode]').combogrid({
+        panelWidth: 500,
+        idField: 'code',
+        textField: 'name',
+        url: contextPath + '/topSubarea/findTopSubareaList',
+        mode: 'remote',
+        fitColumns: true,
+        method: 'get',
+        columns: [
+            [{
+                field: 'name',
+                title: '分区名称',
+                width: 100
+            }, {
+                field: 'code',
+                title: '分区编码',
+                width: 100
+            }]
+
+        ],
+
+        onSelect: function (rowIndex, rowData) {
+            console.log(rowData);
+            // $("#subareaCode").val(rowData.code);
+        },
+
+    });
 }
 
 function latitude(latitude) {
