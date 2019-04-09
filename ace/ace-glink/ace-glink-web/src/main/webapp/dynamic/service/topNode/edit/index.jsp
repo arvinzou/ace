@@ -192,7 +192,7 @@
                 建筑物ID
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="buildingId"
+                <input STYLE="width: auto" type="text" class="form-control" name="buildingId"
                        value="\${data.o.buildingId}" maxlength="50"
                        placeholder="请输入建筑物ID（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
@@ -225,13 +225,15 @@
 
 <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-<script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/common/js/cropUpload.js?version=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
+
+<%--easyui--%>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 </html>
