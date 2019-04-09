@@ -25,7 +25,7 @@
 <div class="portlet light">
 
     <div class="portlet-body" id="courseSource">
-        <div class="form-panel">
+        <div class="form-panel fm-page">
             <!--具体界面元素开始-->
             <form class="form-horizontal" id="fm-edit" role="form">
 
@@ -48,7 +48,7 @@
                 节点编号
                 <span class="required" aria-required="true"> * </span>
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="code"
                        value="\${data.o.code}" maxlength="50"
                        placeholder="请输入节点编号（建议字数在14个字以内，不超过50个字)">
@@ -60,7 +60,7 @@
                 节点名称
                 <span class="required" aria-required="true"> * </span>
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="name"
                        value="\${data.o.name}" maxlength="50"
                        placeholder="请输入节点名称（建议字数在14个字以内，不超过50个字)">
@@ -72,7 +72,7 @@
 
                 节点描述
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="depict"
                        value="\${data.o.depict}" maxlength="200"
                        placeholder="请输入节点描述（建议字数在14个字以内，不超过200个字)">
@@ -85,10 +85,10 @@
                 详细地址
                 <span class="required" aria-required="true"> * </span>
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="address"
                        value="\${data.o.address}" maxlength="200"
-                       placeholder="请输入详细地址（建议字数在14个字以内，不超过200个字)">
+                       placeholder="请输入详细地址（建议字数在14个字以内，不超过200个字)" style="float:left;width:92%">
                 <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
                    style="float:right;line-height: 28px;">选择</a>
                 <span class="help-block"></span>
@@ -104,7 +104,7 @@
                 IPV4地址
                 <span class="required" aria-required="true"> * </span>
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="ipv4"
                        value="\${data.o.ipv4}" maxlength="20"
                        placeholder="请输入IPV4地址（建议字数在14个字以内，不超过20个字)">
@@ -116,7 +116,7 @@
 
                 IPV6地址
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="ipv6"
                        value="\${data.o.ipv6}" maxlength="20"
                        placeholder="请输入IPV6地址（建议字数在14个字以内，不超过20个字)">
@@ -129,7 +129,7 @@
                 端口号
                 <span class="required" aria-required="true"> * </span>
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="port"
                        value="\${data.o.port}" maxlength="10"
                        placeholder="请输入端口号（建议字数在14个字以内，不超过10个字)">
@@ -142,7 +142,7 @@
                 分辨率-宽
                 <span class="required" aria-required="true"> * </span>
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="resolutionWidth"
                        value="\${data.o.resolutionWidth}" maxlength="19"
                        placeholder="请输入分辨率-宽（建议字数在14个字以内，不超过19个字)">
@@ -155,7 +155,7 @@
                 分辨率-高
                 <span class="required" aria-required="true"> * </span>
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="resolutionHeight"
                        value="\${data.o.resolutionHeight}" maxlength="19"
                        placeholder="请输入分辨率-高（建议字数在14个字以内，不超过19个字)">
@@ -167,7 +167,7 @@
 
                 mac地址
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="macAddr"
                        value="\${data.o.macAddr}" maxlength="20"
                        placeholder="请输入mac地址（建议字数在14个字以内，不超过20个字)">
@@ -179,7 +179,7 @@
 
                 控制器数量
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="ctrlNum"
                        value="\${data.o.ctrlNum}" maxlength="10"
                        placeholder="请输入控制器数量（建议字数在14个字以内，不超过10个字)">
@@ -191,7 +191,7 @@
 
                 建筑物ID
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="buildingId"
                        value="\${data.o.buildingId}" maxlength="50"
                        placeholder="请输入建筑物ID（建议字数在14个字以内，不超过50个字)">
@@ -203,7 +203,7 @@
 
                 备注
             </label>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <input type="text" class="form-control" name="remark"
                        value="\${data.o.remark}" maxlength="200"
                        placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
