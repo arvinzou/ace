@@ -26,145 +26,151 @@
     <div class="portlet-body">
         <div class="form-panel" id="fm-add-panel">
             <!--具体界面元素开始-->
-
-        </div>
-
-    </div>
-</div>
-
-
-<script id="tpl-fm-add" type="text/template">
-    <form class="form-horizontal" id="fm-add" role="form">
-        <div class="form-body">
-                                                <div class="form-group">
+            <form class="form-horizontal" id="fm-add" role="form">
+                <div class="form-body">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
                             建筑编号
-                                                            <span class="required" aria-required="true"> * </span>
-                                                    </label>
+                            <span class="required" aria-required="true"> * </span>
+                        </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="code" maxlength="50"
                                    placeholder="请输入建筑编号（建议字数在14个字以内，不超过50个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
-                                    <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
                             建筑名称
-                                                            <span class="required" aria-required="true"> * </span>
-                                                    </label>
+                            <span class="required" aria-required="true"> * </span>
+                        </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="name" maxlength="50"
                                    placeholder="请输入建筑名称（建议字数在14个字以内，不超过50个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
-                                    <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
                             建筑物类型
                             <span class="required" aria-required="true"> * </span>
                         </label>
                         <div class="col-md-10">
                             <select name="type" id="type" class="form-control">
-                                {@each data as typeItem, index}
-                                <option value="\${typeItem.CODE}">\${typeItem.NAME}</option>
-                                {@/each}
+
                             </select>
                         </div>
                     </div>
-                                    <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
                             建筑描述
-                                                    </label>
+                        </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="depict" maxlength="200"
                                    placeholder="请输入建筑描述（建议字数在14个字以内，不超过200个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
-                                    <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
                             所在地
-                                                            <span class="required" aria-required="true"> * </span>
-                                                    </label>
+                            <span class="required" aria-required="true"> * </span>
+                        </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="address" maxlength="200"
                                    placeholder="请输入所在地（建议字数在14个字以内，不超过200个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
-                                    <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
                             经度
-                                                    </label>
+                        </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="longitude" maxlength="10"
                                    placeholder="请输入经度（建议字数在14个字以内，不超过10个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
-                                    <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
                             纬度
-                                                    </label>
+                        </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="latitude" maxlength="10"
                                    placeholder="请输入纬度（建议字数在14个字以内，不超过10个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
-                                    <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
                             重点建筑标记
-                                                    </label>
+                        </label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="mainTag" maxlength="1"
-                                   placeholder="请输入重点建筑标记（建议字数在14个字以内，不超过1个字)">
+                            <input type="radio" value="0" name="mainTag">不重要
+                            <input type="radio" value="1" name="mainTag">重要
                             <span class="help-block"></span>
                         </div>
                     </div>
-                                    <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
                             建筑物状态
-                                                    </label>
+                        </label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="state" maxlength="1"
-                                   placeholder="请输入建筑物状态（建议字数在14个字以内，不超过1个字)">
+                            <input type="radio" value="0" name="state">不在线
+                            <input type="radio" value="1" name="state">在线
                             <span class="help-block"></span>
                         </div>
                     </div>
-                                    <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
-                            分区编码
-                                                            <span class="required" aria-required="true"> * </span>
-                                                    </label>
+                            所属分区
+                            <span class="required" aria-required="true"> * </span>
+                        </label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="subareaCode" maxlength="50"
-                                   placeholder="请输入分区编码（建议字数在14个字以内，不超过50个字)">
+                            <select name="subareaCode" id="areaList" class="form-control">
+
+                            </select>
                             <span class="help-block"></span>
                         </div>
                     </div>
-                                    <div class="form-group">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
                             备注
-                                                    </label>
+                        </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="remark" maxlength="200"
                                    placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
-                            
-        </div>
-        <div class="form-actions">
-            <div class="row">
-                <div class="col-md-offset-3 col-md-7">
-                    <button class="btn   green" type="submit" style="width:30%">保存</button>
+
                 </div>
-            </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-7">
+                            <button class="btn   green" type="submit" style="width:30%">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+
+    </div>
+</div>
+
+
+<script id="type-tpl" type="text/template">
+    {@each data as typeItem, index}
+    <option value="\${typeItem.CODE}">\${typeItem.NAME}</option>
+    {@/each}
 </script>
 
+<script id="area-tpl" type="text/template">
+    {@each data as item, index}
+    <option value="\${item.code}">\${item.name}</option>
+    {@/each}
+</script>
 
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>

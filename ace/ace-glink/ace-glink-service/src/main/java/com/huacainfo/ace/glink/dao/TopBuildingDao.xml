@@ -141,6 +141,7 @@
     select count(*)
     from top_building b
     where b.code = #{code}
+    and b.`name` = #{name}
   </select>
 
   <update id="updateStatus" parameterType="java.lang.String">

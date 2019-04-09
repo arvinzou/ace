@@ -113,11 +113,38 @@ alert("对不起出错了！");
 }
 
 function initForm(){
-var data=staticDictObject['177'];
-/*for(var i=0; i < data.length; i++){
-    if(data[i].CODE == ""){
-        data[i].NAME = "请选择建筑类型";
+    var data=staticDictObject['177'];
+    var dataList = [];
+    for(var i=0; i < data.length; i++){
+        if(data[i].CODE != ""){
+            dataList.push(data[i]);
+        }
     }
-}*/
-render('#fm-add-panel',data,'tpl-fm-add');
+    render('#type',dataList,'type-tpl');
+    initSubAreaList();
+}
+
+function initSubAreaList(){
+    startLoad();
+    $.ajax({
+        url: contextPath + "/topSubarea/findTopSubareaList",
+        type: "post",
+        async: false,
+        data: {
+            start: 0,
+            limit: 999
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                render('#areaList', result.rows, 'area-tpl');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }
