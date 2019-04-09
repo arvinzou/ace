@@ -1,52 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.glink.dao.TopStationDao">
-    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.TopStation">
-        <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="subareaCode" jdbcType="VARCHAR" property="subareaCode"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="depict" jdbcType="VARCHAR" property="depict"/>
-        <result column="remark" jdbcType="VARCHAR" property="remark"/>
-        <result column="status" jdbcType="CHAR" property="status"/>
-        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
-        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
-        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
-        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
-        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
-        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-    id, subareaCode, name, depict, remark, status, createUserId, createUserName, createDate, 
-    lastModifyUserId, lastModifyUserName, lastModifyDate
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.TopStation">
+    <id column="id" jdbcType="VARCHAR" property="id"/>
+    <result column="subareaCode" jdbcType="VARCHAR" property="subareaCode"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="depict" jdbcType="VARCHAR" property="depict"/>
+    <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    <result column="status" jdbcType="CHAR" property="status"/>
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    <result column="address" jdbcType="VARCHAR" property="address"/>
+    <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+    <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, subareaCode, name, depict, remark, status, createUserId, createUserName, createDate,
+    lastModifyUserId, lastModifyUserName, lastModifyDate,address, longitude, latitude
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from top_station
-        where id = #{id,jdbcType=VARCHAR}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from top_station
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from top_station
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.TopStation">
+  <insert id="insert" parameterType="com.huacainfo.ace.glink.model.TopStation">
     insert into top_station (id, subareaCode, name, 
-      depict, remark, status, 
+      depict,address, longitude,
+      latitude, remark, status,
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate
       )
     values (#{id,jdbcType=VARCHAR}, #{subareaCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{depict,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{depict,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL},
+      #{latitude,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
       )
   </insert>
-
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.TopStation">
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.TopStation">
     update top_station
     set subareaCode = #{subareaCode,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       depict = #{depict,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      latitude = #{latitude,jdbcType=DECIMAL},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -57,4 +64,42 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <sql id="Vo_Column_List">
+    t.id, t.subareaCode, t.name, t.depict, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+    t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.address, t.longitude, t.latitude
+  </sql>
+
+  <sql id="From_Statement">
+        FROM top_station t
+    </sql>
+  <sql id="Where_Condition">
+    where 1=1
+    <if test='condition.name!=null and condition.name!=""'>
+      and name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+    </if>
+  </sql>
+
+
+  <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Vo_Column_List"/>
+    <include refid="From_Statement"/>
+    <include refid="Where_Condition"/>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="From_Statement"/>
+    <include refid="Where_Condition"/>
+  </select>
 </mapper>

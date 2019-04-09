@@ -30,37 +30,15 @@
             <div class="col-md-9">
 
                 <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
-                    </div>
-                    <div class="input-group">
+
+                    <div class="input-group" style="width: 30%;">
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入直播名称">
+                               placeholder="请输入站点名称">
                         <span class="input-group-btn">
-                                                                        <button class="btn  btn-default search_btn"
-                                                                                type="submit">
-                                                                                搜索
-                                                                        </button>
-                                                                    </span>
+                            <button class="btn  btn-default search_btn" type="submit">搜索</button>
+                        </span>
                     </div>
                 </form>
             </div>
@@ -72,18 +50,14 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 主键</th>
-                    <th width="10%"> 分区编码</th>
-                    <th width="10%"> 站点名称</th>
-                    <th width="10%"> 站点描述</th>
-                    <th width="10%"> 备注</th>
+
+                    <th width="15%"> 分区编码</th>
+                    <th width="15%"> 站点名称</th>
+                    <th width="15%"> 站点描述</th>
                     <th width="10%"> 状态</th>
-                    <th width="10%"> 创建人编号</th>
-                    <th width="10%"> 创建人姓名</th>
-                    <th width="10%"> 创建日期</th>
-                    <th width="10%"> 更新人编号</th>
-                    <th width="10%"> 更新人名称</th>
-                    <th width="10%"> 更新日期</th>
+
+                    <th width="15%"> 创建日期</th>
+
                     <th width="15%">操作</th>
                 </tr>
                 </thead>
@@ -110,42 +84,17 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \&{item.id}</td>
-        <td> \&{item.subareaCode}</td>
-        <td> \&{item.name}</td>
-        <td> \&{item.depict}</td>
-        <td> \&{item.remark}</td>
-        <td> \&{item.status}</td>
-        <td> \&{item.createUserId}</td>
-        <td> \&{item.createUserName}</td>
-        <td> \&{item.createDate}</td>
-        <td> \&{item.lastModifyUserId}</td>
-        <td> \&{item.lastModifyUserName}</td>
-        <td> \&{item.lastModifyDate}</td>
+
+        <td> \${item.subareaCode}</td>
+        <td> \${item.name}</td>
+        <td> \${item.depict}</td>
+        {@if item.status==1}
+        <td> 正常</td>
+        {@/if}
+        <td> \${item.createDate}</td>
         <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">待审</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
-        </td>
-        <td>
-            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-status">设置状态</a>
-            {@if item.auditStatus==1}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-            {@/if}
+            <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
+
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
 
@@ -156,74 +105,9 @@
     {@/each}
 </script>
 ﻿
-<div class="modal fade " id="modal-status">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">设置状态</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-status" role="form">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="col-md-2 view-label">对象</label>
-                            <div class="col-md-10 status-title">
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">状态</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <input type="hidden" name="id">
-                                    <label>
-                                        <input type="radio" name="status" value="1"><span style="padding:10px">预播</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="2"><span
-                                            style="padding:10px">直播中</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="3"><span style="padding:10px">历史</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green status">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
-<!--审核弹框-->
-<div class="modal fade" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
 
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green audit">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" role="dialog" id="modal-preview">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
@@ -251,73 +135,73 @@
         <div class="form-group">
             <label class="col-md-2 view-label">主键</label>
             <div class="col-md-10">
-                \${id}
+                \${data.o.id}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">分区编码</label>
             <div class="col-md-10">
-                \${subareaCode}
+                \${data.o.subareaCode}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">站点名称</label>
             <div class="col-md-10">
-                \${name}
+                \${data.o.name}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">站点描述</label>
             <div class="col-md-10">
-                \${depict}
+                \${data.o.depict}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">备注</label>
             <div class="col-md-10">
-                \${remark}
+                \${data.o.remark}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">状态 </label>
             <div class="col-md-10">
-                \${status}
+                \${data.o.status}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">创建人编号</label>
             <div class="col-md-10">
-                \${createUserId}
+                \${data.o.createUserId}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">创建人姓名</label>
             <div class="col-md-10">
-                \${createUserName}
+                \${data.o.createUserName}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">创建日期</label>
             <div class="col-md-10">
-                \${createDate}
+                \${data.o.createDate}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">更新人编号</label>
             <div class="col-md-10">
-                \${lastModifyUserId}
+                \${data.o.lastModifyUserId}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">更新人名称</label>
             <div class="col-md-10">
-                \${lastModifyUserName}
+                \${data.o.lastModifyUserName}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">更新日期</label>
             <div class="col-md-10">
-                \${lastModifyDate}
+                \${data.o.lastModifyDate}
             </div>
         </div>
 
@@ -348,78 +232,55 @@
 </script>
 
 <script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="col-md-2 view-label">分区编码</label>
         <div class="col-md-10">
-            \${subareaCode}
+            \${data.o.subareaCode}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">站点名称</label>
         <div class="col-md-10">
-            \${name}
+            \${data.o.name}
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 view-label">站点地址</label>
+        <div class="col-md-10">
+            \${data.o.address}
+        </div>
+    </div>
+
+    <div class="form-group">
         <label class="col-md-2 view-label">站点描述</label>
         <div class="col-md-10">
-            \${depict}
+            \${data.o.depict}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">备注</label>
         <div class="col-md-10">
-            \${remark}
+            \${data.o.remark}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">状态 </label>
         <div class="col-md-10">
-            \${status}
+            {@if data.o.status==1}
+            正常
+            {@/if}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建人编号</label>
-        <div class="col-md-10">
-            \${createUserId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建人姓名</label>
-        <div class="col-md-10">
-            \${createUserName}
-        </div>
-    </div>
+
+
     <div class="form-group">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">
-            \${createDate}
+            \${data.o.createDate}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新人编号</label>
-        <div class="col-md-10">
-            \${lastModifyUserId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新人名称</label>
-        <div class="col-md-10">
-            \${lastModifyUserName}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新日期</label>
-        <div class="col-md-10">
-            \${lastModifyDate}
-        </div>
-    </div>
+
 </script>
 <style>
     .cover {
@@ -444,4 +305,12 @@
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 </html>

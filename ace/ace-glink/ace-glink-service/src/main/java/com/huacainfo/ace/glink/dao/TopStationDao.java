@@ -22,11 +22,10 @@ public interface TopStationDao {
 
     TopStationVo selectVoByPrimaryKey(String id);
 
-    List
-            <TopStationVo> findList(@Param("condition") TopStationQVo condition,
-                                    @Param("start") int start,
-                                    @Param("limit") int limit,
-                                    @Param("orderBy") String orderBy);
+    List<TopStationVo> findList(@Param("condition") TopStationQVo condition,
+                                @Param("start") int start,
+                                @Param("limit") int limit,
+                                @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") TopStationQVo condition);
 
@@ -35,20 +34,10 @@ public interface TopStationDao {
     int updateStatus(@Param("id") String id, @Param("status") String status);
 
 
-    List
-            <Map
-                    <String
-                            , Object>> getList(@Param("p") Map
-            <String
-                    , Object> p);
+    List<Map<String, Object>> getList(@Param("p") Map<String, Object> p);
 
 
-    List
-            <Map
-                    <String
-                            , Object>> getListByCondition(@Param("params") Map
-            <String
-                    , Object> params);
+    List<Map<String, Object>> getListByCondition(@Param("params") Map<String, Object> params);
 
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
