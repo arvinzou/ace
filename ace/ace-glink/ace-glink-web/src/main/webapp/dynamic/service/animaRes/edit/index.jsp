@@ -40,6 +40,8 @@
 <%--==============common jsp-suffix==============--%>
 </body>
 <script id="tpl-fm" type="text/template">
+    <input type="text" class="form-control hidden" name="id" value="\${data.o.id}">
+    <input type="text" class="form-control hidden" name="status" value="\${data.o.status}">
     <div class="form-body">
         <div class="form-group">
             <label class="col-md-2 control-label">
