@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.LtStrategyDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.LtStrategy">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="depict" jdbcType="VARCHAR" property="depict"/>
+        <result column="state" jdbcType="CHAR" property="state"/>
+        <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="stationCode" jdbcType="VARCHAR" property="stationCode"/>
+        <result column="pattern" jdbcType="CHAR" property="pattern"/>
+        <result column="isWeek" jdbcType="INTEGER" property="isWeek"/>
+        <result column="weeks" jdbcType="VARCHAR" property="weeks"/>
+        <result column="isMonth" jdbcType="INTEGER" property="isMonth"/>
+        <result column="months" jdbcType="VARCHAR" property="months"/>
+        <result column="startDate" jdbcType="TIMESTAMP" property="startDate"/>
+        <result column="stopDate" jdbcType="TIMESTAMP" property="stopDate"/>
+        <result column="specialDate" jdbcType="TIMESTAMP" property="specialDate"/>
+        <result column="startTime" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="stopTime" jdbcType="TIMESTAMP" property="stopTime"/>
+        <result column="strategy" jdbcType="VARCHAR" property="strategy"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, code, name, depict, state, district, stationCode, pattern, isWeek, weeks, isMonth, 
+    months, startDate, stopDate, specialDate, startTime, stopTime, strategy, remark, 
+    status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
+    lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lt_strategy
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from lt_strategy
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.LtStrategy">
+    insert into lt_strategy (id, code, name, 
+      depict, state, district, 
+      stationCode, pattern, isWeek, 
+      weeks, isMonth, months, 
+      startDate, stopDate, specialDate, 
+      startTime, stopTime, strategy, 
+      remark, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{depict,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, #{district,jdbcType=VARCHAR}, 
+      #{stationCode,jdbcType=VARCHAR}, #{pattern,jdbcType=CHAR}, #{isWeek,jdbcType=INTEGER}, 
+      #{weeks,jdbcType=VARCHAR}, #{isMonth,jdbcType=INTEGER}, #{months,jdbcType=VARCHAR}, 
+      #{startDate,jdbcType=TIMESTAMP}, #{stopDate,jdbcType=TIMESTAMP}, #{specialDate,jdbcType=TIMESTAMP}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{stopTime,jdbcType=TIMESTAMP}, #{strategy,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.LtStrategy">
+    update lt_strategy
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      depict = #{depict,jdbcType=VARCHAR},
+      state = #{state,jdbcType=CHAR},
+      district = #{district,jdbcType=VARCHAR},
+      stationCode = #{stationCode,jdbcType=VARCHAR},
+      pattern = #{pattern,jdbcType=CHAR},
+      isWeek = #{isWeek,jdbcType=INTEGER},
+      weeks = #{weeks,jdbcType=VARCHAR},
+      isMonth = #{isMonth,jdbcType=INTEGER},
+      months = #{months,jdbcType=VARCHAR},
+      startDate = #{startDate,jdbcType=TIMESTAMP},
+      stopDate = #{stopDate,jdbcType=TIMESTAMP},
+      specialDate = #{specialDate,jdbcType=TIMESTAMP},
+      startTime = #{startTime,jdbcType=TIMESTAMP},
+      stopTime = #{stopTime,jdbcType=TIMESTAMP},
+      strategy = #{strategy,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.LtStrategyVo"></resultMap>
+
+    <sql id="Vo_Column_List">
+    l.id, l.code, l.name, l.depict, l.state, l.district, l.stationCode, l.pattern, l.isWeek, l.weeks, l.isMonth,
+    l.months, l.startDate, l.stopDate, l.specialDate, l.startTime, l.stopTime, l.strategy, l.remark,
+    l.status, l.createUserId, l.createUserName, l.createDate,l.lastModifyUserId, l.lastModifyUserName,
+    l.lastModifyDate
+  </sql>
+
+    <sql id="From_Statement">
+    FROM lt_strategy l
+  </sql>
+    <sql id="Where_Condition">
+        where l.status <![CDATA[ <> ]]> 0
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and (l.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') or
+            l.code LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') )
+        </if>
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY l.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.LtStrategy">
+    select count(*)
+    from lt_strategy
+    where name=#{name,jdbcType=VARCHAR}
+    and code != #{code,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>
