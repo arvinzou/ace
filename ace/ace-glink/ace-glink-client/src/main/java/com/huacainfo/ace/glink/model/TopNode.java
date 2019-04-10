@@ -32,7 +32,10 @@ public class TopNode {
 
     private Integer ctrlNum;
 
-    private String buildingId;
+    private String buildingCode;
+
+
+    private String stationCode;
 
     private String remark;
 
@@ -162,12 +165,20 @@ public class TopNode {
         this.ctrlNum = ctrlNum;
     }
 
-    public String getBuildingId() {
-        return buildingId;
+    public String getBuildingCode() {
+        return buildingCode;
     }
 
-    public void setBuildingId(String buildingId) {
-        this.buildingId = buildingId == null ? null : buildingId.trim();
+    public void setBuildingCode(String buildingCode) {
+        this.buildingCode = buildingCode;
+    }
+
+    public String getStationCode() {
+        return stationCode;
+    }
+
+    public void setStationCode(String stationCode) {
+        this.stationCode = stationCode;
     }
 
     public String getRemark() {

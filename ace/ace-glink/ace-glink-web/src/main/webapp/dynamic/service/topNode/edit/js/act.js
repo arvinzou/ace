@@ -1,6 +1,6 @@
 var loading = {};
 var editor;
-var qq;
+var qq='',sn='';
 window.onload = function () {
     jQuery(function ($) {
         $(".breadcrumb").append("<li> <span>编辑节点管理</span></li>");
@@ -35,18 +35,30 @@ function render(obj, data, tplId) {
 }
 
 function initPage() {
-    $(".form-body input[name='buildingId']").combogrid({
+    $(".form-body input[name='buildingCode']").combogrid({
         url: contextPath + "/topBuilding/findTopBuildingList?name="+qq,
         method: 'get',
         loadMsg: "正在获取...",
         panelWidth: 400,
         mode: 'remote',
         // fitColumns: true,
-        idField: 'id',
+        idField: 'code',
         textField: 'name',
         pageSize: 100,
         columns: [[
             {field: 'name', title: '建筑名称', width: 200}
+        ]]
+    });
+    $(".form-body input[name='stationCode']").combogrid({
+        url: contextPath + "/topStation/findTopStationList?name="+sn,
+        method:'get',
+        loadMsg:"正在获取...",
+        panelWidth: 400,
+        mode:'remote',
+        idField:'code',
+        textField:'name',
+        columns:[[
+            {field:'name',title:'站点名称',width:200}
         ]]
     });
 }
@@ -138,7 +150,8 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                qq=result.value.tbName;
+                qq=result.value.topBuilding.name;
+                sn=result.value.topStation.name;
                 render('#fm-edit', data, 'tpl-fm');
                 initPage();
 //富文本填值

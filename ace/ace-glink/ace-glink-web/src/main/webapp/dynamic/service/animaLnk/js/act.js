@@ -7,44 +7,47 @@ window.onload = function () {
 }
 
 
-/*节点管理初始化分页*/
+/*节目上传初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 1,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
-        prev: '<li class="prev" > <a href="javascript:;" > 上一页 < /a></li >',
-        next: '<li class = "next" > <a href = "javascript:;" > 下一页 < /a></li>',
-        page: '<li class = "page" > <a href = "javascript:;" > {{page}}</a></li>',
-        onPageChange: function (num, type) {
-            params['start'] = (num - 1) * params.limit;
-            params['initType'] = type;
-            getPageList();
-        }
-    });
-}
-
-$('#fm-search').ajaxForm({
-    beforeSubmit: function (formData, jqForm, options) {
-        $.each(formData, function (n, obj) {
-            params[obj.name] = obj.value;
-        });
-        params['initType'] = 'init';
-        params['start'] = 0;
+        prev: '<li class = "prev"> <a href = "javascript:;"> 上一页 </a></li>',
+        next: '<li class = "next"> <a href = "javascript:;"> 下一页 </a></li>',
+        page: '<li class = "page"> <a href = "javascript:;" >{{page}}</a></li> ',
+    onPageChange: function (num, type) {
+        params['start'] = (num - 1) * params.limit;
+        params['initType'] = type;
         getPageList();
-        return false;
     }
 });
+}
+
+function initBtnEvents() {
+    $('#fm-search').ajaxForm({
+        beforeSubmit: function (formData, jqForm, options) {
+            $.each(formData, function (n, obj) {
+                params[obj.name] = obj.value;
+            });
+            params['initType'] = 'init';
+            params['start'] = 0;
+            getPageList();
+            return false;
+        }
+
+    });
+}
 
 function setParams(key, value) {
     params[key] = value;
     getPageList();
 }
 
-/*节点管理加载表格数据*/
+/*节目上传加载表格数据*/
 function getPageList() {
-    var url = contextPath + "/topNode/findTopNodeList";
+    var url = contextPath + "/topBuilding/findTopBuildingList";
     params['name'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
@@ -70,36 +73,19 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
-/*节点管理添加*/
+/*节目上传添加*/
 function add(type) {
     window.location.href = 'add/index.jsp?id=' + urlParams.id;
 }
 
-/*节点管理编辑*/
+/*节目上传编辑*/
 function edit(did) {
     window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
 }
 
-function del(did) {
-    var url = contextPath + "/topNode/deleteTopNodeByTopNodeId";
-    var data={
-        jsons:JSON.stringify({
-            id:did
-        })
-    }
-    $.getJSON(url,data, function (rst) {
-        if(rst.status==0){
-            getPageList();
-        }
-        else {
-            alert("删除失败")
-        }
-    })
-}
-
 /*查看详情*/
 function detail(id) {
-    var url = contextPath + "/topNode/selectTopNodeByPrimaryKey";
+    var url = contextPath + "/animaLnk/selectAnimaLnkByPrimaryKey";
     $.getJSON(url, {id: id}, function (result) {
         if (result.status == 0) {
             var navitem = document.getElementById('tpl-detail').innerHTML;
@@ -110,22 +96,22 @@ function detail(id) {
     })
 }
 
-function initEvents() {
-    $('#modal-preview').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        initPreview(id);
-    })
+function initEvents(){
+//初始化按钮组件
+    initBtnEvents();
 
-    $('#modal-import').on('shown.bs.modal', function (event) {
-        //加载班级列表
-        alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
-        importInit();
-    });
-    $('#modal-audit').on('show.bs.modal', function (event) {
+//模态框事件
+﻿$('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var title = relatedTarget.data('title');
+        var modal = $(this);
+        console.log(relatedTarget);
+        initPreview(id);
+    })
+    $('#modal-option').on('show.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var id = relatedTarget.data('id');
         var modal = $(this);
         console.log(relatedTarget);
         initForm(id);
@@ -153,23 +139,14 @@ function initEvents() {
         $(event.target).addClass("active");
     });
 
-    //批量导入
-    $('#btn-view-import').on('click', function () {
-        //加载导入
-        importXls();
-    });
 
 }
 
-function importInit() {
-    reset_uploader();
-}
-
-/*节点管理审核*/
+/*节目上传审核*/
 function audit(params) {
     startLoad();
     $.ajax({
-        url: contextPath + "/topNode/audit",
+        url: contextPath + "/animaLnk/audit",
         type: "post",
         async: false,
         data: params,
@@ -188,16 +165,12 @@ function audit(params) {
     });
 }
 
-function importXls() {
-    $('#modal-import').modal('show');
-}
-
-/*节点管理上架*/
+/*节目上传上架*/
 function online(id) {
     if (confirm("确定要上架吗？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/topNode/updateStatus",
+            url: contextPath + "/animaLnk/updateStatus",
             type: "post",
             async: false,
             data: {
@@ -220,12 +193,12 @@ function online(id) {
     }
 }
 
-/*节点管理下架*/
+/*节目上传下架*/
 function outline(id) {
     if (confirm("确定要下架吗？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/topNode/updateStatus",
+            url: contextPath + "/animaLnk/updateStatus",
             type: "post",
             async: false,
             data: {
@@ -278,10 +251,11 @@ function parseStatus(status) {
     }
 }
 
-function initPreview(id) {
+
+﻿function initPreview(id) {
     startLoad();
     $.ajax({
-        url: contextPath + "/topNode/selectTopNodeByPrimaryKey",
+        url: contextPath + "/animaLnk/selectAnimaLnkByPrimaryKey",
         type: "post",
         async: false,
         data: {
@@ -290,7 +264,8 @@ function initPreview(id) {
         success: function (result) {
             stopLoad();
             if (result.status == 0) {
-                var data  = result.value;
+                var data = {};
+                data['o'] = result.value;
                 render('#fm-preview', data, 'tpl-preview');
             } else {
                 alert(result.errorMessage);
@@ -306,18 +281,17 @@ function initPreview(id) {
 function initForm(id) {
     startLoad();
     $.ajax({
-        url: contextPath + "/topNode/selectTopNodeByPrimaryKey",
+        url: contextPath + "/animaRes/findAnimaResList",
         type: "post",
         async: false,
         data: {
-            id: id
+           start: 0,
+            limit:40
         },
         success: function (result) {
             stopLoad();
             if (result.status == 0) {
-                var data = {};
-                data['o'] = result.value;
-                render('#fm-audit', data, 'tpl-fm');
+                render('#animaList', result.rows, 'animaList-tpl');
             } else {
                 alert(result.errorMessage);
             }

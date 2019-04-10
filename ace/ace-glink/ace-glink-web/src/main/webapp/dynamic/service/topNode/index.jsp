@@ -15,6 +15,8 @@
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -25,10 +27,13 @@
         <div class="row custom-toolbar">
             <div class="col-md-3">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+                <button type="button" class="btn  green" id="btn-view-import"
+                        authority="false">批量导入
+                </button>
             </div>
 
-            <div class="col-md-9">
 
+            <div class="col-md-9">
                 <form id="fm-search">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
@@ -107,7 +112,7 @@
         <%--<td> \${item.resolutionHeight}</td>--%>
         <%--<td> \${item.macAddr}</td>--%>
         <td> \${item.ctrlNum}</td>
-        <td> \${item.tbName}</td>
+        <td> \${item.topBuilding.name}</td>
         <td> \${item.remark}</td>
         <td> \${item.status}</td>
         <td>
@@ -189,28 +194,31 @@
     </div>
 </div>
 
-
-<!--审核弹框-->
-<div class="modal fade" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document" style="width: 90%;">
+<div class="modal fade" role="dialog" id="modal-import">
+    <div class="modal-dialog" role="document" style="width: 75%;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" class="close" authority="false" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">审核</h4>
+                <h4 class="modal-title">批量导入</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-
-                </form>
+                <div id="uploader">
+                </div>
+                <div style="margin:5px">
+                    <a href="node_template.xls" style="color:red">下载模板</a><br>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green audit">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
             </div>
         </div>
     </div>
 </div>
+
+
+<!--审核弹框-->
 <div class="modal fade" role="dialog" id="modal-preview">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
@@ -232,173 +240,6 @@
         </div>
     </div>
 </div>
-<script id="tpl-fm" type="text/template">
-    <div class="form-body">
-
-        <div class="form-group">
-            <label class="col-md-2 view-label">主键</label>
-            <div class="col-md-10">
-                \${id}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">节点编号</label>
-            <div class="col-md-10">
-                \${code}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">节点名称</label>
-            <div class="col-md-10">
-                \${name}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">节点描述</label>
-            <div class="col-md-10">
-                \${depict}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">详细地址</label>
-            <div class="col-md-10">
-                \${address}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">经度</label>
-            <div class="col-md-10">
-                \${longitude}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">纬度</label>
-            <div class="col-md-10">
-                \${latitude}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">IPV4地址</label>
-            <div class="col-md-10">
-                \${ipv4}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">IPV6地址</label>
-            <div class="col-md-10">
-                \${ipv6}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">端口号</label>
-            <div class="col-md-10">
-                \${port}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">分辨率-宽</label>
-            <div class="col-md-10">
-                \${resolutionWidth}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">分辨率-高</label>
-            <div class="col-md-10">
-                \${resolutionHeight}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">mac地址</label>
-            <div class="col-md-10">
-                \${macAddr}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">控制器数量</label>
-            <div class="col-md-10">
-                \${ctrlNum}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">建筑物ID</label>
-            <div class="col-md-10">
-                \${buildingId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">备注</label>
-            <div class="col-md-10">
-                \${remark}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">状态 </label>
-            <div class="col-md-10">
-                \${status}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建人编号</label>
-            <div class="col-md-10">
-                \${createUserId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建人姓名</label>
-            <div class="col-md-10">
-                \${createUserName}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建日期</label>
-            <div class="col-md-10">
-                \${createDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新人编号</label>
-            <div class="col-md-10">
-                \${lastModifyUserId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新人名称</label>
-            <div class="col-md-10">
-                \${lastModifyUserName}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新日期</label>
-            <div class="col-md-10">
-                \${lastModifyDate}
-            </div>
-        </div>
-
-        <h4>结果</h4>
-        <hr>
-        <div class="form-group " id="operation">
-            <label class="col-md-2 control-label">结果</label>
-            <div class="col-md-10">
-                <div class="radio-group-container">
-                    <label>
-                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">说明</label>
-            <div class="col-md-10">
-                <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-            </div>
-        </div>
-    </div>
-
-</script>
 
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
@@ -480,9 +321,15 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">建筑物ID</label>
+        <label class="col-md-2 view-label">建筑物编号</label>
         <div class="col-md-10">
-            \${data.buildingId}
+            \${data.buildingCode}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">站点编号</label>
+        <div class="col-md-10">
+            \${data.stationCode}
         </div>
     </div>
     <div class="form-group">
@@ -522,27 +369,19 @@
         </div>
     </div>
 </script>
-<style>
-    .cover {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
-
-    .describtion {
-        padding-left: 15px;
-        height: 50px;
-    }
-
-    .cost {
-        padding-top: 5px;
-        padding-left: 15px;
-        color: #FE6500;
-    }
-</style>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+
+
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
+<script src="js/upload.js?v=${cfg.version}"></script>
 </html>
