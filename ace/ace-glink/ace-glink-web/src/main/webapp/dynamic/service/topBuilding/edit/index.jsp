@@ -93,32 +93,16 @@
                 <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="address"
-                       value="\${data.o.address}" maxlength="200"
-                       placeholder="请输入所在地（建议字数在14个字以内，不超过200个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                经度
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="longitude"
-                       value="\${data.o.longitude}" maxlength="10"
-                       placeholder="请输入经度（建议字数在14个字以内，不超过10个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                纬度
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="latitude"
-                       value="\${data.o.latitude}" maxlength="10"
-                       placeholder="请输入纬度（建议字数在14个字以内，不超过10个字)">
-                <span class="help-block"></span>
+                    <input type="text" class="form-control" name="address"
+                           value="\${data.o.address}" maxlength="200"
+                           placeholder="请输入所在地（建议字数在14个字以内，不超过200个字)" style="float:left;width:92%">
+                    <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
+                       style="float:right;line-height: 28px;">选择</a>
+                    <span class="help-block"></span>
+                    <input name="latitude" type="hidden" value="\${data.o.latitude}"/>
+                    <input name="longitude" type="hidden" value="\${data.o.longitude}"/>
+                    <div class="error-address"></div>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -126,9 +110,13 @@
                 重点建筑标记
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="mainTag"
-                       value="\${data.o.mainTag}" maxlength="1"
-                       placeholder="请输入重点建筑标记（建议字数在14个字以内，不超过1个字)">
+                {@if data.o.mainTag == "1"}
+                <input type="radio" name="mainTag" value="1" checked>重要<span style="padding-right: 60px;"></span>
+                <input type="radio" name="mainTag" value="0">不重要
+                {@else}
+                <input type="radio" name="mainTag" value="1">重要<span style="padding-right: 60px;"></span>
+                <input type="radio" name="mainTag" value="0" checked>不重要
+                {@/if}
                 <span class="help-block"></span>
             </div>
         </div>
@@ -137,9 +125,13 @@
                 建筑物状态
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="state"
-                       value="\${data.o.state}" maxlength="1"
-                       placeholder="请输入建筑物状态（建议字数在14个字以内，不超过1个字)">
+                {@if data.o.state == "1"}
+                <input type="radio" name="state" value="1" checked>在线<span style="padding-right: 60px;"></span>
+                <input type="radio" name="state" value="0">不在线
+                {@else}
+                <input type="radio" name="state" value="1">在线<span style="padding-right: 60px;"></span>
+                <input type="radio" name="state" value="0" checked>不在线
+                {@/if}
                 <span class="help-block"></span>
             </div>
         </div>

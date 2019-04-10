@@ -163,9 +163,9 @@
                     建筑物ID
                 </label>
                 <div class="col-md-10">
-                    <input style="width:auto" type="text" class="form-control" name="buildingId" maxlength="50"
-                           placeholder="请输入建筑物ID（建议字数在14个字以内，不超过50个字)">
-                    <span class="help-block"></span>
+                        <input type="text" class="form-control" name="buildingId" maxlength="50"
+                               placeholder="请输入建筑物ID（建议字数在14个字以内，不超过50个字)">
+                        <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -190,6 +190,7 @@
 
 
 </script>
+
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 </body>

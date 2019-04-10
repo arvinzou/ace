@@ -39,14 +39,14 @@ function initPage() {
         url: contextPath + "/topBuilding/findTopBuildingList?name="+qq,
         method: 'get',
         loadMsg: "正在获取...",
-        width: '100%',
+        panelWidth: 400,
         mode: 'remote',
         // fitColumns: true,
         idField: 'id',
         textField: 'name',
         pageSize: 100,
         columns: [[
-            {field: 'name', title: 'Name', width: 200}
+            {field: 'name', title: '建筑名称', width: 200}
         ]]
     });
 }
