@@ -102,7 +102,6 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
-        o.setState("0");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.topBuildingDao.insert(o);
