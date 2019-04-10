@@ -46,7 +46,7 @@ function initPage() {
         textField: 'name',
         pageSize: 100,
         columns: [[
-            {field: 'name', title: 'Name', width: 200}
+            {field: 'name', title: '建筑名称', width: 200}
         ]]
     });
 }

@@ -18,12 +18,12 @@ public interface LtStrategyDao {
 
     int updateByPrimaryKey(LtStrategy record);
 
-    LtStrategyVo selectVoByPrimaryKey(String id);
+    LtStrategyVo selectByPrimaryKeyVo(String id);
 
     List<LtStrategyVo> findList(@Param("condition") LtStrategyQVo condition,
-                                @Param("start") int start,
-                                @Param("limit") int limit,
-                                @Param("orderBy") String orderBy);
+                                    @Param("start") int start,
+                                    @Param("limit") int limit,
+                                    @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") LtStrategyQVo condition);
 

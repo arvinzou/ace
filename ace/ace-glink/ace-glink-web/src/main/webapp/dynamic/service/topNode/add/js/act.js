@@ -8,22 +8,6 @@ window.onload = function () {
     });
 }
 
-function initEditor() {
-    editor = new Simditor({
-        textarea: $('textarea[name=introduce]'),
-        toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
-            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
-        ],
-        upload: {
-            url: portalPath + '/files/uploadImage.do',
-            params: null,
-            fileKey: 'file',
-            connectionCount: 3,
-            leaveConfirm: '正在上传文件'
-        }
-    });
-}
-
 /*页面渲染*/
 function render(obj, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;
@@ -124,7 +108,7 @@ function initForm() {
         idField:'id',
         textField:'name',
         columns:[[
-            {field:'name',title:'Name',width:200}
+            {field:'name',title:'建筑名称',width:200}
         ]]
     });
 }

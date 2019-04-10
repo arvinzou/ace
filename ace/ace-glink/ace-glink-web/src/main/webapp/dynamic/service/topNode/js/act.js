@@ -89,7 +89,10 @@ function del(did) {
     }
     $.getJSON(url,data, function (rst) {
         if(rst.status==0){
-
+            getPageList();
+        }
+        else {
+            alert("删除失败")
         }
     })
 }

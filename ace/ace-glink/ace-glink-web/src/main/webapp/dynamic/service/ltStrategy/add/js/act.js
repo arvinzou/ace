@@ -8,21 +8,6 @@ window.onload = function () {
     });
 }
 
-function initEditor() {
-    editor = new Simditor({
-        textarea: $('textarea[name=introduce]'),
-        toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
-            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
-        ],
-        upload: {
-            url: portalPath + '/files/uploadImage.do',
-            params: null,
-            fileKey: 'file',
-            connectionCount: 3,
-            leaveConfirm: '正在上传文件'
-        }
-    });
-}
 
 /*页面渲染*/
 function render(obj, data, tplId) {
@@ -102,4 +87,34 @@ function save(params) {
 function initForm() {
     var data = staticDictObject;
     render('#fm-add-panel', data, 'tpl-fm-add');
+    $(".form-body input[name='district']").combotree({
+        url: portalPath + "/system/selectProvinceTreeList.do?id=00",
+        method: 'get',
+        label: '',
+        labelPosition: 'top',
+        valueField: "id",
+        textField: "text",
+        lines: true,
+        panelWidth: 400,
+        queryParams: {},
+        onBeforeSelect: function (node) {
+            // 控制职能选择子节点
+            // if (!$(this).tree('isLeaf', node.target)) {
+            //     $(this).combo("showPanel");
+            //     return false;
+            // }
+        }
+    });
+    $(".form-body input[name='stationCode']").combogrid({
+        url: contextPath + "/topStation/findTopStationList",
+        method:'get',
+        loadMsg:"正在获取...",
+        panelWidth: 400,
+        mode:'remote',
+        idField:'id',
+        textField:'name',
+        columns:[[
+            {field:'name',title:'站点名称',width:200}
+        ]]
+    });
 }

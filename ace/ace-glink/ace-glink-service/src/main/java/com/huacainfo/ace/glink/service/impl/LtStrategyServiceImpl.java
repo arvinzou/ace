@@ -86,9 +86,6 @@ public class LtStrategyServiceImpl implements LtStrategyService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "策略名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
         int temp = this.ltStrategyDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "策略管理名称重复！");
@@ -152,7 +149,7 @@ public class LtStrategyServiceImpl implements LtStrategyService {
     @Override
     public SingleResult<LtStrategyVo> selectLtStrategyByPrimaryKey(String id) throws Exception {
         SingleResult<LtStrategyVo> rst = new SingleResult<>();
-        rst.setValue(this.ltStrategyDao.selectVoByPrimaryKey(id));
+        rst.setValue(this.ltStrategyDao.selectByPrimaryKeyVo(id));
         return rst;
     }
 
