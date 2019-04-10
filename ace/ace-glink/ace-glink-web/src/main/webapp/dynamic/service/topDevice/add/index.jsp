@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
+    <link href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
@@ -41,7 +43,7 @@
                     设备编号
                     <span class="required" aria-required="true"> * </span>
                 </label>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <input type="text" class="form-control" name="code" maxlength="50"
                            placeholder="请输入设备编号（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
@@ -52,7 +54,7 @@
                     设备名称
                     <span class="required" aria-required="true"> * </span>
                 </label>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <input type="text" class="form-control" name="name" maxlength="50"
                            placeholder="请输入设备名称（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
@@ -63,18 +65,23 @@
                     设备类型
                     <span class="required" aria-required="true"> * </span>
                 </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="type" maxlength="2"
-                           placeholder="请输入设备类型（建议字数在14个字以内，不超过2个字)">
-                    <span class="help-block"></span>
+                <div class="col-md-5">
+                    <select name="type" id="type" class="form-control">
+                        {@each data['178'] as item, index}
+                        {@if item.CODE!=''}
+                        <option value="\${item.CODE}">\${item.NAME}</option>
+                        {@/if}
+                        {@/each}
+                    </select>
+
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
                     所属节点
                 </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="nodeCode" maxlength="50"
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="nodeCode" maxlength="50" style="width: 500px;"
                            placeholder="请输入所属节点（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
                 </div>
@@ -83,19 +90,20 @@
                 <label class="col-md-2 control-label">
                     上线时间
                 </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="onlineDate" maxlength=""
-                           placeholder="请输入上线时间（建议字数在14个字以内，不超过个字)">
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="onlineDate" id="onlineDate" maxlength="50"
+                           placeholder="请选择上线时间">
                     <span class="help-block"></span>
                 </div>
+
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
                     下线时间
                 </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="offlineDate" maxlength=""
-                           placeholder="请输入下线时间（建议字数在14个字以内，不超过个字)">
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="offlineDate" maxlength="50"
+                           placeholder="请选择下线时间" id="offlineDate">
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -103,7 +111,7 @@
                 <label class="col-md-2 control-label">
                     生产厂商
                 </label>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <input type="text" class="form-control" name="prcBisFirm" maxlength="50"
                            placeholder="请输入生产厂商（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
@@ -113,9 +121,9 @@
                 <label class="col-md-2 control-label">
                     生产日期
                 </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="prcDate" maxlength=""
-                           placeholder="请输入生产日期（建议字数在14个字以内，不超过个字)">
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="prcDate" maxlength="50"
+                           placeholder="请选择生产日期" id="prcDate">
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -123,9 +131,9 @@
                 <label class="col-md-2 control-label">
                     理论使用寿命
                 </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="workingLife" maxlength="10"
-                           placeholder="请输入理论使用寿命（建议字数在14个字以内，不超过10个字)">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" name="workingLife" maxlength="10" value="0"
+                           placeholder="请输入理论使用寿命" onkeyup="this.value=this.value.replace(/\D/g,'')">
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -133,7 +141,7 @@
                 <label class="col-md-2 control-label">
                     备注
                 </label>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <input type="text" class="form-control" name="remark" maxlength="200"
                            placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
                     <span class="help-block"></span>
@@ -159,12 +167,19 @@
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-<script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"
+        type="text/javascript"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
+<link rel="stylesheet" type="text/css"
+<%--easyui--%>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>

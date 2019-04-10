@@ -61,6 +61,19 @@
         <div class="form-group">
             <label class="col-md-2 control-label">
 
+                站点编码
+                <span class="required" aria-required="true"> * </span>
+            </label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="code"
+                       value="\${data.o.code}" maxlength="50"
+                       placeholder="请输入站点编码（建议字数在14个字以内，不超过50个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
                 站点名称
                 <span class="required" aria-required="true"> * </span>
             </label>

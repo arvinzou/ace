@@ -2,9 +2,7 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("
-            < li > < span > 编辑设备管理 < /span></
-        li > ");
+        $(".breadcrumb").append(" <li> <span> 编辑设备管理 </span></li> ");
         initForm();
         initEvents();
     });
@@ -114,8 +112,9 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
+                data['dict'] = staticDictObject;
                 render('#fm-edit', data, 'tpl-fm');
-                initPage();
+                //   initPage();
 //富文本填值
 //editor.setValue(data['o'].summary);
             } else {
@@ -126,5 +125,41 @@ function initForm() {
             stopLoad();
             alert("对不起出错了！");
         }
+    });
+
+    datetimepicker($('#onlineDate'));
+    datetimepicker($('#offlineDate'));
+    datetimepicker($('#prcDate'));
+
+    $(".form-body input[name='nodeCode']").combogrid({
+        url: contextPath + "/topNode/findTopNodeList",
+        method: 'get',
+        loadMsg: "正在获取...",
+        width: '100%',
+        mode: 'remote',
+        idField: 'code',
+        textField: 'name',
+        columns: [[
+            {field: 'name', title: '节点名称', width: 200},
+            {field: 'code', title: '节点编号', width: 200}
+        ]]
+    });
+}
+
+function datetimepicker(name) {
+    name.datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1, //显示‘今日’按钮
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 'hour', //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+        clearBtn: true, //清除按钮
+        forceParse: 0
+    });
+    name.focus(function () {
+        $(this).blur(); //不可输入状态
     });
 }

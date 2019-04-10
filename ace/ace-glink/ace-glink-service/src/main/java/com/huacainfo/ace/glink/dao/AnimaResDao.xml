@@ -68,13 +68,7 @@
       rsoWidth = #{rsoWidth,jdbcType=BIGINT},
       rsoHeight = #{rsoHeight,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
-      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+      status = #{status,jdbcType=CHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 

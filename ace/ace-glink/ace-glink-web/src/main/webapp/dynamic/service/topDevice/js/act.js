@@ -108,7 +108,7 @@ function initEvents() {
         var modal = $(this);
         console.log(relatedTarget);
         initPreview(id);
-    })
+    });
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
@@ -116,7 +116,7 @@ function initEvents() {
         var modal = $(this);
         console.log(relatedTarget);
         initForm(id);
-    })
+    });
     $('#modal-audit .audit').on('click', function () {
         $('#modal-audit form').submit();
     });
@@ -267,6 +267,7 @@ function initPreview(id) {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
+                data['dict'] = staticDictObject;
                 render('#fm-preview', data, 'tpl-preview');
             } else {
                 alert(result.errorMessage);
@@ -277,6 +278,20 @@ function initPreview(id) {
             alert("对不起出错了！");
         }
     });
+}
+
+//juicer自定义函数
+function initJuicerMethod() {
+    juicer.register('parseType', parseType);
+}
+
+function parseType(type) {
+    var typeList = staticDictObject['178'];
+    for (var i = 0; i < typeList.length; i++) {
+        if (type == typeList[i].CODE) {
+            return typeList[i].NAME;
+        }
+    }
 }
 
 function initForm(id) {
@@ -303,4 +318,31 @@ function initForm(id) {
             alert("对不起出错了！");
         }
     });
+}
+
+function del(did) {
+    startLoad();
+    var params = {};
+    params.id = did;
+    if (confirm("确定要删除吗？")) {
+        $.ajax({
+            url: contextPath + "/topDevice/deleteTopDeviceByTopDeviceId",
+            type: "post",
+            async: false,
+            data: {
+                jsons: JSON.stringify(params)
+            },
+            success: function (rst) {
+                stopLoad();
+                if (rst.status == 0) {
+                    alert("删除成功！");
+                    getPageList();
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    }
 }
