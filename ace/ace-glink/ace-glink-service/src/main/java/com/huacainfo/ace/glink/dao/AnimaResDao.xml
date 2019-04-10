@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.AnimaResDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.AnimaRes">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="CHAR" property="type" />
+    <result column="duration" jdbcType="INTEGER" property="duration" />
+    <result column="playUrl" jdbcType="VARCHAR" property="playUrl" />
+    <result column="prePlayUrl" jdbcType="VARCHAR" property="prePlayUrl" />
+    <result column="preImgUrl" jdbcType="VARCHAR" property="preImgUrl" />
+    <result column="rsoWidth" jdbcType="BIGINT" property="rsoWidth" />
+    <result column="rsoHeight" jdbcType="BIGINT" property="rsoHeight" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.AnimaResVo">
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, code, name, type, duration, playUrl, prePlayUrl, preImgUrl, rsoWidth, rsoHeight, 
+    remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
+    lastModifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from anima_res
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from anima_res
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.glink.model.AnimaRes">
+    insert into anima_res (id, code, name, 
+      type, duration, playUrl, 
+      prePlayUrl, preImgUrl, rsoWidth, 
+      rsoHeight, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=CHAR}, #{duration,jdbcType=INTEGER}, #{playUrl,jdbcType=VARCHAR}, 
+      #{prePlayUrl,jdbcType=VARCHAR}, #{preImgUrl,jdbcType=VARCHAR}, #{rsoWidth,jdbcType=BIGINT}, 
+      #{rsoHeight,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.AnimaRes">
+    update anima_res
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      duration = #{duration,jdbcType=INTEGER},
+      playUrl = #{playUrl,jdbcType=VARCHAR},
+      prePlayUrl = #{prePlayUrl,jdbcType=VARCHAR},
+      preImgUrl = #{preImgUrl,jdbcType=VARCHAR},
+      rsoWidth = #{rsoWidth,jdbcType=BIGINT},
+      rsoHeight = #{rsoHeight,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    t.id, t.code, t.`name`, t.type, t.duration, t.playUrl, t.prePlayUrl, t.preImgUrl, t.rsoWidth, t.rsoHeight,
+    t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
+    t.lastModifyDate
+    from anima_res t
+    where t.id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    t.id, t.code, t.`name`, t.type, t.duration, t.playUrl, t.prePlayUrl, t.preImgUrl, t.rsoWidth, t.rsoHeight,
+    t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
+    t.lastModifyDate
+    from anima_res t
+    <include refid="Where_Condition"/>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <sql id="Where_Condition">
+    where 1 = 1
+    <if test="condition.code !=null and condition.code !=&quot;&quot;">
+      and t.code =#{condition.code,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.status !=null and condition.status !=&quot;&quot;">
+      and t.status =#{condition.status,jdbcType=CHAR}
+    </if>
+    <if test="condition.type !=null and condition.type !=&quot;&quot;">
+      and t.type =#{condition.type,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.name !=null and condition.name !=&quot;&quot;">
+      and (t.`name` like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+      )
+    </if>
+  </sql>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    from anima_res t
+    <include refid="Where_Condition"/>
+  </select>
+
+  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
+    select count(*)
+    from anima_res t
+    where t.code = #{code}
+  </select>
+
+  <update id="updateStatus" parameterType="java.lang.String">
+    update anima_res
+    set status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>
