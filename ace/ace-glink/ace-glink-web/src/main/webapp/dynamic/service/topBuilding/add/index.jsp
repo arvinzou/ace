@@ -78,28 +78,13 @@
                         </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="address" maxlength="200"
-                                   placeholder="请输入所在地（建议字数在14个字以内，不超过200个字)">
+                                   placeholder="请输入所在地（建议字数在14个字以内，不超过200个字)" style="float:left;width:92%">
+                            <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
+                               style="float:right;line-height: 28px;">选择</a>
                             <span class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">
-                            经度
-                        </label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="longitude" maxlength="10"
-                                   placeholder="请输入经度（建议字数在14个字以内，不超过10个字)">
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">
-                            纬度
-                        </label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="latitude" maxlength="10"
-                                   placeholder="请输入纬度（建议字数在14个字以内，不超过10个字)">
-                            <span class="help-block"></span>
+                            <input name="latitude" type="hidden"/>
+                            <input name="longitude" type="hidden"/>
+                            <div class="error-address"></div>
                         </div>
                     </div>
                     <div class="form-group">

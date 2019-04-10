@@ -170,3 +170,15 @@ function initSubAreaList(subareaCode){
         }
     });
 }
+
+function latitude(latitude) {
+    $("input[name=latitude]").val(latitude);
+}
+
+function longitude(longitude) {
+    $("input[name=longitude]").val(longitude);
+}
+
+function addr(addr) {
+    $("input[name=address]").val(addr);
+}
