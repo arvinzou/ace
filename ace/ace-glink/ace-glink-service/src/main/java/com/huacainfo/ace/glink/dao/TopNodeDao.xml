@@ -89,16 +89,30 @@
   <!--#################################################################################################################################################-->
   <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.TopNodeVo"></resultMap>
 
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.glink.vo.TopNodeVo">
+    <collection property="topBuilding" ofType="com.huacainfo.ace.glink.model.TopBuilding">
+      <id column="tbId" property="id"/>
+      <result column="tbName" property="name"/>
+    </collection>
+    <collection property="topStation" ofType="com.huacainfo.ace.glink.model.TopStation">
+      <id property="id" column="tsId"/>
+      <result column="tsName" property="name"/>
+    </collection>
+  </resultMap>
+
+
   <sql id="Vo_Column_List">
    t.id, t.code, t.name, t.depict, t.address, t.longitude, t.latitude, t.ipv4, t.ipv6, t.port, t.resolutionWidth,
     t.resolutionHeight, t.macAddr, t.ctrlNum, t.buildingCode, t.stationCode, t.remark, t.status, t.createUserId, t.createUserName,
     t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
-    tb.name tbName
+    tb.id as tbId,tb.name as tbName,
+    ts.id as tsId,ts.name as tsName
   </sql>
 
   <sql id="From_Statement">
     FROM top_node t
     LEFT JOIN top_building tb on tb.code=t.buildingCode
+    LEFT JOIN  top_station ts on ts.code=t.stationCode
   </sql>
   <sql id="Where_Condition">
     where t.status <![CDATA[ <> ]]> 0
@@ -108,7 +122,7 @@
     </if>
   </sql>
 
-  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+  <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
     <include refid="Vo_Column_List"/>
     <include refid="From_Statement"/>
@@ -137,7 +151,7 @@
     and code != #{code,jdbcType=VARCHAR}
   </select>
 
-  <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="VoResultMap">
+  <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
     <include refid="Vo_Column_List"/>
     <include refid="From_Statement"/>

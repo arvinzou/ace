@@ -1,6 +1,7 @@
 package com.huacainfo.ace.glink.web.controller;
 
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +59,11 @@ public class TopStationController extends GLinkBaseController {
     @RequestMapping(value = "/findTopStationList")
     @ResponseBody
     public PageResult
-            <TopStationVo> findTopStationList(TopStationQVo condition, PageParamNoChangeSord page) throws Exception {
+            <TopStationVo> findTopStationList(TopStationQVo condition, PageParamNoChangeSord page,String q) throws Exception {
 
+        if(!CommonUtils.isBlank(q)){
+            condition.setName(q);
+        }
         PageResult<TopStationVo> rst = this.topStationService.findTopStationList(condition, page.getStart(),
                 page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {

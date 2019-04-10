@@ -1,6 +1,6 @@
 var loading = {};
 var editor;
-var qq,sn;
+var qq='',sn='';
 window.onload = function () {
     jQuery(function ($) {
         $(".breadcrumb").append("<li> <span>编辑节点管理</span></li>");
@@ -42,7 +42,7 @@ function initPage() {
         panelWidth: 400,
         mode: 'remote',
         // fitColumns: true,
-        idField: 'id',
+        idField: 'code',
         textField: 'name',
         pageSize: 100,
         columns: [[
@@ -150,8 +150,8 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                qq=result.value.tbName;
-                // sn=result.value;
+                qq=result.value.topBuilding.name;
+                sn=result.value.topStation.name;
                 render('#fm-edit', data, 'tpl-fm');
                 initPage();
 //富文本填值

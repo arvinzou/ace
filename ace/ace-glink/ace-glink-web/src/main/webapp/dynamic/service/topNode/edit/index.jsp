@@ -201,7 +201,7 @@
             </label>
             <div class="col-md-10">
                 <input STYLE="width: auto" type="text" class="form-control" name="stationCode"
-                       value="\${data.o.buildingCode}" maxlength="50"
+                       value="\${data.o.stationCode}" maxlength="50"
                        placeholder="请输入站点编号（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
             </div>

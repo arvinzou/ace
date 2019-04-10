@@ -33,6 +33,8 @@ public class TopNode {
     private Integer ctrlNum;
 
     private String buildingCode;
+
+
     private String stationCode;
 
     private String remark;

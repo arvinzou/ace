@@ -17,6 +17,10 @@ import com.huacainfo.ace.glink.service.TopNodeService;
 import com.huacainfo.ace.glink.vo.TopNodeQVo;
 import com.huacainfo.ace.glink.vo.TopNodeVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +43,8 @@ public class TopNodeServiceImpl implements TopNodeService {
     private TopNodeDao topNodeDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private SqlSessionTemplate sqlSession;
 
 
     /**
@@ -57,12 +63,22 @@ public class TopNodeServiceImpl implements TopNodeService {
      */
     @Override
     public PageResult<TopNodeVo> findTopNodeList(TopNodeQVo condition, int start, int limit, String orderBy) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TopNodeDao dao = session.getMapper(TopNodeDao.class);
         PageResult<TopNodeVo> rst = new PageResult<>();
-        List<TopNodeVo> list = this.topNodeDao.findList(condition, start, limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.topNodeDao.findCount(condition);
-            rst.setTotal(allRows);
+        try {
+            List<TopNodeVo> list = dao.findList(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (start <= 1) {
+                int allRows = dao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
         }
         return rst;
     }
@@ -182,8 +198,19 @@ public class TopNodeServiceImpl implements TopNodeService {
      */
     @Override
     public SingleResult<TopNodeVo> selectTopNodeByPrimaryKey(String id) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TopNodeDao dao = session.getMapper(TopNodeDao.class);
         SingleResult<TopNodeVo> rst = new SingleResult<>();
-        rst.setValue(this.topNodeDao.selectByPrimaryKeyVo(id));
+        try {
+            TopNodeVo topNodeVo = dao.selectByPrimaryKeyVo(id);
+            rst.setValue(topNodeVo);
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
+        }
         return rst;
     }
 
@@ -246,8 +273,8 @@ public class TopNodeServiceImpl implements TopNodeService {
      * @version: 2019-04-09
      */
     @Override
-    public ListResult<Map<String,Object>> getList(Map<String,Object> p) throws Exception {
-        ListResult<Map<String,Object>> rst = new ListResult<>();
+    public ListResult<Map<String, Object>> getList(Map<String, Object> p) throws Exception {
+        ListResult<Map<String, Object>> rst = new ListResult<>();
         rst.setValue(this.topNodeDao.getList(p));
 
         return rst;
@@ -330,7 +357,7 @@ public class TopNodeServiceImpl implements TopNodeService {
     public MessageResponse insertImportXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
         String importDateTime = DateUtil.getNow();
         int i = 1;
-        int total=0;
+        int total = 0;
         MessageResponse iMs;
         for (Map<String, Object> row : list) {
             TopNode o = new TopNode();
@@ -374,7 +401,7 @@ public class TopNodeServiceImpl implements TopNodeService {
         }
 
         dataBaseLogService.log("批量导入节点", "批量导入节点", "", "rs.xls", "rs.xls", userProp);
-        return new MessageResponse(ResultCode.SUCCESS, "导入成功"+total+"条数据");
+        return new MessageResponse(ResultCode.SUCCESS, "导入成功" + total + "条数据");
     }
 
 }

@@ -112,7 +112,7 @@
         <%--<td> \${item.resolutionHeight}</td>--%>
         <%--<td> \${item.macAddr}</td>--%>
         <td> \${item.ctrlNum}</td>
-        <td> \${item.tbName}</td>
+        <td> \${item.topBuilding.name}</td>
         <td> \${item.remark}</td>
         <td> \${item.status}</td>
         <td>
