@@ -93,6 +93,7 @@
     <collection property="topBuilding" ofType="com.huacainfo.ace.glink.model.TopBuilding">
       <id column="tbId" property="id"/>
       <result column="tbName" property="name"/>
+      <result column="tbAddress" property="address"/>
     </collection>
     <collection property="topStation" ofType="com.huacainfo.ace.glink.model.TopStation">
       <id property="id" column="tsId"/>
@@ -105,7 +106,7 @@
    t.id, t.code, t.name, t.depict, t.address, t.longitude, t.latitude, t.ipv4, t.ipv6, t.port, t.resolutionWidth,
     t.resolutionHeight, t.macAddr, t.ctrlNum, t.buildingCode, t.stationCode, t.remark, t.status, t.createUserId, t.createUserName,
     t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
-    tb.id as tbId,tb.name as tbName,
+    tb.id as tbId,tb.name as tbName,tb.address as tbAddress,
     ts.id as tsId,ts.name as tsName
   </sql>
 
