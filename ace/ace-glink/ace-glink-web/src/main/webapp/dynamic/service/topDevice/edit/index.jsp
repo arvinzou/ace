@@ -43,117 +43,123 @@
     <div class="form-body">
         <div class="form-group">
             <label class="col-md-2 control-label">
-                建筑编号
+
+                设备编号
                 <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-10">
                 <input type="text" class="form-control" name="code"
-                       value="\${data.o.code}" maxlength="50"
-                       placeholder="请输入建筑编号（建议字数在14个字以内，不超过50个字)">
+                       value="\{data.o.code}" maxlength="50"
+                       placeholder="请输入设备编号（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
-                建筑名称
+
+                设备名称
                 <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-10">
                 <input type="text" class="form-control" name="name"
-                       value="\${data.o.name}" maxlength="50"
-                       placeholder="请输入建筑名称（建议字数在14个字以内，不超过50个字)">
+                       value="\{data.o.name}" maxlength="50"
+                       placeholder="请输入设备名称（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
-                建筑物类型
-                <span class="required" aria-required="true"> * </span>
-            </label>
-            <div class="col-md-10">
-                <select name="type" id="type" class="form-control">
 
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                建筑描述
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="depict"
-                       value="\${data.o.depict}" maxlength="200"
-                       placeholder="请输入建筑描述（建议字数在14个字以内，不超过200个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                所在地
+                设备类型
                 <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-10">
-                    <input type="text" class="form-control" name="address"
-                           value="\${data.o.address}" maxlength="200"
-                           placeholder="请输入所在地（建议字数在14个字以内，不超过200个字)" style="float:left;width:92%">
-                    <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
-                       style="float:right;line-height: 28px;">选择</a>
-                    <span class="help-block"></span>
-                    <input name="latitude" type="hidden" value="\${data.o.latitude}"/>
-                    <input name="longitude" type="hidden" value="\${data.o.longitude}"/>
-                    <div class="error-address"></div>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                重点建筑标记
-            </label>
-            <div class="col-md-10">
-                {@if data.o.mainTag == "1"}
-                <input type="radio" name="mainTag" value="1" checked>重要<span style="padding-right: 60px;"></span>
-                <input type="radio" name="mainTag" value="0">不重要
-                {@else}
-                <input type="radio" name="mainTag" value="1">重要<span style="padding-right: 60px;"></span>
-                <input type="radio" name="mainTag" value="0" checked>不重要
-                {@/if}
+                <input type="text" class="form-control" name="type"
+                       value="\{data.o.type}" maxlength="2"
+                       placeholder="请输入设备类型（建议字数在14个字以内，不超过2个字)">
                 <span class="help-block"></span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
-                建筑物状态
-            </label>
-            <div class="col-md-10">
-                {@if data.o.state == "1"}
-                <input type="radio" name="state" value="1" checked>在线<span style="padding-right: 60px;"></span>
-                <input type="radio" name="state" value="0">不在线
-                {@else}
-                <input type="radio" name="state" value="1">在线<span style="padding-right: 60px;"></span>
-                <input type="radio" name="state" value="0" checked>不在线
-                {@/if}
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                所属分区
-                <span class="required" aria-required="true"> * </span>
-            </label>
-            <div class="col-md-10">
-                <select name="subareaCode" id="areaList" class="form-control">
 
-                </select>
+                所属节点
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="nodeCode"
+                       value="\{data.o.nodeCode}" maxlength="50"
+                       placeholder="请输入所属节点（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
+
+                上线时间
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="onlineDate"
+                       value="\{data.o.onlineDate}" maxlength=""
+                       placeholder="请输入上线时间（建议字数在14个字以内，不超过个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
+                下线时间
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="offlineDate"
+                       value="\{data.o.offlineDate}" maxlength=""
+                       placeholder="请输入下线时间（建议字数在14个字以内，不超过个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
+                生产厂商
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="prcBisFirm"
+                       value="\{data.o.prcBisFirm}" maxlength="50"
+                       placeholder="请输入生产厂商（建议字数在14个字以内，不超过50个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
+                生产日期
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="prcDate"
+                       value="\{data.o.prcDate}" maxlength=""
+                       placeholder="请输入生产日期（建议字数在14个字以内，不超过个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
+                理论使用寿命
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="workingLife"
+                       value="\{data.o.workingLife}" maxlength="10"
+                       placeholder="请输入理论使用寿命（建议字数在14个字以内，不超过10个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
                 备注
             </label>
             <div class="col-md-10">
                 <input type="text" class="form-control" name="remark"
-                       value="\${data.o.remark}" maxlength="200"
+                       value="\{data.o.remark}" maxlength="200"
                        placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
                 <span class="help-block"></span>
             </div>
@@ -168,27 +174,9 @@
     </div>
 </script>
 
-<script id="type-tpl" type="text/template">
-    {@each data as item, index}
-    {@if item.selected == "selected"}
-    <option value="\${item.CODE}" selected="\${item.selected}">\${item.NAME}</option>
-    {@else}
-    <option value="\${item.CODE}">\${item.NAME}</option>
-    {@/if}
-    {@/each}
-</script>
-
-<script id="area-tpl" type="text/template">
-    {@each data as item, index}
-    {@if item.selected == "selected"}
-        <option value="\${item.code}" selected="\${item.selected}">\${item.name}</option>
-    {@else}
-        <option value="\${item.code}">\${item.name}</option>
-    {@/if}
-    {@/each}
-</script>
 
 <jsp:include page="/dynamic/common/footer.jsp"/>
+
 <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>

@@ -35,7 +35,7 @@
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入站点名称">
+                               placeholder="请输入站点名称" style="width: 40%;float: right">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn" type="submit">搜索</button>
                         </span>
