@@ -1,5 +1,7 @@
 package com.huacainfo.ace.glink.web.controller;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -157,45 +159,6 @@ public class TopNodeController extends GLinkBaseController {
 
     /**
      * @throws
-     * @Title:importXls
-     * @Description: TODO(导入!{bean.tableChineseName})
-     * @param: @param file
-     * @param: @param jsons
-     * @param: @return
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: huacai003
-     * @version:2019-04-09
-     */
-    @RequestMapping(value = "/importXls")
-    @ResponseBody
-    public MessageResponse importXls(@RequestParam MultipartFile[] file, String jsons) throws Exception {
-        ExcelUtils utils = new ExcelUtils();
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        MongoFile[] files = new MongoFile[file.length];
-        int i = 0;
-        for (MultipartFile o : file) {
-            MongoFile obj = new MongoFile();
-            obj.setInputStream(o.getInputStream());
-            obj.setFilename(o.getOriginalFilename());
-            obj.setLength(o.getSize());
-            files[i] = obj;
-            i++;
-            String ext = obj.getFilename().toLowerCase().substring(obj.getFilename().toLowerCase().lastIndexOf("."));
-            this.logger.info(ext);
-            if (ext.equals(".xls")) {
-                list = utils.readExcelByJXL(obj.getInputStream(), 2);
-            }
-            if (ext.equals(".xlsx")) {
-                list = utils.readExcelByPOI(obj.getInputStream(), 2);
-            }
-        }
-        return this.topNodeService.importXls(list, this.getCurUserProp());
-    }
-
-
-    /**
-     * @throws
      * @Title:audit
      * @Description: TODO(条件查询)
      * @param: @param p
@@ -261,5 +224,31 @@ public class TopNodeController extends GLinkBaseController {
     @ResponseBody
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.topNodeService.updateStatus(id, status, this.getCurUserProp());
+    }
+
+    @RequestMapping(value = "/importXls")
+    @ResponseBody
+    public MessageResponse importXls(@RequestParam MultipartFile[] file) throws Exception {
+        List<Map<String, Object>> list = new ArrayList<>();
+        MongoFile[] files = new MongoFile[file.length];
+        ExcelUtils utils = new ExcelUtils();
+        int i = 0;
+        for (MultipartFile o : file) {
+            MongoFile obj = new MongoFile();
+            obj.setLength(o.getSize());
+            obj.setInputStream(o.getInputStream());
+            obj.setFilename(o.getOriginalFilename());
+            files[i] = obj;
+            i++;
+            String ext = obj.getFilename().toLowerCase().substring(obj.getFilename().toLowerCase().lastIndexOf("."));
+            this.logger.info(ext);
+            if (ext.equals(".xls")) {
+                list = utils.readExcelByJXL(obj.getInputStream(), 2);
+            }
+            if (ext.equals(".xlsx")) {
+                list = utils.readExcelByPOI(obj.getInputStream(), 2);
+            }
+        }
+        return topNodeService.insertImportXls(list, this.getCurUserProp());
     }
 }

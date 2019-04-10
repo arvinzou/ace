@@ -187,12 +187,22 @@
         <div class="form-group">
             <label class="col-md-2 control-label">
 
-                建筑物ID
+                建筑物编号
             </label>
             <div class="col-md-10">
-                <input STYLE="width: auto" type="text" class="form-control" name="buildingId"
-                       value="\${data.o.buildingId}" maxlength="50"
-                       placeholder="请输入建筑物ID（建议字数在14个字以内，不超过50个字)">
+                <input STYLE="width: auto" type="text" class="form-control" name="buildingCode"
+                       value="\${data.o.buildingCode}" maxlength="50"
+                       placeholder="请输入建筑物编号（建议字数在14个字以内，不超过50个字)">
+                <span class="help-block"></span>
+            </div>
+        </div> <div class="form-group">
+            <label class="col-md-2 control-label">
+                站点编号
+            </label>
+            <div class="col-md-10">
+                <input STYLE="width: auto" type="text" class="form-control" name="stationCode"
+                       value="\${data.o.buildingCode}" maxlength="50"
+                       placeholder="请输入站点编号（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
             </div>
         </div>
