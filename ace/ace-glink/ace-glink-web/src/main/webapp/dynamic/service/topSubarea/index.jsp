@@ -23,24 +23,24 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
+            <div class="col-md-8">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-4">
 
                 <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('thirdTag','');">全部</button>
-                        <button type="button" class="btn btn-default active" onclick="setParams('thirdTag','0');">否
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('thirdTag','1');">是</button>
-                    </div>
-                    <div class="input-group" style="float:left;padding-right:5px">
-                        行政区划 <input class="easyui-combotree " name="district"
-                                    data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
-                                    style="width:200px;﻿line-height: 30px;height: 30px;">
-                    </div>
+                    <%--<div class="btn-group" role="group" style="float:left;padding-right:5px">--%>
+                    <%--<button type="button" class="btn btn-default" onclick="setParams('thirdTag','');">全部</button>--%>
+                    <%--<button type="button" class="btn btn-default active" onclick="setParams('thirdTag','0');">否--%>
+                    <%--</button>--%>
+                    <%--<button type="button" class="btn btn-default" onclick="setParams('thirdTag','1');">是</button>--%>
+                    <%--</div>--%>
+                    <%--<div class="input-group" style="float:left;padding-right:5px">--%>
+                    <%--行政区划 <input class="easyui-combotree " name="district"--%>
+                    <%--data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"--%>
+                    <%--style="width:200px;﻿line-height: 30px;height: 30px;">--%>
+                    <%--</div>--%>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
@@ -60,11 +60,11 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="15%"> 行政区划</th>
-                    <th width="15%"> 分区编号</th>
-                    <th width="15%"> 分区名称</th>
-                    <th width="30%"> 分区描述</th>
-                    <th width="10%">操作</th>
+                    <%--<th width="15%"> 行政区划</th>--%>
+                    <th width="30%"> 分区编号</th>
+                    <th width="50%"> 分区名称</th>
+                    <%--<th width="30%"> 分区描述</th>--%>
+                    <th width="20%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -90,10 +90,10 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \${item.districtName}</td>
+        <%--<td> \${item.districtName}</td>--%>
         <td> \${item.code}</td>
         <td> \${item.name}</td>
-        <td> \${item.depict}</td>
+        <%--<td> \${item.depict}</td>--%>
         <td>
             <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
@@ -127,62 +127,105 @@
     </div>
 </div>
 <script id="tpl-preview" type="text/template">
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">\${id}</div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">行政区划</label>
-        <div class="col-md-10">
-            \${data.o.districtFullName}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption font-green-sharp">
+                <i class="icon-share font-green-sharp"></i>
+                <span class="caption-subject bold uppercase"> 基本信息</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="form-group hide">
+                <label class="col-md-2 view-label">主键</label>
+                <div class="col-md-10">\${id}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">行政区划</label>
+                <div class="col-md-10">
+                    \${data.o.districtFullName}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">分区编号</label>
+                <div class="col-md-10">
+                    \${data.o.code}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">分区名称</label>
+                <div class="col-md-10">
+                    \${data.o.name}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">分区描述</label>
+                <div class="col-md-10">
+                    \${data.o.depict}
+                </div>
+            </div>
+            <div class="form-group hide">
+                <label class="col-md-2 view-label">详细地址</label>
+                <div class="col-md-10">
+                    \${data.o.address}
+                </div>
+            </div>
+            <div class="form-group hide">
+                <label class="col-md-2 view-label">经纬度坐标</label>
+                <div class="col-md-10">
+                    \${data.o.longitude},\${data.o.latitude}
+                </div>
+            </div>
+            <div class="form-group hide">
+                <label class="col-md-2 view-label">是否为第三方分区</label>
+                <div class="col-md-10">
+                    \${parseThirdTag(data.o.thirdTag)}
+                </div>
+            </div>
+            <div class="form-group hide">
+                <label class="col-md-2 view-label">备注</label>
+                <div class="col-md-10">
+                    \${data.o.remark}
+                </div>
+            </div>
+            <div class="form-group hide">
+                <label class="col-md-2 view-label">状态 </label>
+                <div class="col-md-10">
+                    \${parseStatus(data.o.status)}
+                </div>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">分区编号</label>
-        <div class="col-md-10">
-            \${data.o.code}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption font-green-sharp">
+                <i class="icon-share font-green-sharp"></i>
+                <span class="caption-subject bold uppercase"> 归属站点列表</span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">分区名称</label>
-        <div class="col-md-10">
-            \${data.o.name}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">分区描述</label>
-        <div class="col-md-10">
-            \${data.o.depict}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">详细地址</label>
-        <div class="col-md-10">
-            \${data.o.address}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">经纬度坐标</label>
-        <div class="col-md-10">
-            \${data.o.longitude},\${data.o.latitude}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">是否为第三方分区</label>
-        <div class="col-md-10">
-            \${parseThirdTag(data.o.thirdTag)}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">备注</label>
-        <div class="col-md-10">
-            \${data.o.remark}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">状态 </label>
-        <div class="col-md-10">
-            \${parseStatus(data.o.status)}
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <table class="table table-hover table-light">
+                        <thead>
+                        <tr>
+                            <th width="20%"> 编号</th>
+                            <th width="30%"> 名称</th>
+                            <th width="50%"> 地址</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {@each data.stationList as item, index}
+                        <tr>
+                            <td> \${item.code}</td>
+                            <td> \${item.name}</td>
+                            <td> \${item.address}</td>
+                        </tr>
+                        {@/each}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 </script>

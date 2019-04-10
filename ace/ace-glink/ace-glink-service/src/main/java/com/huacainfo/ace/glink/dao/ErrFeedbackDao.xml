@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.ErrFeedbackDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.ErrFeedback">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="deviceCode" jdbcType="VARCHAR" property="deviceCode"/>
+        <result column="errType" jdbcType="VARCHAR" property="errType"/>
+        <result column="errLevel" jdbcType="CHAR" property="errLevel"/>
+        <result column="errDate" jdbcType="TIMESTAMP" property="errDate"/>
+        <result column="errContent" jdbcType="VARCHAR" property="errContent"/>
+        <result column="errLoopNum" jdbcType="INTEGER" property="errLoopNum"/>
+        <result column="dataSrcCode" jdbcType="VARCHAR" property="dataSrcCode"/>
+        <result column="apiRst" jdbcType="VARCHAR" property="apiRst"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, deviceCode, errType, errLevel, errDate, errContent, errLoopNum, dataSrcCode, 
+    apiRst, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
+    lastModifyUserName, lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from err_feedback
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from err_feedback
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.ErrFeedback">
+    insert into err_feedback (id, deviceCode, errType, 
+      errLevel, errDate, errContent, 
+      errLoopNum, dataSrcCode, apiRst, 
+      remark, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{deviceCode,jdbcType=VARCHAR}, #{errType,jdbcType=VARCHAR}, 
+      #{errLevel,jdbcType=CHAR}, #{errDate,jdbcType=TIMESTAMP}, #{errContent,jdbcType=VARCHAR}, 
+      #{errLoopNum,jdbcType=INTEGER}, #{dataSrcCode,jdbcType=VARCHAR}, #{apiRst,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.ErrFeedback">
+    update err_feedback
+    set deviceCode = #{deviceCode,jdbcType=VARCHAR},
+      errType = #{errType,jdbcType=VARCHAR},
+      errLevel = #{errLevel,jdbcType=CHAR},
+      errDate = #{errDate,jdbcType=TIMESTAMP},
+      errContent = #{errContent,jdbcType=VARCHAR},
+      errLoopNum = #{errLoopNum,jdbcType=INTEGER},
+      dataSrcCode = #{dataSrcCode,jdbcType=VARCHAR},
+      apiRst = #{apiRst,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.ErrFeedbackVo">
+
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        t.id, t.deviceCode, t.errType, t.errLevel, t.errDate, t.errContent, t.errLoopNum, t.dataSrcCode,
+        t.apiRst, t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId,
+        t.lastModifyUserName, t.lastModifyDate
+    </sql>
+    <sql id="From_Statement">
+        FROM err_feedback t
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test="condition.deviceCode !=null and condition.deviceCode !=&quot;&quot;">
+            and t.deviceCode like concat(#{condition.deviceCode,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc, t.deviceCode
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopSubarea">
+        select count(1)
+        from err_feedback
+        where 1!=1
+    </select>
+</mapper>

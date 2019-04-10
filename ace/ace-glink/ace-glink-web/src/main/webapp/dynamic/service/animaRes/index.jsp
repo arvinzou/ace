@@ -52,12 +52,13 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 节目编号</th>
-                    <th width="20%"> 节目名称</th>
-                    <th width="15%"> 节目类型</th>
-                    <th width="15%"> 播放时长</th>
-                    <th width="10%"> 状态 </th>
-                    <th width="10%"> 创建人姓名</th>
+                    <th width="10%"> 编号</th>
+                    <th width="10%"> 类别</th>
+                    <th width="15%"> 名称</th>
+                    <th width="10%"> 封面</th>
+                    <th width="10%"> 时长</th>
+                    <th width="15%"> 播放地址</th>
+                    <th width="10%">分辨率</th>
                     <th width="20%">操作</th>
                 </tr>
                 </thead>
@@ -84,20 +85,21 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td width="10%">\${item.code}</td>
-        <td width="20%"> \${item.name}</td>
-        <td width="15%"> \${parseSourseType(item.type)}</td>
-        <td width="15%"> \${item.duration}</td>
+        <td width="10%"> \${item.code}</td>
+        <td width="10%"> \${parseSourseType(item.type)}</td>
+        <td width="15%"> \${item.name}</td>
         <td width="10%">
-            {@if item.status == "1"}
-                正常
+            {@if item.preImgUrl}
+            <img src="\${item.preImgUrl}" style="width: 70px;height: 70px;object-fit: cover">
             {@/if}
         </td>
-        <td width="10%">\${item.createUserName}</td>
+        <td width="10%">\${item.duration}</td>
+        <td width="15%">\${item.playUrl}</td>
+        <td width="10%">\${item.rsoWidth} x \${item.rsoHeight}</td>
         <td>
             ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-status">设置状态</a>
+            <a href="#" data-toggle="modal" data-url="\${item.prePlayUrl}" data-type="\${item.type}"
+               data-target="#modal-show">预览</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
 
@@ -108,41 +110,18 @@
     {@/each}
 </script>
 ﻿
-<div class="modal fade " id="modal-status">
+<div class="modal fade " id="modal-show">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
+        <div class="modal-content" style="width: 900px;height: 700px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">设置状态</h4>
+                <h4 class="modal-title">媒体文件预览</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="width: 90%;height: 550px;">
                 <form class="form-horizontal" id="fm-status" role="form">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="col-md-2 view-label">对象</label>
-                            <div class="col-md-10 status-title">
+                    <div class="form-body" id="sourcePreview">
 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">状态</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <input type="hidden" name="id">
-                                    <label>
-                                        <input type="radio" name="status" value="1"><span style="padding:10px">预播</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="2"><span
-                                            style="padding:10px">直播中</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="3"><span style="padding:10px">历史</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </form>
             </div>
@@ -182,79 +161,83 @@
            <div class="form-group">
                 <label class="col-md-2 view-label">节目编号</label>
                 <div class="col-md-10">
-                    \${code}
+                    \${data.o.code}
                 </div>
             </div>
-                        <div class="form-group">
+           <div class="form-group">
                 <label class="col-md-2 view-label">节目名称</label>
                 <div class="col-md-10">
-                    \${name}
+                    \${data.o.name}
                 </div>
             </div>
-                        <div class="form-group">
+           <div class="form-group">
                 <label class="col-md-2 view-label">节目类型</label>
                 <div class="col-md-10">
-                    \${type}
+                    \${parseSourseType(data.o.type)}
                 </div>
             </div>
-                        <div class="form-group">
+           <div class="form-group">
                 <label class="col-md-2 view-label">播放时长</label>
                 <div class="col-md-10">
-                    \${duration}
+                    \${data.o.duration}
                 </div>
             </div>
-                        <div class="form-group">
+           <div class="form-group">
                 <label class="col-md-2 view-label">播放地址</label>
                 <div class="col-md-10">
-                    \${playUrl}
+                    \${data.o.playUrl}
                 </div>
             </div>
-                        <div class="form-group">
+           <div class="form-group">
                 <label class="col-md-2 view-label">预览地址</label>
                 <div class="col-md-10">
-                    \${prePlayUrl}
+                    \${data.o.prePlayUrl}
                 </div>
             </div>
-                        <div class="form-group">
+           <div class="form-group">
                 <label class="col-md-2 view-label">效果图地址</label>
                 <div class="col-md-10">
-                    \${preImgUrl}
+                    \${data.o.preImgUrl}
                 </div>
             </div>
-                        <div class="form-group">
+           <div class="form-group">
                 <label class="col-md-2 view-label">分辨率-宽</label>
                 <div class="col-md-10">
-                    \${rsoWidth}
+                    \${data.o.rsoWidth}
                 </div>
             </div>
-                        <div class="form-group">
+           <div class="form-group">
                 <label class="col-md-2 view-label">分辨率-高</label>
                 <div class="col-md-10">
-                    \${rsoHeight}
+                    \${data.o.rsoHeight}
                 </div>
             </div>
-                        <div class="form-group">
+           <div class="form-group">
                 <label class="col-md-2 view-label">备注</label>
                 <div class="col-md-10">
-                    \${remark}
+                    \${data.o.remark}
                 </div>
             </div>
-                        <div class="form-group">
+           <div class="form-group">
                 <label class="col-md-2 view-label">状态 </label>
                 <div class="col-md-10">
-                    \${status}
+                    {@if data.o.status == "1"}
+                        正常
+                    {@else}
+                        不正常
+                    {@/if}
                 </div>
             </div>
            <div class="form-group">
                 <label class="col-md-2 view-label">创建人姓名</label>
                 <div class="col-md-10">
-                    \${createUserName}
+                    \${data.o.createUserName}
                 </div>
             </div>
            <div class="form-group">
                 <label class="col-md-2 view-label">创建日期</label>
                 <div class="col-md-10">
-                    \${createDate}
+                    \${data.o.createDate}
                 </div>
             </div>
 

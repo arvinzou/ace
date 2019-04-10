@@ -120,90 +120,10 @@ function initBtnEvents() {
     });
 }
 
-/*分区管理审核*/
-function audit(params) {
-    startLoad();
-    $.ajax({
-        url: contextPath + "/topSubarea/audit",
-        type: "post",
-        async: false,
-        data: params,
-        success: function (rst) {
-            stopLoad();
-            $("#modal-audit").modal('hide');
-            alert(rst.errorMessage);
-            if (rst.status == 0) {
-                getPageList();
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
-        }
-    });
-}
-
-/*分区管理上架*/
-function online(id) {
-    if (confirm("确定要上架吗？")) {
-        startLoad();
-        $.ajax({
-            url: contextPath + "/topSubarea/updateStatus",
-            type: "post",
-            async: false,
-            data: {
-                id: id,
-                status: '1'
-            },
-            success: function (rst) {
-                stopLoad();
-                if (rst.status == 0) {
-                    getPageList();
-                } else {
-                    alert(rst.errorMessage);
-                }
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起，出错了！");
-            }
-        });
-    }
-}
-
-/*分区管理下架*/
-function outline(id) {
-    if (confirm("确定要下架吗？")) {
-        startLoad();
-        $.ajax({
-            url: contextPath + "/topSubarea/updateStatus",
-            type: "post",
-            async: false,
-            data: {
-                id: id,
-                status: '0'
-            },
-            success: function (rst) {
-                stopLoad();
-                if (rst.status == 0) {
-                    getPageList();
-                } else {
-                    alert(rst.errorMessage);
-                }
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起，出错了！");
-            }
-        });
-    }
-}
-
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
     juicer.register('parseThirdTag', parseThirdTag);
-
 }
 
 function parseThirdTag(val) {
@@ -248,6 +168,8 @@ function initPreview(id) {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
+                data['stationList'] = result.value.stationList;
+
                 render('#fm-preview', data, 'tpl-preview');
             } else {
                 alert(result.errorMessage);

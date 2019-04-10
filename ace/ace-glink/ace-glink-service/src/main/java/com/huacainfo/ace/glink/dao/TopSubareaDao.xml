@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.TopSubarea">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="district" jdbcType="VARCHAR" property="district"/>
-        <result column="code" jdbcType="BIGINT" property="code"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="depict" jdbcType="VARCHAR" property="depict"/>
         <result column="address" jdbcType="VARCHAR" property="address"/>
@@ -42,7 +42,7 @@
       remark, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{code,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
       #{name,jdbcType=VARCHAR}, #{depict,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{thirdTag,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
@@ -52,7 +52,7 @@
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.TopSubarea">
     update top_subarea
     set district = #{district,jdbcType=VARCHAR},
-      code = #{code,jdbcType=BIGINT},
+      code = #{code,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       depict = #{depict,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},

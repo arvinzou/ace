@@ -93,7 +93,7 @@
                 <span class="help-block"></span>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 control-label">
                 详细地址
             </label>
@@ -112,7 +112,7 @@
                 <div class="error-address"></div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 control-label">
                 第三方分区
             </label>
@@ -130,7 +130,7 @@
                 <span class="help-block"></span>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 control-label">
                 备注
             </label>

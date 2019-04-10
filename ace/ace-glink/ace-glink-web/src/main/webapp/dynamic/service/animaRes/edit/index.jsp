@@ -40,129 +40,128 @@
 <%--==============common jsp-suffix==============--%>
 </body>
 <script id="tpl-fm" type="text/template">
+    <input type="text" class="form-control hidden" name="id" value="\${data.o.id}">
+    <input type="text" class="form-control hidden" name="status" value="\${data.o.status}">
     <div class="form-body">
-                                    <div class="form-group">
-                    <label class="col-md-2 control-label">
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                节目编号
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="code"
+                       value="\${data.o.code}" maxlength="20"
+                       placeholder="请输入节目编号（不超过20个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                节目名称
+                <span class="required" aria-required="true"> * </span>
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="name"
+                       value="\${data.o.name}" maxlength="50"
+                       placeholder="请输入节目名称（不超过50个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                节目类型
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="type"
+                       value="\${data.o.type}" maxlength="2"
+                       placeholder="请输入节目类型（建议字数在14个字以内，不超过2个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                播放时长
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="duration"
+                       value="\${data.o.duration}" maxlength="10"
+                       placeholder="请输入播放时长（单位：s)" onblur="checkNumber(this);">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                播放地址
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="playUrl" id="playUrl"
+                       value="\${data.o.playUrl}" maxlength="300"
+                       placeholder="请输入播放地址（建议字数在14个字以内，不超过300个字)"  style="width: 80%;float: left;margin-right: 10px;">
+                <a href="javascript:void(0);" id="uploadPlayUrl" style="font-size: 14px !important;"
+                   class="btn green commonCourse" style="float: left;">上传资源</a>
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                预览地址
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="prePlayUrl" id="prePlayUrl"
+                       value="\${data.o.prePlayUrl}" maxlength="300"
+                       placeholder="请输入预览地址（建议字数在14个字以内，不超过300个字)" style="width: 80%;float: left;margin-right: 10px;">
+                <a href="javascript:void(0);" id="uploadPrePlayUrl" style="font-size: 14px !important;"
+                   class="btn green commonCourse" style="float: left;">上传资源</a>
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
 
-                        节目编号
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="code"
-                               value="\{data.o.code}" maxlength="20"
-                               placeholder="请输入节目编号（建议字数在14个字以内，不超过20个字)">
-                        <span class="help-block"></span>
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        节目名称
-                                                    <span class="required" aria-required="true"> * </span>
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="name"
-                               value="\{data.o.name}" maxlength="50"
-                               placeholder="请输入节目名称（建议字数在14个字以内，不超过50个字)">
-                        <span class="help-block"></span>
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        节目类型
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="type"
-                               value="\{data.o.type}" maxlength="2"
-                               placeholder="请输入节目类型（建议字数在14个字以内，不超过2个字)">
-                        <span class="help-block"></span>
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        播放时长
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="duration"
-                               value="\{data.o.duration}" maxlength="10"
-                               placeholder="请输入播放时长（建议字数在14个字以内，不超过10个字)">
-                        <span class="help-block"></span>
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        播放地址
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="playUrl"
-                               value="\{data.o.playUrl}" maxlength="300"
-                               placeholder="请输入播放地址（建议字数在14个字以内，不超过300个字)">
-                        <span class="help-block"></span>
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        预览地址
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="prePlayUrl"
-                               value="\{data.o.prePlayUrl}" maxlength="300"
-                               placeholder="请输入预览地址（建议字数在14个字以内，不超过300个字)">
-                        <span class="help-block"></span>
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        效果图地址
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="preImgUrl"
-                               value="\{data.o.preImgUrl}" maxlength="300"
-                               placeholder="请输入效果图地址（建议字数在14个字以内，不超过300个字)">
-                        <span class="help-block"></span>
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        分辨率-宽
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="rsoWidth"
-                               value="\{data.o.rsoWidth}" maxlength="19"
-                               placeholder="请输入分辨率-宽（建议字数在14个字以内，不超过19个字)">
-                        <span class="help-block"></span>
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        分辨率-高
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="rsoHeight"
-                               value="\{data.o.rsoHeight}" maxlength="19"
-                               placeholder="请输入分辨率-高（建议字数在14个字以内，不超过19个字)">
-                        <span class="help-block"></span>
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        备注
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="remark"
-                               value="\{data.o.remark}" maxlength="200"
-                               placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
-                        <span class="help-block"></span>
-                    </div>
-                </div>
-                        </div>
+                效果图地址
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="preImgUrl" id="preImgUrl"
+                       value="\${data.o.preImgUrl}" maxlength="300"
+                       placeholder="请输入效果图地址（建议字数在14个字以内，不超过300个字)" style="width: 80%;float: left;margin-right: 10px;">
+                <a href="javascript:void(0);" id="uploadPreImgUrl" style="font-size: 14px !important;"
+                   class="btn green commonCourse" style="float: left;">上传资源</a>
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                分辨率-宽
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="rsoWidth"
+                       value="\${data.o.rsoWidth}" maxlength="19"
+                       placeholder="请输入分辨率-宽（建议字数在14个字以内，不超过19个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                分辨率-高
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="rsoHeight"
+                       value="\${data.o.rsoHeight}" maxlength="19"
+                       placeholder="请输入分辨率-高（建议字数在14个字以内，不超过19个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                备注
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="remark"
+                       value="\${data.o.remark}" maxlength="200"
+                       placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+    </div>
     <div class="form-actions">
         <div class="row">
             <div class="col-md-offset-3 col-md-7">

@@ -10,9 +10,11 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.dao.TopStationDao;
 import com.huacainfo.ace.glink.dao.TopSubareaDao;
 import com.huacainfo.ace.glink.model.TopSubarea;
 import com.huacainfo.ace.glink.service.TopSubareaService;
+import com.huacainfo.ace.glink.vo.TopStationQVo;
 import com.huacainfo.ace.glink.vo.TopSubareaQVo;
 import com.huacainfo.ace.glink.vo.TopSubareaVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -39,6 +41,9 @@ public class TopSubareaServiceImpl implements TopSubareaService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
+    @Autowired
+    private TopStationDao topStationDao;
+
 
     /**
      * @throws
@@ -57,8 +62,7 @@ public class TopSubareaServiceImpl implements TopSubareaService {
     public PageResult<TopSubareaVo> findTopSubareaList(TopSubareaQVo condition,
                                                        int start, int limit, String orderBy) throws Exception {
         PageResult<TopSubareaVo> rst = new PageResult<>();
-        List<TopSubareaVo> list = this.topSubareaDao.findList(condition,
-                start, limit, orderBy);
+        List<TopSubareaVo> list = this.topSubareaDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.topSubareaDao.findCount(condition);
@@ -170,8 +174,15 @@ public class TopSubareaServiceImpl implements TopSubareaService {
      */
     @Override
     public SingleResult<TopSubareaVo> selectTopSubareaByPrimaryKey(String id) throws Exception {
+
+        TopSubareaVo vo = topSubareaDao.selectVoByPrimaryKey(id);
+        //setStationList
+        TopStationQVo condition = new TopStationQVo();
+        condition.setSubareaCode(vo.getCode());
+        vo.setStationList(topStationDao.findList(condition, 0, 500, "t.name"));
+
         SingleResult<TopSubareaVo> rst = new SingleResult<>();
-        rst.setValue(this.topSubareaDao.selectVoByPrimaryKey(id));
+        rst.setValue(vo);
         return rst;
     }
 

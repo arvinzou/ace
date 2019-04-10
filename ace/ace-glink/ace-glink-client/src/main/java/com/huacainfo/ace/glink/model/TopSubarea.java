@@ -10,7 +10,7 @@ public class TopSubarea extends BaseModel {
 
     private String district;
 
-    private Long code;
+    private String code;
 
     private String name;
 
@@ -58,11 +58,11 @@ public class TopSubarea extends BaseModel {
         this.district = district == null ? null : district.trim();
     }
 
-    public Long getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(Long code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
