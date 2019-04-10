@@ -242,6 +242,12 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 view-label">站点编码</label>
+        <div class="col-md-10">
+            \${data.o.code}
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 view-label">站点名称</label>
         <div class="col-md-10">
             \${data.o.name}

@@ -45,12 +45,17 @@ function initEvents() {
             $(element).valid();
         },
         rules: {
-            subareaCode: {required: true, maxlength: 50}, name: {required: true, maxlength: 50}
+            subareaCode: {required: true, maxlength: 50}, code: {required: true, maxlength: 50},
+            name: {required: true, maxlength: 50},
+
         },
         messages: {
             subareaCode: {
                 required: "请选择分区编码",
                 maxlength: "分区编码字符长度不能超过50"
+            }, code: {
+                required: "请输入站点编码",
+                maxlength: "站点编码字符长度不能超过50"
             }, name: {
                 required: "请输入站点名称",
                 maxlength: "站点名称字符长度不能超过50"
@@ -125,10 +130,6 @@ function initForm() {
 
         ],
 
-        onSelect: function (rowIndex, rowData) {
-            console.log(rowData);
-            // $("#subareaCode").val(rowData.code);
-        },
 
     });
 }

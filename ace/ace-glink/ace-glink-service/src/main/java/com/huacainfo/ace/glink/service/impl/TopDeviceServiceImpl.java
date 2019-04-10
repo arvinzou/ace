@@ -104,7 +104,6 @@ public class TopDeviceServiceImpl implements TopDeviceService {
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
-        o.setWorkingLife(0);
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
