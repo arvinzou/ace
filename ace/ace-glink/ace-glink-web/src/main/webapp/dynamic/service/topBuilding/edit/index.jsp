@@ -111,10 +111,10 @@
             </label>
             <div class="col-md-10">
                 {@if data.o.mainTag == "1"}
-                <input type="radio" name="mainTag" value="1" checked>重要
+                <input type="radio" name="mainTag" value="1" checked>重要<span style="padding-right: 60px;"></span>
                 <input type="radio" name="mainTag" value="0">不重要
                 {@else}
-                <input type="radio" name="mainTag" value="1">重要
+                <input type="radio" name="mainTag" value="1">重要<span style="padding-right: 60px;"></span>
                 <input type="radio" name="mainTag" value="0" checked>不重要
                 {@/if}
                 <span class="help-block"></span>
@@ -126,10 +126,10 @@
             </label>
             <div class="col-md-10">
                 {@if data.o.state == "1"}
-                <input type="radio" name="state" value="1" checked>在线
+                <input type="radio" name="state" value="1" checked>在线<span style="padding-right: 60px;"></span>
                 <input type="radio" name="state" value="0">不在线
                 {@else}
-                <input type="radio" name="state" value="1">在线
+                <input type="radio" name="state" value="1">在线<span style="padding-right: 60px;"></span>
                 <input type="radio" name="state" value="0" checked>不在线
                 {@/if}
                 <span class="help-block"></span>

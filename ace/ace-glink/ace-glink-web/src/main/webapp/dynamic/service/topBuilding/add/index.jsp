@@ -92,7 +92,7 @@
                             重点建筑标记
                         </label>
                         <div class="col-md-10">
-                            <input type="radio" value="0" name="mainTag">不重要
+                            <input type="radio" value="0" name="mainTag">不重要<span style="padding-right: 60px;"></span>
                             <input type="radio" value="1" name="mainTag">重要
                             <span class="help-block"></span>
                         </div>
@@ -102,7 +102,7 @@
                             建筑物状态
                         </label>
                         <div class="col-md-10">
-                            <input type="radio" value="0" name="state">不在线
+                            <input type="radio" value="0" name="state">不在线<span style="padding-right: 60px;"></span>
                             <input type="radio" value="1" name="state">在线
                             <span class="help-block"></span>
                         </div>
