@@ -100,3 +100,13 @@ function initForm() {
     var data = staticDictObject;
     render('#fm-add-panel', data, 'tpl-fm-add');
 }
+
+function checkNumber(obj){
+    var value = obj.value;
+    var re=/^\d*$/;
+    if(!re.test(value)){
+        alert("输入数据格式只能是数字。");
+        $(obj).val("");
+        return false;
+    }
+}

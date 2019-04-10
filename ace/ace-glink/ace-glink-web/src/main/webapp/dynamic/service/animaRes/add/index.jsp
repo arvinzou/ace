@@ -70,10 +70,10 @@
                                     <div class="form-group">
                         <label class="col-md-2 control-label">
                             播放时长
-                                                    </label>
+                        </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="duration" maxlength="10"
-                                   placeholder="请输入播放时长（建议字数在14个字以内，不超过10个字)">
+                                   placeholder="请输入播放时长（建议字数在14个字以内，不超过10个字)" onblur="checkNumber(this);">
                             <span class="help-block"></span>
                         </div>
                     </div>

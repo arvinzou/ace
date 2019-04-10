@@ -182,79 +182,83 @@
            <div class="form-group">
                 <label class="col-md-2 view-label">节目编号</label>
                 <div class="col-md-10">
-                    \${code}
+                    \${data.o.code}
                 </div>
             </div>
                         <div class="form-group">
                 <label class="col-md-2 view-label">节目名称</label>
                 <div class="col-md-10">
-                    \${name}
+                    \${data.o.name}
                 </div>
             </div>
                         <div class="form-group">
                 <label class="col-md-2 view-label">节目类型</label>
                 <div class="col-md-10">
-                    \${type}
+                    \${parseSourseType(data.o.type)}
                 </div>
             </div>
                         <div class="form-group">
                 <label class="col-md-2 view-label">播放时长</label>
                 <div class="col-md-10">
-                    \${duration}
+                    \${data.o.duration}
                 </div>
             </div>
                         <div class="form-group">
                 <label class="col-md-2 view-label">播放地址</label>
                 <div class="col-md-10">
-                    \${playUrl}
+                    \${data.o.playUrl}
                 </div>
             </div>
                         <div class="form-group">
                 <label class="col-md-2 view-label">预览地址</label>
                 <div class="col-md-10">
-                    \${prePlayUrl}
+                    \${data.o.prePlayUrl}
                 </div>
             </div>
                         <div class="form-group">
                 <label class="col-md-2 view-label">效果图地址</label>
                 <div class="col-md-10">
-                    \${preImgUrl}
+                    \${data.o.preImgUrl}
                 </div>
             </div>
                         <div class="form-group">
                 <label class="col-md-2 view-label">分辨率-宽</label>
                 <div class="col-md-10">
-                    \${rsoWidth}
+                    \${data.o.rsoWidth}
                 </div>
             </div>
                         <div class="form-group">
                 <label class="col-md-2 view-label">分辨率-高</label>
                 <div class="col-md-10">
-                    \${rsoHeight}
+                    \${data.o.rsoHeight}
                 </div>
             </div>
                         <div class="form-group">
                 <label class="col-md-2 view-label">备注</label>
                 <div class="col-md-10">
-                    \${remark}
+                    \${data.o.remark}
                 </div>
             </div>
                         <div class="form-group">
                 <label class="col-md-2 view-label">状态 </label>
                 <div class="col-md-10">
-                    \${status}
+                    {@if data.o.status == "1"}
+                        正常
+                    {@/else}
+                        不正常
+                    {@/if}
                 </div>
             </div>
            <div class="form-group">
                 <label class="col-md-2 view-label">创建人姓名</label>
                 <div class="col-md-10">
-                    \${createUserName}
+                    \${data.o.createUserName}
                 </div>
             </div>
            <div class="form-group">
                 <label class="col-md-2 view-label">创建日期</label>
                 <div class="col-md-10">
-                    \${createDate}
+                    \${data.o.createDate}
                 </div>
             </div>
 
