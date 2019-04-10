@@ -11,6 +11,7 @@
     <meta content="${cfg.sys_name}" name="${cfg.sys_name}"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
 </head>
 
@@ -23,7 +24,7 @@
 <div class="portlet light">
 
     <div class="portlet-body">
-        <div class="form-panel fm-page" id="fm-add-panel">
+        <div class="form-panel" id="fm-add-panel">
             <!--具体界面元素开始-->
 
         </div>
@@ -33,86 +34,96 @@
 
 
 <script id="tpl-fm-add" type="text/template">
-    <form class="form-horizontal" id="fm-add" role="form">
+    <form class="form-horizontal fm-page" id="fm-add" role="form">
         <div class="form-body">
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    行政区划
+                    设备编号
                     <span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-10">
-                    <input class="form-control" name="district"
-                           style="width:275px;﻿line-height: 30px;height: 30px;">
+                    <input type="text" class="form-control" name="deviceCode" maxlength="50"
+                           placeholder="请输入设备编号（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    分区编号
-                    <span class="required" aria-required="true"> * </span>
+                    故障类型
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="code" maxlength="19"
-                           placeholder="请输入分区编号（20位有效整型数据)">
+                    <select class="form-control select-ctrl" name="errType">
+                        {@each data['180'] as item, index}
+                        <option value="\${item.CODE}" \${index==1?'selected=selected':''}> \${item.NAME}</option>
+                        {@/each}
+                    </select>
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    分区名称
-                    <span class="required" aria-required="true"> * </span>
+                    故障等级
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="name" maxlength="50"
-                           placeholder="请输入分区名称（建议字数在14个字以内，不超过50个字)">
+                    <select class="form-control select-ctrl" name="errLevel">
+                        {@each data['181'] as item, index}
+                        <option value="\${item.CODE}" \${index==1?'selected=selected':''}> \${item.NAME}</option>
+                        {@/each}
+                    </select>
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    分区描述
+                    故障时间
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="depict" maxlength="200"
-                           placeholder="请输入分区描述（建议字数在14个字以内，不超过200个字)">
+                    <input type="text" class="form-control" name="errDate" maxlength=""
+                           placeholder="请输入故障时间（建议字数在14个字以内，不超过个字)">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    故障内容
+                </label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="errContent" maxlength="200"
+                           placeholder="请输入故障内容（建议字数在14个字以内，不超过200个字)">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    故障回路数
+                </label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="errLoopNum" maxlength="10"
+                           placeholder="请输入故障回路数（建议字数在14个字以内，不超过10个字)">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    数据源编号
+                </label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="dataSrcCode" maxlength="50"
+                           placeholder="请输入数据源编号（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group hide">
                 <label class="col-md-2 control-label">
-                    详细地址
+                    接口返回内容
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="address" maxlength="200"
-                           placeholder="请选择详细地址"
-                           style="float:left;width:92%">
-                    <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
-                       style="float:right;line-height: 34px;">选择</a>
-                    <span class="help-block"></span>
-                    <%--纬度--%>
-                    <input name="latitude" type="hidden"/>
-                    <%--经度--%>
-                    <input name="longitude" type="hidden"/>
-                    <div class="error-address"></div>
-                </div>
-            </div>
-            <div class="form-group hide">
-                <label class="col-md-2 control-label">
-                    第三方分区
-                </label>
-                <div class="col-md-10">
-                    <div class="radio-group-container">
-                        <label>
-                            <input type="radio" name="thirdTag" value="0" checked><span style="padding:10px">否</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="thirdTag" value="1"><span style="padding:10px">是</span>
-                        </label>
-                    </div>
+                    <input type="text" class="form-control" name="apiRst" maxlength="300"
+                           placeholder="请输入接口返回内容（建议字数在14个字以内，不超过300个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
-            <div class="form-group hide">
+            <div class="form-group">
                 <label class="col-md-2 control-label">
                     备注
                 </label>
@@ -135,32 +146,29 @@
 
 
 </script>
-</body>
+
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+</body>
 <jsp:include page="/dynamic/common/footer.jsp"/>
-
-<style>
-    .fm-page {
-        max-width: 80%;
-    }
-</style>
 <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
 <script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
-<%--action js--%>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 
-<%--easyui--%>
-<link rel="stylesheet" type="text/css"
-      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
-<link rel="stylesheet" type="text/css"
-      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+<style>
+    .select-ctrl {
+        max-width: 30%;
+    }
 
+    .fm-page {
+        max-width: 80%;
+    }
+</style>
 </html>

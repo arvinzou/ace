@@ -1,9 +1,10 @@
 var loading = {};
 var editor;
-var qq,sn;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("<li> <span>编辑节点管理</span></li>");
+        $(".breadcrumb").append("
+            < li > < span > 编辑故障报警 < /span></
+        li > ");
         initForm();
         initEvents();
     });
@@ -35,32 +36,8 @@ function render(obj, data, tplId) {
 }
 
 function initPage() {
-    $(".form-body input[name='buildingCode']").combogrid({
-        url: contextPath + "/topBuilding/findTopBuildingList?name="+qq,
-        method: 'get',
-        loadMsg: "正在获取...",
-        panelWidth: 400,
-        mode: 'remote',
-        // fitColumns: true,
-        idField: 'id',
-        textField: 'name',
-        pageSize: 100,
-        columns: [[
-            {field: 'name', title: '建筑名称', width: 200}
-        ]]
-    });
-    $(".form-body input[name='stationCode']").combogrid({
-        url: contextPath + "/topStation/findTopStationList?name="+sn,
-        method:'get',
-        loadMsg:"正在获取...",
-        panelWidth: 400,
-        mode:'remote',
-        idField:'code',
-        textField:'name',
-        columns:[[
-            {field:'name',title:'站点名称',width:200}
-        ]]
-    });
+    initEditor();
+//   initUpload();
 }
 
 function initEvents() {
@@ -70,28 +47,12 @@ function initEvents() {
             $(element).valid();
         },
         rules: {
-            code: {required: true, maxlength: 50},
-            name: {required: true, maxlength: 50},
-            address: {required: true, maxlength: 200},
-            ipv4: {required: true, maxlength: 20},
-            port: {required: true, maxlength: 10}
+            deviceCode: {required: true, maxlength: 50}
         },
         messages: {
-            code: {
-                required: "请输入节点编号",
-                maxlength: "节点编号字符长度不能超过50"
-            }, name: {
-                required: "请输入节点名称",
-                maxlength: "节点名称字符长度不能超过50"
-            }, address: {
-                required: "请输入详细地址",
-                maxlength: "详细地址字符长度不能超过200"
-            }, ipv4: {
-                required: "请输入IPV4地址",
-                maxlength: "IPV4地址字符长度不能超过20"
-            }, port: {
-                required: "请输入端口号",
-                maxlength: "端口号字符长度不能超过10"
+            deviceCode: {
+                required: "请输入设备编号",
+                maxlength: "设备编号字符长度不能超过50"
             }
         }
     });
@@ -118,7 +79,7 @@ function save(params) {
     $.extend(params, {});
     startLoad();
     $.ajax({
-        url: contextPath + "/topNode/updateTopNode",
+        url: contextPath + "/errFeedback/updateErrFeedback",
         type: "post",
         async: false,
         data: {
@@ -141,7 +102,7 @@ function save(params) {
 function initForm() {
     startLoad();
     $.ajax({
-        url: contextPath + "/topNode/selectTopNodeByPrimaryKey",
+        url: contextPath + "/errFeedback/selectErrFeedbackByPrimaryKey",
         type: "post",
         async: false,
         data: {id: urlParams.did},
@@ -150,8 +111,6 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                qq=result.value.tbName;
-                // sn=result.value;
                 render('#fm-edit', data, 'tpl-fm');
                 initPage();
 //富文本填值
@@ -165,17 +124,4 @@ function initForm() {
             alert("对不起出错了！");
         }
     });
-}
-
-
-function latitude(latitude) {
-    $("input[name=latitude]").val(latitude);
-}
-
-function longitude(longitude) {
-    $("input[name=longitude]").val(longitude);
-}
-
-function addr(addr) {
-    $("input[name=address]").val(addr);
 }

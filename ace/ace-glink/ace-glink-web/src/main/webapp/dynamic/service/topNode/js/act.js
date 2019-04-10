@@ -116,6 +116,12 @@ function initEvents() {
         var id = relatedTarget.data('id');
         initPreview(id);
     })
+
+    $('#modal-import').on('shown.bs.modal', function (event) {
+        //加载班级列表
+        alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
+        importInit();
+    });
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
@@ -147,7 +153,16 @@ function initEvents() {
         $(event.target).addClass("active");
     });
 
+    //批量导入
+    $('#btn-view-import').on('click', function () {
+        //加载导入
+        importXls();
+    });
 
+}
+
+function importInit() {
+    reset_uploader();
 }
 
 /*节点管理审核*/
@@ -171,6 +186,10 @@ function audit(params) {
             alert("对不起出错了！");
         }
     });
+}
+
+function importXls() {
+    $('#modal-import').modal('show');
 }
 
 /*节点管理上架*/
