@@ -106,31 +106,19 @@ $('#modal-preview').on('show.bs.modal', function (event) {
         console.log(relatedTarget);
         initPreview(id);
     });
-    $('#modal-audit').on('show.bs.modal', function (event) {
+    $('#modal-show').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        var title = relatedTarget.data('title');
+        var preUrl = relatedTarget.data('url');
+        var type = relatedTarget.data('type');
         var modal = $(this);
-        console.log(relatedTarget);
-        initForm(id);
-    })
-    $('#modal-audit .audit').on('click', function () {
-        $('#modal-audit form').submit();
-    });
-    $('#modal-audit form').ajaxForm({
-        beforeSubmit: function (formData, jqForm, options) {
-            var params = {};
-            $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
-            });
-            $.extend(params, {
-                time: new Date()
-            });
-            console.log(params);
-            audit(params);
-            return false;
+        if(type == '01'){//01是音频文件
+            $("#sourcePreview").html("<audio src='"+preUrl+"' style='width: 100%;height: 500px;' controls=\"controls\"></audio>");
+        }else if(type == '02'){//02是视频文件
+            $("#sourcePreview").html("<video src='"+preUrl+"' style='width: 100%;height: 100%' controls=\"controls\"></video>");
+        }else{
+            $("#sourcePreview").html("<p>没有可预览的资源文件</p>")
         }
-    });
+    })
     $(".btn-group .btn").bind('click', function (event) {
         $(event.target).siblings().removeClass("active");
         console.log(event);
@@ -167,32 +155,6 @@ function parseSourseType(type){
                 var data = {};
                 data['o'] = result.value;
                 render('#fm-preview', data, 'tpl-preview');
-            } else {
-                alert(result.errorMessage);
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
-        }
-    });
-}
-
-function initForm(id) {
-    startLoad();
-    $.ajax({
-        url: contextPath + "/animaRes/selectAnimaResByPrimaryKey",
-        type: "post",
-        async: false,
-        data: {
-            id: id
-        },
-        success: function (result) {
-            stopLoad();
-            if (result.status == 0) {
-                var data = {};
-                data['o'] = result.value;
-                render('#fm-audit', data, 'tpl-fm');
             } else {
                 alert(result.errorMessage);
             }

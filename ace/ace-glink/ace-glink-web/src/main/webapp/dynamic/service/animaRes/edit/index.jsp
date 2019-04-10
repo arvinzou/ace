@@ -50,7 +50,7 @@
             <div class="col-md-10">
                 <input type="text" class="form-control" name="code"
                        value="\${data.o.code}" maxlength="20"
-                       placeholder="请输入节目编号（建议字数在14个字以内，不超过20个字)">
+                       placeholder="请输入节目编号（不超过20个字)">
                 <span class="help-block"></span>
             </div>
         </div>
@@ -62,7 +62,7 @@
             <div class="col-md-10">
                 <input type="text" class="form-control" name="name"
                        value="\${data.o.name}" maxlength="50"
-                       placeholder="请输入节目名称（建议字数在14个字以内，不超过50个字)">
+                       placeholder="请输入节目名称（不超过50个字)">
                 <span class="help-block"></span>
             </div>
         </div>
@@ -84,7 +84,7 @@
             <div class="col-md-10">
                 <input type="text" class="form-control" name="duration"
                        value="\${data.o.duration}" maxlength="10"
-                       placeholder="请输入播放时长（建议字数在14个字以内，不超过10个字)" onblur="checkNumber(this);">
+                       placeholder="请输入播放时长（单位：s)" onblur="checkNumber(this);">
                 <span class="help-block"></span>
             </div>
         </div>
@@ -93,9 +93,11 @@
                 播放地址
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="playUrl"
+                <input type="text" class="form-control" name="playUrl" id="playUrl"
                        value="\${data.o.playUrl}" maxlength="300"
-                       placeholder="请输入播放地址（建议字数在14个字以内，不超过300个字)">
+                       placeholder="请输入播放地址（建议字数在14个字以内，不超过300个字)"  style="width: 80%;float: left;margin-right: 10px;">
+                <a href="javascript:void(0);" id="uploadPlayUrl" style="font-size: 14px !important;"
+                   class="btn green commonCourse" style="float: left;">上传资源</a>
                 <span class="help-block"></span>
             </div>
         </div>
@@ -104,9 +106,11 @@
                 预览地址
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="prePlayUrl"
+                <input type="text" class="form-control" name="prePlayUrl" id="prePlayUrl"
                        value="\${data.o.prePlayUrl}" maxlength="300"
-                       placeholder="请输入预览地址（建议字数在14个字以内，不超过300个字)">
+                       placeholder="请输入预览地址（建议字数在14个字以内，不超过300个字)" style="width: 80%;float: left;margin-right: 10px;">
+                <a href="javascript:void(0);" id="uploadPrePlayUrl" style="font-size: 14px !important;"
+                   class="btn green commonCourse" style="float: left;">上传资源</a>
                 <span class="help-block"></span>
             </div>
         </div>
@@ -116,9 +120,11 @@
                 效果图地址
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="preImgUrl"
+                <input type="text" class="form-control" name="preImgUrl" id="preImgUrl"
                        value="\${data.o.preImgUrl}" maxlength="300"
-                       placeholder="请输入效果图地址（建议字数在14个字以内，不超过300个字)">
+                       placeholder="请输入效果图地址（建议字数在14个字以内，不超过300个字)" style="width: 80%;float: left;margin-right: 10px;">
+                <a href="javascript:void(0);" id="uploadPreImgUrl" style="font-size: 14px !important;"
+                   class="btn green commonCourse" style="float: left;">上传资源</a>
                 <span class="help-block"></span>
             </div>
         </div>
