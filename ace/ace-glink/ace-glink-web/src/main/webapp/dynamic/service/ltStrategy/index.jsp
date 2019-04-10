@@ -31,21 +31,6 @@
 
                 <form id="fm-search">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
                         <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
                         <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
@@ -54,7 +39,7 @@
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入直播名称">
+                               placeholder="请输入策略名称或编号">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn"
                                     type="submit">
@@ -79,18 +64,18 @@
                     <th width="10%"> 策略状态</th>
                     <th width="10%"> 行政区划</th>
                     <th width="10%"> 所属站点</th>
-                    <th width="10%"> 模式</th>
-                    <th width="10%"> 按周执行（0否1是）[日程模式]</th>
-                    <th width="10%"> 星期数组[日程模式]</th>
-                    <th width="10%"> 按月执行(0否1整月)[日程模式]</th>
-                    <th width="10%"> 月份数组(pattern为1)[日程模式]</th>
-                    <th width="10%"> 开始日期[假日模式]</th>
-                    <th width="10%"> 技术日期[假日模式]</th>
-                    <th width="10%"> 具体的特殊日期[事件模式]</th>
-                    <th width="10%"> 策略的开始时间</th>
-                    <th width="10%"> 策略的结束时间</th>
-                    <th width="10%"> 分区已编辑完毕的策略编号（或名称）</th>
-                    <th width="10%"> 备注</th>
+                    <%--<th width="10%"> 模式</th>--%>
+                    <%--<th width="10%"> 按周执行</th>--%>
+                    <%--<th width="10%"> 星期数组</th>--%>
+                    <%--<th width="10%"> 按月执行</th>--%>
+                    <%--<th width="10%"> 月份数组</th>--%>
+                    <%--<th width="10%"> 开始日期</th>--%>
+                    <%--<th width="10%"> 技术日期</th>--%>
+                    <%--<th width="10%"> 具体的特殊日期</th>--%>
+                    <%--<th width="10%"> 策略的开始时间</th>--%>
+                    <%--<th width="10%"> 策略的结束时间</th>--%>
+                    <%--<th width="10%"> 分区已编辑完毕的策略编号（或名称）</th>--%>
+                    <%--<th width="10%"> 备注</th>--%>
                     <th width="10%"> 状态</th>
                     <%--<th width="10%"> 创建人编号</th>--%>
                     <%--<th width="10%"> 创建人姓名</th>--%>
@@ -131,18 +116,18 @@
         <td> \${item.state}</td>
         <td> \${item.district}</td>
         <td> \${item.stationCode}</td>
-        <td> \${item.pattern}</td>
-        <td> \${item.isWeek}</td>
-        <td> \${item.weeks}</td>
-        <td> \${item.isMonth}</td>
-        <td> \${item.months}</td>
-        <td> \${item.startDate}</td>
-        <td> \${item.stopDate}</td>
-        <td> \${item.specialDate}</td>
-        <td> \${item.startTime}</td>
-        <td> \${item.stopTime}</td>
-        <td> \${item.strategy}</td>
-        <td> \${item.remark}</td>
+        <%--<td> \${item.pattern}</td>--%>
+        <%--<td> \${item.isWeek}</td>--%>
+        <%--<td> \${item.weeks}</td>--%>
+        <%--<td> \${item.isMonth}</td>--%>
+        <%--<td> \${item.months}</td>--%>
+        <%--<td> \${item.startDate}</td>--%>
+        <%--<td> \${item.stopDate}</td>--%>
+        <%--<td> \${item.specialDate}</td>--%>
+        <%--<td> \${item.startTime}</td>--%>
+        <%--<td> \${item.stopTime}</td>--%>
+        <%--<td> \${item.strategy}</td>--%>
+        <%--<td> \${item.remark}</td>--%>
         <td> \${item.status}</td>
         <%--<td> \${item.createUserId}</td>--%>
         <%--<td> \${item.createUserName}</td>--%>
@@ -260,7 +245,7 @@
                 </button>
                 <h4 class="modal-title">详细</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 600px;overflow: auto">
                 <div class="form-horizontal" role="form">
                     <div class="form-body" id="fm-preview">
 
@@ -463,157 +448,157 @@
     <div class="form-group">
         <label class="col-md-2 view-label">主键</label>
         <div class="col-md-10">
-            \${id}
+            \${data.id}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">策略编号</label>
         <div class="col-md-10">
-            \${code}
+            \${data.code}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">策略名称</label>
         <div class="col-md-10">
-            \${name}
+            \${data.name}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">策略描述</label>
         <div class="col-md-10">
-            \${depict}
+            \${data.depict}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">策略状态</label>
         <div class="col-md-10">
-            \${state}
+            \${data.state}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">行政区划</label>
         <div class="col-md-10">
-            \${district}
+            \${data.district}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">所属站点</label>
         <div class="col-md-10">
-            \${stationCode}
+            \${data.stationCode}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">模式</label>
         <div class="col-md-10">
-            \${pattern}
+            \${data.pattern}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">按周执行（0否1是）[日程模式]</label>
         <div class="col-md-10">
-            \${isWeek}
+            \${data.isWeek}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">星期数组[日程模式]</label>
         <div class="col-md-10">
-            \${weeks}
+            \${data.weeks}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">按月执行(0否1整月)[日程模式]</label>
         <div class="col-md-10">
-            \${isMonth}
+            \${data.isMonth}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">月份数组(pattern为1)[日程模式]</label>
         <div class="col-md-10">
-            \${months}
+            \${data.months}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">开始日期[假日模式]</label>
         <div class="col-md-10">
-            \${startDate}
+            \${data.startDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">技术日期[假日模式]</label>
         <div class="col-md-10">
-            \${stopDate}
+            \${data.stopDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">具体的特殊日期[事件模式]</label>
         <div class="col-md-10">
-            \${specialDate}
+            \${data.specialDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">策略的开始时间</label>
         <div class="col-md-10">
-            \${startTime}
+            \${data.startTime}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">策略的结束时间</label>
         <div class="col-md-10">
-            \${stopTime}
+            \${data.stopTime}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">分区已编辑完毕的策略编号（或名称）</label>
         <div class="col-md-10">
-            \${strategy}
+            \${data.strategy}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">备注</label>
         <div class="col-md-10">
-            \${remark}
+            \${data.remark}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">状态 </label>
         <div class="col-md-10">
-            \${status}
+            \${data.status}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">创建人编号</label>
         <div class="col-md-10">
-            \${createUserId}
+            \${data.createUserId}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">创建人姓名</label>
         <div class="col-md-10">
-            \${createUserName}
+            \${data.createUserName}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">
-            \${createDate}
+            \${data.createDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">更新人编号</label>
         <div class="col-md-10">
-            \${lastModifyUserId}
+            \${data.lastModifyUserId}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">更新人名称</label>
         <div class="col-md-10">
-            \${lastModifyUserName}
+            \${data.lastModifyUserName}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">更新日期</label>
         <div class="col-md-10">
-            \${lastModifyDate}
+            \${data.lastModifyDate}
         </div>
     </div>
 </script>

@@ -1,0 +1,10 @@
+.fm-page {
+    max-width: 80%;
+}
+.combo {
+    width: 100% !important;
+    height: 34px !important;
+}
+.combo .combo-text{
+    width: calc(100% - 18px) !important;
+}

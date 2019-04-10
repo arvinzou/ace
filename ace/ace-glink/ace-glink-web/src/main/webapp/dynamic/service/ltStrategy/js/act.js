@@ -96,7 +96,6 @@ function initEvents() {
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
-        console.log(relatedTarget);
         initPreview(id);
     })
     $('#modal-audit .audit').on('click', function () {
@@ -259,8 +258,7 @@ function initPreview(id) {
         success: function (result) {
             stopLoad();
             if (result.status == 0) {
-                var data = {};
-                data['o'] = result.value;
+                var data  = result.value;
                 render('#fm-preview', data, 'tpl-preview');
             } else {
                 alert(result.errorMessage);
@@ -271,6 +269,25 @@ function initPreview(id) {
             alert("对不起出错了！");
         }
     });
+}
+
+
+function del(did) {
+    var url = contextPath + "/ltStrategy/deleteLtStrategyByLtStrategyId";
+    var data={
+        jsons:JSON.stringify({
+            id:did
+        })
+    }
+    $.getJSON(url,data, function (rst) {
+        if(rst.status==0){
+            getPageList();
+        }
+        else {
+            alert("删除失败")
+        }
+
+    })
 }
 
 function initForm(id) {
