@@ -119,7 +119,7 @@ function initForm() {
         url: contextPath + "/topBuilding/findTopBuildingList",
         method:'get',
         loadMsg:"正在获取...",
-        width:'100%',
+        panelWidth: 400,
         mode:'remote',
         idField:'id',
         textField:'name',

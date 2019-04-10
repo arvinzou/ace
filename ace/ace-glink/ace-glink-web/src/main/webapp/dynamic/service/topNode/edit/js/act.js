@@ -39,7 +39,7 @@ function initPage() {
         url: contextPath + "/topBuilding/findTopBuildingList?name="+qq,
         method: 'get',
         loadMsg: "正在获取...",
-        width: '100%',
+        panelWidth: 400,
         mode: 'remote',
         // fitColumns: true,
         idField: 'id',
