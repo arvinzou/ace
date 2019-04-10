@@ -24,10 +24,11 @@
 <div class="portlet light">
 
     <div class="portlet-body">
-        <div class="form-panel fm-page" id="fm-add-panel">
+        <div class="form-panel" id="fm-add-panel">
             <!--具体界面元素开始-->
 
         </div>
+
     </div>
 </div>
 
@@ -37,135 +38,95 @@
         <div class="form-body">
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    节点编号
+                    设备编号
                     <span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-10">
                     <input type="text" class="form-control" name="code" maxlength="50"
-                           placeholder="请输入节点编号（建议字数在14个字以内，不超过50个字)">
+                           placeholder="请输入设备编号（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    节点名称
+                    设备名称
                     <span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-10">
                     <input type="text" class="form-control" name="name" maxlength="50"
-                           placeholder="请输入节点名称（建议字数在14个字以内，不超过50个字)">
+                           placeholder="请输入设备名称（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    节点描述
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="depict" maxlength="200"
-                           placeholder="请输入节点描述（建议字数在14个字以内，不超过200个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    详细地址
+                    设备类型
                     <span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="address" maxlength="200"
-                           placeholder="请输入详细地址（建议字数在14个字以内，不超过200个字)" style="float:left;width:92%">
-                    <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
-                       style="float:right;line-height: 28px;">选择</a>
-                    <span class="help-block"></span>
-                    <input name="latitude" type="hidden"/>
-                    <input name="longitude" type="hidden"/>
-                    <div class="error-address"></div>
+                    <input type="text" class="form-control" name="type" maxlength="2"
+                           placeholder="请输入设备类型（建议字数在14个字以内，不超过2个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    IPV4地址
-                    <span class="required" aria-required="true"> * </span>
+                    所属节点
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="ipv4" maxlength="20"
-                           placeholder="请输入IPV4地址（建议字数在14个字以内，不超过20个字)">
+                    <input type="text" class="form-control" name="nodeCode" maxlength="50"
+                           placeholder="请输入所属节点（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    IPV6地址
+                    上线时间
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="ipv6" maxlength="20"
-                           placeholder="请输入IPV6地址（建议字数在14个字以内，不超过20个字)">
+                    <input type="text" class="form-control" name="onlineDate" maxlength=""
+                           placeholder="请输入上线时间（建议字数在14个字以内，不超过个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    端口号
-                    <span class="required" aria-required="true"> * </span>
+                    下线时间
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="port" maxlength="10"
-                           placeholder="请输入端口号（建议字数在14个字以内，不超过10个字)">
+                    <input type="text" class="form-control" name="offlineDate" maxlength=""
+                           placeholder="请输入下线时间（建议字数在14个字以内，不超过个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    分辨率-宽
-                    <span class="required" aria-required="true"> * </span>
+                    生产厂商
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="resolutionWidth" maxlength="19"
-                           placeholder="请输入分辨率-宽（建议字数在14个字以内，不超过19个字)">
+                    <input type="text" class="form-control" name="prcBisFirm" maxlength="50"
+                           placeholder="请输入生产厂商（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    分辨率-高
-                    <span class="required" aria-required="true"> * </span>
+                    生产日期
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="resolutionHeight" maxlength="19"
-                           placeholder="请输入分辨率-高（建议字数在14个字以内，不超过19个字)">
+                    <input type="text" class="form-control" name="prcDate" maxlength=""
+                           placeholder="请输入生产日期（建议字数在14个字以内，不超过个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    mac地址
+                    理论使用寿命
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="macAddr" maxlength="20"
-                           placeholder="请输入mac地址（建议字数在14个字以内，不超过20个字)">
+                    <input type="text" class="form-control" name="workingLife" maxlength="10"
+                           placeholder="请输入理论使用寿命（建议字数在14个字以内，不超过10个字)">
                     <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    控制器数量
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="ctrlNum" maxlength="10"
-                           placeholder="请输入控制器数量（建议字数在14个字以内，不超过10个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    建筑物ID
-                </label>
-                <div class="col-md-10">
-                        <input type="text" class="form-control" name="buildingId" maxlength="50"
-                               placeholder="请输入建筑物ID（建议字数在14个字以内，不超过50个字)">
-                        <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -178,6 +139,7 @@
                     <span class="help-block"></span>
                 </div>
             </div>
+
         </div>
         <div class="form-actions">
             <div class="row">
@@ -197,14 +159,12 @@
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
-<%--easyui--%>
-<link rel="stylesheet" type="text/css"
-      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
-<link rel="stylesheet" type="text/css"
-      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 </html>

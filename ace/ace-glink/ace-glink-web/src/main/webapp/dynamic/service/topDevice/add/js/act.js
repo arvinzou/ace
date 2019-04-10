@@ -2,9 +2,12 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("<li> <span > 创建节点管理 </span></li>");
+        $(".breadcrumb").append("
+            < li > < span > 创建设备管理 < /span></
+        li > ");
         initPage();
         initEvents();
+
     });
 }
 
@@ -44,28 +47,15 @@ function initEvents() {
             $(element).valid();
         },
         rules: {
-            code: {required: true, maxlength: 50},
-            name: {required: true, maxlength: 50},
-            address: {required: true, maxlength: 200},
-            ipv4: {required: true, maxlength: 20},
-            port: {required: true, maxlength: 10}
+            code: {required: true, maxlength: 50}, name: {required: true, maxlength: 50}
         },
         messages: {
             code: {
-                required: "请输入节点编号",
-                maxlength: "节点编号字符长度不能超过50"
+                required: "请输入设备编号",
+                maxlength: "设备编号字符长度不能超过50"
             }, name: {
-                required: "请输入节点名称",
-                maxlength: "节点名称字符长度不能超过50"
-            }, address: {
-                required: "请输入详细地址",
-                maxlength: "详细地址字符长度不能超过200"
-            }, ipv4: {
-                required: "请输入IPV4地址",
-                maxlength: "IPV4地址字符长度不能超过20"
-            }, port: {
-                required: "请输入端口号",
-                maxlength: "端口号字符长度不能超过10"
+                required: "请输入设备名称",
+                maxlength: "设备名称字符长度不能超过50"
             }
         }
     });
@@ -92,7 +82,7 @@ function save(params) {
     $.extend(params, {});
     startLoad();
     $.ajax({
-        url: contextPath + "/topNode/insertTopNode",
+        url: contextPath + "/topDevice/insertTopDevice",
         type: "post",
         async: false,
         data: {
@@ -115,29 +105,4 @@ function save(params) {
 function initForm() {
     var data = staticDictObject;
     render('#fm-add-panel', data, 'tpl-fm-add');
-    $(".form-body input[name='buildingId']").combogrid({
-        url: contextPath + "/topBuilding/findTopBuildingList",
-        method:'get',
-        loadMsg:"正在获取...",
-        panelWidth: 400,
-        mode:'remote',
-        idField:'id',
-        textField:'name',
-        columns:[[
-            {field:'name',title:'Name',width:200}
-        ]]
-    });
-}
-
-
-function latitude(latitude) {
-    $("input[name=latitude]").val(latitude);
-}
-
-function longitude(longitude) {
-    $("input[name=longitude]").val(longitude);
-}
-
-function addr(addr) {
-    $("input[name=address]").val(addr);
 }

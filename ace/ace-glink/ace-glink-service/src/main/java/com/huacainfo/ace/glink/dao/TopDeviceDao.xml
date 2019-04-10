@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.TopDeviceDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.TopDevice">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="CHAR" property="type"/>
+        <result column="nodeCode" jdbcType="VARCHAR" property="nodeCode"/>
+        <result column="onlineDate" jdbcType="TIMESTAMP" property="onlineDate"/>
+        <result column="offlineDate" jdbcType="TIMESTAMP" property="offlineDate"/>
+        <result column="prcBisFirm" jdbcType="VARCHAR" property="prcBisFirm"/>
+        <result column="prcDate" jdbcType="TIMESTAMP" property="prcDate"/>
+        <result column="workingLife" jdbcType="INTEGER" property="workingLife"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, code, name, type, nodeCode, onlineDate, offlineDate, prcBisFirm, prcDate, workingLife, 
+    remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
+    lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from top_device
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from top_device
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.TopDevice">
+    insert into top_device (id, code, name, 
+      type, nodeCode, onlineDate, 
+      offlineDate, prcBisFirm, prcDate, 
+      workingLife, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=CHAR}, #{nodeCode,jdbcType=VARCHAR}, #{onlineDate,jdbcType=TIMESTAMP}, 
+      #{offlineDate,jdbcType=TIMESTAMP}, #{prcBisFirm,jdbcType=VARCHAR}, #{prcDate,jdbcType=TIMESTAMP}, 
+      #{workingLife,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.TopDevice">
+    update top_device
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=CHAR},
+      nodeCode = #{nodeCode,jdbcType=VARCHAR},
+      onlineDate = #{onlineDate,jdbcType=TIMESTAMP},
+      offlineDate = #{offlineDate,jdbcType=TIMESTAMP},
+      prcBisFirm = #{prcBisFirm,jdbcType=VARCHAR},
+      prcDate = #{prcDate,jdbcType=TIMESTAMP},
+      workingLife = #{workingLife,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.TopDeviceVo"></resultMap>
+
+    <sql id="Vo_Column_List">
+    t.id, t.code, t.name, t.type, t.nodeCode, t.onlineDate, t.offlineDate, t.prcBisFirm, t.prcDate, t.workingLife,
+    t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
+    t.lastModifyDate
+  </sql>
+
+    <sql id="From_Statement">
+    FROM top_device t
+  </sql>
+    <sql id="Where_Condition">
+        where t.status <![CDATA[ <> ]]> 0
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopDevice">
+    select count(*)
+    from top_device
+    where name=#{name,jdbcType=VARCHAR}
+    and nodeCode != #{nodeCode,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>
