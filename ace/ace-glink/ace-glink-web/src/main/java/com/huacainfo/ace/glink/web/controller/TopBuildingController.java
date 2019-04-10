@@ -67,7 +67,6 @@ public class TopBuildingController extends GLinkBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 
