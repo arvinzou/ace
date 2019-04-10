@@ -23,24 +23,24 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
+            <div class="col-md-8">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-4">
 
                 <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('thirdTag','');">全部</button>
-                        <button type="button" class="btn btn-default active" onclick="setParams('thirdTag','0');">否
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('thirdTag','1');">是</button>
-                    </div>
-                    <div class="input-group" style="float:left;padding-right:5px">
-                        行政区划 <input class="easyui-combotree " name="district"
-                                    data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
-                                    style="width:200px;﻿line-height: 30px;height: 30px;">
-                    </div>
+                    <%--<div class="btn-group" role="group" style="float:left;padding-right:5px">--%>
+                    <%--<button type="button" class="btn btn-default" onclick="setParams('thirdTag','');">全部</button>--%>
+                    <%--<button type="button" class="btn btn-default active" onclick="setParams('thirdTag','0');">否--%>
+                    <%--</button>--%>
+                    <%--<button type="button" class="btn btn-default" onclick="setParams('thirdTag','1');">是</button>--%>
+                    <%--</div>--%>
+                    <%--<div class="input-group" style="float:left;padding-right:5px">--%>
+                    <%--行政区划 <input class="easyui-combotree " name="district"--%>
+                    <%--data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"--%>
+                    <%--style="width:200px;﻿line-height: 30px;height: 30px;">--%>
+                    <%--</div>--%>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
@@ -214,17 +214,13 @@
                         </tr>
                         </thead>
                         <tbody>
+                        {@each data.stationList as item, index}
                         <tr>
-                            <td> 1</td>
-                            <td> Mark</td>
-                            <td> Otto</td>
+                            <td> \${item.code}</td>
+                            <td> \${item.name}</td>
+                            <td> \${item.address}</td>
                         </tr>
-                        <tr>
-                            <td> 2</td>
-                            <td> Jacob</td>
-                            <td> Nilson</td>
-                        </tr>
-
+                        {@/each}
                         </tbody>
                     </table>
                 </div>

@@ -2,6 +2,8 @@ package com.huacainfo.ace.glink.vo;
 
 import com.huacainfo.ace.glink.model.TopSubarea;
 
+import java.util.List;
+
 
 public class TopSubareaVo extends TopSubarea {
     private static final long serialVersionUID = 1L;
@@ -13,6 +15,19 @@ public class TopSubareaVo extends TopSubarea {
      * 行政区划全称
      */
     private String districtFullName;
+
+    /**
+     * 归属站点列表
+     */
+    private List<TopStationVo> stationList;
+
+    public List<TopStationVo> getStationList() {
+        return stationList;
+    }
+
+    public void setStationList(List<TopStationVo> stationList) {
+        this.stationList = stationList;
+    }
 
     public String getDistrictName() {
         return districtName;

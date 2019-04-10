@@ -2,29 +2,26 @@ package com.huacainfo.ace.glink.model;
 
 import com.huacainfo.ace.common.model.BaseModel;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
-public class TopSubarea extends BaseModel {
+public class ErrFeedback extends BaseModel {
     private String id;
 
-    private String district;
+    private String deviceCode;
 
-    private String code;
+    private String errType;
 
-    private String name;
+    private String errLevel;
 
-    private String depict;
+    private Date errDate;
 
-    private String address;
+    private String errContent;
 
-    private BigDecimal longitude;
+    private Integer errLoopNum;
 
-    private BigDecimal latitude;
-    /**
-     * 第三方分区 0-否 ；1-是
-     */
-    private Integer thirdTag;
+    private String dataSrcCode;
+
+    private String apiRst;
 
     private String remark;
 
@@ -50,68 +47,68 @@ public class TopSubarea extends BaseModel {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getDistrict() {
-        return district;
+    public String getDeviceCode() {
+        return deviceCode;
     }
 
-    public void setDistrict(String district) {
-        this.district = district == null ? null : district.trim();
+    public void setDeviceCode(String deviceCode) {
+        this.deviceCode = deviceCode == null ? null : deviceCode.trim();
     }
 
-    public String getCode() {
-        return code;
+    public String getErrType() {
+        return errType;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setErrType(String errType) {
+        this.errType = errType == null ? null : errType.trim();
     }
 
-    public String getName() {
-        return name;
+    public String getErrLevel() {
+        return errLevel;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setErrLevel(String errLevel) {
+        this.errLevel = errLevel == null ? null : errLevel.trim();
     }
 
-    public String getDepict() {
-        return depict;
+    public Date getErrDate() {
+        return errDate;
     }
 
-    public void setDepict(String depict) {
-        this.depict = depict == null ? null : depict.trim();
+    public void setErrDate(Date errDate) {
+        this.errDate = errDate;
     }
 
-    public String getAddress() {
-        return address;
+    public String getErrContent() {
+        return errContent;
     }
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+    public void setErrContent(String errContent) {
+        this.errContent = errContent == null ? null : errContent.trim();
     }
 
-    public BigDecimal getLongitude() {
-        return longitude;
+    public Integer getErrLoopNum() {
+        return errLoopNum;
     }
 
-    public void setLongitude(BigDecimal longitude) {
-        this.longitude = longitude;
+    public void setErrLoopNum(Integer errLoopNum) {
+        this.errLoopNum = errLoopNum;
     }
 
-    public BigDecimal getLatitude() {
-        return latitude;
+    public String getDataSrcCode() {
+        return dataSrcCode;
     }
 
-    public void setLatitude(BigDecimal latitude) {
-        this.latitude = latitude;
+    public void setDataSrcCode(String dataSrcCode) {
+        this.dataSrcCode = dataSrcCode == null ? null : dataSrcCode.trim();
     }
 
-    public Integer getThirdTag() {
-        return thirdTag;
+    public String getApiRst() {
+        return apiRst;
     }
 
-    public void setThirdTag(Integer thirdTag) {
-        this.thirdTag = thirdTag;
+    public void setApiRst(String apiRst) {
+        this.apiRst = apiRst == null ? null : apiRst.trim();
     }
 
     public String getRemark() {
