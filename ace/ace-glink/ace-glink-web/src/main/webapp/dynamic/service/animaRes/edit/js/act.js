@@ -5,6 +5,9 @@ window.onload = function () {
         $(".breadcrumb").append("<li><span>编辑节目管理</span></li>");
         initForm();
         initEvents();
+        initUploadPlayUrl();
+        initUploadPrePlayUrl();
+        initUploadPreImgUrl();
     });
 }
 /*页面渲染*/
@@ -114,4 +117,106 @@ function checkNumber(obj){
         $(obj).val("");
        return false;
     }
+}
+
+/**
+ * 播放文件上传
+ */
+function initUploadPlayUrl(){
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'uploadPlayUrl',
+        url: '/portal/files/uploadFile.do',
+        file_data_name: 'file',
+        multi_selection: false,
+        filters: {
+            max_file_size: '2048mb',
+            mime_types: [
+
+            ]
+        },
+        init: {
+            FileFiltered: function (up, files) {
+                up.start();
+                return false;
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                $(".uploadPloadprogress").html("开始上传（" + r + "%）");
+            },
+            FileUploaded: function (uploader, file, responseObject) {
+                var rst = JSON.parse(responseObject.response);
+                $("#playUrl").val(rst.value[0]);
+            }
+        }
+    });
+    uploader.init();
+}
+
+/**
+ * 预览播放文件上传
+ */
+function initUploadPrePlayUrl(){
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'uploadPrePlayUrl',
+        url: '/portal/files/uploadFile.do',
+        file_data_name: 'file',
+        multi_selection: false,
+        filters: {
+            max_file_size: '2048mb',
+            mime_types: [
+
+            ]
+        },
+        init: {
+            FileFiltered: function (up, files) {
+                up.start();
+                return false;
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                $(".uploadPloadprogress").html("开始上传（" + r + "%）");
+            },
+            FileUploaded: function (uploader, file, responseObject) {
+                var rst = JSON.parse(responseObject.response);
+                $("#prePlayUrl").val(rst.value[0]);
+            }
+        }
+    });
+    uploader.init();
+}
+
+/**
+ * 封面上传
+ */
+function initUploadPreImgUrl(){
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'uploadPreImgUrl',
+        url: '/portal/files/uploadFile.do',
+        file_data_name: 'file',
+        multi_selection: false,
+        filters: {
+            max_file_size: '2048mb',
+            mime_types: [
+
+            ]
+        },
+        init: {
+            FileFiltered: function (up, files) {
+                up.start();
+                return false;
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                $(".uploadPloadprogress").html("开始上传（" + r + "%）");
+            },
+            FileUploaded: function (uploader, file, responseObject) {
+                var rst = JSON.parse(responseObject.response);
+                $("#preImgUrl").val(rst.value[0]);
+            }
+        }
+    });
+    uploader.init();
 }
