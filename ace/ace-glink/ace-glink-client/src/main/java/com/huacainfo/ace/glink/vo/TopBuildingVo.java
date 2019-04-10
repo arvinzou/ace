@@ -11,11 +11,21 @@ private static final long serialVersionUID = 1L;
      */
     private String subareaName;
 
+    private int animaCount;
+
     public String getSubareaName() {
         return subareaName;
     }
 
     public void setSubareaName(String subareaName) {
         this.subareaName = subareaName;
+    }
+
+    public int getAnimaCount() {
+        return animaCount;
+    }
+
+    public void setAnimaCount(int animaCount) {
+        this.animaCount = animaCount;
     }
 }

@@ -24,6 +24,7 @@
   </resultMap>
   <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.TopBuildingVo">
     <result column="subareaName" jdbcType="VARCHAR" property="subareaName"/>
+    <result column="animaCount" jdbcType="INTEGER" property="animaCount"/>
   </resultMap>
 
 
@@ -90,7 +91,10 @@
     select
     b.id, b.code, b.`name`, b.type, b.depict, b.address, b.longitude, b.latitude, b.mainTag, b.state, b.subareaCode,
     b.remark, b.status, b.createUserId, b.createUserName, b.createDate, b.lastModifyUserId, b.lastModifyUserName,
-    b.lastModifyDate, s.`name` as subareaName
+    b.lastModifyDate, s.`name` AS subareaName, (
+    SELECT COUNT(*)
+    FROM anima_lnk a
+    WHERE a.lnkCode = b.id) AS animaCount
     from top_building b
     LEFT JOIN top_subarea s ON b.subareaCode = s.code
     <include refid="Where_Condition"/>
