@@ -30,31 +30,12 @@
             <div class="col-md-9">
 
                 <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
-                    </div>
+
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入直播名称">
+                               placeholder="请输入设备名称">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn"
                                     type="submit">
@@ -113,8 +94,8 @@
 
         <td> \${item.code}</td>
         <td> \${item.name}</td>
-        <td> \${item.type}</td>
-        <td> \${item.nodeCode}</td>
+        <td> \${parseType(item.type)}</td>
+        <td> \${item.nodeName}</td>
         <td> \${item.onlineDate}</td>
         <td> \${item.offlineDate}</td>
         <td> \${item.prcBisFirm}</td>
@@ -124,11 +105,8 @@
 
         <td>
             ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-
-
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-
             <a href="javascript:del('\${item.id}');">删除</a>
 
         </td>
@@ -364,114 +342,81 @@
 </script>
 
 <script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="col-md-2 view-label">设备编号</label>
         <div class="col-md-10">
-            \${code}
+            \${data.o.code}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">设备名称</label>
         <div class="col-md-10">
-            \${name}
+            \${data.o.name}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">设备类型</label>
         <div class="col-md-10">
-            \${type}
+            \${parseType(data.o.type)}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">所属节点</label>
         <div class="col-md-10">
-            \${nodeCode}
+            \${data.o.nodeCode}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">上线时间</label>
         <div class="col-md-10">
-            \${onlineDate}
+            \${data.o.onlineDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">下线时间</label>
         <div class="col-md-10">
-            \${offlineDate}
+            \${data.o.offlineDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">生产厂商</label>
         <div class="col-md-10">
-            \${prcBisFirm}
+            \${data.o.prcBisFirm}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">生产日期</label>
         <div class="col-md-10">
-            \${prcDate}
+            \${data.o.prcDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">理论使用寿命</label>
         <div class="col-md-10">
-            \${workingLife}
+            \${data.o.workingLife}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">备注</label>
         <div class="col-md-10">
-            \${remark}
+            \${data.o.remark}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">状态 </label>
         <div class="col-md-10">
-            \${status}
+            \${data.o.status}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建人编号</label>
-        <div class="col-md-10">
-            \${createUserId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建人姓名</label>
-        <div class="col-md-10">
-            \${createUserName}
-        </div>
-    </div>
+
     <div class="form-group">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">
-            \${createDate}
+            \${data.o.createDate}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新人编号</label>
-        <div class="col-md-10">
-            \${lastModifyUserId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新人名称</label>
-        <div class="col-md-10">
-            \${lastModifyUserName}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新日期</label>
-        <div class="col-md-10">
-            \${lastModifyDate}
-        </div>
-    </div>
+
 </script>
 <style>
     .cover {

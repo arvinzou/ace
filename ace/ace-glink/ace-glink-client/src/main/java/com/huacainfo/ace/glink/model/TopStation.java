@@ -35,6 +35,8 @@ public class TopStation implements java.io.Serializable {
 
     private BigDecimal latitude;
 
+    private String code;
+
     public String getId() {
         return id;
     }
@@ -153,5 +155,13 @@ public class TopStation implements java.io.Serializable {
 
     public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
