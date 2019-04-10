@@ -328,11 +328,13 @@ public class ErrFeedbackServiceImpl implements ErrFeedbackService {
      * @version: 2019-04-10
      */
     @Override
-    public MessageResponse updateStatus(String id, String status, UserProp userProp) throws
-            Exception {
+    public MessageResponse updateStatus(String id, String status,
+                                        UserProp userProp) throws Exception {
+        String type = "0".equals(status) ? "故障报警-标记未读" : "故障报警-标记已读";
+
+
         this.errFeedbackDao.updateStatus(id, status);
-        this.dataBaseLogService.log("跟新状态", "故障报警", id, id,
-                "故障报警", userProp);
+        this.dataBaseLogService.log("跟新状态", "故障报警", id, id, type, userProp);
         return new MessageResponse(0, "成功！");
     }
 

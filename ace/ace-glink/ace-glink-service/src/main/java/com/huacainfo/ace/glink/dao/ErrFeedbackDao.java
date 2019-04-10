@@ -29,7 +29,8 @@ public interface ErrFeedbackDao {
 
     int isExist(ErrFeedback record);
 
-    int updateStatus(@Param("id") String id, @Param("status") String status);
+    int updateStatus(@Param("id") String id,
+                     @Param("status") String status);
 
     List<Map<String, Object>> getList(@Param("p") Map<String, Object> p);
 
