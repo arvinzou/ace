@@ -229,3 +229,24 @@ select{
     float: left;
     margin-left: 10px;
 }
+.serious{
+    width: 10px;
+    height: 10px;
+    display: block;
+    border-radius:50% !important;
+    background:rgba(255,65,65,1);
+}
+.more-serious{
+    width: 10px;
+    height: 10px;
+    display: block;
+    border-radius:50% !important;
+    background:rgba(255,159,65,1);
+}
+.less-serious{
+    width: 10px;
+    height: 10px;
+    display: block;
+    border-radius:50% !important;
+    background:rgba(255,239,65,1);
+}

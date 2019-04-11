@@ -159,7 +159,9 @@
                                 </thead>
                                 <tbody id="top10-list">
                                     <tr>
-                                        <td width="10%" align="center"></td>
+                                        <td width="10%" align="center">
+                                            <div class="serious"></div>
+                                        </td>
                                         <td width="20%" align="center">设备名称1</td>
                                         <td width="20%" align="center">江汉区</td>
                                         <td width="20%" align="center">故障类型</td>
@@ -167,7 +169,9 @@
                                         <td width="20%" align="center">03.01-15:30:04</td>
                                     </tr>
                                     <tr>
-                                        <td width="10%" align="center"></td>
+                                        <td width="10%" align="center">
+                                            <div class="serious"></div>
+                                        </td>
                                         <td width="20%" align="center">设备名称1</td>
                                         <td width="20%" align="center">江汉区</td>
                                         <td width="20%" align="center">故障类型</td>
@@ -175,7 +179,9 @@
                                         <td width="20%" align="center">03.01-15:30:04</td>
                                     </tr>
                                     <tr>
-                                        <td width="10%" align="center"></td>
+                                        <td width="10%" align="center">
+                                            <div class="more-serious"></div>
+                                        </td>
                                         <td width="20%" align="center">设备名称1</td>
                                         <td width="20%" align="center">江汉区</td>
                                         <td width="20%" align="center">故障类型</td>
@@ -183,7 +189,9 @@
                                         <td width="20%" align="center">03.01-15:30:04</td>
                                     </tr>
                                     <tr>
-                                        <td width="10%" align="center"></td>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
                                         <td width="20%" align="center">设备名称1</td>
                                         <td width="20%" align="center">江汉区</td>
                                         <td width="20%" align="center">故障类型</td>
@@ -191,7 +199,9 @@
                                         <td width="20%" align="center">03.01-15:30:04</td>
                                     </tr>
                                     <tr>
-                                        <td width="10%" align="center"></td>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
                                         <td width="20%" align="center">设备名称1</td>
                                         <td width="20%" align="center">江汉区</td>
                                         <td width="20%" align="center">故障类型</td>
@@ -199,7 +209,9 @@
                                         <td width="20%" align="center">03.01-15:30:04</td>
                                     </tr>
                                     <tr>
-                                        <td width="10%" align="center"></td>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
                                         <td width="20%" align="center">设备名称1</td>
                                         <td width="20%" align="center">江汉区</td>
                                         <td width="20%" align="center">故障类型</td>
@@ -207,7 +219,9 @@
                                         <td width="20%" align="center">03.01-15:30:04</td>
                                     </tr>
                                     <tr>
-                                        <td width="10%" align="center"></td>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
                                         <td width="20%" align="center">设备名称1</td>
                                         <td width="20%" align="center">江汉区</td>
                                         <td width="20%" align="center">故障类型</td>
@@ -215,7 +229,9 @@
                                         <td width="20%" align="center">03.01-15:30:04</td>
                                     </tr>
                                     <tr>
-                                        <td width="10%" align="center"></td>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
                                         <td width="20%" align="center">设备名称1</td>
                                         <td width="20%" align="center">江汉区</td>
                                         <td width="20%" align="center">故障类型</td>
@@ -223,7 +239,9 @@
                                         <td width="20%" align="center">03.01-15:30:04</td>
                                     </tr>
                                     <tr>
-                                        <td width="10%" align="center"></td>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
                                         <td width="20%" align="center">设备名称1</td>
                                         <td width="20%" align="center">江汉区</td>
                                         <td width="20%" align="center">故障类型</td>
@@ -231,7 +249,9 @@
                                         <td width="20%" align="center">03.01-15:30:04</td>
                                     </tr>
                                     <tr>
-                                        <td width="10%" align="center"></td>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
                                         <td width="20%" align="center">设备名称1</td>
                                         <td width="20%" align="center">江汉区</td>
                                         <td width="20%" align="center">故障类型</td>
