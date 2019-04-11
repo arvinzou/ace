@@ -6,7 +6,7 @@ public class Generator {
 
     public static void main(String[] args) throws Exception {
         CodeGenerator codeGenerator = new CodeGenerator("policeschool", "群英考勤数据", "ArvinZou");
-        Class<?> c = com.huacainfo.ace.policeschool.model.QyAttRecord.class;
+        Class<?> c = null;//com.huacainfo.ace.policeschool.model.QyAttRecord.class;
 
         //*******************************************
         codeGenerator.init(c);

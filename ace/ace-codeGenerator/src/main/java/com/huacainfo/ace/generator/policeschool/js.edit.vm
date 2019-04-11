@@ -6,7 +6,28 @@ $(".breadcrumb").append("
 <li><span>编辑$!{bean.tableChineseName}</span></li>");
 initForm();
 initEvents();
+initJuicerMethod();
 });
+}
+
+//juicer自定义函数
+function initJuicerMethod() {
+juicer.register('rsd', rsd);
+juicer.register('parseStatus', parseStatus);
+}
+
+/**
+* 状态解析
+*/
+function parseStatus(status) {
+switch (status) {
+case '0':
+return "未读";
+case '1':
+return "已读";
+default:
+return "未读";
+}
 }
 
 function initEditor() {
@@ -68,7 +89,7 @@ params[obj.name] = obj.value;
 });
 $.extend(params, {
 time: new Date(),
-//coverUrl: $('#coverUrl').attr("src")
+
 });
 console.log(params);
 save(params);
@@ -116,8 +137,7 @@ var data={};
 data['o']=result.value;
 render('#fm-edit',data,'tpl-fm');
 initPage();
-//富文本填值
-//editor.setValue(data['o'].summary);
+
 }else {
 alert(result.errorMessage);
 }
