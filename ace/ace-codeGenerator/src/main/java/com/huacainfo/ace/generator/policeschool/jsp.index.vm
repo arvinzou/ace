@@ -14,7 +14,12 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
+
     <link rel="stylesheet" href="css/style.css">
+    <%--sweetalert--%>
+    <script src="${pageContext.request.contextPath}/content/common/js/sweetalert/js/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/content/common/js/sweetalert/css/sweet-alert.css">
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>

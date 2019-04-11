@@ -183,10 +183,7 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                 List
                 <Map
                 <String
-                , Object>> list=new ArrayList
-                <Map
-                <String
-                , Object>>();
+                , Object>> list=new ArrayList<>();
                 MongoFile[] files = new MongoFile[file.length];
                 int i = 0;
                 for (MultipartFile o : file) {
@@ -196,12 +193,8 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                 obj.setLength(o.getSize());
                 files[i] = obj;
                 i++;
-                String ext = obj
-                .getFilename()
-                .toLowerCase()
-                .substring(
-                obj.getFilename().toLowerCase()
-                .lastIndexOf("."));
+                String ext = obj.getFilename().toLowerCase();
+                ext = ext.substring(obj.getFilename().toLowerCase().lastIndexOf("."));
                 this.logger.info(ext);
                 if (ext.equals(".xls")) {
                 list = utils.readExcelByJXL(obj.getInputStream(), 2);
