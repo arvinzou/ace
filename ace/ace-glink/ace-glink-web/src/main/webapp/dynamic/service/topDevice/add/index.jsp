@@ -73,7 +73,7 @@
                         {@/if}
                         {@/each}
                     </select>
-
+                    <span class="help-block"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -103,7 +103,7 @@
                 </label>
                 <div class="col-md-5">
                     <input type="text" class="form-control" name="offlineDate" maxlength="50"
-                           placeholder="请选择下线时间" id="offlineDate">
+                           placeholder="请选择下线时间" id="offlineDate" onchange="validateOffTime(this.value)">
                     <span class="help-block"></span>
                 </div>
             </div>

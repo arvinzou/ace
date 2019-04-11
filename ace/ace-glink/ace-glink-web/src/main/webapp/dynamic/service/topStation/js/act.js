@@ -3,6 +3,7 @@ var params = {limit: 10};
 window.onload = function () {
     initPage();
     initEvents();
+    initSubAreaList();
     initJuicerMethod();
 }
 
@@ -260,6 +261,8 @@ function initPreview(id) {
                 if (result.status == 0) {
                     var data = {};
                     data['o'] = result.value;
+                    data['nodeList'] = result.value.nodeList;
+                    console.log(result.value);
                     render('#fm-preview', data, 'tpl-preview');
                 } else {
                     alert(result.errorMessage);
@@ -323,4 +326,33 @@ function del(id) {
             }
         });
     }
+}
+
+function initSubAreaList() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/topSubarea/findTopSubareaList",
+        type: "post",
+        async: false,
+        data: {
+            start: 0,
+            limit: 999
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+
+                var dataList = result.rows;
+                var o = {code: "", name: "全部"};
+                dataList.unshift(o);
+                render('#subArea', dataList, 'area-list');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }

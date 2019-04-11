@@ -41,4 +41,6 @@ public interface TopDeviceDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    int deviceNum(String nodeCode);
+
 }

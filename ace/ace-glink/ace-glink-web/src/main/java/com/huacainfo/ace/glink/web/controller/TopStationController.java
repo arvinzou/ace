@@ -120,8 +120,8 @@ public class TopStationController extends GLinkBaseController {
     @RequestMapping(value = "/selectTopStationByPrimaryKey")
     @ResponseBody
     public SingleResult
-            <TopStation> selectTopStationByPrimaryKey(String id) throws Exception {
-        return this.topStationService.selectByPrimaryKey(id);
+            <TopStationVo> selectTopStationByPrimaryKey(String id) throws Exception {
+        return this.topStationService.selectTopStationByPrimaryKey(id);
     }
 
     /**

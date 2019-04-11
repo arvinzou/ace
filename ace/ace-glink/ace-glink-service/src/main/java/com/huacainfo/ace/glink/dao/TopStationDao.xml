@@ -66,7 +66,10 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.TopStationVo">
 
+    <result column="subareaName" jdbcType="VARCHAR" property="subareaName"/>
+  </resultMap>
   <sql id="Vo_Column_List">
     t.id, t.subareaCode, t.name, t.depict, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
     t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.address, t.longitude, t.latitude,t.code,tb.name as subareaName
@@ -86,12 +89,13 @@
           and t.address like concat('%',#{condition.address,jdbcType=VARCHAR},'%')
       </if>
     <if test='condition.subareaCode!=null and condition.subareaCode!=""'>
-      and t.subareaCode = #{condition.subareaCode,jdbcType=VARCHAR}
+      and t.subareaCode like concat('%',#{condition.subareaCode,jdbcType=VARCHAR},'%')
+
     </if>
   </sql>
 
 
-  <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
     select
     <include refid="Vo_Column_List"/>
     <include refid="From_Statement"/>
@@ -111,5 +115,19 @@
     SELECT COUNT(*)
     <include refid="From_Statement"/>
     <include refid="Where_Condition"/>
+  </select>
+
+  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopStation">
+    select count(*)
+    from top_station
+    where code=#{code,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    select   t.id, t.subareaCode, t.name, t.depict, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+    t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.address, t.longitude, t.latitude,t.code,tb.name as subareaName
+     FROM top_station t
+      LEFT JOIN top_subarea tb on tb.code=t.subareaCode
+    where t.id = #{id,jdbcType=VARCHAR}
   </select>
 </mapper>
