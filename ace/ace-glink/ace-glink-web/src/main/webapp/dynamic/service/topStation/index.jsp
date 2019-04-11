@@ -328,8 +328,8 @@
                         <tr>
                             <td> \${item.code}</td>
                             <td> \${item.name}</td>
-                            <td> \${item.tbName}</td>
-                            <td> \${item.deviceNum}</td>
+                            <td> \${item.topBuilding.name}</td>
+                            <td> \${item.deviceCount}</td>
                         </tr>
                         {@/each}
                         </tbody>

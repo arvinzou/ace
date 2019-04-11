@@ -262,7 +262,6 @@ function initPreview(id) {
                     var data = {};
                     data['o'] = result.value;
                     data['nodeList'] = result.value.nodeList;
-                    console.log(result.value);
                     render('#fm-preview', data, 'tpl-preview');
                 } else {
                     alert(result.errorMessage);
