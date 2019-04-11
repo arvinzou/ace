@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,12 +100,12 @@ public class TopDeviceServiceImpl implements TopDeviceService {
 
         int temp = this.topDeviceDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "设备管理名称重复！");
+            return new MessageResponse(1, "设备编号重复！");
         }
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        o.setStatus("2");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.topDeviceDao.insert(o);
@@ -226,22 +227,13 @@ public class TopDeviceServiceImpl implements TopDeviceService {
 
     @Override
     public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
+        String importDateTime = DateUtil.getNow();
         int i = 1;
+        int total = 0;
         for (Map<String, Object> row : list) {
             TopDevice o = new TopDevice();
             CommonBeanUtils.copyMap2Bean(o, row);
-            o.setCreateDate(new Date());
-            o.setCreateUserId(userProp.getUserId());
-            o.setCreateUserName(userProp.getName());
-            o.setStatus("1");
-
-            this.logger.info(o.toString());
-            if (true) {
-                return new MessageResponse(1, "行" + i + ",编号不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getId())) {
-                return new MessageResponse(1, "主键不能为空！");
-            }
+            o.setRemark("批量导入设备：" + importDateTime);
             if (CommonUtils.isBlank(o.getCode())) {
                 return new MessageResponse(1, "设备编号不能为空！");
             }
@@ -251,17 +243,23 @@ public class TopDeviceServiceImpl implements TopDeviceService {
             if (CommonUtils.isBlank(o.getType())) {
                 return new MessageResponse(1, "设备类型不能为空！");
             }
-            if (CommonUtils.isBlank(o.getStatus())) {
-                return new MessageResponse(1, "状态 不能为空！");
-            }
+
 
             int t = this.topDeviceDao.isExit(o);
             if (t > 0) {
-                this.topDeviceDao.updateByPrimaryKey(o);
+                continue;
+                //  this.topDeviceDao.updateByPrimaryKey(o);
 
             } else {
+                o.setId(GUIDUtil.getGUID());
+                o.setCreateDate(new Date());
+                o.setStatus("2");
+                o.setCreateUserName(userProp.getName());
+                o.setCreateUserId(userProp.getUserId());
                 this.topDeviceDao.insert(o);
+                total++;
             }
+            i++;
             i++;
         }
         this.dataBaseLogService.log("设备管理导入", "设备管理", "",

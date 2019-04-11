@@ -30,12 +30,17 @@
             <div class="col-md-9">
 
                 <form id="fm-search">
-
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <select id="subArea" name="subareaCode" id="s-cls-list" class="form-control"
+                                style="height: 31px;"
+                                onchange="setParams('subareaCode',this.value)">
+                        </select>
+                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入站点名称" style="width: 40%;float: right">
+                               placeholder="请输入站点名称">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn" type="submit">搜索</button>
                         </span>
@@ -51,13 +56,14 @@
                 <thead>
                 <tr>
 
-                    <th width="10%"> 分区编码</th>
+                    <th width="10%"> 所属分区</th>
                     <th width="15%"> 站点名称</th>
+                    <th width="10%"> 站点编号</th>
                     <th width="15%"> 站点地址</th>
                     <th width="15%"> 站点描述</th>
                     <th width="10%"> 状态</th>
 
-                    <th width="15%"> 创建日期</th>
+                    <th width="10%"> 创建日期</th>
 
                     <th width="15%">操作</th>
                 </tr>
@@ -86,8 +92,9 @@
     {@each data as item, index}
     <tr>
 
-        <td> \${item.subareaCode}</td>
+        <td> \${item.subareaName}</td>
         <td> \${item.name}</td>
+        <td> \${item.code}</td>
         <td> \${item.address}</td>
         <td> \${item.depict}</td>
         {@if item.status==1}
@@ -234,11 +241,18 @@
 </script>
 
 <script id="tpl-preview" type="text/template">
-
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption font-green-sharp">
+                <i class="icon-share font-green-sharp"></i>
+                <span class="caption-subject bold uppercase"> 基本信息</span>
+            </div>
+        </div>
+        <div class="portlet-body">
     <div class="form-group">
         <label class="col-md-2 view-label">分区编码</label>
         <div class="col-md-10">
-            \${data.o.subareaCode}
+            \${data.o.subareaName}
         </div>
     </div>
     <div class="form-group">
@@ -288,8 +302,51 @@
             \${data.o.createDate}
         </div>
     </div>
+        </div>
+    </div>
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption font-green-sharp">
+                <i class="icon-share font-green-sharp"></i>
+                <span class="caption-subject bold uppercase"> 归属节点列表</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <table class="table table-hover table-light">
+                        <thead>
+                        <tr>
+                            <th width="20%"> 编号</th>
+                            <th width="30%"> 节点名称</th>
+                            <th width="30%"> 建筑名称</th>
+                            <th width="20%"> 设备数量</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {@each data.nodeList as item, index}
+                        <tr>
+                            <td> \${item.code}</td>
+                            <td> \${item.name}</td>
+                            <td> \${item.topBuilding.name}</td>
+                            <td> \${item.deviceCount}</td>
+                        </tr>
+                        {@/each}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
+        </div>
+    </div>
 </script>
+<script id="area-list" type="text/template">
+    {@each data as item, index}
+    <option value="\${item.code}">\${item.name}</option>
+    {@/each}
+</script>
+﻿
+
 <style>
     .cover {
         width: 70px;

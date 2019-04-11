@@ -54,11 +54,9 @@ public class AnimaLnkServiceImpl implements AnimaLnkService {
      * @version: 2019-04-10
      */
     @Override
-    public PageResult
-            <AnimaLnkVo> findAnimaLnkList(AnimaLnkQVo condition,
+    public PageResult<AnimaLnkVo> findAnimaLnkList(AnimaLnkQVo condition,
                                           int start, int limit, String orderBy) throws Exception {
-        PageResult
-                <AnimaLnkVo> rst = new PageResult<>();
+        PageResult<AnimaLnkVo> rst = new PageResult<>();
         List
                 <AnimaLnkVo> list = this.animaLnkDao.findList(condition,
                 start, limit, orderBy);
@@ -84,16 +82,12 @@ public class AnimaLnkServiceImpl implements AnimaLnkService {
     @Override
     public MessageResponse insertAnimaLnk(AnimaLnk o, UserProp userProp) throws Exception {
 
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getAiCode())) {
             return new MessageResponse(1, "节目编号不能为空！");
         }
         if (CommonUtils.isBlank(o.getLnkCode())) {
             return new MessageResponse(1, "建筑/节点/站点编码不能为空！");
         }
-
 
         int temp = this.animaLnkDao.isExit(o);
         if (temp > 0) {
@@ -107,7 +101,7 @@ public class AnimaLnkServiceImpl implements AnimaLnkService {
         this.dataBaseLogService.log("添加节目上传", "节目上传", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "保存成功！");
+        return new MessageResponse(0, "操作成功！");
     }
 
     /**

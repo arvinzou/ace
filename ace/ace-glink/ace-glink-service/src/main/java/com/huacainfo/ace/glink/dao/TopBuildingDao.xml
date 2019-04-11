@@ -94,7 +94,7 @@
     b.lastModifyDate, s.`name` AS subareaName, (
     SELECT COUNT(*)
     FROM anima_lnk a
-    WHERE a.lnkCode = b.id) AS animaCount
+    WHERE a.lnkCode = b.code) AS animaCount
     from top_building b
     LEFT JOIN top_subarea s ON b.subareaCode = s.code
     <include refid="Where_Condition"/>

@@ -15,6 +15,9 @@
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+          type="text/css" media="screen"/>
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -25,17 +28,34 @@
         <div class="row custom-toolbar">
             <div class="col-md-3">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+                <button type="button" class="btn  green" id="btn-view-importXls"
+                        authority="false">Excel导入
+                </button>
+            </div>
+            <div class="col-md-3">
+
             </div>
 
             <div class="col-md-9">
 
                 <form id="fm-search">
 
-                    <div class="input-group">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control"
-                               placeholder="请输入设备名称">
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <select name="type" id="type" class="form-control" onchange="setParams('type',this.value)">
+
+                        </select>
+                    </div>
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+
+                        <select name="status" id="status" class="form-control"
+                                onchange="setParams('status',this.value)">
+                            <option value="">全部</option>
+                            <option value="1">上线</option>
+                            <option value="2">下线</option>
+                        </select>
+                    </div>
+                    <div class="input-group" style="width: 50%;float: right">
+                        <input type="text" name="keyword" class="form-control" placeholder="请输入设备名称">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn"
                                     type="submit">
@@ -61,9 +81,9 @@
                     <th width="10%"> 上线时间</th>
                     <th width="10%"> 下线时间</th>
                     <th width="10%"> 生产厂商</th>
-
-                    <th width="10%"> 理论使用寿命</th>
-
+                    <%-- <th width="10%"> 生产时间</th>--%>
+                    <th width="8%"> 理论使用寿命</th>
+                    <th width="8%"> 状态</th>
 
                     <th width="15%">操作</th>
                 </tr>
@@ -99,16 +119,22 @@
         <td> \${item.onlineDate}</td>
         <td> \${item.offlineDate}</td>
         <td> \${item.prcBisFirm}</td>
-
+        <%-- <td> \${item.prcDate}</td>--%>
         <td> \${item.workingLife}</td>
-
-
+        <td>
+            {@if item.status==1}
+            <span class="label label-lg label-danger">上线</span>
+            {@else if item.status==2}
+            <span class="label label-lg label-success">下线</span>
+            {@/if}
+        </td>
         <td>
             ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
             <a href="javascript:del('\${item.id}');">删除</a>
-
+            <a href="javascript:online('\${item.id}');">上线</a>
+            <a href="javascript:outline('\${item.id}');">下线</a>
         </td>
     </tr>
     {@/each}
@@ -160,28 +186,29 @@
     </div>
 </div>
 
-
-<!--审核弹框-->
-<div class="modal fade" role="dialog" id="modal-audit">
+<div class="modal fade" role="dialog" id="modal-upload">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" class="close" authority="false" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">审核</h4>
+                <h4 class="modal-title">Excel导入</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-
-                </form>
+                <div id="uploader">
+                </div>
+                <div style="margin:5px">
+                    <a href="device.xls" style="color:red">下载模板</a>.<br>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green audit">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
             </div>
         </div>
     </div>
 </div>
+
 <div class="modal fade" role="dialog" id="modal-preview">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
@@ -203,143 +230,7 @@
         </div>
     </div>
 </div>
-<script id="tpl-fm" type="text/template">
-    <div class="form-body">
 
-        <div class="form-group">
-            <label class="col-md-2 view-label">主键</label>
-            <div class="col-md-10">
-                \${id}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">设备编号</label>
-            <div class="col-md-10">
-                \${code}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">设备名称</label>
-            <div class="col-md-10">
-                \${name}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">设备类型</label>
-            <div class="col-md-10">
-                \${type}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">所属节点</label>
-            <div class="col-md-10">
-                \${nodeCode}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">上线时间</label>
-            <div class="col-md-10">
-                \${onlineDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">下线时间</label>
-            <div class="col-md-10">
-                \${offlineDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">生产厂商</label>
-            <div class="col-md-10">
-                \${prcBisFirm}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">生产日期</label>
-            <div class="col-md-10">
-                \${prcDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">理论使用寿命</label>
-            <div class="col-md-10">
-                \${workingLife}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">备注</label>
-            <div class="col-md-10">
-                \${remark}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">状态 </label>
-            <div class="col-md-10">
-                \${status}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建人编号</label>
-            <div class="col-md-10">
-                \${createUserId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建人姓名</label>
-            <div class="col-md-10">
-                \${createUserName}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建日期</label>
-            <div class="col-md-10">
-                \${createDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新人编号</label>
-            <div class="col-md-10">
-                \${lastModifyUserId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新人名称</label>
-            <div class="col-md-10">
-                \${lastModifyUserName}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新日期</label>
-            <div class="col-md-10">
-                \${lastModifyDate}
-            </div>
-        </div>
-
-        <h4>结果</h4>
-        <hr>
-        <div class="form-group " id="operation">
-            <label class="col-md-2 control-label">结果</label>
-            <div class="col-md-10">
-                <div class="radio-group-container">
-                    <label>
-                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">说明</label>
-            <div class="col-md-10">
-                <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-            </div>
-        </div>
-    </div>
-
-</script>
 
 <script id="tpl-preview" type="text/template">
 
@@ -406,7 +297,11 @@
     <div class="form-group">
         <label class="col-md-2 view-label">状态 </label>
         <div class="col-md-10">
-            \${data.o.status}
+            {@if data.o.status==1}
+            <span>上线</span>
+            {@else if data.o.status==2}
+            <span>下线</span>
+            {@/if}
         </div>
     </div>
 
@@ -418,6 +313,14 @@
     </div>
 
 </script>
+
+<script id="type-tpl" type="text/template">
+    <option value="">全部</option>
+    {@each data as item, index}
+    <option value="\${item.CODE}">\${item.NAME}</option>
+    {@/each}
+</script>
+
 <style>
     .cover {
         width: 70px;
@@ -441,4 +344,12 @@
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
+<script src="js/upload.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+
 </html>

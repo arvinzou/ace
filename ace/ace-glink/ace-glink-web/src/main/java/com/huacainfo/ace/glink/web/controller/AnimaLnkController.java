@@ -1,5 +1,12 @@
 package com.huacainfo.ace.glink.web.controller;
 
+import com.huacainfo.ace.glink.dao.AnimaLnkDao;
+import com.huacainfo.ace.glink.dao.TopNodeDao;
+import com.huacainfo.ace.glink.vo.TopNodeVo;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +48,9 @@ public class AnimaLnkController extends GLinkBaseController {
     @Autowired
     private AnimaLnkService animaLnkService;
 
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -56,18 +66,25 @@ public class AnimaLnkController extends GLinkBaseController {
      */
     @RequestMapping(value = "/findAnimaLnkList")
     @ResponseBody
-    public PageResult
-            <AnimaLnkVo>
-    findAnimaLnkList(AnimaLnkQVo condition, PageParamNoChangeSord page) throws Exception {
+    public PageResult<AnimaLnkVo> findAnimaLnkList(AnimaLnkQVo condition, PageParamNoChangeSord page) throws Exception {
 
-        PageResult
-                <AnimaLnkVo> rst =
-                this.animaLnkService.findAnimaLnkList(condition, page.getStart(),
-                        page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        AnimaLnkDao dao = session.getMapper(AnimaLnkDao.class);
+        PageResult<AnimaLnkVo> rst = new PageResult<>();
+        try {
+            List<AnimaLnkVo> list = dao.findList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+            rst.setRows(list);
+            if (rst.getTotal()  <= 1) {
+                int allRows = dao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
         }
-
         return rst;
     }
 

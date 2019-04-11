@@ -12,6 +12,8 @@ public class TopNodeVo extends TopNode {
 
     private TopStation topStation;
 
+    private int deviceCount;
+
     public TopBuilding getTopBuilding() {
         return topBuilding;
     }
@@ -26,5 +28,13 @@ public class TopNodeVo extends TopNode {
 
     public void setTopStation(TopStation topStation) {
         this.topStation = topStation;
+    }
+
+    public int getDeviceCount() {
+        return deviceCount;
+    }
+
+    public void setDeviceCount(int deviceCount) {
+        this.deviceCount = deviceCount;
     }
 }
