@@ -1,0 +1,231 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.index{
+    width: 100%;
+    min-width: 1100px;
+    height: 100%;
+}
+.meter-title{
+    color: #2B3643;
+    font-size: 12px;
+    padding: 10px;
+}
+.meter-menu{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.meter-menu:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.menu-item{
+    width: 19%;
+    height: 89px;
+    float: left;
+}
+.menu-item:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.mr{
+    margin-right: 1.25%;
+}
+.cjkz{
+    background: url("../img/bg_blue.png") no-repeat;
+    background-size: 100% 100%;
+}
+.clgl{
+    background: url("../img/bg_yellow.png") no-repeat;
+    background-size: 100% 100%;
+}
+.gzjk{
+    background: url("../img/bg_red.png") no-repeat;
+    background-size: 100% 100%;
+}
+.jmsc{
+    background: url("../img/bg_violet.png") no-repeat;
+    background-size: 100% 100%;
+}
+.gismap{
+    background: url("../img/bg_green.png") no-repeat;
+    background-size: 100% 100%;
+}
+.icon-box{
+    width: 25%;
+    height: 100%;
+    float: left;
+    text-align: right;
+}
+.icon-image{
+    width: 28px;
+    height: 29px;
+    margin-top: 30px;
+}
+.icon-gis{
+    width: 28px;
+    height: 35px;
+    margin-top: 27px;
+}
+.title-01{
+    width: auto;
+    height: 25px;
+    line-height: 25px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 22px;
+    padding-left: 11px;
+}
+.title-02{
+    width: auto;
+    height: 20px;
+    line-height: 20px;
+    color: #ffffff;
+    font-size: 10px;
+    padding-left: 11px;
+}
+.menu-detail{
+    width: 75%;
+    height: 100%;
+    float: left;
+}
+.part01{
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    margin-bottom: 10px;
+}
+.part01:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.part02{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+}
+.part02:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.statics-list{
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+.statics-list:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.statics-item{
+    width: 15.625%;
+    height: 100%;
+    background:rgba(239,243,248,0.54);
+    float: left;
+}
+.total-count{
+    width: auto;
+    height: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1890FF;
+    padding-left: 18px;
+    margin-top: 15px;
+}
+.total-count-tips{
+    width: auto;
+    height: 20px;
+    line-height: 20px;
+    font-size: 10px;
+    padding-left: 18px;
+}
+.tip-01{
+    color: #718095;
+}
+.tip-02{
+    color: #1890FF;
+}
+.static-left{
+    width: 59%;
+    height: 500px;
+    float: left;
+    margin-right: 1%;
+    background: #ffffff;
+}
+.static-right{
+    width: 40%;
+    height: 500px;
+    float: left;
+    background: #ffffff;
+}
+.top-title-01{
+    font-size: 12px;
+    font-weight: 400;
+    color: #2B3643;
+    padding-left: 10px;
+}
+.top-title-02{
+    font-size: 10px;
+    font-weight: 400;
+    color: #718095;
+}
+.top-title{
+    width: 70%;
+    height: 50px;
+    line-height: 50px;
+    float: left;
+}
+.chart-select-box{
+    width: 30%;
+    height: 50px;
+    float: left;
+    text-align: right;
+}
+.top-more{
+    width: 30%;
+    height: 50px;
+    float: left;
+    text-align: right;
+}
+.top-title-box{
+    width: 100%;
+    height: auto;
+}
+.top-title-box:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.top-more img{
+    width: 37px;
+    height: 8.2px;
+    margin-right: 10px;
+    margin-top: 20.9px;
+}
+.chart-option{
+    width: 125px;
+    height: 26px;
+    margin-top: 12px;
+    margin-right: 10px;
+    float: right;
+}
+select{
+    width: 60px;
+    height: 26px;
+    background:rgba(228,245,255,1);
+    border-radius:12px 12px 12px 12px;
+    color: #0093EE;
+    border: none;
+    display: block;
+    float: left;
+    margin-left: 10px;
+}
