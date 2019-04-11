@@ -118,6 +118,13 @@ function datetimepicker(name) {
     });
 }
 
+function validateOffTime(val) {
+    var onlineDate = Date.parse($('#onlineDate').val());
+    var inputTime = Date.parse(val)
+    if (inputTime < onlineDate) {
+        alert("下线时间不得早于上线时间!");
+    }
+}
 
 
 function initForm() {

@@ -9,6 +9,13 @@ import java.util.List;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.dao.TopDeviceDao;
+import com.huacainfo.ace.glink.dao.TopNodeDao;
+import com.huacainfo.ace.glink.vo.TopNodeQVo;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +46,8 @@ public class TopStationServiceImpl implements TopStationService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
+    @Autowired
+    private SqlSessionTemplate sqlSession;
 
     /**
      * @throws
@@ -92,10 +101,10 @@ public class TopStationServiceImpl implements TopStationService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "站点名称不能为空！");
         }
-       /* int temp = this.topStationDao.isExit(o);
+        int temp = this.topStationDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "站点管理名称重复！");
-        }*/
+            return new MessageResponse(1, "站点编号重复！");
+        }
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
@@ -152,12 +161,19 @@ public class TopStationServiceImpl implements TopStationService {
      * @version: 2019-04-09
      */
     @Override
-    public SingleResult
-            <TopStationVo> selectTopStationByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <TopStationVo> rst = new SingleResult<>();
-        rst.setValue(this.topStationDao.selectVoByPrimaryKey(id));
+    public SingleResult<TopStationVo> selectTopStationByPrimaryKey(String id) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TopNodeDao dao = session.getMapper(TopNodeDao.class);
+        TopStationVo vo = topStationDao.selectVoByPrimaryKey(id);
+        TopNodeQVo condition = new TopNodeQVo();
+        condition.setStationCode(vo.getCode());
+        vo.setNodeList(dao.findList(condition, 0, 500, ""));
+        SingleResult<TopStationVo> rst = new SingleResult<>();
+        rst.setValue(vo);
         return rst;
+
     }
 
     @Override
