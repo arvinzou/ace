@@ -4,6 +4,8 @@
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.ErrFeedback">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="deviceCode" jdbcType="VARCHAR" property="deviceCode"/>
+        <result column="buildingCode" jdbcType="VARCHAR" property="buildingCode"/>
+        <result column="errCode" jdbcType="VARCHAR" property="errCode"/>
         <result column="errType" jdbcType="VARCHAR" property="errType"/>
         <result column="errLevel" jdbcType="CHAR" property="errLevel"/>
         <result column="errDate" jdbcType="TIMESTAMP" property="errDate"/>
@@ -23,7 +25,7 @@
     <sql id="Base_Column_List">
     id, deviceCode, errType, errLevel, errDate, errContent, errLoopNum, dataSrcCode, 
     apiRst, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
-    lastModifyUserName, lastModifyDate
+    lastModifyUserName, lastModifyDate, buildingCode, errCode
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -41,17 +43,20 @@
       errLoopNum, dataSrcCode, apiRst, 
       remark, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate)
+      lastModifyUserName, lastModifyDate, buildingCode, errCode)
     values (#{id,jdbcType=VARCHAR}, #{deviceCode,jdbcType=VARCHAR}, #{errType,jdbcType=VARCHAR}, 
       #{errLevel,jdbcType=CHAR}, #{errDate,jdbcType=TIMESTAMP}, #{errContent,jdbcType=VARCHAR}, 
       #{errLoopNum,jdbcType=INTEGER}, #{dataSrcCode,jdbcType=VARCHAR}, #{apiRst,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
+      #{buildingCode,jdbcType=VARCHAR}, #{errCode,jdbcType=VARCHAR})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.ErrFeedback">
     update err_feedback
     set deviceCode = #{deviceCode,jdbcType=VARCHAR},
+      buildingCode = #{buildingCode,jdbcType=VARCHAR},
+      errCode = #{errCode,jdbcType=VARCHAR}
       errType = #{errType,jdbcType=VARCHAR},
       errLevel = #{errLevel,jdbcType=CHAR},
       errDate = #{errDate,jdbcType=TIMESTAMP},
@@ -71,22 +76,59 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.ErrFeedbackVo">
+        <result column="deviceName" jdbcType="VARCHAR" property="deviceName"/>
+        <result column="buildingName" jdbcType="VARCHAR" property="buildingName"/>
+        <result column="nodeCode" jdbcType="VARCHAR" property="nodeCode"/>
+        <result column="nodeName" jdbcType="VARCHAR" property="nodeName"/>
+        <result column="stationCode" jdbcType="VARCHAR" property="stationCode"/>
+        <result column="stationName" jdbcType="VARCHAR" property="stationName"/>
+        <result column="subareaCode" jdbcType="VARCHAR" property="subareaCode"/>
+        <result column="subareaName" jdbcType="VARCHAR" property="subareaName"/>
 
     </resultMap>
 
     <sql id="Vo_Column_List">
+        d.`name` as deviceName,
+        b.`name` as buildingName,
+        d.nodeCode, n.nodeName,
+        n.stationCode, n.stationName,
+        n.subareaCode, n.subareaName,
+
+        t.buildingCode, t.errCode,
         t.id, t.deviceCode, t.errType, t.errLevel, t.errDate, t.errContent, t.errLoopNum, t.dataSrcCode,
         t.apiRst, t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId,
         t.lastModifyUserName, t.lastModifyDate
     </sql>
     <sql id="From_Statement">
         FROM err_feedback t
+        left JOIN top_device d on t.deviceCode = d.`code`
+        left join top_building b on t.buildingCode = b.`code`
+        left join
+        (SELECT
+            t.`code` as nodeCode, t.`name` as nodeName,
+            t.stationCode, s.`name` as stationName,
+            s.subareaCode, s.`name` as subareaName
+        from top_node t
+        left join top_station s on t.stationCode = s.`code`
+        LEFT join top_subarea a on s.subareaCode = a.`code`)n on n.nodeCode = d.nodeCode
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
         <if test="condition.deviceCode !=null and condition.deviceCode !=&quot;&quot;">
-            and t.deviceCode like concat(#{condition.deviceCode,jdbcType=VARCHAR},'%')
+            and t.deviceCode = #{condition.deviceCode,jdbcType=VARCHAR}
         </if>
+        <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+            and (b.`name` like concat(#{condition.keyword,jdbcType=VARCHAR},'%')
+            or d.`name` like concat(#{condition.keyword,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        <if test="condition.errType !=null and condition.errType !=&quot;&quot;">
+            and t.errType = #{condition.errType,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -123,4 +165,10 @@
         from err_feedback
         where 1!=1
     </select>
+
+    <update id="updateStatus">
+        update err_feedback
+        set status = #{status,jdbcType=CHAR}, lastModifyDate = now()
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

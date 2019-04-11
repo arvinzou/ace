@@ -17,9 +17,9 @@ return renderBtn(cur);
 function aceSwitch(cellvalue, options, cell) {
 console.log('aceSwitch');
 setTimeout(function () {
-$(cell).find('input[type=checkbox]')
-.addClass('ace ace-switch ace-switch-5')
-.after('<span class="lbl"></span>');
+$(cell).find('input[type=checkbox]').addClass(
+'ace ace-switch ace-switch-5').after(
+'<span class="lbl"></span>');
 }, 0);
 }
 // enable datepicker

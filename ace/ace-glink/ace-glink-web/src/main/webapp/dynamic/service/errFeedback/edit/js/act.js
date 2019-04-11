@@ -2,9 +2,7 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("
-            < li > < span > 编辑故障报警 < /span></
-        li > ");
+        $(".breadcrumb").append("< li > < span > 编辑故障监控 < /span></li > ");
         initForm();
         initEvents();
     });

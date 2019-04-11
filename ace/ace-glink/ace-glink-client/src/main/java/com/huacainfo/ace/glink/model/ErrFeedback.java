@@ -9,6 +9,10 @@ public class ErrFeedback extends BaseModel {
 
     private String deviceCode;
 
+    private String buildingCode;
+
+    private String errCode;
+
     private String errType;
 
     private String errLevel;
@@ -24,7 +28,9 @@ public class ErrFeedback extends BaseModel {
     private String apiRst;
 
     private String remark;
-
+    /**
+     * 0-未读 1-已读
+     */
     private String status;
 
     private String createUserId;
@@ -38,6 +44,22 @@ public class ErrFeedback extends BaseModel {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getBuildingCode() {
+        return buildingCode;
+    }
+
+    public void setBuildingCode(String buildingCode) {
+        this.buildingCode = buildingCode;
+    }
+
+    public String getErrCode() {
+        return errCode;
+    }
+
+    public void setErrCode(String errCode) {
+        this.errCode = errCode;
+    }
 
     public String getId() {
         return id;

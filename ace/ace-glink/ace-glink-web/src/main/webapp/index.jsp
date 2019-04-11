@@ -6,307 +6,272 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
     <meta name="description" content="overview &amp; stats"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/index.css">
     <title>${cfg.sys_name}</title>
-
 </head>
 
-
 <jsp:include page="/dynamic/common/header.jsp"/>
-
-
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-
-
-<div class="page-content-inner">
-
-</div>
-
-<div class="row">
-    <div class="col-xs-12 col-sm-6">
-        <div class="portlet light">
-            <div class="portlet-title">发布通知</div>
-            <div class="portlet-body">
-                <div class="row" style="padding:15px">
-                    <table width="100%;">
-                        <tbody id="notice-list-grid">
-
-                        </tbody>
-                    </table>
-
+<div class="index">
+    <div class="part01">
+        <div class="meter-title">快捷入口</div>
+        <div class="meter-menu">
+            <div class="menu-item cjkz mr">
+                <div class="icon-box">
+                    <img src="${pageContext.request.contextPath}/content/common/img/icon-cjkz.png" class="icon-image">
                 </div>
-
+                <div class="menu-detail">
+                    <div class="content-box">
+                        <div class="title-01">场景控制</div>
+                        <div class="title-02">启动、关闭、暂停恢复场景</div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item clgl mr">
+                <div class="icon-box">
+                    <img src="${pageContext.request.contextPath}/content/common/img/icon-clgl.png" class="icon-image">
+                </div>
+                <div class="menu-detail">
+                    <div class="content-box">
+                        <div class="title-01">策略管理</div>
+                        <div class="title-02">策略生成与下发</div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item gzjk mr">
+                <div class="icon-box">
+                    <img src="${pageContext.request.contextPath}/content/common/img/icon-gzjk.png" class="icon-image">
+                </div>
+                <div class="menu-detail">
+                    <div class="title-01">故障监控</div>
+                    <div class="title-02">监控设备故障情况</div>
+                </div>
+            </div>
+            <div class="menu-item jmsc mr">
+                <div class="icon-box">
+                    <img src="${pageContext.request.contextPath}/content/common/img/icon-jmsc.png" class="icon-image">
+                </div>
+                <div class="menu-detail">
+                    <div class="title-01">节目上传</div>
+                    <div class="title-02">上传节目媒体文件</div>
+                </div>
+            </div>
+            <div class="menu-item gismap">
+                <div class="icon-box">
+                    <img src="${pageContext.request.contextPath}/content/common/img/icon-gis.png" class="icon-gis">
+                </div>
+                <div class="menu-detail">
+                    <div class="title-01">GIS地图</div>
+                    <div class="title-02">展示建筑物信息及故障情况</div>
+                </div>
+            </div>
+        </div>
+        <div class="meter-title">数据统计</div>
+        <div class="statics-list">
+            <div class="statics-item mr">
+                <div class="total-count">468</div>
+                <div class="total-count-tips"><span class="tip-01">建筑物总数</span></div>
+            </div>
+            <div class="statics-item mr">
+                <div class="total-count">468</div>
+                <div class="total-count-tips">
+                    <span class="tip-01">离线设备  |</span>
+                    <span class="tip-02">总设备数:1286</span>
+                </div>
+            </div>
+            <div class="statics-item mr">
+                <div class="total-count">42</div>
+                <div class="total-count-tips"><span class="tip-01">故障回路</span></div>
+            </div>
+            <div class="statics-item mr">
+                <div class="total-count">10</div>
+                <div class="total-count-tips">
+                    <span class="tip-01">执行中策略 |</span>
+                    <span class="tip-02">总策略数:40</span>
+                </div>
+            </div>
+            <div class="statics-item mr">
+                <div class="total-count">468</div>
+                <div class="total-count-tips">
+                    <span class="tip-01">场景总数</span>
+                </div>
+            </div>
+            <div class="statics-item">
+                <div class="total-count">56812251.97kw</div>
+                <div class="total-count-tips">
+                    <span class="tip-01">累计能耗</span></div>
             </div>
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-6">
-        <div class="portlet light">
-            <div class="portlet-title">内部公告</div>
-            <div class="portlet-body">
-                <div class="row" style="padding:15px">
-                    <table width="100%;">
-                        <tbody id="notice-list-grid-area">
-
-                        </tbody>
-                    </table>
-
+    <div class="part02">
+        <div class="static-left">
+            <div class="top-title-box">
+                <div class="top-title"><span class="top-title-01">故障监控</span></div>
+                <div class="chart-select-box">
+                    <div class="chart-option">
+                        <select id="year">
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                        </select>
+                        <select id="month">
+                            <option value="04">04</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
                 </div>
+            </div>
+            <div class="chart-box" id="chartBox" style="min-width: 700px;max-width: 900px;height: 450px;">
 
+            </div>
+        </div>
+        <div class="static-right">
+            <div class="top-title-box">
+                <div class="top-title"><span class="top-title-01">故障报警TOP10</span><span class="top-title-02">(故障时间倒叙)</span></div>
+                <div class="top-more"><img src="${pageContext.request.contextPath}/content/common/img/icon-more.png"></div>
+            </div>
+            <div class="top-list">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body">
+                        <div class="table-scrollable">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th width="10%" align="center">故障等级</th>
+                                    <th width="20%" align="center">设备名称</th>
+                                    <th width="20%" align="center">故障位置</th>
+                                    <th width="20%" align="center">故障类型</th>
+                                    <th width="10%" align="center">故障数量</th>
+                                    <th width="20%" align="center">故障时间</th>
+                                </tr>
+                                </thead>
+                                <tbody id="top10-list">
+                                    <tr>
+                                        <td width="10%" align="center">
+                                            <div class="serious"></div>
+                                        </td>
+                                        <td width="20%" align="center">设备名称1</td>
+                                        <td width="20%" align="center">江汉区</td>
+                                        <td width="20%" align="center">故障类型</td>
+                                        <td width="10%" align="center">10</td>
+                                        <td width="20%" align="center">03.01-15:30:04</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="10%" align="center">
+                                            <div class="serious"></div>
+                                        </td>
+                                        <td width="20%" align="center">设备名称1</td>
+                                        <td width="20%" align="center">江汉区</td>
+                                        <td width="20%" align="center">故障类型</td>
+                                        <td width="10%" align="center">10</td>
+                                        <td width="20%" align="center">03.01-15:30:04</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="10%" align="center">
+                                            <div class="more-serious"></div>
+                                        </td>
+                                        <td width="20%" align="center">设备名称1</td>
+                                        <td width="20%" align="center">江汉区</td>
+                                        <td width="20%" align="center">故障类型</td>
+                                        <td width="10%" align="center">10</td>
+                                        <td width="20%" align="center">03.01-15:30:04</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
+                                        <td width="20%" align="center">设备名称1</td>
+                                        <td width="20%" align="center">江汉区</td>
+                                        <td width="20%" align="center">故障类型</td>
+                                        <td width="10%" align="center">10</td>
+                                        <td width="20%" align="center">03.01-15:30:04</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
+                                        <td width="20%" align="center">设备名称1</td>
+                                        <td width="20%" align="center">江汉区</td>
+                                        <td width="20%" align="center">故障类型</td>
+                                        <td width="10%" align="center">10</td>
+                                        <td width="20%" align="center">03.01-15:30:04</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
+                                        <td width="20%" align="center">设备名称1</td>
+                                        <td width="20%" align="center">江汉区</td>
+                                        <td width="20%" align="center">故障类型</td>
+                                        <td width="10%" align="center">10</td>
+                                        <td width="20%" align="center">03.01-15:30:04</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
+                                        <td width="20%" align="center">设备名称1</td>
+                                        <td width="20%" align="center">江汉区</td>
+                                        <td width="20%" align="center">故障类型</td>
+                                        <td width="10%" align="center">10</td>
+                                        <td width="20%" align="center">03.01-15:30:04</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
+                                        <td width="20%" align="center">设备名称1</td>
+                                        <td width="20%" align="center">江汉区</td>
+                                        <td width="20%" align="center">故障类型</td>
+                                        <td width="10%" align="center">10</td>
+                                        <td width="20%" align="center">03.01-15:30:04</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
+                                        <td width="20%" align="center">设备名称1</td>
+                                        <td width="20%" align="center">江汉区</td>
+                                        <td width="20%" align="center">故障类型</td>
+                                        <td width="10%" align="center">10</td>
+                                        <td width="20%" align="center">03.01-15:30:04</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="10%" align="center">
+                                            <div class="less-serious"></div>
+                                        </td>
+                                        <td width="20%" align="center">设备名称1</td>
+                                        <td width="20%" align="center">江汉区</td>
+                                        <td width="20%" align="center">故障类型</td>
+                                        <td width="10%" align="center">10</td>
+                                        <td width="20%" align="center">03.01-15:30:04</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-
-<script id="tpl-portal-1" type="text/template">
-
-    <div class="row widget-row">
-        <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">系统用户</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple icon-user"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.person}">\${data.person}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- END WIDGET THUMB -->
-        </div>
-        <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">登记事故</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple fa fa-location-arrow"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.traAcc}">\${data.traAcc}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- END WIDGET THUMB -->
-        </div>
-        <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">管辖路段</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-red  fa fa-map-signs"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup"
-                              data-value="\${data.roadSection}">\${data.roadSection}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- END WIDGET THUMB -->
-        </div>
-        <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">路长</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple fa fa-male"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.roadMan}">\${data.roadMan}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- END WIDGET THUMB -->
-        </div>
-
-    </div>
-
-    </div>
-
-
-</script>
-
-
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
-<script>
-
-    function App() {
-
-
-    }
-
-    Array.prototype.contains = function (needle) {
-        for (i in this) {
-            if (this[i] == needle) return true;
-        }
-        return false;
-    }
-
-    /*页面渲染*/
-    function render(obj, data, tplId) {
-        var tpl = document.getElementById(tplId).innerHTML;
-        var html = juicer(tpl, {
-            data: data,
-        });
-        $(obj).html(html);
-    }
-
-    window.onload = function () {
-        var data = {reportId: "portal", userId: userProp.userId};
-        var tplId = "tpl-portal-1";
-
-        $.ajax({
-            type: "post",
-            url: contextPath + '/anslysis/query',
-            data: data,
-            success: function (rst) {
-                var data = {};
-                $.each(rst.value, function (i, o) {
-                    data[o.id] = o.value;
-                });
-
-                render($(".page-content-inner"), data, tplId)
-            }
-        });
-        initNoticeTopList1();
-        initNoticeTopList2();
-    }
-
-    function initNoticeTopList1() {
-
-        $.ajax({
-            type: "post",
-            url: portalPath + "/notice/findListTop.do?category=1",
-            data: {},
-            beforeSend: function (XMLHttpRequest) {
-            },
-            success: function (rst, textStatus) {
-
-                if (rst) {
-                    var html = new Array();
-                    var k = 0;
-                    $(rst.value).each(function (i, o) {
-                        o.url = portalPath + "/dynamic/portal/notice/preview.jsp?noticeId=" + o.noticeId + "&taskId=0"
-                        k++;
-                        html.push('<tr>');
-                        html.push('<td>');
-                        html.push('<span">■</span> ');
-
-                        html.push('</td>');
-                        html.push('<td align="left">');
-
-
-                        html.push('<a href="' + o.url + '" target="_blank">');
-
-                        html.push(o.title);
-
-
-                        html.push('</a>');
-
-                        if (o.top == '1') {
-                            html.push('  <span class="badge badge-yellow">置顶</span> ');
-
-                        }
-                        html.push('</td>');
-                        html.push('<td width="150px" align="right">');
-                        html.push(o.createTime);
-                        html.push('</td>');
-
-
-                        html.push('</tr>');
-
-                        //console.log(rst.list[i]);
-                    });
-                    $('#notice-list-grid').html(html.join(''));
-                }
-            },
-            complete: function (XMLHttpRequest, textStatus) {
-
-            },
-            error: function () {
-
-            }
-        });
-    }
-
-    function initNoticeTopList2() {
-
-        $.ajax({
-            type: "post",
-            url: portalPath + "/notice/findListTop.do?category=2",
-            data: {},
-            beforeSend: function (XMLHttpRequest) {
-            },
-            success: function (rst, textStatus) {
-
-                if (rst) {
-                    var html = new Array();
-                    var k = 0;
-                    $(rst.value).each(function (i, o) {
-                        o.url = portalPath + "/dynamic/portal/notice/preview.jsp?noticeId=" + o.noticeId + "&taskId=0"
-                        k++;
-                        html.push('<tr>');
-                        html.push('<td>');
-                        html.push('<span">■</span> ');
-
-                        html.push('</td>');
-                        html.push('<td align="left">');
-
-
-                        html.push('<a href="' + o.url + '" target="_blank">');
-
-                        html.push(o.title);
-
-
-                        html.push('</a>');
-
-                        if (o.top == '1') {
-                            html.push('  <span class="badge badge-yellow">置顶</span> ');
-
-                        }
-                        html.push('</td>');
-                        html.push('<td width="150px" align="right">');
-                        html.push(o.createTime);
-                        html.push('</td>');
-
-
-                        html.push('</tr>');
-
-                        //console.log(rst.list[i]);
-                    });
-                    $('#notice-list-grid-area').html(html.join(''));
-                }
-            },
-            complete: function (XMLHttpRequest, textStatus) {
-
-            },
-            error: function () {
-
-            }
-        });
-    }
-</script>
-<style>
-    .portlet.light > .portlet-title {
-        border-bottom: 1px solid #eef1f5;
-    }
-
-    .portlet.light > .portlet-title {
-        padding: 0;
-        min-height: 25px;
-    }
-
-    .portlet.light .portlet-body {
-        padding-top: 1px;
-
-        min-height: 250px;
-    }
-</style>
-
+<script src="${pageContext.request.contextPath}/content/common/js/echarts.js"></script>
+<script src="${pageContext.request.contextPath}/content/common/js/index.js"></script>
 </body>
 </html>

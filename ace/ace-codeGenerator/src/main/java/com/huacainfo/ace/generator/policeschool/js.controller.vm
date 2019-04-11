@@ -28,8 +28,8 @@ beforeShowForm: function (e) {
 var form = $(e[0]);
 form.closest('.ui-jqdialog')
 .find('.ui-jqdialog-titlebar')
-.wrapInner('
-<div class="widget-header" / > ');
+.wrapInner("
+<div class='widget-header'/>");
 
 }
 })
@@ -102,8 +102,8 @@ beforeShowForm: function (e) {
 var form = $(e[0]);
 form.closest('.ui-jqdialog')
 .find('.ui-jqdialog-titlebar')
-.wrapInner('
-<div class="widget-header"/>');
+.wrapInner("
+<div class='widget-header'/>");
 
 }
 });
@@ -118,8 +118,8 @@ var form = $(e[0]);
 if (!show) {
 form.closest('.ui-jqdialog')
 .find('.ui-jqdialog-titlebar')
-.wrapInner('
-<div class="widget-header"/>');
+.wrapInner("
+<div class='widget-header'/>");
 }
 show = true;
 }

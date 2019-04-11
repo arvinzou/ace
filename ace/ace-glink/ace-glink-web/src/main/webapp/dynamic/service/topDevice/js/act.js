@@ -4,6 +4,8 @@ window.onload = function () {
     initPage();
     initEvents();
     initJuicerMethod();
+    type();
+
 }
 
 
@@ -109,6 +111,11 @@ function initEvents() {
         console.log(relatedTarget);
         initPreview(id);
     });
+    $('#modal-upload').on('shown.bs.modal', function (event) {
+        //加载班级列表
+        alert("温馨提醒：在导入前，请先下载导入模板,并选择导入！");
+        importInit();
+    });
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
@@ -140,9 +147,20 @@ function initEvents() {
         $(event.target).addClass("active");
     });
 
-
+    $('#btn-view-importXls').on('click', function () {
+        importXls();
+    });
 }
 
+function importInit() {
+    reset_uploader();
+}
+
+function importXls() {
+    // reset_uploader();
+    $('#modal-upload').modal('show');
+
+}
 /*设备管理审核*/
 function audit(params) {
     startLoad();
@@ -168,7 +186,7 @@ function audit(params) {
 
 /*设备管理上架*/
 function online(id) {
-    if (confirm("确定要上架吗？")) {
+    if (confirm("确定要上线吗？")) {
         startLoad();
         $.ajax({
             url: contextPath + "/topDevice/updateStatus",
@@ -196,7 +214,7 @@ function online(id) {
 
 /*设备管理下架*/
 function outline(id) {
-    if (confirm("确定要下架吗？")) {
+    if (confirm("确定要下线吗？")) {
         startLoad();
         $.ajax({
             url: contextPath + "/topDevice/updateStatus",
@@ -204,7 +222,7 @@ function outline(id) {
             async: false,
             data: {
                 id: id,
-                status: '0'
+                status: '2'
             },
             success: function (rst) {
                 stopLoad();
@@ -292,6 +310,18 @@ function parseType(type) {
             return typeList[i].NAME;
         }
     }
+}
+
+function type() {
+    var data = staticDictObject['178'];
+    var dataList = [];
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].CODE != "") {
+            dataList.push(data[i]);
+        }
+    }
+    render('#type', dataList, 'type-tpl');
+    console.log(dataList);
 }
 
 function initForm(id) {

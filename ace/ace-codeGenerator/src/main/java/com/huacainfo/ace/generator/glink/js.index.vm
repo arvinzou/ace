@@ -14,35 +14,30 @@ totalCounts: 1,
 pageSize: params.limit,
 visiblePages: 10,
 currentPage: 1,
-prev: '
-<li class="prev"><a href="javascript:;">上一页</a></li>',
-next: '
-<li class="next"><a href="javascript:;">下一页</a></li>',
-page: '
-<li class="page"><a href="javascript:;">{{page}}</a></li>',
+prev: "
+<li class="prev"><a href="javascript:;">上一页</a></li>",
+next: "
+<li class="next"><a href="javascript:;">下一页</a></li>",
+page: "
+<li class="page"><a href="javascript:;">{{page}}</a></li>",
 onPageChange: function (num, type) {
 params['start']=(num-1)*params.limit;
 params['initType']=type;
 getPageList();
 }
 });
-}
 
-function initBtnEvents() {
 $('#fm-search').ajaxForm({
-beforeSubmit: function (formData, jqForm, options) {
-$.each(formData, function (n, obj) {
+beforeSubmit: function(formData, jqForm, options) {
+$.each(formData, function(n, obj) {
 params[obj.name] = obj.value;
 });
 params['initType'] = 'init';
-params['start'] = 0;
+params['start']=0;
 getPageList();
 return false;
 }
-
-});
 }
-
 function setParams(key,value){
 params[key]=value;
 getPageList();
@@ -95,11 +90,7 @@ $("#modal-detail").modal("show");
 }
 
 function initEvents() {
-//初始化按钮组件
-initBtnEvents();
-
-//模态框事件
-﻿$('#modal-preview').on('show.bs.modal', function (event) {
+﻿   $('#modal-preview').on('show.bs.modal', function (event) {
 var relatedTarget = $(event.relatedTarget);
 var id = relatedTarget.data('id');
 var title = relatedTarget.data('title');
@@ -219,31 +210,20 @@ alert("对不起，出错了！");
 
 //juicer自定义函数
 function initJuicerMethod() {
+juicer.register('rsd', rsd);
 juicer.register('parseStatus', parseStatus);
 }
 
 /**
-* 状态
-* 0-删除
-* 1-暂存
-* 2-提交审核
-* 3-审核通过
-* 4-审核驳回
+* 状态解析
 */
 function parseStatus(status) {
 switch (status) {
 case '0':
 return "删除";
 case '1':
-return "暂存";
-case '2':
-return "待审";
-case '3':
-return "通过";
-case '4':
-return "驳回";
 default:
-return "";
+return "0";
 }
 }
 

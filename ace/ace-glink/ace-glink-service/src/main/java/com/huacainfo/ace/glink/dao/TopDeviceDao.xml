@@ -92,6 +92,12 @@
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.type !=null and condition.type !=&quot;&quot;">
+            and t.type = #{condition.type,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -119,8 +125,7 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopDevice">
     select count(*)
     from top_device
-    where name=#{name,jdbcType=VARCHAR}
-    and nodeCode != #{nodeCode,jdbcType=VARCHAR}
+    where code=#{code,jdbcType=VARCHAR}
   </select>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -129,4 +134,16 @@
         <include refid="From_Statement"/>
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <update id="updateStatus" parameterType="java.lang.String">
+    update top_device
+    set status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="deviceNum" resultType="int">
+    select count(*)
+    from top_device
+    where nodeCode=#{nodeCode,jdbcType=VARCHAR}
+  </select>
 </mapper>

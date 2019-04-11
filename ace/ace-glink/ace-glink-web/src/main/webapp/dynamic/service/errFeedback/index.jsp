@@ -15,6 +15,10 @@
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+    <%--sweetalert--%>
+    <script src="${pageContext.request.contextPath}/content/common/js/sweetalert/js/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/content/common/js/sweetalert/css/sweet-alert.css">
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -23,23 +27,38 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-4">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+            <div class="col-md-3">
+                <%--<a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>--%>
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-9">
 
                 <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
+                    <%--分区--%>
+                    <div class="input-group" style="float:left;padding-right:5px">
                     </div>
+                    <%--站点--%>
+                    <div class="input-group" style="float:left;padding-right:5px">
+                    </div>
+                    <%--节点--%>
+                    <div class="input-group" style="float:left;padding-right:5px">
+                    </div>
+
+                    <%--故障类型--%>
+                    <div id="p-errType" class="btn-group" role="group" style="float:left;padding-right:5px">
+                    </div>
+                    <%--处理状态--%>
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <button type="button" class="btn btn-default" onclick="setParams('status','');">处理状态</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','0');">未读</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">已读</button>
+                    </div>
+                    <%--搜索--%>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入设备编号">
+                               placeholder="请输入建筑物名称/设备名称/设备编号">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn"
                                     type="submit">
@@ -57,13 +76,16 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-
-                    <th width="10%"> 设备编号</th>
+                    <th width="10%"> 故障编号</th>
+                    <th width="10%"> 分区名称</th>
+                    <th width="10%"> 站点名称</th>
+                    <th width="10%"> 节点名称</th>
+                    <th width="10%"> 建筑名称</th>
                     <th width="10%"> 故障类型</th>
-                    <th width="10%"> 故障等级</th>
-                    <th width="20%"> 故障时间</th>
-                    <th width="30%"> 故障内容</th>
-                    <th width="15%">操作</th>
+                    <th width="10%"> 故障时间</th>
+                    <th width="10%"> 故障内容</th>
+                    <th width="10%"> 故障回路数</th>
+                    <th width="10%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -85,28 +107,44 @@
 <%--==============common jsp-suffix==============--%>
 </body>
 
+<script id="tpl-errType" type="text/template">
+    <button type="button" class="btn btn-default" onclick="setParams('errType','');">故障类型</button>
+    {@each data['180'] as item, index}
+    {@if item.CODE!=''}
+    <button type="button" class="btn btn-default" onclick="setParams('errType','\${item.CODE}');">\${item.NAME}</button>
+    {@/if}
+    {@/each}
+</script>
+
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-
-        <td> \${item.deviceCode}</td>
-        <td> \${item.errType}</td>
-        <td> \${item.errLevel}</td>
+        <td> \${item.errCode}</td>
+        <td> \${item.subareaName}</td>
+        <td> \${item.stationName}</td>
+        <td> \${item.nodeName}</td>
+        <td> \${item.buildingName}</td>
+        <td> \${rsd(item.errType,'180')}</td>
         <td> \${item.errDate}</td>
         <td> \${item.errContent}</td>
+        <td> \${item.errLoopNum}</td>
         <td>
-            <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
+            {@if item.status == '0'}
+            <a href="javascript:updateStatus('\${item.id}','1');">未读</a>
+            {@else}
+            <a href="javascript:updateStatus('\${item.id}','0');">已读</a>
+            {@/if}
+
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-            <a href="javascript:del('\${item.id}');">删除</a>
         </td>
     </tr>
     {@/each}
 </script>
 ﻿
 <div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document" style="width: 90%;">
+    <div class="modal-dialog" role="document" style="width: 80%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -127,106 +165,90 @@
     </div>
 </div>
 <script id="tpl-preview" type="text/template">
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption font-green-sharp">
+                <i class="icon-share font-green-sharp"></i>
+                <span class="caption-subject bold uppercase"> 基本信息</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="form-group hide">
+                <label class="col-md-2 view-label"> 主键</label>
+                <div class="col-md-10">
+                    \${data.o.id}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label"> 故障编号</label>
+                <div class="col-md-10">
+                    \${data.o.errCode}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label"> 分区名称</label>
+                <div class="col-md-10">
+                    \${data.o.subareaName}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label"> 站点名称</label>
+                <div class="col-md-10">
+                    \${data.o.stationName}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label"> 节点名称</label>
+                <div class="col-md-10">
+                    \${data.o.nodeName}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label"> 建筑物名称</label>
+                <div class="col-md-10">
+                    \${data.o.buildingName}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label"> 故障类型</label>
+                <div class="col-md-10">
+                    \${rsd(data.o.errType,'180')}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label"> 故障时间</label>
+                <div class="col-md-10">
+                    \${data.o.errDate}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label"> 故障内容</label>
+                <div class="col-md-10">
+                    \${data.o.errContent}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label"> 故障回路数</label>
+                <div class="col-md-10">
+                    \${data.o.errLoopNum}
+                </div>
+            </div>
+            <div class="form-group hide">
+                <label class="col-md-2 view-label"> 状态</label>
+                <div class="col-md-10">
+                    \${parseStatus(data.o.status)}
+                </div>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">设备编号</label>
-        <div class="col-md-10">
-            \${deviceCode}
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption font-green-sharp">
+                <i class="icon-share font-green-sharp"></i>
+                <span class="caption-subject bold uppercase"> GIS地图</span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">故障类型</label>
-        <div class="col-md-10">
-            \${errType}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">故障等级</label>
-        <div class="col-md-10">
-            \${errLevel}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">故障时间</label>
-        <div class="col-md-10">
-            \${errDate}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">故障内容</label>
-        <div class="col-md-10">
-            \${errContent}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">故障回路数</label>
-        <div class="col-md-10">
-            \${errLoopNum}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">数据源编号</label>
-        <div class="col-md-10">
-            \${dataSrcCode}
-        </div>
-    </div>
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">接口返回内容</label>
-        <div class="col-md-10">
-            \${apiRst}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">备注</label>
-        <div class="col-md-10">
-            \${remark}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">状态 </label>
-        <div class="col-md-10">
-            \${status}
-        </div>
-    </div>
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">创建人编号</label>
-        <div class="col-md-10">
-            \${createUserId}
-        </div>
-    </div>
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">创建人姓名</label>
-        <div class="col-md-10">
-            \${createUserName}
-        </div>
-    </div>
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">创建日期</label>
-        <div class="col-md-10">
-            \${createDate}
-        </div>
-    </div>
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">更新人编号</label>
-        <div class="col-md-10">
-            \${lastModifyUserId}
-        </div>
-    </div>
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">更新人名称</label>
-        <div class="col-md-10">
-            \${lastModifyUserName}
-        </div>
-    </div>
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">更新日期</label>
-        <div class="col-md-10">
-            \${lastModifyDate}
+        <div class="portlet-body">
         </div>
     </div>
 </script>
@@ -235,5 +257,7 @@
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
+<%----%>
 <script src="js/act.js?v=${cfg.version}"></script>
+
 </html>

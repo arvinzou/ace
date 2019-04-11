@@ -23,6 +23,8 @@ function initPage() {
             getPageList();
         }
     });
+    //故障类型-查询条件
+    render('#p-errType', staticDictObject, 'tpl-errType');
 }
 
 function initBtnEvents() {
@@ -118,88 +120,51 @@ function initEvents() {
 
 }
 
-/*故障报警审核*/
-function audit(params) {
-    startLoad();
-    $.ajax({
-        url: contextPath + "/errFeedback/audit",
-        type: "post",
-        async: false,
-        data: params,
-        success: function (rst) {
-            stopLoad();
-            $("#modal-audit").modal('hide');
-            alert(rst.errorMessage);
-            if (rst.status == 0) {
-                getPageList();
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
-        }
-    });
-}
 
 /*故障报警上架*/
-function online(id) {
-    if (confirm("确定要上架吗？")) {
-        startLoad();
-        $.ajax({
-            url: contextPath + "/errFeedback/updateStatus",
-            type: "post",
-            async: false,
-            data: {
-                id: id,
-                status: '1'
-            },
-            success: function (rst) {
-                stopLoad();
-                if (rst.status == 0) {
-                    getPageList();
-                } else {
-                    alert(rst.errorMessage);
+function updateStatus(id, state) {
+    var title = '0' == state ? '标记为未读?' : '标记为已读?';
+    swal({
+            title: title,
+            text: "故障状态将发生变更!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes,do it!",
+            closeOnConfirm: false
+        },
+        function () {
+            startLoad();
+            $.ajax({
+                url: contextPath + "/errFeedback/updateStatus",
+                type: "post",
+                async: false,
+                data: {
+                    id: id,
+                    status: state
+                },
+                success: function (rst) {
+                    stopLoad();
+                    if (rst.status == 0) {
+                        swal("变更成功!", "", "success");
+                        getPageList();
+                    } else {
+                        swal(rst.errorMessage, "", "error");
+                    }
+                },
+                error: function () {
+                    stopLoad();
+                    alert("对不起，出错了！");
                 }
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起，出错了！");
-            }
-        });
-    }
-}
-
-/*故障报警下架*/
-function outline(id) {
-    if (confirm("确定要下架吗？")) {
-        startLoad();
-        $.ajax({
-            url: contextPath + "/errFeedback/updateStatus",
-            type: "post",
-            async: false,
-            data: {
-                id: id,
-                status: '0'
-            },
-            success: function (rst) {
-                stopLoad();
-                if (rst.status == 0) {
-                    getPageList();
-                } else {
-                    alert(rst.errorMessage);
-                }
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起，出错了！");
-            }
-        });
-    }
+            });
+        }
+    );
 }
 
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
+    juicer.register('rsd', rsd);
 }
 
 /**
@@ -213,17 +178,11 @@ function initJuicerMethod() {
 function parseStatus(status) {
     switch (status) {
         case '0':
-            return "删除";
+            return "未读";
         case '1':
-            return "暂存";
-        case '2':
-            return "待审";
-        case '3':
-            return "通过";
-        case '4':
-            return "驳回";
+            return "已读";
         default:
-            return "";
+            return "未读";
     }
 }
 
