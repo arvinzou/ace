@@ -62,6 +62,8 @@ public interface LtStrategyService {
         */
         MessageResponse updateLtStrategy(LtStrategy obj,UserProp userProp) throws Exception;
 
+        MessageResponse updateLtStrategyVo(LtStrategy obj,UserProp userProp) throws Exception;
+
         /**
         *
         * @Title:selectLtStrategyByPrimaryKey

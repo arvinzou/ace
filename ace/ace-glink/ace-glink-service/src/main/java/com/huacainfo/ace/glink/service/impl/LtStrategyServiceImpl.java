@@ -138,6 +138,28 @@ public class LtStrategyServiceImpl implements LtStrategyService {
 
     /**
      * @throws
+     * @Title:updateLtStrategy
+     * @Description: TODO(更新策略管理)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2019-04-10
+     */
+    @Override
+    public MessageResponse updateLtStrategyVo(LtStrategy o, UserProp userProp) throws Exception {
+        o.setLastModifyDate(new Date());
+        o.setLastModifyUserName(userProp.getName());
+        o.setLastModifyUserId(userProp.getUserId());
+        this.ltStrategyDao.updateByPrimaryKeyVo(o);
+        this.dataBaseLogService.log("变更策略管理", "策略管理", "",
+                o.getId(), o.getId(), userProp);
+        return new MessageResponse(0, "保存成功！");
+    }
+
+    /**
+     * @throws
      * @Title:selectLtStrategyByPrimaryKey
      * @Description: TODO(获取策略管理)
      * @param: @param id

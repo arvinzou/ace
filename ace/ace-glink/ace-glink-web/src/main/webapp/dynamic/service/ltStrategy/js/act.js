@@ -84,6 +84,7 @@ function detail(id) {
 function initEvents() {
     //初始化按钮组件
     initBtnEvents();
+    juicer.register('isChecked', isChecked);
     //模态框事件
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
@@ -119,6 +120,160 @@ function initEvents() {
         $(event.target).siblings().removeClass("active");
         $(event.target).addClass("active");
     });
+
+}
+
+function isChecked(val, idex) {
+    var i = val.slice(',');
+    console.log(i);
+    for (var x = 0; x < i.length; x++) {
+        if (idex == i[x]) {
+            return 'checked'
+        }
+    }
+    return '';
+}
+
+function setModel(id) {
+    startLoad();
+    var url = contextPath + "/ltStrategy/selectLtStrategyByPrimaryKey";
+    var data = {
+        id: id
+    };
+    $.getJSON(url, data, function (rst) {
+        stopLoad();
+        if (rst.status == 0) {
+            data = rst.value;
+            render('#setModel', data, 'tpl-setModel');
+            initDatetimepicker();
+            $('#modal-seting').modal('show');
+        } else {
+            alert(rst.errorMessage);
+        }
+    });
+}
+
+
+function initDatetimepicker() {
+    $("input[name=startDate]").datetimepicker({
+        minView: "hour",
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: true, //显示‘今日’按钮
+        clearBtn: true, //清除按钮
+        autoclose: true,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var startTime = event.date;
+        $("input[name=stopDate]").datetimepicker('setStartDate', startTime);
+        $("input[name=stopDate]").val("");
+    });
+
+    $('input[name=startDate]').focus(function () {
+        $(this).blur(); //不可输入状态
+    })
+
+
+    $("input[name=stopDate]").datetimepicker({
+        minView: "hour",
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: true, //显示‘今日’按钮
+        clearBtn: true, //清除按钮
+        autoclose: true,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var endTime = event.date;
+        $("input[name=startDate]").datetimepicker('setEndDate', endTime);
+    });
+    $('input[name=stopDate]').focus(function () {
+        $(this).blur(); //不可输入状态
+    });
+
+
+    $("input[name=startTime]").datetimepicker({
+        minView: "hour",
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: true, //显示‘今日’按钮
+        clearBtn: true, //清除按钮
+        autoclose: true,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var startTime = event.date;
+        $("input[name=stopTime]").datetimepicker('setStartDate', startTime);
+        $("input[name=stopTime]").val("");
+    });
+
+    $('input[name=startTime]').focus(function () {
+        $(this).blur(); //不可输入状态
+    })
+
+
+    $("input[name=stopTime]").datetimepicker({
+        minView: "hour",
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: true, //显示‘今日’按钮
+        clearBtn: true, //清除按钮
+        autoclose: true,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var endTime = event.date;
+        $("input[name=startTime]").datetimepicker('setEndDate', endTime);
+    });
+    $('input[name=stopTime]').focus(function () {
+        $(this).blur(); //不可输入状态
+    });
+    $('#setting').ajaxForm({
+        beforeSubmit: function (formData, jqForm, options) {
+            var params = {};
+            $.each(formData, function (n, obj) {
+                if (params[obj.name]) {
+                    params[obj.name] = params[obj.name] + ',' + obj.value;
+                } else {
+                    params[obj.name] = obj.value;
+                }
+            });
+            saveSetting(params);
+            return false;
+        }
+    });
+
+}
+
+function change(idx) {
+    $('#modal-seting .tab_leb .tab_f').hide();
+    switch(idx){
+        case '1':
+            $('#modal-seting .tab_leb .tab_1').show();  break;
+        case '2':
+            $('#modal-seting .tab_leb .tab_2').show();
+            break;
+        case '3':
+            $('#modal-seting .tab_leb .tab_3').show();
+            break;
+    }
 }
 
 
@@ -133,8 +288,23 @@ function initBtnEvents() {
             getPageList();
             return false;
         }
-
     });
+
+    /*监听表单提交*/
+}
+
+function saveSetting(params) {
+    var url = contextPath + "/ltStrategy/updateLtStrategyVo";
+    var data = {
+        jsons: JSON.stringify(params)
+    }
+    $.post(url,data,function (rst) {
+        if(rst.status==0){
+            alert(1)
+        }else{
+            alert(2)
+        }
+    })
 }
 
 /*策略管理审核*/
@@ -161,30 +331,22 @@ function audit(params) {
 }
 
 /*策略管理上架*/
-function online(id) {
-    if (confirm("确定要上架吗？")) {
+function updateStatus(id) {
+    if (confirm("确定要发布吗？")) {
         startLoad();
-        $.ajax({
-            url: contextPath + "/ltStrategy/updateStatus",
-            type: "post",
-            async: false,
-            data: {
-                id: id,
-                status: '1'
-            },
-            success: function (rst) {
+        var url=contextPath + "/ltStrategy/updateStatus";
+        var data= {
+            id: id,
+                status: '2'
+        };
+        $.getJSON(url,data,function(rst){
                 stopLoad();
                 if (rst.status == 0) {
                     getPageList();
                 } else {
                     alert(rst.errorMessage);
                 }
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起，出错了！");
-            }
-        });
+        })
     }
 }
 
@@ -258,7 +420,7 @@ function initPreview(id) {
         success: function (result) {
             stopLoad();
             if (result.status == 0) {
-                var data  = result.value;
+                var data = result.value;
                 render('#fm-preview', data, 'tpl-preview');
             } else {
                 alert(result.errorMessage);
@@ -274,13 +436,13 @@ function initPreview(id) {
 
 function del(did) {
     var url = contextPath + "/ltStrategy/deleteLtStrategyByLtStrategyId";
-    var data={
-        jsons:JSON.stringify({
-            id:did
+    var data = {
+        jsons: JSON.stringify({
+            id: did
         })
     }
-    $.getJSON(url,data, function (rst) {
-        if(rst.status==0){
+    $.getJSON(url, data, function (rst) {
+        if (rst.status == 0) {
             getPageList();
         }
         else {

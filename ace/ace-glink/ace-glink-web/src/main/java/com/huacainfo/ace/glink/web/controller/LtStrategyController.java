@@ -106,6 +106,13 @@ public class LtStrategyController extends GLinkBaseController {
         return this.ltStrategyService.updateLtStrategy(obj, this.getCurUserProp());
     }
 
+    @RequestMapping(value = "/updateLtStrategyVo")
+    @ResponseBody
+    public MessageResponse updateLtStrategyVo(String jsons) throws Exception {
+        LtStrategy obj = JSON.parseObject(jsons, LtStrategy.class);
+        return this.ltStrategyService.updateLtStrategyVo(obj, this.getCurUserProp());
+    }
+
     /**
      * @throws
      * @Title:selectLtStrategyByPrimaryKey

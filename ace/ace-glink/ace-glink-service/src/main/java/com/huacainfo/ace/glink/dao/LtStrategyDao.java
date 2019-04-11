@@ -17,6 +17,7 @@ public interface LtStrategyDao {
     int insert(LtStrategy record);
 
     int updateByPrimaryKey(LtStrategy record);
+    int updateByPrimaryKeyVo(LtStrategy record);
 
     LtStrategyVo selectByPrimaryKeyVo(String id);
 
