@@ -89,10 +89,10 @@
         <td width="20%">\${item.address}</td>
         <td width="10%">\${item.animaCount}</td>
         <td>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+            <a href="#" data-toggle="modal" data-id="\${item.code}" data-title="\${item.name}"
                data-target="#modal-option">下发</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-preview">详情</a>
+            <a href="#" data-toggle="modal" data-id="\${item.code}" data-title="\${item.name}"
+               data-target="#modal-preview">节目列表</a>
         </td>
     </tr>
     {@/each}
@@ -131,7 +131,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green status">确定</button>
+               <%-- <button type="button" class="btn green confirm">确定</button>--%>
             </div>
         </div>
     </div>
@@ -141,7 +141,7 @@
 <script id="animaList-tpl" type="text/template">
     {@each data as item, index}
     <div class="layout-user">
-        <a href="javascript:bindAnimaEvent('o5HQ00SmDxDIjwzTto5Eg-k-u0Ps','åArvin','http://thirdwx.qlogo.cn/mmopen/vi_32/EPQ0sC241zmj8bkn5uYAB5ntVg7G9330JibBotGE0QfXR2COjScV8NbsdkxqnLUfWvAc7ln2wZ8RicegNAGUIGibA/132')">
+        <a href="javascript:bindAnimaEvent('\${item.code}','\${item.prePlayUrl}')">
             <img class="photo"
                  src="\${item.preImgUrl}"></a>
         <div style="text-align:center"> \${item.name}</div>
@@ -149,39 +149,36 @@
     {@/each}
 </script>
 
-<!--审核弹框-->
-<div class="modal fade" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green audit">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" role="dialog" id="modal-preview">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">详细</h4>
+                <h4 class="modal-title">该建筑下的节目列表</h4>
             </div>
             <div class="modal-body">
                 <div class="form-horizontal" role="form">
-                    <div class="form-body" id="fm-preview">
+                    <div class="form-body">
+                        <div class="table-scrollable">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th width="30%">节目名称</th>
+                                    <th width="20%">封面</th>
+                                    <th width="20%">时长</th>
+                                    <th width="10%"></th>
+                                    <th width="20%">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="fm-preview">
 
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="paginationbar">
+                            <ul class="pagination" id="pagination2"></ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -191,135 +188,25 @@
         </div>
     </div>
 </div>
-<script id="tpl-fm" type="text/template">
-    <div class="form-body">
-
-        <div class="form-group">
-            <label class="col-md-2 view-label">主键</label>
-            <div class="col-md-10">
-                \${id}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">节目编号</label>
-            <div class="col-md-10">
-                \${aiCode}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">建筑/节点/站点编码</label>
-            <div class="col-md-10">
-                \${lnkCode}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">关联编码类型
-                1-站点；2-节点；3-建筑</label>
-            <div class="col-md-10">
-                \${lnkType}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">预览地址</label>
-            <div class="col-md-10">
-                \${prePlayUrl}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">备注</label>
-            <div class="col-md-10">
-                \${remark}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">状态 </label>
-            <div class="col-md-10">
-                \${status}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建日期</label>
-            <div class="col-md-10">
-                \${createDate}
-            </div>
-        </div>
-
-        <h4>结果</h4>
-        <hr>
-        <div class="form-group " id="operation">
-            <label class="col-md-2 control-label">结果</label>
-            <div class="col-md-10">
-                <div class="radio-group-container">
-                    <label>
-                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">说明</label>
-            <div class="col-md-10">
-                <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-            </div>
-        </div>
-    </div>
-
-</script>
 
 <script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">节目编号</label>
-        <div class="col-md-10">
-            \${aiCode}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">建筑/节点/站点编码</label>
-        <div class="col-md-10">
-            \${lnkCode}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">关联编码类型
-            1-站点；2-节点；3-建筑</label>
-        <div class="col-md-10">
-            \${lnkType}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">预览地址</label>
-        <div class="col-md-10">
-            \${prePlayUrl}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">备注</label>
-        <div class="col-md-10">
-            \${remark}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">状态 </label>
-        <div class="col-md-10">
-            \${status}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建日期</label>
-        <div class="col-md-10">
-            \${createDate}
-        </div>
-    </div>
+    {@each data as item, index}
+    <tr>
+        <td width="30%">\${item.animaResVo.name}</td>
+        <td width="20%">
+            {@if item.animaResVo.preImgUrl}
+            <img src="\${item.animaResVo.preImgUrl}" style="width: 70px;height: 70px;object-fit: cover">
+            {@/if}
+        </td>
+        <td width="20%">\${item.animaResVo.duration}</td>
+        <td width="10%">\${item.animaResVo.rsoWidth} x \${item.animaResVo.rsoHeight}</td>
+        <td>
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+               data-target="#modal-preUrl">预览</a>
+            <a href="javascript:removeAnimaEvent('\${item.id}')" >移除</a>
+        </td>
+    </tr>
+    {@/each}
 </script>
 <style>
     .layout-user {

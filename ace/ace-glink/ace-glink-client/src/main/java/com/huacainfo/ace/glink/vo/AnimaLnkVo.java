@@ -31,6 +31,11 @@ public class AnimaLnkVo extends AnimaLnk {
      */
     private int animaCount;
 
+    /**
+     * 媒体文件对象
+     */
+    private AnimaResVo animaResVo;
+
     public String getSubareaCode() {
         return subareaCode;
     }
@@ -68,5 +73,13 @@ public class AnimaLnkVo extends AnimaLnk {
 
     public void setAnimaCount(int animaCount) {
         this.animaCount = animaCount;
+    }
+
+    public AnimaResVo getAnimaResVo() {
+        return animaResVo;
+    }
+
+    public void setAnimaResVo(AnimaResVo animaResVo) {
+        this.animaResVo = animaResVo;
     }
 }

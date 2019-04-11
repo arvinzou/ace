@@ -17,6 +17,19 @@
     <result column="topBuildingName" jdbcType="VARCHAR" property="topBuildingName"/>
     <result column="address" jdbcType="VARCHAR" property="address"/>
     <result column="animaCount" jdbcType="INTEGER" property="animaCount"/>
+    <collection property="animaResVo" ofType="com.huacainfo.ace.glink.vo.AnimaResVo">
+      <id column="a_id" property="id" />
+      <result column="code" property="code"/>
+      <result column="name" property="name"/>
+      <result column="type" property="type"/>
+      <result column="duration" property="duration"/>
+      <result column="playUrl" property="playUrl"/>
+      <result column="prePlayUrl" property="prePlayUrl"/>
+      <result column="preImgUrl" property="preImgUrl"/>
+      <result column="rsoWidth" property="rsoWidth"/>
+      <result column="rsoHeight" property="rsoHeight"/>
+      <result column="rsoHeight" property="rsoHeight"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, aiCode, lnkCode, lnkType, prePlayUrl, remark, status, createDate
@@ -94,10 +107,17 @@
     select
     t.id, t.aiCode, t.lnkCode, t.lnkType, t.prePlayUrl, t.remark, t.status, t.createDate,
     b.name as topBuildingName, b.address as address, b.subareaCode as subareaCode,
-    s.name as subareaName
+    s.name as subareaName,
+    r.id as a_id, r.code, r.`name`, r.prePlayUrl, r.preImgUrl , r.duration, r.type, r.playUrl, r.rsoWidth,
+    r.rsoHeight
     from anima_lnk t
     LEFT JOIN top_building b on t.lnkCode = b.code
     LEFT JOIN  top_subarea s on b.subareaCode = s.code
+    LEFT JOIN  anima_res r on t.aiCode = r.code
+    where 1=1
+    <if test="condition.lnkCode !=null and condition.lnkCode !=&quot;&quot;">
+      and t.lnkCode =#{condition.lnkCode,jdbcType=VARCHAR}
+    </if>
     <choose>
       <when test="orderBy!=null and orderBy!=&quot;&quot;">
         ORDER BY ${orderBy}
