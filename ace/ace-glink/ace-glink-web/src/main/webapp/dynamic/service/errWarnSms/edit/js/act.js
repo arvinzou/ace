@@ -2,26 +2,31 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("< li > < span > 编辑故障监控 < /span></li > ");
+        $(".breadcrumb").append("<li><span>编辑故障短信模板</span></li>");
         initForm();
         initEvents();
+        initJuicerMethod();
     });
 }
 
-function initEditor() {
-    editor = new Simditor({
-        textarea: $('textarea[name=introduce]'),
-        toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
-            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
-        ],
-        upload: {
-            url: portalPath + '/files/uploadImage.do',
-            params: null,
-            fileKey: 'file',
-            connectionCount: 3,
-            leaveConfirm: '正在上传文件'
-        }
-    });
+//juicer自定义函数
+function initJuicerMethod() {
+    juicer.register('rsd', rsd);
+    juicer.register('parseStatus', parseStatus);
+}
+
+/**
+ * 状态解析
+ */
+function parseStatus(status) {
+    switch (status) {
+        case '0':
+            return "未读";
+        case '1':
+            return "已读";
+        default:
+            return "未读";
+    }
 }
 
 /*页面渲染*/
@@ -34,8 +39,28 @@ function render(obj, data, tplId) {
 }
 
 function initPage() {
-    initEditor();
-//   initUpload();
+    //
+    $('input[name=subareaCode]').combogrid({
+        panelWidth: 500,
+        idField: 'code',
+        textField: 'name',
+        url: contextPath + '/topSubarea/findTopSubareaList',
+        mode: 'remote',
+        fitColumns: true,
+        method: 'get',
+        columns: [
+            [{
+                field: 'name',
+                title: '分区名称',
+                width: 100
+            }, {
+                field: 'code',
+                title: '分区编码',
+                width: 100
+            }]
+
+        ],
+    });
 }
 
 function initEvents() {
@@ -45,12 +70,20 @@ function initEvents() {
             $(element).valid();
         },
         rules: {
-            deviceCode: {required: true, maxlength: 50}
+            subareaCode: {required: true, maxlength: 50},
+            smsName: {required: true, maxlength: 50},
+            smsContent: {required: true, maxlength: 200}
         },
         messages: {
-            deviceCode: {
-                required: "请输入设备编号",
-                maxlength: "设备编号字符长度不能超过50"
+            subareaCode: {
+                required: "请输入分区代码",
+                maxlength: "分区代码字符长度不能超过50"
+            }, smsName: {
+                required: "请输入模板名称",
+                maxlength: "模板名称字符长度不能超过50"
+            }, smsContent: {
+                required: "请输入模板内容",
+                maxlength: "模板内容字符长度不能超过200"
             }
         }
     });
@@ -63,7 +96,7 @@ function initEvents() {
             });
             $.extend(params, {
                 time: new Date(),
-//coverUrl: $('#coverUrl').attr("src")
+
             });
             console.log(params);
             save(params);
@@ -77,7 +110,7 @@ function save(params) {
     $.extend(params, {});
     startLoad();
     $.ajax({
-        url: contextPath + "/errFeedback/updateErrFeedback",
+        url: contextPath + "/errWarnSms/updateErrWarnSms",
         type: "post",
         async: false,
         data: {
@@ -100,7 +133,7 @@ function save(params) {
 function initForm() {
     startLoad();
     $.ajax({
-        url: contextPath + "/errFeedback/selectErrFeedbackByPrimaryKey",
+        url: contextPath + "/errWarnSms/selectErrWarnSmsByPrimaryKey",
         type: "post",
         async: false,
         data: {id: urlParams.did},
@@ -111,8 +144,7 @@ function initForm() {
                 data['o'] = result.value;
                 render('#fm-edit', data, 'tpl-fm');
                 initPage();
-//富文本填值
-//editor.setValue(data['o'].summary);
+
             } else {
                 alert(result.errorMessage);
             }

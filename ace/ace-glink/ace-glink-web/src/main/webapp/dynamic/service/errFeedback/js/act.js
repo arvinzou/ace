@@ -149,8 +149,7 @@ function updateStatus(id, state) {
                         swal("变更成功!", "", "success");
                         getPageList();
                     } else {
-                        swal("变更成功!", "", "success");
-                        alert(rst.errorMessage);
+                        swal(rst.errorMessage, "", "error");
                     }
                 },
                 error: function () {
@@ -158,7 +157,8 @@ function updateStatus(id, state) {
                     alert("对不起，出错了！");
                 }
             });
-        });
+        }
+    );
 }
 
 //juicer自定义函数
