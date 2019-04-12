@@ -92,7 +92,7 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         if (CommonUtils.isBlank(o.getAddress())) {
             return new MessageResponse(1, "所在地不能为空！");
         }
-        if (CommonUtils.isBlank(o.getSubareaCode())) {
+        if (CommonUtils.isBlank(o.getStationCode())) {
             return new MessageResponse(1, "分区编码不能为空！");
         }
         int temp = this.topBuildingDao.isExit(o);
@@ -136,8 +136,8 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         if (CommonUtils.isBlank(o.getAddress())) {
             return new MessageResponse(1, "所在地不能为空！");
         }
-        if (CommonUtils.isBlank(o.getSubareaCode())) {
-            return new MessageResponse(1, "分区编码不能为空！");
+        if (CommonUtils.isBlank(o.getStationCode())) {
+            return new MessageResponse(1, "站点编码不能为空！");
         }
         o.setStatus("1");
         o.setLastModifyDate(new Date());

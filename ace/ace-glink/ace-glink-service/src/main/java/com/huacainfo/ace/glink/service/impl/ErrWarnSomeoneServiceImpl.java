@@ -139,7 +139,7 @@ public class ErrWarnSomeoneServiceImpl implements ErrWarnSomeoneService {
             return new MessageResponse(1, "手机号已存在！");
         }
 
-        o.setStatus(vo.getStatus());
+        o.setStatus(StringUtil.isEmpty(o.getStatus()) ? vo.getStatus() : o.getStatus());
         o.setCreateDate(vo.getCreateDate());
         errWarnSomeoneDao.updateByPrimaryKey(o);
         dataBaseLogService.log("变更故障报警-送报人",

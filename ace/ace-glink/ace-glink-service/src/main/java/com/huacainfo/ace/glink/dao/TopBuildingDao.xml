@@ -12,6 +12,7 @@
     <result column="latitude" jdbcType="DECIMAL" property="latitude" />
     <result column="mainTag" jdbcType="CHAR" property="mainTag" />
     <result column="state" jdbcType="CHAR" property="state" />
+    <result column="stationCode" jdbcType="VARCHAR" property="stationCode" />
     <result column="subareaCode" jdbcType="VARCHAR" property="subareaCode" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="status" jdbcType="CHAR" property="status" />
@@ -23,13 +24,23 @@
     <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
   </resultMap>
   <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.TopBuildingVo">
-    <result column="subareaName" jdbcType="VARCHAR" property="subareaName"/>
     <result column="animaCount" jdbcType="INTEGER" property="animaCount"/>
+    <collection property="topStationVo" ofType="com.huacainfo.ace.glink.vo.TopStationVo">
+      <id column="t_id" property="id" />
+      <result column="stationCode" property="code"/>
+      <result column="subareaCode" property="subareaCode"/>
+      <result column="subareaName" property="subareaName"/>
+      <result column="stationName" property="name"/>
+      <result column="depict" property="depict"/>
+      <result column="address" property="address"/>
+      <result column="latitude" property="latitude"/>
+      <result column="longitude" property="longitude"/>
+    </collection>
   </resultMap>
 
 
   <sql id="Base_Column_List">
-    id, code, name, type, depict, address, longitude, latitude, mainTag, state, subareaCode, 
+    id, code, name, type, depict, address, longitude, latitude, mainTag, state, subareaCode,stationCode
     remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
     lastModifyDate
   </sql>
@@ -47,17 +58,17 @@
     insert into top_building (id, code, name, 
       type, depict, address, 
       longitude, latitude, mainTag, 
-      state, subareaCode, remark, 
+      state, subareaCode, stationCode, remark,
       status, createUserId, createUserName, 
       createDate, lastModifyUserId, lastModifyUserName, 
       lastModifyDate)
     values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{type,jdbcType=CHAR}, #{depict,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{mainTag,jdbcType=CHAR}, 
-      #{state,jdbcType=CHAR}, #{subareaCode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
-      #{lastModifyDate,jdbcType=TIMESTAMP})
+      #{state,jdbcType=CHAR}, #{subareaCode,jdbcType=VARCHAR}, #{stationCode,jdbcType=VARCHAR},
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
@@ -72,6 +83,7 @@
       mainTag = #{mainTag,jdbcType=CHAR},
       state = #{state,jdbcType=CHAR},
       subareaCode = #{subareaCode,jdbcType=VARCHAR},
+      stationCode = #{stationCode, jdbcType=VARCHAR}
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR}
     where id = #{id,jdbcType=VARCHAR}
@@ -81,23 +93,33 @@
     select
     b.id, b.code, b.name, b.type, b.depict, b.address, b.longitude, b.latitude, b.mainTag, b.state, b.subareaCode,
     b.remark, b.status, b.createUserId, b.createUserName, b.createDate, b.lastModifyUserId, b.lastModifyUserName,
-    b.lastModifyDate
+    b.lastModifyDate, b.stationCode, t.id as t_id, t.code as stationCode, t.subareaCode, t.name as stationName, t.depict, t.address, t.latitude,t.longitude,
+    s.name as subareaName
     from top_building b
-    LEFT JOIN top_subarea s ON b.subareaCode = s.`code`
+    LEFT JOIN top_station t ON  t.code = b.stationCode
+    LEFT JOIN top_subarea s ON t.subareaCode = s.`code`
     where b.id = #{id,jdbcType=VARCHAR}
   </select>
 
   <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
     select
-    b.id, b.code, b.`name`, b.type, b.depict, b.address, b.longitude, b.latitude, b.mainTag, b.state, b.subareaCode,
+    b.id, b.code, b.name, b.type, b.depict, b.address, b.longitude, b.latitude, b.mainTag, b.state, b.subareaCode,
     b.remark, b.status, b.createUserId, b.createUserName, b.createDate, b.lastModifyUserId, b.lastModifyUserName,
-    b.lastModifyDate, s.`name` AS subareaName, (
+    b.lastModifyDate,  b.stationCode, t.id as t_id, t.code as stationCode, t.subareaCode, t.name as stationName, t.depict, t.address, t.latitude,t.longitude,
+    s.name as subareaName, (
     SELECT COUNT(*)
     FROM anima_lnk a
     WHERE a.lnkCode = b.code) AS animaCount
     from top_building b
-    LEFT JOIN top_subarea s ON b.subareaCode = s.code
+    LEFT JOIN  top_station t on t.code = b.stationCode
+    LEFT JOIN top_subarea s ON t.subareaCode = s.code
     <include refid="Where_Condition"/>
+    <if test="condition.stationCode !=null and condition.stationCode !=&quot;&quot;">
+      and b.stationCode =#{condition.stationCode,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.subareaCode !=null and condition.subareaCode !=&quot;&quot;">
+      and t.subareaCode =#{condition.subareaCode,jdbcType=VARCHAR}
+    </if>
     <choose>
       <when test="orderBy!=null and orderBy!=&quot;&quot;">
         ORDER BY ${orderBy}
@@ -116,9 +138,6 @@
     </if>
     <if test="condition.status !=null and condition.status !=&quot;&quot;">
       and b.status =#{condition.status,jdbcType=CHAR}
-    </if>
-    <if test="condition.subareaCode !=null and condition.subareaCode !=&quot;&quot;">
-      and b.subareaCode =#{condition.subareaCode,jdbcType=VARCHAR}
     </if>
     <if test="condition.name !=null and condition.name !=&quot;&quot;">
       and (b.`name` like concat('%',#{condition.name,jdbcType=VARCHAR},'%')

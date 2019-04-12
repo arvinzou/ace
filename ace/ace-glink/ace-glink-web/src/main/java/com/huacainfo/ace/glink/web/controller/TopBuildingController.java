@@ -2,6 +2,13 @@ package com.huacainfo.ace.glink.web.controller;
 
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.glink.dao.AnimaLnkDao;
+import com.huacainfo.ace.glink.dao.TopBuildingDao;
+import com.huacainfo.ace.glink.vo.AnimaLnkVo;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +50,9 @@ public class TopBuildingController extends GLinkBaseController {
     @Autowired
     private TopBuildingService topBuildingService;
 
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -58,14 +68,23 @@ public class TopBuildingController extends GLinkBaseController {
      */
     @RequestMapping(value = "/findTopBuildingList")
     @ResponseBody
-    public PageResult
-            <TopBuildingVo> findTopBuildingList(TopBuildingQVo condition, PageParamNoChangeSord page,String q) throws Exception {
-        if(!CommonUtils.isBlank(q)){
-            condition.setName(q);
-        }
-        PageResult<TopBuildingVo> rst = this.topBuildingService.findTopBuildingList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
+    public PageResult<TopBuildingVo> findTopBuildingList(TopBuildingQVo condition, PageParamNoChangeSord page,String q) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TopBuildingDao dao = session.getMapper(TopBuildingDao.class);
+        PageResult<TopBuildingVo> rst = new PageResult<>();
+        try {
+            List<TopBuildingVo> list = dao.findList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+            rst.setRows(list);
+            if (rst.getTotal()  <= 1) {
+                int allRows = dao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
         }
         return rst;
     }
@@ -116,9 +135,21 @@ public class TopBuildingController extends GLinkBaseController {
      */
     @RequestMapping(value = "/selectTopBuildingByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <TopBuildingVo> selectTopBuildingByPrimaryKey(String id) throws Exception {
-        return this.topBuildingService.selectTopBuildingByPrimaryKey(id);
+    public SingleResult<TopBuildingVo> selectTopBuildingByPrimaryKey(String id) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TopBuildingDao dao = session.getMapper(TopBuildingDao.class);
+        SingleResult<TopBuildingVo> rst = new SingleResult<>();
+        try {
+            TopBuildingVo vo = dao.selectVoByPrimaryKey(id);
+            rst.setValue(vo);
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
+        }
+        return rst;
     }
 
     /**

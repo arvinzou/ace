@@ -171,4 +171,12 @@
         set status = #{status,jdbcType=CHAR}, lastModifyDate = now()
         where id = #{id,jdbcType=VARCHAR}
     </update>
+
+    <select id="getDayErrCount" resultType="map">
+        SELECT DATE_FORMAT(errDate,'%Y%m%d') as errday , sum(t.errLoopNum) as totalErrNum
+        from err_feedback t
+        where DATE_FORMAT(errDate,'%Y') = #{year,jdbcType=VARCHAR}
+        and  DATE_FORMAT(errDate,'%m') = #{month,jdbcType=VARCHAR}
+        group by errday
+    </select>
 </mapper>

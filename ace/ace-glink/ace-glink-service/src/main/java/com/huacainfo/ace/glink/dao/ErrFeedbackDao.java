@@ -40,4 +40,6 @@ public interface ErrFeedbackDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    List<Map<String,Object>> getDayErrCount(@Param("year") String year, @Param("month") String month);
+
 }

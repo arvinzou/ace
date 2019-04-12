@@ -204,36 +204,24 @@ function initSomeone(subareaCode) {
     });
 }
 
-var someoneState;
+var switchState;
 
 function initAddSomeoneEvent(subareaCode) {
-
+    var switchId = '#fm-add-someone .sw-content input';
     //基本初始化
-    $('.sw-content input').bootstrapSwitch();
-    //点击触发事件，监听按钮状态
-    $('.sw-content input').on('switchChange.bootstrapSwitch', function (event, state) {
-        // //内置对象、内置属性
-        // console.log(event);
-        // //获取状态
-        // console.log(state);
-        if (state) {
-            someoneState = '1';
-        } else {
-            someoneState = '0';
-        }
-    });
+    initSwitchEvent(switchId);
     //
     $("#btn-add-someone").bind('click', function (event) {
         $('#modal-add-someone').modal('show');
         $('#modal-add-someone input').val('');
         //手动设置按钮状态
-        $('.sw-content input').bootstrapSwitch('state', true);
+        setSwitchState(switchId, true);
     });
-    //审核框 确定按钮
+    //确定按钮
     $('#modal-add-someone .btn-primary').on('click', function () {
         $('#modal-add-someone form').submit();
     });
-    //审核框 提交事件
+    //提交事件
     $('#modal-add-someone form').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             var params = {};
@@ -241,7 +229,7 @@ function initAddSomeoneEvent(subareaCode) {
                 params[obj.name] = obj.value;
             });
             params.subareaCode = subareaCode;
-            params.status = someoneState;
+            params.status = getSwitchState(switchId) ? '1' : '0';
             addSomeone(params);
             return false;
         }
@@ -416,7 +404,7 @@ function clearSubareaCode() {
 
 /*新增送报人*/
 function addSomeone(params) {
-    console.log(params);
+    console.log(JSON.stringify(params));
     startLoad();
     $.ajax({
         url: contextPath + "/errWarnSomeone/insertErrWarnSomeone",
@@ -440,8 +428,105 @@ function addSomeone(params) {
 
 /*编辑送报人*/
 function editSomeone(did, subareaCode) {
+    //送报人
+    $('#modal-upd-someone').on('show.bs.modal', function (event) {
+        //render窗体元素
+        startLoad();
+        $.ajax({
+            url: contextPath + "/errWarnSomeone/selectErrWarnSomeoneByPrimaryKey",
+            type: "post",
+            async: false,
+            data: {
+                id: did
+            },
+            success: function (result) {
+                stopLoad();
+                if (result.status == 0) {
+                    var data = {};
+                    data['o'] = result.value;
+                    render('#fm-upd-someone', data, 'tpl-fm-upd-someone');
+                    //Switch基本初始化
+                    var switchId = '#fm-upd-someone .sw-content input';
+                    initSwitchEvent(switchId);
+                    setSwitchState(switchId, data['o'].status == '1');
+                    //
+                    initEditSomeoneEvent(subareaCode);
+                } else {
+                    alert(result.errorMessage);
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    });
+    $('#modal-upd-someone').modal('show');
+}
 
+function initSwitchEvent(selector) {
+    //基本初始化
+    $(selector).bootstrapSwitch();
+    //点击触发事件，监听按钮状态
+    $(selector).on('switchChange.bootstrapSwitch', function (event, state) {
+        // 内置对象、内置属性 console.log(event);
+        // 获取状态 console.log(state);
+        console.log("state=" + state);
+        switchState = state ? '1' : '0';
+    });
+}
 
+function getSwitchState(selector) {
+    return $(selector).bootstrapSwitch('state');
+}
+
+function setSwitchState(selector, state) {
+    $(selector).bootstrapSwitch('state', state);
+}
+
+function initEditSomeoneEvent(subareaCode) {
+    //确定按钮
+    $('#modal-upd-someone .btn-primary').on('click', function () {
+        $('#modal-upd-someone form').submit();
+    });
+    //提交事件
+    $('#modal-upd-someone form').ajaxForm({
+        beforeSubmit: function (formData, jqForm, options) {
+            var params = {};
+            $.each(formData, function (n, obj) {
+                params[obj.name] = obj.value;
+            });
+            params.subareaCode = subareaCode;
+            var switchId = '#fm-upd-someone .sw-content input';
+            params.status = getSwitchState(switchId) ? '1' : '0';
+            updateSomeone(params);
+            return false;
+        }
+    });
+}
+
+/*修改送报人*/
+function updateSomeone(p) {
+    console.log(JSON.stringify(p));
+    startLoad();
+    $.ajax({
+        url: contextPath + "/errWarnSomeone/updateErrWarnSomeone",
+        type: "post",
+        async: false,
+        data: {jsons: JSON.stringify(p)},
+        success: function (rst) {
+            stopLoad();
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                initSomeone(p.subareaCode);
+                $('#modal-upd-someone').modal('hide');
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert('对不起出错了！');
+        }
+    });
 }
 
 /*删除送报人*/

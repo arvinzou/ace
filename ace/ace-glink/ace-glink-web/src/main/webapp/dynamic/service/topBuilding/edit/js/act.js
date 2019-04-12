@@ -105,7 +105,7 @@ function initForm(){
                 var data={};
                 data['o']=result.value;
                 render('#fm-edit',data,'tpl-fm');
-                initDict(result.value.type, result.value.subareaCode);
+                initDict(result.value.type, result.value.stationCode);
                 initPage();
                 //富文本填值
                 //editor.setValue(data['o'].summary);
@@ -120,7 +120,7 @@ function initForm(){
     });
 }
 
-function initDict(type, subareaCode){
+function initDict(type, stationCode){
     var data=staticDictObject['177'];
     var dataList = [];
     for(var i=0; i < data.length; i++){
@@ -132,13 +132,13 @@ function initDict(type, subareaCode){
         }
     }
     render('#type',dataList,'type-tpl');
-    initSubAreaList(subareaCode);
+    initStationList(stationCode);
 }
 
-function initSubAreaList(subareaCode){
+function initStationList(stationCode){
     startLoad();
     $.ajax({
-        url: contextPath + "/topSubarea/findTopSubareaList",
+        url: contextPath + "/topStation/findTopStationList",
         type: "post",
         async: false,
         data: {
@@ -152,7 +152,7 @@ function initSubAreaList(subareaCode){
                 var areaList = [];
                     for(var i=0; i<dataList.length; i++){
                         var o = {};
-                        if(subareaCode == dataList[i].code){
+                        if(stationCode == dataList[i].code){
                             o.selected = "selected";
                         }
                         o.code = dataList[i].code;
