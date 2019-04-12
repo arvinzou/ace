@@ -326,6 +326,18 @@ public class TopNodeServiceImpl implements TopNodeService {
     }
 
 
+
+    @Override
+    public MessageResponse updateStation(String[] id,String stationCode, UserProp userProp)
+            throws Exception {
+        this.topNodeDao.updateStation(id,stationCode);
+        this.dataBaseLogService.log("批量分配节点管理", "节点管理", id[0],
+                id[0], "节点管理", userProp);
+        return new MessageResponse(0, "分配成功！");
+
+    }
+
+
     /**
      * @throws
      * @Title:updateStatus

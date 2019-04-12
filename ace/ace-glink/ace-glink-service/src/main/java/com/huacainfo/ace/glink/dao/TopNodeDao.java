@@ -39,5 +39,6 @@ public interface TopNodeDao {
 
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
+    int updateStation(@Param("ids") String[] ids,@Param("stationCode") String stationCode);
 
 }

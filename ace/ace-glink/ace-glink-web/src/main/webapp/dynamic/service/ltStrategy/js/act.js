@@ -84,7 +84,6 @@ function detail(id) {
 function initEvents() {
     //初始化按钮组件
     initBtnEvents();
-    juicer.register('isChecked', isChecked);
     //模态框事件
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
@@ -124,7 +123,7 @@ function initEvents() {
 }
 
 function isChecked(val, idex) {
-    var i = val.slice(',');
+    var i = val.split(',');
     console.log(i);
     for (var x = 0; x < i.length; x++) {
         if (idex == i[x]) {
@@ -381,6 +380,7 @@ function outline(id) {
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
+    juicer.register('isChecked', isChecked);
 }
 
 /**
