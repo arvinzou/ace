@@ -4,6 +4,7 @@ window.onload = function () {
     initPage();
     initEvents();
     initSubAreaList();
+    initTopStationList();
     initJuicerMethod();
 }
 
@@ -180,6 +181,9 @@ function initPreview(id) {
     });
 }
 
+/**
+ * 初始化分区下拉列表
+ */
 function initSubAreaList() {
     startLoad();
     $.ajax({
@@ -208,3 +212,36 @@ function initSubAreaList() {
         }
     });
 }
+
+/**
+ * 初始化下拉站点列表
+ */
+function initTopStationList() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/topStation/findTopStationList",
+        type: "post",
+        async: false,
+        data: {
+            start: 0,
+            limit: 999
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+
+                var dataList = result.rows;
+                var o = {code: "", name: "全部"};
+                dataList.unshift(o);
+                render('#subStation', dataList, 'station-list');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+

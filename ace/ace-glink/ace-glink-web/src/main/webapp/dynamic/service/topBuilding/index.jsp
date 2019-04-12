@@ -29,8 +29,13 @@
 
             <div class="col-md-6">
                 <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                    <select id="subArea" name="subareaCode" id="s-cls-list" class="form-control" style="height: 31px;"
+                    <select id="subArea" name="subareaCode"  class="form-control" style="height: 31px;"
                             onchange="setParams('subareaCode',this.value)">
+                    </select>
+                </div>
+                <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                    <select id="subStation" name="stationCode" class="form-control" style="height: 31px;"
+                            onchange="setParams('stationCode',this.value)">
                     </select>
                 </div>
                 <form id="fm-search">
@@ -54,13 +59,11 @@
                 <thead>
                 <tr>
                     <th width="5%"> 建筑编号</th>
-                    <th width="20%"> 建筑名称</th>
-                    <th width="10%"> 建筑物类型</th>
-                    <th width="20%"> 所在地</th>
-                    <th width="10%"> 建筑物状态</th>
-                    <th width="10%"> 所属分区</th>
-                    <th width="5%"> 状态</th>
-                    <th width="10%"> 创建人姓名</th>
+                    <th width="20%">建筑名称</th>
+                    <th width="15%">站点名称</th>
+                    <th width="15%">分区名称</th>
+                    <th width="10%">建筑物状态</th>
+                    <th width="25%"> 地址</th>
                     <th width="10%">操作</th>
                 </tr>
                 </thead>
@@ -87,24 +90,18 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td width="5%"> \${item.code}</td>
-        <td width="20%">\${item.name}</td>
-        <td width="10%"> \${parseType(item.type)}</td>
-        <td width="20%">\${item.address}</td>
-        <td width="10%">
+        <td> \${item.code}</td>
+        <td>\${item.name}</td>
+        <td> \${item.topStationVo.name}</td>
+        <td>\${item.topStationVo.subareaName}</td>
+        <td>
             {@if item.state == '1'}
                 在线
             {@else}
                 不在线
             {@/if}
         </td>
-        <td width="10%">\${item.subareaName}</td>
-        <td width="5%">
-            {@if item.status == "1"}
-                正常
-            {@/if}
-        </td>
-        <td width="10%">\${item.createUserName}</td>
+        <td>\${item.address}</td>
         <td>
             ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
@@ -116,6 +113,12 @@
 </script>
 
 <script id="area-list" type="text/template">
+    {@each data as item, index}
+    <option value="\${item.code}">\${item.name}</option>
+    {@/each}
+</script>﻿
+
+<script id="station-list" type="text/template">
     {@each data as item, index}
     <option value="\${item.code}">\${item.name}</option>
     {@/each}

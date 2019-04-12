@@ -121,13 +121,13 @@ function initForm(){
         }
     }
     render('#type',dataList,'type-tpl');
-    initSubAreaList();
+    initStationList();
 }
 
-function initSubAreaList(){
+function initStationList(){
     startLoad();
     $.ajax({
-        url: contextPath + "/topSubarea/findTopSubareaList",
+        url: contextPath + "/topStation/findTopStationList",
         type: "post",
         async: false,
         data: {
