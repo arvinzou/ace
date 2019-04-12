@@ -145,8 +145,8 @@ public interface TopNodeService {
      * @author: huacai003
      * @version: 2019-04-09
      */
-    public MessageResponse deleteTopNodeByTopNodeIds(String[] id, UserProp userProp) throws
-            Exception;
+     MessageResponse deleteTopNodeByTopNodeIds(String[] id,UserProp userProp) throws Exception;
+     MessageResponse updateStation(String[] id,String stationCode, UserProp userProp) throws Exception;
 
 
     /**

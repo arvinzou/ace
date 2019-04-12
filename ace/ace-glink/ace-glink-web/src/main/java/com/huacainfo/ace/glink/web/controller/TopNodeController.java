@@ -210,6 +210,14 @@ public class TopNodeController extends GLinkBaseController {
         return this.topNodeService.deleteTopNodeByTopNodeIds(id, this.getCurUserProp());
     }
 
+
+    @RequestMapping(value = "/updateStation")
+    @ResponseBody
+    public MessageResponse updateStation(String ids,String stationCode) throws Exception {
+        String[] idss=ids.split(",");
+        return this.topNodeService.updateStation(idss,stationCode, this.getCurUserProp());
+    }
+
     /**
      * @throws
      * @Title:updateStatus

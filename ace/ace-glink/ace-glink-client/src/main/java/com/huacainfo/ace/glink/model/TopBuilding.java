@@ -26,6 +26,8 @@ public class TopBuilding extends BaseModel{
 
     private String state;
 
+    private String stationCode;
+
     private String subareaCode;
 
     private String remark;
@@ -194,5 +196,13 @@ public class TopBuilding extends BaseModel{
 
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
+    }
+
+    public String getStationCode() {
+        return stationCode;
+    }
+
+    public void setStationCode(String stationCode) {
+        this.stationCode = stationCode;
     }
 }

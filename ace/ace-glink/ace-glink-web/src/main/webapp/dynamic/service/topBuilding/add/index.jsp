@@ -109,11 +109,11 @@
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">
-                            所属分区
+                            所属站点
                             <span class="required" aria-required="true"> * </span>
                         </label>
                         <div class="col-md-10">
-                            <select name="subareaCode" id="areaList" class="form-control">
+                            <select name="stationCode" id="areaList" class="form-control">
 
                             </select>
                             <span class="help-block"></span>

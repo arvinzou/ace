@@ -30,6 +30,7 @@
                 <button type="button" class="btn  green" id="btn-view-import"
                         authority="false">批量导入
                 </button>
+                <a href="group/index.jsp?id=${param.id}" class="btn green">节点分组</a>
             </div>
 
 
@@ -73,7 +74,7 @@
                     <%--<th width="10%"> mac地址</th>--%>
                     <th width="10%"> 控制器数量</th>
                     <th width="10%"> 建筑物</th>
-                    <th width="10%"> 备注</th>
+
                     <th width="10%"> 状态</th>
                     <th width="15%">操作</th>
                 </tr>
@@ -113,8 +114,6 @@
         <%--<td> \${item.macAddr}</td>--%>
         <td> \${item.ctrlNum}</td>
         <td> \${item.topBuilding.name}</td>
-        <td> \${item.remark}</td>
-        <td> \${item.status}</td>
         <td>
             {@if item.status==0}
             <span class="label label-lg label-danger">删除</span>

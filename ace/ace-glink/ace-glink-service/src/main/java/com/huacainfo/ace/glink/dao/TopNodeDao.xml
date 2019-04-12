@@ -121,9 +121,14 @@
   </sql>
   <sql id="Where_Condition">
     where t.status <![CDATA[ <> ]]> 0
+    <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+      and (t.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+      or t.code LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+      or tb.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+      or ts.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%') )
+    </if>
     <if test="condition.name !=null and condition.name !=&quot;&quot;">
-      and (t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') or
-       t.code LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') )
+      and t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
     </if>
     <if test="condition.stationCode !=null and condition.stationCode !=&quot;&quot;">
       and t.stationCode LIKE concat('%',#{condition.stationCode,jdbcType=VARCHAR},'%')
@@ -165,4 +170,16 @@
     <include refid="From_Statement"/>
     where t.id = #{id,jdbcType=VARCHAR}
   </select>
+
+
+  <update id="updateStation">
+    update top_node
+    set
+    stationCode = #{stationCode,jdbcType=VARCHAR}
+    where id in
+    <foreach collection="ids" index="index" item="item"  open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </update>
+
 </mapper>
