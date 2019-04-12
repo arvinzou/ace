@@ -8,6 +8,34 @@ $(function () {
  * @constructor
  */
 function ErrorChart() {
+    var dayList = [];
+    var dayCountList = [];
+    startLoad();
+    var year = $("#year option:selected").val();
+    var month = $("#month option:selected").val();
+    $.ajax({
+        url: contextPath + "/errFeedback/getDayErrCountList",
+        type: "post",
+        async: false,
+        data: {
+            year: year,
+            month: month,
+        },
+        success: function (rst) {
+            stopLoad();
+            if(rst.length > 0){
+                for(var i=0; i<rst.length; i++){
+                    dayList.push(rst[i].errday);
+                    dayCountList.push(rst[i].totalErrNum);
+                }
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+
     var myChart = echarts.init(document.getElementById('chartBox'));
     option = {
         tooltip: {
@@ -31,7 +59,7 @@ function ErrorChart() {
             {
                 type: 'category',
                 boundaryGap: false,
-                data: ['0301', '0302', '0303', '0304', '0305', '0306', '0307', '0308', '0309', '0310', '0311', '0312', '0313', '0314', '0315']
+                data: dayList
             }
         ],
         yAxis: [
@@ -45,7 +73,7 @@ function ErrorChart() {
                 type: 'line',
                 stack: '总量',
                 itemStyle: {normal: {areaStyle: {type: 'default'}}},
-                data: [10, 9, 11, 15, 3, 1, 5, 6, 10, 3, 0, 12, 3, 8, 9]
+                data: dayCountList
             }
         ]
     };

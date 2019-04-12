@@ -264,4 +264,16 @@ public class ErrFeedbackController extends GLinkBaseController {
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.errFeedbackService.updateStatus(id, status, this.getCurUserProp());
     }
+
+    /**
+     * 根据年，月。获取月份下面的每天故障统计情况
+     * @param year
+     * @param month
+     * @return
+     */
+    @RequestMapping(value = "/getDayErrCountList")
+    @ResponseBody
+    public List<Map<String, Object>> getDayErrCountList(String year, String month) throws Exception{
+        return this.errFeedbackService.getDayErrCount(year, month);
+    }
 }

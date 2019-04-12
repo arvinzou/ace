@@ -112,11 +112,11 @@
                 <div class="top-title"><span class="top-title-01">故障监控</span></div>
                 <div class="chart-select-box">
                     <div class="chart-option">
-                        <select id="year">
+                        <select id="year" onchange="ErrorChart();">
                             <option value="2019">2019</option>
                             <option value="2018">2018</option>
                         </select>
-                        <select id="month">
+                        <select id="month" onchange="ErrorChart();">
                             <option value="04">04</option>
                             <option value="01">01</option>
                             <option value="02">02</option>

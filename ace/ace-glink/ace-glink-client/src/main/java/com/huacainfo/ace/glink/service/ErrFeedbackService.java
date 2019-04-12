@@ -173,4 +173,12 @@ public interface ErrFeedbackService {
      * @version: 2019-04-10
      */
     MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
+
+    /**
+     * 根据选择年，月获取当月下面的每天故障数据统计
+     * @param year
+     * @param month
+     * @return
+     */
+    public List<Map<String, Object>> getDayErrCount(String year, String month) throws Exception;
 }
