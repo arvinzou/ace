@@ -2,13 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.glink.dao.report.Portal">
     <select id="query" resultType="map">
-        SELECT
-        'person' id,
-        count(1) value
-        FROM
-        portal.users t
-        WHERE
-        t.stauts='1' and t.cur_syid ='glink'
-
+        select topBuildingCount, onlineDeviceCount, offlineDeviceCount, totalDeviceCount
+        from(
+        (SELECT count(*) as topBuildingCount FROM top_building where status = '1')a,
+        (SELECT count(*) as onlineDeviceCount from top_device where status = '1') b ,
+        (SELECT count(*) as offlineDeviceCount from top_device where status = '2')c,
+        (SELECT count(*) as totalDeviceCount from top_device)d
+        )
     </select>
 </mapper>

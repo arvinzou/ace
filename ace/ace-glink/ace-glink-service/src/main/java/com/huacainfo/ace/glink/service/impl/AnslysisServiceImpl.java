@@ -1,17 +1,22 @@
 package com.huacainfo.ace.glink.service.impl;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.SpringUtils;
+import com.huacainfo.ace.glink.dao.report.ReportDao;
+import com.huacainfo.ace.glink.service.AnalysisService;
 import com.huacainfo.ace.glink.dao.report.ReportDao;
 import com.huacainfo.ace.glink.service.AnalysisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("analysisService")
 public class AnslysisServiceImpl implements AnalysisService {
@@ -29,6 +34,5 @@ public class AnslysisServiceImpl implements AnalysisService {
         rst.setValue(p);
         return rst;
     }
-
 
 }

@@ -69,40 +69,8 @@
             </div>
         </div>
         <div class="meter-title">数据统计</div>
-        <div class="statics-list">
-            <div class="statics-item mr">
-                <div class="total-count">468</div>
-                <div class="total-count-tips"><span class="tip-01">建筑物总数</span></div>
-            </div>
-            <div class="statics-item mr">
-                <div class="total-count">468</div>
-                <div class="total-count-tips">
-                    <span class="tip-01">离线设备  |</span>
-                    <span class="tip-02">总设备数:1286</span>
-                </div>
-            </div>
-            <div class="statics-item mr">
-                <div class="total-count">42</div>
-                <div class="total-count-tips"><span class="tip-01">故障回路</span></div>
-            </div>
-            <div class="statics-item mr">
-                <div class="total-count">10</div>
-                <div class="total-count-tips">
-                    <span class="tip-01">执行中策略 |</span>
-                    <span class="tip-02">总策略数:40</span>
-                </div>
-            </div>
-            <div class="statics-item mr">
-                <div class="total-count">468</div>
-                <div class="total-count-tips">
-                    <span class="tip-01">场景总数</span>
-                </div>
-            </div>
-            <div class="statics-item">
-                <div class="total-count">56812251.97kw</div>
-                <div class="total-count-tips">
-                    <span class="tip-01">累计能耗</span></div>
-            </div>
+        <div class="statics-list" id="totalCount">
+
         </div>
     </div>
 
@@ -189,6 +157,43 @@
     </tr>
     {@/each}
 </script>
+
+<script id="total-count-tpl" type="text/template">
+    <div class="statics-item mr">
+        <div class="total-count">\${data.topBuildingCount}</div>
+        <div class="total-count-tips"><span class="tip-01">建筑物总数</span></div>
+    </div>
+    <div class="statics-item mr">
+        <div class="total-count">\${data.offlineDeviceCount}</div>
+        <div class="total-count-tips">
+            <span class="tip-01">离线设备  |</span>
+            <span class="tip-02">总设备数:\${data.totalDeviceCount}</span>
+        </div>
+    </div>
+    <div class="statics-item mr">
+        <div class="total-count">42</div>
+        <div class="total-count-tips"><span class="tip-01">故障回路</span></div>
+    </div>
+    <div class="statics-item mr">
+        <div class="total-count">10</div>
+        <div class="total-count-tips">
+            <span class="tip-01">执行中策略 |</span>
+            <span class="tip-02">总策略数:40</span>
+        </div>
+    </div>
+    <div class="statics-item mr">
+        <div class="total-count">468</div>
+        <div class="total-count-tips">
+            <span class="tip-01">场景总数</span>
+        </div>
+    </div>
+    <div class="statics-item">
+        <div class="total-count">56812251.97kw</div>
+        <div class="total-count-tips">
+            <span class="tip-01">累计能耗</span></div>
+    </div>
+</script>
+
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
