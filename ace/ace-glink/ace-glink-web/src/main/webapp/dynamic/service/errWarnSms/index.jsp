@@ -102,13 +102,12 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-
         <td> \${item.smsName}</td>
         <td> \${item.smsContent}</td>
         <td> \${item.subareaName}</td>
         <td>
             {@if item.status==1}
-            <span class="label label-lg label-info">\${parseStatus(item.status)}</span>
+            <span class="label label-lg label-success">\${parseStatus(item.status)}</span>
             {@else}
             <span class="label label-lg label-danger">\${parseStatus(item.status)}</span>
             {@/if}
@@ -121,8 +120,8 @@
 
             <a href="#" data-toggle="modal" data-id="\${item.subareaCode}" data-title="\${item.name}"
                data-target="#modal-someone">送报人</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-scheduler">调度规则</a>
+            <%--<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"--%>
+            <%--data-target="#modal-scheduler">调度规则</a>--%>
         </td>
     </tr>
     {@/each}
@@ -155,7 +154,7 @@
 </script>
 
 <%--送报人--%>
-<div class="modal fade" role="dialog" id="modal-someone">
+<div class="modal fade" role="dialog" id="modal-someone" data-keyboard="false">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
@@ -221,7 +220,13 @@
                     <td> \${item.mobile}</td>
                     <td> \${item.unitName}</td>
                     <td> \${item.subareaName}</td>
-                    <td> \${parseSomeoneStatus(item.status)}</td>
+                    <td>
+                        {@if item.status == '1'}
+                        <span class="label label-sm label-success"> \${parseSomeoneStatus(item.status)}</span>
+                        {@else}
+                        <span class="label label-sm label-danger"> \${parseSomeoneStatus(item.status)}</span>
+                        {@/if}
+                    </td>
                     <td>
                         <a href="javascript:editSomeone('\${item.id}','\${item.subareaCode}')">编辑</a>
                         <a href="javascript:delSomeone('\${item.id}','\${item.subareaCode}')">删除</a>
@@ -308,6 +313,92 @@
         </div>
     </div>
 </div>
+<%--修改送报人--%>
+<div class="modal fade" role="dialog" id="modal-upd-someone">
+    <div class="modal-dialog" role="document" style="width: 45%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">新增送报人</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm-upd-someone">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="tpl-fm-upd-someone" type="text/template">
+    <form class="form-horizontal" role="form" style="width: 90%">
+        <div class="form-body">
+            <div class="form-group hide">
+                <label class="col-md-2 control-label">ID</label>
+                <div class="col-md-10">
+                    <input type="text" name="id" class="form-control" maxlength="50" value="\${data.o.id}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    姓名
+                    <span class="required" aria-required="true"> * </span>
+                </label>
+                <div class="col-md-10">
+                    <input type="text" name="name" class="form-control" maxlength="50"
+                           value="\${data.o.name}"
+                           placeholder="请输入姓名（建议字数在14个字以内，不超过50个字)">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    手机
+                    <span class="required" aria-required="true"> * </span>
+                </label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="mobile" maxlength="50"
+                           value="\${data.o.mobile}"
+                           placeholder="请输入姓名（建议字数在14个字以内，不超过50个字)">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    单位
+                </label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="unitName" maxlength="50"
+                           value="\${data.o.unitName}"
+                           placeholder="请输入备注（建议字数在14个字以内，不超过50个字)">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    通知状态
+                </label>
+                <div class="col-md-10 sw-content">
+                    <input name="status" type="checkbox" class="make-switch"
+                           checked="" data-on-color="success" data-off-color="danger">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-offset-5 col-md-7">
+                    <button class="btn green" type="submit" style="width:50%">保存</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</script>
 ﻿
 <%--查看--%>
 <div class="modal fade" role="dialog" id="modal-preview">
