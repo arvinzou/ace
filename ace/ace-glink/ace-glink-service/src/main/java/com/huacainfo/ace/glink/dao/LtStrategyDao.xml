@@ -96,6 +96,38 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+    <update id="updateStatus" parameterType="com.huacainfo.ace.glink.model.LtStrategy">
+    update lt_strategy
+    set
+      status = #{status,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <update id="updateByPrimaryKeyVo" parameterType="com.huacainfo.ace.glink.model.LtStrategy">
+    update lt_strategy
+    set
+      depict = #{depict,jdbcType=VARCHAR},
+      state = #{state,jdbcType=CHAR},
+      district = #{district,jdbcType=VARCHAR},
+      stationCode = #{stationCode,jdbcType=VARCHAR},
+      pattern = #{pattern,jdbcType=CHAR},
+      isWeek = #{isWeek,jdbcType=INTEGER},
+      weeks = #{weeks,jdbcType=VARCHAR},
+      isMonth = #{isMonth,jdbcType=INTEGER},
+      months = #{months,jdbcType=VARCHAR},
+      startDate = #{startDate,jdbcType=TIMESTAMP},
+      stopDate = #{stopDate,jdbcType=TIMESTAMP},
+      specialDate = #{specialDate,jdbcType=TIMESTAMP},
+      startTime = #{startTime,jdbcType=TIMESTAMP},
+      stopTime = #{stopTime,jdbcType=TIMESTAMP},
+      strategy = #{strategy,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.LtStrategyVo"></resultMap>
 
     <sql id="Vo_Column_List">

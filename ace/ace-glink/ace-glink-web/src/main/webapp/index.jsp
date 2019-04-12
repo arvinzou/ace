@@ -112,11 +112,11 @@
                 <div class="top-title"><span class="top-title-01">故障监控</span></div>
                 <div class="chart-select-box">
                     <div class="chart-option">
-                        <select id="year">
+                        <select id="year" onchange="ErrorChart();">
                             <option value="2019">2019</option>
                             <option value="2018">2018</option>
                         </select>
-                        <select id="month">
+                        <select id="month" onchange="ErrorChart();">
                             <option value="04">04</option>
                             <option value="01">01</option>
                             <option value="02">02</option>
@@ -158,106 +158,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="top10-list">
-                                    <tr>
-                                        <td width="10%" align="center">
-                                            <div class="serious"></div>
-                                        </td>
-                                        <td width="20%" align="center">设备名称1</td>
-                                        <td width="20%" align="center">江汉区</td>
-                                        <td width="20%" align="center">故障类型</td>
-                                        <td width="10%" align="center">10</td>
-                                        <td width="20%" align="center">03.01-15:30:04</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10%" align="center">
-                                            <div class="serious"></div>
-                                        </td>
-                                        <td width="20%" align="center">设备名称1</td>
-                                        <td width="20%" align="center">江汉区</td>
-                                        <td width="20%" align="center">故障类型</td>
-                                        <td width="10%" align="center">10</td>
-                                        <td width="20%" align="center">03.01-15:30:04</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10%" align="center">
-                                            <div class="more-serious"></div>
-                                        </td>
-                                        <td width="20%" align="center">设备名称1</td>
-                                        <td width="20%" align="center">江汉区</td>
-                                        <td width="20%" align="center">故障类型</td>
-                                        <td width="10%" align="center">10</td>
-                                        <td width="20%" align="center">03.01-15:30:04</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10%" align="center">
-                                            <div class="less-serious"></div>
-                                        </td>
-                                        <td width="20%" align="center">设备名称1</td>
-                                        <td width="20%" align="center">江汉区</td>
-                                        <td width="20%" align="center">故障类型</td>
-                                        <td width="10%" align="center">10</td>
-                                        <td width="20%" align="center">03.01-15:30:04</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10%" align="center">
-                                            <div class="less-serious"></div>
-                                        </td>
-                                        <td width="20%" align="center">设备名称1</td>
-                                        <td width="20%" align="center">江汉区</td>
-                                        <td width="20%" align="center">故障类型</td>
-                                        <td width="10%" align="center">10</td>
-                                        <td width="20%" align="center">03.01-15:30:04</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10%" align="center">
-                                            <div class="less-serious"></div>
-                                        </td>
-                                        <td width="20%" align="center">设备名称1</td>
-                                        <td width="20%" align="center">江汉区</td>
-                                        <td width="20%" align="center">故障类型</td>
-                                        <td width="10%" align="center">10</td>
-                                        <td width="20%" align="center">03.01-15:30:04</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10%" align="center">
-                                            <div class="less-serious"></div>
-                                        </td>
-                                        <td width="20%" align="center">设备名称1</td>
-                                        <td width="20%" align="center">江汉区</td>
-                                        <td width="20%" align="center">故障类型</td>
-                                        <td width="10%" align="center">10</td>
-                                        <td width="20%" align="center">03.01-15:30:04</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10%" align="center">
-                                            <div class="less-serious"></div>
-                                        </td>
-                                        <td width="20%" align="center">设备名称1</td>
-                                        <td width="20%" align="center">江汉区</td>
-                                        <td width="20%" align="center">故障类型</td>
-                                        <td width="10%" align="center">10</td>
-                                        <td width="20%" align="center">03.01-15:30:04</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10%" align="center">
-                                            <div class="less-serious"></div>
-                                        </td>
-                                        <td width="20%" align="center">设备名称1</td>
-                                        <td width="20%" align="center">江汉区</td>
-                                        <td width="20%" align="center">故障类型</td>
-                                        <td width="10%" align="center">10</td>
-                                        <td width="20%" align="center">03.01-15:30:04</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="10%" align="center">
-                                            <div class="less-serious"></div>
-                                        </td>
-                                        <td width="20%" align="center">设备名称1</td>
-                                        <td width="20%" align="center">江汉区</td>
-                                        <td width="20%" align="center">故障类型</td>
-                                        <td width="10%" align="center">10</td>
-                                        <td width="20%" align="center">03.01-15:30:04</td>
-                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -268,6 +169,26 @@
     </div>
 </div>
 
+<script id="top10-tpl" type="text/template">
+    {@each data as item, index}
+    <tr>
+        <td width="10%" align="center">
+            {@if item.errLevel == '03'}
+            <div class="serious"></div>
+            {@else if item.errLevel == '02'}
+            <div class="more-serious"></div>
+            {@else if item.errLevel == '01'}
+            <div class="less-serious"></div>
+            {@/if}
+        </td>
+        <td width="20%" align="center">\${item.deviceName}</td>
+        <td width="20%" align="center">\${item.subareaName}</td>
+        <td width="20%" align="center">\${item.errContent}</td>
+        <td width="10%" align="center">\${item.errLoopNum}</td>
+        <td width="20%" align="center">\${item.errDate}</td>
+    </tr>
+    {@/each}
+</script>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>

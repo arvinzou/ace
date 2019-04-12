@@ -21,10 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("errFeedbackService")
 /**
@@ -336,6 +333,17 @@ public class ErrFeedbackServiceImpl implements ErrFeedbackService {
         this.errFeedbackDao.updateStatus(id, status);
         this.dataBaseLogService.log("跟新状态", "故障报警", id, id, type, userProp);
         return new MessageResponse(0, "成功！");
+    }
+
+    @Override
+    public List<Map<String, Object>> getDayErrCount(String year, String month) throws Exception {
+        List<Map<String, Object>> rst = new ArrayList<Map<String, Object>>();
+        try{
+            rst = this.errFeedbackDao.getDayErrCount(year, month);
+        }catch(Exception e){
+            throw new RuntimeException("统计总故障失败！"+e);
+        }
+        return rst;
     }
 
 }
