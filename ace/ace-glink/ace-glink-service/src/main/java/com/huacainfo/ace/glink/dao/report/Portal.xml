@@ -2,12 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.glink.dao.report.Portal">
     <select id="query" resultType="map">
-        select topBuildingCount, onlineDeviceCount, offlineDeviceCount, totalDeviceCount
+       select topBuildingCount, onlineDeviceCount, offlineDeviceCount, totalDeviceCount, totalErrLoopNum, totalIngStrategy, totalStrategy
         from(
         (SELECT count(*) as topBuildingCount FROM top_building where status = '1')a,
         (SELECT count(*) as onlineDeviceCount from top_device where status = '1') b ,
         (SELECT count(*) as offlineDeviceCount from top_device where status = '2')c,
-        (SELECT count(*) as totalDeviceCount from top_device)d
+        (SELECT count(*) as totalDeviceCount from top_device)d,
+        (SELECT sum(errLoopNum) as totalErrLoopNum from err_feedback) e,
+        (SELECT count(*) as totalIngStrategy from lt_strategy where STATUS = '1')f,
+        (SELECT count(*) as totalStrategy from lt_strategy where STATUS = '2')g
         )
     </select>
 </mapper>

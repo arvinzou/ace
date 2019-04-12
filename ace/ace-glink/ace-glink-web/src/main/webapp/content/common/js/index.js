@@ -92,9 +92,9 @@ function errorList() {
         async: false,
         data: {
             start: 0,
-            limit: 10,
-            orderBy: 'errLoopNum',
-            sord:'desc'
+            limit: 10
+            //orderBy: 'errLoopNum',
+            //sord:'desc'
         },
         success: function (rst) {
             stopLoad();

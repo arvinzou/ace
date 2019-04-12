@@ -117,12 +117,12 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th width="10%" align="center">故障等级</th>
-                                    <th width="20%" align="center">设备名称</th>
-                                    <th width="20%" align="center">故障位置</th>
-                                    <th width="20%" align="center">故障类型</th>
-                                    <th width="10%" align="center">故障数量</th>
-                                    <th width="20%" align="center">故障时间</th>
+                                    <th width="10%" style="text-align: center;">故障等级</th>
+                                    <th width="20%" style="text-align: center;">设备名称</th>
+                                    <th width="20%" style="text-align: center;">故障位置</th>
+                                    <th width="20%" style="text-align: center;">故障类型</th>
+                                    <th width="10%" style="text-align: center;">故障数量</th>
+                                    <th width="20%" style="text-align: center;">故障时间</th>
                                 </tr>
                                 </thead>
                                 <tbody id="top10-list">
@@ -140,7 +140,7 @@
 <script id="top10-tpl" type="text/template">
     {@each data as item, index}
     <tr>
-        <td width="10%" align="center">
+        <td width="10%">
             {@if item.errLevel == '03'}
             <div class="serious"></div>
             {@else if item.errLevel == '02'}
@@ -149,11 +149,11 @@
             <div class="less-serious"></div>
             {@/if}
         </td>
-        <td width="20%" align="center">\${item.deviceName}</td>
-        <td width="20%" align="center">\${item.subareaName}</td>
-        <td width="20%" align="center">\${item.errContent}</td>
-        <td width="10%" align="center">\${item.errLoopNum}</td>
-        <td width="20%" align="center">\${item.errDate}</td>
+        <td width="20%" style="text-align: center;">\${item.deviceName}</td>
+        <td width="20%" style="text-align: center;">\${item.subareaName}</td>
+        <td width="20%" style="text-align: center;">\${item.errContent}</td>
+        <td width="10%" style="text-align: center;">\${item.errLoopNum}</td>
+        <td width="20%" style="text-align: center;">\${item.errDate}</td>
     </tr>
     {@/each}
 </script>
@@ -171,14 +171,14 @@
         </div>
     </div>
     <div class="statics-item mr">
-        <div class="total-count">42</div>
+        <div class="total-count">\${data.totalErrLoopNum}</div>
         <div class="total-count-tips"><span class="tip-01">故障回路</span></div>
     </div>
     <div class="statics-item mr">
-        <div class="total-count">10</div>
+        <div class="total-count">\${data.totalIngStrategy}</div>
         <div class="total-count-tips">
             <span class="tip-01">执行中策略 |</span>
-            <span class="tip-02">总策略数:40</span>
+            <span class="tip-02">总策略数:\${data.totalStrategy}</span>
         </div>
     </div>
     <div class="statics-item mr">
