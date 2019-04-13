@@ -19,6 +19,8 @@
     <script src="${pageContext.request.contextPath}/content/common/js/sweetalert/js/sweet-alert.min.js"></script>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/content/common/js/sweetalert/css/sweet-alert.css">
+    <%--qq map--%>
+    <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB"></script>
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -248,7 +250,10 @@
                 <span class="caption-subject bold uppercase"> GIS地图</span>
             </div>
         </div>
-        <div class="portlet-body">
+        <div class="portlet-body body">
+            <div id="map-container" style="min-width:600px;min-height:550px;">
+
+            </div>
         </div>
     </div>
 </script>

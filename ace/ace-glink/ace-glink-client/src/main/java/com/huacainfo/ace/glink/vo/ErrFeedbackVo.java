@@ -2,6 +2,8 @@ package com.huacainfo.ace.glink.vo;
 
 import com.huacainfo.ace.glink.model.ErrFeedback;
 
+import java.math.BigDecimal;
+
 
 public class ErrFeedbackVo extends ErrFeedback {
     /**
@@ -36,6 +38,26 @@ public class ErrFeedbackVo extends ErrFeedback {
      * 分区名称
      */
     private String subareaName;
+
+    private BigDecimal longitude;
+
+    private BigDecimal latitude;
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
 
     public String getDeviceName() {
         return deviceName;
