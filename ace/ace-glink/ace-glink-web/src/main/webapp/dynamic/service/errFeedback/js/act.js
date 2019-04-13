@@ -201,6 +201,14 @@ function initPreview(id) {
                 var data = {};
                 data['o'] = result.value;
                 render('#fm-preview', data, 'tpl-preview');
+                //调用初始化函数地图
+                var lat = data['o'].latitude,
+                    lng = data['o'].longitude;
+                console.log("lat=" + lat + ",lng=" + lng);
+                if (lat != null) {
+                    initCustomMapMarker(lat, lng, 'map-container'
+                        , 'https://lbs.qq.com/javascript_v2/img/center.gif');
+                }
             } else {
                 alert(result.errorMessage);
             }
@@ -237,3 +245,23 @@ function initForm(id) {
         }
     });
 }
+
+//初始化自定义地图标记
+function initCustomMapMarker(lat, lng, container, img) {
+    var center = new qq.maps.LatLng(lat, lng);
+    var map = new qq.maps.Map(document.getElementById(container), {
+        center: center,
+        zoom: 15
+    });
+    var anchor = new qq.maps.Point(6, 6),
+        size = new qq.maps.Size(300, 300),
+        origin = new qq.maps.Point(0, 0),
+        icon = new qq.maps.MarkerImage(img, size, origin, anchor);
+    var marker = new qq.maps.Marker({
+        icon: icon,
+        map: map,
+        position: map.getCenter()
+    });
+}
+
+
