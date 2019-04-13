@@ -1,0 +1,15 @@
+var cfg = {};
+cfg.view_load_data_url = portalPath + '/scheduler/selectSchedulerByPrimaryKey';
+cfg.grid_load_data_url = portalPath + '/scheduler/findSchedulerList';
+cfg.grid_add_data_url = portalPath + '/scheduler/insertScheduler';
+cfg.grid_edit_data_url = portalPath + '/scheduler/updateScheduler';
+cfg.grid_delete_data_url = portalPath + '/scheduler/deleteSchedulerBySchedulerId';
+cfg.grid_selector = "#grid-table";
+cfg.pager_selector = "#grid-pager";
+//cfg.caption= "参数";
+cfg.rowNum = default_page_list[0];
+cfg.dataId = 'id';
+cfg.gridHeight = 'auto';
+cfg.jgridEditWinWidth = 900;
+cfg.jgridAlertWidth = 400;
+cfg.jgrdInfoDialogWidth = 500;
