@@ -5,7 +5,7 @@ window.onload = function () {
     initEvents();
     initJuicerMethod();
     type();
-
+    initNodeList();
 }
 
 
@@ -321,7 +321,6 @@ function type() {
         }
     }
     render('#type', dataList, 'type-tpl');
-    console.log(dataList);
 }
 
 function initForm(id) {
@@ -375,4 +374,34 @@ function del(did) {
             }
         });
     }
+}
+
+function initNodeList() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/topNode/findTopNodeList",
+        type: "post",
+        async: false,
+        data: {
+            start: 0,
+            limit: 999
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+
+                var dataList = result.rows;
+                //  var o = {code: "", name: "全部"};
+                //  dataList.unshift(o);
+                render('#nodeCode', dataList, 'nodeCode-tpl');
+                console.log(dataList);
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }
