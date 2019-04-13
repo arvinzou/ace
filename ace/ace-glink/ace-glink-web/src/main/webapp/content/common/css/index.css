@@ -235,6 +235,7 @@ select{
     display: block;
     border-radius:50% !important;
     background:rgba(255,65,65,1);
+    margin-left: 20px;
 }
 .more-serious{
     width: 10px;
@@ -242,6 +243,7 @@ select{
     display: block;
     border-radius:50% !important;
     background:rgba(255,159,65,1);
+    margin-left: 20px;
 }
 .less-serious{
     width: 10px;
@@ -249,4 +251,5 @@ select{
     display: block;
     border-radius:50% !important;
     background:rgba(255,239,65,1);
+    margin-left: 20px;
 }

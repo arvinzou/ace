@@ -98,6 +98,9 @@
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
+        <if test="condition.nodeCode !=null and condition.nodeCode !=&quot;&quot;">
+            and t.nodeCode = #{condition.nodeCode,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">

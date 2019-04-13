@@ -39,7 +39,12 @@
             <div class="col-md-9">
 
                 <form id="fm-search">
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <select name="nodeCode" id="nodeCode" class="form-control"
+                                onchange="setParams('nodeCode',this.value)">
 
+                        </select>
+                    </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <select name="type" id="type" class="form-control" onchange="setParams('type',this.value)">
 
@@ -318,6 +323,13 @@
     <option value="">全部</option>
     {@each data as item, index}
     <option value="\${item.CODE}">\${item.NAME}</option>
+    {@/each}
+</script>
+
+<script id="nodeCode-tpl" type="text/template">
+    <option value="">全部</option>
+    {@each data as item, index}
+    <option value="\${item.code}">\${item.name}</option>
     {@/each}
 </script>
 
