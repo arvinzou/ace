@@ -31,4 +31,5 @@ public interface AnimaLnkDao {
 
     int isExit(AnimaLnk record);
 
+    int updatePrePlayUrl(@Param("id") String id, @Param("prePlayUrl") String prePlayUrl);
 }

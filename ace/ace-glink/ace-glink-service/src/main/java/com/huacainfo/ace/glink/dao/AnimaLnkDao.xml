@@ -139,5 +139,9 @@
     from anima_res t
     where t.id = #{id}
   </select>
+  <update id="updatePrePlayUrl">
+  update anima_lnk set prePlayUrl = #{prePlayUrl,jdbcType=VARCHAR} where id = #{id,jdbcType=VARCHAR}
+
+</update>
 
 </mapper>

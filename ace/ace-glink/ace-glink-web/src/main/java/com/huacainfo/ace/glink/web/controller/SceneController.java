@@ -3,7 +3,9 @@ package com.huacainfo.ace.glink.web.controller;
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.glink.service.AnimaLnkService;
 import com.huacainfo.ace.glink.service.TopStationService;
 import com.huacainfo.ace.glink.service.TopSubareaService;
 import com.huacainfo.ace.glink.vo.TopSubareaQVo;
@@ -23,10 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SceneController extends GLinkBaseController {
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired
-    private TopStationService topStationService;
+
     @Autowired
     private TopSubareaService topSubareaService;
+    @Autowired
+    private AnimaLnkService animaLnkService;
 
     /**
      * @throws
@@ -53,5 +56,18 @@ public class SceneController extends GLinkBaseController {
         return rst;
     }
 
+    /**
+     * 修改文件
+     *
+     * @param id
+     * @param prePlayUrl
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/updatePrePlayUrl")
+    @ResponseBody
+    public MessageResponse updatePrePlayUrl(String id, String prePlayUrl) throws Exception {
+        return this.animaLnkService.updatePrePlayUrl(id, prePlayUrl);
+    }
 
 }
