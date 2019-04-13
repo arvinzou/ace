@@ -1,0 +1,68 @@
+
+#page-list ul {
+    display: block;
+
+}
+
+#page-list ul li {
+
+    list-style: none;
+    float: left;
+    margin-left: 10px;
+}
+
+#station-list ul {
+    display: block;
+}
+
+#station-list ul li {
+    width: 100px;
+    height: 25px;
+    text-align: center;
+    border: 1px solid #e9eceb;
+    list-style: none;
+    float: left;
+    margin: 0 10px;
+    background-color: #ffffff;
+}
+
+#allCheck {
+    margin-left: 40px;
+}
+
+ul.videolist {
+    margin: 0 auto;
+}
+
+ul.videolist li {
+    float: left;
+    list-style: none;
+    margin-left: 20px;
+    height: 300px;
+}
+
+ul.videolist li video {
+    display: block;
+    width: 280px;
+}
+
+ul.videolist li div {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background: #F6F9F8;
+}
+
+ul.videolist li div span {
+    width: 80%;
+    height: 20px;
+    line-height: 0px;
+    margin: 0 50px;
+}
+
+ul.videolist li div input {
+    width: 16px;
+    height: 16px;
+    line-height: 0px;
+}
+
