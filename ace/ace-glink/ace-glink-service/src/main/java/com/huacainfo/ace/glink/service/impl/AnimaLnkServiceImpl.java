@@ -228,4 +228,8 @@ public class AnimaLnkServiceImpl implements AnimaLnkService {
         return new MessageResponse(0, "导入成功！");
     }
 
+    public MessageResponse updatePrePlayUrl(String id, String prePlayUrl) throws Exception {
+        animaLnkDao.updatePrePlayUrl(id, prePlayUrl);
+        return new MessageResponse(0, "替换成功！");
+    }
 }

@@ -114,7 +114,8 @@ function clinkList(obj, code) {
 //查找节目
 function animaList(obj, code) {
     //startLoad();
-    $('div').is('.redColor')
+    var onlinelen;
+    var len1;
     var a = $('#animaLnk-list ul li').is("." + code);
     if (a == true) {
 
@@ -131,23 +132,34 @@ function animaList(obj, code) {
             success: function (result) {
                 stopLoad();
                 if (result.status == 0) {
-                    var data = {};
+                    var data = result.rows;
+                    //   data.unshift(n);
                     console.log(result.rows.length);
                     if (result.rows.length == 0) {
                         //$('#animaLnk-list').append("该站点没有节目");
                     }
                     $("#allCheck").show();
-                    //  render('#animaLnk-list', result.rows, 'tp3-list');
+                    //    render('#animaLnk-list', data, 'tp3-list');
                     for (var i = 0; i < result.rows.length; i++) {
                         //   $('#animaLnk-list ul').append("<li><video src='"+result.rows[i].prePlayUrl+"' style='width: 300px;height: 300px' controls=\"controls\"></video></li>");
-
+                        onlinelen = $("input[name='online']").length;
+                        len1 = onlinelen + 1;
                         $('#animaLnk-list ul').append("  <li class=" + result.rows[i].lnkCode + "><div>\n" +
                             "            <input name=\"checkanima\" type=\"checkbox\" value=" + result.rows[i].id + " onclick=\"checkanima();\"/>\n" +
                             "            <span>" + result.rows[i].topBuildingName + "</span>\n" +
                             "           </div>\n" +
                             "            <video src=" + result.rows[i].prePlayUrl + " controls=\"controls\">\n" +
                             "            </video>\n" +
-                            "        </li>");
+                            "         <div style='height: 20px'>\n" +
+                            "\n" +
+                            "            <input type=\"checkbox\" id=\"s" + len1 + "\"  class=\"a\" name=\"online\"/>\n" +
+                            "            <label class=\"slider-v2\" for=\"s" + len1 + "\"></label>\n" +
+                            "\n" +
+                            "            <input type=\"checkbox\" id=\"b" + len1 + "\" checked=\"\" class=\"a\" name=\"pause\"/>\n" +
+                            "            <label class=\"slider-v2\" for=\"b" + len1 + "\"></label>\n" +
+                            "\n" +
+                            "        </div>  <a href=\"#\" data-toggle=\"modal\" data-id=" + result.rows[i].id + " data-title=" + result.rows[i].name + "\n" +
+                            "               data-target=\"#modal-option\" class=\"edit btn   green\">替换</a></li>");
                     }
                 } else {
                     alert(result.errorMessage);
@@ -163,13 +175,14 @@ function animaList(obj, code) {
 
     if (attr == '' || attr == undefined) {
         $(obj).parent().css("background", "#1890FF");
+        $(obj).css("color", "#ffffff");
 
     } else {
         $(obj).parent().removeAttr("style");
+        $(obj).css("color", "#000002");
     }
 
 }
-
 
 function initEvents() {
     //初始化按钮组件
@@ -189,7 +202,13 @@ function initEvents() {
         console.log(event);
         $(event.target).addClass("active");
     });
-
+    $('#modal-option').on('show.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var id = relatedTarget.data('id');
+        topBuildingCode = id;
+        var modal = $(this);
+        initForm(id);
+    });
     $("input[name='checkList']").click(function () {
 //判断当前点击的复选框处于什么状态$(this).is(":checked") 返回的是布尔类型
         if ($(this).is(":checked")) {
@@ -236,4 +255,60 @@ function checkanima() {
     }
 
 
+}
+
+function initForm(id) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/animaRes/findAnimaResList",
+        type: "post",
+        async: false,
+        data: {
+            start: 0,
+            limit: 40
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data.lnkid = id;
+                data.list = result.rows;
+
+                render('#animaList', data, 'animaList-tpl');
+                console.log(data);
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+function updatePrePlayUrl(lnkid, id, prePlayUrl) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/scene/updatePrePlayUrl",
+        type: "post",
+        async: false,
+        data: {
+            id: lnkid,
+            prePlayUrl: prePlayUrl
+
+        },
+        success: function (rst) {
+            stopLoad();
+            $("#modal-option").modal('hide');
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                getPageList();
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }

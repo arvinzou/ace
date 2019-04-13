@@ -21,30 +21,77 @@
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <div class="portlet light">
 
-    <div class="portlet-body light">
+    <div class="portlet-body">
         <div id="page-list">
 
         </div>
-        <br>
+        <br><br>
         <div id="station-list">
 
         </div>
-        <br>
-        <br>
+
+        <br> <br><br>
         <div id="allCheck" style="display: none">
             <input name="checkList" type="checkbox" style="width: 16px; height:16px;"/>全选
             <span style="color:#1890FF">当前选中<span id="checkCount">0</span>条</span>
+
+            <div class="wrap">
+
+                <input type="checkbox" id="a0" class="a"/>
+                <label class="slider-v2" for="a0"></label>
+
+                <input type="checkbox" id="a1" checked="" class="a"/>
+                <label class="slider-v2" for="a1"></label>
+
+            </div>
         </div>
+        <br><br><br><br>
 
-
-        <br>
-        <br>
         <div id="animaLnk-list">
             <ul class="videolist">
 
             </ul>
         </div>
 
+    </div>
+</div>
+
+<div class="modal fade " id="modal-option">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 1000px;height: 700px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">选择节目</h4>
+            </div>
+            <div class="modal-body" style="width: 100%;height: 550px;">
+                <form class="form-horizontal" id="fm-status" role="form">
+                    <div class="form-body">
+                        <div class="row custom-toolbar">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-5"></div>
+                            <div class="col-md-4">
+                                <form onsubmit="return query()">
+                                    <div class="input-group">
+                                        <%-- <input type="text" name="nickname" class="form-control" placeholder="请输入昵称">
+                                         <span class="input-group-btn">
+                                             <button class="btn  btn-default search_btn" type="submit">搜索</button>
+                                         </span>--%>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row" id="animaList">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <%-- <button type="button" class="btn green confirm">确定</button>--%>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -55,43 +102,68 @@
 
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
-    {@each data as item, index}
     <ul>
+        {@each data as item, index}
         <li><a href="#" data-id="\${item.id}" data-title="\${item.name}" onclick="stationList('\${item.code}');">\${item.name}</a>
         </li>
-
+        {@/each}
     </ul>
-    {@/each}
 </script>
 
 <%--站点列表模板--%>
 <script id="tp2-list" type="text/template">
-
-    {@each data as item, index}
     <ul>
-        <li><a href="#" data-id="\${item.id}" data-title="\${item.name}"
-               onclick="animaList(this,'\${item.code}');"><font color="black">\${item.name}</font></a></li>
+    {@each data as item, index}
+
+        <li><a href="#" data-id="\${item.id}" data-title="\${item.name}" style="color: black"
+               onclick="animaList(this,'\${item.code}');">\${item.name}</a></li>
+        {@/each}
     </ul>
-    {@/each}
 </script>
 
 <%--节目列表模板--%>
 <script id="tp3-list" type="text/template">
+    <%--  <ul class="videolist">
     {@each data as item, index}
-    <%-- <ul class="videolist">
-         <li><div>
+
+         <li  class=" \${item.lnkCode}"><div>
              <input name="checkanima" type="checkbox" value="\${item.id}" onclick="checkanima();"/>
              <span>\${item.topBuildingName}</span>
             </div>
              <video src="\${item.prePlayUrl}" controls="controls">
              </video>
+             <div>
+                 <input type="checkbox"   id="s3" class="a"/>
+                 <label class="slider-v2" for="s3"></label>
+
+                 <input type="checkbox" id="s4" checked="" class="a"/>
+                 <label class="slider-v2" for="s4"></label>
+             </div>
+             ﻿<a href="#" class="edit">替换</a>
          </li>
 
-     </ul>--%>
+
     {@/each}
+     </ul>--%>
 </script>
 
+<!--节目清单渲染-->
+<script id="animaList-tpl" type="text/template">
+    <ul>
+        {@each data.list as item, index}
+        <li>
+            <div class="layout-user">
 
+                <video src="\${item.prePlayUrl}" controls="controls" style="width: 200px;height: 200px;">
+                </video>
+                <div> \${item.name}</div>
+                <a href="javascript:updatePrePlayUrl('\${data.lnkid}','\${item.id}','\${item.prePlayUrl}')"
+                   style="margin-right: 20px;" class="btn  green"> 确定</a>
+            </div>
+        </li>
+        {@/each}
+    </ul>
+</script>
 <style>
     <%--custom style--%>
 </style>
@@ -101,14 +173,5 @@
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 
-<%--easyui--%>
-<link rel="stylesheet" type="text/css"
-      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
-<link rel="stylesheet" type="text/css"
-      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 
 </html>
