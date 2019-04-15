@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.AmmeterAreaDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.AmmeterArea">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="areacode" jdbcType="VARCHAR" property="areacode" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="power" jdbcType="DECIMAL" property="power" />
+    <result column="payment" jdbcType="DECIMAL" property="payment" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.AmmeterAreaVo">
+    <result column="areaName" jdbcType="VARCHAR" property="areaName"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, areacode, price, power, payment, remark, status, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ammeter_area
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ammeter_area
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.glink.model.AmmeterArea">
+    insert into ammeter_area (id, areacode, price, 
+      power, payment, remark, 
+      status, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{areacode,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{power,jdbcType=DECIMAL}, #{payment,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.AmmeterArea">
+    update ammeter_area
+    set areacode = #{areacode,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      power = #{power,jdbcType=DECIMAL},
+      payment = #{payment,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    t.id, t.areacode, t.price, t.power, t.payment, t.remark, t.status, t.createDate,
+    s.name as areaName
+    from ammeter_area t
+    LEFT JOIN top_subarea s on s.code = t.areacode
+    where t.id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    t.id, t.areacode, t.price, t.power, t.payment, t.remark, t.status, t.createDate,
+    s.name as areaName
+    from ammeter_area t
+    LEFT JOIN top_subarea s on s.code = t.areacode
+    where 1=1
+    <if test="condition.id !=null and condition.id !=&quot;&quot;">
+      and t.id =#{condition.id,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.areacode !=null and condition.areacode !=&quot;&quot;">
+      and t.areacode =#{condition.areacode,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.price !=null and condition.price !=&quot;&quot;">
+      and t.price =#{condition.price,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.power !=null and condition.power !=&quot;&quot;">
+      and t.power =#{condition.power,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.payment !=null and condition.payment !=&quot;&quot;">
+      and t.payment =#{condition.payment,jdbcType=VARCHAR}
+    </if>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    from ammeter_area t
+  </select>
+
+  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
+    select count(*)
+    from ammeter_area t
+    where t.id = #{id}
+  </select>
+
+</mapper>
