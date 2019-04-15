@@ -16,10 +16,6 @@
     <jsp:include page="/dynamic/common/header.jsp"/>
 
     <link rel="stylesheet" href="css/style.css">
-    <%--sweetalert--%>
-    <script src="${pageContext.request.contextPath}/content/common/js/sweetalert/js/sweet-alert.min.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/content/common/js/sweetalert/css/sweet-alert.css">
     <link rel="stylesheet" type="text/css"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
 </head>

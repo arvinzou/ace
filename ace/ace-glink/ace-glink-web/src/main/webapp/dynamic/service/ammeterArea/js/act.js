@@ -27,7 +27,7 @@ function initDatetimepicker(id, options) {
     });
 }
 function initCondition() {
-    dtPickerOptions.format = 'yyyy-mm-dd hh:ii:ss';
+    dtPickerOptions.format = 'yyyy-mm-dd';
     //
     initDatetimepicker('p-startDt', dtPickerOptions);
     initDatetimepicker('p-endDt', dtPickerOptions);
