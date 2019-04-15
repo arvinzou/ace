@@ -152,10 +152,11 @@
         <include refid="whereCondition"/>
     </select>
 
-    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Classroom">
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Notice">
         select count(*)
         from notice
         where
+        classesId=#{classesId}
         title=#{title}
     </select>
 
