@@ -138,28 +138,28 @@ function animaList(obj, code) {
                     if (result.rows.length == 0) {
                         //$('#animaLnk-list').append("该站点没有节目");
                     }
-                    $("#allCheck").show();
+                    // $("#allCheck").show();
                     //    render('#animaLnk-list', data, 'tp3-list');
                     for (var i = 0; i < result.rows.length; i++) {
                         //   $('#animaLnk-list ul').append("<li><video src='"+result.rows[i].prePlayUrl+"' style='width: 300px;height: 300px' controls=\"controls\"></video></li>");
                         onlinelen = $("input[name='online']").length;
                         len1 = onlinelen + 1;
-                        $('#animaLnk-list ul').append("  <li class=" + result.rows[i].lnkCode + "><div>\n" +
-                            "            <input name=\"checkanima\" type=\"checkbox\" value=" + result.rows[i].id + " onclick=\"checkanima();\"/>\n" +
+                        $('#animaLnk-list ul').append("  <li class=" + result.rows[i].lnkCode + "><div class='div1'>\n" +
+                            "            <input name=\"checkanima\" type=\"checkbox\" value=" + len1 + " onclick=\"checkanima();\"/>\n" +
                             "            <span>" + result.rows[i].topBuildingName + "</span>\n" +
                             "           </div>\n" +
-                            "            <video src=" + result.rows[i].prePlayUrl + " controls=\"controls\">\n" +
+                            "            <video src=" + result.rows[i].prePlayUrl + " controls=\"controls\" >\n" +
                             "            </video>\n" +
-                            "         <div style='height: 20px'>\n" +
+                            "         <div class='box'>\n" +
                             "\n" +
-                            "            <input type=\"checkbox\" id=\"s" + len1 + "\"  class=\"a\" name=\"online\"/>\n" +
+                            "            <input type=\"checkbox\" id=\"s" + len1 + "\"  class=\"a\" name=\"online\" onclick=\"checkonline(this," + len1 + ");\"/>\n" +
                             "            <label class=\"slider-v2\" for=\"s" + len1 + "\"></label>\n" +
                             "\n" +
-                            "            <input type=\"checkbox\" id=\"b" + len1 + "\" checked=\"\" class=\"a\" name=\"pause\"/>\n" +
-                            "            <label class=\"slider-v2\" for=\"b" + len1 + "\"></label>\n" +
+                            "            <input type=\"checkbox\" id=\"b" + len1 + "\"  class=\"a\" name=\"pause\"/>\n" +
+                            "            <label class=\"slider-v3\" for=\"b" + len1 + "\"></label>\n" +
                             "\n" +
-                            "        </div>  <a href=\"#\" data-toggle=\"modal\" data-id=" + result.rows[i].id + " data-title=" + result.rows[i].name + "\n" +
-                            "               data-target=\"#modal-option\" class=\"edit btn   green\">替换</a></li>");
+                            "          <a href=\"#\" data-toggle=\"modal\" data-id=" + result.rows[i].id + " data-title=" + result.rows[i].name + "\n" +
+                            "               data-target=\"#modal-option\" class=\"edit btn   green\">替换</a><span class='closespan' id=\"close" + len1 + "\"></span></div></li>");
                     }
                 } else {
                     alert(result.errorMessage);
@@ -209,10 +209,12 @@ function initEvents() {
         var modal = $(this);
         initForm(id);
     });
+    //多选
     $("input[name='checkList']").click(function () {
 //判断当前点击的复选框处于什么状态$(this).is(":checked") 返回的是布尔类型
         if ($(this).is(":checked")) {
             $("input[name='checkanima']").prop("checked", true);
+
         } else {
             $("input[name='checkanima']").prop("checked", false);
 
@@ -220,6 +222,35 @@ function initEvents() {
         var a = $("input[name='checkanima']:checked").length;
         $("#checkCount").text(a);
     });
+    //批量操作开关
+    $("input[name='checkonline']").click(function () {
+        //先判断多选是否选中
+        if ($(this).is(":checked")) {
+            $('input[name="checkanima"]:checked').each(function () {
+                $("#s" + $(this).val()).prop("checked", true);
+            });
+        } else {
+            $('input[name="checkanima"]:checked').each(function () {
+                $("#s" + $(this).val()).prop("checked", false);
+
+            });
+        }
+    });
+// 批量操作暂停恢复
+    $("input[name='checkpause']").click(function () {
+        //先判断多选是否选中
+        if ($(this).is(":checked")) {
+            $('input[name="checkanima"]:checked').each(function () {
+                //选中的批量操作
+                $("#b" + $(this).val()).prop("checked", true);
+            });
+        } else {
+            $('input[name="checkanima"]:checked').each(function () {
+                $("#b" + $(this).val()).prop("checked", false);
+            });
+        }
+    });
+
 
 }
 
@@ -239,6 +270,18 @@ function initBtnEvents() {
     });
 }
 
+function checkonline(obj, len1) {
+    //关闭vedio
+    if ($(obj).is(":checked")) {
+        $(obj).parent().parent().find("video").addClass("overlay");
+        $(obj).parent().parent().find("video").removeAttr("controls");
+        $("#close" + len1).text("当前已关闭");
+    } else {
+        $(obj).parent().parent().find("video").removeClass("overlay");
+        $(obj).parent().parent().find("video").attr("controls", "controls");
+        $("#close" + len1).text("当前已开启");
+    }
+}
 
 //选中的值
 function checkanima() {
@@ -256,6 +299,7 @@ function checkanima() {
 
 
 }
+
 
 function initForm(id) {
     startLoad();

@@ -1,10 +1,10 @@
 var map = null;
 var markers = [];
 var params = {
-    limit: 99
+    limit: 99,
+    subareaCode:'',
+    stationCode:'',
 };
-
-
 function rsd(value, kernelKey, staticDictObjects) {
     try {
         if (!staticDictObjects) {
@@ -44,7 +44,7 @@ function rsd(value, kernelKey, staticDictObjects) {
 
 var rst = null;
 
-function findTraAccList() {
+function findTopBuildingList() {
     var url = contextPath + '/topBuilding/findTopBuildingList';
     var data = params;
     $.getJSON(url, data, function (rst) {
@@ -94,7 +94,9 @@ function findTraAccList() {
 
                         });
                         qq.maps.event.addListener(marker, 'click', function (event) {
+                            $('.detailBar').removeClass('active');
                             initPreview(event.target.o.id);
+                            return false;
                         });
                         markers.push(marker);
                     }
@@ -106,12 +108,6 @@ function findTraAccList() {
     })
 }
 
-function clearMarkers(markers) {
-    var marker;
-    while (marker = markers.pop()) {
-        marker.setMap(null);
-    }
-}
 
 jQuery(function ($) {
     $(".info").hide();
@@ -128,14 +124,18 @@ jQuery(function ($) {
             $("#FullScreen").css('left', '299px');
         }
     })
-    $('.detailBar').on('click', '.b', changeview)
-    $('.searchBar').on('click', '.rst', showSelect)
+    $('#Map').click(cancelActive)
+    $('.detailBar').on('click', '.b', changeview);
+    $('.searchBar').on('click', '.rst', showSelect);
+    getAreas();
     initJuicerMethod();
-    initMap();
-    initEvents();
-    findTraAccList();
-
 });
+
+
+function cancelActive(event) {
+    $('.searchBar .select').removeClass('active');
+    $('.detailBar').removeClass('active');
+}
 
 function showSelect() {
     var s = $('.searchBar .select');
@@ -162,9 +162,9 @@ function changeview() {
 }
 
 
-function initMap() {
+function initMap(la,lo) {
     map = new qq.maps.Map(document.getElementById("Map"), {
-        center: new qq.maps.LatLng(30.601090, 114.270730),
+        center: new qq.maps.LatLng(la, lo),
         zoom: 14,
         //mapTypeId: "coordinate",
         resizeKeepCenter: true,
@@ -197,72 +197,6 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
-function initEvents() {
-
-
-    $(".btn-group .btn").bind('click', function (event) {
-        $(event.target).siblings().removeClass("active");
-        console.log(event);
-        $(event.target).addClass("active");
-    });
-    //道路级别
-    var data = {};
-    data.key = 'category';
-    data.list = staticDictObject['170'];
-    render($("#check-group-category"), data, "tpl-check-group");
-
-    $("input[name=startDate]").datetimepicker({
-        minView: "month",
-        format: 'yyyy-mm-dd',
-        language: 'zh-CN',
-        weekStart: 1,
-        todayBtn: true, //显示‘今日’按钮
-        clearBtn: true, //清除按钮
-        autoclose: true,
-        todayHighlight: 1,
-        startView: 2,
-        forceParse: 0
-    }).on('hide', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        var startTime = event.date;
-        $("input[name=endDate]").datetimepicker('setStartDate', startTime);
-        $("input[name=endDate]").val("");
-    });
-
-    $('input[name=startDate]').focus(function () {
-        $(this).blur(); //不可输入状态
-    })
-
-
-    $("input[name=endDate]").datetimepicker({
-        minView: "month",
-        format: 'yyyy-mm-dd',
-        language: 'zh-CN',
-        weekStart: 1,
-        todayBtn: true, //显示‘今日’按钮
-        clearBtn: true, //清除按钮
-        autoclose: true,
-        todayHighlight: 1,
-        startView: 2,
-        forceParse: 0
-    }).on('hide', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        var endTime = event.date;
-        $("input[name=startDate]").datetimepicker('setEndDate', endTime);
-    });
-    $('input[name=endDate]').focus(function () {
-        $(this).blur(); //不可输入状态
-    });
-    /*    $('#tt').combotree({
-            onSelect: function (node) {
-                getLatLongByAreaCode({
-                    areaCode: node.id
-                });
-            }
-        });*/
-}
 
 function initPreview(id) {
     var url=contextPath + "/topBuilding/selectTopBuildingByPrimaryKey";
@@ -299,8 +233,82 @@ function initPreview(id) {
     // });
 }
 
-function areaChange(text,code) {
-    
+function render(obj, data, tplId) {
+    var tpl = document.getElementById(tplId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $(obj).html(html);
+}
+
+
+function getAreas(){
+   var url=contextPath+'/topSubarea/findTopSubareaList';
+   var data={
+       start:0,
+       limit:100,
+   }
+   $.getJSON(url,data,function (rst) {
+      if(rst.status==0){
+          data=rst.rows[0];
+          if(data&&data.longitude&&data.latitude){
+              initMap(data.latitude,data.longitude);
+          }else{
+              initMap(30.601090,114.270730);
+          };
+          params.subareaCode=data.code;
+          findTopBuildingList();
+          getStations(data.code);
+          $('.rst .area').text(data.name);
+          render('#areaList',rst.rows,'tpl-areaList');
+      }
+   })
+}
+
+function areaChange(that) {
+   var $t=$(that);
+   var name=$t.data('name');
+   var code=$t.data('code');
+   var la=$t.data('la');
+   var lo=$t.data('lo');
+    params.subareaCode=code;
+    params.stationCode='';
+    findTopBuildingList();
+    getStations(code);
+    if(la&&lo){
+        map.panTo(new qq.maps.LatLng(la, lo));
+    }
+    $('.rst .area').text(name);
+    $('.rst .station .text').text('全部');
+}
+
+
+function stationChange(that) {
+    var $t=$(that);
+    var name=$t.data('name');
+    var code=$t.data('code');
+    var la=$t.data('la');
+    var lo=$t.data('lo');
+    params.stationCode=code;
+    findTopBuildingList();
+    if(la&&lo){
+        map.panTo(new qq.maps.LatLng(la, lo));
+    }
+    $('.rst .station .text').text(name);
+}
+
+function getStations(code) {
+    var url=contextPath+'/topStation/findTopStationList';
+    var data={
+        subareaCode:code,
+        start:0,
+        limit:200,
+    }
+    $.getJSON(url,data,function (rst) {
+        if(rst.status==0){
+            render('#stationList',rst.rows,'tpl-stationList');
+        }
+    })
 }
 
 

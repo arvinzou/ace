@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SceneConfigDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SceneConfig">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="linkCode" jdbcType="VARCHAR" property="linkCode"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="decipt" jdbcType="VARCHAR" property="decipt"/>
+        <result column="mode" jdbcType="VARCHAR" property="mode"/>
+        <result column="weeks" jdbcType="VARCHAR" property="weeks"/>
+        <result column="startDate" jdbcType="TIMESTAMP" property="startDate"/>
+        <result column="endDate" jdbcType="TIMESTAMP" property="endDate"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, district, category, linkCode, code, name, decipt, mode, weeks, startDate, endDate, 
+    remark, status, createDate, updateDate
+  </sql>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from scene_config
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SceneConfig">
+    insert into scene_config (id, district, category, 
+      linkCode, code, name, 
+      decipt, mode, weeks, 
+      startDate, endDate, remark, 
+      status, createDate, updateDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{linkCode,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{decipt,jdbcType=VARCHAR}, #{mode,jdbcType=VARCHAR}, #{weeks,jdbcType=VARCHAR}, 
+      #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SceneConfig">
+    update scene_config
+    set district = #{district,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      linkCode = #{linkCode,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      decipt = #{decipt,jdbcType=VARCHAR},
+      mode = #{mode,jdbcType=VARCHAR},
+      weeks = #{weeks,jdbcType=VARCHAR},
+      startDate = #{startDate,jdbcType=TIMESTAMP},
+      endDate = #{endDate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SceneConfigVo"></resultMap>
+
+    <sql id="Vo_Column_List">
+        s.id, s.district, s.category, s.linkCode, s.code, s.name, s.decipt, s.mode, s.weeks, s.startDate, s.endDate,
+    s.remark, s.status, s.createDate, s.updateDate
+    </sql>
+
+    <sql id="From_Statement">
+        FROM scene_config s
+    </sql>
+    <sql id="Where_Condition">
+        where s.status <![CDATA[ <> ]]> 0
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and (s.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') or
+            s.code LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') )
+        </if>
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY s.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.SceneConfig">
+        select count(*)
+        from scene_config
+        where name=#{name,jdbcType=VARCHAR}
+        and code != #{code,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where s.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

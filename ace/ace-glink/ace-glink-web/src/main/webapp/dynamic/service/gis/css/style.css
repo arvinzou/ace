@@ -130,8 +130,8 @@ input {
 }
 
 #Header img {
-    width: 42px;
-    height: 43px;
+    width: 158px;
+    /*height: 43px;*/
     object-fit: cover;
     margin-right: 15px;
 }
@@ -144,6 +144,7 @@ input {
     height: 100%;
     border-radius: 4px !important;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .statusBar, .detailBar {
@@ -159,6 +160,7 @@ input {
     padding-left: 40px;
     z-index: 100;
     position: relative;
+    pointer-events: auto;
 }
 
 .statusBar .data {
@@ -229,6 +231,7 @@ input {
     top: -730px;
     transition: top 0.5s;
     overflow: hidden;
+    pointer-events: auto;
 }
 
 .detailBar.active{
@@ -421,6 +424,7 @@ table.tftable td {
     width: 314px;
     height: 700px;
     overflow: hidden;
+    pointer-events: none;
 }
 
 .searchBar .rst{
@@ -434,6 +438,7 @@ table.tftable td {
     padding: 0 20px;
     position: relative;
     z-index:99;
+    pointer-events: auto;
 }
 
 .searchBar .rst::after{
@@ -454,6 +459,7 @@ table.tftable td {
     top: -500px;
     transition: top 0.5s ease-in-out,opacity 0.2s ease-in-out;
     box-shadow:0px 3px 17px 4px rgba(166,166,166,0.36);
+    pointer-events: auto;
 }
 
 .searchBar .select.active{
