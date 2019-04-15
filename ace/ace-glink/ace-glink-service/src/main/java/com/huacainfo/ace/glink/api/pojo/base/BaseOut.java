@@ -3,12 +3,12 @@ package com.huacainfo.ace.glink.api.pojo.base;
 import com.huacainfo.ace.common.model.BaseModel;
 
 /**
- * @ClassName BaseRst
+ * @ClassName BaseOut
  * @Description TODO
  * @Author Arvin Zou
  * @Date 2019/4/15 10:31
  */
-public class BaseRst extends BaseModel {
+public class BaseOut extends BaseModel {
     /**
      * 返回码:
      * 200: 成功
@@ -19,7 +19,6 @@ public class BaseRst extends BaseModel {
      * 返回描述
      */
     private String message;
-
 
     public int getCode() {
         return code;

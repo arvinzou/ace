@@ -1,17 +1,17 @@
 package com.huacainfo.ace.glink.api.pojo.light;
 
 import com.huacainfo.ace.common.model.BaseModel;
-import com.huacainfo.ace.glink.api.pojo.base.BaseRst;
+import com.huacainfo.ace.glink.api.pojo.base.BaseOut;
 
 import java.util.List;
 
 /**
- * @ClassName HeartRst
+ * @ClassName HeartOut
  * @Description TODO
  * @Author Arvin Zou
  * @Date 2019/4/15 10:31
  */
-public class HeartRst extends BaseRst {
+public class HeartOut extends BaseOut {
 
     private HeartData data;//返回数据
 
