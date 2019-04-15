@@ -50,45 +50,20 @@
 </div>
 
 <div class="searchBar">
-    <div class="rst"><span>全部</span> <span>>><span>全部</span></span></div>
+    <div class="rst"><span class="area">全部</span> <span class="station">>><span class="text">全部</span></span></div>
     <div class="select">
         <div class="options">
             <form>
                 <p>分区</p>
                 <div class="area ulstyle">
-                    <ul>
-                        <li>
-                            <input onchange="areaChange('区域','1')" id="a1" type="checkbox">
-                            <label for="a1">全部</label>
-                        </li>
-                        <li>
-                            <input id="a2" type="checkbox">
-                            <label for="a2">区域2</label>
-                        </li>
+                    <ul id="areaList">
 
-                        <li>
-                            <input id="a3" type="checkbox">
-                            <label for="a3">区域3</label>
-                        </li>
                     </ul>
                 </div>
                 <p>站点</p>
                 <div class="station ulstyle">
-                    <ul>
-                        <li>
-                            <input id="s1" name="stationCode" type="radio">
-                            <label for="s1">区域4</label>
-                        </li>
+                    <ul id="stationList" class="stationList">
 
-                        <li>
-                            <input id="s2" name="stationCode" type="radio">
-                            <label for="s2">区域5</label>
-                        </li>
-
-                        <li>
-                            <input id="s3" name="stationCode" type="radio">
-                            <label for="s3">区域6</label>
-                        </li>
                     </ul>
                 </div>
             </form>
@@ -504,12 +479,33 @@
 </div>
 
 
-<script id="tpl-preview" type="text/template">
-
+<script id="tpl-areaList" type="text/template">
+    {@each data as item, index}
+    <li>
+        <input onchange="areaChange(this)" data-name="\${item.name}" data-code="\${item.code}"
+               data-la="\${item.latitude}" name="q" data-lo="\${item.longitude}" \${index==0?'checked':''}
+               id="a\${index}"
+               type="radio">
+        <label for="a\${index}">\${item.name}</label>
+    </li>
+    {@/each}
 </script>
 
-<script id="tpl-check-group" type="text/template">
-
+<script id="tpl-stationList" type="text/template">
+    <li>
+        <input onchange="stationChange(this)" data-name="全部" data-code=""
+               data-la="" data-lo="" name="stationCode" checked id="s" type="radio">
+        <label for="s">全部</label>
+    </li>
+    {@each data as item, index}
+    <li>
+        <input onchange="stationChange(this)" id="s\${index}" data-name="\${item.name}"
+               data-code="\${item.code}"
+               data-la="\${item.latitude}" data-lo="\${item.longitude}" name="stationCode"
+               type="radio">
+        <label for="s\${index}">\${item.name}</label>
+    </li>
+    {@/each}
 </script>
 
 <!--[if lt IE 9]>
