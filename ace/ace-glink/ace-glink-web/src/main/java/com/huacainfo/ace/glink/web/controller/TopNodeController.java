@@ -68,6 +68,14 @@ public class TopNodeController extends GLinkBaseController {
         return rst;
     }
 
+    @RequestMapping(value = "/findNodeAndStationList")
+    @ResponseBody
+    public PageResult<TopNodeVo> findNodeAndStationList(TopNodeQVo condition) throws Exception {
+        PageResult<TopNodeVo> rst = this.topNodeService.findNodeAndStationList(condition);
+        return rst;
+    }
+
+
     /**
      * @throws
      * @Title:insertTopNode

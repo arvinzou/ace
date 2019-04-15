@@ -18,7 +18,7 @@ public interface SceneConfigDao {
 
     int updateByPrimaryKey(SceneConfig record);
 
-    SceneConfigVo selectVoByPrimaryKey(String id);
+    SceneConfigVo selectByPrimaryKeyVo(String id);
 
     List<SceneConfigVo> findList(@Param("condition") SceneConfigQVo condition,
                                  @Param("start") int start,

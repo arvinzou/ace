@@ -13,8 +13,19 @@ window.onload = function () {
 function initJuicerMethod() {
     juicer.register('rsd', rsd);
     juicer.register('parseStatus', parseStatus);
+    juicer.register('isChecked', isChecked);
 }
 
+
+function isChecked(val, idex) {
+    var i = val.split(',');
+    for (var x = 0; x < i.length; x++) {
+        if (idex == i[x]) {
+            return 'checked'
+        }
+    }
+    return '';
+}
 /**
  * 状态解析
  */
@@ -52,11 +63,6 @@ function render(obj, data, tplId) {
         data: data,
     });
     $(obj).html(html);
-}
-
-function initPage() {
-    initEditor();
-//   initUpload();
 }
 
 function initEvents() {
@@ -136,26 +142,89 @@ function save(params) {
 
 function initForm() {
     startLoad();
-    $.ajax({
-        url: contextPath + "/sceneConfig/selectSceneConfigByPrimaryKey",
-        type: "post",
-        async: false,
-        data: {id: urlParams.did},
-        success: function (result) {
-            stopLoad();
-            if (result.status == 0) {
-                var data = {};
-                data['o'] = result.value;
-                render('#fm-edit', data, 'tpl-fm');
-                initPage();
-
-            } else {
-                alert(result.errorMessage);
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
+    var url= contextPath + "/sceneConfig/selectSceneConfigByPrimaryKey";
+    var data = {id: urlParams.did};
+    $.getJSON(url,data,function (rst) {
+        stopLoad();
+        if (rst.status == 0) {
+            var data = {};
+            data['o'] = rst.value;
+            render('#fm-edit', data, 'tpl-fm');
+            initInput();
+        } else {
+            alert(rst.errorMessage);
         }
+    })
+}
+
+
+function initInput() {
+    $(".form-body input[name='district']").combotree({
+        url: portalPath + "/system/selectProvinceTreeList.do?id=00",
+        method: 'get',
+        label: '',
+        panelWidth: 400,
+        labelPosition: 'top',
+        valueField: "id",
+        textField: "text",
+        lines: true,
+    });
+    $(".form-body input[name='linkCode']").combogrid({
+        url: contextPath + "/topNode/findNodeAndStationList",
+        method:'get',
+        loadMsg:"正在获取...",
+        panelWidth: 400,
+        mode:'remote',
+        idField:'code',
+        textField:'name',
+        columns:[[
+            {field:'code',title:'编码',width:100},
+            {field:'name',title:'名称',width:200},
+            {field:'remark',title:'类型',width:50},
+        ]]
+    });
+    $("input[name=startDate]").datetimepicker({
+        minView: "hour",
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: true, //显示‘今日’按钮
+        clearBtn: true, //清除按钮
+        autoclose: true,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var startTime = event.date;
+        $("input[name=endDate]").datetimepicker('setStartDate', startTime);
+        $("input[name=endDate]").val("");
+    });
+
+    $('input[name=startDate]').focus(function () {
+        $(this).blur(); //不可输入状态
+    })
+
+
+    $("input[name=endDate]").datetimepicker({
+        minView: "hour",
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: true, //显示‘今日’按钮
+        clearBtn: true, //清除按钮
+        autoclose: true,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var endTime = event.date;
+        $("input[name=startDate]").datetimepicker('setEndDate', endTime);
+    });
+    $('input[name=endDate]').focus(function () {
+        $(this).blur(); //不可输入状态
     });
 }

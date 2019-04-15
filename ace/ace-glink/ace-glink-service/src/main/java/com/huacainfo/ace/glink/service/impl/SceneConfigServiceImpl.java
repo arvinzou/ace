@@ -40,7 +40,6 @@ public class SceneConfigServiceImpl implements SceneConfigService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
-
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -82,7 +81,6 @@ public class SceneConfigServiceImpl implements SceneConfigService {
     public MessageResponse insertSceneConfig(SceneConfig o, UserProp userProp) throws Exception {
         String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
         o.setId(guid);
-
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -101,11 +99,6 @@ public class SceneConfigServiceImpl implements SceneConfigService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "策略名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
-
-
         int temp = this.sceneConfigDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "场景设置名称重复！");
@@ -134,6 +127,7 @@ public class SceneConfigServiceImpl implements SceneConfigService {
      */
     @Override
     public MessageResponse updateSceneConfig(SceneConfig o, UserProp userProp) throws Exception {
+
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -152,9 +146,8 @@ public class SceneConfigServiceImpl implements SceneConfigService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "策略名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
+        o.setStatus("1");
+        o.setUpdateDate(new Date());
         this.sceneConfigDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更场景设置", "场景设置", "",
                 o.getId(), o.getId(), userProp);
@@ -176,7 +169,7 @@ public class SceneConfigServiceImpl implements SceneConfigService {
     public SingleResult<SceneConfigVo> selectSceneConfigByPrimaryKey(String id) throws Exception {
         SingleResult
                 <SceneConfigVo> rst = new SingleResult<>();
-        rst.setValue(this.sceneConfigDao.selectVoByPrimaryKey(id));
+        rst.setValue(this.sceneConfigDao.selectByPrimaryKeyVo(id));
         return rst;
     }
 
