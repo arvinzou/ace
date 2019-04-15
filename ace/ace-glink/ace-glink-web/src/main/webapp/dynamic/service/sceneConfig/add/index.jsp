@@ -28,10 +28,8 @@
             <!--具体界面元素开始-->
 
         </div>
-
     </div>
 </div>
-
 
 <script id="tpl-fm-add" type="text/template">
     <form class="form-horizontal" id="fm-add" role="form">
