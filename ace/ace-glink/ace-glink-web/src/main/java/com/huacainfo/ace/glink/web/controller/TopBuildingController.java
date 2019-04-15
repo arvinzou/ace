@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.glink.dao.AnimaLnkDao;
 import com.huacainfo.ace.glink.dao.TopBuildingDao;
 import com.huacainfo.ace.glink.vo.AnimaLnkVo;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -167,7 +168,15 @@ public class TopBuildingController extends GLinkBaseController {
     public MessageResponse deleteTopBuildingByTopBuildingId(String jsons) throws Exception {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
-        return this.topBuildingService.deleteTopBuildingByTopBuildingId(id, this.getCurUserProp());
+        try{
+            return this.topBuildingService.deleteTopBuildingByTopBuildingId(id, this.getCurUserProp());
+        }catch(Exception e){
+            MessageResponse m = new MessageResponse();
+            m.setStatus(1);
+            m.setErrorMessage("该建筑下有节点信息，不能进行删除！");
+            return m;
+        }
+
     }
 
     /**
