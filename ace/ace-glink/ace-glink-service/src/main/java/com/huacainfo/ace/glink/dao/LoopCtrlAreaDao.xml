@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.LoopCtrlAreaDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.LoopCtrlArea">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="loopName" jdbcType="VARCHAR" property="loopName"/>
+        <result column="loopKey" jdbcType="VARCHAR" property="loopKey"/>
+        <result column="loopType" jdbcType="VARCHAR" property="loopType"/>
+        <result column="loopCurrent" jdbcType="VARCHAR" property="loopCurrent"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, loopName, loopKey, loopType, loopCurrent, state, remark, status, createDate, 
+    updateDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from loop_ctrl_area
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from loop_ctrl_area
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.LoopCtrlArea">
+    insert into loop_ctrl_area (id, loopName, loopKey, 
+      loopType, loopCurrent, state, 
+      remark, status, createDate, 
+      updateDate)
+    values (#{id,jdbcType=VARCHAR}, #{loopName,jdbcType=VARCHAR}, #{loopKey,jdbcType=VARCHAR}, 
+      #{loopType,jdbcType=VARCHAR}, #{loopCurrent,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.LoopCtrlArea">
+    update loop_ctrl_area
+    set loopName = #{loopName,jdbcType=VARCHAR},
+      loopKey = #{loopKey,jdbcType=VARCHAR},
+      loopType = #{loopType,jdbcType=VARCHAR},
+      loopCurrent = #{loopCurrent,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.LoopCtrlAreaVo"></resultMap>
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+
+
+    </select>
+
+</mapper>
