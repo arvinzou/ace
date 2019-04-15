@@ -253,3 +253,12 @@ function initTopStationList() {
     });
 }
 
+/**
+ * 查看地址的位置
+ * @param longitude
+ * @param latitude
+ */
+function previewMap(longitude, latitude) {
+    window.location.href = contextPath + '/dynamic/service/topBuilding/map.jsp?longitude='+longitude+'&latitude='+latitude;
+}
+
