@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.SchedulerDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.Scheduler">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="depict" jdbcType="VARCHAR" property="depict"/>
+        <result column="jobName" jdbcType="VARCHAR" property="jobName"/>
+        <result column="triggerName" jdbcType="VARCHAR" property="triggerName"/>
+        <result column="jobGroupName" jdbcType="VARCHAR" property="jobGroupName"/>
+        <result column="triggerGroupName" jdbcType="VARCHAR" property="triggerGroupName"/>
+        <result column="classPath" jdbcType="VARCHAR" property="classPath"/>
+        <result column="validState" jdbcType="CHAR" property="validState"/>
+        <result column="restartState" jdbcType="CHAR" property="restartState"/>
+        <result column="corn" jdbcType="VARCHAR" property="corn"/>
+        <result column="restartTime" jdbcType="TIMESTAMP" property="restartTime"/>
+        <result column="lastRunTime" jdbcType="TIMESTAMP" property="lastRunTime"/>
+        <result column="sysId" jdbcType="VARCHAR" property="sysId"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, depict, jobName, triggerName, jobGroupName, triggerGroupName, classPath, validState,
+    restartState, corn, restartTime, lastRunTime, sysId, remark, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from scheduler
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from scheduler
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.portal.model.Scheduler">
+    insert into scheduler (id, name, depict, jobName,
+      triggerName, jobGroupName, triggerGroupName, 
+      classPath, validState, restartState,
+      corn, restartTime, lastRunTime, 
+      sysId, remark, status, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{depict,jdbcType=VARCHAR},
+      #{jobName,jdbcType=VARCHAR},
+      #{triggerName,jdbcType=VARCHAR}, #{jobGroupName,jdbcType=VARCHAR}, #{triggerGroupName,jdbcType=VARCHAR}, 
+      #{classPath,jdbcType=VARCHAR}, #{validState,jdbcType=CHAR}, #{restartState,jdbcType=CHAR},
+      #{corn,jdbcType=VARCHAR}, #{restartTime,jdbcType=TIMESTAMP}, #{lastRunTime,jdbcType=TIMESTAMP}, 
+      #{sysId,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.Scheduler">
+    update scheduler
+    set name = #{name,jdbcType=VARCHAR},
+      depict =  #{depict,jdbcType=VARCHAR},
+      jobName = #{jobName,jdbcType=VARCHAR},
+      triggerName = #{triggerName,jdbcType=VARCHAR},
+      jobGroupName = #{jobGroupName,jdbcType=VARCHAR},
+      triggerGroupName = #{triggerGroupName,jdbcType=VARCHAR},
+      classPath = #{classPath,jdbcType=VARCHAR},
+      validState = #{validState,jdbcType=CHAR},
+      restartState = #{restartState,jdbcType=CHAR},
+      corn = #{corn,jdbcType=VARCHAR},
+      restartTime = #{restartTime,jdbcType=TIMESTAMP},
+      lastRunTime = #{lastRunTime,jdbcType=TIMESTAMP},
+      sysId = #{sysId,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.portal.vo.SchedulerVo">
+        <result column="linkId" jdbcType="VARCHAR" property="linkId"/>
+        <result column="checked" jdbcType="VARCHAR" property="checked"/>
+
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        m.linkId ,
+        CASE when IFNULL(m.linkId,'null') = 'null' then '0' else '1' end as checked,
+
+        t.id, t.name, t.depict,
+        t.jobName, t.triggerName, t.jobGroupName, t.triggerGroupName,
+        t.classPath, t.validState, t.restartState, t.corn, t.restartTime, t.lastRunTime,
+        t.sysId, t.remark, t.status, t.createDate
+    </sql>
+    <sql id="From_Statement">
+        FROM scheduler t
+        left join scheduler_mapped m on t.id = m.schedulerId
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+            and name like concat(#{condition.keyword,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.sysId !=null and condition.sysId !=&quot;&quot;">
+            and t.sysId = #{condition.sysId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.linkId !=null and condition.linkId !=&quot;&quot;">
+            and m.linkId = #{condition.linkId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc, t.name
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.portal.model.Scheduler">
+        select count(1)
+        from scheduler
+        where id != #{id,jdbcType=VARCHAR}
+        and sysId = #{sysId,jdbcType=VARCHAR}
+        and name = #{name,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateStatus">
+        update scheduler
+        set status = #{status,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateValidState" parameterType="com.huacainfo.ace.portal.model.Scheduler">
+    update scheduler
+    set validState = #{state,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

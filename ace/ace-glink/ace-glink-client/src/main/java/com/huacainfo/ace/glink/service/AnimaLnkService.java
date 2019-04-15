@@ -102,4 +102,6 @@ public interface AnimaLnkService {
      */
     MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception;
 
+    MessageResponse updatePrePlayUrl(String id, String prePlayUrl) throws Exception;
+
 }

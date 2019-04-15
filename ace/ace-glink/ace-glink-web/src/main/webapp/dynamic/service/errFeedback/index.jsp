@@ -19,6 +19,8 @@
     <script src="${pageContext.request.contextPath}/content/common/js/sweetalert/js/sweet-alert.min.js"></script>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/content/common/js/sweetalert/css/sweet-alert.css">
+    <%--qq map--%>
+    <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB"></script>
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -167,74 +169,74 @@
 <script id="tpl-preview" type="text/template">
     <div class="portlet light">
         <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
+            <div class="caption ">
+                <i class="icon-share "></i>
                 <span class="caption-subject bold uppercase"> 基本信息</span>
             </div>
         </div>
         <div class="portlet-body">
             <div class="form-group hide">
-                <label class="col-md-2 view-label"> 主键</label>
+                <label class="col-md-2 view-label"> 主键:</label>
                 <div class="col-md-10">
                     \${data.o.id}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 故障编号</label>
+            <div class="row">
+                <label class="col-md-2 view-label"> 故障编号:</label>
                 <div class="col-md-10">
                     \${data.o.errCode}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 分区名称</label>
+            <div class="row">
+                <label class="col-md-2 view-label"> 分区名称:</label>
                 <div class="col-md-10">
                     \${data.o.subareaName}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 站点名称</label>
+            <div class="row">
+                <label class="col-md-2 view-label"> 站点名称:</label>
                 <div class="col-md-10">
                     \${data.o.stationName}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 节点名称</label>
+            <div class="row">
+                <label class="col-md-2 view-label"> 节点名称:</label>
                 <div class="col-md-10">
                     \${data.o.nodeName}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 建筑物名称</label>
+            <div class="row">
+                <label class="col-md-2 view-label"> 建筑物名称:</label>
                 <div class="col-md-10">
                     \${data.o.buildingName}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 故障类型</label>
+            <div class="row">
+                <label class="col-md-2 view-label"> 故障类型:</label>
                 <div class="col-md-10">
                     \${rsd(data.o.errType,'180')}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 故障时间</label>
+            <div class="row">
+                <label class="col-md-2 view-label"> 故障时间:</label>
                 <div class="col-md-10">
                     \${data.o.errDate}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 故障内容</label>
+            <div class="row">
+                <label class="col-md-2 view-label"> 故障内容:</label>
                 <div class="col-md-10">
                     \${data.o.errContent}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 故障回路数</label>
+            <div class="row">
+                <label class="col-md-2 view-label"> 故障回路数:</label>
                 <div class="col-md-10">
                     \${data.o.errLoopNum}
                 </div>
             </div>
-            <div class="form-group hide">
-                <label class="col-md-2 view-label"> 状态</label>
+            <div class="row hide">
+                <label class="col-md-2 view-label"> 状态:</label>
                 <div class="col-md-10">
                     \${parseStatus(data.o.status)}
                 </div>
@@ -243,12 +245,15 @@
     </div>
     <div class="portlet light">
         <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
+            <div class="caption">
+                <i class="icon-share"></i>
                 <span class="caption-subject bold uppercase"> GIS地图</span>
             </div>
         </div>
-        <div class="portlet-body">
+        <div class="portlet-body body">
+            <div id="map-container" style="min-width:600px;min-height:550px;">
+
+            </div>
         </div>
     </div>
 </script>
@@ -259,5 +264,9 @@
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <%----%>
 <script src="js/act.js?v=${cfg.version}"></script>
-
+<style>
+    #fm-preview .form-group {
+        padding-top: 10px;
+    }
+</style>
 </html>

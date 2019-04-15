@@ -1,4 +1,5 @@
 $(function () {
+    query();
     ErrorChart();
     errorList();
 });
@@ -91,9 +92,9 @@ function errorList() {
         async: false,
         data: {
             start: 0,
-            limit: 10,
-            orderBy: 'errLoopNum',
-            sord:'desc'
+            limit: 10
+            //orderBy: 'errLoopNum',
+            //sord:'desc'
         },
         success: function (rst) {
             stopLoad();
@@ -107,6 +108,32 @@ function errorList() {
         }
     });
 }
+
+/**
+ * 获取统计数据
+ */
+function query(){
+    startLoad();
+    $.ajax({
+        url: contextPath + "/anslysis/query.do",
+        type: "post",
+        async: false,
+        data: {
+            reportId: 'portal'
+        },
+        success: function (rst) {
+            stopLoad();
+            if (rst.status == 0) {
+                render('#totalCount', rst.value[0], 'total-count-tpl');
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
 /*页面渲染*/
 function render(obj, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;

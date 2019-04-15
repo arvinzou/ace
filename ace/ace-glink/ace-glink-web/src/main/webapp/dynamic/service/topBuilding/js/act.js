@@ -139,8 +139,16 @@ $('#modal-preview').on('show.bs.modal', function (event) {
         console.log(event);
         $(event.target).addClass("active");
     });
+    //批量导入
+    $('#btn-view-import').on('click', function () {
+        //加载导入
+        importXls();
+    });
 }
 
+function importXls() {
+    $('#modal-import').modal('show');
+}
 
 //juicer自定义函数
 function initJuicerMethod() {
@@ -243,5 +251,14 @@ function initTopStationList() {
             alert("对不起出错了！");
         }
     });
+}
+
+/**
+ * 查看地址的位置
+ * @param longitude
+ * @param latitude
+ */
+function previewMap(longitude, latitude) {
+    window.location.href = contextPath + '/dynamic/service/topBuilding/map.jsp?longitude='+longitude+'&latitude='+latitude;
 }
 

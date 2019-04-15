@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.SchedulerMappedDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.SchedulerMapped">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="linkId" jdbcType="VARCHAR" property="linkId"/>
+        <result column="schedulerId" jdbcType="VARCHAR" property="schedulerId"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, linkId, schedulerId, remark, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from scheduler_mapped
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from scheduler_mapped
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.portal.model.SchedulerMapped">
+    insert into scheduler_mapped (id, linkId, schedulerId, 
+      remark, status, createDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{linkId,jdbcType=VARCHAR}, #{schedulerId,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.SchedulerMapped">
+    update scheduler_mapped
+    set linkId = #{linkId,jdbcType=VARCHAR},
+      schedulerId = #{schedulerId,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <resultMap id="VoResultMap" type="com.huacainfo.ace.portal.vo.SchedulerMappedVo">
+    </resultMap>
+
+    <sql id="From_Statement">
+        FROM err_warn_sms t
+        LEFT JOIN top_subarea a on t.subareaCode  = a.`code`
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+            and smsName like concat(#{condition.keyword,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+
+    </sql>
+
+    <select id="findVoList" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc, t.smsName
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+</mapper>

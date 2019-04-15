@@ -69,40 +69,8 @@
             </div>
         </div>
         <div class="meter-title">数据统计</div>
-        <div class="statics-list">
-            <div class="statics-item mr">
-                <div class="total-count">468</div>
-                <div class="total-count-tips"><span class="tip-01">建筑物总数</span></div>
-            </div>
-            <div class="statics-item mr">
-                <div class="total-count">468</div>
-                <div class="total-count-tips">
-                    <span class="tip-01">离线设备  |</span>
-                    <span class="tip-02">总设备数:1286</span>
-                </div>
-            </div>
-            <div class="statics-item mr">
-                <div class="total-count">42</div>
-                <div class="total-count-tips"><span class="tip-01">故障回路</span></div>
-            </div>
-            <div class="statics-item mr">
-                <div class="total-count">10</div>
-                <div class="total-count-tips">
-                    <span class="tip-01">执行中策略 |</span>
-                    <span class="tip-02">总策略数:40</span>
-                </div>
-            </div>
-            <div class="statics-item mr">
-                <div class="total-count">468</div>
-                <div class="total-count-tips">
-                    <span class="tip-01">场景总数</span>
-                </div>
-            </div>
-            <div class="statics-item">
-                <div class="total-count">56812251.97kw</div>
-                <div class="total-count-tips">
-                    <span class="tip-01">累计能耗</span></div>
-            </div>
+        <div class="statics-list" id="totalCount">
+
         </div>
     </div>
 
@@ -149,12 +117,12 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th width="10%" align="center">故障等级</th>
-                                    <th width="20%" align="center">设备名称</th>
-                                    <th width="20%" align="center">故障位置</th>
-                                    <th width="20%" align="center">故障类型</th>
-                                    <th width="10%" align="center">故障数量</th>
-                                    <th width="20%" align="center">故障时间</th>
+                                    <th width="10%" style="text-align: center;">故障等级</th>
+                                    <th width="20%" style="text-align: center;">设备名称</th>
+                                    <th width="20%" style="text-align: center;">故障位置</th>
+                                    <th width="20%" style="text-align: center;">故障类型</th>
+                                    <th width="10%" style="text-align: center;">故障数量</th>
+                                    <th width="20%" style="text-align: center;">故障时间</th>
                                 </tr>
                                 </thead>
                                 <tbody id="top10-list">
@@ -172,7 +140,7 @@
 <script id="top10-tpl" type="text/template">
     {@each data as item, index}
     <tr>
-        <td width="10%" align="center">
+        <td width="10%">
             {@if item.errLevel == '03'}
             <div class="serious"></div>
             {@else if item.errLevel == '02'}
@@ -181,14 +149,51 @@
             <div class="less-serious"></div>
             {@/if}
         </td>
-        <td width="20%" align="center">\${item.deviceName}</td>
-        <td width="20%" align="center">\${item.subareaName}</td>
-        <td width="20%" align="center">\${item.errContent}</td>
-        <td width="10%" align="center">\${item.errLoopNum}</td>
-        <td width="20%" align="center">\${item.errDate}</td>
+        <td width="20%" style="text-align: center;">\${item.deviceName}</td>
+        <td width="20%" style="text-align: center;">\${item.subareaName}</td>
+        <td width="20%" style="text-align: center;">\${item.errContent}</td>
+        <td width="10%" style="text-align: center;">\${item.errLoopNum}</td>
+        <td width="20%" style="text-align: center;">\${item.errDate}</td>
     </tr>
     {@/each}
 </script>
+
+<script id="total-count-tpl" type="text/template">
+    <div class="statics-item mr">
+        <div class="total-count">\${data.topBuildingCount}</div>
+        <div class="total-count-tips"><span class="tip-01">建筑物总数</span></div>
+    </div>
+    <div class="statics-item mr">
+        <div class="total-count">\${data.offlineDeviceCount}</div>
+        <div class="total-count-tips">
+            <span class="tip-01">离线设备  |</span>
+            <span class="tip-02">总设备数:\${data.totalDeviceCount}</span>
+        </div>
+    </div>
+    <div class="statics-item mr">
+        <div class="total-count">\${data.totalErrLoopNum}</div>
+        <div class="total-count-tips"><span class="tip-01">故障回路</span></div>
+    </div>
+    <div class="statics-item mr">
+        <div class="total-count">\${data.totalIngStrategy}</div>
+        <div class="total-count-tips">
+            <span class="tip-01">执行中策略 |</span>
+            <span class="tip-02">总策略数:\${data.totalStrategy}</span>
+        </div>
+    </div>
+    <div class="statics-item mr">
+        <div class="total-count">468</div>
+        <div class="total-count-tips">
+            <span class="tip-01">场景总数</span>
+        </div>
+    </div>
+    <div class="statics-item">
+        <div class="total-count">56812251.97kw</div>
+        <div class="total-count-tips">
+            <span class="tip-01">累计能耗</span></div>
+    </div>
+</script>
+
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>

@@ -1,13 +1,15 @@
-package com.huacainfo.ace.glink.model;
+package com.huacainfo.ace.portal.model;
 
 import com.huacainfo.ace.common.model.BaseModel;
 
 import java.util.Date;
 
-public class DynamicScheduler extends BaseModel {
+public class Scheduler extends BaseModel {
     private String id;
 
     private String name;
+
+    private String depict;
 
     private String jobName;
 
@@ -19,7 +21,7 @@ public class DynamicScheduler extends BaseModel {
 
     private String classPath;
 
-    private String vaildState;
+    private String validState;
 
     private String restartState;
 
@@ -36,6 +38,14 @@ public class DynamicScheduler extends BaseModel {
     private String status;
 
     private Date createDate;
+
+    public String getDepict() {
+        return depict;
+    }
+
+    public void setDepict(String depict) {
+        this.depict = depict;
+    }
 
     public String getId() {
         return id;
@@ -93,12 +103,12 @@ public class DynamicScheduler extends BaseModel {
         this.classPath = classPath == null ? null : classPath.trim();
     }
 
-    public String getVaildState() {
-        return vaildState;
+    public String getValidState() {
+        return validState;
     }
 
-    public void setVaildState(String vaildState) {
-        this.vaildState = vaildState == null ? null : vaildState.trim();
+    public void setValidState(String validState) {
+        this.validState = validState == null ? null : validState.trim();
     }
 
     public String getRestartState() {

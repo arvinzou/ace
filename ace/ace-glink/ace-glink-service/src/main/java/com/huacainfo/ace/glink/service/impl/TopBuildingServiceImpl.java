@@ -227,28 +227,18 @@ public class TopBuildingServiceImpl implements TopBuildingService {
      */
 
     @Override
-    public MessageResponse importXls(List
-                                             <Map
-                                                     <String
-                                                             , Object>> list, UserProp userProp) throws Exception {
+    public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
         int i = 1;
-        for (Map
-                <String
-                        , Object> row : list) {
+        for (Map<String, Object> row : list) {
             TopBuilding o = new TopBuilding();
             CommonBeanUtils.copyMap2Bean(o, row);
             o.setCreateDate(new Date());
             o.setCreateUserId(userProp.getUserId());
             o.setCreateUserName(userProp.getName());
+            o.setId(GUIDUtil.getGUID());
             o.setStatus("1");
 
             this.logger.info(o.toString());
-            if (true) {
-                return new MessageResponse(1, "行" + i + ",编号不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getId())) {
-                return new MessageResponse(1, "主键不能为空！");
-            }
             if (CommonUtils.isBlank(o.getCode())) {
                 return new MessageResponse(1, "建筑编号不能为空！");
             }
@@ -261,13 +251,9 @@ public class TopBuildingServiceImpl implements TopBuildingService {
             if (CommonUtils.isBlank(o.getAddress())) {
                 return new MessageResponse(1, "所在地不能为空！");
             }
-            if (CommonUtils.isBlank(o.getSubareaCode())) {
-                return new MessageResponse(1, "分区编码不能为空！");
+            if (CommonUtils.isBlank(o.getStationCode())) {
+                return new MessageResponse(1, "站点编码不能为空！");
             }
-            if (CommonUtils.isBlank(o.getStatus())) {
-                return new MessageResponse(1, "状态不能为空！");
-            }
-
             int t = this.topBuildingDao.isExit(o);
             if (t > 0) {
                 this.topBuildingDao.updateByPrimaryKey(o);

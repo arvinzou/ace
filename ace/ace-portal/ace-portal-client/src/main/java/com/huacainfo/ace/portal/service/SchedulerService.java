@@ -1,19 +1,19 @@
-package com.huacainfo.ace.glink.service;
+package com.huacainfo.ace.portal.service;
 
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.glink.model.DynamicScheduler;
-import com.huacainfo.ace.glink.vo.DynamicSchedulerQVo;
-import com.huacainfo.ace.glink.vo.DynamicSchedulerVo;
+import com.huacainfo.ace.portal.model.Scheduler;
+import com.huacainfo.ace.portal.vo.SchedulerQVo;
+import com.huacainfo.ace.portal.vo.SchedulerVo;
 
 /**
  * @author: Arvin
  * @version: 2019-04-11
  * @Description: TODO(故障报警 - 调度设置)
  */
-public interface DynamicSchedulerService {
+public interface SchedulerService {
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -23,12 +23,12 @@ public interface DynamicSchedulerService {
      * @param: @param limit
      * @param: @param orderBy
      * @param: @throws Exception
-     * @return: PageResult<DynamicSchedulerVo>
+     * @return: PageResult<SchedulerVo>
      * @author: Arvin
      * @version: 2019-04-11
      */
-    PageResult<DynamicSchedulerVo> findDynamicSchedulerList(DynamicSchedulerQVo condition,
-                                                            int start, int limit, String orderBy) throws Exception;
+    PageResult<SchedulerVo> findSchedulerList(SchedulerQVo condition,
+                                              int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -41,7 +41,7 @@ public interface DynamicSchedulerService {
      * @author: Arvin
      * @version: 2019-04-11
      */
-    MessageResponse insertDynamicScheduler(DynamicScheduler obj, UserProp userProp) throws Exception;
+    MessageResponse insertScheduler(Scheduler obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -54,7 +54,7 @@ public interface DynamicSchedulerService {
      * @author: Arvin
      * @version: 2019-04-11
      */
-    MessageResponse updateDynamicScheduler(DynamicScheduler obj, UserProp userProp) throws Exception;
+    MessageResponse updateScheduler(Scheduler obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -62,11 +62,11 @@ public interface DynamicSchedulerService {
      * @Description: TODO(获取故障报警 - 调度设置)
      * @param: @param id
      * @param: @throws Exception
-     * @return: SingleResult<DynamicScheduler>
+     * @return: SingleResult<Scheduler>
      * @author: Arvin
      * @version: 2019-04-11
      */
-    SingleResult<DynamicSchedulerVo> selectDynamicSchedulerByPrimaryKey(String id) throws Exception;
+    SingleResult<SchedulerVo> selectSchedulerByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -79,7 +79,7 @@ public interface DynamicSchedulerService {
      * @author: Arvin
      * @version: 2019-04-11
      */
-    MessageResponse deleteDynamicSchedulerByDynamicSchedulerId(String id, UserProp userProp) throws Exception;
+    MessageResponse deleteSchedulerBySchedulerId(String id, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -93,4 +93,15 @@ public interface DynamicSchedulerService {
      * @version: 2019-04-11
      */
     MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
+
+
+    /**
+     * 更新调度规则有效状态
+     *
+     * @param id    主键
+     * @param state 0-失效，1-生效
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse updateValidState(String id, String state, UserProp curUserProp);
 }
