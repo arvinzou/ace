@@ -124,7 +124,30 @@ function query(){
         success: function (rst) {
             stopLoad();
             if (rst.status == 0) {
-                render('#totalCount', rst.value[0], 'total-count-tpl');
+                var data = {};
+                var retData = rst.value;
+                for(var i=0; i<retData.length; i++){
+                    if(retData[i].itemKey == 'offlineDeviceCount'){
+                        data.offlineDeviceCount = retData[i].itemValue;
+                    }else if(retData[i].itemKey == 'onlineDeviceCount'){
+                        data.onlineDeviceCount = retData[i].itemValue;
+                    }else if(retData[i].itemKey == 'topBuildingCount'){
+                        data.topBuildingCount = retData[i].itemValue;
+                    }else if(retData[i].itemKey == 'totalDeviceCount'){
+                        data.totalDeviceCount = retData[i].itemValue;
+                    }else if(retData[i].itemKey == 'totalErrLoopNum'){
+                        data.totalErrLoopNum = retData[i].itemValue;
+                    }else if(retData[i].itemKey == 'totalIngStrategy'){
+                        data.totalIngStrategy = retData[i].itemValue;
+                    }else if(retData[i].itemKey == 'totalStrategy'){
+                        data.totalStrategy = retData[i].itemValue;
+                    }else if(retData[i].itemKey == 'totalScene'){
+                        data.totalScene = retData[i].itemValue;
+                    }else if(retData[i].itemKey == 'totalEnergy'){
+                        data.totalEnergy = retData[i].itemValue;
+                    }
+                }
+                render('#totalCount', data, 'total-count-tpl');
             }
         },
         error: function () {
