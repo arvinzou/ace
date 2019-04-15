@@ -201,13 +201,37 @@
         <td width="20%">\${item.animaResVo.duration}</td>
         <td width="10%">\${item.animaResVo.rsoWidth} x \${item.animaResVo.rsoHeight}</td>
         <td>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+            <a href="#" data-toggle="modal" data-url="\${item.animaResVo.prePlayUrl}" data-type="\${item.animaResVo.type}"
                data-target="#modal-preUrl">预览</a>
             <a href="javascript:removeAnimaEvent('\${item.id}')" >移除</a>
         </td>
     </tr>
     {@/each}
 </script>
+
+<div class="modal fade " id="modal-preUrl">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 900px;height: 700px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">媒体文件预览</h4>
+            </div>
+            <div class="modal-body" style="width: 90%;height: 550px;">
+                <form class="form-horizontal"  role="form">
+                    <div class="form-body" id="sourcePreview">
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green status">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
     .layout-user {
         width: 120px;
