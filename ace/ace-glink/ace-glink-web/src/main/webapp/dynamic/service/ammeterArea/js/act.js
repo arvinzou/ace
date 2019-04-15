@@ -1,11 +1,37 @@
 var loading = {};
 var params = {limit: 10};
 window.onload = function () {
+    initCondition();
     initPage();
     initEvents();
     initJuicerMethod();
 }
 
+var dtPickerOptions = {
+    format: 'yyyy-mm-dd hh:ii:ss',
+    language: 'zh-CN',
+    minView: 'month',  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+    weekStart: 1,
+    todayBtn: true,//显示‘今日’按钮
+    autoclose: true,
+    todayHighlight: 1,
+    startView: 2,
+    clearBtn: true,//清除按钮
+    forceParse: 0
+}
+
+function initDatetimepicker(id, options) {
+    $("#" + id).datetimepicker(options);
+    $('#' + id).focus(function () {
+        $(this).blur();//不可输入状态
+    });
+}
+function initCondition() {
+    dtPickerOptions.format = 'yyyy-mm-dd hh:ii:ss';
+    //
+    initDatetimepicker('p-startDt', dtPickerOptions);
+    initDatetimepicker('p-endDt', dtPickerOptions);
+}
 
 /*故障报警-短信-调度映射关系初始化分页*/
 function initPage() {

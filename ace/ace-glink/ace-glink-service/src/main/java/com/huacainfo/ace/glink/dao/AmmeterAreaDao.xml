@@ -78,6 +78,12 @@
     <if test="condition.payment !=null and condition.payment !=&quot;&quot;">
       and t.payment =#{condition.payment,jdbcType=VARCHAR}
     </if>
+    <if test="condition.startDate !=null and condition.startDate !=&quot;&quot;">
+      and t.createDate >= str_to_date( #{condition.startDate} , '%Y-%m-%d %H:%i:%S')
+    </if>
+    <if test="condition.endDate != null and condition.endDate !=&quot;&quot;">
+      and t.createDate <![CDATA[<=]]> str_to_date( #{condition.endDate} , '%Y-%m-%d %H:%i:%S')
+    </if>
     <choose>
       <when test="orderBy!=null and orderBy!=&quot;&quot;">
         ORDER BY ${orderBy}
