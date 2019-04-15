@@ -68,7 +68,6 @@
                 </div>
             </form>
         </div>
-        <button class="submit" type="submit">确定</button>
     </div>
 </div>
 
