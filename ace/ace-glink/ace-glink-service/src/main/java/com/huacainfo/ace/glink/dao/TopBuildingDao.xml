@@ -83,7 +83,7 @@
       mainTag = #{mainTag,jdbcType=CHAR},
       state = #{state,jdbcType=CHAR},
       subareaCode = #{subareaCode,jdbcType=VARCHAR},
-      stationCode = #{stationCode, jdbcType=VARCHAR}
+      stationCode = #{stationCode, jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR}
     where id = #{id,jdbcType=VARCHAR}
