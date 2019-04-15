@@ -94,7 +94,9 @@ function findTopBuildingList() {
 
                         });
                         qq.maps.event.addListener(marker, 'click', function (event) {
+                            $('.detailBar').removeClass('active');
                             initPreview(event.target.o.id);
+                            return false;
                         });
                         markers.push(marker);
                     }
@@ -122,11 +124,18 @@ jQuery(function ($) {
             $("#FullScreen").css('left', '299px');
         }
     })
+    $('#Map').click(cancelActive)
     $('.detailBar').on('click', '.b', changeview);
     $('.searchBar').on('click', '.rst', showSelect);
     getAreas();
     initJuicerMethod();
 });
+
+
+function cancelActive(event) {
+    $('.searchBar .select').removeClass('active');
+    $('.detailBar').removeClass('active');
+}
 
 function showSelect() {
     var s = $('.searchBar .select');
