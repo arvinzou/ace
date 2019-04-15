@@ -31,21 +31,23 @@
         </div>
 
         <br> <br><br>
-        <div id="allCheck" style="display: none">
-            <input name="checkList" type="checkbox" style="width: 16px; height:16px;"/>全选
-            <span style="color:#1890FF">当前选中<span id="checkCount">0</span>条</span>
+        <div id="allCheck">
+            &nbsp;<input name="checkList" type="checkbox" style="width: 15px; height:15px;" class="all"/><span
+                class="checkall">全选</span>&nbsp;&nbsp;&nbsp;
+            <span class="count">当前选中<span id="checkCount">0</span>条</span>
 
             <div class="wrap">
 
-                <input type="checkbox" id="a0" class="a"/>
+                <input type="checkbox" id="a0" class="a" name="checkonline"/>
                 <label class="slider-v2" for="a0"></label>
 
-                <input type="checkbox" id="a1" checked="" class="a"/>
-                <label class="slider-v2" for="a1"></label>
+                <input type="checkbox" id="a1" class="a" name="checkpause"/>
+                <label class="slider-v3" for="a1"></label>
 
             </div>
+            <label style=" margin-left: 330px;margin-top: 20px;" class="batch">批量操作</label>
         </div>
-        <br><br><br><br>
+        <br><br>
 
         <div id="animaLnk-list">
             <ul class="videolist">
@@ -123,28 +125,7 @@
 
 <%--节目列表模板--%>
 <script id="tp3-list" type="text/template">
-    <%--  <ul class="videolist">
-    {@each data as item, index}
 
-         <li  class=" \${item.lnkCode}"><div>
-             <input name="checkanima" type="checkbox" value="\${item.id}" onclick="checkanima();"/>
-             <span>\${item.topBuildingName}</span>
-            </div>
-             <video src="\${item.prePlayUrl}" controls="controls">
-             </video>
-             <div>
-                 <input type="checkbox"   id="s3" class="a"/>
-                 <label class="slider-v2" for="s3"></label>
-
-                 <input type="checkbox" id="s4" checked="" class="a"/>
-                 <label class="slider-v2" for="s4"></label>
-             </div>
-             ﻿<a href="#" class="edit">替换</a>
-         </li>
-
-
-    {@/each}
-     </ul>--%>
 </script>
 
 <!--节目清单渲染-->

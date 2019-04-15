@@ -1,5 +1,6 @@
 package com.huacainfo.ace.glink.web.controller;
 
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,11 +57,15 @@ public class AmmeterAreaController extends GLinkBaseController {
      */
     @RequestMapping(value = "/findAmmeterAreaList")
     @ResponseBody
-    public PageResult
-            <AmmeterAreaVo> findAmmeterAreaList(AmmeterAreaQVo condition, PageParamNoChangeSord page) throws Exception {
+    public PageResult<AmmeterAreaVo> findAmmeterAreaList(AmmeterAreaQVo condition, PageParamNoChangeSord page) throws Exception {
 
-        PageResult
-                <AmmeterAreaVo> rst = this.ammeterAreaService.findAmmeterAreaList(condition, page.getStart(),
+        if (StringUtil.isNotEmpty(condition.getStartDate())) {
+            condition.setStartDate(condition.getStartDate() + " 00:00:00");
+        }
+        if (StringUtil.isNotEmpty(condition.getEndDate())) {
+            condition.setEndDate(condition.getEndDate() + " 23:59:59");
+        }
+        PageResult<AmmeterAreaVo> rst = this.ammeterAreaService.findAmmeterAreaList(condition, page.getStart(),
                 page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
