@@ -182,13 +182,13 @@
         </div>
     </div>
     <div class="statics-item mr">
-        <div class="total-count">468</div>
+        <div class="total-count">\${data.totalScene}</div>
         <div class="total-count-tips">
             <span class="tip-01">场景总数</span>
         </div>
     </div>
     <div class="statics-item">
-        <div class="total-count">56812251.97kw</div>
+        <div class="total-count">\${data.totalEnergy}kw</div>
         <div class="total-count-tips">
             <span class="tip-01">累计能耗</span></div>
     </div>
