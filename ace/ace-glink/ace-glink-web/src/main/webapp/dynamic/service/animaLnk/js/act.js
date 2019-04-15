@@ -144,6 +144,19 @@ function initEvents(){
         var modal = $(this);
         initForm(id);
     });
+    $('#modal-preUrl').on('show.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var preUrl = relatedTarget.data('url');
+        var type = relatedTarget.data('type');
+        var modal = $(this);
+        if(type == '01'){//01是音频文件
+            $("#sourcePreview").html("<audio src='"+preUrl+"' style='width: 100%;height: 500px;' controls=\"controls\"></audio>");
+        }else if(type == '02'){//02是视频文件
+            $("#sourcePreview").html("<video src='"+preUrl+"' style='width: 100%;height: 100%' controls=\"controls\"></video>");
+        }else{
+            $("#sourcePreview").html("<p>没有可预览的资源文件</p>")
+        }
+    })
 }
 
 //juicer自定义函数
