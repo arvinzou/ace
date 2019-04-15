@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.LoopCtrlNodeDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.LoopCtrlNode">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="nodeCode" jdbcType="VARCHAR" property="nodeCode"/>
+        <result column="loopName" jdbcType="VARCHAR" property="loopName"/>
+        <result column="loopKey" jdbcType="VARCHAR" property="loopKey"/>
+        <result column="loopType" jdbcType="VARCHAR" property="loopType"/>
+        <result column="loopCurrent" jdbcType="VARCHAR" property="loopCurrent"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, nodeCode, loopName, loopKey, loopType, loopCurrent, state, remark, status, createDate, 
+    updateDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from loop_ctrl_node
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from loop_ctrl_node
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.LoopCtrlNode">
+    insert into loop_ctrl_node (id, nodeCode, loopName, 
+      loopKey, loopType, loopCurrent, 
+      state, remark, status, 
+      createDate, updateDate)
+    values (#{id,jdbcType=VARCHAR}, #{nodeCode,jdbcType=VARCHAR}, #{loopName,jdbcType=VARCHAR}, 
+      #{loopKey,jdbcType=VARCHAR}, #{loopType,jdbcType=VARCHAR}, #{loopCurrent,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.LoopCtrlNode">
+    update loop_ctrl_node
+    set nodeCode = #{nodeCode,jdbcType=VARCHAR},
+      loopName = #{loopName,jdbcType=VARCHAR},
+      loopKey = #{loopKey,jdbcType=VARCHAR},
+      loopType = #{loopType,jdbcType=VARCHAR},
+      loopCurrent = #{loopCurrent,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.LoopCtrlNodeVo"></resultMap>
+
+    <sql id="Vo_Column_List">
+    l.id, l.nodeCode, l.loopName, l.loopKey, l.loopType, l.loopCurrent, l.state, l.remark, l.status, l.createDate,
+    l.updateDate,n.name as nodeName , b.name as buName
+  </sql>
+
+    <sql id="From_Statement">
+    FROM `loop_ctrl_node` l
+     LEFT JOIN top_node n on l.nodeCode=n.`code`
+     LEFT JOIN top_building b on b.`code`=n.buildingCode
+  </sql>
+    <sql id="Where_Condition">
+        where l.status <![CDATA[ <> ]]> 0
+        <if test="condition.loopName !=null and condition.loopName !=&quot;&quot;">
+            and l.loopName LIKE concat('%',#{condition.loopName,jdbcType=VARCHAR},'%')
+        </if>
+
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY l.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="findCount" resultType="int">
+
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <update id="updateState">
+    update loop_ctrl_node set state = #{state,jdbcType=INTEGER} where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

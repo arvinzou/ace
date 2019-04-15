@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.AmmeterNodeDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.AmmeterNode">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="nodeCode" jdbcType="VARCHAR" property="nodeCode" />
+    <result column="itemDecipt" jdbcType="VARCHAR" property="itemDecipt" />
+    <result column="itemKey" jdbcType="VARCHAR" property="itemKey" />
+    <result column="itemValue" jdbcType="VARCHAR" property="itemValue" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.AmmeterNodeVo">
+    <collection property="topNodeVo" ofType="com.huacainfo.ace.glink.vo.TopNodeVo">
+      <id column="t_id" property="id" />
+      <result column="t_code" property="code"/>
+      <result column="name" property="name"/>
+      <result column="depict" property="depict"/>
+      <result column="address" property="address"/>
+      <result column="longitude" property="longitude"/>
+      <result column="latitude" property="latitude"/>
+      <result column="ipv4" property="ipv4"/>
+      <result column="ipv6" property="ipv6"/>
+      <result column="port" property="port"/>
+      <result column="resolutionWidth" property="resolutionWidth"/>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, nodeCode, itemDecipt, itemKey, itemValue, status, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ammeter_node
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ammeter_node
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.glink.model.AmmeterNode">
+    insert into ammeter_node (id, nodeCode, itemDecipt, 
+      itemKey, itemValue, status, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{nodeCode,jdbcType=VARCHAR}, #{itemDecipt,jdbcType=VARCHAR}, 
+      #{itemKey,jdbcType=VARCHAR}, #{itemValue,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.AmmeterNode">
+    update ammeter_node
+    set nodeCode = #{nodeCode,jdbcType=VARCHAR},
+      itemDecipt = #{itemDecipt,jdbcType=VARCHAR},
+      itemKey = #{itemKey,jdbcType=VARCHAR},
+      itemValue = #{itemValue,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    t.id, t.nodeCode, t.itemDecipt, t.itemKey, t.itemValue, t.status, t.createDate,
+    s.id as t_id, s.code as t_code, s.name, s.depict, s.address, s.longitude, s.latitude,
+    s.ipv4, s.ipv6, s.port, s.resolutionWidth
+    from ammeter_node t
+    LEFT JOIN top_node s on s.code = t.nodeCode
+    where t.id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    t.id, t.nodeCode, t.itemDecipt, t.itemKey, t.itemValue, t.status, t.createDate,
+    s.id as t_id, s.code as t_code, s.name, s.depict, s.address, s.longitude, s.latitude,
+    s.ipv4, s.ipv6, s.port, s.resolutionWidth
+    from ammeter_node t
+    LEFT JOIN top_node s on s.code = t.nodeCode
+    where 1=1
+    <if test="condition.id !=null and condition.id !=&quot;&quot;">
+      and t.id =#{condition.id,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.nodeCode !=null and condition.nodeCode !=&quot;&quot;">
+      and t.nodeCode =#{condition.nodeCode,jdbcType=VARCHAR}
+    </if>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    from ammeter_node t
+  </select>
+
+  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
+    select count(*)
+    from ammeter_node t
+    where t.id = #{id}
+  </select>
+
+</mapper>
