@@ -85,7 +85,7 @@
     <tr>
         <td width="10%">\${item.code}</td>
         <td width="20%">\${item.name}</td>
-        <td width="20%">\${item.subareaName}</td>
+        <td width="20%">\${item.topStationVo.subareaName}</td>
         <td width="20%">\${item.address}</td>
         <td width="10%">\${item.animaCount}</td>
         <td>
