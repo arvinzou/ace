@@ -114,7 +114,7 @@
         LEFT join portal.attach a ON a.notice_id=n.id
         WHERE  n.category='4' AND (n.classesId=#{classesId,jdbcType=VARCHAR} OR n.classesId IS NULL)
         ORDER BY pushDate desc
-        limit 0,6
+        limit 0,100
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -152,10 +152,11 @@
         <include refid="whereCondition"/>
     </select>
 
-    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Classroom">
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.policeschool.model.Notice">
         select count(*)
         from notice
         where
+        classesId=#{classesId}
         title=#{title}
     </select>
 

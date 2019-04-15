@@ -83,10 +83,11 @@ function edit(did) {
     window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
 }
 
-function del(did) {
+function del(did, code) {
     startLoad();
     var params = {};
     params.id = did;
+    params.code = code;
     if (confirm("确定要删除吗？")) {
         $.ajax({
             url: contextPath + "/topBuilding/deleteTopBuildingByTopBuildingId",
@@ -100,6 +101,8 @@ function del(did) {
                 if (rst.status == 0) {
                     alert("删除成功！");
                     getPageList();
+                }else{
+                    alert(rst.errorMessage);
                 }
             },
             error: function () {
@@ -251,5 +254,14 @@ function initTopStationList() {
             alert("对不起出错了！");
         }
     });
+}
+
+/**
+ * 查看地址的位置
+ * @param longitude
+ * @param latitude
+ */
+function previewMap(longitude, latitude) {
+    window.location.href = contextPath + '/dynamic/service/topBuilding/map.jsp?longitude='+longitude+'&latitude='+latitude;
 }
 

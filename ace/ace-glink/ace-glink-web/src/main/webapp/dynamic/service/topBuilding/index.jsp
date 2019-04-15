@@ -112,7 +112,7 @@
             ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-            <%--<a href="javascript:del('\${item.id}');">删除</a>--%>
+            <a href="javascript:del('\${item.id}', '\${item.code}');">删除</a>
         </td>
     </tr>
     {@/each}
@@ -228,8 +228,9 @@
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">所在地</label>
-        <div class="col-md-10">
+        <div class="col-md-8">
             \${data.o.address}
+            <a href="javascript:previewMap('\${data.o.longitude}','\${data.o.latitude}')">查看地图</a>
         </div>
     </div>
     <div class="form-group">

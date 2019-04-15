@@ -183,10 +183,15 @@ public class TopBuildingServiceImpl implements TopBuildingService {
     @Override
     public MessageResponse deleteTopBuildingByTopBuildingId(String id, UserProp userProp) throws
             Exception {
-        this.topBuildingDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除建筑物管理", "建筑物管理", id, id,
-                "建筑物管理", userProp);
-        return new MessageResponse(0, "删除成功！");
+        try{
+            this.topBuildingDao.deleteByPrimaryKey(id);
+            this.dataBaseLogService.log("删除建筑物管理", "建筑物管理", id, id,
+                    "建筑物管理", userProp);
+            return new MessageResponse(0, "删除成功！");
+        }catch(Exception e){
+            return new MessageResponse(0, "删除失败！"+e);
+        }
+
     }
 
 

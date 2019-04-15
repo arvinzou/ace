@@ -52,7 +52,7 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from top_building
-    where id = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR};
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
     insert into top_building (id, code, name, 
@@ -83,7 +83,7 @@
       mainTag = #{mainTag,jdbcType=CHAR},
       state = #{state,jdbcType=CHAR},
       subareaCode = #{subareaCode,jdbcType=VARCHAR},
-      stationCode = #{stationCode, jdbcType=VARCHAR}
+      stationCode = #{stationCode, jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR}
     where id = #{id,jdbcType=VARCHAR}

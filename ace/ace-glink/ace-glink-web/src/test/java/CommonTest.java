@@ -1,5 +1,5 @@
-import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.api.LApiToolKit;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class CommonTest {
     @Test
     public void test() throws IOException {
 
-        System.out.println(CommonUtils.getPinYin("阿萨是大所"));
+        System.out.println(LApiToolKit.heart().getData().getInfos().get(0).toString());
     }
 
     private void generatorGUID(int num) {
