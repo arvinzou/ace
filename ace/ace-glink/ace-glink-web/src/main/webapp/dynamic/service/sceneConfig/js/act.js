@@ -14,28 +14,28 @@ function initPage() {
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
-        prev: '<li class="prev" > < a href="javascript:;" > 上一页 < /a></li >',
-        next: '<li class = "next" > < a href = "javascript:;" > 下一页 < /a></li > ',
-        page: '<li class = "page" > < a href = "javascript:;" > {{page}}< /a></li > ',
+        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
             params['start'] = (num - 1) * params.limit;
             params['initType'] = type;
             getPageList();
         }
     });
+}
 
-    $('#fm-search').ajaxForm({
-        beforeSubmit: function (formData, jqForm, options) {
-            $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
-            });
-            params['initType'] = 'init';
-            params['start'] = 0;
-            getPageList();
-            return false;
-        }
-    })
-};
+$('#fm-search').ajaxForm({
+    beforeSubmit: function (formData, jqForm, options) {
+        $.each(formData, function (n, obj) {
+            params[obj.name] = obj.value;
+        });
+        params['initType'] = 'init';
+        params['start'] = 0;
+        getPageList();
+        return false;
+    }
+});
 
 function setParams(key, value) {
     params[key] = value;
@@ -132,8 +132,6 @@ function initEvents() {
         console.log(event);
         $(event.target).addClass("active");
     });
-
-
 }
 
 /*场景设置审核*/

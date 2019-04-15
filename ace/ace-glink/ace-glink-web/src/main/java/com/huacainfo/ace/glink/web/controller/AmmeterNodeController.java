@@ -1,6 +1,5 @@
 package com.huacainfo.ace.glink.web.controller;
 
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,10 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
-import com.huacainfo.ace.glink.model.AmmeterArea;
-import com.huacainfo.ace.glink.service.AmmeterAreaService;
-import com.huacainfo.ace.glink.vo.AmmeterAreaVo;
-import com.huacainfo.ace.glink.vo.AmmeterAreaQVo;
+import com.huacainfo.ace.glink.model.AmmeterNode;
+import com.huacainfo.ace.glink.service.AmmeterNodeService;
+import com.huacainfo.ace.glink.vo.AmmeterNodeVo;
+import com.huacainfo.ace.glink.vo.AmmeterNodeQVo;
 import org.springframework.web.multipart.MultipartFile;
 import com.huacainfo.ace.portal.vo.MongoFile;
 
@@ -28,44 +27,40 @@ import java.util.Map;
 import java.util.List;
 
 @Controller
-@RequestMapping("/ammeterArea")
+@RequestMapping("/ammeterNode")
 /**
- * @author: Arvin
+ * @author: luocan
  * @version: 2019-04-15
- * @Description: TODO(故障报警 - 短信 - 调度映射关系)
+ * @Description: TODO(节点能耗信息)
  */
-public class AmmeterAreaController extends GLinkBaseController {
+public class AmmeterNodeController extends GLinkBaseController {
 
 
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private AmmeterAreaService ammeterAreaService;
+    private AmmeterNodeService ammeterNodeService;
 
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(故障报警 - 短信 - 调度映射关系分页查询)
+     * @Description: TODO(节点能耗信息分页查询)
      * @param: @param condition
      * @param: @param page
      * @param: @return
      * @param: @throws Exception
      * @return: PageResult
-     * <AmmeterAreaVo>
-     * @author: Arvin
+     * <AmmeterNodeVo>
+     * @author: luocan
      * @version: 2019-04-15
      */
-    @RequestMapping(value = "/findAmmeterAreaList")
+    @RequestMapping(value = "/findAmmeterNodeList")
     @ResponseBody
-    public PageResult<AmmeterAreaVo> findAmmeterAreaList(AmmeterAreaQVo condition, PageParamNoChangeSord page) throws Exception {
+    public PageResult
+            <AmmeterNodeVo> findAmmeterNodeList(AmmeterNodeQVo condition, PageParamNoChangeSord page) throws Exception {
 
-        if (StringUtil.isNotEmpty(condition.getStartDate())) {
-            condition.setStartDate(condition.getStartDate() + " 00:00:00");
-        }
-        if (StringUtil.isNotEmpty(condition.getEndDate())) {
-            condition.setEndDate(condition.getEndDate() + " 23:59:59");
-        }
-        PageResult<AmmeterAreaVo> rst = this.ammeterAreaService.findAmmeterAreaList(condition, page.getStart(),
+        PageResult
+                <AmmeterNodeVo> rst = this.ammeterNodeService.findAmmeterNodeList(condition, page.getStart(),
                 page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
@@ -76,90 +71,90 @@ public class AmmeterAreaController extends GLinkBaseController {
 
     /**
      * @throws
-     * @Title:insertAmmeterArea
-     * @Description: TODO(添加故障报警 - 短信 - 调度映射关系)
+     * @Title:insertAmmeterNode
+     * @Description: TODO(添加节点能耗信息)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
-     * @author: Arvin
+     * @author: luocan
      * @version: 2019-04-15
      */
-    @RequestMapping(value = "/insertAmmeterArea")
+    @RequestMapping(value = "/insertAmmeterNode")
     @ResponseBody
-    public MessageResponse insertAmmeterArea(String jsons) throws Exception {
-        AmmeterArea obj = JSON.parseObject(jsons, AmmeterArea.class);
-        return this.ammeterAreaService.insertAmmeterArea(obj, this.getCurUserProp());
+    public MessageResponse insertAmmeterNode(String jsons) throws Exception {
+        AmmeterNode obj = JSON.parseObject(jsons, AmmeterNode.class);
+        return this.ammeterNodeService.insertAmmeterNode(obj, this.getCurUserProp());
     }
 
     /**
      * @throws
-     * @Title:updateAmmeterArea
-     * @Description: TODO(更新故障报警 - 短信 - 调度映射关系)
+     * @Title:updateAmmeterNode
+     * @Description: TODO(更新节点能耗信息)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
-     * @author: Arvin
+     * @author: luocan
      * @version: 2019-04-15
      */
-    @RequestMapping(value = "/updateAmmeterArea")
+    @RequestMapping(value = "/updateAmmeterNode")
     @ResponseBody
-    public MessageResponse updateAmmeterArea(String jsons) throws Exception {
-        AmmeterArea obj = JSON.parseObject(jsons, AmmeterArea.class);
-        return this.ammeterAreaService.updateAmmeterArea(obj, this.getCurUserProp());
+    public MessageResponse updateAmmeterNode(String jsons) throws Exception {
+        AmmeterNode obj = JSON.parseObject(jsons, AmmeterNode.class);
+        return this.ammeterNodeService.updateAmmeterNode(obj, this.getCurUserProp());
     }
 
     /**
      * @throws
-     * @Title:selectAmmeterAreaByPrimaryKey
-     * @Description: TODO(获取故障报警 - 短信 - 调度映射关系)
+     * @Title:selectAmmeterNodeByPrimaryKey
+     * @Description: TODO(获取节点能耗信息)
      * @param: @param id
      * @param: @throws Exception
-     * @return: SingleResult<AmmeterArea>
-     * @author: Arvin
+     * @return: SingleResult<AmmeterNode>
+     * @author: luocan
      * @version: 2019-04-15
      */
-    @RequestMapping(value = "/selectAmmeterAreaByPrimaryKey")
+    @RequestMapping(value = "/selectAmmeterNodeByPrimaryKey")
     @ResponseBody
     public SingleResult
-            <AmmeterAreaVo> selectAmmeterAreaByPrimaryKey(String id) throws Exception {
-        return this.ammeterAreaService.selectAmmeterAreaByPrimaryKey(id);
+            <AmmeterNodeVo> selectAmmeterNodeByPrimaryKey(String id) throws Exception {
+        return this.ammeterNodeService.selectAmmeterNodeByPrimaryKey(id);
     }
 
     /**
      * @throws
-     * @Title:deleteAmmeterAreaByAmmeterAreaId
-     * @Description: TODO(删除故障报警 - 短信 - 调度映射关系)
+     * @Title:deleteAmmeterNodeByAmmeterNodeId
+     * @Description: TODO(删除节点能耗信息)
      * @param: @param jsons
      * @param: @throws Exception
      * @return: MessageResponse
-     * @author: Arvin
+     * @author: luocan
      * @version: 2019-04-15
      */
-    @RequestMapping(value = "/deleteAmmeterAreaByAmmeterAreaId")
+    @RequestMapping(value = "/deleteAmmeterNodeByAmmeterNodeId")
     @ResponseBody
-    public MessageResponse deleteAmmeterAreaByAmmeterAreaId(String jsons) throws Exception {
+    public MessageResponse deleteAmmeterNodeByAmmeterNodeId(String jsons) throws Exception {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
-        return this.ammeterAreaService.deleteAmmeterAreaByAmmeterAreaId(id, this.getCurUserProp());
+        return this.ammeterNodeService.deleteAmmeterNodeByAmmeterNodeId(id, this.getCurUserProp());
     }
 
     /**
      * @throws
      * @Title:audit
-     * @Description: TODO(审核故障报警 - 短信 - 调度映射关系)
+     * @Description: TODO(审核节点能耗信息)
      * @param: @param id bean.id
      * @param: @param rst 审核结果 3-通过 4-拒绝
      * @param: @param message 审核说明
      * @param: @throws Exception
      * @return: MessageResponse
-     * @author: Arvin
+     * @author: luocan
      * @version: 2019-04-15
      */
     @RequestMapping(value = "/audit")
     @ResponseBody
     public MessageResponse audit(String id, String rst, String message) throws Exception {
 
-        return this.ammeterAreaService.audit(id, rst, message, this.getCurUserProp());
+        return this.ammeterNodeService.audit(id, rst, message, this.getCurUserProp());
     }
 
 
@@ -172,7 +167,7 @@ public class AmmeterAreaController extends GLinkBaseController {
      * @param: @return
      * @param: @throws Exception
      * @return: MessageResponse
-     * @author: Arvin
+     * @author: luocan
      * @version:2019-04-15
      */
     @RequestMapping(value = "/importXls")
@@ -203,8 +198,6 @@ public class AmmeterAreaController extends GLinkBaseController {
                 list = utils.readExcelByPOI(obj.getInputStream(), 2);
             }
         }
-        return this.ammeterAreaService.importXls(list, this.getCurUserProp());
+        return this.ammeterNodeService.importXls(list, this.getCurUserProp());
     }
-
-
 }

@@ -9,13 +9,17 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title>场景设置</title>
+    <title>节点能耗信息</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
 
     <link rel="stylesheet" href="css/style.css">
+    <%--sweetalert--%>
+    <script src="${pageContext.request.contextPath}/content/common/js/sweetalert/js/sweet-alert.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="${pageContext.request.contextPath}/content/common/js/sweetalert/css/sweet-alert.css">
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -57,11 +61,11 @@
                                class="form-control"
                                placeholder="请输入直播名称">
                         <span class="input-group-btn">
-                            <button class="btn  btn-default search_btn"
-                                    type="submit">
-                                    搜索
-                            </button>
-                        </span>
+                                                                        <button class="btn  btn-default search_btn"
+                                                                                type="submit">
+                                                                                搜索
+                                                                        </button>
+                                                                    </span>
                     </div>
                 </form>
             </div>
@@ -73,12 +77,14 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-
-                    <th width="10%"> 策略编码</th>
-                    <th width="10%"> 策略名称</th>
-                    <th width="10%"> 策略模式</th>
-                    <th width="10%"> 状态</th>
-                    <th width="15%">操作</th>
+                                                                        <th width="10%"> 主键</th>
+                                                    <th width="10%"> 节点编码</th>
+                                                    <th width="10%"> 字段描述</th>
+                                                    <th width="10%"> 字段键</th>
+                                                    <th width="10%"> 字段值</th>
+                                                    <th width="10%"> 状态 </th>
+                                                    <th width="10%"> 创建日期</th>
+                                                                <th width="15%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -104,10 +110,14 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \${item.code}</td>
-        <td> \${item.name}</td>
-        <td> \${item.mode}</td>
-        <td>
+                                    <td> \&{item.id}</td>
+                            <td> \&{item.nodeCode}</td>
+                            <td> \&{item.itemDecipt}</td>
+                            <td> \&{item.itemKey}</td>
+                            <td> \&{item.itemValue}</td>
+                            <td> \&{item.status}</td>
+                            <td> \&{item.createDate}</td>
+                            <td>
             {@if item.status==0}
             <span class="label label-lg label-danger">删除</span>
             {@else if item.status==1}
@@ -233,97 +243,49 @@
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
 
-        <div class="form-group">
-            <label class="col-md-2 view-label">主键</label>
-            <div class="col-md-10">
-                \${id}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">行政区划</label>
-            <div class="col-md-10">
-                \${district}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">分类</label>
-            <div class="col-md-10">
-                \${category}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">节点/站点编码</label>
-            <div class="col-md-10">
-                \${linkCode}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">策略编码</label>
-            <div class="col-md-10">
-                \${code}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">策略名称</label>
-            <div class="col-md-10">
-                \${name}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">策略描述</label>
-            <div class="col-md-10">
-                \${decipt}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">策略模式</label>
-            <div class="col-md-10">
-                \${mode}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">执行周期(数组)</label>
-            <div class="col-md-10">
-                \${weeks}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">开始执行时间</label>
-            <div class="col-md-10">
-                \${startDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">结束执行时间</label>
-            <div class="col-md-10">
-                \${endDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">备注</label>
-            <div class="col-md-10">
-                \${remark}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">状态 </label>
-            <div class="col-md-10">
-                \${status}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建日期</label>
-            <div class="col-md-10">
-                \${createDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">修改日期</label>
-            <div class="col-md-10">
-                \${updateDate}
-            </div>
-        </div>
-
+                                    <div class="form-group">
+                    <label class="col-md-2 view-label">主键</label>
+                    <div class="col-md-10">
+                        \${id}
+                    </div>
+                </div>
+                            <div class="form-group">
+                    <label class="col-md-2 view-label">节点编码</label>
+                    <div class="col-md-10">
+                        \${nodeCode}
+                    </div>
+                </div>
+                            <div class="form-group">
+                    <label class="col-md-2 view-label">字段描述</label>
+                    <div class="col-md-10">
+                        \${itemDecipt}
+                    </div>
+                </div>
+                            <div class="form-group">
+                    <label class="col-md-2 view-label">字段键</label>
+                    <div class="col-md-10">
+                        \${itemKey}
+                    </div>
+                </div>
+                            <div class="form-group">
+                    <label class="col-md-2 view-label">字段值</label>
+                    <div class="col-md-10">
+                        \${itemValue}
+                    </div>
+                </div>
+                            <div class="form-group">
+                    <label class="col-md-2 view-label">状态 </label>
+                    <div class="col-md-10">
+                        \${status}
+                    </div>
+                </div>
+                            <div class="form-group">
+                    <label class="col-md-2 view-label">创建日期</label>
+                    <div class="col-md-10">
+                        \${createDate}
+                    </div>
+                </div>
+                    
         <h4>结果</h4>
         <hr>
         <div class="form-group " id="operation">
@@ -351,97 +313,49 @@
 </script>
 
 <script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">行政区划</label>
-        <div class="col-md-10">
-            \${district}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">分类</label>
-        <div class="col-md-10">
-            \${category}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">节点/站点编码</label>
-        <div class="col-md-10">
-            \${linkCode}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">策略编码</label>
-        <div class="col-md-10">
-            \${code}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">策略名称</label>
-        <div class="col-md-10">
-            \${name}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">策略描述</label>
-        <div class="col-md-10">
-            \${decipt}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">策略模式</label>
-        <div class="col-md-10">
-            \${mode}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">执行周期(数组)</label>
-        <div class="col-md-10">
-            \${weeks}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">开始执行时间</label>
-        <div class="col-md-10">
-            \${startDate}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">结束执行时间</label>
-        <div class="col-md-10">
-            \${endDate}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">备注</label>
-        <div class="col-md-10">
-            \${remark}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">状态 </label>
-        <div class="col-md-10">
-            \${status}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建日期</label>
-        <div class="col-md-10">
-            \${createDate}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">修改日期</label>
-        <div class="col-md-10">
-            \${updateDate}
-        </div>
-    </div>
-</script>
+                                <div class="form-group">
+                <label class="col-md-2 view-label">主键</label>
+                <div class="col-md-10">
+                    \${id}
+                </div>
+            </div>
+                        <div class="form-group">
+                <label class="col-md-2 view-label">节点编码</label>
+                <div class="col-md-10">
+                    \${nodeCode}
+                </div>
+            </div>
+                        <div class="form-group">
+                <label class="col-md-2 view-label">字段描述</label>
+                <div class="col-md-10">
+                    \${itemDecipt}
+                </div>
+            </div>
+                        <div class="form-group">
+                <label class="col-md-2 view-label">字段键</label>
+                <div class="col-md-10">
+                    \${itemKey}
+                </div>
+            </div>
+                        <div class="form-group">
+                <label class="col-md-2 view-label">字段值</label>
+                <div class="col-md-10">
+                    \${itemValue}
+                </div>
+            </div>
+                        <div class="form-group">
+                <label class="col-md-2 view-label">状态 </label>
+                <div class="col-md-10">
+                    \${status}
+                </div>
+            </div>
+                        <div class="form-group">
+                <label class="col-md-2 view-label">创建日期</label>
+                <div class="col-md-10">
+                    \${createDate}
+                </div>
+            </div>
+                    </script>
 <style>
     .cover {
         width: 70px;

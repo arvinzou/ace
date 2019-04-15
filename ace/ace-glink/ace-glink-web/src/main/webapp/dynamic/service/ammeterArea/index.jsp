@@ -16,10 +16,8 @@
     <jsp:include page="/dynamic/common/header.jsp"/>
 
     <link rel="stylesheet" href="css/style.css">
-    <%--sweetalert--%>
-    <script src="${pageContext.request.contextPath}/content/common/js/sweetalert/js/sweet-alert.min.js"></script>
     <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/content/common/js/sweetalert/css/sweet-alert.css">
+          href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -28,14 +26,29 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
+            <div class="col-md-6">
 
             </div>
 
-            <div class="col-md-9">
-
+            <div class="col-md-6">
                 <form id="fm-search">
-
+                    <div style="width:10%;float:left;line-height:35px"> 时间</div>
+                    <div class="input-group date form_datetime" style="width:30%;float:left;border: 1px solid #efefef;">
+                        <input id="p-startDt" type="text" size="16" name="startDate" readonly="" class="form-control">
+                    </div>
+                    <span class="input-group-addon" style="width:10%;float:left;"><font
+                            style="vertical-align: inherit;"><font
+                            style="vertical-align: inherit;"> 至 </font></font></span>
+                    <div class="input-group date form_datetime"
+                         style="width: 35%;float:left;border: 1px solid #efefef;">
+                        <input id="p-endDt" type="text" size="16" name="endDate" readonly="" class="form-control">
+                    </div>
+                    <span class="input-group-btn" style="width: 10%;float: left;">
+                            <button class="btn  btn-default search_btn"
+                                    type="submit">
+                                    搜索
+                            </button>
+                        </span>
                 </form>
             </div>
 
@@ -324,5 +337,9 @@
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>

@@ -17,9 +17,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <%--sweetalert--%>
-    <script src="${pageContext.request.contextPath}/content/common/js/sweetalert/js/sweet-alert.min.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/content/common/js/sweetalert/css/sweet-alert.css">
+
     <%--datatables--%>
     <link href="${portalPath}/content/common/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet"
           type="text/css"/>
@@ -39,9 +37,7 @@
             <div class="col-md-5">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
             </div>
-
             <div class="col-md-7">
-
                 <form id="fm-search">
                     <%--分区筛选--%>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
