@@ -45,7 +45,7 @@ function initEvents() {
         },
         rules: {
             district: {required: true, maxlength: 50},
-            category: {required: true, maxlength: 10},
+            linkType: {required: true, maxlength: 10},
             linkCode: {required: true, maxlength: 50},
             code: {required: true, maxlength: 100},
             name: {required: true, maxlength: 50}
@@ -54,7 +54,7 @@ function initEvents() {
             district: {
                 required: "请输入行政区划",
                 maxlength: "行政区划字符长度不能超过50"
-            }, category: {
+            }, linkType: {
                 required: "请输入分类",
                 maxlength: "分类字符长度不能超过10"
             }, linkCode: {

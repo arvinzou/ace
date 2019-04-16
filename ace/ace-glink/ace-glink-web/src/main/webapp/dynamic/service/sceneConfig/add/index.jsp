@@ -51,7 +51,7 @@
                     <span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="category" maxlength="10"
+                    <input type="text" class="form-control" name="linkType" maxlength="10"
                            placeholder="请输入分类（建议字数在14个字以内，不超过10个字)">
                     <span class="help-block"></span>
                 </div>

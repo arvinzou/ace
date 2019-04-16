@@ -32,9 +32,9 @@
 
                 <form id="fm-search">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('linkType','');">全部</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('linkType','1');">图文</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('linkType','2');">视频</button>
                     </div>
                     <div class="input-group">
                         <input type="text"
@@ -230,7 +230,7 @@
         <div class="form-group">
             <label class="col-md-2 view-label">分类</label>
             <div class="col-md-10">
-                \${data.o.category}
+                \${data.o.linkType}
             </div>
         </div>
         <div class="form-group">
@@ -348,7 +348,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">分类</label>
         <div class="col-md-10">
-            \${data.o.category}
+            \${data.o.linkType}
         </div>
     </div>
     <div class="form-group">
