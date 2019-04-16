@@ -68,6 +68,12 @@ public class WClassesController extends BisBaseController {
 
     }
 
+    @RequestMapping(value = "/selectClass")
+    @ResponseBody
+    public SingleResult<ClassesVo> selectClasse(String name) throws Exception {
+        return this.classesService.selectClasse(name);
+    }
+
     @RequestMapping(value = "/getMyClasses")
     @ResponseBody
     public ResultResponse getMyClasses() throws Exception {

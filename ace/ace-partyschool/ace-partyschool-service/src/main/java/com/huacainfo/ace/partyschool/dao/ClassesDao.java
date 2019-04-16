@@ -22,6 +22,7 @@ public interface ClassesDao {
 
 
     ClassesVo selectVoByPrimaryKey(String id);
+    ClassesVo selectClasse(String name);
 
     ClassesVo getClassesInfo(String id);
 

@@ -63,6 +63,18 @@ public class ClassroomServiceImpl implements ClassroomService {
         return rst;
     }
 
+    @Override
+    public PageResult<ClassroomVo> selectClassroomList(ClassroomQVo condition, int start, int limit, String orderBy) throws Exception {
+        PageResult<ClassroomVo> rst = new PageResult<>();
+        List<ClassroomVo> list = this.classroomDao.selectClassroomList(condition, start, limit, orderBy);
+        rst.setRows(list);
+        if (start <= 1) {
+            int allRows = this.classroomDao.findCount(condition);
+            rst.setTotal(allRows);
+        }
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:insertClassroom

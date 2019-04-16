@@ -2,34 +2,35 @@ var classId = '1';
 var nowDate;
 var dateData;
 var mySwiper;
-var weekStr=['周日','周一','周二','周三','周四','周五','周六'];
+var weekStr = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
 var timerModal;
 
 $(function () {
     clock_12h();
-    dateData=new Date();
+    dateData = new Date();
     initSwriper();
     initClassRoom();
-     // initpdf();
+    // initpdf();
     initClock();
-    $('.info_box').on('click','.active_course',viewCourse);
-    $('.info_box').on('click','.active_classInfo',viewClassInfo);
-    $('.weeekClass').on('click','.nextWeek',nextWeek);
-    $('.weeekClass').on('click','.prevWeek',prevWeek);
-    $('.modal').on('click','.hideModal',hideModal);
-    $('body').on('click','.modal',timerClearModal);
-    $('.classInfo').on('click','.active_photos',viewPhotos);
-    $('.classInfo').on('click','.active_student',viewStudent);
-    $('.content').on('click','.active_changeRoom',changeRoom);
-    $('.classRoom').on('click','.roomItem',chooesRoom);
+    ClockData();
+    $('.info_box').on('click', '.active_course', viewCourse);
+    $('.info_box').on('click', '.active_classInfo', viewClassInfo);
+    $('.weeekClass').on('click', '.nextWeek', nextWeek);
+    $('.weeekClass').on('click', '.prevWeek', prevWeek);
+    $('.modal').on('click', '.hideModal', hideModal);
+    $('body').on('click', '.modal', timerClearModal);
+    $('.classInfo').on('click', '.active_photos', viewPhotos);
+    $('.classInfo').on('click', '.active_student', viewStudent);
+    // $('.content').on('click','.active_changeRoom',changeRoom);
+    // $('.classRoom').on('click','.roomItem',chooesRoom);
 
 
 })
 
 
 function initSwriper() {
-    mySwiper  = new Swiper ('.swiper-container', {
-        autoplay:{
+    mySwiper = new Swiper('.swiper-container', {
+        autoplay: {
             delay: 10000
         },
         // 如果需要前进后退按钮
@@ -45,12 +46,12 @@ function viewStudent() {
     var url = contextPath + "/www/classes/findStudentList";
     var data = {
         classId: classId,
-        start:0,
-        limit:500
+        start: 0,
+        limit: 500
     }
     $.getJSON(url, data, function (rst) {
-        if(rst.status==0){
-            renderPage('student',rst.rows,'tpl-student');
+        if (rst.status == 0) {
+            renderPage('student', rst.rows, 'tpl-student');
             $('.modal4').show();
         }
     });
@@ -63,26 +64,26 @@ function getNotices() {
         classesId: classId,
     }
     $.getJSON(url, data, function (rst) {
-        if(rst.status==0){
+        if (rst.status == 0) {
             mySwiper.removeAllSlides();
-            var datas=rst.data;
+            var datas = rst.data;
             var temp;
-            for(var i=0;i<datas.length;i++){
-                var item=datas[i];
-                if(item.fileUrl){
-                    if(item.fileUrl.lastIndexOf('.pdf')!=-1){
-                        temp=pdfTemp.replace('#index#',i);
+            for (var i = 0; i < datas.length; i++) {
+                var item = datas[i];
+                if (item.fileUrl) {
+                    if (item.fileUrl.lastIndexOf('.pdf') != -1) {
+                        temp = pdfTemp.replace('#index#', i);
                         mySwiper.appendSlide(temp);
-                        initpdf(item.fileUrl,i);
+                        initpdf(item.fileUrl, i);
                         continue;
-                    }else if(item.fileUrl.lastIndexOf('.jpg')!=-1||item.fileUrl.lastIndexOf('.png')!=-1||item.fileUrl.lastIndexOf('gif')!=-1){
-                        temp=imgTemps.replace('#url#',item.url);
+                    } else if (item.fileUrl.lastIndexOf('.jpg') != -1 || item.fileUrl.lastIndexOf('.png') != -1 || item.fileUrl.lastIndexOf('gif') != -1) {
+                        temp = imgTemps.replace('#url#', item.fileUrl);
                         mySwiper.appendSlide(temp);
                         continue;
                     }
                 }
-                if(item.content){
-                    temp=txtTemp.replace('#text#',item.content)
+                if (item.content) {
+                    temp = txtTemp.replace('#text#', item.content)
                     mySwiper.appendSlide(temp);
                 }
             }
@@ -91,36 +92,53 @@ function getNotices() {
 }
 
 
-var imgTemps='<div class="swiper-slide"><div class="imgMessage"><img src="#url#" alt=""></div></div>';
-var txtTemp='<div class="swiper-slide"><div class="txtMessage">#text#</div></div>';
-var pdfTemp='<div class="swiper-slide"><div class="pdfMessage" id="fileMessage#index#"></div></div>';
+var imgTemps = '<div class="swiper-slide"><div class="imgMessage"><img src="#url#" alt=""></div></div>';
+var txtTemp = '<div class="swiper-slide"><div class="txtMessage">#text#</div></div>';
+var pdfTemp = '<div class="swiper-slide"><div class="pdfMessage" id="fileMessage#index#"></div></div>';
 
 
-
-
-function initClassRoom(){
-    classId=localStorage.getItem("classId");
-    if(!classId){
-        changeRoom();
-        return;
-    }
-    initData();
+function initClassRoom() {
+    var roomname=GetQueryString('roomname');
+    getClassId(roomname);
+    $('.room_name').text(roomname);
 }
 
-function chooesRoom() {
+function getClassId(roomname) {
+    var url = contextPath + "/www/classes/selectClass";
+    var data = {
+       name:roomname
+    }
+    $.getJSON(url, data, function (rst) {
+        if(rst.status==0&&rst.value){
+            classId=rst.value.id;
+            getData();
+        }else{
+
+        }
+    });
+}
+
+
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+    if (r != null) return decodeURI( r[2] );
+    return null;
+}
+
+/*function chooesRoom() {
     classId=$(this).data('id');
     if(!classId){
         alert("刷新重试");
         return;
     }
     localStorage.setItem("classId",classId);
-    initData();
+    getData();
     $('.modal5').hide();
-}
+}*/
 
 
-
-function changeRoom(){
+/*function changeRoom(){
     var url = contextPath + "/www/classes/findClassList";
     var data = {
         status:1,
@@ -133,27 +151,26 @@ function changeRoom(){
             $('.modal5').show();
         }
     });
-}
+}*/
 
 
 function viewPhotos() {
     var url = contextPath + "/www/files/findFilesListVo";
     var data = {
-        category:2,
+        category: 2,
         classesId: classId,
-        start:0,
-        limit:50
+        start: 0,
+        limit: 50
     }
     $.getJSON(url, data, function (rst) {
-        if(rst.status==0){
+        if (rst.status == 0) {
             $('#imgTemp').viewer('destroy');
-            renderPage('imgTemp',rst.rows,'tpl-imgTemp');
+            renderPage('imgTemp', rst.rows, 'tpl-imgTemp');
             $('.modal3').show();
             $('#imgTemp').viewer();
         }
     });
 }
-
 
 
 function viewClassInfo() {
@@ -162,39 +179,38 @@ function viewClassInfo() {
 }
 
 
-
 function hideModal() {
     $(this).closest('.modal').hide();
 }
 
 function nextWeek() {
-    dateData=addDate(dateData,7);
+    dateData = addDate(dateData, 7);
     viewCourse();
 }
 
 function prevWeek() {
-    dateData=addDate(dateData,-7);
+    dateData = addDate(dateData, -7);
     viewCourse();
 }
 
 
-function viewCourse(){
+function viewCourse() {
     var url = contextPath + "/www/classSchedule/findMyClassSchedule";
     var data = {
         weekDate: getDateTimeStr(dateData),
         classList: classId
     }
     $.getJSON(url, data, function (rst) {
-        if(rst.status==0){
+        if (rst.status == 0) {
             $('#weeekCourseList').empty();
             viewCourseTable();
-            var datas=rst.data;
-            var len=datas.length;
-            for(var i=0;i<len;i++){
-                var item=datas[i];
-                var f=item.courseDate.substring(6,10);
-                $('.'+f+item.courseIndex+'Teacher').text(item.teacher.name);
-                $('.'+f+item.courseIndex+'Course').text(item.course.name);
+            var datas = rst.data;
+            var len = datas.length;
+            for (var i = 0; i < len; i++) {
+                var item = datas[i];
+                var f = item.courseDate.substring(5, 10);
+                $('.' + f + item.courseIndex + 'Teacher').text(item.teacher.name);
+                $('.' + f + item.courseIndex + 'Course').text(item.course.name);
             }
         }
     });
@@ -203,21 +219,21 @@ function viewCourse(){
 
 
 function viewCourseTable() {
-    var fristDayDate=GetMonday(dateData);
-    for(var i=0;i<7;i++){
-        var dayDateString=getDateTimeStr(fristDayDate);
-        var dayStyle1=dayDateString.substring(6,10);
-        var dayStyle2=dayStyle1.replace('-','.');
-        var weekString=weekStr[fristDayDate.getDay()];
-        var temp=dayCourse;
-        if(i>4){
-            temp=dayCourseE
+    var fristDayDate = GetMonday(dateData);
+    for (var i = 0; i < 7; i++) {
+        var dayDateString = getDateTimeStr(fristDayDate);
+        var dayStyle1 = dayDateString.substring(5, 10);
+        var dayStyle2 = dayStyle1.replace('-', '.');
+        var weekString = weekStr[fristDayDate.getDay()];
+        var temp = dayCourse;
+        if (i > 4) {
+            temp = dayCourseE
         }
-        temp=temp.replace(' #dateString#',dayStyle2);
-        temp=temp.replace('[weekString]',weekString);
-        temp = temp.replace( /#dateString#/g , dayStyle1 );
+        temp = temp.replace(' #dateString#', dayStyle2);
+        temp = temp.replace('[weekString]', weekString);
+        temp = temp.replace(/#dateString#/g, dayStyle1);
         $('#weeekCourseList').append($(temp));
-        fristDayDate=addDate(fristDayDate,1);
+        fristDayDate = addDate(fristDayDate, 1);
     }
 }
 
@@ -226,11 +242,10 @@ function getDateTimeStr(dateData) {
     var year = dateData.getFullYear();
     var month = dateData.getMonth() + 1;
     var date = dateData.getDate();
-    month=month>9?month:'0'+month;
-    date=date>9?date:'0'+date;
+    month = month > 9 ? month : '0' + month;
+    date = date > 9 ? date : '0' + date;
     return year + '-' + month + '-' + date + ' 00:00:00';
 }
-
 
 
 function GetMonday(dd) {
@@ -240,11 +255,11 @@ function GetMonday(dd) {
     var y = dd.getFullYear();
     var m = dd.getMonth(); //获取月份
     var d = dd.getDate();
-    return new Date(y,m,d);
+    return new Date(y, m, d);
 }
 
 
-var dayCourse='     <div class="dayClass">\n' +
+var dayCourse = '     <div class="dayClass">\n' +
     '      <div class="left">\n' +
     '       <p> #dateString#</p>\n' +
     '       <p>[weekString]</p>\n' +
@@ -267,7 +282,7 @@ var dayCourse='     <div class="dayClass">\n' +
     '      </div>\n' +
     '     </div>';
 
-var dayCourseE='     <div class="dayClass">\n' +
+var dayCourseE = '     <div class="dayClass">\n' +
     '      <div class="left">\n' +
     '       <p> #dateString#</p>\n' +
     '       <p>[weekString]</p>\n' +
@@ -291,26 +306,17 @@ var dayCourseE='     <div class="dayClass">\n' +
     '     </div>';
 
 
-
-/*初始化信息*/
-function initData() {
-    getClassinfo();
-    getCourseList();
-    getNotices();
-}
-
 function getClassinfo() {
-    var url = contextPath+ "/www/classes/getClassesInfo";
+    var url = contextPath + "/www/classes/getClassesInfo";
     var data = {
         classId: classId
     }
     $.getJSON(url, data, function (rst) {
-        if(rst.status==0){
-            var datas=rst.data;
+        if (rst.status == 0) {
+            var datas = rst.data;
             $('.class_name').text(datas.list.name);
             $('.class_people').text(datas.count);
-            $('.room_name').text(datas.list.classroom.name);
-            renderPage('classTemp',datas,'tpl-classTemp');
+            renderPage('classTemp', datas, 'tpl-classTemp');
         }
     });
 }
@@ -325,16 +331,11 @@ function renderPage(IDom, data, tempId) {
 }
 
 
-
-function addDate(dateData,day){
-    dateData.setDate(dateData.getDate()+day);
-    var m=dateData.getMonth();
-    return new Date(dateData.getFullYear(),m,dateData.getDate());
+function addDate(dateData, day) {
+    dateData.setDate(dateData.getDate() + day);
+    var m = dateData.getMonth();
+    return new Date(dateData.getFullYear(), m, dateData.getDate());
 }
-
-
-
-
 
 
 function getCourseList() {
@@ -344,13 +345,13 @@ function getCourseList() {
         classList: classId
     }
     $.getJSON(url, data, function (rst) {
-        if(rst.status==0){
-            var datas=rst.data;
+        if (rst.status == 0) {
+            var datas = rst.data;
             revertClass();
-            for(var i=0;i<datas.length;i++){
-                var icon=datas[i].courseIndex;
-                $('.'+icon+'Class').text(datas[i].course.name);
-                $('.'+icon+'ClassTeacher').text(datas[i].course.teacherNames);
+            for (var i = 0; i < datas.length; i++) {
+                var icon = datas[i].courseIndex;
+                $('.' + icon + 'Class').text(datas[i].course.name);
+                $('.' + icon + 'ClassTeacher').text(datas[i].course.teacherNames);
             }
         }
     });
@@ -376,15 +377,28 @@ function timerClearModal() {
     timerModal = setInterval(function () {
         $('.modal').hide();
         $('#imgTemp').viewer('hide');
-        initData();
     }, 60000);
 }
 
 
-function initpdf(url,index) {
+function ClockData() {
+    setInterval(function () {
+        getData();
+    }, 180000);
+}
+
+
+function getData() {
+    getClassinfo();
+    getCourseList();
+    getNotices();
+}
+
+
+function initpdf(url, index) {
     var success = new PDFObject({
         url: url
-    }).embed("fileMessage"+index);
+    }).embed("fileMessage" + index);
 }
 
 var PDFObject = function (y) {

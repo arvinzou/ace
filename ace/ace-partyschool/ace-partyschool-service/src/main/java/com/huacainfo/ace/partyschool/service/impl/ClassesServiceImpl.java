@@ -234,6 +234,13 @@ public class ClassesServiceImpl implements ClassesService {
         return rst;
     }
 
+    @Override
+    public SingleResult<ClassesVo> selectClasse(String name) throws Exception {
+        SingleResult<ClassesVo> rst = new SingleResult<>();
+        rst.setValue(this.classesDao.selectClasse(name));
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:selectClassesByPrimaryKeyV

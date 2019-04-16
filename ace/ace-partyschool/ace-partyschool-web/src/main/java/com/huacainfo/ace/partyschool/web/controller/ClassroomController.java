@@ -1,5 +1,6 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,7 @@ public class ClassroomController extends BisBaseController {
      */
     @RequestMapping(value = "/findClassroomList")
     @ResponseBody
-    public PageResult<ClassroomVo> findClassroomList(ClassroomQVo condition,
-                                                     PageParamNoChangeSord page) throws Exception {
-
+    public PageResult<ClassroomVo> findClassroomList(ClassroomQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<ClassroomVo> rst = this.classroomService
                 .findClassroomList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
@@ -59,6 +58,21 @@ public class ClassroomController extends BisBaseController {
 
         return rst;
     }
+
+    @RequestMapping(value = "/selectClassroomList")
+    @ResponseBody
+    public PageResult<ClassroomVo> selectClassroomList(ClassroomQVo condition, PageParamNoChangeSord page,String q) throws Exception {
+        if(!CommonUtils.isBlank(q)){
+            condition.setName(q);
+        }
+        PageResult<ClassroomVo> rst = this.classroomService.selectClassroomList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return rst;
+    }
+
 
     /**
      * @throws

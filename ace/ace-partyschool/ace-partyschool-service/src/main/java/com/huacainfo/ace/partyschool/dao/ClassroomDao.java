@@ -26,6 +26,11 @@ public interface ClassroomDao {
                                @Param("limit") int limit,
                                @Param("orderBy") String orderBy);
 
+    List<ClassroomVo> selectClassroomList(@Param("condition") ClassroomQVo condition,
+                               @Param("start") int start,
+                               @Param("limit") int limit,
+                               @Param("orderBy") String orderBy);
+
     int findCount(@Param("condition") ClassroomQVo condition);
 
     int isExit(Classroom record);

@@ -84,7 +84,7 @@ function getNotices() {
                         initpdf(item.fileUrl, i);
                         continue;
                     } else if (item.fileUrl.lastIndexOf('.jpg') != -1 || item.fileUrl.lastIndexOf('.png') != -1 || item.fileUrl.lastIndexOf('gif') != -1) {
-                        temp = imgTemps.replace('#url#', item.url);
+                        temp = imgTemps.replace('#url#', item.fileUrl);
                         mySwiper.appendSlide(temp);
                         continue;
                     }

@@ -68,6 +68,7 @@ public interface ClassesService {
      * @version: 2019-01-03
      */
     SingleResult<ClassesVo> selectClassesByPrimaryKey(String id) throws Exception;
+    SingleResult<ClassesVo> selectClasse(String name) throws Exception;
 
     ResultResponse selectClassesByPrimaryKeyVo(UserProp userProp,String classId) throws Exception;
 

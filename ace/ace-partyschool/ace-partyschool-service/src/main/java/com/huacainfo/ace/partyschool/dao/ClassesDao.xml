@@ -129,6 +129,19 @@
         where c.id = #{  id,jdbcType=VARCHAR}
     </select>
 
+
+    <select id="selectClasse" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        c.id, c.name, c.startDate, c.introduce,c.endDate, c.photoUrl, c.fileUrl, c.tid1,
+        c.tid2, classroomId, c.headmaster,
+        c.remark, c.status, c.createUserId,
+        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate
+        from classes c
+        LEFT JOIN classroom cr ON cr.id = c.classroomId
+        where cr.name = #{name,jdbcType=VARCHAR}
+        and c.`status`='1'
+    </select>
+
     <resultMap id="ClassesInfoResultMap" type="com.huacainfo.ace.partyschool.vo.ClassesVo">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
