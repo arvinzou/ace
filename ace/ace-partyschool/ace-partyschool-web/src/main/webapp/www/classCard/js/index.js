@@ -12,7 +12,6 @@ $(function () {
     initClassRoom();
     // initpdf();
     initClock();
-    ClockData();
     $('.info_box').on('click', '.active_course', viewCourse);
     $('.info_box').on('click', '.active_classInfo', viewClassInfo);
     $('.weeekClass').on('click', '.nextWeek', nextWeek);
@@ -115,6 +114,7 @@ function getClassId(roomname) {
         if(rst.status==0&&rst.value){
             classId=rst.value.id;
             getData();
+            ClockData();
         }else{
 
         }
