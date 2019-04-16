@@ -99,6 +99,9 @@ var pdfTemp = '<div class="swiper-slide"><div class="pdfMessage" id="fileMessage
 
 function initClassRoom() {
     var roomname=GetQueryString('roomname');
+    if(!roomname){
+        return false;
+    }
     getClassId(roomname);
     $('.room_name').text(roomname);
 }
