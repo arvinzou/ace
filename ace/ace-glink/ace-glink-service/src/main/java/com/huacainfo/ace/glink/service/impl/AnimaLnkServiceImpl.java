@@ -8,6 +8,10 @@ import java.util.List;
 
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +42,8 @@ public class AnimaLnkServiceImpl implements AnimaLnkService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
-
+    @Autowired
+    private SqlSessionTemplate sqlSession;
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -56,14 +61,22 @@ public class AnimaLnkServiceImpl implements AnimaLnkService {
     @Override
     public PageResult<AnimaLnkVo> findAnimaLnkList(AnimaLnkQVo condition,
                                           int start, int limit, String orderBy) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        AnimaLnkDao dao = session.getMapper(AnimaLnkDao.class);
         PageResult<AnimaLnkVo> rst = new PageResult<>();
-        List
-                <AnimaLnkVo> list = this.animaLnkDao.findList(condition,
-                start, limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.animaLnkDao.findCount(condition);
-            rst.setTotal(allRows);
+        try {
+            List<AnimaLnkVo> list = dao.findList(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (rst.getTotal()  <= 1) {
+                int allRows = dao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
         }
         return rst;
     }
