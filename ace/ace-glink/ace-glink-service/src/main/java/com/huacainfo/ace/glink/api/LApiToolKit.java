@@ -156,17 +156,19 @@ public class LApiToolKit {
     }
 
     /**
-     * 获取分区(站点或建筑物)执行结果信息
+     * 获取分区(站点或建筑物)执行结果信息  -- 被新接口替换
      *
      * @param params 请求入参
      * @return String
      */
+    @Deprecated
     public static String change(ChangeIn params) {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/data/change?");
         return post(path.toString(), params.toString());
     }
 
+    @Deprecated
     public static String change(int type) {
         ChangeIn in = new ChangeIn();
         in.setArea("0000");
