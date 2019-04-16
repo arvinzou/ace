@@ -97,7 +97,13 @@ function initEvents() {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         initPreview(id);
-    })
+    });
+    $('#modal-push').on('show.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var id = relatedTarget.data('id');
+        var code = relatedTarget.data('code');
+        initPush(id,code);
+    });
     $('#modal-audit .audit').on('click', function () {
         $('#modal-audit form').submit();
     });
@@ -263,9 +269,10 @@ function initDatetimepicker() {
 
 function change(idx) {
     $('#modal-seting .tab_leb .tab_f').hide();
-    switch(idx){
+    switch (idx) {
         case '1':
-            $('#modal-seting .tab_leb .tab_1').show();  break;
+            $('#modal-seting .tab_leb .tab_1').show();
+            break;
         case '2':
             $('#modal-seting .tab_leb .tab_2').show();
             break;
@@ -297,10 +304,10 @@ function saveSetting(params) {
     var data = {
         jsons: JSON.stringify(params)
     }
-    $.post(url,data,function (rst) {
-        if(rst.status==0){
+    $.post(url, data, function (rst) {
+        if (rst.status == 0) {
             alert(1)
-        }else{
+        } else {
             alert(2)
         }
     })
@@ -329,25 +336,7 @@ function audit(params) {
     });
 }
 
-/*策略管理上架*/
-function updateStatus(id) {
-    if (confirm("确定要发布吗？")) {
-        startLoad();
-        var url=contextPath + "/ltStrategy/updateStatus";
-        var data= {
-            id: id,
-                status: '2'
-        };
-        $.getJSON(url,data,function(rst){
-                stopLoad();
-                if (rst.status == 0) {
-                    getPageList();
-                } else {
-                    alert(rst.errorMessage);
-                }
-        })
-    }
-}
+
 
 /*策略管理下架*/
 function outline(id) {
@@ -476,4 +465,75 @@ function initForm(id) {
             alert("对不起出错了！");
         }
     });
+}
+
+var lnktype;
+var combo;
+
+function initPush(id,code) {
+    lnktype="站点";
+    render('#push', {id:id,code:code}, 'tpl-push');
+    combo=$("#fm-status input[name='lnkCode']").combogrid({
+        url: contextPath + "/topNode/findNodeAndStationList?remark="+lnktype,
+        method:'get',
+        loadMsg:"正在获取...",
+        panelWidth: 400,
+        mode:'remote',
+        idField:'code',
+        textField:'name',
+        columns:[[
+            {field:'code',title:'编码',width:100},
+            {field:'name',title:'名称',width:200},
+            {field:'remark',title:'类型',width:50},
+        ]]
+    });
+    $('#fm-status').ajaxForm({
+        beforeSubmit: function (formData, jqForm, options) {
+            console.log(1);
+            var params = {};
+            $.each(formData, function (n, obj) {
+                if (params[obj.name]) {
+                    params[obj.name] = params[obj.name] + ',' + obj.value;
+                } else {
+                    params[obj.name] = obj.value;
+                }
+            });
+            issue(params);
+            return false;
+        }
+    });
+}
+
+function changeUrl(type) {
+    switch (type) {
+        case 1:
+            lnktype="站点";
+            break;
+        case 2:
+            lnktype="节点";
+            break;
+        case 3:
+            lnktype="建筑";
+            break;
+    }
+    $("#fm-status input[name='lnkCode']").val('');
+    combo.combogrid('grid').datagrid('options').url=contextPath + "/topNode/findNodeAndStationList?remark="+lnktype;
+    combo.combogrid('grid').datagrid('reload');
+}
+
+
+/*策略管理上架*/
+function issue(params) {
+    if (confirm("确定要下发吗？")){
+        startLoad();
+        var url = contextPath + "/ltStrategy/updateStatus";
+        $.getJSON(url, params, function (rst) {
+            stopLoad();
+            if (rst.status == 0) {
+                getPageList();
+            } else {
+                alert(rst.errorMessage);
+            }
+        })
+    }
 }

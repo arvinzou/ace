@@ -9,6 +9,10 @@ import java.util.List;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +43,8 @@ public class TopBuildingServiceImpl implements TopBuildingService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
+    @Autowired
+    private SqlSessionTemplate sqlSession;
 
     /**
      * @throws
@@ -56,12 +62,22 @@ public class TopBuildingServiceImpl implements TopBuildingService {
      */
     @Override
     public PageResult<TopBuildingVo> findTopBuildingList(TopBuildingQVo condition, int start, int limit, String orderBy) throws Exception {
-        PageResult <TopBuildingVo> rst = new PageResult<>();
-        List<TopBuildingVo> list = this.topBuildingDao.findList(condition, start, limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.topBuildingDao.findCount(condition);
-            rst.setTotal(allRows);
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TopBuildingDao dao = session.getMapper(TopBuildingDao.class);
+        PageResult<TopBuildingVo> rst = new PageResult<>();
+        try {
+            List<TopBuildingVo> list = dao.findList(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (rst.getTotal()  <= 1) {
+                int allRows = dao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
         }
         return rst;
     }
@@ -161,11 +177,20 @@ public class TopBuildingServiceImpl implements TopBuildingService {
      * @version: 2019-04-09
      */
     @Override
-    public SingleResult
-            <TopBuildingVo> selectTopBuildingByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <TopBuildingVo> rst = new SingleResult<>();
-        rst.setValue(this.topBuildingDao.selectVoByPrimaryKey(id));
+    public SingleResult<TopBuildingVo> selectTopBuildingByPrimaryKey(String id) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        TopBuildingDao dao = session.getMapper(TopBuildingDao.class);
+        SingleResult<TopBuildingVo> rst = new SingleResult<>();
+        try {
+            TopBuildingVo vo = dao.selectVoByPrimaryKey(id);
+            rst.setValue(vo);
+        } catch (Exception e) {
+            session.close();
+        } finally {
+            session.close();
+        }
         return rst;
     }
 

@@ -73,7 +73,7 @@
     s.id as t_id, s.code as t_code, s.name, s.depict, s.address, s.longitude, s.latitude,
     s.ipv4, s.ipv6, s.port, s.resolutionWidth
     from ammeter_node t
-    LEFT JOIN top_node s on s.code = t.nodeCode
+    LEFT JOIN top_node s on t.nodeCode = s.code
     where 1=1
     <if test="condition.id !=null and condition.id !=&quot;&quot;">
       and t.id =#{condition.id,jdbcType=VARCHAR}

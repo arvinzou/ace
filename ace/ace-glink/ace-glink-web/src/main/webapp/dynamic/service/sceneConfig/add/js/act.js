@@ -45,7 +45,7 @@ function initEvents() {
         },
         rules: {
             district: {required: true, maxlength: 50},
-            category: {required: true, maxlength: 10},
+            linkType: {required: true, maxlength: 10},
             linkCode: {required: true, maxlength: 50},
             code: {required: true, maxlength: 100},
             name: {required: true, maxlength: 50}
@@ -54,7 +54,7 @@ function initEvents() {
             district: {
                 required: "请输入行政区划",
                 maxlength: "行政区划字符长度不能超过50"
-            }, category: {
+            }, linkType: {
                 required: "请输入分类",
                 maxlength: "分类字符长度不能超过10"
             }, linkCode: {
@@ -74,7 +74,11 @@ function initEvents() {
         beforeSubmit: function (formData, jqForm, options) {
             var params = {};
             $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
+                if (params[obj.name]) {
+                    params[obj.name] = params[obj.name] + ',' + obj.value;
+                } else {
+                    params[obj.name] = obj.value;
+                }
             });
             $.extend(params, {
                 time: new Date(),
@@ -115,4 +119,76 @@ function save(params) {
 function initForm() {
     var data = staticDictObject;
     render('#fm-add-panel', data, 'tpl-fm-add');
+    $(".form-body input[name='district']").combotree({
+        url: portalPath + "/system/selectProvinceTreeList.do?id=00",
+        method: 'get',
+        label: '',
+        panelWidth: 400,
+        labelPosition: 'top',
+        valueField: "id",
+        textField: "text",
+        lines: true,
+    });
+    $(".form-body input[name='linkCode']").combogrid({
+        url: contextPath + "/topNode/findNodeAndStationList",
+        method:'get',
+        loadMsg:"正在获取...",
+        panelWidth: 400,
+        mode:'remote',
+        idField:'code',
+        textField:'name',
+        columns:[[
+            {field:'code',title:'编码',width:100},
+            {field:'name',title:'名称',width:200},
+            {field:'remark',title:'类型',width:50},
+        ]]
+    });
+    $("input[name=startDate]").datetimepicker({
+        minView: "hour",
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: true, //显示‘今日’按钮
+        clearBtn: true, //清除按钮
+        autoclose: true,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var startTime = event.date;
+        console.log(startTime);
+        $("input[name=endDate]").datetimepicker('setStartDate', startTime);
+    }).on('show', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        $("input[name=startDate]").datetimepicker('setStartDate', new Date());
+    });
+
+    $('input[name=startDate]').focus(function () {
+        $(this).blur(); //不可输入状态
+    })
+
+
+    $("input[name=endDate]").datetimepicker({
+        minView: "hour",
+        format: 'yyyy-mm-dd hh:ii:ss',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: true, //显示‘今日’按钮
+        clearBtn: true, //清除按钮
+        autoclose: true,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0
+    }).on('hide', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var endTime = event.date;
+        $("input[name=startDate]").datetimepicker('setEndDate', endTime);
+    });
+    $('input[name=endDate]').focus(function () {
+        $(this).blur(); //不可输入状态
+    });
 }

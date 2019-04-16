@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SceneConfig">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="district" jdbcType="VARCHAR" property="district"/>
-        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="linkType" jdbcType="VARCHAR" property="linkType"/>
         <result column="linkCode" jdbcType="VARCHAR" property="linkCode"/>
         <result column="code" jdbcType="VARCHAR" property="code"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
@@ -19,7 +19,7 @@
         <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, district, category, linkCode, code, name, decipt, mode, weeks, startDate, endDate, 
+    id, district, linkType, linkCode, code, name, decipt, mode, weeks, startDate, endDate, 
     remark, status, createDate, updateDate
   </sql>
 
@@ -28,13 +28,13 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SceneConfig">
-    insert into scene_config (id, district, category, 
+    insert into scene_config (id, district, linkType, 
       linkCode, code, name, 
       decipt, mode, weeks, 
       startDate, endDate, remark, 
       status, createDate, updateDate
       )
-    values (#{id,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{linkType,jdbcType=VARCHAR}, 
       #{linkCode,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{decipt,jdbcType=VARCHAR}, #{mode,jdbcType=VARCHAR}, #{weeks,jdbcType=VARCHAR}, 
       #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
@@ -44,7 +44,7 @@
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SceneConfig">
     update scene_config
     set district = #{district,jdbcType=VARCHAR},
-      category = #{category,jdbcType=VARCHAR},
+      linkType = #{linkType,jdbcType=VARCHAR},
       linkCode = #{linkCode,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
@@ -64,7 +64,7 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SceneConfigVo"></resultMap>
 
     <sql id="Vo_Column_List">
-        s.id, s.district, s.category, s.linkCode, s.code, s.name, s.decipt, s.mode, s.weeks, s.startDate, s.endDate,
+        s.id, s.district, s.linkType, s.linkCode, s.code, s.name, s.decipt, s.mode, s.weeks, s.startDate, s.endDate,
     s.remark, s.status, s.createDate, s.updateDate
     </sql>
 

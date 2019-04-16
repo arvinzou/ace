@@ -59,8 +59,7 @@ public class AmmeterNodeController extends GLinkBaseController {
     public PageResult
             <AmmeterNodeVo> findAmmeterNodeList(AmmeterNodeQVo condition, PageParamNoChangeSord page) throws Exception {
 
-        PageResult
-                <AmmeterNodeVo> rst = this.ammeterNodeService.findAmmeterNodeList(condition, page.getStart(),
+        PageResult<AmmeterNodeVo> rst = this.ammeterNodeService.findAmmeterNodeList(condition, page.getStart(),
                 page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());

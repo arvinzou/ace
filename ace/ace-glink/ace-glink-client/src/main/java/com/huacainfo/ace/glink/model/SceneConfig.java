@@ -9,7 +9,7 @@ public class SceneConfig extends BaseModel {
 
     private String district;
 
-    private String category;
+    private String linkType;
 
     private String linkCode;
 
@@ -51,12 +51,12 @@ public class SceneConfig extends BaseModel {
         this.district = district == null ? null : district.trim();
     }
 
-    public String getCategory() {
-        return category;
+    public String getLinkType() {
+        return linkType;
     }
 
-    public void setCategory(String category) {
-        this.category = category == null ? null : category.trim();
+    public void setLinkType(String linkType) {
+        this.linkType = linkType;
     }
 
     public String getLinkCode() {

@@ -36,9 +36,9 @@ import com.huacainfo.ace.glink.vo.SceneConfigQVo;
 public class SceneConfigServiceImpl implements SceneConfigService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private SceneConfigDao sceneConfigDao;
-    @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private SceneConfigDao sceneConfigDao;
 
 
     /**
@@ -82,7 +82,6 @@ public class SceneConfigServiceImpl implements SceneConfigService {
     public MessageResponse insertSceneConfig(SceneConfig o, UserProp userProp) throws Exception {
         String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
         o.setId(guid);
-
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -101,17 +100,10 @@ public class SceneConfigServiceImpl implements SceneConfigService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "策略名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
-
-
         int temp = this.sceneConfigDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "场景设置名称重复！");
         }
-
-
         o.setCreateDate(new Date());
         o.setStatus("1");
         this.sceneConfigDao.insert(o);
@@ -152,9 +144,8 @@ public class SceneConfigServiceImpl implements SceneConfigService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "策略名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
+        o.setStatus("1");
+        o.setUpdateDate(new Date());
         this.sceneConfigDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更场景设置", "场景设置", "",
                 o.getId(), o.getId(), userProp);
@@ -176,7 +167,7 @@ public class SceneConfigServiceImpl implements SceneConfigService {
     public SingleResult<SceneConfigVo> selectSceneConfigByPrimaryKey(String id) throws Exception {
         SingleResult
                 <SceneConfigVo> rst = new SingleResult<>();
-        rst.setValue(this.sceneConfigDao.selectVoByPrimaryKey(id));
+        rst.setValue(this.sceneConfigDao.selectByPrimaryKeyVo(id));
         return rst;
     }
 
@@ -237,9 +228,7 @@ public class SceneConfigServiceImpl implements SceneConfigService {
     @Override
     public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
         int i = 1;
-        for (Map
-                <String
-                        , Object> row : list) {
+        for (Map<String, Object> row : list) {
             SceneConfig o = new SceneConfig();
             CommonBeanUtils.copyMap2Bean(o, row);
             o.setCreateDate(new Date());

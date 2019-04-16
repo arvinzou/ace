@@ -9,21 +9,21 @@ window.onload = function () {
 
 /*区级整体控制初始化分页*/
 function initPage() {
-    $.jqPaginator('#pagination1', {
-        totalCounts: 1,
-        pageSize: params.limit,
-        visiblePages: 10,
-        currentPage: 1,
-        prev: '<li class="prev" > <a href="javascript:;" > 上一页 < /a></li >',
-        next: '<li class = "next" > <a href = "javascript:;" > 下一页 < /a></li>',
-        page: '<li class = "page" > <a href = "javascript:;" > {{page}}</a></li>',
-        onPageChange: function (num, type) {
-            params['start'] = (num - 1) * params.limit;
-            params['initType'] = type;
-            getPageList();
-        }
-    });
+    /*  $.jqPaginator('#pagination1', {
+          totalCounts: 1,
+          pageSize: params.limit,
+          visiblePages: 10,
+          currentPage: 1,
+          prev: '<li class="prev" > <a href="javascript:;" > 上一页 < /a></li >',
+          next: '<li class = "next" > <a href = "javascript:;" > 下一页 < /a></li>',
+          page: '<li class = "page" > <a href = "javascript:;" > {{page}}</a></li>',
+          onPageChange: function (num, type) {
+              params['start'] = (num - 1) * params.limit;
+              params['initType'] = type;
 
+          }
+      });*/
+    getPageList();
     $('#fm-search').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             $.each(formData, function (n, obj) {
@@ -49,16 +49,13 @@ function getPageList() {
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
-        if (rst.status == 0) {
-            if (params.initType == "init") {
-                $('#pagination1').jqPaginator('option', {
-                    totalCounts: rst.total == 0 ? 1 : rst.total,
-                    currentPage: 1
-                });
-            }
-            render($("#page-list"), rst.rows, "tpl-list");
-        }
-    })
+        console.log(rst);
+
+
+        var data = rst;
+        render($("#page-list"), data, "tpl-list");
+
+    });
 }
 
 /*页面渲染*/
@@ -160,16 +157,17 @@ function audit(params) {
 }
 
 /*区级整体控制上架*/
-function online(id) {
-    if (confirm("确定要上架吗？")) {
+function close(id, areaCode) {
+    if (confirm("确定要关闭吗？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/loopCtrlArea/updateStatus",
+            url: contextPath + "/loopCtrlArea/updateState",
             type: "post",
             async: false,
             data: {
                 id: id,
-                status: '1'
+                state: '0',
+                areaCode: areaCode
             },
             success: function (rst) {
                 stopLoad();
@@ -187,17 +185,72 @@ function online(id) {
     }
 }
 
-/*区级整体控制下架*/
-function outline(id) {
-    if (confirm("确定要下架吗？")) {
+/*区级整体控制上架*/
+function closeAll(areaCode) {
+    if (confirm("确定要全部关闭吗？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/loopCtrlArea/updateStatus",
+            url: contextPath + "/loopCtrlArea/updateState",
+            type: "post",
+            async: false,
+            data: {
+                state: '0',
+                areaCode: areaCode
+            },
+            success: function (rst) {
+                stopLoad();
+                if (rst.status == 0) {
+                    getPageList();
+                } else {
+                    alert(rst.errorMessage);
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起，出错了！");
+            }
+        });
+    }
+}
+/*区级整体控制下架*/
+function open(id, areaCode) {
+    if (confirm("确定要开启吗？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/loopCtrlArea/updateState",
             type: "post",
             async: false,
             data: {
                 id: id,
-                status: '0'
+                state: '1',
+                areaCode: areaCode
+            },
+            success: function (rst) {
+                stopLoad();
+                if (rst.status == 0) {
+                    getPageList();
+                } else {
+                    alert(rst.errorMessage);
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起，出错了！");
+            }
+        });
+    }
+}
+
+function openAll(areaCode) {
+    if (confirm("确定要全部开启吗？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/loopCtrlArea/updateState",
+            type: "post",
+            async: false,
+            data: {
+                state: '1',
+                areaCode: areaCode
             },
             success: function (rst) {
                 stopLoad();

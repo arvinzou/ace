@@ -3,6 +3,7 @@ package com.huacainfo.ace.glink.web.controller;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,17 @@ public class TopNodeController extends GLinkBaseController {
 
         return rst;
     }
+
+    @RequestMapping(value = "/findNodeAndStationList")
+    @ResponseBody
+    public PageResult<TopNodeVo> findNodeAndStationList(TopNodeQVo condition,String q) throws Exception {
+        if (!CommonUtils.isBlank(q)){
+            condition.setName(q);
+        }
+        PageResult<TopNodeVo> rst = this.topNodeService.findNodeAndStationList(condition);
+        return rst;
+    }
+
 
     /**
      * @throws

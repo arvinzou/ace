@@ -107,27 +107,23 @@
                 <h4 class="modal-title">下发节目</h4>
             </div>
             <div class="modal-body" style="width: 100%;height: 550px;">
-                <form class="form-horizontal" id="fm-status" role="form">
                     <div class="form-body">
                         <div class="row custom-toolbar">
                             <div class="col-md-3"></div>
                             <div class="col-md-5"></div>
                             <div class="col-md-4">
-                                <form onsubmit="return query()">
                                     <div class="input-group">
-                                        <input type="text" name="nickname" class="form-control" placeholder="请输入昵称">
+                                        <input type="text" name="name" id="animaName" class="form-control" placeholder="请输入节目名称">
                                         <span class="input-group-btn">
-                                            <button class="btn  btn-default search_btn" type="submit">搜索</button>
+                                            <button class="btn  btn-default search_btn" type="button"  onclick="query();">搜索</button>
                                         </span>
                                     </div>
-                                </form>
                             </div>
                         </div>
                         <div class="row" id="animaList">
 
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

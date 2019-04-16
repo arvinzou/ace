@@ -33,6 +33,7 @@ public interface TopNodeService {
      * @version: 2019-04-09
      */
     PageResult<TopNodeVo> findTopNodeList(TopNodeQVo condition, int start, int limit, String orderBy) throws Exception;
+    PageResult<TopNodeVo> findNodeAndStationList(TopNodeQVo condition) throws Exception;
 
     /**
      * @throws

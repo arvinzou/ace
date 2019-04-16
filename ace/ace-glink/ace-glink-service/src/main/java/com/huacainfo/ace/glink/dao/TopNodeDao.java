@@ -25,6 +25,10 @@ public interface TopNodeDao {
                              @Param("limit") int limit,
                              @Param("orderBy") String orderBy);
 
+
+
+    List<TopNodeVo> findNodeAndStationList(@Param("condition") TopNodeQVo condition);
+
     int findCount(@Param("condition") TopNodeQVo condition);
 
     int isExit(TopNode record);

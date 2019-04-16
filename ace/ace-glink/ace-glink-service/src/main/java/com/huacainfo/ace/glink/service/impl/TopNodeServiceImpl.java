@@ -83,6 +83,14 @@ public class TopNodeServiceImpl implements TopNodeService {
         return rst;
     }
 
+    @Override
+    public PageResult<TopNodeVo> findNodeAndStationList(TopNodeQVo condition) throws Exception {
+        PageResult<TopNodeVo> rst = new PageResult<>();
+        List<TopNodeVo> list = topNodeDao.findNodeAndStationList(condition);
+        rst.setRows(list);
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:insertTopNode

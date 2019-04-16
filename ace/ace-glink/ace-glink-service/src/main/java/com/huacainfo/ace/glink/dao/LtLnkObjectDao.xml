@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.LtLnkObjectDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.LtLnkObject">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="aiCode" jdbcType="VARCHAR" property="aiCode" />
+    <result column="lnkCode" jdbcType="VARCHAR" property="lnkCode" />
+    <result column="lnkType" jdbcType="CHAR" property="lnkType" />
+    <result column="sendDate" jdbcType="TIMESTAMP" property="sendDate" />
+    <result column="apiState" jdbcType="VARCHAR" property="apiState" />
+    <result column="apiRst" jdbcType="VARCHAR" property="apiRst" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, aiCode, lnkCode, lnkType, sendDate, apiState, apiRst, remark, status, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from lt_lnk_object
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from lt_lnk_object
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.glink.model.LtLnkObject">
+    insert into lt_lnk_object (id, aiCode, lnkCode, 
+      lnkType, sendDate, apiState, 
+      apiRst, remark, status, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{aiCode,jdbcType=VARCHAR}, #{lnkCode,jdbcType=VARCHAR}, 
+      #{lnkType,jdbcType=CHAR}, #{sendDate,jdbcType=TIMESTAMP}, #{apiState,jdbcType=VARCHAR}, 
+      #{apiRst,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.glink.model.LtLnkObject">
+    insert into lt_lnk_object
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="aiCode != null">
+        aiCode,
+      </if>
+      <if test="lnkCode != null">
+        lnkCode,
+      </if>
+      <if test="lnkType != null">
+        lnkType,
+      </if>
+      <if test="sendDate != null">
+        sendDate,
+      </if>
+      <if test="apiState != null">
+        apiState,
+      </if>
+      <if test="apiRst != null">
+        apiRst,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="aiCode != null">
+        #{aiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lnkCode != null">
+        #{lnkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lnkType != null">
+        #{lnkType,jdbcType=CHAR},
+      </if>
+      <if test="sendDate != null">
+        #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apiState != null">
+        #{apiState,jdbcType=VARCHAR},
+      </if>
+      <if test="apiRst != null">
+        #{apiRst,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.glink.model.LtLnkObject">
+    update lt_lnk_object
+    <set>
+      <if test="aiCode != null">
+        aiCode = #{aiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lnkCode != null">
+        lnkCode = #{lnkCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lnkType != null">
+        lnkType = #{lnkType,jdbcType=CHAR},
+      </if>
+      <if test="sendDate != null">
+        sendDate = #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="apiState != null">
+        apiState = #{apiState,jdbcType=VARCHAR},
+      </if>
+      <if test="apiRst != null">
+        apiRst = #{apiRst,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.LtLnkObject">
+    update lt_lnk_object
+    set aiCode = #{aiCode,jdbcType=VARCHAR},
+      lnkCode = #{lnkCode,jdbcType=VARCHAR},
+      lnkType = #{lnkType,jdbcType=CHAR},
+      sendDate = #{sendDate,jdbcType=TIMESTAMP},
+      apiState = #{apiState,jdbcType=VARCHAR},
+      apiRst = #{apiRst,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

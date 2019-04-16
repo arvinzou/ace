@@ -57,16 +57,14 @@ public class LoopCtrlAreaController extends GLinkBaseController {
      */
     @RequestMapping(value = "/findLoopCtrlAreaList")
     @ResponseBody
-    public PageResult
-            <LoopCtrlAreaVo> findLoopCtrlAreaList(LoopCtrlAreaQVo condition, PageParamNoChangeSord page) throws Exception {
+    public Map<String, List<LoopCtrlAreaVo>> findLoopCtrlAreaList(Map<String, List<LoopCtrlAreaVo>> p, LoopCtrlAreaQVo condition, PageParamNoChangeSord page) throws Exception {
 
-        PageResult
-                <LoopCtrlAreaVo> rst = this.loopCtrlAreaService.findLoopCtrlAreaList(condition, page.getStart(),
+        Map<String, List<LoopCtrlAreaVo>> rst = this.loopCtrlAreaService.findLoopCtrlAreaList(p, condition, page.getStart(),
                 page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
+       /* if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
+*/
         return rst;
     }
 
@@ -270,5 +268,22 @@ public class LoopCtrlAreaController extends GLinkBaseController {
     @ResponseBody
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.loopCtrlAreaService.updateStatus(id, status, this.getCurUserProp());
+    }
+
+
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(更新状态码)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: heshuang
+     * @version:2019-04-15
+     */
+    @RequestMapping(value = "/updateState")
+    @ResponseBody
+    public MessageResponse updateState(String id, String state, String areaCode) throws Exception {
+        return this.loopCtrlAreaService.updateState(id, state, areaCode);
     }
 }

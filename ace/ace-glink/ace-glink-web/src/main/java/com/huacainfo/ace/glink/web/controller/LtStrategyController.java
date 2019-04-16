@@ -1,6 +1,7 @@
 package com.huacainfo.ace.glink.web.controller;
 
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.glink.model.LtLnkObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -273,7 +274,11 @@ public class LtStrategyController extends GLinkBaseController {
      */
     @RequestMapping(value = "/updateStatus")
     @ResponseBody
-    public MessageResponse updateStatus(String id, String status) throws Exception {
-        return this.ltStrategyService.updateStatus(id, status, this.getCurUserProp());
+    public MessageResponse updateStatus(String id, String lnkCode,String lnkType,String aiCode) throws Exception {
+        LtLnkObject ltLnkObject =new LtLnkObject();
+        ltLnkObject.setLnkCode(lnkCode);
+        ltLnkObject.setLnkType(lnkType);
+        ltLnkObject.setAiCode(aiCode);
+        return this.ltStrategyService.updateStatus(id,  ltLnkObject, this.getCurUserProp());
     }
 }

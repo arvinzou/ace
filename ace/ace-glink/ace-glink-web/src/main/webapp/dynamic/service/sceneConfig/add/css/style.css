@@ -1,0 +1,42 @@
+.fm-page {
+    max-width: 80%;
+}
+.combo {
+    width: 100% !important;
+}
+.combo .combo-text{
+    width: calc(100% - 18px) !important;
+}
+
+.inputClick{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.inputClick li{
+    width:auto;
+    height: auto;
+    display: inline-block;
+}
+
+.inputClick li input{
+    display: none;
+}
+
+.inputClick li label{
+    display: inline-block;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+    background: #eee;
+    color: #111;
+    cursor: pointer;
+}
+
+
+.inputClick li input:checked+ label{
+    background: #1890ff;
+    color: #fff;
+}

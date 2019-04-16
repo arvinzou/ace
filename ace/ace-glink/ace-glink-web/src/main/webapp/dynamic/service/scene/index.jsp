@@ -31,7 +31,7 @@
         </div>
 
         <br> <br><br>
-        <div id="allCheck">
+        <div id="allCheck" style="display: none">
             &nbsp;<input name="checkList" type="checkbox" style="width: 15px; height:15px;" class="all"/><span
                 class="checkall">全选</span>&nbsp;&nbsp;&nbsp;
             <span class="count">当前选中<span id="checkCount">0</span>条</span>
@@ -49,7 +49,7 @@
         </div>
         <br><br>
 
-        <div id="animaLnk-list">
+        <div id="animaLnk-list" style="overflow: auto;">
             <ul class="videolist">
 
             </ul>

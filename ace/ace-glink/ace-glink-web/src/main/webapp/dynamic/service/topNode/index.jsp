@@ -113,7 +113,7 @@
         <%--<td> \${item.resolutionHeight}</td>--%>
         <%--<td> \${item.macAddr}</td>--%>
         <td> \${item.ctrlNum}</td>
-        <td> \${item.topBuilding.name}</td>
+        <td> \${item.topBuilding?item.topBuilding.name:''}</td>
         <td>
             {@if item.status==0}
             <span class="label label-lg label-danger">删除</span>

@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.glink.dao.TopNodeDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.TopNode">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="depict" jdbcType="VARCHAR" property="depict" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
-    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
-    <result column="ipv4" jdbcType="VARCHAR" property="ipv4" />
-    <result column="ipv6" jdbcType="VARCHAR" property="ipv6" />
-    <result column="port" jdbcType="VARCHAR" property="port" />
-    <result column="resolutionWidth" jdbcType="BIGINT" property="resolutionWidth" />
-    <result column="resolutionHeight" jdbcType="BIGINT" property="resolutionHeight" />
-    <result column="macAddr" jdbcType="VARCHAR" property="macAddr" />
-    <result column="ctrlNum" jdbcType="INTEGER" property="ctrlNum" />
-    <result column="buildingCode" jdbcType="VARCHAR" property="buildingCode" />
-    <result column="stationCode" jdbcType="VARCHAR" property="stationCode" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
-    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
-    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
-    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.TopNode">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="depict" jdbcType="VARCHAR" property="depict"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="ipv4" jdbcType="VARCHAR" property="ipv4"/>
+        <result column="ipv6" jdbcType="VARCHAR" property="ipv6"/>
+        <result column="port" jdbcType="VARCHAR" property="port"/>
+        <result column="resolutionWidth" jdbcType="BIGINT" property="resolutionWidth"/>
+        <result column="resolutionHeight" jdbcType="BIGINT" property="resolutionHeight"/>
+        <result column="macAddr" jdbcType="VARCHAR" property="macAddr"/>
+        <result column="ctrlNum" jdbcType="INTEGER" property="ctrlNum"/>
+        <result column="buildingCode" jdbcType="VARCHAR" property="buildingCode"/>
+        <result column="stationCode" jdbcType="VARCHAR" property="stationCode"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, code, name, depict, address, longitude, latitude, ipv4, ipv6, port, resolutionWidth, 
     resolutionHeight, macAddr, ctrlNum, buildingCode, stationCode, remark, status, createUserId, createUserName,
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from top_node
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from top_node
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from top_node
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.glink.model.TopNode">
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.TopNode">
     insert into top_node (id, code, name, 
       depict, address, longitude, 
       latitude, ipv4, ipv6, 
@@ -60,7 +60,7 @@
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.TopNode">
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.TopNode">
     update top_node
     set code = #{code,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
@@ -86,26 +86,26 @@
   </update>
 
 
-  <!--#################################################################################################################################################-->
+    <!--#################################################################################################################################################-->
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.TopNodeVo">
 
     </resultMap>
 
-  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.glink.vo.TopNodeVo">
-      <result column="deviceCount" jdbcType="INTEGER" property="deviceCount"/>
-    <collection property="topBuilding" ofType="com.huacainfo.ace.glink.model.TopBuilding">
-      <id column="tbId" property="id"/>
-      <result column="tbName" property="name"/>
-      <result column="tbAddress" property="address"/>
-    </collection>
-    <collection property="topStation" ofType="com.huacainfo.ace.glink.model.TopStation">
-      <id property="id" column="tsId"/>
-      <result column="tsName" property="name"/>
-    </collection>
-  </resultMap>
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.glink.vo.TopNodeVo">
+        <result column="deviceCount" jdbcType="INTEGER" property="deviceCount"/>
+        <collection property="topBuilding" ofType="com.huacainfo.ace.glink.model.TopBuilding">
+            <id column="tbId" property="id"/>
+            <result column="tbName" property="name"/>
+            <result column="tbAddress" property="address"/>
+        </collection>
+        <collection property="topStation" ofType="com.huacainfo.ace.glink.model.TopStation">
+            <id property="id" column="tsId"/>
+            <result column="tsName" property="name"/>
+        </collection>
+    </resultMap>
 
 
-  <sql id="Vo_Column_List">
+    <sql id="Vo_Column_List">
    t.id, t.code, t.name, t.depict, t.address, t.longitude, t.latitude, t.ipv4, t.ipv6, t.port, t.resolutionWidth,
     t.resolutionHeight, t.macAddr, t.ctrlNum, t.buildingCode, t.stationCode, t.remark, t.status, t.createUserId, t.createUserName,
     t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
@@ -113,73 +113,113 @@
     ts.id as tsId,ts.name as tsName,(SELECT COUNT(*)FROM top_device a WHERE a.nodeCode = t.code )as deviceCount
   </sql>
 
-  <sql id="From_Statement">
+    <sql id="From_Statement">
     FROM top_node t
     LEFT JOIN top_building tb on tb.code=t.buildingCode
     LEFT JOIN  top_station ts on ts.code=t.stationCode
 
   </sql>
-  <sql id="Where_Condition">
-    where t.status <![CDATA[ <> ]]> 0
-    <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
-      and (t.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
-      or t.code LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
-      or tb.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
-      or ts.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%') )
-    </if>
-    <if test="condition.name !=null and condition.name !=&quot;&quot;">
-      and t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
-    </if>
-    <if test="condition.stationCode !=null and condition.stationCode !=&quot;&quot;">
-      and t.stationCode LIKE concat('%',#{condition.stationCode,jdbcType=VARCHAR},'%')
-    </if>
-  </sql>
+    <sql id="Where_Condition">
+        where t.status <![CDATA[ <> ]]> 0
+        <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+            and (t.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            or t.code LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            or tb.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+            or ts.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%') )
+        </if>
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.stationCode !=null and condition.stationCode !=&quot;&quot;">
+            and t.stationCode LIKE concat('%',#{condition.stationCode,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
 
-  <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
-    select
-    <include refid="Vo_Column_List"/>
-    <include refid="From_Statement"/>
-    <include refid="Where_Condition"/>
-    <choose>
-      <when test="orderBy!=null and orderBy!=&quot;&quot;">
-        ORDER BY ${orderBy}
-      </when>
-      <otherwise>
-        ORDER BY t.createDate desc
-      </otherwise>
-    </choose>
-    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-  </select>
+    <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 
-  <select id="findCount" resultType="int">
-    SELECT COUNT(*)
-    <include refid="From_Statement"/>
-    <include refid="Where_Condition"/>
-  </select>
+    <select id="findNodeAndStationList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT ts.NAME,ts.CODE,ts.remark
+        FROM (
+        (
+        SELECT t.NAME,t.CODE,'节点' AS remark
+        FROM glink.top_node t
+        WHERE 1=1
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        LIMIT 0,20
+        ) UNION ALL
+        (
+        SELECT s.NAME,s.CODE,'站点' AS remark
+        FROM glink.top_station s
+        WHERE 1=1
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and s.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        LIMIT 0,20
+        ) UNION ALL
+        (
+        SELECT s.NAME,s.CODE,'建筑' AS remark
+        FROM glink.top_building s
+        WHERE 1=1
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and s.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        LIMIT 0,20
+        )
+        ) ts
+        WHERE 1=1
+        <if test="condition.remark !=null and condition.remark !=&quot;&quot;">
+            and ts.remark LIKE concat('%',#{condition.remark,jdbcType=VARCHAR},'%')
+        </if>
+        ORDER BY ts.CODE ASC
+        LIMIT 0,20
 
-  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopNode">
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopNode">
     select count(*)
     from top_node
     where name=#{name,jdbcType=VARCHAR}
     and code != #{code,jdbcType=VARCHAR}
   </select>
 
-  <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="BaseResultMapVo">
-    select
-    <include refid="Vo_Column_List"/>
-    <include refid="From_Statement"/>
-    where t.id = #{id,jdbcType=VARCHAR}
-  </select>
+    <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
 
 
-  <update id="updateStation">
-    update top_node
-    set
-    stationCode = #{stationCode,jdbcType=VARCHAR}
-    where id in
-    <foreach collection="ids" index="index" item="item"  open="(" separator="," close=")">
-      #{item}
-    </foreach>
-  </update>
+    <update id="updateStation">
+        update top_node
+        set
+        stationCode = #{stationCode,jdbcType=VARCHAR}
+        where id in
+        <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 
 </mapper>
