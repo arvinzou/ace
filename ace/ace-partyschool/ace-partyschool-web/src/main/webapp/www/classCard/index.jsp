@@ -15,7 +15,7 @@
 <body>
 <div class="content">
     <div class="head">
-        <div class="room_name active_changeRoom pointer">一教室</div>
+        <div class="room_name active_changeRoom pointer"></div>
         <img src="img/logo.png"/>
         <div class="dateTime" id="clock">
             <p>1921年7月1日 </p>
