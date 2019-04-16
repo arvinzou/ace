@@ -158,8 +158,12 @@ function initForm() {
         event.preventDefault();
         event.stopPropagation();
         var startTime = event.date;
+        console.log(startTime);
         $("input[name=endDate]").datetimepicker('setStartDate', startTime);
-        $("input[name=endDate]").val("");
+    }).on('show', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        $("input[name=startDate]").datetimepicker('setStartDate', new Date());
     });
 
     $('input[name=startDate]').focus(function () {

@@ -9,6 +9,9 @@ import java.util.List;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.dao.LtLnkObjectDao;
+import com.huacainfo.ace.glink.model.LtLnkObject;
+import com.huacainfo.ace.glink.service.LtLnkObjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,9 @@ public class LtStrategyServiceImpl implements LtStrategyService {
     private LtStrategyDao ltStrategyDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private LtLnkObjectService ltLnkObjectService;
+
 
 
     /**
@@ -350,9 +356,10 @@ public class LtStrategyServiceImpl implements LtStrategyService {
      * @version: 2019-04-10
      */
     @Override
-    public MessageResponse updateStatus(String id, String status, UserProp userProp) throws
+    public MessageResponse updateStatus(String id, LtLnkObject ltLnkObject, UserProp userProp) throws
             Exception {
-        this.ltStrategyDao.updateStatus(id, status);
+        this.ltStrategyDao.updateStatus(id, "2");
+        this.ltLnkObjectService.insertLtLnkObject(ltLnkObject,userProp);
         this.dataBaseLogService.log("跟新状态", "策略管理", id, id,
                 "策略管理", userProp);
         return new MessageResponse(0, "成功！");

@@ -198,15 +198,17 @@ function initInput() {
         event.preventDefault();
         event.stopPropagation();
         var startTime = event.date;
+        console.log(startTime);
         $("input[name=endDate]").datetimepicker('setStartDate', startTime);
-        $("input[name=endDate]").val("");
+    }).on('show', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        $("input[name=startDate]").datetimepicker('setStartDate', new Date());
     });
 
     $('input[name=startDate]').focus(function () {
         $(this).blur(); //不可输入状态
     })
-
-
     $("input[name=endDate]").datetimepicker({
         minView: "hour",
         format: 'yyyy-mm-dd hh:ii:ss',

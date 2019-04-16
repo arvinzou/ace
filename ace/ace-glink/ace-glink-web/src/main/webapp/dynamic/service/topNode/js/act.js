@@ -119,7 +119,7 @@ function initEvents() {
 
     $('#modal-import').on('shown.bs.modal', function (event) {
         //加载班级列表
-        alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
+        alert("温馨提醒：在导入前，请先下载导入模板！");
         importInit();
     });
     $('#modal-audit').on('show.bs.modal', function (event) {

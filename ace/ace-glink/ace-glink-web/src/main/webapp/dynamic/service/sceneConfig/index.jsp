@@ -32,21 +32,6 @@
 
                 <form id="fm-search">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
                         <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
                         <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
@@ -133,9 +118,7 @@
             {@/if}
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-
             <a href="javascript:del('\${item.id}');">删除</a>
-
         </td>
     </tr>
     {@/each}
@@ -232,95 +215,94 @@
 </div>
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
-
         <div class="form-group">
             <label class="col-md-2 view-label">主键</label>
             <div class="col-md-10">
-                \${id}
+                \${data.id}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">行政区划</label>
             <div class="col-md-10">
-                \${district}
+                \${data.o.district}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">分类</label>
             <div class="col-md-10">
-                \${category}
+                \${data.o.category}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">节点/站点编码</label>
             <div class="col-md-10">
-                \${linkCode}
+                \${data.o.linkCode}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">策略编码</label>
             <div class="col-md-10">
-                \${code}
+                \${data.o.code}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">策略名称</label>
             <div class="col-md-10">
-                \${name}
+                \${data.o.name}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">策略描述</label>
             <div class="col-md-10">
-                \${decipt}
+                \${data.o.decipt}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">策略模式</label>
             <div class="col-md-10">
-                \${mode}
+                \${data.o.mode}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">执行周期(数组)</label>
             <div class="col-md-10">
-                \${weeks}
+                \${data.o.weeks}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">开始执行时间</label>
             <div class="col-md-10">
-                \${startDate}
+                \${data.o.startDate}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">结束执行时间</label>
             <div class="col-md-10">
-                \${endDate}
+                \${data.o.endDate}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">备注</label>
             <div class="col-md-10">
-                \${remark}
+                \${data.o.remark}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">状态 </label>
             <div class="col-md-10">
-                \${status}
+                \${data.o.status}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">创建日期</label>
             <div class="col-md-10">
-                \${createDate}
+                \${data.o.createDate}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">修改日期</label>
             <div class="col-md-10">
-                \${updateDate}
+                \${data.o.updateDate}
             </div>
         </div>
 
@@ -354,91 +336,91 @@
     <div class="form-group">
         <label class="col-md-2 view-label">主键</label>
         <div class="col-md-10">
-            \${id}
+            \${data.o.id}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">行政区划</label>
         <div class="col-md-10">
-            \${district}
+            \${data.o.district}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">分类</label>
         <div class="col-md-10">
-            \${category}
+            \${data.o.category}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">节点/站点编码</label>
         <div class="col-md-10">
-            \${linkCode}
+            \${data.o.linkCode}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">策略编码</label>
         <div class="col-md-10">
-            \${code}
+            \${data.o.code}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">策略名称</label>
         <div class="col-md-10">
-            \${name}
+            \${data.o.name}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">策略描述</label>
         <div class="col-md-10">
-            \${decipt}
+            \${data.o.decipt}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">策略模式</label>
         <div class="col-md-10">
-            \${mode}
+            \${data.o.mode}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">执行周期(数组)</label>
         <div class="col-md-10">
-            \${weeks}
+            \${data.o.weeks}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">开始执行时间</label>
         <div class="col-md-10">
-            \${startDate}
+            \${data.o.startDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">结束执行时间</label>
         <div class="col-md-10">
-            \${endDate}
+            \${data.o.endDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">备注</label>
         <div class="col-md-10">
-            \${remark}
+            \${data.o.remark}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">状态 </label>
         <div class="col-md-10">
-            \${status}
+            \${data.o.status}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">
-            \${createDate}
+            \${data.o.createDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">修改日期</label>
         <div class="col-md-10">
-            \${updateDate}
+            \${data.o.updateDate}
         </div>
     </div>
 </script>
