@@ -128,6 +128,7 @@ function bindAnimaEvent(animaCode,prePlayUrl){
 
 function initEvents(){
     initBtnEvents();
+
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
@@ -142,7 +143,7 @@ function initEvents(){
         var id = relatedTarget.data('id');
         topBuildingCode = id;
         var modal = $(this);
-        initForm(id);
+        initForm();
     });
     $('#modal-preUrl').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
@@ -187,14 +188,16 @@ function initJuicerMethod() {
     });
 }
 
-function initForm(id) {
+function initForm() {
     startLoad();
+    var name = $("#animaName").val();
     $.ajax({
         url: contextPath + "/animaRes/findAnimaResList",
         type: "post",
         async: false,
         data: {
-           start: 0,
+            name: name,
+            start: 0,
             limit:40
         },
         success: function (result) {
@@ -210,6 +213,7 @@ function initForm(id) {
             alert("对不起出错了！");
         }
     });
+    return;
 }
 
 function removeAnimaEvent(did){
@@ -239,4 +243,9 @@ function removeAnimaEvent(did){
             }
         });
     }
+}
+
+function query(){
+    initForm();
+    $('#modal-option').show();
 }

@@ -25,6 +25,7 @@
     width: 19%;
     height: 89px;
     float: left;
+    cursor: pointer;
 }
 .menu-item:after{
     content: '';

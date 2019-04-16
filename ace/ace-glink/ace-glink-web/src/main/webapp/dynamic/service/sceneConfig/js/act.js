@@ -80,6 +80,22 @@ function edit(did) {
     window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
 }
 
+function del(id) {
+    var url = contextPath + "/sceneConfig/deleteSceneConfigBySceneConfigId";
+    var data ={
+        jsons:JSON.stringify({
+            id:id
+        })
+    }
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+                getPageList();
+        }else{
+            alert("删除失败。")
+        }
+    })
+}
+
 /*查看详情*/
 function detail(id) {
     var url = contextPath + "/sceneConfig/selectSceneConfigByPrimaryKey";
@@ -97,9 +113,6 @@ function initEvents() {
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
-        var title = relatedTarget.data('title');
-        var modal = $(this);
-        console.log(relatedTarget);
         initPreview(id);
     })
     $('#modal-audit').on('show.bs.modal', function (event) {

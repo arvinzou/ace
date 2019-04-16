@@ -161,6 +161,7 @@
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
+        LIMIT 0,20
         ) UNION ALL
         (
         SELECT s.NAME,s.CODE,'站点' AS remark
@@ -169,10 +170,25 @@
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and s.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
+        LIMIT 0,20
+        ) UNION ALL
+        (
+        SELECT s.NAME,s.CODE,'建筑' AS remark
+        FROM glink.top_building s
+        WHERE 1=1
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and s.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        LIMIT 0,20
         )
         ) ts
+        WHERE 1=1
+        <if test="condition.remark !=null and condition.remark !=&quot;&quot;">
+            and ts.remark LIKE concat('%',#{condition.remark,jdbcType=VARCHAR},'%')
+        </if>
         ORDER BY ts.CODE ASC
         LIMIT 0,20
+
     </select>
 
     <select id="findCount" resultType="int">

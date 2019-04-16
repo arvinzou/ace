@@ -202,3 +202,44 @@
 .a-radio:checked~.b-radio:before{
     display: block;
 }
+
+.objectType{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.objectType li{
+    width:auto;
+    height: auto;
+    display: inline-block;
+}
+
+.objectType li input{
+    display: none;
+}
+
+.objectType li label{
+    display: inline-block;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+    background: #eee;
+    color: #111;
+    cursor: pointer;
+}
+
+
+.objectType li input:checked+ label{
+    background: #1890ff;
+    color: #fff;
+}
+
+.combo {
+    width: 100% !important;
+    height: 34px !important;
+}
+.combo .combo-text{
+    width: calc(100% - 18px) !important;
+}
