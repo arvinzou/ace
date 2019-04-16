@@ -91,6 +91,9 @@ public class SceneConfigServiceImpl implements SceneConfigService {
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "分类不能为空！");
         }
+        if (CommonUtils.isBlank(o.getLinkType())) {
+            return new MessageResponse(1, "编码类别不能为空！");
+        }
         if (CommonUtils.isBlank(o.getLinkCode())) {
             return new MessageResponse(1, "节点/站点编码不能为空！");
         }
@@ -134,6 +137,9 @@ public class SceneConfigServiceImpl implements SceneConfigService {
         }
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "分类不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getLinkType())) {
+            return new MessageResponse(1, "编码类别不能为空！");
         }
         if (CommonUtils.isBlank(o.getLinkCode())) {
             return new MessageResponse(1, "节点/站点编码不能为空！");
@@ -246,6 +252,9 @@ public class SceneConfigServiceImpl implements SceneConfigService {
             }
             if (CommonUtils.isBlank(o.getCategory())) {
                 return new MessageResponse(1, "分类不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getLinkType())) {
+                return new MessageResponse(1, "编码类别不能为空！");
             }
             if (CommonUtils.isBlank(o.getLinkCode())) {
                 return new MessageResponse(1, "节点/站点编码不能为空！");
