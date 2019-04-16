@@ -18,7 +18,7 @@
     <div class="part01">
         <div class="meter-title">快捷入口</div>
         <div class="meter-menu">
-            <div class="menu-item cjkz mr">
+            <div class="menu-item cjkz mr" onclick="window.location.href='/glink/dynamic/service/scene/index.jsp?id=5302'">
                 <div class="icon-box">
                     <img src="${pageContext.request.contextPath}/content/common/img/icon-cjkz.png" class="icon-image">
                 </div>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="menu-item clgl mr">
+            <div class="menu-item clgl mr" onclick="window.location.href='/glink/dynamic/service/ltStrategy/index.jsp?id=5303'">
                 <div class="icon-box">
                     <img src="${pageContext.request.contextPath}/content/common/img/icon-clgl.png" class="icon-image">
                 </div>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </div>
-            <div class="menu-item gzjk mr">
+            <div class="menu-item gzjk mr" onclick="window.location.href='/glink/dynamic/service/errFeedback/index.jsp?id=530502'">
                 <div class="icon-box">
                     <img src="${pageContext.request.contextPath}/content/common/img/icon-gzjk.png" class="icon-image">
                 </div>
@@ -49,7 +49,7 @@
                     <div class="title-02">监控设备故障情况</div>
                 </div>
             </div>
-            <div class="menu-item jmsc mr">
+            <div class="menu-item jmsc mr" onclick="window.location.href='/glink/dynamic/service/animaLnk/index.jsp?id=530401'">
                 <div class="icon-box">
                     <img src="${pageContext.request.contextPath}/content/common/img/icon-jmsc.png" class="icon-image">
                 </div>
@@ -58,7 +58,7 @@
                     <div class="title-02">上传节目媒体文件</div>
                 </div>
             </div>
-            <div class="menu-item gismap">
+            <div class="menu-item gismap" onclick="window.location.href='/glink/dynamic/service/gis/index.jsp?id=5307'">
                 <div class="icon-box">
                     <img src="${pageContext.request.contextPath}/content/common/img/icon-gis.png" class="icon-gis">
                 </div>
@@ -108,7 +108,7 @@
         <div class="static-right">
             <div class="top-title-box">
                 <div class="top-title"><span class="top-title-01">故障报警TOP10</span><span class="top-title-02">(故障时间倒叙)</span></div>
-                <div class="top-more"><img src="${pageContext.request.contextPath}/content/common/img/icon-more.png"></div>
+                <div class="top-more" onclick="window.location.href='/glink/dynamic/service/errFeedback/index.jsp?id=530502'"><img src="${pageContext.request.contextPath}/content/common/img/icon-more.png"></div>
             </div>
             <div class="top-list">
                 <div class="form-horizontal" role="form">
