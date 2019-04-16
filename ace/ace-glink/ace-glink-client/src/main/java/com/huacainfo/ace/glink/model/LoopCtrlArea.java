@@ -3,6 +3,7 @@ package com.huacainfo.ace.glink.model;
 import com.huacainfo.ace.common.model.BaseModel;
 
 import java.util.Date;
+import java.util.List;
 
 public class LoopCtrlArea extends BaseModel {
     private String id;
@@ -26,6 +27,7 @@ public class LoopCtrlArea extends BaseModel {
     private Date createDate;
 
     private Date updateDate;
+
 
     public String getId() {
         return id;
@@ -114,4 +116,6 @@ public class LoopCtrlArea extends BaseModel {
     public void setAreaCode(String areaCode) {
         this.areaCode = areaCode;
     }
+
+
 }

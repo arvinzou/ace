@@ -28,63 +28,13 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
-            </div>
 
-            <div class="col-md-9">
-
-                <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
-                    </div>
-                    <div class="input-group">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control"
-                               placeholder="请输入直播名称">
-                        <span class="input-group-btn">
-                                                                        <button class="btn  btn-default search_btn"
-                                                                                type="submit">
-                                                                                搜索
-                                                                        </button>
-                                                                    </span>
-                    </div>
-                </form>
-            </div>
 
         </div>
 
 
-        <div class="table-scrollable">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th width="10%"> 主键</th>
-                    <th width="10%"> 回路名称</th>
-                    <th width="10%"> 回路编码</th>
-                    <th width="10%"> 回路类型</th>
-                    <th width="10%"> 回路电流（A）</th>
-                    <th width="10%"> 状态码</th>
-                    <th width="10%"> 备注</th>
-                    <th width="10%"> 状态</th>
-                    <th width="10%"> 创建日期</th>
-                    <th width="10%"> 更新日期</th>
-                    <th width="15%">操作</th>
-                </tr>
-                </thead>
-                <tbody id="page-list">
+        <div id="page-list" style="height: 700px;width: 100%;overflow: auto;"
 
-                </tbody>
-            </table>
         </div>
         <div class="paginationbar">
             <ul class="pagination" id="pagination1"></ul>
@@ -102,52 +52,44 @@
 
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
+
     {@each data as item, index}
-    <tr>
-        <td> \&{item.id}</td>
-        <td> \&{item.loopName}</td>
-        <td> \&{item.loopKey}</td>
-        <td> \&{item.loopType}</td>
-        <td> \&{item.loopCurrent}</td>
-        <td> \&{item.state}</td>
-        <td> \&{item.remark}</td>
-        <td> \&{item.status}</td>
-        <td> \&{item.createDate}</td>
-        <td> \&{item.updateDate}</td>
-        <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">待审</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
-        </td>
-        <td>
-            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-status">设置状态</a>
-            {@if item.auditStatus==1}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-            {@/if}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-preview">查看</a>
+    <table class="table table-hover" style="width: 400px;height: 300px; float: left;margin-left:50px;">
 
-            <a href="javascript:del('\${item.id}');">删除</a>
+        <th>\${item[0].subName}</th>
 
-        </td>
+        {@each item as m}
+        <tr>
+            <td style="width: 40%"> \${m.loopName}</td>
+            <%-- <td> \${m.loopCurrent}</td>--%>
+            <td style="width: 30%">{@if m.state==0}
+                <span class="label label-lg label-info">关闭</span>
+                {@else if m.state==1}
+                <span class="label label-lg label-danger">开启</span>
+                {@/if}
+            </td>
+            <td style="width: 30%">
+                {@if m.state==1}
+                <a href="javascript:close('\${m.id}','\${m.areaCode}');">关闭</a>
+                {@/if}
+                {@if m.state==0}
+                <a href="javascript:open('\${m.id}','\${m.areaCode}');">开启</a>
+                {@/if}
+            </td>
+            {@/each}
+        </tr>
+        <tr>
+            <td><a href="javascript:closeAll('\${item[0].areaCode}');"><span
+                    class="label label-lg label-success">全关</span></a>
+
+                <a href="javascript:openAll('\${item[0].areaCode}');" style="margin-left: 30px;"><span
+                        class="label label-lg label-success">全开</span></a></td>
     </tr>
     {@/each}
+    </table>
 </script>
-﻿
+
+
 <div class="modal fade " id="modal-status">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -93,6 +93,10 @@ function stationList(code) {
             stopLoad();
             if (result.status == 0) {
                 var data = {};
+                if (result.rows.length == 0) {
+                    $("#allCheck").hide();
+                    $("#animaLnk-list ul").empty();
+                }
                 console.log(result.rows);
                 render('#station-list', result.rows, 'tp2-list');
             } else {
@@ -107,9 +111,6 @@ function stationList(code) {
 }
 
 
-function clinkList(obj, code) {
-
-}
 
 //查找节目
 function animaList(obj, code) {
@@ -138,7 +139,7 @@ function animaList(obj, code) {
                     if (result.rows.length == 0) {
                         //$('#animaLnk-list').append("该站点没有节目");
                     }
-                    // $("#allCheck").show();
+                    $("#allCheck").show();
                     //    render('#animaLnk-list', data, 'tp3-list');
                     for (var i = 0; i < result.rows.length; i++) {
                         //   $('#animaLnk-list ul').append("<li><video src='"+result.rows[i].prePlayUrl+"' style='width: 300px;height: 300px' controls=\"controls\"></video></li>");
@@ -348,6 +349,7 @@ function updatePrePlayUrl(lnkid, id, prePlayUrl) {
             alert(rst.errorMessage);
             if (rst.status == 0) {
                 getPageList();
+                $("#animaLnk-list ul").empty();
             }
         },
         error: function () {

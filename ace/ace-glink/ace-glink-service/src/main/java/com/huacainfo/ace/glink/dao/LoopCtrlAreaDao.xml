@@ -15,7 +15,7 @@
         <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, loopName, loopKey, loopType, loopCurrent, state, remark, status, createDate, 
+    id,areaCode, loopName, loopKey, loopType, loopCurrent, state, remark, status, createDate,
     updateDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -29,11 +29,11 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.glink.model.LoopCtrlArea">
-    insert into loop_ctrl_area (id, loopName, loopKey, 
+    insert into loop_ctrl_area (id,areaCode, loopName, loopKey,
       loopType, loopCurrent, state, 
       remark, status, createDate, 
       updateDate)
-    values (#{id,jdbcType=VARCHAR}, #{loopName,jdbcType=VARCHAR}, #{loopKey,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{loopName,jdbcType=VARCHAR}, #{loopKey,jdbcType=VARCHAR},
       #{loopType,jdbcType=VARCHAR}, #{loopCurrent,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{updateDate,jdbcType=TIMESTAMP})
@@ -41,7 +41,8 @@
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.LoopCtrlArea">
     update loop_ctrl_area
-    set loopName = #{loopName,jdbcType=VARCHAR},
+    set areaCode = #{areaCode,jdbcType=VARCHAR},
+      loopName = #{loopName,jdbcType=VARCHAR},
       loopKey = #{loopKey,jdbcType=VARCHAR},
       loopType = #{loopType,jdbcType=VARCHAR},
       loopCurrent = #{loopCurrent,jdbcType=VARCHAR},
@@ -53,9 +54,53 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.LoopCtrlAreaVo"></resultMap>
+    <sql id="Vo_Column_List">
+    l.id,l.areaCode, l.loopName, l.loopKey, l.loopType, l.loopCurrent, l.state, l.remark, l.status, l.createDate,
+    l.updateDate,s.`code` as subCode,s.`name` as  subName
+  </sql>
+
+    <sql id="From_Statement">
+    FROM `loop_ctrl_area` l
+     left join top_subarea s on  l.areaCode=s.`code`
+  </sql>
+    <sql id="Where_Condition">
+        where l.status <![CDATA[ <> ]]> 0
+        <if test="condition.loopName !=null and condition.loopName !=&quot;&quot;">
+            and l.loopName LIKE concat('%',#{condition.loopName,jdbcType=VARCHAR},'%')
+        </if>
+
+    </sql>
+
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
-
-
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY l.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
+
+    <select id="findCount" resultType="int">
+
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+    <update id="updateState">
+        update loop_ctrl_area set state = #{state,jdbcType=INTEGER} where areaCode=#{areaCode,jdbcType=VARCHAR}
+
+        <if test="id!=null and id!=&quot;&quot;">
+            and id = #{id,jdbcType=VARCHAR}
+        </if>
+
+
+    </update>
 </mapper>

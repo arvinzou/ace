@@ -29,32 +29,42 @@
 
         <div class="row custom-toolbar">
             <div class="col-md-3">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+                <%--  <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>--%>
             </div>
 
             <div class="col-md-9">
 
                 <form id="fm-search">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <select name="nodeCode" id="nodeCode" class="form-control"
+                                onchange="setParams('nodeCode',this.value)">
 
+                        </select>
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <select name="loopType" id="loopType" class="form-control"
+                                onchange="setParams('loopType',this.value)">
 
+                        </select>
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
+                        <select id="state" name="state" class="form-control"
+                                onchange="setParams('state',this.value)">
+                            <option value="">全部</option>
+                            <option value="0">关闭</option>
+                            <option value="1">开启</option>
+                        </select>
+
                     </div>
-                    <div class="input-group">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control"
-                               placeholder="请输入回路名称">
-                        <span class="input-group-btn">
-                                <button class="btn  btn-default search_btn" type="submit">搜索</button>
-                        </span>
-                    </div>
+                    <%-- <div class="input-group">
+                         <input type="text"
+                                name="keyword"
+                                class="form-control"
+                                placeholder="请输入回路名称">
+                         <span class="input-group-btn">
+                                 <button class="btn  btn-default search_btn" type="submit">搜索</button>
+                         </span>
+                     </div>--%>
                 </form>
             </div>
 
@@ -108,9 +118,9 @@
         <td>
 
             {@if item.state==0}
-            <span class="label label-lg label-danger">关闭</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">开启</span>
+            <span class="label label-lg label-info">关闭</span>
+            {@else if item.state==1}
+            <span class="label label-lg label-danger">开启</span>
             {@/if}
 
         </td>
@@ -132,6 +142,21 @@
     </tr>
     {@/each}
 </script>
+
+<script id="type-tpl" type="text/template">
+    <option value="">全部</option>
+    {@each data as item, index}
+    <option value="\${item.CODE}">\${item.NAME}</option>
+    {@/each}
+</script>
+
+<script id="nodeCode-tpl" type="text/template">
+    <option value="">全部</option>
+    {@each data as item, index}
+    <option value="\${item.code}">\${item.name}</option>
+    {@/each}
+</script>
+
 ﻿
 <div class="modal fade " id="modal-status">
     <div class="modal-dialog" role="document">

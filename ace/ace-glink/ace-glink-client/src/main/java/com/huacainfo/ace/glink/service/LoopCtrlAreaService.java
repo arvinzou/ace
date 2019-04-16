@@ -32,9 +32,8 @@ public interface LoopCtrlAreaService {
      * @author: heshuang
      * @version: 2019-04-15
      */
-    PageResult
-            <LoopCtrlAreaVo> findLoopCtrlAreaList(LoopCtrlAreaQVo condition,
-                                                  int start, int limit, String orderBy) throws Exception;
+    Map<String, List<LoopCtrlAreaVo>> findLoopCtrlAreaList(Map<String, List<LoopCtrlAreaVo>> p, LoopCtrlAreaQVo condition,
+                                                           int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -188,4 +187,16 @@ public interface LoopCtrlAreaService {
      * @version: 2019-04-15
      */
     MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
+
+
+    /**
+     * 状态码
+     *
+     * @param id
+     * @param state
+     * @param areaCode
+     * @return
+     * @throws Exception
+     */
+    MessageResponse updateState(String id, String state, String areaCode) throws Exception;
 }

@@ -51,4 +51,6 @@ public interface LoopCtrlAreaDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    int updateState(@Param("id") String id, @Param("state") String state, @Param("areaCode") String areaCode);
+
 }
