@@ -4,6 +4,8 @@ window.onload = function () {
     initPage();
     initEvents();
     initJuicerMethod();
+    loopType();
+    initNodeList();
 }
 
 
@@ -276,6 +278,46 @@ function initForm(id) {
                 var data = {};
                 data['o'] = result.value;
                 render('#fm-audit', data, 'tpl-fm');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+function loopType() {
+    var data = staticDictObject['183'];
+    var dataList = [];
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].CODE != "") {
+            dataList.push(data[i]);
+        }
+    }
+    render('#loopType', dataList, 'type-tpl');
+}
+
+function initNodeList() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/topNode/findTopNodeList",
+        type: "post",
+        async: false,
+        data: {
+            start: 0,
+            limit: 999
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+
+                var dataList = result.rows;
+
+                render('#nodeCode', dataList, 'nodeCode-tpl');
+
             } else {
                 alert(result.errorMessage);
             }

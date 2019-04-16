@@ -1,10 +1,7 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
@@ -56,19 +53,32 @@ public class LoopCtrlAreaServiceImpl implements LoopCtrlAreaService {
      * @version: 2019-04-15
      */
     @Override
-    public PageResult
-            <LoopCtrlAreaVo> findLoopCtrlAreaList(LoopCtrlAreaQVo condition,
-                                                  int start, int limit, String orderBy) throws Exception {
-        PageResult
-                <LoopCtrlAreaVo> rst = new PageResult<>();
-        List
-                <LoopCtrlAreaVo> list = loopCtrlAreaDao.findList(condition, start, limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
+    public Map<String, List<LoopCtrlAreaVo>> findLoopCtrlAreaList(Map<String, List<LoopCtrlAreaVo>> p, LoopCtrlAreaQVo condition,
+                                                                  int start, int limit, String orderBy) throws Exception {
+        PageResult<LoopCtrlAreaVo> rst = new PageResult<>();
+        List<LoopCtrlAreaVo> list = loopCtrlAreaDao.findList(condition, 0, 500, orderBy);
+
+        List<LoopCtrlAreaVo> ListVo = new ArrayList<LoopCtrlAreaVo>();
+        LoopCtrlAreaVo dataItem;
+        Map<String, List<LoopCtrlAreaVo>> resultMap = new HashMap<String, List<LoopCtrlAreaVo>>();
+        for (int i = 0; i < list.size(); i++) {
+            dataItem = list.get(i);
+            if (resultMap.containsKey(dataItem.getAreaCode())) {
+                resultMap.get(dataItem.getAreaCode()).add(dataItem);
+            } else {
+                List<LoopCtrlAreaVo> loopCtrlAreaList = new ArrayList<LoopCtrlAreaVo>();
+                loopCtrlAreaList.add(dataItem);
+                ListVo.addAll(loopCtrlAreaList);
+                resultMap.put(dataItem.getAreaCode(), loopCtrlAreaList);
+            }
+        }
+        // rst.setRows(loopCtrlAreaList);
+       /* if (start <= 1) {
             int allRows = this.loopCtrlAreaDao.findCount(condition);
             rst.setTotal(allRows);
-        }
-        return rst;
+        }*/
+
+        return resultMap;
     }
 
     /**
@@ -364,6 +374,12 @@ public class LoopCtrlAreaServiceImpl implements LoopCtrlAreaService {
         this.loopCtrlAreaDao.updateStatus(id, status);
         this.dataBaseLogService.log("跟新状态", "区级整体控制", id, id,
                 "区级整体控制", userProp);
+        return new MessageResponse(0, "成功！");
+    }
+
+    @Override
+    public MessageResponse updateState(String id, String state, String areaCode) throws Exception {
+        this.loopCtrlAreaDao.updateState(id, state, areaCode);
         return new MessageResponse(0, "成功！");
     }
 

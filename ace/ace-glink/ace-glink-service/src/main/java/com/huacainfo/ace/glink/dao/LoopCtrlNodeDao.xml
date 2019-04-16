@@ -71,6 +71,15 @@
         <if test="condition.loopName !=null and condition.loopName !=&quot;&quot;">
             and l.loopName LIKE concat('%',#{condition.loopName,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.state !=null and condition.state !=&quot;&quot;">
+            and l.state = #{condition.state,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.loopType !=null and condition.loopType !=&quot;&quot;">
+            and l.loopType = #{condition.loopType,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.nodeCode !=null and condition.nodeCode !=&quot;&quot;">
+            and l.nodeCode = #{condition.nodeCode,jdbcType=VARCHAR}
+        </if>
 
     </sql>
 
