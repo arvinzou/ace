@@ -146,6 +146,7 @@ body {
 
 .body table .style4 {
 	text-align: center !important;
+	width: 130px;
 }
 
 .body table .active_classInfo,
