@@ -74,7 +74,7 @@ public class SeApiToolKit {
     }
 
     //3.3、获取单个配电箱监测数据（InterFaceType=3） -- 页面手动及时调用
-    public Map<String, Object> getNodeInfo(String nodeId) {
+    public Map<String, Object> getNodeMonitorSingleData(String nodeId) {
         Map<String, String> params = common("3");
         params.put("NodeID", nodeId);
 
@@ -88,12 +88,12 @@ public class SeApiToolKit {
      * @param nodeGroup 配电箱ID组合，用英文','隔开
      * @return Map<String, Object>
      */
-    public Map<String, Object> getNodeInfoList(String nodeGroup) {
+    public NodeMonitorDataOut getNodeMonitorListData(String nodeGroup) {
         Map<String, String> params = common("4");
         params.put("NodeGroup", nodeGroup);
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
-        return JsonUtil.toMap(rstJson);
+        return JsonUtil.toObject(rstJson, NodeMonitorDataOut.class);
     }
 
     /**
