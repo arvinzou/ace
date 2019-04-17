@@ -113,7 +113,7 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         }
         int temp = this.topBuildingDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "建筑物管理名称重复！");
+            return new MessageResponse(1, "建筑物重复！");
         }
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
