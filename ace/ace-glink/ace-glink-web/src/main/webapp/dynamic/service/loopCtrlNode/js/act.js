@@ -6,6 +6,8 @@ window.onload = function () {
     initJuicerMethod();
     loopType();
     initNodeList();
+    initTopStationList();
+
 }
 
 
@@ -318,6 +320,37 @@ function initNodeList() {
 
                 render('#nodeCode', dataList, 'nodeCode-tpl');
 
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+/**
+ * 初始化下拉站点列表
+ */
+function initTopStationList() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/topStation/findTopStationList",
+        type: "post",
+        async: false,
+        data: {
+            start: 0,
+            limit: 999
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+
+                var dataList = result.rows;
+
+                render('#stationCode', dataList, 'stationCode-tpl');
             } else {
                 alert(result.errorMessage);
             }
