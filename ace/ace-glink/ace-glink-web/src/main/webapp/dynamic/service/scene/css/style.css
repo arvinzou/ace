@@ -115,9 +115,14 @@ ul.videolist li video {
 }
 
 .box {
-    height: 1px;
-
+    width: 100%;
+    line-height: 32px;
+    background: #F6F9F8;
     float: left;
+}
+
+.box a {
+    margin-top: -20px;
 }
 
 .closespan {
@@ -128,6 +133,9 @@ ul.videolist li video {
     font-weight: 400;
     color: rgba(24, 144, 255, 1);
     line-height: 18px;
+
+    margin-left: 30px;
+
 }
 
 .div1 {
@@ -137,10 +145,9 @@ ul.videolist li video {
     background: #F6F9F8;
 }
 
-ul.videolist li div span {
+ul.videolist li div span.bname {
     width: 80%;
     height: 20px;
-    line-height: 0px;
     margin: 0 50px;
 }
 

@@ -38,19 +38,22 @@
 
             <div class="col-md-9">
 
-                <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select name="nodeCode" id="nodeCode" class="form-control"
+
+                <label style="float:left;padding-right:5px;line-height: 31px;">站点：</label>
+                <div class="btn-group" role="group" style="float:left;padding-right:20px;">
+                    <select name="nodeCode" id="nodeCode" class="form-control"
                                 onchange="setParams('nodeCode',this.value)">
 
                         </select>
                     </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select name="type" id="type" class="form-control" onchange="setParams('type',this.value)">
+                <label style="float:left;padding-right:5px;line-height: 31px;">设备类型：</label>
+                <div class="btn-group" role="group" style="float:left;padding-right:20px;">
+                    <select name="type" id="type" class="form-control" onchange="setParams('type',this.value)">
 
                         </select>
                     </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                <label style="float:left;padding-right:5px;line-height: 31px;">设备状态：</label>
+                <div class="btn-group" role="group" style="float:left;padding-right:20px;">
 
                         <select name="status" id="status" class="form-control"
                                 onchange="setParams('status',this.value)">
@@ -59,7 +62,8 @@
                             <option value="2">下线</option>
                         </select>
                     </div>
-                    <div class="input-group" style="width: 50%;float: right">
+                <form id="fm-search">
+                    <div class="input-group">
                         <input type="text" name="keyword" class="form-control" placeholder="请输入设备名称">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn"

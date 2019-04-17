@@ -34,27 +34,31 @@
 
             <div class="col-md-9">
 
-                <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+
+                <label style="float:left;padding-right:5px;line-height: 31px;">站点：</label>
+                <div class="btn-group" role="group" style="float:left;padding-right:20px">
                         <select name="stationCode" id="stationCode" class="form-control"
                                 onchange="setParams('stationCode',this.value)">
 
                         </select>
                     </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                <label style="float:left;padding-right:5px;line-height: 31px;">节点：</label>
+                <div class="btn-group" role="group" style="float:left;padding-right:20px">
 
                         <select name="nodeCode" id="nodeCode" class="form-control"
                                 onchange="setParams('nodeCode',this.value)">
 
                         </select>
                     </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                <label style="float:left;padding-right:5px;line-height: 31px;">回路类型：</label>
+                <div class="btn-group" role="group" style="float:left;padding-right:20px">
                         <select name="loopType" id="loopType" class="form-control"
                                 onchange="setParams('loopType',this.value)">
 
                         </select>
                     </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                <label style="float:left;padding-right:5px;line-height: 31px;">回路状态：</label>
+                <div class="btn-group" role="group" style="float:left;padding-right:20px">
                         <select id="state" name="state" class="form-control"
                                 onchange="setParams('state',this.value)">
                             <option value="">全部</option>
@@ -63,6 +67,7 @@
                         </select>
 
                     </div>
+                <form id="fm-search">
                     <%-- <div class="input-group">
                          <input type="text"
                                 name="keyword"

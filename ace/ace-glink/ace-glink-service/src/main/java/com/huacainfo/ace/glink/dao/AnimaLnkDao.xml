@@ -17,6 +17,7 @@
     <result column="topBuildingName" jdbcType="VARCHAR" property="topBuildingName"/>
     <result column="address" jdbcType="VARCHAR" property="address"/>
     <result column="animaCount" jdbcType="INTEGER" property="animaCount"/>
+    <result column="stationCode" jdbcType="VARCHAR" property="stationCode"/>
     <collection property="animaResVo" ofType="com.huacainfo.ace.glink.vo.AnimaResVo">
       <id column="a_id" property="id" />
       <result column="code" property="code"/>
@@ -109,14 +110,18 @@
     b.name as topBuildingName, b.address as address, b.subareaCode as subareaCode,
     s.name as subareaName,
     r.id as a_id, r.code, r.`name`, r.prePlayUrl, r.preImgUrl , r.duration, r.type, r.playUrl, r.rsoWidth,
-    r.rsoHeight
+    r.rsoHeight ,sta.`code` as stationCode
     from anima_lnk t
     LEFT JOIN top_building b on t.lnkCode = b.code
     LEFT JOIN  top_subarea s on b.subareaCode = s.code
     LEFT JOIN  anima_res r on t.aiCode = r.code
+    LEFT JOIN top_station sta on b.stationCode = sta.code
     where 1=1
     <if test="condition.lnkCode !=null and condition.lnkCode !=&quot;&quot;">
       and t.lnkCode =#{condition.lnkCode,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.stationCode !=null and condition.stationCode !=&quot;&quot;">
+      and sta.code =#{condition.stationCode,jdbcType=VARCHAR}
     </if>
     <choose>
       <when test="orderBy!=null and orderBy!=&quot;&quot;">
