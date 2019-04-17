@@ -46,7 +46,7 @@ public interface AnimaLnkService {
      * @author: luocan
      * @version: 2019-04-10
      */
-    MessageResponse insertAnimaLnk(AnimaLnk obj, UserProp userProp) throws Exception;
+    MessageResponse insertAnimaLnk(List<AnimaLnk> list, UserProp userProp) throws Exception;
 
     /**
      * @throws

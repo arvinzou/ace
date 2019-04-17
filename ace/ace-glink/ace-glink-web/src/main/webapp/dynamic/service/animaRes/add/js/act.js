@@ -201,7 +201,7 @@ function initUploadPreImgUrl(){
         filters: {
             max_file_size: '2048mb',
             mime_types: [
-                { title: "Image files", filetype: "jpg,jpeg,png" }
+
             ]
         },
         init: {

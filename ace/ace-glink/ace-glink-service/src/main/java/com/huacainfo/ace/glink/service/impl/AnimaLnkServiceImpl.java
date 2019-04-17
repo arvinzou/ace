@@ -93,9 +93,9 @@ public class AnimaLnkServiceImpl implements AnimaLnkService {
      * @version: 2019-04-10
      */
     @Override
-    public MessageResponse insertAnimaLnk(AnimaLnk o, UserProp userProp) throws Exception {
+    public MessageResponse insertAnimaLnk(List<AnimaLnk> list, UserProp userProp) throws Exception {
 
-        if (CommonUtils.isBlank(o.getAiCode())) {
+       /* if (CommonUtils.isBlank(o.getAiCode())) {
             return new MessageResponse(1, "节目编号不能为空！");
         }
         if (CommonUtils.isBlank(o.getLnkCode())) {
@@ -114,7 +114,29 @@ public class AnimaLnkServiceImpl implements AnimaLnkService {
         this.dataBaseLogService.log("添加节目上传", "节目上传", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "操作成功！");
+        return new MessageResponse(0, "操作成功！");*/
+
+        for (int i=0; i<list.size(); i++) {
+            AnimaLnk o = list.get(i);
+            o.setCreateDate(new Date());
+            o.setStatus("1");
+            o.setId(GUIDUtil.getGUID());
+
+            if (CommonUtils.isBlank(o.getAiCode())) {
+                return new MessageResponse(1, "节目编号不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getLnkCode())) {
+                return new MessageResponse(1, "建筑/节点/站点编码不能为空！");
+            }
+            int t = this.animaLnkDao.isExit(o);
+            if (t > 0) {
+                return new MessageResponse(1, "节目下发重复！");
+
+            } else {
+                this.animaLnkDao.insert(o);
+            }
+        }
+        return new MessageResponse(0, "节目下发成功！");
     }
 
     /**
@@ -200,14 +222,9 @@ public class AnimaLnkServiceImpl implements AnimaLnkService {
      */
 
     @Override
-    public MessageResponse importXls(List
-                                             <Map
-                                                     <String
-                                                             , Object>> list, UserProp userProp) throws Exception {
+    public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
         int i = 1;
-        for (Map
-                <String
-                        , Object> row : list) {
+        for (Map<String, Object> row : list) {
             AnimaLnk o = new AnimaLnk();
             CommonBeanUtils.copyMap2Bean(o, row);
             o.setCreateDate(new Date());

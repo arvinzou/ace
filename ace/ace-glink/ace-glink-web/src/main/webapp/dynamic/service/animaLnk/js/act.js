@@ -97,19 +97,41 @@ function detail(id) {
     })
 }
 
-function bindAnimaEvent(animaCode,prePlayUrl){
+function bindAnimaEvent(obj,animaCode,prePlayUrl){
+    var checkStatus = $(obj).find(".checkStatus").attr("src");
+    var list = [];
+    if(checkStatus.indexOf("un")>0){
+        //未勾选
+        $(obj).find(".checkStatus").attr("src",'img/icon-checked.png');
+        $(obj).find(".checkStatus").addClass("active");
+    }else{
+        //已勾选
+        $(obj).find(".checkStatus").attr("src",'img/icon-unchecked.png');
+        $(obj).find(".checkStatus").removeClass("active");
+    }
+}
+
+function confirmBindAnima(){
+    var list = [];
+    var checkList = $("#animaList").find(".active");
+    for(var i=0; i<checkList.length; i++){
+        var animaCode = $(checkList[i]).data('code');
+        var prePlayUrl = $(checkList[i]).data('url');
+        var o = {
+            aiCode:  animaCode,
+            lnkCode: topBuildingCode,
+            lnkType: "3",
+            prePlayUrl: prePlayUrl
+        };
+        list.push(o);
+    }
     startLoad();
     $.ajax({
         url: contextPath + "/animaLnk/insertAnimaLnk",
         type: "post",
         async: false,
         data: {
-            jsons: JSON.stringify({
-                aiCode:  animaCode,
-                lnkCode: topBuildingCode,
-                lnkType: "3",
-                prePlayUrl: prePlayUrl
-            })
+            jsons: JSON.stringify(list)
         },
         success: function (rst) {
             stopLoad();

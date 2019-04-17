@@ -54,10 +54,9 @@
                 <tr>
                     <th width="10%"> 编号</th>
                     <th width="10%"> 类别</th>
-                    <th width="15%"> 名称</th>
-                    <th width="10%"> 封面</th>
+                    <th width="20%"> 名称</th>
+                    <th width="15%"> 封面</th>
                     <th width="10%"> 时长</th>
-                    <th width="15%"> 播放地址</th>
                     <th width="10%">分辨率</th>
                     <th width="20%">操作</th>
                 </tr>
@@ -85,17 +84,16 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td width="10%"> \${item.code}</td>
-        <td width="10%"> \${parseSourseType(item.type)}</td>
-        <td width="15%"> \${item.name}</td>
-        <td width="10%">
+        <td> \${item.code}</td>
+        <td> \${parseSourseType(item.type)}</td>
+        <td> \${item.name}</td>
+        <td>
             {@if item.preImgUrl}
             <img src="\${item.preImgUrl}" style="width: 70px;height: 70px;object-fit: cover">
             {@/if}
         </td>
-        <td width="10%">\${item.duration}</td>
-        <td width="15%">\${item.playUrl}</td>
-        <td width="10%">\${item.rsoWidth} x \${item.rsoHeight}</td>
+        <td>\${item.duration}</td>
+        <td>\${item.rsoWidth} x \${item.rsoHeight}</td>
         <td>
             ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-url="\${item.prePlayUrl}" data-type="\${item.type}"
