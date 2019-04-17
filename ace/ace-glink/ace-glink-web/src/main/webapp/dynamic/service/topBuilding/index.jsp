@@ -258,7 +258,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">建筑物状态</label>
         <div class="col-md-10">
-            {@if item.state == '1'}
+            {@if data.o.state == '1'}
             在线
             {@else}
             不在线
@@ -266,9 +266,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">分区编码</label>
+        <label class="col-md-2 view-label">所属站点</label>
         <div class="col-md-10">
-            \${data.o.subareaCode}
+            \${data.o.topStationVo.name}
         </div>
     </div>
     <div class="form-group">
