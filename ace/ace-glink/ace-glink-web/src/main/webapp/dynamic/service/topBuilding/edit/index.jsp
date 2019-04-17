@@ -51,7 +51,7 @@
             <div class="col-md-10">
                 <input type="text" class="form-control" name="code"
                        value="\${data.o.code}" maxlength="50"
-                       placeholder="请输入建筑编号（建议字数在14个字以内，不超过50个字)">
+                       placeholder="请输入建筑编号（不超过50个字符)">
                 <span class="help-block"></span>
             </div>
         </div>
@@ -63,7 +63,7 @@
             <div class="col-md-10">
                 <input type="text" class="form-control" name="name"
                        value="\${data.o.name}" maxlength="50"
-                       placeholder="请输入建筑名称（建议字数在14个字以内，不超过50个字)">
+                       placeholder="请输入建筑名称（不超过50个字符)">
                 <span class="help-block"></span>
             </div>
         </div>
@@ -85,7 +85,7 @@
             <div class="col-md-10">
                 <input type="text" class="form-control" name="depict"
                        value="\${data.o.depict}" maxlength="200"
-                       placeholder="请输入建筑描述（建议字数在14个字以内，不超过200个字)">
+                       placeholder="请输入建筑描述（不超过200个字)">
                 <span class="help-block"></span>
             </div>
         </div>
@@ -97,7 +97,7 @@
             <div class="col-md-10">
                     <input type="text" class="form-control" name="address"
                            value="\${data.o.address}" maxlength="200"
-                           placeholder="请输入所在地（建议字数在14个字以内，不超过200个字)" style="float:left;width:92%">
+                           placeholder="请输入所在地（不超过200个字)" style="float:left;width:92%">
                     <a href="javascript:window.open('${portalPath}/dynamic/common/map.jsp')"
                        style="float:right;line-height: 28px;">选择</a>
                     <span class="help-block"></span>
@@ -156,7 +156,7 @@
             <div class="col-md-10">
                 <input type="text" class="form-control" name="remark"
                        value="\${data.o.remark}" maxlength="200"
-                       placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
+                       placeholder="请输入备注（不超过200个字)">
                 <span class="help-block"></span>
             </div>
         </div>

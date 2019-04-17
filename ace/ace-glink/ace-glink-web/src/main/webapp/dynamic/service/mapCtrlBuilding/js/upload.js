@@ -29,7 +29,7 @@ function init_uploader(p) {
         } else {
             alert(rst.errorMessage);
             $('#modal-import').modal('hide');
-
+            //刷新
             initPage();
         }
     });

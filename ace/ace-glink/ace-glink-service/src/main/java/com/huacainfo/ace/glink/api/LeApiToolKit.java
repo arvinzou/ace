@@ -2,8 +2,8 @@ package com.huacainfo.ace.glink.api;
 
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.tools.JsonUtil;
-import com.huacainfo.ace.glink.api.pojo.base.BaseOut;
-import com.huacainfo.ace.glink.api.pojo.light.*;
+import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
+import com.huacainfo.ace.glink.api.pojo.le.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,30 +11,63 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @ClassName LApiToolKit
+ * @ClassName LeApiToolKit
  * @Description 弱电接口--调用工具
  * @Author Arvin Zou
  * @Date 2019/4/15 9:57
  */
-public class LApiToolKit {
+public class LeApiToolKit {
 
     private static final String domain = "http://116.228.110.86:8092";
 
-    private LApiToolKit instance;
+    private LeApiToolKit instance;
 
     /**
      * 单例模式
      */
-    private LApiToolKit() {
+    private LeApiToolKit() {
 
     }
 
-    public LApiToolKit newInstance() {
-        if (instance == null) {
-            return new LApiToolKit();
+    /**
+     * 灯光策略下发
+     *
+     * @param params 下发参数
+     * @return LeBaseOut
+     */
+    public static String lightStrategy(LightStrategyIn params) {
+        Map<String, String> request = new HashMap<>();
+        request.put("pattern", params.getPattern());
+        request.put("strategy", params.getStrategy());
+        request.put("area", params.getArea());
+        request.put("startTime", params.getStartTime());
+        request.put("stopTime", params.getStopTime());
+        //参数准备
+        switch (params.getPattern()) {
+            case LightStrategyIn.MODE_SCHEDULE://日程模式
+                //模式专有
+                request.put("isWeek", params.getIsWeek() + "");
+                request.put("weeks", params.getWeeks());
+                request.put("isMonth", params.getIsMonth() + "");
+                request.put("months", params.getMonths());
+                break;
+            case LightStrategyIn.MODE_HOLIDAY://假日模式
+                //模式专有
+                request.put("startDate", params.getStartDate());
+                request.put("stopDate", params.getStopDate());
+                break;
+            case LightStrategyIn.MODE_EVENT://事件模式
+                request.put("specialDate", params.getSpecialDate());
+                break;
+            default:
+                LeBaseOut out = new LeBaseOut();
+                out.setCode(400);
+                out.setMessage("策略模式设置有误！");
+                return out.toString();
         }
 
-        return instance;
+        String path = "/wh/limplight/control/lightStrategy";
+        return post(domain + path, JsonUtil.toJson(request));
     }
 
     private static String post(String url, String json) {
@@ -74,52 +107,19 @@ public class LApiToolKit {
         return HttpKit.get(domain + path);
     }
 
-    /**
-     * 灯光策略下发
-     *
-     * @param params 下发参数
-     * @return BaseOut
-     */
-    public static String lightStrategy(LightStrategyIn params) {
-        Map<String, String> request = new HashMap<>();
-        request.put("pattern", params.getPattern());
-        request.put("strategy", params.getStrategy());
-        request.put("area", params.getArea());
-        request.put("startTime", params.getStartTime());
-        request.put("stopTime", params.getStopTime());
-        //参数准备
-        switch (params.getPattern()) {
-            case LightStrategyIn.MODE_SCHEDULE://日程模式
-                //模式专有
-                request.put("isWeek", params.getIsWeek() + "");
-                request.put("weeks", params.getWeeks());
-                request.put("isMonth", params.getIsMonth() + "");
-                request.put("months", params.getMonths());
-                break;
-            case LightStrategyIn.MODE_HOLIDAY://假日模式
-                //模式专有
-                request.put("startDate", params.getStartDate());
-                request.put("stopDate", params.getStopDate());
-                break;
-            case LightStrategyIn.MODE_EVENT://事件模式
-                request.put("specialDate", params.getSpecialDate());
-                break;
-            default:
-                BaseOut out = new BaseOut();
-                out.setCode(400);
-                out.setMessage("策略模式设置有误！");
-                return out.toString();
-        }
-
-        String path = "/wh/limplight/control/lightStrategy";
-        return post(domain + path, JsonUtil.toJson(request));
-    }
-
     public static void lightStrategy() {
 
         LightStrategyIn p = new LightStrategyIn("01932EF", "0000", "20190107", "20190107",
                 1, "[1,2,3]", 0, "[]");
-        System.out.println(LApiToolKit.lightStrategy(p));
+        System.out.println(LeApiToolKit.lightStrategy(p));
+    }
+
+    public LeApiToolKit newInstance() {
+        if (instance == null) {
+            return new LeApiToolKit();
+        }
+
+        return instance;
     }
 
     /**

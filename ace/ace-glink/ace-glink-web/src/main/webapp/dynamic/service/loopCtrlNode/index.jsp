@@ -36,6 +36,13 @@
 
                 <form id="fm-search">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <select name="stationCode" id="stationCode" class="form-control"
+                                onchange="setParams('stationCode',this.value)">
+
+                        </select>
+                    </div>
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+
                         <select name="nodeCode" id="nodeCode" class="form-control"
                                 onchange="setParams('nodeCode',this.value)">
 
@@ -151,6 +158,12 @@
 </script>
 
 <script id="nodeCode-tpl" type="text/template">
+    <option value="">全部</option>
+    {@each data as item, index}
+    <option value="\${item.code}">\${item.name}</option>
+    {@/each}
+</script>
+<script id="stationCode-tpl" type="text/template">
     <option value="">全部</option>
     {@each data as item, index}
     <option value="\${item.code}">\${item.name}</option>
