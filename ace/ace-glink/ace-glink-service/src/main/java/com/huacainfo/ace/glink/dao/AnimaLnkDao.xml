@@ -137,8 +137,7 @@
   <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
     select count(*)
     from anima_lnk t
-    where t.id = #{id}
-    and t.aiCode = #{aiCode}
+    where t.aiCode = #{aiCode}
     and t.lnkCode = #{lnkCode}
   </select>
   <update id="updatePrePlayUrl">
