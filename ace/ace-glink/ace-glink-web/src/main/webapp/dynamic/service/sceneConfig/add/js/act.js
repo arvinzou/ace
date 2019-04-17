@@ -116,9 +116,16 @@ function save(params) {
     });
 }
 
+var lnktype;
+var combo;
+
 function initForm() {
     var data = staticDictObject;
-    render('#fm-add-panel', data, 'tpl-fm-add');
+    console.log(data);
+    render('#fm-add-panel', data['184'], 'tpl-fm-add');
+
+    lnktype="站点";
+
     $(".form-body input[name='district']").combotree({
         url: portalPath + "/system/selectProvinceTreeList.do?id=00",
         method: 'get',
@@ -129,8 +136,9 @@ function initForm() {
         textField: "text",
         lines: true,
     });
-    $(".form-body input[name='linkCode']").combogrid({
-        url: contextPath + "/topNode/findNodeAndStationList",
+
+    combo= $(".form-body input[name='linkCode']").combogrid({
+        url: contextPath + "/topNode/findNodeAndStationList?remark="+lnktype,
         method:'get',
         loadMsg:"正在获取...",
         panelWidth: 400,
@@ -143,6 +151,7 @@ function initForm() {
             {field:'remark',title:'类型',width:50},
         ]]
     });
+
     $("input[name=startDate]").datetimepicker({
         minView: "hour",
         format: 'yyyy-mm-dd hh:ii:ss',
@@ -191,4 +200,21 @@ function initForm() {
     $('input[name=endDate]').focus(function () {
         $(this).blur(); //不可输入状态
     });
+}
+
+function changeUrl(type) {
+    switch (type) {
+        case 1:
+            lnktype="站点";
+            break;
+        case 2:
+            lnktype="节点";
+            break;
+        case 3:
+            lnktype="建筑";
+            break;
+    }
+    $(".form-body input[name='linkCode']").val('');
+    combo.combogrid('grid').datagrid('options').url=contextPath + "/topNode/findNodeAndStationList?remark="+lnktype;
+    combo.combogrid('grid').datagrid('reload');
 }
