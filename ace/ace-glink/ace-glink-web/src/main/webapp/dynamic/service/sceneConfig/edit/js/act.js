@@ -148,7 +148,9 @@ function initForm() {
         stopLoad();
         if (rst.status == 0) {
             var data = {};
+            data['s']=staticDictObject['184'];
             data['o'] = rst.value;
+            lnktype=rst.value.linkType==1?'站点':'节点';
             render('#fm-edit', data, 'tpl-fm');
             initInput();
         } else {
@@ -157,6 +159,9 @@ function initForm() {
     })
 }
 
+
+var lnktype;
+var combo;
 
 function initInput() {
     $(".form-body input[name='district']").combotree({
@@ -169,8 +174,8 @@ function initInput() {
         textField: "text",
         lines: true,
     });
-    $(".form-body input[name='linkCode']").combogrid({
-        url: contextPath + "/topNode/findNodeAndStationList",
+    combo=$(".form-body input[name='linkCode']").combogrid({
+        url: contextPath + "/topNode/findNodeAndStationList?remark="+lnktype,
         method:'get',
         loadMsg:"正在获取...",
         panelWidth: 400,
@@ -180,7 +185,7 @@ function initInput() {
         columns:[[
             {field:'code',title:'编码',width:100},
             {field:'name',title:'名称',width:200},
-            {field:'remark',title:'类型',width:50},
+            {field:'remark',title:'类型',width:50}
         ]]
     });
     $("input[name=startDate]").datetimepicker({
@@ -229,4 +234,21 @@ function initInput() {
     $('input[name=endDate]').focus(function () {
         $(this).blur(); //不可输入状态
     });
+}
+
+function changeUrl(type) {
+    switch (type) {
+        case 1:
+            lnktype="站点";
+            break;
+        case 2:
+            lnktype="节点";
+            break;
+        case 3:
+            lnktype="建筑";
+            break;
+    }
+    $(".form-body input[name='lnkCode']").val('');
+    combo.combogrid('grid').datagrid('options').url=contextPath + "/topNode/findNodeAndStationList?remark="+lnktype;
+    combo.combogrid('grid').datagrid('reload');
 }

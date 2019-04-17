@@ -51,9 +51,39 @@
                     <span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="linkType" maxlength="10"
-                           placeholder="请输入分类（建议字数在14个字以内，不超过10个字)">
-                    <span class="help-block"></span>
+                    <ul class="objectType">
+                        {@each data as item,index}
+                        {@if item.NAME}
+                        <li>
+                            <input name="category" value="\${item.CODE}" type="radio" checked id="s\${index}">
+                            <label for="s\${index}">\${item.NAME}</label>
+                        </li>
+                        {@/if}
+                        {@/each}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    编码类型
+                    <span class="required" aria-required="true"> * </span>
+                </label>
+                <div class="col-md-10">
+                    <ul class="objectType">
+                        <li>
+                            <input name="linkType" value="1" type="radio" checked id="s1" onchange="changeUrl(1)">
+                            <label for="s1">站点</label>
+                        </li>
+                        <%-- <li>
+                             <input type="radio" value="3" name="lnkType"  id="s" onchange="changeUrl(3)">
+                             <label for="s">建筑物</label>
+                         </li>--%>
+                        <li>
+                            <input name="linkType" value="2" type="radio" id="s2" onchange="changeUrl(2)">
+                            <label for="s2">节点</label>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="form-group">
