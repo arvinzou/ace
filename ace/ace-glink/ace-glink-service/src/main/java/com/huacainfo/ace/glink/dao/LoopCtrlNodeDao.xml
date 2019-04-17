@@ -58,7 +58,7 @@
 
     <sql id="Vo_Column_List">
     l.id, l.nodeCode, l.loopName, l.loopKey, l.loopType, l.loopCurrent, l.state, l.remark, l.status, l.createDate,
-    l.updateDate,n.name as nodeName , b.name as buName
+    l.updateDate,n.name as nodeName , b.name as buName ,n.stationCode as stationCode
   </sql>
 
     <sql id="From_Statement">
@@ -80,7 +80,9 @@
         <if test="condition.nodeCode !=null and condition.nodeCode !=&quot;&quot;">
             and l.nodeCode = #{condition.nodeCode,jdbcType=VARCHAR}
         </if>
-
+        <if test="condition.stationCode !=null and condition.stationCode !=&quot;&quot;">
+            and n.stationCode = #{condition.stationCode,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
