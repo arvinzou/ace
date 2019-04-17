@@ -131,13 +131,15 @@
 
   <select id="findCount" resultType="int">
     SELECT COUNT(*)
-    from anima_res t
+    from anima_lnk t
   </select>
 
   <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
     select count(*)
-    from anima_res t
+    from anima_lnk t
     where t.id = #{id}
+    and t.aiCode = #{aiCode}
+    and t.lnkCode = #{lnkCode}
   </select>
   <update id="updatePrePlayUrl">
   update anima_lnk set prePlayUrl = #{prePlayUrl,jdbcType=VARCHAR} where id = #{id,jdbcType=VARCHAR}
