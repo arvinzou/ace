@@ -128,7 +128,7 @@ function animaList(obj, code) {
             type: "post",
             async: false,
             data: {
-                lnkCode: code
+                stationCode: code
             },
             success: function (result) {
                 stopLoad();
@@ -145,9 +145,9 @@ function animaList(obj, code) {
                         //   $('#animaLnk-list ul').append("<li><video src='"+result.rows[i].prePlayUrl+"' style='width: 300px;height: 300px' controls=\"controls\"></video></li>");
                         onlinelen = $("input[name='online']").length;
                         len1 = onlinelen + 1;
-                        $('#animaLnk-list ul').append("  <li class=" + result.rows[i].lnkCode + "><div class='div1'>\n" +
+                        $('#animaLnk-list ul').append("  <li class=" + result.rows[i].stationCode + "><div class='div1'>\n" +
                             "            <input name=\"checkanima\" type=\"checkbox\" value=" + len1 + " onclick=\"checkanima();\"/>\n" +
-                            "            <span>" + result.rows[i].topBuildingName + "</span>\n" +
+                            "            <span class='bname'>" + result.rows[i].topBuildingName + "</span>\n" +
                             "           </div>\n" +
                             "            <video src=" + result.rows[i].prePlayUrl + " controls=\"controls\" >\n" +
                             "            </video>\n" +
@@ -274,13 +274,14 @@ function initBtnEvents() {
 function checkonline(obj, len1) {
     //关闭vedio
     if ($(obj).is(":checked")) {
+        $(obj).parent().parent().find("video").removeClass("overlay");
+        $(obj).parent().parent().find("video").attr("controls", "controls");
+
+        $("#close" + len1).text("当前已开启");
+    } else {
         $(obj).parent().parent().find("video").addClass("overlay");
         $(obj).parent().parent().find("video").removeAttr("controls");
         $("#close" + len1).text("当前已关闭");
-    } else {
-        $(obj).parent().parent().find("video").removeClass("overlay");
-        $(obj).parent().parent().find("video").attr("controls", "controls");
-        $("#close" + len1).text("当前已开启");
     }
 }
 

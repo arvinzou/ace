@@ -17,9 +17,9 @@
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body style="overflow: hidden;">
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<div class="portlet light">
+<div class="portlet light" style="overflow: hidden;">
 
     <div class="portlet-body">
         <div id="page-list">

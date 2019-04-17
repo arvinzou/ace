@@ -99,8 +99,8 @@
 </script>
 ﻿
 <div class="modal fade " id="modal-option">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" style="width: 1000px;height: 700px;">
+    <div class="modal-dialog" role="document" style="width: 84%;height: auto;">
+        <div class="modal-content" style="width: 100%;height: 700px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
@@ -127,7 +127,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-               <%-- <button type="button" class="btn green confirm">确定</button>--%>
+                <button type="button" class="btn blue confirm" onclick="confirmBindAnima();">确定</button>
             </div>
         </div>
     </div>
@@ -136,11 +136,16 @@
 <!--节目清单渲染-->
 <script id="animaList-tpl" type="text/template">
     {@each data as item, index}
-    <div class="layout-user">
-        <a href="javascript:bindAnimaEvent('\${item.code}','\${item.prePlayUrl}')">
-            <img class="photo"
-                 src="\${item.preImgUrl}"></a>
-        <div style="text-align:center"> \${item.name}</div>
+    <div class="anima-box mar" onclick="bindAnimaEvent(this, '\${item.code}','\${item.prePlayUrl}')">
+        <div class="anima-box-top">
+            <div class="anima-box-left">
+                <img class="checkStatus" src="img/icon-unchecked.png" data-code="\${item.code}" data-url="\${item.prePlayUrl}">
+            </div>
+            <div class="anima-box-right">\${item.name}</div>
+        </div>
+        <div class="anima-box-bottom">
+            <img class="photo" src="\${item.preImgUrl}">
+        </div>
     </div>
     {@/each}
 </script>
@@ -228,23 +233,6 @@
     </div>
 </div>
 
-<style>
-    .layout-user {
-        width: 120px;
-        height: 90px;
-        float: left;
-        margin: 10px 10px 10px;
-        text-align: center;
-    }
-
-    .photo {
-        height: 90px;
-        width: 120px;
-        vertical-align: middle;
-        border-radius: 60px;
-        object-fit: cover;
-    }
-</style>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>

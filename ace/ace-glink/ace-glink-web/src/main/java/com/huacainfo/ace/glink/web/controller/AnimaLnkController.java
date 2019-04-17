@@ -84,8 +84,8 @@ public class AnimaLnkController extends GLinkBaseController {
     @RequestMapping(value = "/insertAnimaLnk")
     @ResponseBody
     public MessageResponse insertAnimaLnk(String jsons) throws Exception {
-        AnimaLnk obj = JSON.parseObject(jsons, AnimaLnk.class);
-        return this.animaLnkService.insertAnimaLnk(obj, this.getCurUserProp());
+        List<AnimaLnk> list = JSON.parseArray(jsons, AnimaLnk.class);
+        return this.animaLnkService.insertAnimaLnk(list, this.getCurUserProp());
     }
 
     /**

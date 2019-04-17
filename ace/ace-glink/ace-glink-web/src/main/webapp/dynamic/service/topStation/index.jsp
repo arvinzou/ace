@@ -27,15 +27,17 @@
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-6" style="float: right">
 
-                <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+
+                <label style="float:left;padding-right:5px;line-height: 31px;">分区：</label>
+                <div class="btn-group" role="group" style="float:left;padding-right:20px">
                         <select id="subArea" name="subareaCode" id="s-cls-list" class="form-control"
                                 style="height: 31px;"
                                 onchange="setParams('subareaCode',this.value)">
                         </select>
                     </div>
+                <form id="fm-search">
                     <div class="input-group">
                         <input type="text"
                                name="keyword"

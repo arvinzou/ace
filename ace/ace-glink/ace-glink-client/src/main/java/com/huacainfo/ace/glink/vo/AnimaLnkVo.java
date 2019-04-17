@@ -36,6 +36,8 @@ public class AnimaLnkVo extends AnimaLnk {
      */
     private AnimaResVo animaResVo;
 
+    private String stationCode;
+
     public String getSubareaCode() {
         return subareaCode;
     }
@@ -81,5 +83,13 @@ public class AnimaLnkVo extends AnimaLnk {
 
     public void setAnimaResVo(AnimaResVo animaResVo) {
         this.animaResVo = animaResVo;
+    }
+
+    public String getStationCode() {
+        return stationCode;
+    }
+
+    public void setStationCode(String stationCode) {
+        this.stationCode = stationCode;
     }
 }
