@@ -1,6 +1,6 @@
-package com.huacainfo.ace.glink.api.pojo.light;
+package com.huacainfo.ace.glink.api.pojo.le;
 
-import com.huacainfo.ace.glink.api.pojo.base.BaseOut;
+import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * @Author Arvin Zou
  * @Date 2019/4/15 18:29
  */
-public class GetBulidingDetailOut extends BaseOut {
+public class GetBulidingDetailOut extends LeBaseOut {
 
     private List<BulidingDetail> data;
 

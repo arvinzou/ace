@@ -1,4 +1,4 @@
-package com.huacainfo.ace.glink.api.pojo.light;
+package com.huacainfo.ace.glink.api.pojo.le;
 
 /**
  * @ClassName LightStrategyIn

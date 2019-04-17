@@ -1,4 +1,4 @@
-package com.huacainfo.ace.glink.api.pojo.light;
+package com.huacainfo.ace.glink.api.pojo.le;
 
 import com.huacainfo.ace.common.model.BaseModel;
 
