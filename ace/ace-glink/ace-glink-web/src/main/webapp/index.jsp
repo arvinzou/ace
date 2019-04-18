@@ -80,6 +80,16 @@
                 <div class="top-title"><span class="top-title-01">故障监控</span></div>
                 <div class="chart-select-box">
                     <div class="chart-option">
+                        <%--<div class="selectBox">
+                            <div class="inputCase">
+                                <input class="imitationSelect" type="text" oulName="" oulId="" value="2019" readonly/>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <ul class="selectUl">
+                                <li oliName="2019" oliId="2019" class="actived_li">2019</li>
+                                <li oliName="2018" oliId="2018">2018</li>
+                            </ul>
+                        </div>--%>
                             <select id="year" onchange="ErrorChart();">
                                 <option value="2019">2019</option>
                                 <option value="2018">2018</option>
@@ -149,11 +159,11 @@
             <div class="less-serious"></div>
             {@/if}
         </td>
-        <td width="20%" style="text-align: center;">\${item.deviceName}</td>
-        <td width="20%" style="text-align: center;">\${item.subareaName}</td>
-        <td width="20%" style="text-align: center;">\${item.errContent}</td>
-        <td width="10%" style="text-align: center;">\${item.errLoopNum}</td>
-        <td width="20%" style="text-align: center;">\${item.errDate}</td>
+        <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.deviceName}</td>
+        <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.subareaName}</td>
+        <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.errContent}</td>
+        <td width="10%" style="text-align: center;font-size: 8px !important;">\${item.errLoopNum}</td>
+        <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.errDate}</td>
     </tr>
     {@/each}
 </script>

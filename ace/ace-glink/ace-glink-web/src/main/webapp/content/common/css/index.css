@@ -254,3 +254,56 @@ select{
     background:rgba(255,239,65,1);
     margin-left: 20px;
 }
+
+/**
+下拉时间切换
+ */
+.selectBox{
+    width: 400px;
+    height: 36px;
+    line-height: 36px;
+    background: #f72323;
+}
+.inputCase{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+.inputCase input.imitationSelect{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    display: block;
+    text-indent: 20px;
+    cursor: default;
+}
+.inputCase i.fa{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #007AFF;
+}
+.selectUl{
+    display: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+.selectUl li{
+    height: 36px;
+    line-height: 36px;
+    list-style: none;
+    text-indent: 20px;
+    border-bottom: 1px solid #ccc;transition: all .5s ease 0s;
+
+}
+.selectUl li:hover{
+    background: #ddd;
+}
+.selectUl li:last-child{
+    border-bottom: 0 none;
+}
