@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeGatewayStateDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeGatewayState">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="nodeID" jdbcType="INTEGER" property="nodeID" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="updateTime" jdbcType="VARCHAR" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeGatewayStateVo">
+    <collection property="seNodeVo" ofType="com.huacainfo.ace.glink.vo.SeNodeVo">
+      <id column="n_id" property="id" />
+      <result column="nodeCount" property="nodeCount"/>
+      <result column="n_nodeID" property="nodeID"/>
+      <result column="local" property="local"/>
+      <result column="n_areaNodeID" property="areaNodeID"/>
+      <result column="pX" property="pX"/>
+      <result column="pY" property="pY"/>
+      <result column="meterID" property="meterID"/>
+      <result column="meterType" property="meterType"/>
+      <result column="engineer" property="engineer"/>
+      <result column="tel" property="tel"/>
+      <result column="deviceCount" property="deviceCount"/>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, nodeID, status, updateTime, remark, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from se_gateway_state
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_gateway_state
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeGatewayState">
+    insert into se_gateway_state (id, nodeID, status, 
+      updateTime, remark, createDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeGatewayState">
+    update se_gateway_state
+    set nodeID = #{nodeID,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      updateTime = #{updateTime,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    t.id, t.nodeID, t.status, t.updateTime, t.remark, t.createDate
+    from se_gateway_state t
+    where t.id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    t.id, t.nodeID, t.status, t.updateTime, t.remark, t.createDate,
+    n.id as n_id, n.nodeCount, n.nodeID as n_nodeID, n.local, n.iPAddress, n.areaNodeID as n_areaNodeID,
+    n.pX, n.pY, n.meterID, n.meterType, n.engineer, n.tel, n.deviceCount
+    from se_gateway_state t
+    LEFT JOIN  se_node n
+    on t.nodeID = n.nodeID
+    <include refid="Where_Condition"/>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <sql id="Where_Condition">
+    where 1 = 1
+    <if test="condition.nodeID !=null and condition.nodeID !=&quot;&quot;">
+      and t.nodeID =#{condition.nodeID,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    from se_gateway_state t
+    <include refid="Where_Condition"/>
+  </select>
+
+  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
+    select count(*)
+    from se_gateway_state t
+    where t.id = #{id}
+  </select>
+
+  <insert id="deleteByPrimaryKeys" parameterType="java.util.List" useGeneratedKeys="false">
+    DELETE FROM se_gateway_state
+    WHERE id in (
+    <foreach collection="list" item="item" index="index" separator=",">
+      #{item}
+    </foreach>
+    );
+  </insert>
+</mapper>

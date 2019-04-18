@@ -40,8 +40,11 @@ jQuery(function ($) {
             beforeShowForm: function (e) {
                 appendUploadImageBtn("photoUrl");
                 appendUploadFileBtn("fileUrl");
-
-                //$('#headmaster').combogrid('grid').datagrid('reload');
+                setTimeout(function () {
+                    var options=$('#classroomId').combogrid('grid').datagrid('options');
+                        options.url=contextPath+'/classroom/selectClassroomList';
+                    $('#classroomId').combogrid('grid').datagrid('reload');
+                },200);
             }
         })
     });
@@ -148,6 +151,7 @@ function edit(rowid) {
 }
 
 var show = false;
+
 function del(rowid) {
 
     if (confirm("确认注销么？")) {
@@ -181,6 +185,7 @@ function setParams(key, value) {
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
 }
+
 function parseStatus(val) {
     switch (val) {
         case '1':
