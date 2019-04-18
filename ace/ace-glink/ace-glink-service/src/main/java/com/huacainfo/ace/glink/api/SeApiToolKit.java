@@ -113,11 +113,11 @@ public class SeApiToolKit {
      *
      * @return Map<String, Object>
      */
-    public Map<String, Object> get4GRouterState() {
+    public RouteOut get4GRouterState() {
         Map<String, String> params = common("6");
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
-        return JsonUtil.toMap(rstJson);
+        return JsonUtil.toObject(rstJson, RouteOut.class);
     }
 
     /**
@@ -125,11 +125,11 @@ public class SeApiToolKit {
      *
      * @return Map<String, Object>
      */
-    public Map<String, Object> getGatewayState() {
+    public GatewayOut getGatewayState() {
         Map<String, String> params = common("7");
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
-        return JsonUtil.toMap(rstJson);
+        return JsonUtil.toObject(rstJson, GatewayOut.class);
     }
 
 
