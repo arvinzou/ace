@@ -96,22 +96,25 @@ public class SeGatewayStateServiceImpl implements SeGatewayStateService {
      * @version: 2019-04-18
      */
     @Override
-    public MessageResponse insertSeGatewayState(SeGatewayState o, UserProp userProp) throws Exception {
-        String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
-        o.setId(guid);
-        if (CommonUtils.isBlank(o.getNodeID())) {
-            return new MessageResponse(1, "配电箱编号不能为空！");
+    public MessageResponse insertSeGatewayState(List<SeGatewayState> list, UserProp userProp) throws Exception {
+        if(list.size()>0){
+            for(int i=0; i<list.size(); i++){
+                SeGatewayState o = list.get(i);
+                String guid = StringUtil.isEmpty(list.get(i).getId()) ? GUIDUtil.getGUID() : list.get(i).getId();
+                o.setId(guid);
+                if (CommonUtils.isBlank(o.getNodeID())) {
+                    return new MessageResponse(1, "配电箱编号不能为空！");
+                }
+                int temp = this.seGatewayStateDao.isExit(o);
+                if (temp > 0) {
+                    return new MessageResponse(1, "网关数据名称重复！");
+                }
+                o.setCreateDate(new Date());
+                this.seGatewayStateDao.insert(o);
+                this.dataBaseLogService.log("添加网关数据", "网关数据", "",
+                        o.getId(), o.getId(), userProp);
+            }
         }
-
-        int temp = this.seGatewayStateDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "网关数据名称重复！");
-        }
-
-        o.setCreateDate(new Date());
-        this.seGatewayStateDao.insert(o);
-        this.dataBaseLogService.log("添加网关数据", "网关数据", "",
-                o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "保存成功！");
     }
