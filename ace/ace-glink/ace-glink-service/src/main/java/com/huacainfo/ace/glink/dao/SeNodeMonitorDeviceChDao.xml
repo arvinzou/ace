@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeNodeMonitorDeviceChDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeNodeMonitorDeviceCh">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="chName" jdbcType="VARCHAR" property="chName"/>
+        <result column="deviceCode" jdbcType="VARCHAR" property="deviceCode"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="cHReportTime" jdbcType="VARCHAR" property="cHReportTime"/>
+        <result column="va" jdbcType="VARCHAR" property="va"/>
+        <result column="vb" jdbcType="VARCHAR" property="vb"/>
+        <result column="vc" jdbcType="VARCHAR" property="vc"/>
+        <result column="ia" jdbcType="VARCHAR" property="ia"/>
+        <result column="ib" jdbcType="VARCHAR" property="ib"/>
+        <result column="ic" jdbcType="VARCHAR" property="ic"/>
+        <result column="pa" jdbcType="VARCHAR" property="pa"/>
+        <result column="pb" jdbcType="VARCHAR" property="pb"/>
+        <result column="pc" jdbcType="VARCHAR" property="pc"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, chName, deviceCode, status, cHReportTime, va, vb, vc, ia, ib, ic, pa, pb, pc, 
+    remark, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_node_monitor_device_ch
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_node_monitor_device_ch
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeNodeMonitorDeviceCh">
+    insert into se_node_monitor_device_ch (id, chName, deviceCode, 
+      status, cHReportTime, va, 
+      vb, vc, ia, ib, 
+      ic, pa, pb, pc, 
+      remark, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{chName,jdbcType=VARCHAR}, #{deviceCode,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{cHReportTime,jdbcType=VARCHAR}, #{va,jdbcType=VARCHAR}, 
+      #{vb,jdbcType=VARCHAR}, #{vc,jdbcType=VARCHAR}, #{ia,jdbcType=VARCHAR}, #{ib,jdbcType=VARCHAR}, 
+      #{ic,jdbcType=VARCHAR}, #{pa,jdbcType=VARCHAR}, #{pb,jdbcType=VARCHAR}, #{pc,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNodeMonitorDeviceCh">
+    update se_node_monitor_device_ch
+    set chName = #{chName,jdbcType=VARCHAR},
+      deviceCode = #{deviceCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      cHReportTime = #{cHReportTime,jdbcType=VARCHAR},
+      va = #{va,jdbcType=VARCHAR},
+      vb = #{vb,jdbcType=VARCHAR},
+      vc = #{vc,jdbcType=VARCHAR},
+      ia = #{ia,jdbcType=VARCHAR},
+      ib = #{ib,jdbcType=VARCHAR},
+      ic = #{ic,jdbcType=VARCHAR},
+      pa = #{pa,jdbcType=VARCHAR},
+      pb = #{pb,jdbcType=VARCHAR},
+      pc = #{pc,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

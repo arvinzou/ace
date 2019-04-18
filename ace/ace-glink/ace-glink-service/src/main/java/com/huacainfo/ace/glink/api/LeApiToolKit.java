@@ -114,14 +114,6 @@ public class LeApiToolKit {
         System.out.println(LeApiToolKit.lightStrategy(p));
     }
 
-    public LeApiToolKit newInstance() {
-        if (instance == null) {
-            return new LeApiToolKit();
-        }
-
-        return instance;
-    }
-
     /**
      * //模式的紧急停止(恢复)
      *

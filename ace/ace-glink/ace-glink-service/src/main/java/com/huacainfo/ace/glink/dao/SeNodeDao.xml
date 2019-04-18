@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeNodeDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeNode">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="nodeCount" jdbcType="INTEGER" property="nodeCount"/>
+        <result column="nodeID" jdbcType="INTEGER" property="nodeID"/>
+        <result column="local" jdbcType="VARCHAR" property="local"/>
+        <result column="iPAddress" jdbcType="VARCHAR" property="iPAddress"/>
+        <result column="routeIPAddress" jdbcType="VARCHAR" property="routeIPAddress"/>
+        <result column="areaNodeID" jdbcType="VARCHAR" property="areaNodeID"/>
+        <result column="pX" jdbcType="VARCHAR" property="pX"/>
+        <result column="pY" jdbcType="VARCHAR" property="pY"/>
+        <result column="meterID" jdbcType="VARCHAR" property="meterID"/>
+        <result column="meterType" jdbcType="VARCHAR" property="meterType"/>
+        <result column="engineer" jdbcType="VARCHAR" property="engineer"/>
+        <result column="tel" jdbcType="VARCHAR" property="tel"/>
+        <result column="deviceCount" jdbcType="INTEGER" property="deviceCount"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, nodeCount, nodeID, local, iPAddress, routeIPAddress, areaNodeID, pX, pY, meterID, 
+    meterType, engineer, tel, deviceCount, remark, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_node
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_node
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeNode">
+    insert into se_node (id, nodeCount, nodeID, 
+      local, iPAddress, routeIPAddress, 
+      areaNodeID, pX, pY, 
+      meterID, meterType, engineer, 
+      tel, deviceCount, remark, 
+      status, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{nodeCount,jdbcType=INTEGER}, #{nodeID,jdbcType=INTEGER}, 
+      #{local,jdbcType=VARCHAR}, #{iPAddress,jdbcType=VARCHAR}, #{routeIPAddress,jdbcType=VARCHAR}, 
+      #{areaNodeID,jdbcType=VARCHAR}, #{pX,jdbcType=VARCHAR}, #{pY,jdbcType=VARCHAR}, 
+      #{meterID,jdbcType=VARCHAR}, #{meterType,jdbcType=VARCHAR}, #{engineer,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{deviceCount,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNode">
+    update se_node
+    set nodeCount = #{nodeCount,jdbcType=INTEGER},
+      nodeID = #{nodeID,jdbcType=INTEGER},
+      local = #{local,jdbcType=VARCHAR},
+      iPAddress = #{iPAddress,jdbcType=VARCHAR},
+      routeIPAddress = #{routeIPAddress,jdbcType=VARCHAR},
+      areaNodeID = #{areaNodeID,jdbcType=VARCHAR},
+      pX = #{pX,jdbcType=VARCHAR},
+      pY = #{pY,jdbcType=VARCHAR},
+      meterID = #{meterID,jdbcType=VARCHAR},
+      meterType = #{meterType,jdbcType=VARCHAR},
+      engineer = #{engineer,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      deviceCount = #{deviceCount,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeNodeVo">
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        id, nodeCount, nodeID, local, iPAddress, routeIPAddress, areaNodeID, pX, pY, meterID,
+        meterType, engineer, tel, deviceCount, remark, status, createDate
+    </sql>
+    <sql id="From_Statement">
+        FROM se_node t
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test="condition.nodeID !=null and condition.nodeID !=&quot;&quot;">
+            and t.nodeID like concat(#{condition.nodeID,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc, t.nodeID
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopSubarea">
+        select count(1)
+        from se_node
+        where 1!=1
+    </select>
+</mapper>
