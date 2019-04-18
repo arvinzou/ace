@@ -70,9 +70,12 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeNodeVo">
+        <result column="areaNodeName" jdbcType="VARCHAR" property="areaNodeName"/>
+
     </resultMap>
 
     <sql id="Vo_Column_List">
+        '区域名称' as areaNodeName,
         id, nodeCount, nodeID, local, iPAddress, routeIPAddress, areaNodeID, pX, pY, meterID,
         meterType, engineer, tel, deviceCount, remark, status, createDate
     </sql>
@@ -120,4 +123,9 @@
         from se_node
         where 1!=1
     </select>
+
+    <update id="allClear">
+        truncate table se_node ;
+        truncate table se_node_device ;
+    </update>
 </mapper>

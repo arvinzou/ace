@@ -46,7 +46,7 @@ public interface SeGatewayStateService {
      * @author: luocan
      * @version: 2019-04-18
      */
-    MessageResponse insertSeGatewayState(SeGatewayState obj, UserProp userProp) throws Exception;
+    MessageResponse insertSeGatewayState(List<SeGatewayState> list, UserProp userProp) throws Exception;
 
     /**
      * @throws

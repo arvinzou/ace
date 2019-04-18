@@ -12,6 +12,12 @@ import java.util.List;
  */
 public class JackBoxOut extends BaseModel {
 
+
+    public JackBoxOut(int nodeCount, List<JackBox> nodeGroup) {
+        NodeCount = nodeCount;
+        NodeGroup = nodeGroup;
+    }
+
     private int NodeCount;//配电箱数量
 
     private List<JackBox> NodeGroup;//配电箱集合
@@ -36,7 +42,7 @@ public class JackBoxOut extends BaseModel {
      * static class
      */
     public static class JackBox extends BaseModel {
-        private String NodeID;              //配电箱编号
+        private int NodeID;              //配电箱编号
         private String Local;               //位置标识
         private String IPAddress;           //网关IP地址
         private String RouteIPAddress;      //路由器IP地址
@@ -50,11 +56,11 @@ public class JackBoxOut extends BaseModel {
         private int DeviceCount;            //模块数量
         private List<Device> DeviceData;    //模块集合
 
-        public String getNodeID() {
+        public int getNodeID() {
             return NodeID;
         }
 
-        public void setNodeID(String nodeID) {
+        public void setNodeID(int nodeID) {
             NodeID = nodeID;
         }
 

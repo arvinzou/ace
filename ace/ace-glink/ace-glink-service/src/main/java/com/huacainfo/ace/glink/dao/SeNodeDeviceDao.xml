@@ -110,4 +110,37 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+    <sql id="Vo_Column_List">
+      id, nodeID, deviceType, deviceCode, deviceBox, cH1Name, cH2Name, cH3Name, cH4Name,
+      cH5Name, cH6Name, cH7Name, cH8Name, cH9Name, cH10Name, cH11Name, cH12Name, cH1Control,
+      cH2Control, cH3Control, cH4Control, cH5Control, cH6Control, cH7Control, cH8Control,
+      cH9Control, cH10Control, cH11Control, cH12Control, remark, status, createDate
+  </sql>
+    <sql id="From_Statement">
+        FROM se_node_device t
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test="condition.nodeID !=null and condition.nodeID !=&quot;&quot;">
+            and t.nodeID = #{condition.nodeID,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findList" resultMap="BaseResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.deviceCode desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 </mapper>

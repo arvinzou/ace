@@ -70,14 +70,15 @@
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
+
 </body>
 
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \&{item.areaNodeID}</td>
-        <td> \&{item.areaNOdeName}</td>
+        <td> \${item.areaNodeID}</td>
+        <td> \${item.areaNodeName}</td>
         <td>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
@@ -88,76 +89,9 @@
     {@/each}
 </script>
 ﻿
-<div class="modal fade " id="modal-status">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">设置状态</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-status" role="form">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="col-md-2 view-label">对象</label>
-                            <div class="col-md-10 status-title">
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">状态</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <input type="hidden" name="id">
-                                    <label>
-                                        <input type="radio" name="status" value="1"><span style="padding:10px">预播</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="2"><span
-                                            style="padding:10px">直播中</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="3"><span style="padding:10px">历史</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green status">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!--审核弹框-->
-<div class="modal fade" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green audit">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
+<%--查看--%>
 <div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document" style="width: 90%;">
+    <div class="modal-dialog" role="document" style="width: 85%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -177,241 +111,147 @@
         </div>
     </div>
 </div>
-<script id="tpl-fm" type="text/template">
-    <div class="form-body">
-
-        <div class="form-group">
-            <label class="col-md-2 view-label">主键</label>
-            <div class="col-md-10">
-                \${id}
+<script id="tpl-preview" type="text/template">
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-share"></i>
+                <span class="caption-subject bold uppercase"> 基本信息</span>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">配电箱数量</label>
-            <div class="col-md-10">
-                \${nodeCount}
+        <div class="portlet-body">
+            <div class="form-group">
+                <label class="col-md-2 view-label">配电箱编号</label>
+                <div class="col-md-10">
+                    \${data.o.nodeID}
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">配电箱编号</label>
-            <div class="col-md-10">
-                \${nodeID}
+            <div class="form-group">
+                <label class="col-md-2 view-label">位置标识</label>
+                <div class="col-md-10">
+                    \${data.o.local}
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">位置标识</label>
-            <div class="col-md-10">
-                \${local}
+            <div class="form-group">
+                <label class="col-md-2 view-label">网关IP地址</label>
+                <div class="col-md-10">
+                    \${data.o.iPAddress}
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">网关IP地址</label>
-            <div class="col-md-10">
-                \${iPAddress}
+            <div class="form-group">
+                <label class="col-md-2 view-label">路由器IP地址</label>
+                <div class="col-md-10">
+                    \${data.o.routeIPAddress}
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">路由器IP地址</label>
-            <div class="col-md-10">
-                \${routeIPAddress}
+            <div class="form-group">
+                <label class="col-md-2 view-label">电表表号</label>
+                <div class="col-md-10">
+                    \${data.o.meterID}
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">区域id索引</label>
-            <div class="col-md-10">
-                \${areaNodeID}
+            <div class="form-group">
+                <label class="col-md-2 view-label">电表品牌或类型</label>
+                <div class="col-md-10">
+                    \${data.o.meterType}
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">经度</label>
-            <div class="col-md-10">
-                \${pX}
+            <div class="form-group">
+                <label class="col-md-2 view-label">维护人员</label>
+                <div class="col-md-10">
+                    \${data.o.engineer}
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">纬度</label>
-            <div class="col-md-10">
-                \${pY}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">电表表号</label>
-            <div class="col-md-10">
-                \${meterID}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">电表品牌或类型</label>
-            <div class="col-md-10">
-                \${meterType}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">维护人员</label>
-            <div class="col-md-10">
-                \${engineer}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">维护人员电话</label>
-            <div class="col-md-10">
-                \${tel}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">模块数量</label>
-            <div class="col-md-10">
-                \${deviceCount}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">备注</label>
-            <div class="col-md-10">
-                \${remark}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">状态</label>
-            <div class="col-md-10">
-                \${status}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建日期</label>
-            <div class="col-md-10">
-                \${createDate}
-            </div>
-        </div>
-
-        <h4>结果</h4>
-        <hr>
-        <div class="form-group " id="operation">
-            <label class="col-md-2 control-label">结果</label>
-            <div class="col-md-10">
-                <div class="radio-group-container">
-                    <label>
-                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                    </label>
+            <div class="form-group">
+                <label class="col-md-2 view-label">维护人员电话</label>
+                <div class="col-md-10">
+                    \${data.o.tel}
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">说明</label>
-            <div class="col-md-10">
-                <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
+    </div>
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-share"></i>
+                <span class="caption-subject bold uppercase"> 模块列表</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="table-scrollable">
+                <table class="table table-hover table-light">
+                    <thead>
+                    <tr>
+                        <th width="5%"> 模块类型</th>
+                        <th width="5%"> 模块代码</th>
+                        <th width="5%"> 模块地址</th>
+                        <th width="5%"> 回路1名称</th>
+                        <th width="5%"> 回路2名称</th>
+                        <th width="5%"> 回路3名称</th>
+                        <th width="5%"> 回路4名称</th>
+                        <th width="5%"> 回路5名称</th>
+                        <th width="5%"> 回路6名称</th>
+                        <th width="5%"> 回路7名称</th>
+                        <th width="5%"> 回路8名称</th>
+                        <th width="5%"> 回路9名称</th>
+                        <th width="5%"> 回路10名称</th>
+                        <th width="5%"> 回路11名称</th>
+                        <th width="5%"> 回路12名称</th>
+                        <th width="5%"> 回路1控制</th>
+                        <th width="5%"> 回路2控制</th>
+                        <th width="5%"> 回路3控制</th>
+                        <th width="5%"> 回路4控制</th>
+                        <th width="5%"> 回路5控制</th>
+                        <th width="5%"> 回路6控制</th>
+                        <th width="5%"> 回路7控制</th>
+                        <th width="5%"> 回路8控制</th>
+                        <th width="5%"> 回路9控制</th>
+                        <th width="5%"> 回路10控制</th>
+                        <th width="5%"> 回路11控制</th>
+                        <th width="5%"> 回路12控制</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {@each data.deviceList as item, index}
+                    <tr>
+                        <th width="5%"> \${item.deviceType}</th>
+                        <th width="5%"> \${item.deviceCode}</th>
+                        <th width="5%"> \${item.deviceBox}</th>
+
+                        <th width="5%"> \${item.cH1Name}</th>
+                        <th width="5%"> \${item.cH2Name}</th>
+                        <th width="5%"> \${item.cH3Name}</th>
+                        <th width="5%"> \${item.cH4Name}</th>
+                        <th width="5%"> \${item.cH5Name}</th>
+                        <th width="5%"> \${item.cH6Name}</th>
+                        <th width="5%"> \${item.cH7Name}</th>
+                        <th width="5%"> \${item.cH8Name}</th>
+                        <th width="5%"> \${item.cH9Name}</th>
+                        <th width="5%"> \${item.cH10Name}</th>
+                        <th width="5%"> \${item.cH11Name}</th>
+                        <th width="5%"> \${item.cH12Name}</th>
+
+                        <th width="5%"> \${item.cH1Control}</th>
+                        <th width="5%"> \${item.cH2Control}</th>
+                        <th width="5%"> \${item.cH3Control}</th>
+                        <th width="5%"> \${item.cH4Control}</th>
+                        <th width="5%"> \${item.cH5Control}</th>
+                        <th width="5%"> \${item.cH6Control}</th>
+                        <th width="5%"> \${item.cH7Control}</th>
+                        <th width="5%"> \${item.cH8Control}</th>
+                        <th width="5%"> \${item.cH9Control}</th>
+                        <th width="5%"> \${item.cH10Control}</th>
+                        <th width="5%"> \${item.cH11Control}</th>
+                        <th width="5%"> \${item.cH12Control}</th>
+
+                    </tr>
+                    {@/each}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-</script>
-
-<script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">配电箱数量</label>
-        <div class="col-md-10">
-            \${nodeCount}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">配电箱编号</label>
-        <div class="col-md-10">
-            \${nodeID}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">位置标识</label>
-        <div class="col-md-10">
-            \${local}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">网关IP地址</label>
-        <div class="col-md-10">
-            \${iPAddress}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">路由器IP地址</label>
-        <div class="col-md-10">
-            \${routeIPAddress}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">区域id索引</label>
-        <div class="col-md-10">
-            \${areaNodeID}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">经度</label>
-        <div class="col-md-10">
-            \${pX}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">纬度</label>
-        <div class="col-md-10">
-            \${pY}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">电表表号</label>
-        <div class="col-md-10">
-            \${meterID}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">电表品牌或类型</label>
-        <div class="col-md-10">
-            \${meterType}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">维护人员</label>
-        <div class="col-md-10">
-            \${engineer}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">维护人员电话</label>
-        <div class="col-md-10">
-            \${tel}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">模块数量</label>
-        <div class="col-md-10">
-            \${deviceCount}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">备注</label>
-        <div class="col-md-10">
-            \${remark}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">状态</label>
-        <div class="col-md-10">
-            \${status}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建日期</label>
-        <div class="col-md-10">
-            \${createDate}
-        </div>
-    </div>
 </script>
 <style>
 
