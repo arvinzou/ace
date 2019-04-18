@@ -9,8 +9,21 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
   </resultMap>
-  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeAlarmDataVo">
-
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeGatewayStateVo">
+    <collection property="seNodeVo" ofType="com.huacainfo.ace.glink.vo.SeNodeVo">
+      <id column="n_id" property="id" />
+      <result column="nodeCount" property="nodeCount"/>
+      <result column="n_nodeID" property="nodeID"/>
+      <result column="local" property="local"/>
+      <result column="n_areaNodeID" property="areaNodeID"/>
+      <result column="pX" property="pX"/>
+      <result column="pY" property="pY"/>
+      <result column="meterID" property="meterID"/>
+      <result column="meterType" property="meterType"/>
+      <result column="engineer" property="engineer"/>
+      <result column="tel" property="tel"/>
+      <result column="deviceCount" property="deviceCount"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, nodeID, status, updateTime, remark, createDate
@@ -52,8 +65,12 @@
 
   <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
     select
-    t.id, t.nodeID, t.status, t.updateTime, t.remark, t.createDate
+    t.id, t.nodeID, t.status, t.updateTime, t.remark, t.createDate,
+    n.id as n_id, n.nodeCount, n.nodeID as n_nodeID, n.local, n.iPAddress, n.areaNodeID as n_areaNodeID,
+    n.pX, n.pY, n.meterID, n.meterType, n.engineer, n.tel, n.deviceCount
     from se_gateway_state t
+    LEFT JOIN  se_node n
+    on t.nodeID = n.nodeID
     <include refid="Where_Condition"/>
     <choose>
       <when test="orderBy!=null and orderBy!=&quot;&quot;">
