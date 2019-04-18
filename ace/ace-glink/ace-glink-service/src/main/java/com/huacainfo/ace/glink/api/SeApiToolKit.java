@@ -17,7 +17,6 @@ import java.util.Map;
 public class SeApiToolKit {
 
     private static final String API_DOMAIN = "http://192.168.100.2?";
-    private SeApiToolKit instance;
 
     /**
      * 单例模式
@@ -26,15 +25,7 @@ public class SeApiToolKit {
 
     }
 
-    public SeApiToolKit newInstance() {
-        if (instance == null) {
-            return new SeApiToolKit();
-        }
-
-        return instance;
-    }
-
-    private Map<String, String> common(String interFaceType) {
+    private static Map<String, String> common(String interFaceType) {
         Map<String, String> map = new HashMap<>();
         map.clear();
 
@@ -44,7 +35,7 @@ public class SeApiToolKit {
         return map;
     }
 
-    private String parse(Map<String, String> p) {
+    private static String parse(Map<String, String> p) {
         return URLKit.mapToStr(p);
     }
 
@@ -54,7 +45,7 @@ public class SeApiToolKit {
      *
      * @return ProjectAreaOut
      */
-    public ProjectAreaOut getAreaProjectInfo() {
+    public static ProjectAreaOut getAreaProjectInfo() {
         Map<String, String> params = common("1");
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
 
@@ -66,7 +57,7 @@ public class SeApiToolKit {
      *
      * @return JackBoxOut
      */
-    public JackBoxOut getBaseNodeInfo() {
+    public static JackBoxOut getBaseNodeInfo() {
         Map<String, String> params = common("2");
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
 
@@ -74,7 +65,7 @@ public class SeApiToolKit {
     }
 
     //3.3、获取单个配电箱监测数据（InterFaceType=3） -- 页面手动及时调用
-    public Map<String, Object> getNodeMonitorSingleData(String nodeId) {
+    public static Map<String, Object> getNodeMonitorSingleData(String nodeId) {
         Map<String, String> params = common("3");
         params.put("NodeID", nodeId);
 
@@ -88,7 +79,7 @@ public class SeApiToolKit {
      * @param nodeGroup 配电箱ID组合，用英文','隔开
      * @return Map<String, Object>
      */
-    public NodeMonitorDataOut getNodeMonitorListData(String nodeGroup) {
+    public static NodeMonitorDataOut getNodeMonitorListData(String nodeGroup) {
         Map<String, String> params = common("4");
         params.put("NodeGroup", nodeGroup);
 
@@ -101,7 +92,7 @@ public class SeApiToolKit {
      *
      * @return MeterBoxOut
      */
-    public MeterBoxOut getAllMeterData() {
+    public static MeterBoxOut getAllMeterData() {
         Map<String, String> params = common("5");
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
@@ -113,7 +104,7 @@ public class SeApiToolKit {
      *
      * @return Map<String, Object>
      */
-    public RouteOut get4GRouterState() {
+    public static RouteOut get4GRouterState() {
         Map<String, String> params = common("6");
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
@@ -125,7 +116,7 @@ public class SeApiToolKit {
      *
      * @return Map<String, Object>
      */
-    public GatewayOut getGatewayState() {
+    public static GatewayOut getGatewayState() {
         Map<String, String> params = common("7");
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
@@ -138,7 +129,7 @@ public class SeApiToolKit {
      *
      * @return CustomAreaOut
      */
-    public CustomAreaOut getCustomAreaInfo() {
+    public static CustomAreaOut getCustomAreaInfo() {
         Map<String, String> params = common("8");
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
@@ -150,7 +141,7 @@ public class SeApiToolKit {
      *
      * @return AreaTaskOut
      */
-    public AreaTaskOut getAreaTaskInfo() {
+    public static AreaTaskOut getAreaTaskInfo() {
         Map<String, String> params = common("9");
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
@@ -162,7 +153,7 @@ public class SeApiToolKit {
      *
      * @return PresetDataOut
      */
-    public PresetDataOut getPresetData() {
+    public static PresetDataOut getPresetData() {
         Map<String, String> params = common("10");
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
@@ -174,7 +165,7 @@ public class SeApiToolKit {
      *
      * @return TimerDataOut
      */
-    public TimerDataOut getTimerData() {
+    public static TimerDataOut getTimerData() {
         Map<String, String> params = common("11");
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
@@ -189,7 +180,7 @@ public class SeApiToolKit {
      * @param AreaNodeID 区域编号
      * @return Map<String, Object>
      */
-    public Map<String, Object> executePreset(String AreaNO, String PresetNo, String AreaNodeID) {
+    public static Map<String, Object> executePreset(String AreaNO, String PresetNo, String AreaNodeID) {
         Map<String, String> params = common("12");
         params.put("AreaNO", AreaNO);
         params.put("PresetNo", PresetNo);
@@ -206,7 +197,7 @@ public class SeApiToolKit {
      * @param TaskNO 任务序号
      * @return Map<String, Object>
      */
-    public Map<String, Object> executeTask(String TaskNO) {
+    public static Map<String, Object> executeTask(String TaskNO) {
         Map<String, String> params = common("13");
         params.put("TaskNO", TaskNO);
 
@@ -222,7 +213,7 @@ public class SeApiToolKit {
      * @param timerData 入参
      * @return Map<String, Object>
      */
-    public Map<String, Object> updateTimer(TimerDataOut.TimerData timerData) {
+    public static Map<String, Object> updateTimer(TimerDataOut.TimerData timerData) {
         Map<String, String> params = common("14");
 
         String rstJson = HttpKit.post(API_DOMAIN + parse(params), timerData.toString());
@@ -236,7 +227,7 @@ public class SeApiToolKit {
      * @param AreaNodeID 区域编号
      * @return Map<String, Object>
      */
-    public Map<String, Object> getCurrentPreset(String AreaNodeID) {
+    public static Map<String, Object> getCurrentPreset(String AreaNodeID) {
         Map<String, String> params = common("15");
         params.put("AreaNodeID", AreaNodeID);
 
@@ -249,7 +240,7 @@ public class SeApiToolKit {
      *
      * @return Map<String, Object>
      */
-    public Map<String, Object> getGeneralCtrlTimer() {
+    public static Map<String, Object> getGeneralCtrlTimer() {
         Map<String, String> params = common("17");
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
@@ -263,7 +254,7 @@ public class SeApiToolKit {
      * @param in GeneralCtrlTimerIn
      * @return Map<String, Object>
      */
-    public Map<String, Object> updateGeneralCtrlTimer(GeneralCtrlTimerIn in) {
+    public static Map<String, Object> updateGeneralCtrlTimer(GeneralCtrlTimerIn in) {
         Map<String, String> params = common("18");
 
         String rstJson = HttpKit.post(API_DOMAIN + parse(params), in.toString());
@@ -276,7 +267,7 @@ public class SeApiToolKit {
      *
      * @return YearCron
      */
-    public YearCron getGeneralCtrlCron() {
+    public static YearCron getGeneralCtrlCron() {
         Map<String, String> params = common("19");
 
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
@@ -290,7 +281,7 @@ public class SeApiToolKit {
      * @return Map<String, Object>
      */
 
-    public Map<String, Object> updateGeneralCtrlCron(YearCron in) {
+    public static Map<String, Object> updateGeneralCtrlCron(YearCron in) {
         Map<String, String> params = common("20");
 
         String rstJson = HttpKit.post(API_DOMAIN + parse(params), in.toString());
@@ -304,7 +295,7 @@ public class SeApiToolKit {
      * @param WorkMode 总控工作模式：  1-平日模式、2-节假日模式、3-重大节假日模式、其他数值为非法;
      * @return Map<String, Object>
      */
-    public Map<String, Object> updateDayCron(int WorkMode) {
+    public static Map<String, Object> updateDayCron(int WorkMode) {
         Map<String, String> params = common("21");
         params.put("WorkMode", WorkMode + "");
 

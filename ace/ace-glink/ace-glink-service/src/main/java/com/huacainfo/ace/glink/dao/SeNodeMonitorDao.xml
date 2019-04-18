@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeNodeMonitorDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeNodeMonitor">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="nodeID" jdbcType="INTEGER" property="nodeID"/>
+        <result column="reportTime" jdbcType="VARCHAR" property="reportTime"/>
+        <result column="gateStatus" jdbcType="INTEGER" property="gateStatus"/>
+        <result column="gateReportTime" jdbcType="VARCHAR" property="gateReportTime"/>
+        <result column="routeStatus" jdbcType="INTEGER" property="routeStatus"/>
+        <result column="routeSignal" jdbcType="VARCHAR" property="routeSignal"/>
+        <result column="routeReportTime" jdbcType="VARCHAR" property="routeReportTime"/>
+        <result column="currentPreset" jdbcType="INTEGER" property="currentPreset"/>
+        <result column="presetCaption" jdbcType="VARCHAR" property="presetCaption"/>
+        <result column="presetReportTime" jdbcType="VARCHAR" property="presetReportTime"/>
+        <result column="temperature" jdbcType="VARCHAR" property="temperature"/>
+        <result column="humidity" jdbcType="VARCHAR" property="humidity"/>
+        <result column="wSDReportTime" jdbcType="VARCHAR" property="wSDReportTime"/>
+        <result column="doorStatus" jdbcType="VARCHAR" property="doorStatus"/>
+        <result column="meterID" jdbcType="VARCHAR" property="meterID"/>
+        <result column="meterValue" jdbcType="VARCHAR" property="meterValue"/>
+        <result column="meterReportTime" jdbcType="VARCHAR" property="meterReportTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, nodeID, reportTime, gateStatus, gateReportTime, routeStatus, routeSignal, routeReportTime, 
+    currentPreset, presetCaption, presetReportTime, temperature, humidity, wSDReportTime, 
+    doorStatus, meterID, meterValue, meterReportTime, remark, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_node_monitor
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_node_monitor
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeNodeMonitor">
+    insert into se_node_monitor (id, nodeID, reportTime, 
+      gateStatus, gateReportTime, routeStatus, 
+      routeSignal, routeReportTime, currentPreset, 
+      presetCaption, presetReportTime, temperature, 
+      humidity, wSDReportTime, doorStatus, 
+      meterID, meterValue, meterReportTime, 
+      remark, status, createDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=INTEGER}, #{reportTime,jdbcType=VARCHAR}, 
+      #{gateStatus,jdbcType=INTEGER}, #{gateReportTime,jdbcType=VARCHAR}, #{routeStatus,jdbcType=INTEGER}, 
+      #{routeSignal,jdbcType=VARCHAR}, #{routeReportTime,jdbcType=VARCHAR}, #{currentPreset,jdbcType=INTEGER}, 
+      #{presetCaption,jdbcType=VARCHAR}, #{presetReportTime,jdbcType=VARCHAR}, #{temperature,jdbcType=VARCHAR}, 
+      #{humidity,jdbcType=VARCHAR}, #{wSDReportTime,jdbcType=VARCHAR}, #{doorStatus,jdbcType=VARCHAR}, 
+      #{meterID,jdbcType=VARCHAR}, #{meterValue,jdbcType=VARCHAR}, #{meterReportTime,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNodeMonitor">
+    update se_node_monitor
+    set nodeID = #{nodeID,jdbcType=INTEGER},
+      reportTime = #{reportTime,jdbcType=VARCHAR},
+      gateStatus = #{gateStatus,jdbcType=INTEGER},
+      gateReportTime = #{gateReportTime,jdbcType=VARCHAR},
+      routeStatus = #{routeStatus,jdbcType=INTEGER},
+      routeSignal = #{routeSignal,jdbcType=VARCHAR},
+      routeReportTime = #{routeReportTime,jdbcType=VARCHAR},
+      currentPreset = #{currentPreset,jdbcType=INTEGER},
+      presetCaption = #{presetCaption,jdbcType=VARCHAR},
+      presetReportTime = #{presetReportTime,jdbcType=VARCHAR},
+      temperature = #{temperature,jdbcType=VARCHAR},
+      humidity = #{humidity,jdbcType=VARCHAR},
+      wSDReportTime = #{wSDReportTime,jdbcType=VARCHAR},
+      doorStatus = #{doorStatus,jdbcType=VARCHAR},
+      meterID = #{meterID,jdbcType=VARCHAR},
+      meterValue = #{meterValue,jdbcType=VARCHAR},
+      meterReportTime = #{meterReportTime,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
