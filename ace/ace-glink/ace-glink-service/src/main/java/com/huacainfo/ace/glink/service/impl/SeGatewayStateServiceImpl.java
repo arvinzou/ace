@@ -8,6 +8,12 @@ import java.util.List;
 
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.dao.TopBuildingDao;
+import com.huacainfo.ace.glink.vo.TopBuildingVo;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +45,8 @@ public class SeGatewayStateServiceImpl implements SeGatewayStateService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
-
+    @Autowired
+    private SqlSessionTemplate sqlSession;
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -56,12 +63,23 @@ public class SeGatewayStateServiceImpl implements SeGatewayStateService {
      */
     @Override
     public PageResult<SeGatewayStateVo> findSeGatewayStateList(SeGatewayStateQVo condition, int start, int limit, String orderBy) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        SeGatewayStateDao dao = session.getMapper(SeGatewayStateDao.class);
         PageResult<SeGatewayStateVo> rst = new PageResult<>();
-        List<SeGatewayStateVo> list = seGatewayStateDao.findList(condition, start, limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.seGatewayStateDao.findCount(condition);
-            rst.setTotal(allRows);
+        try {
+            List<SeGatewayStateVo> list = dao.findList(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (rst.getTotal()  <= 1) {
+                int allRows = dao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.close();
+        } finally {
+            session.close();
         }
         return rst;
     }
