@@ -152,6 +152,7 @@ function initPreview(id) {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
+                data['deviceList'] = result.value.deviceList;
                 render('#fm-preview', data, 'tpl-preview');
             } else {
                 alert(result.errorMessage);

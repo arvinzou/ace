@@ -28,4 +28,5 @@ public interface SeNodeDao {
 
     int isExist(SeNode record);
 
+    int allClear();
 }

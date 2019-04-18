@@ -129,8 +129,8 @@
 <script id="tpl-preview" type="text/template">
     <div class="portlet light">
         <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
+            <div class="caption">
+                <i class="icon-share"></i>
                 <span class="caption-subject bold uppercase"> 基本信息</span>
             </div>
         </div>
@@ -197,8 +197,8 @@
     </div>
     <div class="portlet light">
         <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
+            <div class="caption">
+                <i class="icon-share"></i>
                 <span class="caption-subject bold uppercase"> 归属站点列表</span>
             </div>
         </div>
