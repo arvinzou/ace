@@ -32,7 +32,8 @@
 
         <br> <br><br>
         <div id="allCheck" style="display: none">
-            &nbsp;<input name="checkList" type="checkbox" style="width: 15px; height:15px;" class="all"/><span
+            &nbsp;<input name="checkList" type="checkbox" style="width: 15px; height:15px;" class="all"/>
+            <span
                 class="checkall">全选</span>&nbsp;&nbsp;&nbsp;
             <span class="count">当前选中<span id="checkCount">0</span>条</span>
 
@@ -45,7 +46,7 @@
                 <label class="slider-v3" for="a1"></label>
 
             </div>
-            <label style=" margin-left: 330px;margin-top: 20px;" class="batch">批量操作</label>
+            <label style=" margin-left: 380px;margin-top: 20px;" class="batch">批量操作</label>
         </div>
         <br><br>
 
