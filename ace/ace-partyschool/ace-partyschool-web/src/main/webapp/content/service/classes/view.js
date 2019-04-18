@@ -43,6 +43,12 @@ jQuery(cfg.grid_selector).jqGrid({
         deleteurl: cfg.grid_delete_data_url,
         caption: cfg.caption
     });
+
+    // $(cfg.grid_selector).bind("jqGridAddEditAfterShowForm", function (e,form,act) {
+    //     if(act=='add'){
+    //         $('#classroomId').combogrid('grid').datagrid('reload',contextPath + '/classroom/selectClassroomList');
+    //     }
+    // });
 });
 
 function resizeJqGrid() {
