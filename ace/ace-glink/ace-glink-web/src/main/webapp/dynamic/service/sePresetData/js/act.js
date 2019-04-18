@@ -7,7 +7,7 @@ window.onload = function () {
 }
 
 
-/*节点管理初始化分页*/
+/*场景定义数据初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 1,
@@ -42,9 +42,9 @@ function setParams(key, value) {
     getPageList();
 }
 
-/*节点管理加载表格数据*/
+/*场景定义数据加载表格数据*/
 function getPageList() {
-    var url = contextPath + "/topNode/findTopNodeList";
+    var url = contextPath + "/sePresetData/findSePresetDataList";
     params['name'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
@@ -70,36 +70,19 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
-/*节点管理添加*/
+/*场景定义数据添加*/
 function add(type) {
     window.location.href = 'add/index.jsp?id=' + urlParams.id;
 }
 
-/*节点管理编辑*/
+/*场景定义数据编辑*/
 function edit(did) {
     window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
 }
 
-function del(did) {
-    var url = contextPath + "/topNode/deleteTopNodeByTopNodeId";
-    var data={
-        jsons:JSON.stringify({
-            id:did
-        })
-    }
-    $.getJSON(url,data, function (rst) {
-        if(rst.status==0){
-            getPageList();
-        }
-        else {
-            alert("删除失败")
-        }
-    })
-}
-
 /*查看详情*/
 function detail(id) {
-    var url = contextPath + "/topNode/selectTopNodeByPrimaryKey";
+    var url = contextPath + "/sePresetData/selectSePresetDataByPrimaryKey";
     $.getJSON(url, {id: id}, function (result) {
         if (result.status == 0) {
             var navitem = document.getElementById('tpl-detail').innerHTML;
@@ -111,17 +94,14 @@ function detail(id) {
 }
 
 function initEvents() {
-    $('#modal-preview').on('show.bs.modal', function (event) {
+$('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
+        var title = relatedTarget.data('title');
+        var modal = $(this);
+        console.log(relatedTarget);
         initPreview(id);
     })
-
-    $('#modal-import').on('shown.bs.modal', function (event) {
-        //加载班级列表
-        alert("温馨提醒：在导入前，请先下载导入模板！");
-        importInit();
-    });
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
@@ -153,23 +133,14 @@ function initEvents() {
         $(event.target).addClass("active");
     });
 
-    //批量导入
-    $('#btn-view-import').on('click', function () {
-        //加载导入
-        importXls();
-    });
 
 }
 
-function importInit() {
-    reset_uploader();
-}
-
-/*节点管理审核*/
+/*场景定义数据审核*/
 function audit(params) {
     startLoad();
     $.ajax({
-        url: contextPath + "/topNode/audit",
+        url: contextPath + "/sePresetData/audit",
         type: "post",
         async: false,
         data: params,
@@ -188,16 +159,12 @@ function audit(params) {
     });
 }
 
-function importXls() {
-    $('#modal-import').modal('show');
-}
-
-/*节点管理上架*/
+/*场景定义数据上架*/
 function online(id) {
     if (confirm("确定要上架吗？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/topNode/updateStatus",
+            url: contextPath + "/sePresetData/updateStatus",
             type: "post",
             async: false,
             data: {
@@ -220,12 +187,12 @@ function online(id) {
     }
 }
 
-/*节点管理下架*/
+/*场景定义数据下架*/
 function outline(id) {
     if (confirm("确定要下架吗？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/topNode/updateStatus",
+            url: contextPath + "/sePresetData/updateStatus",
             type: "post",
             async: false,
             data: {
@@ -250,38 +217,27 @@ function outline(id) {
 
 //juicer自定义函数
 function initJuicerMethod() {
+    juicer.register('rsd', rsd);
     juicer.register('parseStatus', parseStatus);
 }
 
 /**
- * 状态
- * 0-删除
- * 1-暂存
- * 2-提交审核
- * 3-审核通过
- * 4-审核驳回
+ * 状态解析
  */
 function parseStatus(status) {
     switch (status) {
         case '0':
             return "删除";
         case '1':
-            return "暂存";
-        case '2':
-            return "待审";
-        case '3':
-            return "通过";
-        case '4':
-            return "驳回";
         default:
-            return "";
+            return "0";
     }
 }
 
 function initPreview(id) {
     startLoad();
     $.ajax({
-        url: contextPath + "/topNode/selectTopNodeByPrimaryKey",
+        url: contextPath + "/sePresetData/selectSePresetDataByPrimaryKey",
         type: "post",
         async: false,
         data: {
@@ -290,7 +246,8 @@ function initPreview(id) {
         success: function (result) {
             stopLoad();
             if (result.status == 0) {
-                var data  = result.value;
+                var data = {};
+                data['o'] = result.value;
                 render('#fm-preview', data, 'tpl-preview');
             } else {
                 alert(result.errorMessage);
@@ -306,7 +263,7 @@ function initPreview(id) {
 function initForm(id) {
     startLoad();
     $.ajax({
-        url: contextPath + "/topNode/selectTopNodeByPrimaryKey",
+        url: contextPath + "/sePresetData/selectSePresetDataByPrimaryKey",
         type: "post",
         async: false,
         data: {
