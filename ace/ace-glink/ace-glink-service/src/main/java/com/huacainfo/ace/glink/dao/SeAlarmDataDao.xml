@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeAlarmDataDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeAlarmData">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="areaNodeID" jdbcType="VARCHAR" property="areaNodeID" />
+    <result column="alarmType" jdbcType="VARCHAR" property="alarmType" />
+    <result column="alarmContent" jdbcType="VARCHAR" property="alarmContent" />
+    <result column="alarmDateTime" jdbcType="VARCHAR" property="alarmDateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeAlarmDataVo">
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, areaNodeID, alarmType, alarmContent, alarmDateTime, remark, status, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from se_alarm_data
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_alarm_data
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeAlarmData">
+    insert into se_alarm_data (id, areaNodeID, alarmType, 
+      alarmContent, alarmDateTime, remark, 
+      status, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{areaNodeID,jdbcType=VARCHAR}, #{alarmType,jdbcType=VARCHAR}, 
+      #{alarmContent,jdbcType=VARCHAR}, #{alarmDateTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeAlarmData">
+    update se_alarm_data
+    set areaNodeID = #{areaNodeID,jdbcType=VARCHAR},
+      alarmType = #{alarmType,jdbcType=VARCHAR},
+      alarmContent = #{alarmContent,jdbcType=VARCHAR},
+      alarmDateTime = #{alarmDateTime,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    t.id, t.areaNodeID, t.alarmType, t.alarmContent, t.alarmDateTime, t.remark, t.status, t.createDate
+    from se_alarm_data t
+    where t.id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    t.id, t.areaNodeID, t.alarmType, t.alarmContent, t.alarmDateTime, t.remark, t.status, t.createDate
+    from se_alarm_data t
+    <include refid="Where_Condition"/>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <sql id="Where_Condition">
+    where 1 = 1
+    <if test="condition.areaNodeID !=null and condition.areaNodeID !=&quot;&quot;">
+      and t.areaNodeID =#{condition.areaNodeID,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.alarmType !=null and condition.alarmType !=&quot;&quot;">
+      and t.alarmType =#{condition.alarmType,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    from se_alarm_data t
+    <include refid="Where_Condition"/>
+  </select>
+
+  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
+    select count(*)
+    from se_alarm_data t
+    where t.id = #{id}
+  </select>
+
+  <insert id="deleteByPrimaryKeys" parameterType="java.util.List" useGeneratedKeys="false">
+    DELETE FROM se_alarm_data
+    WHERE id in (
+    <foreach collection="list" item="item" index="index" separator=",">
+      #{item}
+    </foreach>
+    );
+  </insert>
+
+</mapper>
