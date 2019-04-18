@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeCustomAreaDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeCustomArea">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="areaNo" jdbcType="INTEGER" property="areaNo"/>
+        <result column="areaName" jdbcType="VARCHAR" property="areaName"/>
+        <result column="areaNodeID" jdbcType="VARCHAR" property="areaNodeID"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, areaNo, areaName, areaNodeID, remark, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_custom_area
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_custom_area
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeCustomArea">
+    insert into se_custom_area (id, areaNo, areaName, 
+      areaNodeID, remark, status, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{areaNo,jdbcType=INTEGER}, #{areaName,jdbcType=VARCHAR}, 
+      #{areaNodeID,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeCustomArea">
+    update se_custom_area
+    set areaNo = #{areaNo,jdbcType=INTEGER},
+      areaName = #{areaName,jdbcType=VARCHAR},
+      areaNodeID = #{areaNodeID,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeProjectAreaVo"></resultMap>
+    <sql id="Vo_Column_List">
+     id, areaNo, areaName, areaNodeID, remark, status, createDate
+  </sql>
+
+    <sql id="From_Statement">
+    FROM se_custom_area
+
+  </sql>
+    <sql id="Where_Condition">
+    where status <![CDATA[ <> ]]> 0
+
+  </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+</mapper>

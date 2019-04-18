@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeNodeDeviceDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeNodeDevice">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="nodeID" jdbcType="INTEGER" property="nodeID"/>
+        <result column="deviceType" jdbcType="VARCHAR" property="deviceType"/>
+        <result column="deviceCode" jdbcType="VARCHAR" property="deviceCode"/>
+        <result column="deviceBox" jdbcType="INTEGER" property="deviceBox"/>
+        <result column="cH1Name" jdbcType="VARCHAR" property="cH1Name"/>
+        <result column="cH2Name" jdbcType="VARCHAR" property="cH2Name"/>
+        <result column="cH3Name" jdbcType="VARCHAR" property="cH3Name"/>
+        <result column="cH4Name" jdbcType="VARCHAR" property="cH4Name"/>
+        <result column="cH5Name" jdbcType="VARCHAR" property="cH5Name"/>
+        <result column="cH6Name" jdbcType="VARCHAR" property="cH6Name"/>
+        <result column="cH7Name" jdbcType="VARCHAR" property="cH7Name"/>
+        <result column="cH8Name" jdbcType="VARCHAR" property="cH8Name"/>
+        <result column="cH9Name" jdbcType="VARCHAR" property="cH9Name"/>
+        <result column="cH10Name" jdbcType="VARCHAR" property="cH10Name"/>
+        <result column="cH11Name" jdbcType="VARCHAR" property="cH11Name"/>
+        <result column="cH12Name" jdbcType="VARCHAR" property="cH12Name"/>
+        <result column="cH1Control" jdbcType="VARCHAR" property="cH1Control"/>
+        <result column="cH2Control" jdbcType="VARCHAR" property="cH2Control"/>
+        <result column="cH3Control" jdbcType="VARCHAR" property="cH3Control"/>
+        <result column="cH4Control" jdbcType="VARCHAR" property="cH4Control"/>
+        <result column="cH5Control" jdbcType="VARCHAR" property="cH5Control"/>
+        <result column="cH6Control" jdbcType="VARCHAR" property="cH6Control"/>
+        <result column="cH7Control" jdbcType="VARCHAR" property="cH7Control"/>
+        <result column="cH8Control" jdbcType="VARCHAR" property="cH8Control"/>
+        <result column="cH9Control" jdbcType="VARCHAR" property="cH9Control"/>
+        <result column="cH10Control" jdbcType="VARCHAR" property="cH10Control"/>
+        <result column="cH11Control" jdbcType="VARCHAR" property="cH11Control"/>
+        <result column="cH12Control" jdbcType="VARCHAR" property="cH12Control"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, nodeID, deviceType, deviceCode, deviceBox, cH1Name, cH2Name, cH3Name, cH4Name, 
+    cH5Name, cH6Name, cH7Name, cH8Name, cH9Name, cH10Name, cH11Name, cH12Name, cH1Control, 
+    cH2Control, cH3Control, cH4Control, cH5Control, cH6Control, cH7Control, cH8Control, 
+    cH9Control, cH10Control, cH11Control, cH12Control, remark, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_node_device
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_node_device
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeNodeDevice">
+    insert into se_node_device (id, nodeID, deviceType, 
+      deviceCode, deviceBox, cH1Name, 
+      cH2Name, cH3Name, cH4Name, 
+      cH5Name, cH6Name, cH7Name, 
+      cH8Name, cH9Name, cH10Name, 
+      cH11Name, cH12Name, cH1Control, 
+      cH2Control, cH3Control, cH4Control, 
+      cH5Control, cH6Control, cH7Control, 
+      cH8Control, cH9Control, cH10Control, 
+      cH11Control, cH12Control, remark, 
+      status, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=INTEGER}, #{deviceType,jdbcType=VARCHAR}, 
+      #{deviceCode,jdbcType=VARCHAR}, #{deviceBox,jdbcType=INTEGER}, #{cH1Name,jdbcType=VARCHAR}, 
+      #{cH2Name,jdbcType=VARCHAR}, #{cH3Name,jdbcType=VARCHAR}, #{cH4Name,jdbcType=VARCHAR}, 
+      #{cH5Name,jdbcType=VARCHAR}, #{cH6Name,jdbcType=VARCHAR}, #{cH7Name,jdbcType=VARCHAR}, 
+      #{cH8Name,jdbcType=VARCHAR}, #{cH9Name,jdbcType=VARCHAR}, #{cH10Name,jdbcType=VARCHAR}, 
+      #{cH11Name,jdbcType=VARCHAR}, #{cH12Name,jdbcType=VARCHAR}, #{cH1Control,jdbcType=VARCHAR}, 
+      #{cH2Control,jdbcType=VARCHAR}, #{cH3Control,jdbcType=VARCHAR}, #{cH4Control,jdbcType=VARCHAR}, 
+      #{cH5Control,jdbcType=VARCHAR}, #{cH6Control,jdbcType=VARCHAR}, #{cH7Control,jdbcType=VARCHAR}, 
+      #{cH8Control,jdbcType=VARCHAR}, #{cH9Control,jdbcType=VARCHAR}, #{cH10Control,jdbcType=VARCHAR}, 
+      #{cH11Control,jdbcType=VARCHAR}, #{cH12Control,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNodeDevice">
+    update se_node_device
+    set nodeID = #{nodeID,jdbcType=INTEGER},
+      deviceType = #{deviceType,jdbcType=VARCHAR},
+      deviceCode = #{deviceCode,jdbcType=VARCHAR},
+      deviceBox = #{deviceBox,jdbcType=INTEGER},
+      cH1Name = #{cH1Name,jdbcType=VARCHAR},
+      cH2Name = #{cH2Name,jdbcType=VARCHAR},
+      cH3Name = #{cH3Name,jdbcType=VARCHAR},
+      cH4Name = #{cH4Name,jdbcType=VARCHAR},
+      cH5Name = #{cH5Name,jdbcType=VARCHAR},
+      cH6Name = #{cH6Name,jdbcType=VARCHAR},
+      cH7Name = #{cH7Name,jdbcType=VARCHAR},
+      cH8Name = #{cH8Name,jdbcType=VARCHAR},
+      cH9Name = #{cH9Name,jdbcType=VARCHAR},
+      cH10Name = #{cH10Name,jdbcType=VARCHAR},
+      cH11Name = #{cH11Name,jdbcType=VARCHAR},
+      cH12Name = #{cH12Name,jdbcType=VARCHAR},
+      cH1Control = #{cH1Control,jdbcType=VARCHAR},
+      cH2Control = #{cH2Control,jdbcType=VARCHAR},
+      cH3Control = #{cH3Control,jdbcType=VARCHAR},
+      cH4Control = #{cH4Control,jdbcType=VARCHAR},
+      cH5Control = #{cH5Control,jdbcType=VARCHAR},
+      cH6Control = #{cH6Control,jdbcType=VARCHAR},
+      cH7Control = #{cH7Control,jdbcType=VARCHAR},
+      cH8Control = #{cH8Control,jdbcType=VARCHAR},
+      cH9Control = #{cH9Control,jdbcType=VARCHAR},
+      cH10Control = #{cH10Control,jdbcType=VARCHAR},
+      cH11Control = #{cH11Control,jdbcType=VARCHAR},
+      cH12Control = #{cH12Control,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

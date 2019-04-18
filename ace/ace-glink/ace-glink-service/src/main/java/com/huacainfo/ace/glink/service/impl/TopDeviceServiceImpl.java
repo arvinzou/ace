@@ -229,10 +229,14 @@ public class TopDeviceServiceImpl implements TopDeviceService {
     public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
         String importDateTime = DateUtil.getNow();
         int i = 1;
-        int total = 0;
         for (Map<String, Object> row : list) {
             TopDevice o = new TopDevice();
             CommonBeanUtils.copyMap2Bean(o, row);
+            o.setId(GUIDUtil.getGUID());
+            o.setCreateDate(new Date());
+            o.setStatus("2");
+            o.setCreateUserName(userProp.getName());
+            o.setCreateUserId(userProp.getUserId());
             o.setRemark("批量导入设备：" + importDateTime);
             if (CommonUtils.isBlank(o.getCode())) {
                 return new MessageResponse(1, "设备编号不能为空！");
@@ -247,20 +251,16 @@ public class TopDeviceServiceImpl implements TopDeviceService {
 
             int t = this.topDeviceDao.isExit(o);
             if (t > 0) {
-                continue;
-                //  this.topDeviceDao.updateByPrimaryKey(o);
+                //continue;
+                this.topDeviceDao.updateByPrimaryKey(o);
 
             } else {
-                o.setId(GUIDUtil.getGUID());
-                o.setCreateDate(new Date());
-                o.setStatus("2");
-                o.setCreateUserName(userProp.getName());
-                o.setCreateUserId(userProp.getUserId());
+
                 this.topDeviceDao.insert(o);
-                total++;
+
             }
             i++;
-            i++;
+
         }
         this.dataBaseLogService.log("设备管理导入", "设备管理", "",
                 "rs.xls", "rs.xls", userProp);
