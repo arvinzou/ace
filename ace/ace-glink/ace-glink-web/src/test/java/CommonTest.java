@@ -40,4 +40,5 @@ public class CommonTest {
         System.out.println(LeApiToolKit.lightStrategy(p));
     }
 
+
 }
