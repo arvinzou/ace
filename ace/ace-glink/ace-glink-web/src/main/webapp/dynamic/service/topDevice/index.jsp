@@ -83,18 +83,18 @@
                 <thead>
                 <tr>
 
-                    <th width="10%"> 设备编号</th>
+                    <th width="8%"> 设备编号</th>
                     <th width="10%"> 设备名称</th>
                     <th width="10%"> 设备类型</th>
                     <th width="10%"> 所属节点</th>
                     <th width="10%"> 上线时间</th>
                     <th width="10%"> 下线时间</th>
                     <th width="10%"> 生产厂商</th>
-                    <%-- <th width="10%"> 生产时间</th>--%>
-                    <th width="8%"> 理论使用寿命</th>
-                    <th width="8%"> 状态</th>
+                    <th width="10%"> 生产时间</th>
+                    <th width="5%"> 理论使用寿命</th>
+                    <th width="5%"> 状态</th>
 
-                    <th width="15%">操作</th>
+                    <th width="12%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -128,7 +128,7 @@
         <td> \${item.onlineDate}</td>
         <td> \${item.offlineDate}</td>
         <td> \${item.prcBisFirm}</td>
-        <%-- <td> \${item.prcDate}</td>--%>
+        <td> \${item.prcDate}</td>
         <td> \${item.workingLife}</td>
         <td>
             {@if item.status==1}
@@ -264,7 +264,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">所属节点</label>
         <div class="col-md-10">
-            \${data.o.nodeCode}
+            \${data.o.nodeName}
         </div>
     </div>
     <div class="form-group">
