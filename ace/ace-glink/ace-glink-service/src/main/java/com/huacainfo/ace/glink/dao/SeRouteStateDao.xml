@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.glink.dao.SeRouteStateDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeRouteState">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="nodeID" jdbcType="INTEGER" property="nodeID" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="signal" jdbcType="VARCHAR" property="signal" />
-    <result column="updateTime" jdbcType="VARCHAR" property="updateTime" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeRouteState">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="nodeID" jdbcType="INTEGER" property="nodeID"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="signal" jdbcType="VARCHAR" property="signal"/>
+        <result column="updateTime" jdbcType="VARCHAR" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, nodeID, status, signal, updateTime, remark, createDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from se_route_state
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_route_state
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from se_route_state
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeRouteState">
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeRouteState">
     insert into se_route_state (id, nodeID, status, 
       signal, updateTime, remark, 
       createDate)
@@ -31,80 +31,7 @@
       #{signal,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.huacainfo.ace.glink.model.SeRouteState">
-    insert into se_route_state
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="nodeID != null">
-        nodeID,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="signal != null">
-        signal,
-      </if>
-      <if test="updateTime != null">
-        updateTime,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="createDate != null">
-        createDate,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="nodeID != null">
-        #{nodeID,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="signal != null">
-        #{signal,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.glink.model.SeRouteState">
-    update se_route_state
-    <set>
-      <if test="nodeID != null">
-        nodeID = #{nodeID,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="signal != null">
-        signal = #{signal,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        updateTime = #{updateTime,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        createDate = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeRouteState">
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeRouteState">
     update se_route_state
     set nodeID = #{nodeID,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
@@ -114,4 +41,60 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeRouteStateVo"></resultMap>
+
+    <sql id="Vo_Column_List">
+    s.id, s.nodeID, s.status, s.signal, s.updateTime, s.remark, s.createDate
+  </sql>
+
+    <sql id="From_Statement">
+    FROM se_route_state s
+  </sql>
+    <sql id="Where_Condition">
+        where s.status <![CDATA[ <> ]]> 0
+        <if test="condition.nodeID !=null and condition.nodeID !=&quot;&quot;">
+            and s.nodeID LIKE concat('%',#{condition.nodeID,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY s.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.SeRouteState">
+    select count(*)
+    from se_route_state
+    where name=#{name,jdbcType=VARCHAR}
+    and code != #{code,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where s.id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="clearAll">
+    delete from se_route_state
+  </delete>
 </mapper>
