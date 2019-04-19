@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeTimerDayDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeTimerDay">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="timerID" jdbcType="INTEGER" property="timerID"/>
+        <result column="d1" jdbcType="INTEGER" property="d1"/>
+        <result column="d2" jdbcType="INTEGER" property="d2"/>
+        <result column="d3" jdbcType="INTEGER" property="d3"/>
+        <result column="d4" jdbcType="INTEGER" property="d4"/>
+        <result column="d5" jdbcType="INTEGER" property="d5"/>
+        <result column="d6" jdbcType="INTEGER" property="d6"/>
+        <result column="d7" jdbcType="INTEGER" property="d7"/>
+        <result column="d8" jdbcType="INTEGER" property="d8"/>
+        <result column="d9" jdbcType="INTEGER" property="d9"/>
+        <result column="d10" jdbcType="INTEGER" property="d10"/>
+        <result column="d11" jdbcType="INTEGER" property="d11"/>
+        <result column="d12" jdbcType="INTEGER" property="d12"/>
+        <result column="d13" jdbcType="INTEGER" property="d13"/>
+        <result column="d14" jdbcType="INTEGER" property="d14"/>
+        <result column="d15" jdbcType="INTEGER" property="d15"/>
+        <result column="d16" jdbcType="INTEGER" property="d16"/>
+        <result column="d17" jdbcType="INTEGER" property="d17"/>
+        <result column="d18" jdbcType="INTEGER" property="d18"/>
+        <result column="d19" jdbcType="INTEGER" property="d19"/>
+        <result column="d20" jdbcType="INTEGER" property="d20"/>
+        <result column="d21" jdbcType="INTEGER" property="d21"/>
+        <result column="d22" jdbcType="INTEGER" property="d22"/>
+        <result column="d23" jdbcType="INTEGER" property="d23"/>
+        <result column="d24" jdbcType="INTEGER" property="d24"/>
+        <result column="d25" jdbcType="INTEGER" property="d25"/>
+        <result column="d26" jdbcType="INTEGER" property="d26"/>
+        <result column="d27" jdbcType="INTEGER" property="d27"/>
+        <result column="d28" jdbcType="INTEGER" property="d28"/>
+        <result column="d29" jdbcType="INTEGER" property="d29"/>
+        <result column="d30" jdbcType="INTEGER" property="d30"/>
+        <result column="d31" jdbcType="INTEGER" property="d31"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, timerID, d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, 
+    d17, d18, d19, d20, d21, d22, d23, d24, d25, d26, d27, d28, d29, d30, d31, remark, 
+    status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_timer_day
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_timer_day
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeTimerDay">
+    insert into se_timer_day (id, timerID, d1, 
+      d2, d3, d4, d5, 
+      d6, d7, d8, d9, 
+      d10, d11, d12, d13, 
+      d14, d15, d16, d17, 
+      d18, d19, d20, d21, 
+      d22, d23, d24, d25, 
+      d26, d27, d28, d29, 
+      d30, d31, remark, status, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{timerID,jdbcType=INTEGER}, #{d1,jdbcType=INTEGER}, 
+      #{d2,jdbcType=INTEGER}, #{d3,jdbcType=INTEGER}, #{d4,jdbcType=INTEGER}, #{d5,jdbcType=INTEGER}, 
+      #{d6,jdbcType=INTEGER}, #{d7,jdbcType=INTEGER}, #{d8,jdbcType=INTEGER}, #{d9,jdbcType=INTEGER}, 
+      #{d10,jdbcType=INTEGER}, #{d11,jdbcType=INTEGER}, #{d12,jdbcType=INTEGER}, #{d13,jdbcType=INTEGER}, 
+      #{d14,jdbcType=INTEGER}, #{d15,jdbcType=INTEGER}, #{d16,jdbcType=INTEGER}, #{d17,jdbcType=INTEGER}, 
+      #{d18,jdbcType=INTEGER}, #{d19,jdbcType=INTEGER}, #{d20,jdbcType=INTEGER}, #{d21,jdbcType=INTEGER}, 
+      #{d22,jdbcType=INTEGER}, #{d23,jdbcType=INTEGER}, #{d24,jdbcType=INTEGER}, #{d25,jdbcType=INTEGER}, 
+      #{d26,jdbcType=INTEGER}, #{d27,jdbcType=INTEGER}, #{d28,jdbcType=INTEGER}, #{d29,jdbcType=INTEGER}, 
+      #{d30,jdbcType=INTEGER}, #{d31,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeTimerDay">
+    update se_timer_day
+    set timerID = #{timerID,jdbcType=INTEGER},
+      d1 = #{d1,jdbcType=INTEGER},
+      d2 = #{d2,jdbcType=INTEGER},
+      d3 = #{d3,jdbcType=INTEGER},
+      d4 = #{d4,jdbcType=INTEGER},
+      d5 = #{d5,jdbcType=INTEGER},
+      d6 = #{d6,jdbcType=INTEGER},
+      d7 = #{d7,jdbcType=INTEGER},
+      d8 = #{d8,jdbcType=INTEGER},
+      d9 = #{d9,jdbcType=INTEGER},
+      d10 = #{d10,jdbcType=INTEGER},
+      d11 = #{d11,jdbcType=INTEGER},
+      d12 = #{d12,jdbcType=INTEGER},
+      d13 = #{d13,jdbcType=INTEGER},
+      d14 = #{d14,jdbcType=INTEGER},
+      d15 = #{d15,jdbcType=INTEGER},
+      d16 = #{d16,jdbcType=INTEGER},
+      d17 = #{d17,jdbcType=INTEGER},
+      d18 = #{d18,jdbcType=INTEGER},
+      d19 = #{d19,jdbcType=INTEGER},
+      d20 = #{d20,jdbcType=INTEGER},
+      d21 = #{d21,jdbcType=INTEGER},
+      d22 = #{d22,jdbcType=INTEGER},
+      d23 = #{d23,jdbcType=INTEGER},
+      d24 = #{d24,jdbcType=INTEGER},
+      d25 = #{d25,jdbcType=INTEGER},
+      d26 = #{d26,jdbcType=INTEGER},
+      d27 = #{d27,jdbcType=INTEGER},
+      d28 = #{d28,jdbcType=INTEGER},
+      d29 = #{d29,jdbcType=INTEGER},
+      d30 = #{d30,jdbcType=INTEGER},
+      d31 = #{d31,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
