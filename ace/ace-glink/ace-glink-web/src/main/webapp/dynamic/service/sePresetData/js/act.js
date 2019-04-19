@@ -285,3 +285,16 @@ function initForm(id) {
         }
     });
 }
+
+
+function syncData() {
+    var  url=contextPath+'/sePresetData/syncData'
+    $.getJSON(url,function (rst) {
+        if(rst.status==0){
+            getPageList();
+        }
+        else {
+            alert("同步失败");
+        }
+    })
+}

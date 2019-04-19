@@ -262,4 +262,12 @@ public class SePresetDataController extends GLinkBaseController {
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.sePresetDataService.updateStatus(id, status, this.getCurUserProp());
     }
+
+
+    @RequestMapping(value = "/syncData")
+    @ResponseBody
+    public MessageResponse syncData() throws Exception {
+        return this.sePresetDataService.syncData(this.getCurUserProp());
+    }
+
 }
