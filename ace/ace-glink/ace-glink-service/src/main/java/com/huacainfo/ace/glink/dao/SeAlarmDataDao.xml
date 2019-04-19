@@ -101,4 +101,7 @@
     );
   </insert>
 
+  <update id="allClear">
+    truncate table se_alarm_data ;
+  </update>
 </mapper>

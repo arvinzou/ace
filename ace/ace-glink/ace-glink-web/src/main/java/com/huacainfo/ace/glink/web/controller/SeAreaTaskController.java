@@ -125,4 +125,16 @@ public class SeAreaTaskController extends GLinkBaseController {
         return this.seAreaTaskService.deleteSeAreaTaskBySeAreaTaskId(id, this.getCurUserProp());
     }
 
+    /**
+     * 同步区域任务数据
+     *
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/syncData")
+    public MessageResponse syncData() throws Exception {
+        return seAreaTaskService.syncData(this.getCurUserProp());
+    }
+
 }

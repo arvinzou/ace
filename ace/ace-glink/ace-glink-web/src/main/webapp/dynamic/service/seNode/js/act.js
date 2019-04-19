@@ -150,24 +150,26 @@ function initMonitor(nodeID) {
 
 /*配电箱数据同步*/
 function syncData() {
-    startLoad();
-    $.ajax({
-        url: contextPath + "/seNode/syncData",
-        type: "post",
-        async: false,
-        data: {},
-        success: function (rst) {
-            stopLoad();
-            alert(rst.errorMessage);
-            if (rst.status == 0) {
-                getPageList();
+    if (confirm("配电箱基础数据即将更新，是否继续？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/seNode/syncData",
+            type: "post",
+            async: false,
+            data: {},
+            success: function (rst) {
+                stopLoad();
+                alert(rst.errorMessage);
+                if (rst.status == 0) {
+                    getPageList();
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
             }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
-        }
-    });
+        });
+    }
 }
 
 //juicer自定义函数
@@ -274,23 +276,26 @@ function initForm(id) {
 
 /*配电箱数据同步*/
 function syncMonitorData() {
-    startLoad();
-    $.ajax({
-        url: contextPath + "/seNode/syncMonitorData",
-        type: "post",
-        async: false,
-        data: {},
-        success: function (rst) {
-            stopLoad();
-            alert(rst.errorMessage);
-            if (rst.status == 0) {
-                getPageList();
+    if (confirm("配电箱监控数据即将更新，是否继续？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/seNode/syncMonitorData",
+            type: "post",
+            async: false,
+            data: {},
+            success: function (rst) {
+                stopLoad();
+                alert(rst.errorMessage);
+                if (rst.status == 0) {
+                    getPageList();
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
             }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
-        }
-    });
+        });
+    }
+
 }
 

@@ -11,6 +11,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.glink.api.pojo.fe.JackBoxOut;
+import com.huacainfo.ace.glink.api.pojo.fe.MeterBoxOut;
 import com.huacainfo.ace.glink.api.pojo.fe.NodeMonitorDataOut;
 import com.huacainfo.ace.glink.dao.*;
 import com.huacainfo.ace.glink.model.*;
@@ -48,6 +49,8 @@ public class SeNodeServiceImpl implements SeNodeService {
     private SeNodeMonitorDeviceDao seNodeMonitorDeviceDao;
     @Autowired
     private SeNodeMonitorDeviceChDao seNodeMonitorDeviceChDao;
+    @Autowired
+    private SeNodeMeterDao seNodeMeterDao;
 
     @Autowired
     private DataBaseLogService dataBaseLogService;
@@ -464,8 +467,59 @@ public class SeNodeServiceImpl implements SeNodeService {
     }
 
     /**
+     * 同步配电箱全部电表数据
+     *
+     * @param userProp 操作员
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse syncNodeMeterData(UserProp userProp) {
+        //0-接口调用，获取数据源
+        MeterBoxOut out = getTestMeterData();// SeApiToolKit.getAllMeterData();
+        //1-清空库存
+        seNodeMeterDao.allClear();
+        //2-添加库存
+        SeNodeMeter meter;
+        for (MeterBoxOut.MeterData item : out.getNodeMeterData()) {
+            meter = new SeNodeMeter();
+            meter.setId(GUIDUtil.getGUID());
+            meter.setStatus("1");
+            meter.setCreateDate(DateUtil.getNowDate());
+            //
+            meter.setNodeID(item.getNodeID());
+            meter.setMeterID(item.getMeterID());
+            meter.setMeterValue(new BigDecimal(item.getMeterValue().replace("kwh", "")));
+            meter.setMeterValueUnit("kwh");
+            meter.setUpdateTime(item.getUpdateTime());
+
+            seNodeMeterDao.insert(meter);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "数据同步成功");
+    }
+
+
+    /**
      * =====================tes data=====================
      */
+    private MeterBoxOut getTestMeterData() {
+        List<MeterBoxOut.MeterData> list = new ArrayList<>();
+        MeterBoxOut.MeterData item;
+        int index;
+        for (int i = 0; i < 6; i++) {
+            index = i + 1;
+            item = new MeterBoxOut.MeterData();
+            item.setNodeID(index);
+            item.setMeterID("0000000000" + index);
+            item.setMeterValue("12" + index + ".56kwh");
+            item.setUpdateTime(DateUtil.getNow());
+            list.add(item);
+        }
+
+        return new MeterBoxOut(6, list);
+    }
+
     private NodeMonitorDataOut getTestNodeMonitorDataOut(String nodeGroup) {
         int NodeCount = 3;//配电箱节点数量
         List<NodeMonitorDataOut.NodeMonitorData> NodeData = getTestNodeMonitorData(nodeGroup);//监测数据数组

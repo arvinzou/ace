@@ -79,6 +79,7 @@ public class SeAlarmDataServiceImpl implements SeAlarmDataService {
      */
     @Override
     public MessageResponse insertSeAlarmData(List<SeAlarmData> list, UserProp userProp) throws Exception {
+            seAlarmDataDao.allClear();
         if(list.size()>0){
             for(int i=0; i<list.size(); i++){
                 SeAlarmData o = list.get(i);
