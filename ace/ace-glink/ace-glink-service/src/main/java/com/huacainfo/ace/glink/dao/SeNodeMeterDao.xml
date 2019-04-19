@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeNodeMeterDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeNodeMeter">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="nodeID" jdbcType="VARCHAR" property="nodeID"/>
+        <result column="meterID" jdbcType="VARCHAR" property="meterID"/>
+        <result column="meterValue" jdbcType="DECIMAL" property="meterValue"/>
+        <result column="meterValueUnit" jdbcType="VARCHAR" property="meterValueUnit"/>
+        <result column="updateTime" jdbcType="VARCHAR" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, nodeID, meterID, meterValue, meterValueUnit, updateTime, remark, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_node_meter
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_node_meter
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeNodeMeter">
+    insert into se_node_meter (id, nodeID, meterID, 
+      meterValue, meterValueUnit, updateTime, 
+      remark, status, createDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=VARCHAR}, #{meterID,jdbcType=VARCHAR}, 
+      #{meterValue,jdbcType=DECIMAL}, #{meterValueUnit,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNodeMeter">
+    update se_node_meter
+    set nodeID = #{nodeID,jdbcType=VARCHAR},
+      meterID = #{meterID,jdbcType=VARCHAR},
+      meterValue = #{meterValue,jdbcType=DECIMAL},
+      meterValueUnit = #{meterValueUnit,jdbcType=VARCHAR},
+      updateTime = #{updateTime,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <update id="allClear">
+      truncate table se_node_meter;
+    </update>
+</mapper>

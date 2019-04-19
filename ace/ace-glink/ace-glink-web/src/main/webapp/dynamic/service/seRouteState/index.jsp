@@ -30,7 +30,7 @@
 
             <div class="col-md-9">
 
-                <form id="fm-search">
+                <%--<form id="fm-search">
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
@@ -43,7 +43,7 @@
                         </button>
                     </span>
                     </div>
-                </form>
+                </form>--%>
             </div>
 
         </div>
@@ -92,34 +92,8 @@
         <td> \${item.remark}</td>
         <td> \${item.createDate}</td>
         <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">待审</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
-        </td>
-        <td>
-            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-status">设置状态</a>
-            {@if item.auditStatus==1}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-            {@/if}
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-
-            <a href="javascript:del('\${item.id}');">删除</a>
-
         </td>
     </tr>
     {@/each}
@@ -194,7 +168,7 @@
     </div>
 </div>
 <div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document" style="width: 90%;">
+    <div class="modal-dialog" role="document" style="width: 60%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -214,140 +188,45 @@
         </div>
     </div>
 </div>
-<script id="tpl-fm" type="text/template">
-    <div class="form-body">
-
-        <div class="form-group">
-            <label class="col-md-2 view-label">主键</label>
-            <div class="col-md-10">
-                \${id}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">配电箱编号</label>
-            <div class="col-md-10">
-                \${nodeID}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">状态：1-在线，0-离线</label>
-            <div class="col-md-10">
-                \${status}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">信号强度，离线时为空</label>
-            <div class="col-md-10">
-                \${signal}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">状态更新时间</label>
-            <div class="col-md-10">
-                \${updateTime}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">备注</label>
-            <div class="col-md-10">
-                \${remark}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建日期</label>
-            <div class="col-md-10">
-                \${createDate}
-            </div>
-        </div>
-
-        <h4>结果</h4>
-        <hr>
-        <div class="form-group " id="operation">
-            <label class="col-md-2 control-label">结果</label>
-            <div class="col-md-10">
-                <div class="radio-group-container">
-                    <label>
-                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">说明</label>
-            <div class="col-md-10">
-                <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-            </div>
-        </div>
-    </div>
-
-</script>
 
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 view-label">配电箱编号</label>
         <div class="col-md-10">
-            \${nodeID}
+            \${data.nodeID}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">状态：1-在线，0-离线</label>
         <div class="col-md-10">
-            \${status}
+            \${data.status}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">信号强度，离线时为空</label>
         <div class="col-md-10">
-            \${signal}
+            \${data.signal}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">状态更新时间</label>
         <div class="col-md-10">
-            \${updateTime}
+            \${data.updateTime}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">备注</label>
         <div class="col-md-10">
-            \${remark}
+            \${data.remark}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">
-            \${createDate}
+            \${data.createDate}
         </div>
     </div>
 </script>
-<style>
-    .cover {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
-
-    .describtion {
-        padding-left: 15px;
-        height: 50px;
-    }
-
-    .cost {
-        padding-top: 5px;
-        padding-left: 15px;
-        color: #FE6500;
-    }
-</style>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>

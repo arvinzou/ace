@@ -212,7 +212,7 @@ function viewCourse() {
             for (var i = 0; i < len; i++) {
                 var item = datas[i];
                 var f = item.courseDate.substring(5, 10);
-                $('.' + f + item.courseIndex + 'Teacher').text(item.teacher.name);
+                $('.' + f + item.courseIndex + 'Teacher').text(item.course.teacherNames);
                 $('.' + f + item.courseIndex + 'Course').text(item.course.name);
             }
         }

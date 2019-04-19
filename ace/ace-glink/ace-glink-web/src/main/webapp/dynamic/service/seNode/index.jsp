@@ -50,8 +50,9 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="30%"> 区域编号</th>
-                    <th width="55%"> 区域名称</th>
+                    <th width="20%"> 区域编号</th>
+                    <th width="30%"> 区域名称</th>
+                    <th width="35%"> 配电箱编号</th>
                     <th width="15%">操作</th>
                 </tr>
                 </thead>
@@ -81,6 +82,7 @@
     <tr>
         <td> \${item.areaNodeID}</td>
         <td> \${item.areaNodeName}</td>
+        <td> \${item.nodeID}</td>
         <td>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>

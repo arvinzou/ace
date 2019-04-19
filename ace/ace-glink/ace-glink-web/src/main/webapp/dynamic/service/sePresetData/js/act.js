@@ -247,7 +247,7 @@ function initPreview(id) {
             stopLoad();
             if (result.status == 0) {
                 var data = {};
-                data['o'] = result.value;
+                data = result.value;
                 render('#fm-preview', data, 'tpl-preview');
             } else {
                 alert(result.errorMessage);
@@ -273,7 +273,7 @@ function initForm(id) {
             stopLoad();
             if (result.status == 0) {
                 var data = {};
-                data['o'] = result.value;
+                data = result.value;
                 render('#fm-audit', data, 'tpl-fm');
             } else {
                 alert(result.errorMessage);

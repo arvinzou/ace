@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeAreaTask">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="areaNodeID" jdbcType="VARCHAR" property="areaNodeID"/>
-        <result column="taskNo" jdbcType="VARCHAR" property="taskNo"/>
+        <result column="taskNo" jdbcType="INTEGER" property="taskNo"/>
         <result column="taskName" jdbcType="VARCHAR" property="taskName"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
@@ -27,14 +27,14 @@
     insert into se_area_task (id, areaNodeID, taskNo, 
       taskName, remark, status, 
       createDate)
-    values (#{id,jdbcType=VARCHAR}, #{areaNodeID,jdbcType=VARCHAR}, #{taskNo,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{areaNodeID,jdbcType=VARCHAR}, #{taskNo,jdbcType=INTEGER},
       #{taskName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeAreaTask">
     update se_area_task
     set areaNodeID = #{areaNodeID,jdbcType=VARCHAR},
-      taskNo = #{taskNo,jdbcType=VARCHAR},
+      taskNo = #{taskNo,jdbcType=INTEGER},
       taskName = #{taskName,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
@@ -42,7 +42,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeNodeVo">
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeAreaTaskVo">
     </resultMap>
 
     <sql id="Vo_Column_List">
@@ -92,4 +92,8 @@
         from se_area_task
         where 1!=1
     </select>
+
+    <update id="allClear">
+      truncate table se_area_task;
+    </update>
 </mapper>
