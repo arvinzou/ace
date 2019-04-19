@@ -106,7 +106,6 @@ public class SeApiToolKit {
      */
     public static RouteOut get4GRouterState() {
         Map<String, String> params = common("6");
-
         String rstJson = HttpKit.get(API_DOMAIN + parse(params));
         return JsonUtil.toObject(rstJson, RouteOut.class);
     }

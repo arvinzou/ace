@@ -83,7 +83,9 @@ public class SeCustomAreaController extends GLinkBaseController {
     @RequestMapping(value = "/insertSeCustomArea")
     @ResponseBody
     public MessageResponse insertSeCustomArea(String jsons) throws Exception {
-        SeCustomArea obj = JSON.parseObject(jsons, SeCustomArea.class);
+        List<SeCustomArea> obj = JSON.parseArray(jsons, SeCustomArea.class);
+
+        //SeCustomArea obj = JSON.parseObject(jsons, SeCustomArea.class);
         return this.seCustomAreaService.insertSeCustomArea(obj, this.getCurUserProp());
     }
 

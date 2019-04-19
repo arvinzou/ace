@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeTimerDataDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeTimerData">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="timerID" jdbcType="INTEGER" property="timerID"/>
+        <result column="timerName" jdbcType="VARCHAR" property="timerName"/>
+        <result column="timerEnable" jdbcType="INTEGER" property="timerEnable"/>
+        <result column="startTime" jdbcType="VARCHAR" property="startTime"/>
+        <result column="taskNo" jdbcType="INTEGER" property="taskNo"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, timerID, timerName, timerEnable, startTime, taskNo, remark, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_timer_data
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_timer_data
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeTimerData">
+    insert into se_timer_data (id, timerID, timerName, 
+      timerEnable, startTime, taskNo, 
+      remark, status, createDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{timerID,jdbcType=INTEGER}, #{timerName,jdbcType=VARCHAR}, 
+      #{timerEnable,jdbcType=INTEGER}, #{startTime,jdbcType=VARCHAR}, #{taskNo,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeTimerData">
+    update se_timer_data
+    set timerID = #{timerID,jdbcType=INTEGER},
+      timerName = #{timerName,jdbcType=VARCHAR},
+      timerEnable = #{timerEnable,jdbcType=INTEGER},
+      startTime = #{startTime,jdbcType=VARCHAR},
+      taskNo = #{taskNo,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeTimerDataVo"></resultMap>
+    <sql id="Vo_Column_List">
+    id, timerID, timerName, timerEnable, startTime, taskNo, remark, status, createDate
+  </sql>
+
+    <sql id="From_Statement">
+    FROM se_timer_data
+
+  </sql>
+    <sql id="Where_Condition">
+    where status <![CDATA[ <> ]]> 0
+
+  </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+</mapper>

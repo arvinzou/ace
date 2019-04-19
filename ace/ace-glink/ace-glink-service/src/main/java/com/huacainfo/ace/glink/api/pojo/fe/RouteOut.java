@@ -38,11 +38,17 @@ public class RouteOut extends BaseModel {
         private String UpdateTime;//状态更新时间
 
         public RouteData(int nodeID, int status, String signal, String updateTime) {
+            super();
             NodeID = nodeID;
             Status = status;
             Signal = signal;
             UpdateTime = updateTime;
         }
+
+        public RouteData() {
+            super();
+        }
+
 
         public int getNodeID() {
             return NodeID;

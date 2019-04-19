@@ -1,31 +1,33 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.api.SeApiToolKit;
+import com.huacainfo.ace.glink.api.pojo.fe.RouteOut;
+import com.huacainfo.ace.glink.dao.SeRouteStateDao;
+import com.huacainfo.ace.glink.model.SeRouteState;
+import com.huacainfo.ace.glink.service.SeRouteStateService;
+import com.huacainfo.ace.glink.vo.SeRouteStateQVo;
+import com.huacainfo.ace.glink.vo.SeRouteStateVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.glink.dao.SeRouteStateDao;
-import com.huacainfo.ace.glink.model.SeRouteState;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.glink.service.SeRouteStateService;
-import com.huacainfo.ace.glink.vo.SeRouteStateVo;
-import com.huacainfo.ace.glink.vo.SeRouteStateQVo;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("seRouteStateService")
 /**
@@ -319,6 +321,38 @@ public class SeRouteStateServiceImpl implements SeRouteStateService {
         this.dataBaseLogService.log("跟新状态", "路由器运行状态", id, id,
                 "路由器运行状态", userProp);
         return new MessageResponse(0, "成功！");
+    }
+
+
+    /**
+     * 同步路由器
+     *
+     * @param userProp 操作用户
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse syncData(UserProp userProp) {
+        //http请求，获取远程服务器数据
+        RouteOut out = SeApiToolKit.get4GRouterState();
+        //1、清理库中原有数据
+        this.seRouteStateDao.clearAll();
+        //2、填充获取的新数据
+        List<RouteOut.RouteData> routeDatagroup = out.getRouteData();
+        SeRouteState seRouteState;
+        for (RouteOut.RouteData item : routeDatagroup) {
+            seRouteState = new SeRouteState();
+            seRouteState.setId(GUIDUtil.getGUID());
+            seRouteState.setNodeID(item.getNodeID());
+            seRouteState.setStatus(1);
+            seRouteState.setSignal(item.getSignal());
+            seRouteState.setUpdateTime(item.getUpdateTime());
+            seRouteState.setRemark("同步数据填充");
+            seRouteState.setCreateDate(new Date());
+            //插入配电箱
+            this.seRouteStateDao.insert(seRouteState);
+        }
+        return new MessageResponse(ResultCode.SUCCESS, "同步成功");
     }
 
 }

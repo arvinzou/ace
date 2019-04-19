@@ -43,7 +43,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeProjectAreaVo"></resultMap>
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeCustomAreaVo"></resultMap>
     <sql id="Vo_Column_List">
      id, areaNo, areaName, areaNodeID, remark, status, createDate
   </sql>
@@ -79,4 +79,9 @@
         <include refid="Where_Condition"/>
     </select>
 
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.SeCustomArea">
+    select count(*)
+    from se_custom_area
+    where areaNo=#{areaNo,jdbcType=VARCHAR}
+  </select>
 </mapper>

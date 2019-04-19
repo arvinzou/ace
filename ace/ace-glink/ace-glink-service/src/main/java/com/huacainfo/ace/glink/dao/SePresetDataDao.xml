@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.glink.dao.SePresetDataDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SePresetData">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="presetNo" jdbcType="INTEGER" property="presetNo" />
-    <result column="presetName" jdbcType="VARCHAR" property="presetName" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SePresetData">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="presetNo" jdbcType="INTEGER" property="presetNo"/>
+        <result column="presetName" jdbcType="VARCHAR" property="presetName"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, presetNo, presetName, remark, status, createDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from se_preset_data
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_preset_data
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from se_preset_data
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SePresetData">
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SePresetData">
     insert into se_preset_data (id, presetNo, presetName, 
       remark, status, createDate
       )
@@ -30,7 +30,7 @@
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SePresetData">
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SePresetData">
     update se_preset_data
     set presetNo = #{presetNo,jdbcType=INTEGER},
       presetName = #{presetName,jdbcType=VARCHAR},
@@ -41,58 +41,58 @@
   </update>
 
 
-  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SePresetDataVo"></resultMap>
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SePresetDataVo"></resultMap>
 
-  <sql id="Vo_Column_List">
+    <sql id="Vo_Column_List">
    s.id, s.presetNo, s.presetName, s.remark, s.status, s.createDate
   </sql>
 
-  <sql id="From_Statement">
+    <sql id="From_Statement">
     FROM se_preset_data s
   </sql>
-  <sql id="Where_Condition">
-    where s.status <![CDATA[ <> ]]> 0
-    <if test="condition.presetName !=null and condition.presetName !=&quot;&quot;">
-      and s.presetName LIKE concat('%',#{condition.presetName,jdbcType=VARCHAR},'%')
-    </if>
-  </sql>
+    <sql id="Where_Condition">
+        where s.status <![CDATA[ <> ]]> 0
+        <if test="condition.presetName !=null and condition.presetName !=&quot;&quot;">
+            and s.presetName LIKE concat('%',#{condition.presetName,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
 
-  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
-    select
-    <include refid="Vo_Column_List"/>
-    <include refid="From_Statement"/>
-    <include refid="Where_Condition"/>
-    <choose>
-      <when test="orderBy!=null and orderBy!=&quot;&quot;">
-        ORDER BY ${orderBy}
-      </when>
-      <otherwise>
-        ORDER BY s.createDate desc
-      </otherwise>
-    </choose>
-    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-  </select>
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY s.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 
-  <select id="findCount" resultType="int">
-    SELECT COUNT(*)
-    <include refid="From_Statement"/>
-    <include refid="Where_Condition"/>
-  </select>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
 
-  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.SePresetData">
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.SePresetData">
     select count(*)
     from se_preset_data
     where name=#{name,jdbcType=VARCHAR}
     and code != #{code,jdbcType=VARCHAR}
   </select>
 
-  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
-    select
-    <include refid="Vo_Column_List"/>
-    <include refid="From_Statement"/>
-    where s.id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="clearAll">
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where s.id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="clearAll">
     delete from se_preset_data
   </delete>
 </mapper>

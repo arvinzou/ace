@@ -47,7 +47,7 @@ public interface SeCustomAreaService {
      * @author: heshuang
      * @version: 2019-04-18
      */
-    MessageResponse insertSeCustomArea(SeCustomArea obj, UserProp userProp) throws Exception;
+    MessageResponse insertSeCustomArea(List<SeCustomArea> obj, UserProp userProp) throws Exception;
 
     /**
      * @throws

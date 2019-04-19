@@ -36,6 +36,16 @@ public class PresetDataOut extends BaseModel {
      * static class
      */
     public static class PresetData extends BaseModel {
+        public PresetData(int presetNo, String presetName) {
+            super();
+            PresetNo = presetNo;
+            PresetName = presetName;
+        }
+
+        public PresetData() {
+            super();
+        }
+
         private int PresetNo;//场景号
         private String PresetName;//场景名称
 

@@ -2,9 +2,7 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("
-            < li > < span > 编辑区级整体控制 < /span></
-        li > ");
+        $(".breadcrumb").append(" <li> <span> 编辑项目区域控制 </span></li> ");
         initForm();
         initEvents();
         initJuicerMethod();

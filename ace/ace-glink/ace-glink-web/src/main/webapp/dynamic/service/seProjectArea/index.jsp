@@ -36,19 +36,10 @@
 
                 <form id="fm-search">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
+
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
+
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
@@ -77,7 +68,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 主键</th>
+
                     <th width="10%"> 上一级ID</th>
                     <th width="10%"> 项目名称</th>
                     <th width="10%"> 区域名称</th>
@@ -113,16 +104,16 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \&{item.id}</td>
-        <td> \&{item.pid}</td>
-        <td> \&{item.projectName}</td>
-        <td> \&{item.areaName}</td>
-        <td> \&{item.areaNodeCount}</td>
-        <td> \&{item.areaNodeID}</td>
-        <td> \&{item.areaType}</td>
-        <td> \&{item.remark}</td>
-        <td> \&{item.status}</td>
-        <td> \&{item.createDate}</td>
+
+        <td> \${item.pid}</td>
+        <td> \${item.projectName}</td>
+        <td> \${item.areaName}</td>
+        <td> \${item.areaNodeCount}</td>
+        <td> \${item.areaNodeID}</td>
+        <td> \${item.areaType}</td>
+        <td> \${item.remark}</td>
+        <td> \${item.status}</td>
+        <td> \${item.createDate}</td>
         <td>
             {@if item.status==0}
             <span class="label label-lg label-danger">删除</span>
