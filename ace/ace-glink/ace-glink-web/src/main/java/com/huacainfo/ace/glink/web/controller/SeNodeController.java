@@ -7,7 +7,9 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.glink.model.SeNode;
+import com.huacainfo.ace.glink.model.SeNodeMonitorDeviceCh;
 import com.huacainfo.ace.glink.service.SeNodeService;
+import com.huacainfo.ace.glink.vo.SeNodeMonitorVo;
 import com.huacainfo.ace.glink.vo.SeNodeQVo;
 import com.huacainfo.ace.glink.vo.SeNodeVo;
 import org.slf4j.Logger;
@@ -135,6 +137,45 @@ public class SeNodeController extends GLinkBaseController {
     @RequestMapping(value = "/syncData")
     public MessageResponse syncData() throws Exception {
         return seNodeService.syncData(this.getCurUserProp());
+    }
+
+    /**
+     * 同步配电箱监测数据
+     *
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/syncMonitorData")
+    public MessageResponse syncMonitorData() throws Exception {
+        return seNodeService.syncMonitorData(this.getCurUserProp());
+    }
+
+    /**
+     * 获取配电箱监控数据
+     *
+     * @param nodeID 配电箱编号
+     * @return SingleResult<SeNodeMonitorVo>
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getMonitorData")
+    public SingleResult<SeNodeMonitorVo> getMonitorData(String nodeID) throws Exception {
+        return seNodeService.getMonitorData(nodeID);
+    }
+
+    /**
+     * 获取配电箱监控数据
+     *
+     * @param deviceCode 模块代码
+     * @param chName     回路名称
+     * @return SingleResult<SeNodeMonitorDeviceCh>
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getMonitorDeviceCH")
+    public SingleResult<SeNodeMonitorDeviceCh> getMonitorDeviceCH(String deviceCode, String chName) throws Exception {
+        return seNodeService.getMonitorDeviceCH(deviceCode, chName);
     }
 
 }

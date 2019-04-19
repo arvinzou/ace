@@ -2,9 +2,7 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("
-            < li > < span > 创建项目区域数据 < /span></
-        li > ");
+        $(".breadcrumb").append(" <li> <span> 创建逻辑区定义数据 </span></li> ");
         initPage();
         initEvents();
 

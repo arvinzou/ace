@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeTimerWeekDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeTimerWeek">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="timerID" jdbcType="INTEGER" property="timerID"/>
+        <result column="w1" jdbcType="INTEGER" property="w1"/>
+        <result column="w2" jdbcType="INTEGER" property="w2"/>
+        <result column="w3" jdbcType="INTEGER" property="w3"/>
+        <result column="w4" jdbcType="INTEGER" property="w4"/>
+        <result column="w5" jdbcType="INTEGER" property="w5"/>
+        <result column="w6" jdbcType="INTEGER" property="w6"/>
+        <result column="w7" jdbcType="INTEGER" property="w7"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, timerID, w1, w2, w3, w4, w5, w6, w7, remark, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_timer_week
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_timer_week
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeTimerWeek">
+    insert into se_timer_week (id, timerID, w1, 
+      w2, w3, w4, w5, 
+      w6, w7, remark, status, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{timerID,jdbcType=INTEGER}, #{w1,jdbcType=INTEGER}, 
+      #{w2,jdbcType=INTEGER}, #{w3,jdbcType=INTEGER}, #{w4,jdbcType=INTEGER}, #{w5,jdbcType=INTEGER}, 
+      #{w6,jdbcType=INTEGER}, #{w7,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeTimerWeek">
+    update se_timer_week
+    set timerID = #{timerID,jdbcType=INTEGER},
+      w1 = #{w1,jdbcType=INTEGER},
+      w2 = #{w2,jdbcType=INTEGER},
+      w3 = #{w3,jdbcType=INTEGER},
+      w4 = #{w4,jdbcType=INTEGER},
+      w5 = #{w5,jdbcType=INTEGER},
+      w6 = #{w6,jdbcType=INTEGER},
+      w7 = #{w7,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

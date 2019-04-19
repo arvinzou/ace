@@ -20,11 +20,10 @@ public interface SeCustomAreaDao {
 
     SeCustomAreaVo selectVoByPrimaryKey(String id);
 
-    List
-            <SeCustomAreaVo> findList(@Param("condition") SeCustomAreaQVo condition,
-                                      @Param("start") int start,
-                                      @Param("limit") int limit,
-                                      @Param("orderBy") String orderBy);
+    List<SeCustomAreaVo> findList(@Param("condition") SeCustomAreaQVo condition,
+                                  @Param("start") int start,
+                                  @Param("limit") int limit,
+                                  @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") SeCustomAreaQVo condition);
 

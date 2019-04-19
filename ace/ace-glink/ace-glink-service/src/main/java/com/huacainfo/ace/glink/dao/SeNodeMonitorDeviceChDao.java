@@ -1,17 +1,17 @@
 package com.huacainfo.ace.glink.dao;
 
 import com.huacainfo.ace.glink.model.SeNodeMonitorDeviceCh;
+import org.apache.ibatis.annotations.Param;
 
 public interface SeNodeMonitorDeviceChDao {
     int deleteByPrimaryKey(String id);
 
     int insert(SeNodeMonitorDeviceCh record);
 
-    int insertSelective(SeNodeMonitorDeviceCh record);
-
     SeNodeMonitorDeviceCh selectByPrimaryKey(String id);
 
-    int updateByPrimaryKeySelective(SeNodeMonitorDeviceCh record);
-
     int updateByPrimaryKey(SeNodeMonitorDeviceCh record);
+
+    SeNodeMonitorDeviceCh findByCHName(@Param("deviceCode") String deviceCode,
+                                       @Param("chName") String chName);
 }

@@ -11,6 +11,11 @@ import java.util.List;
  * @Date 2019/4/17 18:15
  */
 public class NodeMonitorDataOut extends BaseModel {
+    public NodeMonitorDataOut(int nodeCount, List<NodeMonitorData> nodeData) {
+        NodeCount = nodeCount;
+        NodeData = nodeData;
+    }
+
     private int NodeCount;//配电箱节点数量
     private List<NodeMonitorData> NodeData;//监测数据数组
 
@@ -52,7 +57,7 @@ public class NodeMonitorDataOut extends BaseModel {
         private String MeterID;//电表号
         private String MeterValue;//电表读数
         private String MeterReportTime;//电表上报时间
-        private DeviceData DeviceData;//模块数据集合
+        private List<DeviceData> DeviceData;//模块数据集合
 
         public int getNodeID() {
             return NodeID;
@@ -190,11 +195,11 @@ public class NodeMonitorDataOut extends BaseModel {
             MeterReportTime = meterReportTime;
         }
 
-        public NodeMonitorDataOut.DeviceData getDeviceData() {
+        public List<DeviceData> getDeviceData() {
             return DeviceData;
         }
 
-        public void setDeviceData(NodeMonitorDataOut.DeviceData deviceData) {
+        public void setDeviceData(List<DeviceData> deviceData) {
             DeviceData = deviceData;
         }
     }
@@ -357,6 +362,24 @@ public class NodeMonitorDataOut extends BaseModel {
     }
 
     public static class CHValue {
+
+        public CHValue(int status, String CHReportTime,
+                       String va, String vb, String vc,
+                       String ia, String ib, String ic,
+                       String pa, String pb, String pc) {
+            Status = status;
+            this.CHReportTime = CHReportTime;
+            Va = va;
+            Vb = vb;
+            Vc = vc;
+            Ia = ia;
+            Ib = ib;
+            Ic = ic;
+            Pa = pa;
+            Pb = pb;
+            Pc = pc;
+        }
+
         private int Status;//回路状态：  1-开、0-关、2-未知
         private String CHReportTime;//回路状态报告时间
         private String Va;//A 相电压

@@ -64,4 +64,12 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <select id="findByCHName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_node_monitor_device_ch
+        where deviceCode = #{deviceCode,jdbcType=VARCHAR}
+        and chName = #{chName,jdbcType=VARCHAR}
+    </select>
 </mapper>

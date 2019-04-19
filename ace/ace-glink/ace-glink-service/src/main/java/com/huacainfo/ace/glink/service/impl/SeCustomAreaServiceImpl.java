@@ -59,10 +59,8 @@ public class SeCustomAreaServiceImpl implements SeCustomAreaService {
     public PageResult
             <SeCustomAreaVo> findSeCustomAreaList(SeCustomAreaQVo condition,
                                                   int start, int limit, String orderBy) throws Exception {
-        PageResult
-                <SeCustomAreaVo> rst = new PageResult<>();
-        List
-                <SeCustomAreaVo> list = seCustomAreaDao.findList(condition, start, limit, orderBy);
+        PageResult<SeCustomAreaVo> rst = new PageResult<>();
+        List<SeCustomAreaVo> list = seCustomAreaDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.seCustomAreaDao.findCount(condition);
@@ -83,34 +81,23 @@ public class SeCustomAreaServiceImpl implements SeCustomAreaService {
      * @version: 2019-04-18
      */
     @Override
-    public MessageResponse insertSeCustomArea(SeCustomArea o, UserProp userProp) throws Exception {
-        String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
-        o.setId(guid);
+    public MessageResponse insertSeCustomArea(List<SeCustomArea> list, UserProp userProp) throws Exception {
+        for (SeCustomArea o : list) {
+            String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
+            o.setId(guid);
+            if (CommonUtils.isBlank(o.getAreaName())) {
+                return new MessageResponse(1, "区名称不能为空！");
+            }
+            int temp = this.seCustomAreaDao.isExit(o);
+            if (temp > 0) {
+                return new MessageResponse(1, "逻辑区数据名称重复！");
+            }
+            o.setCreateDate(new Date());
+            o.setStatus("1");
 
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
+            this.seCustomAreaDao.insert(o);
+
         }
-        if (CommonUtils.isBlank(o.getAreaName())) {
-            return new MessageResponse(1, "区名称不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-
-
-        int temp = this.seCustomAreaDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "逻辑区数据名称重复！");
-        }
-
-
-        o.setCreateDate(new Date());
-        o.setStatus("1");
-
-        this.seCustomAreaDao.insert(o);
-        this.dataBaseLogService.log("添加逻辑区数据", "逻辑区数据", "",
-                o.getId(), o.getId(), userProp);
-
         return new MessageResponse(0, "保存成功！");
     }
 

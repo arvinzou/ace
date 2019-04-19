@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.SeTimerMonthDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeTimerMonth">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="timerID" jdbcType="INTEGER" property="timerID"/>
+        <result column="m1" jdbcType="INTEGER" property="m1"/>
+        <result column="m2" jdbcType="INTEGER" property="m2"/>
+        <result column="m3" jdbcType="INTEGER" property="m3"/>
+        <result column="m4" jdbcType="INTEGER" property="m4"/>
+        <result column="m5" jdbcType="INTEGER" property="m5"/>
+        <result column="m6" jdbcType="INTEGER" property="m6"/>
+        <result column="m7" jdbcType="INTEGER" property="m7"/>
+        <result column="m8" jdbcType="INTEGER" property="m8"/>
+        <result column="m9" jdbcType="INTEGER" property="m9"/>
+        <result column="m10" jdbcType="INTEGER" property="m10"/>
+        <result column="m11" jdbcType="INTEGER" property="m11"/>
+        <result column="m12" jdbcType="INTEGER" property="m12"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, timerID, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, remark, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_timer_month
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from se_timer_month
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeTimerMonth">
+    insert into se_timer_month (id, timerID, m1, 
+      m2, m3, m4, m5, 
+      m6, m7, m8, m9, 
+      m10, m11, m12, remark, 
+      status, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{timerID,jdbcType=INTEGER}, #{m1,jdbcType=INTEGER}, 
+      #{m2,jdbcType=INTEGER}, #{m3,jdbcType=INTEGER}, #{m4,jdbcType=INTEGER}, #{m5,jdbcType=INTEGER}, 
+      #{m6,jdbcType=INTEGER}, #{m7,jdbcType=INTEGER}, #{m8,jdbcType=INTEGER}, #{m9,jdbcType=INTEGER}, 
+      #{m10,jdbcType=INTEGER}, #{m11,jdbcType=INTEGER}, #{m12,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeTimerMonth">
+    update se_timer_month
+    set timerID = #{timerID,jdbcType=INTEGER},
+      m1 = #{m1,jdbcType=INTEGER},
+      m2 = #{m2,jdbcType=INTEGER},
+      m3 = #{m3,jdbcType=INTEGER},
+      m4 = #{m4,jdbcType=INTEGER},
+      m5 = #{m5,jdbcType=INTEGER},
+      m6 = #{m6,jdbcType=INTEGER},
+      m7 = #{m7,jdbcType=INTEGER},
+      m8 = #{m8,jdbcType=INTEGER},
+      m9 = #{m9,jdbcType=INTEGER},
+      m10 = #{m10,jdbcType=INTEGER},
+      m11 = #{m11,jdbcType=INTEGER},
+      m12 = #{m12,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
