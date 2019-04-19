@@ -69,9 +69,12 @@
     n.id as n_id, n.nodeCount, n.nodeID as n_nodeID, n.local, n.iPAddress, n.areaNodeID as n_areaNodeID,
     n.pX, n.pY, n.meterID, n.meterType, n.engineer, n.tel, n.deviceCount
     from se_gateway_state t
-    LEFT JOIN  se_node n
-    on t.nodeID = n.nodeID
+    LEFT JOIN  se_node n on t.nodeID = n.nodeID
+    LEFT JOIN  se_project_area p on n.areaNodeID = p.areaNodeID
     <include refid="Where_Condition"/>
+    <if test="condition.areaNodeID !=null and condition.areaNodeID !=&quot;&quot;">
+      and n.areaNodeID =#{condition.areaNodeID,jdbcType=VARCHAR}
+    </if>
     <choose>
       <when test="orderBy!=null and orderBy!=&quot;&quot;">
         ORDER BY ${orderBy}
