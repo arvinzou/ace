@@ -125,7 +125,6 @@ function initForm() {
                 data['o'] = result.value;
                 render('#fm-edit', data, 'tpl-fm');
                 initPage();
-
             } else {
                 alert(result.errorMessage);
             }

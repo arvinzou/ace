@@ -30,70 +30,6 @@
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.huacainfo.ace.glink.model.SePresetData">
-    insert into se_preset_data
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="presetNo != null">
-        presetNo,
-      </if>
-      <if test="presetName != null">
-        presetName,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="createDate != null">
-        createDate,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="presetNo != null">
-        #{presetNo,jdbcType=INTEGER},
-      </if>
-      <if test="presetName != null">
-        #{presetName,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=CHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.glink.model.SePresetData">
-    update se_preset_data
-    <set>
-      <if test="presetNo != null">
-        presetNo = #{presetNo,jdbcType=INTEGER},
-      </if>
-      <if test="presetName != null">
-        presetName = #{presetName,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=CHAR},
-      </if>
-      <if test="createDate != null">
-        createDate = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SePresetData">
     update se_preset_data
     set presetNo = #{presetNo,jdbcType=INTEGER},
@@ -103,4 +39,60 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SePresetDataVo"></resultMap>
+
+  <sql id="Vo_Column_List">
+   s.id, s.presetNo, s.presetName, s.remark, s.status, s.createDate
+  </sql>
+
+  <sql id="From_Statement">
+    FROM se_preset_data s
+  </sql>
+  <sql id="Where_Condition">
+    where s.status <![CDATA[ <> ]]> 0
+    <if test="condition.presetName !=null and condition.presetName !=&quot;&quot;">
+      and s.presetName LIKE concat('%',#{condition.presetName,jdbcType=VARCHAR},'%')
+    </if>
+  </sql>
+
+  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    <include refid="Vo_Column_List"/>
+    <include refid="From_Statement"/>
+    <include refid="Where_Condition"/>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY s.createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="From_Statement"/>
+    <include refid="Where_Condition"/>
+  </select>
+
+  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.SePresetData">
+    select count(*)
+    from se_preset_data
+    where name=#{name,jdbcType=VARCHAR}
+    and code != #{code,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    <include refid="Vo_Column_List"/>
+    <include refid="From_Statement"/>
+    where s.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="clearAll">
+    delete from se_preset_data
+  </delete>
 </mapper>

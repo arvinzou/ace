@@ -80,8 +80,9 @@ public class SeGatewayStateController extends GLinkBaseController {
     @RequestMapping(value = "/insertSeGatewayState")
     @ResponseBody
     public MessageResponse insertSeGatewayState(String jsons) throws Exception {
-        SeGatewayState obj = JSON.parseObject(jsons, SeGatewayState.class);
-        return this.seGatewayStateService.insertSeGatewayState(obj, this.getCurUserProp());
+
+        List<SeGatewayState> list = JSON.parseArray(jsons, SeGatewayState.class);
+        return this.seGatewayStateService.insertSeGatewayState(list, this.getCurUserProp());
     }
 
     /**

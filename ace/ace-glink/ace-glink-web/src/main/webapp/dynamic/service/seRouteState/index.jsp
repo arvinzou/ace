@@ -61,11 +61,11 @@
                                class="form-control"
                                placeholder="请输入直播名称">
                         <span class="input-group-btn">
-                                                                        <button class="btn  btn-default search_btn"
-                                                                                type="submit">
-                                                                                搜索
-                                                                        </button>
-                                                                    </span>
+                        <button class="btn  btn-default search_btn"
+                                type="submit">
+                                搜索
+                        </button>
+                    </span>
                     </div>
                 </form>
             </div>
@@ -77,14 +77,14 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                                                                        <th width="10%"> 主键</th>
-                                                    <th width="10%"> 配电箱编号</th>
-                                                    <th width="10%"> 状态：1-在线，0-离线</th>
-                                                    <th width="10%"> 信号强度，离线时为空</th>
-                                                    <th width="10%"> 状态更新时间</th>
-                                                    <th width="10%"> 备注</th>
-                                                    <th width="10%"> 创建日期</th>
-                                                                <th width="15%">操作</th>
+                    <th width="10%"> 主键</th>
+                    <th width="10%"> 配电箱编号</th>
+                    <th width="10%"> 状态：1-在线，0-离线</th>
+                    <th width="10%"> 信号强度，离线时为空</th>
+                    <th width="10%"> 状态更新时间</th>
+                    <th width="10%"> 备注</th>
+                    <th width="10%"> 创建日期</th>
+                    <th width="15%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -110,14 +110,14 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-                                    <td> \&{item.id}</td>
-                            <td> \&{item.nodeID}</td>
-                            <td> \&{item.status}</td>
-                            <td> \&{item.signal}</td>
-                            <td> \&{item.updateTime}</td>
-                            <td> \&{item.remark}</td>
-                            <td> \&{item.createDate}</td>
-                            <td>
+        <td> \${item.id}</td>
+        <td> \${item.nodeID}</td>
+        <td> \${item.status}</td>
+        <td> \${item.signal}</td>
+        <td> \${item.updateTime}</td>
+        <td> \${item.remark}</td>
+        <td> \${item.createDate}</td>
+        <td>
             {@if item.status==0}
             <span class="label label-lg label-danger">删除</span>
             {@else if item.status==1}
@@ -243,49 +243,49 @@
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
 
-                                    <div class="form-group">
-                    <label class="col-md-2 view-label">主键</label>
-                    <div class="col-md-10">
-                        \${id}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">配电箱编号</label>
-                    <div class="col-md-10">
-                        \${nodeID}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">状态：1-在线，0-离线</label>
-                    <div class="col-md-10">
-                        \${status}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">信号强度，离线时为空</label>
-                    <div class="col-md-10">
-                        \${signal}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">状态更新时间</label>
-                    <div class="col-md-10">
-                        \${updateTime}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">备注</label>
-                    <div class="col-md-10">
-                        \${remark}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">创建日期</label>
-                    <div class="col-md-10">
-                        \${createDate}
-                    </div>
-                </div>
-                    
+        <div class="form-group">
+            <label class="col-md-2 view-label">主键</label>
+            <div class="col-md-10">
+                \${id}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">配电箱编号</label>
+            <div class="col-md-10">
+                \${nodeID}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">状态：1-在线，0-离线</label>
+            <div class="col-md-10">
+                \${status}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">信号强度，离线时为空</label>
+            <div class="col-md-10">
+                \${signal}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">状态更新时间</label>
+            <div class="col-md-10">
+                \${updateTime}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建日期</label>
+            <div class="col-md-10">
+                \${createDate}
+            </div>
+        </div>
+
         <h4>结果</h4>
         <hr>
         <div class="form-group " id="operation">
@@ -313,49 +313,49 @@
 </script>
 
 <script id="tpl-preview" type="text/template">
-                                <div class="form-group">
-                <label class="col-md-2 view-label">主键</label>
-                <div class="col-md-10">
-                    \${id}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">配电箱编号</label>
-                <div class="col-md-10">
-                    \${nodeID}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">状态：1-在线，0-离线</label>
-                <div class="col-md-10">
-                    \${status}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">信号强度，离线时为空</label>
-                <div class="col-md-10">
-                    \${signal}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">状态更新时间</label>
-                <div class="col-md-10">
-                    \${updateTime}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">备注</label>
-                <div class="col-md-10">
-                    \${remark}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">创建日期</label>
-                <div class="col-md-10">
-                    \${createDate}
-                </div>
-            </div>
-                    </script>
+    <div class="form-group">
+        <label class="col-md-2 view-label">主键</label>
+        <div class="col-md-10">
+            \${id}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">配电箱编号</label>
+        <div class="col-md-10">
+            \${nodeID}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">状态：1-在线，0-离线</label>
+        <div class="col-md-10">
+            \${status}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">信号强度，离线时为空</label>
+        <div class="col-md-10">
+            \${signal}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">状态更新时间</label>
+        <div class="col-md-10">
+            \${updateTime}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">备注</label>
+        <div class="col-md-10">
+            \${remark}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">创建日期</label>
+        <div class="col-md-10">
+            \${createDate}
+        </div>
+    </div>
+</script>
 <style>
     .cover {
         width: 70px;
