@@ -121,11 +121,12 @@
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopSubarea">
         select count(1)
         from se_node
-        where 1!=1
+        where nodeID=#{nodeID,jdbcType=VARCHAR}
     </select>
 
     <update id="allClear">
         truncate table se_node ;
         truncate table se_node_device ;
     </update>
+
 </mapper>

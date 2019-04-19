@@ -2,7 +2,7 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        $(".breadcrumb").append("<li> < span > 编辑策略管理 < /span></li > ");
+        $(".breadcrumb").append("<li> <span>编辑策略管理</span></li > ");
         initForm();
         initEvents();
     });

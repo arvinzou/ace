@@ -87,7 +87,6 @@
     where name=#{name,jdbcType=VARCHAR}
     and code != #{code,jdbcType=VARCHAR}
   </select>
-
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
@@ -95,6 +94,6 @@
         where s.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="clearAll">
-    delete from se_route_state
+    truncate table se_route_state
   </delete>
 </mapper>
