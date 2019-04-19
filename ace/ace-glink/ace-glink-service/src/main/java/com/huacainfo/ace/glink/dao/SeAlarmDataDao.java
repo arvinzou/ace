@@ -31,4 +31,6 @@ public interface SeAlarmDataDao {
 
     int deleteByPrimaryKeys(@Param("list") List<String> list);
 
+    int allClear();
+
 }

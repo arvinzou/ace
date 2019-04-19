@@ -1,10 +1,7 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -97,6 +94,7 @@ public class SeGatewayStateServiceImpl implements SeGatewayStateService {
      */
     @Override
     public MessageResponse insertSeGatewayState(List<SeGatewayState> list, UserProp userProp) throws Exception {
+        seGatewayStateDao.allClear();
         if(list.size()>0){
             for(int i=0; i<list.size(); i++){
                 SeGatewayState o = list.get(i);

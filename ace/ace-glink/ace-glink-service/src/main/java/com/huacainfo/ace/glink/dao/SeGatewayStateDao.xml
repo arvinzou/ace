@@ -110,4 +110,8 @@
     </foreach>
     );
   </insert>
+
+  <update id="allClear">
+    truncate table se_gateway_state ;
+  </update>
 </mapper>

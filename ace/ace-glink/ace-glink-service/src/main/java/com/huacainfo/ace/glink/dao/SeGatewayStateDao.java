@@ -31,4 +31,5 @@ public interface SeGatewayStateDao {
 
     int deleteByPrimaryKeys(@Param("list") List<String> list);
 
+    int allClear();
 }
