@@ -81,4 +81,20 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <update id="allClear">
+        truncate table se_node_monitor ;
+        truncate table se_node_monitor_device ;
+        truncate table se_node_monitor_device_ch ;
+    </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeNodeMonitorVo">
+    </resultMap>
+
+    <select id="findByNodeID" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_node_monitor
+        where nodeID = #{nodeID,jdbcType=VARCHAR}
+    </select>
 </mapper>

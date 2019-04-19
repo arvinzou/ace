@@ -11,11 +11,11 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.glink.api.pojo.fe.JackBoxOut;
-import com.huacainfo.ace.glink.dao.SeNodeDao;
-import com.huacainfo.ace.glink.dao.SeNodeDeviceDao;
-import com.huacainfo.ace.glink.model.SeNode;
-import com.huacainfo.ace.glink.model.SeNodeDevice;
+import com.huacainfo.ace.glink.api.pojo.fe.NodeMonitorDataOut;
+import com.huacainfo.ace.glink.dao.*;
+import com.huacainfo.ace.glink.model.*;
 import com.huacainfo.ace.glink.service.SeNodeService;
+import com.huacainfo.ace.glink.vo.SeNodeMonitorVo;
 import com.huacainfo.ace.glink.vo.SeNodeQVo;
 import com.huacainfo.ace.glink.vo.SeNodeVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -23,7 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,6 +42,12 @@ public class SeNodeServiceImpl implements SeNodeService {
     private SeNodeDao seNodeDao;
     @Autowired
     private SeNodeDeviceDao seNodeDeviceDao;
+    @Autowired
+    private SeNodeMonitorDao seNodeMonitorDao;
+    @Autowired
+    private SeNodeMonitorDeviceDao seNodeMonitorDeviceDao;
+    @Autowired
+    private SeNodeMonitorDeviceChDao seNodeMonitorDeviceChDao;
 
     @Autowired
     private DataBaseLogService dataBaseLogService;
@@ -142,10 +150,6 @@ public class SeNodeServiceImpl implements SeNodeService {
                 o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "保存成功！");
-    }
-
-    public static void main(String[] args) {
-
     }
 
     /**
@@ -275,6 +279,269 @@ public class SeNodeServiceImpl implements SeNodeService {
 
             seNodeDeviceDao.insert(device);
         }
+    }
+
+
+    /**
+     * 同步配电箱监测数据
+     *
+     * @param curUserProp
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse syncMonitorData(UserProp curUserProp) {
+        //0-1、获取所有配电箱数据
+        String nodeGroup = findNodeGroup();
+        if (nodeGroup.isEmpty()) {
+            return new MessageResponse(ResultCode.FAIL, "配电箱基础数据缺失");
+        }
+        //http请求，获取远程服务器数据
+        NodeMonitorDataOut out = getTestNodeMonitorDataOut(nodeGroup);//SeApiToolKit.getNodeMonitorListData(nodeGroup);
+        //1、清理库中原有数据
+        seNodeMonitorDao.allClear();
+        //2、填充获取的新数据
+        List<NodeMonitorDataOut.NodeMonitorData> nodeData = out.getNodeData();
+        SeNodeMonitor monitor;
+        for (NodeMonitorDataOut.NodeMonitorData item : nodeData) {
+            monitor = new SeNodeMonitor();
+            monitor.setId(GUIDUtil.getGUID());
+            monitor.setStatus("1");
+            monitor.setCreateDate(DateUtil.getNowDate());
+            monitor.setRemark("测试数据导入");
+            //
+            monitor.setNodeID(item.getNodeID());
+            monitor.setReportTime(item.getReportTime());
+            monitor.setGateStatus(item.getGateStatus());
+            monitor.setGateReportTime(item.getGateReportTime());
+            monitor.setRouteStatus(item.getRouteStatus());
+            monitor.setRouteSignal(item.getRouteSignal());
+            monitor.setRouteReportTime(item.getRouteReportTime());
+            monitor.setCurrentPreset(item.getCurrentPreset());
+            monitor.setPresetCaption(item.getPresetCaption());
+            monitor.setPresetReportTime(item.getPresetReportTime());
+            monitor.setTemperature(item.getTemperature());
+            monitor.setHumidity(item.getHumidity());
+            monitor.setwSDReportTime(item.getWSDReportTime());
+            monitor.setDoorStatus(item.getDoorStatus());
+            monitor.setMeterID(item.getMeterID());
+            monitor.setMeterValue(new BigDecimal(item.getMeterValue().replace("kwh", "")));
+            monitor.setMeterValueUnit("kwh");
+            monitor.setMeterReportTime(DateUtil.getNow());
+            //监测模块数据
+            recurInsertMonitorDevice(monitor, item.getDeviceData());
+
+            seNodeMonitorDao.insert(monitor);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "同步成功");
+    }
+
+
+    private String findNodeGroup() {
+        SeNodeQVo condition = new SeNodeQVo();
+        List<SeNodeVo> seNodeVoList = this.seNodeDao.findList(condition, 0, 99999, "");
+        if (CollectionUtils.isEmpty(seNodeVoList)) {
+            return "";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (SeNodeVo item : seNodeVoList) {
+            sb.append(item.getNodeID()).append(",");
+        }
+
+        String nodeGroup = sb.toString();
+        return nodeGroup.substring(0, nodeGroup.length() - 1);
+    }
+
+    private void recurInsertMonitorDevice(SeNodeMonitor monitor, List<NodeMonitorDataOut.DeviceData> deviceData) {
+
+        //
+        SeNodeMonitorDevice record;
+        for (NodeMonitorDataOut.DeviceData item : deviceData) {
+            record = new SeNodeMonitorDevice();
+            record.setId(GUIDUtil.getGUID());
+            record.setStatus("1");
+            record.setCreateDate(DateUtil.getNowDate());
+            record.setRemark("测试数据导入");
+            //
+            record.setNodeID(monitor.getNodeID());
+            record.setDeviceType(item.getDeviceType());
+            record.setDeviceCode(item.getDeviceCode());
+            record.setDeviceBox(item.getDeviceBox());
+            record.setDeviceStatus(item.getDeviceStatus());
+            record.setDeviceReportTime(item.getDeviceReportTime());
+            //
+            recurInsertMonitorDeviceCH(item);
+
+            seNodeMonitorDeviceDao.insert(record);
+        }
+    }
+
+    private void recurInsertMonitorDeviceCH(NodeMonitorDataOut.DeviceData item) {
+        //CH1Value
+        insertMonitorDeviceCH("CH1Value", item.getDeviceCode(), item.getCH1Value());
+        //CH2Value
+        insertMonitorDeviceCH("CH2Value", item.getDeviceCode(), item.getCH2Value());
+        //CH3Value
+        insertMonitorDeviceCH("CH3Value", item.getDeviceCode(), item.getCH3Value());
+        //CH4Value
+        insertMonitorDeviceCH("CH4Value", item.getDeviceCode(), item.getCH4Value());
+        //CH5Value
+        insertMonitorDeviceCH("CH5Value", item.getDeviceCode(), item.getCH5Value());
+        //CH6Value
+        insertMonitorDeviceCH("CH6Value", item.getDeviceCode(), item.getCH6Value());
+        //CH7Value
+        insertMonitorDeviceCH("CH7Value", item.getDeviceCode(), item.getCH7Value());
+        //CH8Value
+        insertMonitorDeviceCH("CH8Value", item.getDeviceCode(), item.getCH8Value());
+        //CH9Value
+        insertMonitorDeviceCH("CH9Value", item.getDeviceCode(), item.getCH9Value());
+        //CH10Value
+        insertMonitorDeviceCH("CH10Value", item.getDeviceCode(), item.getCH10Value());
+        //CH11Value
+        insertMonitorDeviceCH("CH11Value", item.getDeviceCode(), item.getCH11Value());
+        //CH12Value
+        insertMonitorDeviceCH("CH12Value", item.getDeviceCode(), item.getCH12Value());
+    }
+
+    private int insertMonitorDeviceCH(String CHName, String deviceCode, NodeMonitorDataOut.CHValue data) {
+        SeNodeMonitorDeviceCh ch = new SeNodeMonitorDeviceCh();
+        ch.setId(GUIDUtil.getGUID());
+        ch.setCreateDate(DateUtil.getNowDate());
+        ch.setRemark("测试数据导入");
+        //
+        ch.setChName(CHName);
+        ch.setDeviceCode(deviceCode);
+        ch.setStatus(data.getStatus());
+        ch.setcHReportTime(data.getCHReportTime());
+        ch.setVa(data.getVa());
+        ch.setVb(data.getVb());
+        ch.setVc(data.getVc());
+        ch.setIa(data.getIa());
+        ch.setIb(data.getIb());
+        ch.setIc(data.getIc());
+        ch.setPa(data.getPa());
+        ch.setPb(data.getPb());
+        ch.setPc(data.getPc());
+
+        return seNodeMonitorDeviceChDao.insert(ch);
+    }
+
+
+    /**
+     * 获取配电箱监控数据
+     *
+     * @param nodeID 配电箱编号
+     * @return SingleResult<SeNodeMonitorVo>
+     * @throws Exception
+     */
+    @Override
+    public SingleResult<SeNodeMonitorVo> getMonitorData(String nodeID) {
+
+        SingleResult<SeNodeMonitorVo> rst = new SingleResult<>();
+        //vo
+        SeNodeMonitorVo vo = seNodeMonitorDao.findByNodeID(nodeID);
+        //setDeviceList
+        vo.setMonitorDeviceList(seNodeMonitorDeviceDao.findByNodeID(nodeID));
+
+        rst.setValue(vo);
+        return rst;
+    }
+
+    /**
+     * 获取配电箱监控数据
+     *
+     * @param deviceCode 模块代码
+     * @param chName     回路名称
+     * @return SingleResult<SeNodeMonitorDeviceCh>
+     * @throws Exception
+     */
+    @Override
+    public SingleResult<SeNodeMonitorDeviceCh> getMonitorDeviceCH(String deviceCode, String chName) {
+        SingleResult<SeNodeMonitorDeviceCh> rst = new SingleResult<>();
+        rst.setValue(seNodeMonitorDeviceChDao.findByCHName(deviceCode, chName));
+        return rst;
+    }
+
+    /**
+     * =====================tes data=====================
+     */
+    private NodeMonitorDataOut getTestNodeMonitorDataOut(String nodeGroup) {
+        int NodeCount = 3;//配电箱节点数量
+        List<NodeMonitorDataOut.NodeMonitorData> NodeData = getTestNodeMonitorData(nodeGroup);//监测数据数组
+
+        return new NodeMonitorDataOut(NodeCount, NodeData);
+    }
+
+    private List<NodeMonitorDataOut.NodeMonitorData> getTestNodeMonitorData(String nodeGroup) {
+        String[] array = nodeGroup.split(",");
+        List<NodeMonitorDataOut.NodeMonitorData> list = new ArrayList<>();
+        NodeMonitorDataOut.NodeMonitorData item;
+        String time = DateUtil.getNow();
+        int nodeID;
+        for (int i = 0; i < array.length; i++) {
+            nodeID = Integer.parseInt(array[i]);
+            item = new NodeMonitorDataOut.NodeMonitorData();
+            item.setNodeID(nodeID);//配电箱编号
+            item.setReportTime(time);//报告时间
+            item.setGateStatus(1);//网关状态：1-在线，0-离线
+            item.setGateReportTime(time);//网关状态报告时间
+            item.setRouteStatus(1);//路由器状态：1-在线，0-离线
+            item.setRouteSignal("60dbm");//路由器信号值
+            item.setRouteReportTime(time);//路由器状态报告时间
+            item.setCurrentPreset(1);//当前场景
+            item.setPresetCaption("全开模式");//当前场景描述
+            item.setPresetReportTime(time);//场景报告时间
+            item.setTemperature("2" + i + "℃");//温度
+            item.setHumidity("2" + i + "%RH");//湿度
+            item.setWSDReportTime(time);//温湿度上报时间
+            item.setDoorStatus("关闭");//门状态（未知、关闭、打开）
+            item.setMeterID("0000000000000000" + (i + 1));//电表号
+            item.setMeterValue("12" + i + ".56kwh");//电表读数
+            item.setMeterReportTime(time);//电表上报时间
+            item.setDeviceData(getTestDeviceData(nodeID));//模块数据集合
+
+            list.add(item);
+        }
+
+        return list;
+    }
+
+    private List<NodeMonitorDataOut.DeviceData> getTestDeviceData(int nodeID) {
+        List<NodeMonitorDataOut.DeviceData> list = new ArrayList<>();
+        NodeMonitorDataOut.DeviceData item;
+        for (int i = 0; i < 3; i++) {
+            item = new NodeMonitorDataOut.DeviceData();
+            item.setDeviceType("DDRC4" + i + "0-FR");//模块类型
+            item.setDeviceCode(nodeID + "0x6" + i);//模块代码
+            item.setDeviceBox(10 + i);//模块地址
+            item.setDeviceStatus(1); //模块状态: 1-在线，O-离线
+            item.setDeviceReportTime(DateUtil.getNow()); //模块报告时间
+            item.setCH1Value(getTestCHValue());//回路状态对象
+            item.setCH2Value(getTestCHValue());//
+            item.setCH3Value(getTestCHValue());//
+            item.setCH4Value(getTestCHValue());//
+            item.setCH5Value(getTestCHValue());//
+            item.setCH6Value(getTestCHValue());//
+            item.setCH7Value(getTestCHValue());//
+            item.setCH8Value(getTestCHValue());//
+            item.setCH9Value(getTestCHValue());//
+            item.setCH10Value(getTestCHValue());//
+            item.setCH11Value(getTestCHValue());//
+            item.setCH12Value(getTestCHValue());//
+
+            list.add(item);
+        }
+
+        return list;
+    }
+
+    private NodeMonitorDataOut.CHValue getTestCHValue() {
+
+        return new NodeMonitorDataOut.CHValue(0, DateUtil.getNow(),
+                "221.23V", "220.35V", "230.25V",
+                "2.52A", "2.32A", "2.52A",
+                "400.00W", "300.00W", "500.00W");
     }
 
     private JackBoxOut testData() {

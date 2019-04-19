@@ -2,6 +2,7 @@ package com.huacainfo.ace.glink.model;
 
 import com.huacainfo.ace.common.model.BaseModel;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class SeNodeMonitor extends BaseModel {
@@ -37,7 +38,9 @@ public class SeNodeMonitor extends BaseModel {
 
     private String meterID;
 
-    private String meterValue;
+    private BigDecimal meterValue;
+
+    private String meterValueUnit;//电表读数单位
 
     private String meterReportTime;
 
@@ -46,6 +49,14 @@ public class SeNodeMonitor extends BaseModel {
     private String status;
 
     private Date createDate;
+
+    public String getMeterValueUnit() {
+        return meterValueUnit;
+    }
+
+    public void setMeterValueUnit(String meterValueUnit) {
+        this.meterValueUnit = meterValueUnit;
+    }
 
     public String getId() {
         return id;
@@ -175,12 +186,12 @@ public class SeNodeMonitor extends BaseModel {
         this.meterID = meterID == null ? null : meterID.trim();
     }
 
-    public String getMeterValue() {
+    public BigDecimal getMeterValue() {
         return meterValue;
     }
 
-    public void setMeterValue(String meterValue) {
-        this.meterValue = meterValue == null ? null : meterValue.trim();
+    public void setMeterValue(BigDecimal meterValue) {
+        this.meterValue = meterValue;
     }
 
     public String getMeterReportTime() {

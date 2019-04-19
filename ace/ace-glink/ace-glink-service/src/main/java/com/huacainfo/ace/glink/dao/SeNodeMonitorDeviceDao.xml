@@ -38,16 +38,23 @@
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNodeMonitorDevice">
-    update se_node_monitor_device
-    set nodeID = #{nodeID,jdbcType=INTEGER},
-      deviceType = #{deviceType,jdbcType=VARCHAR},
-      deviceCode = #{deviceCode,jdbcType=VARCHAR},
-      deviceBox = #{deviceBox,jdbcType=INTEGER},
-      deviceStatus = #{deviceStatus,jdbcType=INTEGER},
-      deviceReportTime = #{deviceReportTime,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+        update se_node_monitor_device
+        set nodeID = #{nodeID,jdbcType=INTEGER},
+          deviceType = #{deviceType,jdbcType=VARCHAR},
+          deviceCode = #{deviceCode,jdbcType=VARCHAR},
+          deviceBox = #{deviceBox,jdbcType=INTEGER},
+          deviceStatus = #{deviceStatus,jdbcType=INTEGER},
+          deviceReportTime = #{deviceReportTime,jdbcType=VARCHAR},
+          remark = #{remark,jdbcType=VARCHAR},
+          status = #{status,jdbcType=CHAR},
+          createDate = #{createDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+      </update>
+
+    <select id="findByNodeID" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_node_monitor_device
+        where nodeID = #{nodeID,jdbcType=VARCHAR}
+    </select>
 </mapper>

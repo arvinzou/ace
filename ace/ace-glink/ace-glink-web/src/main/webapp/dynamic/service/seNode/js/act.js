@@ -71,40 +71,91 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
-
-/*查看详情*/
-function detail(id) {
-    var url = contextPath + "/seNode/selectSeNodeByPrimaryKey";
-    $.getJSON(url, {id: id}, function (result) {
-        if (result.status == 0) {
-            var navitem = document.getElementById('tpl-detail').innerHTML;
-            var html = juicer(navitem, {data: result.value});
-            $("#detail-info").html(html);
-            $("#modal-detail").modal("show");
-        }
-    })
-}
-
 function initEvents() {
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
-        var title = relatedTarget.data('title');
-        var modal = $(this);
         console.log(relatedTarget);
         initPreview(id);
     });
 
+    $('#modal-monitor').on('show.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var nodeID = relatedTarget.data('id');
+        //ajax data
+        initMonitor(nodeID);
+    });
+
+    $('#modal-monitor-d-ch').on('show.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var nodeID = relatedTarget.data('id');
+        //ajax data
+        initMonitorDeviceCH(nodeID);
+    });
+}
+
+function showMonitorDeviceCH(deviceCode, chName) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/seNode/getMonitorDeviceCH",
+        type: "post",
+        async: false,
+        data: {
+            deviceCode: deviceCode,
+            chName: chName
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                render('#fm-monitor-dch', data, 'tpl-monitor-dch');
+                //
+                $("#modal-monitor-dch").modal('show');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+function initMonitor(nodeID) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/seNode/getMonitorData",
+        type: "post",
+        async: false,
+        data: {nodeID: nodeID},
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                data['monitorDeviceList'] = result.value.monitorDeviceList;
+                render('#fm-monitor', data, 'tpl-monitor');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }
 
 /*配电箱数据同步*/
-function syncData(params) {
+function syncData() {
     startLoad();
     $.ajax({
         url: contextPath + "/seNode/syncData",
         type: "post",
         async: false,
-        data: params,
+        data: {},
         success: function (rst) {
             stopLoad();
             alert(rst.errorMessage);
@@ -123,6 +174,35 @@ function syncData(params) {
 function initJuicerMethod() {
     juicer.register('rsd', rsd);
     juicer.register('parseStatus', parseStatus);
+    juicer.register('parseOFState', parseOFState);
+    juicer.register('parseCHState', parseCHState);
+
+}
+
+function parseCHState(val) {
+    // 1-开、0-关、2-未知
+    switch (val) {
+        case 1:
+            return '开';
+        case 0:
+            return '关';
+        case 2:
+            return '未知';
+        default:
+            return '未知';
+    }
+}
+
+function parseOFState(val) {
+    // 1在线，0离线
+    switch (val) {
+        case 1:
+            return '在线';
+        case 0:
+            return '离线';
+        default:
+            return '离线';
+    }
 }
 
 /**
@@ -190,3 +270,27 @@ function initForm(id) {
         }
     });
 }
+
+
+/*配电箱数据同步*/
+function syncMonitorData() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/seNode/syncMonitorData",
+        type: "post",
+        async: false,
+        data: {},
+        success: function (rst) {
+            stopLoad();
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                getPageList();
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+

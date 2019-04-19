@@ -25,6 +25,8 @@
         <div class="row custom-toolbar">
             <div class="col-md-7">
                 <a href="javascript:syncData();" class="btn green">同步数据</a>
+                <a href="javascript:syncMonitorData();" class="btn green">同步监测数据</a>
+
             </div>
 
             <div class="col-md-5">
@@ -82,11 +84,334 @@
         <td>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+            <a href="#" data-toggle="modal" data-id="\${item.nodeID}" data-title="\${item.name}"
                data-target="#modal-monitor">查看监测</a>
         </td>
     </tr>
     {@/each}
+</script>
+
+<%--监测数据-模块回路--%>
+<div class="modal fade" role="dialog" id="modal-monitor-dch">
+    <div class="modal-dialog" role="document" style="width: 55%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">详细</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm-monitor-dch">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="tpl-monitor-dch" type="text/template">
+    <div class="form-group">
+        <label class="col-md-2 view-label">回路名称</label>
+        <div class="col-md-10">
+            \${data.o.chName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">模块代码</label>
+        <div class="col-md-10">
+            \${data.o.deviceCode}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">回路状态</label>
+        <div class="col-md-10">
+            \${parseCHState(data.o.status)}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">回路状态报告时间</label>
+        <div class="col-md-10">
+            \${data.o.cHReportTime}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">A相电压</label>
+        <div class="col-md-10">
+            \${data.o.va}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">B相电压</label>
+        <div class="col-md-10">
+            \${data.o.vb}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">C相电压</label>
+        <div class="col-md-10">
+            \${data.o.vc}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">A相电流</label>
+        <div class="col-md-10">
+            \${data.o.ia}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">B相电流</label>
+        <div class="col-md-10">
+            \${data.o.ib}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">C相电流</label>
+        <div class="col-md-10">
+            \${data.o.ic}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">A相视在功率</label>
+        <div class="col-md-10">
+            \${data.o.pa}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">B相视在功率</label>
+        <div class="col-md-10">
+            \${data.o.pb}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">C相视在功率</label>
+        <div class="col-md-10">
+            \${data.o.pc}
+        </div>
+    </div>
+</script>
+
+<%--监测数据--%>
+<div class="modal fade" role="dialog" id="modal-monitor" data-keyboard="false">
+    <div class="modal-dialog" role="document" style="width: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">详细</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm-monitor">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="tpl-monitor" type="text/template">
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-share"></i>
+                <span class="caption-subject bold uppercase"> 基本信息</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="form-group">
+                <label class="col-md-2 view-label">配电箱编号</label>
+                <div class="col-md-10">
+                    \${data.o.nodeID}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">报告时间</label>
+                <div class="col-md-10">
+                    \${data.o.reportTime}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">网关状态</label>
+                <div class="col-md-10">
+                    \${parseOFState(data.o.gateStatus)}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">网关状态上报时间</label>
+                <div class="col-md-10">
+                    \${data.o.gateReportTime}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">路由器状态</label>
+                <div class="col-md-10">
+                    \${parseOFState(data.o.routeStatus)}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">路由器信号值</label>
+                <div class="col-md-10">
+                    \${data.o.routeSignal}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">路由器状态报告时间</label>
+                <div class="col-md-10">
+                    \${data.o.routeReportTime}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">当前场景</label>
+                <div class="col-md-10">
+                    \${data.o.currentPreset}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">当前场景描述</label>
+                <div class="col-md-10">
+                    \${data.o.presetCaption}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">场景报告时间</label>
+                <div class="col-md-10">
+                    \${data.o.presetReportTime}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">温度</label>
+                <div class="col-md-10">
+                    \${data.o.temperature}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">湿度</label>
+                <div class="col-md-10">
+                    \${data.o.humidity}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">温湿度上报时间</label>
+                <div class="col-md-10">
+                    \${data.o.wSDReportTime}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">门状态</label>
+                <div class="col-md-10">
+                    \${data.o.doorStatus}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">电表号</label>
+                <div class="col-md-10">
+                    \${data.o.meterID}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">电表读数</label>
+                <div class="col-md-10">
+                    \${data.o.meterValue}\${data.o.meterValueUnit}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 view-label">电表上报时间</label>
+                <div class="col-md-10">
+                    \${data.o.meterReportTime}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-share"></i>
+                <span class="caption-subject bold uppercase"> 模块监控数据</span>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="table-scrollable">
+                <table class="table table-hover table-light">
+                    <thead>
+                    <tr>
+                        <th width="5%"> 模块类型</th>
+                        <th width="5%"> 模块代码</th>
+                        <th width="5%"> 模块地址</th>
+                        <th width="5%"> 模块状态</th>
+                        <th width="5%"> 模块报告时间</th>
+                        <th width="5%"> 回路1</th>
+                        <th width="5%"> 回路2</th>
+                        <th width="5%"> 回路3</th>
+                        <th width="5%"> 回路4</th>
+                        <th width="5%"> 回路5</th>
+                        <th width="5%"> 回路6</th>
+                        <th width="5%"> 回路7</th>
+                        <th width="5%"> 回路8</th>
+                        <th width="5%"> 回路9</th>
+                        <th width="5%"> 回路10</th>
+                        <th width="5%"> 回路11</th>
+                        <th width="5%"> 回路12</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {@each data.monitorDeviceList as item, index}
+                    <tr>
+                        <th width="5%"> \${item.deviceType}</th>
+                        <th width="5%"> \${item.deviceCode}</th>
+                        <th width="5%"> \${item.deviceBox}</th>
+                        <th width="5%"> \${item.deviceStatus}</th>
+                        <th width="5%"> \${item.deviceReportTime}</th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH1Value');">查看</a>
+                        </th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH2Value');">查看</a>
+                        </th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH3Value');">查看</a>
+                        </th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH4Value');">查看</a>
+                        </th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH5Value');">查看</a>
+                        </th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH6Value');">查看</a>
+                        </th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH7Value');">查看</a>
+                        </th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH8Value');">查看</a>
+                        </th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH9Value');">查看</a>
+                        </th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH10Value');">查看</a>
+                        </th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH11Value');">查看</a>
+                        </th>
+                        <th width="5%">
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH12Value');">查看</a>
+                        </th>
+                    </tr>
+                    {@/each}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </script>
 ﻿
 <%--查看--%>
@@ -254,6 +579,13 @@
 
 </script>
 <style>
+    #modal-monitor {
+        z-index: 10052;
+    }
+
+    #modal-monitor-dch {
+        z-index: 10053;
+    }
 
 </style>
 <jsp:include page="/dynamic/common/footer.jsp"/>

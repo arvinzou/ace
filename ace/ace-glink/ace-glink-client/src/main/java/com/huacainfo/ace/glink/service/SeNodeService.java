@@ -5,6 +5,8 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.glink.model.SeNode;
+import com.huacainfo.ace.glink.model.SeNodeMonitorDeviceCh;
+import com.huacainfo.ace.glink.vo.SeNodeMonitorVo;
 import com.huacainfo.ace.glink.vo.SeNodeQVo;
 import com.huacainfo.ace.glink.vo.SeNodeVo;
 
@@ -88,4 +90,31 @@ public interface SeNodeService {
      * @throws Exception
      */
     MessageResponse syncData(UserProp userProp);
+
+    /**
+     * 同步配电箱监测数据
+     *
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse syncMonitorData(UserProp curUserProp);
+
+    /**
+     * 获取配电箱监控数据
+     *
+     * @param nodeID 配电箱编号
+     * @return SingleResult<SeNodeMonitorVo>
+     * @throws Exception
+     */
+    SingleResult<SeNodeMonitorVo> getMonitorData(String nodeID);
+
+    /**
+     * 获取配电箱监控数据
+     *
+     * @param deviceCode 模块代码
+     * @param chName     回路名称
+     * @return SingleResult<SeNodeMonitorDeviceCh>
+     * @throws Exception
+     */
+    SingleResult<SeNodeMonitorDeviceCh> getMonitorDeviceCH(String deviceCode, String chName);
 }
