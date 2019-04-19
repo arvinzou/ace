@@ -262,4 +262,10 @@ public class SeRouteStateController extends GLinkBaseController {
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.seRouteStateService.updateStatus(id, status, this.getCurUserProp());
     }
+
+    @RequestMapping(value = "/syncData")
+    @ResponseBody
+    public MessageResponse syncData() throws Exception {
+        return this.seRouteStateService.syncData(this.getCurUserProp());
+    }
 }

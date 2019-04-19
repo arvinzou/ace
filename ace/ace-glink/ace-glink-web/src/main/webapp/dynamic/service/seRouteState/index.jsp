@@ -16,10 +16,6 @@
     <jsp:include page="/dynamic/common/header.jsp"/>
 
     <link rel="stylesheet" href="css/style.css">
-    <%--sweetalert--%>
-    <script src="${pageContext.request.contextPath}/content/common/js/sweetalert/js/sweet-alert.min.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/content/common/js/sweetalert/css/sweet-alert.css">
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -29,32 +25,12 @@
 
         <div class="row custom-toolbar">
             <div class="col-md-3">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+                <a href="javascript:syncData();" class="btn green">同步</a>
             </div>
 
             <div class="col-md-9">
 
                 <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
-                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
@@ -77,7 +53,6 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 主键</th>
                     <th width="10%"> 配电箱编号</th>
                     <th width="10%"> 状态：1-在线，0-离线</th>
                     <th width="10%"> 信号强度，离线时为空</th>
@@ -110,7 +85,6 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \${item.id}</td>
         <td> \${item.nodeID}</td>
         <td> \${item.status}</td>
         <td> \${item.signal}</td>

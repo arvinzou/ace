@@ -11,7 +11,7 @@
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, nodeID, status, signal, updateTime, remark, createDate
+    id, nodeID, status, `signal`, updateTime, remark, createDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -25,7 +25,7 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeRouteState">
     insert into se_route_state (id, nodeID, status, 
-      signal, updateTime, remark, 
+      `signal`, updateTime, remark,
       createDate)
     values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
       #{signal,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
@@ -35,7 +35,7 @@
     update se_route_state
     set nodeID = #{nodeID,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      signal = #{signal,jdbcType=VARCHAR},
+      `signal` = #{signal,jdbcType=VARCHAR},
       updateTime = #{updateTime,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP}
@@ -46,7 +46,7 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeRouteStateVo"></resultMap>
 
     <sql id="Vo_Column_List">
-    s.id, s.nodeID, s.status, s.signal, s.updateTime, s.remark, s.createDate
+    s.id, s.nodeID, s.status, s.`signal`, s.updateTime, s.remark, s.createDate
   </sql>
 
     <sql id="From_Statement">

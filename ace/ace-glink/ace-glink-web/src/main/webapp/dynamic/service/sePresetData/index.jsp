@@ -16,10 +16,6 @@
     <jsp:include page="/dynamic/common/header.jsp"/>
 
     <link rel="stylesheet" href="css/style.css">
-    <%--sweetalert--%>
-    <script src="${pageContext.request.contextPath}/content/common/js/sweetalert/js/sweet-alert.min.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/content/common/js/sweetalert/css/sweet-alert.css">
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -29,32 +25,11 @@
 
         <div class="row custom-toolbar">
             <div class="col-md-3">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+                <a href="javascript:syncData();" class="btn green">同步</a>
             </div>
 
             <div class="col-md-9">
-
                 <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
-                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
@@ -77,7 +52,6 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 主键</th>
                     <th width="10%"> 场景编号</th>
                     <th width="10%"> 场景名称</th>
                     <th width="10%"> 备注</th>
@@ -109,7 +83,6 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \${item.id}</td>
         <td> \${item.presetNo}</td>
         <td> \${item.presetName}</td>
         <td> \${item.remark}</td>
@@ -133,7 +106,7 @@
             {@/if}
         </td>
         <td>
-            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
+            ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-status">设置状态</a>
             {@if item.auditStatus==1}
@@ -141,9 +114,7 @@
             {@/if}
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-
             <a href="javascript:del('\${item.id}');">删除</a>
-
         </td>
     </tr>
     {@/each}

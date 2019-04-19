@@ -6,9 +6,12 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.api.SeApiToolKit;
+import com.huacainfo.ace.glink.api.pojo.fe.PresetDataOut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -341,6 +344,37 @@ public class SePresetDataServiceImpl implements SePresetDataService {
         this.dataBaseLogService.log("跟新状态", "场景定义数据", id, id,
                 "场景定义数据", userProp);
         return new MessageResponse(0, "成功！");
+    }
+
+
+    /**
+     * 同步场景定义数据
+     *
+     * @param userProp 操作用户
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse syncData(UserProp userProp) {
+        //http请求，获取远程服务器数据
+        PresetDataOut out = SeApiToolKit.getPresetData();
+        //1、清理库中原有数据
+        this.sePresetDataDao.clearAll();
+        //2、填充获取的新数据
+        List<PresetDataOut.PresetData> PresetDataGroup = out.getPresetData();
+        SePresetData sePresetData;
+        for (PresetDataOut.PresetData item : PresetDataGroup) {
+            sePresetData = new SePresetData();
+            sePresetData.setId(GUIDUtil.getGUID());
+            sePresetData.setPresetNo(item.getPresetNo());
+            sePresetData.setPresetName(item.getPresetName());
+            sePresetData.setRemark("同步数据填充");
+            sePresetData.setStatus("1");
+            sePresetData.setCreateDate(new Date());
+            //插入配电箱
+            this.sePresetDataDao.insert(sePresetData);
+        }
+        return new MessageResponse(ResultCode.SUCCESS, "同步成功");
     }
 
 }
