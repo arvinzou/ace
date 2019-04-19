@@ -45,7 +45,7 @@ function setParams(key, value) {
 /*场景定义数据加载表格数据*/
 function getPageList() {
     var url = contextPath + "/sePresetData/findSePresetDataList";
-    params['name'] = $("input[name=keyword]").val();
+    params['presetName'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();

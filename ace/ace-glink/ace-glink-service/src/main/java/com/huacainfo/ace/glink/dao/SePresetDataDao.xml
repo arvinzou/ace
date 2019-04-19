@@ -93,6 +93,6 @@
         where s.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="clearAll">
-    delete from se_preset_data
+    truncate table se_preset_data
   </delete>
 </mapper>

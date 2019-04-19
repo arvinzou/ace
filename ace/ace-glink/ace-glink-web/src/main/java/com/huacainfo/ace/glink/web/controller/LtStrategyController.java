@@ -61,10 +61,7 @@ public class LtStrategyController extends GLinkBaseController {
     public PageResult
             <LtStrategyVo>
     findLtStrategyList(LtStrategyQVo condition, PageParamNoChangeSord page) throws Exception {
-
-        PageResult
-                <LtStrategyVo> rst =
-                this.ltStrategyService.findLtStrategyList(condition, page.getStart(),
+        PageResult<LtStrategyVo> rst = this.ltStrategyService.findLtStrategyList(condition, page.getStart(),
                         page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());

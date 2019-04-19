@@ -24,17 +24,17 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
+            <div class="col-md-8">
                 <a href="javascript:syncData();" class="btn green">同步</a>
             </div>
 
-            <div class="col-md-9">
-               <%-- <form id="fm-search">
+            <div class="col-md-4">
+                <form id="fm-search">
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入直播名称">
+                               placeholder="请输入场景名称">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn"
                                     type="submit">
@@ -42,7 +42,7 @@
                             </button>
                         </span>
                     </div>
-                </form>--%>
+                </form>
             </div>
 
         </div>

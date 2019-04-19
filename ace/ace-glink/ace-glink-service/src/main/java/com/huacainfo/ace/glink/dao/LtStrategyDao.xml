@@ -174,7 +174,7 @@
     select count(*)
     from lt_strategy
     where name=#{name,jdbcType=VARCHAR}
-    and code != #{code,jdbcType=VARCHAR}
+    or code != #{code,jdbcType=VARCHAR}
   </select>
 
     <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="VoResultMap">
