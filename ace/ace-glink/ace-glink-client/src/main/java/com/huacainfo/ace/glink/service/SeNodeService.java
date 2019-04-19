@@ -117,4 +117,12 @@ public interface SeNodeService {
      * @throws Exception
      */
     SingleResult<SeNodeMonitorDeviceCh> getMonitorDeviceCH(String deviceCode, String chName);
+
+    /**
+     * 同步配电箱全部电表数据
+     *
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse syncNodeMeterData(UserProp curUserProp);
 }

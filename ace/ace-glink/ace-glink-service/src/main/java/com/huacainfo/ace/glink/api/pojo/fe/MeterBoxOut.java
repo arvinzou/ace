@@ -12,6 +12,11 @@ import java.util.List;
  */
 public class MeterBoxOut extends BaseModel {
 
+    public MeterBoxOut(int nodeMeterCount, List<MeterData> nodeMeterData) {
+        NodeMeterCount = nodeMeterCount;
+        NodeMeterData = nodeMeterData;
+    }
+
     private int NodeMeterCount;             //电表数量
     private List<MeterData> NodeMeterData;  //电表数据集合
 
@@ -36,16 +41,16 @@ public class MeterBoxOut extends BaseModel {
      */
     public static class MeterData extends BaseModel {
 
-        private String NodeID;          //配电箱编号
+        private int NodeID;          //配电箱编号
         private String MeterID;         //电表表号
         private String MeterValue;      //电表当前读数
         private String UpdateTime;      //电表当前读数更新时间
 
-        public String getNodeID() {
+        public int getNodeID() {
             return NodeID;
         }
 
-        public void setNodeID(String nodeID) {
+        public void setNodeID(int nodeID) {
             NodeID = nodeID;
         }
 

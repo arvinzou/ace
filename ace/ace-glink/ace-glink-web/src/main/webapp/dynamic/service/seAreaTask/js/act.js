@@ -33,7 +33,8 @@ function initPage() {
             params['start'] = 0;
             getPageList();
             return false;
-        });
+        }
+    });
 }
 
 function setParams(key, value) {
@@ -69,135 +70,27 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
-/*区域任务数据添加*/
-function add(type) {
-    window.location.href = 'add/index.jsp?id=' + urlParams.id;
-}
-
-/*区域任务数据编辑*/
-function edit(did) {
-    window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
-}
-
-/*查看详情*/
-function detail(id) {
-    var url = contextPath + "/seAreaTask/selectSeAreaTaskByPrimaryKey";
-    $.getJSON(url, {id: id}, function (result) {
-        if (result.status == 0) {
-            var navitem = document.getElementById('tpl-detail').innerHTML;
-            var html = juicer(navitem, {data: result.value});
-            $("#detail-info").html(html);
-            $("#modal-detail").modal("show");
-        }
-    })
-}
-
 function initEvents() {
-﻿   $('#modal-preview').on('show.bs.modal', function (event) {
+
+    $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var title = relatedTarget.data('title');
         var modal = $(this);
         console.log(relatedTarget);
         initPreview(id);
-    })
-    $('#modal-audit').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        var title = relatedTarget.data('title');
-        var modal = $(this);
-        console.log(relatedTarget);
-        initForm(id);
-    })
-    $('#modal-audit .audit').on('click', function () {
-        $('#modal-audit form').submit();
-    });
-    $('#modal-audit form').ajaxForm({
-        beforeSubmit: function (formData, jqForm, options) {
-            var params = {};
-            $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
-            });
-            $.extend(params, {
-                time: new Date()
-            });
-            console.log(params);
-            audit(params);
-            return false;
-        }
-    });
-    $(".btn-group .btn").bind('click', function (event) {
-        $(event.target).siblings().removeClass("active");
-        console.log(event);
-        $(event.target).addClass("active");
-    });
-
-
-}
-
-/*区域任务数据审核*/
-function audit(params) {
-    startLoad();
-    $.ajax({
-        url: contextPath + "/seAreaTask/audit",
-        type: "post",
-        async: false,
-        data: params,
-        success: function (rst) {
-            stopLoad();
-            $("#modal-audit").modal('hide');
-            alert(rst.errorMessage);
-            if (rst.status == 0) {
-                getPageList();
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
-        }
     });
 }
 
 /*区域任务数据上架*/
-function online(id) {
-    if (confirm("确定要上架吗？")) {
+function syncData() {
+    if (confirm("任务数据即将更新，是否继续？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/seAreaTask/updateStatus",
+            url: contextPath + "/seAreaTask/syncData",
             type: "post",
             async: false,
-            data: {
-                id: id,
-                status: '1'
-            },
-            success: function (rst) {
-                stopLoad();
-                if (rst.status == 0) {
-                    getPageList();
-                } else {
-                    alert(rst.errorMessage);
-                }
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起，出错了！");
-            }
-        });
-    }
-}
-
-/*区域任务数据下架*/
-function outline(id) {
-    if (confirm("确定要下架吗？")) {
-        startLoad();
-        $.ajax({
-            url: contextPath + "/seAreaTask/updateStatus",
-            type: "post",
-            async: false,
-            data: {
-                id: id,
-                status: '0'
-            },
+            data: {},
             success: function (rst) {
                 stopLoad();
                 if (rst.status == 0) {
@@ -233,8 +126,7 @@ function parseStatus(status) {
     }
 }
 
-
-﻿function initPreview(id) {
+function initPreview(id) {
     startLoad();
     $.ajax({
         url: contextPath + "/seAreaTask/selectSeAreaTaskByPrimaryKey",

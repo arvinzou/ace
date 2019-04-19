@@ -9,7 +9,7 @@ public class SeAreaTask extends BaseModel {
 
     private String areaNodeID;
 
-    private String taskNo;
+    private int taskNo;
 
     private String taskName;
 
@@ -35,12 +35,12 @@ public class SeAreaTask extends BaseModel {
         this.areaNodeID = areaNodeID == null ? null : areaNodeID.trim();
     }
 
-    public String getTaskNo() {
+    public int getTaskNo() {
         return taskNo;
     }
 
-    public void setTaskNo(String taskNo) {
-        this.taskNo = taskNo == null ? null : taskNo.trim();
+    public void setTaskNo(int taskNo) {
+        this.taskNo = taskNo;
     }
 
     public String getTaskName() {

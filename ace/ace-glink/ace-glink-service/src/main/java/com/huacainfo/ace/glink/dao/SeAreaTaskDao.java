@@ -28,4 +28,5 @@ public interface SeAreaTaskDao {
 
     int isExist(SeAreaTask record);
 
+    int allClear();
 }

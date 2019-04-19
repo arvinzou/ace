@@ -80,4 +80,12 @@ public interface SeAreaTaskService {
      * @version: 2019-04-18
      */
     MessageResponse deleteSeAreaTaskBySeAreaTaskId(String id, UserProp userProp) throws Exception;
+
+    /**
+     * 同步区域任务数据
+     *
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse syncData(UserProp curUserProp);
 }

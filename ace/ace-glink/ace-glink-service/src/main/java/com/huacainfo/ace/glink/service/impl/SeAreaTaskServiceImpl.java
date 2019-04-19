@@ -1,15 +1,16 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.api.pojo.fe.AreaTaskOut;
 import com.huacainfo.ace.glink.dao.SeAreaTaskDao;
 import com.huacainfo.ace.glink.model.SeAreaTask;
 import com.huacainfo.ace.glink.service.SeAreaTaskService;
@@ -21,10 +22,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service("seAreaTaskService")
 /**
@@ -97,13 +97,6 @@ public class SeAreaTaskServiceImpl implements SeAreaTaskService {
         if (CommonUtils.isBlank(o.getStatus())) {
             return new MessageResponse(1, "状态不能为空！");
         }
-
-
-        int temp = this.seAreaTaskDao.isExist(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "区域任务数据名称重复！");
-        }
-
 
         o.setCreateDate(new Date());
         o.setStatus("1");
@@ -186,6 +179,53 @@ public class SeAreaTaskServiceImpl implements SeAreaTaskService {
         this.dataBaseLogService.log("删除区域任务数据", "区域任务数据", id, id,
                 "区域任务数据", userProp);
         return new MessageResponse(0, "删除成功！");
+    }
+
+    /**
+     * 同步区域任务数据
+     *
+     * @param userProp 操作人
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse syncData(UserProp userProp) {
+        //0-接口请求
+        AreaTaskOut out = getTestAreaTask();// SeApiToolKit.getAreaTaskInfo();
+        //1-清空库存
+        this.seAreaTaskDao.allClear();
+        //2-放入库存
+        SeAreaTask task;
+        for (AreaTaskOut.TaskData item : out.getTaskData()) {
+            task = new SeAreaTask();
+            task.setId(GUIDUtil.getGUID());
+            task.setRemark("");
+            task.setStatus("1");
+            task.setCreateDate(DateUtil.getNowDate());
+            //
+            task.setAreaNodeID(item.getAreaNodeID());
+            task.setTaskNo(item.getTaskNo());
+            task.setTaskName(item.getTaskName());
+            this.seAreaTaskDao.insert(task);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "同步成功");
+    }
+
+    private AreaTaskOut getTestAreaTask() {
+        List<AreaTaskOut.TaskData> list = new ArrayList<>();
+        AreaTaskOut.TaskData item;
+        int index;
+        for (int i = 0; i < 6; i++) {
+            index = i + 1;
+            item = new AreaTaskOut.TaskData();
+            item.setAreaNodeID("0-" + i); //区域编号
+            item.setTaskNo(i + 1);//任务编号
+            item.setTaskName("任务" + index);//任务名称
+            list.add(item);
+        }
+
+        return new AreaTaskOut(6, list);
     }
 
 }
