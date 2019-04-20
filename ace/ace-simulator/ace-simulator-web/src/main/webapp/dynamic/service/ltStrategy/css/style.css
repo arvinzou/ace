@@ -1,0 +1,245 @@
+#modal-seting .tab {
+    margin: 18px 0;
+}
+
+#modal-seting .title {
+    font-size: 16px;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: rgba(54, 65, 80, 1);
+    margin: 0;
+}
+
+#modal-seting .tab .changeBtn {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+#modal-seting .tab .changeBtn .models{
+    cursor: pointer;
+    position:relative;
+}
+
+#modal-seting .tab .changeBtn .models::after{
+    content: "\2714";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgba(97, 97, 97, 0.44);
+    top:100%;
+    line-height: 160px;
+    color: #ffffff;
+    font-size: 103px;
+    transition: top 0.3s ease;
+}
+#modal-seting .tab .changeBtn >input{
+    display: none;
+}
+
+#modal-seting .tab .changeBtn >input:checked+.models::after{
+    top:0%;
+}
+
+#modal-seting .tab .changeBtn .models:hover{
+    box-shadow: 0px 0px 12px 0px #2b2b2b9c;
+}
+
+#modal-seting .tab .changeBtn .model_2 {
+    background: rgba(78, 185, 173, 1);
+}
+
+#modal-seting .tab .changeBtn .model_3 {
+    background: rgba(8, 172, 196, 1);
+}
+
+#modal-seting .tab .changeBtn .model_1 {
+    background: rgba(91, 142, 210, 1);
+}
+
+#modal-seting .tab .changeBtn .a {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50% !important;
+    margin: auto;
+}
+
+#modal-seting .tab .changeBtn .b {
+    font-size: 16px;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    margin: 12px 0 4px 0;
+}
+
+#modal-seting .tab .changeBtn .models {
+    display: block;
+    width: 220px;
+    height: 160px;
+    text-align: center;
+    padding: 28px 0;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+#modal-seting .tab .changeBtn .models p {
+    margin: 0px;
+    color: rgba(255, 255, 255, 1);
+}
+
+#modal-seting .modal-body {
+    padding: 20px;
+}
+
+#modal-seting .tab_leb{
+
+}
+
+#modal-seting .tab_leb .c{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+}
+
+#modal-seting .tab_leb .c .d{
+    width: 100%;
+    margin-top: 20px;
+}
+#modal-seting .tab_leb label{
+    font-size:16px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(54,65,80,1);
+}
+
+#modal-seting .tab_leb .lists{
+    margin-top: 10px;
+}
+
+#modal-seting .tab_leb .lists ul{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#modal-seting .tab_leb .lists ul li{
+    width:68px;
+    height:30px;
+    margin: 0 20px 20px 0;
+
+}
+
+
+#modal-seting .tab_leb .lists ul li label{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size:14px;
+    font-weight:400;
+    color:rgba(43,54,67,1);
+    line-height:30px;
+    background:rgba(249,251,253,1);
+    text-align: center;
+    border-radius:2px !important;
+    cursor: pointer;
+}
+
+#modal-seting .tab_leb .lists input{
+    display: none;
+}
+
+#modal-seting .tab_leb .lists input:checked + label{
+    background:rgba(24,144,255,1);
+    color:rgba(255,255,255,1);
+}
+
+#modal-seting .tab_leb .dateTime{
+    display: flex;
+}
+
+#modal-seting .tab_leb .e .inputGro{
+    display: flex;
+    width:240px;
+    height:48px;
+    border:1px solid rgba(235,237,242,1);
+    border-radius:5px;
+    margin-right: 40px;
+}
+
+.a-radio{
+    display: none;
+}
+.b-radio{
+    display: inline-block;
+    width:18px;
+    height:18px;
+    border:2px solid rgba(24,144,255,1);
+    border-radius:50% !important;
+    vertical-align: sub;
+    margin-right: 10px;
+    position: relative;
+}
+.b-radio:before{
+    content: '';
+    font-size: 0;
+    width:10px;
+    height:10px;
+    background:rgba(24,144,255,1);
+    border-radius:50% !important;
+    position: absolute;
+    left:50%;
+    top:50%;
+    margin-left: -5px;
+    margin-top: -5px;
+    border-radius: 2px;
+    display: none;
+}
+.a-radio:checked~.b-radio:before{
+    display: block;
+}
+
+.objectType{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.objectType li{
+    width:auto;
+    height: auto;
+    display: inline-block;
+}
+
+.objectType li input{
+    display: none;
+}
+
+.objectType li label{
+    display: inline-block;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+    background: #eee;
+    color: #111;
+    cursor: pointer;
+}
+
+
+.objectType li input:checked+ label{
+    background: #1890ff;
+    color: #fff;
+}
+
+.combo {
+    width: 100% !important;
+    height: 34px !important;
+}
+.combo .combo-text{
+    width: calc(100% - 18px) !important;
+}

@@ -1,0 +1,41 @@
+#modal-preview .nodelist ul,#modal-preview .stationlist ul{
+    list-style: none;
+    padding: 0;
+}
+
+#modal-preview .nodelist ul::after,#modal-preview .stationlist ul::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+#modal-preview .nodelist .node,#modal-preview .stationlist .station {
+    height: 30px;
+    border-radius: 2px !important;
+    line-height: 30px;
+    display: block;
+    width: auto;
+    float: left;
+    margin: 10px;
+    overflow: hidden;
+}
+
+
+#modal-preview .nodelist .node label,#modal-preview .stationlist .station label{
+    padding: 0 30px;
+    height: 30px;
+    background:rgba(249,251,253,1);
+    border-radius: 2px !important;
+    line-height: 30px;
+    display: block;
+    width: auto;
+    font-size:14px;
+    font-weight:400;
+    color:rgba(43,54,67,1);
+    cursor: pointer;
+}
+
+#modal-preview .nodelist .node input:checked+label,#modal-preview .stationlist .station input:checked+label{
+    background:rgba(24,144,255,1);
+    color:rgba(255,255,255,1);
+}
