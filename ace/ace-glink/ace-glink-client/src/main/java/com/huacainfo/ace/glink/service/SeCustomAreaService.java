@@ -47,7 +47,7 @@ public interface SeCustomAreaService {
      * @author: heshuang
      * @version: 2019-04-18
      */
-    MessageResponse insertSeCustomArea(List<SeCustomArea> obj, UserProp userProp) throws Exception;
+    MessageResponse insertSeCustomArea(SeCustomArea obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -188,4 +188,12 @@ public interface SeCustomAreaService {
      * @version: 2019-04-18
      */
     MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
+
+    /**
+     * 同步数据
+     *
+     * @param userProp
+     * @return
+     */
+    MessageResponse syncCustomData(List<SeCustomArea> obj, UserProp userProp);
 }

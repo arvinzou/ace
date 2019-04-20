@@ -54,7 +54,9 @@
   </sql>
     <sql id="Where_Condition">
     where status <![CDATA[ <> ]]> 0
-
+        <if test="condition.areaName !=null and condition.areaName !=&quot;&quot;">
+            and areaName LIKE concat('%',#{condition.areaName,jdbcType=VARCHAR},'%')
+        </if>
   </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">

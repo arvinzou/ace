@@ -1,14 +1,15 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.*;
+import com.huacainfo.ace.glink.api.SeApiToolKit;
+import com.huacainfo.ace.glink.api.pojo.fe.ProjectAreaOut;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.glink.dao.SeProjectAreaDao;
 import com.huacainfo.ace.glink.model.SeProjectArea;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -41,6 +41,8 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
     private DataBaseLogService dataBaseLogService;
 
 
+    private static List<SeProjectArea> list = new ArrayList<>();
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -56,66 +58,17 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
      * @version: 2019-04-18
      */
     @Override
-    public PageResult
-            <SeProjectAreaVo> findSeProjectAreaList(SeProjectAreaQVo condition,
-                                                    int start, int limit, String orderBy) throws Exception {
-        PageResult
-                <SeProjectAreaVo> rst = new PageResult<>();
-        List
-                <SeProjectAreaVo> list = seProjectAreaDao.findList(condition, start, limit, orderBy);
+    public PageResult<SeProjectAreaVo> findSeProjectAreaList(SeProjectAreaQVo condition,
+                                                             int start, int limit, String orderBy) throws Exception {
+        PageResult<SeProjectAreaVo> rst = new PageResult<>();
+
+        List<SeProjectAreaVo> list = seProjectAreaDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.seProjectAreaDao.findCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
-    }
-
-    /**
-     * @throws
-     * @Title:insertSeProjectArea
-     * @Description: TODO(添加区级整体控制)
-     * @param: @param o
-     * @param: @param userProp
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: heshuang
-     * @version: 2019-04-18
-     */
-    @Override
-    public MessageResponse insertSeProjectArea(SeProjectArea o, UserProp userProp) throws Exception {
-        String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
-        o.setId(guid);
-
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getProjectName())) {
-            return new MessageResponse(1, "项目名称不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getAreaName())) {
-            return new MessageResponse(1, "区域名称不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-
-
-        int temp = this.seProjectAreaDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "项目区域数据名称重复！");
-        }
-
-
-        o.setCreateDate(new Date());
-        o.setStatus("1");
-        // o.setCreateUserName(userProp.getName());
-        //  o.setCreateUserId(userProp.getUserId());
-        this.seProjectAreaDao.insert(o);
-        this.dataBaseLogService.log("添加项目区域数据", "项目区域数据", "",
-                o.getId(), o.getId(), userProp);
-
-        return new MessageResponse(0, "保存成功！");
     }
 
     /**
@@ -157,21 +110,38 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
 
     /**
      * @throws
-     * @Title:selectSeProjectAreaByPrimaryKey
-     * @Description: TODO(获取区级整体控制)
-     * @param: @param id
+     * @Title:insertSeProjectArea
+     * @Description: TODO(添加区级整体控制)
+     * @param: @param o
+     * @param: @param userProp
      * @param: @throws Exception
-     * @return: SingleResult<SeProjectArea>
+     * @return: MessageResponse
      * @author: heshuang
      * @version: 2019-04-18
      */
     @Override
-    public SingleResult
-            <SeProjectAreaVo> selectSeProjectAreaByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <SeProjectAreaVo> rst = new SingleResult<>();
-        rst.setValue(this.seProjectAreaDao.selectVoByPrimaryKey(id));
-        return rst;
+    public MessageResponse insertSeProjectArea(SeProjectArea o, UserProp userProp) throws Exception {
+
+
+        String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
+        o.setId(guid);
+        if (CommonUtils.isBlank(o.getProjectName())) {
+            return new MessageResponse(1, "项目名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getAreaName())) {
+            return new MessageResponse(1, "区域名称不能为空！");
+        }
+        int temp = this.seProjectAreaDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "项目区域数据名称重复！");
+        }
+        o.setCreateDate(new Date());
+        o.setStatus("1");
+        this.seProjectAreaDao.insert(o);
+        this.dataBaseLogService.log("添加项目区域数据", "项目区域数据", "",
+                o.getId(), o.getId(), userProp);
+
+        return new MessageResponse(0, "保存成功！");
     }
 
     /**
@@ -384,4 +354,211 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
         return new MessageResponse(0, "成功！");
     }
 
+    /**
+     * @throws
+     * @Title:selectSeProjectAreaByPrimaryKey
+     * @Description: TODO(获取区级整体控制)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<SeProjectArea>
+     * @author: heshuang
+     * @version: 2019-04-18
+     */
+    @Override
+    public SingleResult<SeProjectAreaVo> selectSeProjectAreaByPrimaryKey(String id) throws Exception {
+        SingleResult<SeProjectAreaVo> rst = new SingleResult<>();
+        rst.setValue(this.seProjectAreaDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+
+    /**
+     * 区域树
+     *
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<Tree> selectTreeList() throws Exception {
+        CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
+                this.seProjectAreaDao.selectTreeList());
+        return commonTreeUtils.getTreeList("0");
+    }
+
+    @Override
+    public MessageResponse syncProjectData(UserProp userProp) {
+        ProjectAreaOut o = test();//SeApiToolKit.getAreaProjectInfo();
+        //seProjectAreaDao.allClear();
+        String pid = GUIDUtil.getGUID();
+
+        SeProjectArea r = new SeProjectArea();
+        //第一条
+        r.setId(pid);
+        r.setStatus("1");
+        r.setCreateDate(DateUtil.getNowDate());
+        r.setPid("0");
+        r.setProjectName(o.getProjectName());
+        r.setAreaName(o.getProjectName());
+        r.setAreaNodeCount(o.getAreaNodeCount());
+        r.setAreaNodeID(o.getAreaNodeID());
+        r.setAreaType(o.getAreaType());
+        list.add(r);
+
+        areaList(pid, o.getProjectName(), o);
+
+        for (SeProjectArea record : list) {
+
+            this.seProjectAreaDao.insert(record);
+        }
+
+
+        return new MessageResponse(ResultCode.SUCCESS, "同步成功");
+    }
+
+    private void areaList(String pid, String projectName, ProjectAreaOut obj) {
+        SeProjectArea record;
+
+        if (obj.getAreaType() != 1) {
+            List<ProjectAreaOut> outList = JsonUtil.toList(obj.getAreaNode(), ProjectAreaOut.class);
+            for (ProjectAreaOut item : outList) {
+                String newPid = GUIDUtil.getGUID();
+                record = newObject(newPid, pid, projectName, item);
+                if (item.getAreaType() == 1) {
+                    list.add(record);
+                    continue;
+                } else {
+                    list.add(record);
+                    areaList(newPid, projectName, item);
+                }
+            }
+        }
+
+    }
+
+    private SeProjectArea newObject(String id, String pid, String projectName, ProjectAreaOut in) {
+        SeProjectArea r = new SeProjectArea();
+        r.setId(id);
+        r.setStatus("1");
+        r.setCreateDate(DateUtil.getNowDate());
+        //
+        r.setPid(pid);
+        r.setProjectName(projectName);
+        //
+        r.setAreaName(in.getAreaName());
+        r.setAreaNodeCount(in.getAreaNodeCount());
+        r.setAreaNodeID(in.getAreaNodeID());
+        r.setAreaType(in.getAreaType());
+
+        return r;
+    }
+
+
+    public ProjectAreaOut test() {
+        String jsons = "{\n" +
+                "    \"ProjectName\": \"温州瓯江两岸核心亮化夜游项目\",\n" +
+                "    \"AreaNodeCount\": 2,\n" +
+                "    \"AreaNodeID\": \"0\",\n" +
+                "    \"AreaType\": 0,\n" +
+                "    \"AreaNode\": [\n" +
+                "        {\n" +
+                "            \"AreaName\": \"永嘉山体\",\n" +
+                "            \"AreaNodeCount\": 2,\n" +
+                "            \"AreaNodeID\": \"0-0\",\n" +
+                "            \"AreaType\": 0,\n" +
+                "            \"AreaNode\": [\n" +
+                "                {\n" +
+                "                    \"AreaName\": \"A1山体总箱\",\n" +
+                "                    \"AreaNodeCount\": 2,\n" +
+                "                    \"AreaNodeID\": \"0-0-0\",\n" +
+                "                    \"AreaType\": 0,\n" +
+                "                    \"AreaNode\": [\n" +
+                "                        {\n" +
+                "                            \"AreaName\": \"A1-AL1\",\n" +
+                "                            \"AreaNodeCount\": 0,\n" +
+                "                            \"AreaNodeID\": \"0-0-0-0\",\n" +
+                "                            \"AreaType\": 1\n" +
+                "                        },\n" +
+                "                        {\n" +
+                "                            \"AreaName\": \"A1-AL2\",\n" +
+                "                            \"AreaNodeCount\": 0,\n" +
+                "                            \"AreaNodeID\": \"0-0-0-1\",\n" +
+                "                            \"AreaType\": 1\n" +
+                "                        }\n" +
+                "                    ]\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"AreaName\": \"A2山体总箱\",\n" +
+                "                    \"AreaNodeCount\": 2,\n" +
+                "                    \"AreaNodeID\": \"0-0-1\",\n" +
+                "                    \"AreaType\": 0,\n" +
+                "                    \"AreaNode\": [\n" +
+                "                        {\n" +
+                "                            \"AreaName\": \"A2-AL1\",\n" +
+                "                            \"AreaNodeCount\": 0,\n" +
+                "                            \"AreaNodeID\": \"0-0-1-0\",\n" +
+                "                            \"AreaType\": 1\n" +
+                "                        },\n" +
+                "                        {\n" +
+                "                            \"AreaName\": \"A2-AL2\",\n" +
+                "                            \"AreaNodeCount\": 0,\n" +
+                "                            \"AreaNodeID\": \"0-0-1-1\",\n" +
+                "                            \"AreaType\": 1\n" +
+                "                        }\n" +
+                "                    ]\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"AreaName\": \"瓯江两岸\",\n" +
+                "            \"AreaNodeCount\": 2,\n" +
+                "            \"AreaNodeID\": \"0-1\",\n" +
+                "            \"AreaType\": 0,\n" +
+                "            \"AreaNode\": [\n" +
+                "                {\n" +
+                "                    \"AreaName\": \"瓯北建筑\",\n" +
+                "                    \"AreaNodeCount\": 2,\n" +
+                "                    \"AreaNodeID\": \"0-1-0\",\n" +
+                "                    \"AreaType\": 0,\n" +
+                "                    \"AreaNode\": [\n" +
+                "                        {\n" +
+                "                            \"AreaName\": \"金色海岸小区No1\",\n" +
+                "                            \"AreaNodeCount\": 0,\n" +
+                "                            \"AreaNodeID\": \"0-1-0-0\",\n" +
+                "                            \"AreaType\": 1\n" +
+                "                        },\n" +
+                "                        {\n" +
+                "                            \"AreaName\": \"金色海岸小区No2\",\n" +
+                "                            \"AreaNodeCount\": 0,\n" +
+                "                            \"AreaNodeID\": \"0-1-0-1\",\n" +
+                "                            \"AreaType\": 1\n" +
+                "                        }\n" +
+                "                    ]\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"AreaName\": \"欧南建筑\",\n" +
+                "                    \"AreaNodeCount\": 2,\n" +
+                "                    \"AreaNodeID\": \"0-1-1\",\n" +
+                "                    \"AreaType\": 0,\n" +
+                "                    \"AreaNode\": [\n" +
+                "                        {\n" +
+                "                            \"AreaName\": \"时代海景1\",\n" +
+                "                            \"AreaNodeCount\": 0,\n" +
+                "                            \"AreaNodeID\": \"0-1-1-0\",\n" +
+                "                            \"AreaType\": 1\n" +
+                "                        },\n" +
+                "                        {\n" +
+                "                            \"AreaName\": \"时代海景2\",\n" +
+                "                            \"AreaNodeCount\": 0,\n" +
+                "                            \"AreaNodeID\": \"0-1-1-1\",\n" +
+                "                            \"AreaType\": 1\n" +
+                "                        }\n" +
+                "                    ]\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}";
+        ProjectAreaOut o = JsonUtil.toObject(jsons, ProjectAreaOut.class);
+
+        return o;
+    }
 }

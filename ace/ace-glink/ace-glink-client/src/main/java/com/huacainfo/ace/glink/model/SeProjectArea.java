@@ -13,11 +13,11 @@ public class SeProjectArea extends BaseModel {
 
     private String areaName;
 
-    private String areaNodeCount;
+    private int areaNodeCount;
 
     private String areaNodeID;
 
-    private String areaType;
+    private int areaType;
 
     private String remark;
 
@@ -57,12 +57,12 @@ public class SeProjectArea extends BaseModel {
         this.areaName = areaName == null ? null : areaName.trim();
     }
 
-    public String getAreaNodeCount() {
+    public int getAreaNodeCount() {
         return areaNodeCount;
     }
 
-    public void setAreaNodeCount(String areaNodeCount) {
-        this.areaNodeCount = areaNodeCount == null ? null : areaNodeCount.trim();
+    public void setAreaNodeCount(int areaNodeCount) {
+        this.areaNodeCount = areaNodeCount;
     }
 
     public String getAreaNodeID() {
@@ -73,12 +73,12 @@ public class SeProjectArea extends BaseModel {
         this.areaNodeID = areaNodeID == null ? null : areaNodeID.trim();
     }
 
-    public String getAreaType() {
+    public int getAreaType() {
         return areaType;
     }
 
-    public void setAreaType(String areaType) {
-        this.areaType = areaType == null ? null : areaType.trim();
+    public void setAreaType(int areaType) {
+        this.areaType = areaType;
     }
 
     public String getRemark() {

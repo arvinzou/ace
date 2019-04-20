@@ -6,9 +6,9 @@
         <result column="pid" jdbcType="VARCHAR" property="pid"/>
         <result column="projectName" jdbcType="VARCHAR" property="projectName"/>
         <result column="areaName" jdbcType="VARCHAR" property="areaName"/>
-        <result column="areaNodeCount" jdbcType="VARCHAR" property="areaNodeCount"/>
+        <result column="areaNodeCount" jdbcType="INTEGER" property="areaNodeCount"/>
         <result column="areaNodeID" jdbcType="VARCHAR" property="areaNodeID"/>
-        <result column="areaType" jdbcType="CHAR" property="areaType"/>
+        <result column="areaType" jdbcType="INTEGER" property="areaType"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
@@ -33,8 +33,8 @@
       areaType, remark, status, 
       createDate)
     values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, 
-      #{areaName,jdbcType=VARCHAR}, #{areaNodeCount,jdbcType=VARCHAR}, #{areaNodeID,jdbcType=VARCHAR}, 
-      #{areaType,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{areaName,jdbcType=VARCHAR}, #{areaNodeCount,jdbcType=INTEGER}, #{areaNodeID,jdbcType=VARCHAR},
+      #{areaType,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
 
@@ -43,9 +43,9 @@
     set pid = #{pid,jdbcType=VARCHAR},
       projectName = #{projectName,jdbcType=VARCHAR},
       areaName = #{areaName,jdbcType=VARCHAR},
-      areaNodeCount = #{areaNodeCount,jdbcType=VARCHAR},
+      areaNodeCount = #{areaNodeCount,jdbcType=INTEGER},
       areaNodeID = #{areaNodeID,jdbcType=VARCHAR},
-      areaType = #{areaType,jdbcType=CHAR},
+      areaType = #{areaType,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP}
@@ -64,7 +64,14 @@
     <sql id="Where_Condition">
     where status <![CDATA[ <> ]]> 0
 
-  </sql>
+        <if test="condition.pid !=null and condition.pid !=&quot;&quot;">
+            and pid = #{condition.pid,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.areaName !=null and condition.areaName !=&quot;&quot;">
+            and areaName LIKE concat('%',#{condition.areaName,jdbcType=VARCHAR},'%')
+        </if>
+
+    </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
@@ -86,6 +93,36 @@
         SELECT COUNT(*)
         <include refid="From_Statement"/>
         <include refid="Where_Condition"/>
+    </select>
+
+    <select id="selectTreeList" resultType="map">
+		SELECT
+		t.id ID,
+		t.projectName,
+        t.areaNodeID,
+		t.pid PID,
+		t.areaName TEXT,
+		'' SRC,
+		'' HREF,
+		(SELECT
+		COUNT(*)
+		FROM
+		se_project_area
+		WHERE
+		se_project_area.pid = t.pid) CHILD_COUNT
+		FROM
+		se_project_area t
+		ORDER BY t.id
+	</select>
+    <update id="allClear">
+
+        truncate table se_project_area;
+    </update>
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_project_area
+        where id = #{id,jdbcType=VARCHAR}
     </select>
 
 </mapper>

@@ -51,4 +51,7 @@ public interface SeProjectAreaDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    List<Map<String, Object>> selectTreeList();
+
+    int allClear();
 }

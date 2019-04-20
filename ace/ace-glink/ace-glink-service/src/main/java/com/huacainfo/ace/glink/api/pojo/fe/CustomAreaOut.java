@@ -16,6 +16,14 @@ public class CustomAreaOut extends BaseModel {
 
     private List<AreaData> AreaData;    //逻辑区数据集合
 
+    public CustomAreaOut(int areaCount, List<CustomAreaOut.AreaData> areaData) {
+        AreaCount = areaCount;
+        AreaData = areaData;
+    }
+
+    public CustomAreaOut() {
+        super();
+    }
     public int getAreaCount() {
         return AreaCount;
     }

@@ -30,25 +30,17 @@
         <div class="row custom-toolbar">
             <div class="col-md-3">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+                <a href="javascript:syncData();" class="btn green">同步数据</a>
             </div>
 
             <div class="col-md-9">
 
                 <form id="fm-search">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
+
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
+
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
@@ -57,9 +49,9 @@
                     </div>
                     <div class="input-group">
                         <input type="text"
-                               name="keyword"
+                               name="timerName"
                                class="form-control"
-                               placeholder="请输入直播名称">
+                               placeholder="请输入任务名称">
                         <span class="input-group-btn">
                                                                         <button class="btn  btn-default search_btn"
                                                                                 type="submit">
@@ -86,7 +78,7 @@
                     <th width="10%"> 备注</th>
                     <th width="10%"> 状态</th>
                     <th width="10%"> 创建日期</th>
-                    <th width="15%">操作</th>
+                    <%-- <th width="15%">操作</th>--%>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -121,24 +113,24 @@
         <td> \${item.remark}</td>
         <td> \${item.status}</td>
         <td> \${item.createDate}</td>
-        <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">待审</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
-        </td>
-        <td>
+        <%-- <td>
+             {@if item.status==0}
+             <span class="label label-lg label-danger">删除</span>
+             {@else if item.status==1}
+             <span class="label label-lg label-info">暂存</span>
+             {@else if item.status==2}
+             <span class="label label-lg label-warning">待审</span>
+             {@else if item.status==3}
+             <span class="label label-lg label-info">通过</span>
+             <div style="padding-top:10px">\${item.auditRemark}</div>
+             {@else if item.status==4}
+             <span class="label label-lg label-info">驳回</span>
+             <div style="padding-top:10px">\${item.auditRemark}</div>
+             {@else}
+             <span class="label label-lg label-danger">暂存</span>
+             {@/if}
+         </td>--%>
+        <%--<td>
             ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-status">设置状态</a>
@@ -150,7 +142,7 @@
 
             <a href="javascript:del('\${item.id}');">删除</a>
 
-        </td>
+        </td>--%>
     </tr>
     {@/each}
 </script>

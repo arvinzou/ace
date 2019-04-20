@@ -14,6 +14,14 @@ public class TimerDataOut extends BaseModel {
     private int TimerCount;//定时任务数量
     private List<TimerData> TimerData;//定时任务数据集合
 
+    public TimerDataOut() {
+        super();
+    }
+
+    public TimerDataOut(int timerCount, List<TimerData> nimerData) {
+        TimerCount = timerCount;
+        TimerData = nimerData;
+    }
     public int getTimerCount() {
         return TimerCount;
     }
@@ -42,6 +50,24 @@ public class TimerDataOut extends BaseModel {
         private MonthEnable MonthEnable;//月份数据集合
         private DayEnable DayEnable;//日期数据集合
         private WeekEnable WeekEnable;//星期数据集合
+
+        public TimerData() {
+            super();
+        }
+
+        public TimerData(int timerID, String timerName, int timerEnable, String startTime, int taskNo, TimerDataOut.MonthEnable monthEnable, TimerDataOut.DayEnable dayEnable, TimerDataOut.WeekEnable weekEnable) {
+            super();
+            TimerID = timerID;
+            TimerName = timerName;
+            TimerEnable = timerEnable;
+            StartTime = startTime;
+            TaskNo = taskNo;
+            MonthEnable = monthEnable;
+            DayEnable = dayEnable;
+            WeekEnable = weekEnable;
+        }
+
+
 
         public int getTimerID() {
             return TimerID;
@@ -109,6 +135,7 @@ public class TimerDataOut extends BaseModel {
     }
 
     public static class MonthEnable extends BaseModel {
+
         private int M1;//是否有效，1-有效；0-无效 ;
         private int M2;//同上
         private int M3;
@@ -121,6 +148,25 @@ public class TimerDataOut extends BaseModel {
         private int M10;
         private int M11;
         private int M12;
+
+        public MonthEnable(int m1, int m2, int m3, int m4, int m5, int m6, int m7, int m8, int m9, int m10, int m11, int m12) {
+            M1 = m1;
+            M2 = m2;
+            M3 = m3;
+            M4 = m4;
+            M5 = m5;
+            M6 = m6;
+            M7 = m7;
+            M8 = m8;
+            M9 = m9;
+            M10 = m10;
+            M11 = m11;
+            M12 = m12;
+        }
+
+        public MonthEnable() {
+            super();
+        }
 
         public int getM1() {
             return M1;
@@ -251,6 +297,44 @@ public class TimerDataOut extends BaseModel {
         private int D29;
         private int D30;
         private int D31;
+
+        public DayEnable() {
+            super();
+        }
+
+        public DayEnable(int d1, int d2, int d3, int d4, int d5, int d6, int d7, int d8, int d9, int d10, int d11, int d12, int d13, int d14, int d15, int d16, int d17, int d18, int d19, int d20, int d21, int d22, int d23, int d24, int d25, int d26, int d27, int d28, int d29, int d30, int d31) {
+            D1 = d1;
+            D2 = d2;
+            D3 = d3;
+            D4 = d4;
+            D5 = d5;
+            D6 = d6;
+            D7 = d7;
+            D8 = d8;
+            D9 = d9;
+            D10 = d10;
+            D11 = d11;
+            D12 = d12;
+            D13 = d13;
+            D14 = d14;
+            D15 = d15;
+            D16 = d16;
+            D17 = d17;
+            D18 = d18;
+            D19 = d19;
+            D20 = d20;
+            D21 = d21;
+            D22 = d22;
+            D23 = d23;
+            D24 = d24;
+            D25 = d25;
+            D26 = d26;
+            D27 = d27;
+            D28 = d28;
+            D29 = d29;
+            D30 = d30;
+            D31 = d31;
+        }
 
         public int getD1() {
             return D1;
@@ -509,6 +593,20 @@ public class TimerDataOut extends BaseModel {
         private int W5;
         private int W6;
         private int W7;
+
+        public WeekEnable() {
+            super();
+        }
+
+        public WeekEnable(int w1, int w2, int w3, int w4, int w5, int w6, int w7) {
+            W1 = w1;
+            W2 = w2;
+            W3 = w3;
+            W4 = w4;
+            W5 = w5;
+            W6 = w6;
+            W7 = w7;
+        }
 
         public int getW1() {
             return W1;

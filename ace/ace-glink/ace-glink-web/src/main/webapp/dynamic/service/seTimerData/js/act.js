@@ -286,3 +286,24 @@ function initForm(id) {
         }
     });
 }
+
+function syncData() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/seTimerData/syncData",
+        type: "post",
+        async: false,
+        data: {},
+        success: function (rst) {
+            stopLoad();
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                getPageList();
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
