@@ -34,7 +34,7 @@
         }
     </style>
 
-        <div id="container"></div>
+<div id="container"></div>
 
 
 <script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"></script>
