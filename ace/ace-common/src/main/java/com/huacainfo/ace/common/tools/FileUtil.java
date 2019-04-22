@@ -10,14 +10,21 @@ import java.math.BigDecimal;
  * Created by chenxiaoke on 2017/8/17.
  */
 public class FileUtil {
+    public static final String UTF_8 = "UTF-8";
+    public static final String GBK = "GBK";
+
     public static String ReadFile(String Path) {
+        return ReadFile(Path, UTF_8);
+    }
+
+    public static String ReadFile(String Path, String charsetName) {
         BufferedReader reader = null;
         String laststr = "";
         try {
             FileInputStream fileInputStream = new FileInputStream(Path);
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, charsetName);
             reader = new BufferedReader(inputStreamReader);
-            String tempString = null;
+            String tempString;
             while ((tempString = reader.readLine()) != null) {
                 laststr += tempString;
             }
