@@ -114,6 +114,13 @@ public class ClassesServiceImpl implements ClassesService {
         if (CommonUtils.isBlank(o.getEndDate())) {
             return new MessageResponse(1, "结束日期不能为空！");
         }
+        if (CommonUtils.isBlank(o.getHeadmaster())) {
+            o.setHeadmaster("0");
+            o.setStatus("0");
+        }else {
+            o.setStatus("1");
+        }
+
         //外键约束条件限制
         MessageResponse fms = fKeyCheck(o);
         if (fms.getStatus() == 1) {
@@ -132,7 +139,6 @@ public class ClassesServiceImpl implements ClassesService {
 
         o.setId(id);
         o.setCreateDate(new Date());
-        o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.classesDao.insert(o);
@@ -166,12 +172,17 @@ public class ClassesServiceImpl implements ClassesService {
         if (CommonUtils.isBlank(o.getEndDate())) {
             return new MessageResponse(1, "结束日期不能为空！");
         }
+        if (CommonUtils.isBlank(o.getHeadmaster())) {
+            o.setHeadmaster("0");
+            o.setStatus("0");
+        }else {
+            o.setStatus("1");
+        }
         //外键约束条件限制
         MessageResponse fms = fKeyCheck(o);
         if (fms.getStatus() == 1) {
             return fms;
         }
-
         int i = classesDao.headmasterCount(o.getId(), o.getHeadmaster());
         if (i > 0) {
             return new MessageResponse(1, "该班主任已绑定其他班级！");
@@ -180,8 +191,6 @@ public class ClassesServiceImpl implements ClassesService {
         if (temp > 0) {
             return new MessageResponse(1, "班级管理名称重复！");
         }
-
-        o.setStatus("1");
         o.setCreateDate(new Date());
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
