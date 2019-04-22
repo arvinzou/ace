@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.api.SeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.fe.AreaTaskOut;
 import com.huacainfo.ace.glink.dao.SeAreaTaskDao;
 import com.huacainfo.ace.glink.model.SeAreaTask;
@@ -191,7 +192,7 @@ public class SeAreaTaskServiceImpl implements SeAreaTaskService {
     @Override
     public MessageResponse syncData(UserProp userProp) {
         //0-接口请求
-        AreaTaskOut out = getTestAreaTask();// SeApiToolKit.getAreaTaskInfo();
+        AreaTaskOut out = SeApiToolKit.getAreaTaskInfo();//getTestAreaTask();//
         //1-清空库存
         this.seAreaTaskDao.allClear();
         //2-放入库存

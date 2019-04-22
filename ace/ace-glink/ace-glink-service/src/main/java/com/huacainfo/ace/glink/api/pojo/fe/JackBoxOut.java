@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class JackBoxOut extends BaseModel {
 
+    public JackBoxOut() {
+    }
 
     public JackBoxOut(int nodeCount, List<JackBox> nodeGroup) {
         NodeCount = nodeCount;
