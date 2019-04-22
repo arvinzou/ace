@@ -198,7 +198,7 @@
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         c.id, c.name, c.startDate, c.endDate, c.introduce,c.photoUrl, c.fileUrl, c.tid1,
-        c.tid2, c.classroomId, c.headmaster, c.remark,
+        c.tid2, c.classroomId, (CASE WHEN c.headmaster = '0' THEN '' ELSE c.headmaster END ) AS headmaster, c.remark,
         c.status, c.createUserId,
         c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,
         cr.name as crName,

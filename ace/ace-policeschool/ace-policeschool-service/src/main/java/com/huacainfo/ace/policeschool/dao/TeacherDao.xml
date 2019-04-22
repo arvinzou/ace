@@ -98,7 +98,7 @@
         left join policeschool.card_data cd on t.id = cd.userId
     </sql>
     <sql id="Where_Condition">
-        where 1 = 1
+        where t.status <![CDATA[ <> ]]> 0
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
@@ -151,18 +151,19 @@
         t.introduce, t.workUnitName, t.postName
         from teacher t
         where
+        t.status <![CDATA[ <> ]]> 0
         <choose>
             <when test="condition.id!=null and condition.id!=&quot;&quot;">
-                t.id = #{condition.id,jdbcType=VARCHAR}
+                and t.id = #{condition.id,jdbcType=VARCHAR}
             </when>
             <otherwise>
-                t.id NOT in (
+               and( t.id NOT in (
                 SELECT
                 c.headmaster
                 FROM
                 classes c
                 WHERE c.status =1
-                )
+                ))
             </otherwise>
         </choose>
 
