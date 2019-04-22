@@ -12,6 +12,9 @@ import java.util.List;
  */
 public class AreaTaskOut extends BaseModel {
 
+    public AreaTaskOut() {
+    }
+
     public AreaTaskOut(int taskCount, List<AreaTaskOut.TaskData> taskData) {
         TaskCount = taskCount;
         TaskData = taskData;

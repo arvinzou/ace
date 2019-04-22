@@ -1,0 +1,41 @@
+{
+  "NodeMeterCount": 6,
+  "NodeMeterData": [
+    {
+      "NodeID": 1,
+      "MeterID": "000000000001",
+      "MeterValue": "123.56kwh",
+      "UpdateTime": "2018-11-20 12:33:15"
+    },
+    {
+      "NodeID": 2,
+      "MeterID": "000000000002",
+      "MeterValue": "143.56kwh",
+      "UpdateTime": "2018-11-20 12:33:15"
+    },
+    {
+      "NodeID": 3,
+      "MeterID": "000000000003",
+      "MeterValue": "153.56kwh",
+      "UpdateTime": "2018-11-20 12:33:15"
+    },
+    {
+      "NodeID": 4,
+      "MeterID": "000000000004",
+      "MeterValue": "243.56kwh",
+      "UpdateTime": "2018-11-20 12:33:15"
+    },
+    {
+      "NodeID": 5,
+      "MeterID": "000000000005",
+      "MeterValue": "343.56kwh",
+      "UpdateTime": "2018-11-20 12:33:15"
+    },
+    {
+      "NodeID": 6,
+      "MeterID": "000000000006",
+      "MeterValue": "443.56kwh",
+      "UpdateTime": "2018-11-20 12:33:15"
+    }
+  ]
+}

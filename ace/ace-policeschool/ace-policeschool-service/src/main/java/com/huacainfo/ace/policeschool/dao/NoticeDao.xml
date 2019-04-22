@@ -157,7 +157,7 @@
         from notice
         where
         classesId=#{classesId}
-        title=#{title}
+        and title=#{title}
     </select>
 
     <update id="updateStatus">

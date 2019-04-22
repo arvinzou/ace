@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.api.SeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.fe.JackBoxOut;
 import com.huacainfo.ace.glink.api.pojo.fe.MeterBoxOut;
 import com.huacainfo.ace.glink.api.pojo.fe.NodeMonitorDataOut;
@@ -209,7 +210,7 @@ public class SeNodeServiceImpl implements SeNodeService {
     @Override
     public MessageResponse syncData(UserProp userProp) {
         //http请求，获取远程服务器数据
-        JackBoxOut out = testData();//SeApiToolKit.getBaseNodeInfo();
+        JackBoxOut out = SeApiToolKit.getBaseNodeInfo();//testData();//
         //1、清理库中原有数据
         seNodeDao.allClear();
         //2、填充获取的新数据
