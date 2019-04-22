@@ -2,6 +2,7 @@ package com.huacainfo.ace.glink.api;
 
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
 import com.huacainfo.ace.glink.api.pojo.le.*;
 
@@ -18,9 +19,7 @@ import java.util.Map;
  */
 public class LeApiToolKit {
 
-    private static final String domain = "http://116.228.110.86:8092";
-
-    private LeApiToolKit instance;
+    private static final String domain = PropertyUtil.getProperty("le.api.url");//"http://116.228.110.86:8092";
 
     /**
      * 单例模式
@@ -142,8 +141,8 @@ public class LeApiToolKit {
         path.append(domain).append("/wh/limplight/control/stats?");
         path.append("type=").append(type)
                 .append("&num=").append(num);
-        String rstJson = HttpKit.get(path.toString());
 
+        String rstJson = HttpKit.get(path.toString());
         return JsonUtil.toObject(rstJson, StatsOut.class);
     }
 
@@ -206,6 +205,7 @@ public class LeApiToolKit {
 
     /**
      * //    武汉设备故障数量接口
+     * date >= beginDate && date < endDate
      *
      * @param beginDate 开始日期（格式：yyyyMMdd)，不填写默认20190101
      * @param endDate   结束日期（格式：yyyyMMdd)，不填写默认当前日期的前一日
@@ -230,7 +230,7 @@ public class LeApiToolKit {
      *
      * @return data
      */
-    public static String getBulidingCount() {
+    public static String getBuildingCount() {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/GetBulidingCount");
         return HttpKit.get(path.toString());
@@ -241,44 +241,49 @@ public class LeApiToolKit {
      *
      * @return data
      */
-    public static String getLampStatus() {
+    public static LampStatusOut getLampStatus() {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/GetLampStatus");
-        return HttpKit.get(path.toString());
+        String rstJson = HttpKit.get(path.toString());
+
+        return JsonUtil.toObject(rstJson, LampStatusOut.class);
     }
 
     /**
      * 武汉设备故障情况接口
      *
+     * @param date 查询日期: yyyMMdd
      * @return data
      */
-    public static GetBrokenLampDetailOut getBrokenLampDetail() {
+    public static GetBrokenLampDetailOut getBrokenLampDetail(String date) {
         StringBuilder path = new StringBuilder();
-        path.append(domain).append("/wh/limplight/GetBrokenLampDetailOut");
+        path.append(domain).append("/wh/limplight/GetBrokenLampDetail?");
+        path.append("Date=").append(date);
+        //
         String rstJson = HttpKit.get(path.toString());
 
         return JsonUtil.toObject(rstJson, GetBrokenLampDetailOut.class);
     }
 
     /**
-     * 武汉策略信息详情接口(策略列表)
+     * 武汉策略信息详情接口
      *
      * @return data
      */
-    public static GetBrokenLampDetailOut strategysDetail() {
+    public static StrategysDetailOut strategysDetail() {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/StrategysDetail");
         String rstJson = HttpKit.get(path.toString());
 
-        return JsonUtil.toObject(rstJson, GetBrokenLampDetailOut.class);
+        return JsonUtil.toObject(rstJson, StrategysDetailOut.class);
     }
 
     /**
-     * 武汉策略信息详情接口(策略列表)
+     * 武汉建筑物信息详情接口
      *
      * @return data
      */
-    public static GetBulidingDetailOut GetBulidingDetail() {
+    public static GetBulidingDetailOut getBuildingDetail() {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/GetBulidingDetail");
         String rstJson = HttpKit.get(path.toString());

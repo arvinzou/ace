@@ -1,7 +1,10 @@
 package com.huacainfo.ace.glink.service;
 
+import com.huacainfo.ace.common.result.MessageResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 
@@ -16,6 +19,29 @@ import org.springframework.stereotype.Component;
 public class QuartzManager {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private PagePortalService pagePortalService;
+    @Autowired
+    private LeBrokenLampService leBrokenLampService;
+
+    /**
+     * 每隔[5]分钟,调用一次弱电接口：    获取设备总数&故障设备总数
+     */
+    @Scheduled(cron = "0 0/5 * * * ?")
+    public void leAutoGetLampStatus() {
+        MessageResponse ms = pagePortalService.getLampStatus();
+        logger.info(ms.getErrorMessage());
+    }
+
+    /**
+     * 每天凌晨[1]点,调用一次弱电接口：   获取 武汉设备故障情况
+     */
+    @Scheduled(cron = "0 0 1 * * ?")
+    public void leAutoGetBrokenLampDetail() {
+        MessageResponse ms = leBrokenLampService.getBrokenLampDetail();
+        logger.info(ms.getErrorMessage());
+    }
 
 
 }
