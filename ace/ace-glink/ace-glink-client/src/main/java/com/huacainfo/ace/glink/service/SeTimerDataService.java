@@ -190,4 +190,6 @@ public interface SeTimerDataService {
     MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
 
     MessageResponse syncData(UserProp userProp);
+
+    MessageResponse updateTimer(SeTimerData obj, UserProp userProp);
 }
