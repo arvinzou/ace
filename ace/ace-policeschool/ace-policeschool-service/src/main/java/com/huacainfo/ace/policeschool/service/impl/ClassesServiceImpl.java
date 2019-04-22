@@ -114,13 +114,7 @@ public class ClassesServiceImpl implements ClassesService {
         if (CommonUtils.isBlank(o.getEndDate())) {
             return new MessageResponse(1, "结束日期不能为空！");
         }
-        if (CommonUtils.isBlank(o.getHeadmaster())) {
-            o.setHeadmaster("0");
-            o.setStatus("0");
-        }else {
-            o.setStatus("1");
-        }
-
+        o.setStatus("1");
         //外键约束条件限制
         MessageResponse fms = fKeyCheck(o);
         if (fms.getStatus() == 1) {
@@ -131,6 +125,9 @@ public class ClassesServiceImpl implements ClassesService {
         int i = classesDao.headmasterCount(id, o.getHeadmaster());
         if (i > 0) {
             return new MessageResponse(1, "该班主任已绑定其他班级！");
+        }
+        if (CommonUtils.isBlank(o.getHeadmaster())) {
+            o.setHeadmaster("0");
         }
         int temp = this.classesDao.isExit(o);
         if (temp > 0) {
@@ -172,12 +169,7 @@ public class ClassesServiceImpl implements ClassesService {
         if (CommonUtils.isBlank(o.getEndDate())) {
             return new MessageResponse(1, "结束日期不能为空！");
         }
-        if (CommonUtils.isBlank(o.getHeadmaster())) {
-            o.setHeadmaster("0");
-            o.setStatus("0");
-        }else {
-            o.setStatus("1");
-        }
+        o.setStatus("1");
         //外键约束条件限制
         MessageResponse fms = fKeyCheck(o);
         if (fms.getStatus() == 1) {
@@ -186,6 +178,9 @@ public class ClassesServiceImpl implements ClassesService {
         int i = classesDao.headmasterCount(o.getId(), o.getHeadmaster());
         if (i > 0) {
             return new MessageResponse(1, "该班主任已绑定其他班级！");
+        }
+        if (CommonUtils.isBlank(o.getHeadmaster())) {
+            o.setHeadmaster("0");
         }
         int temp = this.classesDao.isExit(o);
         if (temp > 0) {
