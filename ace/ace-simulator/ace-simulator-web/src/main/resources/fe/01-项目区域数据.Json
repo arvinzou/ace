@@ -1,0 +1,104 @@
+{
+  "ProjectName": "温州瓯江两岸核心亮化夜游项目",
+  "AreaNodeCount": 2,
+  "AreaNodeID": "0",
+  "AreaType": 0,
+  "AreaNode": [
+    {
+      "AreaName": "永嘉山体",
+      "AreaNodeCount": 2,
+      "AreaNodeID": "0-0",
+      "AreaType": 0,
+      "AreaNode": [
+        {
+          "AreaName": "A1山体总箱",
+          "AreaNodeCount": 2,
+          "AreaNodeID": "0-0-0",
+          "AreaType": 0,
+          "AreaNode": [
+            {
+              "AreaName": "A1-AL1",
+              "AreaNodeCount": 0,
+              "AreaNodeID": "0-0-0-0",
+              "AreaType": 1
+            },
+            {
+              "AreaName": "A1-AL2",
+              "AreaNodeCount": 0,
+              "AreaNodeID": "0-0-0-1",
+              "AreaType": 1
+            }
+          ]
+        },
+        {
+          "AreaName": "A2山体总箱",
+          "AreaNodeCount": 2,
+          "AreaNodeID": "0-0-1",
+          "AreaType": 0,
+          "AreaNode": [
+            {
+              "AreaName": "A2-AL1",
+              "AreaNodeCount": 0,
+              "AreaNodeID": "0-0-1-0",
+              "AreaType": 1
+            },
+            {
+              "AreaName": "A2-AL2",
+              "AreaNodeCount": 0,
+              "AreaNodeID": "0-0-1-1",
+              "AreaType": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "AreaName": "瓯江两岸",
+      "AreaNodeCount": 2,
+      "AreaNodeID": "0-1",
+      "AreaType": 0,
+      "AreaNode": [
+        {
+          "AreaName": "瓯北建筑",
+          "AreaNodeCount": 2,
+          "AreaNodeID": "0-1-0",
+          "AreaType": 0,
+          "AreaNode": [
+            {
+              "AreaName": "金色海岸小区No1",
+              "AreaNodeCount": 0,
+              "AreaNodeID": "0-1-0-0",
+              "AreaType": 1
+            },
+            {
+              "AreaName": "金色海岸小区No2",
+              "AreaNodeCount": 0,
+              "AreaNodeID": "0-1-0-1",
+              "AreaType": 1
+            }
+          ]
+        },
+        {
+          "AreaName": "欧南建筑",
+          "AreaNodeCount": 2,
+          "AreaNodeID": "0-1-1",
+          "AreaType": 0,
+          "AreaNode": [
+            {
+              "AreaName": "时代海景1",
+              "AreaNodeCount": 0,
+              "AreaNodeID": "0-1-1-0",
+              "AreaType": 1
+            },
+            {
+              "AreaName": "时代海景2",
+              "AreaNodeCount": 0,
+              "AreaNodeID": "0-1-1-1",
+              "AreaType": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

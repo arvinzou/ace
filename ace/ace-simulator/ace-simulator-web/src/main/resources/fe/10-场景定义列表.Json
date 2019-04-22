@@ -1,0 +1,21 @@
+{
+  "PresetCount": 4,
+  "PresetData": [
+    {
+      "PresetNo": 1,
+      "PresetName": "全开模式"
+    },
+    {
+      "PresetNo": 2,
+      "PresetName": "平日模式"
+    },
+    {
+      "PresetNo": 3,
+      "PresetName": "节能模式"
+    },
+    {
+      "PresetNo": 4,
+      "PresetName": "全关模式"
+    }
+  ]
+}

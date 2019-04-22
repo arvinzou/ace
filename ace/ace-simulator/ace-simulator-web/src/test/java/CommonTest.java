@@ -1,6 +1,5 @@
+import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.simulator.api.LeApiToolKit;
-import com.huacainfo.ace.simulator.api.pojo.le.LightStrategyIn;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +23,41 @@ public class CommonTest {
 //        System.out.println(LeApiToolKit.lightBrokenSum("", ""));
 
 
-        System.out.println("aaaaaaaa".hashCode());
+        System.out.println(JSON.parseObject("{\n" +
+                "    \"GateCount\": 6,\n" +
+                "    \"GateData\": [\n" +
+                "        {\n" +
+                "            \"NodeID\": 1,\n" +
+                "            \"Status\": \"1\",\n" +
+                "            \"UpdateTime\": \"2018-11-20 12:33:15\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"NodeID\": 2,\n" +
+                "            \"Status\": \"1\",\n" +
+                "            \"UpdateTime\": \"2018-11-20 12:33:15\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"NodeID\": 3,\n" +
+                "            \"Status\": \"0\",\n" +
+                "            \"UpdateTime\": \"\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"NodeID\": 4,\n" +
+                "            \"Status\": \"1\",\n" +
+                "            \"UpdateTime\": \"2018-11-20 12:33:15\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"NodeID\": 5,\n" +
+                "            \"Status\": \"0\",\n" +
+                "            \"UpdateTime\": \"\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"NodeID\": 6,\n" +
+                "            \"Status\": \"1\",\n" +
+                "            \"UpdateTime\": \"2018-11-20 12:33:15\"\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}"));
 
     }
 
@@ -33,13 +66,6 @@ public class CommonTest {
         for (int i = 0; i < num; i++) {
             System.out.println(GUIDUtil.getGUID());
         }
-    }
-
-    private void lightStrategy() {
-
-        LightStrategyIn p = new LightStrategyIn("01932EF", "1111", "20190107", "20190107",
-                1, "[1,2,3]", 0, "[]");
-        System.out.println(LeApiToolKit.lightStrategy(p));
     }
 
 

@@ -1,0 +1,35 @@
+{
+  "AreaCount": 6,
+  "AreaData": [
+    {
+      "AreaNodeID": "0-0-0-0",
+      "AreaNo": 1,
+      "AreaName": "A区"
+    },
+    {
+      "AreaNodeID": "0-0-0-1",
+      "AreaNo": 2,
+      "AreaName": "B区"
+    },
+    {
+      "AreaNodeID": "0-1-0-0",
+      "AreaNo": 3,
+      "AreaName": "C区"
+    },
+    {
+      "AreaNodeID": "0-1-0-1",
+      "AreaNo": 4,
+      "AreaName": "D区"
+    },
+    {
+      "AreaNodeID": "0-0",
+      "AreaNo": 5,
+      "AreaName": "E区"
+    },
+    {
+      "AreaNodeID": "0-1",
+      "AreaNo": 6,
+      "AreaName": "F区"
+    }
+  ]
+}
