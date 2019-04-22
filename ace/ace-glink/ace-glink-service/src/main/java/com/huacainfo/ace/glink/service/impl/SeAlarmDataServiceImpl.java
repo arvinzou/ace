@@ -78,29 +78,25 @@ public class SeAlarmDataServiceImpl implements SeAlarmDataService {
      * @version: 2019-04-18
      */
     @Override
-    public MessageResponse insertSeAlarmData(List<SeAlarmData> list, UserProp userProp) throws Exception {
-            seAlarmDataDao.allClear();
-        if(list.size()>0){
-            for(int i=0; i<list.size(); i++){
-                SeAlarmData o = list.get(i);
-                String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
-                o.setId(guid);
-                if (CommonUtils.isBlank(o.getAreaNodeID())) {
-                    return new MessageResponse(1, "区域节点编号不能为空！");
-                }
-                if (CommonUtils.isBlank(o.getStatus())) {
-                    return new MessageResponse(1, "状态不能为空！");
-                }
-                int temp = this.seAlarmDataDao.isExit(o);
-                if (temp > 0) {
-                    return new MessageResponse(1, "强电-报警数据名称重复！");
-                }
-                o.setCreateDate(new Date());
-                this.seAlarmDataDao.insert(o);
-                this.dataBaseLogService.log("添加强电-报警数据", "强电-报警数据", "",
-                        o.getId(), o.getId(), userProp);
-            }
+    public MessageResponse insertSeAlarmData(SeAlarmData o, UserProp userProp) throws Exception {
+        seAlarmDataDao.allClear();
+        String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
+        o.setId(guid);
+        o.setStatus("1");
+        if (CommonUtils.isBlank(o.getAreaNodeID())) {
+            return new MessageResponse(1, "区域节点编号不能为空！");
         }
+        if (CommonUtils.isBlank(o.getStatus())) {
+            return new MessageResponse(1, "状态不能为空！");
+        }
+        int temp = this.seAlarmDataDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "强电-报警数据名称重复！");
+        }
+        o.setCreateDate(new Date());
+        this.seAlarmDataDao.insert(o);
+        this.dataBaseLogService.log("添加强电-报警数据", "强电-报警数据", "",
+                o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "保存成功！");
     }
 
@@ -170,7 +166,6 @@ public class SeAlarmDataServiceImpl implements SeAlarmDataService {
                 "强电-报警数据", userProp);
         return new MessageResponse(0, "删除成功！");
     }
-
 
 
     /**

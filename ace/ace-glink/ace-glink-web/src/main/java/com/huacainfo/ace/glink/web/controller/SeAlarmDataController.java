@@ -81,8 +81,8 @@ public class SeAlarmDataController extends GLinkBaseController {
     @ResponseBody
     public MessageResponse insertSeAlarmData(String jsons) throws Exception {
 
-        List<SeAlarmData> list = JSON.parseArray(jsons, SeAlarmData.class);
-        return this.seAlarmDataService.insertSeAlarmData(list, this.getCurUserProp());
+        SeAlarmData vo = JSON.parseObject(jsons, SeAlarmData.class);
+        return this.seAlarmDataService.insertSeAlarmData(vo, this.getCurUserProp());
     }
 
     /**
