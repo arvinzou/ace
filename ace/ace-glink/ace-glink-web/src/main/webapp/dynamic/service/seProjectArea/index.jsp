@@ -9,13 +9,14 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title>区级整体控制</title>
+    <title>区域数据</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
 
     <link rel="stylesheet" href="css/style.css">
+
     <%--sweetalert--%>
     <%--   <script src="${pageContext.request.contextPath}/content/common/js/sweetalert/js/sweet-alert.min.js"></script>
        <link rel="stylesheet" type="text/css"
@@ -30,6 +31,7 @@
         <div class="row custom-toolbar">
             <div class="col-md-3">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+                <a href="javascript:syncProjectData();" class="btn green">同步数据</a>
             </div>
 
             <div class="col-md-9">
@@ -39,18 +41,25 @@
 
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-
+                        <div class="input-group" style="float:left">
+                            区域数据：
+                            <input id="cc1" name="pid" class="easyui-combotree"
+                                   data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
+                lines:true," style='width:200px;line-height: 30px;height: 30px;'>
+                            <a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
+                        </div>
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
                         <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
                         <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
                     </div>
+
                     <div class="input-group">
                         <input type="text"
-                               name="keyword"
+                               name="areaName"
                                class="form-control"
-                               placeholder="请输入直播名称">
+                               placeholder="请输入区域名称">
                         <span class="input-group-btn">
                                                                         <button class="btn  btn-default search_btn"
                                                                                 type="submit">
@@ -62,33 +71,54 @@
             </div>
 
         </div>
+        <div class="easyui-layout" id="cc" style="width:100%;height:400px">
 
+            <div data-options="region:'center',border:false,fit:true" id="easyui-center">
+                <%--  <table id="grid-table"></table>--%>
+                <div class="table-scrollable">
+                    <table class="table table-hover">
 
-        <div class="table-scrollable">
-            <table class="table table-hover">
-                <thead>
-                <tr>
+                        <tr>
+                            <%-- <th width="10%"> 上一级ID</th>--%>
+                            <th width="10%"> 项目名称</th>
+                            <th width="10%"> 区域名称</th>
+                            <th width="10%"> 当前目录子数量</th>
+                            <th width="10%"> 区域编号</th>
+                            <th width="10%"> 区域类型</th>
+                            <th width="10%"> 备注</th>
+                            <th width="10%"> 状态</th>
+                            <th width="10%"> 创建日期</th>
+                            <%-- <th width="10%">操作</th>--%>
+                        </tr>
 
-                    <th width="10%"> 上一级ID</th>
-                    <th width="10%"> 项目名称</th>
-                    <th width="10%"> 区域名称</th>
-                    <th width="10%"> 当前目录子数量</th>
-                    <th width="10%"> 区域编号</th>
-                    <th width="10%"> 区域类型</th>
-                    <th width="10%"> 备注</th>
-                    <th width="10%"> 状态</th>
-                    <th width="10%"> 创建日期</th>
-                    <th width="15%">操作</th>
-                </tr>
-                </thead>
-                <tbody id="page-list">
+                        <tbody id="page-list">
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="paginationbar" style="text-align:left">
+                    <ul class="pagination" id="pagination1" tyle="padding-left:20px"></ul>
+                </div>
+
+            </div>
+            <div id="cc-west" class="easyui-west" data-options="region:'west',split:true" title="我的树"
+                 style="width:200px;">
+                <ul id="tt" class="easyui-tree" data-options="
+               url: '${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',
+                method: 'get',
+                animate: true,
+                lines:false,
+                onClick: function(e){
+                    $(this).tree('select');
+                    autotreeq(e);
+                }
+            "></ul>
+
+            </div>
+
         </div>
-        <div class="paginationbar">
-            <ul class="pagination" id="pagination1"></ul>
-        </div>
+
 
     </div>
 
@@ -103,9 +133,9 @@
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
+
     <tr>
 
-        <td> \${item.pid}</td>
         <td> \${item.projectName}</td>
         <td> \${item.areaName}</td>
         <td> \${item.areaNodeCount}</td>
@@ -114,38 +144,38 @@
         <td> \${item.remark}</td>
         <td> \${item.status}</td>
         <td> \${item.createDate}</td>
-        <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">待审</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
-        </td>
-        <td>
-            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-status">设置状态</a>
-            {@if item.auditStatus==1}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-            {@/if}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-preview">查看</a>
+        <%--
+                <td>
+                    ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
+                    <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+                       data-target="#modal-status">设置状态</a>
+                    {@if item.auditStatus==1}
+                    <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
+                    {@/if}
+                    <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+                       data-target="#modal-preview">查看</a>
 
-            <a href="javascript:del('\${item.id}');">删除</a>
+                    <a href="javascript:del('\${item.id}');">删除</a>
 
-        </td>
+                </td>--%>
     </tr>
     {@/each}
+</script>
+
+<%--列表juicer模板--%>
+<script id="tpl-find" type="text/template">
+
+    <tr>
+        <td> \${data.o.projectName}</td>
+        <td> \${data.o.areaName}</td>
+        <td> \${data.o.areaNodeCount}</td>
+        <td> \${data.o.areaNodeID}</td>
+        <td> \${data.o.areaType}</td>
+        <td> \${data.o.remark}</td>
+        <td> \${data.o.status}</td>
+        <td> \${data.o.createDate}</td>
+    </tr>
+
 </script>
 ﻿
 <div class="modal fade " id="modal-status">
@@ -407,9 +437,22 @@
         color: #FE6500;
     }
 </style>
+
 <jsp:include page="/dynamic/common/footer.jsp"/>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
+
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
+
 </html>

@@ -1,5 +1,6 @@
 package com.huacainfo.ace.glink.web.controller;
 
+import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,6 +85,7 @@ public class SeProjectAreaController extends GLinkBaseController {
     @ResponseBody
     public MessageResponse insertSeProjectArea(String jsons) throws Exception {
         SeProjectArea obj = JSON.parseObject(jsons, SeProjectArea.class);
+        //  List<SeProjectArea> obj=JSON.parseArray(jsons, SeProjectArea.class);
         return this.seProjectAreaService.insertSeProjectArea(obj, this.getCurUserProp());
     }
 
@@ -120,6 +122,7 @@ public class SeProjectAreaController extends GLinkBaseController {
             <SeProjectAreaVo> selectSeProjectAreaByPrimaryKey(String id) throws Exception {
         return this.seProjectAreaService.selectSeProjectAreaByPrimaryKey(id);
     }
+
 
     /**
      * @throws
@@ -275,5 +278,23 @@ public class SeProjectAreaController extends GLinkBaseController {
     @ResponseBody
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.seProjectAreaService.updateStatus(id, status, this.getCurUserProp());
+    }
+
+    @RequestMapping(value = "/selectTreeList")
+    @ResponseBody
+    public List<Tree> selectResourcesTreeList() throws Exception {
+        return this.seProjectAreaService.selectTreeList();
+    }
+
+    /**
+     * 同步数据
+     *
+     * @throws Exception
+     */
+    @RequestMapping(value = "/syncProjectData")
+    @ResponseBody
+    public MessageResponse syncProjectData() throws Exception {
+
+        return this.seProjectAreaService.syncProjectData(this.getCurUserProp());
     }
 }

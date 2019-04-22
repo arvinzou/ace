@@ -29,7 +29,7 @@
             <div class="col-md-3">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
                 <button type="button" class="btn  green" id="btn-view-importXls"
-                        authority="false">Excel导入
+                        authority="false">批量导入
                 </button>
             </div>
             <div class="col-md-3">
@@ -208,7 +208,7 @@
                 <div id="uploader">
                 </div>
                 <div style="margin:5px">
-                    <a href="device.xls" style="color:red">下载模板</a>.<br>
+                    <a href="device-template.xls" style="color:red">下载模板</a>.<br>
                 </div>
             </div>
             <div class="modal-footer">

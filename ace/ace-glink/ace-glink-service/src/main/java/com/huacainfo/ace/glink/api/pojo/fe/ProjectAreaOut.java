@@ -17,6 +17,19 @@ public class ProjectAreaOut extends BaseModel {
     private int AreaType;           //类型 0-目录，1-区域
     private String AreaNode;        //子项集合
 
+    public ProjectAreaOut() {
+        super();
+    }
+
+    public ProjectAreaOut(String projectName, String areaName, int areaNodeCount, String areaNodeID, int areaType, String areaNode) {
+        ProjectName = projectName;
+        AreaName = areaName;
+        AreaNodeCount = areaNodeCount;
+        AreaNodeID = areaNodeID;
+        AreaType = areaType;
+        AreaNode = areaNode;
+    }
+
     public String getAreaName() {
         return AreaName;
     }

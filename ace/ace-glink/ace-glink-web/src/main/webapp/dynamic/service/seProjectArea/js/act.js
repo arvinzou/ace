@@ -35,6 +35,7 @@ function initPage() {
             return false;
         }
     });
+
 }
 
 function setParams(key, value) {
@@ -285,4 +286,59 @@ function initForm(id) {
             alert("对不起出错了！");
         }
     });
+}
+
+function syncProjectData() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/seProjectArea/syncProjectData",
+        type: "post",
+        async: false,
+        data: {},
+        success: function (rst) {
+            stopLoad();
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                getPageList();
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+function clearQparams() {
+    $('#cc1').combotree('setValue', '');
+}
+
+function autotreeq(obj) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/seProjectArea/selectSeProjectAreaByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: obj.id
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                //  render('#fm-audit', data, 'tpl-fm');
+                render("#page-list", data, "tpl-find");
+                $("#pagination1").hide();
+
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+
 }

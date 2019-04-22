@@ -83,9 +83,9 @@ public class SeCustomAreaController extends GLinkBaseController {
     @RequestMapping(value = "/insertSeCustomArea")
     @ResponseBody
     public MessageResponse insertSeCustomArea(String jsons) throws Exception {
-        List<SeCustomArea> obj = JSON.parseArray(jsons, SeCustomArea.class);
+        /*   List<SeCustomArea> obj = JSON.parseArray(jsons, SeCustomArea.class);*/
 
-        //SeCustomArea obj = JSON.parseObject(jsons, SeCustomArea.class);
+        SeCustomArea obj = JSON.parseObject(jsons, SeCustomArea.class);
         return this.seCustomAreaService.insertSeCustomArea(obj, this.getCurUserProp());
     }
 
@@ -277,5 +277,17 @@ public class SeCustomAreaController extends GLinkBaseController {
     @ResponseBody
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.seCustomAreaService.updateStatus(id, status, this.getCurUserProp());
+    }
+
+    /**
+     * 同步数据
+     *
+     * @throws Exception
+     */
+    @RequestMapping(value = "/syncCustomData")
+    @ResponseBody
+    public MessageResponse syncCustomData(String jsons) throws Exception {
+        List<SeCustomArea> obj = JSON.parseArray(jsons, SeCustomArea.class);
+        return this.seCustomAreaService.syncCustomData(obj, this.getCurUserProp());
     }
 }

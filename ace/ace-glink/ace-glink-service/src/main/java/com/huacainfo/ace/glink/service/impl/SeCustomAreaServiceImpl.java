@@ -9,6 +9,9 @@ import java.util.List;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.glink.api.SeApiToolKit;
+import com.huacainfo.ace.glink.api.pojo.fe.CustomAreaOut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,8 +84,8 @@ public class SeCustomAreaServiceImpl implements SeCustomAreaService {
      * @version: 2019-04-18
      */
     @Override
-    public MessageResponse insertSeCustomArea(List<SeCustomArea> list, UserProp userProp) throws Exception {
-        for (SeCustomArea o : list) {
+    public MessageResponse insertSeCustomArea(SeCustomArea o, UserProp userProp) throws Exception {
+
             String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
             o.setId(guid);
             if (CommonUtils.isBlank(o.getAreaName())) {
@@ -97,7 +100,7 @@ public class SeCustomAreaServiceImpl implements SeCustomAreaService {
 
             this.seCustomAreaDao.insert(o);
 
-        }
+
         return new MessageResponse(0, "保存成功！");
     }
 
@@ -358,4 +361,63 @@ public class SeCustomAreaServiceImpl implements SeCustomAreaService {
         return new MessageResponse(0, "成功！");
     }
 
+    @Override
+    public MessageResponse syncCustomData(List<SeCustomArea> list, UserProp userProp) {
+        CustomAreaOut o = test();// SeApiToolKit.getCustomAreaInfo();
+        SeCustomArea area;
+        List<CustomAreaOut.AreaData> itemData = o.getAreaData();
+        int count = o.getAreaCount();
+        for (CustomAreaOut.AreaData item : itemData) {
+            area = new SeCustomArea();
+            area.setId(GUIDUtil.getGUID());
+            area.setAreaName(item.getAreaName());
+            area.setAreaNo(item.getAreaNo());
+            area.setAreaNodeID(item.getAreaNodeID());
+            area.setCreateDate(new Date());
+            area.setStatus("1");
+            area.setRemark("同步逻辑区数据");
+            this.seCustomAreaDao.insert(area);
+        }
+        return new MessageResponse(0, "同步成功！");
+    }
+
+    public CustomAreaOut test() {
+        String jsons = "{\n" +
+                "    \"AreaCount\": 6,\n" +
+                "    \"AreaData\": [\n" +
+                "        {\n" +
+                "            \"AreaNodeID\": \"0-0-0-0\",\n" +
+                "            \"AreaNo\": 1,\n" +
+                "            \"AreaName\": \"A区\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"AreaNodeID\": \"0-0-0-1\",\n" +
+                "            \"AreaNo\": 2,\n" +
+                "            \"AreaName\": \"B区\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"AreaNodeID\": \"0-1-0-0\",\n" +
+                "            \"AreaNo\": 3,\n" +
+                "            \"AreaName\": \"C区\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"AreaNodeID\": \"0-1-0-1\",\n" +
+                "            \"AreaNo\": 4,\n" +
+                "            \"AreaName\": \"D区\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"AreaNodeID\": \"0-0\",\n" +
+                "            \"AreaNo\": 5,\n" +
+                "            \"AreaName\": \"E区\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"AreaNodeID\": \"0-1\",\n" +
+                "            \"AreaNo\": 6,\n" +
+                "            \"AreaName\":\"F区\"\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}";
+        CustomAreaOut o = JsonUtil.toObject(jsons, CustomAreaOut.class);
+        return o;
+    }
 }

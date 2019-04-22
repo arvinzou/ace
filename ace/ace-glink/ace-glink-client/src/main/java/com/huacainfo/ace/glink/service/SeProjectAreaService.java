@@ -1,6 +1,7 @@
 package com.huacainfo.ace.glink.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -47,7 +48,7 @@ public interface SeProjectAreaService {
      * @author: heshuang
      * @version: 2019-04-18
      */
-    MessageResponse insertSeProjectArea(SeProjectArea obj, UserProp userProp) throws Exception;
+    MessageResponse insertSeProjectArea(SeProjectArea o, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -74,6 +75,7 @@ public interface SeProjectAreaService {
      */
     SingleResult
             <SeProjectAreaVo> selectSeProjectAreaByPrimaryKey(String id) throws Exception;
+
 
     /**
      * @throws
@@ -188,4 +190,20 @@ public interface SeProjectAreaService {
      * @version: 2019-04-18
      */
     MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
+
+    /**
+     * 同步数据
+     *
+     * @param userProp
+     * @return
+     */
+    MessageResponse syncProjectData(UserProp userProp);
+
+    /**
+     * 加载树
+     *
+     * @return
+     * @throws Exception
+     */
+    public abstract List<Tree> selectTreeList() throws Exception;
 }

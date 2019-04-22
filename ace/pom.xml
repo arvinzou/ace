@@ -62,18 +62,18 @@
         <module>ace-common-dao</module>
         <module>ace-common-web</module>
         <module>ace-portal</module>
-        <module>ace-jave</module>
+        <!-- <module>ace-jave</module>-->
         <!--<module>ace-jxb</module>-->
         <!--<module>ace-fop</module>-->
 
         <!--<module>ace-live</module>-->
 
-        <!--<module>ace-cu</module>-->
-        <module>ace-partyschool</module>
-        <module>ace-codeGenerator</module>
+        <!--<module>ace-cu</module>
+        <module>ace-partyschool</module>-->
+        <!--<module>ace-codeGenerator</module>-->
         <!--<module>ace-autocode</module>-->
-        <module>ace-society</module>
-        <!--<module>ace-kernel</module>-->
+        <!-- <module>ace-society</module>-->
+         <!--<module>ace-kernel</module>-->
         <!---->
         <!--<module>ace-iop</module>-->
         <!--
@@ -82,8 +82,8 @@
         <!--<module>ace-operana</module>-->
         <!--<module>ace-fundtown</module>-->
         <!--<module>ace-woc</module>-->
-        <module>ace-taa</module>
-        <!---->
+        <!--<module>ace-taa</module>-->
+
        <!--<module>ace-face</module>-->
         <!--<module>ace-jave</module>-->
         <!--<module>ace-uf</module>-->
@@ -94,6 +94,7 @@
         <!--<module>ace-gesp</module>-->
         <!--<module>ace-weui</module>-->
         <!--<module>activiti-root</module>-->
+        <module>ace-simulator</module>
 
     </modules>
     <dependencies>

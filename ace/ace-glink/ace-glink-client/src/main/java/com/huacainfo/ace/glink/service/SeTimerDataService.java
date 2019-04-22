@@ -188,4 +188,6 @@ public interface SeTimerDataService {
      * @version: 2019-04-19
      */
     MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
+
+    MessageResponse syncData(UserProp userProp);
 }

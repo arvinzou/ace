@@ -51,4 +51,5 @@ public interface SeTimerDataDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    int allClear();
 }

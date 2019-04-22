@@ -276,4 +276,16 @@ public class SeTimerDataController extends GLinkBaseController {
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.seTimerDataService.updateStatus(id, status, this.getCurUserProp());
     }
+
+    /**
+     * 同步数据
+     *
+     * @throws Exception
+     */
+    @RequestMapping(value = "/syncData")
+    @ResponseBody
+    public MessageResponse syncData(String jsons) throws Exception {
+
+        return this.seTimerDataService.syncData(this.getCurUserProp());
+    }
 }

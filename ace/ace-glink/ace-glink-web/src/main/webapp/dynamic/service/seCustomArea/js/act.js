@@ -285,3 +285,24 @@ function initForm(id) {
         }
     });
 }
+
+function syncCustomData() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/seCustomArea/syncCustomData",
+        type: "post",
+        async: false,
+        data: {},
+        success: function (rst) {
+            stopLoad();
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                getPageList();
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
