@@ -45,7 +45,7 @@ public interface SeAlarmDataService {
      * @author: luocan
      * @version: 2019-04-18
      */
-    MessageResponse insertSeAlarmData(List<SeAlarmData> list, UserProp userProp) throws Exception;
+    MessageResponse insertSeAlarmData(SeAlarmData vo, UserProp userProp) throws Exception;
 
     /**
      * @throws
