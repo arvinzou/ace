@@ -193,7 +193,13 @@ public class SeAreaTaskServiceImpl implements SeAreaTaskService {
     @Override
     public MessageResponse syncData(UserProp userProp) {
         //0-接口请求
-        AreaTaskOut out = SeApiToolKit.getAreaTaskInfo();//getTestAreaTask();//
+        AreaTaskOut out = null;
+        try {
+            out = SeApiToolKit.getAreaTaskInfo();
+        } catch (Exception e) {
+            logger.error("[SeAreaTaskServiceImpl.syncData]接口获取数据异常=>{}", e);
+            return new MessageResponse(ResultCode.FAIL, "接口获取数据异常");
+        }
         //1-清空库存
         this.seAreaTaskDao.allClear();
         //2-放入库存

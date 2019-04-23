@@ -192,7 +192,13 @@ public class LeBrokenLampServiceImpl implements LeBrokenLampService {
         //获取前一天数据
         Date yesterday = DateUtil.getDateByDay(DateUtil.getNowDate(), -1);
         String date = DateUtil.toStr(yesterday, CommConstant.DATE_REGEX_LE);
-        GetBrokenLampDetailOut rst = LeApiToolKit.getBrokenLampDetail(date);
+        GetBrokenLampDetailOut rst = null;
+        try {
+            rst = LeApiToolKit.getBrokenLampDetail(date);
+        } catch (Exception e) {
+            logger.error("[" + this.getClass().getName() + ".getBrokenLampDetail]接口获取数据异常=>{}", e);
+            return new MessageResponse(ResultCode.FAIL, "接口获取数据异常");
+        }
         if (rst.getCode() == LeBaseOut.SUCCESS) {
             List<GetBrokenLampDetailOut.BrokenLamp> list = rst.getData();
             LeBrokenLamp record;
