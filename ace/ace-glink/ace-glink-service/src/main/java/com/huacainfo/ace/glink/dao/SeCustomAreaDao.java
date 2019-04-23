@@ -50,4 +50,6 @@ public interface SeCustomAreaDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    int allClear();
+
 }

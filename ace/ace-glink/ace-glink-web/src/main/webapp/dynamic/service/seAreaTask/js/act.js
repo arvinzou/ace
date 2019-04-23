@@ -71,6 +71,12 @@ function render(obj, data, tplId) {
 }
 
 function initEvents() {
+    $("#areaNodeID").combotree({
+        onChange: function (newValue, oldValue) {
+            setParams("areaNodeID", newValue);
+        }
+    });
+
 
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);

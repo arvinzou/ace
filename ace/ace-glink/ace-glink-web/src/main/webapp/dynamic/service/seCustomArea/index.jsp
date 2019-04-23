@@ -39,12 +39,16 @@
 
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-
+                        <div class="input-group" style="float:left">
+                            区域数据：
+                            <input id="cc1" name="areaNodeID" class="easyui-combotree"
+                                   data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
+                lines:true, " style='width:200px;line-height: 30px;height: 30px;'>
+                            <a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
+                        </div>
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
+
                     </div>
                     <div class="input-group">
                         <input type="text"
@@ -106,7 +110,13 @@
         <td> \${item.areaName}</td>
         <td> \${item.areaNodeID}</td>
         <td> \${item.remark}</td>
-        <td> \${item.status}</td>
+        <td> {@if item.status==0}
+            <span class="label label-lg label-info">无效</span>
+            {@else if item.status==1}
+            <span class="label label-lg label-info">有效</span>
+            {@else}
+            {@/if}
+        </td>
         <td> \${item.createDate}</td>
         <%-- <td>
              {@if item.status==0}
@@ -366,6 +376,16 @@
     }
 </style>
 <jsp:include page="/dynamic/common/footer.jsp"/>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>

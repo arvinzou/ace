@@ -39,7 +39,7 @@
             <div class="col-md-9">
 
 
-                <label style="float:left;padding-right:5px;line-height: 31px;">站点：</label>
+                <label style="float:left;padding-right:5px;line-height: 31px;">节点：</label>
                 <div class="btn-group" role="group" style="float:left;padding-right:20px;">
                     <select name="nodeCode" id="nodeCode" class="form-control"
                                 onchange="setParams('nodeCode',this.value)">

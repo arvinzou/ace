@@ -9,7 +9,7 @@ window.onload = function () {
 
 /*区级整体控制初始化分页*/
 function initPage() {
-    /*  $.jqPaginator('#pagination1', {
+    $.jqPaginator('#pagination1', {
           totalCounts: 1,
           pageSize: params.limit,
           visiblePages: 10,
@@ -20,10 +20,10 @@ function initPage() {
           onPageChange: function (num, type) {
               params['start'] = (num - 1) * params.limit;
               params['initType'] = type;
-
+              getPageList();
           }
-      });*/
-    getPageList();
+    });
+
     $('#fm-search').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             $.each(formData, function (n, obj) {

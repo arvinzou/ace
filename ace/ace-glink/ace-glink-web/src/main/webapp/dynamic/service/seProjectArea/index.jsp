@@ -30,7 +30,7 @@
 
         <div class="row custom-toolbar">
             <div class="col-md-3">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+
                 <a href="javascript:syncProjectData();" class="btn green">同步数据</a>
             </div>
 
@@ -44,15 +44,13 @@
                         <div class="input-group" style="float:left">
                             区域数据：
                             <input id="cc1" name="pid" class="easyui-combotree"
-                                   data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
+                                   data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=0',method:'get',animate: true,
                 lines:true," style='width:200px;line-height: 30px;height: 30px;'>
                             <a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
                         </div>
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
+
                     </div>
 
                     <div class="input-group">
@@ -84,10 +82,10 @@
                             <th width="10%"> 区域名称</th>
                             <th width="10%"> 当前目录子数量</th>
                             <th width="10%"> 区域编号</th>
-                            <th width="10%"> 区域类型</th>
+                            <%--<th width="10%"> 区域类型</th>
                             <th width="10%"> 备注</th>
-                            <th width="10%"> 状态</th>
-                            <th width="10%"> 创建日期</th>
+                            <th width="10%"> 状态</th>--%>
+                            <th width="20%"> 创建日期</th>
                             <%-- <th width="10%">操作</th>--%>
                         </tr>
 
@@ -140,9 +138,9 @@
         <td> \${item.areaName}</td>
         <td> \${item.areaNodeCount}</td>
         <td> \${item.areaNodeID}</td>
-        <td> \${item.areaType}</td>
-        <td> \${item.remark}</td>
-        <td> \${item.status}</td>
+        <%-- <td> \${item.areaType}</td>
+         <td> \${item.remark}</td>
+         <td> \${item.status}</td>--%>
         <td> \${item.createDate}</td>
         <%--
                 <td>

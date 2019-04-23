@@ -97,9 +97,9 @@
 
     <select id="selectTreeList" resultType="map">
 		SELECT
-		t.id ID,
+	    t.id ID,
 		t.projectName,
-        t.areaNodeID,
+        t.areaNodeID ,
 		t.pid PID,
 		t.areaName TEXT,
 		'' SRC,
@@ -109,7 +109,7 @@
 		FROM
 		se_project_area
 		WHERE
-		se_project_area.pid = t.pid) CHILD_COUNT
+		se_project_area.pid = t.id) CHILD_COUNT
 		FROM
 		se_project_area t
 		ORDER BY t.id

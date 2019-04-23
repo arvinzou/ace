@@ -1,5 +1,7 @@
 package com.huacainfo.ace.glink.api.pojo.le;
 
+import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
+
 import java.util.List;
 
 /**
@@ -8,7 +10,7 @@ import java.util.List;
  * @Author Arvin Zou
  * @Date 2019/4/15 18:19
  */
-public class GetBrokenLampDetailOut {
+public class GetBrokenLampDetailOut extends LeBaseOut {
 
     private List<BrokenLamp> data;
 

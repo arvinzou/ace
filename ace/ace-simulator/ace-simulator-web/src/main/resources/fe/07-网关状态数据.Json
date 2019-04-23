@@ -1,0 +1,35 @@
+{
+  "GateCount": 6,
+  "GateData": [
+    {
+      "NodeID": 1,
+      "Status": "1",
+      "UpdateTime": "2018-11-20 12:33:15"
+    },
+    {
+      "NodeID": 2,
+      "Status": "1",
+      "UpdateTime": "2018-11-20 12:33:15"
+    },
+    {
+      "NodeID": 3,
+      "Status": "0",
+      "UpdateTime": ""
+    },
+    {
+      "NodeID": 4,
+      "Status": "1",
+      "UpdateTime": "2018-11-20 12:33:15"
+    },
+    {
+      "NodeID": 5,
+      "Status": "0",
+      "UpdateTime": ""
+    },
+    {
+      "NodeID": 6,
+      "Status": "1",
+      "UpdateTime": "2018-11-20 12:33:15"
+    }
+  ]
+}

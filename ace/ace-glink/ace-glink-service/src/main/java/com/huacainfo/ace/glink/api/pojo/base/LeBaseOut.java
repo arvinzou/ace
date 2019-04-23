@@ -9,6 +9,10 @@ import com.huacainfo.ace.common.model.BaseModel;
  * @Date 2019/4/15 10:31
  */
 public class LeBaseOut extends BaseModel {
+
+    public static final int SUCCESS = 200;
+    public static final int FAILED = 400;
+
     /**
      * 返回码:
      * 200: 成功

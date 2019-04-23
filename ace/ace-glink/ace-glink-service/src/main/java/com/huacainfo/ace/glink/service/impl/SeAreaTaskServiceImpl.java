@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.api.SeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.fe.AreaTaskOut;
 import com.huacainfo.ace.glink.dao.SeAreaTaskDao;
 import com.huacainfo.ace.glink.model.SeAreaTask;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service("seAreaTaskService")
 /**
@@ -191,7 +193,13 @@ public class SeAreaTaskServiceImpl implements SeAreaTaskService {
     @Override
     public MessageResponse syncData(UserProp userProp) {
         //0-接口请求
-        AreaTaskOut out = getTestAreaTask();// SeApiToolKit.getAreaTaskInfo();
+        AreaTaskOut out = null;
+        try {
+            out = SeApiToolKit.getAreaTaskInfo();
+        } catch (Exception e) {
+            logger.error("[SeAreaTaskServiceImpl.syncData]接口获取数据异常=>{}", e);
+            return new MessageResponse(ResultCode.FAIL, "接口获取数据异常");
+        }
         //1-清空库存
         this.seAreaTaskDao.allClear();
         //2-放入库存
@@ -210,6 +218,37 @@ public class SeAreaTaskServiceImpl implements SeAreaTaskService {
         }
 
         return new MessageResponse(ResultCode.SUCCESS, "同步成功");
+    }
+
+    /**
+     * 强电接口- 一键执行区域任务
+     *
+     * @param areaNodeID 区域编号
+     * @param taskNo     任务号
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse exeTask(String areaNodeID, String taskNo) {
+        SeAreaTask task = this.seAreaTaskDao.findByTaskNo(taskNo);
+        if (task == null) {
+            return new MessageResponse(ResultCode.FAIL, "该任务号的数据记录丢失！");
+        }
+        //接口调用
+        Map<String, Object> rst;
+        try {
+            rst = SeApiToolKit.executeTask(taskNo);
+        } catch (Exception e) {
+            return new MessageResponse(ResultCode.FAIL, "接口执行失败【接口通讯失败】！");
+        }
+        String exeState = String.valueOf(rst.get("Status"));
+        if ("ok".equals(exeState)) {
+            int i = seAreaTaskDao.exeTask(areaNodeID, Integer.parseInt(taskNo), exeState, rst.toString());
+
+            return new MessageResponse(ResultCode.SUCCESS, "接口执行成功！");
+        } else {
+            return new MessageResponse(ResultCode.FAIL, "接口未执行！");
+        }
     }
 
     private AreaTaskOut getTestAreaTask() {

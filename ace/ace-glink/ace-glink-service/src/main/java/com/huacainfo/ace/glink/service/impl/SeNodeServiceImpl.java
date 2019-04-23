@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.api.SeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.fe.JackBoxOut;
 import com.huacainfo.ace.glink.api.pojo.fe.MeterBoxOut;
 import com.huacainfo.ace.glink.api.pojo.fe.NodeMonitorDataOut;
@@ -208,7 +209,13 @@ public class SeNodeServiceImpl implements SeNodeService {
     @Override
     public MessageResponse syncData(UserProp userProp) {
         //http请求，获取远程服务器数据
-        JackBoxOut out = testData();//SeApiToolKit.getBaseNodeInfo();
+        JackBoxOut out = null;
+        try {
+            out = SeApiToolKit.getBaseNodeInfo();
+        } catch (Exception e) {
+            logger.error("[SeNodeServiceImpl.syncData]接口获取数据异常=>{}", e);
+            return new MessageResponse(ResultCode.FAIL, "接口获取数据异常");
+        }
         //1、清理库中原有数据
         seNodeDao.allClear();
         //2、填充获取的新数据
@@ -300,7 +307,13 @@ public class SeNodeServiceImpl implements SeNodeService {
             return new MessageResponse(ResultCode.FAIL, "配电箱基础数据缺失");
         }
         //http请求，获取远程服务器数据
-        NodeMonitorDataOut out = getTestNodeMonitorDataOut(nodeGroup);//SeApiToolKit.getNodeMonitorListData(nodeGroup);
+        NodeMonitorDataOut out = null;
+        try {
+            out = SeApiToolKit.getNodeMonitorListData(nodeGroup);
+        } catch (Exception e) {
+            logger.error("[SeNodeServiceImpl.syncMonitorData]接口获取数据异常=>{}", e);
+            return new MessageResponse(ResultCode.FAIL, "接口获取数据异常");
+        }
         //1、清理库中原有数据
         seNodeMonitorDao.allClear();
         //2、填充获取的新数据
@@ -476,7 +489,13 @@ public class SeNodeServiceImpl implements SeNodeService {
     @Override
     public MessageResponse syncNodeMeterData(UserProp userProp) {
         //0-接口调用，获取数据源
-        MeterBoxOut out = getTestMeterData();// SeApiToolKit.getAllMeterData();
+        MeterBoxOut out;
+        try {
+            out = SeApiToolKit.getAllMeterData();
+        } catch (Exception e) {
+            logger.error("[SeNodeServiceImpl.syncNodeMeterData]接口获取数据异常=>{}", e);
+            return new MessageResponse(ResultCode.FAIL, "接口获取数据异常");
+        }
         //1-清空库存
         seNodeMeterDao.allClear();
         //2-添加库存

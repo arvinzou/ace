@@ -33,7 +33,7 @@
         </div>
 
 
-        <div id="page-list" style="height: 700px;width: 100%;overflow: auto;"
+        <div id="page-list" style="height: 700px;width: 100%;overflow: auto;">
 
         </div>
         <div class="paginationbar">

@@ -29,4 +29,11 @@ public interface SeAreaTaskDao {
     int isExist(SeAreaTask record);
 
     int allClear();
+
+    SeAreaTask findByTaskNo(String taskNo);
+
+    int exeTask(@Param("areaNodeID") String areaNodeID,
+                @Param("taskNo") int taskNo,
+                @Param("exeState") String exeState,
+                @Param("exeRst") String exeRst);
 }

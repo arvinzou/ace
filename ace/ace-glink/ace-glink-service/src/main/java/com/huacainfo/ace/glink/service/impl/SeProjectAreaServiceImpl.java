@@ -381,21 +381,21 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
     public List<Tree> selectTreeList() throws Exception {
         CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
                 this.seProjectAreaDao.selectTreeList());
-        return commonTreeUtils.getTreeList("0");
+        return commonTreeUtils.getTreeList("top");
     }
 
     @Override
     public MessageResponse syncProjectData(UserProp userProp) {
-        ProjectAreaOut o = test();//SeApiToolKit.getAreaProjectInfo();
-        //seProjectAreaDao.allClear();
-        String pid = GUIDUtil.getGUID();
-
+        ProjectAreaOut o = SeApiToolKit.getAreaProjectInfo();
+        int i = seProjectAreaDao.allClear();//数据清空
+        list.clear(); //列表清空
+        String pid = o.getAreaNodeID();
         SeProjectArea r = new SeProjectArea();
         //第一条
         r.setId(pid);
         r.setStatus("1");
         r.setCreateDate(DateUtil.getNowDate());
-        r.setPid("0");
+        r.setPid("top");
         r.setProjectName(o.getProjectName());
         r.setAreaName(o.getProjectName());
         r.setAreaNodeCount(o.getAreaNodeCount());
@@ -420,8 +420,8 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
         if (obj.getAreaType() != 1) {
             List<ProjectAreaOut> outList = JsonUtil.toList(obj.getAreaNode(), ProjectAreaOut.class);
             for (ProjectAreaOut item : outList) {
-                String newPid = GUIDUtil.getGUID();
-                record = newObject(newPid, pid, projectName, item);
+                String newPid = obj.getAreaNodeID();
+                record = newObject(newPid, projectName, item);
                 if (item.getAreaType() == 1) {
                     list.add(record);
                     continue;
@@ -434,9 +434,9 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
 
     }
 
-    private SeProjectArea newObject(String id, String pid, String projectName, ProjectAreaOut in) {
+    private SeProjectArea newObject(String pid, String projectName, ProjectAreaOut in) {
         SeProjectArea r = new SeProjectArea();
-        r.setId(id);
+        r.setId(in.getAreaNodeID());
         r.setStatus("1");
         r.setCreateDate(DateUtil.getNowDate());
         //
@@ -449,116 +449,5 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
         r.setAreaType(in.getAreaType());
 
         return r;
-    }
-
-
-    public ProjectAreaOut test() {
-        String jsons = "{\n" +
-                "    \"ProjectName\": \"温州瓯江两岸核心亮化夜游项目\",\n" +
-                "    \"AreaNodeCount\": 2,\n" +
-                "    \"AreaNodeID\": \"0\",\n" +
-                "    \"AreaType\": 0,\n" +
-                "    \"AreaNode\": [\n" +
-                "        {\n" +
-                "            \"AreaName\": \"永嘉山体\",\n" +
-                "            \"AreaNodeCount\": 2,\n" +
-                "            \"AreaNodeID\": \"0-0\",\n" +
-                "            \"AreaType\": 0,\n" +
-                "            \"AreaNode\": [\n" +
-                "                {\n" +
-                "                    \"AreaName\": \"A1山体总箱\",\n" +
-                "                    \"AreaNodeCount\": 2,\n" +
-                "                    \"AreaNodeID\": \"0-0-0\",\n" +
-                "                    \"AreaType\": 0,\n" +
-                "                    \"AreaNode\": [\n" +
-                "                        {\n" +
-                "                            \"AreaName\": \"A1-AL1\",\n" +
-                "                            \"AreaNodeCount\": 0,\n" +
-                "                            \"AreaNodeID\": \"0-0-0-0\",\n" +
-                "                            \"AreaType\": 1\n" +
-                "                        },\n" +
-                "                        {\n" +
-                "                            \"AreaName\": \"A1-AL2\",\n" +
-                "                            \"AreaNodeCount\": 0,\n" +
-                "                            \"AreaNodeID\": \"0-0-0-1\",\n" +
-                "                            \"AreaType\": 1\n" +
-                "                        }\n" +
-                "                    ]\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"AreaName\": \"A2山体总箱\",\n" +
-                "                    \"AreaNodeCount\": 2,\n" +
-                "                    \"AreaNodeID\": \"0-0-1\",\n" +
-                "                    \"AreaType\": 0,\n" +
-                "                    \"AreaNode\": [\n" +
-                "                        {\n" +
-                "                            \"AreaName\": \"A2-AL1\",\n" +
-                "                            \"AreaNodeCount\": 0,\n" +
-                "                            \"AreaNodeID\": \"0-0-1-0\",\n" +
-                "                            \"AreaType\": 1\n" +
-                "                        },\n" +
-                "                        {\n" +
-                "                            \"AreaName\": \"A2-AL2\",\n" +
-                "                            \"AreaNodeCount\": 0,\n" +
-                "                            \"AreaNodeID\": \"0-0-1-1\",\n" +
-                "                            \"AreaType\": 1\n" +
-                "                        }\n" +
-                "                    ]\n" +
-                "                }\n" +
-                "            ]\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"AreaName\": \"瓯江两岸\",\n" +
-                "            \"AreaNodeCount\": 2,\n" +
-                "            \"AreaNodeID\": \"0-1\",\n" +
-                "            \"AreaType\": 0,\n" +
-                "            \"AreaNode\": [\n" +
-                "                {\n" +
-                "                    \"AreaName\": \"瓯北建筑\",\n" +
-                "                    \"AreaNodeCount\": 2,\n" +
-                "                    \"AreaNodeID\": \"0-1-0\",\n" +
-                "                    \"AreaType\": 0,\n" +
-                "                    \"AreaNode\": [\n" +
-                "                        {\n" +
-                "                            \"AreaName\": \"金色海岸小区No1\",\n" +
-                "                            \"AreaNodeCount\": 0,\n" +
-                "                            \"AreaNodeID\": \"0-1-0-0\",\n" +
-                "                            \"AreaType\": 1\n" +
-                "                        },\n" +
-                "                        {\n" +
-                "                            \"AreaName\": \"金色海岸小区No2\",\n" +
-                "                            \"AreaNodeCount\": 0,\n" +
-                "                            \"AreaNodeID\": \"0-1-0-1\",\n" +
-                "                            \"AreaType\": 1\n" +
-                "                        }\n" +
-                "                    ]\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"AreaName\": \"欧南建筑\",\n" +
-                "                    \"AreaNodeCount\": 2,\n" +
-                "                    \"AreaNodeID\": \"0-1-1\",\n" +
-                "                    \"AreaType\": 0,\n" +
-                "                    \"AreaNode\": [\n" +
-                "                        {\n" +
-                "                            \"AreaName\": \"时代海景1\",\n" +
-                "                            \"AreaNodeCount\": 0,\n" +
-                "                            \"AreaNodeID\": \"0-1-1-0\",\n" +
-                "                            \"AreaType\": 1\n" +
-                "                        },\n" +
-                "                        {\n" +
-                "                            \"AreaName\": \"时代海景2\",\n" +
-                "                            \"AreaNodeCount\": 0,\n" +
-                "                            \"AreaNodeID\": \"0-1-1-1\",\n" +
-                "                            \"AreaType\": 1\n" +
-                "                        }\n" +
-                "                    ]\n" +
-                "                }\n" +
-                "            ]\n" +
-                "        }\n" +
-                "    ]\n" +
-                "}";
-        ProjectAreaOut o = JsonUtil.toObject(jsons, ProjectAreaOut.class);
-
-        return o;
     }
 }

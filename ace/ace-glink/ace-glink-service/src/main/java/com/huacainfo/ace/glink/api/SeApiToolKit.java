@@ -2,6 +2,7 @@ package com.huacainfo.ace.glink.api;
 
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.common.tools.URLKit;
 import com.huacainfo.ace.glink.api.pojo.fe.*;
 
@@ -16,7 +17,9 @@ import java.util.Map;
  */
 public class SeApiToolKit {
 
-    private static final String API_DOMAIN = "http://192.168.100.2?";
+    private static final String API_DOMAIN_DEV = PropertyUtil.getProperty("fe.api.url");
+
+    private static final String APP_KEY = PropertyUtil.getProperty("fe.api.appkey");
 
     /**
      * 单例模式
@@ -29,7 +32,7 @@ public class SeApiToolKit {
         Map<String, String> map = new HashMap<>();
         map.clear();
 
-        map.put("Appkey", "ProjectYalro");
+        map.put("Appkey", APP_KEY);
         map.put("InterFaceType", interFaceType);
 
         return map;
@@ -47,7 +50,7 @@ public class SeApiToolKit {
      */
     public static ProjectAreaOut getAreaProjectInfo() {
         Map<String, String> params = common("1");
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
 
         return JsonUtil.toObject(rstJson, ProjectAreaOut.class);
     }
@@ -59,7 +62,7 @@ public class SeApiToolKit {
      */
     public static JackBoxOut getBaseNodeInfo() {
         Map<String, String> params = common("2");
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
 
         return JsonUtil.toObject(rstJson, JackBoxOut.class);
     }
@@ -69,7 +72,7 @@ public class SeApiToolKit {
         Map<String, String> params = common("3");
         params.put("NodeID", nodeId);
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toMap(rstJson);
     }
 
@@ -83,7 +86,7 @@ public class SeApiToolKit {
         Map<String, String> params = common("4");
         params.put("NodeGroup", nodeGroup);
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toObject(rstJson, NodeMonitorDataOut.class);
     }
 
@@ -95,7 +98,7 @@ public class SeApiToolKit {
     public static MeterBoxOut getAllMeterData() {
         Map<String, String> params = common("5");
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toObject(rstJson, MeterBoxOut.class);
     }
 
@@ -106,7 +109,7 @@ public class SeApiToolKit {
      */
     public static RouteOut get4GRouterState() {
         Map<String, String> params = common("6");
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toObject(rstJson, RouteOut.class);
     }
 
@@ -118,7 +121,7 @@ public class SeApiToolKit {
     public static GatewayOut getGatewayState() {
         Map<String, String> params = common("7");
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toObject(rstJson, GatewayOut.class);
     }
 
@@ -131,7 +134,7 @@ public class SeApiToolKit {
     public static CustomAreaOut getCustomAreaInfo() {
         Map<String, String> params = common("8");
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toObject(rstJson, CustomAreaOut.class);
     }
 
@@ -143,7 +146,7 @@ public class SeApiToolKit {
     public static AreaTaskOut getAreaTaskInfo() {
         Map<String, String> params = common("9");
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toObject(rstJson, AreaTaskOut.class);
     }
 
@@ -155,7 +158,7 @@ public class SeApiToolKit {
     public static PresetDataOut getPresetData() {
         Map<String, String> params = common("10");
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toObject(rstJson, PresetDataOut.class);
     }
 
@@ -167,7 +170,7 @@ public class SeApiToolKit {
     public static TimerDataOut getTimerData() {
         Map<String, String> params = common("11");
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toObject(rstJson, TimerDataOut.class);
     }
 
@@ -185,7 +188,7 @@ public class SeApiToolKit {
         params.put("PresetNo", PresetNo);
         params.put("AreaNodeID", AreaNodeID);
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toMap(rstJson);
     }
 
@@ -200,7 +203,7 @@ public class SeApiToolKit {
         Map<String, String> params = common("13");
         params.put("TaskNO", TaskNO);
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toMap(rstJson);
     }
 
@@ -215,7 +218,7 @@ public class SeApiToolKit {
     public static Map<String, Object> updateTimer(TimerDataOut.TimerData timerData) {
         Map<String, String> params = common("14");
 
-        String rstJson = HttpKit.post(API_DOMAIN + parse(params), timerData.toString());
+        String rstJson = HttpKit.post(API_DOMAIN_DEV + parse(params), timerData.toString());
         return JsonUtil.toMap(rstJson);
     }
 
@@ -230,7 +233,7 @@ public class SeApiToolKit {
         Map<String, String> params = common("15");
         params.put("AreaNodeID", AreaNodeID);
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toMap(rstJson);
     }
 
@@ -242,7 +245,7 @@ public class SeApiToolKit {
     public static Map<String, Object> getGeneralCtrlTimer() {
         Map<String, String> params = common("17");
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toMap(rstJson);
     }
 
@@ -256,7 +259,7 @@ public class SeApiToolKit {
     public static Map<String, Object> updateGeneralCtrlTimer(GeneralCtrlTimerIn in) {
         Map<String, String> params = common("18");
 
-        String rstJson = HttpKit.post(API_DOMAIN + parse(params), in.toString());
+        String rstJson = HttpKit.post(API_DOMAIN_DEV + parse(params), in.toString());
         return JsonUtil.toMap(rstJson);
     }
 
@@ -269,7 +272,7 @@ public class SeApiToolKit {
     public static YearCron getGeneralCtrlCron() {
         Map<String, String> params = common("19");
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toObject(rstJson, YearCron.class);
     }
 
@@ -283,7 +286,7 @@ public class SeApiToolKit {
     public static Map<String, Object> updateGeneralCtrlCron(YearCron in) {
         Map<String, String> params = common("20");
 
-        String rstJson = HttpKit.post(API_DOMAIN + parse(params), in.toString());
+        String rstJson = HttpKit.post(API_DOMAIN_DEV + parse(params), in.toString());
         return JsonUtil.toMap(rstJson);
     }
 
@@ -298,7 +301,7 @@ public class SeApiToolKit {
         Map<String, String> params = common("21");
         params.put("WorkMode", WorkMode + "");
 
-        String rstJson = HttpKit.get(API_DOMAIN + parse(params));
+        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
         return JsonUtil.toMap(rstJson);
     }
 }
