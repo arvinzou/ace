@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title></title>
+    <title>定时设置</title>
 </head>
 <script src="js/index.min.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="css/common.css"/>
@@ -48,63 +48,150 @@
     <div class="modal Timing">
         <div class="modal-head">
             <span class="title">定时设置</span>
-            <div class="inputGroup">
-                <input type="text" placeholder="输入站点名称"/>
-                <button>
+            <form id="fm-search">
+                <div class="inputGroup">
+                    <input type="text" placeholder="输入任务名称" name="timerName"/>
+                    <button type="submit">
 
-                </button>
-            </div>
+                    </button>
+                </div>
+            </form>
         </div>
         <div class="modal-body">
-            <table class="table-tg">
+            <table class="table-tg" style="border:1px solid rgba(12,129,135);">
                 <tr>
                     <td class="tg-mvxc" width="10%">定时任务序号</td>
-                    <td class="tg-mvxc" width="25%">定时任务名称</td>
+                    <td class="tg-mvxc" width="30%">定时任务名称</td>
                     <td class="tg-mvxc" width="10%">是否有效</td>
-                    <td class="tg-mvxc" width="25%">任务名称</td>
-                    <td class="tg-mvxc" width="15%">启动时间</td>
-                    <td class="tg-mvxc" width="15%">操作</td>
+                    <td class="tg-mvxc" width="20%">启动时间</td>
+                    <td class="tg-mvxc" width="20%">操作</td>
                 </tr>
-                <tr class="tr">
-                    <td class="tg-84q5">1</td>
-                    <td class="tg-84q5">定时任务名称1</td>
-                    <td class="tg-84q5">有效</td>
-                    <td class="tg-84q5">任务名称1</td>
-                    <td class="tg-84q5">2019-04-12   12:00:00</td>
-                    <td class="tg-84q5">查看  更新</td>
+                <tbody id="page-list">
 
-                </tr>
-                <tr class="tr">
-                    <td class="tg-84q5">1</td>
-                    <td class="tg-84q5">定时任务名称1</td>
-                    <td class="tg-84q5">有效</td>
-                    <td class="tg-84q5">任务名称1</td>
-                    <td class="tg-84q5">2019-04-12   12:00:00</td>
-                    <td class="tg-84q5"></td>
-                </tr>
-                <tr class="tr">
-                    <td class="tg-84q5">1</td>
-                    <td class="tg-84q5">定时任务名称1</td>
-                    <td class="tg-84q5">有效</td>
-                    <td class="tg-84q5">任务名称1</td>
-                    <td class="tg-84q5">2019-04-12   12:00:00</td>
-                    <td class="tg-84q5">查看  更新</td>
-                </tr>
+                </tbody>
             </table>
-            <div class="paginationbar">
+            <div class="paginationbar" style="float: right">
                 <ul class="pagination" id="pagination1"></ul>
             </div>
         </div>
     </div>
 </div>
 </body>
+<%--列表juicer模板--%>
+<script id="tpl-list" type="text/template">
+    {@each data as item, index}
+    <tr class="tr">
+
+        <td class="tg-84q5"> \${item.timerID}</td>
+        <td class="tg-84q5"> \${item.timerName}</td>
+        <td class="tg-84q5"> {@if item.timerEnable==0}
+            <span style="color: #FF616D;">无效</span>
+            {@else if item.timerEnable==1}
+            <span style="color: #0AFD99;">有效</span>
+            {@else}
+            {@/if}
+        </td>
+        <td class="tg-84q5">\${item.startTime}</td>
+        <td class="tg-84q5">
+
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.timerName}"
+               data-target="#modal-preview" style="color: #53FDFF;">更新</a>
+
+        </td>
+    </tr>
+    {@/each}
+</script>
+<div class="modal fade" role="dialog" id="modal-preview">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">详细</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm-preview">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="tpl-preview" type="text/template">
+    <div class="form-group">
+        <label class="col-md-2 view-label">主键</label>
+        <div class="col-md-10">
+            \${data.o.id}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">定时任务序号</label>
+        <div class="col-md-10">
+            \${data.o.timerID}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">定时任务名称</label>
+        <div class="col-md-10">
+            \${data.o.timerName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">定时任务状态</label>
+        <div class="col-md-10">
+            \${data.o.timerEnable}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">启动时间</label>
+        <div class="col-md-10">
+            \${data.o.startTime}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">调度任务号</label>
+        <div class="col-md-10">
+            \${data.o.taskNo}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">备注</label>
+        <div class="col-md-10">
+            \${data.o.remark}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">状态</label>
+        <div class="col-md-10">
+            \${data.o.status}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">创建日期</label>
+        <div class="col-md-10">
+            \${data.o.createDate}
+        </div>
+    </div>
+
+
+</script>
+
 <style type="text/css">
 
 
 </style>
+
 <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/loading.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js?v=V1.0.3"
+        type="text/javascript"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 </html>
