@@ -2,7 +2,9 @@ package com.huacainfo.ace.glink.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -137,4 +139,21 @@ public class SeAreaTaskController extends GLinkBaseController {
         return seAreaTaskService.syncData(this.getCurUserProp());
     }
 
+    /**
+     * 强电接口- 一键执行区域任务
+     *
+     * @param areaNodeID 区域编号
+     * @param taskNo     任务号
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/exeTask")
+    public MessageResponse exeTask(String areaNodeID, String taskNo) throws Exception {
+        if (!StringUtil.areNotEmpty(areaNodeID, taskNo)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数！");
+        }
+
+        return seAreaTaskService.exeTask(areaNodeID, taskNo);
+    }
 }

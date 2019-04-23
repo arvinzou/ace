@@ -105,5 +105,15 @@ public class PagePortalServiceImpl implements PagePortalService {
         }
     }
 
+    /**
+     * 自动同步配电箱全部电表数据
+     *
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse autoSyncNodeMeterData() {
+        return null;
+    }
+
 
 }

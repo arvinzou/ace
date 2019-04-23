@@ -37,4 +37,10 @@ public interface PagePortalService {
      */
     MessageResponse getLampStatus();
 
+    /**
+     * 自动同步配电箱全部电表数据
+     *
+     * @return MessageResponse
+     */
+    MessageResponse autoSyncNodeMeterData();
 }

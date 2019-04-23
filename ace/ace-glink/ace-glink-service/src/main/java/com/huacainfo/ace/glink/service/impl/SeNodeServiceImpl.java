@@ -17,7 +17,6 @@ import com.huacainfo.ace.glink.api.pojo.fe.NodeMonitorDataOut;
 import com.huacainfo.ace.glink.dao.*;
 import com.huacainfo.ace.glink.model.*;
 import com.huacainfo.ace.glink.service.SeNodeService;
-import com.huacainfo.ace.glink.vo.SeNodeMonitorQVo;
 import com.huacainfo.ace.glink.vo.SeNodeMonitorVo;
 import com.huacainfo.ace.glink.vo.SeNodeQVo;
 import com.huacainfo.ace.glink.vo.SeNodeVo;
@@ -478,7 +477,7 @@ public class SeNodeServiceImpl implements SeNodeService {
     @Override
     public MessageResponse syncNodeMeterData(UserProp userProp) {
         //0-接口调用，获取数据源
-        MeterBoxOut out = getTestMeterData();// SeApiToolKit.getAllMeterData();
+        MeterBoxOut out = SeApiToolKit.getAllMeterData();
         //1-清空库存
         seNodeMeterDao.allClear();
         //2-添加库存

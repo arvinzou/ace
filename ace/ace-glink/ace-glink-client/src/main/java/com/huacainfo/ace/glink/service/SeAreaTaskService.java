@@ -88,4 +88,14 @@ public interface SeAreaTaskService {
      * @throws Exception
      */
     MessageResponse syncData(UserProp curUserProp);
+
+    /**
+     * 强电接口- 一键执行区域任务
+     *
+     * @param areaNodeID 区域编号
+     * @param taskNo     任务号
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse exeTask(String areaNodeID, String taskNo);
 }

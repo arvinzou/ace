@@ -9,9 +9,12 @@
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+
+        <result column="exeState" jdbcType="VARCHAR" property="exeState"/>
+        <result column="exeRst" jdbcType="VARCHAR" property="exeRst"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, areaNodeID, taskNo, taskName, remark, status, createDate
+    id, areaNodeID, taskNo, taskName, remark, status, createDate, exeState, exeRst
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -25,11 +28,11 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.glink.model.SeAreaTask">
     insert into se_area_task (id, areaNodeID, taskNo, 
-      taskName, remark, status, 
-      createDate)
+      taskName, remark, status, createDate,
+      exeState, exeRst)
     values (#{id,jdbcType=VARCHAR}, #{areaNodeID,jdbcType=VARCHAR}, #{taskNo,jdbcType=INTEGER},
       #{taskName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createDate,jdbcType=TIMESTAMP})
+      #{createDate,jdbcType=TIMESTAMP}, #{exeState,jdbcType=VARCHAR}, #{exeRst,jdbcType=VARCHAR})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeAreaTask">
     update se_area_task
@@ -38,7 +41,9 @@
       taskName = #{taskName,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP}
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      exeState = #{exeState,jdbcType=VARCHAR},
+      exeRst = #{exeRst,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -46,7 +51,7 @@
     </resultMap>
 
     <sql id="Vo_Column_List">
-        id, areaNodeID, taskNo, taskName, remark, status, createDate
+        id, areaNodeID, taskNo, taskName, remark, status, createDate, exeState, exeRst
     </sql>
     <sql id="From_Statement">
         FROM se_area_task t
@@ -55,6 +60,9 @@
         where 1 = 1
         <if test="condition.taskName !=null and condition.taskName !=&quot;&quot;">
             and t.taskName like concat(#{condition.taskName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.areaNodeID !=null and condition.areaNodeID !=&quot;&quot;">
+            and t.areaNodeID = #{condition.areaNodeID,jdbcType=VARCHAR}
         </if>
     </sql>
 
@@ -95,5 +103,27 @@
 
     <update id="allClear">
       truncate table se_area_task;
+    </update>
+
+    <select id="findByTaskNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_area_task
+        where taskNo = #{taskNo,jdbcType=VARCHAR}
+    </select>
+
+    <update id="exeTask" parameterType="com.huacainfo.ace.glink.model.SeAreaTask">
+
+        UPDATE se_area_task
+        set exeState = 'error', createDate = now()
+        where areaNodeID = #{areaNodeID,jdbcType=VARCHAR}
+          and taskNo != #{taskNo,jdbcType=INTEGER} ;
+
+        UPDATE se_area_task
+        set exeState = #{exeState,jdbcType=VARCHAR},
+            exeRst = #{exeRst,jdbcType=VARCHAR},
+            createDate = now()
+        where areaNodeID = #{areaNodeID,jdbcType=VARCHAR}
+          and taskNo = #{taskNo,jdbcType=INTEGER} ;
     </update>
 </mapper>

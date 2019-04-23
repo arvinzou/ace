@@ -72,6 +72,12 @@ function render(obj, data, tplId) {
 }
 
 function initEvents() {
+    $("#areaNodeID").combotree({
+        onChange: function (newValue, oldValue) {
+            setParams("areaNodeID", newValue);
+        }
+    });
+
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
@@ -86,12 +92,6 @@ function initEvents() {
         initMonitor(nodeID);
     });
 
-    $('#modal-monitor-d-ch').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var nodeID = relatedTarget.data('id');
-        //ajax data
-        initMonitorDeviceCH(nodeID);
-    });
 }
 
 function showMonitorDeviceCH(deviceCode, chName) {

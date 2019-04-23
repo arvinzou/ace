@@ -19,6 +19,31 @@ public class SeAreaTask extends BaseModel {
 
     private Date createDate;
 
+    /**
+     * 执行状态 "ok"-已执行；"error"-未执行
+     */
+    private String exeState;
+    /**
+     * 执行结果 ，接口返回值
+     */
+    private String exeRst;
+
+    public String getExeState() {
+        return exeState;
+    }
+
+    public void setExeState(String exeState) {
+        this.exeState = exeState;
+    }
+
+    public String getExeRst() {
+        return exeRst;
+    }
+
+    public void setExeRst(String exeRst) {
+        this.exeRst = exeRst;
+    }
+
     public String getId() {
         return id;
     }

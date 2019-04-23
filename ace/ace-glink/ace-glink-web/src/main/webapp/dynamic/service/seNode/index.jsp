@@ -33,7 +33,10 @@
 
                 <form id="fm-search">
                     <div class="input-group" role="group" style="float:left;padding-right:5px">
-                        <input name="areaNodeID" type="text" class="form-control" placeholder="所属区域">
+                        所属区域：
+                        <input id="areaNodeID" name="a" class="easyui-combotree"
+                               data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
+                lines:true," style='width:255px;line-height: 30px;height: 30px;'>
                     </div>
                     <div class="input-group">
                         <input type="text" name="keyword"
@@ -591,6 +594,16 @@
 
 </style>
 <jsp:include page="/dynamic/common/footer.jsp"/>
+<%--easyui--%>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+<%----%>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
