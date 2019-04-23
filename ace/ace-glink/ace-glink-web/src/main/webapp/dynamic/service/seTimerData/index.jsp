@@ -73,7 +73,6 @@
                     <th width="10%"> 定时任务状态</th>
                     <th width="10%"> 启动时间</th>
                     <th width="10%"> 调度任务号</th>
-
                     <th width="10%"> 状态</th>
                     <th width="15%"> 创建日期</th>
                     <th width="15%">操作</th>
@@ -148,8 +147,7 @@
                {@/if}--%>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-preview">更新</a>
+            <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">更新</a>
 
             <%-- <a href="javascript:del('\${item.id}');">删除</a>--%>
 
@@ -451,13 +449,13 @@
                     <table class="table table-hover table-light">
                         <thead>
                         <tr>
-                            <th width="8%"> 1周</th>
-                            <th width="8%"> 2周</th>
-                            <th width="8%"> 3周</th>
-                            <th width="8%"> 4周</th>
-                            <th width="8%"> 5周</th>
-                            <th width="8%"> 6周</th>
-                            <th width="8%"> 7周</th>
+                            <th width="8%">周1</th>
+                            <th width="8%">周2</th>
+                            <th width="8%">周3</th>
+                            <th width="8%">周4</th>
+                            <th width="8%">周5</th>
+                            <th width="8%">周6</th>
+                            <th width="8%">周7</th>
 
                         </tr>
                         </thead>

@@ -387,7 +387,8 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
     @Override
     public MessageResponse syncProjectData(UserProp userProp) {
         ProjectAreaOut o = SeApiToolKit.getAreaProjectInfo();
-        //seProjectAreaDao.allClear();
+        int i = seProjectAreaDao.allClear();//数据清空
+        list.clear(); //列表清空
         String pid = GUIDUtil.getGUID();
 
         SeProjectArea r = new SeProjectArea();

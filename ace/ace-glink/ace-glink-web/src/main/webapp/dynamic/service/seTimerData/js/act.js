@@ -311,3 +311,7 @@ function syncData() {
         }
     });
 }
+
+function updateTimer() {
+
+}
