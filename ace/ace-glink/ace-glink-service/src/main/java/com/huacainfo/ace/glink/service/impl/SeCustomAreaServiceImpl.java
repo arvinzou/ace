@@ -363,7 +363,7 @@ public class SeCustomAreaServiceImpl implements SeCustomAreaService {
 
     @Override
     public MessageResponse syncCustomData(List<SeCustomArea> list, UserProp userProp) {
-        CustomAreaOut o = test();// SeApiToolKit.getCustomAreaInfo();
+        CustomAreaOut o = SeApiToolKit.getCustomAreaInfo();
         SeCustomArea area;
         List<CustomAreaOut.AreaData> itemData = o.getAreaData();
         int count = o.getAreaCount();
@@ -381,43 +381,4 @@ public class SeCustomAreaServiceImpl implements SeCustomAreaService {
         return new MessageResponse(0, "同步成功！");
     }
 
-    public CustomAreaOut test() {
-        String jsons = "{\n" +
-                "    \"AreaCount\": 6,\n" +
-                "    \"AreaData\": [\n" +
-                "        {\n" +
-                "            \"AreaNodeID\": \"0-0-0-0\",\n" +
-                "            \"AreaNo\": 1,\n" +
-                "            \"AreaName\": \"A区\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"AreaNodeID\": \"0-0-0-1\",\n" +
-                "            \"AreaNo\": 2,\n" +
-                "            \"AreaName\": \"B区\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"AreaNodeID\": \"0-1-0-0\",\n" +
-                "            \"AreaNo\": 3,\n" +
-                "            \"AreaName\": \"C区\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"AreaNodeID\": \"0-1-0-1\",\n" +
-                "            \"AreaNo\": 4,\n" +
-                "            \"AreaName\": \"D区\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"AreaNodeID\": \"0-0\",\n" +
-                "            \"AreaNo\": 5,\n" +
-                "            \"AreaName\": \"E区\"\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"AreaNodeID\": \"0-1\",\n" +
-                "            \"AreaNo\": 6,\n" +
-                "            \"AreaName\":\"F区\"\n" +
-                "        }\n" +
-                "    ]\n" +
-                "}";
-        CustomAreaOut o = JsonUtil.toObject(jsons, CustomAreaOut.class);
-        return o;
-    }
 }

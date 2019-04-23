@@ -16,6 +16,7 @@ import com.huacainfo.ace.glink.dao.SeTimerWeekDao;
 import com.huacainfo.ace.glink.model.SeTimerDay;
 import com.huacainfo.ace.glink.model.SeTimerMonth;
 import com.huacainfo.ace.glink.model.SeTimerWeek;
+import com.huacainfo.ace.glink.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,6 @@ import com.huacainfo.ace.glink.dao.SeTimerDataDao;
 import com.huacainfo.ace.glink.model.SeTimerData;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.glink.service.SeTimerDataService;
-import com.huacainfo.ace.glink.vo.SeTimerDataVo;
-import com.huacainfo.ace.glink.vo.SeTimerDataQVo;
 
 @Service("seTimerDataService")
 /**
@@ -172,7 +171,18 @@ public class SeTimerDataServiceImpl implements SeTimerDataService {
             <SeTimerDataVo> selectSeTimerDataByPrimaryKey(String id) throws Exception {
         SingleResult
                 <SeTimerDataVo> rst = new SingleResult<>();
-        rst.setValue(this.seTimerDataDao.selectVoByPrimaryKey(id));
+
+        SeTimerDataVo vo = seTimerDataDao.selectVoByPrimaryKey(id);
+        SeTimerMonthQVo condition = new SeTimerMonthQVo();
+        condition.setTimerID(vo.getTimerID());
+        vo.setMonthList(seTimerMonthDao.findList(condition, 0, 500, ""));
+        SeTimerWeekQVo conditionWeek = new SeTimerWeekQVo();
+        conditionWeek.setTimerID(vo.getTimerID());
+        vo.setWeekList(seTimerWeekDao.findList(conditionWeek, 0, 500, ""));
+        SeTimerDayQVo conditionDay = new SeTimerDayQVo();
+        conditionDay.setTimerID(vo.getTimerID());
+        vo.setDayList(seTimerDayDao.findList(conditionDay, 0, 500, ""));
+        rst.setValue(vo);
         return rst;
     }
 
@@ -390,7 +400,7 @@ public class SeTimerDataServiceImpl implements SeTimerDataService {
      */
     @Override
     public MessageResponse syncData(UserProp userProp) {
-        TimerDataOut o = testDate();  //SeApiToolKit.getTimerData();
+        TimerDataOut o = SeApiToolKit.getTimerData();
         // seTimerDataDao.allClear();
         List<TimerDataOut.TimerData> outData = o.getTimerData();
         SeTimerData timerData;
@@ -413,6 +423,19 @@ public class SeTimerDataServiceImpl implements SeTimerDataService {
 
         }
         return new MessageResponse(ResultCode.SUCCESS, "同步成功");
+    }
+
+    /**
+     * 修改数据
+     *
+     * @param userProp
+     * @return
+     */
+    @Override
+    public MessageResponse updateTimer(SeTimerData obj, UserProp userProp) {
+
+
+        return null;
     }
 
 

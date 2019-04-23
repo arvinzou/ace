@@ -226,9 +226,10 @@ function initJuicerMethod() {
  */
 function parseStatus(status) {
     switch (status) {
-        case '0':
-            return "删除";
-        case '1':
+        case 0:
+            return "无效";
+        case 1:
+            return "有效";
         default:
             return "0";
     }
@@ -249,6 +250,9 @@ function parseStatus(status) {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
+                data['monthList'] = result.value.monthList;
+                data['weekList'] = result.value.weekList;
+                data['dayList'] = result.value.dayList;
                 render('#fm-preview', data, 'tpl-preview');
             } else {
                 alert(result.errorMessage);
@@ -306,4 +310,8 @@ function syncData() {
             alert("对不起出错了！");
         }
     });
+}
+
+function updateTimer() {
+
 }

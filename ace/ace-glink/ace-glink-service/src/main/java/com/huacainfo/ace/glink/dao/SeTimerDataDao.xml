@@ -94,4 +94,11 @@
         truncate table se_timer_day;
         truncate table se_timer_week;
     </update>
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_timer_data
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
 </mapper>
