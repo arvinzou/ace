@@ -1,6 +1,7 @@
 var loading = {};
 var params = {
     limit: 10,
+    // areaNodeID: '0',
 };
 window.onload = function () {
 
@@ -47,6 +48,8 @@ function initPage() {
 }
 
 function execute(areaNodeID, taskNo) {
+    console.log("areaNodeID=" + areaNodeID + ",taskNo=" + taskNo)
+    //
     if (confirm("确认执行该任务么？")) {
         startLoad();
         $.ajax({
@@ -59,10 +62,10 @@ function execute(areaNodeID, taskNo) {
             },
             success: function (rst) {
                 stopLoad();
+                //
+                alert(rst.errorMessage);
                 if (rst.status == 0) {
                     getPageList();
-                } else {
-                    alert(rst.errorMessage);
                 }
             },
             error: function () {

@@ -152,14 +152,15 @@ body {
 }
 
 .table-tg .tg-mvxc {
-	background-color: #00D6D9;
+    background-color: rgba(17, 96, 104);
 	text-align: center;
 	font-size: 0.072916rem;
 	font-family: MicrosoftYaHei-Bold;
 	font-weight: bold;
-	color: rgba(0, 97, 101, 1);
+    color: rgba(255, 255, 255, 1);
 	height:  0.208333rem;
 	line-height: 0.208333rem;
+
 }
 
 .table-tg .tg-84q5 {

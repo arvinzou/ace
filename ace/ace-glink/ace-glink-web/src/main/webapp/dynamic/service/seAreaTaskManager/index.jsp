@@ -64,26 +64,24 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <div class="mt-element-card mt-element-overlay">
-        <div class="col-lg-2">
-            <div class="mt-card-item card-box-item">
+        <div class="mt-card-item card-box-item">
 
-                <div class="mt-card-avatar card-box-avatar">
-                    <p class="mt-card-name task-name">\${item.taskName}</p>
+            <div class="mt-card-avatar card-box-avatar">
+                <p class="mt-card-name task-name">\${item.taskName}</p>
+            </div>
+
+            <div class="mt-card-content card-box-content">
+
+                <div class="mt-card-social">
+                    {@if item.exeState == 'ok'}
+                    <p class="mt-card-desc p-ok">\${parseExeState(item.exeState)}</p>
+                    {@else}
+                    <p class="mt-card-desc p-error">\${parseExeState(item.exeState)}</p>
+                    {@/if}
+                    <button type="button" class="btn" onclick="execute('\${item.areaNodeID}', '\${item.taskNo}')">执行
+                    </button>
                 </div>
 
-                <div class="mt-card-content card-box-content">
-
-                    <div class="mt-card-social">
-                        {@if item.exeState == 'ok'}
-                        <p class="mt-card-desc p-ok">\${parseExeState(item.exeState)}</p>
-                        {@else}
-                        <p class="mt-card-desc p-error">\${parseExeState(item.exeState)}</p>
-                        {@/if}
-                        <button type="button" class="btn" onclick="execute(\${item.areaNodeID}, \${item.taskNo})">执行
-                        </button>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>
