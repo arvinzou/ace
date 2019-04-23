@@ -60,7 +60,7 @@ function initEvents() {
     })
 }
 
-﻿function initPreview(id) {
+function initPreview(id) {
     startLoad();
     $.ajax({
         url: contextPath + "/seTimerData/selectSeTimerDataByPrimaryKey",

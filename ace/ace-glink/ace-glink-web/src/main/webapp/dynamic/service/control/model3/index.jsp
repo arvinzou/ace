@@ -244,8 +244,6 @@
 
 <style type="text/css">
 
-
-
 </style>
 <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
