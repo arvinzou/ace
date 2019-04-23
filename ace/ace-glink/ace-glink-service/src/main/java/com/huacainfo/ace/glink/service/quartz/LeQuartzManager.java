@@ -1,22 +1,22 @@
-package com.huacainfo.ace.glink.service;
+package com.huacainfo.ace.glink.service.quartz;
 
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.glink.service.LeBrokenLampService;
+import com.huacainfo.ace.glink.service.PagePortalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-
 /**
- * @Auther: Arvin
- * @Date: 2018/11/1 14:58
- * @Description: 因业务需求，新增短信推送功能；
- * 对事故进行按月推送；对有死亡情况的事故进行实时推送；
- * 推送给相应路长以及分路长；
+ * @ClassName LeQuartzManager
+ * @Description 弱电调度任务管理
+ * @Author Arvin Zou
+ * @Date 2019/4/22 18:19
  */
-@Component("QuartzManager")
-public class QuartzManager {
+@Component("leQuartzManager")
+public class LeQuartzManager {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -42,6 +42,4 @@ public class QuartzManager {
         MessageResponse ms = leBrokenLampService.getBrokenLampDetail();
         logger.info(ms.getErrorMessage());
     }
-
-
 }

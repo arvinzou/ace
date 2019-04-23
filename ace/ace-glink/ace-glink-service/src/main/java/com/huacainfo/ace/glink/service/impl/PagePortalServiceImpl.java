@@ -84,7 +84,14 @@ public class PagePortalServiceImpl implements PagePortalService {
      */
     @Override
     public MessageResponse getLampStatus() {
-        LampStatusOut rst = LeApiToolKit.getLampStatus();
+        LampStatusOut rst = null;
+        try {
+            rst = LeApiToolKit.getLampStatus();
+        } catch (Exception e) {
+            logger.error("[PagePortalServiceImpl.getLampStatus]接口获取数据异常=>{}", e);
+            return new MessageResponse(ResultCode.FAIL, "接口获取数据异常");
+        }
+
         if (rst.getCode() == LeBaseOut.SUCCESS) {
             LampStatusOut.LampStatus obj = rst.getData();
             int newVal1 = obj.getLampCount();
@@ -103,6 +110,18 @@ public class PagePortalServiceImpl implements PagePortalService {
             logger.error("[弱电接口失败]-[武汉设备状态接口（GetLampStatus）]=>{}", rst.toString());
             return new MessageResponse(ResultCode.FAIL, "弱电接口调用失败");
         }
+    }
+
+    /**
+     * 自动同步配电箱全部电表数据
+     *
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse autoSyncNodeMeterData() {
+        //todo 缺失统计逻辑
+
+        return null;
     }
 
 
