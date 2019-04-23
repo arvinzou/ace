@@ -18,14 +18,11 @@ public class CommonTest {
 
     @Test
     public void test() throws IOException {
-//        404
-//        System.out.println(LeApiToolKit.change(1));
-//        404
-//        System.out.println(LeApiToolKit.lightBrokenSum("", ""));
 
-
-        System.out.println("aaaaaaaa".hashCode());
-
+        //无数据返回
+//        System.out.println(LeApiToolKit.getBuildingDetail());
+//        System.out.println(LeApiToolKit.getLampStatus());
+        ;
     }
 
     private void generatorGUID(int num) {
