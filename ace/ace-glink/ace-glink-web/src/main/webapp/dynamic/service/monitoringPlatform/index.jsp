@@ -60,6 +60,7 @@
         display: flex;
         align-items: center;
         padding: 26px 0 15px 16px;
+
     }
     .shebei-ul>li+li{
         margin-top:14px;
