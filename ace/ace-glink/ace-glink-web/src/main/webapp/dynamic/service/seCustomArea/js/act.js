@@ -307,8 +307,3 @@ function syncCustomData() {
     });
 }
 
-function autotreeq(obj) {
-
-    $("input[name='areaNodeID']").val(obj);
-
-}

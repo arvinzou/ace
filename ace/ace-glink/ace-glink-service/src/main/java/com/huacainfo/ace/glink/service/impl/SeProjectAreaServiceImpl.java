@@ -381,7 +381,7 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
     public List<Tree> selectTreeList() throws Exception {
         CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
                 this.seProjectAreaDao.selectTreeList());
-        return commonTreeUtils.getTreeList("0");
+        return commonTreeUtils.getTreeList("top");
     }
 
     @Override
@@ -389,14 +389,13 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
         ProjectAreaOut o = SeApiToolKit.getAreaProjectInfo();
         int i = seProjectAreaDao.allClear();//数据清空
         list.clear(); //列表清空
-        String pid = GUIDUtil.getGUID();
-
+        String pid = o.getAreaNodeID();
         SeProjectArea r = new SeProjectArea();
         //第一条
         r.setId(pid);
         r.setStatus("1");
         r.setCreateDate(DateUtil.getNowDate());
-        r.setPid("0");
+        r.setPid("top");
         r.setProjectName(o.getProjectName());
         r.setAreaName(o.getProjectName());
         r.setAreaNodeCount(o.getAreaNodeCount());
@@ -421,8 +420,8 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
         if (obj.getAreaType() != 1) {
             List<ProjectAreaOut> outList = JsonUtil.toList(obj.getAreaNode(), ProjectAreaOut.class);
             for (ProjectAreaOut item : outList) {
-                String newPid = GUIDUtil.getGUID();
-                record = newObject(newPid, pid, projectName, item);
+                String newPid = obj.getAreaNodeID();
+                record = newObject(newPid, projectName, item);
                 if (item.getAreaType() == 1) {
                     list.add(record);
                     continue;
@@ -435,9 +434,9 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
 
     }
 
-    private SeProjectArea newObject(String id, String pid, String projectName, ProjectAreaOut in) {
+    private SeProjectArea newObject(String pid, String projectName, ProjectAreaOut in) {
         SeProjectArea r = new SeProjectArea();
-        r.setId(id);
+        r.setId(in.getAreaNodeID());
         r.setStatus("1");
         r.setCreateDate(DateUtil.getNowDate());
         //

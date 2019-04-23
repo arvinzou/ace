@@ -97,19 +97,19 @@
 
     <select id="selectTreeList" resultType="map">
 		SELECT
-		t.id ,
+	    t.id ID,
 		t.projectName,
-        t.areaNodeID ID,
+        t.areaNodeID ,
 		t.pid PID,
 		t.areaName TEXT,
-		t.areaNodeID SRC,
+		'' SRC,
 		'' HREF,
 		(SELECT
 		COUNT(*)
 		FROM
 		se_project_area
 		WHERE
-		se_project_area.pid = t.pid) CHILD_COUNT
+		se_project_area.pid = t.id) CHILD_COUNT
 		FROM
 		se_project_area t
 		ORDER BY t.id
