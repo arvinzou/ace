@@ -90,4 +90,9 @@
     from se_custom_area
     where areaNo=#{areaNo,jdbcType=VARCHAR}
   </select>
+
+    <update id="allClear">
+
+        truncate table se_custom_area;
+    </update>
 </mapper>

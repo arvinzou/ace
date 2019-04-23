@@ -43,7 +43,10 @@
                             区域数据：
                             <input id="cc1" name="areaNodeID" class="easyui-combotree"
                                    data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
-                lines:true," style='width:200px;line-height: 30px;height: 30px;'>
+                lines:true, onClick: function(e){
+                    $(this).tree('select');
+                    autotreeq(e.src);
+                }" style='width:200px;line-height: 30px;height: 30px;'>
                             <a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
                         </div>
                     </div>

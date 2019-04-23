@@ -68,9 +68,9 @@
                 <thead>
                 <tr>
 
-                    <th width="15%"> 定时任务序号</th>
+                    <th width="15%"> 定时任务号</th>
                     <th width="10%"> 定时任务名称</th>
-                    <th width="10%"> 定时任务状态</th>
+                    <th width="10%"> 是否有效</th>
                     <th width="10%"> 启动时间</th>
                     <th width="10%"> 调度任务号</th>
                     <th width="10%"> 状态</th>
@@ -105,9 +105,9 @@
         <td> \${item.timerID}</td>
         <td> \${item.timerName}</td>
         <td> {@if item.timerEnable==0}
-            <span class="label label-lg label-info">无效</span>
+            <span>无效</span>
             {@else if item.timerEnable==1}
-            <span class="label label-lg label-info">有效</span>
+            <span>有效</span>
             {@else}
             {@/if}
         </td>

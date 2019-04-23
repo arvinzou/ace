@@ -97,12 +97,12 @@
 
     <select id="selectTreeList" resultType="map">
 		SELECT
-		t.id ID,
+		t.id ,
 		t.projectName,
-        t.areaNodeID,
+        t.areaNodeID ID,
 		t.pid PID,
 		t.areaName TEXT,
-		'' SRC,
+		t.areaNodeID SRC,
 		'' HREF,
 		(SELECT
 		COUNT(*)

@@ -401,7 +401,7 @@ public class SeTimerDataServiceImpl implements SeTimerDataService {
     @Override
     public MessageResponse syncData(UserProp userProp) {
         TimerDataOut o = SeApiToolKit.getTimerData();
-        // seTimerDataDao.allClear();
+        seTimerDataDao.allClear();
         List<TimerDataOut.TimerData> outData = o.getTimerData();
         SeTimerData timerData;
         for (TimerDataOut.TimerData item : outData) {
@@ -434,6 +434,8 @@ public class SeTimerDataServiceImpl implements SeTimerDataService {
     @Override
     public MessageResponse updateTimer(SeTimerData obj, UserProp userProp) {
 
+        TimerDataOut.TimerData data = new TimerDataOut.TimerData();
+        Map<String, Object> o = SeApiToolKit.updateTimer(data);
 
         return null;
     }
@@ -520,147 +522,5 @@ public class SeTimerDataServiceImpl implements SeTimerDataService {
 
     }
 
-
-    public TimerDataOut testDate() {
-        String jsons = "{\n" +
-                "    \"TimerCount\": 2,\n" +
-                "    \"TimerData\": [\n" +
-                "        {\n" +
-                "            \"TimerID\": 1,\n" +
-                "            \"TimerName\": \"全开模式\",\n" +
-                "            \"TimerEnable\": 1,\n" +
-                "            \"StartTime\": \"19:00:00\",\n" +
-                "            \"TaskNo\": 1,\n" +
-                "            \"MonthEnable\": {\n" +
-                "                \"M1\": 1,\n" +
-                "                \"M2\": 1,\n" +
-                "                \"M2\": 1,\n" +
-                "                \"M3\": 1,\n" +
-                "                \"M4\": 1,\n" +
-                "                \"M5\": 1,\n" +
-                "                \"M6\": 1,\n" +
-                "                \"M7\": 1,\n" +
-                "                \"M8\": 1,\n" +
-                "                \"M9\": 1,\n" +
-                "                \"M10\": 1,\n" +
-                "                \"M11\": 1,\n" +
-                "                \"M12\": 1\n" +
-                "            },\n" +
-                "            \"DayEnable\": {\n" +
-                "                \"D1\": 1,\n" +
-                "                \"D2\": 1,\n" +
-                "                \"D3\": 1,\n" +
-                "                \"D4\": 1,\n" +
-                "                \"D5\": 1,\n" +
-                "                \"D6\": 1,\n" +
-                "                \"D7\": 1,\n" +
-                "                \"D8\": 1,\n" +
-                "                \"D9\": 1,\n" +
-                "                \"D10\": 1,\n" +
-                "                \"D11\": 1,\n" +
-                "                \"D12\": 1,\n" +
-                "                \"D13\": 1,\n" +
-                "                \"D14\": 1,\n" +
-                "                \"D15\": 1,\n" +
-                "                \"D16\": 1,\n" +
-                "                \"D17\": 1,\n" +
-                "                \"D18\": 1,\n" +
-                "                \"D19\": 1,\n" +
-                "                \"D20\": 1,\n" +
-                "                \"D21\": 1,\n" +
-                "                \"D22\": 1,\n" +
-                "                \"D23\": 1,\n" +
-                "                \"D24\": 1,\n" +
-                "                \"D25\": 1,\n" +
-                "                \"D26\": 1,\n" +
-                "                \"D27\": 1,\n" +
-                "                \"D28\": 1,\n" +
-                "                \"D29\": 1,\n" +
-                "                \"D30\": 1,\n" +
-                "                \"D31\": 1\n" +
-                "            },\n" +
-                "            \"WeekEnable\": {\n" +
-                "                \"W1\": 1,\n" +
-                "                \"W2\": 1,\n" +
-                "                \"W2\": 1,\n" +
-                "                \"W3\": 1,\n" +
-                "                \"W4\": 1,\n" +
-                "                \"W5\": 1,\n" +
-                "                \"W6\": 1,\n" +
-                "                \"W7\": 1\n" +
-                "            }\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"TimerID\": 2,\n" +
-                "            \"TimerName\": \"全关模式\",\n" +
-                "            \"TimerEnable\": 1,\n" +
-                "            \"StartTime\": \"23:00:00\",\n" +
-                "            \"TaskNo\": 4,\n" +
-                "            \"MonthEnable\": {\n" +
-                "                \"M1\": 1,\n" +
-                "                \"M2\": 1,\n" +
-                "                \"M2\": 1,\n" +
-                "                \"M3\": 1,\n" +
-                "                \"M4\": 1,\n" +
-                "                \"M5\": 1,\n" +
-                "                \"M6\": 1,\n" +
-                "                \"M7\": 1,\n" +
-                "                \"M8\": 1,\n" +
-                "                \"M9\": 1,\n" +
-                "                \"M10\": 1,\n" +
-                "                \"M11\": 1,\n" +
-                "                \"M12\": 1\n" +
-                "            },\n" +
-                "            \"DayEnable\": {\n" +
-                "                \"D1\": 1,\n" +
-                "                \"D2\": 1,\n" +
-                "                \"D3\": 1,\n" +
-                "                \"D4\": 1,\n" +
-                "                \"D5\": 1,\n" +
-                "                \"D6\": 1,\n" +
-                "                \"D7\": 1,\n" +
-                "                \"D8\": 1,\n" +
-                "                \"D9\": 1,\n" +
-                "                \"D10\": 1,\n" +
-                "                \"D11\": 1,\n" +
-                "                \"D12\": 1,\n" +
-                "                \"D13\": 1,\n" +
-                "                \"D14\": 1,\n" +
-                "                \"D15\": 1,\n" +
-                "                \"D16\": 1,\n" +
-                "                \"D17\": 1,\n" +
-                "                \"D18\": 1,\n" +
-                "                \"D19\": 1,\n" +
-                "                \"D20\": 1,\n" +
-                "                \"D21\": 1,\n" +
-                "                \"D22\": 1,\n" +
-                "                \"D23\": 1,\n" +
-                "                \"D24\": 1,\n" +
-                "                \"D25\": 1,\n" +
-                "                \"D26\": 1,\n" +
-                "                \"D27\": 1,\n" +
-                "                \"D28\": 1,\n" +
-                "                \"D29\": 1,\n" +
-                "                \"D30\": 1,\n" +
-                "                \"D31\": 1\n" +
-                "            },\n" +
-                "            \"WeekEnable\": {\n" +
-                "                \"W1\": 1,\n" +
-                "                \"W2\": 1,\n" +
-                "                \"W2\": 1,\n" +
-                "                \"W3\": 1,\n" +
-                "                \"W4\": 1,\n" +
-                "                \"W5\": 1,\n" +
-                "                \"W6\": 1,\n" +
-                "                \"W7\": 1\n" +
-                "            }\n" +
-                "        }\n" +
-                "    ]\n" +
-                "}";
-
-        TimerDataOut o = JsonUtil.toObject(jsons, TimerDataOut.class);
-
-        return o;
-    }
 
 }

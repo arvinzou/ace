@@ -364,6 +364,7 @@ public class SeCustomAreaServiceImpl implements SeCustomAreaService {
     @Override
     public MessageResponse syncCustomData(List<SeCustomArea> list, UserProp userProp) {
         CustomAreaOut o = SeApiToolKit.getCustomAreaInfo();
+        seCustomAreaDao.allClear();
         SeCustomArea area;
         List<CustomAreaOut.AreaData> itemData = o.getAreaData();
         int count = o.getAreaCount();
