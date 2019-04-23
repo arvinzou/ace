@@ -45,7 +45,7 @@
     </div>
 </div>
 <div class="content">
-    <div class="modal Timing">
+    <div style="display: none" class="modal Timing">
         <div class="modal-head">
             <span class="title">定时设置</span>
             <form id="fm-search">
@@ -58,7 +58,7 @@
             </form>
         </div>
         <div class="modal-body">
-            <table class="table-tg" style="border:1px solid rgba(12,129,135);">
+            <table class="table-tg" style="border:1px solid rgba(12,129,135,1);">
                 <tr>
                     <td class="tg-mvxc" width="10%">定时任务序号</td>
                     <td class="tg-mvxc" width="30%">定时任务名称</td>
@@ -76,7 +76,7 @@
         </div>
     </div>
 
-    <div class="modal Control">
+    <div style="display: none" class="modal Control">
         <div class="modal-head">
             <span class="title">定时设置</span>
                 <button class="activeBtn">
@@ -136,6 +136,40 @@
         </div>
     </div>
 
+    <div class="modal task">
+        <div class="modal-head">
+            <span class="title">任务管理</span>
+            <button class="activeBtn">
+                执行
+            </button>
+        </div>
+        <div class="modal-body">
+            <ul class="taskList">
+                <li>
+                    <div class="top">
+                            文字
+                    </div>
+                    <div class="bottom">
+                        <span class="status success">成功</span>
+                        <button>
+                            执行
+                        </button>
+                    </div>
+                </li>
+                <li>
+                    <div class="top">
+                        文字
+                    </div>
+                    <div class="bottom">
+                        <span class="status error">失败</span>
+                        <button>
+                            执行
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 </body>
 <%--列表juicer模板--%>
@@ -162,27 +196,6 @@
     </tr>
     {@/each}
 </script>
-<div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">详细</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-horizontal" role="form">
-                    <div class="form-body" id="fm-preview">
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
         <label class="col-md-2 view-label">主键</label>
