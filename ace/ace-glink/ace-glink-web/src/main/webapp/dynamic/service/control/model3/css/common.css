@@ -4,7 +4,7 @@
 	outline: 0;
 	box-sizing: border-box;
 	/*去除系统默认appearance的样式,常用于IOS下移除原生样式*/
-	-webkit-appearance: none;
+	/*-webkit-appearance: none;*/
 	/*当用户轻按一个链接或者JavaScript可点击元素时给元素覆盖一个高亮色
 如果想取消这个高亮，将值设置为全透明即可，比如transparent*/
 	-webkit-tap-highlight-color: transparent
@@ -39,6 +39,10 @@ ul {
 
 input {
 	border: 0
+}
+
+button{
+	border: none;
 }
 
 input::-webkit-input-placeholder,

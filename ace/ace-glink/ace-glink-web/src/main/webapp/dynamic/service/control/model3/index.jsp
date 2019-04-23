@@ -45,7 +45,7 @@
     </div>
 </div>
 <div class="content">
-    <div class="modal Timing">
+    <div class="modal Timing" style="display: none">
         <div class="modal-head">
             <span class="title">定时设置</span>
             <div class="inputGroup">
@@ -70,8 +70,8 @@
                     <td class="tg-84q5">定时任务名称1</td>
                     <td class="tg-84q5">有效</td>
                     <td class="tg-84q5">任务名称1</td>
-                    <td class="tg-84q5">2019-04-12   12:00:00</td>
-                    <td class="tg-84q5">查看  更新</td>
+                    <td class="tg-84q5">2019-04-12 12:00:00</td>
+                    <td class="tg-84q5">查看 更新</td>
 
                 </tr>
                 <tr class="tr">
@@ -79,7 +79,7 @@
                     <td class="tg-84q5">定时任务名称1</td>
                     <td class="tg-84q5">有效</td>
                     <td class="tg-84q5">任务名称1</td>
-                    <td class="tg-84q5">2019-04-12   12:00:00</td>
+                    <td class="tg-84q5">2019-04-12 12:00:00</td>
                     <td class="tg-84q5"></td>
                 </tr>
                 <tr class="tr">
@@ -87,8 +87,8 @@
                     <td class="tg-84q5">定时任务名称1</td>
                     <td class="tg-84q5">有效</td>
                     <td class="tg-84q5">任务名称1</td>
-                    <td class="tg-84q5">2019-04-12   12:00:00</td>
-                    <td class="tg-84q5">查看  更新</td>
+                    <td class="tg-84q5">2019-04-12 12:00:00</td>
+                    <td class="tg-84q5">查看 更新</td>
                 </tr>
             </table>
             <div class="paginationbar">
@@ -96,9 +96,71 @@
             </div>
         </div>
     </div>
+
+    <div class="modal Control">
+        <div class="modal-head">
+            <span class="title">定时设置</span>
+                <button class="activeBtn">
+                        执行
+                </button>
+        </div>
+        <div class="modal-body">
+            <div class="panel">
+                <div class="left">
+                    <ul class="months">
+                        <li class="active">一月</li>
+                        <li>二月</li>
+                        <li>三月</li>
+                        <li>四月</li>
+                        <li>五月</li>
+                        <li>六月</li>
+                        <li>七月</li>
+                        <li>八月</li>
+                        <li>九月</li>
+                        <li>十月</li>
+                        <li>十一月</li>
+                        <li>十二月</li>
+                    </ul>
+                </div>
+                <div class="right">
+                    <div class="heads">
+                        <button class="h-btn">全部日程模式</button>
+                        <button class="h-btn">全部日程模式</button>
+                        <button class="h-btn">全部日程模式</button>
+                    </div>
+                    <div class="table">
+                        <ul class="days">
+                            <li>
+                                <div class="day">
+                                        1
+                                </div>
+                                <div class="seled">
+                                    <div class="checkboxGroup">
+                                        <input id="d1-1" name="d1"  type="radio">
+                                        <label class="check1"  for="d1-1">日程模式</label>
+                                    </div>
+                                    <div class="checkboxGroup">
+                                        <input id="d1-2" name="d1" type="radio">
+                                        <label class="check2"  for="d1-2">节日模式</label>
+                                    </div>
+                                    <div class="checkboxGroup">
+                                        <input id="d1-3" name="d1" type="radio">
+                                        <label class="check3"  for="d1-3">重大节日模式</label>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 </body>
 <style type="text/css">
+
 
 
 </style>
