@@ -59,10 +59,10 @@ function initPage() {
     $("#dayCron").click(function () {
         $("input:radio[value='1']").prop("checked", "checked");
     });
-    $("#festivalCron").click(function () {
+    $("#jieri").click(function () {
         $("input:radio[value='2']").prop("checked", "checked");
     });
-    $("#greatCron").click(function () {
+    $("#zhong").click(function () {
         $("input:radio[value='3']").prop("checked", "checked");
     });
 }
@@ -164,9 +164,7 @@ function getPageList() {
         }
     })
 }
-
 var map = {};
-
 function getYearCronList() {
     var date = new Date;
     var month = date.getMonth() + 1;
@@ -190,14 +188,13 @@ function getYearCronList() {
                 map[id] = data[id];
             }
 
-
+            $('#s' + day).addClass('dayactive');
             $('#' + m).addClass('active');
             render($("#page-YearCronlist"), data[m], "tpl-YearCronlist");
-            $('#s' + day).addClass('dayactive');
+
         }
     });
 }
-
 //加载每月数据
 function setParams(m) {
     var url = contextPath + "/generalYearCron/syncData";
@@ -210,7 +207,6 @@ function setParams(m) {
         }
     });
 }
-
 //获取每月修改的数据
 function monthList() {
     var mid = $("#months li.active").attr("id");
@@ -226,7 +222,6 @@ function monthList() {
     console.log(map);
     execute();
 }
-
 //执行总控数据修改
 function execute() {
     $.ajax({
