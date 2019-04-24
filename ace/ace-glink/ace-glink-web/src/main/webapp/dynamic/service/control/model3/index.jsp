@@ -58,7 +58,7 @@
             </form>
         </div>
         <div class="modal-body">
-            <table class="table-tg" style="border:1px solid rgba(12,129,135);">
+            <table class="table-tg" style="border:1px solid rgb(12,129,135);">
                 <tr>
                     <td class="tg-mvxc" width="10%">定时任务序号</td>
                     <td class="tg-mvxc" width="30%">定时任务名称</td>
@@ -105,8 +105,8 @@
                 <div class="right">
                     <div class="heads">
                         <button class="h-btn" id="dayCron">全部日程模式</button>
-                        <button class="h-btn" id="festivalCron">全部节日模式</button>
-                        <button class="h-btn" id="greatCron">全部重大节日模式</button>
+                        <button class="h-btn" id="jieri">全部节日模式</button>
+                        <button class="h-btn" id="zhong">全部重大节日模式</button>
                     </div>
                     <div class="table">
                         <ul class="days" id="page-YearCronlist">
@@ -161,7 +161,7 @@
                 <label class="check2" for="\${+index+1}-b">节日模式</label>
             </div>
             <div class="checkboxGroup">
-                <input id="\${+index+1}-c" name="m\${+index+1}" type="radio" value="3" {@if item==3} checked {@/if}>
+                <input id="\${+index+1}-c" name='m\${+index+1}' type="radio" value="3" {@if item==3} checked {@/if}>
                 <label class="check3" for="\${+index+1}-c">重大节日模式</label>
             </div>
         </div>
