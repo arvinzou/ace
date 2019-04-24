@@ -45,7 +45,7 @@
     </div>
 </div>
 <div class="content">
-    <div style="display: none" class="modal Timing">
+    <div class="modal Timing" id="Timer" style="display: none;">
         <div class="modal-head">
             <span class="title">定时设置</span>
             <form id="fm-search">
@@ -58,7 +58,7 @@
             </form>
         </div>
         <div class="modal-body">
-            <table class="table-tg" style="border:1px solid rgba(12,129,135,1);">
+            <table class="table-tg" style="border:1px solid rgb(12,129,135);">
                 <tr>
                     <td class="tg-mvxc" width="10%">定时任务序号</td>
                     <td class="tg-mvxc" width="30%">定时任务名称</td>
@@ -76,58 +76,41 @@
         </div>
     </div>
 
-    <div style="display: none" class="modal Control">
+
+    <div class="modal Control" id="yearCron">
         <div class="modal-head">
-            <span class="title">定时设置</span>
-                <button class="activeBtn">
+            <span class="title">总控设置</span>
+            <button class="activeBtn" onclick="monthList();">
                         执行
                 </button>
         </div>
         <div class="modal-body">
             <div class="panel">
                 <div class="left">
-                    <ul class="months">
-                        <li class="active">一月</li>
-                        <li>二月</li>
-                        <li>三月</li>
-                        <li>四月</li>
-                        <li>五月</li>
-                        <li>六月</li>
-                        <li>七月</li>
-                        <li>八月</li>
-                        <li>九月</li>
-                        <li>十月</li>
-                        <li>十一月</li>
-                        <li>十二月</li>
+                    <ul class="months" id="months">
+                        <li id="m1">一月</li>
+                        <li id="m2">二月</li>
+                        <li id="m3">三月</li>
+                        <li id="m4">四月</li>
+                        <li id="m5">五月</li>
+                        <li id="m6">六月</li>
+                        <li id="m7">七月</li>
+                        <li id="m8">八月</li>
+                        <li id="m9">九月</li>
+                        <li id="m10">十月</li>
+                        <li id="m11">十一月</li>
+                        <li id="m12">十二月</li>
                     </ul>
                 </div>
                 <div class="right">
                     <div class="heads">
-                        <button class="h-btn">全部日程模式</button>
-                        <button class="h-btn">全部日程模式</button>
-                        <button class="h-btn">全部日程模式</button>
+                        <button class="h-btn" id="dayCron">全部日程模式</button>
+                        <button class="h-btn" id="jieri">全部节日模式</button>
+                        <button class="h-btn" id="zhong">全部重大节日模式</button>
                     </div>
                     <div class="table">
-                        <ul class="days">
-                            <li>
-                                <div class="day">
-                                        1
-                                </div>
-                                <div class="seled">
-                                    <div class="checkboxGroup">
-                                        <input id="d1-1" name="d1"  type="radio">
-                                        <label class="check1"  for="d1-1">日程模式</label>
-                                    </div>
-                                    <div class="checkboxGroup">
-                                        <input id="d1-2" name="d1" type="radio">
-                                        <label class="check2"  for="d1-2">节日模式</label>
-                                    </div>
-                                    <div class="checkboxGroup">
-                                        <input id="d1-3" name="d1" type="radio">
-                                        <label class="check3"  for="d1-3">重大节日模式</label>
-                                    </div>
-                                </div>
-                            </li>
+                        <ul class="days" id="page-YearCronlist">
+
                         </ul>
                     </div>
                 </div>
@@ -136,40 +119,6 @@
         </div>
     </div>
 
-    <div class="modal task">
-        <div class="modal-head">
-            <span class="title">任务管理</span>
-            <button class="activeBtn">
-                执行
-            </button>
-        </div>
-        <div class="modal-body">
-            <ul class="taskList">
-                <li>
-                    <div class="top">
-                            文字
-                    </div>
-                    <div class="bottom">
-                        <span class="status success">成功</span>
-                        <button>
-                            执行
-                        </button>
-                    </div>
-                </li>
-                <li>
-                    <div class="top">
-                        文字
-                    </div>
-                    <div class="bottom">
-                        <span class="status error">失败</span>
-                        <button>
-                            执行
-                        </button>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>
 </body>
 <%--列表juicer模板--%>
@@ -196,69 +145,36 @@
     </tr>
     {@/each}
 </script>
-<script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${data.o.id}
+<script id="tpl-YearCronlist" type="text/template">
+    {@each data as item, index}
+    <li id="s\${+index+1}">
+        <div class="day">
+            \${+index+1}
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">定时任务序号</label>
-        <div class="col-md-10">
-            \${data.o.timerID}
+        <div class="seled">
+            <div class="checkboxGroup">
+                <input id="\${+index+1}-a" name="m\${+index+1}" type="radio" value="1" {@if item==1} checked {@/if} />
+                <label class="check1" for="\${+index+1}-a">日程模式</label>
+            </div>
+            <div class="checkboxGroup">
+                <input id="\${+index+1}-b" name="m\${+index+1}" type="radio" value="2" {@if item==2} checked {@/if}>
+                <label class="check2" for="\${+index+1}-b">节日模式</label>
+            </div>
+            <div class="checkboxGroup">
+                <input id="\${+index+1}-c" name='m\${+index+1}' type="radio" value="3" {@if item==3} checked {@/if}>
+                <label class="check3" for="\${+index+1}-c">重大节日模式</label>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">定时任务名称</label>
-        <div class="col-md-10">
-            \${data.o.timerName}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">定时任务状态</label>
-        <div class="col-md-10">
-            \${data.o.timerEnable}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">启动时间</label>
-        <div class="col-md-10">
-            \${data.o.startTime}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">调度任务号</label>
-        <div class="col-md-10">
-            \${data.o.taskNo}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">备注</label>
-        <div class="col-md-10">
-            \${data.o.remark}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">状态</label>
-        <div class="col-md-10">
-            \${data.o.status}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建日期</label>
-        <div class="col-md-10">
-            \${data.o.createDate}
-        </div>
-    </div>
-
-
+    </li>
+    {@/each}
 </script>
 
 <style type="text/css">
 
 </style>
-<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+<%--<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>--%>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"
+        type="text/javascript"></script>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/loading.js?v=${cfg.version}" type="text/javascript"></script>

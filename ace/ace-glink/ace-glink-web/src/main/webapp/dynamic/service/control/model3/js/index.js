@@ -15,6 +15,7 @@ $(function () {
     getPageList();
     initEvents();
     initJuicerMethod();
+    getYearCronList();
 });
 
 
@@ -46,6 +47,23 @@ function initPage() {
             getPageList();
             return false;
         }
+    });
+
+    $("#months li").click(function () {
+        //  monthList();
+        $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式
+        $(this).addClass('active'); // 添加当前元素的样式
+        var m = $(this).attr("id");
+        setParams(m);
+    });
+    $("#dayCron").click(function () {
+        $("input:radio[value='1']").prop("checked", "checked");
+    });
+    $("#jieri").click(function () {
+        $("input:radio[value='2']").prop("checked", "checked");
+    });
+    $("#zhong").click(function () {
+        $("input:radio[value='3']").prop("checked", "checked");
     });
 }
 
@@ -145,4 +163,85 @@ function getPageList() {
             render($("#page-list"), rst.rows, "tpl-list");
         }
     })
+}
+var map = {};
+function getYearCronList() {
+    var date = new Date;
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var m = "m" + month;
+    var url = contextPath + "/generalYearCron/syncData";
+    startLoad();
+
+    $.getJSON(url, params, function (rst) {
+        stopLoad();
+
+        console.log(rst.value);
+        if (rst.status == 0) {
+            var data = rst.value;
+            // var nowmon=data[m];
+            //   var a = nowmon.substring(day - 1, day);
+            //   console.log(a);
+            var id;
+            for (var i = 1; i < 13; i++) {
+                id = "m" + i;
+                map[id] = data[id];
+            }
+
+            $('#s' + day).addClass('dayactive');
+            $('#' + m).addClass('active');
+            render($("#page-YearCronlist"), data[m], "tpl-YearCronlist");
+
+        }
+    });
+}
+//加载每月数据
+function setParams(m) {
+    var url = contextPath + "/generalYearCron/syncData";
+    startLoad();
+    $.getJSON(url, params, function (rst) {
+        stopLoad();
+        if (rst.status == 0) {
+            var data = rst.value;
+            render($("#page-YearCronlist"), data[m], "tpl-YearCronlist");
+        }
+    });
+}
+//获取每月修改的数据
+function monthList() {
+    var mid = $("#months li.active").attr("id");
+    console.log(mid);
+    var checkValue = '';
+    $('input:radio:checked').each(function () {
+        checkValue += $(this).val();
+    });
+    console.log(mid + ":" + checkValue);
+    if (map.hasOwnProperty(mid)) {
+        map[mid] = checkValue;
+    }
+    console.log(map);
+    execute();
+}
+//执行总控数据修改
+function execute() {
+    $.ajax({
+        url: contextPath + "/generalYearCron/updateGeneralCtrlCron",
+        type: "post",
+        async: false,
+        data: {
+            jsons: JSON.stringify(map)
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == "ok") {
+                // getPageList();
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }

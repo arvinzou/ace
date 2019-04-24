@@ -459,62 +459,7 @@ body {
 	background:rgba(26,41,51,1);
 }
 
-
-.task .taskList{
-
-}
-.task .taskList li{
-	width:1.25rem;
-	height:1.020833rem;
-	float: left;
-	margin: 0 0.09rem 0.104166rem 0;
-	border-radius: 0.03125rem;
-	overflow: hidden;
-}
-.task .taskList li:nth-child(7n+7){
-	margin: 0 0 0.104166rem 0;
-}
-
-.task .taskList li .top{
-	width:1.25rem;
-	height:0.65625rem;
-	background:rgba(0,255,255,1);
-	font-size:0.125rem;
-	font-family:MicrosoftYaHei;
-	font-weight:400;
-	color:rgba(255,255,255,1);
-	text-align: center;
-	line-height: 0.65625rem;
-}
-
-.task .taskList li .bottom{
-	height:0.364583rem;
-	background:#0E7980;
-	padding:0 0.1rem;
-	font-size:0.114583rem;
-	font-family:MicrosoftYaHei;
-	font-weight:400;
-	color:rgba(255,255,255,1);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.task .taskList li .bottom .success{
-	color: #3BE75B;
-}
-.task .taskList li .bottom .error{
-	color: #FE2626;
-}
-.task .taskList li .bottom button{
-	height:0.21875rem;
-	background:rgba(7,169,174,1);
-	border-radius:2px;
-	padding: 0 0.1rem;
-	color:rgba(255,255,255,1);
-	cursor: pointer;
-}
-
-.task .taskList li .bottom button:active{
-	background:rgb(5, 142, 146);
+.dayactive {
+	background: rgba(12, 133, 140, 1);
+	color: #fff;
 }
