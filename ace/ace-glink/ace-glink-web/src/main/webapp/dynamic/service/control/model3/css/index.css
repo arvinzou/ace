@@ -459,20 +459,9 @@ body {
 	background:rgba(26,41,51,1);
 }
 
-
-.task .taskList{
-
-}
-.task .taskList li{
-	width:1.25rem;
-	height:1.020833rem;
-	float: left;
-	margin: 0 0.09rem 0.104166rem 0;
-	border-radius: 0.03125rem;
-	overflow: hidden;
-}
-.task .taskList li:nth-child(7n+7){
-	margin: 0 0 0.104166rem 0;
+.dayactive {
+	background: rgba(12, 133, 140, 1);
+	color: #fff;
 }
 
 .task .taskList li .top{

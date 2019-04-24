@@ -55,8 +55,9 @@ public class GeneralYearCronController extends GLinkBaseController {
      */
     @RequestMapping(value = "/updateGeneralCtrlCron")
     @ResponseBody
-    public Map<String, Object> updateGeneralCtrlCron(YearCron y) throws Exception {
-        Map<String, Object> o = SeApiToolKit.updateGeneralCtrlCron(y);
+    public Map<String, Object> updateGeneralCtrlCron(String jsons) throws Exception {
+        YearCron cron = JsonUtil.toObject(jsons, YearCron.class);
+        Map<String, Object> o = SeApiToolKit.updateGeneralCtrlCron(cron);
         return o;
     }
 
