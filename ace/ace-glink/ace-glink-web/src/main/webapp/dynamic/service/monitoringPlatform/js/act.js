@@ -1,280 +1,192 @@
 var loading = {};
 var params = {limit: 10};
 window.onload = function () {
-    // initPage();
-    initEvents();
-    initJuicerMethod();
-    initCondition();
+
 };
 
-
-var dtPickerOptions = {
-    format: 'yyyy-mm-dd hh:ii:ss',
-    language: 'zh-CN',
-    minView: 'month',  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
-    weekStart: 1,
-    todayBtn: true,//显示‘今日’按钮
-    autoclose: true,
-    todayHighlight: 1,
-    startView: 2,
-    clearBtn: true,//清除按钮
-    forceParse: 0
+//温度湿度canvas绘图
+var canvasPanel = function(){
+    this.splitNum = 5;    //刻度值
+    this.lineMaxlength = 8;
+    this.lineMinLength = 3;
+    this.danwei = "℃";
+    this.MaxNum = 100;
+    this.MinNum = 0;
+    this.bgColor = 'rgb(3,3,195)';
+    this.fontColor = 'rgb(3,3,195)';
+    this.SplitfontSize =  '12';
+    this.fontSize = '18';
+    this.fontWeight = 'bold';
+    this.SplitfontWeight = 'bold';
+    this.fontFamily = 'Arial';
+    this.SplitfontFamily = 'Arial';
+    this.SplitfontColor = '#666';
+    this.background = 'transparent';
+    this.img1 = new Image();
+    this.img1.src="./img/glassBody.png";
+    //绘制球部
+    this.img=new Image();
+    this.img.src="./img/glassBottom12.png";
+    this.current = 20;  //当前数值
+    this.timer = null;
+    this.title = 'aa';
 }
-function initCondition() {
-    dtPickerOptions.format = 'yyyy-mm-dd';
-    //
-    initDatetimepicker('p-startDt', dtPickerOptions);
-    initDatetimepicker('p-endDt', dtPickerOptions);
-}
+canvasPanel.prototype.init =function(canvasId){
+    var $this = this;
+    //放大缩小的比例
+    $this.nowWidth = $('#'+canvasId).width();
+    $this.nowHeight = $('#'+canvasId).height();
+    if($('#'+canvasId).find('canvas').length>0){
+        $('#'+canvasId).empty();
+    }
+    $('#'+canvasId).append('<canvas width='+$this.nowWidth+'px height='+$this.nowHeight +'px style="background:'+$this.background+'"></canvas>');
+    $this.myCanvas = $('#'+canvasId).find('canvas')[0];
+    $this.context = $this.myCanvas.getContext('2d');
+    //放大缩小的倍数
+    $this.times = Math.min((this.nowWidth/100),(this.nowHeight/220)).toFixed(2);
+    $this.splitHeight = (128/$this.splitNum).toFixed(2);
 
-/*控制器映射关系初始化分页*/
-function initPage() {
-    $.jqPaginator('#pagination1', {
-        totalCounts: 1,
-        pageSize: params.limit,
-        visiblePages: 10,
-        currentPage: 1,
-        prev: "<li class='prev'><a href='javascript:;'>上一页</a></li>",
-        next: "<li class='next'><a href='javascript:;'>下一页</a></li>",
-        page: "<li class='page'><a href='javascript:;'>{{page}}</a></li>",
-        onPageChange: function (num, type) {
-            params['start'] = (num - 1) * params.limit;
-            params['initType'] = type;
-            getPageList();
+    $this.SplitFontSize =  Math.round(12*$this.times);
+    $this.ValueFontSize = Math.round(16*$this.times);
+    //清空画布
+    $this.context.clearRect(0,0,$this.myCanvas.offsetWidth,$this.myCanvas.offsetHeight);
+
+    //绘制圆顶
+    var img2 = new Image();
+    img2.src="./img/glassTop.png";
+    img2.onload=function(){
+        $this.context.drawImage(img2,52*$this.times,0,34*$this.times,12*$this.times);
+    }
+
+    if($this.img.complete) { // 如果图片已经存在于浏览器缓存，直接调用回调函数
+        $this.paintBottom();//绘制柱体,水银球和底座，刻度
+        $this.paintFont();
+        $this.paintNowValue($this.current);
+        $this.paintSplit();
+        return false; // 直接返回，不用再处理onload事件
+    }
+    $this.img.onload = function(){
+        $this.paintBottom();
+        $this.paintFont();
+        $this.paintNowValue($this.current);
+        $this.paintSplit();
+        $this.paintTitle($this.title);
+    }
+}
+//绘制刻度值
+canvasPanel.prototype.paintFont = function (){
+    var $this = this;
+    $this.value = (($this.MaxNum-$this.MinNum)/$this.splitNum).toFixed(2);
+    var fontStyle = $this.SplitfontWeight+' '+Math.round($this.SplitfontSize*$this.times)+'px '+$this.SplitfontFamily;
+    //设置字体样式
+    $this.context.font = fontStyle;
+    //设置字体填充颜色
+    $this.context.fillStyle = $this.SplitfontColor;
+    //从坐标点(50,50)开始绘制文字//绘制刻度线
+    // for(var i=0;i<=$this.splitNum;i++){
+    //     var zhi = ($this.MaxNum-$this.value*i).toFixed(1);
+    //     $this.context.fillText(zhi+$this.danwei, 3*$this.times, (18+$this.splitHeight*i)*$this.times);
+    // }
+}
+//绘制刻度
+canvasPanel.prototype.paintSplit = function(){
+    var $this = this;
+    var smallSplit = ($this.splitHeight/5).toFixed(2);
+    for(var i=0;i<$this.splitNum;i++){
+        $this.context.strokeStyle=$this.bgColor;
+        $this.context.lineWidth=1;
+        $this.context.lineCap='square';
+        $this.context.beginPath();
+        $this.context.moveTo(60*$this.times,(13+$this.splitHeight*i)*$this.times);
+        $this.context.lineTo((60+$this.lineMaxlength)*$this.times,(13+$this.splitHeight*i)*$this.times);
+        $this.context.stroke();
+        $this.context.closePath();
+        for(var j=1;j<5;j++){
+            $this.context.beginPath();
+            $this.context.moveTo(60*$this.times,(13+$this.splitHeight*i+smallSplit*j)*$this.times);
+            $this.context.lineTo((60+$this.lineMinLength)*$this.times,(13+$this.splitHeight*i+smallSplit*j)*$this.times);
+            $this.context.stroke();
+            $this.context.closePath();
         }
-    });
-
-    $('#fm-search').ajaxForm({
-        beforeSubmit: function (formData, jqForm, options) {
-            $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
-            });
-            params['initType'] = 'init';
-            params['start'] = 0;
-            getPageList();
-            return false;
+    }
+}
+//绘制柱体和球部
+canvasPanel.prototype.paintBottom = function(){
+    var $this=this;
+    $this.context.clearRect(45*$this.times,12*$this.times,48*$this.times,183*$this.times);
+    if(!$this.img1.complete){
+        $this.img1.onload=function(){
+            $this.context.drawImage($this.img1,52*$this.times,13*$this.times,34*$this.times,130*$this.times);
         }
-    });
-}
+    }else{
+        $this.context.drawImage($this.img1,52*$this.times,13*$this.times,34*$this.times,130*$this.times);//水银柱背景部分
+    }
+    $this.context.drawImage($this.img,45*$this.times,143*$this.times,48*$this.times,52*$this.times);//绘制水银球体部分
 
-function setParams(key, value) {
-    params[key] = value;
-    getPageList();
-}
+    $this.context.beginPath();
+    $this.context.fillStyle=$this.bgColor;/*设置水银柱填充颜色*/
+    $this.context.fillRect(60*$this.times,142*$this.times,19*$this.times,12*$this.times);/*绘制一个矩形，前两个参数决定开始位置，后两个分别是矩形的宽和高*/
+    $this.context.closePath();
 
-/*控制器映射关系加载表格数据*/
-function getPageList() {
-    var url = contextPath + "/mapCtrlBuilding/findMapCtrlBuildingList";
-    params['name'] = $("input[name=keyword]").val();
-    startLoad();
-    $.getJSON(url, params, function (rst) {
-        stopLoad();
-        if (rst.status == 0) {
-            if (params.initType == "init") {
-                $('#pagination1').jqPaginator('option', {
-                    totalCounts: rst.total == 0 ? 1 : rst.total,
-                    currentPage: 1
-                });
-            }
-            render($("#page-list"), rst.rows, "tpl-list");
+    var g1 = $this.context.createRadialGradient(65*$this.times,160*$this.times,0,65*$this.times,164*$this.times,12*$this.times);
+    g1.addColorStop(0.1, 'rgb(220,220,220)');
+    g1.addColorStop(1, $this.bgColor);  //球体背景色
+    $this.context.fillStyle = g1;
+    $this.context.beginPath();
+    $this.context.arc(69*$this.times,167*$this.times,17*$this.times,0, Math.PI * 2, true);
+    $this.context.closePath();
+    $this.context.fill();
+}
+//绘制当前值及条形柱值
+canvasPanel.prototype.paintNowValue = function (num){
+    var $this=this;
+    if(num>$this.MaxNum){
+        num = $this.MaxNum;
+    }else if(num<$this.MinNum){
+        num = $this.MinNum;
+    }
+    //当前值所在位置百分比
+    var percentage = (num-$this.MinNum)/($this.MaxNum-$this.MinNum);
+    var mHeight = Math.round((141-13)*$this.times * percentage);
+    $this.context.clearRect(45*$this.times,12*$this.times,48*$this.times,131*$this.times);
+    $this.context.clearRect(0,195*$this.times,$this.nowWidth,40*$this.times);
+
+    $this.context.drawImage($this.img1,52*$this.times,12*$this.times,34*$this.times,131*$this.times);
+
+    $this.context.beginPath();
+    $this.context.fillStyle=$this.bgColor;/*设置填充颜色*/
+    $this.context.fillRect(59*$this.times,(141*$this.times-mHeight),20*$this.times,10*$this.times+mHeight);//绘制一个矩形，前两个参数决定开始位置，后两个分别是矩形的宽和高
+    $this.context.closePath();
+    $this.paintSplit();
+
+    //设置字体样式
+    var fontStyle = $this.fontWeight+' '+Math.round($this.fontSize*$this.times)+'px '+$this.fontFamily;
+    $this.context.font = fontStyle;
+    //设置字体填充颜色
+    $this.fontColor = $this.bgColor;
+    // $this.context.fillStyle = $this.fontColor;
+    $this.context.fillStyle = '#fff';
+    //从坐标点(50,50)开始绘制文字
+    if($this.MinNum<0){
+        $this.context.fillText(num+$this.danwei,110*$this.times,1.1*($this.MaxNum-num));
+    }else if($this.MinNum==0){
+        if($this.current > 90){
+            $this.context.fillText(num+$this.danwei,110*$this.times,12);
+        }else{
+            $this.context.fillText(num+$this.danwei,110*$this.times,1.3*($this.MaxNum-num));
         }
-    })
-}
 
-/*页面渲染*/
-// function render(obj, data, tplId) {
-//     var tpl = document.getElementById(tplId).innerHTML;
-//     var html = juicer(tpl, {
-//         data: data,
-//     });
-//     $(obj).html(html);
-// }
-
-
-/*控制器映射关系添加*/
-// function add(type) {
-//     window.location.href = 'add/index.jsp?id=' + urlParams.id;
-// }
-
-/*控制器映射关系编辑*/
-// function edit(did) {
-//     window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
-// }
-
-/*查看详情*/
-// function detail(id) {
-//     var url = contextPath + "/mapCtrlBuilding/selectMapCtrlBuildingByPrimaryKey";
-//     $.getJSON(url, {id: id}, function (result) {
-//         if (result.status == 0) {
-//             var navitem = document.getElementById('tpl-detail').innerHTML;
-//             var html = juicer(navitem, {data: result.value});
-//             $("#detail-info").html(html);
-//             $("#modal-detail").modal("show");
-//         }
-//     })
-// }
-
-function importInit() {
-    reset_uploader();
-}
-
-// function importXls() {
-//     $('#modal-import').modal('show');
-// }
-
-
-function initEvents() {
-
-
+    }
 
 }
-
-// /*删除*/
-// function del(id) {
-//     var args = {id: id};
-//     startLoad();
-//     $.ajax({
-//         url: contextPath + "/mapCtrlBuilding/deleteMapCtrlBuildingByMapCtrlBuildingId",
-//         type: "post",
-//         async: false,
-//         data: {jsons: JSON.stringify(args)},
-//         success: function (rst) {
-//             stopLoad();
-//             alert(rst.errorMessage);
-//             if (rst.status == 0) {
-//                 getPageList();
-//             }
-//         },
-//         error: function () {
-//             stopLoad();
-//             alert("对不起出错了！");
-//         }
-//     });
-// }
-//
-// /*控制器映射关系上架*/
-// function online(id) {
-//     if (confirm("确定要上架吗？")) {
-//         startLoad();
-//         $.ajax({
-//             url: contextPath + "/mapCtrlBuilding/updateStatus",
-//             type: "post",
-//             async: false,
-//             data: {
-//                 id: id,
-//                 status: '1'
-//             },
-//             success: function (rst) {
-//                 stopLoad();
-//                 if (rst.status == 0) {
-//                     getPageList();
-//                 } else {
-//                     alert(rst.errorMessage);
-//                 }
-//             },
-//             error: function () {
-//                 stopLoad();
-//                 alert("对不起，出错了！");
-//             }
-//         });
-//     }
-// }
-//
-// /*控制器映射关系下架*/
-// function outline(id) {
-//     if (confirm("确定要下架吗？")) {
-//         startLoad();
-//         $.ajax({
-//             url: contextPath + "/mapCtrlBuilding/updateStatus",
-//             type: "post",
-//             async: false,
-//             data: {
-//                 id: id,
-//                 status: '0'
-//             },
-//             success: function (rst) {
-//                 stopLoad();
-//                 if (rst.status == 0) {
-//                     getPageList();
-//                 } else {
-//                     alert(rst.errorMessage);
-//                 }
-//             },
-//             error: function () {
-//                 stopLoad();
-//                 alert("对不起，出错了！");
-//             }
-//         });
-//     }
-// }
-
-//juicer自定义函数
-// function initJuicerMethod() {
-//     juicer.register('rsd', rsd);
-//     juicer.register('parseStatus', parseStatus);
-// }
-
-/**
- * 状态解析
- */
-// function parseStatus(status) {
-//     switch (status) {
-//         case '0':
-//             return "删除";
-//         case '1':
-//         default:
-//             return "0";
-//     }
-// }
-
-// function initPreview(id) {
-//     startLoad();
-//     $.ajax({
-//         url: contextPath + "/mapCtrlBuilding/selectMapCtrlBuildingByPrimaryKey",
-//         type: "post",
-//         async: false,
-//         data: {
-//             id: id
-//         },
-//         success: function (result) {
-//             stopLoad();
-//             if (result.status == 0) {
-//                 var data = {};
-//                 data['o'] = result.value;
-//                 render('#fm-preview', data, 'tpl-preview');
-//             } else {
-//                 alert(result.errorMessage);
-//             }
-//         },
-//         error: function () {
-//             stopLoad();
-//             alert("对不起出错了！");
-//         }
-//     });
-// }
-
-// function initForm(id) {
-//     startLoad();
-//     $.ajax({
-//         url: contextPath + "/mapCtrlBuilding/selectMapCtrlBuildingByPrimaryKey",
-//         type: "post",
-//         async: false,
-//         data: {
-//             id: id
-//         },
-//         success: function (result) {
-//             stopLoad();
-//             if (result.status == 0) {
-//                 var data = {};
-//                 data['o'] = result.value;
-//                 render('#fm-audit', data, 'tpl-fm');
-//             } else {
-//                 alert(result.errorMessage);
-//             }
-//         },
-//         error: function () {
-//             stopLoad();
-//             alert("对不起出错了！");
-//         }
-//     });
-// }
+canvasPanel.prototype.paintTitle = function (title) {
+    var $this=this;
+    //设置字体样式
+    var fontStyle = $this.fontWeight+' '+Math.round($this.fontSize*$this.times)+'px '+$this.fontFamily;
+    $this.context.font = fontStyle;
+    //设置字体填充颜色
+    $this.fontColor = $this.bgColor;
+    // $this.context.fillStyle = $this.fontColor;
+    $this.context.fillStyle = '#00D6D9';
+    $this.context.fillText(title,45*$this.times,210*$this.times);
+}

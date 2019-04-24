@@ -1,15 +1,17 @@
 package com.huacainfo.ace.glink.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.glink.model.SeNode;
 import com.huacainfo.ace.glink.model.SeNodeMonitorDeviceCh;
-import com.huacainfo.ace.glink.vo.SeNodeMonitorQVo;
 import com.huacainfo.ace.glink.vo.SeNodeMonitorVo;
 import com.huacainfo.ace.glink.vo.SeNodeQVo;
 import com.huacainfo.ace.glink.vo.SeNodeVo;
+
+import java.util.List;
 
 /**
  * @author: Arvin
@@ -127,4 +129,5 @@ public interface SeNodeService {
      */
     MessageResponse syncNodeMeterData(UserProp curUserProp);
 
+    List<Tree> getNodeTreeList(String id);
 }

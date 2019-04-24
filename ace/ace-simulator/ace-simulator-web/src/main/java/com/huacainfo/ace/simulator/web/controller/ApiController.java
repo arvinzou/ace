@@ -6,6 +6,9 @@ import com.huacainfo.ace.common.tools.FileUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @ClassName ApiController
  * @Description TODO
@@ -76,6 +79,11 @@ public class ApiController extends SamulatorBaseController {
             /**
              ***************************************
              */
+            /**
+             * 3.13、执行一键控制任务（InterFaceType=13）   --  页面手动调用
+             */
+            case 13:
+                return rtnOk();
             //3.14-报警信息推送
 //            case 99:
 //                return JSON.parseObject(FileUtil.ReadFile(path + "17-总控定时计划.Json", FileUtil.UTF_8));
@@ -86,12 +94,19 @@ public class ApiController extends SamulatorBaseController {
 //            //3.20-修改总控全年排程（InterFaceType=20）
 //            case 20:
 //                return JSON.parseObject(FileUtil.ReadFile(path + "03-单个配电箱数据.Json", FileUtil.UTF_8));
-//            //3.21-修改当天总控模式（InterFaceType=21）
-//            case 21:
-//                return JSON.parseObject(FileUtil.ReadFile(path + "03-单个配电箱数据.Json", FileUtil.UTF_8));
+            //3.21-修改当天总控模式（InterFaceType=21）
+            case 21:
+                return rtnOk();
         }
 
 
         return "hello world!~";
+    }
+
+    private Map<String, String> rtnOk() {
+        Map<String, String> map = new HashMap<>();
+        map.put("Status", "ok");
+
+        return map;
     }
 }

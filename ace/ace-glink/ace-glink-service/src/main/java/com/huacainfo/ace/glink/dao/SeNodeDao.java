@@ -6,6 +6,7 @@ import com.huacainfo.ace.glink.vo.SeNodeVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SeNodeDao {
 
@@ -29,4 +30,6 @@ public interface SeNodeDao {
     int isExist(SeNode record);
 
     int allClear();
+
+    List<Map<String, Object>> selectNodeTreeList();
 }
