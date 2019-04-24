@@ -395,53 +395,29 @@ public class SeNodeServiceImpl implements SeNodeService {
 
     private void recurInsertMonitorDeviceCH(NodeMonitorDataOut.DeviceData item) {
         //CH1Value
-        if (item.getCH1Value() != null) {
-            insertMonitorDeviceCH("CH1Value", item.getDeviceCode(), item.getCH1Value());
-        }
+        insertMonitorDeviceCH("CH1Value", item.getDeviceCode(), item.getCH1Value());
         //CH2Value
-        if (item.getCH2Value() != null) {
-            insertMonitorDeviceCH("CH2Value", item.getDeviceCode(), item.getCH2Value());
-        }
+        insertMonitorDeviceCH("CH2Value", item.getDeviceCode(), item.getCH2Value());
         //CH3Value
-        if (item.getCH3Value() != null) {
-            insertMonitorDeviceCH("CH3Value", item.getDeviceCode(), item.getCH3Value());
-        }
+        insertMonitorDeviceCH("CH3Value", item.getDeviceCode(), item.getCH3Value());
         //CH4Value
-        if (item.getCH4Value() != null) {
-            insertMonitorDeviceCH("CH4Value", item.getDeviceCode(), item.getCH4Value());
-        }
+        insertMonitorDeviceCH("CH4Value", item.getDeviceCode(), item.getCH4Value());
         //CH5Value
-        if (item.getCH5Value() != null) {
-            insertMonitorDeviceCH("CH5Value", item.getDeviceCode(), item.getCH5Value());
-        }
+        insertMonitorDeviceCH("CH5Value", item.getDeviceCode(), item.getCH5Value());
         //CH6Value
-        if (item.getCH6Value() != null) {
-            insertMonitorDeviceCH("CH6Value", item.getDeviceCode(), item.getCH6Value());
-        }
+        insertMonitorDeviceCH("CH6Value", item.getDeviceCode(), item.getCH6Value());
         //CH7Value
-        if (item.getCH7Value() != null) {
-            insertMonitorDeviceCH("CH7Value", item.getDeviceCode(), item.getCH7Value());
-        }
+        insertMonitorDeviceCH("CH7Value", item.getDeviceCode(), item.getCH7Value());
         //CH8Value
-        if (item.getCH8Value() != null) {
-            insertMonitorDeviceCH("CH8Value", item.getDeviceCode(), item.getCH8Value());
-        }
+        insertMonitorDeviceCH("CH8Value", item.getDeviceCode(), item.getCH8Value());
         //CH9Value
-        if (item.getCH9Value() != null) {
-            insertMonitorDeviceCH("CH9Value", item.getDeviceCode(), item.getCH9Value());
-        }
+        insertMonitorDeviceCH("CH9Value", item.getDeviceCode(), item.getCH9Value());
         //CH10Value
-        if (item.getCH10Value() != null) {
-            insertMonitorDeviceCH("CH10Value", item.getDeviceCode(), item.getCH10Value());
-        }
+        insertMonitorDeviceCH("CH10Value", item.getDeviceCode(), item.getCH10Value());
         //CH11Value
-        if (item.getCH11Value() != null) {
-            insertMonitorDeviceCH("CH11Value", item.getDeviceCode(), item.getCH11Value());
-        }
+        insertMonitorDeviceCH("CH11Value", item.getDeviceCode(), item.getCH11Value());
         //CH12Value
-        if (item.getCH12Value() != null) {
-            insertMonitorDeviceCH("CH12Value", item.getDeviceCode(), item.getCH12Value());
-        }
+        insertMonitorDeviceCH("CH12Value", item.getDeviceCode(), item.getCH12Value());
     }
 
     private int insertMonitorDeviceCH(String CHName, String deviceCode, NodeMonitorDataOut.CHValue data) {

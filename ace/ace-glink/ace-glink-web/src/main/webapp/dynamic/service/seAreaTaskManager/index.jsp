@@ -1,108 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
-<html>
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title></title>
+    <title>强电-任务管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="${cfg.sys_name}" name="description"/>
+    <jsp:include page="/dynamic/common/header.jsp"/>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<script src="js/index.min.js" type="text/javascript" charset="utf-8"></script>
-<link rel="stylesheet" type="text/css" href="css/common.css"/>
-<link rel="stylesheet" href="css/index.css"/>
-<%
-    session.setAttribute("portalPath", "/portal");
-%>
-<script type="text/javascript">
-    var contextPath = '${pageContext.request.contextPath}';
-    var portalPath = '${portalPath}';
-    var version = '${cfg.version}';
-    var fastdfs_server = '${cfg.fastdfs_server}';
-    var activeSyId = '${SESSION_USERPROP_KEY.activeSyId}';
-    var portalType = '${SESSION_USERPROP_KEY.cfg.portalType}';
-    var default_page_list = [${cfg.default_page_list}];
-</script>
 <body>
-<div class="head">
-    <div class="logo">
-        <img src="img/logo.png" alt=""/> 江汉区照明控制平台
-    </div>
-    <div class="btns">
-        <div class="btn">
-            <p class="cn">任务管理</p>
-            <p class="en">Task Management</p>
-        </div>
-        <div class="btn">
-            <p class="cn">场景执行</p>
-            <p class="en">Scenario Execution</p>
-        </div>
-        <div class="btn">
-            <p class="cn">定时设置</p>
-            <p class="en">Timing Settings</p>
-        </div>
-        <div class="btn">
-            <p class="cn">总控设置</p>
-            <p class="en">Control Set</p>
-        </div>
-    </div>
-</div>
-<div class="content">
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<div class="portlet light">
 
-    <div class="modal task">
-        <div class="modal-head">
-            <span class="title">任务管理</span>
-            <div class="area-search">
-                所属区域：
-                <input id="areaNodeID" class="easyui-combotree"
-                       data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
-                lines:true," style='min-width:245px;height: 25px;'>
+    <div class="portlet-body">
+
+        <div class="row custom-toolbar">
+            <div class="col-md-7">
+            </div>
+
+            <div class="col-md-5">
+
+                <form id="fm-search">
+
+                    <div class="input-group">
+                        所属区域：
+                        <input id="areaNodeID" class="easyui-combotree"
+                               data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
+                lines:true," style='width:255px;line-height: 30px;height: 30px;'>
+                    </div>
+
+                </form>
             </div>
 
         </div>
-        <div class="modal-body">
-            <%--list--%>
-            <ul class="taskList" id="page-list">
+        <%--page content--%>
+        <div class="table-scrollable">
+            <div id="page-list">
 
-            </ul>
-
-            <%--分页页脚--%>
-            <div class="paginationbar">
-                <ul class="pagination" id="pagination1"></ul>
             </div>
         </div>
+        <%--分页页脚--%>
+        <div class="paginationbar">
+            <ul class="pagination" id="pagination1"></ul>
+        </div>
+
     </div>
-</div>
+
+
+    <%--=============common jsp-suffix===============--%>
+    <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+    <%--==============common jsp-suffix==============--%>
 </body>
+
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
-    <li>
-        <div class="top">
-            \${item.taskName}
+    <div class="mt-element-card mt-element-overlay">
+        <div class="mt-card-item card-box-item">
+
+            <div class="mt-card-avatar card-box-avatar">
+                <p class="mt-card-name task-name">\${item.taskName}</p>
+            </div>
+
+            <div class="mt-card-content card-box-content">
+
+                <div class="mt-card-social">
+                    {@if item.exeState == 'ok'}
+                    <p class="mt-card-desc p-ok">\${parseExeState(item.exeState)}</p>
+                    {@else}
+                    <p class="mt-card-desc p-error">\${parseExeState(item.exeState)}</p>
+                    {@/if}
+                    <button type="button" class="btn" onclick="execute('\${item.areaNodeID}', '\${item.taskNo}')">执行
+                    </button>
+                </div>
+
+            </div>
         </div>
-        <div class="bottom">
-            {@if item.exeState == 'ok'}
-            <span class="status success">\${parseExeState(item.exeState)}</span>
-            {@else}
-            <span class="status error">\${parseExeState(item.exeState)}</span>
-            {@/if}
-            <button name="btnExecute" onclick="execute('\${item.areaNodeID}', '\${item.taskNo}')"> 执行</button>
-        </div>
-    </li>
+    </div>
     {@/each}
 </script>
-
-<style type="text/css">
+﻿
+<style>
 
 </style>
-<%----%>
-<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
-<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
-<script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
-<script src="${portalPath}/content/common/js/loading.js?v=${cfg.version}" type="text/javascript"></script>
-<script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
-<script src="${portalPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js?v=V1.0.3"
-        type="text/javascript"></script>
-<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
-<%--easyui--%>
+<jsp:include page="/dynamic/common/footer.jsp"/>
 <link rel="stylesheet" type="text/css"
       href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
 <link rel="stylesheet" type="text/css"
@@ -111,4 +100,9 @@
         src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
 <script type="text/javascript"
         src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 </html>
