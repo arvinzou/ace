@@ -12,6 +12,9 @@ import java.util.List;
  */
 public class MeterBoxOut extends BaseModel {
 
+    public MeterBoxOut() {
+    }
+
     public MeterBoxOut(int nodeMeterCount, List<MeterData> nodeMeterData) {
         NodeMeterCount = nodeMeterCount;
         NodeMeterData = nodeMeterData;

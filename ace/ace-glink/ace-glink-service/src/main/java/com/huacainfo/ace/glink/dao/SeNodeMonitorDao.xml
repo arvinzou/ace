@@ -19,6 +19,7 @@
         <result column="doorStatus" jdbcType="VARCHAR" property="doorStatus"/>
         <result column="meterID" jdbcType="VARCHAR" property="meterID"/>
         <result column="meterValue" jdbcType="VARCHAR" property="meterValue"/>
+        <result column="meterValueUnit" jdbcType="VARCHAR" property="meterValueUnit"/>
         <result column="meterReportTime" jdbcType="VARCHAR" property="meterReportTime"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
@@ -27,7 +28,7 @@
     <sql id="Base_Column_List">
     id, nodeID, reportTime, gateStatus, gateReportTime, routeStatus, routeSignal, routeReportTime, 
     currentPreset, presetCaption, presetReportTime, temperature, humidity, wSDReportTime, 
-    doorStatus, meterID, meterValue, meterReportTime, remark, status, createDate
+    doorStatus, meterID, meterValue, meterReportTime, remark, status, createDate, meterValueUnit
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -46,7 +47,7 @@
       presetCaption, presetReportTime, temperature, 
       humidity, wSDReportTime, doorStatus, 
       meterID, meterValue, meterReportTime, 
-      remark, status, createDate
+      remark, status, createDate, meterValueUnit
       )
     values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=INTEGER}, #{reportTime,jdbcType=VARCHAR}, 
       #{gateStatus,jdbcType=INTEGER}, #{gateReportTime,jdbcType=VARCHAR}, #{routeStatus,jdbcType=INTEGER}, 
@@ -54,7 +55,8 @@
       #{presetCaption,jdbcType=VARCHAR}, #{presetReportTime,jdbcType=VARCHAR}, #{temperature,jdbcType=VARCHAR}, 
       #{humidity,jdbcType=VARCHAR}, #{wSDReportTime,jdbcType=VARCHAR}, #{doorStatus,jdbcType=VARCHAR}, 
       #{meterID,jdbcType=VARCHAR}, #{meterValue,jdbcType=VARCHAR}, #{meterReportTime,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP},
+      #{meterValueUnit,jdbcType=VARCHAR}
       )
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNodeMonitor">
@@ -78,7 +80,8 @@
       meterReportTime = #{meterReportTime,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP}
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      meterValueUnit = #{meterValueUnit,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
