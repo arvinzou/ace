@@ -3,10 +3,12 @@ package com.huacainfo.ace.glink.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -31,6 +33,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service("seNodeService")
 /**
@@ -516,6 +519,14 @@ public class SeNodeServiceImpl implements SeNodeService {
         }
 
         return new MessageResponse(ResultCode.SUCCESS, "数据同步成功");
+    }
+
+    @Override
+    public List<Tree> getNodeTreeList(String id) {
+        List<Map<String, Object>> dataList = seNodeDao.selectNodeTreeList();
+
+        CommonTreeUtils commonTreeUtils = new CommonTreeUtils(dataList);
+        return commonTreeUtils.getTreeList(id);
     }
 
 

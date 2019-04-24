@@ -128,4 +128,36 @@
         truncate table se_node ;
         truncate table se_node_device ;
     </update>
+
+    <select id="selectNodeTreeList" resultType="map">
+        SELECT
+            t.id  AS ID,
+            t.pid AS PID,
+            t.areaName AS TEXT,
+            '0' AS SRC,
+            '' AS HREF,
+            '' AS ICON,
+            (
+                SELECT
+                  COUNT(1)
+                FROM se_project_area
+                WHERE se_project_area.pid = t.id
+            ) + (
+                select
+                  count(1)
+                from se_node
+                where areaNodeID = t.id
+        ) AS CHILD_COUNT
+        FROM se_project_area t
+        UNION ALL
+        select
+            nodeID  AS ID,
+            areaNodeID AS PID,
+            CONCAT('配电箱-',local) AS TEXT,
+            '1' AS SRC,
+            '' AS HREF,
+            '' AS ICON,
+            0  AS CHILD_COUNT
+        from se_node
+    </select>
 </mapper>

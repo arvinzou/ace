@@ -3,13 +3,14 @@ package com.huacainfo.ace.glink.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.view.Tree;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.glink.model.SeNode;
 import com.huacainfo.ace.glink.model.SeNodeMonitorDeviceCh;
 import com.huacainfo.ace.glink.service.SeNodeService;
-import com.huacainfo.ace.glink.vo.SeNodeMonitorQVo;
 import com.huacainfo.ace.glink.vo.SeNodeMonitorVo;
 import com.huacainfo.ace.glink.vo.SeNodeQVo;
 import com.huacainfo.ace.glink.vo.SeNodeVo;
@@ -19,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/seNode")
@@ -177,6 +180,13 @@ public class SeNodeController extends GLinkBaseController {
     @RequestMapping(value = "/getMonitorDeviceCH")
     public SingleResult<SeNodeMonitorDeviceCh> getMonitorDeviceCH(String deviceCode, String chName) throws Exception {
         return seNodeService.getMonitorDeviceCH(deviceCode, chName);
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/getNodeTreeList")
+    public List<Tree> getNodeTreeList(String id) throws Exception {
+        return this.seNodeService.getNodeTreeList(StringUtil.isEmpty(id) ? "top" : id);
     }
 
 }
