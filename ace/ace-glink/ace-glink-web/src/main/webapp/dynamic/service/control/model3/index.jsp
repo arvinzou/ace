@@ -26,19 +26,19 @@
         <img src="img/logo.png" alt=""/> 江汉区照明控制平台
     </div>
     <div class="btns">
-        <div class="btn">
+        <div data-type="tasks" class="btn">
             <p class="cn">任务管理</p>
             <p class="en">Task Management</p>
         </div>
-        <div class="btn">
+        <div data-type="scenario" class="btn">
             <p class="cn">场景执行</p>
             <p class="en">Scenario Execution</p>
         </div>
-        <div class="btn">
+        <div data-type="Timing"  class="btn">
             <p class="cn">定时设置</p>
             <p class="en">Timing Settings</p>
         </div>
-        <div class="btn">
+        <div data-type="Control" class="btn">
             <p class="cn">总控设置</p>
             <p class="en">Control Set</p>
         </div>
@@ -80,7 +80,7 @@
     <div class="modals Control" id="yearCron">
         <div class="modals-head">
             <span class="title">总控设置</span>
-            <button class="activeBtn" onclick="monthList();">
+            <button class="activeBtn style1" onclick="monthList();">
                 执行
             </button>
         </div>
@@ -88,25 +88,25 @@
             <div class="panel">
                 <div class="left">
                     <ul class="months" id="months">
-                        <li id="m1">一月</li>
-                        <li id="m2">二月</li>
-                        <li id="m3">三月</li>
-                        <li id="m4">四月</li>
-                        <li id="m5">五月</li>
-                        <li id="m6">六月</li>
-                        <li id="m7">七月</li>
-                        <li id="m8">八月</li>
-                        <li id="m9">九月</li>
-                        <li id="m10">十月</li>
-                        <li id="m11">十一月</li>
-                        <li id="m12">十二月</li>
+                        <li data-id="1">一月</li>
+                        <li data-id="2">二月</li>
+                        <li data-id="3">三月</li>
+                        <li data-id="4">四月</li>
+                        <li data-id="5">五月</li>
+                        <li data-id="6">六月</li>
+                        <li data-id="7">七月</li>
+                        <li data-id="8">八月</li>
+                        <li data-id="9">九月</li>
+                        <li data-id="10">十月</li>
+                        <li data-id="11">十一月</li>
+                        <li data-id="12">十二月</li>
                     </ul>
                 </div>
                 <div class="right">
                     <div class="heads">
-                        <button class="h-btn" id="dayCron">全部日程模式</button>
-                        <button class="h-btn" id="jieri">全部节日模式</button>
-                        <button class="h-btn" id="zhong">全部重大节日模式</button>
+                        <button class="style1" id="dayCron">全部日程模式</button>
+                        <button class="style1" id="jieri">全部节日模式</button>
+                        <button class="style1" id="zhong">全部重大节日模式</button>
                     </div>
                     <div class="table">
                         <ul class="days" id="page-YearCronlist">
@@ -119,10 +119,10 @@
         </div>
     </div>
 
-    <div style="display: none;" class="modals task">
+    <div style="display: block" class="modals tasks task">
         <div class="modals-head">
             <span class="title">任务管理</span>
-            <button class="activeBtn">
+            <button class="style1 activeBtn">
                 执行
             </button>
         </div>
@@ -155,10 +155,10 @@
     </div>
 
 
-    <div style="display: none" class="modals task scenario">
+    <div class="modals task scenario">
         <div class="modals-head">
             <span class="title">场景执行</span>
-            <button class="activeBtn">
+            <button class="style1 activeBtn">
                 执行
             </button>
         </div>
@@ -189,7 +189,6 @@
     </div>
 
 </div>
-
 
 <div class="modal timing-modal">
     <div class="modal-content">
@@ -236,238 +235,6 @@
                                     <label class="slider-v3" for="s6"></label>
                                 </div>
                             </li>
-
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
-                            <li>
-                                <span>12月</span>
-                                <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
-                                    <label class="slider-v3" for="s6"></label>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -503,22 +270,22 @@
     {@/each}
 </script>
 <script id="tpl-YearCronlist" type="text/template">
-    {@each data as item, index}
-    <li id="s\${+index+1}">
+    {@each data.m as item, index}
+    <li id="s\${+index+1}" class="\${index<data.d?'':'hidden'}">
         <div class="day">
             \${+index+1}
         </div>
         <div class="seled">
             <div class="checkboxGroup">
-                <input id="\${+index+1}-a" name="m\${+index+1}" type="radio" value="1" {@if item==1} checked {@/if} />
+                <input id="\${+index+1}-a" name="m\${+index+1}" type="radio" value="1" \${item==1?'checked':''} />
                 <label class="check1" for="\${+index+1}-a">日程模式</label>
             </div>
             <div class="checkboxGroup">
-                <input id="\${+index+1}-b" name="m\${+index+1}" type="radio" value="2" {@if item==2} checked {@/if}>
+                <input id="\${+index+1}-b" name="m\${+index+1}" type="radio" value="2" \${item==1?'checked':''}/>
                 <label class="check2" for="\${+index+1}-b">节日模式</label>
             </div>
             <div class="checkboxGroup">
-                <input id="\${+index+1}-c" name='m\${+index+1}' type="radio" value="3" {@if item==3} checked {@/if}>
+                <input id="\${+index+1}-c" name='m\${+index+1}' type="radio" value="3" \${item==1?'checked':''}/>
                 <label class="check3" for="\${+index+1}-c">重大节日模式</label>
             </div>
         </div>
@@ -527,116 +294,6 @@
 </script>
 
 <style type="text/css">
-    .timing-modal .box {
-        width: 8.364583rem;
-        height: 3.770833rem;
-        display: flex;
-        margin: auto;
-    }
-
-    .timing-modal .box .unit .piece {
-        width: 100%;
-        height: calc(100% / 3);
-        background: rgba(37, 52, 61, 1);
-        font-size: 0.125rem;
-        font-family: MicrosoftYaHei;
-        font-weight: 400;
-        color: rgba(167, 233, 234, 1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-    }
-
-    .timing-modal .box .unit .piece:hover {
-        background: rgb(31, 44, 51);
-    }
-
-    .timing-modal .box .unit .piece.active {
-        position: relative;
-        background: rgba(7, 200, 202, 1);
-        color: #fff;
-    }
-
-    .timing-modal .box .unit .piece.active.active::after {
-        position: absolute;
-        display: block;
-        content: '';
-        width: 0.0625rem;
-        height: 0.0625rem;
-        top: 50%;
-        left: 100%;
-        transform: translate(-50%, -50%) rotate(45deg);
-        background: #1A2933;
-    }
-
-    .timing-modal .box .unit {
-        width: 0.947916rem;
-    }
-
-    .timing-modal .box .info {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        width:8.364583rem;
-    }
-
-    .timing-modal .box .info .btn-list {
-        width: 100%;
-        height: 0.260416rem;
-        background: rgba(40, 53, 62, 1);
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        padding:0 0.15625rem;
-    }
-
-    .timing-modal .box .info .show {
-        flex-grow: 1;
-        background: rgba(26, 41, 51, 1);
-        font-size: 0.125rem;
-        font-family: MicrosoftYaHei;
-        font-weight: 400;
-        color: rgba(255, 255, 255, 1);
-        padding: 0.15625rem;
-        overflow: auto;
-    }
-
-    .timing-modal .box .info .list:after {
-        display: block;
-        clear: both;
-        content: '';
-    }
-
-    .timing-modal .box .info .list {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .timing-modal .box .info .list > li {
-        display: flex;
-        width: 1.135416rem;
-        height: 0.489583rem;
-        background: rgba(13, 67, 72, 1);
-        border: 1px solid rgba(7, 200, 202, 1);
-        border-radius: 0.020833rem;
-        padding: 0 0.104166rem;
-        justify-content: space-between;
-        align-items: center;
-        float: left;
-        margin: 0 0.077rem 0.1rem 0;
-    }
-    .timing-modal .box .info .list > li:nth-child(6n+6){
-        margin: 0;
-    }
-
-    .timing-modal .box .info .show input {
-        display: none;
-    }
-
-    .timing-modal .box .info .btn-list >button{
-        margin-left:0.08rem;
-    }
 
 </style>
 <%--<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"

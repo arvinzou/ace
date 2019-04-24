@@ -340,3 +340,7 @@ button.style1{
 button.style1:active{
 	box-shadow: inset 0px 0px 8px #07c8ca;
 }
+
+.hidden{
+	display: none !important;
+}
