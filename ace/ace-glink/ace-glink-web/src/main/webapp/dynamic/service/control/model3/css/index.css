@@ -73,7 +73,7 @@ body {
 	background-size: 100% 100%;
 }
 
-.content .modal{
+.content .modals{
 	width: 9.791666rem;
 	height: 4.479166rem;
 	background: url(../img/contentBg.png) no-repeat;
@@ -112,14 +112,14 @@ body {
 	cursor: pointer;
 }
 
-.modal .modal-head{
+.modals .modals-head{
 	height: 0.22rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.modal .modal-head .title{
+.modals .modals-head .title{
 	font-size:0.104166rem;
 	font-family:MicrosoftYaHei;
 	color:rgba(0,214,217,1);
@@ -152,7 +152,7 @@ body {
 }
 
 .table-tg .tg-mvxc {
-    background-color: rgba(17, 96, 104);
+    background-color: rgba(17, 96, 104,1);
 	text-align: center;
 	font-size: 0.072916rem;
 	font-family: MicrosoftYaHei-Bold;
@@ -354,7 +354,7 @@ body {
 }
 
 
-.modal .modal-head .activeBtn{
+.modals .modals-head .activeBtn{
 	width:0.333333rem;
 	height:0.1875rem;
 	background:rgba(0,214,217,1);
@@ -368,7 +368,7 @@ body {
 	outline: none;
 	border: 0px;
 }
-.modal .modal-body{
+.modals .modals-body{
 	width: 100%;
 }
 .Control .panel{
@@ -517,4 +517,8 @@ body {
 
 .task .taskList li .bottom button:active{
 	background:rgb(5, 142, 146);
+}
+
+.task.scenario .taskList li .bottom{
+	justify-content: flex-end;
 }
