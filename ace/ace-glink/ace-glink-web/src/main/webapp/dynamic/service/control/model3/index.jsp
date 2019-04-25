@@ -153,7 +153,7 @@
                     </div>
                     <div class="bottom">
                         <button>
-                            执行
+                            选择
                         </button>
                     </div>
                 </li>
@@ -220,12 +220,44 @@
 </div>
 
 
+
+
+<div class="modal cenario-modal" style="display: block">
+    <div class="modal-content">
+        <div class="bg">
+            <div class="lefgBg">
+                <div class="l1"></div>
+                <div class="l2"></div>
+                <div class="l3"></div>
+                <div class="l2 l22"></div>
+                <div class="l4"></div>
+
+            </div>
+            <div class="centerBg">
+                <div class="c1"></div>
+                <div class="c2"></div>
+                <div class="c3"></div>
+            </div>
+            <div class="rightBg">
+                <div class="r1"></div>
+                <div class="r2"></div>
+                <div class="r3"></div>
+                <div class="r2 r22"></div>
+                <div class="r4"></div>
+            </div>
+        </div>
+        <div class="modal-body">
+
+        </div>
+    </div>
+</div>
+
+
 </body>
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr class="tr">
-
         <td class="tg-84q5"> \${item.timerID}</td>
         <td class="tg-84q5"> \${item.timerName}</td>
         <td class="tg-84q5"> {@if item.timerEnable==0}
