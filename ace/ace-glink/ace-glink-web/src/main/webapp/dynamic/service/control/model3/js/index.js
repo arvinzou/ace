@@ -11,9 +11,7 @@ $(function () {
     initTask();
     initControl();
     initTimeing();
-    getPageList();
     initJuicerMethod();
-    getYearCronList();
     $('.btns').on('click','.btn',changePage);
 });
 
@@ -29,8 +27,26 @@ function changePage() {
 /*****************************************总控设置Start***********************************************/
 var map = {};
 function  initControl() {
+    getYearCronList();
     $('#months').on('click','li',changeMonth);
     $('.Control .right .heads').on('click','button',checkType);
+}
+
+
+function  getYearCronList(){
+    var date = new Date;
+    var month = date.getMonth();
+    var m = month + 1;
+    var url = contextPath + "/generalYearCron/syncData";
+    $.getJSON(url, params, function (rst) {
+        console.log(rst.value);
+        if (rst.status == 0) {
+            var data = rst.value;
+            map=data;
+            $('#months li:eq('+month+')').addClass('active');
+            renderMonths(m);
+        }
+    });
 }
 
 /*点击切换月份*/
@@ -82,12 +98,15 @@ function postList() {
     }
     $.post(url,data,function(result){
         if (result.status == "ok") {
-            alert("设置成功")
+            alert("设置成功");
+            getYearCronList();
         } else {
             alert(result.errorMessage);
         }
     })
 }
+
+
 
 /*****************************************总控设置End***********************************************/
 
@@ -324,21 +343,7 @@ function parseStatus(status) {
 
 
 
-function getYearCronList() {
-    var date = new Date;
-    var month = date.getMonth();
-    var m = month + 1;
-    var url = contextPath + "/generalYearCron/syncData";
-    $.getJSON(url, params, function (rst) {
-        console.log(rst.value);
-        if (rst.status == 0) {
-            var data = rst.value;
-            map=data;
-            $('#months li:eq('+month+')').addClass('active');
-            renderMonths(m);
-        }
-    });
-}
+
 
 // //加载每月数据
 // function setParams(m) {
