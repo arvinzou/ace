@@ -216,27 +216,6 @@ function initPage() {
             getPageList();
         }
     });
-}
-
-    $("#months li").click(function () {
-        //  monthList();
-        $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式
-        $(this).addClass('active'); // 添加当前元素的样式
-        var m = $(this).data("id");
-        setParams(m);
-    });
-    //全部平日模式
-    $("#dayCron").click(function () {
-        $("input:radio[value='1']").prop("checked", "checked");
-    });
-    //全部节日模式
-    $("#festivalCron").click(function () {
-        $("input:radio[value='2']").prop("checked", "checked");
-    });
-    //全部重大节日模式
-    $("#greatCron").click(function () {
-        $("input:radio[value='3']").prop("checked", "checked");
-    });
     //全部有效
     $("#AllEffective").click(function () {
         var type = $('.piece.active').data('type');
@@ -265,30 +244,30 @@ function initPage() {
             $("input[name='checkDay']").prop('value', '0');
         }
     });
-
 }
 
+/*定时任务数据加载表格数据*/
+function getPageList() {
+    var val = $('.Timing .inputGroup .timerName').val();
+    params['timerName'] = val;
+    var url = contextPath + "/seTimerData/findSeTimerDataList";
+    $.getJSON(url, params, function (rst) {
+        if (rst.status == 0) {
+            if (params.initType == "init") {
+                $('#pagination1').jqPaginator('option', {
+                    totalCounts: rst.total == 0 ? 1 : rst.total,
+                    currentPage: 1
+                });
+            }
+            render($("#page-list"), rst.rows, "tpl-list");
+        }
+    })
+}
 /*****************************************定时设置End***********************************************/
-
-/*切换页面*/
-function changeList() {
-    var that = $(this);
-    $(this).siblings('div').removeClass('active');
-    $(this).addClass('active');
-    var type = that.data('type');
-    changeDo(type);
-}
-
-function changeDo(type) {
-    console.log(type);
-    $('.list').hide();
-    $('.list.' + type).show();
-}
 
 //查询更新定时设置数据
 function selectTimerDate(id) {
-    $("#Timer").hide();
-    $("#updateRecord").show();
+    $(".timing-modal").show();
     $.ajax({
         url: contextPath + "/seTimerData/selectSeTimerDataByPrimaryKey",
         type: "post",
