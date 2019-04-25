@@ -20,7 +20,7 @@ public class CommonTest {
     public void test() throws IOException {
 
         //无数据返回
-//        System.out.println(LeApiToolKit.getBuildingDetail());
+        System.out.println(LeApiToolKit.getBuildingDetail());
 //        System.out.println(LeApiToolKit.getLampStatus());
         ;
     }
