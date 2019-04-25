@@ -125,7 +125,20 @@ function activeDo(type) {
     $('.modals.'+type).show();
 }
 
+/*切换页面*/
+function changeList() {
+    var that = $(this);
+    $(this).siblings('div').removeClass('active');
+    $(this).addClass('active');
+    var type = that.data('type');
+    changeDo(type);
+}
 
+function changeDo(type) {
+    console.log(type);
+    $('.list').hide();
+    $('.list.' + type).show();
+}
 /*分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
@@ -155,6 +168,23 @@ function initPage() {
             return false;
         }
     });
+
+    $("#months li").click(function () {
+        //  monthList();
+        $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式
+        $(this).addClass('active'); // 添加当前元素的样式
+        var m = $(this).data("id");
+        setParams(m);
+    });
+    $("#dayCron").click(function () {
+        $("input:radio[value='1']").prop("checked", "checked");
+    });
+    $("#jieri").click(function () {
+        $("input:radio[value='2']").prop("checked", "checked");
+    });
+    $("#zhong").click(function () {
+        $("input:radio[value='3']").prop("checked", "checked");
+    });
 }
 
 function stroyMap(){
@@ -166,8 +196,10 @@ function stroyMap(){
     map[mid]=checkValue;
 }
 
-function initPreview(id) {
-    startLoad();
+//查询更新定时设置数据
+function selectTimerDate(id) {
+    $("#Timer").hide();
+    $("#updateRecord").show();
     $.ajax({
         url: contextPath + "/seTimerData/selectSeTimerDataByPrimaryKey",
         type: "post",
@@ -176,14 +208,14 @@ function initPreview(id) {
             id: id
         },
         success: function (result) {
-            stopLoad();
             if (result.status == 0) {
                 var data = {};
+                console.log(result);
                 data['o'] = result.value;
                 data['monthList'] = result.value.monthList;
                 data['weekList'] = result.value.weekList;
                 data['dayList'] = result.value.dayList;
-                render('#fm-preview', data, 'tpl-preview');
+                render('#page-update', data, 'tpl-monthslist');
             } else {
                 alert(result.errorMessage);
             }
@@ -327,6 +359,17 @@ function mGetDate(m){
 
 //获取每月修改的数据
 function monthList() {
+    var mid = $("#months li.active").attr("id");
+    console.log(mid);
+    var checkValue = '';
+    $('input:radio:checked').each(function () {
+        checkValue += $(this).val();
+    });
+    console.log(mid + ":" + checkValue);
+    if (map.hasOwnProperty(mid)) {
+        map[mid] = checkValue;
+    }
+    console.log(map);
     execute();
 }
 //执行总控数据修改
@@ -351,4 +394,60 @@ function execute() {
             alert("对不起出错了！");
         }
     });
+}
+
+
+var Timermap = {};
+
+//选中的值
+function checkData() {
+
+    var MonthEnable = {};
+    var WeekEnable = {};
+    var DayEnable = {};
+    $('input[name="checkMonth"]').each(function (i) {
+        i = i + 1;
+        var m = "m" + i;
+        MonthEnable[m] = $(this).val();
+    });
+    $('input[name="checkWeek"]').each(function (i) {
+        i = i + 1;
+        var m = "w" + i;
+        WeekEnable[m] = $(this).val();
+    });
+    $('input[name="checkDay"]').each(function (i) {
+        i = i + 1;
+        var m = "d" + i;
+        DayEnable[m] = $(this).val();
+    });
+    Timermap['MonthEnable'] = MonthEnable;
+    Timermap['WeekEnable'] = WeekEnable;
+    Timermap['DayEnable'] = DayEnable;
+
+    console.log(Timermap);
+}
+
+function TimerUpdate() {
+    checkData();
+    /*$.ajax({
+        url: contextPath + "/seTimerData/updateTimer",
+        type: "post",
+        async: false,
+        data: {
+            jsons: JSON.stringify(Timermap)
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == "ok") {
+                // getPageList();
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+*/
 }
