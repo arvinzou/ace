@@ -45,6 +45,7 @@ body {
 	background: url(../img/btnBg.png) no-repeat;
 	background-size: 100% 100%;
 	padding: 0.09rem 0 0.09rem 0.35rem;
+	cursor: pointer;
 }
 
 .head .btns .btn .cn {
@@ -73,7 +74,7 @@ body {
 	background-size: 100% 100%;
 }
 
-.content .modal{
+.content .modals{
 	width: 9.791666rem;
 	height: 4.479166rem;
 	background: url(../img/contentBg.png) no-repeat;
@@ -112,14 +113,15 @@ body {
 	cursor: pointer;
 }
 
-.modal .modal-head{
+.modals .modals-head{
 	height: 0.22rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: 0.1rem;
 }
 
-.modal .modal-head .title{
+.modals .modals-head .title{
 	font-size:0.104166rem;
 	font-family:MicrosoftYaHei;
 	color:rgba(0,214,217,1);
@@ -152,7 +154,7 @@ body {
 }
 
 .table-tg .tg-mvxc {
-    background-color: rgba(17, 96, 104);
+    background-color: rgba(17, 96, 104,1);
 	text-align: center;
 	font-size: 0.072916rem;
 	font-family: MicrosoftYaHei-Bold;
@@ -182,6 +184,7 @@ body {
 
 .paginationbar{
 	font-size: 14px;
+	float: right;
 }
 .paginationbar .pagination{
 	height: 38px;
@@ -281,6 +284,7 @@ body {
 .checkboxGroup label{
 	position: relative;
 	padding-left: 0.15625rem;
+	cursor: pointer;
 }
 
 .checkboxGroup label::before{
@@ -354,21 +358,21 @@ body {
 }
 
 
-.modal .modal-head .activeBtn{
-	width:0.333333rem;
-	height:0.1875rem;
-	background:rgba(0,214,217,1);
-	border-radius:0.020833rem;
-	line-height: 0.1875rem;
-	text-align: center;
-	font-size:0.072916rem;
-	font-family:MicrosoftYaHei;
-	font-weight:400;
-	color:rgba(255,255,255,1);
-	outline: none;
-	border: 0px;
-}
-.modal .modal-body{
+/*.modals .modals-head .activeBtn{*/
+	/*width:0.333333rem;*/
+	/*height:0.1875rem;*/
+	/*background:rgba(0,214,217,1);*/
+	/*border-radius:0.020833rem;*/
+	/*line-height: 0.1875rem;*/
+	/*text-align: center;*/
+	/*font-size:0.072916rem;*/
+	/*font-family:MicrosoftYaHei;*/
+	/*font-weight:400;*/
+	/*color:rgba(255,255,255,1);*/
+	/*outline: none;*/
+	/*border: 0px;*/
+/*}*/
+.modals .modals-body{
 	width: 100%;
 }
 .Control .panel{
@@ -383,7 +387,7 @@ body {
 	background:#28353E;
 }
 .Control .panel .left .months{
-	width:0.770833rem;
+	width:0.7rem;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -392,7 +396,7 @@ body {
 	margin: auto;
 }
 .Control .panel .left .months>li{
-	width:0.770833rem;
+	width:100%;
 	height:0.270833rem;
 	line-height:0.270833rem;
 	font-size:0.09375rem;
@@ -428,6 +432,7 @@ body {
 	flex-direction: column;
 	flex-grow: 1;
 	z-index: 5;
+	width: 9.291666rem;
 }
 
 .Control .panel .right .heads{
@@ -439,8 +444,12 @@ body {
 	background:rgba(32,48,58,1);
 	justify-content: flex-end;
 }
+.Control .right .heads .style1{
+	margin-left: 0.08rem;
+}
 
-.Control .panel .right .h-btn{
+
+/*.Control .panel .right .h-btn{
 	height:0.177083rem;
 	background:rgba(0,214,217,1);
 	border-radius:0.020833rem;
@@ -452,7 +461,7 @@ body {
 	line-height: 0.177083rem;
 	margin-left:0.072916rem;
 	cursor: pointer;
-}
+}*/
 .Control .panel .right .table{
 	width: 100%;
 	flex-grow: 1;
@@ -461,5 +470,199 @@ body {
 
 .dayactive {
 	background: rgba(12, 133, 140, 1);
-	color: #fff;
+	color: #fff !important;
+}
+.dayactive .day{
+	color: #fff !important;
+}
+
+.task .taskList::after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.task .taskList{
+	height: 3.38rem;
+	overflow: auto;
+}
+
+.task .taskList li{
+    width:1.25rem;
+    background: rgba(12, 133, 140, 1);
+    height:1.020833rem;
+    float: left;
+    margin: 0 0.09rem 0.104166rem 0;
+    border-radius: 0.03125rem;
+    overflow: hidden;
+}
+.task .taskList li:nth-child(7n+7){
+    margin: 0 0 0.104166rem 0;
+    color: #fff;
+}
+
+
+.task .taskList li .top{
+	width:1.25rem;
+	height:0.65625rem;
+	background:rgba(0,255,255,1);
+	font-size:0.125rem;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+	text-align: center;
+	line-height: 0.65625rem;
+}
+
+.task .taskList li .bottom{
+	height:0.364583rem;
+	background:#0E7980;
+	padding:0 0.1rem;
+	font-size:0.114583rem;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.task .taskList li .bottom .success{
+	color: #3BE75B;
+}
+.task .taskList li .bottom .error{
+	color: #FE2626;
+}
+.task .taskList li .bottom button{
+	height:0.21875rem;
+	background:rgba(7,169,174,1);
+	border-radius:2px;
+	padding: 0 0.1rem;
+	color:rgba(255,255,255,1);
+	cursor: pointer;
+}
+
+
+
+
+.task .taskList li .bottom button:active{
+	background:rgb(5, 142, 146);
+}
+
+.task.scenario .taskList li .bottom{
+	justify-content: flex-end;
+}
+
+.timing-modal .box {
+    width: 8.364583rem;
+    height: 3.770833rem;
+    display: flex;
+    margin: auto;
+}
+
+.timing-modal .box .unit .piece {
+    width: 100%;
+    height: calc(100% / 3);
+    background: rgba(37, 52, 61, 1);
+    font-size: 0.125rem;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: rgba(167, 233, 234, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.timing-modal .box .unit .piece:hover {
+    background: rgb(31, 44, 51);
+}
+
+.timing-modal .box .unit .piece.active {
+    position: relative;
+    background: rgba(7, 200, 202, 1);
+    color: #fff;
+}
+
+.timing-modal .box .unit .piece.active.active::after {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 0.0625rem;
+    height: 0.0625rem;
+    top: 50%;
+    left: 100%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: #1A2933;
+}
+
+.timing-modal .box .unit {
+    width: 0.947916rem;
+}
+
+.timing-modal .box .info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width:8.364583rem;
+}
+
+.timing-modal .box .info .btn-list {
+    width: 100%;
+    height: 0.260416rem;
+    background: rgba(40, 53, 62, 1);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding:0 0.15625rem;
+}
+
+.timing-modal .box .info .show {
+    flex-grow: 1;
+    background: rgba(26, 41, 51, 1);
+    font-size: 0.125rem;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 1);
+    padding: 0.15625rem;
+    overflow: auto;
+}
+
+.timing-modal .box .info .list:after {
+    display: block;
+    clear: both;
+    content: '';
+}
+
+.timing-modal .box .info .list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.timing-modal .box .info .list > li {
+    display: flex;
+    width: 1.135416rem;
+    height: 0.489583rem;
+    background: rgba(13, 67, 72, 1);
+    border: 1px solid rgba(7, 200, 202, 1);
+    border-radius: 0.020833rem;
+    padding: 0 0.104166rem;
+    justify-content: space-between;
+    align-items: center;
+    float: left;
+    margin: 0 0.077rem 0.1rem 0;
+}
+.timing-modal .box .info .list > li:nth-child(6n+6){
+    margin: 0;
+}
+
+.timing-modal .box .info .show input {
+    display: none;
+}
+
+.timing-modal .box .info .btn-list >button{
+    margin-left:0.08rem;
+}
+
+.modals,.modal{
+    display: none;
 }

@@ -3,11 +3,11 @@ package com.huacainfo.ace.glink.service.impl;
 
 import java.util.*;
 
+import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.glink.api.SeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.fe.TimerDataOut;
 import com.huacainfo.ace.glink.dao.SeTimerDayDao;
@@ -432,13 +432,14 @@ public class SeTimerDataServiceImpl implements SeTimerDataService {
      * @return
      */
     @Override
-    public MessageResponse updateTimer(SeTimerData obj, UserProp userProp) {
-
-        TimerDataOut.TimerData data = new TimerDataOut.TimerData();
+    public Map<String, Object> updateTimer(String jsons, UserProp userProp) {
+        TimerDataOut.TimerData data = JSON.parseObject(jsons, TimerDataOut.TimerData.class);
         Map<String, Object> o = SeApiToolKit.updateTimer(data);
-
-        return null;
+        syncData(userProp);
+        return o;
     }
+
+
 
 
     public int insertTimerMoth(int timeId, TimerDataOut.MonthEnable data) {
@@ -521,6 +522,5 @@ public class SeTimerDataServiceImpl implements SeTimerDataService {
         return seTimerWeekDao.insert(week);
 
     }
-
 
 }

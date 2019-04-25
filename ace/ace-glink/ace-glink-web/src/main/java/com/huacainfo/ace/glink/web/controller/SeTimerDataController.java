@@ -296,8 +296,7 @@ public class SeTimerDataController extends GLinkBaseController {
      */
     @RequestMapping(value = "/updateTimer")
     @ResponseBody
-    public MessageResponse updateTimer(String jsons) throws Exception {
-        SeTimerData obj = JSON.parseObject(jsons, SeTimerData.class);
-        return this.seTimerDataService.updateTimer(obj, this.getCurUserProp());
+    public Map<String, Object> updateTimer(String jsons) throws Exception {
+        return this.seTimerDataService.updateTimer(jsons, this.getCurUserProp());
     }
 }
