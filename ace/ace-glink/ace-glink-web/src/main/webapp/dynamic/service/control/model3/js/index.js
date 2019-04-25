@@ -102,12 +102,13 @@ function initPage() {
         var type = $('.piece.active').data('type');
         if (type == 'monthData') {
             $("input[name='checkMonth']").prop("checked", true);
-
+            $("input[name='checkMonth']").prop('value', '1');
         } else if (type == 'weekData') {
             $("input[name='checkWeek']").prop("checked", true);
-
+            $("input[name='checkWeek']").prop('value', '1');
         } else if (type == 'dayData') {
             $("input[name='checkDay']").prop("checked", true);
+            $("input[name='checkDay']").prop('value', '1');
         }
     });
     //全部无效
@@ -115,10 +116,13 @@ function initPage() {
         var type = $('.piece.active').data('type');
         if (type == 'monthData') {
             $("input:checkbox[name='checkMonth']").prop("checked", false);
+            $("input[name='checkMonth']").prop('value', '0');
         } else if (type == 'weekData') {
             $("input:checkbox[name='checkWeek']").prop("checked", false);
+            $("input[name='checkWeek']").prop('value', '0');
         } else if (type == 'dayData') {
             $("input:checkbox[name='checkDay']").prop("checked", false);
+            $("input[name='checkDay']").prop('value', '0');
         }
     });
 
@@ -346,16 +350,21 @@ function checkData() {
         var m = "d" + i;
         DayEnable[m] = $(this).val();
     });
+    Timermap['id'] = $('input[name="id"]').val();
+    Timermap['timerID'] = $('input[name="timerID"]').val();
+    Timermap['timerName'] = $('input[name="timerNames"]').val();
+    Timermap['timerEnable'] = $('input[name="timerEnable"]').val();
+    Timermap['startTime'] = $('input[name="startTime"]').val();
+    Timermap['taskNo'] = $('input[name="taskNo"]').val();
     Timermap['MonthEnable'] = MonthEnable;
     Timermap['WeekEnable'] = WeekEnable;
     Timermap['DayEnable'] = DayEnable;
-
     console.log(Timermap);
 }
 
 function TimerUpdate() {
     checkData();
-    /*$.ajax({
+    $.ajax({
         url: contextPath + "/seTimerData/updateTimer",
         type: "post",
         async: false,
@@ -375,5 +384,5 @@ function TimerUpdate() {
             alert("对不起出错了！");
         }
     });
-*/
+
 }
