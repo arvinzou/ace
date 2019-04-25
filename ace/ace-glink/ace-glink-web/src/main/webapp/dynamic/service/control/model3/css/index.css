@@ -184,6 +184,7 @@ body {
 
 .paginationbar{
 	font-size: 14px;
+	float: right;
 }
 .paginationbar .pagination{
 	height: 38px;
@@ -443,6 +444,10 @@ body {
 	background:rgba(32,48,58,1);
 	justify-content: flex-end;
 }
+.Control .right .heads .style1{
+	margin-left: 0.08rem;
+}
+
 
 /*.Control .panel .right .h-btn{
 	height:0.177083rem;
@@ -469,6 +474,16 @@ body {
 }
 .dayactive .day{
 	color: #fff !important;
+}
+
+.task .taskList::after{
+	content: '';
+	display: block;
+	clear: both;
+}
+.task .taskList{
+	height: 3.38rem;
+	overflow: auto;
 }
 
 .task .taskList li{

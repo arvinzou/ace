@@ -5,54 +5,206 @@ $(window).resize(function () {   //当浏览器大小变化时
 		window.location.reload();
 	},500)
 });
-var params={
-	start:0,
-	limit:100
-}
 
 $(function () {
     initPage();
-    getPageList();
-    initEvents();
+    initTask();
+    initControl();
+    initTimeing();
     initJuicerMethod();
-    getYearCronList();
-    $('.btns').on('click','.btn',changePage)
-    $('.unit').on('click', '.piece', changeList)
-
+    $('.btns').on('click','.btn',changePage);
 });
 
 /*切换页面*/
 function changePage() {
     var that=$(this);
     var type=that.data('type');
-    activeDo(type);
-}
-
-function activeDo(type) {
-    console.log(type);
     $('.modals').hide();
     $('.modals.'+type).show();
 }
 
-/*切换页面*/
-function changeList() {
-    var that = $(this);
-    $(this).siblings('div').removeClass('active');
-    $(this).addClass('active');
-    var type = that.data('type');
-    changeDo(type);
+
+/*****************************************总控设置Start***********************************************/
+var map = {};
+function  initControl() {
+    getYearCronList();
+    $('#months').on('click','li',changeMonth);
+    $('.Control .right .heads').on('click','button',checkType);
 }
 
-function changeDo(type) {
-    console.log(type);
-    $('.list').hide();
-    $('.list.' + type).show();
+
+function  getYearCronList(){
+    var date = new Date;
+    var month = date.getMonth();
+    var m = month + 1;
+    var url = contextPath + "/generalYearCron/syncData";
+    $.getJSON(url, params, function (rst) {
+        console.log(rst.value);
+        if (rst.status == 0) {
+            var data = rst.value;
+            map=data;
+            $('#months li:eq('+month+')').addClass('active');
+            renderMonths(m);
+        }
+    });
 }
-/*分页*/
+
+/*点击切换月份*/
+function changeMonth() {
+    stroyMap();
+    $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式
+    $(this).addClass('active'); // 添加当前元素的样式
+    var m = $(this).data("id");
+    renderMonths(m);
+}
+
+/*全部设置类型*/
+function checkType() {
+    var that=$(this);
+    var type=that.data('type');
+    $("input:radio[value='"+type+"']").prop("checked", "checked");
+    stroyMap();
+}
+/*储存map*/
+function stroyMap(){
+    var mid ='m'+$("#months li.active").data("id");
+    var checkValue = '';
+    $('input:radio:checked').each(function () {
+        checkValue += $(this).val();
+    });
+    map[mid]=checkValue;
+}
+
+function renderMonths(m) {
+    var datas={};
+    datas.m=map['m'+m];
+    datas.d=parseInt(mGetDate(m));
+    render($("#page-YearCronlist"), datas, "tpl-YearCronlist");
+    var date = new Date;
+    var month = date.getMonth();
+    var mo=m-1;
+    if(month==mo){
+        var day = date.getDate();
+        $('#s' + day).addClass('dayactive');
+    }
+}
+
+//提交总控数据
+function postList() {
+    stroyMap();
+    var url=contextPath + "/generalYearCron/updateGeneralCtrlCron";
+    var data={
+        jsons: JSON.stringify(map)
+    }
+    $.post(url,data,function(result){
+        if (result.status == "ok") {
+            alert("设置成功");
+            getYearCronList();
+        } else {
+            alert(result.errorMessage);
+        }
+    })
+}
+
+
+
+/*****************************************总控设置End***********************************************/
+
+/*****************************************任务管理Start***********************************************/
+var taskParams={
+    start:0,
+    limit:21
+}
+
+/*任务初始化管理*/
+function initTask() {
+    $("#areaNodeID").combotree({
+        onChange: function (newValue, oldValue) {
+            getTaskList("areaNodeID", newValue);
+        }
+    });
+    initPageTask();
+}
+
+/*初始化分页器*/
+function initPageTask() {
+    $.jqPaginator('#pagination2', {
+        totalCounts: 1,
+        pageSize: taskParams.limit,
+        visiblePages: 10,
+        currentPage: 1,
+        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        onPageChange: function (num, type) {
+            taskParams['start'] = (num - 1) * taskParams.limit;
+            taskParams['initType'] = type;
+            getTaskList();
+        }
+    });
+}
+
+/*ajax获取数据列表*/
+function getTaskList(key, value) {
+    if(!key){
+        taskParams[key] = value;
+    }
+    var url = contextPath + "/seAreaTask/findSeAreaTaskList";
+    $.getJSON(url, taskParams, function (rst) {
+        if (rst.status == 0) {
+            if (taskParams.initType == "init") {
+                $('#pagination1').jqPaginator('option', {
+                    totalCounts: rst.total == 0 ? 1 : rst.total,
+                    currentPage: 1
+                });
+            }
+            render($("#taskList"), rst.rows, "tpl-taskList");
+        }
+    });
+}
+
+function executeTask(areaNodeID, taskNo) {
+    if (!confirm("确认执行该任务么？")) {
+        return;
+    }
+    var url=contextPath + "/seAreaTask/exeTask";
+    var data={
+        areaNodeID: areaNodeID,
+        taskNo: taskNo
+    }
+    $.post(url,data,function(rst){
+        if (rst.status == 0) {
+            alert(rst.errorMessage);
+            getTaskList();
+        }
+    })
+}
+/*****************************************任务管理End***********************************************/
+
+
+/*****************************************定时设置Start***********************************************/
+var params={
+    start:0,
+    limit:15
+}
+
+function initTimeing() {
+    initPage();
+    $('.Timing .submit').click(searchTiming);
+
+}
+
+function searchTiming() {
+    params['initType'] = 'init';
+    getPageList();
+}
+
+
+/*初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 100,
-        pageSize: 5,
+        totalCounts: 1,
+        pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
@@ -64,19 +216,7 @@ function initPage() {
             getPageList();
         }
     });
-
-    $('#fm-search').ajaxForm({
-        beforeSubmit: function (formData, jqForm, options) {
-            $.each(formData, function (n, obj) {
-                params[obj.name] = obj.value;
-                console.log(obj);
-            });
-            params['initType'] = 'init';
-            params['start'] = 0;
-            getPageList();
-            return false;
-        }
-    });
+}
 
     $("#months li").click(function () {
         //  monthList();
@@ -128,16 +268,21 @@ function initPage() {
 
 }
 
-function initEvents() {
+/*****************************************定时设置End***********************************************/
 
-    $('#modal-preview').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        var title = relatedTarget.data('title');
-        var modal = $(this);
-        console.log(relatedTarget);
+/*切换页面*/
+function changeList() {
+    var that = $(this);
+    $(this).siblings('div').removeClass('active');
+    $(this).addClass('active');
+    var type = that.data('type');
+    changeDo(type);
+}
 
-    })
+function changeDo(type) {
+    console.log(type);
+    $('.list').hide();
+    $('.list.' + type).show();
 }
 
 //查询更新定时设置数据
@@ -211,71 +356,23 @@ function parseStatus(status) {
 }
 
 
-/*定时任务数据加载表格数据*/
-function getPageList() {
-    var url = contextPath + "/seTimerData/findSeTimerDataList";
-    startLoad();
-    $.getJSON(url, params, function (rst) {
-        stopLoad();
-        if (rst.status == 0) {
-            if (params.initType == "init") {
-                $('#pagination1').jqPaginator('option', {
-                    totalCounts: rst.total == 0 ? 1 : rst.total,
-                    currentPage: 1
-                });
-            }
-            render($("#page-list"), rst.rows, "tpl-list");
-        }
-    })
-}
-var map = {};
-function getYearCronList() {
-    var date = new Date;
-    var month = date.getMonth();
-    var m = month + 1;
-    var day = date.getDate();
-    var url = contextPath + "/generalYearCron/syncData";
-    $.getJSON(url, params, function (rst) {
-        console.log(rst.value);
-        if (rst.status == 0) {
-            var data = rst.value;
-            // var nowmon=data[m];
-            //   var a = nowmon.substring(day - 1, day);
-            //   console.log(a);
-            var id;
-            for (var i = 1; i < 13; i++) {
-                id = "m" + i;
-                map[id] = data[id];
-            }
-            $('#months li:eq('+month+')').addClass('active');
-            var datas={};
-            datas.m=data['m'+m];
-            datas.d=parseInt(mGetDate(m));
-            render($("#page-YearCronlist"), datas, "tpl-YearCronlist");
-            $('#s' + day).addClass('dayactive');
-        }
-    });
-}
-//加载每月数据
-function setParams(m) {
-    var url = contextPath + "/generalYearCron/syncData";
-    $.getJSON(url, params, function (rst) {
-        if (rst.status == 0) {
-            var d = rst.value;
-            var data={};
-            data.m=d['m'+m];
-            data.d=parseInt(mGetDate(m));
-            render($("#page-YearCronlist"), data, "tpl-YearCronlist");
-            var date = new Date;
-            var month = date.getMonth();
-            var mo=m-1;
-            if(month==mo){
-                var day = date.getDate();
-                $('#s' + day).addClass('dayactive');
-            }
-        }
-    });
-}
+
+
+
+// //加载每月数据
+// function setParams(m) {
+//     var url = contextPath + "/generalYearCron/syncData";
+//     $.getJSON(url, params, function (rst) {
+//         if (rst.status == 0) {
+//             var d = rst.value;
+//             var data={};
+//             data.m=d['m'+m];
+//             data.d=parseInt(mGetDate(m));
+//             render($("#page-YearCronlist"), data, "tpl-YearCronlist");
+//         }
+//     });
+// }
+
 
 
 
@@ -287,44 +384,7 @@ function mGetDate(m){
 }
 
 
-//获取每月修改的数据
-function monthList() {
-    var mid = $("#months li.active").data("id");
-    console.log(mid);
-    var checkValue = '';
-    $('input:radio:checked').each(function () {
-        checkValue += $(this).val();
-    });
-    console.log(mid + ":" + checkValue);
-    if (map.hasOwnProperty(mid)) {
-        map[mid] = checkValue;
-    }
-    console.log(map);
-    execute();
-}
-//执行总控数据修改
-function execute() {
-    $.ajax({
-        url: contextPath + "/generalYearCron/updateGeneralCtrlCron",
-        type: "post",
-        async: false,
-        data: {
-            jsons: JSON.stringify(map)
-        },
-        success: function (result) {
-            stopLoad();
-            if (result.status == "ok") {
-                // getPageList();
-            } else {
-                alert(result.errorMessage);
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
-        }
-    });
-}
+
 
 
 var Timermap = {};

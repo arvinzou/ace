@@ -12,8 +12,8 @@ window.onload = function () {
 /**
  * 初始化类型*/
 function initcategory() {
-    console.log(staticDictObject['176']);
-    render($("#categorys"), staticDictObject['176'].slice(1), "tpl-categorys");
+    console.log(staticDictObject['154']);
+    render($("#categorys"), staticDictObject['154'].slice(1), "tpl-categorys");
 }
 
 /*页面渲染*/
