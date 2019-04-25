@@ -45,7 +45,7 @@
     </div>
 </div>
 <div class="content">
-    <div class="modals Timing" id="Timer" style="display: none;">
+    <div class="modals Timing" style="display: none;">
         <div class="modals-head">
             <span class="title">定时设置</span>
             <div class="inputGroup">

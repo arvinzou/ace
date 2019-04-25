@@ -238,7 +238,6 @@ function changeDo(type) {
 
 //查询更新定时设置数据
 function selectTimerDate(id) {
-    $("#Timer").hide();
     $("#updateRecord").show();
     $.ajax({
         url: contextPath + "/seTimerData/selectSeTimerDataByPrimaryKey",
