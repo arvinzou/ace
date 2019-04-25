@@ -435,7 +435,23 @@ function render(obj, data, tplId) {
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
+    juicer.register('parseExeState', parseExeState);
 }
+
+/**
+ * 状态解析
+ */
+function parseExeState(val) {
+    switch (val) {
+        case 'ok':
+            return "已执行";
+        case 'error':
+            return "未执行";
+        default:
+            return "未执行";
+    }
+}
+
 
 /**
  * 状态解析
