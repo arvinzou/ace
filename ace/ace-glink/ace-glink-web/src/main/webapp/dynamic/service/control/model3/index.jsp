@@ -34,7 +34,7 @@
             <p class="cn">场景执行</p>
             <p class="en">Scenario Execution</p>
         </div>
-        <div data-type="Timing"  class="btn">
+        <div data-type="Timing" class="btn">
             <p class="cn">定时设置</p>
             <p class="en">Timing Settings</p>
         </div>
@@ -49,10 +49,10 @@
         <div class="modals-head">
             <span class="title">定时设置</span>
             <div class="inputGroup">
-                    <input class="timerName" type="text" placeholder="输入任务名称" name="timerName"/>
-                    <button class="submit">
+                <input class="timerName" type="text" placeholder="输入任务名称" name="timerName"/>
+                <button class="submit">
 
-                    </button>
+                </button>
             </div>
         </div>
         <div class="modals-body">
@@ -121,8 +121,8 @@
         <div class="modals-head">
             <span class="title">任务管理</span>
             <input placeholder="请选择分区" id="areaNodeID" class="easyui-combotree"
-                       data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
-                lines:true," style='min-width:245px;height: 25px;'>
+                   data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
+                lines:true," style='min-width:120px;height: 25px;'>
         </div>
         <div class="modals-body">
             <%--list--%>
@@ -141,33 +141,18 @@
     <div class="modals task scenario">
         <div class="modals-head">
             <span class="title">场景执行</span>
-            <button class="style1 activeBtn">
-                执行
-            </button>
+            <input placeholder="请选择分区" id="areaNodeID1" class="easyui-combotree"
+                   data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
+                lines:true," style='min-width:120px;height: 25px;'>
         </div>
         <div class="modals-body">
-            <ul class="taskList">
-                <li>
-                    <div class="top">
-                        文字
-                    </div>
-                    <div class="bottom">
-                        <button>
-                            选择
-                        </button>
-                    </div>
-                </li>
-                <li>
-                    <div class="top">
-                        文字
-                    </div>
-                    <div class="bottom">
-                        <button>
-                            执行
-                        </button>
-                    </div>
-                </li>
+            <ul class="taskList" id="scenarioList">
+
             </ul>
+            <%--分页页脚--%>
+            <div class="paginationbar">
+                <ul class="pagination" id="pagination3"></ul>
+            </div>
         </div>
     </div>
 
@@ -220,9 +205,7 @@
 </div>
 
 
-
-
-<div class="modal cenario-modal" style="display: block">
+<div class="modal scenario-modal">
     <div class="modal-content">
         <div class="bg">
             <div class="lefgBg">
@@ -247,7 +230,22 @@
             </div>
         </div>
         <div class="modal-body">
-
+            <div class="presetList">
+                <div class="top">
+                    <span class="title">定时设置</span>
+                    <div class="inputGroup">
+                        <input class="presetName" type="text" placeholder="输入场景名称"/>
+                        <button class="submit"></button>
+                    </div>
+                </div>
+                <div class="ulList">
+                    <ul id="presets">
+                    </ul>
+                    <div class="paginationbar">
+                        <ul class="pagination" id="pagination4"></ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -284,7 +282,7 @@
         </div>
         <div class="seled">
             <div class="checkboxGroup">
-                <input id="a\${index}" name="m\${index}" type="radio" value="1" \${item==1?'checked':''} />
+                <input id="a\${index}" name="m\${index}" type="radio" value="1" \${item==1?'checked':''}/>
                 <label class="check1" for="a\${index}">日程模式</label>
             </div>
             <div class="checkboxGroup">
@@ -739,8 +737,69 @@
     </li>
     {@/each}
 </script>
+<%--scenarioList--%>
+<script id="tpl-scenarioList" type="text/template">
+    {@each data as item, index}
+    <li>
+        <div class="top">
+            \${item.areaNodeID}-\${item.areaName}
+        </div>
+        <div class="bottom">
+            <button data-areaNo="\${item.areaNo}" data-areaNodeID="\${item.areaNodeID}">
+                选择
+            </button>
+        </div>
+    </li>
+    {@/each}
+</script>
+<script id="tpl-presets" type="text/template">
+    {@each data as item, index}
+    <li data-presetNo="\${item.presetNo}">\${item.presetName}</li>
+    {@/each}
+</script>
 
 <style type="text/css">
+    .scenario-modal .presetList{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .scenario-modal .presetList .top {
+        height: 0.3rem;
+        width: 100%;
+        display: flex;
+        font-size: 0.104166rem;
+        font-family: MicrosoftYaHei;
+        color: rgba(0,214,217,1);
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.05rem;
+
+    }
+
+    .scenario-modal .presetList .ulList {
+        width: 100%;
+        flex-grow: 1;
+    }
+    .scenario-modal .presetList .ulList> ul{
+        height: 3.9rem;
+    }
+    .scenario-modal .presetList .ulList >ul>li{
+        font-size: 0.12rem;
+        height: 0.5rem;
+        background: #07C6C9;
+        margin-bottom: 0.1rem;
+        border-radius: 0.05rem;
+        line-height: 0.5rem;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .scenario-modal .presetList .ulList li:active{
+        background: #0E7980;
+    }
 
 </style>
 <%--<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"

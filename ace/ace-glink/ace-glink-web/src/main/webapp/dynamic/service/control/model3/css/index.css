@@ -666,3 +666,8 @@ body {
 .modals,.modal{
     display: none;
 }
+
+.scenario-modal .modal-content{
+	width: 4rem;
+	height: 5rem;
+}
