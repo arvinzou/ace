@@ -16,7 +16,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName PagePortalServiceImpl
@@ -122,6 +124,35 @@ public class PagePortalServiceImpl implements PagePortalService {
         //todo 缺失统计逻辑
 
         return null;
+    }
+
+    /**
+     * 大屏展示数据接口
+     *
+     * @param params nodeId 节点ID
+     * @return Map<String, Object>
+     */
+    @Override
+    public Map<String, Object> screenData(Map<String, String> params) {
+
+        Map<String, Object> rst = new HashMap<>();
+        String[] keys = new String[]{
+                PortalKey.LE_BuildingTotal,
+                PortalKey.SE_RouterOffNum,
+                PortalKey.SE_NodeTotal,
+                PortalKey.SE_GatewayOffNum,
+                PortalKey.SE_NodeDeviceOffNum,
+                PortalKey.SE_NodeDeviceNum,
+                PortalKey.SE_PowerTotal,
+                PortalKey.SE_UnitPrice
+        };
+        //存储键值对
+        List<PagePortal> allList = pagePortalDao.findListByKeys("glink", keys);
+        for (PagePortal item : allList) {
+            rst.put(item.getItemKey(), item);
+        }
+
+        return rst;
     }
 
 

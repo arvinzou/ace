@@ -160,4 +160,11 @@
             0  AS CHILD_COUNT
         from se_node
     </select>
+
+    <select id="findByNodeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from se_node
+        where nodeID = #{nodeId,jdbcType=VARCHAR}
+    </select>
 </mapper>

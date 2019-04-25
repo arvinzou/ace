@@ -58,4 +58,15 @@
         from page_portal
         where sysId = #{sysId,jdbcType=VARCHAR}
     </select>
+
+    <select id="findListByKeys" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from page_portal
+        where sysId = #{sysId,jdbcType=VARCHAR}
+        and itemKey in
+        <foreach collection="keys" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

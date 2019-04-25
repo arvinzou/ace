@@ -18,4 +18,7 @@ public interface PagePortalDao {
                          @Param("sysId") String sysId);
 
     List<PagePortal> findListBySysId(String sysId);
+
+    List<PagePortal> findListByKeys(@Param("sysId") String sysId,
+                                    @Param("keys") String[] keys);
 }

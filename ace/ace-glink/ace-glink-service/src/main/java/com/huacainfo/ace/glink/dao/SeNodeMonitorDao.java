@@ -15,4 +15,5 @@ public interface SeNodeMonitorDao {
     int allClear();
 
     SeNodeMonitorVo findByNodeID(String nodeID);
+
 }

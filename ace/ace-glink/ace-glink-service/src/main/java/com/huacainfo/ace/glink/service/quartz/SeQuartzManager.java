@@ -37,13 +37,12 @@ public class SeQuartzManager {
     /**
      * 每隔[5]分钟,调用一次强电接口：    同步配电箱全部电表数据
      */
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/3 * * * ?")
     public void autoSyncNodeMeterData() {
         //同步基础数据
         MessageResponse ms = seNodeService.syncNodeMeterData(null);
-        logger.debug(ms.getErrorMessage());
-        //portal数据统计
-        ms = pagePortalService.autoSyncNodeMeterData();
         logger.debug("[自动同步配电箱全部电表数据]=>{}", ms.getErrorMessage());
+        //portal数据统计
+//        ms = pagePortalService.autoSyncNodeMeterData();
     }
 }

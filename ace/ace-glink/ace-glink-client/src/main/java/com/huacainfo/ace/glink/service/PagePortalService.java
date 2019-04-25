@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.glink.model.PagePortal;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName PagePortalService
@@ -43,4 +44,13 @@ public interface PagePortalService {
      * @return MessageResponse
      */
     MessageResponse autoSyncNodeMeterData();
+
+    /**
+     * 大屏展示数据接口
+     *
+     * @param params nodeId 节点ID
+     * @return Map<String, Object>
+     */
+    Map<String, Object> screenData(Map<String, String> params);
+
 }
