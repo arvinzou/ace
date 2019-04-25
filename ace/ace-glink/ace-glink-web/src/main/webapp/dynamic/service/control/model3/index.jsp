@@ -104,9 +104,9 @@
                 </div>
                 <div class="right">
                     <div class="heads">
-                        <button class="style1" id="dayCron">全部日程模式</button>
-                        <button class="style1" id="jieri">全部节日模式</button>
-                        <button class="style1" id="zhong">全部重大节日模式</button>
+                        <button class="style1" data-type="1">全部日程模式</button>
+                        <button class="style1" data-type="2">全部节日模式</button>
+                        <button class="style1" data-type="3">全部重大节日模式</button>
                     </div>
                     <div class="table">
                         <ul class="days" id="page-YearCronlist">
@@ -122,35 +122,20 @@
     <div style="display: block" class="modals tasks task">
         <div class="modals-head">
             <span class="title">任务管理</span>
-            <button class="style1 activeBtn">
-                执行
-            </button>
+            <input placeholder="请选择分区" id="areaNodeID" class="easyui-combotree"
+                       data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
+                lines:true," style='min-width:245px;height: 25px;'>
         </div>
         <div class="modals-body">
-            <ul class="taskList">
-                <li>
-                    <div class="top">
-                        文字
-                    </div>
-                    <div class="bottom">
-                        <span class="status success">成功</span>
-                        <button>
-                            执行
-                        </button>
-                    </div>
-                </li>
-                <li>
-                    <div class="top">
-                        文字
-                    </div>
-                    <div class="bottom">
-                        <span class="status error">失败</span>
-                        <button>
-                            执行
-                        </button>
-                    </div>
-                </li>
+            <%--list--%>
+            <ul class="taskList" id="taskList">
+
             </ul>
+
+            <%--分页页脚--%>
+            <div class="paginationbar">
+                <ul class="pagination" id="pagination2"></ul>
+            </div>
         </div>
     </div>
 
@@ -231,7 +216,7 @@
                             <li>
                                 <span>12月</span>
                                 <div class="wrap">
-                                    <input type="checkbox" id="s6"/>
+                                    <input type="radio" id="s6"/>
                                     <label class="slider-v3" for="s6"></label>
                                 </div>
                             </li>
@@ -277,17 +262,36 @@
         </div>
         <div class="seled">
             <div class="checkboxGroup">
-                <input id="\${+index+1}-a" name="m\${+index+1}" type="radio" value="1" \${item==1?'checked':''} />
-                <label class="check1" for="\${+index+1}-a">日程模式</label>
+                <input id="a\${index}" name="m\${index}" type="radio" value="1" \${item==1?'checked':''} />
+                <label class="check1" for="a\${index}">日程模式</label>
             </div>
             <div class="checkboxGroup">
-                <input id="\${+index+1}-b" name="m\${+index+1}" type="radio" value="2" \${item==1?'checked':''}/>
-                <label class="check2" for="\${+index+1}-b">节日模式</label>
+                <input id="b\${index}" name="m\${index}" type="radio" value="2" \${item==2?'checked':''}/>
+                <label class="check2" for="b\${index}">节日模式</label>
             </div>
             <div class="checkboxGroup">
-                <input id="\${+index+1}-c" name='m\${+index+1}' type="radio" value="3" \${item==1?'checked':''}/>
-                <label class="check3" for="\${+index+1}-c">重大节日模式</label>
+                <input id="c\${index}" name='m\${index}' type="radio" value="3" \${item==3?'checked':''}/>
+                <label class="check3" for="c\${index}">重大节日模式</label>
             </div>
+        </div>
+    </li>
+    {@/each}
+</script>
+
+<%--Task--%>
+<script id="tpl-taskList" type="text/template">
+    {@each data as item, index}
+    <li>
+        <div class="top">
+            \${item.taskName}
+        </div>
+        <div class="bottom">
+            {@if item.exeState == 'ok'}
+            <span class="status success">\${parseExeState(item.exeState)}</span>
+            {@else}
+            <span class="status error">\${parseExeState(item.exeState)}</span>
+            {@/if}
+            <button name="btnExecute" onclick="executeTask('\${item.areaNodeID}', '\${item.taskNo}')"> 执行</button>
         </div>
     </li>
     {@/each}
@@ -306,5 +310,13 @@
 <script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js?v=V1.0.3"
         type="text/javascript"></script>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 </html>

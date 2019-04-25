@@ -7,17 +7,109 @@ $(window).resize(function () {   //当浏览器大小变化时
 });
 var params={
 	start:0,
-	limit:100
+	limit:10
+}
+var taskParams={
+	start:0,
+	limit:10
 }
 
 $(function () {
     initPage();
+    initTask();
     getPageList();
-    initEvents();
     initJuicerMethod();
     getYearCronList();
-    $('.btns').on('click','.btn',changePage)
+    $('.btns').on('click','.btn',changePage);
+    $('#months').on('click','li',changeMonth);
+    $('.Control .right .heads').on('click','button',checkType);
 });
+
+
+/*任务初始化管理*/
+function initTask() {
+    $("#areaNodeID").combotree({
+        onChange: function (newValue, oldValue) {
+            getTaskList("areaNodeID", newValue);
+        }
+    });
+    initPageTask();
+}
+
+
+
+function executeTask(areaNodeID, taskNo) {
+    if (!confirm("确认执行该任务么？")) {
+        return;
+    }
+   var url=contextPath + "/seAreaTask/exeTask";
+   var data={
+       areaNodeID: areaNodeID,
+       taskNo: taskNo
+   }
+   $.post(url,data,function(rst){
+       if (rst.status == 0) {
+           alert(rst.errorMessage);
+           getTaskList();
+       }
+   })
+}
+
+
+function initPageTask() {
+    $.jqPaginator('#pagination2', {
+        totalCounts: 1,
+        pageSize: taskParams.limit,
+        visiblePages: 10,
+        currentPage: 1,
+        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        onPageChange: function (num, type) {
+            taskParams['start'] = (num - 1) * taskParams.limit;
+            taskParams['initType'] = type;
+            getTaskList();
+        }
+    });
+}
+
+/*ajax获取数据列表*/
+function getTaskList(key, value) {
+    if(!key){
+        taskParams[key] = value;
+    }
+    var url = contextPath + "/seAreaTask/findSeAreaTaskList";
+    $.getJSON(url, taskParams, function (rst) {
+        if (rst.status == 0) {
+            if (taskParams.initType == "init") {
+                $('#pagination1').jqPaginator('option', {
+                    totalCounts: rst.total == 0 ? 1 : rst.total,
+                    currentPage: 1
+                });
+            }
+            render($("#taskList"), rst.rows, "tpl-taskList");
+        }
+    });
+}
+
+
+/*全部设置类型*/
+function checkType() {
+   var that=$(this);
+   var type=that.data('type');
+    $("input:radio[value='"+type+"']").prop("checked", "checked");
+    stroyMap();
+}
+
+
+/*点击切换月份*/
+function changeMonth() {
+    stroyMap();
+    $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式
+    $(this).addClass('active'); // 添加当前元素的样式
+    var m = $(this).data("id");
+    renderMonths(m);
+}
 
 /*切换页面*/
 function changePage() {
@@ -26,6 +118,7 @@ function changePage() {
     activeDo(type);
 }
 
+/*切换界面*/
 function activeDo(type) {
     console.log(type);
     $('.modals').hide();
@@ -36,8 +129,8 @@ function activeDo(type) {
 /*分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 100,
-        pageSize: 5,
+        totalCounts: 1,
+        pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
@@ -62,34 +155,15 @@ function initPage() {
             return false;
         }
     });
-
-    $("#months li").click(function () {
-        //  monthList();
-        $(this).siblings('li').removeClass('active');  // 删除其他兄弟元素的样式
-        $(this).addClass('active'); // 添加当前元素的样式
-        var m = $(this).data("id");
-        setParams(m);
-    });
-    $("#dayCron").click(function () {
-        $("input:radio[value='1']").prop("checked", "checked");
-    });
-    $("#jieri").click(function () {
-        $("input:radio[value='2']").prop("checked", "checked");
-    });
-    $("#zhong").click(function () {
-        $("input:radio[value='3']").prop("checked", "checked");
-    });
 }
 
-function initEvents() {
-    $('#modal-preview').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        var title = relatedTarget.data('title');
-        var modal = $(this);
-        console.log(relatedTarget);
-        initPreview(id);
-    })
+function stroyMap(){
+    var mid ='m'+$("#months li.active").data("id");
+    var checkValue = '';
+    $('input:radio:checked').each(function () {
+        checkValue += $(this).val();
+    });
+    map[mid]=checkValue;
 }
 
 function initPreview(id) {
@@ -143,7 +217,25 @@ function render(obj, data, tplId) {
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
+    juicer.register('parseExeState', parseExeState);
 }
+
+
+
+/**
+ * 状态解析
+ */
+function parseExeState(val) {
+    switch (val) {
+        case 'ok':
+            return "已执行";
+        case 'error':
+            return "未执行";
+        default:
+            return "未执行";
+    }
+}
+
 
 /**
  * 状态解析
@@ -182,49 +274,46 @@ function getYearCronList() {
     var date = new Date;
     var month = date.getMonth();
     var m = month + 1;
-    var day = date.getDate();
     var url = contextPath + "/generalYearCron/syncData";
     $.getJSON(url, params, function (rst) {
         console.log(rst.value);
         if (rst.status == 0) {
             var data = rst.value;
-            // var nowmon=data[m];
-            //   var a = nowmon.substring(day - 1, day);
-            //   console.log(a);
-            var id;
-            for (var i = 1; i < 13; i++) {
-                id = "m" + i;
-                map[id] = data[id];
-            }
+            map=data;
             $('#months li:eq('+month+')').addClass('active');
-            var datas={};
-            datas.m=data['m'+m];
-            datas.d=parseInt(mGetDate(m));
-            render($("#page-YearCronlist"), datas, "tpl-YearCronlist");
-            $('#s' + day).addClass('dayactive');
+            renderMonths(m);
         }
     });
 }
-//加载每月数据
-function setParams(m) {
-    var url = contextPath + "/generalYearCron/syncData";
-    $.getJSON(url, params, function (rst) {
-        if (rst.status == 0) {
-            var d = rst.value;
-            var data={};
-            data.m=d['m'+m];
-            data.d=parseInt(mGetDate(m));
-            render($("#page-YearCronlist"), data, "tpl-YearCronlist");
-            var date = new Date;
-            var month = date.getMonth();
-            var mo=m-1;
-            if(month==mo){
-                var day = date.getDate();
-                $('#s' + day).addClass('dayactive');
-            }
-        }
-    });
+
+function renderMonths(m) {
+    var datas={};
+    datas.m=map['m'+m];
+    datas.d=parseInt(mGetDate(m));
+    render($("#page-YearCronlist"), datas, "tpl-YearCronlist");
+    var date = new Date;
+    var month = date.getMonth();
+    var mo=m-1;
+    if(month==mo){
+        var day = date.getDate();
+        $('#s' + day).addClass('dayactive');
+    }
 }
+
+// //加载每月数据
+// function setParams(m) {
+//     var url = contextPath + "/generalYearCron/syncData";
+//     $.getJSON(url, params, function (rst) {
+//         if (rst.status == 0) {
+//             var d = rst.value;
+//             var data={};
+//             data.m=d['m'+m];
+//             data.d=parseInt(mGetDate(m));
+//             render($("#page-YearCronlist"), data, "tpl-YearCronlist");
+//         }
+//     });
+// }
+
 
 
 
@@ -238,17 +327,6 @@ function mGetDate(m){
 
 //获取每月修改的数据
 function monthList() {
-    var mid = $("#months li.active").attr("id");
-    console.log(mid);
-    var checkValue = '';
-    $('input:radio:checked').each(function () {
-        checkValue += $(this).val();
-    });
-    console.log(mid + ":" + checkValue);
-    if (map.hasOwnProperty(mid)) {
-        map[mid] = checkValue;
-    }
-    console.log(map);
     execute();
 }
 //执行总控数据修改
