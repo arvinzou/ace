@@ -191,7 +191,7 @@ var params={
 function initTimeing() {
     initPage();
     $('.Timing .submit').click(searchTiming);
-    
+
 }
 
 function searchTiming() {
@@ -216,12 +216,40 @@ function initPage() {
             getPageList();
         }
     });
+    //全部有效
+    $("#AllEffective").click(function () {
+        var type = $('.piece.active').data('type');
+        if (type == 'monthData') {
+            $("input[name='checkMonth']").prop("checked", true);
+            $("input[name='checkMonth']").prop('value', '1');
+        } else if (type == 'weekData') {
+            $("input[name='checkWeek']").prop("checked", true);
+            $("input[name='checkWeek']").prop('value', '1');
+        } else if (type == 'dayData') {
+            $("input[name='checkDay']").prop("checked", true);
+            $("input[name='checkDay']").prop('value', '1');
+        }
+    });
+    //全部无效
+    $("#AllInvalid").click(function () {
+        var type = $('.piece.active').data('type');
+        if (type == 'monthData') {
+            $("input:checkbox[name='checkMonth']").prop("checked", false);
+            $("input[name='checkMonth']").prop('value', '0');
+        } else if (type == 'weekData') {
+            $("input:checkbox[name='checkWeek']").prop("checked", false);
+            $("input[name='checkWeek']").prop('value', '0');
+        } else if (type == 'dayData') {
+            $("input:checkbox[name='checkDay']").prop("checked", false);
+            $("input[name='checkDay']").prop('value', '0');
+        }
+    });
 }
 
 /*定时任务数据加载表格数据*/
 function getPageList() {
-    var val=$('.Timing .inputGroup .timerName').val();
-    params['timerName']=val;
+    var val = $('.Timing .inputGroup .timerName').val();
+    params['timerName'] = val;
     var url = contextPath + "/seTimerData/findSeTimerDataList";
     $.getJSON(url, params, function (rst) {
         if (rst.status == 0) {
@@ -235,29 +263,11 @@ function getPageList() {
         }
     })
 }
-
 /*****************************************定时设置End***********************************************/
-
-/*切换页面*/
-function changeList() {
-    var that = $(this);
-    $(this).siblings('div').removeClass('active');
-    $(this).addClass('active');
-    var type = that.data('type');
-    changeDo(type);
-}
-
-function changeDo(type) {
-    console.log(type);
-    $('.list').hide();
-    $('.list.' + type).show();
-}
-
-
 
 //查询更新定时设置数据
 function selectTimerDate(id) {
-    $("#updateRecord").show();
+    $(".timing-modal").show();
     $.ajax({
         url: contextPath + "/seTimerData/selectSeTimerDataByPrimaryKey",
         type: "post",
@@ -285,6 +295,7 @@ function selectTimerDate(id) {
     });
 }
 
+
 /*添加渲染*/
 function renderadd(obj, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;
@@ -307,25 +318,7 @@ function render(obj, data, tplId) {
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
-    juicer.register('parseExeState', parseExeState);
 }
-
-
-
-/**
- * 状态解析
- */
-function parseExeState(val) {
-    switch (val) {
-        case 'ok':
-            return "已执行";
-        case 'error':
-            return "未执行";
-        default:
-            return "未执行";
-    }
-}
-
 
 /**
  * 状态解析
@@ -396,16 +389,21 @@ function checkData() {
         var m = "d" + i;
         DayEnable[m] = $(this).val();
     });
+    Timermap['id'] = $('input[name="id"]').val();
+    Timermap['timerID'] = $('input[name="timerID"]').val();
+    Timermap['timerName'] = $('input[name="timerNames"]').val();
+    Timermap['timerEnable'] = $('input[name="timerEnable"]').val();
+    Timermap['startTime'] = $('input[name="startTime"]').val();
+    Timermap['taskNo'] = $('input[name="taskNo"]').val();
     Timermap['MonthEnable'] = MonthEnable;
     Timermap['WeekEnable'] = WeekEnable;
     Timermap['DayEnable'] = DayEnable;
-
     console.log(Timermap);
 }
 
 function TimerUpdate() {
     checkData();
-    /*$.ajax({
+    $.ajax({
         url: contextPath + "/seTimerData/updateTimer",
         type: "post",
         async: false,
@@ -425,5 +423,5 @@ function TimerUpdate() {
             alert("对不起出错了！");
         }
     });
-*/
+
 }
