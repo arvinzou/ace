@@ -48,14 +48,12 @@
     <div class="modals Timing" id="Timer" style="display: none;">
         <div class="modals-head">
             <span class="title">定时设置</span>
-            <form id="fm-search">
-                <div class="inputGroup">
-                    <input type="text" placeholder="输入任务名称" name="timerName"/>
-                    <button type="submit">
+            <div class="inputGroup">
+                    <input class="timerName" type="text" placeholder="输入任务名称" name="timerName"/>
+                    <button class="submit">
 
                     </button>
-                </div>
-            </form>
+            </div>
         </div>
         <div class="modals-body">
             <table class="table-tg" style="border:1px solid rgb(12,129,135);">
@@ -80,7 +78,7 @@
     <div class="modals Control" id="yearCron">
         <div class="modals-head">
             <span class="title">总控设置</span>
-            <button class="activeBtn style1" onclick="monthList();">
+            <button class="activeBtn style1" onclick="postList();">
                 执行
             </button>
         </div>
@@ -104,9 +102,9 @@
                 </div>
                 <div class="right">
                     <div class="heads">
-                        <button class="style1" id="dayCron">全部日程模式</button>
-                        <button class="style1" id="jieri">全部节日模式</button>
-                        <button class="style1" id="zhong">全部重大节日模式</button>
+                        <button class="style1" data-type="1">全部日程模式</button>
+                        <button class="style1" data-type="2">全部节日模式</button>
+                        <button class="style1" data-type="3">全部重大节日模式</button>
                     </div>
                     <div class="table">
                         <ul class="days" id="page-YearCronlist">
@@ -662,11 +660,19 @@
         type="text/javascript"></script>--%>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"
         type="text/javascript"></script>
-<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/loading.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js?v=V1.0.3"
         type="text/javascript"></script>
+<%--easyui--%>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 </html>
