@@ -17,6 +17,8 @@ $(function () {
     initJuicerMethod();
     getYearCronList();
     $('.btns').on('click','.btn',changePage)
+    $('.unit').on('click', '.piece', changeList)
+
 });
 
 /*切换页面*/
@@ -32,7 +34,20 @@ function activeDo(type) {
     $('.modals.'+type).show();
 }
 
+/*切换页面*/
+function changeList() {
+    var that = $(this);
+    $(this).siblings('div').removeClass('active');
+    $(this).addClass('active');
+    var type = that.data('type');
+    changeDo(type);
+}
 
+function changeDo(type) {
+    console.log(type);
+    $('.list').hide();
+    $('.list.' + type).show();
+}
 /*分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
@@ -70,30 +85,61 @@ function initPage() {
         var m = $(this).data("id");
         setParams(m);
     });
+    //全部平日模式
     $("#dayCron").click(function () {
         $("input:radio[value='1']").prop("checked", "checked");
     });
-    $("#jieri").click(function () {
+    //全部节日模式
+    $("#festivalCron").click(function () {
         $("input:radio[value='2']").prop("checked", "checked");
     });
-    $("#zhong").click(function () {
+    //全部重大节日模式
+    $("#greatCron").click(function () {
         $("input:radio[value='3']").prop("checked", "checked");
     });
+    //全部有效
+    $("#AllEffective").click(function () {
+        var type = $('.piece.active').data('type');
+        if (type == 'monthData') {
+            $("input[name='checkMonth']").prop("checked", true);
+
+        } else if (type == 'weekData') {
+            $("input[name='checkWeek']").prop("checked", true);
+
+        } else if (type == 'dayData') {
+            $("input[name='checkDay']").prop("checked", true);
+        }
+    });
+    //全部无效
+    $("#AllInvalid").click(function () {
+        var type = $('.piece.active').data('type');
+        if (type == 'monthData') {
+            $("input:checkbox[name='checkMonth']").prop("checked", false);
+        } else if (type == 'weekData') {
+            $("input:checkbox[name='checkWeek']").prop("checked", false);
+        } else if (type == 'dayData') {
+            $("input:checkbox[name='checkDay']").prop("checked", false);
+        }
+    });
+
 }
 
 function initEvents() {
+
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var title = relatedTarget.data('title');
         var modal = $(this);
         console.log(relatedTarget);
-        initPreview(id);
+
     })
 }
 
-function initPreview(id) {
-    startLoad();
+//查询更新定时设置数据
+function selectTimerDate(id) {
+    $("#Timer").hide();
+    $("#updateRecord").show();
     $.ajax({
         url: contextPath + "/seTimerData/selectSeTimerDataByPrimaryKey",
         type: "post",
@@ -102,14 +148,14 @@ function initPreview(id) {
             id: id
         },
         success: function (result) {
-            stopLoad();
             if (result.status == 0) {
                 var data = {};
+                console.log(result);
                 data['o'] = result.value;
                 data['monthList'] = result.value.monthList;
                 data['weekList'] = result.value.weekList;
                 data['dayList'] = result.value.dayList;
-                render('#fm-preview', data, 'tpl-preview');
+                render('#page-update', data, 'tpl-monthslist');
             } else {
                 alert(result.errorMessage);
             }
@@ -120,6 +166,7 @@ function initPreview(id) {
         }
     });
 }
+
 
 /*添加渲染*/
 function renderadd(obj, data, tplId) {
@@ -238,7 +285,7 @@ function mGetDate(m){
 
 //获取每月修改的数据
 function monthList() {
-    var mid = $("#months li.active").attr("id");
+    var mid = $("#months li.active").data("id");
     console.log(mid);
     var checkValue = '';
     $('input:radio:checked').each(function () {
@@ -273,4 +320,60 @@ function execute() {
             alert("对不起出错了！");
         }
     });
+}
+
+
+var Timermap = {};
+
+//选中的值
+function checkData() {
+
+    var MonthEnable = {};
+    var WeekEnable = {};
+    var DayEnable = {};
+    $('input[name="checkMonth"]').each(function (i) {
+        i = i + 1;
+        var m = "m" + i;
+        MonthEnable[m] = $(this).val();
+    });
+    $('input[name="checkWeek"]').each(function (i) {
+        i = i + 1;
+        var m = "w" + i;
+        WeekEnable[m] = $(this).val();
+    });
+    $('input[name="checkDay"]').each(function (i) {
+        i = i + 1;
+        var m = "d" + i;
+        DayEnable[m] = $(this).val();
+    });
+    Timermap['MonthEnable'] = MonthEnable;
+    Timermap['WeekEnable'] = WeekEnable;
+    Timermap['DayEnable'] = DayEnable;
+
+    console.log(Timermap);
+}
+
+function TimerUpdate() {
+    checkData();
+    /*$.ajax({
+        url: contextPath + "/seTimerData/updateTimer",
+        type: "post",
+        async: false,
+        data: {
+            jsons: JSON.stringify(Timermap)
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == "ok") {
+                // getPageList();
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+*/
 }
