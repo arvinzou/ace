@@ -11,6 +11,7 @@ import com.huacainfo.ace.glink.constant.CommConstant;
 import com.huacainfo.ace.glink.constant.PortalKey;
 import com.huacainfo.ace.glink.dao.PagePortalDao;
 import com.huacainfo.ace.glink.model.PagePortal;
+import com.huacainfo.ace.glink.service.LeLampStatusService;
 import com.huacainfo.ace.glink.service.PagePortalService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class PagePortalServiceImpl implements PagePortalService {
 
     @Autowired
     private PagePortalDao pagePortalDao;
+    @Autowired
+    private LeLampStatusService leLampStatusService;
 
     /**
      * 根据key索引
@@ -84,7 +87,7 @@ public class PagePortalServiceImpl implements PagePortalService {
      */
     @Override
     public MessageResponse getLampStatus() {
-        LampStatusOut rst = null;
+        LampStatusOut rst;
         try {
             rst = LeApiToolKit.getLampStatus();
         } catch (Exception e) {
@@ -96,20 +99,23 @@ public class PagePortalServiceImpl implements PagePortalService {
             LampStatusOut.LampStatus obj = rst.getData();
             int newVal1 = obj.getLampCount();
             int newVal2 = obj.getBrokenLampCount();
-            //弱电-设备总睡
-            PagePortal key1 = findByKey(PortalKey.LE_LampCount, CommConstant.SYS_ID);
-            insertOrUpdate(CommConstant.SYS_ID, key1,
-                    PortalKey.LE_LampCount_ch, PortalKey.LE_LampCount, newVal1 + "");
-            //弱电-故障设备总数
-            PagePortal key2 = findByKey(PortalKey.LE_BrokenLampCount, CommConstant.SYS_ID);
-            insertOrUpdate(CommConstant.SYS_ID, key2,
-                    PortalKey.LE_BrokenLampCount_ch, PortalKey.LE_BrokenLampCount, newVal2 + "");
-
+            savePagePortal(newVal1, newVal2);
             return new MessageResponse(ResultCode.SUCCESS, "更新成功!");
         } else {
             logger.error("[弱电接口失败]-[武汉设备状态接口（GetLampStatus）]=>{}", rst.toString());
             return new MessageResponse(ResultCode.FAIL, "弱电接口调用失败");
         }
+    }
+
+    private void savePagePortal(int newVal1, int newVal2) {
+        //弱电-设备总睡
+        PagePortal key1 = findByKey(PortalKey.LE_LampCount, CommConstant.SYS_ID);
+        insertOrUpdate(CommConstant.SYS_ID, key1,
+                PortalKey.LE_LampCount_ch, PortalKey.LE_LampCount, newVal1 + "");
+        //弱电-故障设备总数
+        PagePortal key2 = findByKey(PortalKey.LE_BrokenLampCount, CommConstant.SYS_ID);
+        insertOrUpdate(CommConstant.SYS_ID, key2,
+                PortalKey.LE_BrokenLampCount_ch, PortalKey.LE_BrokenLampCount, newVal2 + "");
     }
 
     /**

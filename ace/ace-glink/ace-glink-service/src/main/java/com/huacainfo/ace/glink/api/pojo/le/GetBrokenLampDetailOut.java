@@ -27,8 +27,8 @@ public class GetBrokenLampDetailOut extends LeBaseOut {
     public static class BrokenLamp {
         private String MediaArea;// 控制区域编号
         private String Controller;//控制器编号,
-        private int ChannelNo;//通道编号,
-        private int LampNo;//灯组编号
+        private String ChannelNo;//通道编号,
+        private String LampNo;//灯组编号
 
         public String getMediaArea() {
             return MediaArea;
@@ -46,19 +46,19 @@ public class GetBrokenLampDetailOut extends LeBaseOut {
             Controller = controller;
         }
 
-        public int getChannelNo() {
+        public String getChannelNo() {
             return ChannelNo;
         }
 
-        public void setChannelNo(int channelNo) {
+        public void setChannelNo(String channelNo) {
             ChannelNo = channelNo;
         }
 
-        public int getLampNo() {
+        public String getLampNo() {
             return LampNo;
         }
 
-        public void setLampNo(int lampNo) {
+        public void setLampNo(String lampNo) {
             LampNo = lampNo;
         }
     }
