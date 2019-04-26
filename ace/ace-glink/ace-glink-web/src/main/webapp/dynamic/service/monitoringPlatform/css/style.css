@@ -193,6 +193,7 @@ i{
     height: 212px;
 }
 .shebei-status-wrap{
+    position: relative;
     margin-left:20px;
     padding-top: 35px;
 }
@@ -281,6 +282,7 @@ select#month
     flex: 0 0 60px;
     width: 60px;
     height: 25px;
+    padding-left: 10px;
     color: #00F2F5;
     border:none;
     outline: none;
@@ -374,4 +376,23 @@ select#month{
 #jiedianhaodl{
     width: 230px;
     height: 210px;
+}
+.node-tree-container{
+    display: none;
+    position: absolute;
+    top:72px;
+    right: 0;
+    z-index: 20;
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+    padding-left: 20px;
+    background-color: #fff;
+    border-radius: 5px !important;
+}
+#node-name{
+    color: #00D6D9;
+    font-size: 14px;
+    border:none;
+    border-radius: 20px !important;
 }
