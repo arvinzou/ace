@@ -81,7 +81,7 @@
                                <span>电费单价</span>
                                <div class="input-wrap">
                                    <i>¥</i>
-                                   <input value="0.0">
+                                   <input value="0.0"  id="input-unitPrice">
                                    <span>/kwh</span>
                                </div>
                            </div>
@@ -90,7 +90,7 @@
                                <span>电费</span>
                                <div class="input-wrap">
                                    <i>¥</i>
-                                   <input value="0.0" readonly>
+                                   <input value="0.0" id="input-totalPrice" readonly>
                                </div>
                            </div>
                        </div>
@@ -108,10 +108,6 @@
                        <div class="canvas-tu"  id="shidu"></div>
                    </div>
                    <div class="shebei-status-wrap">
-                       <%--<select class="form-control">--%>
-                           <%--<option value="0">万达广场</option>--%>
-                           <%--<option value="1">水星楼</option>--%>
-                       <%--</select>--%>
                        <div class="ztree-wrap">
                            <input id="node-name" data-id="1" value="配电箱-A楼AL1" class="form-control" readonly>
                            <div class="node-tree-container">
@@ -265,6 +261,7 @@
     * */
     function initAreaData(obj) {
         var powerTotal = obj.powerTotal.itemValue;
+        localStorage.setItem('powerTotal',powerTotal);
         var unitPrice = parseFloat(obj.unitPrice.itemValue);
         var powerPriceTotal = (parseFloat(powerTotal) * unitPrice).toFixed(1);
         $('.dianfei>.left>.input-wrap input').val(unitPrice);
@@ -286,6 +283,17 @@
             }
         }
     }
+    /*
+    * 监听输入框单价回车事件,
+    * */
+    $("#input-unitPrice").on('keypress blur',function (e) {
+        var powerTotal = parseFloat(localStorage.getItem('powerTotal'));
+        var price = parseFloat($(this).val());
+        var totalPrice = powerTotal*price;
+        if (e.which == 13) {
+            $('#input-totalPrice').val(totalPrice.toFixed(1));
+        }
+    });
     /*
     * 初始化温度湿度值
     * */
