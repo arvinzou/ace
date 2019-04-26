@@ -264,7 +264,6 @@ function getPageList() {
         }
     })
 }
-
 /*切换页面*/
 function changeList() {
     var that = $(this);
@@ -279,6 +278,8 @@ function changeDo(type) {
     $('.list').hide();
     $('.list.' + type).show();
 }
+
+/*****************************************定时设置End***********************************************/
 
 //查询更新定时设置数据
 function selectTimerDate(id) {
@@ -309,6 +310,72 @@ function selectTimerDate(id) {
         }
     });
 }
+
+
+/*添加渲染*/
+function renderadd(obj, data, tplId) {
+    var tpl = document.getElementById(tplId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $(obj).append(html);
+}
+
+
+/*页面渲染*/
+function render(obj, data, tplId) {
+    var tpl = document.getElementById(tplId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $(obj).html(html);
+}
+
+//juicer自定义函数
+function initJuicerMethod() {
+    juicer.register('parseStatus', parseStatus);
+}
+
+/**
+ * 状态解析
+ */
+function parseStatus(status) {
+    switch (status) {
+        case 0:
+            return "无效";
+        case 1:
+            return "有效";
+        default:
+            return "0";
+    }
+}
+
+
+// //加载每月数据
+// function setParams(m) {
+//     var url = contextPath + "/generalYearCron/syncData";
+//     $.getJSON(url, params, function (rst) {
+//         if (rst.status == 0) {
+//             var d = rst.value;
+//             var data={};
+//             data.m=d['m'+m];
+//             data.d=parseInt(mGetDate(m));
+//             render($("#page-YearCronlist"), data, "tpl-YearCronlist");
+//         }
+//     });
+// }
+
+
+function mGetDate(m) {
+    var date = new Date();
+    var year = date.getFullYear();
+    var d = new Date(year, m, 0);
+    return d.getDate();
+}
+
+
+
+
 
 var Timermap = {};
 
@@ -369,76 +436,3 @@ function TimerUpdate() {
     });
 
 }
-/*****************************************定时设置End***********************************************/
-
-
-/*添加渲染*/
-function renderadd(obj, data, tplId) {
-    var tpl = document.getElementById(tplId).innerHTML;
-    var html = juicer(tpl, {
-        data: data,
-    });
-    $(obj).append(html);
-}
-
-
-/*页面渲染*/
-function render(obj, data, tplId) {
-    var tpl = document.getElementById(tplId).innerHTML;
-    var html = juicer(tpl, {
-        data: data,
-    });
-    $(obj).html(html);
-}
-
-//juicer自定义函数
-function initJuicerMethod() {
-    juicer.register('parseStatus', parseStatus);
-}
-
-/**
- * 状态解析
- */
-function parseStatus(status) {
-    switch (status) {
-        case 0:
-            return "无效";
-        case 1:
-            return "有效";
-        default:
-            return "0";
-    }
-}
-
-
-
-
-
-// //加载每月数据
-// function setParams(m) {
-//     var url = contextPath + "/generalYearCron/syncData";
-//     $.getJSON(url, params, function (rst) {
-//         if (rst.status == 0) {
-//             var d = rst.value;
-//             var data={};
-//             data.m=d['m'+m];
-//             data.d=parseInt(mGetDate(m));
-//             render($("#page-YearCronlist"), data, "tpl-YearCronlist");
-//         }
-//     });
-// }
-
-
-
-
-function mGetDate(m){
-    var date = new Date();
-    var year = date.getFullYear();
-    var d = new Date(year, m, 0);
-    return d.getDate();
-}
-
-
-
-
-
