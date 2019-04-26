@@ -11,6 +11,7 @@ $(function () {
     initTask();
     initControl();
     initTimeing();
+    initScenario();
     initJuicerMethod();
     $('.btns').on('click','.btn',changePage);
 });
@@ -146,14 +147,14 @@ function initPageTask() {
 
 /*ajax获取数据列表*/
 function getTaskList(key, value) {
-    if(!key){
+    if(key){
         taskParams[key] = value;
     }
     var url = contextPath + "/seAreaTask/findSeAreaTaskList";
     $.getJSON(url, taskParams, function (rst) {
         if (rst.status == 0) {
             if (taskParams.initType == "init") {
-                $('#pagination1').jqPaginator('option', {
+                $('#pagination2').jqPaginator('option', {
                     totalCounts: rst.total == 0 ? 1 : rst.total,
                     currentPage: 1
                 });
@@ -180,8 +181,6 @@ function executeTask(areaNodeID, taskNo) {
     })
 }
 /*****************************************任务管理End***********************************************/
-
-
 /*****************************************定时设置Start***********************************************/
 var params={
     start:0,
@@ -264,6 +263,124 @@ function getPageList() {
     })
 }
 /*****************************************定时设置End***********************************************/
+/*****************************************场景执行Start***********************************************/
+
+var scenarioParams={
+    start:0,
+    limit:21
+}
+
+/*任务初始化管理*/
+function initScenario() {
+    $('#scenarioList').on('click','button',selectPreset);
+    $('.scenario-modal').on('click','.submit',searchPreset);
+    $('.scenario-modal #presets').on('click','li',setScenario);
+    $("#areaNodeID1").combotree({
+        onChange: function (newValue, oldValue) {
+            getScenarioList("areaNodeID", newValue);
+        }
+    });
+    initPageScenario();
+}
+
+function setScenario() {
+    var that=$(this);
+    scenarioPostData.presetNo=that.data('presetNo');
+    var url='';
+    $.post(url,scenarioPostData,function () {
+        
+    })
+}
+
+/*初始化分页器*/
+function initPageScenario() {
+    $.jqPaginator('#pagination3', {
+        totalCounts: 1,
+        pageSize: scenarioParams.limit,
+        visiblePages: 10,
+        currentPage: 1,
+        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        onPageChange: function (num, type) {
+            scenarioParams['start'] = (num - 1) * scenarioParams.limit;
+            scenarioParams['initType'] = type;
+            getScenarioList();
+        }
+    });
+
+    $.jqPaginator('#pagination4', {
+        totalCounts: 1,
+        pageSize: scenarioParams.limit,
+        visiblePages: 10,
+        currentPage: 1,
+        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        onPageChange: function (num, type) {
+            presetMap['start'] = (num - 1) * scenarioParams.limit;
+            presetMap['initType'] = type;
+            if(type!='init'){
+                getScenarioList();
+            }
+        }
+    });
+}
+
+
+/*ajax获取数据列表*/
+function getScenarioList(key, value) {
+    if(key){
+        scenarioParams[key] = value;
+    }
+    var url = contextPath + "/seCustomArea/findSeCustomAreaList";
+    $.getJSON(url, taskParams, function (rst) {
+        if (rst.status == 0) {
+            if (taskParams.initType == "init") {
+                $('#pagination3').jqPaginator('option', {
+                    totalCounts: rst.total == 0 ? 1 : rst.total,
+                    currentPage: 1
+                });
+            }
+            render($("#scenarioList"), rst.rows, "tpl-scenarioList");
+        }
+    });
+}
+
+var presetMap={
+    start:0,
+    limit:10
+};
+var scenarioPostData={};
+
+function selectPreset() {
+    var that=$(this);
+    scenarioPostData.areaNo=that.data('areaNo');
+    scenarioPostData.areaNodeID=that.data('areaNodeID');
+    var val =$('.scenario-modal  .presetName').val();
+    presetMap['presetName'] = val;
+    $('.scenario-modal').show();
+    var url = contextPath + "/sePresetData/findSePresetDataList";
+    $.getJSON(url, presetMap, function (rst) {
+        if (rst.status == 0) {
+            if (presetMap.initType == "init") {
+                $('#pagination4').jqPaginator('option', {
+                    totalCounts: rst.total == 0 ? 1 : rst.total,
+                    currentPage: 1
+                });
+            }
+            render($("#presets"), rst.rows, "tpl-presets");
+        }
+    });
+}
+
+function searchPreset() {
+    presetMap.start=0;
+    selectPreset();
+}
+
+
+/*****************************************场景执行End***********************************************/
 
 //查询更新定时设置数据
 function selectTimerDate(id) {
@@ -318,7 +435,23 @@ function render(obj, data, tplId) {
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
+    juicer.register('parseExeState', parseExeState);
 }
+
+/**
+ * 状态解析
+ */
+function parseExeState(val) {
+    switch (val) {
+        case 'ok':
+            return "已执行";
+        case 'error':
+            return "未执行";
+        default:
+            return "未执行";
+    }
+}
+
 
 /**
  * 状态解析
