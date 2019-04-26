@@ -125,4 +125,10 @@ public class LeBrokenLampController extends GLinkBaseController {
         return this.leBrokenLampService.deleteLeBrokenLampByLeBrokenLampId(id, this.getCurUserProp());
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/syncData")
+    public MessageResponse syncData() {
+        return leBrokenLampService.getBrokenLampDetail();
+    }
+
 }

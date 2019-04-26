@@ -2,6 +2,7 @@ package com.huacainfo.ace.glink.service.quartz;
 
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.glink.service.LeBrokenLampService;
+import com.huacainfo.ace.glink.service.LeLampStatusService;
 import com.huacainfo.ace.glink.service.PagePortalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,13 +25,15 @@ public class LeQuartzManager {
     private PagePortalService pagePortalService;
     @Autowired
     private LeBrokenLampService leBrokenLampService;
+    @Autowired
+    private LeLampStatusService leLampStatusService;
 
     /**
-     * 每隔[5]分钟,调用一次弱电接口：    获取设备总数&故障设备总数
+     * 每隔[10分钟,调用一次弱电接口：    获取设备总数&故障设备总数
      */
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void leAutoGetLampStatus() {
-        MessageResponse ms = pagePortalService.getLampStatus();
+        MessageResponse ms = leLampStatusService.syncData();// pagePortalService.getLampStatus();
         logger.info(ms.getErrorMessage());
     }
 

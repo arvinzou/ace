@@ -4,18 +4,20 @@ import com.huacainfo.ace.common.model.BaseModel;
 
 import java.util.Date;
 
-public class LeBrokenLamp extends BaseModel {
+public class LeLampStatus extends BaseModel {
     private String id;
 
     private String checkDate;
 
-    private String mediaArea;
+    private String checkYear;
 
-    private String controller;
+    private String checkMonth;
 
-    private String channelNo;
+    private String checkDay;
 
-    private String lampNo;
+    private Integer lampCount;
+
+    private Integer brokenLampCount;
 
     private String remark;
 
@@ -39,36 +41,44 @@ public class LeBrokenLamp extends BaseModel {
         this.checkDate = checkDate == null ? null : checkDate.trim();
     }
 
-    public String getMediaArea() {
-        return mediaArea;
+    public String getCheckYear() {
+        return checkYear;
     }
 
-    public void setMediaArea(String mediaArea) {
-        this.mediaArea = mediaArea == null ? null : mediaArea.trim();
+    public void setCheckYear(String checkYear) {
+        this.checkYear = checkYear == null ? null : checkYear.trim();
     }
 
-    public String getController() {
-        return controller;
+    public String getCheckMonth() {
+        return checkMonth;
     }
 
-    public void setController(String controller) {
-        this.controller = controller == null ? null : controller.trim();
+    public void setCheckMonth(String checkMonth) {
+        this.checkMonth = checkMonth == null ? null : checkMonth.trim();
     }
 
-    public String getChannelNo() {
-        return channelNo;
+    public String getCheckDay() {
+        return checkDay;
     }
 
-    public void setChannelNo(String channelNo) {
-        this.channelNo = channelNo;
+    public void setCheckDay(String checkDay) {
+        this.checkDay = checkDay == null ? null : checkDay.trim();
     }
 
-    public String getLampNo() {
-        return lampNo;
+    public Integer getLampCount() {
+        return lampCount;
     }
 
-    public void setLampNo(String lampNo) {
-        this.lampNo = lampNo;
+    public void setLampCount(Integer lampCount) {
+        this.lampCount = lampCount;
+    }
+
+    public Integer getBrokenLampCount() {
+        return brokenLampCount;
+    }
+
+    public void setBrokenLampCount(Integer brokenLampCount) {
+        this.brokenLampCount = brokenLampCount;
     }
 
     public String getRemark() {

@@ -1,3 +1,4 @@
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.glink.api.LeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.le.LightStrategyIn;
@@ -6,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @Auther: Arvin
@@ -20,9 +22,14 @@ public class CommonTest {
     public void test() throws IOException {
 
         //无数据返回
-        System.out.println(LeApiToolKit.getBuildingDetail());
-//        System.out.println(LeApiToolKit.getLampStatus());
-        ;
+//        System.out.println(LeApiToolKit.getBuildingDetail());
+//        String date = DateUtil.toStr(DateUtil.toDate("2019-04-16 00:00:00"), CommConstant.DATE_REGEX_LE);
+
+//        System.out.println(LeApiToolKit.getBrokenLampDetail(date));
+        Date now = DateUtil.getNowDate();
+        System.out.println(DateUtil.toStr(now, "yyyy"));
+        System.out.println(DateUtil.toStr(now, "MM"));
+        System.out.println(DateUtil.toStr(now, "dd"));
     }
 
     private void generatorGUID(int num) {
