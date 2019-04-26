@@ -29,7 +29,7 @@ var canvasPanel = function(){
     this.img.src="./img/glassBottom12.png";
     this.current = 20;  //当前数值
     this.timer = null;
-    this.title = 'aa';
+    this.title = '';
 }
 canvasPanel.prototype.init =function(canvasId){
     var $this = this;
@@ -171,9 +171,9 @@ canvasPanel.prototype.paintNowValue = function (num){
         $this.context.fillText(num+$this.danwei,110*$this.times,1.1*($this.MaxNum-num));
     }else if($this.MinNum==0){
         if($this.current > 90){
-            $this.context.fillText(num+$this.danwei,110*$this.times,12);
+            $this.context.fillText(num+$this.danwei,90*$this.times,12);
         }else{
-            $this.context.fillText(num+$this.danwei,110*$this.times,1.3*($this.MaxNum-num));
+            $this.context.fillText(num+$this.danwei,90*$this.times,1.3*($this.MaxNum-num));
         }
 
     }

@@ -291,7 +291,7 @@
         var price = parseFloat($(this).val());
         var totalPrice = powerTotal*price;
         if (e.which == 13) {
-            $('#input-totalPrice').val(totalPrice.toFixed(1));
+            $('#input-totalPrice').val(totalPrice.toFixed   (1));
         }
     });
     /*
@@ -309,7 +309,7 @@
         wendu.init('wendu');
         var shidu = new canvasPanel();
         shidu.bgColor = '#00FFFF';
-        shidu.danwei = "%";
+        shidu.danwei = "%RH";
         shidu.MaxNum = 100;
         shidu.MinNum = 0;
         shidu.current = humidity;
