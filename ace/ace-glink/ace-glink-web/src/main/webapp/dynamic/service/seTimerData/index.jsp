@@ -30,7 +30,7 @@
         <div class="row custom-toolbar">
             <div class="col-md-3">
 
-                <a href="javascript:syncData();" class="btn green">同步数据</a>
+                <a href="javascript:syncData();" class="btn green">同步</a>
             </div>
 
             <div class="col-md-6" style="float: right;">
@@ -68,13 +68,13 @@
                 <thead>
                 <tr>
 
-                    <th width="15%"> 定时任务号</th>
-                    <th width="10%"> 定时任务名称</th>
-                    <th width="10%"> 是否有效</th>
-                    <th width="10%"> 启动时间</th>
-                    <th width="10%"> 调度任务号</th>
-                    <th width="10%"> 状态</th>
-                    <th width="15%"> 创建日期</th>
+
+                    <th width="20%"> 定时任务名称</th>
+                    <th width="20%"> 是否有效</th>
+                    <th width="20%"> 启动时间</th>
+
+
+                    <th width="25%"> 创建日期</th>
                     <th width="15%">操作</th>
                 </tr>
                 </thead>
@@ -102,7 +102,7 @@
     {@each data as item, index}
     <tr>
 
-        <td> \${item.timerID}</td>
+
         <td> \${item.timerName}</td>
         <td> {@if item.timerEnable==0}
             <span>无效</span>
@@ -112,14 +112,8 @@
             {@/if}
         </td>
         <td> \${item.startTime}</td>
-        <td> \${item.taskNo}</td>
-        <td> {@if item.status==0}
-            <span class="label label-lg label-info">无效</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">有效</span>
-            {@else}
-            {@/if}
-        </td>
+
+
         <td> \${item.createDate}</td>
 
         <td>
@@ -348,12 +342,12 @@
             \${data.o.remark}
         </div>
     </div>
-    <div class="form-group">
+    <%--<div class="form-group">
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
             \${data.o.status}
         </div>
-    </div>
+    </div>--%>
     <div class="form-group">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">
@@ -361,12 +355,7 @@
         </div>
     </div>
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
-                <span class="caption-subject bold uppercase"> 月数据列表</span>
-            </div>
-        </div>
+        <h4 class="modal-title">月数据列表</h4>
         <div class="portlet-body">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
@@ -413,12 +402,9 @@
     </div>
 
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
-                <span class="caption-subject bold uppercase"> 周数据列表</span>
-            </div>
-        </div>
+
+        <h4 class="modal-title"> 周数据列表</h4>
+
         <div class="portlet-body">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
@@ -456,12 +442,9 @@
         </div>
     </div>
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
-                <span class="caption-subject bold uppercase"> 日数据列表</span>
-            </div>
-        </div>
+
+        <h4 class="modal-title"> 日数据列表</h4>
+
         <div class="portlet-body">
             <div class="row">
                 <div class="table-scrollable">

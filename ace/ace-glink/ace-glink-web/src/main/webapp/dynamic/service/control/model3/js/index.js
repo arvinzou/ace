@@ -97,7 +97,7 @@ function postList() {
         jsons: JSON.stringify(map)
     }
     $.post(url,data,function(result){
-        if (result.status == "ok") {
+        if (result.Status == "ok") {
             alert("设置成功");
             getYearCronList();
         } else {
@@ -191,6 +191,7 @@ var params={
 function initTimeing() {
     initPage();
     $('.Timing .submit').click(searchTiming);
+    $('.unit').on('click', '.piece', changeList);
 
 }
 
@@ -263,7 +264,21 @@ function getPageList() {
         }
     })
 }
-/*****************************************定时设置End***********************************************/
+
+/*切换页面*/
+function changeList() {
+    var that = $(this);
+    $(this).siblings('div').removeClass('active');
+    $(this).addClass('active');
+    var type = that.data('type');
+    changeDo(type);
+}
+
+function changeDo(type) {
+    console.log(type);
+    $('.list').hide();
+    $('.list.' + type).show();
+}
 
 //查询更新定时设置数据
 function selectTimerDate(id) {
@@ -294,6 +309,67 @@ function selectTimerDate(id) {
         }
     });
 }
+
+var Timermap = {};
+
+//选中的值
+function checkData() {
+
+    var MonthEnable = {};
+    var WeekEnable = {};
+    var DayEnable = {};
+    $('input[name="checkMonth"]').each(function (i) {
+        i = i + 1;
+        var m = "m" + i;
+        MonthEnable[m] = $(this).val();
+    });
+    $('input[name="checkWeek"]').each(function (i) {
+        i = i + 1;
+        var m = "w" + i;
+        WeekEnable[m] = $(this).val();
+    });
+    $('input[name="checkDay"]').each(function (i) {
+        i = i + 1;
+        var m = "d" + i;
+        DayEnable[m] = $(this).val();
+    });
+    Timermap['id'] = $('input[name="id"]').val();
+    Timermap['timerID'] = $('input[name="timerID"]').val();
+    Timermap['timerName'] = $('input[name="timerNames"]').val();
+    Timermap['timerEnable'] = $('input[name="timerEnable"]').val();
+    Timermap['startTime'] = $('input[name="startTime"]').val();
+    Timermap['taskNo'] = $('input[name="taskNo"]').val();
+    Timermap['MonthEnable'] = MonthEnable;
+    Timermap['WeekEnable'] = WeekEnable;
+    Timermap['DayEnable'] = DayEnable;
+    console.log(Timermap);
+}
+
+function TimerUpdate() {
+    checkData();
+    $.ajax({
+        url: contextPath + "/seTimerData/updateTimer",
+        type: "post",
+        async: false,
+        data: {
+            jsons: JSON.stringify(Timermap)
+        },
+        success: function (result) {
+            if (result.Status == "ok") {
+                alert("设置成功");
+                getPageList();
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+
+}
+/*****************************************定时设置End***********************************************/
 
 
 /*添加渲染*/
@@ -366,62 +442,3 @@ function mGetDate(m){
 
 
 
-var Timermap = {};
-
-//选中的值
-function checkData() {
-
-    var MonthEnable = {};
-    var WeekEnable = {};
-    var DayEnable = {};
-    $('input[name="checkMonth"]').each(function (i) {
-        i = i + 1;
-        var m = "m" + i;
-        MonthEnable[m] = $(this).val();
-    });
-    $('input[name="checkWeek"]').each(function (i) {
-        i = i + 1;
-        var m = "w" + i;
-        WeekEnable[m] = $(this).val();
-    });
-    $('input[name="checkDay"]').each(function (i) {
-        i = i + 1;
-        var m = "d" + i;
-        DayEnable[m] = $(this).val();
-    });
-    Timermap['id'] = $('input[name="id"]').val();
-    Timermap['timerID'] = $('input[name="timerID"]').val();
-    Timermap['timerName'] = $('input[name="timerNames"]').val();
-    Timermap['timerEnable'] = $('input[name="timerEnable"]').val();
-    Timermap['startTime'] = $('input[name="startTime"]').val();
-    Timermap['taskNo'] = $('input[name="taskNo"]').val();
-    Timermap['MonthEnable'] = MonthEnable;
-    Timermap['WeekEnable'] = WeekEnable;
-    Timermap['DayEnable'] = DayEnable;
-    console.log(Timermap);
-}
-
-function TimerUpdate() {
-    checkData();
-    $.ajax({
-        url: contextPath + "/seTimerData/updateTimer",
-        type: "post",
-        async: false,
-        data: {
-            jsons: JSON.stringify(Timermap)
-        },
-        success: function (result) {
-            stopLoad();
-            if (result.status == "ok") {
-                // getPageList();
-            } else {
-                alert(result.errorMessage);
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
-        }
-    });
-
-}

@@ -58,16 +58,12 @@
                 <thead>
                 <tr>
 
-                    <th width="10%"> 所属分区</th>
+                    <th width="20%"> 所属分区</th>
                     <th width="15%"> 站点名称</th>
-                    <th width="10%"> 站点编号</th>
-                    <th width="15%"> 站点地址</th>
-                    <th width="15%"> 站点描述</th>
-                    <th width="10%"> 状态</th>
+                    <th width="25%"> 站点地址</th>
+                    <th width="20%"> 创建日期</th>
 
-                    <th width="10%"> 创建日期</th>
-
-                    <th width="15%">操作</th>
+                    <th width="20%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -96,12 +92,10 @@
 
         <td> \${item.subareaName}</td>
         <td> \${item.name}</td>
-        <td> \${item.code}</td>
+
         <td> \${item.address}</td>
-        <td> \${item.depict}</td>
-        {@if item.status==1}
-        <td> 正常</td>
-        {@/if}
+
+
         <td> \${item.createDate}</td>
         <td>
             <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
@@ -244,12 +238,9 @@
 
 <script id="tpl-preview" type="text/template">
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
-                <span class="caption-subject bold uppercase"> 基本信息</span>
-            </div>
-        </div>
+        <span class="caption-subject bold uppercase"> 基本信息</span>
+
+
         <div class="portlet-body">
     <div class="form-group">
         <label class="col-md-2 view-label">分区编码</label>
@@ -307,19 +298,16 @@
         </div>
     </div>
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
-                <span class="caption-subject bold uppercase"> 归属节点列表</span>
-            </div>
-        </div>
+
+        <span class="caption-subject bold uppercase"> 归属节点列表</span>
+
         <div class="portlet-body">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <table class="table table-hover table-light">
                         <thead>
                         <tr>
-                            <th width="20%"> 编号</th>
+
                             <th width="30%"> 节点名称</th>
                             <th width="30%"> 建筑名称</th>
                             <th width="20%"> 设备数量</th>
@@ -328,7 +316,7 @@
                         <tbody>
                         {@each data.nodeList as item, index}
                         <tr>
-                            <td> \${item.code}</td>
+
                             <td> \${item.name}</td>
                             <td> \${item.topBuilding.name}</td>
                             <td> \${item.deviceCount}</td>

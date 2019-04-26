@@ -220,9 +220,7 @@
 </div>
 
 
-
-
-<div class="modal cenario-modal" style="display: block">
+<div class="modal cenario-modal" style="display: none;">
     <div class="modal-content">
         <div class="bg">
             <div class="lefgBg">
@@ -292,8 +290,8 @@
                 <label class="check2" for="b\${index}">节日模式</label>
             </div>
             <div class="checkboxGroup">
-                <input id="c\${index}" name='m\${index}' type="radio" value="3" \${item==3?'checked':''}/>
-                <label class="check3" for="c\${index}">重大节日模式</label>
+                <input id="g\${index}" name='m\${index}' type="radio" value="3" \${item==3?'checked':''}/>
+                <label class="check3" for="g\${index}">重大节日模式</label>
             </div>
         </div>
     </li>
