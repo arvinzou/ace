@@ -274,6 +274,7 @@ input:checked+.slider-v3::after {
 	flex-wrap: wrap;
 	overflow: auto;
 	height: 100%;
+	position: relative;
 }
 
 .videoList .videoGroup .info {

@@ -201,6 +201,9 @@
                 </div>
             </div>
         </div>
+        <div class="modal-close">
+            <img src="img/close.png" alt="">
+        </div>
     </div>
 </div>
 
@@ -247,6 +250,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="modal-close">
+            <img src="img/close.png" alt="">
         </div>
     </div>
 </div>
@@ -784,9 +790,14 @@
         width: 100%;
         flex-grow: 1;
     }
+<<<<<<< Updated upstream
 
     .scenario-modal .presetList .ulList > ul {
         height: 3.9rem;
+=======
+    .scenario-modal .presetList .ulList> ul{
+        height: 2.9rem;
+>>>>>>> Stashed changes
     }
 
     .scenario-modal .presetList .ulList > ul > li {
@@ -805,7 +816,20 @@
     .scenario-modal .presetList .ulList li:active {
         background: #0E7980;
     }
+    .modal .modal-content .modal-close{
+        width:0.28125rem;
+        height:0.28125rem;
+        position: absolute;
+        display: flex;
+        top: -0.3rem;
+        right: 0px;
+    }
 
+    .modal .modal-content .modal-close img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 </style>
 <%--<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"
         type="text/javascript"></script>--%>
