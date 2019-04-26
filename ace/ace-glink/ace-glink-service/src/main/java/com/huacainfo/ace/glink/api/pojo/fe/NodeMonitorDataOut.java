@@ -11,6 +11,10 @@ import java.util.List;
  * @Date 2019/4/17 18:15
  */
 public class NodeMonitorDataOut extends BaseModel {
+
+    public NodeMonitorDataOut() {
+    }
+
     public NodeMonitorDataOut(int nodeCount, List<NodeMonitorData> nodeData) {
         NodeCount = nodeCount;
         NodeData = nodeData;
@@ -362,6 +366,9 @@ public class NodeMonitorDataOut extends BaseModel {
     }
 
     public static class CHValue {
+
+        public CHValue() {
+        }
 
         public CHValue(int status, String CHReportTime,
                        String va, String vb, String vc,
