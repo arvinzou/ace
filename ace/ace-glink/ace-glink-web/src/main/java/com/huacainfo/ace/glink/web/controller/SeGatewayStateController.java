@@ -1,13 +1,5 @@
 package com.huacainfo.ace.glink.web.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
@@ -17,14 +9,21 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.glink.model.SeGatewayState;
 import com.huacainfo.ace.glink.service.SeGatewayStateService;
-import com.huacainfo.ace.glink.vo.SeGatewayStateVo;
 import com.huacainfo.ace.glink.vo.SeGatewayStateQVo;
-import org.springframework.web.multipart.MultipartFile;
+import com.huacainfo.ace.glink.vo.SeGatewayStateVo;
 import com.huacainfo.ace.portal.vo.MongoFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/seGatewayState")
@@ -194,4 +193,14 @@ public class SeGatewayStateController extends GLinkBaseController {
         return this.seGatewayStateService.deleteSeGatewayStateBySeGatewayStateIds(list, this.getCurUserProp());
     }
 
+    /**
+     * 同步网关数据
+     * @param parasm
+     * @return String
+     */
+    @RequestMapping(value = "/syncData")
+    @ResponseBody
+    public MessageResponse syncData(String parasm){
+        return  this.seGatewayStateService.syncData(this.getCurUserProp());
+    }
 }

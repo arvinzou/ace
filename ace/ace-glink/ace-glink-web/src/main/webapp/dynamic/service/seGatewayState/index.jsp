@@ -25,13 +25,15 @@
 
         <div class="row custom-toolbar">
             <div class="col-md-3">
-
+                <button class="btn sync-data green"  type="button">同步数据</button>
             </div>
 
             <div class="col-md-9">
 
                 <form id="fm-search">
+
                     <div class="input-group">
+
                         <input type="text"
                                name="keyword"
                                class="form-control"

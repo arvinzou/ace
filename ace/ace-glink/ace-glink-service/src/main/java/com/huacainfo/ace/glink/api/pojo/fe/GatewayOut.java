@@ -11,12 +11,16 @@ import java.util.List;
  * @Date 2019/4/18 9:55
  */
 public class GatewayOut extends BaseModel {
+
+    public GatewayOut() {
+    }
+
     private int GateCount;//网关设备数量
-    private List<GatewayData> GatewayData;
+    private List<GatewayData> GateData;
 
     public GatewayOut(int gateCount, List<GatewayOut.GatewayData> gatewayData) {
         GateCount = gateCount;
-        GatewayData = gatewayData;
+        GateData = gatewayData;
     }
 
     public int getGateCount() {
@@ -27,18 +31,21 @@ public class GatewayOut extends BaseModel {
         GateCount = gateCount;
     }
 
-    public List<GatewayOut.GatewayData> getGatewayData() {
-        return GatewayData;
+    public List<GatewayOut.GatewayData> getGateData() {
+        return GateData;
     }
 
-    public void setGatewayData(List<GatewayOut.GatewayData> gatewayData) {
-        GatewayData = gatewayData;
+    public void setGateData(List<GatewayOut.GatewayData> gateData) {
+        GateData = gateData;
     }
 
     public static class GatewayData {
         private int NodeID;//配电箱编号
         private int Status;//状态：1-在线，0-离线
         private String UpdateTime;//状态更新时间
+
+        public GatewayData() {
+        }
 
         public GatewayData(int nodeID, int status, String updateTime) {
             NodeID = nodeID;

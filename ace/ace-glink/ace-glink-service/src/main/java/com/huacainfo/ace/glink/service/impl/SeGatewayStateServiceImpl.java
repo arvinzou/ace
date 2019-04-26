@@ -1,12 +1,24 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
-import java.util.*;
-
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.glink.dao.TopBuildingDao;
-import com.huacainfo.ace.glink.vo.TopBuildingVo;
+import com.huacainfo.ace.glink.api.SeApiToolKit;
+import com.huacainfo.ace.glink.api.pojo.fe.GatewayOut;
+import com.huacainfo.ace.glink.dao.SeGatewayStateDao;
+import com.huacainfo.ace.glink.model.SeGatewayState;
+import com.huacainfo.ace.glink.service.SeGatewayStateService;
+import com.huacainfo.ace.glink.vo.SeGatewayStateQVo;
+import com.huacainfo.ace.glink.vo.SeGatewayStateVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -16,18 +28,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.glink.dao.SeGatewayStateDao;
-import com.huacainfo.ace.glink.model.SeGatewayState;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.glink.service.SeGatewayStateService;
-import com.huacainfo.ace.glink.vo.SeGatewayStateVo;
-import com.huacainfo.ace.glink.vo.SeGatewayStateQVo;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service("seGatewayStateService")
 /**
@@ -246,6 +249,40 @@ public class SeGatewayStateServiceImpl implements SeGatewayStateService {
                 list.get(0), "网关数据", userProp);
         return new MessageResponse(0, "删除成功！");
 
+    }
+    /**
+     * 同步网关数据
+     *
+     * @param userProp 操作人
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse syncData(UserProp userProp) {
+        //0-接口请求
+        GatewayOut out = null;
+        try {
+            out = SeApiToolKit.getGatewayState();
+        } catch (Exception e) {
+            logger.error("[SeAreaTaskServiceImpl.syncData]接口获取数据异常=>{}", e);
+            return new MessageResponse(ResultCode.FAIL, "接口获取数据异常");
+        }
+        //1-清空库存
+        this.seGatewayStateDao.allClear();
+        //2-放入库存
+        SeGatewayState gatewayState;
+        for (GatewayOut.GatewayData item : out.getGateData()) {
+            gatewayState = new SeGatewayState();
+            gatewayState.setId(GUIDUtil.getGUID());
+            gatewayState.setNodeID(item.getNodeID());
+            gatewayState.setStatus(item.getStatus());
+            gatewayState.setRemark("");
+            gatewayState.setUpdateTime(item.getUpdateTime());
+            gatewayState.setCreateDate(DateUtil.getNowDate());
+            this.seGatewayStateDao.insert(gatewayState);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "同步成功");
     }
 
 }
