@@ -553,6 +553,11 @@ public class SeNodeServiceImpl implements SeNodeService {
         return commonTreeUtils.getTreeList(id);
     }
 
+    @Override
+    public SeNodeMonitorVo findByNodeId(String nodeId) {
+        return seNodeMonitorDao.findByNodeID(nodeId);
+    }
+
 
     /**
      * =====================tes data=====================

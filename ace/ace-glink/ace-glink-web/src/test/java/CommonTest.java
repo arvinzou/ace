@@ -20,9 +20,11 @@ public class CommonTest {
     public void test() throws IOException {
 
         //无数据返回
-        System.out.println(LeApiToolKit.getBuildingDetail());
-//        System.out.println(LeApiToolKit.getLampStatus());
-        ;
+//        System.out.println(LeApiToolKit.getBuildingDetail());
+//        String date = DateUtil.toStr(DateUtil.toDate("2019-04-16 00:00:00"), CommConstant.DATE_REGEX_LE);
+
+//        System.out.println(LeApiToolKit.getBrokenLampDetail(date));
+        System.out.println(LeApiToolKit.getLampStatus());
     }
 
     private void generatorGUID(int num) {
