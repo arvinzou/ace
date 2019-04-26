@@ -1,13 +1,10 @@
 package com.huacainfo.ace.glink.web.controller;
 
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.glink.service.*;
-import com.huacainfo.ace.glink.vo.LeBrokenLampQVo;
-import com.huacainfo.ace.glink.vo.LeBrokenLampVo;
-import com.huacainfo.ace.glink.vo.LeLampStatusVo;
+import com.huacainfo.ace.glink.service.AnalysisService;
+import com.huacainfo.ace.glink.service.PagePortalService;
+import com.huacainfo.ace.glink.service.SeNodeService;
 import com.huacainfo.ace.glink.vo.SeNodeMonitorVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +28,6 @@ public class AnalysisController extends GLinkBaseController {
     private PagePortalService pagePortalService;
     @Autowired
     private SeNodeService seNodeService;
-    @Autowired
-    private LeLampStatusService leLampStatusService;
-    @Autowired
-    private LeBrokenLampService leBrokenLampService;
 
     @RequestMapping(value = "/query")
     @ResponseBody
@@ -82,9 +75,11 @@ public class AnalysisController extends GLinkBaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/errorChart")
-    public List<LeLampStatusVo> errorChart() {
+    public List errorChart() {
 
-        return leLampStatusService.getErrorChartData();
+//        return seNodeService.findByNodeId(nodeId);
+
+        return null;
     }
 
     /**
@@ -94,15 +89,9 @@ public class AnalysisController extends GLinkBaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/errorList")
-    public PageResult<LeBrokenLampVo> errorList(LeBrokenLampQVo condition, PageParamNoChangeSord page) throws Exception {
+    public List errorList() {
 
-        //
-        PageResult<LeBrokenLampVo> rst =
-                leBrokenLampService.findLeBrokenLampList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
-        }
-
-        return rst;
+//        return seNodeService.findByNodeId(nodeId);
+        return null;
     }
 }

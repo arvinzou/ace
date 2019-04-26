@@ -24,14 +24,14 @@
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<div class="portlet light">
+<div class="portlet light" style="height: 700px;">
 
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
             <div class="col-md-3">
 
-                <a href="javascript:syncProjectData();" class="btn green">同步数据</a>
+                <a href="javascript:syncProjectData();" class="btn green">同步</a>
             </div>
 
             <div class="col-md-9">
@@ -69,23 +69,23 @@
             </div>
 
         </div>
-        <div class="easyui-layout" id="cc" style="width:100%;height:400px">
+        <div class="easyui-layout" id="cc" style="width:100%;height: 400px;">
 
             <div data-options="region:'center',border:false,fit:true" id="easyui-center">
                 <%--  <table id="grid-table"></table>--%>
-                <div class="table-scrollable">
+
                     <table class="table table-hover">
 
                         <tr>
                             <%-- <th width="10%"> 上一级ID</th>--%>
-                            <th width="10%"> 项目名称</th>
-                            <th width="10%"> 区域名称</th>
-                            <th width="10%"> 当前目录子数量</th>
-                            <th width="10%"> 区域编号</th>
+
+                            <th width="20%"> 区域名称</th>
+                            <th width="20%"> 当前目录子数量</th>
+                            <th width="20%"> 区域编号</th>
                             <%--<th width="10%"> 区域类型</th>
                             <th width="10%"> 备注</th>
                             <th width="10%"> 状态</th>--%>
-                            <th width="20%"> 创建日期</th>
+                            <th width="40%"> 创建日期</th>
                             <%-- <th width="10%">操作</th>--%>
                         </tr>
 
@@ -93,15 +93,15 @@
 
                         </tbody>
                     </table>
-                </div>
 
-                <div class="paginationbar" style="text-align:left">
-                    <ul class="pagination" id="pagination1" tyle="padding-left:20px"></ul>
+
+                <div class="paginationbar" style="text-align:right;">
+                    <ul class="pagination" id="pagination1" style="padding-right:200px"></ul>
                 </div>
 
             </div>
             <div id="cc-west" class="easyui-west" data-options="region:'west',split:true" title="我的树"
-                 style="width:200px;">
+                 style="width:200px;top:0px;">
                 <ul id="tt" class="easyui-tree" data-options="
                url: '${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',
                 method: 'get',
@@ -133,8 +133,6 @@
     {@each data as item, index}
 
     <tr>
-
-        <td> \${item.projectName}</td>
         <td> \${item.areaName}</td>
         <td> \${item.areaNodeCount}</td>
         <td> \${item.areaNodeID}</td>
@@ -142,20 +140,7 @@
          <td> \${item.remark}</td>
          <td> \${item.status}</td>--%>
         <td> \${item.createDate}</td>
-        <%--
-                <td>
-                    ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-                    <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-                       data-target="#modal-status">设置状态</a>
-                    {@if item.auditStatus==1}
-                    <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-                    {@/if}
-                    <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-                       data-target="#modal-preview">查看</a>
 
-                    <a href="javascript:del('\${item.id}');">删除</a>
-
-                </td>--%>
     </tr>
     {@/each}
 </script>

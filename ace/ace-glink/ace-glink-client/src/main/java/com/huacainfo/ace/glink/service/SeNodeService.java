@@ -130,6 +130,4 @@ public interface SeNodeService {
     MessageResponse syncNodeMeterData(UserProp curUserProp);
 
     List<Tree> getNodeTreeList(String id);
-
-    SeNodeMonitorVo findByNodeId(String nodeId);
 }

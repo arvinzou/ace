@@ -50,26 +50,5 @@ public interface PortalKey {
     //总设备数
     String LE_LampCount = "SE-LampCount";
     String LE_LampCount_ch = "弱电-总设备数";
-    //建筑物总数
-    String LE_BuildingTotal = "LE-BuildingTotal";
-    String LE_BuildingTotal_ch = "建筑物总数";
-    //
 
-    /***
-     * 强电部分
-     */
-    String SE_RouterOffNum = "SE-RouterOffNum";
-    String SE_RouterOffNum_ch = "路由器离线数";
-    String SE_NodeTotal = "SE-NodeTotal";
-    String SE_NodeTotal_ch = "总设备数(强电)";
-    String SE_GatewayOffNum = "SE-GatewayOffNum";
-    String SE_GatewayOffNum_ch = "网关离线数";
-    String SE_NodeDeviceOffNum = "SE-NodeDeviceOffNum";
-    String SE_NodeDeviceOffNum_ch = "模块离线数";
-    String SE_NodeDeviceNum = "SE-NodeDeviceNum";
-    String SE_NodeDeviceNum_ch = "模块总数";
-    String SE_PowerTotal = "SE-PowerTotal";
-    String SE_PowerTotal_ch = "总耗电量";
-    String SE_UnitPrice = "SE-UnitPrice";
-    String SE_UnitPrice_ch = "初始电费单价";
 }
