@@ -113,26 +113,26 @@
                            <%--<option value="1">水星楼</option>--%>
                        <%--</select>--%>
                        <div class="ztree-wrap">
-                           <input id="node-name" class="form-control" readonly>
+                           <input id="node-name" data-id="1" value="配电箱-A楼AL1" class="form-control" readonly>
                            <div class="node-tree-container">
                                <ul class="ztree" id="node-name-tree"></ul>
                            </div>
                        </div>
                        <ul class="shebei-status-ul">
-                           <li>
+                           <li class="router">
                                <img src="./img/shebei-router@2x.png">
                                <div class="right">
                                    <i>路由器状态</i>
-                                   <div class="line zaixian">
+                                   <div class="line">
                                        <span>在线</span><img src="./img/signal-4.png">
                                    </div>
                                </div>
                            </li>
-                           <li>
+                           <li class="gate">
                                <img src="./img/shebei-wg@2x.png">
                                <div class="right">
                                    <i>网关状态</i>
-                                   <div class="line lixian"><span>离线</span></div>
+                                   <div class="line "><span>离线</span></div>
                                </div>
                            </li>
                        </ul>
@@ -208,11 +208,10 @@
     $(function () {
         initLeftData();   //初始化左边屏幕数据
         initFaultMonitoringTime(); //初始化故障监控年月
-        initNodeConsumePowerData();  //初始化节点耗电
         initFaultMonitoringData();   //初始化故障监控
-        initTemperatureAndHumidity();  //初始化温度，湿度值
         initWeakCurrentFaultData();   //初始化弱电故障数据
         initZTreeData();   //初始化树数据
+        initSelectTreeData();  //初始化下拉树选中的配电箱数据
     });
     /*
     *  初始化左边屏幕数据
@@ -290,12 +289,14 @@
     /*
     * 初始化温度湿度值
     * */
-    function initTemperatureAndHumidity(){
+    function initTemperatureAndHumidity(temperature,humidity){
+        temperature = parseFloat(temperature.replace('℃',''));
+        humidity = parseFloat(humidity.replace('%RH',''));
         var wendu = new canvasPanel();
         wendu.bgColor = '#FF7B57';
         wendu.MaxNum = 120;
         wendu.MinNum = -10;
-        wendu.current = 40;
+        wendu.current = temperature;
         wendu.title = '温度值';
         wendu.init('wendu');
         var shidu = new canvasPanel();
@@ -303,9 +304,37 @@
         shidu.danwei = "%";
         shidu.MaxNum = 100;
         shidu.MinNum = 0;
-        shidu.current = 100;
+        shidu.current = humidity;
         shidu.title = '湿度值';
         shidu.init('shidu');
+    }
+    /*
+    * 初始化路由网关状态
+    * */
+    function initSignalValue(routeSignalObj,gateStatus){
+        //路由
+        if(routeSignalObj.routeStatus == 1){ //1,在线，0离线
+            var routeSignal = routeSignalObj.routeSignal;
+            routeSignal = parseFloat(routeSignal.replace('dbm',''));
+            var html = '';
+            if(routeSignal < 0 && routeSignal >= -50){
+                html = '<span>在线</span><img src="./img/signal-5.png">';
+            }else if(routeSignal < -50 && routeSignal >= -70){
+                html = '<span>在线</span><img src="./img/signal-3.png">';
+            }else if(routeSignal < -70){
+                html = '<span>在线</span><img src="./img/signal-1.png">';
+            }
+            $('.shebei-status-ul>li.router .line').addClass('zaixian').html(html);
+
+        }else{
+            $('.shebei-status-ul>li.router .line').addClass('lixian').html('<span>离线</span>')
+        }
+        //网关
+        if(gateStatus == 1){ //1,在线，0离线
+            $('.shebei-status-ul>li.gate .line').addClass(('zaixian')).html('<span>在线</span>');
+        }else{
+            $('.shebei-status-ul>li.gate .line').addClass(('lixian')).html('<span>离线</span>')
+        }
     }
     /*
      * 初始化故障监控年月
@@ -329,7 +358,13 @@
     /*
      * 初始化节点耗电数据echarts图
     */
-    function initNodeConsumePowerData() {
+    function initNodeConsumePowerData(number) {
+        //处理仪表盘max数值，根据实际值来
+        var max = (number*10).toFixed(0);
+        var len = max.length -1;
+        max = max / (Math.pow(10, len));
+        max = max.toFixed(0);
+        max = max *(Math.pow(10, len)) / max;
         var myChart = echarts.init(document.getElementById('jiedianhaodl')); //节点耗电chart图
         // 指定图表的配置项和数据
         var option = {
@@ -367,7 +402,7 @@
                 startAngle:200,  //仪表盘起始角度。圆心 正右手侧为0度，正上方为90度，正左手侧为180度。
                 endAngle: -20,
                 min:0,
-                max:10000,
+                max:max,
                 axisLine: {
                     lineStyle: {
                         width: 14 // 这个是修改宽度的属性
@@ -398,7 +433,7 @@
                     color: '#FFF100'
                 },
                 title: {//仪表盘内标题(即data下value值的单位"km/h")
-                    offsetCenter:['52%', '50%'],//相对于仪表盘中心的偏移位置
+                    offsetCenter:['0', '-25%'],//相对于仪表盘中心的偏移位置
                     textStyle: {
                         fontWeight: 'bolder',
                         fontSize: 16,
@@ -409,14 +444,14 @@
                     }
                 },
                 detail: {  //仪表盘详情，用于显示数据。
-                    offsetCenter: ['-10%', '50%'], //相对于仪表盘中心的偏移位置
+                    offsetCenter: ['0', '50%'], //相对于仪表盘中心的偏移位置
                     formatter:'{value}',
                     fontSize: 30,
                     fontWeight: 'bold',
                     color: '#FFF100'
                 },
                 data: [
-                    {value: 1000, name: '/kmh'}
+                    {value: number, name: 'kwh'}
                 ]
             }]
 
@@ -430,7 +465,6 @@
     function initFaultMonitoringData() {
         var dayList = [];
         var dayCountList = [];
-        // startLoad();
         var year = $("#year option:selected").val();
         var month = $("#month option:selected").val();
         $.ajax({
@@ -450,7 +484,6 @@
                 }
             },
             error: function () {
-                // stopLoad();
                 alert("对不起出错了！");
             }
         });
@@ -558,11 +591,126 @@
             }
         });
     }
-
-
     /*
-    * 格式化数字，金钱
+    * 初始化树数据
     * */
+    function initZTreeData() {
+        var setting = {
+            check: {
+                enable: true
+            },
+            view: {
+                dblClickExpand: true,
+                showIcon: false,
+                fontCss : {"font-weight":"400","font-size":"16px"}
+            },
+            data: {
+                key: {
+                    name: "text",
+                    children: "children"
+                },
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {    //第一步
+                onClick: zTreeOnClick     //获取节点值
+            }
+        };
+        $.ajax({
+            url: contextPath + "/seNode/getNodeTreeList",
+            type: "post",
+            async: false,
+            data: {
+                start: 0,
+                limit: 10
+            },
+            success: function (rst) {
+                if (rst.length > 0) {
+                    $.fn.zTree.init($("#node-name-tree"), setting, rst);
+                }
+            },
+            error: function () {
+                alert("对不起出错了！");
+            }
+        });
+    }
+    //tree执行选择事件
+    function zTreeOnClick(event, treeId, treeNode) {       //第二步
+        console.log(treeNode);
+        if(!treeNode.isParent){
+            if(treeNode.src==1){   //src, 0,不可选 1，可选
+                var id = treeNode.id;
+                var text = treeNode.text;
+                $('#node-name').attr('data-id',id).val(text);
+                initSelectTreeData(id,text);
+
+            }else{
+                alert('当前节点不可用，请重新选择');
+            }
+        }else{
+            alert('当前节点不是最末端，请重新选择')
+        }
+    }
+    /*
+     *  初始化下拉树选中数据
+     */
+    function initSelectTreeData(id,text){
+        var id = id?id:1;
+        var text = text?text:$('#node-name').val();
+        $('.dianya-wrap>.title').html(text);
+        $.ajax({
+            url: contextPath + "/anslysis/screenNodeData?nodeId="+ id +"",
+            type: "post",
+            async: false,
+            data: {
+                start: 0,
+                limit: 10
+            },
+            success: function (res) {
+                console.log(res);
+                var nodeConsumePowerNumber = res.meterValue; //节点耗电量
+                var temperature = res.temperature; // 温度
+                var humidity = res.humidity; //湿度
+                var routeSignalObj = {
+                    routeStatus : res.routeStatus,
+                    routeSignal: res.routeSignal
+                };
+                var gateStatus = res.gateStatus;
+                initNodeConsumePowerData(nodeConsumePowerNumber); //初始化节点耗电量echart图
+                initTemperatureAndHumidity(temperature,humidity);  //初始化温度，湿度值
+                initSignalValue(routeSignalObj,gateStatus); //初始化路由和网关状态
+
+            },
+            error: function () {
+                alert("对不起出错了！");
+            }
+        });
+    }
+    //tree显示与隐藏
+    document.onclick = function(e) {
+        $('.node-tree-container').hide();
+    };
+    $('#node-name').on("click", function(e) {
+        if($('.node-tree-container').css("display") == "none") {
+            $('.node-tree-container').show();
+        } else {
+            $('.node-tree-container').hide();
+        }
+        e = e || event;
+        stopFunc(e);
+    });
+
+    $('.node-tree-container').on("click", function(e) {
+        e = e || event;
+        stopFunc(e);
+    });
+    function stopFunc(e) {
+        e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+    }
+    /*
+   * 格式化数字，金钱
+   * */
     function formatCurrency(num) {
         if (!num){
             return "0.00";
@@ -590,123 +738,6 @@
         });
         $(obj).html(html);
     }
-    /*
-    * 初始化树数据
-    * */
-    function initZTreeData() {
-        var setting = {
-            check: {
-                enable: true
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
-            },
-            callback: {    //第一步
-                onClick: zTreeOnClick     //获取节点值
-            }
-        };
-        function zTreeOnClick(event, treeId, treeNode) {       //第二步
-            var treeObj = $.fn.zTree.getZTreeObj("node-name-tree"),
-                nodes = treeObj.getNodes(true),
-                v = "";
-            for (var i = 0; i < nodes.length; i++) {
-                v += nodes[i].name + ",";
-                console.log("节点id:" + nodes[i].id + "节点名称" + v); //获取选中节点的值
-            }
-        }
-        $.ajax({
-            url: contextPath + "/anslysis/errorList",
-            type: "post",
-            async: false,
-            data: {
-                start: 0,
-                limit: 10
-            },
-            success: function (rst) {
-                if (rst.status == 0) {
-                    render('#top10-list', rst.rows, 'top10-tpl');
-                }
-            },
-            error: function () {
-                alert("对不起出错了！");
-            }
-        });
-        var zNodes =[
-            { name:"父节点1 - 展开", open:true,
-                children: [
-                    { name:"父节点11 - 折叠",
-                        children: [
-                            { name:"叶子节点111"},
-                            { name:"叶子节点112"},
-                            { name:"叶子节点113"},
-                            { name:"叶子节点114"}
-                        ]},
-                    { name:"父节点12 - 折叠",
-                        children: [
-                            { name:"叶子节点121"},
-                            { name:"叶子节点122"},
-                            { name:"叶子节点123"},
-                            { name:"叶子节点124"}
-                        ]},
-                    { name:"父节点13 - 没有子节点", isParent:true}
-                ]},
-            { name:"父节点2 - 折叠",
-                children: [
-                    { name:"父节点21 - 展开", open:true,
-                        children: [
-                            { name:"叶子节点211"},
-                            { name:"叶子节点212"},
-                            { name:"叶子节点213"},
-                            { name:"叶子节点214"}
-                        ]},
-                    { name:"父节点22 - 折叠",
-                        children: [
-                            { name:"叶子节点221"},
-                            { name:"叶子节点222"},
-                            { name:"叶子节点223"},
-                            { name:"叶子节点224"}
-                        ]},
-                    { name:"父节点23 - 折叠",
-                        children: [
-                            { name:"叶子节点231"},
-                            { name:"叶子节点232"},
-                            { name:"叶子节点233"},
-                            { name:"叶子节点234"}
-                        ]}
-                ]},
-            { name:"父节点3 - 没有子节点", isParent:true}
-
-        ];
-
-        $(document).ready(function(){
-            $.fn.zTree.init($("#node-name-tree"), setting, zNodes);
-        });
-    }
-
-    //tree显示与隐藏
-    document.onclick = function(e) {
-        $('.node-tree-container').hide();
-    };
-    $('#node-name').on("click", function(e) {
-        if($('.node-tree-container').css("display") == "none") {
-            $('.node-tree-container').show();
-        } else {
-            $('.node-tree-container').hide();
-        }
-        e = e || event;
-        stopFunc(e);
-    });
-
-    $('.node-tree-container').on("click", function(e) {
-        e = e || event;
-        stopFunc(e);
-    });
-    function stopFunc(e) {
-        e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
-    }
-
 </script>
 </body>
 </html>

@@ -8,6 +8,7 @@ i{
 }
 .jkpt-container-wrap{
     width: 100%;
+    min-width: 1920px;
     height: 1080px;
     background: url("./../img/monitoring-bg@2x.png") no-repeat center center transparent;
 }
@@ -18,6 +19,7 @@ i{
 }
 .jkpt-main-wrap{
     width: 100%;
+    min-width: 1899px;
     height: 947px;
     background: url("./../img/border-mainbig@2x.png") no-repeat center center/contain ;
 }
@@ -394,5 +396,6 @@ select#month{
     color: #00D6D9;
     font-size: 14px;
     border:none;
+    outline: none;
     border-radius: 20px !important;
 }
