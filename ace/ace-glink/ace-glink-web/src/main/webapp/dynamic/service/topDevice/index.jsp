@@ -83,18 +83,15 @@
                 <thead>
                 <tr>
 
-                    <th width="8%"> 设备编号</th>
-                    <th width="10%"> 设备名称</th>
-                    <th width="10%"> 设备类型</th>
-                    <th width="10%"> 所属节点</th>
-                    <th width="10%"> 上线时间</th>
-                    <th width="10%"> 下线时间</th>
-                    <th width="10%"> 生产厂商</th>
-                    <th width="10%"> 生产时间</th>
-                    <th width="5%"> 理论使用寿命</th>
-                    <th width="5%"> 状态</th>
 
-                    <th width="12%">操作</th>
+                    <th width="12%"> 设备名称</th>
+                    <th width="13%"> 设备类型</th>
+                    <th width="13%"> 所属节点</th>
+                    <th width="15%"> 上线时间</th>
+                    <th width="13%"> 下线时间</th>
+                    <th width="10%"> 状态</th>
+
+                    <th width="20%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -121,15 +118,14 @@
     {@each data as item, index}
     <tr>
 
-        <td> \${item.code}</td>
+
         <td> \${item.name}</td>
         <td> \${parseType(item.type)}</td>
         <td> \${item.nodeName}</td>
         <td> \${item.onlineDate}</td>
         <td> \${item.offlineDate}</td>
-        <td> \${item.prcBisFirm}</td>
-        <td> \${item.prcDate}</td>
-        <td> \${item.workingLife}</td>
+
+
         <td>
             {@if item.status==1}
             <span class="label label-lg label-danger">上线</span>

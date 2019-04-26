@@ -29,7 +29,7 @@
 
         <div class="row custom-toolbar">
             <div class="col-md-3">
-                <a href="javascript:syncCustomData();" class="btn green">同步数据</a>
+                <a href="javascript:syncCustomData();" class="btn green">同步</a>
             </div>
 
             <div class="col-md-9">
@@ -73,12 +73,12 @@
                 <thead>
                 <tr>
 
-                    <th width="10%"> 区号</th>
-                    <th width="10%"> 区名称</th>
-                    <th width="10%"> 区域编号</th>
-                    <th width="10%"> 备注</th>
-                    <th width="10%"> 状态</th>
-                    <th width="10%"> 创建日期</th>
+                    <%-- <th width="15%"> 区号</th>--%>
+                    <th width="25%"> 区名称</th>
+                    <th width="25%"> 区域编号</th>
+
+                    <th width="25%"> 状态</th>
+                    <th width="25%"> 创建日期</th>
                     <%--      <th width="15%">操作</th>--%>
                 </tr>
                 </thead>
@@ -106,10 +106,10 @@
     {@each data as item, index}
     <tr>
 
-        <td> \${item.areaNo}</td>
+        <%-- <td> \${item.areaNo}</td>--%>
         <td> \${item.areaName}</td>
         <td> \${item.areaNodeID}</td>
-        <td> \${item.remark}</td>
+
         <td> {@if item.status==0}
             <span class="label label-lg label-info">无效</span>
             {@else if item.status==1}

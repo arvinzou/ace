@@ -19,6 +19,7 @@
           href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"/>
     <link rel="stylesheet" type="text/css"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/zTreeStyle.css">
 </head>
 <body>
    <div class="jkpt-container-wrap">
@@ -26,32 +27,32 @@
        <div class="jkpt-main-wrap">
            <div class="left">
                <ul class="shebei-ul">
-                   <li>
+                   <li class="buildingTotal">
                        <img src="./img/icon-jzwzs@2x.png">
                        <div class="right">
-                           <i>2,346</i>
+                           <i></i>
                            <span>建筑物总数</span>
                        </div>
                    </li>
-                   <li>
+                   <li class="routerOffNum">
                        <img src="./img/icon-router@2x.png">
                        <div class="right">
-                           <i>1,056</i>
-                           <span>路由器离线数</span><span>总设备数&nbsp;6,846</span>
+                           <i></i>
+                           <span>路由器离线数</span><span>总设备数&nbsp;<i></i></span>
                        </div>
                    </li>
-                   <li>
+                   <li class="gatewayOffNum">
                        <img src="./img/icon-wgsl@2x.png">
                        <div class="right">
-                           <i>106</i>
-                           <span>网关离线数</span><span>总设备数&nbsp;6,846</span>
+                           <i></i>
+                           <span>网关离线数</span><span>总设备数&nbsp;<i></i></span>
                        </div>
                    </li>
-                   <li>
+                   <li class="nodeDeviceOffNum">
                        <img src="./img/icon-qdlxs@2x.png">
                        <div class="right">
-                           <i>8</i>
-                           <span>强电离线数</span><span>总设备数&nbsp;6,846</span>
+                           <i></i>
+                           <span>模块离线数</span><span>模块总数&nbsp;<i></i></span>
                        </div>
                    </li>
                </ul>
@@ -65,14 +66,14 @@
                        <div class="dianliang">
                            <span>总耗电量（kwh）</span>
                            <ul class="num-ul">
-                               <li>0</li>
-                               <li>0</li>
-                               <li>0</li>
-                               <li class="active">6</li>
-                               <li class="active">8</li>
-                               <li class="active">0</li>
-                               <li class="active">0</li>
-                               <li class="active">0</li>
+                               <%--<li>0</li>--%>
+                               <%--<li>0</li>--%>
+                               <%--<li>0</li>--%>
+                               <%--<li class="active">6</li>--%>
+                               <%--<li class="active">8</li>--%>
+                               <%--<li class="active">0</li>--%>
+                               <%--<li class="active">0</li>--%>
+                               <%--<li class="active">0</li>--%>
                            </ul>
                        </div>
                        <div class="dianfei">
@@ -80,7 +81,7 @@
                                <span>电费单价</span>
                                <div class="input-wrap">
                                    <i>¥</i>
-                                   <input value="0.0">
+                                   <input value="0.0"  id="input-unitPrice">
                                    <span>/kwh</span>
                                </div>
                            </div>
@@ -89,7 +90,7 @@
                                <span>电费</span>
                                <div class="input-wrap">
                                    <i>¥</i>
-                                   <input value="0.0" readonly>
+                                   <input value="0.0" id="input-totalPrice" readonly>
                                </div>
                            </div>
                        </div>
@@ -107,25 +108,27 @@
                        <div class="canvas-tu"  id="shidu"></div>
                    </div>
                    <div class="shebei-status-wrap">
-                       <select class="form-control">
-                           <option value="0">万达广场</option>
-                           <option value="1">水星楼</option>
-                       </select>
+                       <div class="ztree-wrap">
+                           <input id="node-name" data-id="1" value="配电箱-A楼AL1" class="form-control" readonly>
+                           <div class="node-tree-container">
+                               <ul class="ztree" id="node-name-tree"></ul>
+                           </div>
+                       </div>
                        <ul class="shebei-status-ul">
-                           <li>
+                           <li class="router">
                                <img src="./img/shebei-router@2x.png">
                                <div class="right">
                                    <i>路由器状态</i>
-                                   <div class="line zaixian">
+                                   <div class="line">
                                        <span>在线</span><img src="./img/signal-4.png">
                                    </div>
                                </div>
                            </li>
-                           <li>
+                           <li class="gate">
                                <img src="./img/shebei-wg@2x.png">
                                <div class="right">
                                    <i>网关状态</i>
-                                   <div class="line lixian"><span>离线</span></div>
+                                   <div class="line "><span>离线</span></div>
                                </div>
                            </li>
                        </ul>
@@ -156,46 +159,18 @@
                        <div id="guzhangjiankong"></div>
                    </div>
                    <div class="baojingqianshi-wrap">
-                       <%--<div class="baojingqianshi-title">--%>
-                           <%--<span class="left">故障报警TOP10<i>（故障时间倒叙）</i></span>--%>
-                           <%--<a href="/glink/dynamic/service/errFeedback/index.jsp?id=530502" class="right">More <img src="./img/icon-more@2x.png"></a>--%>
-                       <%--</div>--%>
                        <table class="table   gzjb-table">
                            <thead >
                                <tr>
-                                   <th width="11.6%" style="text-align: center;">故障等级</th>
-                                   <th width="18.2%" style="text-align: center;">设备名称</th>
+                                   <th width="13.6%" style="text-align: center;">灯组编号</th>
+                                   <th width="20.2%" style="text-align: center;">通道编号</th>
+                                   <th width="20.2%" style="text-align: center;">控制器名称</th>
                                    <th width="20.2%" style="text-align: center;">故障位置</th>
-                                   <th width="20.2%" style="text-align: center;">故障类型</th>
-                                   <th width="12.6%" style="text-align: center;">故障数量</th>
-                                   <th width="16.6%" style="text-align: center;">故障时间</th>
+                                   <th width="20.6%" style="text-align: center;">故障时间</th>
                                </tr>
                            </thead>
                            <tbody id="top10-list">
-                               <tr >
-                                   <td><i class="circle grade-red"></i></td>
-                                   <td>设备名称1</td>
-                                   <td>江汉区</td>
-                                   <td>故障类型</td>
-                                   <td>10</td>
-                                   <td>03.01-15:30:04</td>
-                               </tr>
-                               <tr >
-                                   <td><i class="circle grade-orange"></i></td>
-                                   <td>设备名称1</td>
-                                   <td>江汉区</td>
-                                   <td>故障类型</td>
-                                   <td>10</td>
-                                   <td>03.01-15:30:04</td>
-                               </tr>
-                               <tr >
-                                   <td><i class="circle grade-yellow"></i></td>
-                                   <td>设备名称1</td>
-                                   <td>江汉区</td>
-                                   <td>故障类型</td>
-                                   <td>10</td>
-                                   <td>03.01-15:30:04</td>
-                               </tr>
+
                            </tbody>
                        </table>
                    </div>
@@ -206,20 +181,11 @@
 <script id="top10-tpl" type="text/template">
     {@each data as item, index}
     <tr>
-        <td >
-            {@if item.errLevel == '03'}
-            <div class="serious"></div>
-            {@else if item.errLevel == '02'}
-            <div class="more-serious"></div>
-            {@else if item.errLevel == '01'}
-            <div class="less-serious"></div>
-            {@/if}
-        </td>
-        <td >\${item.deviceName}</td>
-        <td >\${item.subareaName}</td>
-        <td >\${item.errContent}</td>
-        <td>\${item.errLoopNum}</td>
-        <td >\${item.errDate}</td>
+        <td >\${item.lampNo}</td>
+        <td >\${item.channelNo}</td>
+        <td >\${item.ctrlName}</td>
+        <td >\${item.buildingName}</td>
+        <td >\${item.checkDate}</td>
     </tr>
     {@/each}
 </script>
@@ -228,37 +194,155 @@
 <script src="${pageContext.request.contextPath}/content/common/js/echarts.js"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script type="text/javascript"
-        src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript"
+        src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script><script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/content/common/js/jquery.ztree.core.min.js"></script>
+   <script type="text/javascript"
         src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 
 <script>
     $(function () {
+        initLeftData();   //初始化左边屏幕数据
         initFaultMonitoringTime(); //初始化故障监控年月
-        initNodeConsumePowerData();  //初始化节点耗电
         initFaultMonitoringData();   //初始化故障监控
-        initTemperatureAndHumidity();  //初始化温度，湿度值
+        initWeakCurrentFaultData();   //初始化弱电故障数据
+        initZTreeData();   //初始化树数据
+        initSelectTreeData();  //初始化下拉树选中的配电箱数据
     });
     /*
-    *  初始化温度，湿度值
+    *  初始化左边屏幕数据
     */
-    function initTemperatureAndHumidity(){
+    function initLeftData() {
+        $.ajax({
+            url: contextPath + "/anslysis/screenData",
+            type: "post",
+            async: false,
+            success: function (res) {
+                var buildObj = {
+                    buildingTotal:res['LE-BuildingTotal'],  // 建筑物总数
+                    routerOffNum:res['SE-RouterOffNum'],  //路由离线
+                    gatewayOffNum:res['SE-GatewayOffNum'],   //网关离线
+                    nodeTotal:res['SE-NodeTotal'],   //路由，网关总设备数
+                    nodeDeviceOffNum:res['SE-NodeDeviceOffNum'],  // 模块离线数
+                    nodeDeviceNum:res['SE-NodeDeviceNum']  //模块总数
+                };
+                var areaObj = {
+                    powerTotal:res['SE-PowerTotal'],
+                    unitPrice:res['SE-UnitPrice']
+                };
+                initBuildingData(buildObj);
+                initAreaData(areaObj);
+            },
+            error: function () {
+                alert("对不起出错了！");
+            }
+        });
+    }
+    /*
+    * 初始化建筑物数据
+    * */
+    function initBuildingData(obj) {
+        var buildingTotal =  parseFloat(formatCurrency(obj.buildingTotal.itemValue)).toFixed(0);
+        var routerOffNum = parseFloat(formatCurrency(obj.routerOffNum.itemValue)).toFixed(0);
+        var gatewayOffNum = parseFloat(formatCurrency(obj.gatewayOffNum.itemValue)).toFixed(0);
+        var nodeTotal = parseFloat(formatCurrency(obj.nodeTotal.itemValue)).toFixed(0);
+        var nodeDeviceOffNum = parseFloat(formatCurrency(obj.nodeDeviceOffNum.itemValue)).toFixed(0);
+        var nodeDeviceNum = parseFloat(formatCurrency(obj.nodeDeviceNum.itemValue)).toFixed(0);
+        $('.shebei-ul>li.buildingTotal>.right i').html(buildingTotal);
+        $('.shebei-ul>li.routerOffNum>.right i').html(routerOffNum);
+        $('.shebei-ul>li.routerOffNum>.right>span:nth-of-type(2) i').html(nodeTotal);
+        $('.shebei-ul>li.gatewayOffNum>.right i').html(gatewayOffNum);
+        $('.shebei-ul>li.gatewayOffNum>.right>span:nth-of-type(2) i').html(nodeTotal);
+        $('.shebei-ul>li.nodeDeviceOffNum>.right i').html(nodeDeviceOffNum);
+        $('.shebei-ul>li.nodeDeviceOffNum>.right>span:nth-of-type(2) i').html(nodeDeviceNum);
+    }
+    /*
+    * 初始化地区数据
+    * */
+    function initAreaData(obj) {
+        var powerTotal = obj.powerTotal.itemValue;
+        localStorage.setItem('powerTotal',powerTotal);
+        var unitPrice = parseFloat(obj.unitPrice.itemValue);
+        var powerPriceTotal = (parseFloat(powerTotal) * unitPrice).toFixed(1);
+        $('.dianfei>.left>.input-wrap input').val(unitPrice);
+        $('.dianfei>.right>.input-wrap input').val(powerPriceTotal);
+        var numArr = powerTotal.split('');
+        if(numArr.length <=8){
+            var html = '';
+            for(var i=0; i < numArr.length; i++){
+                html += '<li class="active">'+numArr[i]+'</li>';
+            }
+            $(".num-ul").append(html);
+            var num = 8 - numArr.length;
+            if(num > 0){
+                var preHtml = '';
+                for(var i=0; i <  num; i++){
+                    preHtml += '<li>0</li>';
+                }
+                $(".num-ul").prepend(preHtml);
+            }
+        }
+    }
+    /*
+    * 监听输入框单价回车事件,
+    * */
+    $("#input-unitPrice").on('keypress blur',function (e) {
+        var powerTotal = parseFloat(localStorage.getItem('powerTotal'));
+        var price = parseFloat($(this).val());
+        var totalPrice = powerTotal*price;
+        if (e.which == 13) {
+            $('#input-totalPrice').val(totalPrice.toFixed   (1));
+        }
+    });
+    /*
+    * 初始化温度湿度值
+    * */
+    function initTemperatureAndHumidity(temperature,humidity){
+        temperature = parseFloat(temperature.replace('℃',''));
+        humidity = parseFloat(humidity.replace('%RH',''));
         var wendu = new canvasPanel();
         wendu.bgColor = '#FF7B57';
         wendu.MaxNum = 120;
         wendu.MinNum = -10;
-        wendu.current = 40;
+        wendu.current = temperature;
         wendu.title = '温度值';
         wendu.init('wendu');
         var shidu = new canvasPanel();
         shidu.bgColor = '#00FFFF';
-        shidu.danwei = "%";
+        shidu.danwei = "%RH";
         shidu.MaxNum = 100;
         shidu.MinNum = 0;
-        shidu.current = 100;
+        shidu.current = humidity;
         shidu.title = '湿度值';
         shidu.init('shidu');
+    }
+    /*
+    * 初始化路由网关状态
+    * */
+    function initSignalValue(routeSignalObj,gateStatus){
+        //路由
+        if(routeSignalObj.routeStatus == 1){ //1,在线，0离线
+            var routeSignal = routeSignalObj.routeSignal;
+            routeSignal = parseFloat(routeSignal.replace('dbm',''));
+            var html = '';
+            if(routeSignal < 0 && routeSignal >= -50){
+                html = '<span>在线</span><img src="./img/signal-5.png">';
+            }else if(routeSignal < -50 && routeSignal >= -70){
+                html = '<span>在线</span><img src="./img/signal-3.png">';
+            }else if(routeSignal < -70){
+                html = '<span>在线</span><img src="./img/signal-1.png">';
+            }
+            $('.shebei-status-ul>li.router .line').addClass('zaixian').html(html);
+
+        }else{
+            $('.shebei-status-ul>li.router .line').addClass('lixian').html('<span>离线</span>')
+        }
+        //网关
+        if(gateStatus == 1){ //1,在线，0离线
+            $('.shebei-status-ul>li.gate .line').addClass(('zaixian')).html('<span>在线</span>');
+        }else{
+            $('.shebei-status-ul>li.gate .line').addClass(('lixian')).html('<span>离线</span>')
+        }
     }
     /*
      * 初始化故障监控年月
@@ -282,7 +366,13 @@
     /*
      * 初始化节点耗电数据echarts图
     */
-    function initNodeConsumePowerData() {
+    function initNodeConsumePowerData(number) {
+        //处理仪表盘max数值，根据实际值来
+        var max = (number*10).toFixed(0);
+        var len = max.length -1;
+        max = max / (Math.pow(10, len));
+        max = max.toFixed(0);
+        max = max *(Math.pow(10, len)) / max;
         var myChart = echarts.init(document.getElementById('jiedianhaodl')); //节点耗电chart图
         // 指定图表的配置项和数据
         var option = {
@@ -320,7 +410,7 @@
                 startAngle:200,  //仪表盘起始角度。圆心 正右手侧为0度，正上方为90度，正左手侧为180度。
                 endAngle: -20,
                 min:0,
-                max:10000,
+                max:max,
                 axisLine: {
                     lineStyle: {
                         width: 14 // 这个是修改宽度的属性
@@ -351,7 +441,7 @@
                     color: '#FFF100'
                 },
                 title: {//仪表盘内标题(即data下value值的单位"km/h")
-                    offsetCenter:['52%', '50%'],//相对于仪表盘中心的偏移位置
+                    offsetCenter:['0', '-25%'],//相对于仪表盘中心的偏移位置
                     textStyle: {
                         fontWeight: 'bolder',
                         fontSize: 16,
@@ -362,14 +452,14 @@
                     }
                 },
                 detail: {  //仪表盘详情，用于显示数据。
-                    offsetCenter: ['-10%', '50%'], //相对于仪表盘中心的偏移位置
+                    offsetCenter: ['0', '50%'], //相对于仪表盘中心的偏移位置
                     formatter:'{value}',
                     fontSize: 30,
                     fontWeight: 'bold',
                     color: '#FFF100'
                 },
                 data: [
-                    {value: 1000, name: '/kmh'}
+                    {value: number, name: 'kwh'}
                 ]
             }]
 
@@ -381,33 +471,30 @@
      * @constructor
      */
     function initFaultMonitoringData() {
-            var dayList = [];
-            var dayCountList = [];
-            // startLoad();
-            var year = $("#year option:selected").val();
-            var month = $("#month option:selected").val();
-            $.ajax({
-                url: contextPath + "/errFeedback/getDayErrCountList",
-                type: "post",
-                async: false,
-                data: {
-                    year: year,
-                    month: month
-                },
-                success: function (rst) {
-                    // stopLoad();
-                    if(rst.length > 0){
-                        for(var i=0; i<rst.length; i++){
-                            dayList.push(rst[i].errday);
-                            dayCountList.push(rst[i].totalErrNum);
-                        }
+        var dayList = [];
+        var dayCountList = [];
+        var year = $("#year option:selected").val();
+        var month = $("#month option:selected").val();
+        $.ajax({
+            url: contextPath + "/anslysis/errorChart",
+            type: "post",
+            async: false,
+            data: {
+                year: year,
+                month: month
+            },
+            success: function (rst) {
+                if(rst.length > 0){
+                    for(var i=0; i<rst.length; i++){
+                        dayList.push(rst[i].checkMonth + '-' + rst[i].checkDay  );
+                        dayCountList.push(rst[i].brokenLampCount);
                     }
-                },
-                error: function () {
-                    // stopLoad();
-                    alert("对不起出错了！");
                 }
-            });
+            },
+            error: function () {
+                alert("对不起出错了！");
+            }
+        });
         var lineColor = ['#00D6D9','#f8d347','#8174c7','#67b245','#04177a','#d41b30','#078f91','#f49e24','#007aff','#38474f','#aed39d'];
         var echart = echarts.init(document.getElementById("guzhangjiankong"));
         var option = {
@@ -489,10 +576,149 @@
         };
         echart.setOption(option);
     }
-
+    /**
+     * 初始化弱电故障数据
+     *
+     */
+    function initWeakCurrentFaultData(){
+        $.ajax({
+            url: contextPath + "/anslysis/errorList",
+            type: "post",
+            async: false,
+            data: {
+                start: 0,
+                limit: 10
+            },
+            success: function (rst) {
+                if (rst.status == 0) {
+                    render('#top10-list', rst.rows, 'top10-tpl');
+                }
+            },
+            error: function () {
+                alert("对不起出错了！");
+            }
+        });
+    }
     /*
-    * 格式化数字，金钱
+    * 初始化树数据
     * */
+    function initZTreeData() {
+        var setting = {
+            check: {
+                enable: true
+            },
+            view: {
+                dblClickExpand: true,
+                showIcon: false,
+                fontCss : {"font-weight":"400","font-size":"16px"}
+            },
+            data: {
+                key: {
+                    name: "text",
+                    children: "children"
+                },
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {    //第一步
+                onClick: zTreeOnClick     //获取节点值
+            }
+        };
+        $.ajax({
+            url: contextPath + "/seNode/getNodeTreeList",
+            type: "post",
+            async: false,
+            data: {
+                start: 0,
+                limit: 10
+            },
+            success: function (rst) {
+                if (rst.length > 0) {
+                    $.fn.zTree.init($("#node-name-tree"), setting, rst);
+                }
+            },
+            error: function () {
+                alert("对不起出错了！");
+            }
+        });
+    }
+    //tree执行选择事件
+    function zTreeOnClick(event, treeId, treeNode) {       //第二步
+        console.log(treeNode);
+        if(!treeNode.isParent){
+            if(treeNode.src==1){   //src, 0,不可选 1，可选
+                var id = treeNode.id;
+                var text = treeNode.text;
+                $('#node-name').attr('data-id',id).val(text);
+                initSelectTreeData(id,text);
+
+            }else{
+                alert('当前节点不可用，请重新选择');
+            }
+        }else{
+            alert('当前节点不是最末端，请重新选择')
+        }
+    }
+    /*
+     *  初始化下拉树选中数据
+     */
+    function initSelectTreeData(id,text){
+        var id = id?id:1;
+        var text = text?text:$('#node-name').val();
+        $('.dianya-wrap>.title').html(text);
+        $.ajax({
+            url: contextPath + "/anslysis/screenNodeData?nodeId="+ id +"",
+            type: "post",
+            async: false,
+            data: {
+                start: 0,
+                limit: 10
+            },
+            success: function (res) {
+                console.log(res);
+                var nodeConsumePowerNumber = res.meterValue; //节点耗电量
+                var temperature = res.temperature; // 温度
+                var humidity = res.humidity; //湿度
+                var routeSignalObj = {
+                    routeStatus : res.routeStatus,
+                    routeSignal: res.routeSignal
+                };
+                var gateStatus = res.gateStatus;
+                initNodeConsumePowerData(nodeConsumePowerNumber); //初始化节点耗电量echart图
+                initTemperatureAndHumidity(temperature,humidity);  //初始化温度，湿度值
+                initSignalValue(routeSignalObj,gateStatus); //初始化路由和网关状态
+
+            },
+            error: function () {
+                alert("对不起出错了！");
+            }
+        });
+    }
+    //tree显示与隐藏
+    document.onclick = function(e) {
+        $('.node-tree-container').hide();
+    };
+    $('#node-name').on("click", function(e) {
+        if($('.node-tree-container').css("display") == "none") {
+            $('.node-tree-container').show();
+        } else {
+            $('.node-tree-container').hide();
+        }
+        e = e || event;
+        stopFunc(e);
+    });
+
+    $('.node-tree-container').on("click", function(e) {
+        e = e || event;
+        stopFunc(e);
+    });
+    function stopFunc(e) {
+        e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+    }
+    /*
+   * 格式化数字，金钱
+   * */
     function formatCurrency(num) {
         if (!num){
             return "0.00";
@@ -510,7 +736,15 @@
         }
         for ( var i = 0; i < Math.floor((num.length - (1 + i)) / 3); i++)
             num = num.substring(0, num.length - (4 * i + 3)) + ','+ num.substring(num.length - (4 * i + 3));
-        return (((sign) ? '' : '-') + '' + num + '.' + cents);
+        return (((sign) ? '' : '-') + '' + num + ',' + cents);
+    }
+    /*页面渲染*/
+    function render(obj, data, tplId) {
+        var tpl = document.getElementById(tplId).innerHTML;
+        var html = juicer(tpl, {
+            data: data
+        });
+        $(obj).html(html);
     }
 </script>
 </body>

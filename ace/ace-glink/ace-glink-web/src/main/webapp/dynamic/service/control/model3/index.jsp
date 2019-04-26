@@ -206,6 +206,7 @@
 
 
 <div class="modal scenario-modal">
+
     <div class="modal-content">
         <div class="bg">
             <div class="lefgBg">
@@ -290,8 +291,8 @@
                 <label class="check2" for="b\${index}">节日模式</label>
             </div>
             <div class="checkboxGroup">
-                <input id="c\${index}" name='m\${index}' type="radio" value="3" \${item==3?'checked':''}/>
-                <label class="check3" for="c\${index}">重大节日模式</label>
+                <input id="g\${index}" name='m\${index}' type="radio" value="3" \${item==3?'checked':''}/>
+                <label class="check3" for="g\${index}">重大节日模式</label>
             </div>
         </div>
     </li>
@@ -759,19 +760,20 @@
 </script>
 
 <style type="text/css">
-    .scenario-modal .presetList{
+    .scenario-modal .presetList {
         width: 100%;
         height: 100%;
         display: flex;
         flex-direction: column;
     }
+
     .scenario-modal .presetList .top {
         height: 0.3rem;
         width: 100%;
         display: flex;
         font-size: 0.104166rem;
         font-family: MicrosoftYaHei;
-        color: rgba(0,214,217,1);
+        color: rgba(0, 214, 217, 1);
         align-items: center;
         justify-content: space-between;
         margin-bottom: 0.05rem;
@@ -782,10 +784,12 @@
         width: 100%;
         flex-grow: 1;
     }
-    .scenario-modal .presetList .ulList> ul{
+
+    .scenario-modal .presetList .ulList > ul {
         height: 3.9rem;
     }
-    .scenario-modal .presetList .ulList >ul>li{
+
+    .scenario-modal .presetList .ulList > ul > li {
         font-size: 0.12rem;
         height: 0.5rem;
         background: #07C6C9;
@@ -797,7 +801,8 @@
         font-weight: bold;
         cursor: pointer;
     }
-    .scenario-modal .presetList .ulList li:active{
+
+    .scenario-modal .presetList .ulList li:active {
         background: #0E7980;
     }
 

@@ -276,7 +276,7 @@ function getBusyCV(ctx,cl,sz,tp,ir,w,ct,sp,mo) {
 }
 
 function startLoading(){
-    return getBusyOverlay('viewport',{color:'#eff3f8', opacity:0, text:'viewport: loading...', style:'font-size:14px;color:#000000'},{color:'#00000', size:80, type:'o'});
+    return getBusyOverlay('viewport',{color:'#eff3f8', opacity:0.75, text:'viewport: loading...', style:'font-size:14px;color:#000000'},{color:'#00000', size:80, type:'o'});
 }
 function startLoad(){
  try {loading = startLoading();} catch (e) {};

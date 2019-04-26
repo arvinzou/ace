@@ -1,69 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huacainfo.ace.glink.dao.LeBrokenLampDao">
-    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.LeBrokenLamp">
+<mapper namespace="com.huacainfo.ace.glink.dao.LeLampStatusDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.LeLampStatus">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="checkDate" jdbcType="VARCHAR" property="checkDate"/>
-        <result column="mediaArea" jdbcType="VARCHAR" property="mediaArea"/>
-        <result column="controller" jdbcType="VARCHAR" property="controller"/>
-        <result column="channelNo" jdbcType="VARCHAR" property="channelNo"/>
-        <result column="lampNo" jdbcType="VARCHAR" property="lampNo"/>
+        <result column="checkYear" jdbcType="VARCHAR" property="checkYear"/>
+        <result column="checkMonth" jdbcType="VARCHAR" property="checkMonth"/>
+        <result column="checkDay" jdbcType="VARCHAR" property="checkDay"/>
+        <result column="lampCount" jdbcType="INTEGER" property="lampCount"/>
+        <result column="brokenLampCount" jdbcType="INTEGER" property="brokenLampCount"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, checkDate, mediaArea, controller, channelNo, lampNo, remark, status, createDate
+    id, checkDate, checkYear, checkMonth, checkDay, lampCount, brokenLampCount, remark, 
+    status, createDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from le_broken_lamp
+        from le_lamp_status
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from le_broken_lamp
+    delete from le_lamp_status
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.LeBrokenLamp">
-    insert into le_broken_lamp (id, checkDate, mediaArea, 
-      controller, channelNo, lampNo, 
-      remark, status, createDate
-      )
-    values (#{id,jdbcType=VARCHAR}, #{checkDate,jdbcType=VARCHAR}, #{mediaArea,jdbcType=VARCHAR}, 
-      #{controller,jdbcType=VARCHAR}, #{channelNo,jdbcType=VARCHAR}, #{lampNo,jdbcType=VARCHAR},
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}
-      )
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.LeLampStatus">
+    insert into le_lamp_status (id, checkDate, checkYear, 
+      checkMonth, checkDay, lampCount, 
+      brokenLampCount, remark, status, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{checkDate,jdbcType=VARCHAR}, #{checkYear,jdbcType=VARCHAR}, 
+      #{checkMonth,jdbcType=VARCHAR}, #{checkDay,jdbcType=VARCHAR}, #{lampCount,jdbcType=INTEGER}, 
+      #{brokenLampCount,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
   </insert>
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.LeBrokenLamp">
-    update le_broken_lamp
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.LeLampStatus">
+    update le_lamp_status
     set checkDate = #{checkDate,jdbcType=VARCHAR},
-      mediaArea = #{mediaArea,jdbcType=VARCHAR},
-      controller = #{controller,jdbcType=VARCHAR},
-      channelNo = #{channelNo,jdbcType=VARCHAR},
-      lampNo = #{lampNo,jdbcType=VARCHAR},
+      checkYear = #{checkYear,jdbcType=VARCHAR},
+      checkMonth = #{checkMonth,jdbcType=VARCHAR},
+      checkDay = #{checkDay,jdbcType=VARCHAR},
+      lampCount = #{lampCount,jdbcType=INTEGER},
+      brokenLampCount = #{brokenLampCount,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+    <delete id="deleteByCheckDate">
+    delete from le_lamp_status
+    where checkDate = #{checkDate,jdbcType=VARCHAR}
+  </delete>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.LeBrokenLampVo">
-        <result column="ctrlName" jdbcType="VARCHAR" property="ctrlName"/>
-        <result column="buildingName" jdbcType="VARCHAR" property="buildingName"/>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.LeLampStatusVo">
 
     </resultMap>
 
     <sql id="Vo_Column_List">
-        t.lampNo, t.channelNo, t.controller, t.checkDate,
-        IFNULL(m.ctrlName, CONCAT('控制器',t.lampNo)) as ctrlName,
-        IFNULL(b.`name`, '未知') as buildingName
+       id, checkDate, checkYear, checkMonth, checkDay, lampCount, brokenLampCount, remark,
+      status, createDate
     </sql>
     <sql id="From_Statement">
-        from le_broken_lamp t
-        left join map_ctrl_building m on t.controller = m.ctrlCode
-        left join top_building b on m.buildingCode = b.`code`
+        FROM le_lamp_status t
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
@@ -89,7 +92,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY t.controller , t.lampNo
+                ORDER BY t.checkDate asc
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

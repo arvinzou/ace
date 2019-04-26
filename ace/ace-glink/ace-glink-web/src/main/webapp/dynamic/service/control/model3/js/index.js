@@ -98,7 +98,7 @@ function postList() {
         jsons: JSON.stringify(map)
     }
     $.post(url,data,function(result){
-        if (result.status == "ok") {
+        if (result.Status == "ok") {
             alert("设置成功");
             getYearCronList();
         } else {
@@ -147,14 +147,14 @@ function initPageTask() {
 
 /*ajax获取数据列表*/
 function getTaskList(key, value) {
-    if(key){
+    if(!key){
         taskParams[key] = value;
     }
     var url = contextPath + "/seAreaTask/findSeAreaTaskList";
     $.getJSON(url, taskParams, function (rst) {
         if (rst.status == 0) {
             if (taskParams.initType == "init") {
-                $('#pagination2').jqPaginator('option', {
+                $('#pagination1').jqPaginator('option', {
                     totalCounts: rst.total == 0 ? 1 : rst.total,
                     currentPage: 1
                 });
@@ -181,6 +181,8 @@ function executeTask(areaNodeID, taskNo) {
     })
 }
 /*****************************************任务管理End***********************************************/
+
+
 /*****************************************定时设置Start***********************************************/
 var params={
     start:0,
@@ -190,6 +192,7 @@ var params={
 function initTimeing() {
     initPage();
     $('.Timing .submit').click(searchTiming);
+    $('.unit').on('click', '.piece', changeList);
 
 }
 
@@ -262,19 +265,35 @@ function getPageList() {
         }
     })
 }
+/*切换页面*/
+function changeList() {
+    var that = $(this);
+    $(this).siblings('div').removeClass('active');
+    $(this).addClass('active');
+    var type = that.data('type');
+    changeDo(type);
+}
+
+function changeDo(type) {
+    console.log(type);
+    $('.list').hide();
+    $('.list.' + type).show();
+}
+
 /*****************************************定时设置End***********************************************/
+
 /*****************************************场景执行Start***********************************************/
 
-var scenarioParams={
-    start:0,
-    limit:21
+var scenarioParams = {
+    start: 0,
+    limit: 21
 }
 
 /*任务初始化管理*/
 function initScenario() {
-    $('#scenarioList').on('click','button',selectPreset);
-    $('.scenario-modal').on('click','.submit',searchPreset);
-    $('.scenario-modal #presets').on('click','li',setScenario);
+    $('#scenarioList').on('click', 'button', selectPreset);
+    $('.scenario-modal').on('click', '.submit', searchPreset);
+    $('.scenario-modal #presets').on('click', 'li', setScenario);
     $("#areaNodeID1").combotree({
         onChange: function (newValue, oldValue) {
             getScenarioList("areaNodeID", newValue);
@@ -284,11 +303,11 @@ function initScenario() {
 }
 
 function setScenario() {
-    var that=$(this);
-    scenarioPostData.presetNo=that.data('presetNo');
-    var url='';
-    $.post(url,scenarioPostData,function () {
-        
+    var that = $(this);
+    scenarioPostData.presetNo = that.data('presetNo');
+    var url = '';
+    $.post(url, scenarioPostData, function () {
+
     })
 }
 
@@ -320,7 +339,7 @@ function initPageScenario() {
         onPageChange: function (num, type) {
             presetMap['start'] = (num - 1) * scenarioParams.limit;
             presetMap['initType'] = type;
-            if(type!='init'){
+            if (type != 'init') {
                 getScenarioList();
             }
         }
@@ -330,7 +349,7 @@ function initPageScenario() {
 
 /*ajax获取数据列表*/
 function getScenarioList(key, value) {
-    if(key){
+    if (key) {
         scenarioParams[key] = value;
     }
     var url = contextPath + "/seCustomArea/findSeCustomAreaList";
@@ -347,17 +366,17 @@ function getScenarioList(key, value) {
     });
 }
 
-var presetMap={
-    start:0,
-    limit:10
+var presetMap = {
+    start: 0,
+    limit: 10
 };
-var scenarioPostData={};
+var scenarioPostData = {};
 
 function selectPreset() {
-    var that=$(this);
-    scenarioPostData.areaNo=that.data('areaNo');
-    scenarioPostData.areaNodeID=that.data('areaNodeID');
-    var val =$('.scenario-modal  .presetName').val();
+    var that = $(this);
+    scenarioPostData.areaNo = that.data('areaNo');
+    scenarioPostData.areaNodeID = that.data('areaNodeID');
+    var val = $('.scenario-modal  .presetName').val();
     presetMap['presetName'] = val;
     $('.scenario-modal').show();
     var url = contextPath + "/sePresetData/findSePresetDataList";
@@ -375,7 +394,7 @@ function selectPreset() {
 }
 
 function searchPreset() {
-    presetMap.start=0;
+    presetMap.start = 0;
     selectPreset();
 }
 
@@ -468,9 +487,6 @@ function parseStatus(status) {
 }
 
 
-
-
-
 // //加载每月数据
 // function setParams(m) {
 //     var url = contextPath + "/generalYearCron/syncData";
@@ -486,9 +502,7 @@ function parseStatus(status) {
 // }
 
 
-
-
-function mGetDate(m){
+function mGetDate(m) {
     var date = new Date();
     var year = date.getFullYear();
     var d = new Date(year, m, 0);
@@ -544,9 +558,9 @@ function TimerUpdate() {
             jsons: JSON.stringify(Timermap)
         },
         success: function (result) {
-            stopLoad();
-            if (result.status == "ok") {
-                // getPageList();
+            if (result.Status == "ok") {
+                alert("设置成功");
+                getPageList();
             } else {
                 alert(result.errorMessage);
             }

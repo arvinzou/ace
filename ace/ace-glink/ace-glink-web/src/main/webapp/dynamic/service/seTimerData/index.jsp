@@ -30,7 +30,7 @@
         <div class="row custom-toolbar">
             <div class="col-md-3">
 
-                <a href="javascript:syncData();" class="btn green">同步数据</a>
+                <a href="javascript:syncData();" class="btn green">同步</a>
             </div>
 
             <div class="col-md-6" style="float: right;">
@@ -68,13 +68,13 @@
                 <thead>
                 <tr>
 
-                    <th width="15%"> 定时任务号</th>
-                    <th width="10%"> 定时任务名称</th>
-                    <th width="10%"> 是否有效</th>
-                    <th width="10%"> 启动时间</th>
-                    <th width="10%"> 调度任务号</th>
-                    <th width="10%"> 状态</th>
-                    <th width="15%"> 创建日期</th>
+
+                    <th width="20%"> 定时任务名称</th>
+                    <th width="20%"> 是否有效</th>
+                    <th width="20%"> 启动时间</th>
+
+
+                    <th width="25%"> 创建日期</th>
                     <th width="15%">操作</th>
                 </tr>
                 </thead>
@@ -102,7 +102,7 @@
     {@each data as item, index}
     <tr>
 
-        <td> \${item.timerID}</td>
+
         <td> \${item.timerName}</td>
         <td> {@if item.timerEnable==0}
             <span>无效</span>
@@ -112,14 +112,8 @@
             {@/if}
         </td>
         <td> \${item.startTime}</td>
-        <td> \${item.taskNo}</td>
-        <td> {@if item.status==0}
-            <span class="label label-lg label-info">无效</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">有效</span>
-            {@else}
-            {@/if}
-        </td>
+
+
         <td> \${item.createDate}</td>
 
         <td>
@@ -348,12 +342,12 @@
             \${data.o.remark}
         </div>
     </div>
-    <div class="form-group">
+    <%--<div class="form-group">
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
             \${data.o.status}
         </div>
-    </div>
+    </div>--%>
     <div class="form-group">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">
@@ -361,184 +355,249 @@
         </div>
     </div>
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
-                <span class="caption-subject bold uppercase"> 月数据列表</span>
-            </div>
-        </div>
-        <div class="portlet-body">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <table class="table table-hover table-light">
-                        <thead>
-                        <tr>
-                            <th width="8%"> 1月</th>
-                            <th width="8%"> 2月</th>
-                            <th width="8%"> 3月</th>
-                            <th width="8%"> 4月</th>
-                            <th width="8%"> 5月</th>
-                            <th width="8%"> 6月</th>
-                            <th width="8%"> 7月</th>
-                            <th width="8%"> 8月</th>
-                            <th width="8%"> 9月</th>
-                            <th width="8%"> 10月</th>
-                            <th width="8%"> 11月</th>
-                            <th width="8%"> 12月</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {@each data.monthList as item, index}
-                        <tr>
-                            <td> \${parseStatus(item.m1)}</td>
-                            <td> \${parseStatus(item.m2)}</td>
-                            <td> \${parseStatus(item.m3)}</td>
-                            <td> \${parseStatus(item.m4)}</td>
-                            <td> \${parseStatus(item.m5)}</td>
-                            <td> \${parseStatus(item.m6)}</td>
-                            <td> \${parseStatus(item.m7)}</td>
-                            <td> \${parseStatus(item.m8)}</td>
-                            <td> \${parseStatus(item.m9)}</td>
-                            <td> \${parseStatus(item.m10)}</td>
-                            <td> \${parseStatus(item.m11)}</td>
-                            <td> \${parseStatus(item.m12)}</td>
-                        </tr>
-                        {@/each}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
-                <span class="caption-subject bold uppercase"> 周数据列表</span>
-            </div>
-        </div>
-        <div class="portlet-body">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <table class="table table-hover table-light">
-                        <thead>
-                        <tr>
-                            <th width="8%">周1</th>
-                            <th width="8%">周2</th>
-                            <th width="8%">周3</th>
-                            <th width="8%">周4</th>
-                            <th width="8%">周5</th>
-                            <th width="8%">周6</th>
-                            <th width="8%">周7</th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {@each data.weekList as item, index}
-                        <tr>
-                            <td> \${parseStatus(item.w1)}</td>
-                            <td> \${parseStatus(item.w2)}</td>
-                            <td> \${parseStatus(item.w3)}</td>
-                            <td> \${parseStatus(item.w4)}</td>
-                            <td> \${parseStatus(item.w5)}</td>
-                            <td> \${parseStatus(item.w6)}</td>
-                            <td> \${parseStatus(item.w7)}</td>
-
-                        </tr>
-                        {@/each}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption font-green-sharp">
-                <i class="icon-share font-green-sharp"></i>
-                <span class="caption-subject bold uppercase"> 日数据列表</span>
-            </div>
-        </div>
+        <h4 class="modal-title">月数据列表</h4>
         <div class="portlet-body">
             <div class="row">
                 <div class="table-scrollable">
-                    <table class="table table-hover table-light">
-                        <thead>
-                        <tr>
-                            <th width="5%"> 1日</th>
-                            <th width="5%"> 2日</th>
-                            <th width="5%"> 3日</th>
-                            <th width="5%"> 4日</th>
-                            <th width="5%"> 5日</th>
-                            <th width="5%"> 6日</th>
-                            <th width="5%"> 7日</th>
-                            <th width="5%"> 8日</th>
-                            <th width="5%"> 9日</th>
-                            <th width="5%"> 10日</th>
-                            <th width="5%"> 11日</th>
-                            <th width="5%"> 12日</th>
-                            <th width="5%"> 13日</th>
-                            <th width="5%"> 14日</th>
-                            <th width="5%"> 15日</th>
-                            <th width="5%"> 16日</th>
-                            <th width="5%"> 17日</th>
-                            <th width="5%"> 18日</th>
-                            <th width="5%"> 19日</th>
-                            <th width="5%"> 20日</th>
-                            <th width="5%"> 21日</th>
-                            <th width="5%"> 22日</th>
-                            <th width="5%"> 23日</th>
-                            <th width="5%"> 24日</th>
-                            <th width="5%"> 25日</th>
-                            <th width="5%"> 26日</th>
-                            <th width="5%"> 27日</th>
-                            <th width="5%"> 28日</th>
-                            <th width="5%"> 29日</th>
-                            <th width="5%"> 30日</th>
-                            <th width="5%"> 31日</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {@each data.dayList as item, index}
-                        <tr>
-                            <td> \${parseStatus(item.d1)}</td>
-                            <td> \${parseStatus(item.d2)}</td>
-                            <td> \${parseStatus(item.d3)}</td>
-                            <td> \${parseStatus(item.d4)}</td>
-                            <td> \${parseStatus(item.d5)}</td>
-                            <td> \${parseStatus(item.d6)}</td>
-                            <td> \${parseStatus(item.d7)}</td>
-                            <td> \${parseStatus(item.d8)}</td>
-                            <td> \${parseStatus(item.d9)}</td>
-                            <td> \${parseStatus(item.d10)}</td>
-                            <td> \${parseStatus(item.d11)}</td>
-                            <td> \${parseStatus(item.d12)}</td>
-                            <td> \${parseStatus(item.d13)}</td>
-                            <td> \${parseStatus(item.d14)}</td>
-                            <td> \${parseStatus(item.d15)}</td>
-                            <td> \${parseStatus(item.d16)}</td>
-                            <td> \${parseStatus(item.d17)}</td>
-                            <td> \${parseStatus(item.d18)}</td>
-                            <td> \${parseStatus(item.d19)}</td>
-                            <td> \${parseStatus(item.d20)}</td>
-                            <td> \${parseStatus(item.d21)}</td>
-                            <td> \${parseStatus(item.d22)}</td>
-                            <td> \${parseStatus(item.d23)}</td>
-                            <td> \${parseStatus(item.d24)}</td>
-                            <td> \${parseStatus(item.d25)}</td>
-                            <td> \${parseStatus(item.d26)}</td>
-                            <td> \${parseStatus(item.d27)}</td>
-                            <td> \${parseStatus(item.d28)}</td>
-                            <td> \${parseStatus(item.d29)}</td>
-                            <td> \${parseStatus(item.d30)}</td>
-                            <td> \${parseStatus(item.d31)}</td>
-                        </tr>
+                    <ul class="dayul">
+                        {@each data.monthList as item, index}
+                        <li>
+                            <div class="day">1月</div>
+                            <div class="status">\${parseStatus(item.m1)}</div>
+                        </li>
+                        <li>
+                            <div class="day">2月</div>
+                            <div class="status">\${parseStatus(item.m2)}</div>
+                        </li>
+                        <li>
+                            <div class="day">3月</div>
+                            <div class="status">\${parseStatus(item.m3)}</div>
+                        </li>
+                        <li>
+                            <div class="day">4月</div>
+                            <div class="status">\${parseStatus(item.m4)}</div>
+                        </li>
+                        <li>
+                            <div class="day">5月</div>
+                            <div class="status">\${parseStatus(item.m5)}</div>
+                        </li>
+                        <li>
+                            <div class="day">6月</div>
+                            <div class="status">\${parseStatus(item.m6)}</div>
+                        </li>
+                        <li>
+                            <div class="day">7月</div>
+                            <div class="status">\${parseStatus(item.m7)}</div>
+                        </li>
+                        <li>
+                            <div class="day">8月</div>
+                            <div class="status">\${parseStatus(item.m8)}</div>
+                        </li>
+                        <li>
+                            <div class="day">9月</div>
+                            <div class="status">\${parseStatus(item.m9)}</div>
+                        </li>
+                        <li>
+                            <div class="day">10月</div>
+                            <div class="status">\${parseStatus(item.m10)}</div>
+                        </li>
+                        <li>
+                            <div class="day">11月</div>
+                            <div class="status">\${parseStatus(item.m11)}</div>
+                        </li>
+                        <li>
+                            <div class="day">12月</div>
+                            <div class="status">\${parseStatus(item.m12)}</div>
+                        </li>
                         {@/each}
-                        </tbody>
-                    </table>
+                    </ul>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="portlet light">
+
+        <h4 class="modal-title"> 周数据列表</h4>
+
+        <div class="portlet-body">
+            <div class="row">
+                <div class="table-scrollable">
+                    <ul class="dayul">
+                        {@each data.weekList as item, index}
+                        <li>
+                            <div class="day">周一</div>
+                            <div class="status">\${parseStatus(item.w1)}</div>
+                        </li>
+                        <li>
+                            <div class="day">周二</div>
+                            <div class="status">\${parseStatus(item.w2)}</div>
+                        </li>
+                        <li>
+                            <div class="day">周三</div>
+                            <div class="status">\${parseStatus(item.w3)}</div>
+                        </li>
+                        <li>
+                            <div class="day">周四</div>
+                            <div class="status">\${parseStatus(item.w4)}</div>
+                        </li>
+                        <li>
+                            <div class="day">周五</div>
+                            <div class="status">\${parseStatus(item.w5)}</div>
+                        </li>
+                        <li>
+                            <div class="day">周六</div>
+                            <div class="status">\${parseStatus(item.w6)}</div>
+                        </li>
+                        <li>
+                            <div class="day">周日</div>
+                            <div class="status">\${parseStatus(item.w7)}</div>
+                        </li>
+                        {@/each}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="portlet light">
+
+        <h4 class="modal-title"> 日数据列表</h4>
+
+        <div class="portlet-body">
+            <div class="row">
+                <div class="table-scrollable">
+                    <ul class="dayul">
+                        {@each data.dayList as item, index}
+                        <li>
+                            <div class="day">1日</div>
+                            <div class="status">\${parseStatus(item.d1)}</div>
+                        </li>
+                        <li>
+                            <div class="day">2日</div>
+                            <div class="status">\${parseStatus(item.d2)}</div>
+                        </li>
+                        <li>
+                            <div class="day">3日</div>
+                            <div class="status">\${parseStatus(item.d3)}</div>
+                        </li>
+                        <li>
+                            <div class="day">4日</div>
+                            <div class="status">\${parseStatus(item.d4)}</div>
+                        </li>
+                        <li>
+                            <div class="day">5日</div>
+                            <div class="status">\${parseStatus(item.d5)}</div>
+                        </li>
+                        <li>
+                            <div class="day">6日</div>
+                            <div class="status">\${parseStatus(item.d6)}</div>
+                        </li>
+                        <li>
+                            <div class="day">7日</div>
+                            <div class="status">\${parseStatus(item.d7)}</div>
+                        </li>
+                        <li>
+                            <div class="day">8日</div>
+                            <div class="status">\${parseStatus(item.d8)}</div>
+                        </li>
+                        <li>
+                            <div class="day">9日</div>
+                            <div class="status">\${parseStatus(item.d9)}</div>
+                        </li>
+                        <li>
+                            <div class="day">10日</div>
+                            <div class="status">\${parseStatus(item.d10)}</div>
+                        </li>
+                        <li>
+                            <div class="day">11日</div>
+                            <div class="status">\${parseStatus(item.d11)}</div>
+                        </li>
+                        <li>
+                            <div class="day">12日</div>
+                            <div class="status">\${parseStatus(item.d12)}</div>
+                        </li>
+                        <li>
+                            <div class="day">13日</div>
+                            <div class="status">\${parseStatus(item.d13)}</div>
+                        </li>
+                        <li>
+                            <div class="day">14日</div>
+                            <div class="status">\${parseStatus(item.d14)}</div>
+                        </li>
+                        <li>
+                            <div class="day">15日</div>
+                            <div class="status">\${parseStatus(item.d15)}</div>
+                        </li>
+                        <li>
+                            <div class="day">16日</div>
+                            <div class="status">\${parseStatus(item.d16)}</div>
+                        </li>
+                        <li>
+                            <div class="day">17日</div>
+                            <div class="status">\${parseStatus(item.d17)}</div>
+                        </li>
+                        <li>
+                            <div class="day">18日</div>
+                            <div class="status">\${parseStatus(item.d18)}</div>
+                        </li>
+                        <li>
+                            <div class="day">19日</div>
+                            <div class="status">\${parseStatus(item.d19)}</div>
+                        </li>
+                        <li>
+                            <div class="day">20日</div>
+                            <div class="status">\${parseStatus(item.d20)}</div>
+                        </li>
+                        <li>
+                            <div class="day">21日</div>
+                            <div class="status">\${parseStatus(item.d21)}</div>
+                        </li>
+                        <li>
+                            <div class="day">22日</div>
+                            <div class="status">\${parseStatus(item.d22)}</div>
+                        </li>
+                        <li>
+                            <div class="day">23日</div>
+                            <div class="status">\${parseStatus(item.d23)}</div>
+                        </li>
+                        <li>
+                            <div class="day">24日</div>
+                            <div class="status">\${parseStatus(item.d24)}</div>
+                        </li>
+                        <li>
+                            <div class="day">25日</div>
+                            <div class="status">\${parseStatus(item.d25)}</div>
+                        </li>
+                        <li>
+                            <div class="day">26日</div>
+                            <div class="status">\${parseStatus(item.d26)}</div>
+                        </li>
+                        <li>
+                            <div class="day">27日</div>
+                            <div class="status">\${parseStatus(item.d27)}</div>
+                        </li>
+                        <li>
+                            <div class="day">28日</div>
+                            <div class="status">\${parseStatus(item.d28)}</div>
+                        </li>
+                        <li>
+                            <div class="day">29日</div>
+                            <div class="status">\${parseStatus(item.d29)}</div>
+                        </li>
+                        <li>
+                            <div class="day">30日</div>
+                            <div class="status">\${parseStatus(item.d30)}</div>
+                        </li>
+                        <li>
+                            <div class="day">31日</div>
+                            <div class="status">\${parseStatus(item.d31)}</div>
+                        </li>
+                        {@/each}
+                    </ul>
+
                 </div>
             </div>
 
@@ -563,6 +622,7 @@
         padding-left: 15px;
         color: #FE6500;
     }
+
 </style>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>

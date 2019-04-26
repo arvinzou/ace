@@ -32,6 +32,4 @@ public interface SeNodeDao {
     int allClear();
 
     List<Map<String, Object>> selectNodeTreeList();
-
-    SeNode findByNodeId(String nodeId);
 }
