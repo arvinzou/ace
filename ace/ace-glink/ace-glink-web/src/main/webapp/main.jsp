@@ -7,7 +7,7 @@
     <meta charset="utf-8"/>
     <meta name="description" content="overview &amp; stats"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/index1.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/main.css">
     <title>${cfg.sys_name}</title>
 </head>
 

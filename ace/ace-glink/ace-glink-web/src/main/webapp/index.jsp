@@ -33,7 +33,7 @@
             <a href="${pageContext.request.contextPath}/dynamic/service/control/model1/index.jsp"> 弱电</a>
         </div>
         <div class="forceElectricity electricity">
-            <a href="${pageContext.request.contextPath}/dynamic/service/control/model1/index.jsp">强电</a>
+            <a href="${pageContext.request.contextPath}/dynamic/service/control/model3/index.jsp">强电</a>
         </div>
     </div>
     <div class="arrow">
