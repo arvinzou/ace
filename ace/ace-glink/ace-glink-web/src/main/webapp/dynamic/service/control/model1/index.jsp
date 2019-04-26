@@ -80,7 +80,10 @@
         </div>
         <div class="videoList">
             <ul id="videos">
-
+                <div class="default">
+                    <img src="img/default.png" alt="">
+                    <p>当前暂无场景，请先选择站点</p>
+                </div>
             </ul>
         </div>
     </div>
@@ -193,6 +196,25 @@
 </script>
 
 <style type="text/css">
+
+    .default{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        font-size:0.09375rem;
+        font-family:MicrosoftYaHei;
+        font-weight:400;
+        color:rgba(0,214,217,1);
+    }
+    .default img{
+        width: 0.854166rem;
+        height: 0.572916rem;
+        margin: auto;
+        display: block;
+        margin-bottom: 0.1rem;
+    }
+
     .modal {
         position: fixed;
         width: 100%;

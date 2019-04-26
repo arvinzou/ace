@@ -665,4 +665,12 @@ body {
 
 .modals,.modal{
     display: none;
+<<<<<<< Updated upstream
+=======
+}
+
+.scenario-modal .modal-content{
+	width: 3rem;
+	height: 4rem;
+>>>>>>> Stashed changes
 }

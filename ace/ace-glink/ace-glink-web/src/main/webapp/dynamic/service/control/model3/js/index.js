@@ -14,7 +14,12 @@ $(function () {
     initScenario();
     initJuicerMethod();
     $('.btns').on('click','.btn',changePage);
+    $(' .modal .modal-content').on('click','.modal-close', closeModal);
 });
+
+function closeModal() {
+    $(this).parents().find('.modal').hide();
+}
 
 /*切换页面*/
 function changePage() {
