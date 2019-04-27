@@ -130,7 +130,7 @@ function initTask() {
     //
     $("#taskAreaNode").combotree({
         onChange: function (newValue, oldValue) {
-            alert(newValue);
+            // alert(newValue);
             getTaskList("areaNodeID", newValue);
         }
     });
