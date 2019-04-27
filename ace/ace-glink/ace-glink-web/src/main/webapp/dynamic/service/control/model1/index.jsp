@@ -40,6 +40,13 @@
             <p class="en">Strategy Send</p>
         </div>
     </div>
+    <div class="userInfo">
+        <div class="headImg">
+            <img alt="" class="img-circle"
+                 src="${portalPath}/content/common/assets/layouts/layout/img/avatar3_small.jpg"/>
+        </div>
+        <span class="username username-hide-on-mobile"> ${SESSION_USERPROP_KEY.name} </span>
+    </div>
 </div>
 <div  class="sceneControl content">
     <div class="left">

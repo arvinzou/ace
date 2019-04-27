@@ -43,6 +43,13 @@
             <p class="en">Control Set</p>
         </div>
     </div>
+    <div class="userInfo">
+        <div class="headImg">
+            <img alt="" class="img-circle"
+                 src="${portalPath}/content/common/assets/layouts/layout/img/avatar3_small.jpg"/>
+        </div>
+        <span class="username username-hide-on-mobile"> ${SESSION_USERPROP_KEY.name} </span>
+    </div>
 </div>
 <div class="content">
     <div class="modals Timing" style="display: none;">
@@ -766,6 +773,63 @@
 </script>
 
 <style type="text/css">
+    .userInfo{
+        width: 2rem;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 0.21875rem;
+
+    }
+
+    .userInfo .headImg{
+        width:0.19rem;
+        height:0.19rem;
+        border:1px solid rgba(167,250,251,1);
+        border-radius:50%;
+        padding: 0.021rem;
+        display: flex;
+        position: relative;
+        margin-right: 0.104166rem;
+    }
+    .userInfo .username{
+        font-size:0.09375rem;
+        font-family:MicrosoftYaHei;
+        font-weight:400;
+        color:rgba(255,255,255,1);
+        position: relative;
+        cursor: pointer;
+    }
+
+    .userInfo .headImg img{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width:0.14rem;
+        height:0.14rem;
+        border:1px solid rgba(167,250,251,1);
+        border-radius:50%;
+        object-fit: cover;
+        object-position: 50% 50%;
+        transform:  translate(-50%,-50%);
+    }
+
+    .userInfo .username::before{
+        position: absolute;
+        content: '';
+        display: block;
+        width: 0.05rem;
+        height:0.05rem;
+        border: 2px #FFFFFF solid;
+        border-top:none;
+        border-right: none;
+        top: 50%;
+        left: 105%;
+        transform:rotate(-45deg) translate(50%,-50%);
+    }
+
+
 
 </style>
 <%--<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"
