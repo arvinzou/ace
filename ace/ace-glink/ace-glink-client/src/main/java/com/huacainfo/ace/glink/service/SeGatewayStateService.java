@@ -4,13 +4,12 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.glink.model.SeGatewayState;
-import com.huacainfo.ace.glink.vo.SeGatewayStateVo;
 import com.huacainfo.ace.glink.vo.SeGatewayStateQVo;
+import com.huacainfo.ace.glink.vo.SeGatewayStateVo;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: luocan
@@ -116,4 +115,12 @@ public interface SeGatewayStateService {
      */
     MessageResponse deleteSeGatewayStateBySeGatewayStateIds(List<String> list, UserProp userProp) throws Exception;
 
+
+    /**
+     * 同步网关数据
+     *
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse syncData(UserProp curUserProp);
 }

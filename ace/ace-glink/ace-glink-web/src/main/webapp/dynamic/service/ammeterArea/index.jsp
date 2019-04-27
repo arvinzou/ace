@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" type="text/css"
-          href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+          href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
