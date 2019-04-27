@@ -2,7 +2,6 @@ package com.huacainfo.ace.glink.api;
 
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.tools.JsonUtil;
-import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
 import com.huacainfo.ace.glink.api.pojo.le.*;
 
@@ -19,7 +18,7 @@ import java.util.Map;
  */
 public class LeApiToolKit {
 
-    private static final String domain = PropertyUtil.getProperty("le.api.url");//"http://116.228.110.86:8092";
+    private static final String domain = "http://116.228.110.86:8092";//ropertyUtil.getProperty("le.api.url");//
 
     /**
      * 单例模式

@@ -665,12 +665,69 @@ body {
 
 .modals,.modal{
     display: none;
-<<<<<<< Updated upstream
-=======
 }
 
 .scenario-modal .modal-content{
 	width: 3rem;
 	height: 4rem;
->>>>>>> Stashed changes
+}
+
+.scenario-modal .presetList {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.scenario-modal .presetList .top {
+	height: 0.3rem;
+	width: 100%;
+	display: flex;
+	font-size: 0.104166rem;
+	font-family: MicrosoftYaHei;
+	color: rgba(0, 214, 217, 1);
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 0.05rem;
+
+}
+
+.scenario-modal .presetList .ulList {
+	width: 100%;
+	flex-grow: 1;
+}
+.scenario-modal .presetList .ulList> ul{
+	height: 2.9rem;
+
+}
+
+.scenario-modal .presetList .ulList > ul > li {
+	font-size: 0.12rem;
+	height: 0.5rem;
+	background: #07C6C9;
+	margin-bottom: 0.1rem;
+	border-radius: 0.05rem;
+	line-height: 0.5rem;
+	text-align: center;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.scenario-modal .presetList .ulList li:active {
+	background: #0E7980;
+}
+.modal .modal-content .modal-close{
+	width:0.28125rem;
+	height:0.28125rem;
+	position: absolute;
+	display: flex;
+	top: -0.3rem;
+	right: 0px;
+}
+
+.modal .modal-content .modal-close img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }

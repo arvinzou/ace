@@ -1,7 +1,21 @@
 package com.huacainfo.ace.glink.web.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.ExcelUtils;
+import com.huacainfo.ace.glink.api.LeApiToolKit;
+import com.huacainfo.ace.glink.api.pojo.le.StrategysDetailOut;
 import com.huacainfo.ace.glink.model.LtLnkObject;
+import com.huacainfo.ace.glink.model.LtStrategy;
+import com.huacainfo.ace.glink.service.LtStrategyService;
+import com.huacainfo.ace.glink.vo.LtStrategyQVo;
+import com.huacainfo.ace.glink.vo.LtStrategyVo;
+import com.huacainfo.ace.portal.vo.MongoFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,24 +23,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.ExcelUtils;
-import com.huacainfo.ace.glink.model.LtStrategy;
-import com.huacainfo.ace.glink.service.LtStrategyService;
-import com.huacainfo.ace.glink.vo.LtStrategyVo;
-import com.huacainfo.ace.glink.vo.LtStrategyQVo;
 import org.springframework.web.multipart.MultipartFile;
-import com.huacainfo.ace.portal.vo.MongoFile;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/ltStrategy")
@@ -278,4 +279,19 @@ public class LtStrategyController extends GLinkBaseController {
         ltLnkObject.setAiCode(aiCode);
         return this.ltStrategyService.updateStatus(id,  ltLnkObject, this.getCurUserProp());
     }
+
+    /**
+     * 策略信息详情
+     *
+     * @throws Exception
+     */
+    @RequestMapping(value = "/strategysDetail")
+    @ResponseBody
+    public SingleResult syncData() throws Exception {
+        StrategysDetailOut strategysDetailOut = LeApiToolKit.strategysDetail();
+        SingleResult<StrategysDetailOut> rst = new SingleResult<>();
+        rst.setValue(strategysDetailOut);
+        return rst;
+    }
+
 }

@@ -35,13 +35,13 @@
             <p class="cn">场景列表</p>
             <p class="en">Scene List</p>
         </div>
-        <div class="btn">
+        <div class="btn strategySend">
             <p class="cn">策略下发</p>
             <p class="en">Strategy Send</p>
         </div>
     </div>
 </div>
-<div class="content">
+<div  class="sceneControl content">
     <div class="left">
         <div class="control">
             <div class="title">
@@ -105,6 +105,31 @@
     </div>
 </div>
 
+<div style="display: none"  class="content strategySend content1">
+    <div class="modals task scenario">
+        <div class="modals-head">
+            <span class="title">场景执行</span>
+            <div class="inputGroup margin-0">
+                <input class="timerName" type="text" placeholder="输入任务名称" name="timerName"/>
+                <button class="submit">
+
+                </button>
+            </div>
+        </div>
+        <div class="modals-body">
+            <ul class="taskList" id="strategyList">
+
+            </ul>
+            <%--分页页脚--%>
+            <div class="paginationbar">
+                <ul class="pagination" id="pagination3"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="modal" style="display: none">
     <div class="modal-content">
         <div class="bg">
@@ -162,6 +187,47 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="modal scenario-modal" style="display: none">
+    <div class="modal-content">
+        <div class="bg">
+            <div class="lefgBg">
+                <div class="l1"></div>
+                <div class="l2"></div>
+                <div class="l3"></div>
+                <div class="l2 l22"></div>
+                <div class="l4"></div>
+
+            </div>
+            <div class="centerBg">
+                <div class="c1"></div>
+                <div class="c2"></div>
+                <div class="c3"></div>
+            </div>
+            <div class="rightBg">
+                <div class="r1"></div>
+                <div class="r2"></div>
+                <div class="r3"></div>
+                <div class="r2 r22"></div>
+                <div class="r4"></div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="presetList">
+                <div class="ulList">
+                    <ul id="presets">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-close">
+            <img src="img/close.png" alt="">
+        </div>
+    </div>
+</div>
+
 </body>
 
 <script id="tpl-check" type="text/template">
@@ -195,199 +261,34 @@
     {@/each}
 </script>
 
+<script id="tpl-strategyList" type="text/template">
+    {@each data as item, index}
+    <li>
+        <div class="top">
+            \${item.code}-\${item.name}
+        </div>
+        <div class="bottom">
+            <button data-areaNo="\${item.areaNo}" data-areaNodeID="\${item.areaNodeID}">
+                选择
+            </button>
+        </div>
+    </li>
+    {@/each}
+</script>
+
+<script id="tpl-presets" type="text/template">
+    {@each data as item, index}
+    <li data-presetNo="\${item.presetNo}">\${item.strategyExplain}</li>
+    {@/each}
+</script>
+
+
 <style type="text/css">
 
-    .default{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        font-size:0.09375rem;
-        font-family:MicrosoftYaHei;
-        font-weight:400;
-        color:rgba(0,214,217,1);
-    }
-    .default img{
-        width: 0.854166rem;
-        height: 0.572916rem;
-        margin: auto;
-        display: block;
-        margin-bottom: 0.1rem;
-    }
-
-    .modal {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        display: flex;
-        align-items: center;
-        top: 0;
-        justify-content: center;
-    }
-
-    .modal .modal-content {
-        position: relative;
-    }
-
-    .modal .modal-body {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        padding: 0.3rem 0.15rem 0.15rem;
-    }
-
-    .modal .modal-body .videoList {
-        padding-top: 0.35rem;
-        height: 100%;
-    }
-
-    .modal .modal-body .buttonGroup {
-        width: 0.5rem;
-    }
-
-    .modal .modal-body .buttonGroup button {
-        border-radius: 0.020833rem;
-        background-image: none;
-        color: white;
-        cursor: pointer;
-    }
-
-    .modal .modal-body .inputGroup {
-        margin: 0;
-        float: right;
-    }
-
-    .modal .modal-body .videoGroup {
-        width: 2.020833rem;
-    }
-
-    .modal .modal-body .videoGroup .info {
-        height: 0.260416rem;
-        line-height: 0.260416rem;
-    }
-
-    .modal .modal-body .videoGroup .video {
-        height: 1.145833rem;
-    }
-
-    .modal .modal-content {
-        width: 8.75rem;
-        height: 4.166666rem;
-    }
-
-    .modal .bg {
-        display: flex;
-        width: 100%;
-        height: 100%;
-    }
-
-    .modal .bg .lefgBg {
-        width: 1.770833rem;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .modal .bg .lefgBg .l1,
-    .modal .bg .rightBg .r1,
-    .modal .bg .centerBg .c1 {
-        width: 100%;
-        height: 0.322916rem;
-        background: url(./modalImg/l1.png) no-repeat;
-        background-size: 100% 100%;
-    }
-
-    .modal .bg .rightBg .r1 {
-        background: url(./modalImg/r1.png) no-repeat;
-        background-size: 100% 100%;
-    }
-
-    .modal .bg .centerBg .c1 {
-        background: url(./modalImg/c1.png);
-        background-repeat-y: no-repeat;
-        background-repeat-x: repeat;
-        background-size: auto 100%;
-    }
-
-    .modal .bg .lefgBg .l2,
-    .modal .bg .rightBg .r2 {
-        width: 100%;
-        background: url(./modalImg/l2.png) repeat;
-        flex-grow: 1;
-        background-repeat-y: repeat;
-        background-repeat-x: no-repeat;
-        background-size: 100%;
-    }
-
-    .modal .bg .rightBg .r2 {
-        background: url(./modalImg/r2.png) repeat;
-        background-repeat-y: repeat;
-        background-repeat-x: no-repeat;
-        background-size: 100%;
-    }
-
-    .modal .bg .lefgBg .l22 {
-        flex-grow: 2;
-    }
-
-    .modal .bg .rightBg .r22 {
-        flex-grow: 1;
-    }
-
-    .modal .bg .lefgBg .l3,
-    .modal .bg .rightBg .r3 {
-        width: 100%;
-        height: 0.520833rem;
-        background: url(./modalImg/l3.png) no-repeat;
-        background-size: 100% 100%;
-    }
-
-    .modal .bg .rightBg .r3 {
-        background: url(./modalImg/r3.png) no-repeat;
-        background-size: 100% 100%;
-    }
-
-    .modal .bg .lefgBg .l4,
-    .modal .bg .rightBg .r4 {
-        width: 100%;
-        height: 0.520833rem;
-        background: url(./modalImg/l4.png) no-repeat;
-        background-size: 100% 100%;
-    }
-
-    .modal .bg .rightBg .r4 {
-        background: url(./modalImg/r4.png) no-repeat;
-        background-size: 100% 100%;
-    }
-
-    .modal .bg .centerBg {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .modal .bg .centerBg .c2 {
-        flex-grow: 1;
-    }
-
-    .modal .bg .centerBg .c3 {
-        width: 100%;
-        height: 0.520833rem;
-        background: url(./modalImg/c3.png);
-        background-repeat-y: no-repeat;
-        background-repeat-x: repeat;
-        background-size: auto 100%;
-    }
-
-    .modal .bg .rightBg {
-        width: 1.5625rem;
-        display: flex;
-        flex-direction: column;
-    }
 </style>
-<script src="${portalPath}/content/common/js/loading.js?v=${cfg.version}" type="text/javascript"></script>
-<script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+<script src="${portalPath}/content/common/js/loading.js?v=${cfg.version}" type="text/javascript"></script>
+<script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 </html>

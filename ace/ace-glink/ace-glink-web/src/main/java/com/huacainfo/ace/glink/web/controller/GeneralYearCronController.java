@@ -2,18 +2,10 @@ package com.huacainfo.ace.glink.web.controller;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.glink.api.SeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.fe.YearCron;
-import com.huacainfo.ace.glink.service.AnimaLnkService;
-import com.huacainfo.ace.glink.service.TopSubareaService;
-import com.huacainfo.ace.glink.vo.TopSubareaQVo;
-import com.huacainfo.ace.glink.vo.TopSubareaVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
