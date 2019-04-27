@@ -1,0 +1,10 @@
+.sync-data{
+    border:none;
+    border-radius: 4px;
+    color: #FFF;
+    background-color: #1890ff;
+    border-color: #1890ff;
+}
+.sync-data:hover{
+    color: #fff;
+}

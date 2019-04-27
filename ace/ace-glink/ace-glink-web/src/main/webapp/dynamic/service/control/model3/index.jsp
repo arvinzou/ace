@@ -120,9 +120,9 @@
     <div style="display: block" class="modals tasks task">
         <div class="modals-head">
             <span class="title">任务管理</span>
-            <input placeholder="请选择分区" id="areaNodeID" class="easyui-combotree"
+            <input placeholder="请选择分区" id="taskAreaNode" class="easyui-combotree"
                    data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
-                lines:true," style='min-width:120px;height: 25px;'>
+                lines:true," style='min-width:225px;height: 25px;'>
         </div>
         <div class="modals-body">
             <%--list--%>

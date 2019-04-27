@@ -1,9 +1,9 @@
 var timer;
 $(window).resize(function () {   //当浏览器大小变化时
-	clearTimeout(timer);
-	timer=setTimeout(function(){
-		window.location.reload();
-	},500)
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+        window.location.reload();
+    }, 500)
 });
 
 $(function () {
@@ -13,8 +13,8 @@ $(function () {
     initTimeing();
     initScenario();
     initJuicerMethod();
-    $('.btns').on('click','.btn',changePage);
-    $(' .modal .modal-content').on('click','.modal-close', closeModal);
+    $('.btns').on('click', '.btn', changePage);
+    $(' .modal .modal-content').on('click', '.modal-close', closeModal);
 });
 
 function closeModal() {
@@ -23,23 +23,24 @@ function closeModal() {
 
 /*切换页面*/
 function changePage() {
-    var that=$(this);
-    var type=that.data('type');
+    var that = $(this);
+    var type = that.data('type');
     $('.modals').hide();
-    $('.modals.'+type).show();
+    $('.modals.' + type).show();
 }
 
 
 /*****************************************总控设置Start***********************************************/
 var map = {};
-function  initControl() {
+
+function initControl() {
     getYearCronList();
-    $('#months').on('click','li',changeMonth);
-    $('.Control .right .heads').on('click','button',checkType);
+    $('#months').on('click', 'li', changeMonth);
+    $('.Control .right .heads').on('click', 'button', checkType);
 }
 
 
-function  getYearCronList(){
+function getYearCronList() {
     var date = new Date;
     var month = date.getMonth();
     var m = month + 1;
@@ -48,8 +49,8 @@ function  getYearCronList(){
         console.log(rst.value);
         if (rst.status == 0) {
             var data = rst.value;
-            map=data;
-            $('#months li:eq('+month+')').addClass('active');
+            map = data;
+            $('#months li:eq(' + month + ')').addClass('active');
             renderMonths(m);
         }
     });
@@ -66,30 +67,31 @@ function changeMonth() {
 
 /*全部设置类型*/
 function checkType() {
-    var that=$(this);
-    var type=that.data('type');
-    $("input:radio[value='"+type+"']").prop("checked", "checked");
+    var that = $(this);
+    var type = that.data('type');
+    $("input:radio[value='" + type + "']").prop("checked", "checked");
     stroyMap();
 }
+
 /*储存map*/
-function stroyMap(){
-    var mid ='m'+$("#months li.active").data("id");
+function stroyMap() {
+    var mid = 'm' + $("#months li.active").data("id");
     var checkValue = '';
     $('input:radio:checked').each(function () {
         checkValue += $(this).val();
     });
-    map[mid]=checkValue;
+    map[mid] = checkValue;
 }
 
 function renderMonths(m) {
-    var datas={};
-    datas.m=map['m'+m];
-    datas.d=parseInt(mGetDate(m));
+    var datas = {};
+    datas.m = map['m' + m];
+    datas.d = parseInt(mGetDate(m));
     render($("#page-YearCronlist"), datas, "tpl-YearCronlist");
     var date = new Date;
     var month = date.getMonth();
-    var mo=m-1;
-    if(month==mo){
+    var mo = m - 1;
+    if (month == mo) {
         var day = date.getDate();
         $('#s' + day).addClass('dayactive');
     }
@@ -98,11 +100,11 @@ function renderMonths(m) {
 //提交总控数据
 function postList() {
     stroyMap();
-    var url=contextPath + "/generalYearCron/updateGeneralCtrlCron";
-    var data={
+    var url = contextPath + "/generalYearCron/updateGeneralCtrlCron";
+    var data = {
         jsons: JSON.stringify(map)
     }
-    $.post(url,data,function(result){
+    $.post(url, data, function (result) {
         if (result.Status == "ok") {
             alert("设置成功");
             getYearCronList();
@@ -113,23 +115,25 @@ function postList() {
 }
 
 
-
 /*****************************************总控设置End***********************************************/
 
 /*****************************************任务管理Start***********************************************/
-var taskParams={
-    start:0,
-    limit:21
+var taskParams = {
+    start: 0,
+    limit: 21
 }
 
 /*任务初始化管理*/
 function initTask() {
-    $("#areaNodeID").combotree({
+    //
+    initPageTask();
+    //
+    $("#taskAreaNode").combotree({
         onChange: function (newValue, oldValue) {
+            // alert(newValue);
             getTaskList("areaNodeID", newValue);
         }
     });
-    initPageTask();
 }
 
 /*初始化分页器*/
@@ -145,16 +149,21 @@ function initPageTask() {
         onPageChange: function (num, type) {
             taskParams['start'] = (num - 1) * taskParams.limit;
             taskParams['initType'] = type;
-            getTaskList();
+            //区域筛选后，才能加载数据列表
+            if ($.isEmptyObject(taskParams.areaNodeID)) {
+                console.log("未加载区域数据！~");
+            } else {
+                getPageList();
+            }
         }
     });
 }
 
 /*ajax获取数据列表*/
 function getTaskList(key, value) {
-    if(!key){
-        taskParams[key] = value;
-    }
+    taskParams[key] = value;
+    console.log("taskParams=" + JSON.stringify(taskParams));
+
     var url = contextPath + "/seAreaTask/findSeAreaTaskList";
     $.getJSON(url, taskParams, function (rst) {
         if (rst.status == 0) {
@@ -173,25 +182,26 @@ function executeTask(areaNodeID, taskNo) {
     if (!confirm("确认执行该任务么？")) {
         return;
     }
-    var url=contextPath + "/seAreaTask/exeTask";
-    var data={
+    var url = contextPath + "/seAreaTask/exeTask";
+    var data = {
         areaNodeID: areaNodeID,
         taskNo: taskNo
     }
-    $.post(url,data,function(rst){
+    $.post(url, data, function (rst) {
         if (rst.status == 0) {
             alert(rst.errorMessage);
             getTaskList();
         }
     })
 }
+
 /*****************************************任务管理End***********************************************/
 
 
 /*****************************************定时设置Start***********************************************/
-var params={
-    start:0,
-    limit:15
+var params = {
+    start: 0,
+    limit: 15
 }
 
 function initTimeing() {
@@ -270,6 +280,7 @@ function getPageList() {
         }
     })
 }
+
 /*切换页面*/
 function changeList() {
     var that = $(this);
@@ -513,9 +524,6 @@ function mGetDate(m) {
     var d = new Date(year, m, 0);
     return d.getDate();
 }
-
-
-
 
 
 var Timermap = {};

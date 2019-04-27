@@ -286,3 +286,30 @@ $('#fm-search').ajaxForm({
             }
         });
     }
+    /*
+    *  同步数据
+    * */
+$('.sync-data').on('click',function (e) {
+    if (confirm("网关数据即将更新，是否继续？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/seGatewayState/syncData",
+            type: "post",
+            async: false,
+            data: {},
+            success: function (rst) {
+                stopLoad();
+                if (rst.status == 0) {
+                    console.log(11111);
+                    getPageList();
+                } else {
+                    alert(rst.errorMessage);
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起，出错了！");
+            }
+        });
+    }
+});
