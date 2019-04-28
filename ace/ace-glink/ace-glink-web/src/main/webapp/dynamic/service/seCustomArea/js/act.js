@@ -94,6 +94,11 @@ function detail(id) {
 }
 
 function initEvents() {
+    $("#areaNodeID").combotree({
+        onChange: function (newValue, oldValue) {
+            setParams("areaNodeID", newValue);
+        }
+    });
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');

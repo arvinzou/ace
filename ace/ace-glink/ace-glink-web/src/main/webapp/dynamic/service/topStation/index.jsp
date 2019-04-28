@@ -263,7 +263,9 @@
     <div class="form-group">
         <label class="col-md-2 view-label">站点地址</label>
         <div class="col-md-10">
-            \${data.o.address}
+            <a href="${pageContext.request.contextPath}/dynamic/service/topBuilding/map.jsp?latitude=\${data.o.latitude}&longitude=\${data.o.longitude}"
+               target="_blank">\${data.o.address}</a>
+
         </div>
     </div>
 

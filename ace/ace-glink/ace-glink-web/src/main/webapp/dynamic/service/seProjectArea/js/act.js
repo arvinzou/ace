@@ -95,6 +95,11 @@ function detail(id) {
 }
 
 function initEvents() {
+    $("#pid").combotree({
+        onChange: function (newValue, oldValue) {
+            setParams("pid", newValue);
+        }
+    });
 ﻿   $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');

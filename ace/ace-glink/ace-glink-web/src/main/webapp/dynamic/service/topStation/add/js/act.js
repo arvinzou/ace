@@ -110,7 +110,7 @@ function initForm() {
     render('#fm-add-panel', data, 'tpl-fm-add');
 
     $('input[name=subareaCode]').combogrid({
-        panelWidth: 500,
+        panelWidth: 450,
         idField: 'code',
         textField: 'name',
         url: contextPath + '/topSubarea/findTopSubareaList',

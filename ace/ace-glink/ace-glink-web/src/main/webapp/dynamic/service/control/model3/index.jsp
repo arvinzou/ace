@@ -313,12 +313,6 @@
 </script>
 
 <script id="tpl-monthslist" type="text/template">
-    <input type="text" class="form-control" name="id" value="\${data.o.id}">
-    <input type="text" class="form-control" name="timerID" value="\${data.o.timerID}">
-    <input type="text" class="form-control" name="timerNames" value="\${data.o.timerName}">
-    <input type="text" class="form-control" name="timerEnable" value="\${data.o.timerEnable}">
-    <input type="text" class="form-control" name="startTime" value="\${data.o.startTime}">
-    <input type="text" class="form-control" name="taskNo" value="\${data.o.taskNo}">
     <ul class="list monthData">
         {@each data.monthList as item, index}
         <li>

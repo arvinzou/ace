@@ -435,13 +435,14 @@ function selectTimerDate(id) {
                 data['monthList'] = result.value.monthList;
                 data['weekList'] = result.value.weekList;
                 data['dayList'] = result.value.dayList;
+                Timermap = result.value;
                 render('#page-update', data, 'tpl-monthslist');
             } else {
                 alert(result.errorMessage);
             }
         },
         error: function () {
-            stopLoad();
+            // stopLoad();
             alert("对不起出错了！");
         }
     });
@@ -549,12 +550,6 @@ function checkData() {
         var m = "d" + i;
         DayEnable[m] = $(this).val();
     });
-    Timermap['id'] = $('input[name="id"]').val();
-    Timermap['timerID'] = $('input[name="timerID"]').val();
-    Timermap['timerName'] = $('input[name="timerNames"]').val();
-    Timermap['timerEnable'] = $('input[name="timerEnable"]').val();
-    Timermap['startTime'] = $('input[name="startTime"]').val();
-    Timermap['taskNo'] = $('input[name="taskNo"]').val();
     Timermap['MonthEnable'] = MonthEnable;
     Timermap['WeekEnable'] = WeekEnable;
     Timermap['DayEnable'] = DayEnable;
@@ -579,7 +574,7 @@ function TimerUpdate() {
             }
         },
         error: function () {
-            stopLoad();
+            //  stopLoad();
             alert("对不起出错了！");
         }
     });
