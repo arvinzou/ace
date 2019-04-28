@@ -731,3 +731,84 @@ body {
 	height: 100%;
 	object-fit: cover;
 }
+.userInfo{
+	width: 2rem;
+	height: 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding-right: 0.21875rem;
+}
+
+.userInfo .headImg{
+	width:0.19rem;
+	height:0.19rem;
+	border:1px solid rgba(167,250,251,1);
+	border-radius:50%;
+	padding: 0.021rem;
+	display: flex;
+	position: relative;
+	margin-right: 0.104166rem;
+}
+.userInfo .username{
+	font-size:0.09375rem;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+	position: relative;
+	cursor: pointer;
+}
+
+.userInfo .headImg img{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width:0.14rem;
+	height:0.14rem;
+	border:1px solid rgba(167,250,251,1);
+	border-radius:50%;
+	object-fit: cover;
+	object-position: 50% 50%;
+	transform:  translate(-50%,-50%);
+}
+
+.userInfo .username::before{
+	position: absolute;
+	content: '';
+	display: block;
+	width: 0.05rem;
+	height:0.05rem;
+	border: 2px #FFFFFF solid;
+	border-top:none;
+	border-right: none;
+	top: 50%;
+	left: 105%;
+	transform:rotate(-45deg) translate(50%,-50%);
+}
+
+.menu-wrap{
+	display: none;
+	position: absolute;
+	top:62px;
+	right: .1rem;
+	z-index: 10;
+	background-color: #fff;
+	border-radius:4px;
+	min-width:180px;
+	font-size: .08rem;
+	padding:10px 0;
+}
+.menu-wrap a{
+	display: block;
+	text-align: center;
+	font-size: .08rem;
+	color: #0d4348;
+}
+.menu-ul>li{
+	margin-top: 10px;
+}
+.userInfo>.up{
+	font-size: 0.09375rem;
+	display: flex;
+	align-items: center;
+}

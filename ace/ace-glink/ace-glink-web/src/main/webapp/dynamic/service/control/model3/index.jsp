@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title></title>
+    <title>强电</title>
 </head>
 <script src="js/index.min.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="css/common.css"/>
@@ -44,11 +44,19 @@
         </div>
     </div>
     <div class="userInfo">
-        <div class="headImg">
-            <img alt="" class="img-circle"
-                 src="${portalPath}/content/common/assets/layouts/layout/img/avatar3_small.jpg"/>
+        <div class="up">
+            <div class="headImg">
+                <img alt="" class="img-circle"
+                     src="${portalPath}/content/common/assets/layouts/layout/img/avatar3_small.jpg"/>
+            </div>
+            <span class="username username-hide-on-mobile"> ${SESSION_USERPROP_KEY.name} </span>
         </div>
-        <span class="username username-hide-on-mobile"> ${SESSION_USERPROP_KEY.name} </span>
+        <div class="menu-wrap">
+            <ul class="menu-ul">
+                <li><a href="${portalPath}/index.jsp">返回首页</a></li>
+                <li><a href="${portalPath}/dynamic/portal/security/loginOut.jsp">安全退出</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 <div class="content">
@@ -771,67 +779,6 @@
     <li data-presetNo="\${item.presetNo}">\${item.presetName}</li>
     {@/each}
 </script>
-
-<style type="text/css">
-    .userInfo{
-        width: 2rem;
-        height: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding-right: 0.21875rem;
-
-    }
-
-    .userInfo .headImg{
-        width:0.19rem;
-        height:0.19rem;
-        border:1px solid rgba(167,250,251,1);
-        border-radius:50%;
-        padding: 0.021rem;
-        display: flex;
-        position: relative;
-        margin-right: 0.104166rem;
-    }
-    .userInfo .username{
-        font-size:0.09375rem;
-        font-family:MicrosoftYaHei;
-        font-weight:400;
-        color:rgba(255,255,255,1);
-        position: relative;
-        cursor: pointer;
-    }
-
-    .userInfo .headImg img{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width:0.14rem;
-        height:0.14rem;
-        border:1px solid rgba(167,250,251,1);
-        border-radius:50%;
-        object-fit: cover;
-        object-position: 50% 50%;
-        transform:  translate(-50%,-50%);
-    }
-
-    .userInfo .username::before{
-        position: absolute;
-        content: '';
-        display: block;
-        width: 0.05rem;
-        height:0.05rem;
-        border: 2px #FFFFFF solid;
-        border-top:none;
-        border-right: none;
-        top: 50%;
-        left: 105%;
-        transform:rotate(-45deg) translate(50%,-50%);
-    }
-
-
-
-</style>
 <%--<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"
         type="text/javascript"></script>--%>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"
@@ -851,4 +798,27 @@
 <script type="text/javascript"
         src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    //菜单显示与隐藏
+    document.onclick = function(e) {
+        $('.menu-wrap').hide();
+    };
+    $('.userInfo>.up').on("click", function(e) {
+        if($('.menu-wrap').css("display") == "none") {
+            $('.menu-wrap').show();
+        } else {
+            $('.menu-wrap').hide();
+        }
+        e = e || event;
+        stopFunc(e);
+    });
+
+    $('.menu-wrap').on("click", function(e) {
+        e = e || event;
+        stopFunc(e);
+    });
+    function stopFunc(e) {
+        e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+    }
+</script>
 </html>

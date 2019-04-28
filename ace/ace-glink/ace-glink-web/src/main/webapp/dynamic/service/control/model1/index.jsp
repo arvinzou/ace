@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title></title>
+    <title>弱电</title>
 </head>
 <script src="js/index.min.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="css/common.css"/>
@@ -41,11 +41,19 @@
         </div>
     </div>
     <div class="userInfo">
-        <div class="headImg">
-            <img alt="" class="img-circle"
-                 src="${portalPath}/content/common/assets/layouts/layout/img/avatar3_small.jpg"/>
+        <div class="up">
+            <div class="headImg">
+                <img alt="" class="img-circle"
+                     src="${portalPath}/content/common/assets/layouts/layout/img/avatar3_small.jpg"/>
+            </div>
+            <span class="username username-hide-on-mobile"> ${SESSION_USERPROP_KEY.name} </span>
         </div>
-        <span class="username username-hide-on-mobile"> ${SESSION_USERPROP_KEY.name} </span>
+        <div class="menu-wrap">
+            <ul class="menu-ul">
+                <li><a href="${portalPath}/index.jsp">返回首页</a></li>
+                <li><a href="${portalPath}/dynamic/portal/security/loginOut.jsp">安全退出</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 <div  class="sceneControl content">
@@ -298,4 +306,27 @@
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    //菜单显示与隐藏
+    document.onclick = function(e) {
+        $('.menu-wrap').hide();
+    };
+    $('.userInfo>.up').on("click", function(e) {
+        if($('.menu-wrap').css("display") == "none") {
+            $('.menu-wrap').show();
+        } else {
+            $('.menu-wrap').hide();
+        }
+        e = e || event;
+        stopFunc(e);
+    });
+
+    $('.menu-wrap').on("click", function(e) {
+        e = e || event;
+        stopFunc(e);
+    });
+    function stopFunc(e) {
+        e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
+    }
+</script>
 </html>
