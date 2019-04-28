@@ -219,6 +219,7 @@ function outline(id) {
 function initJuicerMethod() {
     juicer.register('rsd', rsd);
     juicer.register('parseStatus', parseStatus);
+    juicer.register('parseOne', parseOne);
 }
 
 /**
@@ -235,6 +236,16 @@ function parseStatus(status) {
     }
 }
 
+function parseOne(status) {
+    switch (status) {
+        case '0':
+            return "无效";
+        case '1':
+            return "有效";
+        default:
+            return "0";
+    }
+}
 
 ﻿function initPreview(id) {
     startLoad();

@@ -35,6 +35,7 @@
                         <input id="areaNodeID" name="a" class="easyui-combotree"
                                data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
                 lines:true," style='width:255px;line-height: 30px;height: 30px;'>
+                        <a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
                     </div>
                     <div class="input-group">
                         <input type="text"

@@ -87,6 +87,9 @@
         <if test="condition.nodeID !=null and condition.nodeID !=&quot;&quot;">
             and t.nodeID like concat(#{condition.nodeID,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.areaNodeID !=null and condition.areaNodeID !=&quot;&quot;">
+            and t.areaNodeID = #{condition.areaNodeID,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">

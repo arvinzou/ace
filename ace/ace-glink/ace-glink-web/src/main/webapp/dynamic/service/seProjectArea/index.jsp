@@ -34,7 +34,7 @@
                 <a href="javascript:syncProjectData();" class="btn green">同步</a>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-5" style="float: right;">
 
                 <form id="fm-search">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">

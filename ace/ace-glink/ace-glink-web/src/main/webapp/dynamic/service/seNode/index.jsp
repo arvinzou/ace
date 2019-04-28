@@ -37,6 +37,7 @@
                         <input id="areaNodeID" name="a" class="easyui-combotree"
                                data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
                 lines:true," style='width:255px;line-height: 30px;height: 30px;'>
+                        <a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
                     </div>
                     <div class="input-group">
                         <input type="text" name="keyword"
@@ -53,10 +54,13 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="20%"> 区域编号</th>
-                    <th width="30%"> 区域名称</th>
-                    <th width="35%"> 配电箱编号</th>
-                    <th width="15%">操作</th>
+                    <th width="10%"> 配电箱编号</th>
+                    <th width="10%"> 位置标识</th>
+                    <th width="10%"> 网关IP地址</th>
+                    <th width="10%"> 电表品牌</th>
+                    <th width="10%"> 维护人员</th>
+                    <th width="10%"> 维护人员电话</th>
+                    <th width="10%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -83,9 +87,12 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \${item.areaNodeID}</td>
-        <td> \${item.areaNodeName}</td>
         <td> \${item.nodeID}</td>
+        <td> \${item.local}</td>
+        <td> \${item.iPAddress}</td>
+        <td> \${item.meterType}</td>
+        <td> \${item.engineer}</td>
+        <td> \${item.tel}</td>
         <td>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
@@ -223,12 +230,9 @@
 </div>
 <script id="tpl-monitor" type="text/template">
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-share"></i>
-                <span class="caption-subject bold uppercase"> 基本信息</span>
-            </div>
-        </div>
+
+        <h4> 基本信息</h4>
+
         <div class="portlet-body">
             <div class="form-group">
                 <label class="col-md-2 view-label">配电箱编号</label>
@@ -335,12 +339,9 @@
         </div>
     </div>
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-share"></i>
-                <span class="caption-subject bold uppercase"> 模块监控数据</span>
-            </div>
-        </div>
+
+        <h4> 模块监控数据</h4>
+
         <div class="portlet-body">
             <div class="table-scrollable">
                 <table class="table table-hover table-light">
@@ -374,40 +375,40 @@
                         <th width="5%"> \${item.deviceStatus}</th>
                         <th width="5%"> \${item.deviceReportTime}</th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH1Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH1Value');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH2Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH2Value');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH3Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH3Value');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH4Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH4Value');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH5Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH5Value');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH6Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH6Value');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH7Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH7Value');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH8Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH8Value');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH9Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH9Value');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH10Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH10Value');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH11Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH11Value');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH12Value');">查看</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH12Value');">详情</a>
                         </th>
                     </tr>
                     {@/each}
@@ -443,12 +444,9 @@
 </div>
 <script id="tpl-preview" type="text/template">
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-share"></i>
-                <span class="caption-subject bold uppercase"> 基本信息</span>
-            </div>
-        </div>
+
+        <h4> 基本信息</h4>
+
         <div class="portlet-body">
             <div class="form-group">
                 <label class="col-md-2 view-label">配电箱编号</label>
@@ -501,12 +499,9 @@
         </div>
     </div>
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-share"></i>
-                <span class="caption-subject bold uppercase"> 模块列表</span>
-            </div>
-        </div>
+
+        <h4> 模块列表</h4>
+
         <div class="portlet-body">
             <div class="table-scrollable">
                 <table class="table table-hover table-light">

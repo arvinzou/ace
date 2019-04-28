@@ -46,7 +46,7 @@ function setParams(key, value) {
 /*配电箱数据加载表格数据*/
 function getPageList() {
     var url = contextPath + "/seNode/findSeNodeList";
-    params['name'] = $("input[name=keyword]").val();
+    params['nodeID'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
@@ -299,3 +299,7 @@ function syncMonitorData() {
 
 }
 
+//树形数据搜索清除
+function clearQparams() {
+    $('#areaNodeID').combotree('setValue', '');
+}
