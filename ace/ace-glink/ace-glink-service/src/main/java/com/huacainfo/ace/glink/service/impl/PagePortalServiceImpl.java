@@ -161,5 +161,35 @@ public class PagePortalServiceImpl implements PagePortalService {
         return rst;
     }
 
+    /**
+     * 根据key，更新value值
+     * @param key
+     * @param val
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse updatePagePortalData(String key, String val) throws Exception {
+        PagePortal r= pagePortalDao.findByKey(key,CommConstant.SYS_ID);
+        if (r == null) {
+
+            r = new PagePortal();
+            r.setSysId(CommConstant.SYS_ID);
+            r.setId(GUIDUtil.getGUID());
+            r.setStatus("1");
+            r.setCreateDate(DateUtil.getNowDate());
+
+            r.setItemKey(key);
+            r.setItemValue(val);
+            r.setItemName(PortalKey.LE_sceneControlState_ch);
+            pagePortalDao.insert(r);
+
+        }else{
+            r.setItemValue(val);
+            pagePortalDao.updateByPrimaryKey(r);
+        }
+        return new MessageResponse(0,"保存成功");
+    }
+
 
 }

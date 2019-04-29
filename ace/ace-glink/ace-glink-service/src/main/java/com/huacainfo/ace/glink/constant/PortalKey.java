@@ -53,7 +53,11 @@ public interface PortalKey {
     //建筑物总数
     String LE_BuildingTotal = "LE-BuildingTotal";
     String LE_BuildingTotal_ch = "建筑物总数";
-    //
+    //弱电运行状态
+    String LE_sceneControlState = "sceneControlState";
+    String LE_sceneControlState_ch = "场景控制状态";
+    String LE_playbackStatus = "playbackStatus";
+    String LE_playbackStatus_ch = "播放状态";
 
     /***
      * 强电部分
