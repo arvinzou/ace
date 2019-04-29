@@ -47,13 +47,23 @@
                     </div>
 
                     <%--故障类型--%>
-                    <div id="p-errType" class="btn-group" role="group" style="float:left;padding-right:5px">
+
+                    <label style="float:left;padding-right:5px;line-height: 31px;">故障类型：</label>
+                    <div class="btn-group" role="group" style="float:left;padding-right:20px;height: 36px;">
+                        <select name="errType" id="errType" class="form-control"
+                                onchange="setParams('errType',this.value)">
+
+                        </select>
                     </div>
                     <%--处理状态--%>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">处理状态</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','0');">未读</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">已读</button>
+                    <label style="float:left;padding-right:5px;line-height: 31px;">状态：</label>
+                    <div class="btn-group" role="group" style="float:left;padding-right:20px;height: 36px;">
+                        <select name="status" id="status" class="form-control"
+                                onchange="setParams('status',this.value)">
+                            <option value="">全部</option>
+                            <option value="0">未读</option>
+                            <option value="1">已读</option>
+                        </select>
                     </div>
                     <%--搜索--%>
                     <div class="input-group">
@@ -110,12 +120,19 @@
 </body>
 
 <script id="tpl-errType" type="text/template">
-    <button type="button" class="btn btn-default" onclick="setParams('errType','');">故障类型</button>
+    <%-- <button type="button" class="btn btn-default" onclick="setParams('errType','');">故障类型</button>
+     {@each data['180'] as item, index}
+     {@if item.CODE!=''}
+     <button type="button" class="btn btn-default" onclick="setParams('errType','\${item.CODE}');">\${item.NAME}</button>
+     {@/if}
+     {@/each}--%>
+    <option value="">全部</option>
     {@each data['180'] as item, index}
     {@if item.CODE!=''}
-    <button type="button" class="btn btn-default" onclick="setParams('errType','\${item.CODE}');">\${item.NAME}</button>
+    <option value="\${item.CODE}">\${item.NAME}</option>
     {@/if}
     {@/each}
+
 </script>
 
 <%--列表juicer模板--%>

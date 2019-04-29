@@ -53,9 +53,9 @@
                 <thead>
                 <tr>
                     <th width="10%">编号</th>
-                    <th width="20%">建筑物名称</th>
-                    <th width="20%">分区名称</th>
-                    <th width="20%">地址</th>
+                    <th width="15%">建筑物名称</th>
+                    <th width="10%">分区名称</th>
+                    <th width="30%">地址</th>
                     <th width="10%">节目数量</th>
                     <th width="20%">操作</th>
                 </tr>

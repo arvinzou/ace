@@ -87,7 +87,7 @@ public class ErrWarnSmsServiceImpl implements ErrWarnSmsService {
             return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(o.getSubareaCode())) {
-            return new MessageResponse(1, "分区代码不能为空！");
+            return new MessageResponse(1, "分区名称不能为空！");
         }
         if (CommonUtils.isBlank(o.getSmsName())) {
             return new MessageResponse(1, "模板名称不能为空！");
