@@ -315,7 +315,7 @@ function syncProjectData() {
 }
 
 function clearQparams() {
-    $('#cc1').combotree('setValue', '');
+    $('#pid').combotree('setValue', '');
 }
 
 function autotreeq(obj) {

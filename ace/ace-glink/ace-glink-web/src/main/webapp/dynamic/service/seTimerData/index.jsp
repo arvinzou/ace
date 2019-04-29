@@ -33,7 +33,7 @@
                 <a href="javascript:syncData();" class="btn green">同步</a>
             </div>
 
-            <div class="col-md-6" style="float: right;">
+            <div class="col-md-4" style="float: right;">
 
                 <form id="fm-search">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
@@ -218,12 +218,7 @@
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
 
-        <div class="form-group">
-            <label class="col-md-2 view-label">主键</label>
-            <div class="col-md-10">
-                \${id}
-            </div>
-        </div>
+
         <div class="form-group">
             <label class="col-md-2 view-label">定时任务序号</label>
             <div class="col-md-10">
@@ -342,12 +337,12 @@
             \${data.o.remark}
         </div>
     </div>
-    <%--<div class="form-group">
+    <div class="form-group">
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
-            \${data.o.status}
+            \${parseOne(data.o.status)}
         </div>
-    </div>--%>
+    </div>
     <div class="form-group">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">

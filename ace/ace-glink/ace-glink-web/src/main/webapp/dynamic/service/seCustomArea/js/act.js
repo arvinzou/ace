@@ -312,3 +312,7 @@ function syncCustomData() {
     });
 }
 
+//树形数据搜索清除
+function clearQparams() {
+    $('#areaNodeID').combotree('setValue', '');
+}

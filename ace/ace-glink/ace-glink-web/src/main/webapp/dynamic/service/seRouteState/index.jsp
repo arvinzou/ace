@@ -53,13 +53,11 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 配电箱编号</th>
-                    <th width="10%"> 状态：1-在线，0-离线</th>
-                    <th width="10%"> 信号强度，离线时为空</th>
-                    <th width="10%"> 状态更新时间</th>
-                    <th width="10%"> 备注</th>
-                    <th width="10%"> 创建日期</th>
-                    <th width="15%">操作</th>
+                    <th width="20%"> 配电箱编号</th>
+                    <th width="20%"> 信号强度</th>
+                    <th width="20%"> 状态</th>
+                    <th width="20%"> 创建日期</th>
+                    <th width="20%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -86,10 +84,8 @@
     {@each data as item, index}
     <tr>
         <td> \${item.nodeID}</td>
-        <td> \${item.status}</td>
         <td> \${item.signal}</td>
-        <td> \${item.updateTime}</td>
-        <td> \${item.remark}</td>
+        <td> \${parseStatus(item.status)}</td>
         <td> \${item.createDate}</td>
         <td>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
@@ -197,21 +193,15 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">状态：1-在线，0-离线</label>
+        <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
-            \${data.status}
+            \${parseStatus(data.status)}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">信号强度，离线时为空</label>
+        <label class="col-md-2 view-label">信号强度</label>
         <div class="col-md-10">
             \${data.signal}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">状态更新时间</label>
-        <div class="col-md-10">
-            \${data.updateTime}
         </div>
     </div>
     <div class="form-group">
