@@ -279,7 +279,7 @@
         </div>
         <div class="modal-body">
                 <div class="wrap">
-                    <div class="title">添加策略</div>
+                    <div class="title">添加/修改策略</div>
                     <div class="form">
                         <form id="strategyInfo">
 
