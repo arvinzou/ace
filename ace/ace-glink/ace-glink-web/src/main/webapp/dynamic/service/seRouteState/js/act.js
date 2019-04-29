@@ -226,9 +226,10 @@ function initJuicerMethod() {
  */
 function parseStatus(status) {
     switch (status) {
-        case '0':
-            return "删除";
-        case '1':
+        case 0:
+            return "离线";
+        case 1:
+            return '在线';
         default:
             return "0";
     }

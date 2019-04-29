@@ -227,8 +227,9 @@ function initJuicerMethod() {
 function parseStatus(status) {
     switch (status) {
         case '0':
-            return "删除";
+            return "无效";
         case '1':
+            return "有效"
         default:
             return "0";
     }

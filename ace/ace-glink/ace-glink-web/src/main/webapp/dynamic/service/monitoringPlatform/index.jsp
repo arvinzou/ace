@@ -23,7 +23,9 @@
 </head>
 <body>
    <div class="jkpt-container-wrap">
-       <div class="jkpt-header-wrap"></div>
+       <div class="jkpt-header-wrap">
+           <a href="/glink/dynamic/service/gis/index.jsp"></a>
+       </div>
        <div class="jkpt-main-wrap">
            <div class="left">
                <ul class="shebei-ul">
@@ -100,7 +102,7 @@
            <div class="right">
                <div class="up">
                    <div class="dianya-wrap">
-                       <span class="title">万达广场节点信息</span>
+                       <span class="title"></span>
                        <div id="jiedianhaodl" ></div>
                    </div>
                    <div class="wendu-wrap">
@@ -612,13 +614,14 @@
                 showIcon: false,
                 fontCss : {"font-weight":"400","font-size":"16px"}
             },
+            //节点字段修改
             data: {
                 key: {
                     name: "text",
                     children: "children"
                 },
                 simpleData: {
-                    enable: true
+                    enable: true,
                 }
             },
             callback: {    //第一步

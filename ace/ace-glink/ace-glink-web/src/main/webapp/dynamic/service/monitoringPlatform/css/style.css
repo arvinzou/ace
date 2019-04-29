@@ -13,9 +13,18 @@ i{
     background: url("./../img/monitoring-bg@2x.png") no-repeat center center transparent;
 }
 .jkpt-header-wrap{
+    position: relative;
     width: 100%;
     height: 108px;
     background: url("./../img/header-bg@2x.png") no-repeat center center/contain;
+}
+.jkpt-header-wrap>a{
+    position: absolute;
+    top: 12px;
+    left: 33px;
+    display: block;
+    width: 177px;
+    height: 60px;
 }
 .jkpt-main-wrap{
     width: 100%;

@@ -45,7 +45,7 @@ function setParams(key, value) {
 /*区域任务数据加载表格数据*/
 function getPageList() {
     var url = contextPath + "/seAreaTask/findSeAreaTaskList";
-    params['name'] = $("input[name=keyword]").val();
+    params['taskName'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
@@ -182,4 +182,9 @@ function initForm(id) {
             alert("对不起出错了！");
         }
     });
+}
+
+//树形数据搜索清除
+function clearQparams() {
+    $('#areaNodeID').combotree('setValue', '');
 }

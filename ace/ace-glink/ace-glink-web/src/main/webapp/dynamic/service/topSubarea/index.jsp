@@ -128,12 +128,9 @@
 </div>
 <script id="tpl-preview" type="text/template">
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-share"></i>
-                <span class="caption-subject bold uppercase"> 基本信息</span>
-            </div>
-        </div>
+
+        <h4> 基本信息</h4>
+
         <div class="portlet-body">
             <div class="form-group hide">
                 <label class="col-md-2 view-label">主键</label>
@@ -196,12 +193,9 @@
         </div>
     </div>
     <div class="portlet light">
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-share"></i>
-                <span class="caption-subject bold uppercase"> 归属站点列表</span>
-            </div>
-        </div>
+
+        <h4> 归属站点列表</h4>
+
         <div class="portlet-body">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">

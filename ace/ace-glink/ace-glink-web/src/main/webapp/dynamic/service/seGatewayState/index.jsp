@@ -25,10 +25,10 @@
 
         <div class="row custom-toolbar">
             <div class="col-md-3">
-                <button class="btn sync-data green"  type="button">同步数据</button>
+                <button class="btn sync-data green" type="button">同步</button>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-4" style="float: right;">
 
                 <form id="fm-search">
 
@@ -52,9 +52,9 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="15%"> 配电箱编号</th>
-                    <th> 状态</th>
-                    <th width="20%"> 状态更新时间</th>
+                    <th width="33%"> 配电箱编号</th>
+                    <th width="33%"> 状态</th>
+                    <th width="33%"> 创建时间</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -88,7 +88,7 @@
             离线
             {@/if}
         </td>
-        <td> \${item.updateTime}</td>
+        <td> \${item.createDate}</td>
     </tr>
     {@/each}
 </script>

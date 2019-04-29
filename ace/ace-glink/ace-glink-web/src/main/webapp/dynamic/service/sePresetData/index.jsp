@@ -54,7 +54,7 @@
                 <tr>
                     <th width="10%"> 场景编号</th>
                     <th width="10%"> 场景名称</th>
-                    <th width="10%"> 备注</th>
+
                     <th width="10%"> 创建日期</th>
                     <th width="15%">操作</th>
                 </tr>
@@ -84,7 +84,7 @@
     <tr>
         <td> \${item.presetNo}</td>
         <td> \${item.presetName}</td>
-        <td> \${item.remark}</td>
+
         <td> \${item.createDate}</td>
         <td>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
@@ -206,7 +206,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
-            \${data.status}
+            \${parseStatus(data.status)}
         </div>
     </div>
     <div class="form-group">
