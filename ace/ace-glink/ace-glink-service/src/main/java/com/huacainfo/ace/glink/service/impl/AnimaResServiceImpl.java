@@ -87,6 +87,7 @@ public class AnimaResServiceImpl implements AnimaResService {
             return new MessageResponse(1, "节目管理名称重复！");
         }
         o.setId(GUIDUtil.getGUID());
+        o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());

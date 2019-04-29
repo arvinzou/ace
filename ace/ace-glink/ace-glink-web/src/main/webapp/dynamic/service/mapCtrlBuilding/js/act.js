@@ -45,7 +45,7 @@ function setParams(key, value) {
 /*控制器映射关系加载表格数据*/
 function getPageList() {
     var url = contextPath + "/mapCtrlBuilding/findMapCtrlBuildingList";
-    params['name'] = $("input[name=keyword]").val();
+    params['ctrlName'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();

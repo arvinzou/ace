@@ -43,7 +43,7 @@
     <input type="text" class="form-control hidden" name="id" value="\${data.o.id}">
     <input type="text" class="form-control hidden" name="status" value="\${data.o.status}">
     <div class="form-body">
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 control-label">
                 节目编号
             </label>
@@ -71,10 +71,18 @@
                 节目类型
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="type"
-                       value="\${data.o.type}" maxlength="2"
-                       placeholder="请输入节目类型（建议字数在14个字以内，不超过2个字)">
-                <span class="help-block"></span>
+                <select name="type" id="type" class="form-control">
+                    {@each data.dict['179'] as item, index}
+                    {@if item.CODE!=''}
+                    {@if item.CODE == data.o.type}
+                    <option value="\${item.CODE}" selected=selected>\${item.NAME}</option>
+                    {@else}
+                    <option value="\${item.CODE}">\${item.NAME}</option>
+                    {@/if}
+                    {@/if}
+                    {@/each}
+                </select>
+
             </div>
         </div>
         <div class="form-group">

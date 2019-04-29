@@ -252,6 +252,7 @@ function outline(id) {
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
+    juicer.register('pStatus', pStatus);
 }
 
 /**
@@ -274,6 +275,17 @@ function parseStatus(status) {
             return "通过";
         case '4':
             return "驳回";
+        default:
+            return "";
+    }
+}
+
+function pStatus(status) {
+    switch (status) {
+        case '0':
+            return "删除";
+        case '1':
+            return "正常";
         default:
             return "";
     }

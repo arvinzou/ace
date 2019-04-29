@@ -131,11 +131,11 @@
         </td>
         <td>
             ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-status">设置状态</a>
-            {@if item.auditStatus==1}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-            {@/if}
+            <%-- <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+                data-target="#modal-status">设置状态</a>
+             {@if item.auditStatus==1}
+             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
+             {@/if}--%>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
             <a href="javascript:del('\${item.id}');">删除</a>
@@ -260,7 +260,8 @@
     <div class="form-group">
         <label class="col-md-2 view-label">详细地址</label>
         <div class="col-md-10">
-            \${data.address}
+            <a href="${pageContext.request.contextPath}/dynamic/service/topBuilding/map.jsp?latitude=\${data.latitude}&longitude=\${data.longitude}"
+               target="_blank">\${data.address}</a>
         </div>
     </div>
     <div class="form-group">
@@ -338,7 +339,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">状态 </label>
         <div class="col-md-10">
-            \${data.status}
+            \${pStatus(data.status)}
         </div>
     </div>
     <div class="form-group">

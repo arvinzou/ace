@@ -36,7 +36,7 @@
 <script id="tpl-fm-add" type="text/template">
     <form class="form-horizontal" id="fm-add" role="form">
         <div class="form-body">
-            <div class="form-group">
+            <div class="form-group hide">
                 <label class="col-md-2 control-label">
                     节目编号
                 </label>
