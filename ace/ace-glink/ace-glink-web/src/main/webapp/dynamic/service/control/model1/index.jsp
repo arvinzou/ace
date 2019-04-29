@@ -621,29 +621,5 @@
             alert('请切换开关状态为开启，再进行操作！')
         }
     });
-
-
-    //菜单显示与隐藏
-    document.onclick = function (e) {
-        $('.menu-wrap').hide();
-    };
-    $('.userInfo>.up').on("click", function (e) {
-        if ($('.menu-wrap').css("display") == "none") {
-            $('.menu-wrap').show();
-        } else {
-            $('.menu-wrap').hide();
-        }
-        e = e || event;
-        stopFunc(e);
-    });
-
-    $('.menu-wrap').on("click", function (e) {
-        e = e || event;
-        stopFunc(e);
-    });
-
-    function stopFunc(e) {
-        e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
-    }
 </script>
 </html>
