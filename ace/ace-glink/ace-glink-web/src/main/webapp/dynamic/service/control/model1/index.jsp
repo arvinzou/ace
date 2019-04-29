@@ -7,6 +7,7 @@
 </head>
 <script src="js/index.min.js" type="text/javascript" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="css/common.css"/>
+<link rel="stylesheet" href="css/foundation-datepicker.min.css"/>
 <link rel="stylesheet" href="css/index.css"/>
 <%
     session.setAttribute("portalPath", "/portal");
@@ -27,15 +28,12 @@
         <img src="img/logo.png" alt=""/> 江汉区照明控制平台
     </div>
     <div class="btns">
-        <div class="btn">
+        <div  data-type="sceneControl" class="btn">
             <p class="cn">场景控制</p>
             <p class="en">Scene Control</p>
         </div>
-        <div class="btn">
-            <p class="cn">场景列表</p>
-            <p class="en">Scene List</p>
-        </div>
-        <div class="btn strategySend">
+
+        <div data-type="strategyPart" class="btn strategySend">
             <p class="cn">策略下发</p>
             <p class="en">Strategy Send</p>
         </div>
@@ -57,7 +55,8 @@
         </div>
     </div>
 </div>
-<div style="display: none" class="sceneControl content">
+<%--场景控制--%>
+<div class="sceneControl content">
     <div class="left">
         <div class="control">
             <div class="title">
@@ -121,16 +120,16 @@
     </div>
 </div>
 
-<div class="content strategyPart content1">
+<%--策略下发--%>
+<div style="display:none" class="content strategyPart content1">
     <div class="modals strategy">
         <div class="modals-head">
             <span class="title">定时设置</span>
             <div class="operation">
-                <button>创建</button>
+                <button class="addStrategy">创建</button>
                 <div class="inputGroup">
-                    <input class="timerName" type="text" placeholder="输入任务名称" name="timerName"/>
-                    <button class="submit">
-
+                    <input class="strategyName" type="text" placeholder="搜索" name="name"/>
+                    <button class="searchBtn">
                     </button>
                 </div>
             </div>
@@ -142,7 +141,6 @@
                         <td class="tg-mvxc" width="10%">策略编号</td>
                         <td class="tg-mvxc" width="30%">策列名称</td>
                         <td class="tg-mvxc" width="10%">分区</td>
-                        <td class="tg-mvxc" width="20%">策略状态</td>
                         <td class="tg-mvxc" width="20%">操作</td>
                     </tr>
                     <tbody id="strategyList">
@@ -157,8 +155,8 @@
     </div>
 </div>
 
-
-<div class="modal" style="display: none">
+<%--切换--%>
+<div style="display: none" class="modal">
     <div class="modal-content">
         <div class="bg">
             <div class="lefgBg">
@@ -217,6 +215,7 @@
 </div>
 
 
+<%----%>
 <div class="modal scenario-modal" style="display: none">
     <div class="modal-content">
         <div class="bg">
@@ -242,7 +241,54 @@
             </div>
         </div>
         <div class="modal-body">
+            <div class="ulList">
+                <ul id="presets">
+                </ul>
+            </div>
+        </div>
+        <div class="modal-close">
+            <img src="img/close.png" alt="">
+        </div>
+    </div>
+</div>
 
+<%--添加策略--%>
+<div class="modal addStrategy-modal" style="display: none">
+    <div class="modal-content">
+        <div class="bg">
+            <div class="lefgBg">
+                <div class="l1"></div>
+                <div class="l2"></div>
+                <div class="l3"></div>
+                <div class="l2 l22"></div>
+                <div class="l4"></div>
+
+            </div>
+            <div class="centerBg">
+                <div class="c1"></div>
+                <div class="c2"></div>
+                <div class="c3"></div>
+            </div>
+            <div class="rightBg">
+                <div class="r1"></div>
+                <div class="r2"></div>
+                <div class="r3"></div>
+                <div class="r2 r22"></div>
+                <div class="r4"></div>
+            </div>
+        </div>
+        <div class="modal-body">
+                <div class="wrap">
+                    <div class="title">添加策略</div>
+                    <div class="form">
+                        <form id="strategyInfo">
+
+                        </form>
+                    </div>
+                    <div class="bottom">
+                        <button type="submit" form="strategyInfo">确定</button>
+                    </div>
+                </div>
         </div>
         <div class="modal-close">
             <img src="img/close.png" alt="">
@@ -251,42 +297,8 @@
 </div>
 
 
-<%--<div class="modal addStrategy-modal" style="display: block">--%>
-    <%--<div class="modal-content">--%>
-        <%--<div class="bg">--%>
-            <%--<div class="lefgBg">--%>
-                <%--<div class="l1"></div>--%>
-                <%--<div class="l2"></div>--%>
-                <%--<div class="l3"></div>--%>
-                <%--<div class="l2 l22"></div>--%>
-                <%--<div class="l4"></div>--%>
-
-            <%--</div>--%>
-            <%--<div class="centerBg">--%>
-                <%--<div class="c1"></div>--%>
-                <%--<div class="c2"></div>--%>
-                <%--<div class="c3"></div>--%>
-            <%--</div>--%>
-            <%--<div class="rightBg">--%>
-                <%--<div class="r1"></div>--%>
-                <%--<div class="r2"></div>--%>
-                <%--<div class="r3"></div>--%>
-                <%--<div class="r2 r22"></div>--%>
-                <%--<div class="r4"></div>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-        <%--<div class="modal-body">--%>
-
-        <%--</div>--%>
-        <%--<div class="modal-close">--%>
-            <%--<img src="img/close.png" alt="">--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
-
-
-
-<div class="modal setTime-modal" style="display: block">
+<%--设置定时--%>
+<div class="modal setTime-modal" style="display: none">
     <div class="modal-content">
         <div class="bg">
             <div class="lefgBg">
@@ -313,10 +325,10 @@
         <div class="modal-body">
             <div class="box">
                 <div class="unit">
-                    <div class="piece active" data-type="monthData">日程数据<br/>(周)</div>
-                    <div class="piece" data-type="monthData">日程数据<br/>(月)</div>
-                    <div class="piece" data-type="weekData">假日模式</div>
-                    <div class="piece" data-type="dayData">时间模式</div>
+                    <div class="piece week active" data-type="week">日程数据<br/>(周)</div>
+                    <div class="piece month" data-type="month">日程数据<br/>(月)</div>
+                    <div class="piece holiday" data-type="holiday">假日模式</div>
+                    <div class="piece event" data-type="event">事件模式</div>
                 </div>
                 <div class="info">
                     <div class="btn-list">
@@ -325,7 +337,11 @@
                     <div class="show" id="page-update">
                         <form id="setS" action="">
                             <div class="form" id="inputList">
-
+                            </div>
+                            <div class="inputTime">
+                                <p>时间范围</p>
+                                <input name="startTime" type="text" autocomplete="off">
+                                <input name="stopTime" type="text" autocomplete="off">
                             </div>
                         </form>
                     </div>
@@ -337,10 +353,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 </body>
 
@@ -382,36 +394,29 @@
         <td class="tg-84q5"> \${item.code}</td>
         <td class="tg-84q5"> \${item.name}</td>
         <td class="tg-84q5">\${item.areaCode}</td>
-        <td class="tg-84q5"> {@if item.state==0}
-            <span style="color: #FF616D;">未执行</span>
-            {@else if item.state==1}
-            <span style="color: #0AFD99;">执行</span>
-            {@else}
-            {@/if}
-        </td>
         <td class="tg-84q5">
-            <a href="javascript:selectTimerDate('\${item.id}');" style="color: #53FDFF;">修改</a>
-            <a href="javascript:selectTimerDate('\${item.id}');" style="color: #53FDFF;">定时</a>
-            <a href="javascript:selectTimerDate('\${item.id}');" style="color: #53FDFF;">下发</a>
+            <a href="javascript:editStrategy('\${item.id}');" style="color: #53FDFF;">修改</a>
+            <a href="javascript:setTimer('\${item.id}');" style="color: #53FDFF;">定时</a>
+            <a href="javascript:selectPreset('\${formatObject(item)}');" style="color: #53FDFF;">下发</a>
         </td>
     </tr>
     {@/each}
 </script>
 
-<script id="tpl-strategyList" type="text/template">
-    {@each data as item, index}
-    <li>
-        <div class="top">
-            \${item.code}-\${item.name}
-        </div>
-        <div class="bottom">
-            <button data-areaNo="\${item.areaNo}" data-areaNodeID="\${item.areaNodeID}">
-                选择
-            </button>
-        </div>
-    </li>
-    {@/each}
-</script>
+<%--<script id="tpl-strategyList" type="text/template">--%>
+    <%--{@each data as item, index}--%>
+    <%--<li>--%>
+        <%--<div class="top">--%>
+            <%--\${item.code}-\${item.name}--%>
+        <%--</div>--%>
+        <%--<div class="bottom">--%>
+            <%--<button data-areaNo="\${item.areaNo}" data-areaNodeID="\${item.areaNodeID}">--%>
+                <%--选择--%>
+            <%--</button>--%>
+        <%--</div>--%>
+    <%--</li>--%>
+    <%--{@/each}--%>
+<%--</script>--%>
 
 <script id="tpl-presets" type="text/template">
     {@each data as item, index}
@@ -422,103 +427,59 @@
 
 <script id="tpl-weeks" type="text/template">
     <ul class="list weeks">
+        {@each data.daysShort as item, index}
         <li>
-            <span> 周一</span>
+            <span>\${item}</span>
             <div class="wrap">
-                <input type="checkbox" id="w1" name="weeks" value="1"/>
-                <label class="slider-v3" for="w1"></label>
+                <input type="checkbox" id="w\${item}" name="weeks" \${isChecked(data.weeks, +index+1)} value="\${+index+1}"/>
+                <label class="slider-v3" for="w\${item}"></label>
             </div>
         </li>
-        <li>
-            <span> 周二</span>
-            <div class="wrap">
-                <input type="checkbox" id="w2" name="weeks" value="2"/>
-                <label class="slider-v3" for="w2"></label>
-            </div>
-        </li>
-        <li>
-            <span> 周三</span>
-            <div class="wrap">
-                <input type="checkbox" id="w3" name="weeks" value="3"/>
-                <label class="slider-v3" for="w3"></label>
-            </div>
-        </li>
-        <li>
-            <span> 周四</span>
-            <div class="wrap">
-                <input type="checkbox" id="w4" name="weeks" value="4"/>
-                <label class="slider-v3" for="w4"></label>
-            </div>
-        </li>
-        <li>
-            <span> 周五</span>
-            <div class="wrap">
-                <input type="checkbox" id="w5" name="weeks" value="5"/>
-                <label class="slider-v3" for="w5"></label>
-            </div>
-        </li>
-        <li>
-            <span> 周六</span>
-            <div class="wrap">
-                <input type="checkbox" id="w6" name="weeks" value="6"/>
-                <label class="slider-v3" for="w6"></label>
-            </div>
-        </li>
-        <li>
-            <span> 周日</span>
-            <div class="wrap">
-                <input type="checkbox" id="w7" name="weeks" value="7"/>
-                <label class="slider-v3" for="w7"></label>
-            </div>
-        </li>
+        {@/each}
     </ul>
 </script>
 
-<script id="tpl-month" type="text/template">
-    {@each data as item, index}
-    <ul class="list weeks">
+<script id="tpl-months" type="text/template">
+
+    <ul class="list months">
+        {@each data.months as item, index}
         <li>
-            <span> 1月</span>
+            <span>\${item}</span>
             <div class="wrap">
-                <input type="checkbox" id="m1" name="weeks" value="1"/>
-                <label class="slider-v3" for="m1"></label>
+                <input type="checkbox" id="m\${item}" name="months" \${isChecked(data.mons, +index+1)} value="\${+index+1}"/>
+                <label class="slider-v3" for="m\${item}"></label>
             </div>
         </li>
+        {@/each}
     </ul>
-    {@/each}
+
 </script>
 
+<script id="tpl-strategyInfo" type="text/template">
+        <input type="text" name="id" style="display: none;" value="\${data.id}">
+        <div class="input-Group">
+            <p>策略编号*</p>
+            <input name="code" type="text"  value="\${data.code}">
+        </div>
+        <div class="input-Group">
+            <p>策略名称*</p>
+            <input name="name" type="text"  value="\${data.name}">
+        </div>
+        <div class="input-Group">
+            <p>行政编号*</p>
+            <input name="areaCode" type="text"  value="\${data.areaCode}">
+        </div>
+        <div class="input-Group">
+            <p>策略描述</p>
+            <textarea name="remark">\${data.remark}</textarea>
+        </div>
+</script>
 
-<style type="text/css">
-
-</style>
 <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/loading.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
+<script src="js/foundation-datepicker.min.js"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
-<script>
-    //菜单显示与隐藏
-    document.onclick = function (e) {
-        $('.menu-wrap').hide();
-    };
-    $('.userInfo>.up').on("click", function (e) {
-        if ($('.menu-wrap').css("display") == "none") {
-            $('.menu-wrap').show();
-        } else {
-            $('.menu-wrap').hide();
-        }
-        e = e || event;
-        stopFunc(e);
-    });
-
-    $('.menu-wrap').on("click", function (e) {
-        e = e || event;
-        stopFunc(e);
-    });
-
-    function stopFunc(e) {
-        e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
-    }
-</script>
 </html>
