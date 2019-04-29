@@ -86,7 +86,7 @@ public class TopSubareaServiceImpl implements TopSubareaService {
     public MessageResponse insertTopSubarea(TopSubarea o, UserProp userProp) throws Exception {
         String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
         o.setId(guid);
-
+        o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
         if (CommonUtils.isBlank(o.getDistrict())) {
             return new MessageResponse(1, "行政区划不能为空！");
         }

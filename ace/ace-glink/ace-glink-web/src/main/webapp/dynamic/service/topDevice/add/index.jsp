@@ -38,7 +38,7 @@
 <script id="tpl-fm-add" type="text/template">
     <form class="form-horizontal" id="fm-add" role="form">
         <div class="form-body">
-            <div class="form-group">
+            <%--<div class="form-group">
                 <label class="col-md-2 control-label">
                     设备编号
                     <span class="required" aria-required="true"> * </span>
@@ -48,7 +48,7 @@
                            placeholder="请输入设备编号（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
                 </div>
-            </div>
+            </div>--%>
             <div class="form-group">
                 <label class="col-md-2 control-label">
                     设备名称

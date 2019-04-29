@@ -73,6 +73,12 @@
         <if test="condition.checkDate !=null and condition.checkDate !=&quot;&quot;">
             and t.checkDate like concat(#{condition.checkDate,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.checkYear !=null and condition.checkYear !=&quot;&quot;">
+            and t.checkYear = #{condition.checkYear,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.checkMonth !=null and condition.checkMonth !=&quot;&quot;">
+            and t.checkMonth = #{condition.checkMonth,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">

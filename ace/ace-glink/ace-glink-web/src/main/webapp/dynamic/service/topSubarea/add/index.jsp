@@ -46,17 +46,17 @@
                     <span class="help-block"></span>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    分区编号
-                    <span class="required" aria-required="true"> * </span>
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="code" maxlength="19"
-                           placeholder="请输入分区编号（20位有效整型数据)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
+            <%-- <div class="form-group">
+                 <label class="col-md-2 control-label">
+                     分区编号
+                     <span class="required" aria-required="true"> * </span>
+                 </label>
+                 <div class="col-md-10">
+                     <input type="text" class="form-control" name="code" maxlength="19"
+                            placeholder="请输入分区编号（20位有效整型数据)">
+                     <span class="help-block"></span>
+                 </div>
+             </div>--%>
             <div class="form-group">
                 <label class="col-md-2 control-label">
                     分区名称

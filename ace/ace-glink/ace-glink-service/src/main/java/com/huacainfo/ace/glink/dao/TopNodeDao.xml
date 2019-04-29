@@ -201,7 +201,7 @@
     select count(*)
     from top_node
     where name=#{name,jdbcType=VARCHAR}
-    or code != #{code,jdbcType=VARCHAR}
+    or code = #{code,jdbcType=VARCHAR}
   </select>
 
     <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="BaseResultMapVo">

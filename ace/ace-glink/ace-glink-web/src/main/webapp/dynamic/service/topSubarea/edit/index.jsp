@@ -60,7 +60,7 @@
                 <span class="help-block"></span>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 control-label">
                 分区编号
                 <span class="required" aria-required="true"> * </span>

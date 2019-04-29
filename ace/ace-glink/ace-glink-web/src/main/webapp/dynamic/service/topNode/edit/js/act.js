@@ -36,7 +36,7 @@ function render(obj, data, tplId) {
 
 function initPage() {
     $(".form-body input[name='buildingCode']").combogrid({
-        url: contextPath + "/topBuilding/findTopBuildingList?name="+qq,
+        url: contextPath + "/topBuilding/findTopBuildingList",
         method: 'get',
         loadMsg: "正在获取...",
         panelWidth: 400,
@@ -50,7 +50,7 @@ function initPage() {
         ]]
     });
     $(".form-body input[name='stationCode']").combogrid({
-        url: contextPath + "/topStation/findTopStationList?name="+sn,
+        url: contextPath + "/topStation/findTopStationList",
         method:'get',
         loadMsg:"正在获取...",
         panelWidth: 400,
@@ -150,8 +150,9 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                qq=result.value.topBuilding.name;
-                sn=result.value.topStation.name;
+                console.log(result.value);
+                // qq=result.value.topBuilding.name;
+                //sn=result.value.topStation.name;
                 render('#fm-edit', data, 'tpl-fm');
                 initPage();
 //富文本填值

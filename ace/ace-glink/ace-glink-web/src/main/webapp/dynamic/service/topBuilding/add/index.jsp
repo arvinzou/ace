@@ -28,7 +28,7 @@
             <!--具体界面元素开始-->
             <form class="form-horizontal" id="fm-add" role="form">
                 <div class="form-body">
-                    <div class="form-group">
+                    <div class="form-group hide">
                         <label class="col-md-2 control-label">
                             建筑编号
                             <span class="required" aria-required="true"> * </span>
@@ -93,7 +93,7 @@
                         </label>
                         <div class="col-md-10">
                             <input type="radio" value="0" name="mainTag">不重要<span style="padding-right: 60px;"></span>
-                            <input type="radio" value="1" name="mainTag">重要
+                            <input type="radio" value="1" name="mainTag" checked>重要
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -103,19 +103,30 @@
                         </label>
                         <div class="col-md-10">
                             <input type="radio" value="0" name="state">不在线<span style="padding-right: 60px;"></span>
-                            <input type="radio" value="1" name="state">在线
+                            <input type="radio" value="1" name="state" checked>在线
                             <span class="help-block"></span>
                         </div>
                     </div>
+                    <%-- <div class="form-group">
+                         <label class="col-md-2 control-label">
+                             所属站点
+                             <span class="required" aria-required="true"> * </span>
+                         </label>
+                         <div class="col-md-10">
+                             <select name="stationCode" id="areaList" class="form-control">
+
+                             </select>
+                             <span class="help-block"></span>
+                         </div>
+                     </div>--%>
                     <div class="form-group">
                         <label class="col-md-2 control-label">
                             所属站点
-                            <span class="required" aria-required="true"> * </span>
                         </label>
                         <div class="col-md-10">
-                            <select name="stationCode" id="areaList" class="form-control">
-
-                            </select>
+                            <input type="text" class="form-control" name="stationCode" maxlength="50"
+                                   style="width: 500px;"
+                                   placeholder="请输入所属站点">
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -170,5 +181,14 @@
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
+<%--easyui--%>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>

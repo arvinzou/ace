@@ -143,8 +143,8 @@ function initForm() {
         idField: 'code',
         textField: 'name',
         columns: [[
-            {field: 'name', title: '节点名称', width: 200},
-            {field: 'code', title: '节点编号', width: 200}
+            {field: 'name', title: '节点名称', width: 200}
+
         ]]
     });
 

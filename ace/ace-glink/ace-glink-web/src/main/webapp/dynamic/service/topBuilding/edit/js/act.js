@@ -118,6 +118,18 @@ function initForm(){
         alert("对不起出错了！");
         }
     });
+    $(".form-body input[name='stationCode']").combogrid({
+        url: contextPath + "/topStation/findTopStationList",
+        method: 'get',
+        loadMsg: "正在获取...",
+        panelWidth: 400,
+        mode: 'remote',
+        idField: 'code',
+        textField: 'name',
+        columns: [[
+            {field: 'name', title: '站点名称', width: 200}
+        ]]
+    });
 }
 
 function initDict(type, stationCode){
@@ -132,7 +144,7 @@ function initDict(type, stationCode){
         }
     }
     render('#type',dataList,'type-tpl');
-    initStationList(stationCode);
+    // initStationList(stationCode);
 }
 
 function initStationList(stationCode){

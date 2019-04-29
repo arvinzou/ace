@@ -78,13 +78,15 @@ public class AnalysisController extends GLinkBaseController {
     /**
      * 大屏展示数据接口 -3
      *
+     * @param year  yyyy
+     * @param month MM
      * @return Map<String, Object>
      */
     @ResponseBody
     @RequestMapping(value = "/errorChart")
-    public List<LeLampStatusVo> errorChart() {
+    public List<LeLampStatusVo> errorChart(String year, String month) {
 
-        return leLampStatusService.getErrorChartData();
+        return leLampStatusService.getErrorChartData(year, month);
     }
 
     /**

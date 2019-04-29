@@ -34,12 +34,14 @@
             </div>
 
             <div class="col-md-6">
-                <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                <label style="float:left;padding-right:5px;line-height: 31px;">分区：</label>
+                <div class="btn-group" role="group" style="float:left;padding-right:20px;">
                     <select id="subArea" name="subareaCode"  class="form-control" style="height: 31px;"
                             onchange="setParams('subareaCode',this.value)">
                     </select>
                 </div>
-                <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                <label style="float:left;padding-right:5px;line-height: 31px;">站点：</label>
+                <div class="btn-group" role="group" style="float:left;padding-right:20px;">
                     <select id="subStation" name="stationCode" class="form-control" style="height: 31px;"
                             onchange="setParams('stationCode',this.value)">
                     </select>
@@ -64,13 +66,13 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="5%"> 建筑编号</th>
-                    <th width="20%">建筑名称</th>
-                    <th width="15%">站点名称</th>
+                    <th width="15%"> 建筑编号</th>
+                    <th width="15%">建筑名称</th>
+                    <%--<th width="25%">站点名称</th>--%>
                     <th width="15%">分区名称</th>
                     <th width="10%">建筑物状态</th>
                     <th width="25%"> 地址</th>
-                    <th width="10%">操作</th>
+                    <th width="15%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -98,7 +100,7 @@
     <tr>
         <td> \${item.code}</td>
         <td>\${item.name}</td>
-        <td> \${item.topStationVo.name}</td>
+        <%-- <td> \${item.topStationVo.name}</td>--%>
         <td>\${item.topStationVo.subareaName}</td>
         <td>
             {@if item.state == '1'}
