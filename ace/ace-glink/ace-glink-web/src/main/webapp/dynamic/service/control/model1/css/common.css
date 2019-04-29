@@ -92,3 +92,20 @@ textarea::-webkit-input-placeholder {
 	border-radius: 2px;
 	background: rgba(0, 0, 0, 0.1);
 }
+
+button.style1{
+	padding: 0 0.08rem;
+	height:0.177083rem;
+	line-height:0.177083rem;
+	border:1px solid rgba(0,214,217,1);
+	border-radius:0.020833rem;
+	background: #0d4348;
+	box-shadow: inset 0px 0px 5px #07c8ca;
+	font-size:0.072916rem;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(255,255,255,1);
+
+}
+
+

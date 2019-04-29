@@ -47,16 +47,17 @@
                      src="${portalPath}/content/common/assets/layouts/layout/img/avatar3_small.jpg"/>
             </div>
             <span class="username username-hide-on-mobile"> ${SESSION_USERPROP_KEY.name} </span>
-        </div>
-        <div class="menu-wrap">
-            <ul class="menu-ul">
-                <li><a href="${portalPath}/index.jsp">返回首页</a></li>
-                <li><a href="${portalPath}/dynamic/portal/security/loginOut.jsp">安全退出</a></li>
-            </ul>
+
+            <div class="menu-wrap">
+                <ul class="menu-ul">
+                    <li><a href="${portalPath}/index.jsp">返回首页</a></li>
+                    <li><a href="${portalPath}/dynamic/portal/security/loginOut.jsp">安全退出</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
-<div  class="sceneControl content">
+<div style="display: none" class="sceneControl content">
     <div class="left">
         <div class="control">
             <div class="title">
@@ -120,29 +121,41 @@
     </div>
 </div>
 
-<div style="display: none"  class="content strategySend content1">
-    <div class="modals task scenario">
+<div class="content strategyPart content1">
+    <div class="modals strategy">
         <div class="modals-head">
-            <span class="title">场景执行</span>
-            <div class="inputGroup margin-0">
-                <input class="timerName" type="text" placeholder="输入任务名称" name="timerName"/>
-                <button class="submit">
+            <span class="title">定时设置</span>
+            <div class="operation">
+                <button>创建</button>
+                <div class="inputGroup">
+                    <input class="timerName" type="text" placeholder="输入任务名称" name="timerName"/>
+                    <button class="submit">
 
-                </button>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="modals-body">
-            <ul class="taskList" id="strategyList">
+            <div class="table">
+                <table class="table-tg" style="border:1px solid rgb(12,129,135);">
+                    <tr>
+                        <td class="tg-mvxc" width="10%">策略编号</td>
+                        <td class="tg-mvxc" width="30%">策列名称</td>
+                        <td class="tg-mvxc" width="10%">分区</td>
+                        <td class="tg-mvxc" width="20%">策略状态</td>
+                        <td class="tg-mvxc" width="20%">操作</td>
+                    </tr>
+                    <tbody id="strategyList">
 
-            </ul>
-            <%--分页页脚--%>
-            <div class="paginationbar">
+                    </tbody>
+                </table>
+            </div>
+            <div class="paginationbar" style="float: right">
                 <ul class="pagination" id="pagination3"></ul>
             </div>
         </div>
     </div>
 </div>
-
 
 
 <div class="modal" style="display: none">
@@ -204,7 +217,6 @@
 </div>
 
 
-
 <div class="modal scenario-modal" style="display: none">
     <div class="modal-content">
         <div class="bg">
@@ -230,10 +242,93 @@
             </div>
         </div>
         <div class="modal-body">
-            <div class="presetList">
-                <div class="ulList">
-                    <ul id="presets">
-                    </ul>
+
+        </div>
+        <div class="modal-close">
+            <img src="img/close.png" alt="">
+        </div>
+    </div>
+</div>
+
+
+<%--<div class="modal addStrategy-modal" style="display: block">--%>
+    <%--<div class="modal-content">--%>
+        <%--<div class="bg">--%>
+            <%--<div class="lefgBg">--%>
+                <%--<div class="l1"></div>--%>
+                <%--<div class="l2"></div>--%>
+                <%--<div class="l3"></div>--%>
+                <%--<div class="l2 l22"></div>--%>
+                <%--<div class="l4"></div>--%>
+
+            <%--</div>--%>
+            <%--<div class="centerBg">--%>
+                <%--<div class="c1"></div>--%>
+                <%--<div class="c2"></div>--%>
+                <%--<div class="c3"></div>--%>
+            <%--</div>--%>
+            <%--<div class="rightBg">--%>
+                <%--<div class="r1"></div>--%>
+                <%--<div class="r2"></div>--%>
+                <%--<div class="r3"></div>--%>
+                <%--<div class="r2 r22"></div>--%>
+                <%--<div class="r4"></div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="modal-body">--%>
+
+        <%--</div>--%>
+        <%--<div class="modal-close">--%>
+            <%--<img src="img/close.png" alt="">--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+
+
+<div class="modal setTime-modal" style="display: block">
+    <div class="modal-content">
+        <div class="bg">
+            <div class="lefgBg">
+                <div class="l1"></div>
+                <div class="l2"></div>
+                <div class="l3"></div>
+                <div class="l2 l22"></div>
+                <div class="l4"></div>
+
+            </div>
+            <div class="centerBg">
+                <div class="c1"></div>
+                <div class="c2"></div>
+                <div class="c3"></div>
+            </div>
+            <div class="rightBg">
+                <div class="r1"></div>
+                <div class="r2"></div>
+                <div class="r3"></div>
+                <div class="r2 r22"></div>
+                <div class="r4"></div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="box">
+                <div class="unit">
+                    <div class="piece active" data-type="monthData">日程数据<br/>(周)</div>
+                    <div class="piece" data-type="monthData">日程数据<br/>(月)</div>
+                    <div class="piece" data-type="weekData">假日模式</div>
+                    <div class="piece" data-type="dayData">时间模式</div>
+                </div>
+                <div class="info">
+                    <div class="btn-list">
+                        <button class="style1" form="setS">确定</button>
+                    </div>
+                    <div class="show" id="page-update">
+                        <form id="setS" action="">
+                            <div class="form" id="inputList">
+
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -242,6 +337,10 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 </body>
 
@@ -276,6 +375,29 @@
     {@/each}
 </script>
 
+
+<script id="tpl-strategyList" type="text/template">
+    {@each data as item, index}
+    <tr class="tr">
+        <td class="tg-84q5"> \${item.code}</td>
+        <td class="tg-84q5"> \${item.name}</td>
+        <td class="tg-84q5">\${item.areaCode}</td>
+        <td class="tg-84q5"> {@if item.state==0}
+            <span style="color: #FF616D;">未执行</span>
+            {@else if item.state==1}
+            <span style="color: #0AFD99;">执行</span>
+            {@else}
+            {@/if}
+        </td>
+        <td class="tg-84q5">
+            <a href="javascript:selectTimerDate('\${item.id}');" style="color: #53FDFF;">修改</a>
+            <a href="javascript:selectTimerDate('\${item.id}');" style="color: #53FDFF;">定时</a>
+            <a href="javascript:selectTimerDate('\${item.id}');" style="color: #53FDFF;">下发</a>
+        </td>
+    </tr>
+    {@/each}
+</script>
+
 <script id="tpl-strategyList" type="text/template">
     {@each data as item, index}
     <li>
@@ -298,6 +420,75 @@
 </script>
 
 
+<script id="tpl-weeks" type="text/template">
+    <ul class="list weeks">
+        <li>
+            <span> 周一</span>
+            <div class="wrap">
+                <input type="checkbox" id="w1" name="weeks" value="1"/>
+                <label class="slider-v3" for="w1"></label>
+            </div>
+        </li>
+        <li>
+            <span> 周二</span>
+            <div class="wrap">
+                <input type="checkbox" id="w2" name="weeks" value="2"/>
+                <label class="slider-v3" for="w2"></label>
+            </div>
+        </li>
+        <li>
+            <span> 周三</span>
+            <div class="wrap">
+                <input type="checkbox" id="w3" name="weeks" value="3"/>
+                <label class="slider-v3" for="w3"></label>
+            </div>
+        </li>
+        <li>
+            <span> 周四</span>
+            <div class="wrap">
+                <input type="checkbox" id="w4" name="weeks" value="4"/>
+                <label class="slider-v3" for="w4"></label>
+            </div>
+        </li>
+        <li>
+            <span> 周五</span>
+            <div class="wrap">
+                <input type="checkbox" id="w5" name="weeks" value="5"/>
+                <label class="slider-v3" for="w5"></label>
+            </div>
+        </li>
+        <li>
+            <span> 周六</span>
+            <div class="wrap">
+                <input type="checkbox" id="w6" name="weeks" value="6"/>
+                <label class="slider-v3" for="w6"></label>
+            </div>
+        </li>
+        <li>
+            <span> 周日</span>
+            <div class="wrap">
+                <input type="checkbox" id="w7" name="weeks" value="7"/>
+                <label class="slider-v3" for="w7"></label>
+            </div>
+        </li>
+    </ul>
+</script>
+
+<script id="tpl-month" type="text/template">
+    {@each data as item, index}
+    <ul class="list weeks">
+        <li>
+            <span> 1月</span>
+            <div class="wrap">
+                <input type="checkbox" id="m1" name="weeks" value="1"/>
+                <label class="slider-v3" for="m1"></label>
+            </div>
+        </li>
+    </ul>
+    {@/each}
+</script>
+
+
 <style type="text/css">
 
 </style>
@@ -308,11 +499,11 @@
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 <script>
     //菜单显示与隐藏
-    document.onclick = function(e) {
+    document.onclick = function (e) {
         $('.menu-wrap').hide();
     };
-    $('.userInfo>.up').on("click", function(e) {
-        if($('.menu-wrap').css("display") == "none") {
+    $('.userInfo>.up').on("click", function (e) {
+        if ($('.menu-wrap').css("display") == "none") {
             $('.menu-wrap').show();
         } else {
             $('.menu-wrap').hide();
@@ -321,10 +512,11 @@
         stopFunc(e);
     });
 
-    $('.menu-wrap').on("click", function(e) {
+    $('.menu-wrap').on("click", function (e) {
         e = e || event;
         stopFunc(e);
     });
+
     function stopFunc(e) {
         e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
     }
