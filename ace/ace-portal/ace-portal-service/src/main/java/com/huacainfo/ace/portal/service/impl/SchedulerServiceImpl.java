@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-@Service("dynamicSchedulerService")
+@Service("schedulerService")
 /**
  * @author: Arvin
  * @version: 2019-04-11

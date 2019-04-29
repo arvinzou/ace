@@ -65,7 +65,7 @@
             and t.subareaCode = #{condition.subareaCode,jdbcType=VARCHAR}
         </if>
         <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
-            and smsName like concat(#{condition.keyword,jdbcType=VARCHAR},'%')
+            and smsName like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}

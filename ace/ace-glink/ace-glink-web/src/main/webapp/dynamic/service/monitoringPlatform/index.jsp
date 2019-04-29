@@ -109,6 +109,33 @@
                        <div class="canvas-tu"  id="wendu"></div>
                        <div class="canvas-tu"  id="shidu"></div>
                    </div>
+                   <div class="scene-wrap">
+                       <div class="scene-content">
+                           <span>当前场景</span>
+                           <div class="down">
+                               <img src="./img/icon-weekdays@2x.png">
+                               <span>平日模式</span>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="shebei-status-wrap mokuai-huilu-wrap">
+                       <ul class="shebei-status-ul mokuai-huilu-ul ">
+                           <li class="router">
+                               <img src="./img/icon-model-num@2x.png">
+                               <div class="right">
+                                   <i>10</i>
+                                   <span>模块数量</span>
+                               </div>
+                           </li>
+                           <li class="gate">
+                               <img src="./img/icon-loop@2x.png">
+                               <div class="right">
+                                   <i>20</i>
+                                   <span>回路数量</span>
+                               </div>
+                           </li>
+                       </ul>
+                   </div>
                    <div class="shebei-status-wrap">
                        <div class="ztree-wrap">
                            <input id="node-name" data-id="1" value="配电箱-A楼AL1" class="form-control" readonly>
@@ -263,12 +290,13 @@
     * */
     function initAreaData(obj) {
         var powerTotal = obj.powerTotal.itemValue;
-        localStorage.setItem('powerTotal',powerTotal);
+        powerTotal = Math.round(parseFloat(powerTotal));
         var unitPrice = parseFloat(obj.unitPrice.itemValue);
         var powerPriceTotal = (parseFloat(powerTotal) * unitPrice).toFixed(1);
         $('.dianfei>.left>.input-wrap input').val(unitPrice);
         $('.dianfei>.right>.input-wrap input').val(powerPriceTotal);
-        var numArr = powerTotal.split('');
+        var numArr = powerTotal.toString().split('');
+        localStorage.setItem('powerTotal',powerTotal);
         if(numArr.length <=8){
             var html = '';
             for(var i=0; i < numArr.length; i++){
@@ -288,12 +316,17 @@
     /*
     * 监听输入框单价回车事件,
     * */
-    $("#input-unitPrice").on('keypress blur',function (e) {
+    $("#input-unitPrice").on('keypress',function (e) {
         var powerTotal = parseFloat(localStorage.getItem('powerTotal'));
         var price = parseFloat($(this).val());
-        var totalPrice = powerTotal*price;
-        if (e.which == 13) {
-            $('#input-totalPrice').val(totalPrice.toFixed   (1));
+        var reg = /^[0-9]+(.[0-9]{1})?$/;   //验证有一位小数的正实数
+        if (!reg.test(price)) {
+            alert('输入的字符有误，请重新输入！')
+        }else{
+            var totalPrice = powerTotal*price;
+            if (e.which == 13) {
+                $('#input-totalPrice').val(totalPrice.toFixed(1));
+            }
         }
     });
     /*

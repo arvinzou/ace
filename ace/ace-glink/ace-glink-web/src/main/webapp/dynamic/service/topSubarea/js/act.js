@@ -207,3 +207,22 @@ function initForm(id) {
         }
     });
 }
+
+/*删除*/
+function del(did) {
+    if (confirm("确定要删除吗？")) {
+        var url = contextPath + "/topSubarea/deleteTopSubareaByTopSubareaId";
+        var data = {
+            jsons: JSON.stringify({
+                id: did
+            })
+        }
+        $.getJSON(url, data, function (rst) {
+            if (rst.status == 0) {
+                getPageList();
+            } else {
+                alert("删除失败")
+            }
+        })
+    }
+}

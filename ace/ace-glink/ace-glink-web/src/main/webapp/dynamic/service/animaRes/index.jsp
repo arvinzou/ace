@@ -27,7 +27,7 @@
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-5" style="float: right;">
 
                 <form id="fm-search">
                     <div class="input-group">

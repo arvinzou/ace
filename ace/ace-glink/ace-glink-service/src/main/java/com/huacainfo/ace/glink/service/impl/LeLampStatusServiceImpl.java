@@ -172,13 +172,17 @@ public class LeLampStatusServiceImpl implements LeLampStatusService {
     /**
      * 大屏展示数据接口 -3
      *
+     * @param year  yyyy
+     * @param month MM
      * @return Map<String, Object>
      */
     @Override
-    public List<LeLampStatusVo> getErrorChartData() {
+    public List<LeLampStatusVo> getErrorChartData(String year, String month) {
 
         LeLampStatusQVo condition = new LeLampStatusQVo();
-        return leLampStatusDao.findList(condition,0,12,"");
+        condition.setCheckYear(year);
+        condition.setCheckMonth(month);
+        return leLampStatusDao.findList(condition, 0, 12, "");
     }
 
 

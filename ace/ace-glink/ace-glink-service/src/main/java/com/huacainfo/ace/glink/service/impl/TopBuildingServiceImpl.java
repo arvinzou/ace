@@ -95,7 +95,8 @@ public class TopBuildingServiceImpl implements TopBuildingService {
      */
     @Override
     public MessageResponse insertTopBuilding(TopBuilding o, UserProp userProp) throws Exception {
-
+        o.setId(GUIDUtil.getGUID());
+        o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
         if (CommonUtils.isBlank(o.getCode())) {
             return new MessageResponse(1, "建筑编号不能为空！");
         }
@@ -115,7 +116,7 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         if (temp > 0) {
             return new MessageResponse(1, "建筑物重复！");
         }
-        o.setId(GUIDUtil.getGUID());
+
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());

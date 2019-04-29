@@ -350,29 +350,20 @@ function initForm(id) {
 }
 
 function del(did) {
-    startLoad();
-    var params = {};
-    params.id = did;
     if (confirm("确定要删除吗？")) {
-        $.ajax({
-            url: contextPath + "/topDevice/deleteTopDeviceByTopDeviceId",
-            type: "post",
-            async: false,
-            data: {
-                jsons: JSON.stringify(params)
-            },
-            success: function (rst) {
-                stopLoad();
-                if (rst.status == 0) {
-                    alert("删除成功！");
-                    getPageList();
-                }
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起出错了！");
+        var url = contextPath + "/topDevice/deleteTopDeviceByTopDeviceId";
+        var data = {
+            jsons: JSON.stringify({
+                id: did
+            })
+        }
+        $.getJSON(url, data, function (rst) {
+            if (rst.status == 0) {
+                getPageList();
+            } else {
+                alert("删除失败")
             }
-        });
+        })
     }
 }
 

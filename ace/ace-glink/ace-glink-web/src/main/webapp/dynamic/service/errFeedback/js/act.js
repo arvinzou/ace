@@ -24,7 +24,7 @@ function initPage() {
         }
     });
     //故障类型-查询条件
-    render('#p-errType', staticDictObject, 'tpl-errType');
+    render('#errType', staticDictObject, 'tpl-errType');
 }
 
 function initBtnEvents() {
@@ -130,7 +130,8 @@ function updateStatus(id, state) {
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes,do it!",
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
             closeOnConfirm: false
         },
         function () {

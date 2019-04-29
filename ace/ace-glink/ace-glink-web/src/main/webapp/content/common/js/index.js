@@ -2,7 +2,14 @@ $(function () {
     query();
     ErrorChart();
     errorList();
+    initJuicerMethod();
 });
+
+
+//juicer自定义函数
+function initJuicerMethod() {
+    juicer.register('errTypes', errTypes);
+}
 
 /**
  * 故障监控统计图表
@@ -166,3 +173,13 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
+function errTypes(type) {
+    console.log(a);
+    var typeList = staticDictObject['180'];
+    console.log(typeList);
+    for (var i = 0; i < typeList.length; i++) {
+        if (type == typeList[i].CODE) {
+            return typeList[i].NAME;
+        }
+    }
+}

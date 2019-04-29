@@ -150,4 +150,10 @@
 
     <dubbo:service interface="com.huacainfo.ace.portal.service.SysInitService"
                    ref="sysInitService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.SchedulerService"
+                   ref="schedulerService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.SchedulerMappedService"
+                   ref="schedulerMappedService"/>
+
+
 </beans>

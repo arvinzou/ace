@@ -295,7 +295,7 @@
 </script>
 
 <script id="tpl-preview" type="text/template">
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">主键</label>
         <div class="col-md-10">
             \${data.o.id}
@@ -316,7 +316,13 @@
     <div class="form-group">
         <label class="col-md-2 view-label">定时任务状态</label>
         <div class="col-md-10">
-            \${data.o.timerEnable}
+            {@if data.o.timerEnable==0}
+            <span>无效</span>
+            {@else if data.o.timerEnable==1}
+            <span>有效</span>
+            {@else}
+            {@/if}
+
         </div>
     </div>
     <div class="form-group">

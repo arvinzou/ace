@@ -12,6 +12,31 @@ import java.util.List;
  * @Date 2019/4/18 20:39
  */
 public class SeNodeMonitorVo extends SeNodeMonitor {
+    /**
+     * 模块数量
+     */
+    private int deviceCount;
+    /**
+     * 回路数量
+     */
+    private int deviceCHCount;
+
+
+    public int getDeviceCount() {
+        return deviceCount;
+    }
+
+    public void setDeviceCount(int deviceCount) {
+        this.deviceCount = deviceCount;
+    }
+
+    public int getDeviceCHCount() {
+        return deviceCHCount;
+    }
+
+    public void setDeviceCHCount(int deviceCHCount) {
+        this.deviceCHCount = deviceCHCount;
+    }
 
     private List<SeNodeMonitorDevice> monitorDeviceList;
 

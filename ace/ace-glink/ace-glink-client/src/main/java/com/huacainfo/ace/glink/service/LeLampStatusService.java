@@ -68,6 +68,8 @@ public interface LeLampStatusService {
      * 大屏展示数据接口 -3
      *
      * @return List<LeLampStatusVo>
+     * @param year yyyy
+     * @param month MM
      */
-    List<LeLampStatusVo>  getErrorChartData();
+    List<LeLampStatusVo> getErrorChartData(String year, String month);
 }

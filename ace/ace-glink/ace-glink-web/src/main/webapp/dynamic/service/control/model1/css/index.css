@@ -940,6 +940,13 @@ body {
 	background:#00D6D9;
 	box-shadow: 0 0 0 1.5em #00D6D9 inset;
 }
+.btns img{
+	cursor: pointer;
+}
+.switch-wrap span{
+	display: inline-block;
+	margin-top: 8px;
+}
 
 .addStrategy-modal .modal-content{
 	width:4.239583rem;

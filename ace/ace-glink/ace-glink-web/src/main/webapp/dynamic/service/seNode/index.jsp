@@ -372,7 +372,7 @@
                         <th width="5%"> \${item.deviceType}</th>
                         <th width="5%"> \${item.deviceCode}</th>
                         <th width="5%"> \${item.deviceBox}</th>
-                        <th width="5%"> \${item.deviceStatus}</th>
+                        <th width="5%"> \${parseOFState(item.deviceStatus)}</th>
                         <th width="5%"> \${item.deviceReportTime}</th>
                         <th width="5%">
                             <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH1Value');">详情</a>

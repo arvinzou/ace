@@ -94,6 +94,7 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
+                data['dict'] = staticDictObject;
                 render('#fm-edit', data, 'tpl-fm');
                 initPage();
 //富文本填值

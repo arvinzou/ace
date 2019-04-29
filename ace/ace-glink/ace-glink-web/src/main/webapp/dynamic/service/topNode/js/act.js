@@ -81,20 +81,21 @@ function edit(did) {
 }
 
 function del(did) {
-    var url = contextPath + "/topNode/deleteTopNodeByTopNodeId";
-    var data={
-        jsons:JSON.stringify({
-            id:did
+    if (confirm("确定要删除吗？")) {
+        var url = contextPath + "/topNode/deleteTopNodeByTopNodeId";
+        var data = {
+            jsons: JSON.stringify({
+                id: did
+            })
+        }
+        $.getJSON(url, data, function (rst) {
+            if (rst.status == 0) {
+                getPageList();
+            } else {
+                alert("删除失败")
+            }
         })
     }
-    $.getJSON(url,data, function (rst) {
-        if(rst.status==0){
-            getPageList();
-        }
-        else {
-            alert("删除失败")
-        }
-    })
 }
 
 /*查看详情*/
@@ -251,6 +252,7 @@ function outline(id) {
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
+    juicer.register('pStatus', pStatus);
 }
 
 /**
@@ -273,6 +275,17 @@ function parseStatus(status) {
             return "通过";
         case '4':
             return "驳回";
+        default:
+            return "";
+    }
+}
+
+function pStatus(status) {
+    switch (status) {
+        case '0':
+            return "删除";
+        case '1':
+            return "正常";
         default:
             return "";
     }
