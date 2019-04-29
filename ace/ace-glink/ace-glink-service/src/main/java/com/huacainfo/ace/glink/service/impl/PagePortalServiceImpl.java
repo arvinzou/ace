@@ -163,6 +163,7 @@ public class PagePortalServiceImpl implements PagePortalService {
 
     /**
      * 根据key，更新value值
+     *
      * @param key
      * @param val
      * @return
@@ -170,7 +171,7 @@ public class PagePortalServiceImpl implements PagePortalService {
      */
     @Override
     public MessageResponse updatePagePortalData(String key, String val) throws Exception {
-        PagePortal r= pagePortalDao.findByKey(key,CommConstant.SYS_ID);
+        PagePortal r = pagePortalDao.findByKey(key, CommConstant.SYS_ID);
         if (r == null) {
 
             r = new PagePortal();
@@ -184,11 +185,72 @@ public class PagePortalServiceImpl implements PagePortalService {
             r.setItemName(PortalKey.LE_sceneControlState_ch);
             pagePortalDao.insert(r);
 
-        }else{
+        } else {
             r.setItemValue(val);
             pagePortalDao.updateByPrimaryKey(r);
         }
-        return new MessageResponse(0,"保存成功");
+        return new MessageResponse(0, "保存成功");
+    }
+
+
+    /**
+     * 自动统计数据
+     *
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse autoDataStatistics() {
+        Map<String, Object> map = pagePortalDao.autoDataStatistics();
+        String key;
+        String val;
+        //PortalKey.LE_BuildingTotal
+        key = PortalKey.LE_BuildingTotal;
+        val = String.valueOf(map.get("BuildingTotal"));
+        PagePortal obj = findByKey(key);
+        obj.setItemValue(val);
+        insertOrUpdate(CommConstant.SYS_ID, obj, PortalKey.LE_BuildingTotal_ch, key, val);
+        //PortalKey.SE_NodeTotal
+        key = PortalKey.SE_NodeTotal;
+        val = String.valueOf(map.get("NodeTotal"));
+        obj = findByKey(key);
+        obj.setItemValue(val);
+        insertOrUpdate(CommConstant.SYS_ID, obj, PortalKey.SE_NodeTotal_ch, key, val);
+        //PortalKey.SE_RouterOffNum
+        key = PortalKey.SE_RouterOffNum;
+        val = String.valueOf(map.get("RouterOffNum"));
+        obj = findByKey(key);
+        obj.setItemValue(val);
+        insertOrUpdate(CommConstant.SYS_ID, obj, PortalKey.SE_RouterOffNum_ch, key, val);
+        //PortalKey.SE_GatewayOffNum
+        key = PortalKey.SE_GatewayOffNum;
+        val = String.valueOf(map.get("GatewayOffNum"));
+        obj = findByKey(key);
+        obj.setItemValue(val);
+        insertOrUpdate(CommConstant.SYS_ID, obj, PortalKey.SE_GatewayOffNum_ch, key, val);
+        //PortalKey.SE_NodeDeviceOffNum
+        key = PortalKey.SE_NodeDeviceOffNum;
+        val = String.valueOf(map.get("NodeDeviceOffNum"));
+        obj = findByKey(key);
+        obj.setItemValue(val);
+        insertOrUpdate(CommConstant.SYS_ID, obj, PortalKey.SE_NodeDeviceOffNum_ch, key, val);
+        //PortalKey.SE_NodeDeviceNum
+        key = PortalKey.SE_NodeDeviceNum;
+        val = String.valueOf(map.get("NodeDeviceNum"));
+        obj = findByKey(key);
+        obj.setItemValue(val);
+        insertOrUpdate(CommConstant.SYS_ID, obj, PortalKey.SE_NodeDeviceNum_ch, key, val);
+        //PortalKey.SE_PowerTotal
+        key = PortalKey.SE_PowerTotal;
+        val = String.valueOf(map.get("PowerTotal"));
+        obj = findByKey(key);
+        obj.setItemValue(val);
+        insertOrUpdate(CommConstant.SYS_ID, obj, PortalKey.SE_PowerTotal_ch, key, val);
+
+        return new MessageResponse(0, "同步成功");
+    }
+
+    private PagePortal findByKey(String key) {
+        return findByKey(key, CommConstant.SYS_ID);
     }
 
 

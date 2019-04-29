@@ -53,7 +53,6 @@ public interface PagePortalService {
      */
     Map<String, Object> screenData(Map<String, String> params);
 
-
     /**
      * 插入弱电运行场景状态
      * @param key
@@ -62,4 +61,11 @@ public interface PagePortalService {
      * @throws Exception
      */
     MessageResponse updatePagePortalData(String key, String val) throws Exception;
+
+    /**
+     * 自动统计数据
+     *
+     * @return MessageResponse
+     */
+    MessageResponse autoDataStatistics();
 }

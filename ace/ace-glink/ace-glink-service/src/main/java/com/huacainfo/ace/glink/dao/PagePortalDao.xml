@@ -69,4 +69,17 @@
             #{item}
         </foreach>
     </select>
+
+    <select id="autoDataStatistics" resultType="map">
+       select
+        (select count(1) from top_building ) as BuildingTotal,
+        (select count(1) from se_node_monitor) as NodeTotal,
+        (select count(1) from se_node_monitor where routeStatus = 0) as RouterOffNum,
+        (select count(1) from se_node_monitor where gateStatus = 0) as GatewayOffNum,
+        (select count(1) from se_node_monitor_device) as NodeDeviceNum,
+        (select count(1) from se_node_monitor_device where deviceStatus= 0 ) as NodeDeviceOffNum,
+        (select IFNULL(sum(meterValue),0) from se_node_meter) as PowerTotal
+
+        from dual;
+    </select>
 </mapper>
