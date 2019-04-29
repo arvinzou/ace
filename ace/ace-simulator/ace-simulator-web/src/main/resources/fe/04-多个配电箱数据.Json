@@ -81,7 +81,7 @@
         },
         {
           "DeviceType": "DDRC420-FR",
-          "DeviceCode": "0x60",
+          "DeviceCode": "0x61",
           "DeviceBox": 14,
           "DeviceStatus": 1,
           "DeviceStatusTime": "2018-12-22 12:33:25",
@@ -156,7 +156,7 @@
       "DeviceData": [
         {
           "DeviceType": "DDRC420-FR",
-          "DeviceCode": "0x60",
+          "DeviceCode": "0x62",
           "DeviceBox": 15,
           "DeviceStatus": 1,
           "DeviceStatusTime": "2018-12-22 12:33:25",
@@ -215,7 +215,7 @@
         },
         {
           "DeviceType": "DDRC420-FR",
-          "DeviceCode": "0x60",
+          "DeviceCode": "0x63",
           "DeviceBox": 16,
           "DeviceStatus": 1,
           "DeviceStatusTime": "2018-12-22 12:33:25",
