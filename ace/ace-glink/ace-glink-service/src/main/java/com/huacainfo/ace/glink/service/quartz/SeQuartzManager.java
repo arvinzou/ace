@@ -41,9 +41,19 @@ public class SeQuartzManager {
     public void autoSyncNodeMeterData() {
         //同步基础数据
         MessageResponse ms = seNodeService.syncNodeMeterData(null);
-        logger.debug(ms.getErrorMessage());
-        //portal数据统计
-        ms = pagePortalService.autoSyncNodeMeterData();
+//        logger.debug(ms.getErrorMessage());
+//        //portal数据统计
+//        ms = pagePortalService.autoSyncNodeMeterData();
         logger.debug("[自动同步配电箱全部电表数据]=>{}", ms.getErrorMessage());
+    }
+
+    /**
+     * 每隔[6]分钟,自动统计数据
+     */
+    @Scheduled(cron = "0 0/1 * * * ?")
+    public void autoDataStatistics() {
+        //同步基础数据
+        MessageResponse ms = pagePortalService.autoDataStatistics();
+        logger.debug("[自动统计数据]=>{}", ms.getErrorMessage());
     }
 }
