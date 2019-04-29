@@ -89,12 +89,30 @@
     </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.SeNodeMonitorVo">
+        <result column="deviceCount" jdbcType="INTEGER" property="deviceCount"/>
+        <result column="deviceCHCount" jdbcType="INTEGER" property="deviceCHCount"/>
+
     </resultMap>
+
+    <sql id="Vo_Column_List">
+        (select count(1) from se_node_monitor_device where nodeID = t.nodeID) as deviceCount,
+        (
+        select count(1) from se_node_monitor_device_ch ch
+        where ch.deviceCode in (
+        select deviceCode from se_node_monitor_device where nodeID = t.nodeID
+        )
+        ) as deviceCHCount,
+
+        t.id, t.nodeID, t.reportTime, t.gateStatus, t.gateReportTime, t.routeStatus, t.routeSignal, t.routeReportTime,
+        t.currentPreset, t.presetCaption, t.presetReportTime, t.temperature, t.humidity, t.wSDReportTime,
+        t.doorStatus, t.meterID, t.meterValue, t.meterReportTime, t.remark, t.status, t.createDate
+    </sql>
 
     <select id="findByNodeID" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from se_node_monitor
-        where nodeID = #{nodeID,jdbcType=VARCHAR}
+
+        <include refid="Vo_Column_List"/>
+        from se_node_monitor t
+        where t.nodeID = #{nodeID,jdbcType=VARCHAR}
     </select>
 </mapper>

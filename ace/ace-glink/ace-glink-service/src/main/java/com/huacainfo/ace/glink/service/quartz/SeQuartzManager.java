@@ -50,7 +50,7 @@ public class SeQuartzManager {
     /**
      * 每隔[6]分钟,自动统计数据
      */
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "0 0/6 * * * ?")
     public void autoDataStatistics() {
         //同步基础数据
         MessageResponse ms = pagePortalService.autoDataStatistics();
