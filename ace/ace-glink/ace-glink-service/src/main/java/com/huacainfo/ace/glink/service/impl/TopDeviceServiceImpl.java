@@ -85,8 +85,8 @@ public class TopDeviceServiceImpl implements TopDeviceService {
      */
     @Override
     public MessageResponse insertTopDevice(TopDevice o, UserProp userProp) throws Exception {
-
-
+        o.setId(GUIDUtil.getGUID());
+        o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
         if (CommonUtils.isBlank(o.getCode())) {
             return new MessageResponse(1, "设备编号不能为空！");
         }
@@ -103,7 +103,7 @@ public class TopDeviceServiceImpl implements TopDeviceService {
             return new MessageResponse(1, "设备编号重复！");
         }
 
-        o.setId(GUIDUtil.getGUID());
+
         o.setCreateDate(new Date());
         o.setStatus("2");
         o.setCreateUserName(userProp.getName());

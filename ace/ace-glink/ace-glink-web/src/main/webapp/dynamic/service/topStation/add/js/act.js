@@ -122,10 +122,6 @@ function initForm() {
                 field: 'name',
                 title: '分区名称',
                 width: 100
-            }, {
-                field: 'code',
-                title: '分区编码',
-                width: 100
             }]
 
         ],

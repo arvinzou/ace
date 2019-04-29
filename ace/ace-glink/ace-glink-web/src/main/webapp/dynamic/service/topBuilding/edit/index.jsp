@@ -43,7 +43,7 @@
     <input type="text" class="form-control hidden" name="id" value="\${data.o.id}">
     <input type="text" class="form-control hidden" name="status" value="\${data.o.status}">
     <div class="form-body">
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 control-label">
                 建筑编号
                 <span class="required" aria-required="true"> * </span>
@@ -106,7 +106,7 @@
                     <div class="error-address"></div>
                 </div>
             </div>
-        </div>
+
         <div class="form-group">
             <label class="col-md-2 control-label">
                 重点建筑标记
@@ -137,15 +137,14 @@
                 <span class="help-block"></span>
             </div>
         </div>
+
         <div class="form-group">
             <label class="col-md-2 control-label">
                 所属站点
-                <span class="required" aria-required="true"> * </span>
             </label>
             <div class="col-md-10">
-                <select name="stationCode" id="areaList" class="form-control">
-
-                </select>
+                <input type="text" class="form-control" name="stationCode" maxlength="50" style="width: 500px;"
+                       value="\${data.o.stationCode}" placeholder="请选择所属站点">
                 <span class="help-block"></span>
             </div>
         </div>
@@ -167,6 +166,7 @@
                 <button class="btn   green" type="submit" style="width:30%">保存</button>
             </div>
         </div>
+    </div>
     </div>
 </script>
 
@@ -196,10 +196,18 @@
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
 <script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/common/js/cropUpload.js?version=${cfg.version}"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
+<%--easyui--%>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>

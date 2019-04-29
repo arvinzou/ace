@@ -106,6 +106,7 @@ public class TopNodeServiceImpl implements TopNodeService {
     public MessageResponse insertTopNode(TopNode o, UserProp userProp) throws Exception {
 
         o.setId(GUIDUtil.getGUID());
+        o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
         if (CommonUtils.isBlank(o.getCode())) {
             return new MessageResponse(1, "节点编号不能为空！");
         }

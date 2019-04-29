@@ -81,20 +81,21 @@ function edit(did) {
 }
 
 function del(did) {
-    var url = contextPath + "/topNode/deleteTopNodeByTopNodeId";
-    var data={
-        jsons:JSON.stringify({
-            id:did
+    if (confirm("确定要删除吗？")) {
+        var url = contextPath + "/topNode/deleteTopNodeByTopNodeId";
+        var data = {
+            jsons: JSON.stringify({
+                id: did
+            })
+        }
+        $.getJSON(url, data, function (rst) {
+            if (rst.status == 0) {
+                getPageList();
+            } else {
+                alert("删除失败")
+            }
         })
     }
-    $.getJSON(url,data, function (rst) {
-        if(rst.status==0){
-            getPageList();
-        }
-        else {
-            alert("删除失败")
-        }
-    })
 }
 
 /*查看详情*/
