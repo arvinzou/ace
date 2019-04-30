@@ -150,6 +150,12 @@ function initInputDate() {
 
 
 /*++++++++++++++++++++++++++++++++++++++++++initsceneControl Start++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+var html='<div class="default">\n' +
+    '                    <img src="img/default.png" alt="">\n' +
+    '                    <p>当前暂无场景，请先选择站点</p>\n' +
+    '                </div>'
+
 function initsceneControl() {
     getStations();
     requestSenceStatusData();
@@ -283,9 +289,23 @@ function checkStation() {
             renderadd('#checked', [{code: code, name: name}], 'tpl-checked');
             var data = rst.rows;
             renderadd('#videos', data, 'tpl-videos');
+            hasLi();
         }
     })
 }
+
+function hasLi() {
+    if($('#videos li').length>0){
+        $('#videos .default').remove();
+    }
+}
+
+function nohasLi() {
+    if($('#videos li').length<1&&$('#videos .default').length<1){
+        $('#videos').append(html);
+    }
+}
+
 
 /*删除选择站点*/
 function removeStation() {
@@ -293,6 +313,7 @@ function removeStation() {
     var code = that.data('code');
     var name = that.data('name');
     $('#videos .video' + code).remove();
+    nohasLi()
     renderadd('#check', [{code: code, name: name}], 'tpl-check');
     that.remove();
 }

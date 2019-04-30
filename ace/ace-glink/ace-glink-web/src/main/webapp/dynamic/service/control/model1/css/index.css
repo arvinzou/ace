@@ -165,7 +165,7 @@ body {
     background: url(../img/videoList.png) no-repeat;
     background-size: 100% 100%;
     margin-top: 0.125rem;
-    padding: 0.260416rem 0.145833rem 0.145833rem;
+    padding: 0.260416rem 0.04rem 0.145833rem 0.145833rem;
 }
 
 .content .right {
@@ -302,10 +302,6 @@ body {
     width: 1.520833rem;
     height: auto;
     margin: 0 0.104166rem 0.0625rem 0;
-}
-
-.videoList .videoGroup:nth-child(4n+4) {
-    margin-right: 0;
 }
 
 .videoList > ul {
