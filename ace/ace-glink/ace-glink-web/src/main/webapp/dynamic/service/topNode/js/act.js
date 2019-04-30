@@ -45,7 +45,7 @@ function setParams(key, value) {
 /*节点管理加载表格数据*/
 function getPageList() {
     var url = contextPath + "/topNode/findTopNodeList";
-    params['name'] = $("input[name=keyword]").val();
+    // params['name'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();

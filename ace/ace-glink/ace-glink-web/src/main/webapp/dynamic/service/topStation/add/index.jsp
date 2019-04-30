@@ -38,7 +38,7 @@
         <div class="form-body">
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    分区编码
+                    分区编号
                     <span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-6">
