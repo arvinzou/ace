@@ -34,7 +34,7 @@ public class LeApiToolKit {
      * @return LeBaseOut
      */
     public static String lightStrategy(LightStrategyIn params) {
-        Map<String, String> request = new HashMap<>();
+        Map<String, Object> request = new HashMap<>();
         request.put("pattern", params.getPattern());
         request.put("strategy", params.getStrategy());
         request.put("area", params.getArea());
@@ -45,17 +45,34 @@ public class LeApiToolKit {
             case LightStrategyIn.MODE_SCHEDULE://日程模式
                 //模式专有
                 request.put("isWeek", params.getIsWeek() + "");
-                request.put("weeks", params.getWeeks());
+                request.put("weeks", params.getWeeks().split(","));
                 request.put("isMonth", params.getIsMonth() + "");
-                request.put("months", params.getMonths());
+                request.put("months", params.getMonths().split(","));
+                //
+                request.put("startDate", "");
+                request.put("stopDate", "");
+                request.put("specialDate", "");
                 break;
             case LightStrategyIn.MODE_HOLIDAY://假日模式
                 //模式专有
                 request.put("startDate", params.getStartDate());
                 request.put("stopDate", params.getStopDate());
+                //
+                request.put("isWeek", "0");
+                request.put("weeks", new String[]{});
+                request.put("isMonth", "0");
+                request.put("months", new String[]{});
+                request.put("specialDate", "");
                 break;
             case LightStrategyIn.MODE_EVENT://事件模式
                 request.put("specialDate", params.getSpecialDate());
+                //
+                request.put("isWeek", "0");
+                request.put("weeks", new String[]{});
+                request.put("isMonth", "0");
+                request.put("months", new String[]{});
+                request.put("startDate", "");
+                request.put("stopDate", "");
                 break;
             default:
                 LeBaseOut out = new LeBaseOut();
@@ -65,6 +82,7 @@ public class LeApiToolKit {
         }
 
         String path = "/wh/limplight/control/lightStrategy";
+        System.out.println(JsonUtil.toJson(request));
         return post(domain + path, JsonUtil.toJson(request));
     }
 
@@ -106,9 +124,24 @@ public class LeApiToolKit {
     }
 
     public static void lightStrategy() {
+//{
+//"area":"0000",
+//"pattern":"1",
+//"startTime":"20190107",
+//"stopTime":"20190108",
+//"strategy":"01932EF",
+//"isWeek":"1",
+//"weeks":[1,2,3,4,5],
+//"isMonth":"0",
+//"months":[],
+//"startDate":"",
+//"stopDate":"",
+//"specialDate":""
+//}
 
         LightStrategyIn p = new LightStrategyIn("01932EF", "0000", "20190107", "20190107",
                 1, "[1,2,3]", 0, "[]");
+        System.out.println(p.toString());
         System.out.println(LeApiToolKit.lightStrategy(p));
     }
 

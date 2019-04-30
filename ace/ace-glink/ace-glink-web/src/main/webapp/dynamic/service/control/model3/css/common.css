@@ -38,7 +38,8 @@ ul {
 }
 
 input {
-	border: 0
+	border: 0;
+	color: #fff;
 }
 
 button{

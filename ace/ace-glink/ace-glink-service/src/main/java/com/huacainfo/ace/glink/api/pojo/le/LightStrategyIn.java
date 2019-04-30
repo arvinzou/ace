@@ -1,12 +1,14 @@
 package com.huacainfo.ace.glink.api.pojo.le;
 
+import com.huacainfo.ace.common.model.BaseModel;
+
 /**
  * @ClassName LightStrategyIn
  * @Description 灯光策略下发 --入参列表
  * @Author Arvin Zou
  * @Date 2019/4/15 15:19
  */
-public class LightStrategyIn {
+public class LightStrategyIn extends BaseModel {
     //模式（日程模式：1 假日模式：2 事件模式:3）优先级依次上升
     public static final String MODE_SCHEDULE = "1";
     public static final String MODE_HOLIDAY = "2";

@@ -37,16 +37,27 @@
         <!--自动重载toString()方法插件-->
         <!--<plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>-->
 
+        <!--自定义插件-->
+        <plugin type="com.huacainfo.ace.plus.mybatis.MapperXmlAdapter"/>
+
         <!--注释生成器（可自定义） 具体参看mybatis-generator-->
-        <commentGenerator>
-            <property name="suppressDate" value="true"/><!-- 是否生成注释代时间戳-->
-            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+        <commentGenerator type="com.huacainfo.ace.plus.mybatis.comment.MySQLCommentGenerator">
+            <!-- 是否生成注释代时间戳-->
+            <property name="suppressDate" value="true"/>
+            <!-- 是否取消注释 -->
+            <property name="suppressAllComments" value="false"/>
+            <!--<property name="addRemarkComments" value="true"/>-->
         </commentGenerator>
 
         <!-- 必须要有的，使用这个配置链接数据库 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.2.253:3306/glink"
-                        userId="root" password="123456">
+                        connectionURL="jdbc:mysql://192.168.2.253:3306/glink?useUnicode=true&amp;characterEncoding=UTF-8&amp;useInformationSchema=true"
+                        userId="root"
+                        password="123456">
+            <!-- 针对oracle数据库 -->
+            <!--<property name="remarksReporting" value="true"></property>-->
+            <!-- 针对mysql数据库 -->
+            <!--<property name="useInformationSchema" value="true"></property>-->
         </jdbcConnection>
 
         <!-- java类型处理器
@@ -154,9 +165,9 @@
 
             注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
          -->
-        <table tableName="se_gateway_state"
-               domainObjectName="SeGatewayState"
-               mapperName="SeGatewayStateDao"
+        <table tableName="ai_demo"
+               domainObjectName="AiDemo"
+               mapperName="AiDemoDao"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

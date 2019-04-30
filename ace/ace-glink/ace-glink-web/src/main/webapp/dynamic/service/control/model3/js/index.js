@@ -99,6 +99,9 @@ function renderMonths(m) {
 
 //提交总控数据
 function postList() {
+    if (!confirm("确认执行吗？")) {
+        return;
+    }
     stroyMap();
     var url = contextPath + "/generalYearCron/updateGeneralCtrlCron";
     var data = {
@@ -321,10 +324,10 @@ function initScenario() {
 
 function setScenario() {
     var that = $(this);
-    scenarioPostData.presetNo = that.data('presetNo');
-    var url = '';
-    $.post(url, scenarioPostData, function () {
-
+    scenarioPostData.presetNo = that.data('presetno');
+    var url = contextPath + '/seCustomArea/executePreset';
+    $.post(url, scenarioPostData, function (rst){
+        console.log(rst);
     })
 }
 
@@ -370,7 +373,7 @@ function getScenarioList(key, value) {
         scenarioParams[key] = value;
     }
     var url = contextPath + "/seCustomArea/findSeCustomAreaList";
-    $.getJSON(url, taskParams, function (rst) {
+    $.getJSON(url, scenarioParams, function (rst) {
         if (rst.status == 0) {
             if (taskParams.initType == "init") {
                 $('#pagination3').jqPaginator('option', {
@@ -391,8 +394,8 @@ var scenarioPostData = {};
 
 function selectPreset() {
     var that = $(this);
-    scenarioPostData.areaNo = that.data('areaNo');
-    scenarioPostData.areaNodeID = that.data('areaNodeID');
+    scenarioPostData.areaNo = that.data('areano');
+    scenarioPostData.areaNodeID = that.data('areanodeid');
     var val = $('.scenario-modal  .presetName').val();
     presetMap['presetName'] = val;
     $('.scenario-modal').show();
@@ -558,6 +561,9 @@ function checkData() {
 }
 
 function TimerUpdate() {
+    if (!confirm("确认执行吗？")) {
+        return;
+    }
     checkData();
     $.ajax({
         url: contextPath + "/seTimerData/updateTimer",

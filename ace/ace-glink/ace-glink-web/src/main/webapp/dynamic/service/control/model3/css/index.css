@@ -786,29 +786,47 @@ body {
 	transform:rotate(-45deg) translate(50%,-50%);
 }
 
-.menu-wrap{
+.menu-wrap {
 	display: none;
 	position: absolute;
-	top:62px;
-	right: .1rem;
+	right: -17%;
 	z-index: 10;
-	background-color: #fff;
-	border-radius:4px;
-	min-width:180px;
+	border-radius: 0.020833rem;
+	min-width: 100%;
 	font-size: .08rem;
-	padding:10px 0;
+	padding: 10px 0;
+	top: 120%;
+	border: 1px solid rgba(0, 214, 217, 1);
+	background: rgba(13, 67, 72, 1);
+	font-family: MicrosoftYaHei;
+	font-weight: 400;
 }
-.menu-wrap a{
+
+.menu-wrap a {
 	display: block;
 	text-align: center;
 	font-size: .08rem;
 	color: #0d4348;
 }
-.menu-ul>li{
-	margin-top: 10px;
+
+.menu-ul > li {
+	text-align: center;
+	height: 0.2rem;
+	line-height: 0.2rem;
 }
-.userInfo>.up{
+
+.menu-ul > li:active {
+	background: #0b393e;
+}
+
+.menu-ul > li > a {
+	color: rgba(255, 255, 255, 1);
+}
+
+.userInfo > .up {
 	font-size: 0.09375rem;
 	display: flex;
 	align-items: center;
+	position: relative;
 }
+
