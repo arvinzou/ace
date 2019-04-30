@@ -101,6 +101,9 @@ public class TopStationServiceImpl implements TopStationService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "站点名称不能为空！");
         }
+        if (CommonUtils.isBlank(o.getAddress())) {
+            return new MessageResponse(1, "详细地址不能为空！");
+        }
         int temp = this.topStationDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "站点编号重复！");
