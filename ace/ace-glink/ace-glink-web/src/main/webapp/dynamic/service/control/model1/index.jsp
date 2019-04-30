@@ -420,7 +420,7 @@
 
 <script id="tpl-presets" type="text/template">
     {@each data as item, index}
-    <li data-presetNo="\${item.presetNo}">\${item.strategyExplain}</li>
+    <li data-strategyNum="\${item.strategyNum}">\${item.strategyExplain}</li>
     {@/each}
 </script>
 

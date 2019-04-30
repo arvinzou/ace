@@ -182,11 +182,13 @@ canvasPanel.prototype.paintNowValue = function (num){
 canvasPanel.prototype.paintTitle = function (title) {
     var $this=this;
     //设置字体样式
-    var fontStyle = $this.fontWeight+' '+Math.round($this.fontSize*$this.times)+'px '+$this.fontFamily;
+    var fontStyle = $this.fontWeight+' '+ Math.round($this.fontSize*$this.times)+'px '+$this.fontFamily;
     $this.context.font = fontStyle;
     //设置字体填充颜色
     $this.fontColor = $this.bgColor;
+    $this.title = title;
     // $this.context.fillStyle = $this.fontColor;
     $this.context.fillStyle = '#00D6D9';
     $this.context.fillText(title,45*$this.times,210*$this.times);
+    $this.context.closePath();
 }
