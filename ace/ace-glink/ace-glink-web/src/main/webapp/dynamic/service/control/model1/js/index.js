@@ -14,14 +14,14 @@ $(function () {
     initPage();
     initsceneControl();
     initJuicerMethod();
-    $('.setTime-modal .unit').on('click', '.piece', changePattern)
+    $('.setTime-modal .unit').on('click', '.piece', changePattern);
 });
 
 
 var clearData = ['isWeek', 'isMonth', 'weeks', 'months', 'startDate', 'stopDate', 'specialDate'];
 
 
-//juicer自定义函数
+/**juicer自定义函数*/
 function initJuicerMethod() {
     juicer.register('isChecked', isChecked);
     juicer.register('formatObject', formatObject);
@@ -45,7 +45,7 @@ function isChecked(val, idex) {
 
 function formatObject(data) {
     for (var item in data) {
-        if (item.indexOf('Date') > -1 || item.indexOf('Time')>-1){
+        if (item.indexOf('Date') > -1 || item.indexOf('Time') > -1) {
             data[item] = data[item].substring(0, 10).split('-').join('');
         }
     }
@@ -152,9 +152,105 @@ function initInputDate() {
 /*++++++++++++++++++++++++++++++++++++++++++initsceneControl Start++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 function initsceneControl() {
     getStations();
+    requestSenceStatusData();
     $('#check').on('click', 'li', checkStation);
     $('#checked').on('click', 'li', removeStation);
+    $('.sceneControl .btns').on('click', '.colorful img', controllPlay);
+    $('#s6').change(switchNow);
 }
+
+function switchNow() {
+    var that = $(this);
+    if (that.is(':checked')) {
+        submitSenceStatusData('sceneControlState', 1);
+    } else {
+        submitSenceStatusData('sceneControlState', 2);
+    }
+}
+
+function controllPlay() {
+    var that = $(this);
+    var state = that.data('state');
+    submitSenceStatusData('playbackStatus', state);
+    requestSenceStatusData();
+}
+
+
+/**
+ * 提交状态
+ * */
+function submitSenceStatusData(str, num) {
+    var url = contextPath + "/pagePortal/updatePagePortalData";
+    var data = {
+        key: str,
+        val: num
+    };
+    $.ajaxSettings.async = false;
+    $.post(url, data, function (rst) {
+
+    })
+    $.ajaxSettings.async = true;
+}
+
+
+/**
+ * 请求场景状态数据
+ */
+function requestSenceStatusData() {
+    $.ajax({
+        url: contextPath + "/pagePortal/findList",
+        type: "post",
+        async: false,
+        success: function (res) {
+            console.log(res);
+            if (res.length > 0) {
+                initSenceStatusData(res);   //初始化场景状态数据
+            } else {
+                alert('暂无数据')
+            }
+        },
+        error: function () {
+            alert("对不起出错了！");
+        }
+    });
+}
+
+
+/**
+ * 初始化场景状态数据
+ */
+function initSenceStatusData(arr) {
+    $.each(arr, function (i, item) {
+        console.log(item);
+        if (item.itemKey == "sceneControlState") {
+            if (item.itemValue == 1) { // 1开，2关
+                $('#s6').attr('checked', true);
+            } else {
+                $('#s6').attr('checked', false);
+            }
+        }
+        if (item.itemKey == "playbackStatus") {  // 0播放， 1暂停
+            if (item.itemValue == 0) {
+                playNow();
+            } else {
+                pauseNow();
+            }
+
+        }
+    });
+}
+
+
+function playNow() {
+    $('#pause').addClass('colorful');
+    $('#play').removeClass('colorful');
+}
+
+function pauseNow() {
+    $('#play').addClass('colorful');
+    $('#pause').removeClass('colorful');
+}
+
 
 /*获取所有站点*/
 function getStations() {
@@ -339,11 +435,11 @@ function viewSetTime(data) {
                 var weeks = data.weeks;
                 setTimerWeek(weeks);
                 $('.setTime-modal .piece.week').addClass('active');
-            }else if (data.isMonth) {
+            } else if (data.isMonth) {
                 var months = data.months;
                 setTimerMonth(months);
                 $('.setTime-modal .piece.month').addClass('active');
-            }else{
+            } else {
                 setTimerWeek();
                 $('.setTime-modal .piece.week').addClass('active');
             }
@@ -357,7 +453,7 @@ function viewSetTime(data) {
             $('.setTime-modal .piece.event').addClass('active');
             break;
     }
-    if(mateData.startTime){
+    if (mateData.startTime) {
         $('input[name=startTime]').val(mateData.startTime.substring(0, 10));
         $('input[name=stopTime]').val(mateData.stopTime.substring(0, 10));
     }
@@ -442,6 +538,45 @@ function clearParam() {
     }
 }
 
+
+var jsonData = '';
+
+function selectPreset(data) {
+    jsonData = data;
+    $('.scenario-modal').show();
+    var url = contextPath + "/ltStrategy/strategysDetail";
+    $.getJSON(url, function (rst) {
+        if (rst.status == 0) {
+            render($("#presets"), rst.value.data, "tpl-presets");
+        }
+    });
+}
+
+function setStrategy() {
+    var that = $(this);
+    var strategyNum = that.data('strategynum');
+    if (!strategyNum) {
+        return false;
+    }
+    var i = JSON.parse(jsonData);
+    i.strategy = strategyNum;
+    var data = {
+        jsons: JSON.stringify(i)
+    }
+    var url = contextPath + "/ltStrategy/lightStrategy";
+    $.post(url, data, function (rst) {
+        var r = JSON.parse(rst.value)
+        if (r.code == '200') {
+            $('.modal').hide();
+            alert("下发成功");
+        }
+        else{
+            alert("出现错误");
+        }
+    })
+}
+
+
 /*++++++++++++++++++++++++++++++++++++++++++initstrategyPart end++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 function renderadd(obj, data, tplId) {
@@ -462,39 +597,10 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
-var strategyPostData = {};
-var jsonData='';
-
-function selectPreset(data) {
-    jsonData=data;
-    $('.scenario-modal').show();
-    var url = contextPath + "/ltStrategy/strategysDetail";
-    $.getJSON(url, function (rst) {
-        if (rst.status == 0) {
-            render($("#presets"), rst.value.data, "tpl-presets");
-        }
-    });
-}
-
 
 /*************************************************************************************************************/
 
-function setStrategy() {
-    var that = $(this);
-    var strategyNum= that.data('strategynum');
-    if(!strategyNum){
-        return false;
-    }
-    var i=JSON.parse(jsonData);
-    i.strategy=strategyNum;
-    var data={
-        jsons:JSON.stringify(i)
-    }
-    var url = contextPath + "/ltStrategy/lightStrategy";
-    $.post(url,data, function () {
 
-    })
-}
 
 
 
