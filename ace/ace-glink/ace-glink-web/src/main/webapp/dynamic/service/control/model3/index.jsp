@@ -305,7 +305,7 @@
         <div class="seled">
             <div class="checkboxGroup">
                 <input id="a\${index}" name="m\${index}" type="radio" value="1" \${item==1?'checked':''}/>
-                <label class="check1" for="a\${index}">日程模式</label>
+                <label class="check1" for="a\${index}">平日模式</label>
             </div>
             <div class="checkboxGroup">
                 <input id="b\${index}" name="m\${index}" type="radio" value="2" \${item==2?'checked':''}/>

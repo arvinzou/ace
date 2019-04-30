@@ -129,16 +129,12 @@ public class LtStrategyServiceImpl implements LtStrategyService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "策略名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.ltStrategyDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更策略管理", "策略管理", "",
                 o.getId(), o.getId(), userProp);
-
         return new MessageResponse(0, "保存成功！");
     }
 

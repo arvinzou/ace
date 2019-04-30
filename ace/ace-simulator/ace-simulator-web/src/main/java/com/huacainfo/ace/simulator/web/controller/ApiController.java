@@ -64,7 +64,7 @@ public class ApiController extends SamulatorBaseController {
                 return JSON.parseObject(FileUtil.ReadFile(path + "11-系统定时数据.Json", FileUtil.UTF_8));
             //3.15-系统定时计划修改（InterFaceType=14）
             case 14:
-                return JSON.parseObject(FileUtil.ReadFile(path + "14-系统定时修改.Json", FileUtil.UTF_8));
+                return rtnOk();//JSON.parseObject(FileUtil.ReadFile(path + "14-系统定时修改.Json", FileUtil.UTF_8));
             //3.16-获取逻辑区当前场景（InterFaceType=15）
             case 15:
                 return JSON.parseObject(FileUtil.ReadFile(path + "15-逻辑区域场景反馈.Json", FileUtil.UTF_8));
@@ -92,8 +92,8 @@ public class ApiController extends SamulatorBaseController {
 //                return JSON.parseObject(FileUtil.ReadFile(path + "03-单个配电箱数据.Json", FileUtil.UTF_8));
 //
 //            //3.20-修改总控全年排程（InterFaceType=20）
-//            case 20:
-//                return JSON.parseObject(FileUtil.ReadFile(path + "03-单个配电箱数据.Json", FileUtil.UTF_8));
+            case 20:
+                return rtnOk();//JSON.parseObject(FileUtil.ReadFile(path + "03-单个配电箱数据.Json", FileUtil.UTF_8));
             //3.21-修改当天总控模式（InterFaceType=21）
             case 21:
                 return rtnOk();

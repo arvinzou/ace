@@ -432,11 +432,17 @@ public class SeTimerDataServiceImpl implements SeTimerDataService {
      * @return
      */
     @Override
-    public Map<String, Object> updateTimer(String jsons, UserProp userProp) {
+    public MessageResponse updateTimer(String jsons, UserProp userProp) {
         TimerDataOut.TimerData data = JSON.parseObject(jsons, TimerDataOut.TimerData.class);
         Map<String, Object> o = SeApiToolKit.updateTimer(data);
-        syncData(userProp);
-        return o;
+        MessageResponse m;
+        if (o.get("Status").equals("ok")) {
+            syncData(userProp);
+            m = new MessageResponse(ResultCode.SUCCESS, "执行成功");
+        } else {
+            m = new MessageResponse(ResultCode.FAIL, "执行失败");
+        }
+        return m;
     }
 
 

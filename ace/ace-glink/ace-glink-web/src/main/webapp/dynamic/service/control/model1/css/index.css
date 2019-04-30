@@ -26,7 +26,7 @@ body {
 .head .logo img {
 	width: 1rem;
 	height: 0.208333rem;
-	object-fit: cover;
+	object-fit: fill;
 	margin-right: 0.145833rem;
 }
 
@@ -34,7 +34,6 @@ body {
 	width: 3.5rem;
 	height: 100%;
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
 }
 
@@ -44,6 +43,7 @@ body {
 	background: url(../img/btnBg.png) no-repeat;
 	background-size: 100% 100%;
 	padding: 0.09rem 0 0.09rem 0.35rem;
+	margin-right: 0.3rem;
 }
 
 .head .btns .btn .cn {
@@ -888,13 +888,13 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	float: left;
-	margin: 0 0.077rem 0.1rem 0;
+	margin: 0 0.07rem 0.1rem 0;
 }
 .setTime-modal .box .info .list > li:nth-child(4n+4){
 	margin: 0;
 }
 
-.setTime-modal .box .info .show input {
+.setTime-modal .box .info .show input[type='checkbox'] {
 	display: none;
 }
 
@@ -928,8 +928,6 @@ body {
 	position: absolute;
 }
 
-
-
 .setTime-modal input:checked+.slider-v3{
 	box-shadow: 0px 0px 5px #00D6D9;
 }
@@ -948,6 +946,155 @@ body {
 .switch-wrap span{
 	display: inline-block;
 	margin-top: 8px;
+}
+
+.addStrategy-modal .modal-content{
+	width:4.239583rem;
+	height:4.197916rem;
+}
+
+.setTime-modal .inputTime input[type='text']{
+	width:1.5625rem;
+	height:0.197916rem;
+	background:rgba(40,53,62,1);
+	border: 1px solid rgba(40,53,62,1);
+	color: #fff;
+	padding: 0 0.1rem;
+}
+.setTime-modal .inputTime p{
+	margin-bottom: 0.08rem;
+}
+
+.setTime-modal .inputTime input:focus{
+	border:1px solid rgba(0,214,217,1);
+}
+
+.addStrategy-modal .wrap{
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.addStrategy-modal .wrap .title{
+	width:100%;
+	height:0.260416rem;
+	line-height:0.260416rem;
+	background:rgba(40,53,62,1);
+	font-size:0.083333rem;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(0,214,217,1);
+	padding: 0  0.104166rem;
+}
+.addStrategy-modal .wrap .form{
+	width:100%;
+	flex-grow: 1;
+	background:rgba(26,41,51,1);
+	padding:0.02rem 0.291666rem;
+}
+.addStrategy-modal .wrap .bottom{
+	border-top:1px solid rgba(40,53,62,1);
+	width: 100%;
+	height:0.322916rem;
+	background:rgba(26,41,51,1);
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding:0 0.291666rem;
+}
+.addStrategy-modal .wrap .bottom button{
+	width:0.364583rem;
+	height:0.177083rem;
+	line-height:0.177083rem;
+	background:rgba(0,214,217,1);
+	border-radius:0.020833rem;
+	font-size:0.072916rem;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(5,91,91,1);
+}
+
+.addStrategy-modal .wrap .bottom button:active{
+	background: #02c5c7;
+}
+
+.addStrategy-modal .wrap .form .input-Group{
+	display: flex;
+	flex-direction: column;
+}
+
+.addStrategy-modal .wrap .form .input-Group>p{
+	font-size:0.072916rem;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(0,214,217,1);
+	margin:0.1rem 0 0.06rem;
+}
+.addStrategy-modal .wrap .form .input-Group label{
+	font-size:0.0625rem;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(167,233,234,1);
+}
+
+.addStrategy-modal .wrap .form .input-Group>input[type='text']{
+	width:1.541666rem;
+	height:0.197916rem;
+	background:rgba(40,53,62,1);
+	padding: 0 0.1rem;
+	color: #fff;
+}
+
+.addStrategy-modal .wrap .form .input-Group>input[type='text']:focus,.addStrategy-modal .wrap .form .input-Group>textarea:focus{
+	border:1px solid rgba(0,214,217,1);
+}
+
+.addStrategy-modal .wrap .form .input-Group>textarea{
+	width:100%;
+	height:0.9rem;
+	background:rgba(40,53,62,1);
+	border: 1px solid rgba(40,53,62,1);
+	padding: 0.1rem;
+	color: #fff;
+}
+
+
+.scenario-modal .modal-content{
+	width: 3rem;
+	height: 4rem;
+}
+
+.scenario-modal {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.scenario-modal  .ulList {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+.scenario-modal .ulList> ul{
+	height: 2.9rem;
+}
+
+.scenario-modal .ulList > ul > li {
+	font-size: 0.12rem;
+	height: 0.5rem;
+	background: #07C6C9;
+	margin-bottom: 0.1rem;
+	border-radius: 0.05rem;
+	line-height: 0.5rem;
+	text-align: center;
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.scenario-modal .ulList li:active {
+	background: #0E7980;
 }
 
 /*****************************************************************************************************************************************************************/

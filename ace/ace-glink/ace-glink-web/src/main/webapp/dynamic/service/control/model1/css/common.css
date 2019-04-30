@@ -40,13 +40,18 @@ ul {
 input {
 	border: 0
 }
+textarea{
+	resize: none;
+}
+
 button{
 	border: none;
 }
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-	color: #ccc
+	color: #ccc;
+
 }
 
 ::-webkit-scrollbar {
@@ -106,6 +111,23 @@ button.style1{
 	font-weight:400;
 	color:rgba(255,255,255,1);
 
+}
+
+.fa-chevron-right:before,.fa-chevron-left:before{
+	content: '';
+	display: block;
+	width: 9px;
+	height: 9px;
+	border: 2px solid;
+	border-left: none;
+	border-bottom: none;
+
+}
+.fa-chevron-right:before{
+	transform: rotate(45deg);
+}
+.fa-chevron-left:before{
+	transform: rotate(-135deg);
 }
 
 

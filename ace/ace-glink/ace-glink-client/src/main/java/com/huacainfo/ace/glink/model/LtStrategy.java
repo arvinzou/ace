@@ -55,6 +55,16 @@ public class LtStrategy {
 
     private Date lastModifyDate;
 
+    private String areaCode;
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+
     public String getId() {
         return id;
     }

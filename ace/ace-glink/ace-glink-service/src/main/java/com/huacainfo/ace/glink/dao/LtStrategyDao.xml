@@ -8,6 +8,7 @@
         <result column="depict" jdbcType="VARCHAR" property="depict"/>
         <result column="state" jdbcType="CHAR" property="state"/>
         <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
         <result column="stationCode" jdbcType="VARCHAR" property="stationCode"/>
         <result column="pattern" jdbcType="CHAR" property="pattern"/>
         <result column="isWeek" jdbcType="INTEGER" property="isWeek"/>
@@ -30,7 +31,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, code, name, depict, state, district, stationCode, pattern, isWeek, weeks, isMonth, 
+    id, code, name, depict, state, district,areaCode, stationCode, pattern, isWeek, weeks, isMonth,
     months, startDate, stopDate, specialDate, startTime, stopTime, strategy, remark, 
     status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
     lastModifyDate
@@ -47,7 +48,7 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.glink.model.LtStrategy">
     insert into lt_strategy (id, code, name, 
-      depict, state, district, 
+      depict, state, district, areaCode,
       stationCode, pattern, isWeek, 
       weeks, isMonth, months, 
       startDate, stopDate, specialDate, 
@@ -56,7 +57,7 @@
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate)
     values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{depict,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, #{district,jdbcType=VARCHAR}, 
+      #{depict,jdbcType=VARCHAR}, #{state,jdbcType=CHAR}, #{district,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR},
       #{stationCode,jdbcType=VARCHAR}, #{pattern,jdbcType=CHAR}, #{isWeek,jdbcType=INTEGER}, 
       #{weeks,jdbcType=VARCHAR}, #{isMonth,jdbcType=INTEGER}, #{months,jdbcType=VARCHAR}, 
       #{startDate,jdbcType=TIMESTAMP}, #{stopDate,jdbcType=TIMESTAMP}, #{specialDate,jdbcType=TIMESTAMP}, 
@@ -73,6 +74,7 @@
       depict = #{depict,jdbcType=VARCHAR},
       state = #{state,jdbcType=CHAR},
       district = #{district,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
       stationCode = #{stationCode,jdbcType=VARCHAR},
       pattern = #{pattern,jdbcType=CHAR},
       isWeek = #{isWeek,jdbcType=INTEGER},
@@ -86,10 +88,6 @@
       stopTime = #{stopTime,jdbcType=TIMESTAMP},
       strategy = #{strategy,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
@@ -109,6 +107,7 @@
       depict = #{depict,jdbcType=VARCHAR},
       state = #{state,jdbcType=CHAR},
       district = #{district,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
       stationCode = #{stationCode,jdbcType=VARCHAR},
       pattern = #{pattern,jdbcType=CHAR},
       isWeek = #{isWeek,jdbcType=INTEGER},
@@ -131,7 +130,7 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.LtStrategyVo"></resultMap>
 
     <sql id="Vo_Column_List">
-    l.id, l.code, l.name, l.depict, l.state, l.district, l.stationCode, l.pattern, l.isWeek, l.weeks, l.isMonth,
+    l.id, l.code, l.name, l.depict, l.state, l.district, l.areaCode, l.stationCode, l.pattern, l.isWeek, l.weeks, l.isMonth,
     l.months, l.startDate, l.stopDate, l.specialDate, l.startTime, l.stopTime, l.strategy, l.remark,
     l.status, l.createUserId, l.createUserName, l.createDate,l.lastModifyUserId, l.lastModifyUserName,
     l.lastModifyDate
@@ -174,7 +173,7 @@
     select count(*)
     from lt_strategy
     where name=#{name,jdbcType=VARCHAR}
-    or code != #{code,jdbcType=VARCHAR}
+    or code = #{code,jdbcType=VARCHAR}
   </select>
 
     <select id="selectByPrimaryKeyVo" parameterType="java.lang.String" resultMap="VoResultMap">

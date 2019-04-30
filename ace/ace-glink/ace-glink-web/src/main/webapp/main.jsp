@@ -161,7 +161,7 @@
         </td>
         <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.deviceName}</td>
         <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.subareaName}</td>
-        <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.errContent}</td>
+        <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.errTypes_ch}</td>
         <td width="10%" style="text-align: center;font-size: 8px !important;">\${item.errLoopNum}</td>
         <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.errDate}</td>
     </tr>
