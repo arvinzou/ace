@@ -2,6 +2,8 @@ package com.huacainfo.ace.glink.web.controller;
 
 import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.glink.api.SeApiToolKit;
@@ -47,11 +49,16 @@ public class GeneralYearCronController extends GLinkBaseController {
      */
     @RequestMapping(value = "/updateGeneralCtrlCron")
     @ResponseBody
-    public Map<String, Object> updateGeneralCtrlCron(String jsons) throws Exception {
+    public MessageResponse updateGeneralCtrlCron(String jsons) throws Exception {
         YearCron cron = JsonUtil.toObject(jsons, YearCron.class);
         Map<String, Object> o = SeApiToolKit.updateGeneralCtrlCron(cron);
-        return o;
+        MessageResponse m;
+        if (o.get("Status").equals("ok")) {
+            this.syncData();
+            m = new MessageResponse(ResultCode.SUCCESS, "执行成功");
+        } else {
+            m = new MessageResponse(ResultCode.FAIL, "执行失败");
+        }
+        return m;
     }
-
-
 }
