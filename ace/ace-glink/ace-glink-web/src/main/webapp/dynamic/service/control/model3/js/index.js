@@ -321,10 +321,10 @@ function initScenario() {
 
 function setScenario() {
     var that = $(this);
-    scenarioPostData.presetNo = that.data('presetNo');
-    var url = '';
-    $.post(url, scenarioPostData, function () {
-
+    scenarioPostData.presetNo = that.data('presetno');
+    var url = contextPath + '/seCustomArea/executePreset';
+    $.post(url, scenarioPostData, function (rst){
+        console.log(rst);
     })
 }
 
@@ -391,8 +391,8 @@ var scenarioPostData = {};
 
 function selectPreset() {
     var that = $(this);
-    scenarioPostData.areaNo = that.data('areaNo');
-    scenarioPostData.areaNodeID = that.data('areaNodeID');
+    scenarioPostData.areaNo = that.data('areano');
+    scenarioPostData.areaNodeID = that.data('areanodeid');
     var val = $('.scenario-modal  .presetName').val();
     presetMap['presetName'] = val;
     $('.scenario-modal').show();

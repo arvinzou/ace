@@ -761,7 +761,7 @@
             \${item.areaNodeID}-\${item.areaName}
         </div>
         <div class="bottom">
-            <button data-areaNo="\${item.areaNo}" data-areaNodeID="\${item.areaNodeID}">
+            <button data-areano="\${item.areaNo}" data-areanodeid="\${item.areaNodeID}">
                 选择
             </button>
         </div>

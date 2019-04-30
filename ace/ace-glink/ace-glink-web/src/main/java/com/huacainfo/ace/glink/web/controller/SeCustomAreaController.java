@@ -1,6 +1,9 @@
 package com.huacainfo.ace.glink.web.controller;
 
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.glink.api.LeApiToolKit;
+import com.huacainfo.ace.glink.api.SeApiToolKit;
+import com.huacainfo.ace.glink.api.pojo.le.LightStrategyIn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,16 +60,11 @@ public class SeCustomAreaController extends GLinkBaseController {
      */
     @RequestMapping(value = "/findSeCustomAreaList")
     @ResponseBody
-    public PageResult
-            <SeCustomAreaVo> findSeCustomAreaList(SeCustomAreaQVo condition, PageParamNoChangeSord page) throws Exception {
-
-        PageResult
-                <SeCustomAreaVo> rst = this.seCustomAreaService.findSeCustomAreaList(condition, page.getStart(),
-                page.getLimit(), page.getOrderBy());
+    public PageResult<SeCustomAreaVo> findSeCustomAreaList(SeCustomAreaQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<SeCustomAreaVo> rst = this.seCustomAreaService.findSeCustomAreaList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 
@@ -178,10 +176,7 @@ public class SeCustomAreaController extends GLinkBaseController {
     public MessageResponse importXls(@RequestParam MultipartFile[] file,
                                      String jsons) throws Exception {
         ExcelUtils utils = new ExcelUtils();
-        List
-                <Map
-                        <String
-                                , Object>> list = new ArrayList<>();
+        List<Map<String, Object>> list = new ArrayList<>();
         MongoFile[] files = new MongoFile[file.length];
         int i = 0;
         for (MultipartFile o : file) {
@@ -217,10 +212,7 @@ public class SeCustomAreaController extends GLinkBaseController {
      */
     @RequestMapping(value = "/getList")
     @ResponseBody
-    public ListResult
-            <Map
-                    <String
-                            , Object>> getList() throws Exception {
+    public ListResult<Map<String, Object>> getList() throws Exception {
         return this.seCustomAreaService.getList(this.getParams());
     }
 
@@ -239,9 +231,7 @@ public class SeCustomAreaController extends GLinkBaseController {
      */
     @RequestMapping(value = "/getListByCondition")
     @ResponseBody
-    public Map
-            <String
-                    , Object> getListByCondition() {
+    public Map<String, Object> getListByCondition() {
         return this.seCustomAreaService.getListByCondition(this.getParams());
     }
 
@@ -290,4 +280,19 @@ public class SeCustomAreaController extends GLinkBaseController {
         List<SeCustomArea> obj = JSON.parseArray(jsons, SeCustomArea.class);
         return this.seCustomAreaService.syncCustomData(obj, this.getCurUserProp());
     }
+
+    /**
+     * 策略下发
+     *
+     * @throws Exception
+     */
+    @RequestMapping(value = "/executePreset")
+    @ResponseBody
+    public SingleResult executePreset(String areaNO, String presetNo, String areaNodeID) throws Exception {
+        Map<String, Object> map = SeApiToolKit.executePreset(areaNO,presetNo,areaNodeID);
+        SingleResult<Map> rst = new SingleResult<>();
+        rst.setValue(map);
+        return rst;
+    }
+
 }
