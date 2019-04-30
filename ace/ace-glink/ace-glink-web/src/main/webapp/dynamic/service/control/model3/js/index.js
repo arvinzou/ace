@@ -370,7 +370,7 @@ function getScenarioList(key, value) {
         scenarioParams[key] = value;
     }
     var url = contextPath + "/seCustomArea/findSeCustomAreaList";
-    $.getJSON(url, taskParams, function (rst) {
+    $.getJSON(url, scenarioParams, function (rst) {
         if (rst.status == 0) {
             if (taskParams.initType == "init") {
                 $('#pagination3').jqPaginator('option', {
