@@ -139,7 +139,7 @@
                     <tr>
                         <td class="tg-mvxc" width="10%">策略编号</td>
                         <td class="tg-mvxc" width="30%">策列名称</td>
-                        <td class="tg-mvxc" width="10%">分区</td>
+                        <td class="tg-mvxc" width="10%">分区编号</td>
                         <td class="tg-mvxc" width="20%">操作</td>
                     </tr>
                     <tbody id="strategyList">
@@ -465,7 +465,7 @@
             <input name="name" type="text"  value="\${data.name}">
         </div>
         <div class="input-Group">
-            <p>行政编号*</p>
+            <p>分区编号*</p>
             <input name="areaCode" type="text"  value="\${data.areaCode}">
         </div>
         <div class="input-Group">
