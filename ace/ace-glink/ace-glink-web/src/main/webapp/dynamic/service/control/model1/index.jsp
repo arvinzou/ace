@@ -63,13 +63,13 @@
                 场景控制
             </div>
             <div class="btns">
-                <div class="playback-status" >
-                    <img src="img/start.png" />
-                    <p></p>
-                </div>
-                <div>
-                    <img src="img/stop.png" />
+                <div id="play">
+                    <img data-state="0" src="img/start.png" />
                     <p>恢复</p>
+                </div>
+                <div id="pause">
+                    <img data-state="1" src="img/stop.png" />
+                    <p>停止</p>
                 </div>
                 <div>
                     <img src="img/change.png" />
@@ -79,9 +79,8 @@
             <div class="radio">
             </div>
             <div class="wrap switch-wrap">
-                <input type="checkbox" id="s6"   />
+                <input type="checkbox" id="s6" value="1"/>
                 <label class="slider-v3 label-switch" for="s6"></label>
-                <span></span>
             </div>
             <!--/wrap-->
 
@@ -483,143 +482,89 @@
 <script src="js/foundation-datepicker.min.js"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    $(function(){
-        requestSenceStatusData();  //请求场景状态数据
-    });
-    /**
-     * 请求场景状态数据
-     */
-    function requestSenceStatusData(){
-        $.ajax({
-            url: contextPath + "/pagePortal/findList",
-            type: "post",
-            async: false,
-            success: function (res) {
-               console.log(res);
-                if(res.length > 0){
-                    initSenceStatusData(res);   //初始化场景状态数据
-                }else{
-                    alert('暂无数据')
-                }
-            },
-            error: function () {
-                alert("对不起出错了！");
-            }
-        });
-    }
 
-    /**
-     * 初始化场景状态数据
-     */
-    function  initSenceStatusData(arr){
-        var  $switch = $('.switch-wrap');
-        var  $playbackStatus = $('.playback-status');
-        $.each(arr,function (i,item) {
-            console.log(item);
-            if(item.itemKey == "sceneControlState"){
-                if(item.itemValue==1){ // 1开，2关
-                    $switch.find('input').attr('checked',true);
-                    $switch.find('label').attr('data-value',item.itemValue);
-                    $switch.find('span').html('开启');
-                }else{
-                    $switch.find('input').attr('checked',false);
-                    $switch.find('label').attr('data-value',item.itemValue);
-                    $switch.find('span').html('关闭');
-                }
-            }
-            if(item.itemKey == "playbackStatus"){  // 0播放， 1暂停
-                if(item.itemValue == 0){
-                    $playbackStatus.find('img').attr('src','img/stop.png');
-                    $playbackStatus.find('p').html('播放');
-                    $playbackStatus.attr('data-value',item.itemValue);
-                }else{
-                    $playbackStatus.find('img').attr('src','img/start.png');
-                    $playbackStatus.find('p').html('暂停');
-                    $playbackStatus.attr('data-value',item.itemValue);
-                }
 
-            }
-        });
-    }
 
-    /*
-    * 总开关点击切换事件
-    * */
-    $('.label-switch').on('click',function(e){
-        var  $switch = $('.switch-wrap');
-        var $input = $switch.find('input');
-        var $play = $('.playback-status');
-        var str1 = 'sceneControlState';  //场景控制状态 // 1,开， 2关
-        var str2 = 'playbackStatus';  //播放状态 //0播放， 1暂停
-        if(confirm('确认切换当前状态？')){
-            if($input.is(':checked')){
-                $switch.find('label').attr('data-value',2);
-                $input.attr('checked',true);
-                $switch.find('span').html('关闭');
-                submitSenceStatusData(str1,2);  //场景控制状态
 
-                //场景开关关闭时，关闭所有操作
-                $play.attr('data-value',1);
-                $play.find('img').attr('src','./img/start.png');
-                $play.find('p').html('暂停');
-                submitSenceStatusData(str2,1);  //播放状态为暂停
-            }else{
-                $switch.find('label').attr('data-value',1);
-                $input.attr('checked',false);
-                $switch.find('span').html('开启');
-                submitSenceStatusData(str1,1);
-            }
-        }
 
-    });
-    /*
-    * 提交状态
-    * */
-    function submitSenceStatusData(str,num){
-        $.ajax({
-            url: contextPath + "/pagePortal/updatePagePortalData",
-            type: "post",
-            async: false,
-            data:{
-                key:str,
-                val:num
-            },
-            success: function (res) {
-                if(res.status == 0){
-                    // alert('场景控制状态保存成功');
-                }
-            },
-            error: function () {
-                alert("对不起出错了！");
-            }
-        });
-    }
-
-    /**
-     * 播放状态点击事件
-     */
-    $('.playback-status img').on('click',function () {
-        var switchValue = $('.switch-wrap label').attr('data-value');
-        var $play = $('.playback-status');
-        var str = 'playbackStatus';  //播放状态
-        var playValue =  $play.attr('data-value');
-        console.log(switchValue);
-        console.log(playValue);
-        if(switchValue == 1){ // 1,开， 2关
-            if(playValue == 0){  //0播放， 1暂停
-                $play.attr('data-value',1);
-                $play.find('img').attr('src','img/start.png');
-                $play.find('p').html('暂停');
-                submitSenceStatusData(str,1);
-            }else{
-                $play.attr('data-value',0);
-                $play.find('img').attr('src','img/stop.png');
-                $play.find('p').html('播放');
-                submitSenceStatusData(str,0);
-            }
-        }else{
-            alert('请切换开关状态为开启，再进行操作！')
-        }
-    });
+//    /*
+//    * 总开关点击切换事件
+//    * */
+//    $('.label-switch').on('click',function(e){
+//        var  $switch = $('.switch-wrap');
+//        var $input = $switch.find('input');
+//        var $play = $('.playback-status');
+//        var str1 = 'sceneControlState';  //场景控制状态 // 1,开， 2关
+//        var str2 = 'playbackStatus';  //播放状态 //0播放， 1暂停
+//        if(confirm('确认切换当前状态？')){
+//            if($input.is(':checked')){
+//                $switch.find('label').attr('data-value',2);
+//                $input.attr('checked',true);
+//                $switch.find('span').html('关闭');
+//                submitSenceStatusData(str1,2);  //场景控制状态
+//
+//                //场景开关关闭时，关闭所有操作
+//                $play.attr('data-value',1);
+//                $play.find('img').attr('src','./img/start.png');
+//                $play.find('p').html('暂停');
+//                submitSenceStatusData(str2,1);  //播放状态为暂停
+//            }else{
+//                $switch.find('label').attr('data-value',1);
+//                $input.attr('checked',false);
+//                $switch.find('span').html('开启');
+//                submitSenceStatusData(str1,1);
+//            }
+//        }
+//
+//    });
+//    /*
+//    * 提交状态
+//    * */
+//    function submitSenceStatusData(str,num){
+//        $.ajax({
+//            url: contextPath + "/pagePortal/updatePagePortalData",
+//            type: "post",
+//            async: false,
+//            data:{
+//                key:str,
+//                val:num
+//            },
+//            success: function (res) {
+//                if(res.status == 0){
+//                    // alert('场景控制状态保存成功');
+//                }
+//            },
+//            error: function () {
+//                alert("对不起出错了！");
+//            }
+//        });
+//    }
+//
+//    /**
+//     * 播放状态点击事件
+//     */
+//    $('.playback-status img').on('click',function () {
+//        var switchValue = $('.switch-wrap label').attr('data-value');
+//        var $play = $('.playback-status');
+//        var str = 'playbackStatus';  //播放状态
+//        var playValue =  $play.attr('data-value');
+//        console.log(switchValue);
+//        console.log(playValue);
+//        if(switchValue == 1){ // 1,开， 2关
+//            if(playValue == 0){  //0播放， 1暂停
+//                $play.attr('data-value',1);
+//                $play.find('img').attr('src','img/start.png');
+//                $play.find('p').html('暂停');
+//                submitSenceStatusData(str,1);
+//            }else{
+//                $play.attr('data-value',0);
+//                $play.find('img').attr('src','img/stop.png');
+//                $play.find('p').html('播放');
+//                submitSenceStatusData(str,0);
+//            }
+//        }else{
+//            alert('请切换开关状态为开启，再进行操作！')
+//        }
+//    });
 </script>
 </html>
