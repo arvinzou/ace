@@ -44,13 +44,13 @@ function isChecked(val, idex) {
 }
 
 function formatObject(data) {
-    for(var item in data){
-        if(item.indexOf('Date')>-1&&item.indexOf('Time')){
-            data[item]=data[item].substring(0,10).split('-').join('');
+    for (var item in data) {
+        if (item.indexOf('Date') > -1 || item.indexOf('Time')>-1){
+            data[item] = data[item].substring(0, 10).split('-').join('');
         }
     }
-    data.strategy=item.code;
-    data.areaCode=item.area;
+    data.strategy = data.code;
+    data.area = data.areaCode;
     return JSON.stringify(data);
 }
 
@@ -216,7 +216,7 @@ function initstrategyPart() {
     $('#strategyList').on('click', 'button', selectPreset);
     $('.strategyPart').on('click', '.addStrategy', addStrategy);
     $('.strategyPart').on('click', '.searchBtn', searchByName);
-    $('.strategy-modal #presets').on('click', 'li', setStrategy);
+    $('.scenario-modal #presets').on('click', 'li', setStrategy);
 
 }
 
@@ -318,9 +318,7 @@ function setTimer(id) {
         if (rst.status == 0) {
             mateData = rst.value;
             if (!mateData.pattern) {
-                setTimerWeek();
-                $('.setTime-modal').show();
-                return;
+                mateData.pattern = '1';
             }
             viewSetTime(mateData);
         }
@@ -333,28 +331,36 @@ function setTimer(id) {
 
 function viewSetTime(data) {
     $('.setTime-modal .piece').removeClass('active');
+    $('input[name=startTime]').val('');
+    $('input[name=stopTime]').val('');
     switch (data.pattern) {
         case "1":
             if (data.isWeek) {
                 var weeks = data.weeks;
                 setTimerWeek(weeks);
                 $('.setTime-modal .piece.week').addClass('active');
-            }
-            if (data.isMonth) {
+            }else if (data.isMonth) {
                 var months = data.months;
                 setTimerMonth(months);
                 $('.setTime-modal .piece.month').addClass('active');
+            }else{
+                setTimerWeek();
+                $('.setTime-modal .piece.week').addClass('active');
             }
             break;
         case "2":
+            $('#inputList').empty();
             $('.setTime-modal .piece.holiday').addClass('active');
             break;
         case "3":
+            $('#inputList').empty();
             $('.setTime-modal .piece.event').addClass('active');
             break;
     }
-    $('input[name=startTime]').val(mateData.startTime.substring(0, 10));
-    $('input[name=stopTime]').val(mateData.stopTime.substring(0, 10));
+    if(mateData.startTime){
+        $('input[name=startTime]').val(mateData.startTime.substring(0, 10));
+        $('input[name=stopTime]').val(mateData.stopTime.substring(0, 10));
+    }
     $('.setTime-modal').show();
 }
 
@@ -375,6 +381,7 @@ function changePattern() {
             mateData.pattern = '2';
             break;
         case 'event':
+            $('#inputList').empty();
             mateData.pattern = '3';
             break;
     }
@@ -409,6 +416,7 @@ function postTimer(param) {
         }
         mateData[item] = param[item];
     }
+
     if (mateData.pattern == '2') {
         mateData.startDate = mateData.startTime;
         mateData.stopDate = mateData.stopTime;
@@ -453,9 +461,12 @@ function render(obj, data, tplId) {
     });
     $(obj).html(html);
 }
-var strategyPostData = {};
 
-function selectPreset() {
+var strategyPostData = {};
+var jsonData='';
+
+function selectPreset(data) {
+    jsonData=data;
     $('.scenario-modal').show();
     var url = contextPath + "/ltStrategy/strategysDetail";
     $.getJSON(url, function (rst) {
@@ -470,9 +481,17 @@ function selectPreset() {
 
 function setStrategy() {
     var that = $(this);
-    strategyPostData.presetNo = that.data('presetNo');
-    var url = '';
-    $.post(url, strategyPostData, function () {
+    var strategyNum= that.data('strategynum');
+    if(!strategyNum){
+        return false;
+    }
+    var i=JSON.parse(jsonData);
+    i.strategy=strategyNum;
+    var data={
+        jsons:JSON.stringify(i)
+    }
+    var url = contextPath + "/ltStrategy/lightStrategy";
+    $.post(url,data, function () {
 
     })
 }

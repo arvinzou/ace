@@ -108,7 +108,7 @@
         (SELECT
             t.`code` as nodeCode, t.`name` as nodeName,
             t.stationCode, s.`name` as stationName,
-            s.subareaCode, s.`name` as subareaName
+            s.subareaCode, a.`name` as subareaName
         from top_node t
         left join top_station s on t.stationCode = s.`code`
         LEFT join top_subarea a on s.subareaCode = a.`code`)n on n.nodeCode = d.nodeCode
@@ -129,7 +129,12 @@
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
-
+        <if test="condition.nodeCode !=null and condition.nodeCode !=&quot;&quot;">
+            and n.nodeCode = #{condition.nodeCode,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.stationCode !=null and condition.stationCode !=&quot;&quot;">
+            and n.stationCode = #{condition.stationCode,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">

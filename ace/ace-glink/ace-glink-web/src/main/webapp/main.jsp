@@ -18,7 +18,7 @@
     <div class="part01">
         <div class="meter-title">快捷入口</div>
         <div class="meter-menu">
-            <div class="menu-item cjkz mr" onclick="window.location.href='/glink/dynamic/service/scene/index.jsp?id=5302'">
+            <div class="menu-item cjkz mr" onclick="window.location.href='/glink/dynamic/service/control/model1/index.jsp?name=sence'">
                 <div class="icon-box">
                     <img src="${pageContext.request.contextPath}/content/common/img/icon-cjkz.png" class="icon-image">
                 </div>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div class="menu-item clgl mr" onclick="window.location.href='/glink/dynamic/service/ltStrategy/index.jsp?id=5303'">
+            <div class="menu-item clgl mr" onclick="window.location.href='/glink/dynamic/service/control/model1/index.jsp?name=celue'">
                 <div class="icon-box">
                     <img src="${pageContext.request.contextPath}/content/common/img/icon-clgl.png" class="icon-image">
                 </div>
