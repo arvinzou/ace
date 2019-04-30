@@ -105,8 +105,19 @@ function errorList() {
         },
         success: function (rst) {
             stopLoad();
+            console.log(rst);
             if (rst.status == 0) {
-                render('#top10-list', rst.rows, 'top10-tpl');
+                var tempArr = rst.rows;
+                var typeList = staticDictObject['180'];
+                for (var i = 0; i < tempArr.length; i++) {
+                    data = tempArr[i];
+                    for (var j = 0; j < typeList.length; j++) {
+                        if (tempArr[i].errType == typeList[j].CODE) {
+                            tempArr[i].errTypes_ch = typeList[j].NAME;
+                        }
+                    }
+                }
+                render('#top10-list', tempArr, 'top10-tpl');
             }
         },
         error: function () {
