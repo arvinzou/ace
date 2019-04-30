@@ -62,7 +62,7 @@
             and t.taskName like concat('%',#{condition.taskName,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.areaNodeID !=null and condition.areaNodeID !=&quot;&quot;">
-            and t.areaNodeID = #{condition.areaNodeID,jdbcType=VARCHAR}
+            and t.areaNodeID like concat(#{condition.areaNodeID,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 

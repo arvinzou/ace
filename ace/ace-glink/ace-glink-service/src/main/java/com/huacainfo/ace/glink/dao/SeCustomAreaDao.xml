@@ -59,7 +59,7 @@
             and s.areaName LIKE concat('%',#{condition.areaName,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.areaNodeID !=null and condition.areaNodeID !=&quot;&quot;">
-            and s.areaNodeID =#{condition.areaNodeID,jdbcType=VARCHAR}
+            and s.areaNodeID  LIKE concat(#{condition.areaNodeID,jdbcType=VARCHAR},'%')
         </if>
   </sql>
 
