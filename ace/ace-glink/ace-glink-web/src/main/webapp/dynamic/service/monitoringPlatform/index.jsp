@@ -113,24 +113,24 @@
                        <div class="scene-content">
                            <span>当前场景</span>
                            <div class="down">
-                               <img src="./img/icon-weekdays@2x.png">
-                               <span>平日模式</span>
+                               <img src="">
+                               <span></span>
                            </div>
                        </div>
                    </div>
                    <div class="shebei-status-wrap mokuai-huilu-wrap">
                        <ul class="shebei-status-ul mokuai-huilu-ul ">
-                           <li class="router">
+                           <li class="modular">
                                <img src="./img/icon-model-num@2x.png">
                                <div class="right">
-                                   <i>10</i>
+                                   <i>0</i>
                                    <span>模块数量</span>
                                </div>
                            </li>
-                           <li class="gate">
+                           <li class="loop">
                                <img src="./img/icon-loop@2x.png">
                                <div class="right">
-                                   <i>20</i>
+                                   <i>0</i>
                                    <span>回路数量</span>
                                </div>
                            </li>
@@ -332,24 +332,37 @@
     /*
     * 初始化温度湿度值
     * */
+    var wendu,shidu;
     function initTemperatureAndHumidity(temperature,humidity){
         temperature = parseFloat(temperature.replace('℃',''));
         humidity = parseFloat(humidity.replace('%RH',''));
-        var wendu = new canvasPanel();
-        wendu.bgColor = '#FF7B57';
-        wendu.MaxNum = 120;
-        wendu.MinNum = -10;
-        wendu.current = temperature;
-        wendu.title = '温度值';
-        wendu.init('wendu');
-        var shidu = new canvasPanel();
-        shidu.bgColor = '#00FFFF';
-        shidu.danwei = "%RH";
-        shidu.MaxNum = 100;
-        shidu.MinNum = 0;
-        shidu.current = humidity;
-        shidu.title = '湿度值';
-        shidu.init('shidu');
+        if(!wendu){
+            wendu = new canvasPanel();
+            wendu.bgColor = '#FF7B57';
+            wendu.MaxNum = 120;
+            wendu.MinNum = -10;
+            wendu.current = temperature;
+            wendu.title = '温度值';
+            wendu.init('wendu');
+        }else{
+            wendu.current = temperature;
+            wendu.init('wendu');
+            wendu.paintTitle('温度值');
+        }
+        if(!shidu){
+            shidu = new canvasPanel();
+            shidu.bgColor = '#00FFFF';
+            shidu.danwei = "%RH";
+            shidu.MaxNum = 100;
+            shidu.MinNum = 0;
+            shidu.current = humidity;
+            shidu.title = '湿度值';
+            shidu.init('shidu');
+        }else {
+            shidu.current = humidity;
+            shidu.init('shidu');
+            shidu.paintTitle('湿度值');
+        }
     }
     /*
     * 初始化路由网关状态
@@ -697,6 +710,36 @@
         }
     }
     /*
+    *  初始化回路模块数量
+    * */
+    function  initLoopModularScene(modularNum,loopNum,sceneValue){
+        $('.mokuai-huilu-ul>li.modular .right i').html(modularNum);
+        $('.mokuai-huilu-ul>li.loop .right i').html(loopNum);
+        var $scene =  $('.scene-content>.down');
+        switch (sceneValue) {
+            case '平日模式':
+                $scene.find('img').attr('src','./img/icon-weekdays@2x.png');
+                $scene.find('span').html(sceneValue);
+                break;
+            case '全开模式':
+                $scene.find('img').attr('src','./img/icon-open@2x.png');
+                $scene.find('span').html(sceneValue);
+                break;
+            case '全关模式':
+                $scene.find('img').attr('src','./img/icon-close@2x.png');
+                $scene.find('span').html(sceneValue);
+                break;
+            case '节能模式':
+                $scene.find('img').attr('src','./img/icon-model-jieneng@2x.png');
+                $scene.find('span').html(sceneValue);
+                break;
+            case '未知模式':
+                $scene.find('img').attr('src','./img/icon-model-xx@2x.png');
+                $scene.find('span').html(sceneValue);
+                break;
+        }
+    }
+    /*
      *  初始化下拉树选中数据
      */
     function initSelectTreeData(id,text){
@@ -716,15 +759,18 @@
                 var nodeConsumePowerNumber = res.meterValue; //节点耗电量
                 var temperature = res.temperature; // 温度
                 var humidity = res.humidity; //湿度
-                var routeSignalObj = {
+                var routeSignalObj = {    //路由
                     routeStatus : res.routeStatus,
                     routeSignal: res.routeSignal
                 };
-                var gateStatus = res.gateStatus;
+                var gateStatus = res.gateStatus;//网关状态
+                var modularNum = res.deviceCount; //模块数量
+                var loopNum = res.deviceCHCount;  //回路数量
+                var sceneValue = res.presetCaption; //场景
                 initNodeConsumePowerData(nodeConsumePowerNumber); //初始化节点耗电量echart图
                 initTemperatureAndHumidity(temperature,humidity);  //初始化温度，湿度值
                 initSignalValue(routeSignalObj,gateStatus); //初始化路由和网关状态
-
+                initLoopModularScene(modularNum,loopNum,sceneValue); //初始化回路，模块，场景模式
             },
             error: function () {
                 alert("对不起出错了！");
