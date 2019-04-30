@@ -116,8 +116,8 @@ function initEvents() {
         console.log(event);
         $(event.target).addClass("active");
     });
-
-
+    initNodeList();
+    initTopStationList();
 }
 
 
@@ -265,4 +265,61 @@ function initCustomMapMarker(lat, lng, container, img) {
     });
 }
 
+/**
+ * 初始化下拉节点列表
+ */
+function initNodeList() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/topNode/findTopNodeList",
+        type: "post",
+        async: false,
+        data: {
+            start: 0,
+            limit: 999
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var dataList = result.rows;
+                render('#nodeCode', dataList, 'nodeCode-tpl');
+                console.log(dataList);
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
 
+/**
+ * 初始化下拉站点列表
+ */
+function initTopStationList() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/topStation/findTopStationList",
+        type: "post",
+        async: false,
+        data: {
+            start: 0,
+            limit: 999
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                var dataList = result.rows;
+                render('#subStation', dataList, 'station-list');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}

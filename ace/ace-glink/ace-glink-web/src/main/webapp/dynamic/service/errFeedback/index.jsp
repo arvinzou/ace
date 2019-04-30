@@ -33,7 +33,7 @@
                 <%--<a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>--%>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-10" style="float: right;">
 
                 <form id="fm-search">
                     <%--分区--%>
@@ -41,29 +41,45 @@
                     </div>
                     <%--站点--%>
                     <div class="input-group" style="float:left;padding-right:5px">
+                        <label style="float:left;padding-right:5px;line-height: 31px;">站点：</label>
+                        <div class="btn-group" role="group" style="float:left;padding-right:10px;">
+                            <select id="subStation" name="stationCode" class="form-control" style="height: 31px;"
+                                    onchange="setParams('stationCode',this.value)">
+                            </select>
+                        </div>
                     </div>
                     <%--节点--%>
                     <div class="input-group" style="float:left;padding-right:5px">
+                        <label style="float:left;padding-right:5px;line-height: 31px;">节点：</label>
+                        <div class="btn-group" role="group" style="float:left;padding-right:10px;">
+                            <select name="nodeCode" id="nodeCode" class="form-control"
+                                    onchange="setParams('nodeCode',this.value)">
+
+                            </select>
+                        </div>
                     </div>
 
                     <%--故障类型--%>
-
+                    <div class="input-group" style="float:left;padding-right:5px">
                     <label style="float:left;padding-right:5px;line-height: 31px;">故障类型：</label>
-                    <div class="btn-group" role="group" style="float:left;padding-right:20px;height: 36px;">
+                        <div class="btn-group" role="group" style="float:left;padding-right:10px;height: 36px;">
                         <select name="errType" id="errType" class="form-control"
                                 onchange="setParams('errType',this.value)">
 
                         </select>
                     </div>
+                    </div>
                     <%--处理状态--%>
-                    <label style="float:left;padding-right:5px;line-height: 31px;">状态：</label>
-                    <div class="btn-group" role="group" style="float:left;padding-right:20px;height: 36px;">
+                    <div class="input-group" style="float:left;padding-right:5px">
+                        <label style="float:left;padding-right:5px;line-height: 31px;">状态：</label>
+                        <div class="btn-group" role="group" style="float:left;padding-right:10px;height: 36px;">
                         <select name="status" id="status" class="form-control"
                                 onchange="setParams('status',this.value)">
                             <option value="">全部</option>
                             <option value="0">未读</option>
                             <option value="1">已读</option>
                         </select>
+                    </div>
                     </div>
                     <%--搜索--%>
                     <div class="input-group">
@@ -118,7 +134,19 @@
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
 </body>
-
+<script id="nodeCode-tpl" type="text/template">
+    <option value="">全部</option>
+    {@each data as item, index}
+    <option value="\${item.code}">\${item.name}</option>
+    {@/each}
+</script>
+<script id="station-list" type="text/template">
+    <option value="">全部</option>
+    {@each data as item, index}
+    <option value="\${item.code}">\${item.name}</option>
+    {@/each}
+</script>
+﻿
 <script id="tpl-errType" type="text/template">
     <%-- <button type="button" class="btn btn-default" onclick="setParams('errType','');">故障类型</button>
      {@each data['180'] as item, index}
