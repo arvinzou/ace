@@ -1,3 +1,4 @@
+import com.huacainfo.ace.api.mybatis.MapperXmlAdapter;
 import org.junit.Test;
 
 import java.util.regex.Matcher;
@@ -12,6 +13,21 @@ import java.util.regex.Pattern;
 public class MyUnitTest {
 
     private static Pattern linePattern = Pattern.compile("_(\\w)");
+
+
+    @Test
+    public void test() {
+        MapperXmlAdapter.generate();
+    }
+
+    private void getBeanName(String tableName) {
+        String beanName = lineToHump(tableName);
+        beanName = toUpperCaseFirstOne(beanName);
+        System.out.println("TableName=>" + tableName);
+        System.out.println("ModelName=>" + beanName);
+        System.out.println("DaoName=>" + beanName + "Dao");
+    }
+
 
     /**
      * 下划线转驼峰
@@ -41,18 +57,5 @@ public class MyUnitTest {
             return s;
         else
             return (new StringBuilder()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
-    }
-
-    @Test
-    public void test() {
-        getBeanName("se_node_monitor_device_ch");
-    }
-
-    private void getBeanName(String tableName) {
-        String beanName = lineToHump(tableName);
-        beanName = toUpperCaseFirstOne(beanName);
-        System.out.println("TableName=>" + tableName);
-        System.out.println("ModelName=>" + beanName);
-        System.out.println("DaoName=>" + beanName + "Dao");
     }
 }
