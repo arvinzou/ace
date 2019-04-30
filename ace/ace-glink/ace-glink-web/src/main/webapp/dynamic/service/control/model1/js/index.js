@@ -160,11 +160,11 @@ function initsceneControl() {
 }
 
 function switchNow() {
-    var that=$(this);
-    if(that.is(':checked')){
-        submitSenceStatusData('sceneControlState',1);
-    }else {
-        submitSenceStatusData('sceneControlState',2);
+    var that = $(this);
+    if (that.is(':checked')) {
+        submitSenceStatusData('sceneControlState', 1);
+    } else {
+        submitSenceStatusData('sceneControlState', 2);
     }
 }
 
@@ -186,7 +186,7 @@ function submitSenceStatusData(str, num) {
         val: num
     };
     $.ajaxSettings.async = false;
-    $.post(url, data, function (rst){
+    $.post(url, data, function (rst) {
 
     })
     $.ajaxSettings.async = true;
@@ -564,8 +564,15 @@ function setStrategy() {
         jsons: JSON.stringify(i)
     }
     var url = contextPath + "/ltStrategy/lightStrategy";
-    $.post(url, data, function () {
-
+    $.post(url, data, function (rst) {
+        var r = JSON.parse(rst.value)
+        if (r.code == '200') {
+            $('.modal').hide();
+            alert("下发成功");
+        }
+        else{
+            alert("出现错误");
+        }
     })
 }
 

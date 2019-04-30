@@ -50,12 +50,12 @@
                      src="${portalPath}/content/common/assets/layouts/layout/img/avatar3_small.jpg"/>
             </div>
             <span class="username username-hide-on-mobile"> ${SESSION_USERPROP_KEY.name} </span>
-        </div>
-        <div class="menu-wrap">
-            <ul class="menu-ul">
-                <li><a href="${portalPath}/index.jsp">返回首页</a></li>
-                <li><a href="${portalPath}/dynamic/portal/security/loginOut.jsp">安全退出</a></li>
-            </ul>
+            <div class="menu-wrap">
+                <ul class="menu-ul">
+                    <li><a href="${portalPath}/index.jsp">返回首页</a></li>
+                    <li><a href="${portalPath}/dynamic/portal/security/loginOut.jsp">安全退出</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
