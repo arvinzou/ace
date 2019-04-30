@@ -1,4 +1,4 @@
-package com.huacainfo.ace.api.mybatis.comment;
+package com.huacainfo.ace.plus.mybatis.comment;
 
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;
