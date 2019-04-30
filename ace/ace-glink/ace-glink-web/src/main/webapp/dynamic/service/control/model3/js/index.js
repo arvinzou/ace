@@ -99,6 +99,9 @@ function renderMonths(m) {
 
 //提交总控数据
 function postList() {
+    if (!confirm("确认执行吗？")) {
+        return;
+    }
     stroyMap();
     var url = contextPath + "/generalYearCron/updateGeneralCtrlCron";
     var data = {
@@ -558,6 +561,9 @@ function checkData() {
 }
 
 function TimerUpdate() {
+    if (!confirm("确认执行吗？")) {
+        return;
+    }
     checkData();
     $.ajax({
         url: contextPath + "/seTimerData/updateTimer",
