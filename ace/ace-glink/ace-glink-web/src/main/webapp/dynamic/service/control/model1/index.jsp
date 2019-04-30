@@ -485,7 +485,28 @@
 <script>
     $(function(){
         requestSenceStatusData();  //请求场景状态数据
+        initPageContainer();
     });
+    /*
+    *  根据参数显示显示场景控制和策略下发
+    * */
+    function initPageContainer(){
+        var name = getQueryString('name');
+        if(name){
+            $('.content').hide();
+            if(name=='sence'){
+                $('.sceneControl').show();
+            }else if(name=='celue'){
+                $('.strategyPart').show();
+            }
+        }
+    }
+    //获取地址栏参数
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
     /**
      * 请求场景状态数据
      */
