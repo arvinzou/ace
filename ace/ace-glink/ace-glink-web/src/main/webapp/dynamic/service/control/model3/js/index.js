@@ -105,8 +105,9 @@ function postList() {
         jsons: JSON.stringify(map)
     }
     $.post(url, data, function (result) {
-        if (result.Status == "ok") {
-            alert("设置成功");
+        if (result.status == 0) {
+            // /alert("设置成功");
+            alert(result.errorMessage);
             getYearCronList();
         } else {
             alert(result.errorMessage);
@@ -566,8 +567,9 @@ function TimerUpdate() {
             jsons: JSON.stringify(Timermap)
         },
         success: function (result) {
-            if (result.Status == "ok") {
-                alert("设置成功");
+            if (result.status == 0) {
+                //alert("设置成功");
+                alert(result.errorMessage);
                 getPageList();
             } else {
                 alert(result.errorMessage);

@@ -191,5 +191,5 @@ public interface SeTimerDataService {
 
     MessageResponse syncData(UserProp userProp);
 
-    Map<String, Object> updateTimer(String jsons, UserProp userProp);
+    MessageResponse updateTimer(String jsons, UserProp userProp);
 }
