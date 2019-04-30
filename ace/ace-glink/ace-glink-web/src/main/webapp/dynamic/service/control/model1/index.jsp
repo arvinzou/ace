@@ -481,6 +481,5 @@
 <script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="js/foundation-datepicker.min.js"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
-<script>
-</script>
+
 </html>
