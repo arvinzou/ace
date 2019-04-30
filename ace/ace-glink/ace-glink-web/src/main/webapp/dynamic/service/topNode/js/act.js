@@ -4,6 +4,7 @@ window.onload = function () {
     initPage();
     initEvents();
     initJuicerMethod();
+    initTopStationList();
 }
 
 
@@ -45,7 +46,7 @@ function setParams(key, value) {
 /*节点管理加载表格数据*/
 function getPageList() {
     var url = contextPath + "/topNode/findTopNodeList";
-    params['name'] = $("input[name=keyword]").val();
+    // params['name'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
@@ -331,6 +332,38 @@ function initForm(id) {
                 var data = {};
                 data['o'] = result.value;
                 render('#fm-audit', data, 'tpl-fm');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+/**
+ * 初始化下拉站点列表
+ */
+function initTopStationList() {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/topStation/findTopStationList",
+        type: "post",
+        async: false,
+        data: {
+            start: 0,
+            limit: 999
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+
+                var dataList = result.rows;
+                var o = {code: "", name: "全部"};
+                dataList.unshift(o);
+                render('#subStation', dataList, 'station-list');
             } else {
                 alert(result.errorMessage);
             }

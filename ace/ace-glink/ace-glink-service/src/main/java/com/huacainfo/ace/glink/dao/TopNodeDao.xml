@@ -131,7 +131,7 @@
             and t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.stationCode !=null and condition.stationCode !=&quot;&quot;">
-            and t.stationCode LIKE concat('%',#{condition.stationCode,jdbcType=VARCHAR},'%')
+            and t.stationCode =#{condition.stationCode,jdbcType=VARCHAR}
         </if>
     </sql>
 

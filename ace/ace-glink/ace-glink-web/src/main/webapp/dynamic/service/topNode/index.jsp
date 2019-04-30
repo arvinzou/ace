@@ -37,7 +37,12 @@
             <div class="col-md-5" style="float: right;">
                 <form id="fm-search">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-
+                        <label style="float:left;padding-right:5px;line-height: 31px;">站点：</label>
+                        <div class="btn-group" role="group" style="float:left;padding-right:20px;">
+                            <select id="subStation" name="stationCode" class="form-control" style="height: 31px;"
+                                    onchange="setParams('stationCode',this.value)">
+                            </select>
+                        </div>
                     </div>
                     <div class="input-group">
                         <input type="text"
@@ -95,7 +100,12 @@
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
 </body>
-
+<script id="station-list" type="text/template">
+    {@each data as item, index}
+    <option value="\${item.code}">\${item.name}</option>
+    {@/each}
+</script>
+﻿
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
     {@each data as item, index}

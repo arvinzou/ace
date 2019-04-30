@@ -1,4 +1,4 @@
-package com.huacainfo.ace.api.mybatis;
+package com.huacainfo.ace.plus.mybatis;
 
 import org.mybatis.generator.api.*;
 import org.mybatis.generator.api.dom.java.*;
@@ -19,8 +19,8 @@ import java.util.List;
 public class MapperXmlAdapter extends PluginAdapter {
 
 
-    public static void generate() {
-        String config = MapperXmlAdapter.class.getClassLoader().getResource("generatorConfig.xml").getFile();
+    public static void generate(String configName) {
+        String config = MapperXmlAdapter.class.getClassLoader().getResource(configName).getFile();
         String[] arg = {"-configfile", config, "-overwrite"};
         ShellRunner.main(arg);
     }
