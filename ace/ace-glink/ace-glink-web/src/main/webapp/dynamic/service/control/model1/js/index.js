@@ -235,8 +235,8 @@ function initSenceStatusData(arr) {
                 $('#s6').attr('checked', false);
             }
         }
-        if (item.itemKey == "playbackStatus") {  // 0播放， 1暂停
-            if (item.itemValue == 0) {
+        if (item.itemKey == "playbackStatus") {  // 1播放， 2暂停
+            if (item.itemValue == 1) {
                 playNow();
             } else {
                 pauseNow();

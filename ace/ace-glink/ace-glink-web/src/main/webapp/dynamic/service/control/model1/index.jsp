@@ -64,11 +64,11 @@
             </div>
             <div class="btns">
                 <div id="play">
-                    <img data-state="0" src="img/start.png" />
+                    <img data-state="1" src="img/start.png" />
                     <p>恢复</p>
                 </div>
                 <div id="pause">
-                    <img data-state="1" src="img/stop.png" />
+                    <img data-state="2" src="img/stop.png" />
                     <p>停止</p>
                 </div>
                 <div>
