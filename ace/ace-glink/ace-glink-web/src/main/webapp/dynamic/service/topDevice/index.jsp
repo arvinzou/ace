@@ -42,13 +42,14 @@
                 <label style="float:left;padding-right:5px;line-height: 31px;">节点：</label>
                 <div class="btn-group" role="group" style="float:left;padding-right:20px;">
                     <select name="nodeCode" id="nodeCode" class="form-control"
-                                onchange="setParams('nodeCode',this.value)">
+                            onchange="setParams('nodeCode',this.value)" style="height: 31px;">
 
                         </select>
                     </div>
                 <label style="float:left;padding-right:5px;line-height: 31px;">设备类型：</label>
                 <div class="btn-group" role="group" style="float:left;padding-right:20px;">
-                    <select name="type" id="type" class="form-control" onchange="setParams('type',this.value)">
+                    <select name="type" id="type" class="form-control" onchange="setParams('type',this.value)"
+                            style="height: 31px;">
 
                         </select>
                     </div>
@@ -56,7 +57,7 @@
                 <div class="btn-group" role="group" style="float:left;padding-right:20px;">
 
                         <select name="status" id="status" class="form-control"
-                                onchange="setParams('status',this.value)">
+                                onchange="setParams('status',this.value)" style="height: 31px;">
                             <option value="">全部</option>
                             <option value="1">上线</option>
                             <option value="2">下线</option>
