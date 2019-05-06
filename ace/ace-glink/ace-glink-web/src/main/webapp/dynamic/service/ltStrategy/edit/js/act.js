@@ -125,7 +125,7 @@ function initForm() {
                 var data = {};
                 data['o'] = result.value;
                 render('#fm-edit', data, 'tpl-fm');
-                initPage();
+               // initPage();
 //富文本填值
 //editor.setValue(data['o'].summary);
             } else {
