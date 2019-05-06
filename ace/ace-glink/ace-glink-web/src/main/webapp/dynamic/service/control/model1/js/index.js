@@ -423,6 +423,9 @@ function postParam(params) {
             getStrategyList();
             $('.modal').hide();
         }
+        else{
+            alert(rst.errorMessage);
+        }
     })
 }
 
