@@ -30,9 +30,10 @@ function initEvents() {
         rules: {
             code: {required: true, maxlength: 50},
             name: {required: true, maxlength: 50},
-            address: {required: true, maxlength: 200},
             ipv4: {required: true, maxlength: 20},
-            port: {required: true, maxlength: 10}
+            port: {required: true, maxlength: 10},
+            resolutionWidth: {required: true, maxlength: 20},
+            resolutionHeight: {required: true, maxlength: 20}
         },
         messages: {
             code: {
@@ -41,15 +42,18 @@ function initEvents() {
             }, name: {
                 required: "请输入节点名称",
                 maxlength: "节点名称字符长度不能超过50"
-            }, address: {
-                required: "请输入详细地址",
-                maxlength: "详细地址字符长度不能超过200"
             }, ipv4: {
                 required: "请输入IPV4地址",
                 maxlength: "IPV4地址字符长度不能超过20"
             }, port: {
                 required: "请输入端口号",
                 maxlength: "端口号字符长度不能超过10"
+            }, resolutionWidth: {
+                required: "请输入分辨率宽",
+                maxlength: "分辨率宽字符长度不能超过10"
+            }, resolutionHeight: {
+                required: "请输入分辨率高",
+                maxlength: "分辨率高字符长度不能超过10"
             }
         }
     });

@@ -123,9 +123,7 @@
         where t.status <![CDATA[ <> ]]> 0
         <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
             and (t.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
-            or t.code LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
-            or tb.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
-            or ts.name LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%') )
+            or t.code LIKE concat('%',#{condition.keyword,jdbcType=VARCHAR},'%') )
         </if>
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
