@@ -62,6 +62,19 @@ function initPage() {
     $('.userInfo>.up').on("click", showMenu);
     $('.btns').on('click', '.btn', changePart);
     $(' .modal .modal-content').on('click', '.modal-close', closeModal);
+
+    $('#check').on('click', 'li', checkStation);
+    $('#checked').on('click', 'li', removeStation);
+    $('.sceneControl .btns').on('click', '.colorful img', controllPlay);
+    $('#s6').change(switchNow);
+
+
+    $('#strategyList').on('click', 'button', selectPreset);
+    $('.strategyPart').on('click', '.addStrategy', addStrategy);
+    $('.strategyPart').on('click', '.searchBtn', searchByName);
+    $('.scenario-modal #presets').on('click', 'li', setStrategy);
+
+
     initInputDate();
     $('#strategyInfo').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
@@ -159,10 +172,6 @@ var html='<div class="default">\n' +
 function initsceneControl() {
     getStations();
     requestSenceStatusData();
-    $('#check').on('click', 'li', checkStation);
-    $('#checked').on('click', 'li', removeStation);
-    $('.sceneControl .btns').on('click', '.colorful img', controllPlay);
-    $('#s6').change(switchNow);
 }
 
 function switchNow() {
@@ -330,11 +339,6 @@ var strategyParams = {
 /*任务初始化管理*/
 function initstrategyPart() {
     initPageStrategy();
-    $('#strategyList').on('click', 'button', selectPreset);
-    $('.strategyPart').on('click', '.addStrategy', addStrategy);
-    $('.strategyPart').on('click', '.searchBtn', searchByName);
-    $('.scenario-modal #presets').on('click', 'li', setStrategy);
-
 }
 
 function searchByName() {
@@ -418,6 +422,9 @@ function postParam(params) {
         if (rst.status == 0) {
             getStrategyList();
             $('.modal').hide();
+        }
+        else{
+            alert(rst.errorMessage);
         }
     })
 }

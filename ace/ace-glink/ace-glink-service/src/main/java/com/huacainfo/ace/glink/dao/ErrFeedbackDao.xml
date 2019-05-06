@@ -86,11 +86,12 @@
         <result column="subareaName" jdbcType="VARCHAR" property="subareaName"/>
         <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
         <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="address" jdbcType="DECIMAL" property="address"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
         d.`name` as deviceName,
-        b.`name` as buildingName, b.latitude, b.longitude,
+        b.`name` as buildingName,b.address, b.latitude, b.longitude,
         d.nodeCode, n.nodeName,
         n.stationCode, n.stationName,
         n.subareaCode, n.subareaName,

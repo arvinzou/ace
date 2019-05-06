@@ -40,7 +40,7 @@
                         <a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
                     </div>
                     <div class="input-group">
-                        <input type="text" name="keyword"
+                        <input type="number" name="keyword"
                                class="form-control" placeholder="请输入配电箱编号">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn" type="submit"> 搜索</button>
