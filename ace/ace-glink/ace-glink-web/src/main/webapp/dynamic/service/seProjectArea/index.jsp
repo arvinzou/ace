@@ -149,13 +149,9 @@
 <script id="tpl-find" type="text/template">
 
     <tr>
-        <td> \${data.o.projectName}</td>
         <td> \${data.o.areaName}</td>
         <td> \${data.o.areaNodeCount}</td>
         <td> \${data.o.areaNodeID}</td>
-        <td> \${data.o.areaType}</td>
-        <td> \${data.o.remark}</td>
-        <td> \${data.o.status}</td>
         <td> \${data.o.createDate}</td>
     </tr>
 
