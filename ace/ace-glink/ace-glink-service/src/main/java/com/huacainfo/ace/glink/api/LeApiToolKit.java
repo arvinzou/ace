@@ -82,7 +82,7 @@ public class LeApiToolKit {
         }
 
         String path = "/wh/limplight/control/lightStrategy";
-        System.out.println(JsonUtil.toJson(request));
+//        System.out.println(JsonUtil.toJson(request));
         return post(domain + path, JsonUtil.toJson(request));
     }
 

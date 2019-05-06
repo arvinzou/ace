@@ -36,8 +36,8 @@ function initEvents() {
         },
         messages: {
             subareaCode: {
-                required: "请输入分区代码",
-                maxlength: "分区代码字符长度不能超过50"
+                required: "请输入分区名称",
+                maxlength: "分区名称字符长度不能超过50"
             }, smsName: {
                 required: "请输入模板名称",
                 maxlength: "模板名称字符长度不能超过50"
