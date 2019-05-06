@@ -94,7 +94,7 @@ public class LtStrategyServiceImpl implements LtStrategyService {
         }
         int temp = this.ltStrategyDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "策略管理名称重复！");
+            return new MessageResponse(1, "策略管理名称或编号重复！");
         }
         o.setCreateDate(new Date());
         o.setStatus("1");

@@ -41,9 +41,9 @@
 </body>
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
+        <input type="text" class="form-control hidden" name="id" value="\${data.o.id}">
         <div class="form-group">
             <label class="col-md-2 control-label">
-
                 策略编号
                 <span class="required" aria-required="true"> * </span>
             </label>
@@ -56,7 +56,6 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
-
                 策略名称
                 <span class="required" aria-required="true"> * </span>
             </label>
@@ -69,7 +68,6 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
-
                 策略描述
             </label>
             <div class="col-md-10">
@@ -79,184 +77,39 @@
                 <span class="help-block"></span>
             </div>
         </div>
+        <%--<div class="form-group">--%>
+            <%--<label class="col-md-2 control-label">--%>
+                <%--策略状态--%>
+            <%--</label>--%>
+            <%--<div class="col-md-10">--%>
+                <%--<input type="text" class="form-control" name="state"--%>
+                       <%--value="\${data.o.state}" maxlength="1"--%>
+                       <%--placeholder="请输入策略状态（建议字数在14个字以内，不超过1个字)">--%>
+                <%--<span class="help-block"></span>--%>
+            <%--</div>--%>
+        <%--</div>--%>
         <div class="form-group">
             <label class="col-md-2 control-label">
-
-                策略状态
+                分区编号
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="state"
-                       value="\${data.o.state}" maxlength="1"
-                       placeholder="请输入策略状态（建议字数在14个字以内，不超过1个字)">
+                <input type="text" class="form-control" name="areaCode"
+                       value="\${data.o.areaCode}" maxlength="50"
+                       placeholder="请输入分区编号（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                行政区划
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="district"
-                       value="\${data.o.district}" maxlength="50"
-                       placeholder="请输入行政区划（建议字数在14个字以内，不超过50个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                所属站点
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="stationCode"
-                       value="\${data.o.stationCode}" maxlength="50"
-                       placeholder="请输入所属站点（建议字数在14个字以内，不超过50个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                模式
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="pattern"
-                       value="\${data.o.pattern}" maxlength="1"
-                       placeholder="请输入模式（建议字数在14个字以内，不超过1个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                按周执行（0否1是）[日程模式]
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="isWeek"
-                       value="\${data.o.isWeek}" maxlength="10"
-                       placeholder="请输入按周执行（0否1是）[日程模式]（建议字数在14个字以内，不超过10个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                星期数组[日程模式]
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="weeks"
-                       value="\${data.o.weeks}" maxlength="50"
-                       placeholder="请输入星期数组[日程模式]（建议字数在14个字以内，不超过50个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                按月执行(0否1整月)[日程模式]
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="isMonth"
-                       value="\${data.o.isMonth}" maxlength="10"
-                       placeholder="请输入按月执行(0否1整月)[日程模式]（建议字数在14个字以内，不超过10个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                月份数组(pattern为1)[日程模式]
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="months"
-                       value="\${data.o.months}" maxlength="50"
-                       placeholder="请输入月份数组(pattern为1)[日程模式]（建议字数在14个字以内，不超过50个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                开始日期[假日模式]
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="startDate"
-                       value="\${data.o.startDate}" maxlength=""
-                       placeholder="请输入开始日期[假日模式]（建议字数在14个字以内，不超过个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                技术日期[假日模式]
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="stopDate"
-                       value="\${data.o.stopDate}" maxlength=""
-                       placeholder="请输入技术日期[假日模式]（建议字数在14个字以内，不超过个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                具体的特殊日期[事件模式]
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="specialDate"
-                       value="\${data.o.specialDate}" maxlength=""
-                       placeholder="请输入具体的特殊日期[事件模式]（建议字数在14个字以内，不超过个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                策略的开始时间
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="startTime"
-                       value="\${data.o.startTime}" maxlength=""
-                       placeholder="请输入策略的开始时间（建议字数在14个字以内，不超过个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                策略的结束时间
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="stopTime"
-                       value="\${data.o.stopTime}" maxlength=""
-                       placeholder="请输入策略的结束时间（建议字数在14个字以内，不超过个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                分区已编辑完毕的策略编号（或名称）
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="strategy"
-                       value="\${data.o.strategy}" maxlength="50"
-                       placeholder="请输入分区已编辑完毕的策略编号（或名称）（建议字数在14个字以内，不超过50个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-
-                备注
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="remark"
-                       value="\${data.o.remark}" maxlength="200"
-                       placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
+        <%--<div class="form-group">--%>
+            <%--<label class="col-md-2 control-label">--%>
+                <%--所属站点--%>
+            <%--</label>--%>
+            <%--<div class="col-md-10">--%>
+                <%--<input type="text" class="form-control" name="stationCode"--%>
+                       <%--value="\${data.o.stationCode}" maxlength="50"--%>
+                       <%--placeholder="请输入所属站点（建议字数在14个字以内，不超过50个字)">--%>
+                <%--<span class="help-block"></span>--%>
+            <%--</div>--%>
+        <%--</div>--%>
     </div>
     <div class="form-actions">
         <div class="row">

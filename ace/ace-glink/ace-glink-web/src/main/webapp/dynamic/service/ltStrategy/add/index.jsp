@@ -68,157 +68,26 @@
                     <span class="help-block"></span>
                 </div>
             </div>
+            <%--<div class="form-group">--%>
+                <%--<label class="col-md-2 control-label">--%>
+                    <%--策略状态--%>
+                <%--</label>--%>
+                <%--<div class="col-md-10">--%>
+                    <%--<input type="text" class="form-control" name="state" maxlength="1"--%>
+                           <%--placeholder="请输入策略状态（建议字数在14个字以内，不超过1个字)">--%>
+                    <%--<span class="help-block"></span>--%>
+                <%--</div>--%>
+            <%--</div>--%>
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    策略状态
+                    分区编号
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="state" maxlength="1"
-                           placeholder="请输入策略状态（建议字数在14个字以内，不超过1个字)">
+                    <input type="text" class="form-control" name="areaCode" maxlength="50"
+                           placeholder="请输入分区编号（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    行政区划
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="district" maxlength="50"
-                           placeholder="请输入行政区划（建议字数在14个字以内，不超过50个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    所属站点
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="stationCode" maxlength="50"
-                           placeholder="请输入所属站点（建议字数在14个字以内，不超过50个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    模式
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="pattern" maxlength="1"
-                           placeholder="请输入模式（建议字数在14个字以内，不超过1个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    按周执行（0否1是）[日程模式]
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="isWeek" maxlength="10"
-                           placeholder="请输入按周执行（0否1是）[日程模式]（建议字数在14个字以内，不超过10个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    星期数组[日程模式]
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="weeks" maxlength="50"
-                           placeholder="请输入星期数组[日程模式]（建议字数在14个字以内，不超过50个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    按月执行(0否1整月)[日程模式]
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="isMonth" maxlength="10"
-                           placeholder="请输入按月执行(0否1整月)[日程模式]（建议字数在14个字以内，不超过10个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    月份数组(pattern为1)[日程模式]
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="months" maxlength="50"
-                           placeholder="请输入月份数组(pattern为1)[日程模式]（建议字数在14个字以内，不超过50个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    开始日期[假日模式]
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="startDate" maxlength="20"
-                           placeholder="请输入开始日期[假日模式]（建议字数在14个字以内，不超过个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    技术日期[假日模式]
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="stopDate" maxlength="20"
-                           placeholder="请输入技术日期[假日模式]（建议字数在14个字以内，不超过个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    具体的特殊日期[事件模式]
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="specialDate" maxlength="20"
-                           placeholder="请输入具体的特殊日期[事件模式]（建议字数在14个字以内，不超过个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    策略的开始时间
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="startTime" maxlength="21"
-                           placeholder="请输入策略的开始时间（建议字数在14个字以内，不超过个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    策略的结束时间
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="stopTime" maxlength="21"
-                           placeholder="请输入策略的结束时间（建议字数在14个字以内，不超过个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    分区已编辑完毕的策略编号（或名称）
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="strategy" maxlength="50"
-                           placeholder="请输入分区已编辑完毕的策略编号（或名称）（建议字数在14个字以内，不超过50个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">
-                    备注
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="remark" maxlength="200"
-                           placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
-                    <span class="help-block"></span>
-                </div>
-            </div>
-
         </div>
         <div class="form-actions">
             <div class="row">
@@ -228,8 +97,6 @@
             </div>
         </div>
     </form>
-
-
 </script>
 
 

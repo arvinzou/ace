@@ -25,18 +25,13 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
+            <div class="col-md-7">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-5">
 
                 <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
-                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
@@ -59,32 +54,9 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <%--<th width="10%"> 主键</th>--%>
                     <th width="10%"> 策略编号</th>
                     <th width="10%"> 策略名称</th>
-                    <%--<th width="10%"> 策略描述</th>--%>
                     <th width="10%"> 策略状态</th>
-                    <th width="10%"> 行政区划</th>
-                    <th width="10%"> 所属站点</th>
-                    <%--<th width="10%"> 模式</th>--%>
-                    <%--<th width="10%"> 按周执行</th>--%>
-                    <%--<th width="10%"> 星期数组</th>--%>
-                    <%--<th width="10%"> 按月执行</th>--%>
-                    <%--<th width="10%"> 月份数组</th>--%>
-                    <%--<th width="10%"> 开始日期</th>--%>
-                    <%--<th width="10%"> 技术日期</th>--%>
-                    <%--<th width="10%"> 具体的特殊日期</th>--%>
-                    <%--<th width="10%"> 策略的开始时间</th>--%>
-                    <%--<th width="10%"> 策略的结束时间</th>--%>
-                    <%--<th width="10%"> 分区已编辑完毕的策略编号（或名称）</th>--%>
-                    <%--<th width="10%"> 备注</th>--%>
-                    <th width="10%"> 状态</th>
-                    <%--<th width="10%"> 创建人编号</th>--%>
-                    <%--<th width="10%"> 创建人姓名</th>--%>
-                    <%--<th width="10%"> 创建日期</th>--%>
-                    <%--<th width="10%"> 更新人编号</th>--%>
-                    <%--<th width="10%"> 更新人名称</th>--%>
-                    <%--<th width="10%"> 更新日期</th>--%>
                     <th width="15%">操作</th>
                 </tr>
                 </thead>
@@ -96,9 +68,7 @@
         <div class="paginationbar">
             <ul class="pagination" id="pagination1"></ul>
         </div>
-
     </div>
-
 </div>
 
 
@@ -111,61 +81,17 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <%--<td> \${item.id}</td>--%>
         <td> \${item.code}</td>
         <td> \${item.name}</td>
-        <%--<td> \${item.depict}</td>--%>
         <td> \${item.state}</td>
-        <td> \${item.district}</td>
-        <td> \${item.stationCode}</td>
-        <%--<td> \${item.pattern}</td>--%>
-        <%--<td> \${item.isWeek}</td>--%>
-        <%--<td> \${item.weeks}</td>--%>
-        <%--<td> \${item.isMonth}</td>--%>
-        <%--<td> \${item.months}</td>--%>
-        <%--<td> \${item.startDate}</td>--%>
-        <%--<td> \${item.stopDate}</td>--%>
-        <%--<td> \${item.specialDate}</td>--%>
-        <%--<td> \${item.startTime}</td>--%>
-        <%--<td> \${item.stopTime}</td>--%>
-        <%--<td> \${item.strategy}</td>--%>
-        <%--<td> \${item.remark}</td>--%>
-        <td> \${item.status}</td>
-        <%--<td> \${item.createUserId}</td>--%>
-        <%--<td> \${item.createUserName}</td>--%>
-        <%--<td> \${item.createDate}</td>--%>
-        <%--<td> \${item.lastModifyUserId}</td>--%>
-        <%--<td> \${item.lastModifyUserName}</td>--%>
-        <%--<td> \${item.lastModifyDate}</td>--%>
-        <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">待审</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
-        </td>
         <td>
             ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
             <a href="javascript:updateStatus('\${item.id}');">发布</a>
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-code="\${item.code}" data-target="#modal-push">下发</a>
-
             <a href="javascript:setModel('\${item.id}');">定时</a>
-
             <a href="javascript:del('\${item.id}');">删除</a>
-
         </td>
     </tr>
     {@/each}
