@@ -130,7 +130,7 @@
                                     <th width="10%" style="text-align: center;">故障等级</th>
                                     <th width="20%" style="text-align: center;">设备名称</th>
                                     <th width="20%" style="text-align: center;">故障位置</th>
-                                    <th width="20%" style="text-align: center;">故障类型</th>
+                                    <th width="20%" style="text-align: center;">故障内容</th>
                                     <th width="10%" style="text-align: center;">故障数量</th>
                                     <th width="20%" style="text-align: center;">故障时间</th>
                                 </tr>
@@ -160,8 +160,8 @@
             {@/if}
         </td>
         <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.deviceName}</td>
-        <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.subareaName}</td>
-        <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.errTypes_ch}</td>
+        <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.address}</td>
+        <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.errContent}</td>
         <td width="10%" style="text-align: center;font-size: 8px !important;">\${item.errLoopNum}</td>
         <td width="20%" style="text-align: center;font-size: 8px !important;">\${item.errDate}</td>
     </tr>

@@ -42,6 +42,7 @@ public class ErrFeedbackVo extends ErrFeedback {
     private BigDecimal longitude;
 
     private BigDecimal latitude;
+    private String address;
 
     public BigDecimal getLongitude() {
         return longitude;
@@ -121,5 +122,13 @@ public class ErrFeedbackVo extends ErrFeedback {
 
     public void setSubareaName(String subareaName) {
         this.subareaName = subareaName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
