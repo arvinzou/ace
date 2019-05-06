@@ -25,20 +25,22 @@ function closeModal() {
 function changePage() {
     var that = $(this);
     var type = that.data('type');
-    $('.modals').hide();
-    $('.modals.' + type).show();
+    var flag = judgeUpdate();
+    if (flag == true) {
+        $('.modals').hide();
+        $('.modals.' + type).show();
+    }
 }
 
 
 /*****************************************总控设置Start***********************************************/
 var map = {};
-
+var oldMap = {};
 function initControl() {
     getYearCronList();
     $('#months').on('click', 'li', changeMonth);
     $('.Control .right .heads').on('click', 'button', checkType);
 }
-
 
 function getYearCronList() {
     var date = new Date;
@@ -49,6 +51,7 @@ function getYearCronList() {
         console.log(rst.value);
         if (rst.status == 0) {
             var data = rst.value;
+            oldMap = data;
             map = data;
             $('#months li:eq(' + month + ')').addClass('active');
             renderMonths(m);
@@ -82,7 +85,6 @@ function stroyMap() {
     });
     map[mid] = checkValue;
 }
-
 function renderMonths(m) {
     var datas = {};
     datas.m = map['m' + m];
@@ -117,6 +119,90 @@ function postList() {
         }
     })
 }
+
+//深度克隆
+function deepClone(obj) {
+    var result = {},
+        oClass = isClass(obj);
+    for (key in obj) {
+        var copy = obj[key];
+        if (isClass(copy) == "Object") {
+            result[key] = arguments.callee(copy);
+        } else if (isClass(copy) == "Array") {
+            result[key] = arguments.callee(copy);
+        } else {
+            result[key] = obj[key];
+        }
+    }
+    return result;
+}
+
+function isClass(o) {
+    if (o === null) return "Null";
+    if (o === undefined) return "Undefined";
+    return Object.prototype.toString.call(o).slice(8, -1);
+}
+
+//判断两个对象是否相同
+function diff(obj1, obj2) {
+    var o1 = obj1 instanceof Object;
+    var o2 = obj2 instanceof Object;
+    if (!o1 || !o2) {/*  判断不是对象  */
+        return obj1 === obj2;
+    }
+
+    if (Object.keys(obj1).length !== Object.keys(obj2).length) {
+        return false;
+        //Object.keys() 返回一个由对象的自身可枚举属性(key值)组成的数组
+    }
+
+    for (var attr in obj1) {
+        var t1 = obj1[attr] instanceof Object;
+        var t2 = obj2[attr] instanceof Object;
+        if (t1 && t2) {
+            return diff(obj1[attr], obj2[attr]);
+        } else if (obj1[attr] !== obj2[attr]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+//判断总控数据是否修改，修改就弹出执行提示框
+function judgeUpdate() {
+    //克隆一个数组
+    var arr = oldMap;
+    var oNew = deepClone(arr);
+    stroyMap();
+    var flag = diff(oNew, map);
+    console.log(flag);
+    if (flag == false) {
+        if (!confirm("当前数据已经修改确认执行吗？")) {
+            getYearCronList();
+            return true;
+        }
+        stroyMap();
+        var url = contextPath + "/generalYearCron/updateGeneralCtrlCron";
+        var data = {
+            jsons: JSON.stringify(map)
+        }
+        $.post(url, data, function (result) {
+            if (result.status == 0) {
+                // /alert("设置成功");
+                alert(result.errorMessage);
+                getYearCronList();
+            } else {
+                alert(result.errorMessage);
+            }
+        })
+        return false;
+    } else {
+        return true;
+    }
+    return true;
+}
+
+
 
 
 /*****************************************总控设置End***********************************************/
@@ -300,6 +386,96 @@ function changeDo(type) {
     $('.list.' + type).show();
 }
 
+
+//查询更新定时设置数据
+function selectTimerDate(id) {
+    $(".timing-modal").show();
+    $.ajax({
+        url: contextPath + "/seTimerData/selectSeTimerDataByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: id
+        },
+        success: function (result) {
+            if (result.status == 0) {
+                var data = {};
+                console.log(result);
+                data['o'] = result.value;
+                data['monthList'] = result.value.monthList;
+                data['weekList'] = result.value.weekList;
+                data['dayList'] = result.value.dayList;
+                Timermap = result.value;
+                render('#page-update', data, 'tpl-monthslist');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            // stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+
+var Timermap = {};
+
+//选中的值
+function checkData() {
+
+    var MonthEnable = {};
+    var WeekEnable = {};
+    var DayEnable = {};
+    $('input[name="checkMonth"]').each(function (i) {
+        i = i + 1;
+        var m = "m" + i;
+        MonthEnable[m] = $(this).val();
+    });
+    $('input[name="checkWeek"]').each(function (i) {
+        i = i + 1;
+        var m = "w" + i;
+        WeekEnable[m] = $(this).val();
+    });
+    $('input[name="checkDay"]').each(function (i) {
+        i = i + 1;
+        var m = "d" + i;
+        DayEnable[m] = $(this).val();
+    });
+    Timermap['MonthEnable'] = MonthEnable;
+    Timermap['WeekEnable'] = WeekEnable;
+    Timermap['DayEnable'] = DayEnable;
+    console.log(Timermap);
+}
+
+function TimerUpdate() {
+    if (!confirm("确认执行吗？")) {
+        return;
+    }
+    checkData();
+    $.ajax({
+        url: contextPath + "/seTimerData/updateTimer",
+        type: "post",
+        async: false,
+        data: {
+            jsons: JSON.stringify(Timermap)
+        },
+        success: function (result) {
+            if (result.status == 0) {
+                //alert("设置成功");
+                alert(result.errorMessage);
+                getPageList();
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            //  stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+
+}
 /*****************************************定时设置End***********************************************/
 
 /*****************************************场景执行Start***********************************************/
@@ -421,36 +597,6 @@ function searchPreset() {
 
 /*****************************************场景执行End***********************************************/
 
-//查询更新定时设置数据
-function selectTimerDate(id) {
-    $(".timing-modal").show();
-    $.ajax({
-        url: contextPath + "/seTimerData/selectSeTimerDataByPrimaryKey",
-        type: "post",
-        async: false,
-        data: {
-            id: id
-        },
-        success: function (result) {
-            if (result.status == 0) {
-                var data = {};
-                console.log(result);
-                data['o'] = result.value;
-                data['monthList'] = result.value.monthList;
-                data['weekList'] = result.value.weekList;
-                data['dayList'] = result.value.dayList;
-                Timermap = result.value;
-                render('#page-update', data, 'tpl-monthslist');
-            } else {
-                alert(result.errorMessage);
-            }
-        },
-        error: function () {
-            // stopLoad();
-            alert("对不起出错了！");
-        }
-    });
-}
 
 
 /*添加渲染*/
@@ -531,60 +677,3 @@ function mGetDate(m) {
 }
 
 
-var Timermap = {};
-
-//选中的值
-function checkData() {
-
-    var MonthEnable = {};
-    var WeekEnable = {};
-    var DayEnable = {};
-    $('input[name="checkMonth"]').each(function (i) {
-        i = i + 1;
-        var m = "m" + i;
-        MonthEnable[m] = $(this).val();
-    });
-    $('input[name="checkWeek"]').each(function (i) {
-        i = i + 1;
-        var m = "w" + i;
-        WeekEnable[m] = $(this).val();
-    });
-    $('input[name="checkDay"]').each(function (i) {
-        i = i + 1;
-        var m = "d" + i;
-        DayEnable[m] = $(this).val();
-    });
-    Timermap['MonthEnable'] = MonthEnable;
-    Timermap['WeekEnable'] = WeekEnable;
-    Timermap['DayEnable'] = DayEnable;
-    console.log(Timermap);
-}
-
-function TimerUpdate() {
-    if (!confirm("确认执行吗？")) {
-        return;
-    }
-    checkData();
-    $.ajax({
-        url: contextPath + "/seTimerData/updateTimer",
-        type: "post",
-        async: false,
-        data: {
-            jsons: JSON.stringify(Timermap)
-        },
-        success: function (result) {
-            if (result.status == 0) {
-                //alert("设置成功");
-                alert(result.errorMessage);
-                getPageList();
-            } else {
-                alert(result.errorMessage);
-            }
-        },
-        error: function () {
-            //  stopLoad();
-            alert("对不起出错了！");
-        }
-    });
-
-}
