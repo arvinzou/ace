@@ -70,7 +70,9 @@
         <if test="condition.areaName !=null and condition.areaName !=&quot;&quot;">
             and areaName LIKE concat('%',#{condition.areaName,jdbcType=VARCHAR},'%')
         </if>
-
+        <if test="condition.id !=null and condition.id !=&quot;&quot;">
+            and id like concat(#{condition.id,jdbcType=VARCHAR},'%')
+        </if>
     </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
