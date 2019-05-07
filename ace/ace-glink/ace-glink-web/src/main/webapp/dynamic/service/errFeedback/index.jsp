@@ -33,7 +33,7 @@
                 <%--<a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>--%>
             </div>
 
-            <div class="col-md-10" style="float: right;">
+            <div class="col-md-9" style="float: right;">
 
                 <form id="fm-search">
                     <%--分区--%>
@@ -86,7 +86,7 @@
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入建筑物名称/设备名称/设备编号">
+                               placeholder="请输入建筑物名称">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn"
                                     type="submit">
