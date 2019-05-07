@@ -128,6 +128,9 @@ function initEvents() {
 
 /*删除*/
 function del(id) {
+    if (!confirm("确定要删除吗？")) {
+        return;
+    }
     var args = {id: id};
     startLoad();
     $.ajax({
