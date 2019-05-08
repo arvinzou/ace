@@ -1,34 +1,34 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.glink.api.SeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.fe.PresetDataOut;
+import com.huacainfo.ace.glink.dao.SePresetDataDao;
+import com.huacainfo.ace.glink.model.SePresetData;
+import com.huacainfo.ace.glink.service.SePresetDataService;
+import com.huacainfo.ace.glink.vo.SePresetDataQVo;
+import com.huacainfo.ace.glink.vo.SePresetDataVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.glink.dao.SePresetDataDao;
-import com.huacainfo.ace.glink.model.SePresetData;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.glink.service.SePresetDataService;
-import com.huacainfo.ace.glink.vo.SePresetDataVo;
-import com.huacainfo.ace.glink.vo.SePresetDataQVo;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("sePresetDataService")
 /**
@@ -358,12 +358,15 @@ public class SePresetDataServiceImpl implements SePresetDataService {
     public MessageResponse syncData(UserProp userProp) {
         //http请求，获取远程服务器数据
         PresetDataOut out = SeApiToolKit.getPresetData();
+        List<PresetDataOut.PresetData> presetDataGroup = out.getPresetData();
+        if (CollectionUtils.isEmpty(presetDataGroup)) {
+            return new MessageResponse(ResultCode.FAIL, "接口数据获取失败");
+        }
         //1、清理库中原有数据
         this.sePresetDataDao.clearAll();
         //2、填充获取的新数据
-        List<PresetDataOut.PresetData> PresetDataGroup = out.getPresetData();
         SePresetData sePresetData;
-        for (PresetDataOut.PresetData item : PresetDataGroup) {
+        for (PresetDataOut.PresetData item : presetDataGroup) {
             sePresetData = new SePresetData();
             sePresetData.setId(GUIDUtil.getGUID());
             sePresetData.setPresetNo(item.getPresetNo());

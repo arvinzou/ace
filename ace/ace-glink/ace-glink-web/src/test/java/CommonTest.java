@@ -1,7 +1,4 @@
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.common.tools.JsonUtil;
-import com.huacainfo.ace.glink.api.LeApiToolKit;
-import com.huacainfo.ace.glink.api.pojo.le.LightStrategyIn;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,12 +16,24 @@ public class CommonTest {
 
     @Test
     public void test() throws IOException {
-        String text = "{\"areaCode\":\"0000\",\"code\":\"22\",\"createDate\":\"20190430\",\"createUserId\":\"b7a29e42e42d4f61b1ed2342b6984c1d\",\"createUserName\":\"系统管理员\",\"id\":\"087c786b6d97496ca7bcc284c094b00c\",\"isWeek\":1,\"lastModifyDate\":\"20190430\",\"lastModifyUserId\":\"b7a29e42e42d4f61b1ed2342b6984c1d\",\"lastModifyUserName\":\"系统管理员\",\"months\":\"\",\"name\":\"22\",\"pattern\":\"1\",\"remark\":\"222\",\"startTime\":\"20190430\",\"status\":\"1\",\"stopTime\":\"20190510\",\"weeks\":\"1\",\"strategy\":\"SHGL#0003\",\"area\":\"22\"}";
-        LightStrategyIn in = JsonUtil.toObject(text, LightStrategyIn.class);
-        System.out.println(LeApiToolKit.lightStrategy(in));
 
 
-//        LeApiToolKit.lightStrategy();
+//        System.out.println(SeApiToolKit.getBaseNodeInfo());
+
+        //todo 1、缺少执行区域场景数据
+//        System.out.println(SeApiToolKit.executePreset());
+
+        //todo 2、待沟通确认，是否可以执行（考虑开关操作是否影响线上环境？）
+//        System.out.println(SeApiToolKit.getAreaTaskInfo());
+//        System.out.println(SeApiToolKit.executeTask());
+//todo 3、类似问题2
+//        System.out.println(SeApiToolKit.getTimerData());
+//        System.out.println(SeApiToolKit.updateTimer());
+
+//        System.out.println(SeApiToolKit.getGeneralCtrlCron());
+
+//        todo 无法修改，接口返回：{"Status":"error"}
+//        System.out.println(SeApiToolKit.updateDayCron(2));
     }
 
     private void generatorGUID(int num) {

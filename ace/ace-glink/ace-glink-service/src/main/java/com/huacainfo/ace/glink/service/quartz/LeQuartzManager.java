@@ -7,7 +7,6 @@ import com.huacainfo.ace.glink.service.PagePortalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
@@ -31,7 +30,7 @@ public class LeQuartzManager {
     /**
      * 每隔[10分钟,调用一次弱电接口：    获取设备总数&故障设备总数
      */
-    @Scheduled(cron = "0 0/10 * * * ?")
+//    @Scheduled(cron = "0 0/10 * * * ?")
     public void leAutoGetLampStatus() {
         MessageResponse ms = leLampStatusService.syncData();// pagePortalService.getLampStatus();
         logger.info(ms.getErrorMessage());
@@ -40,7 +39,7 @@ public class LeQuartzManager {
     /**
      * 每天凌晨[1]点,调用一次弱电接口：   获取 武汉设备故障情况
      */
-    @Scheduled(cron = "0 0 1 * * ?")
+//    @Scheduled(cron = "0 0 1 * * ?")
     public void leAutoGetBrokenLampDetail() {
         MessageResponse ms = leBrokenLampService.getBrokenLampDetail();
         logger.info(ms.getErrorMessage());

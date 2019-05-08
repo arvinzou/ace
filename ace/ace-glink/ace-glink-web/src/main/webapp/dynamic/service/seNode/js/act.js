@@ -94,7 +94,7 @@ function initEvents() {
 
 }
 
-function showMonitorDeviceCH(deviceCode, chName) {
+function showMonitorDeviceCH(deviceCode, chName, deviceBox) {
     startLoad();
     $.ajax({
         url: contextPath + "/seNode/getMonitorDeviceCH",
@@ -102,7 +102,8 @@ function showMonitorDeviceCH(deviceCode, chName) {
         async: false,
         data: {
             deviceCode: deviceCode,
-            chName: chName
+            chName: chName,
+            deviceBox: deviceBox
         },
         success: function (result) {
             stopLoad();

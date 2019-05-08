@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.glink.dao.SeNodeDeviceDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeNodeDevice">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="nodeID" jdbcType="INTEGER" property="nodeID"/>
+        <result column="nodeID" jdbcType="VARCHAR" property="nodeID"/>
         <result column="deviceType" jdbcType="VARCHAR" property="deviceType"/>
         <result column="deviceCode" jdbcType="VARCHAR" property="deviceCode"/>
         <result column="deviceBox" jdbcType="INTEGER" property="deviceBox"/>
@@ -63,7 +63,7 @@
       cH8Control, cH9Control, cH10Control, 
       cH11Control, cH12Control, remark, 
       status, createDate)
-    values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=INTEGER}, #{deviceType,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR},
       #{deviceCode,jdbcType=VARCHAR}, #{deviceBox,jdbcType=INTEGER}, #{cH1Name,jdbcType=VARCHAR}, 
       #{cH2Name,jdbcType=VARCHAR}, #{cH3Name,jdbcType=VARCHAR}, #{cH4Name,jdbcType=VARCHAR}, 
       #{cH5Name,jdbcType=VARCHAR}, #{cH6Name,jdbcType=VARCHAR}, #{cH7Name,jdbcType=VARCHAR}, 
@@ -77,7 +77,7 @@
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNodeDevice">
     update se_node_device
-    set nodeID = #{nodeID,jdbcType=INTEGER},
+    set nodeID = #{nodeID,jdbcType=VARCHAR},
       deviceType = #{deviceType,jdbcType=VARCHAR},
       deviceCode = #{deviceCode,jdbcType=VARCHAR},
       deviceBox = #{deviceBox,jdbcType=INTEGER},

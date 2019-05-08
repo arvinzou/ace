@@ -178,8 +178,10 @@ public class SeNodeController extends GLinkBaseController {
      */
     @ResponseBody
     @RequestMapping(value = "/getMonitorDeviceCH")
-    public SingleResult<SeNodeMonitorDeviceCh> getMonitorDeviceCH(String deviceCode, String chName) throws Exception {
-        return seNodeService.getMonitorDeviceCH(deviceCode, chName);
+    public SingleResult<SeNodeMonitorDeviceCh> getMonitorDeviceCH(String deviceCode,
+                                                                  String chName,
+                                                                  String deviceBox) throws Exception {
+        return seNodeService.getMonitorDeviceCH(deviceCode, chName, deviceBox);
     }
 
 

@@ -28,7 +28,7 @@ public class SeQuartzManager {
     /**
      * 每隔[5]分钟,调用一次强电接口：    同步配电箱监测数据
      */
-    @Scheduled(cron = "0 0/5 * * * ?")
+//    @Scheduled(cron = "0 0/5 * * * ?")
     public void autoSyncMonitorData() {
         MessageResponse ms = seNodeService.syncMonitorData(null);
         logger.debug("[自动同步配电箱监测数据]=>{}", ms.getErrorMessage());

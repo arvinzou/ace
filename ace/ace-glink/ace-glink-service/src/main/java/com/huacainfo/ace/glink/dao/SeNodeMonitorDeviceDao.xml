@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.glink.dao.SeNodeMonitorDeviceDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeNodeMonitorDevice">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="nodeID" jdbcType="INTEGER" property="nodeID"/>
+        <result column="nodeID" jdbcType="VARCHAR" property="nodeID"/>
         <result column="deviceType" jdbcType="VARCHAR" property="deviceType"/>
         <result column="deviceCode" jdbcType="VARCHAR" property="deviceCode"/>
         <result column="deviceBox" jdbcType="INTEGER" property="deviceBox"/>
@@ -32,14 +32,14 @@
       deviceCode, deviceBox, deviceStatus, 
       deviceReportTime, remark, status, 
       createDate)
-    values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=INTEGER}, #{deviceType,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR},
       #{deviceCode,jdbcType=VARCHAR}, #{deviceBox,jdbcType=INTEGER}, #{deviceStatus,jdbcType=INTEGER}, 
       #{deviceReportTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNodeMonitorDevice">
         update se_node_monitor_device
-        set nodeID = #{nodeID,jdbcType=INTEGER},
+        set nodeID = #{nodeID,jdbcType=VARCHAR},
           deviceType = #{deviceType,jdbcType=VARCHAR},
           deviceCode = #{deviceCode,jdbcType=VARCHAR},
           deviceBox = #{deviceBox,jdbcType=INTEGER},

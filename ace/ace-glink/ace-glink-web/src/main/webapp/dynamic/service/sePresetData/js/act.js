@@ -291,11 +291,12 @@ function initForm(id) {
 function syncData() {
     var  url=contextPath+'/sePresetData/syncData'
     $.getJSON(url,function (rst) {
+        console.log
         if(rst.status==0){
             getPageList();
         }
         else {
-            alert("同步失败");
+            alert(rst.errorMessage);
         }
     })
 }

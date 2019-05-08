@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeNode">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="nodeCount" jdbcType="INTEGER" property="nodeCount"/>
-        <result column="nodeID" jdbcType="INTEGER" property="nodeID"/>
+        <result column="nodeID" jdbcType="VARCHAR" property="nodeID"/>
         <result column="local" jdbcType="VARCHAR" property="local"/>
         <result column="iPAddress" jdbcType="VARCHAR" property="iPAddress"/>
         <result column="routeIPAddress" jdbcType="VARCHAR" property="routeIPAddress"/>
@@ -41,7 +41,7 @@
       meterID, meterType, engineer, 
       tel, deviceCount, remark, 
       status, createDate)
-    values (#{id,jdbcType=VARCHAR}, #{nodeCount,jdbcType=INTEGER}, #{nodeID,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=VARCHAR}, #{nodeCount,jdbcType=INTEGER}, #{nodeID,jdbcType=VARCHAR},
       #{local,jdbcType=VARCHAR}, #{iPAddress,jdbcType=VARCHAR}, #{routeIPAddress,jdbcType=VARCHAR}, 
       #{areaNodeID,jdbcType=VARCHAR}, #{pX,jdbcType=VARCHAR}, #{pY,jdbcType=VARCHAR}, 
       #{meterID,jdbcType=VARCHAR}, #{meterType,jdbcType=VARCHAR}, #{engineer,jdbcType=VARCHAR}, 
@@ -51,7 +51,7 @@
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNode">
     update se_node
     set nodeCount = #{nodeCount,jdbcType=INTEGER},
-      nodeID = #{nodeID,jdbcType=INTEGER},
+      nodeID = #{nodeID,jdbcType=VARCHAR},
       local = #{local,jdbcType=VARCHAR},
       iPAddress = #{iPAddress,jdbcType=VARCHAR},
       routeIPAddress = #{routeIPAddress,jdbcType=VARCHAR},
@@ -85,7 +85,7 @@
     <sql id="Where_Condition">
         where 1 = 1
         <if test="condition.nodeID !=null and condition.nodeID !=&quot;&quot;">
-            and t.nodeID like concat(#{condition.nodeID,jdbcType=INTEGER},'%')
+            and t.nodeID like concat(#{condition.nodeID,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.areaNodeID !=null and condition.areaNodeID !=&quot;&quot;">
             and t.areaNodeID = #{condition.areaNodeID,jdbcType=VARCHAR}

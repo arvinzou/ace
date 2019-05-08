@@ -5,6 +5,8 @@ import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.common.tools.URLKit;
 import com.huacainfo.ace.glink.api.pojo.fe.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,9 @@ import java.util.Map;
  * @Date 2019/4/15 9:57
  */
 public class SeApiToolKit {
+
+    static Logger logger = LoggerFactory.getLogger(SeApiToolKit.class);
+
 
     private static final String API_DOMAIN_DEV = PropertyUtil.getProperty("fe.api.url");
 
@@ -42,6 +47,22 @@ public class SeApiToolKit {
         return URLKit.mapToStr(p);
     }
 
+    private static String apiURLStr(int interFaceType) {
+        return API_DOMAIN_DEV + "InterFaceType=" + interFaceType + "&Appkey=" + APP_KEY;
+    }
+
+    private static String post(String url, String data) {
+        logger.debug("\n*********request info*********\n" +
+                "request url: {}\n" +
+                "request data: {}\n" +
+                "*********request info end*********", url, data);
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "application/json");
+
+        return HttpKit.post(url, data, headers);
+    }
+
 
     /**
      * 3.1、获取项目区域数据（InterFaceType=1） -- 初始化一次，后期根据需求手动调用
@@ -49,11 +70,14 @@ public class SeApiToolKit {
      * @return ProjectAreaOut
      */
     public static ProjectAreaOut getAreaProjectInfo() {
-        Map<String, String> params = common("1");
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(1);
+        System.out.println(requestURL);
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getAreaProjectInfo], response={}", rstJson);
 
         return JsonUtil.toObject(rstJson, ProjectAreaOut.class);
     }
+
 
     /**
      * 3.2、获取配电箱基础数据（InterFaceType=2）    -- 初始化一次，后期根据需求手动调用
@@ -61,19 +85,24 @@ public class SeApiToolKit {
      * @return JackBoxOut
      */
     public static JackBoxOut getBaseNodeInfo() {
-        Map<String, String> params = common("2");
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+
+        String requestURL = apiURLStr(2);
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getBaseNodeInfo], response={}", rstJson);
 
         return JsonUtil.toObject(rstJson, JackBoxOut.class);
     }
 
     //3.3、获取单个配电箱监测数据（InterFaceType=3） -- 页面手动及时调用
     public static Map<String, Object> getNodeMonitorSingleData(String nodeId) {
-        Map<String, String> params = common("3");
-        params.put("NodeID", nodeId);
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(3);
+        requestURL += "&NodeID=" + nodeId;
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getNodeMonitorSingleData], response={}", rstJson);
+
         return JsonUtil.toMap(rstJson);
+
     }
 
     /**
@@ -83,10 +112,13 @@ public class SeApiToolKit {
      * @return Map<String, Object>
      */
     public static NodeMonitorDataOut getNodeMonitorListData(String nodeGroup) {
-        Map<String, String> params = common("4");
-        params.put("NodeGroup", nodeGroup);
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(4);
+        requestURL += "&NodeGroup=" + nodeGroup;
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getNodeMonitorListData], response={}", rstJson);
+
+
         return JsonUtil.toObject(rstJson, NodeMonitorDataOut.class);
     }
 
@@ -96,9 +128,13 @@ public class SeApiToolKit {
      * @return MeterBoxOut
      */
     public static MeterBoxOut getAllMeterData() {
-        Map<String, String> params = common("5");
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        //type2
+        String requestURL = apiURLStr(5);
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getAllMeterData], response={}", rstJson);
+
+
         return JsonUtil.toObject(rstJson, MeterBoxOut.class);
     }
 
@@ -108,8 +144,12 @@ public class SeApiToolKit {
      * @return Map<String, Object>
      */
     public static RouteOut get4GRouterState() {
-        Map<String, String> params = common("6");
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+
+        //type2
+        String requestURL = apiURLStr(6);
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.get4GRouterState], response={}", rstJson);
+
         return JsonUtil.toObject(rstJson, RouteOut.class);
     }
 
@@ -119,9 +159,12 @@ public class SeApiToolKit {
      * @return Map<String, Object>
      */
     public static GatewayOut getGatewayState() {
-        Map<String, String> params = common("7");
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(7);
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getGatewayState], response={}", rstJson);
+
+
         return JsonUtil.toObject(rstJson, GatewayOut.class);
     }
 
@@ -132,9 +175,12 @@ public class SeApiToolKit {
      * @return CustomAreaOut
      */
     public static CustomAreaOut getCustomAreaInfo() {
-        Map<String, String> params = common("8");
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(8);
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getCustomAreaInfo], response={}", rstJson);
+
+
         return JsonUtil.toObject(rstJson, CustomAreaOut.class);
     }
 
@@ -144,9 +190,12 @@ public class SeApiToolKit {
      * @return AreaTaskOut
      */
     public static AreaTaskOut getAreaTaskInfo() {
-        Map<String, String> params = common("9");
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(9);
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getAreaTaskInfo], response={}", rstJson);
+
+
         return JsonUtil.toObject(rstJson, AreaTaskOut.class);
     }
 
@@ -156,9 +205,12 @@ public class SeApiToolKit {
      * @return PresetDataOut
      */
     public static PresetDataOut getPresetData() {
-        Map<String, String> params = common("10");
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(10);
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getPresetData], response={}", rstJson);
+
+
         return JsonUtil.toObject(rstJson, PresetDataOut.class);
     }
 
@@ -168,9 +220,11 @@ public class SeApiToolKit {
      * @return TimerDataOut
      */
     public static TimerDataOut getTimerData() {
-        Map<String, String> params = common("11");
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(11);
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getTimerData], response={}", rstJson);
+
         return JsonUtil.toObject(rstJson, TimerDataOut.class);
     }
 
@@ -183,12 +237,12 @@ public class SeApiToolKit {
      * @return Map<String, Object>
      */
     public static Map<String, Object> executePreset(String AreaNO, String PresetNo, String AreaNodeID) {
-        Map<String, String> params = common("12");
-        params.put("AreaNO", AreaNO);
-        params.put("PresetNo", PresetNo);
-        params.put("AreaNodeID", AreaNodeID);
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(12);
+        requestURL += "&AreaNO=" + AreaNO + "&PresetNo=" + PresetNo + "&AreaNodeID=" + AreaNodeID;
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.executePreset], response={}", rstJson);
+
         return JsonUtil.toMap(rstJson);
     }
 
@@ -200,10 +254,12 @@ public class SeApiToolKit {
      * @return Map<String, Object>
      */
     public static Map<String, Object> executeTask(String TaskNO) {
-        Map<String, String> params = common("13");
-        params.put("TaskNO", TaskNO);
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(13);
+        requestURL += "&TaskNO=" + TaskNO;
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.executeTask], response={}", rstJson);
+
         return JsonUtil.toMap(rstJson);
     }
 
@@ -216,9 +272,11 @@ public class SeApiToolKit {
      * @return Map<String, Object>
      */
     public static Map<String, Object> updateTimer(TimerDataOut.TimerData timerData) {
-        Map<String, String> params = common("14");
 
-        String rstJson = HttpKit.post(API_DOMAIN_DEV + parse(params), timerData.toString());
+        String requestURL = apiURLStr(14);
+        String rstJson = post(requestURL, timerData.toString());
+        logger.debug("[SeApiToolKit.updateTimer], response={}", rstJson);
+
         return JsonUtil.toMap(rstJson);
     }
 
@@ -230,10 +288,12 @@ public class SeApiToolKit {
      * @return Map<String, Object>
      */
     public static Map<String, Object> getCurrentPreset(String AreaNodeID) {
-        Map<String, String> params = common("15");
-        params.put("AreaNodeID", AreaNodeID);
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(15);
+        requestURL += "&AreaNodeID=" + AreaNodeID;
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getCurrentPreset], response={}", rstJson);
+
         return JsonUtil.toMap(rstJson);
     }
 
@@ -243,9 +303,11 @@ public class SeApiToolKit {
      * @return Map<String, Object>
      */
     public static Map<String, Object> getGeneralCtrlTimer() {
-        Map<String, String> params = common("17");
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(17);
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getGeneralCtrlTimer], response={}", rstJson);
+
         return JsonUtil.toMap(rstJson);
     }
 
@@ -257,9 +319,11 @@ public class SeApiToolKit {
      * @return Map<String, Object>
      */
     public static Map<String, Object> updateGeneralCtrlTimer(GeneralCtrlTimerIn in) {
-        Map<String, String> params = common("18");
 
-        String rstJson = HttpKit.post(API_DOMAIN_DEV + parse(params), in.toString());
+        String requestURL = apiURLStr(18);
+        String rstJson = post(requestURL, in.toString());
+        logger.debug("[SeApiToolKit.updateGeneralCtrlTimer], response={}", rstJson);
+
         return JsonUtil.toMap(rstJson);
     }
 
@@ -270,9 +334,11 @@ public class SeApiToolKit {
      * @return YearCron
      */
     public static YearCron getGeneralCtrlCron() {
-        Map<String, String> params = common("19");
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(19);
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.getGeneralCtrlCron], response={}", rstJson);
+
         return JsonUtil.toObject(rstJson, YearCron.class);
     }
 
@@ -284,9 +350,11 @@ public class SeApiToolKit {
      */
 
     public static Map<String, Object> updateGeneralCtrlCron(YearCron in) {
-        Map<String, String> params = common("20");
 
-        String rstJson = HttpKit.post(API_DOMAIN_DEV + parse(params), in.toString());
+        String requestURL = apiURLStr(20);
+        String rstJson = post(requestURL, in.toString());
+        logger.debug("[SeApiToolKit.updateGeneralCtrlCron], response={}", rstJson);
+
         return JsonUtil.toMap(rstJson);
     }
 
@@ -298,10 +366,12 @@ public class SeApiToolKit {
      * @return Map<String, Object>
      */
     public static Map<String, Object> updateDayCron(int WorkMode) {
-        Map<String, String> params = common("21");
-        params.put("WorkMode", WorkMode + "");
 
-        String rstJson = HttpKit.get(API_DOMAIN_DEV + parse(params));
+        String requestURL = apiURLStr(20);
+        requestURL += "&WorkMode=" + WorkMode;
+        String rstJson = post(requestURL, "");
+        logger.debug("[SeApiToolKit.updateDayCron], response={}", rstJson);
+
         return JsonUtil.toMap(rstJson);
     }
 }
