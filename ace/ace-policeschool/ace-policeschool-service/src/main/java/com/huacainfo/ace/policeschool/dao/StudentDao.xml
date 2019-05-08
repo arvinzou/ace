@@ -179,6 +179,7 @@
         select count(1)
         from student
         where badgeNum = #{badgeNum,jdbcType=VARCHAR}
+        or mobile=#{mobile,jdbcType=VARCHAR}
     </select>
 
     <update id="updateStatus" parameterType="java.lang.String">
