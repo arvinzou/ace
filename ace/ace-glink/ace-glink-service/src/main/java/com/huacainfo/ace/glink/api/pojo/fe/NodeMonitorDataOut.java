@@ -44,7 +44,7 @@ public class NodeMonitorDataOut extends BaseModel {
      */
     public static class NodeMonitorData {
 
-        private int NodeID;//配电箱编号
+        private String NodeID;//配电箱编号
         private String ReportTime;//报告时间
         private int GateStatus;//网关状态：1-在线，0-离线
         private String GateReportTime;//网关状态报告时间
@@ -63,11 +63,11 @@ public class NodeMonitorDataOut extends BaseModel {
         private String MeterReportTime;//电表上报时间
         private List<DeviceData> DeviceData;//模块数据集合
 
-        public int getNodeID() {
+        public String getNodeID() {
             return NodeID;
         }
 
-        public void setNodeID(int nodeID) {
+        public void setNodeID(String nodeID) {
             NodeID = nodeID;
         }
 

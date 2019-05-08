@@ -11,6 +11,8 @@ public class SeNodeMonitorDeviceCh extends BaseModel {
 
     private String deviceCode;
 
+    private int deviceBox;
+
     private Integer status;
 
     private String cHReportTime;
@@ -36,6 +38,14 @@ public class SeNodeMonitorDeviceCh extends BaseModel {
     private String remark;
 
     private Date createDate;
+
+    public int getDeviceBox() {
+        return deviceBox;
+    }
+
+    public void setDeviceBox(int deviceBox) {
+        this.deviceBox = deviceBox;
+    }
 
     public String getId() {
         return id;

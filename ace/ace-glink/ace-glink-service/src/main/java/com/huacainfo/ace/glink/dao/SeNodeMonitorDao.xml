@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.glink.dao.SeNodeMonitorDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeNodeMonitor">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="nodeID" jdbcType="INTEGER" property="nodeID"/>
+        <result column="nodeID" jdbcType="VARCHAR" property="nodeID"/>
         <result column="reportTime" jdbcType="VARCHAR" property="reportTime"/>
         <result column="gateStatus" jdbcType="INTEGER" property="gateStatus"/>
         <result column="gateReportTime" jdbcType="VARCHAR" property="gateReportTime"/>
@@ -48,7 +48,7 @@
       meterID, meterValue, meterReportTime, 
       remark, status, createDate
       )
-    values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=INTEGER}, #{reportTime,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{nodeID,jdbcType=VARCHAR}, #{reportTime,jdbcType=VARCHAR},
       #{gateStatus,jdbcType=INTEGER}, #{gateReportTime,jdbcType=VARCHAR}, #{routeStatus,jdbcType=INTEGER}, 
       #{routeSignal,jdbcType=VARCHAR}, #{routeReportTime,jdbcType=VARCHAR}, #{currentPreset,jdbcType=INTEGER}, 
       #{presetCaption,jdbcType=VARCHAR}, #{presetReportTime,jdbcType=VARCHAR}, #{temperature,jdbcType=VARCHAR}, 
@@ -59,7 +59,7 @@
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNodeMonitor">
     update se_node_monitor
-    set nodeID = #{nodeID,jdbcType=INTEGER},
+    set nodeID = #{nodeID,jdbcType=VARCHAR},
       reportTime = #{reportTime,jdbcType=VARCHAR},
       gateStatus = #{gateStatus,jdbcType=INTEGER},
       gateReportTime = #{gateReportTime,jdbcType=VARCHAR},

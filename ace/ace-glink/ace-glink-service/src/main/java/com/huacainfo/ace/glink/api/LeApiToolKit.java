@@ -2,8 +2,11 @@ package com.huacainfo.ace.glink.api;
 
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
 import com.huacainfo.ace.glink.api.pojo.le.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,14 +20,19 @@ import java.util.Map;
  * @Date 2019/4/15 9:57
  */
 public class LeApiToolKit {
-
-    private static final String domain = "http://116.228.110.86:8092";//ropertyUtil.getProperty("le.api.url");//
+    private static final String domain = PropertyUtil.getProperty("le.api.url");//
+    static Logger logger = LoggerFactory.getLogger(LeApiToolKit.class);
 
     /**
      * 单例模式
      */
     private LeApiToolKit() {
 
+    }
+
+    private static String get(String url) {
+        logger.debug("request url={}", url);
+        return HttpKit.get(url);
     }
 
     /**
@@ -158,7 +166,7 @@ public class LeApiToolKit {
         path.append("area=").append(area)
                 .append("&mode=").append(mode);
 
-        return HttpKit.get(path.toString());
+        return get(path.toString());
     }
 
     /**
@@ -174,7 +182,7 @@ public class LeApiToolKit {
         path.append("type=").append(type)
                 .append("&num=").append(num);
 
-        String rstJson = HttpKit.get(path.toString());
+        String rstJson = get(path.toString());
         return JsonUtil.toObject(rstJson, StatsOut.class);
     }
 
@@ -265,7 +273,7 @@ public class LeApiToolKit {
     public static String getBuildingCount() {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/GetBulidingCount");
-        return HttpKit.get(path.toString());
+        return get(path.toString());
     }
 
     /**
@@ -276,7 +284,7 @@ public class LeApiToolKit {
     public static LampStatusOut getLampStatus() {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/GetLampStatus");
-        String rstJson = HttpKit.get(path.toString());
+        String rstJson = get(path.toString());
 
         return JsonUtil.toObject(rstJson, LampStatusOut.class);
     }
@@ -292,7 +300,7 @@ public class LeApiToolKit {
         path.append(domain).append("/wh/limplight/GetBrokenLampDetail?");
         path.append("Date=").append(date);
         //
-        String rstJson = HttpKit.get(path.toString());
+        String rstJson = get(path.toString());
 
         return JsonUtil.toObject(rstJson, GetBrokenLampDetailOut.class);
     }
@@ -305,7 +313,7 @@ public class LeApiToolKit {
     public static StrategysDetailOut strategysDetail() {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/StrategysDetail");
-        String rstJson = HttpKit.get(path.toString());
+        String rstJson = get(path.toString());
 
         return JsonUtil.toObject(rstJson, StrategysDetailOut.class);
     }
@@ -318,7 +326,7 @@ public class LeApiToolKit {
     public static GetBulidingDetailOut getBuildingDetail() {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/GetBulidingDetail");
-        String rstJson = HttpKit.get(path.toString());
+        String rstJson = get(path.toString());
 
         return JsonUtil.toObject(rstJson, GetBulidingDetailOut.class);
     }

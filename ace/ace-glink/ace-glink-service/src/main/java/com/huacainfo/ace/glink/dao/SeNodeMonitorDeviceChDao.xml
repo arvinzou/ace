@@ -3,6 +3,7 @@
 <mapper namespace="com.huacainfo.ace.glink.dao.SeNodeMonitorDeviceChDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.SeNodeMonitorDeviceCh">
         <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="deviceBox" jdbcType="INTEGER" property="deviceBox"/>
         <result column="chName" jdbcType="VARCHAR" property="chName"/>
         <result column="deviceCode" jdbcType="VARCHAR" property="deviceCode"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
@@ -21,7 +22,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, chName, deviceCode, status, cHReportTime, va, vb, vc, ia, ib, ic, pa, pb, pc, 
-    remark, createDate
+    remark, createDate, deviceBox
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -38,12 +39,12 @@
       status, cHReportTime, va, 
       vb, vc, ia, ib, 
       ic, pa, pb, pc, 
-      remark, createDate)
+      remark, createDate, deviceBox)
     values (#{id,jdbcType=VARCHAR}, #{chName,jdbcType=VARCHAR}, #{deviceCode,jdbcType=VARCHAR}, 
       #{status,jdbcType=INTEGER}, #{cHReportTime,jdbcType=VARCHAR}, #{va,jdbcType=VARCHAR}, 
       #{vb,jdbcType=VARCHAR}, #{vc,jdbcType=VARCHAR}, #{ia,jdbcType=VARCHAR}, #{ib,jdbcType=VARCHAR}, 
       #{ic,jdbcType=VARCHAR}, #{pa,jdbcType=VARCHAR}, #{pb,jdbcType=VARCHAR}, #{pc,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+      #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{deviceBox,jdbcType=INTEGER})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.SeNodeMonitorDeviceCh">
     update se_node_monitor_device_ch
@@ -61,15 +62,17 @@
       pb = #{pb,jdbcType=VARCHAR},
       pc = #{pc,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP}
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      deviceBox = #{deviceBox,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <select id="findByCHName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findByCHName" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from se_node_monitor_device_ch
         where deviceCode = #{deviceCode,jdbcType=VARCHAR}
         and chName = #{chName,jdbcType=VARCHAR}
+        and deviceBox = #{deviceBox,jdbcType=VARCHAR}
     </select>
 </mapper>

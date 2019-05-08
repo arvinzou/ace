@@ -375,40 +375,40 @@
                         <th width="5%"> \${parseOFState(item.deviceStatus)}</th>
                         <th width="5%"> \${item.deviceReportTime}</th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH1Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH1Value','\${item.deviceBox}');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH2Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH2Value','\${item.deviceBox}');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH3Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH3Value','\${item.deviceBox}');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH4Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH4Value','\${item.deviceBox}');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH5Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH5Value','\${item.deviceBox}');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH6Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH6Value','\${item.deviceBox}');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH7Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH7Value','\${item.deviceBox}');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH8Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH8Value','\${item.deviceBox}');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH9Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH9Value','\${item.deviceBox}');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH10Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH10Value','\${item.deviceBox}');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH11Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH11Value','\${item.deviceBox}');">详情</a>
                         </th>
                         <th width="5%">
-                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH12Value');">详情</a>
+                            <a href="javascript:showMonitorDeviceCH('\${item.deviceCode}','CH12Value','\${item.deviceBox}');">详情</a>
                         </th>
                     </tr>
                     {@/each}

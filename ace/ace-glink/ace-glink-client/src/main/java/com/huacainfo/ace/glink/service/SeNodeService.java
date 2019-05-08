@@ -119,7 +119,7 @@ public interface SeNodeService {
      * @return SingleResult<SeNodeMonitorDeviceCh>
      * @throws Exception
      */
-    SingleResult<SeNodeMonitorDeviceCh> getMonitorDeviceCH(String deviceCode, String chName);
+    SingleResult<SeNodeMonitorDeviceCh> getMonitorDeviceCH(String deviceCode, String chName, String deviceBox);
 
     /**
      * 同步配电箱全部电表数据

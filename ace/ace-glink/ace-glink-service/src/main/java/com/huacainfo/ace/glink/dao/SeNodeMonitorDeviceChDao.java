@@ -13,5 +13,6 @@ public interface SeNodeMonitorDeviceChDao {
     int updateByPrimaryKey(SeNodeMonitorDeviceCh record);
 
     SeNodeMonitorDeviceCh findByCHName(@Param("deviceCode") String deviceCode,
-                                       @Param("chName") String chName);
+                                       @Param("chName") String chName,
+                                       @Param("deviceBox") String deviceBox);
 }

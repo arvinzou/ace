@@ -8,7 +8,7 @@ import java.util.Date;
 public class SeNodeMonitor extends BaseModel {
     private String id;
 
-    private Integer nodeID;
+    private String nodeID;
 
     private String reportTime;
 
@@ -66,11 +66,11 @@ public class SeNodeMonitor extends BaseModel {
         this.id = id == null ? null : id.trim();
     }
 
-    public Integer getNodeID() {
+    public String getNodeID() {
         return nodeID;
     }
 
-    public void setNodeID(Integer nodeID) {
+    public void setNodeID(String nodeID) {
         this.nodeID = nodeID;
     }
 

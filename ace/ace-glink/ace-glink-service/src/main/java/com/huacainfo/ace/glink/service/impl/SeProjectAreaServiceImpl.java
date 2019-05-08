@@ -1,31 +1,29 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
-import java.util.*;
-
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.view.Tree;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.glink.api.SeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.fe.ProjectAreaOut;
-import org.apache.commons.lang.StringUtils;
+import com.huacainfo.ace.glink.dao.SeProjectAreaDao;
+import com.huacainfo.ace.glink.model.SeProjectArea;
+import com.huacainfo.ace.glink.service.SeProjectAreaService;
+import com.huacainfo.ace.glink.vo.SeProjectAreaQVo;
+import com.huacainfo.ace.glink.vo.SeProjectAreaVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.glink.dao.SeProjectAreaDao;
-import com.huacainfo.ace.glink.model.SeProjectArea;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.glink.service.SeProjectAreaService;
-import com.huacainfo.ace.glink.vo.SeProjectAreaVo;
-import com.huacainfo.ace.glink.vo.SeProjectAreaQVo;
+import java.util.*;
 
 @Service("seProjectAreaService")
 /**
@@ -417,7 +415,8 @@ public class SeProjectAreaServiceImpl implements SeProjectAreaService {
     private void areaList(String pid, String projectName, ProjectAreaOut obj) {
         SeProjectArea record;
 
-        if (obj.getAreaType() != 1) {
+        if (obj.getAreaType() != 1 && obj.getAreaNode() != null) {
+
             List<ProjectAreaOut> outList = JsonUtil.toList(obj.getAreaNode(), ProjectAreaOut.class);
             for (ProjectAreaOut item : outList) {
                 String newPid = obj.getAreaNodeID();
