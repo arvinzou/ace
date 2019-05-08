@@ -123,7 +123,7 @@
                 </label>
                 <div class="col-md-10">
                     <input type="text" class="form-control" name="resolutionWidth" maxlength="19"
-                           placeholder="请输入分辨率-宽（建议字数在14个字以内，不超过19个字)">
+                           placeholder="请输入分辨率-宽（建议字数在14个字以内，不超过20个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -134,7 +134,7 @@
                 </label>
                 <div class="col-md-10">
                     <input type="text" class="form-control" name="resolutionHeight" maxlength="19"
-                           placeholder="请输入分辨率-高（建议字数在14个字以内，不超过19个字)">
+                           placeholder="请输入分辨率-高（建议字数在14个字以内，不超过20个字)">
                     <span class="help-block"></span>
                 </div>
             </div>

@@ -40,7 +40,7 @@
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
 
                     </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                   <%-- <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <div class="input-group" style="float:left">
                             区域数据：
                             <input id="pid" name="pid" class="easyui-combotree"
@@ -48,11 +48,10 @@
                 lines:true," style='width:200px;line-height: 30px;height: 30px;'>
                             <a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
 
                     </div>
-
                     <div class="input-group">
                         <input type="text"
                                name="areaName"
@@ -69,7 +68,7 @@
             </div>
 
         </div>
-        <div class="easyui-layout" id="cc" style="width:100%;height: 400px;">
+        <div class="easyui-layout" id="cc" style="width:100%;height: 500px;">
 
             <div data-options="region:'center',border:false,fit:true" id="easyui-center">
                 <%--  <table id="grid-table"></table>--%>
@@ -96,7 +95,7 @@
 
 
                 <div class="paginationbar" style="text-align:right;">
-                    <ul class="pagination" id="pagination1" style="padding-right:200px"></ul>
+                    <ul class="pagination" id="pagination1" style="padding-right:15%"></ul>
                 </div>
 
             </div>
@@ -109,7 +108,8 @@
                 lines:false,
                 onClick: function(e){
                     $(this).tree('select');
-                    autotreeq(e);
+                    setParams('id',e.id);
+
                 }
             "></ul>
 
@@ -147,18 +147,14 @@
 
 <%--列表juicer模板--%>
 <script id="tpl-find" type="text/template">
-
+    {@each data as item, index}
     <tr>
-        <td> \${data.o.projectName}</td>
-        <td> \${data.o.areaName}</td>
-        <td> \${data.o.areaNodeCount}</td>
-        <td> \${data.o.areaNodeID}</td>
-        <td> \${data.o.areaType}</td>
-        <td> \${data.o.remark}</td>
-        <td> \${data.o.status}</td>
-        <td> \${data.o.createDate}</td>
+        <td> \${item.areaName}</td>
+        <td> \${item.areaNodeCount}</td>
+        <td> \${item.areaNodeID}</td>
+        <td> \${item.createDate}</td>
     </tr>
-
+    {@/each}
 </script>
 ﻿
 <div class="modal fade " id="modal-status">

@@ -120,9 +120,7 @@
             and t.deviceCode = #{condition.deviceCode,jdbcType=VARCHAR}
         </if>
         <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
-            and (b.`name` like concat(#{condition.keyword,jdbcType=VARCHAR},'%')
-            or d.`name` like concat(#{condition.keyword,jdbcType=VARCHAR},'%')
-            )
+            and b.`name` like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.errType !=null and condition.errType !=&quot;&quot;">
             and t.errType = #{condition.errType,jdbcType=VARCHAR}

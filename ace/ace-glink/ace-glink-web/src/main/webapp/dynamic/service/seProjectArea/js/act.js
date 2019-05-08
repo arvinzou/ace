@@ -39,6 +39,8 @@ function initPage() {
 }
 
 function setParams(key, value) {
+    params.start=0;
+    params.initType='init';
     params[key] = value;
     getPageList();
 }
@@ -319,7 +321,7 @@ function clearQparams() {
 }
 
 function autotreeq(obj) {
-    startLoad();
+   startLoad();
     $.ajax({
         url: contextPath + "/seProjectArea/selectSeProjectAreaByPrimaryKey",
         type: "post",
