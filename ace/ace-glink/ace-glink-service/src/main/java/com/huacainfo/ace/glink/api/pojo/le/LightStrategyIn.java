@@ -26,7 +26,7 @@ public class LightStrategyIn extends BaseModel {
     private String stopTime;//策略的结束时间
     private String strategy;//分区已编辑完毕的策略编号（或名称）
 
-    private LightStrategyIn() {
+    public LightStrategyIn() {
     }
 
     public LightStrategyIn(String strategy, String area, String startTime, String stopTime,

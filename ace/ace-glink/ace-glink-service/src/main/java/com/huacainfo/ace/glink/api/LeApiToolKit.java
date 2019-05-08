@@ -32,7 +32,9 @@ public class LeApiToolKit {
 
     private static String get(String url) {
         logger.debug("request url={}", url);
-        return HttpKit.get(url);
+        String r = HttpKit.get(url);
+        logger.debug("response={}", r);
+        return r;
     }
 
     /**
@@ -95,9 +97,16 @@ public class LeApiToolKit {
     }
 
     private static String post(String url, String json) {
+        logger.debug("post.url:{}\n" +
+                "post.json:{}", url, json);
+
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
-        return HttpKit.post(url, json, headers);
+        String r = HttpKit.post(url, json, headers);
+
+        logger.debug("post.response: {}", r);
+
+        return r;
     }
 
 
@@ -115,7 +124,8 @@ public class LeApiToolKit {
      */
     public static HeartOut heart() {
         String path = "/wh/status/control/heart";
-        String rstJson = HttpKit.get(domain + path);
+
+        String rstJson = get(domain + path);// HttpKit.get();
 
         return JsonUtil.toObject(rstJson, HeartOut.class);
     }
@@ -163,8 +173,8 @@ public class LeApiToolKit {
     public static String stopRegain(int mode, String area) {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/control/stopRegain?");
-        path.append("area=").append(area)
-                .append("&mode=").append(mode);
+        path.append("area=").append(area);
+        path.append("&mode=").append(mode);
 
         return get(path.toString());
     }
@@ -179,15 +189,15 @@ public class LeApiToolKit {
     public static StatsOut stats(int type, String num) {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/control/stats?");
-        path.append("type=").append(type)
-                .append("&num=").append(num);
+        path.append("type=").append(type);
+        path.append("&num=").append(num);
 
         String rstJson = get(path.toString());
         return JsonUtil.toObject(rstJson, StatsOut.class);
     }
 
     /**
-     * 获取分区(站点或建筑物)执行结果信息  -- 被新接口替换
+     * 关键变化数据上传  -- 被新接口替换
      *
      * @param params 请求入参
      * @return String

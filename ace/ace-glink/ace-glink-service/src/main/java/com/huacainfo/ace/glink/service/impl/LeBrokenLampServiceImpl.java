@@ -189,8 +189,10 @@ public class LeBrokenLampServiceImpl implements LeBrokenLampService {
      */
     @Override
     public MessageResponse getBrokenLampDetail() {
+
         //获取前一天数据
-        Date yesterday = DateUtil.toDate("2019-04-16 00:00:00");//DateUtil.getDateByDay(DateUtil.getNowDate(), -1);
+        //DateUtil.toDate("2019-04-16 00:00:00");//
+        Date yesterday = DateUtil.getDateByDay(DateUtil.getNowDate(), -1);
         String date = DateUtil.toStr(yesterday, CommConstant.DATE_REGEX_LE);
         GetBrokenLampDetailOut rst = null;
         try {
