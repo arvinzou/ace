@@ -113,7 +113,7 @@ public class StudentServiceImpl implements StudentService {
 
         int temp = this.studentDao.isExist(o);
         if (temp > 0) {
-            return new MessageResponse(ResultCode.FAIL, "警号重复！");
+            return new MessageResponse(ResultCode.FAIL, "警号重复或手机号码重复！");
         }
 
         String sid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
@@ -271,7 +271,7 @@ public class StudentServiceImpl implements StudentService {
         String openId = "";
         String name = data.getName();
         String account = data.getBadgeNum();
-        String pwd = data.getIdCard().substring(data.getIdCard().length() - 7, data.getIdCard().length() - 1);
+        String pwd = data.getIdCard().substring(data.getIdCard().length() - 6, data.getIdCard().length());
         String mobile = data.getMobile();
         String sex = data.getSex();//String.valueOf(signService.getCarInfo(data.getIdCard()).get("sex"));
         String sysId = "policeschool";

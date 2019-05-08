@@ -172,6 +172,9 @@
         <if test="condition.classId!=null and condition.classId!=&quot;&quot;">
             and cls.id = #{condition.classId,jdbcType=VARCHAR}
         </if>
+        <if test="condition.dateTimeStr!=null and condition.dateTimeStr!=&quot;&quot;">
+            and r.attenDate = #{condition.dateTimeStr,jdbcType=VARCHAR}
+        </if>
         <if test='condition.startDate!=null and condition.startDate!=""'>
             <![CDATA[
               and from_unixtime(r.attenTime)>= str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S')
