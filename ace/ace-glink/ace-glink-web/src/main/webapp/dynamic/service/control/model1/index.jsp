@@ -138,7 +138,7 @@
                 <table class="table-tg" style="border:1px solid rgb(12,129,135);">
                     <tr>
                         <td class="tg-mvxc" width="10%">策略编号</td>
-                        <td class="tg-mvxc" width="30%">策列名称</td>
+                        <td class="tg-mvxc" width="30%">策略名称</td>
                         <td class="tg-mvxc" width="10%">分区编号</td>
                         <td class="tg-mvxc" width="20%">操作</td>
                     </tr>
