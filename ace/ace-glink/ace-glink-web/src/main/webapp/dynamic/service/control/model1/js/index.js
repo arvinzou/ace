@@ -25,6 +25,16 @@ var clearData = ['isWeek', 'isMonth', 'weeks', 'months', 'startDate', 'stopDate'
 function initJuicerMethod() {
     juicer.register('isChecked', isChecked);
     juicer.register('formatObject', formatObject);
+    juicer.register('inspect', inspect);
+}
+
+function inspect(code){
+    var li= $('#checked li[data-code='+code+']');
+    console.log(1);
+    if(li.length){
+        return false;
+    }
+    return true;
 }
 
 /**
@@ -72,6 +82,7 @@ function initPage() {
     $('#strategyList').on('click', 'button', selectPreset);
     $('.strategyPart').on('click', '.addStrategy', addStrategy);
     $('.strategyPart').on('click', '.searchBtn', searchByName);
+    $('.stations').on('click', '.searchStations', searchStations);
     $('.scenario-modal #presets').on('click', 'li', setStrategy);
 
 
@@ -266,9 +277,21 @@ function pauseNow() {
     $('#pause').removeClass('colorful');
 }
 
+function searchStations() {
+    getStations();
+}
+
+
+function searchEnterStations(e) {
+    if(e==13){
+        getStations();
+    }
+}
 
 /*获取所有站点*/
 function getStations() {
+    var val=$('.stations input[name=name]').val();
+    params.name=val;
     var url = contextPath + "/topStation/findTopStationList";
     $.get(url, params, function (rst) {
         if (rst.status == 0) {
@@ -321,10 +344,10 @@ function removeStation() {
     var that = $(this);
     var code = that.data('code');
     var name = that.data('name');
+    that.remove();
     $('#videos .video' + code).remove();
     nohasLi()
     renderadd('#check', [{code: code, name: name}], 'tpl-check');
-    that.remove();
 }
 
 /*++++++++++++++++++++++++++++++++++++++++++initsceneControl end++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -604,6 +627,12 @@ function setStrategy() {
     })
 }
 
+
+function searchEnter(a) {
+    if(a==13){
+        searchByName();
+    }
+}
 
 /*++++++++++++++++++++++++++++++++++++++++++initstrategyPart end++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
