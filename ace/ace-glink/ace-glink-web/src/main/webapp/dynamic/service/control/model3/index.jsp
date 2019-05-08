@@ -137,7 +137,7 @@
             <span class="title">任务管理</span>
             <input placeholder="请选择分区" id="taskAreaNode" class="easyui-combotree"
                    data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
-                lines:true," style='min-width:225px;height: 25px;'>
+                lines:true," style='min-width:225px;height:0.260416rem;'>
         </div>
         <div class="modals-body">
             <%--list--%>
@@ -158,7 +158,7 @@
             <span class="title">场景执行</span>
             <input placeholder="请选择分区" id="areaNodeID1" class="easyui-combotree"
                    data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
-                lines:true," style='min-width:120px;height: 25px;'>
+                lines:true," style='min-width:225px;height:0.260416rem;'>
         </div>
         <div class="modals-body">
             <ul class="taskList" id="scenarioList">
@@ -740,7 +740,7 @@
     {@each data as item, index}
     <li>
         <div class="top">
-            \${item.taskName}
+            \${item.taskNo}-\${item.taskName}
         </div>
         <div class="bottom">
             {@if item.exeState == 'ok'}

@@ -105,8 +105,8 @@
         <div class="stations">
             <div class="title">江汉区站点(多选)</div>
             <div class="inputGroup">
-                <input type="text" placeholder="输入站点名称"/>
-                <button>
+                <input type="text" name="name" onkeypress="searchEnterStations(event.keyCode||event.which)" placeholder="输入站点名称"/>
+                <button class="searchStations">
 
                 </button>
             </div>
@@ -127,7 +127,7 @@
             <div class="operation">
                 <button class="addStrategy">创建</button>
                 <div class="inputGroup">
-                    <input class="strategyName" type="text" placeholder="搜索" name="name"/>
+                    <input class="strategyName" onkeypress="searchEnter(event.keyCode||event.which)" type="text" placeholder="输入策略编号或策略名称搜索" name="name"/>
                     <button class="searchBtn">
                     </button>
                 </div>
@@ -138,7 +138,7 @@
                 <table class="table-tg" style="border:1px solid rgb(12,129,135);">
                     <tr>
                         <td class="tg-mvxc" width="10%">策略编号</td>
-                        <td class="tg-mvxc" width="30%">策列名称</td>
+                        <td class="tg-mvxc" width="30%">策略名称</td>
                         <td class="tg-mvxc" width="10%">分区编号</td>
                         <td class="tg-mvxc" width="20%">操作</td>
                     </tr>
@@ -357,7 +357,9 @@
 
 <script id="tpl-check" type="text/template">
     {@each data as item, index}
-    <li data-name="\${item.name}" data-code="\${item.code}">\${item.name}</li>
+        {@if inspect(item.code)}
+            <li data-name="\${item.name}" data-code="\${item.code}">\${item.name}</li>
+        {@/if}
     {@/each}
 </script>
 
