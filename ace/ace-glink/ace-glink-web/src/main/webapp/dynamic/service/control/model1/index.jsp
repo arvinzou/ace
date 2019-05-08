@@ -357,9 +357,9 @@
 
 <script id="tpl-check" type="text/template">
     {@each data as item, index}
-    {@if inspect(item.code)}
-    <li data-name="\${item.name}" data-code="\${item.code}">\${item.name}</li>
-    {@/if}
+        {@if inspect(item.code)}
+            <li data-name="\${item.name}" data-code="\${item.code}">\${item.name}</li>
+        {@/if}
     {@/each}
 </script>
 

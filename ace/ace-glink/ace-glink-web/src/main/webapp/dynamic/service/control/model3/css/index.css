@@ -528,9 +528,11 @@ body {
 
 .task .taskList li .bottom .success{
 	color: #3BE75B;
+	font-size: 0.08rem;
 }
 .task .taskList li .bottom .error{
 	color: #FE2626;
+	font-size: 0.08rem;
 }
 .task .taskList li .bottom button{
 	height:0.21875rem;
@@ -828,5 +830,9 @@ body {
 	display: flex;
 	align-items: center;
 	position: relative;
+}
+
+.combo{
+	display: flex !important;
 }
 
