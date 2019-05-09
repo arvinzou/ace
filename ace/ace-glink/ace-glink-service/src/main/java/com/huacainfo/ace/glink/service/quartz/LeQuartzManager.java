@@ -31,7 +31,7 @@ public class LeQuartzManager {
     /**
      * 每隔[10分钟,调用一次弱电接口：    获取设备总数&故障设备总数
      */
-//    @Scheduled(cron = "0 0/10 * * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void leAutoGetLampStatus() {
         MessageResponse ms = leLampStatusService.syncData();// pagePortalService.getLampStatus();
         logger.info(ms.getErrorMessage());
