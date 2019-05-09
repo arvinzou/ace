@@ -46,7 +46,7 @@
                     <span class="help-block"></span>
                 </div>
             </div>
-            <%-- <div class="form-group">
+             <div class="form-group">
                  <label class="col-md-2 control-label">
                      分区编号
                      <span class="required" aria-required="true"> * </span>
@@ -56,7 +56,7 @@
                             placeholder="请输入分区编号（20位有效整型数据)">
                      <span class="help-block"></span>
                  </div>
-             </div>--%>
+             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">
                     分区名称

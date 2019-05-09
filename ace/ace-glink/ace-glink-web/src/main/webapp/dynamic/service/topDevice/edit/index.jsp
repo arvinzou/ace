@@ -43,7 +43,7 @@
 </body>
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
-        <div class="form-group hide">
+        <div class="form-group">
             <label class="col-md-2 control-label">
                 <input type="hidden" class="form-control" name="id" value="\${data.o.id}"/>
                 <input type="hidden" class="form-control" name="status" value="\${data.o.status}"/>

@@ -86,7 +86,7 @@ public class TopDeviceServiceImpl implements TopDeviceService {
     @Override
     public MessageResponse insertTopDevice(TopDevice o, UserProp userProp) throws Exception {
         o.setId(GUIDUtil.getGUID());
-        o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
+       // o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
         if (CommonUtils.isBlank(o.getCode())) {
             return new MessageResponse(1, "设备编号不能为空！");
         }

@@ -96,7 +96,7 @@ public class TopBuildingServiceImpl implements TopBuildingService {
     @Override
     public MessageResponse insertTopBuilding(TopBuilding o, UserProp userProp) throws Exception {
         o.setId(GUIDUtil.getGUID());
-        o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
+       // o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
         if (CommonUtils.isBlank(o.getCode())) {
             return new MessageResponse(1, "建筑编号不能为空！");
         }
@@ -110,7 +110,7 @@ public class TopBuildingServiceImpl implements TopBuildingService {
             return new MessageResponse(1, "所在地不能为空！");
         }
         if (CommonUtils.isBlank(o.getStationCode())) {
-            return new MessageResponse(1, "分区编码不能为空！");
+            return new MessageResponse(1, "所属站点不能为空！");
         }
         int temp = this.topBuildingDao.isExit(o);
         if (temp > 0) {

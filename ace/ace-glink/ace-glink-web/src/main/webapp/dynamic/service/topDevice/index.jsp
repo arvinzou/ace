@@ -84,15 +84,15 @@
                 <thead>
                 <tr>
 
-
-                    <th width="12%"> 设备名称</th>
-                    <th width="13%"> 设备类型</th>
+                    <th width="12%"> 设备编号</th>
+                    <th width="13%"> 设备名称</th>
+                    <th width="12%"> 设备类型</th>
                     <th width="13%"> 所属节点</th>
-                    <th width="15%"> 上线时间</th>
-                    <th width="13%"> 下线时间</th>
+                    <th width="12%"> 上线时间</th>
+                    <th width="12%"> 下线时间</th>
                     <th width="10%"> 状态</th>
 
-                    <th width="20%">操作</th>
+                    <th width="15%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -119,7 +119,7 @@
     {@each data as item, index}
     <tr>
 
-
+        <td> \${item.code}</td>
         <td> \${item.name}</td>
         <td> \${parseType(item.type)}</td>
         <td> \${item.nodeName}</td>
@@ -129,9 +129,9 @@
 
         <td>
             {@if item.status==1}
-            <span class="label label-lg label-danger">上线</span>
+            <span class="label label-lg label-success">上线</span>
             {@else if item.status==2}
-            <span class="label label-lg label-success">下线</span>
+            <span class="label label-lg label-danger">下线</span>
             {@/if}
         </td>
         <td>
@@ -139,8 +139,13 @@
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
             <a href="javascript:del('\${item.id}');">删除</a>
-            <a href="javascript:online('\${item.id}');">上线</a>
+            {@if item.status==1}
             <a href="javascript:outline('\${item.id}');">下线</a>
+            {@else if item.status==2}
+            <a href="javascript:online('\${item.id}');">上线</a>
+            {@/if}
+           <%-- <a href="javascript:online('\${item.id}');">上线</a>
+            <a href="javascript:outline('\${item.id}');">下线</a>--%>
         </td>
     </tr>
     {@/each}

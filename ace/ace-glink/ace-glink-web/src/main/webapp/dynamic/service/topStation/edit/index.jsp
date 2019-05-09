@@ -59,7 +59,7 @@
                 <span class="help-block"></span>
             </div>
         </div>
-        <%-- <div class="form-group">
+         <div class="form-group">
              <label class="col-md-2 control-label">
 
                  站点编码
@@ -71,7 +71,7 @@
                         placeholder="请输入站点编码（建议字数在14个字以内，不超过50个字)">
                  <span class="help-block"></span>
              </div>
-         </div>--%>
+         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
 

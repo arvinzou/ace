@@ -28,7 +28,7 @@
             <!--具体界面元素开始-->
             <form class="form-horizontal" id="fm-add" role="form">
                 <div class="form-body">
-                    <div class="form-group hide">
+                    <div class="form-group">
                         <label class="col-md-2 control-label">
                             建筑编号
                             <span class="required" aria-required="true"> * </span>

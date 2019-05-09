@@ -58,12 +58,13 @@
                 <thead>
                 <tr>
 
-                    <th width="20%"> 所属分区</th>
+                    <th width="15%"> 所属分区</th>
+                    <th width="15%"> 站点编号</th>
                     <th width="15%"> 站点名称</th>
-                    <th width="25%"> 站点地址</th>
+                    <th width="20%"> 站点地址</th>
                     <th width="20%"> 创建日期</th>
 
-                    <th width="20%">操作</th>
+                    <th width="15%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -91,11 +92,9 @@
     <tr>
 
         <td> \${item.subareaName}</td>
+        <td> \${item.code}</td>
         <td> \${item.name}</td>
-
         <td> \${item.address}</td>
-
-
         <td> \${item.createDate}</td>
         <td>
             <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>

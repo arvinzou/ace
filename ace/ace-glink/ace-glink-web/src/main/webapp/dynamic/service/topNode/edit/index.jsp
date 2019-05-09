@@ -42,18 +42,18 @@
         <input type="text" class="form-control hidden" name="id" value="\${data.o.id}">
         <input type="text" class="form-control hidden" name="status" value="\${data.o.status}">
         <input type="text" class="form-control hidden" name="code" value="\${data.o.code}">
-        <%-- <div class="form-group">
+         <div class="form-group">
              <label class="col-md-2 control-label">
                  节点编号
                  <span class="required" aria-required="true"> * </span>
              </label>
              <div class="col-md-10">
-                 <input type="hidden" class="form-control" name="code"
+                 <input type="text" class="form-control" name="code"
                         value="\${data.o.code}" maxlength="50"
                         placeholder="请输入节点编号（建议字数在14个字以内，不超过50个字)">
                  <span class="help-block"></span>
              </div>
-         </div>--%>
+         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
                 节点名称
