@@ -13,13 +13,13 @@ import java.util.List;
  */
 public class StatsOut extends LeBaseOut {
 
-    private StatsObj data;//返回数据
+    private List<StatsObj> data;//返回数据
 
-    public StatsObj getData() {
+    public List<StatsObj> getData() {
         return data;
     }
 
-    public void setData(StatsObj data) {
+    public void setData(List<StatsObj> data) {
         this.data = data;
     }
 

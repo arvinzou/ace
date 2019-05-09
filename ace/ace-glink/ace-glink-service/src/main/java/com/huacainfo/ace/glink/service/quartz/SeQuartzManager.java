@@ -28,7 +28,7 @@ public class SeQuartzManager {
     /**
      * 每隔[5]分钟,调用一次强电接口：    同步配电箱监测数据
      */
-//    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/30 * * * ?")
     public void autoSyncMonitorData() {
         MessageResponse ms = seNodeService.syncMonitorData(null);
         logger.debug("[自动同步配电箱监测数据]=>{}", ms.getErrorMessage());
@@ -37,7 +37,7 @@ public class SeQuartzManager {
     /**
      * 每隔[5]分钟,调用一次强电接口：    同步配电箱全部电表数据
      */
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/30 * * * ?")
     public void autoSyncNodeMeterData() {
         //同步基础数据
         MessageResponse ms = seNodeService.syncNodeMeterData(null);
@@ -47,7 +47,7 @@ public class SeQuartzManager {
     /**
      * 每隔[6]分钟,自动统计数据
      */
-    @Scheduled(cron = "0 0/6 * * * ?")
+    @Scheduled(cron = "0 0/35 * * * ?")
     public void autoDataStatistics() {
         //同步基础数据
         MessageResponse ms = pagePortalService.autoDataStatistics();

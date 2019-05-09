@@ -1,4 +1,6 @@
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.api.LeApiToolKit;
+import com.huacainfo.ace.glink.api.pojo.le.LightStrategyIn;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +18,40 @@ public class CommonTest {
 
     @Test
     public void test() throws IOException {
+
+        //强电联调
+//        seApiInvoke();
+
+        //弱电联调
+        leApiInvoke();
+    }
+
+    private void leApiInvoke() {
+
+        //分区灯光启动仪式
+//        System.out.println(LeApiToolKit.completionCeremony(2));
+
+        //模式的紧急停止(恢复)
+//        System.out.println(LeApiToolKit.stopRegain(2, "002"));
+
+//        System.out.println(LeApiToolKit.stats(2,"JH068"));
+
+//        System.out.println(LeApiToolKit.strategysDetail());
+
+//
+        LightStrategyIn in = new LightStrategyIn();
+        in.setArea("002");
+        in.setPattern(LightStrategyIn.MODE_HOLIDAY);
+        in.setStopDate("20190509");
+        in.setStartDate("20190507");
+        in.setStrategy("SHGL#0052");
+        in.setStartTime("20190508");
+        in.setStopTime("20190509");
+
+        LeApiToolKit.lightStrategy(in);
+    }
+
+    private void seApiInvoke() {
 
 
 //        System.out.println(SeApiToolKit.getBaseNodeInfo());
