@@ -45,7 +45,7 @@
                     <div class="input-group" style="float:left;padding-right:5px">
                         <label class="control-label" style="float: left;padding-top: 3px">籍贯</label>
                         <input id="ctrl-areaCode" name="areaCode" class="easyui-combotree form-control"
-                               data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=4307', method:'get', animate: true, lines:false,"
+                               data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=00', method:'get', animate: true, lines:false,"
                                style='width: 150px; line-height: 30px; height: 30px;'>
                         <a href="javascript:clearAreaCode()">清除</a>
                     </div>
@@ -112,7 +112,7 @@
                         <label class="col-md-2 control-label">籍贯<span style='color:red;'>*</span></label>
                         <div class="col-md-10">
                             <input id="ctrl-areaCode-import" name="areaCode" class="easyui-combotree form-control"
-                                   data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=4307', method:'get', animate: true, lines:false,"
+                                   data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=00', method:'get', animate: true, lines:false,"
                                    style='width: 275px; line-height: 30px; height: 30px;'>
                         </div>
                     </div>

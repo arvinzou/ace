@@ -143,12 +143,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">备注</label>
-        <div class="col-md-10">
-            \${data.o.remark}
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
             \${parseStatus(data.o.status)}

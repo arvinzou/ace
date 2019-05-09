@@ -11,9 +11,7 @@
 </head>
 <jsp:include page="/dynamic/common/header.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
-<link rel="stylesheet"
-      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
-      type="text/css" media="screen"/>
+<link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen"/>
 <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2-bootstrap.min.css">
 <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2.css">
 <body>
@@ -36,7 +34,7 @@
                     <div class="input-group" role="group" style="float:left;padding-right:5px">
                         籍贯 <input id="p-areaCode" name="areaCode"
                                   class="easyui-combotree" style='width: 200px;height:30px'
-                                  data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=43',
+                                  data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=00',
                                     method:'get',animate: true, lines:false,">
                         <a href="javascript:clearAreaCode()">清除</a>
                     </div>

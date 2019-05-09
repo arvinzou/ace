@@ -43,7 +43,7 @@ public interface AttRecordService {
      * @author: Arvin
      * @version: 2019-02-20
      */
-    //  MessageResponse insertAttRecord(AttRecord obj, UserProp userProp) throws Exception;
+//      MessageResponse insertAttRecord(AttRecord obj, UserProp userProp) throws Exception;
 
     /**
      * @throws

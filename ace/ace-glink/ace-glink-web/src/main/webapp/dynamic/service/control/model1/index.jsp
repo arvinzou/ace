@@ -475,8 +475,7 @@
             <textarea name="remark">\${data.remark}</textarea>
         </div>
 </script>
-
-<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/loading.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>

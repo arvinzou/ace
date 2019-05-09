@@ -144,6 +144,8 @@
     </select>
 
     <select id="findHeadmasterList" parameterType="java.lang.String" resultMap="VoResultMap">
+        SELECT m.* FROM
+        (
         select
         t.id, t.category, t.name, t.sex, t.political, t.mobile, t.idCard, t.photoUrl, t.remark,
         t.status, t.createUserId, t.createUserName, t.createDate,
@@ -152,21 +154,21 @@
         from teacher t
         where
         t.status <![CDATA[ <> ]]> 0
-        <choose>
-            <when test="condition.id!=null and condition.id!=&quot;&quot;">
-                and t.id = #{condition.id,jdbcType=VARCHAR}
-            </when>
-            <otherwise>
-               and( t.id NOT in (
-                SELECT
-                c.headmaster
-                FROM
-                classes c
-                WHERE c.status =1
-                ))
-            </otherwise>
-        </choose>
-
+        <if test="condition.id !=null and condition.id !=&quot;&quot;">
+            AND t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+        limit 0, 1) m
+        UNION
+        SELECT n.* FROM
+        (
+        select
+        t.id, t.category, t.name, t.sex, t.political, t.mobile, t.idCard, t.photoUrl, t.remark,
+        t.status, t.createUserId, t.createUserName, t.createDate,
+        t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
+        t.introduce, t.workUnitName, t.postName
+        from teacher t
+        where
+        t.status <![CDATA[ <> ]]> 0
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
@@ -178,7 +180,7 @@
                 ORDER BY t.createDate desc
             </otherwise>
         </choose>
-        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}) n
     </select>
 
     <select id="findCount" resultType="int">

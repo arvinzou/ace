@@ -99,7 +99,7 @@
     <sql id="Where_Condition">
         where 1 = 1
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
-            and t.status = #{condition.status,jdbcType=VARCHAR}
+            and IFNULL((select 2 from portal.users u where u.account = t.badgeNum),'1') = #{condition.status,jdbcType=VARCHAR}
         </if>
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name = #{condition.name,jdbcType=VARCHAR}

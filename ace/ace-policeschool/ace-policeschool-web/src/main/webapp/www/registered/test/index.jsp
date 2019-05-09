@@ -47,6 +47,7 @@
 
 <script id="tpl_notDoneTest" type="text/template">
     {@each data as item}
+    {@if item.course.evaluatingId&&item.id}
     <div class="temp temp2" data-eid="\${item.course.evaluatingId}" data-cid="\${item.id}">
         <div class="left">
             <p class="title">\${item.course.name}</p>
@@ -58,12 +59,14 @@
         </div>
         <div class="right view">测评</div>
     </div>
+    {@/if}
     {@/each}
 </script>
 
 
 <script id="tpl_doneTest" type="text/template">
     {@each data as item}
+    {@if item.course.evaluatingId&&item.id}
     <div class="temp temp1" data-eid="\${item.course.evaluatingId}" data-cid="\${item.id}">
         <div class="left">
             <p class="title">\${item.course.name}</p>
@@ -75,6 +78,7 @@
         </div>
         <div class="right viewed">查看</div>
     </div>
+    {@/if}
     {@/each}
 </script>
 
