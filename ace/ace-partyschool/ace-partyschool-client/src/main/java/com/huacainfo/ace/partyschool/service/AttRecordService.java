@@ -44,6 +44,7 @@ public interface AttRecordService {
      * @version: 2019-02-20
      */
     MessageResponse insertAttRecord(AttRecord obj, UserProp userProp) throws Exception;
+    ResultResponse location(UserProp userProp) throws Exception;
 
     /**
      * @throws

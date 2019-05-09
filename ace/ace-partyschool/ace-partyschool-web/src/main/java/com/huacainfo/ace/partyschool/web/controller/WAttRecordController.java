@@ -24,6 +24,9 @@ public class WAttRecordController extends BisBaseController {
     private AttRecordService attRecordService;
 
 
+
+
+
     /**
      * 考勤登记
      *
@@ -49,6 +52,21 @@ public class WAttRecordController extends BisBaseController {
 
         MessageResponse ms = attRecordService.insertAttRecord(data, userProp);
         return new ResultResponse(ms);
+    }
+
+    /**
+     * 获取考勤配置信息
+     *
+     * @return ResultResponse
+     */
+    @RequestMapping("/location")
+    public ResultResponse location() throws Exception {
+        UserProp userProp = getCurUserProp();
+        if (userProp == null) {
+            return new ResultResponse(ResultCode.FAIL, "未获取登录信息");
+        }
+
+        return attRecordService.location(userProp);
     }
 
     /**

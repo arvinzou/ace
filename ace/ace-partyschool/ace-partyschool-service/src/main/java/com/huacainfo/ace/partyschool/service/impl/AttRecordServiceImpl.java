@@ -130,6 +130,37 @@ public class AttRecordServiceImpl implements AttRecordService {
         return new MessageResponse(0, "签到成功！");
     }
 
+    /**
+     * @throws
+     * @Title:insertAttRecord
+     * @Description: TODO(获取考勤配置信息)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2019-02-20
+     */
+    @Override
+    public ResultResponse location(UserProp userProp) throws Exception {
+        //中心点
+        Config center = configService.findByKey(CommConstant.SYS_ID, "att_ponit");
+
+        String[] centerArray = center.getConfigValue().split(",");
+        if (centerArray.length != 2) {
+            return new ResultResponse(ResultCode.FAIL, "考勤中心点配置有误");
+        }
+        double cLat = Double.parseDouble(centerArray[0]);
+        double cLng = Double.parseDouble(centerArray[1]);
+        //参考半径
+        Config radius = configService.findByKey(CommConstant.SYS_ID, "att_radius");
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("pointLat",String.valueOf(cLat));
+        map.put("pointLng",String.valueOf(cLng));
+        map.put("radius",radius.getConfigValue());
+        return new ResultResponse(ResultCode.SUCCESS,"成功",map);
+    }
+
     private String setState(boolean isStudent, Date attTime,
                             Map<String, String> config, Map<String, String> config2) {
         //区间划分
