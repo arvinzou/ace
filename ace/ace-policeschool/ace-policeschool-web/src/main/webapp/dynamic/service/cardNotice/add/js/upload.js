@@ -56,6 +56,7 @@ function initUploader(){
 		if (!rst.state) {
 			alert(rst.errorMessage);
 		}else{
+            $('#filelist-history').empty();
 			var html=[];
 			$.each(rst.value, function(n, file) {
 				html.push('<div id="' + file.fileUrl + '"> <a href="'+fastdfs_server+file.fileUrl+'" target="_blank">' + file.fileName + '</a> (' + parseInt(file.fileSize/1024) + 'kb) <a class=\'ace-icon glyphicon glyphicon-remove bigger-110\' href="javascript:deleteAttach(\''+file.attachId+'\')"></a><b></b></div>');

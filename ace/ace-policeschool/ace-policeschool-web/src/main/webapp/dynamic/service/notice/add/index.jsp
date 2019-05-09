@@ -99,7 +99,7 @@
             </label>
             <div class="col-md-10 radio-group-container">
                 <label>
-                    <input type="radio" name="category" value="1" onclick="setClassGroup()"><span style="padding:10px">学校</span>
+                    <input checked type="radio" name="category" value="1" onclick="setClassGroup()"><span style="padding:10px">学校</span>
 
                 </label>
                 <label>

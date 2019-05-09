@@ -137,7 +137,7 @@ function deleteAttach(fileName) {
         data: {fileName: fileName},
         success: function (rst, textStatus) {
             if (rst && rst.state) {
-                loadAttach(noticeId);
+                loadAttach(urlParams.did);
             } else {
                 alert(rst.errorMessage);
             }
