@@ -1,7 +1,9 @@
 package com.huacainfo.ace.glink.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.glink.api.LeApiToolKit;
@@ -172,24 +174,36 @@ public class PagePortalServiceImpl implements PagePortalService {
     @Override
     public MessageResponse updatePagePortalData(String key, String val) throws Exception {
         PagePortal r = pagePortalDao.findByKey(key, CommConstant.SYS_ID);
+        if(CommonUtils.isBlank(val)){
+            return new MessageResponse(1, "上传参数为空");
+        }
+        String rst;
+        if(PortalKey.LE_sceneControlState.equals(key)){
+            rst=LeApiToolKit.completionCeremony(Integer.parseInt(val));
+        }else if(PortalKey.LE_playbackStatus.equals(key)){
+            rst=LeApiToolKit.stopRegain(Integer.parseInt(val),"002");
+        }else {
+            return new MessageResponse(1, "控制失败");
+        }
+        Map mapType = JSON.parseObject(rst,Map.class);
+        if(!"SUCCESS".equals(mapType.get("message").toString().toUpperCase())){
+            return new MessageResponse(1, "控制失败");
+        }
         if (r == null) {
-
             r = new PagePortal();
             r.setSysId(CommConstant.SYS_ID);
             r.setId(GUIDUtil.getGUID());
             r.setStatus("1");
             r.setCreateDate(DateUtil.getNowDate());
-
             r.setItemKey(key);
             r.setItemValue(val);
             r.setItemName(PortalKey.LE_sceneControlState_ch);
             pagePortalDao.insert(r);
-
         } else {
             r.setItemValue(val);
             pagePortalDao.updateByPrimaryKey(r);
         }
-        return new MessageResponse(0, "保存成功");
+        return new MessageResponse(0, "控制成功");
     }
 
 
