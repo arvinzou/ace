@@ -29,7 +29,8 @@ function initEvents() {
             $(element).valid();
         },
         rules: {
-            district: {required: true, maxlength: 50}, name: {required: true, maxlength: 50}
+            district: {required: true, maxlength: 50}, name: {required: true, maxlength: 50},
+            code: {required: true, maxlength: 20}
         },
         messages: {
             district: {
@@ -38,6 +39,9 @@ function initEvents() {
             }, name: {
                 required: "请输入分区名称",
                 maxlength: "分区名称字符长度不能超过50"
+            }, code: {
+                required: "请输入分区编码",
+                maxlength: "分区名称字符长度不能超过20"
             }
         }
     });

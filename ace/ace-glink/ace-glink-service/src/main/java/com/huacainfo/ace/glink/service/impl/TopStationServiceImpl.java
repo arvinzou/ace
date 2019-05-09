@@ -110,7 +110,7 @@ public class TopStationServiceImpl implements TopStationService {
         }
 
         o.setId(GUIDUtil.getGUID());
-        o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
+       // o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());

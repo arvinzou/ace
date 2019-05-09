@@ -43,7 +43,7 @@
     <input type="text" class="form-control hidden" name="id" value="\${data.o.id}">
     <input type="text" class="form-control hidden" name="status" value="\${data.o.status}">
     <div class="form-body">
-        <div class="form-group hide">
+        <div class="form-group">
             <label class="col-md-2 control-label">
                 建筑编号
                 <span class="required" aria-required="true"> * </span>
