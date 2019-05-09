@@ -740,7 +740,7 @@
     {@each data as item, index}
     <li>
         <div class="top">
-            \${item.taskNo}-\${item.taskName}
+            <span>\${item.taskNo}-\${item.taskName}</span>
         </div>
         <div class="bottom">
             {@if item.exeState == 'ok'}
@@ -758,7 +758,7 @@
     {@each data as item, index}
     <li>
         <div class="top">
-            \${item.areaNodeID}-\${item.areaName}
+           <span>\${item.areaNodeID}-\${item.areaName}</span>
         </div>
         <div class="bottom">
             <button data-areano="\${item.areaNo}" data-areanodeid="\${item.areaNodeID}">

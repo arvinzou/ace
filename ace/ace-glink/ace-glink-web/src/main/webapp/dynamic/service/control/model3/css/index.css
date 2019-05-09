@@ -510,7 +510,17 @@ body {
 	font-weight:400;
 	color:rgba(255,255,255,1);
 	text-align: center;
-	line-height: 0.65625rem;
+	display: table-cell;
+	vertical-align:middle;
+	overflow: auto;
+}
+
+.task .taskList li .top>span{
+	display:inline-block;
+	vertical-align:middle;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
 }
 
 .task .taskList li .bottom{
