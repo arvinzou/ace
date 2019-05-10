@@ -100,68 +100,73 @@
                </div>
            </div>
            <div class="right">
-               <div class="up">
-                   <div class="dianya-wrap">
-                       <span class="title"></span>
-                       <div id="jiedianhaodl" ></div>
-                   </div>
-                   <div class="wendu-wrap">
-                       <div class="canvas-tu"  id="wendu"></div>
-                       <div class="canvas-tu"  id="shidu"></div>
-                   </div>
-                   <div class="scene-wrap">
-                       <div class="scene-content">
-                           <span>当前场景</span>
-                           <div class="down">
-                               <img src="">
-                               <span></span>
-                           </div>
+               <div class="up ">
+                   <div class="ztree-wrap">
+                       <input id="node-name" data-id="1" value="请选择" class="form-control" readonly>
+                       <div class="node-tree-container">
+                           <ul class="ztree" id="node-name-tree"></ul>
                        </div>
                    </div>
-                   <div class="shebei-status-wrap mokuai-huilu-wrap">
-                       <ul class="shebei-status-ul mokuai-huilu-ul ">
-                           <li class="modular">
-                               <img src="./img/icon-model-num@2x.png">
-                               <div class="right">
-                                   <i>0</i>
-                                   <span>模块数量</span>
+                   <div class="up-data up-no-data">暂无数据，请选择配电箱下拉树</div>
+                   <div class="up-data up-have-data" >
+                       <div class="dianya-wrap">
+                           <span class="title"></span>
+                           <div id="jiedianhaodl" ></div>
+                       </div>
+                       <div class="wendu-wrap">
+                           <div class="canvas-tu"  id="wendu"></div>
+                           <div class="canvas-tu"  id="shidu"></div>
+                       </div>
+                       <div class="scene-wrap">
+                           <div class="scene-content">
+                               <span>当前场景</span>
+                               <div class="down">
+                                   <img src="">
+                                   <span></span>
                                </div>
-                           </li>
-                           <li class="loop">
-                               <img src="./img/icon-loop@2x.png">
-                               <div class="right">
-                                   <i>0</i>
-                                   <span>回路数量</span>
-                               </div>
-                           </li>
-                       </ul>
-                   </div>
-                   <div class="shebei-status-wrap">
-                       <div class="ztree-wrap">
-                           <input id="node-name" data-id="1" value="配电箱-A楼AL1" class="form-control" readonly>
-                           <div class="node-tree-container">
-                               <ul class="ztree" id="node-name-tree"></ul>
                            </div>
                        </div>
-                       <ul class="shebei-status-ul">
-                           <li class="router">
-                               <img src="./img/shebei-router@2x.png">
-                               <div class="right">
-                                   <i>路由器状态</i>
-                                   <div class="line">
-                                       <span>在线</span><img src="./img/signal-4.png">
+                       <div class="shebei-status-wrap mokuai-huilu-wrap">
+                           <ul class="shebei-status-ul mokuai-huilu-ul ">
+                               <li class="modular">
+                                   <img src="./img/icon-model-num@2x.png">
+                                   <div class="right">
+                                       <i>0</i>
+                                       <span>模块数量</span>
                                    </div>
-                               </div>
-                           </li>
-                           <li class="gate">
-                               <img src="./img/shebei-wg@2x.png">
-                               <div class="right">
-                                   <i>网关状态</i>
-                                   <div class="line "><span>离线</span></div>
-                               </div>
-                           </li>
-                       </ul>
+                               </li>
+                               <li class="loop">
+                                   <img src="./img/icon-loop@2x.png">
+                                   <div class="right">
+                                       <i>0</i>
+                                       <span>回路数量</span>
+                                   </div>
+                               </li>
+                           </ul>
+                       </div>
+                       <div class="shebei-status-wrap">
+                           <ul class="shebei-status-ul">
+                               <li class="router">
+                                   <img src="./img/shebei-router@2x.png">
+                                   <div class="right">
+                                       <i>路由器状态</i>
+                                       <div class="line">
+                                           <span>在线</span><img src="./img/signal-4.png">
+                                       </div>
+                                   </div>
+                               </li>
+                               <li class="gate">
+                                   <img src="./img/shebei-wg@2x.png">
+                                   <div class="right">
+                                       <i>网关状态</i>
+                                       <div class="line "><span>离线</span></div>
+                                   </div>
+                               </li>
+                           </ul>
+                       </div>
                    </div>
+
+
                </div>
                <div class="down">
                    <div class="guzhangjiankong-wrap" >
@@ -236,7 +241,7 @@
         initFaultMonitoringData();   //初始化故障监控
         initWeakCurrentFaultData();   //初始化弱电故障数据
         initZTreeData();   //初始化树数据
-        initSelectTreeData();  //初始化下拉树选中的配电箱数据
+        // initSelectTreeData();  //初始化下拉树选中的配电箱数据
     });
     /*
     *  初始化左边屏幕数据
@@ -700,7 +705,10 @@
                 var id = treeNode.id;
                 var text = treeNode.text;
                 $('#node-name').attr('data-id',id).val(text);
+                $('.up-data').hide();
+                $('.up-have-data').css('display','flex');
                 initSelectTreeData(id,text);
+
 
             }else{
                 alert('当前节点不可用，请重新选择');
