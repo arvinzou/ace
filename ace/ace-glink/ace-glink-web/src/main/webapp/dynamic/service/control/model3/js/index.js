@@ -536,7 +536,7 @@ function initPageScenario() {
             presetMap['start'] = (num - 1) * scenarioParams.limit;
             presetMap['initType'] = type;
             if (type != 'init') {
-                getScenarioList();
+                selectPreset();
             }
         }
     });
@@ -551,7 +551,7 @@ function getScenarioList(key, value) {
     var url = contextPath + "/seCustomArea/findSeCustomAreaList";
     $.getJSON(url, scenarioParams, function (rst) {
         if (rst.status == 0) {
-            if (taskParams.initType == "init") {
+            if (scenarioParams.initType == "init") {
                 $('#pagination3').jqPaginator('option', {
                     totalCounts: rst.total == 0 ? 1 : rst.total,
                     currentPage: 1

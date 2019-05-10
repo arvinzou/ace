@@ -411,7 +411,7 @@ body {
 	background:#171e23;;
 }
 
-.Control .panel .left .months .active{
+.Control .panel .left .months li.active{
 	background:rgba(7,217,220,1);
 	color: #fff;
 }
@@ -844,5 +844,9 @@ body {
 
 .combo{
 	display: flex !important;
+}
+
+.panel.combo-p{
+	background: rgb(25, 46, 56);
 }
 
