@@ -50,7 +50,7 @@ function initUploader() {
             var html = [];
             $('#filelist-history').empty();
             $.each(rst.value, function (n, file) {
-                html.push('<div id="' + file.fileUrl + '"> <a href="' + fastdfs_server + file.fileUrl + '" target="_blank">' + file.fileName + '</a> (' + parseInt(file.fileSize / 1024) + 'kb) <a class=\'ace-icon glyphicon glyphicon-remove bigger-110\' href="javascript:deleteAttach(\'' + file.attachId + '\')"></a><b></b></div>');
+                html.push('<div id="' + file.fileUrl + '"> <a href="' + fastdfs_server+"/" + file.fileUrl + '" target="_blank">' + file.fileName + '</a> (' + parseInt(file.fileSize / 1024) + 'kb) <a class=\'ace-icon glyphicon glyphicon-remove bigger-110\' href="javascript:deleteAttach(\'' + file.attachId + '\')"></a><b></b></div>');
             });
             document.getElementById('filelist-history').innerHTML += html.join('');
             $('#' + id).html('');

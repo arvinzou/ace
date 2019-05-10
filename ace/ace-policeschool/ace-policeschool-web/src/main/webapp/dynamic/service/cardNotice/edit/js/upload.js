@@ -8,9 +8,8 @@ function initUploader(){
 		filters : {
 			max_file_size : '100mb',
 			mime_types: [
-				{title : "Image files", extensions : "jpg,gif,png"},
-	            {title : "Office files", extensions : "xls,xlsx,doc,docx,ppt,pdf"},
-	            {title : "Artive files", extensions : "zip,rar,gzip"}
+	            {title : "Office files", extensions : "pdf"},
+
 			]
 		},
 	
@@ -50,7 +49,7 @@ function initUploader(){
             $('#filelist-history').empty();
 			var html=[];
 			$.each(rst.value, function(n, file) {
-				html.push('<div id="' + file.fileUrl + '"> <a href="'+fastdfs_server+file.fileUrl+'" target="_blank">' + file.fileName + '</a> (' + parseInt(file.fileSize/1024) + 'kb) <a class=\'ace-icon glyphicon glyphicon-remove bigger-110\' href="javascript:deleteAttach(\''+file.attachId+'\')"></a><b></b></div>');
+				html.push('<div id="' + file.fileUrl + '"> <a href="'+fastdfs_server+"/"+file.fileUrl+'" target="_blank">' + file.fileName + '</a> (' + parseInt(file.fileSize/1024) + 'kb) <a class=\'ace-icon glyphicon glyphicon-remove bigger-110\' href="javascript:deleteAttach(\''+file.attachId+'\')"></a><b></b></div>');
 			});
 			document.getElementById('filelist-history').innerHTML+=html.join('');
 			$('#'+id).html('');
