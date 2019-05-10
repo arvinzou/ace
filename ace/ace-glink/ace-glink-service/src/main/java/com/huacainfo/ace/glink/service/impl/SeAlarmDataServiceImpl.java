@@ -1,30 +1,28 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.dao.SeAlarmDataDao;
+import com.huacainfo.ace.glink.model.SeAlarmData;
+import com.huacainfo.ace.glink.service.SeAlarmDataService;
+import com.huacainfo.ace.glink.vo.SeAlarmDataQVo;
+import com.huacainfo.ace.glink.vo.SeAlarmDataVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.glink.dao.SeAlarmDataDao;
-import com.huacainfo.ace.glink.model.SeAlarmData;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.glink.service.SeAlarmDataService;
-import com.huacainfo.ace.glink.vo.SeAlarmDataVo;
-import com.huacainfo.ace.glink.vo.SeAlarmDataQVo;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service("seAlarmDataService")
 /**
@@ -79,13 +77,10 @@ public class SeAlarmDataServiceImpl implements SeAlarmDataService {
      */
     @Override
     public MessageResponse insertSeAlarmData(SeAlarmData o, UserProp userProp) throws Exception {
-        seAlarmDataDao.allClear();
         String guid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
         o.setId(guid);
         o.setStatus("1");
-        if (CommonUtils.isBlank(o.getAreaNodeID())) {
-            return new MessageResponse(1, "区域节点编号不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getStatus())) {
             return new MessageResponse(1, "状态不能为空！");
         }
@@ -94,9 +89,9 @@ public class SeAlarmDataServiceImpl implements SeAlarmDataService {
             return new MessageResponse(1, "强电-报警数据名称重复！");
         }
         o.setCreateDate(new Date());
-        this.seAlarmDataDao.insert(o);
-        this.dataBaseLogService.log("添加强电-报警数据", "强电-报警数据", "",
-                o.getId(), o.getId(), userProp);
+
+        seAlarmDataDao.insert(o);
+//        dataBaseLogService.log("添加强电-报警数据", "强电-报警数据", "", o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "保存成功！");
     }
 

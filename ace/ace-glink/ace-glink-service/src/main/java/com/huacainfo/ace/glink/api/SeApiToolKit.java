@@ -52,7 +52,7 @@ public class SeApiToolKit {
     }
 
     private static String post(String url, String data) {
-        logger.debug("\n*********request info*********\n" +
+        logger.debug(" *********request info*********\n" +
                 "request url: {}\n" +
                 "request data: {}\n" +
                 "*********request info end*********", url, data);
@@ -73,7 +73,7 @@ public class SeApiToolKit {
         String requestURL = apiURLStr(1);
         System.out.println(requestURL);
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getAreaProjectInfo], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getAreaProjectInfo], response={}", rstJson);
 
         return JsonUtil.toObject(rstJson, ProjectAreaOut.class);
     }
@@ -88,7 +88,7 @@ public class SeApiToolKit {
 
         String requestURL = apiURLStr(2);
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getBaseNodeInfo], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getBaseNodeInfo], response={}", rstJson);
 
         return JsonUtil.toObject(rstJson, JackBoxOut.class);
     }
@@ -99,7 +99,7 @@ public class SeApiToolKit {
         String requestURL = apiURLStr(3);
         requestURL += "&NodeID=" + nodeId;
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getNodeMonitorSingleData], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getNodeMonitorSingleData], response={}", rstJson);
 
         return JsonUtil.toMap(rstJson);
 
@@ -116,7 +116,7 @@ public class SeApiToolKit {
         String requestURL = apiURLStr(4);
         requestURL += "&NodeGroup=" + nodeGroup;
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getNodeMonitorListData], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getNodeMonitorListData], response={}", rstJson);
 
 
         return JsonUtil.toObject(rstJson, NodeMonitorDataOut.class);
@@ -132,7 +132,7 @@ public class SeApiToolKit {
         //type2
         String requestURL = apiURLStr(5);
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getAllMeterData], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getAllMeterData], response={}", rstJson);
 
 
         return JsonUtil.toObject(rstJson, MeterBoxOut.class);
@@ -148,7 +148,7 @@ public class SeApiToolKit {
         //type2
         String requestURL = apiURLStr(6);
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.get4GRouterState], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.get4GRouterState], response={}", rstJson);
 
         return JsonUtil.toObject(rstJson, RouteOut.class);
     }
@@ -162,7 +162,7 @@ public class SeApiToolKit {
 
         String requestURL = apiURLStr(7);
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getGatewayState], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getGatewayState], response={}", rstJson);
 
 
         return JsonUtil.toObject(rstJson, GatewayOut.class);
@@ -178,7 +178,7 @@ public class SeApiToolKit {
 
         String requestURL = apiURLStr(8);
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getCustomAreaInfo], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getCustomAreaInfo], response={}", rstJson);
 
 
         return JsonUtil.toObject(rstJson, CustomAreaOut.class);
@@ -193,7 +193,7 @@ public class SeApiToolKit {
 
         String requestURL = apiURLStr(9);
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getAreaTaskInfo], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getAreaTaskInfo], response={}", rstJson);
 
 
         return JsonUtil.toObject(rstJson, AreaTaskOut.class);
@@ -208,7 +208,7 @@ public class SeApiToolKit {
 
         String requestURL = apiURLStr(10);
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getPresetData], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getPresetData], response={}", rstJson);
 
 
         return JsonUtil.toObject(rstJson, PresetDataOut.class);
@@ -223,7 +223,7 @@ public class SeApiToolKit {
 
         String requestURL = apiURLStr(11);
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getTimerData], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getTimerData], response={}", rstJson);
 
         return JsonUtil.toObject(rstJson, TimerDataOut.class);
     }
@@ -241,7 +241,7 @@ public class SeApiToolKit {
         String requestURL = apiURLStr(12);
         requestURL += "&AreaNO=" + AreaNO + "&PresetNo=" + PresetNo + "&AreaNodeID=" + AreaNodeID;
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.executePreset], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.executePreset], response={}", rstJson);
 
         return JsonUtil.toMap(rstJson);
     }
@@ -258,7 +258,7 @@ public class SeApiToolKit {
         String requestURL = apiURLStr(13);
         requestURL += "&TaskNO=" + TaskNO;
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.executeTask], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.executeTask], response={}", rstJson);
 
         return JsonUtil.toMap(rstJson);
     }
@@ -275,7 +275,7 @@ public class SeApiToolKit {
 
         String requestURL = apiURLStr(14);
         String rstJson = post(requestURL, timerData.toString());
-        logger.debug("[SeApiToolKit.updateTimer], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.updateTimer], response={}", rstJson);
 
         return JsonUtil.toMap(rstJson);
     }
@@ -292,7 +292,7 @@ public class SeApiToolKit {
         String requestURL = apiURLStr(15);
         requestURL += "&AreaNodeID=" + AreaNodeID;
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getCurrentPreset], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getCurrentPreset], response={}", rstJson);
 
         return JsonUtil.toMap(rstJson);
     }
@@ -306,7 +306,7 @@ public class SeApiToolKit {
 
         String requestURL = apiURLStr(17);
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getGeneralCtrlTimer], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getGeneralCtrlTimer], response={}", rstJson);
 
         return JsonUtil.toMap(rstJson);
     }
@@ -322,7 +322,7 @@ public class SeApiToolKit {
 
         String requestURL = apiURLStr(18);
         String rstJson = post(requestURL, in.toString());
-        logger.debug("[SeApiToolKit.updateGeneralCtrlTimer], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.updateGeneralCtrlTimer], response={}", rstJson);
 
         return JsonUtil.toMap(rstJson);
     }
@@ -337,7 +337,7 @@ public class SeApiToolKit {
 
         String requestURL = apiURLStr(19);
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.getGeneralCtrlCron], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.getGeneralCtrlCron], response={}", rstJson);
 
         return JsonUtil.toObject(rstJson, YearCron.class);
     }
@@ -353,7 +353,7 @@ public class SeApiToolKit {
 
         String requestURL = apiURLStr(20);
         String rstJson = post(requestURL, in.toString());
-        logger.debug("[SeApiToolKit.updateGeneralCtrlCron], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.updateGeneralCtrlCron], response={}", rstJson);
 
         return JsonUtil.toMap(rstJson);
     }
@@ -367,10 +367,10 @@ public class SeApiToolKit {
      */
     public static Map<String, Object> updateDayCron(int WorkMode) {
 
-        String requestURL = apiURLStr(20);
+        String requestURL = apiURLStr(21);
         requestURL += "&WorkMode=" + WorkMode;
         String rstJson = post(requestURL, "");
-        logger.debug("[SeApiToolKit.updateDayCron], response={}", rstJson);
+        logger.debug(" [SeApiToolKit.updateDayCron], response={}", rstJson);
 
         return JsonUtil.toMap(rstJson);
     }

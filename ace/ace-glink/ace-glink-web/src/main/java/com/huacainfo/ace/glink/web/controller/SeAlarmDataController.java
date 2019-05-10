@@ -1,13 +1,5 @@
 package com.huacainfo.ace.glink.web.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
@@ -17,14 +9,21 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.glink.model.SeAlarmData;
 import com.huacainfo.ace.glink.service.SeAlarmDataService;
-import com.huacainfo.ace.glink.vo.SeAlarmDataVo;
 import com.huacainfo.ace.glink.vo.SeAlarmDataQVo;
-import org.springframework.web.multipart.MultipartFile;
+import com.huacainfo.ace.glink.vo.SeAlarmDataVo;
 import com.huacainfo.ace.portal.vo.MongoFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/seAlarmData")
@@ -191,7 +190,35 @@ public class SeAlarmDataController extends GLinkBaseController {
     @RequestMapping(value = "/deleteSeAlarmDataBySeAlarmDataIds")
     @ResponseBody
     public MessageResponse deleteSeAlarmDataBySeAlarmDataIds(String jsons) throws Exception {
-        List<String> list  = JSON.parseArray(jsons, String.class);
+        List<String> list = JSON.parseArray(jsons, String.class);
         return this.seAlarmDataService.deleteSeAlarmDataBySeAlarmDataIds(list, this.getCurUserProp());
+    }
+
+
+    /**
+     * 强电报警信息推送
+     *
+     * @param AreaNodeID    区域节点编号
+     * @param AlarmType     报警分类
+     * @param AlarmContent  报警类容描述
+     * @param AlarmDateTime 报警时间
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/www/accept")
+    @ResponseBody
+    public MessageResponse accept(String AreaNodeID,
+                                  String AlarmType,
+                                  String AlarmContent,
+                                  String AlarmDateTime) throws Exception {
+
+        SeAlarmData data = new SeAlarmData();
+        data.setAreaNodeID(AreaNodeID);
+        ;
+        data.setAlarmType(AlarmType);
+        data.setAlarmContent(AlarmContent);
+        data.setAlarmDateTime(AlarmDateTime);
+
+        return this.seAlarmDataService.insertSeAlarmData(data, this.getCurUserProp());
     }
 }
