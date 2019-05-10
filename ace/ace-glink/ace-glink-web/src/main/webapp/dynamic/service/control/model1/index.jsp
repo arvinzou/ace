@@ -482,5 +482,29 @@
 <script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="js/foundation-datepicker.min.js"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
-
+<script>
+    $(function(){
+        initPageContainer();
+    });
+    /*
+    *  根据参数显示显示场景控制和策略下发
+    * */
+    function initPageContainer(){
+        var name = getQueryString('name');
+        if(name){
+            $('.content').hide();
+            if(name=='sence'){
+                $('.sceneControl').show();
+            }else if(name=='celue'){
+                $('.strategyPart').show();
+            }
+        }
+    }
+    //获取地址栏参数
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+</script>
 </html>
