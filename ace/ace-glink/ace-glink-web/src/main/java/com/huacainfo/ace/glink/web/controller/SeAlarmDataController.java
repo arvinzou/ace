@@ -7,6 +7,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.glink.model.SeAlarmData;
 import com.huacainfo.ace.glink.service.SeAlarmDataService;
 import com.huacainfo.ace.glink.vo.SeAlarmDataQVo;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -198,26 +200,23 @@ public class SeAlarmDataController extends GLinkBaseController {
     /**
      * 强电报警信息推送
      *
-     * @param AreaNodeID    区域节点编号
-     * @param AlarmType     报警分类
-     * @param AlarmContent  报警类容描述
-     * @param AlarmDateTime 报警时间
+     * @param json AreaNodeID    区域节点编号
+     *             AlarmType     报警分类
+     *             AlarmContent  报警类容描述
+     *             AlarmDateTime 报警时间
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/www/accept")
     @ResponseBody
-    public MessageResponse accept(String AreaNodeID,
-                                  String AlarmType,
-                                  String AlarmContent,
-                                  String AlarmDateTime) throws Exception {
+    @RequestMapping(value = "/www/accept")
+    public MessageResponse accept(@RequestBody String json) throws Exception {
 
+        Map<String, Object> params = JsonUtil.toMap(json);
         SeAlarmData data = new SeAlarmData();
-        data.setAreaNodeID(AreaNodeID);
-        ;
-        data.setAlarmType(AlarmType);
-        data.setAlarmContent(AlarmContent);
-        data.setAlarmDateTime(AlarmDateTime);
+        data.setAreaNodeID(String.valueOf(params.get("AreaNodeID")));
+        data.setAlarmType(String.valueOf(params.get("AlarmType")));
+        data.setAlarmContent(String.valueOf(params.get("AlarmContent")));
+        data.setAlarmDateTime(String.valueOf(params.get("AlarmDateTime")));
 
         return this.seAlarmDataService.insertSeAlarmData(data, this.getCurUserProp());
     }
