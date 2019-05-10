@@ -251,7 +251,7 @@
         <div class="modal-body">
             <div class="presetList">
                 <div class="top">
-                    <span class="title">定时设置</span>
+                    <span class="title">场景选择</span>
                     <div class="inputGroup">
                         <input class="presetName" type="text" placeholder="输入场景名称"/>
                         <button class="submit"></button>
@@ -740,7 +740,7 @@
     {@each data as item, index}
     <li>
         <div class="top">
-            <span>\${item.taskNo}-\${item.taskName}</span>
+            <span>\${item.taskNo} \${item.taskName}</span>
         </div>
         <div class="bottom">
             {@if item.exeState == 'ok'}
@@ -758,7 +758,7 @@
     {@each data as item, index}
     <li>
         <div class="top">
-           <span>\${item.areaNodeID}-\${item.areaName}</span>
+           <span>\${item.areaNodeID} \${item.areaName}</span>
         </div>
         <div class="bottom">
             <button data-areano="\${item.areaNo}" data-areanodeid="\${item.areaNodeID}">
