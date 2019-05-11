@@ -145,8 +145,8 @@ public class StudentServiceImpl implements StudentService {
         }
         String IdCard=o.getIdCard();
         Boolean check= IDCardUtil.isIDCard(IdCard);
-        if(!check&&CommonUtils.isBlank(check)){
-            new MessageResponse(ResultCode.FAIL,"身份证号码错误");
+        if(!check||CommonUtils.isBlank(check)){
+            return new MessageResponse(ResultCode.FAIL,"身份证号码错误");
         }
         o.setNativePlace(IDCardUtil.getNativeCode(IdCard));
         o.setSex(IDCardUtil.getSexCode(IdCard));
@@ -268,8 +268,8 @@ public class StudentServiceImpl implements StudentService {
     public MessageResponse addStudent(Student data, UserProp userProp) throws Exception {
         String IdCard=data.getIdCard();
         Boolean check= IDCardUtil.isIDCard(IdCard);
-        if(!check&&CommonUtils.isBlank(check)){
-            new MessageResponse(ResultCode.FAIL,"身份证号码错误");
+        if(!check||CommonUtils.isBlank(check)){
+            return new MessageResponse(ResultCode.FAIL,"身份证号码错误");
         }
         data.setNativePlace(IDCardUtil.getNativeCode(IdCard));
         data.setSex(IDCardUtil.getSexCode(IdCard));

@@ -187,7 +187,7 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                data['dict154'] = staticDictObject['176'];
+                data['dict154'] = staticDictObject['154'];
                 render('#fm-edit', data, 'tpl-fm');
                 initSelect(data);
             } else {

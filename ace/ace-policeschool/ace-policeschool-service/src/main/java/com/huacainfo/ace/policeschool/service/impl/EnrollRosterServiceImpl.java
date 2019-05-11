@@ -25,12 +25,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service("enrollRosterService")
+
 /**
  * @author: Arvin
  * @version: 2019-01-16
  * @Description: TODO(报名花名册管理)
  */
+@Service("enrollRosterService")
 public class EnrollRosterServiceImpl implements EnrollRosterService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
@@ -86,8 +87,8 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         }
         String IdCard=o.getIdCard();
         Boolean check= IDCardUtil.isIDCard(IdCard);
-        if(!check&&CommonUtils.isBlank(check)){
-            new MessageResponse(ResultCode.FAIL,"身份证号码错误");
+        if(!check||CommonUtils.isBlank(check)){
+           return new MessageResponse(ResultCode.FAIL,"身份证号码错误");
         }
         o.setNativePlace(IDCardUtil.getNativeCode(IdCard));
         o.setSex(IDCardUtil.getSexCode(IdCard));
@@ -128,8 +129,8 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         }
         String IdCard=o.getIdCard();
         Boolean check= IDCardUtil.isIDCard(IdCard);
-        if(!check&&CommonUtils.isBlank(check)){
-            new MessageResponse(ResultCode.FAIL,"身份证号码错误");
+        if(!check||CommonUtils.isBlank(check)){
+            return new MessageResponse(ResultCode.FAIL,"身份证号码错误");
         }
         o.setNativePlace(IDCardUtil.getNativeCode(IdCard));
         o.setSex(IDCardUtil.getSexCode(IdCard));
