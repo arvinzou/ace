@@ -1,13 +1,19 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.glink.dao.AnimaLnkDao;
+import com.huacainfo.ace.glink.model.AnimaLnk;
+import com.huacainfo.ace.glink.service.AnimaLnkService;
+import com.huacainfo.ace.glink.vo.AnimaLnkQVo;
+import com.huacainfo.ace.glink.vo.AnimaLnkVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -17,17 +23,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.glink.dao.AnimaLnkDao;
-import com.huacainfo.ace.glink.model.AnimaLnk;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.glink.service.AnimaLnkService;
-import com.huacainfo.ace.glink.vo.AnimaLnkVo;
-import com.huacainfo.ace.glink.vo.AnimaLnkQVo;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service("animaLnkService")
 /**
@@ -240,6 +238,7 @@ public class AnimaLnkServiceImpl implements AnimaLnkService {
         return new MessageResponse(0, "导入成功！");
     }
 
+    @Override
     public MessageResponse updatePrePlayUrl(String id, String prePlayUrl) throws Exception {
         animaLnkDao.updatePrePlayUrl(id, prePlayUrl);
         return new MessageResponse(0, "替换成功！");
