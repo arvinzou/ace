@@ -316,9 +316,15 @@
                 <label class="check3" for="g\${index}">重大节日模式</label>
             </div>
         </div>
+        <%--{@if +index+1==data.t}--%>
+        <%--<div class="todaySet">--%>
+            <%--就这样了吧--%>
+        <%--</div>--%>
+        <%--{@/if}--%>
     </li>
     {@/each}
 </script>
+
 
 <script id="tpl-monthslist" type="text/template">
     <ul class="list monthData">
