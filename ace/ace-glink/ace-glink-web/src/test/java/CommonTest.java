@@ -19,18 +19,20 @@ public class CommonTest {
     @Test
     public void test() throws IOException {
 
-        seApiInvoke();      //强电联调
-//        leApiInvoke();        //弱电联调
+//        seApiInvoke();      //强电联调
+        leApiInvoke();        //弱电联调
 
     }
 
     private void leApiInvoke() {
 
+        System.out.println(LeApiToolKit.stats(2, "JH068"));
+
         //分区灯光启动仪式
 //        System.out.println(LeApiToolKit.completionCeremony(1));
 
         //模式的紧急停止(恢复) --done
-        System.out.println(LeApiToolKit.stopRegain(2, "002"));
+//        System.out.println(LeApiToolKit.stopRegain(2, "002"));
 
 //        System.out.println(LeApiToolKit.stats(2,"JH068"));
 

@@ -97,8 +97,7 @@ public class LeApiToolKit {
     }
 
     private static String post(String url, String json) {
-        logger.debug("post.url:{}\n" +
-                "post.json:{}", url, json);
+        logger.debug("post.url:{}\n" + "post.json:{}", url, json);
 
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");

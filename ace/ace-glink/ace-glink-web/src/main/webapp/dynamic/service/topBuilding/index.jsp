@@ -28,15 +28,14 @@
         <div class="row custom-toolbar">
             <div class="col-md-6">
                 <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
-                <button type="button" class="btn  green" id="btn-view-import"
-                        authority="false">批量导入
-                </button>
+                <button type="button" class="btn  green" id="btn-view-import" authority="false">批量导入</button>
+                <button type="button" class="btn  green" id="btn-view-syncData" authority="false">数据同步</button>
             </div>
 
             <div class="col-md-6">
                 <label style="float:left;padding-right:5px;line-height: 31px;">分区：</label>
                 <div class="btn-group" role="group" style="float:left;padding-right:20px;">
-                    <select id="subArea" name="subareaCode"  class="form-control" style="height: 31px;"
+                    <select id="subArea" name="subareaCode" class="form-control" style="height: 31px;"
                             onchange="setParams('subareaCode',this.value)">
                     </select>
                 </div>
@@ -104,9 +103,9 @@
         <td>\${item.topStationVo.subareaName}</td>
         <td>
             {@if item.state == '1'}
-                在线
+            在线
             {@else}
-                不在线
+            不在线
             {@/if}
         </td>
         <td>\${item.address}</td>
@@ -124,13 +123,15 @@
     {@each data as item, index}
     <option value="\${item.code}">\${item.name}</option>
     {@/each}
-</script>﻿
+</script>
+﻿
 
 <script id="station-list" type="text/template">
     {@each data as item, index}
     <option value="\${item.code}">\${item.name}</option>
     {@/each}
-</script>﻿
+</script>
+﻿
 
 <div class="modal fade " id="modal-status">
     <div class="modal-dialog" role="document">
@@ -177,7 +178,6 @@
         </div>
     </div>
 </div>
-
 
 
 <div class="modal fade" role="dialog" id="modal-preview">
@@ -251,9 +251,9 @@
         <label class="col-md-2 view-label">重点建筑标记</label>
         <div class="col-md-10">
             {@if data.o.mainTag == "0"}
-                不重要
+            不重要
             {@else if data.o.mainTag == "1"}
-                重要
+            重要
             {@/if}
         </div>
     </div>
@@ -283,7 +283,7 @@
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
             {@if data.o.status == "1"}
-                正常
+            正常
             {@/if}
         </div>
     </div>
