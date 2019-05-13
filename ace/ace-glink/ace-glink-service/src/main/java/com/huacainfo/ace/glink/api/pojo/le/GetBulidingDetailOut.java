@@ -24,51 +24,105 @@ public class GetBulidingDetailOut extends LeBaseOut {
     //**************************static classes**************************************
 
     public static class BulidingDetail {
-        private String MediaArea;//区域编号,
-        private int Status;//": 1：在线，0：离线,
-        private int BrokenLampCount;//": 故障设备数量,
-        private int ControllerCount;//": 控制器数量,
-        private int LampCount;//": 设备总数,
-        private String IsPlayingStrategy;//": 正在播放的节目,
-        private int IsPlaying;//": 1：正在播放，0：未播放
 
-        public String getMediaArea() {
-            return MediaArea;
+        /**
+         * 建筑物编号
+         */
+        private String BuildingNo;
+        /**
+         * 建筑物名称，
+         */
+        private String BuildingName;
+        /**
+         * 建筑物地址
+         */
+        private String BuildingAddress;
+        /**
+         * 1：在线，0：离线,
+         */
+        private String Status;
+        /**
+         * 故障设备数量（前一天）
+         */
+        private String BrokenLampCount;
+        /**
+         * 控制器数量,
+         */
+        private String ControllerCount;
+        /**
+         * 设备总数
+         */
+        private String LampCount;
+        /**
+         * 正在播放的节目,
+         */
+        private String IsPlayingStrategy;
+        /**
+         * 1：正在播放，0：未播放，
+         */
+        private String IsPlaying;
+        /**
+         * 建筑物经度
+         */
+        private String BuildingX;
+        /**
+         * 建筑物纬度
+         */
+        private String BuildingY;
+
+        public String getBuildingNo() {
+            return BuildingNo;
         }
 
-        public void setMediaArea(String mediaArea) {
-            MediaArea = mediaArea;
+        public void setBuildingNo(String buildingNo) {
+            BuildingNo = buildingNo;
         }
 
-        public int getStatus() {
+        public String getBuildingName() {
+            return BuildingName;
+        }
+
+        public void setBuildingName(String buildingName) {
+            BuildingName = buildingName;
+        }
+
+        public String getBuildingAddress() {
+            return BuildingAddress;
+        }
+
+        public void setBuildingAddress(String buildingAddress) {
+            BuildingAddress = buildingAddress;
+        }
+
+        public String getStatus() {
             return Status;
         }
 
-        public void setStatus(int status) {
+        public void setStatus(String status) {
             Status = status;
         }
 
-        public int getBrokenLampCount() {
+        public String getBrokenLampCount() {
             return BrokenLampCount;
         }
 
-        public void setBrokenLampCount(int brokenLampCount) {
+        public void setBrokenLampCount(String brokenLampCount) {
             BrokenLampCount = brokenLampCount;
         }
 
-        public int getControllerCount() {
+        public String getControllerCount() {
             return ControllerCount;
         }
 
-        public void setControllerCount(int controllerCount) {
+        public void setControllerCount(String controllerCount) {
             ControllerCount = controllerCount;
         }
 
-        public int getLampCount() {
+        public String getLampCount() {
             return LampCount;
         }
 
-        public void setLampCount(int lampCount) {
+        public void setLampCount(String lampCount) {
             LampCount = lampCount;
         }
 
@@ -80,12 +134,28 @@ public class GetBulidingDetailOut extends LeBaseOut {
             IsPlayingStrategy = isPlayingStrategy;
         }
 
-        public int getIsPlaying() {
+        public String getIsPlaying() {
             return IsPlaying;
         }
 
-        public void setIsPlaying(int isPlaying) {
+        public void setIsPlaying(String isPlaying) {
             IsPlaying = isPlaying;
+        }
+
+        public String getBuildingX() {
+            return BuildingX;
+        }
+
+        public void setBuildingX(String buildingX) {
+            BuildingX = buildingX;
+        }
+
+        public String getBuildingY() {
+            return BuildingY;
+        }
+
+        public void setBuildingY(String buildingY) {
+            BuildingY = buildingY;
         }
     }
 }

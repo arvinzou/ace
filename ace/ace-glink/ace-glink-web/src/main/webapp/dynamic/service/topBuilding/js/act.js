@@ -101,7 +101,7 @@ function del(did, code) {
                 if (rst.status == 0) {
                     alert("删除成功！");
                     getPageList();
-                }else{
+                } else {
                     alert(rst.errorMessage);
                 }
             },
@@ -129,7 +129,7 @@ function detail(id) {
 
 
 function initEvents() {
-$('#modal-preview').on('show.bs.modal', function (event) {
+    $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var title = relatedTarget.data('title');
@@ -147,6 +147,36 @@ $('#modal-preview').on('show.bs.modal', function (event) {
         //加载导入
         importXls();
     });
+
+    //数据同步
+    $('#btn-view-syncData').on('click', function () {
+        //数据同步
+        syncData();
+    });
+}
+
+function syncData() {
+    if (confirm("历史数据将会被情况，是否继续？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/topBuilding/syncData",
+            type: "post",
+            async: false,
+            data: {},
+            success: function (result) {
+                stopLoad();
+                if (result.status == 0) {
+                    getPageList();
+                } else {
+                    alert(result.errorMessage);
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    }
 }
 
 function importXls() {
@@ -166,6 +196,7 @@ function parseType(type) {
         }
     }
 }
+
 function initPreview(id) {
     startLoad();
     $.ajax({
@@ -262,6 +293,6 @@ function initTopStationList() {
  * @param latitude
  */
 function previewMap(longitude, latitude) {
-    window.location.href = contextPath + '/dynamic/service/topBuilding/map.jsp?longitude='+longitude+'&latitude='+latitude;
+    window.location.href = contextPath + '/dynamic/service/topBuilding/map.jsp?longitude=' + longitude + '&latitude=' + latitude;
 }
 

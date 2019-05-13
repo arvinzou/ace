@@ -1,60 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.glink.dao.TopBuildingDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.TopBuilding">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="code" jdbcType="VARCHAR" property="code" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="type" jdbcType="CHAR" property="type" />
-    <result column="depict" jdbcType="VARCHAR" property="depict" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
-    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
-    <result column="mainTag" jdbcType="CHAR" property="mainTag" />
-    <result column="state" jdbcType="CHAR" property="state" />
-    <result column="stationCode" jdbcType="VARCHAR" property="stationCode" />
-    <result column="subareaCode" jdbcType="VARCHAR" property="subareaCode" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
-    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
-    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
-    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
-  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.TopBuildingVo">
-    <result column="animaCount" jdbcType="INTEGER" property="animaCount"/>
-    <collection property="topStationVo" ofType="com.huacainfo.ace.glink.vo.TopStationVo">
-      <id column="t_id" property="id" />
-      <result column="stationCode" property="code"/>
-      <result column="subareaCode" property="subareaCode"/>
-      <result column="subareaName" property="subareaName"/>
-      <result column="stationName" property="name"/>
-      <result column="depict" property="depict"/>
-      <result column="address" property="address"/>
-      <result column="latitude" property="latitude"/>
-      <result column="longitude" property="longitude"/>
-    </collection>
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.TopBuilding">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="CHAR" property="type"/>
+        <result column="depict" jdbcType="VARCHAR" property="depict"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="mainTag" jdbcType="CHAR" property="mainTag"/>
+        <result column="state" jdbcType="CHAR" property="state"/>
+        <result column="stationCode" jdbcType="VARCHAR" property="stationCode"/>
+        <result column="subareaCode" jdbcType="VARCHAR" property="subareaCode"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.TopBuildingVo">
+        <result column="animaCount" jdbcType="INTEGER" property="animaCount"/>
+        <collection property="topStationVo" ofType="com.huacainfo.ace.glink.vo.TopStationVo">
+            <id column="t_id" property="id"/>
+            <result column="stationCode" property="code"/>
+            <result column="subareaCode" property="subareaCode"/>
+            <result column="subareaName" property="subareaName"/>
+            <result column="stationName" property="name"/>
+            <result column="depict" property="depict"/>
+            <result column="address" property="address"/>
+            <result column="latitude" property="latitude"/>
+            <result column="longitude" property="longitude"/>
+        </collection>
+    </resultMap>
 
 
-  <sql id="Base_Column_List">
+    <sql id="Base_Column_List">
     id, code, name, type, depict, address, longitude, latitude, mainTag, state, subareaCode,stationCode
     remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
     lastModifyDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from top_building
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from top_building
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from top_building
     where id = #{id,jdbcType=VARCHAR};
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
     insert into top_building (id, code, name, 
       type, depict, address, 
       longitude, latitude, mainTag, 
@@ -71,7 +71,7 @@
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
     update top_building
     set code = #{code,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
@@ -89,7 +89,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
     select
     b.id, b.code, b.name, b.type, b.depict, b.address, b.longitude, b.latitude, b.mainTag, b.state, b.subareaCode,
     b.remark, b.status, b.createUserId, b.createUserName, b.createDate, b.lastModifyUserId, b.lastModifyUserName,
@@ -101,69 +101,73 @@
     where b.id = #{id,jdbcType=VARCHAR}
   </select>
 
-  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
-    select
-    b.id, b.code, b.name, b.type, b.depict, b.address, b.longitude, b.latitude, b.mainTag, b.state, b.subareaCode,
-    b.remark, b.status, b.createUserId, b.createUserName, b.createDate, b.lastModifyUserId, b.lastModifyUserName,
-    b.lastModifyDate,  b.stationCode, t.id as t_id, t.code as stationCode, t.subareaCode, t.name as stationName, t.depict, t.address, t.latitude,t.longitude,
-    s.name as subareaName, (
-    SELECT COUNT(*)
-    FROM anima_lnk a
-    WHERE a.lnkCode = b.code) AS animaCount
-    from top_building b
-    LEFT JOIN  top_station t on t.code = b.stationCode
-    LEFT JOIN top_subarea s ON t.subareaCode = s.code
-    <include refid="Where_Condition"/>
-    <if test="condition.stationCode !=null and condition.stationCode !=&quot;&quot;">
-      and b.stationCode =#{condition.stationCode,jdbcType=VARCHAR}
-    </if>
-    <if test="condition.subareaCode !=null and condition.subareaCode !=&quot;&quot;">
-      and t.subareaCode =#{condition.subareaCode,jdbcType=VARCHAR}
-    </if>
-    <choose>
-      <when test="orderBy!=null and orderBy!=&quot;&quot;">
-        ORDER BY ${orderBy}
-      </when>
-      <otherwise>
-        ORDER BY b.createDate desc
-      </otherwise>
-    </choose>
-    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-  </select>
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        b.id, b.code, b.name, b.type, b.depict, b.address, b.longitude, b.latitude, b.mainTag, b.state, b.subareaCode,
+        b.remark, b.status, b.createUserId, b.createUserName, b.createDate, b.lastModifyUserId, b.lastModifyUserName,
+        b.lastModifyDate, b.stationCode, t.id as t_id, t.code as stationCode, t.subareaCode, t.name as stationName,
+        t.depict, t.address, t.latitude,t.longitude,
+        s.name as subareaName, (
+        SELECT COUNT(*)
+        FROM anima_lnk a
+        WHERE a.lnkCode = b.code) AS animaCount
+        from top_building b
+        LEFT JOIN top_station t on t.code = b.stationCode
+        LEFT JOIN top_subarea s ON t.subareaCode = s.code
+        <include refid="Where_Condition"/>
+        <if test="condition.stationCode !=null and condition.stationCode !=&quot;&quot;">
+            and b.stationCode =#{condition.stationCode,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.subareaCode !=null and condition.subareaCode !=&quot;&quot;">
+            and t.subareaCode =#{condition.subareaCode,jdbcType=VARCHAR}
+        </if>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY b.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 
-  <sql id="Where_Condition">
-    where 1 = 1
-    <if test="condition.code !=null and condition.code !=&quot;&quot;">
-      and b.code =#{condition.code,jdbcType=CHAR}
-    </if>
-    <if test="condition.status !=null and condition.status !=&quot;&quot;">
-      and b.status =#{condition.status,jdbcType=CHAR}
-    </if>
-    <if test="condition.name !=null and condition.name !=&quot;&quot;">
-      and (b.`name` like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
-      )
-    </if>
-    <if test="condition.type !=null and condition.type !=&quot;&quot;">
-      and b.type =#{condition.type,jdbcType=CHAR}
-    </if>
-  </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test="condition.code !=null and condition.code !=&quot;&quot;">
+            and b.code =#{condition.code,jdbcType=CHAR}
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and b.status =#{condition.status,jdbcType=CHAR}
+        </if>
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and (b.`name` like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        <if test="condition.type !=null and condition.type !=&quot;&quot;">
+            and b.type =#{condition.type,jdbcType=CHAR}
+        </if>
+    </sql>
 
-  <select id="findCount" resultType="int">
-    SELECT COUNT(*)
-    from top_building b
-    <include refid="Where_Condition"/>
-  </select>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        from top_building b
+        <include refid="Where_Condition"/>
+    </select>
 
-  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.glink.model.TopBuilding">
     select count(*)
     from top_building b
     where b.code = #{code}
   </select>
 
-  <update id="updateStatus" parameterType="java.lang.String">
+    <update id="updateStatus" parameterType="java.lang.String">
     update top_building
     set status = #{status,jdbcType=CHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+    <update id="clearAll">
+      delete from top_building
+    </update>
 </mapper>
