@@ -55,6 +55,7 @@ function viewStudent() {
     var url = contextPath + "/www/classes/findStudentList";
     var data = {
         classId: classId,
+        status:'1'
     }
     $.getJSON(url, data, function (rst) {
         if (rst.status == 0) {
