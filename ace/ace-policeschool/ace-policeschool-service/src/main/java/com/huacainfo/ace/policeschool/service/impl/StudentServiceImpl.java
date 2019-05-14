@@ -327,9 +327,6 @@ public class StudentServiceImpl implements StudentService {
             if (CommonUtils.isBlank(o.getMobile())) {
                 return new MessageResponse(1, "序号[" + o.getIndex() + "],籍贯不能为空！");
             }
-            if (StringUtil.isNotEmpty(o.getSex())) {
-                o.setSex("男".equals(o.getSex().trim()) ? "1" : "2");
-            }
             if (StringUtil.isNotEmpty(o.getPolitical())) {
                 switch (o.getPolitical()) {
                     case "党员":

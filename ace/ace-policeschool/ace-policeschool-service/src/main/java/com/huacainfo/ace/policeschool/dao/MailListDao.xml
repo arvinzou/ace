@@ -119,7 +119,7 @@
 
 
     <select id="getList" resultType="map">
-        select id, name from student where classId=#{p.classId} and (pid is null or pid='0') order by name
+        select id, name from student where status <![CDATA[ <> ]]> 0 and classId=#{p.classId} and (pid is null or pid='0') order by name
     </select>
 
     <resultMap id="MailListContent" type="com.huacainfo.ace.policeschool.vo.MailListContent">

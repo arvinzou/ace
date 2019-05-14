@@ -5,11 +5,13 @@ window.onload = function () {
     initEvents();
     initSelect();
     $(".js-example-basic-single2").on('change', teacherSearch);
+    $(".js-example-basic-single1").on('change', teacherSearch);
 }
 
 
 function teacherSearch() {
     params['cTeacherId'] = $("select[name=teacherId]").val();
+    params['classesId'] = $("select[name=classesId]").val();
     getPageList();
 }
 

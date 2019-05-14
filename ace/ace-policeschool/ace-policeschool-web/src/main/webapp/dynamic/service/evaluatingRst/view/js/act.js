@@ -40,6 +40,10 @@ function exportData() {
     window.location.href = contextPath + '/evaluationRst/exportData?id=' + urlParams.id;
 }
 
+function t_query(){
+    
+}
+
 
 /*测评管理初始化分页*/
 function initPage() {

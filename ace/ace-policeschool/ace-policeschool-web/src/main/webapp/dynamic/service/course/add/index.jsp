@@ -67,9 +67,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">
-
-                            讲师
-                            ﻿
+                            讲师﻿<span class="required" aria-required="true"> * </span>﻿
                         </label>
                         <div class="col-md-6">
                             <select style="width: 100%;height: 34px"

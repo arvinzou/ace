@@ -80,12 +80,14 @@ function edit(did) {
 
 /*课程管理编辑*/
 function del(id) {
-    var url = contextPath + "/course/softdel";
-    $.getJSON(url, {id: id}, function (result) {
-        if (result.status == 0) {
-            getPageList();
-        }
-    })
+    if(confirm("确定删除吗？")){
+        var url = contextPath + "/course/softdel";
+        $.getJSON(url, {id: id}, function (result) {
+            if (result.status == 0) {
+                getPageList();
+            }
+        })
+    }
 }
 
 /*查看详情*/

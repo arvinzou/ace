@@ -73,8 +73,11 @@
         FROM qy_att_record t
     </sql>
     <sql id="Where_Condition">
-    where 1 = 1
-  </sql>
+        where 1 = 1
+        <if test="condition.realname !=null and condition.realname !=&quot;&quot;">
+            and t.realname LIKE concat('%',#{condition.realname,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
