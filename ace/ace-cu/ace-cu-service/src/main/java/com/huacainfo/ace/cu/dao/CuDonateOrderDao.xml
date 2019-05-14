@@ -32,13 +32,14 @@
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="dayDonatePoint" jdbcType="TINYINT" property="dayDonatePoint"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, projectId, userId, openId, donateName, mobileNumber, donateAmount, donateDate, 
     orderNo, payType, payDate, points, needReceipt, consigneeName, country, province, 
     city, district, address, remark, status, createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate, anonymity, consigneeMobileNumber,
-        donatePostName
+        donatePostName,dayDonatePoint
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -60,7 +61,7 @@
       address, remark, status, 
       createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate,
-        anonymity, consigneeMobileNumber, donatePostName
+        anonymity, consigneeMobileNumber, donatePostName,dayDonatePoint
       )
     values (#{id,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{openId,jdbcType=VARCHAR}, #{donateName,jdbcType=VARCHAR}, #{mobileNumber,jdbcType=VARCHAR}, 
@@ -73,7 +74,7 @@
         #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
         #{lastModifyDate,jdbcType=TIMESTAMP},
         #{anonymity,jdbcType=VARCHAR}, #{consigneeMobileNumber,jdbcType=VARCHAR},
-        #{donatePostName,jdbcType=VARCHAR}
+        #{donatePostName,jdbcType=VARCHAR},#{dayDonatePoint,jdbcType=VARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.cu.model.CuDonateOrder">
@@ -170,6 +171,9 @@
             <if test="donatePostName != null">
                 donatePostName,
             </if>
+            <if test="dayDonatePoint != null">
+                dayDonatePoint
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -262,6 +266,9 @@
             <if test="donatePostName != null">
                 #{donatePostName,jdbcType=VARCHAR},
             </if>
+            <if test="dayDonatePoint != null">
+                #{dayDonatePoint,jdbcType=VARCHAR}
+            </if>
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.cu.model.CuDonateOrder">
@@ -352,7 +359,7 @@
                 consigneeMobileNumber = #{consigneeMobileNumber,jdbcType=VARCHAR},
             </if>
             <if test="donatePostName != null">
-                donatePostName = #{donatePostName,jdbcType=VARCHAR},
+                donatePostName = #{donatePostName,jdbcType=VARCHAR}
             </if>
 
         </set>
@@ -419,5 +426,64 @@
                   )a
                   GROUP BY a.openId) c on c.openId = t.openid
         where t.id = #{orderId,jdbcType=VARCHAR}
+    </select>
+    
+    <!-- 获取弹幕数据 -->
+    <select id="bulletScreenData" resultType="java.util.Map">
+        SELECT 
+        	o.remark ,(SELECT u.avatarUrl FROM portal.wx_user u WHERE u.openId = o.openId) AS avatarUrl 
+        FROM 
+        	cu.cu_donate_order o 
+        WHERE 
+        	o.status=2 LIMIT 0,50
+    </select>
+    
+    <!-- 检查当天是否获取善行积分 -->
+    <select id="checkDayPoint">
+        SELECT COUNT(1) FROM cu_donate_order 
+        WHERE dayDonatePoint = 1 AND status = 2 AND TO_DAYS(donateDate) = TO_DAYS(now()) AND projectId = #{projectId} AND userId = #{userId} 
+    </select>
+    
+    <!-- 根据用户获取“日行一善”积分明细 -->
+    <select id="getDayDonateDetails" resultType="com.huacainfo.ace.cu.vo.CuDonateOrderVo">
+        SELECT o.donateDate , o.donateAmount , o.points , o.dayDonatePoint FROM cu.cu_donate_order o 
+        WHERE status=2 AND projectId = #{projectId} AND userId = #{userId}
+    </select>
+    
+    <!-- 捐款总量 -->
+    <select id="getTotalMoney" resultType="java.util.Map">
+        SELECT IFNULL(a.dayAmount,0) AS dayAmount, IFNULL(b.totalAmount,0)  AS totalAmount FROM 
+        (SELECT SUM(donateAmount) AS dayAmount , projectId FROM cu_donate_order WHERE status = 2 AND projectId = #{projectId} AND TO_DAYS(donateDate) = TO_DAYS(now())) a,
+		(SELECT SUM(donateAmount) AS totalAmount , projectId FROM cu_donate_order WHERE status = 2 AND projectId = #{projectId}) b 
+    </select>
+    
+    <!-- 善心积分排行 -->
+    <select id="getHeartPointsRank" resultType="java.util.Map">
+        SELECT * FROM 
+        	(SELECT (SELECT u.nickname FROM portal.wx_user u WHERE u.openId = o.openId) AS nickname, 
+        	(SELECT u.avatarUrl FROM portal.wx_user u WHERE u.openId = o.openId) AS avatarUrl,
+        	FLOOR(SUM(donateAmount)/10) AS heartPoints,
+        	(SELECT u.unionId FROM portal.wx_user u WHERE u.openId = o.openId) AS unionId
+        FROM cu_donate_order o WHERE status = 2 GROUP BY userId ORDER BY heartPoints DESC) t WHERE t.heartPoints != 0 LIMIT 0,100
+    </select>
+    
+    <!-- 善行积分排行 -->
+    <select id="getActionPointsRank" resultType="java.util.Map">
+        SELECT * FROM 
+        	(SELECT (SELECT u.nickname FROM portal.wx_user u WHERE u.openId = o.openId) AS nickname, 
+        	(SELECT u.avatarUrl FROM portal.wx_user u WHERE u.openId = o.openId) AS avatarUrl,
+        	SUM(dayDonatePoint) AS actionPoints,
+        	(SELECT u.unionId FROM portal.wx_user u WHERE u.openId = o.openId) AS unionId
+        FROM cu_donate_order o WHERE status = 2 GROUP BY userId ORDER BY actionPoints DESC) t WHERE t.actionPoints != 0 LIMIT 0,100
+    </select>
+    
+    <!-- 总积分排行 -->
+    <select id="getTotalPointsRank" resultType="java.util.Map">
+        SELECT * FROM 
+        	(SELECT (SELECT u.nickname FROM portal.wx_user u WHERE u.openId = o.openId) AS nickname, 
+        	(SELECT u.avatarUrl FROM portal.wx_user u WHERE u.openId = o.openId) AS avatarUrl,
+        	FLOOR(SUM(donateAmount)/10) + SUM(dayDonatePoint) AS totalPoints,
+        	(SELECT u.unionId FROM portal.wx_user u WHERE u.openId = o.openId) AS unionId 
+        FROM cu_donate_order o WHERE status = 2 GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
     </select>
 </mapper>

@@ -84,6 +84,14 @@ public class CuDonateOrder implements Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+    
+    private int dayDonatePoint;
+    
+    /**
+     *  @捐款类型
+     *  1-日行一日捐，2-日行一善
+     */
+    private int donateType;
 
     public String getDonatePostName() {
         return donatePostName;
@@ -324,4 +332,21 @@ public class CuDonateOrder implements Serializable {
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
     }
+
+	public int getDayDonatePoint() {
+		return dayDonatePoint;
+	}
+
+	public void setDayDonatePoint(int dayDonatePoint) {
+		this.dayDonatePoint = dayDonatePoint;
+	}
+
+	public int getDonateType() {
+		return donateType;
+	}
+
+	public void setDonateType(int donateType) {
+		this.donateType = donateType;
+	}
+	
 }

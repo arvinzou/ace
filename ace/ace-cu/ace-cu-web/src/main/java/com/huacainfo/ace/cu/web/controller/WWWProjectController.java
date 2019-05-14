@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.cu.model.CuProcessRecord;
+import com.huacainfo.ace.cu.service.CuDayDonateService;
 import com.huacainfo.ace.cu.service.CuDonateOrderService;
 import com.huacainfo.ace.cu.service.CuProcessRecordService;
 import com.huacainfo.ace.cu.service.CuProjectApplyService;
@@ -27,13 +28,14 @@ import java.util.List;
 public class WWWProjectController extends CuBaseController {
     @Autowired
     private CuProjectService cuProjectService;
-
     @Autowired
     private CuProjectApplyService cuProjectApplyService;
     @Autowired
     private CuDonateOrderService cuDonateOrderService;
     @Autowired
     private CuProcessRecordService cuProcessRecordService;
+    @Autowired
+    private CuDayDonateService cuDayDonateService;
 
 
     /**
@@ -213,4 +215,53 @@ public class WWWProjectController extends CuBaseController {
 
         return cuProjectService.findDonateListToday(projectId, start, limit, orderBy);
     }
+    
+    /**
+     * 日行一善 初始化数据接口
+     * @param userId
+     * @param projectId
+     * @return
+     * @throws Exception
+     */
+	@RequestMapping("/init")
+	@ResponseBody
+	public ResultResponse initDatDonateInfo(String userId, String projectId) throws Exception {
+        if (StringUtil.isEmpty(userId) || StringUtil.isEmpty(projectId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        
+        return cuDayDonateService.initDayDonateData(userId, projectId);
+    }
+	
+	/**
+	 * 日行一善 捐献明细接口
+	 * @param userId
+	 * @param projectId
+	 * @return
+	 */
+	@RequestMapping("/donateDetails")
+	@ResponseBody
+	public ResultResponse personalDonateDetails(String userId, String projectId) {
+		if (StringUtil.isEmpty(userId) || StringUtil.isEmpty(projectId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+		
+		return cuDayDonateService.personalDonateDataDetails(userId,projectId);
+	}
+	
+	/**
+	 * 日行一善 积分排名接口
+	 * @return
+	 */
+	@RequestMapping("/pointsRank")
+	@ResponseBody
+	public ResultResponse pointsRank() {
+		//公众号用户信息
+        Userinfo userinfo = getCurUserinfo();
+        if (null == userinfo) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+        }
+        
+		return cuDayDonateService.pointsRank(userinfo.getUnionid());
+	}
 }
