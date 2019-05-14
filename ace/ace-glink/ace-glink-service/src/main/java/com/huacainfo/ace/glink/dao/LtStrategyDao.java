@@ -1,12 +1,12 @@
 package com.huacainfo.ace.glink.dao;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.glink.model.LtStrategy;
 import com.huacainfo.ace.glink.vo.LtStrategyQVo;
 import com.huacainfo.ace.glink.vo.LtStrategyVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface LtStrategyDao {
 
@@ -17,14 +17,15 @@ public interface LtStrategyDao {
     int insert(LtStrategy record);
 
     int updateByPrimaryKey(LtStrategy record);
+
     int updateByPrimaryKeyVo(LtStrategy record);
 
     LtStrategyVo selectByPrimaryKeyVo(String id);
 
     List<LtStrategyVo> findList(@Param("condition") LtStrategyQVo condition,
-                                    @Param("start") int start,
-                                    @Param("limit") int limit,
-                                    @Param("orderBy") String orderBy);
+                                @Param("start") int start,
+                                @Param("limit") int limit,
+                                @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") LtStrategyQVo condition);
 
@@ -41,4 +42,6 @@ public interface LtStrategyDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    int updateOtherStatus(@Param("id") String id,
+                          @Param("status") String status);
 }

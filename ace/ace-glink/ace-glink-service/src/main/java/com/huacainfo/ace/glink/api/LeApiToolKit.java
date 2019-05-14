@@ -1,6 +1,7 @@
 package com.huacainfo.ace.glink.api;
 
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
@@ -31,7 +32,7 @@ public class LeApiToolKit {
     }
 
     private static String get(String url) {
-        logger.debug("request url={}", url);
+        logger.debug("[GET] request url={}", url);
         String r = HttpKit.get(url);
         logger.debug("response={}", r);
         return r;
@@ -90,9 +91,8 @@ public class LeApiToolKit {
                 out.setMessage("策略模式设置有误！");
                 return out.toString();
         }
-
         String path = "/wh/limplight/control/lightStrategy";
-//        System.out.println(JsonUtil.toJson(request));
+
         return post(domain + path, JsonUtil.toJson(request));
     }
 
@@ -332,9 +332,12 @@ public class LeApiToolKit {
      *
      * @return data
      */
-    public static GetBulidingDetailOut getBuildingDetail() {
+    public static GetBulidingDetailOut getBuildingDetail(String buildingNo) {
         StringBuilder path = new StringBuilder();
         path.append(domain).append("/wh/limplight/GetBulidingDetail");
+        if (StringUtil.isNotEmpty(buildingNo)) {
+            path.append("?buildingNo=").append(buildingNo);
+        }
         String rstJson = get(path.toString());
 
         return JsonUtil.toObject(rstJson, GetBulidingDetailOut.class);

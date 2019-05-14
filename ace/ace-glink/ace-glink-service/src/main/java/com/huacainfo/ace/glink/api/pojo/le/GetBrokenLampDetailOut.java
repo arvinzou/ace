@@ -25,10 +25,34 @@ public class GetBrokenLampDetailOut extends LeBaseOut {
     //**************************static classes**************************************
 
     public static class BrokenLamp {
-        private String MediaArea;// 控制区域编号
-        private String Controller;//控制器编号,
-        private String ChannelNo;//通道编号,
-        private String LampNo;//灯组编号
+        /**
+         * 建筑物编号
+         */
+        private String BuildingNo;
+        /**
+         * 控制区域编号
+         */
+        private String MediaArea;
+        /**
+         * 控制器编号
+         */
+        private String Controller;
+        /**
+         * 通道编号
+         */
+        private String ChannelNo;
+        /**
+         * 灯组编号
+         */
+        private String LampNo;
+
+        public String getBuildingNo() {
+            return BuildingNo;
+        }
+
+        public void setBuildingNo(String buildingNo) {
+            BuildingNo = buildingNo;
+        }
 
         public String getMediaArea() {
             return MediaArea;

@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.glink.api.LeApiToolKit;
+import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
 import com.huacainfo.ace.glink.api.pojo.le.GetBulidingDetailOut;
 import com.huacainfo.ace.glink.dao.TopBuildingDao;
 import com.huacainfo.ace.glink.model.TopBuilding;
@@ -326,11 +327,11 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         //接口数据获取
         GetBulidingDetailOut out;
         try {
-            out = LeApiToolKit.getBuildingDetail();
+            out = LeApiToolKit.getBuildingDetail("");
         } catch (Exception e) {
             return new MessageResponse(ResultCode.FAIL, "接口通讯异常");
         }
-        if (out.getCode() == 400 || CollectionUtils.isEmpty(out.getData())) {
+        if (out.getCode() == LeBaseOut.FAILED || CollectionUtils.isEmpty(out.getData())) {
             return new MessageResponse(ResultCode.FAIL, "接口获取数据失败");
         }
         //清空库存数据

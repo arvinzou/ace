@@ -192,4 +192,12 @@ public interface LtStrategyService {
      * @version: 2019-04-10
      */
     MessageResponse updateStatus(String id, LtLnkObject ltLnkObject, UserProp userProp) throws Exception;
+
+    /**
+     * 灯光策略下发
+     *
+     * @param jsons 参数值
+     * @return 处理结果
+     */
+    Map<String, Object> lightStrategy(String jsons);
 }
