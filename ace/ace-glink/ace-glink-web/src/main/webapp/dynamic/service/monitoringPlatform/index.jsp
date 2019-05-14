@@ -765,7 +765,7 @@
                     break;
             }
         }else{
-            $scene.find('span').html('当前没有模式')
+            $scene.find('span').html('当前无场景')
         }
 
     }
