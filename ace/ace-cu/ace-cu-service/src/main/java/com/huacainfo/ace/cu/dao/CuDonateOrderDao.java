@@ -38,7 +38,7 @@ public interface CuDonateOrderDao {
     /**
      * @description:获取弹幕数据
      */
-	List<Map<String, Object>> bulletScreenData(@Param("start")int start, @Param("limit")int limit);
+	List<Map<String, Object>> bulletScreenData(@Param("projectId")String projectId,@Param("start")int start, @Param("limit")int limit);
 	
 	/**
 	 * @description:检查当天是否获取善行积分
