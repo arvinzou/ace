@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.glink.dao.LeSceneDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.LeScene">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="sceneNum" jdbcType="VARCHAR" property="sceneNum"/>
+        <result column="sceneName" jdbcType="VARCHAR" property="sceneName"/>
+        <result column="sceneDepict" jdbcType="VARCHAR" property="sceneDepict"/>
+        <result column="viewUrl" jdbcType="VARCHAR" property="viewUrl"/>
+        <result column="playUrl" jdbcType="VARCHAR" property="playUrl"/>
+        <result column="playStatus" jdbcType="CHAR" property="playStatus"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, sceneNum, sceneName, sceneDepict, viewUrl, playUrl, playStatus,
+    remark, status, createDate, updateDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from le_scene
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from le_scene
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.glink.model.LeScene">
+    insert into le_scene (id, sceneNum, sceneName, 
+      sceneDepict, viewUrl, playUrl, playStatus,
+      remark, status, createDate, 
+      updateDate)
+    values (#{id,jdbcType=VARCHAR}, #{sceneNum,jdbcType=VARCHAR}, #{sceneName,jdbcType=VARCHAR}, 
+      #{sceneDepict,jdbcType=VARCHAR}, #{viewUrl,jdbcType=VARCHAR}, #{playUrl,jdbcType=VARCHAR},
+       #{playStatus,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+       #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.LeScene">
+    update le_scene
+    set sceneNum = #{sceneNum,jdbcType=VARCHAR},
+      sceneName = #{sceneName,jdbcType=VARCHAR},
+      sceneDepict = #{sceneDepict,jdbcType=VARCHAR},
+      viewUrl = #{viewUrl,jdbcType=VARCHAR},
+      playUrl = #{playUrl,jdbcType=VARCHAR},
+      playStatus = #{playStatus,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap extends="BaseResultMap" id="VoResultMap" type="com.huacainfo.ace.glink.vo.LeSceneVo">
+
+    </resultMap>
+    <sql id="Vo_Column_List">
+      t.id, t.sceneNum, t.sceneName, t.sceneDepict, t.viewUrl, t.playUrl,t.playStatus,
+      t.remark, t.status, t.createDate, t.updateDate
+    </sql>
+    <sql id="From_Statement">
+        FROM le_scene t
+    </sql>
+    <sql id="Where_Condition">
+        <where>
+            1 = 1
+            <if test="condition.keyword != null and condition.keyword !=&quot;&quot;">
+                and (
+                t.sceneNum like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+                or t.sceneName like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+                )
+            </if>
+            <if test="condition.sceneNum != null and condition.sceneNum !=&quot;&quot;">
+                and t.sceneNum = #{sceneNum,jdbcType=VARCHAR}
+            </if>
+            <if test="condition.sceneName != null and condition.sceneName !=&quot;&quot;">
+                and t.sceneName = #{sceneName,jdbcType=VARCHAR}
+            </if>
+            <if test="condition.sceneDepict != null and condition.sceneDepict !=&quot;&quot;">
+                and t.sceneDepict = #{sceneDepict,jdbcType=VARCHAR}
+            </if>
+            <if test="condition.playStatus != null and condition.playStatus !=&quot;&quot;">
+                and t.playStatus = #{playStatus,jdbcType=CHAR}
+            </if>
+        </where>
+    </sql>
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+    <select id="isExist" parameterType="com.huacainfo.ace.glink.model.LeScene" resultType="int">
+            select count(1)
+        from le_scene
+        where id = #{id,jdbcType=VARCHAR}
+  </select>
+</mapper>

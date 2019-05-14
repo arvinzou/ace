@@ -20,7 +20,7 @@ public class CommonTest {
     public void test() throws IOException {
 
 //        seApiInvoke();      //强电联调
-        leApiInvoke();        //弱电联调
+//        leApiInvoke();        //弱电联调
 
     }
 
@@ -66,7 +66,6 @@ public class CommonTest {
 //todo 3、类似问题2
 //        System.out.println(SeApiToolKit.getTimerData());
 //        System.out.println(SeApiToolKit.updateTimer());
-
 
 
 //        todo 无法修改，接口返回：{"Status":"error"}
