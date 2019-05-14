@@ -1,0 +1,184 @@
+.medalList .medal img {
+	width: 1.706666rem;
+	height: 2.146666rem;
+	display: block;
+	object-fit: cover;
+	margin: auto;
+}
+
+.medalList .medal div {
+	width: 1.986666rem;
+	height: 0.586666rem;
+	background: rgba(234, 68, 54, 1);
+	border-radius: 0.293333rem;
+	font-size: 0.32rem;
+	font-family: PingFang-SC-Medium;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 1);
+	text-align: center;
+	line-height: 0.586666rem;
+	margin-top: 0.266666rem;
+}
+
+.medalList .medal {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.medalList .medal li {
+	margin: 1rem 0.6rem 0;
+}
+
+.medalList .medal .gray {
+	filter: grayscale(100%);
+}
+
+.content {
+	width: 10rem;
+	height: 100%;
+	margin: auto;
+	position: relative;
+}
+
+.content .body {
+	padding: 4.666666rem 0 0;
+	width: 100%;
+	height: 100%;
+}
+
+.body .record {
+	padding: 0.533333rem 0.533333rem 0.6rem 0.72rem;
+}
+
+.record .listStyle li {
+	width: 100%;
+	display: block;
+	border-left: dashed 1px #EA4436;
+	padding: 0.373333rem 0 0 0.533333rem;
+	position: relative;
+}
+
+.record .listStyle li:before {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 0.4rem;
+	height: 0.4rem;
+	background: rgba(255, 255, 255, 1);
+	border: 0.053333rem solid rgba(234, 68, 54, 1);
+	border-radius: 50%;
+	left: -0.266666rem;
+}
+
+.record .listStyle .info {
+	padding: 0.266666rem;
+	background: #FEF5F5;
+	border-radius: 0.053333rem 0.053333rem 0.266666rem 0.266666rem;
+	font-size: 0.346666rem;
+	font-family: PingFang-SC-Medium;
+	font-weight: 500;
+	color: rgba(51, 51, 51, 1);
+	line-height: 0.533333rem;
+}
+
+.record .listStyle .info .time {
+	font-size: 0.32rem;
+	font-family: PingFang-SC-Medium;
+	font-weight: 500;
+	color: rgba(153, 153, 153, 1);
+}
+
+.content .head {
+	width: 10rem;
+	height: 4.666666rem;
+	background: rgba(234, 68, 54, 1);
+	padding: 0.64rem 0 0;
+	position: fixed;
+	top: 0;
+	z-index: 99;
+}
+
+.head .headImg {
+	width: 1.733333rem;
+	height: 1.733333rem;
+	background: rgba(247, 249, 252, 1);
+	border-radius: 50%;
+	border: 0.08rem solid #fff;
+	margin: auto;
+}
+
+.head .name {
+	font-size: 0.453333rem;
+	font-family: PingFang-SC-Bold;
+	font-weight: bold;
+	color: rgba(255, 255, 255, 1);
+	text-align: center;
+}
+
+.head .type {
+	display: flex;
+	position: absolute;
+	height: 1.6rem;
+	bottom: 0;
+	width: 100%;
+	justify-content: space-between;
+	padding: 0 1.733333rem;
+	font-size: 0.64rem;
+	font-family: Bahnschrift;
+	color: rgba(255, 202, 40, 1);
+}
+
+.head .type .active {
+	position: relative;
+}
+
+.head .type .active:after {
+	content: "";
+	color: #FFFFFF;
+	display: block;
+	width: 0;
+	height: 0;
+	border: 0.266666rem solid red;
+	border-top-color: transparent;
+	border-bottom-color: #FFFFFF;
+	border-left-color: transparent;
+	border-right-color: transparent;
+	bottom: 0;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%, 0%);
+}
+
+.head .type img,
+.start img {
+	width: 0.4rem;
+	height: 0.4rem;
+	display: inline-block;
+	object-fit: scale-down;
+	object-position: 50% 50%;
+}
+
+.start img {
+	position: relative;
+	left: -0.2rem;
+}
+
+.start {
+	font-size: 0.346666rem;
+	font-family: PingFang-SC-Bold;
+	font-weight: bold;
+	color: rgba(153, 153, 153, 1);
+}
+
+.head .type p {
+	font-size: 0.346666rem;
+	font-family: PingFang-SC-Medium;
+	font-weight: 500;
+	color: rgba(255, 255, 255, 1);
+	text-align: center;
+}
+
+.head .type>div {
+	text-align: center;
+}
