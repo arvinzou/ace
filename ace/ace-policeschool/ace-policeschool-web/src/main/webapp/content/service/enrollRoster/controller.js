@@ -6,6 +6,7 @@ jQuery(function ($) {
             beforeSubmit: function (formData, jqForm, options) {
                 // var params = {};
                 $.each(formData, function (n, obj) {
+                    params.start=0;
                     params[obj.name] = obj.value;
                 });
                 $.extend(params, {
@@ -331,6 +332,7 @@ function del(rowid) {
 
 function setParams(key, value) {
     params[key] = value;
+    params.start=0;
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
 }
 

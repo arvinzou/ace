@@ -31,6 +31,7 @@ import com.huacainfo.ace.cu.vo.CuDonateOrderVo;
 import com.huacainfo.ace.cu.vo.CuProjectVo;
 import com.huacainfo.ace.cu.vo.CuUserVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -287,7 +288,26 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
             return new ResultResponse(ResultCode.FAIL, "收货信息不全！");
         }
 
-        data.setPoints(new BigDecimal(data.getDonateAmount().intValue()));//1块钱=1积分,无小数
+        data.setDayDonatePoint(0);
+        /**
+         * 1-慈善一日捐
+         * 2-日行一善
+         */
+		switch (data.getDonateType()) {
+			case 1:
+				data.setPoints(new BigDecimal(data.getDonateAmount().intValue()));//1块钱=1积分,无小数
+				break;
+			case 2:
+				data.setPoints(new BigDecimal(data.getDonateAmount().intValue() / 10));// 10块钱=1积分,无小数
+				int todayActionPoint = cuDonateOrderDao.checkDayPoint(data.getProjectId(), data.getUserId());
+				if (todayActionPoint == 0 && data.getDonateAmount().doubleValue() >= 1) {
+					data.setDayDonatePoint(1);
+				}
+				break;
+			default:
+				return new ResultResponse(ResultCode.FAIL, "非法的捐款类型");
+		}
+        
         data.setOrderNo(generateOrderNo());
         data.setUserId(userVo.getId());
         data.setAnonymity(StringUtil.isEmpty(data.getAnonymity()) ? "0" : data.getAnonymity());
@@ -303,7 +323,6 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
         }
         return new ResultResponse(ResultCode.FAIL, "订单创建失败");
     }
-
 
     /**
      * 订单校验
@@ -466,4 +485,5 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
 
         return System.currentTimeMillis() + index;
     }
+    
 }

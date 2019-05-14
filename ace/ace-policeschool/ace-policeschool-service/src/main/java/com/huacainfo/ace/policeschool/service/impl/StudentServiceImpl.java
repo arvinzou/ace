@@ -8,10 +8,7 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.policeschool.constant.CommConstant;
 import com.huacainfo.ace.policeschool.dao.StudentDao;
 import com.huacainfo.ace.policeschool.model.Student;
@@ -146,11 +143,17 @@ public class StudentServiceImpl implements StudentService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(ResultCode.FAIL, "主键不能为空！");
         }
+        String IdCard=o.getIdCard();
+        Boolean check= IDCardUtil.isIDCard(IdCard);
+        if(!check||CommonUtils.isBlank(check)){
+            new MessageResponse(ResultCode.FAIL,"身份证号码错误");
+        }
+        o.setNativePlace(IDCardUtil.getNativeCode(IdCard));
+        o.setSex(IDCardUtil.getSexCode(IdCard));
+        o.setBirthDate(IDCardUtil.getbirthDay(IdCard,"-"));
+
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(ResultCode.FAIL, "姓名不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getIdCard())) {
-            return new MessageResponse(ResultCode.FAIL, "身份证不能为空！");
         }
         if (CommonUtils.isBlank(o.getBadgeNum())) {
             return new MessageResponse(ResultCode.FAIL, "警号不能为空！");
@@ -263,6 +266,14 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public MessageResponse addStudent(Student data, UserProp userProp) throws Exception {
+        String IdCard=data.getIdCard();
+        Boolean check= IDCardUtil.isIDCard(IdCard);
+        if(!check&&CommonUtils.isBlank(check)){
+            new MessageResponse(ResultCode.FAIL,"身份证号码错误");
+        }
+        data.setNativePlace(IDCardUtil.getNativeCode(IdCard));
+        data.setSex(IDCardUtil.getSexCode(IdCard));
+        data.setBirthDate(IDCardUtil.getbirthDay(IdCard,"-"));
         String uid = GUIDUtil.getGUID();
         //主键
         data.setId(uid);
@@ -287,7 +298,6 @@ public class StudentServiceImpl implements StudentService {
         if (ResultCode.FAIL == ms.getStatus()) {
             throw new CustomException(ms.getErrorMessage());
         }
-
         return ms;
     }
 

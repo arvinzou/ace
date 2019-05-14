@@ -36,6 +36,7 @@ function changePage() {
 /*****************************************总控设置Start***********************************************/
 var map = {};
 var oldMap = {};
+
 function initControl() {
     getYearCronList();
     $('#months').on('click', 'li', changeMonth);
@@ -85,6 +86,7 @@ function stroyMap() {
     });
     map[mid] = checkValue;
 }
+
 function renderMonths(m) {
     var datas = {};
     datas.m = map['m' + m];
@@ -203,8 +205,6 @@ function judgeUpdate() {
 }
 
 
-
-
 /*****************************************总控设置End***********************************************/
 
 /*****************************************任务管理Start***********************************************/
@@ -215,15 +215,32 @@ var taskParams = {
 
 /*任务初始化管理*/
 function initTask() {
-    //
+
+    //初始化组件
     initPageTask();
-    //
+    //加载任务树&默认选择第一节点
     $("#taskAreaNode").combotree({
+        url: contextPath + '/seProjectArea/selectTreeList',
+        method: 'get',
+        animate: true,
+        lines: true,
+        label: 'Select Node:',
+        labelPosition: 'top',
         onChange: function (newValue, oldValue) {
-            // alert(newValue);
+            //select onChange
             getTaskList("areaNodeID", newValue);
+        },
+        onSelect: function () {
+            console.log(" alert('selcet!')");
+        },
+        onClick: function () {
+            console.log(" alert('click')")
+        },
+        onLoadSuccess: function (node, data) {
+            $("#taskAreaNode").combotree('setValue', data[0].id);
         }
     });
+
 }
 
 /*初始化分页器*/
@@ -476,6 +493,7 @@ function TimerUpdate() {
     });
 
 }
+
 /*****************************************定时设置End***********************************************/
 
 /*****************************************场景执行Start***********************************************/
@@ -502,7 +520,7 @@ function setScenario() {
     var that = $(this);
     scenarioPostData.presetNo = that.data('presetno');
     var url = contextPath + '/seCustomArea/executePreset';
-    $.post(url, scenarioPostData, function (rst){
+    $.post(url, scenarioPostData, function (rst) {
         console.log(rst);
     })
 }
@@ -596,7 +614,6 @@ function searchPreset() {
 
 
 /*****************************************场景执行End***********************************************/
-
 
 
 /*添加渲染*/

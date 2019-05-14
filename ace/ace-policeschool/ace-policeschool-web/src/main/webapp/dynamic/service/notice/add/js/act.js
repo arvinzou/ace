@@ -4,10 +4,7 @@ var id = guid();
 window.onload = function () {
     jQuery(function ($) {
         $(".breadcrumb").append("<li><span>创建公告</span></li>");
-
         initClassList();
-
-
     });
 }
 

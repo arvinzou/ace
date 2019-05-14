@@ -28,7 +28,7 @@
         <img src="img/logo.png" alt=""/> 江汉区照明控制平台
     </div>
     <div class="btns">
-        <div  data-type="sceneControl" class="btn">
+        <div data-type="sceneControl" class="btn">
             <p class="cn">场景控制</p>
             <p class="en">Scene Control</p>
         </div>
@@ -64,15 +64,15 @@
             </div>
             <div class="btns">
                 <div id="play">
-                    <img data-state="1" src="img/start.png" />
+                    <img data-state="1" src="img/start.png"/>
                     <p>恢复</p>
                 </div>
                 <div id="pause">
-                    <img data-state="2" src="img/stop.png" />
+                    <img data-state="2" src="img/stop.png"/>
                     <p>停止</p>
                 </div>
                 <div>
-                    <img src="img/change.png" />
+                    <img src="img/change.png"/>
                     <p>切换</p>
                 </div>
             </div>
@@ -105,7 +105,8 @@
         <div class="stations">
             <div class="title">江汉区站点(多选)</div>
             <div class="inputGroup">
-                <input type="text" name="name" onkeypress="searchEnterStations(event.keyCode||event.which)" placeholder="输入站点名称"/>
+                <input type="text" name="name" onkeypress="searchEnterStations(event.keyCode||event.which)"
+                       placeholder="输入站点名称"/>
                 <button class="searchStations">
 
                 </button>
@@ -127,7 +128,8 @@
             <div class="operation">
                 <button class="addStrategy">创建</button>
                 <div class="inputGroup">
-                    <input class="strategyName" onkeypress="searchEnter(event.keyCode||event.which)" type="text" placeholder="输入策略编号或策略名称搜索" name="name"/>
+                    <input class="strategyName" onkeypress="searchEnter(event.keyCode||event.which)" type="text"
+                           placeholder="输入策略编号或策略名称搜索" name="name"/>
                     <button class="searchBtn">
                     </button>
                 </div>
@@ -138,8 +140,9 @@
                 <table class="table-tg" style="border:1px solid rgb(12,129,135);">
                     <tr>
                         <td class="tg-mvxc" width="10%">策略编号</td>
-                        <td class="tg-mvxc" width="30%">策略名称</td>
-                        <td class="tg-mvxc" width="10%">分区编号</td>
+                        <td class="tg-mvxc" width="20%">策略名称</td>
+                        <td class="tg-mvxc" width="30%">执行场景</td>
+                        <td class="tg-mvxc" width="10%">执行状态</td>
                         <td class="tg-mvxc" width="20%">操作</td>
                     </tr>
                     <tbody id="strategyList">
@@ -277,17 +280,17 @@
             </div>
         </div>
         <div class="modal-body">
-                <div class="wrap">
-                    <div class="title">添加/修改策略</div>
-                    <div class="form">
-                        <form id="strategyInfo">
+            <div class="wrap">
+                <div class="title">添加/修改策略</div>
+                <div class="form">
+                    <form id="strategyInfo">
 
-                        </form>
-                    </div>
-                    <div class="bottom">
-                        <button type="submit" form="strategyInfo">确定</button>
-                    </div>
+                    </form>
                 </div>
+                <div class="bottom">
+                    <button type="submit" form="strategyInfo">确定</button>
+                </div>
+            </div>
         </div>
         <div class="modal-close">
             <img src="img/close.png" alt="">
@@ -357,9 +360,9 @@
 
 <script id="tpl-check" type="text/template">
     {@each data as item, index}
-        {@if inspect(item.code)}
-            <li data-name="\${item.name}" data-code="\${item.code}">\${item.name}</li>
-        {@/if}
+    {@if inspect(item.code)}
+    <li data-name="\${item.name}" data-code="\${item.code}">\${item.name}</li>
+    {@/if}
     {@/each}
 </script>
 
@@ -394,7 +397,8 @@
     <tr class="tr">
         <td class="tg-84q5"> \${item.code}</td>
         <td class="tg-84q5"> \${item.name}</td>
-        <td class="tg-84q5">\${item.areaCode}</td>
+        <td class="tg-84q5"> \${item.sceneName}-\${item.sceneDepict}</td>
+        <td class="tg-84q5">\${parseSceneStatus(item.status)}</td>
         <td class="tg-84q5">
             <a href="javascript:editStrategy('\${item.id}');" style="color: #53FDFF;">修改</a>
             <a href="javascript:setTimer('\${item.id}');" style="color: #53FDFF;">定时</a>
@@ -404,24 +408,9 @@
     {@/each}
 </script>
 
-<%--<script id="tpl-strategyList" type="text/template">--%>
-    <%--{@each data as item, index}--%>
-    <%--<li>--%>
-        <%--<div class="top">--%>
-            <%--\${item.code}-\${item.name}--%>
-        <%--</div>--%>
-        <%--<div class="bottom">--%>
-            <%--<button data-areaNo="\${item.areaNo}" data-areaNodeID="\${item.areaNodeID}">--%>
-                <%--选择--%>
-            <%--</button>--%>
-        <%--</div>--%>
-    <%--</li>--%>
-    <%--{@/each}--%>
-<%--</script>--%>
-
 <script id="tpl-presets" type="text/template">
     {@each data as item, index}
-    <li data-strategyNum="\${item.strategyNum}">\${item.strategyExplain}</li>
+    <li data-strategyNum="\${item.sceneNum}">\${item.sceneName}-\${item.sceneDepict}</li>
     {@/each}
 </script>
 
@@ -432,7 +421,8 @@
         <li>
             <span>\${item}</span>
             <div class="wrap">
-                <input type="checkbox" id="w\${item}" name="weeks" \${isChecked(data.weeks, +index+1)} value="\${+index+1}"/>
+                <input type="checkbox" id="w\${item}" name="weeks" \${isChecked(data.weeks, +index+1)}
+                       value="\${+index+1}"/>
                 <label class="slider-v3" for="w\${item}"></label>
             </div>
         </li>
@@ -447,7 +437,8 @@
         <li>
             <span>\${item}</span>
             <div class="wrap">
-                <input type="checkbox" id="m\${item}" name="months" \${isChecked(data.mons, +index+1)} value="\${+index+1}"/>
+                <input type="checkbox" id="m\${item}" name="months" \${isChecked(data.mons, +index+1)}
+                       value="\${+index+1}"/>
                 <label class="slider-v3" for="m\${item}"></label>
             </div>
         </li>
@@ -457,23 +448,23 @@
 </script>
 
 <script id="tpl-strategyInfo" type="text/template">
-        <input type="text" name="id" style="display: none;" value="\${data.id}">
-        <div class="input-Group">
-            <p>策略编号*</p>
-            <input name="code" type="text"  value="\${data.code}">
-        </div>
-        <div class="input-Group">
-            <p>策略名称*</p>
-            <input name="name" type="text"  value="\${data.name}">
-        </div>
-        <div class="input-Group">
-            <p>分区编号*</p>
-            <input name="areaCode" type="text"  value="\${data.areaCode}">
-        </div>
-        <div class="input-Group">
-            <p>策略描述</p>
-            <textarea name="remark">\${data.remark}</textarea>
-        </div>
+    <input type="text" name="id" style="display: none;" value="\${data.id}">
+    <div class="input-Group">
+        <p>策略编号*</p>
+        <input name="code" type="text" value="\${data.code}" placeholder="输入自定义策略编号（英文字母+数字组合）">
+    </div>
+    <div class="input-Group">
+        <p>策略名称*</p>
+        <input name="name" type="text" value="\${data.name}" placeholder="输入自定义策略名称">
+    </div>
+    <div class="input-Group">
+        <p>分区编号*</p>
+        <input name="areaCode" type="text" value="002">
+    </div>
+    <div class="input-Group">
+        <p>策略描述</p>
+        <textarea name="remark">\${data.remark}</textarea>
+    </div>
 </script>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
@@ -483,28 +474,31 @@
 <script src="js/foundation-datepicker.min.js"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    $(function(){
+    $(function () {
         initPageContainer();
     });
+
     /*
     *  根据参数显示显示场景控制和策略下发
     * */
-    function initPageContainer(){
+    function initPageContainer() {
         var name = getQueryString('name');
-        if(name){
+        if (name) {
             $('.content').hide();
-            if(name=='sence'){
+            if (name == 'sence') {
                 $('.sceneControl').show();
-            }else if(name=='celue'){
+            } else if (name == 'celue') {
                 $('.strategyPart').show();
             }
         }
     }
+
     //获取地址栏参数
     function getQueryString(name) {
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
-        if(r!=null)return  unescape(r[2]); return null;
+        if (r != null) return unescape(r[2]);
+        return null;
     }
 </script>
 </html>

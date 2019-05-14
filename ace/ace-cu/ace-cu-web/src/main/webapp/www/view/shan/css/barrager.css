@@ -1,0 +1,66 @@
+.barrage {
+	position: absolute;
+	bottom: 0.933333rem;
+	right: -6.666666rem;
+	display: inline-block;
+	width: 7rem;
+	z-index: 99999
+}
+
+.barrage_box {
+	background: #FFEDEC;
+	padding-right: 0.106666rem;
+	height: 0.8rem;
+	display: inline-block;
+	border-radius: 0.4rem;
+	transition: all .3s;
+}
+
+.barrage_box .portrait {
+	display: inline-block;
+	height: 0.8rem;
+	width: 0.8rem;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 0.05rem solid white;
+}
+
+.barrage_box .portrait img {
+	width: 100%;
+	height: 100%;
+}
+
+.barrage_box div.p a {
+	margin-right: 0.026666rem;
+	font-size: 0.32rem;
+	font-family: MicrosoftYaHei;
+	font-weight: 400;
+	line-height: 0.8rem;
+	color: rgba(234, 68, 54, 1) !important;
+	margin-left: 0.24rem;
+}
+
+.barrage_box div.p a:hover {
+	text-decoration: underline;
+}
+
+.barrage_box .close {
+	visibility: hidden;
+	opacity: 0;
+	text-align: center;
+	width: 0.333333rem;
+	height: 0.333333rem;
+	margin-left: 0.266666rem;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, .1);
+	margin-top: 0.106666rem;
+	background-image: url(close.png);
+}
+
+.barrage .z {
+	float: left !important;
+}
+
+.barrage a {
+	text-decoration: none;
+}

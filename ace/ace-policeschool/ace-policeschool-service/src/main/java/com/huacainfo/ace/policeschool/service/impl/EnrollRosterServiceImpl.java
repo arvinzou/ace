@@ -8,10 +8,7 @@ import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.policeschool.dao.EnrollRosterDao;
 import com.huacainfo.ace.policeschool.model.EnrollRoster;
 import com.huacainfo.ace.policeschool.service.EnrollRosterService;
@@ -28,12 +25,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service("enrollRosterService")
+
 /**
  * @author: Arvin
  * @version: 2019-01-16
  * @Description: TODO(报名花名册管理)
  */
+@Service("enrollRosterService")
 public class EnrollRosterServiceImpl implements EnrollRosterService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
@@ -84,16 +82,17 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "姓名不能为空！");
         }
-        if (CommonUtils.isBlank(o.getAreaCode())) {
-            return new MessageResponse(1, "籍贯不能为空！");
-        }
         if (CommonUtils.isBlank(o.getBadgeNum())) {
             return new MessageResponse(1, "警号不能为空！");
         }
-        if (CommonUtils.isBlank(o.getIdCard())) {
-            return new MessageResponse(1, "身份证不能为空！");
+        String IdCard=o.getIdCard();
+        Boolean check= IDCardUtil.isIDCard(IdCard);
+        if(!check||CommonUtils.isBlank(check)){
+           return new MessageResponse(ResultCode.FAIL,"身份证号码错误");
         }
-
+        o.setNativePlace(IDCardUtil.getNativeCode(IdCard));
+        o.setSex(IDCardUtil.getSexCode(IdCard));
+        o.setBirthDate(IDCardUtil.getbirthDay(IdCard,"-"));
         int temp = this.enrollRosterDao.isExist(o);
         if (temp > 0) {
             return new MessageResponse(1, "警号或者身份证重复！");
@@ -125,21 +124,21 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(o.getAreaCode())) {
-            return new MessageResponse(1, "籍贯不能为空！");
-        }
         if (CommonUtils.isBlank(o.getBadgeNum())) {
             return new MessageResponse(1, "警号不能为空！");
         }
-        if (CommonUtils.isBlank(o.getIdCard())) {
-            return new MessageResponse(1, "身份证不能为空！");
+        String IdCard=o.getIdCard();
+        Boolean check= IDCardUtil.isIDCard(IdCard);
+        if(!check||CommonUtils.isBlank(check)){
+            return new MessageResponse(ResultCode.FAIL,"身份证号码错误");
         }
-
+        o.setNativePlace(IDCardUtil.getNativeCode(IdCard));
+        o.setSex(IDCardUtil.getSexCode(IdCard));
+        o.setBirthDate(IDCardUtil.getbirthDay(IdCard,"-"));
         EnrollRoster old = enrollRosterDao.selectByPrimaryKey(o.getId());
         if (old == null) {
             return new MessageResponse(1, "数据丢失！");
         }
-
         o.setStatus("1");
         o.setUpdateDate(DateUtil.getNowDate());
         o.setCreateDate(old.getCreateDate());

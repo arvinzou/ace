@@ -194,7 +194,7 @@ public class LeBrokenLampServiceImpl implements LeBrokenLampService {
         //DateUtil.toDate("2019-04-16 00:00:00");//
         Date yesterday = DateUtil.getDateByDay(DateUtil.getNowDate(), -1);
         String date = DateUtil.toStr(yesterday, CommConstant.DATE_REGEX_LE);
-        GetBrokenLampDetailOut rst = null;
+        GetBrokenLampDetailOut rst;
         try {
             rst = LeApiToolKit.getBrokenLampDetail(date);
         } catch (Exception e) {

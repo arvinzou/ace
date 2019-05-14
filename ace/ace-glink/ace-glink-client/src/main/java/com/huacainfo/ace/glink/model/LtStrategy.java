@@ -1,8 +1,10 @@
 package com.huacainfo.ace.glink.model;
 
+import com.huacainfo.ace.common.model.BaseModel;
+
 import java.util.Date;
 
-public class LtStrategy {
+public class LtStrategy extends BaseModel {
     private String id;
 
     private String code;
@@ -40,7 +42,9 @@ public class LtStrategy {
     private String strategy;
 
     private String remark;
-
+    /**
+     * 1-执行中；0-未执行
+     */
     private String status;
 
     private String createUserId;

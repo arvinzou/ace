@@ -139,7 +139,8 @@ function donateMoney1 (){
                 "address":smallAddress,
                 "remark": message,
                 "consigneeMobileNumber":billphoneNumber,
-                "donatePostName": donatePostName
+                "donatePostName": donatePostName,
+                "donateType": "1"	//	1慈善一日捐 ，2日行一善
             })
         },
         success:function(result){

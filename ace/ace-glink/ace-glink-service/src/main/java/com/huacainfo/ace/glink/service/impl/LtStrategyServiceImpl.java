@@ -1,33 +1,32 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
+import com.alibaba.fastjson.JSON;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.glink.dao.LtLnkObjectDao;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.*;
+import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
+import com.huacainfo.ace.glink.api.pojo.le.LightStrategyIn;
+import com.huacainfo.ace.glink.dao.LtStrategyDao;
 import com.huacainfo.ace.glink.model.LtLnkObject;
+import com.huacainfo.ace.glink.model.LtStrategy;
 import com.huacainfo.ace.glink.service.LtLnkObjectService;
+import com.huacainfo.ace.glink.service.LtStrategyService;
+import com.huacainfo.ace.glink.vo.LtStrategyQVo;
+import com.huacainfo.ace.glink.vo.LtStrategyVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.glink.dao.LtStrategyDao;
-import com.huacainfo.ace.glink.model.LtStrategy;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.glink.service.LtStrategyService;
-import com.huacainfo.ace.glink.vo.LtStrategyVo;
-import com.huacainfo.ace.glink.vo.LtStrategyQVo;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("ltStrategyService")
 /**
@@ -43,7 +42,6 @@ public class LtStrategyServiceImpl implements LtStrategyService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private LtLnkObjectService ltLnkObjectService;
-
 
 
     /**
@@ -97,7 +95,7 @@ public class LtStrategyServiceImpl implements LtStrategyService {
             return new MessageResponse(1, "策略管理名称或编号重复！");
         }
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        o.setStatus("0");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.ltStrategyDao.insert(o);
@@ -321,7 +319,7 @@ public class LtStrategyServiceImpl implements LtStrategyService {
     /**
      * @throws
      * @Title:deleteRoadSectionByRoadSectionIds
-     * @Description: TODO(批量删除策略管理）
+     * @Description: TODO(批量删除策略管理 ）
      * @param: @param ids
      * @param: @param userProp
      * @param: @throws Exception
@@ -355,10 +353,47 @@ public class LtStrategyServiceImpl implements LtStrategyService {
     public MessageResponse updateStatus(String id, LtLnkObject ltLnkObject, UserProp userProp) throws
             Exception {
         this.ltStrategyDao.updateStatus(id, "2");
-        this.ltLnkObjectService.insertLtLnkObject(ltLnkObject,userProp);
+        this.ltLnkObjectService.insertLtLnkObject(ltLnkObject, userProp);
         this.dataBaseLogService.log("跟新状态", "策略管理", id, id,
                 "策略管理", userProp);
         return new MessageResponse(0, "成功！");
+    }
+
+    /**
+     * 灯光策略下发
+     *
+     * @param jsons 参数值
+     * @return 处理结果
+     */
+    @Override
+    public Map<String, Object> lightStrategy(String jsons) {
+        //
+        LightStrategyIn in = JSON.parseObject(jsons, LightStrategyIn.class);
+        String json;
+        Map<String, Object> rtnMap;
+        try {
+//            json = LeApiToolKit.lightStrategy(in);
+
+            json = "{\"code\":\"200\",\"message\":\"ok\"}";
+        } catch (Exception e) {
+            rtnMap = new HashMap<>();
+            rtnMap.put("code", LeBaseOut.FAILED);
+            rtnMap.put("message", "接口通讯异常");
+            return rtnMap;
+        }
+        rtnMap = JsonUtil.toMap(json);
+        int code = Integer.parseInt(String.valueOf(rtnMap.get("code")));
+        if (code == LeBaseOut.SUCCESS) {
+            LtStrategy r = JsonUtil.toObject(jsons, LtStrategy.class);
+            r.setLastModifyDate(DateUtil.getNowDate());
+            r.setStatus("1");
+            ltStrategyDao.updateByPrimaryKey(r);
+            //
+            ltStrategyDao.updateStatus(r.getId(), "1");
+            ltStrategyDao.updateOtherStatus(r.getId(), "0");
+        }
+
+        return rtnMap;
     }
 
 }

@@ -1,14 +1,22 @@
 package com.huacainfo.ace.glink.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
-import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.*;
+import com.huacainfo.ace.glink.api.LeApiToolKit;
+import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
+import com.huacainfo.ace.glink.api.pojo.le.GetBulidingDetailOut;
+import com.huacainfo.ace.glink.dao.TopBuildingDao;
+import com.huacainfo.ace.glink.model.TopBuilding;
+import com.huacainfo.ace.glink.service.TopBuildingService;
+import com.huacainfo.ace.glink.vo.TopBuildingQVo;
+import com.huacainfo.ace.glink.vo.TopBuildingVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -17,18 +25,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.glink.dao.TopBuildingDao;
-import com.huacainfo.ace.glink.model.TopBuilding;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.glink.service.TopBuildingService;
-import com.huacainfo.ace.glink.vo.TopBuildingVo;
-import com.huacainfo.ace.glink.vo.TopBuildingQVo;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service("topBuildingService")
 /**
@@ -70,7 +72,7 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         try {
             List<TopBuildingVo> list = dao.findList(condition, start, limit, orderBy);
             rst.setRows(list);
-            if (rst.getTotal()  <= 1) {
+            if (rst.getTotal() <= 1) {
                 int allRows = dao.findCount(condition);
                 rst.setTotal(allRows);
             }
@@ -96,7 +98,7 @@ public class TopBuildingServiceImpl implements TopBuildingService {
     @Override
     public MessageResponse insertTopBuilding(TopBuilding o, UserProp userProp) throws Exception {
         o.setId(GUIDUtil.getGUID());
-       // o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
+        // o.setCode(String.valueOf(GUIDUtil.getGUID().hashCode() & Integer.MAX_VALUE));
         if (CommonUtils.isBlank(o.getCode())) {
             return new MessageResponse(1, "建筑编号不能为空！");
         }
@@ -209,13 +211,13 @@ public class TopBuildingServiceImpl implements TopBuildingService {
     @Override
     public MessageResponse deleteTopBuildingByTopBuildingId(String id, UserProp userProp) throws
             Exception {
-        try{
+        try {
             this.topBuildingDao.deleteByPrimaryKey(id);
             this.dataBaseLogService.log("删除建筑物管理", "建筑物管理", id, id,
                     "建筑物管理", userProp);
             return new MessageResponse(0, "删除成功！");
-        }catch(Exception e){
-            return new MessageResponse(0, "删除失败！"+e);
+        } catch (Exception e) {
+            return new MessageResponse(0, "删除失败！" + e);
         }
 
     }
@@ -318,6 +320,46 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         this.dataBaseLogService.log("跟新状态", "建筑物管理", id, id,
                 "建筑物管理", userProp);
         return new MessageResponse(0, "成功！");
+    }
+
+    @Override
+    public MessageResponse syncData(UserProp curUserProp) {
+        //接口数据获取
+        GetBulidingDetailOut out;
+        try {
+            out = LeApiToolKit.getBuildingDetail("");
+        } catch (Exception e) {
+            return new MessageResponse(ResultCode.FAIL, "接口通讯异常");
+        }
+        if (out.getCode() == LeBaseOut.FAILED || CollectionUtils.isEmpty(out.getData())) {
+            return new MessageResponse(ResultCode.FAIL, "接口获取数据失败");
+        }
+        //清空库存数据
+        topBuildingDao.clearAll();
+        //存放新获取的数据
+        List<GetBulidingDetailOut.BulidingDetail> data = out.getData();
+        TopBuilding r;
+        for (GetBulidingDetailOut.BulidingDetail item : data) {
+            r = new TopBuilding();
+            r.setId(GUIDUtil.getGUID());
+            r.setCode(item.getBuildingNo());
+            r.setName(item.getBuildingName());
+            r.setType("1");
+            r.setDepict(item.getBuildingName());
+            r.setAddress(item.getBuildingAddress());
+            r.setLatitude(StringUtil.isEmpty(item.getBuildingY()) ? BigDecimal.ZERO : new BigDecimal(item.getBuildingY()));
+            r.setLongitude(StringUtil.isEmpty(item.getBuildingX()) ? BigDecimal.ZERO : new BigDecimal(item.getBuildingX()));
+            r.setState(item.getStatus());
+            //
+            r.setStatus("1");
+            r.setCreateDate(DateUtil.getNowDate());
+            r.setCreateUserId(curUserProp.getUserId());
+            r.setCreateUserName(curUserProp.getName());
+
+            topBuildingDao.insert(r);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "同步数据成功");
     }
 
 }

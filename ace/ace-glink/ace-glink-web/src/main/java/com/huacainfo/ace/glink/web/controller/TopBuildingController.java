@@ -1,15 +1,18 @@
 package com.huacainfo.ace.glink.web.controller;
 
-import com.huacainfo.ace.common.result.ListResult;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.glink.dao.AnimaLnkDao;
-import com.huacainfo.ace.glink.dao.TopBuildingDao;
-import com.huacainfo.ace.glink.vo.AnimaLnkVo;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-import org.apache.ibatis.session.Configuration;
-import org.apache.ibatis.session.ExecutorType;
-import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
+import com.huacainfo.ace.common.tools.ExcelUtils;
+import com.huacainfo.ace.glink.model.TopBuilding;
+import com.huacainfo.ace.glink.service.TopBuildingService;
+import com.huacainfo.ace.glink.vo.TopBuildingQVo;
+import com.huacainfo.ace.glink.vo.TopBuildingVo;
+import com.huacainfo.ace.portal.vo.MongoFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,24 +20,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.ExcelUtils;
-import com.huacainfo.ace.glink.model.TopBuilding;
-import com.huacainfo.ace.glink.service.TopBuildingService;
-import com.huacainfo.ace.glink.vo.TopBuildingVo;
-import com.huacainfo.ace.glink.vo.TopBuildingQVo;
 import org.springframework.web.multipart.MultipartFile;
-import com.huacainfo.ace.portal.vo.MongoFile;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/topBuilding")
@@ -66,8 +56,8 @@ public class TopBuildingController extends GLinkBaseController {
      */
     @RequestMapping(value = "/findTopBuildingList")
     @ResponseBody
-    public PageResult<TopBuildingVo> findTopBuildingList(TopBuildingQVo condition, PageParamNoChangeSord page,String q) throws Exception {
-        if(!CommonUtils.isBlank(q)){
+    public PageResult<TopBuildingVo> findTopBuildingList(TopBuildingQVo condition, PageParamNoChangeSord page, String q) throws Exception {
+        if (!CommonUtils.isBlank(q)) {
             condition.setName(q);
         }
         PageResult<TopBuildingVo> rst = this.topBuildingService.findTopBuildingList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
@@ -142,9 +132,9 @@ public class TopBuildingController extends GLinkBaseController {
     public MessageResponse deleteTopBuildingByTopBuildingId(String jsons) throws Exception {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
-        try{
+        try {
             return this.topBuildingService.deleteTopBuildingByTopBuildingId(id, this.getCurUserProp());
-        }catch(Exception e){
+        } catch (Exception e) {
             MessageResponse m = new MessageResponse();
             m.setStatus(1);
             m.setErrorMessage("该建筑下有节点信息，不能进行删除！");
@@ -176,7 +166,7 @@ public class TopBuildingController extends GLinkBaseController {
     /**
      * @throws
      * @Title:importXls
-     * @Description: TODO(导入!{bean.tableChineseName})
+     * @Description: TODO(导入 ! { bean.tableChineseName })
      * @param: @param file
      * @param: @param jsons
      * @param: @return
@@ -190,13 +180,7 @@ public class TopBuildingController extends GLinkBaseController {
     public MessageResponse importXls(@RequestParam MultipartFile[] file,
                                      String jsons) throws Exception {
         ExcelUtils utils = new ExcelUtils();
-        List
-                <Map
-                        <String
-                                , Object>> list = new ArrayList
-                <Map
-                        <String
-                                , Object>>();
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         MongoFile[] files = new MongoFile[file.length];
         int i = 0;
         for (MultipartFile o : file) {
@@ -237,5 +221,16 @@ public class TopBuildingController extends GLinkBaseController {
     @ResponseBody
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.topBuildingService.updateStatus(id, status, this.getCurUserProp());
+    }
+
+    /**
+     * 同步建筑物详情信息
+     *
+     * @return MessageResponse
+     */
+    @ResponseBody
+    @RequestMapping(value = "/syncData")
+    public MessageResponse syncData() {
+        return this.topBuildingService.syncData(getCurUserProp());
     }
 }

@@ -26,12 +26,24 @@ function initJuicerMethod() {
     juicer.register('isChecked', isChecked);
     juicer.register('formatObject', formatObject);
     juicer.register('inspect', inspect);
+    juicer.register('parseSceneStatus', parseSceneStatus);
 }
 
-function inspect(code){
-    var li= $('#checked li[data-code='+code+']');
+function parseSceneStatus(val) {
+    switch (val) {
+        case '0':
+            return "未执行";
+        case '1':
+            return "执行中";
+        default:
+            return "未执行";
+    }
+}
+
+function inspect(code) {
+    var li = $('#checked li[data-code=' + code + ']');
     console.log(1);
-    if(li.length){
+    if (li.length) {
         return false;
     }
     return true;
@@ -175,7 +187,7 @@ function initInputDate() {
 
 /*++++++++++++++++++++++++++++++++++++++++++initsceneControl Start++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-var html='<div class="default">\n' +
+var html = '<div class="default">\n' +
     '                    <img src="img/default.png" alt="">\n' +
     '                    <p>当前暂无场景，请先选择站点</p>\n' +
     '                </div>'
@@ -283,15 +295,15 @@ function searchStations() {
 
 
 function searchEnterStations(e) {
-    if(e==13){
+    if (e == 13) {
         getStations();
     }
 }
 
 /*获取所有站点*/
 function getStations() {
-    var val=$('.stations input[name=name]').val();
-    params.name=val;
+    var val = $('.stations input[name=name]').val();
+    params.name = val;
     var url = contextPath + "/topStation/findTopStationList";
     $.get(url, params, function (rst) {
         if (rst.status == 0) {
@@ -327,13 +339,13 @@ function checkStation() {
 }
 
 function hasLi() {
-    if($('#videos li').length>0){
+    if ($('#videos li').length > 0) {
         $('#videos .default').remove();
     }
 }
 
 function nohasLi() {
-    if($('#videos li').length<1&&$('#videos .default').length<1){
+    if ($('#videos li').length < 1 && $('#videos .default').length < 1) {
         $('#videos').append(html);
     }
 }
@@ -382,8 +394,7 @@ function editStrategy(id) {
     $.getJSON(url, data, function (rst) {
         if (rst.status == 0) {
             showAddStrategyModal(rst.value);
-        }
-        else {
+        } else {
             alert("失败");
         }
     });
@@ -445,8 +456,7 @@ function postParam(params) {
         if (rst.status == 0) {
             getStrategyList();
             $('.modal').hide();
-        }
-        else{
+        } else {
             alert(rst.errorMessage);
         }
     })
@@ -468,8 +478,7 @@ function setTimer(id) {
                 mateData.pattern = '1';
             }
             viewSetTime(mateData);
-        }
-        else {
+        } else {
             alert("失败");
         }
     });
@@ -597,8 +606,9 @@ function selectPreset(data) {
     $('.scenario-modal').show();
     var url = contextPath + "/ltStrategy/strategysDetail";
     $.getJSON(url, function (rst) {
+
         if (rst.status == 0) {
-            render($("#presets"), rst.value.data, "tpl-presets");
+            render($("#presets"), rst.rows, "tpl-presets");
         }
     });
 }
@@ -616,20 +626,20 @@ function setStrategy() {
     }
     var url = contextPath + "/ltStrategy/lightStrategy";
     $.post(url, data, function (rst) {
-        var r = JSON.parse(rst.value)
-        if (r.code == '200') {
+        console.log(JSON.stringify(rst));
+        if (rst.code == '200') {
             $('.modal').hide();
             alert("下发成功");
-        }
-        else{
-            alert("出现错误");
+            getStrategyList();
+        } else {
+            alert(rst.message);
         }
     })
 }
 
 
 function searchEnter(a) {
-    if(a==13){
+    if (a == 13) {
         searchByName();
     }
 }

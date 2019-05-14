@@ -127,9 +127,14 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.LtStrategyVo"></resultMap>
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.LtStrategyVo">
+        <result column="sceneName" jdbcType="VARCHAR" property="sceneName"/>
+        <result column="sceneDepict" jdbcType="VARCHAR" property="sceneDepict"/>
+    </resultMap>
+
 
     <sql id="Vo_Column_List">
+    s.sceneName,s.sceneDepict,
     l.id, l.code, l.name, l.depict, l.state, l.district, l.areaCode, l.stationCode, l.pattern, l.isWeek, l.weeks, l.isMonth,
     l.months, l.startDate, l.stopDate, l.specialDate, l.startTime, l.stopTime, l.strategy, l.remark,
     l.status, l.createUserId, l.createUserName, l.createDate,l.lastModifyUserId, l.lastModifyUserName,
@@ -138,9 +143,10 @@
 
     <sql id="From_Statement">
     FROM lt_strategy l
+    left join le_scene s on l.strategy =  s.sceneNum
   </sql>
     <sql id="Where_Condition">
-        where l.status <![CDATA[ <> ]]> 0
+        where 1 = 1
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and (l.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') or
             l.code LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%') )
@@ -182,4 +188,10 @@
         <include refid="From_Statement"/>
         where l.id = #{id,jdbcType=VARCHAR}
     </select>
+    <update id="updateOtherStatus">
+      update lt_strategy
+      set status = #{status,jdbcType=VARCHAR},
+          lastModifyDate = now()
+      where id != #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

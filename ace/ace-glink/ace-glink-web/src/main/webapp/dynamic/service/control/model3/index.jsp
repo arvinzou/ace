@@ -136,8 +136,8 @@
         <div class="modals-head">
             <span class="title">任务管理</span>
             <input placeholder="请选择分区" id="taskAreaNode" class="easyui-combotree"
-                   data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
-                lines:true," style='min-width:225px;height:0.260416rem;'>
+                   style='min-width:225px;height:0.260416rem;'>
+            <%--data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate:true, lines:true,"--%>
         </div>
         <div class="modals-body">
             <%--list--%>
@@ -316,9 +316,15 @@
                 <label class="check3" for="g\${index}">重大节日模式</label>
             </div>
         </div>
+        <%--{@if +index+1==data.t}--%>
+        <%--<div class="todaySet">--%>
+            <%--就这样了吧--%>
+        <%--</div>--%>
+        <%--{@/if}--%>
     </li>
     {@/each}
 </script>
+
 
 <script id="tpl-monthslist" type="text/template">
     <ul class="list monthData">
@@ -758,7 +764,7 @@
     {@each data as item, index}
     <li>
         <div class="top">
-           <span>\${item.areaNodeID} \${item.areaName}</span>
+            <span>\${item.areaNodeID} \${item.areaName}</span>
         </div>
         <div class="bottom">
             <button data-areano="\${item.areaNo}" data-areanodeid="\${item.areaNodeID}">
@@ -794,11 +800,11 @@
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 <script>
     //菜单显示与隐藏
-    document.onclick = function(e) {
+    document.onclick = function (e) {
         $('.menu-wrap').hide();
     };
-    $('.userInfo>.up').on("click", function(e) {
-        if($('.menu-wrap').css("display") == "none") {
+    $('.userInfo>.up').on("click", function (e) {
+        if ($('.menu-wrap').css("display") == "none") {
             $('.menu-wrap').show();
         } else {
             $('.menu-wrap').hide();
@@ -807,10 +813,11 @@
         stopFunc(e);
     });
 
-    $('.menu-wrap').on("click", function(e) {
+    $('.menu-wrap').on("click", function (e) {
         e = e || event;
         stopFunc(e);
     });
+
     function stopFunc(e) {
         e.stopPropagation ? e.stopPropagation() : e.cancelBubble = true;
     }

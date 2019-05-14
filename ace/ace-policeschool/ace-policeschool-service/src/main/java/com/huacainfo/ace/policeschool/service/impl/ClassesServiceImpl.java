@@ -120,12 +120,7 @@ public class ClassesServiceImpl implements ClassesService {
         if (fms.getStatus() == 1) {
             return fms;
         }
-
         String id = GUIDUtil.getGUID();
-        int i = classesDao.headmasterCount(id, o.getHeadmaster());
-        if (i > 0) {
-            return new MessageResponse(1, "该班主任已绑定其他班级！");
-        }
         if (CommonUtils.isBlank(o.getHeadmaster())) {
             o.setHeadmaster("0");
         }
@@ -133,7 +128,6 @@ public class ClassesServiceImpl implements ClassesService {
         if (temp > 0) {
             return new MessageResponse(1, "班级管理名称重复！");
         }
-
         o.setId(id);
         o.setCreateDate(new Date());
         o.setCreateUserName(userProp.getName());
@@ -174,10 +168,6 @@ public class ClassesServiceImpl implements ClassesService {
         MessageResponse fms = fKeyCheck(o);
         if (fms.getStatus() == 1) {
             return fms;
-        }
-        int i = classesDao.headmasterCount(o.getId(), o.getHeadmaster());
-        if (i > 0) {
-            return new MessageResponse(1, "该班主任已绑定其他班级！");
         }
         if (CommonUtils.isBlank(o.getHeadmaster())) {
             o.setHeadmaster("0");

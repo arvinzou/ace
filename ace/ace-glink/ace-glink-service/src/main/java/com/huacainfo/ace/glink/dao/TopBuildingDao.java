@@ -1,11 +1,11 @@
 package com.huacainfo.ace.glink.dao;
 
-import java.util.List;
-import java.util.Map;
-import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.glink.model.TopBuilding;
 import com.huacainfo.ace.glink.vo.TopBuildingQVo;
 import com.huacainfo.ace.glink.vo.TopBuildingVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TopBuildingDao {
 
@@ -31,5 +31,7 @@ public interface TopBuildingDao {
     int isExit(TopBuilding record);
 
     int updateStatus(@Param("id") String id, @Param("status") String status);
+
+    int clearAll();
 }
 
