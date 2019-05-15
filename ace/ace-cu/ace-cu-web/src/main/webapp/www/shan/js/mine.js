@@ -1,7 +1,21 @@
 $(function () {
+    getUserInfo();
     init();
     getOrderList();
 })
+
+function getUserInfo() {
+    var url="/cu/www/user/findByOpenId";
+    $.getJSON(url,function (result) {
+        if(result.status == 0) {
+            $('.head .headImg img').prop('href',result.data.headimgurl);
+            $('.head .name').text(result.data.nickname);
+        }else {
+            alert(result.info);
+        }
+    })
+}
+
 /**查看捐赠记录*/
 function getOrderList() {
     var url = "/cu/www/project/donateDetails";

@@ -16,7 +16,7 @@
 <div class="content">
     <div class="head">
         <div class="headImg">
-            <img src="" alt=""/>
+            <img src="img/people.png" alt=""/>
         </div>
         <p class="name">半分</p>
         <div class="type">

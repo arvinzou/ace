@@ -113,6 +113,11 @@
 	margin: auto;
 }
 
+.head .headImg  img{
+	width: 100%;
+	object-fit: cover;
+}
+
 .head .name {
 	font-size: 0.453333rem;
 	font-family: PingFang-SC-Bold;
