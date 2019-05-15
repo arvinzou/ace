@@ -339,8 +339,14 @@
     * */
     var wendu,shidu;
     function initTemperatureAndHumidity(temperature,humidity){
-        temperature = parseFloat(temperature.replace('℃',''));
-        humidity = parseFloat(humidity.replace('%RH',''));
+        if(temperature && humidity){
+            temperature = parseFloat(temperature.replace('℃',''));
+            humidity = parseFloat(humidity.replace('%RH',''));
+        }else{
+            temperature = 0;
+            humidity = 0;
+        }
+
         if(!wendu){
             wendu = new canvasPanel();
             wendu.bgColor = '#FF7B57';
@@ -373,29 +379,34 @@
     * 初始化路由网关状态
     * */
     function initSignalValue(routeSignalObj,gateStatus){
-        //路由
-        if(routeSignalObj.routeStatus == 1){ //1,在线，0离线
-            var routeSignal = routeSignalObj.routeSignal;
-            routeSignal = parseFloat(routeSignal.replace('dbm',''));
-            var html = '';
-            if(routeSignal < 0 && routeSignal >= -50){
-                html = '<span>在线</span><img src="./img/signal-5.png">';
-            }else if(routeSignal < -50 && routeSignal >= -70){
-                html = '<span>在线</span><img src="./img/signal-3.png">';
-            }else if(routeSignal < -70){
-                html = '<span>在线</span><img src="./img/signal-1.png">';
-            }
-            $('.shebei-status-ul>li.router .line').addClass('zaixian').html(html);
+        if(routeSignalObj && gateStatus){
+            //路由
+            if(routeSignalObj.routeStatus == 1){ //1,在线，0离线
+                var routeSignal = routeSignalObj.routeSignal;
+                routeSignal = parseFloat(routeSignal.replace('dbm',''));
+                var html = '';
+                if(routeSignal < 0 && routeSignal >= -50){
+                    html = '<span>在线</span><img src="./img/signal-5.png">';
+                }else if(routeSignal < -50 && routeSignal >= -70){
+                    html = '<span>在线</span><img src="./img/signal-3.png">';
+                }else if(routeSignal < -70){
+                    html = '<span>在线</span><img src="./img/signal-1.png">';
+                }
+                $('.shebei-status-ul>li.router .line').addClass('zaixian').html(html);
 
+            }else{
+                $('.shebei-status-ul>li.router .line').addClass('lixian').html('<span>离线</span>')
+            }
+            //网关
+            if(gateStatus == 1){ //1,在线，0离线
+                $('.shebei-status-ul>li.gate .line').addClass(('zaixian')).html('<span>在线</span>');
+            }else{
+                $('.shebei-status-ul>li.gate .line').addClass(('lixian')).html('<span>离线</span>')
+            }
         }else{
-            $('.shebei-status-ul>li.router .line').addClass('lixian').html('<span>离线</span>')
+            $('.shebei-status-ul').hide();
         }
-        //网关
-        if(gateStatus == 1){ //1,在线，0离线
-            $('.shebei-status-ul>li.gate .line').addClass(('zaixian')).html('<span>在线</span>');
-        }else{
-            $('.shebei-status-ul>li.gate .line').addClass(('lixian')).html('<span>离线</span>')
-        }
+
     }
     /*
      * 初始化故障监控年月
@@ -420,12 +431,17 @@
      * 初始化节点耗电数据echarts图
     */
     function initNodeConsumePowerData(number) {
-        //处理仪表盘max数值，根据实际值来
-        var max = (number*10).toFixed(0);
-        var len = max.length -1;
-        max = max / (Math.pow(10, len));
-        max = max.toFixed(0);
-        max = max *(Math.pow(10, len)) / max;
+        if(number){
+            //处理仪表盘max数值，根据实际值来
+            var max = (number*10).toFixed(0);
+            var len = max.length -1;
+            max = max / (Math.pow(10, len));
+            max = max.toFixed(0);
+            max = max *(Math.pow(10, len)) / max;
+        }else{initNodeConsumePowerData
+            max = 1000;
+            number = 0;
+        }
         var myChart = echarts.init(document.getElementById('jiedianhaodl')); //节点耗电chart图
         // 指定图表的配置项和数据
         var option = {
@@ -721,31 +737,37 @@
     *  初始化回路模块数量
     * */
     function  initLoopModularScene(modularNum,loopNum,sceneValue){
-        $('.mokuai-huilu-ul>li.modular .right i').html(modularNum);
-        $('.mokuai-huilu-ul>li.loop .right i').html(loopNum);
         var $scene =  $('.scene-content>.down');
-        switch (sceneValue) {
-            case '平日模式':
-                $scene.find('img').attr('src','./img/icon-weekdays@2x.png');
-                $scene.find('span').html(sceneValue);
-                break;
-            case '全开模式':
-                $scene.find('img').attr('src','./img/icon-open@2x.png');
-                $scene.find('span').html(sceneValue);
-                break;
-            case '全关模式':
-                $scene.find('img').attr('src','./img/icon-close@2x.png');
-                $scene.find('span').html(sceneValue);
-                break;
-            case '节能模式':
-                $scene.find('img').attr('src','./img/icon-model-jieneng@2x.png');
-                $scene.find('span').html(sceneValue);
-                break;
-            case '未知模式':
-                $scene.find('img').attr('src','./img/icon-model-xx@2x.png');
-                $scene.find('span').html(sceneValue);
-                break;
+        if(modularNum && loopNum && sceneValue){
+            $('.mokuai-huilu-ul>li.modular .right i').html(modularNum);
+            $('.mokuai-huilu-ul>li.loop .right i').html(loopNum);
+
+            switch (sceneValue) {
+                case '平日模式':
+                    $scene.find('img').attr('src','./img/icon-weekdays@2x.png');
+                    $scene.find('span').html(sceneValue);
+                    break;
+                case '全开模式':
+                    $scene.find('img').attr('src','./img/icon-open@2x.png');
+                    $scene.find('span').html(sceneValue);
+                    break;
+                case '全关模式':
+                    $scene.find('img').attr('src','./img/icon-close@2x.png');
+                    $scene.find('span').html(sceneValue);
+                    break;
+                case '节能模式':
+                    $scene.find('img').attr('src','./img/icon-model-jieneng@2x.png');
+                    $scene.find('span').html(sceneValue);
+                    break;
+                case '未知模式':
+                    $scene.find('img').attr('src','./img/icon-model-xx@2x.png');
+                    $scene.find('span').html(sceneValue);
+                    break;
+            }
+        }else{
+            $scene.find('span').html('当前无场景')
         }
+
     }
     /*
      *  初始化下拉树选中数据
