@@ -58,15 +58,15 @@ public interface CuDonateOrderDao {
 	/**
 	 * @description:总积分排行
 	 */
-	List<Map<String,Object>> getTotalPointsRank();
+	List<Map<String,Object>> getTotalPointsRank(@Param("projectId") String projectId);
 	
 	/**
 	 * @description:善行积分排行
 	 */
-	List<Map<String,Object>> getActionPointsRank();
+	List<Map<String,Object>> getActionPointsRank(@Param("projectId") String projectId);
 	
 	/**
 	 * @description:善心积分排行
 	 */
-	List<Map<String,Object>> getHeartPointsRank();
+	List<Map<String,Object>> getHeartPointsRank(@Param("projectId") String projectId);
 }

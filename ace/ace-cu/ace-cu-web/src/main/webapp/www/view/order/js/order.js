@@ -5,24 +5,24 @@ var needReceipt = 0;       //是否需要票据，0不需要，1是需要
 var orderResultData = null;
 var payData = null;
 var isName = false;
-var projectId = null;
+var paramsObj;
+
+
+/**url参数解析为对象*/
+function queryURL(){
+    var url=window.location.href;
+    var arr1 = url.split("?");
+    var params = arr1[1].split("&");
+    var obj = {};//声明对象
+    for(var i=0;i<params.length;i++){
+        var param = params[i].split("=");
+        obj[param[0]] = param[1];//为对象赋值
+    }
+    return obj;
+}
 
 window.onload = function(){
-    var locaUrl = window.location.href;
-    var url = window.location.href.substring(locaUrl.indexOf("?")+1);
-    var primaryId = null;
-    var paramArr = url.split("&");
-    for(var i=0;i < paramArr.length;i++){
-        num=paramArr[i].indexOf("=");
-        if(num>0){
-            name=paramArr[i].substring(0,num);
-            value=paramArr[i].substr(num+1);
-            if(name == "projectId"){
-                projectId = value;
-            }
-        }
-    }
-
+    paramsObj=queryURL();
     $("#onoffswitch").on('click', function() {
         clickSwitch()
     });
@@ -125,7 +125,7 @@ function donateMoney1 (){
         async:false,
         dataType:"json",
         data:{json:JSON.stringify({
-                "projectId": projectId,
+                "projectId": paramsObj.projectId,
                 "donateAmount": donateMoney,
                 "donateName": realName,
                 "consigneeName": billName,
@@ -140,7 +140,7 @@ function donateMoney1 (){
                 "remark": message,
                 "consigneeMobileNumber":billphoneNumber,
                 "donatePostName": donatePostName,
-                "donateType": "1"	//	1慈善一日捐 ，2日行一善
+                "donateType": paramsObj.donateType	//	1慈善一日捐 ，2日行一善
             })
         },
         success:function(result){

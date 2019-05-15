@@ -15,5 +15,5 @@ public interface CuDayDonateService {
 	
 	ResultResponse personalDonateDataDetails(String userId, String projectId);
 	
-	ResultResponse pointsRank(String userId);
+	ResultResponse pointsRank(String userId,String projectId);
 }

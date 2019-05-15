@@ -61,7 +61,7 @@ public class WWWProjectController extends CuBaseController {
     /**
      * 查询项目列表
      *
-     * @param type    项目类型 0-普通项目 1-慈善一日捐 2-个人项目 3-支出项目 4-春节送温暖
+     * @param type    项目类型 0-普通项目 1-慈善一日捐 2-个人项目 3-支出项目 4-春节送温暖，5-日行一善
      * @param start   分页开始位置  --  必选
      * @param limit   页数  --  必选
      * @param orderBy 排序条件   --  可选，默认时间倒叙
@@ -255,13 +255,12 @@ public class WWWProjectController extends CuBaseController {
 	 */
 	@RequestMapping("/pointsRank")
 	@ResponseBody
-	public ResultResponse pointsRank() {
-		//公众号用户信息
+	public ResultResponse pointsRank(String  projectId) {
+	/*	//公众号用户信息
         Userinfo userinfo = getCurUserinfo();
         if (null == userinfo) {
             return new ResultResponse(ResultCode.FAIL, "微信授权失败");
-        }
-        
-		return cuDayDonateService.pointsRank(userinfo.getUnionid());
+        }*/
+		return cuDayDonateService.pointsRank("11c4a2bf65644c2ea72010583a11ada3",projectId);
 	}
 }

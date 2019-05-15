@@ -435,7 +435,7 @@
         FROM 
         	cu.cu_donate_order o 
         WHERE 
-        	o.projectId=#{projectId} AND o.status=2 LIMIT 0,50
+        	o.projectId=#{projectId} AND o.status=2 and o.remark is not null and o.remark <![CDATA[ <> ]]> '' LIMIT 0,50
     </select>
     
     <!-- 检查当天是否获取善行积分 -->
@@ -462,9 +462,9 @@
         SELECT * FROM 
         	(SELECT (SELECT u.nickname FROM portal.wx_user u WHERE u.openId = o.openId) AS nickname, 
         	(SELECT u.avatarUrl FROM portal.wx_user u WHERE u.openId = o.openId) AS avatarUrl,
-        	FLOOR(SUM(donateAmount)/10) AS heartPoints,
+        	FLOOR(SUM(donateAmount)/10) AS totalPoints,
         	(SELECT u.unionId FROM portal.wx_user u WHERE u.openId = o.openId) AS unionId
-        FROM cu_donate_order o WHERE status = 2 GROUP BY userId ORDER BY heartPoints DESC) t WHERE t.heartPoints != 0 LIMIT 0,100
+        FROM cu_donate_order o WHERE status = 2 AND projectId = #{projectId} GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
     </select>
     
     <!-- 善行积分排行 -->
@@ -472,9 +472,9 @@
         SELECT * FROM 
         	(SELECT (SELECT u.nickname FROM portal.wx_user u WHERE u.openId = o.openId) AS nickname, 
         	(SELECT u.avatarUrl FROM portal.wx_user u WHERE u.openId = o.openId) AS avatarUrl,
-        	SUM(dayDonatePoint) AS actionPoints,
+        	SUM(dayDonatePoint) AS totalPoints,
         	(SELECT u.unionId FROM portal.wx_user u WHERE u.openId = o.openId) AS unionId
-        FROM cu_donate_order o WHERE status = 2 GROUP BY userId ORDER BY actionPoints DESC) t WHERE t.actionPoints != 0 LIMIT 0,100
+        FROM cu_donate_order o WHERE status = 2 AND projectId = #{projectId} GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
     </select>
     
     <!-- 总积分排行 -->
@@ -484,6 +484,6 @@
         	(SELECT u.avatarUrl FROM portal.wx_user u WHERE u.openId = o.openId) AS avatarUrl,
         	FLOOR(SUM(donateAmount)/10) + SUM(dayDonatePoint) AS totalPoints,
         	(SELECT u.unionId FROM portal.wx_user u WHERE u.openId = o.openId) AS unionId 
-        FROM cu_donate_order o WHERE status = 2 GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
+        FROM cu_donate_order o WHERE status = 2 AND projectId = #{projectId} GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
     </select>
 </mapper>
