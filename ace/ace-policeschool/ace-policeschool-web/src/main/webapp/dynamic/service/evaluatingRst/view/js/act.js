@@ -10,6 +10,14 @@ window.onload = function () {
         $(".breadcrumb").append("<li><span> 统计详情 </span></li>");
         initPage();
         initEchart();
+        $('#seach_form').ajaxForm({
+            beforeSubmit: function (formData, jqForm, options) {
+                params.initType='init';
+                params.start=0;
+                getPageList();
+                return false;
+            }
+        });
     });
 }
 
@@ -38,10 +46,6 @@ function view(evaluatingId, userId) {
 
 function exportData() {
     window.location.href = contextPath + '/evaluationRst/exportData?id=' + urlParams.id;
-}
-
-function t_query(){
-    
 }
 
 

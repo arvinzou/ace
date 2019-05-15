@@ -28,14 +28,14 @@
             </div>
             <div class="col-md-6">
 
-                <form onsubmit="return t_query()">
+                <form id="seach_form">
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
                                placeholder="请输入关键词">
                         <span class="input-group-btn">
-                            <button class="btn  btn-default search_btn" type="submit">
+                            <button form="seach_form" class="btn  btn-default search_btn" type="submit">
                                     搜索
                             </button>
                         </span>
