@@ -361,7 +361,7 @@ function initTopStationList() {
 }
 
 function syncData() {
-    var url = contextPath + '/leBrokenLamp/syncData?date=2019-04-16';
+    var url = contextPath + '/leBrokenLamp/syncData';
     if (confirm("即将更新当日故障数据，是否继续？")) {
         $.getJSON(url, function (rst) {
             alert(rst.errorMessage);
