@@ -33,7 +33,7 @@ function goRank() {
 function hrefgo() {
     var that=$(this);
     var type=that.data('type');
-    window.location.href ="mine.jsp?type="+type+"&point="+totalPoint;
+    window.location.href ="mine.jsp?type="+type+"&point="+totalPoint+'&projectId='+projectId;
 }
 
 /**捐款*/
@@ -62,8 +62,7 @@ function getProject() {
 function getInit() {
     var url = "/cu/www/project/init";
     var data = {
-        userId: "11c4a2bf65644c2ea72010583a11ada3",
-        projectId: '14771994c7f54fe49c739c8552451f3d'
+        projectId:projectId
     };
     $.getJSON(url, data, function (rst) {
         if (rst.status == 0) {

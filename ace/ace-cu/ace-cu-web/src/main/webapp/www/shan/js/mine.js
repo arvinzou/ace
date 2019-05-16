@@ -1,7 +1,6 @@
 $(function () {
     getUserInfo();
     init();
-    getOrderList();
 })
 
 function getUserInfo() {
@@ -17,11 +16,10 @@ function getUserInfo() {
 }
 
 /**查看捐赠记录*/
-function getOrderList() {
+function getOrderList(projectId) {
     var url = "/cu/www/project/donateDetails";
     var data = {
-        userId: "11c4a2bf65644c2ea72010583a11ada3",
-        projectId: '14771994c7f54fe49c739c8552451f3d'
+        projectId: projectId
     };
     $.getJSON(url, data, function (rst) {
         if (rst.status == 0) {
@@ -41,12 +39,14 @@ function renderPage(IDom, data, tempId) {
     $("#" + IDom).html(html);
 }
 
+
 function init() {
-    var data=queryURL();
+    var paramObj=queryURL();
     $('#point').text(data.point);
     $('#xunzhang').text(whichOne(data.point));
-    showWhich(data.type);
-    renderPage('aaa',data, 'tpl-aaa');
+    showWhich(paramObj.type);
+    renderPage('aaa',paramObj, 'tpl-aaa');
+    getOrderList(paramObj.projectId);
 }
 /**查询勋章个数*/
 function whichOne(num) {

@@ -146,6 +146,7 @@
 				justify-content: space-around;
 				height: 100%;
 				align-items: center;
+				text-align: center;
 			}
 			
 			.menu .menuBtn>li {
@@ -153,6 +154,7 @@
 				font-family: PingFang-SC-Medium;
 				font-weight: 500;
 				color: rgba(0, 0, 0, 1);
+				width: 1.733333rem;
 			}
 			
 			.menu img {

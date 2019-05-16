@@ -226,11 +226,11 @@ public class WWWProjectController extends CuBaseController {
 	@RequestMapping("/init")
 	@ResponseBody
 	public ResultResponse initDatDonateInfo(String userId, String projectId) throws Exception {
-        if (StringUtil.isEmpty(userId) || StringUtil.isEmpty(projectId)) {
-            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        Userinfo userinfo = getCurUserinfo();
+        if (null == userinfo) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
         }
-        
-        return cuDayDonateService.initDayDonateData(userId, projectId);
+        return cuDayDonateService.initDayDonateData(userinfo.getUnionid(), projectId);
     }
 	
 	/**
@@ -242,11 +242,12 @@ public class WWWProjectController extends CuBaseController {
 	@RequestMapping("/donateDetails")
 	@ResponseBody
 	public ResultResponse personalDonateDetails(String userId, String projectId) {
-		if (StringUtil.isEmpty(userId) || StringUtil.isEmpty(projectId)) {
-            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        Userinfo userinfo = getCurUserinfo();
+        if (null == userinfo) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
         }
 		
-		return cuDayDonateService.personalDonateDataDetails(userId,projectId);
+		return cuDayDonateService.personalDonateDataDetails(userinfo.getUnionid(),projectId);
 	}
 	
 	/**
@@ -256,11 +257,11 @@ public class WWWProjectController extends CuBaseController {
 	@RequestMapping("/pointsRank")
 	@ResponseBody
 	public ResultResponse pointsRank(String  projectId) {
-	/*	//公众号用户信息
+		//公众号用户信息
         Userinfo userinfo = getCurUserinfo();
         if (null == userinfo) {
             return new ResultResponse(ResultCode.FAIL, "微信授权失败");
-        }*/
-		return cuDayDonateService.pointsRank("11c4a2bf65644c2ea72010583a11ada3",projectId);
+        }
+		return cuDayDonateService.pointsRank(userinfo.getUnionid(),projectId);
 	}
 }
