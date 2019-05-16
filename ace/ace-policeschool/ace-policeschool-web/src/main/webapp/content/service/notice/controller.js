@@ -47,7 +47,7 @@ function initEvents() {
     })
     var data = {};
     data.key = 'category';
-    data.list = staticDictObject['174'];
+    data.list = staticDictObject['185'];
     render($("#check-group-category"), data, "tpl-check-group");
     $(".btn-group .btn").bind('click', function (event) {
         $(event.target).siblings().removeClass("active");

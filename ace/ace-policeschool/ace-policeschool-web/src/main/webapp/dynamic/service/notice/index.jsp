@@ -26,16 +26,18 @@
 
                 </div>
                 <div class="col-md-9">
-
                     <div class="btn-group" id="check-group-category" role="group" style="float:left;padding-right:5px">
-
+                        <button type="button" authority="false" class="btn btn-default"
+                                onclick="setParams('category','1');">学校
+                        </button>
+                        <button type="button" authority="false" class="btn btn-default active"
+                                onclick="setParams('category','2');">班级
+                        </button>
                     </div>
 
                     <div class="btn-group" id="select1" role="group" style="float:left;padding-right:5px">
 
                     </div>
-
-
                     <div class="input-group">
                         <input type="text" name="title" class="form-control" placeholder="请输入文件名称">
                         <span class="input-group-btn">
