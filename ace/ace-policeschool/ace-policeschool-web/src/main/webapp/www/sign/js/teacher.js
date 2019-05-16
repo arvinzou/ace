@@ -6,7 +6,7 @@ var sex = null;
 $(function () {
     upload();
 
-    var unit = staticDictObject['156'];     //处室字典
+    var unit = staticDictObject['159'];     //处室字典
     var unitArr = [];
     for (var i = 0; i < unit.length; i++) {
         if (unit[i].CODE != "" && unit[i].NAME != '') {
@@ -30,8 +30,7 @@ $(function () {
             workUnit = data;
         }
     });
-
-    var politicalArr = [{"id": "normal", "value": "非党员"}, {"id": "party", "value": "党员"}];
+    var politicalArr = [{"id": "public", "value": "群众"}, {"id": "party", "value": "党员"}, {"id": "member", "value": "团员"}];
     var politicalSelect = new MobileSelect({
         trigger: '#political',
         title: '政治面貌选择',

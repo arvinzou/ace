@@ -336,11 +336,11 @@ function confirm() {
         }
     }
 
-    if(sPolitical == "群众"){
+    if(sPolitical == "public"){
         political = [{"id": "public", "value": "群众"}];
-    }else if(sPolitical == "党员"){
+    }else if(sPolitical == "party"){
         political = [{"id": "party", "value": "党员"}];
-    }else if(sPolitical == "团员"){
+    }else if(sPolitical == "member"){
         political = [{"id": "member", "value": "团员"}];
     }
 

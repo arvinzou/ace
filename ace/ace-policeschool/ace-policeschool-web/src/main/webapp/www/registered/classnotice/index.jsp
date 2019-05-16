@@ -34,7 +34,7 @@
     <div class="box">
         <div class="title02 br">学员须知</div>
         <div class="notice-link">
-            <a href="#" onclick="downloadFile('\${data.list.fileUrl}');">\${data.list.fileName}</a>
+            <a href="${data.list.fileUrl}">\${data.list.fileName}</a>
         </div>
     </div>
     <div class="box">

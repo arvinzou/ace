@@ -270,8 +270,8 @@ function addFiles() {
  * @param id
  */
 function downloadFile(id) {
-    var url=contextPath + "/www/download/file";
-    $.getJSON(url,{id:id},function (s) {
+    var url=contextPath + "/www/download/byUrl";
+    $.post(url,{url:id},function (s) {
         console.log(s);
     })
 }

@@ -46,7 +46,7 @@
                 <div class="file-title">\${item.fileName}</div>
                 <div class="file-footer">
                     <span>\${data.pushDate}</span>
-                    <a href="#" class="download" onclick="downloadFile('\${item.fileUrl}');">下载</a>
+                    <a href="${item.fileUrl}" class="download">下载</a>
                 </div>
             </div>
         </div>
