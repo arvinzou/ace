@@ -213,7 +213,7 @@
         FROM course c
         LEFT JOIN teacher t ON c.teacherId=t.id
         LEFT JOIN evaluating e ON e.id=c.evaluatingId
-        LEFT JOIN (SELECT code,name FROM portal.dict WHERE category_id='154') s ON c.category=s.code
+        LEFT JOIN (SELECT code,name FROM portal.dict WHERE category_id='176') s ON c.category=s.code
     </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
