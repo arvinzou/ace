@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>路段</title>
 </head>
-<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=ALFBZ-5Z2CJ-TK6F7-KVINX-AX5L7-UFBXL"></script>
+<%--<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=ALFBZ-5Z2CJ-TK6F7-KVINX-AX5L7-UFBXL"></script>--%>
+<%--百度离线地图--%>
+<script charset="UTF-8"
+        src="${pageContext.request.contextPath}/content/common/plugins/bmap_v3/map_load.js"></script>
 <script type="text/javascript">
     var contextPath = '${pageContext.request.contextPath}';
     var portalPath = '${portalPath}';
@@ -38,7 +41,6 @@
 
 
 <script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/roadSection/act.js?version=${cfg.version}"></script>
 <script src="js/map.js"></script>
 </body>
 </html>
