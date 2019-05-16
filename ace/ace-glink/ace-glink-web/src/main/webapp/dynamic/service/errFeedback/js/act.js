@@ -49,10 +49,11 @@ function setParams(key, value) {
 
 /*故障报警加载表格数据*/
 function getPageList() {
-    var url = contextPath + "/errFeedback/findErrFeedbackList";
+    var url = contextPath + "/leBrokenLamp/findLeBrokenLampList";
     params['name'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
+        console.log(JSON.stringify(rst));
         stopLoad();
         if (rst.status == 0) {
             if (params.initType == "init") {
@@ -87,7 +88,7 @@ function edit(did) {
 
 /*查看详情*/
 function detail(id) {
-    var url = contextPath + "/errFeedback/selectErrFeedbackByPrimaryKey";
+    var url = contextPath + "/leBrokenLamp/selectLeBrokenLampByPrimaryKey";
     $.getJSON(url, {id: id}, function (result) {
         if (result.status == 0) {
             var navitem = document.getElementById('tpl-detail').innerHTML;
@@ -116,8 +117,9 @@ function initEvents() {
         console.log(event);
         $(event.target).addClass("active");
     });
-    initNodeList();
-    initTopStationList();
+
+    // initNodeList();
+    // initTopStationList();
 }
 
 
@@ -190,13 +192,14 @@ function parseStatus(status) {
 function initPreview(id) {
     startLoad();
     $.ajax({
-        url: contextPath + "/errFeedback/selectErrFeedbackByPrimaryKey",
+        url: contextPath + "/leBrokenLamp/selectLeBrokenLampByPrimaryKey",
         type: "post",
         async: false,
         data: {
             id: id
         },
         success: function (result) {
+            console.log(JSON.stringify(result));
             stopLoad();
             if (result.status == 0) {
                 var data = {};
@@ -252,7 +255,7 @@ function initCustomMapMarker(lat, lng, container, img) {
     var center = new qq.maps.LatLng(lat, lng);
     var map = new qq.maps.Map(document.getElementById(container), {
         center: center,
-        zoom: 15
+        zoom: 17
     });
     var anchor = new qq.maps.Point(6, 6),
         size = new qq.maps.Size(300, 300),
@@ -322,4 +325,17 @@ function initTopStationList() {
             alert("对不起出错了！");
         }
     });
+}
+
+function syncData() {
+    var url = contextPath + '/leBrokenLamp/syncData?date=2019-04-16';
+    if (confirm("即将更新当日故障数据，是否继续？")) {
+        $.getJSON(url, function (rst) {
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                getPageList();
+            }
+        });
+    }
+
 }
