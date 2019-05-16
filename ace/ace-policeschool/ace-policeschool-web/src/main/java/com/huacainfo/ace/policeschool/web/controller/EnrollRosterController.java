@@ -174,10 +174,6 @@ public class EnrollRosterController extends BisBaseController {
     @RequestMapping(value = "/importXls")
     public MessageResponse importXls(@RequestParam MultipartFile[] file,
                                      String areaCode, String clsId) throws Exception {
-        if (StringUtil.isEmpty(areaCode)) {
-            return new MessageResponse(ResultCode.FAIL, "请选择导入籍贯");
-        }
-
         ExcelUtils utils = new ExcelUtils();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         MongoFile[] files = new MongoFile[file.length];

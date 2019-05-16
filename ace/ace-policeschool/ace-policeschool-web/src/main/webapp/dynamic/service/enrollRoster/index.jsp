@@ -108,14 +108,6 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-5">
-                        <label class="col-md-2 control-label">籍贯<span style='color:red;'>*</span></label>
-                        <div class="col-md-10">
-                            <input id="ctrl-areaCode-import" name="areaCode" class="easyui-combotree form-control"
-                                   data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=00', method:'get', animate: true, lines:false,"
-                                   style='width: 275px; line-height: 30px; height: 30px;'>
-                        </div>
-                    </div>
                     <div class="col-md-7">
                         <label class="col-md-3 control-label">班次</label>
                         <div class="col-md-9" style="float: left">

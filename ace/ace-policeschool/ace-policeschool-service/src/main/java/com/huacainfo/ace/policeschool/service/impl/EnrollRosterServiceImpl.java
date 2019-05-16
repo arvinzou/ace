@@ -3,7 +3,6 @@ package com.huacainfo.ace.policeschool.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -229,12 +228,18 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         for (Map<String, Object> row : list) {
             EnrollRoster o = new EnrollRoster();
             CommonBeanUtils.copyMap2Bean(o, row);
-            o.setAreaCode(areaCode);
+            String IdCard=o.getIdCard();
+            Boolean check= IDCardUtil.isIDCard(IdCard);
+            if(!check||CommonUtils.isBlank(check)){
+                return new MessageResponse(ResultCode.FAIL,"身份证号码错误");
+            }
+            o.setNativePlace(IDCardUtil.getNativeCode(IdCard));
+            o.setSex(IDCardUtil.getSexCode(IdCard));
+            o.setBirthDate(IDCardUtil.getbirthDay(IdCard,"-"));
             o.setClsId(clsId);
             o.setStatus("1");
             o.setId(GUIDUtil.getGUID());
             o.setCreateDate(new Date());
-
             this.logger.info(o.toString());
             if (CommonUtils.isBlank(o.getName())) {
                 return new MessageResponse(1, "序号[" + o.getIndex() + "]，" + "姓名不能为空！");
@@ -245,10 +250,6 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
             if (CommonUtils.isBlank(o.getIdCard())) {
                 return new MessageResponse(1, "序号[" + o.getIndex() + "]，" + "身份证不能为空！");
             }
-            if (StringUtil.isNotEmpty(o.getSex())) {
-                o.setSex("男".equals(o.getSex().trim()) ? "1" : "2");
-            }
-
             record = enrollRosterDao.findByBadgeNum(o.getBadgeNum());
             if (record != null) {
                 o.setId(record.getId());

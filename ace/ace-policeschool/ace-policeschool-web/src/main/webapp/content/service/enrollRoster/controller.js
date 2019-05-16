@@ -56,11 +56,8 @@ jQuery(function ($) {
 function importInit() {
     var clsId = $('#cls-list-import option:selected').val();//选中的值;
     //获取当前combotree选中值
-    var areaCode = $('#ctrl-areaCode-import').combotree('getValue');
-
     //导入参数初始化
     var importParams = {};
-    importParams.areaCode = areaCode;
     importParams.clsId = clsId;
     reset_uploader(importParams);
 }
@@ -192,12 +189,6 @@ function initEvents() {
         onChange: function (newValue, oldValue) {
             params.areaCode = newValue;
             reloadGrid();
-        }
-    });
-    //导入籍贯onchange事件注册
-    $("#ctrl-areaCode-import").combotree({
-        onChange: function (newValue, oldValue) {
-            importInit();
         }
     });
 }

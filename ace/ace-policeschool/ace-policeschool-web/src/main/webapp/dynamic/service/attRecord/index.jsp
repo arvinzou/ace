@@ -14,8 +14,7 @@
 <link rel="stylesheet" type="text/css" media="screen"
       href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"/>
 <link rel="stylesheet" type="text/css"
-      href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
-/>
+      href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
 <body>
 
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -248,7 +247,8 @@
 <script src="${pageContext.request.contextPath}/content/service/attRecord/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/attRecord/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/attRecord/view.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/attRecord/upload.js?version=${cfg.version}"></script>
+
+<%--<script src="${pageContext.request.contextPath}/content/service/attRecord/upload.js?version=${cfg.version}"></script>--%>
 <%--权限管理--%>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 

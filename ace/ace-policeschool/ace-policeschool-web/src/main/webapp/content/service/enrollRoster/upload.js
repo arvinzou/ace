@@ -36,11 +36,6 @@ function init_uploader(p) {
 }
 
 function reset_uploader(p) {
-    if (p.areaCode == null || p.areaCode == '') {
-        alert("请先选择导入籍贯!");
-        return;
-    }
-
     var uploader = $('#uploader').pluploadQueue();
     uploader.splice();
     uploader.refresh();

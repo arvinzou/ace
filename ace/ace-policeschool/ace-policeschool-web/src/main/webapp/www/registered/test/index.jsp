@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
-    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <script src="js/flexible.js"></script>
     <jsp:include page="../../common/common.jsp"/>
 </head>
 <body>
