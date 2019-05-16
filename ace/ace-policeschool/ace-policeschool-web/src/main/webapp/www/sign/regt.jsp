@@ -23,10 +23,10 @@
             <label class="form-label">身份证号</label>
             <input class="form-input" maxlength="18" type="text" name="idCard" placeholder="识别/输入身份证号(选填)"/>
         </div>
-        <div class="camera-box">
-            <label><img id="upload" src="img/camera.png" class="camera" onclick="upload();"/></label>
-            <%--                    <input type="file" id="file" name="file" accept="image/*" capture="camera" onchange="imgChange();" style="display: none;width: 100%;height: 100%;"/>--%>
-        </div>
+        <%--<div class="camera-box">--%>
+            <%--<label><img id="upload" src="img/camera.png" class="camera" onclick="upload();"/></label>--%>
+            <%--&lt;%&ndash;                    <input type="file" id="file" name="file" accept="image/*" capture="camera" onchange="imgChange();" style="display: none;width: 100%;height: 100%;"/>&ndash;%&gt;--%>
+        <%--</div>--%>
     </div>
 
     <div class="form-box">

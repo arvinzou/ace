@@ -173,6 +173,7 @@
 <script id="tpl-select-list" type="text/template">
 
     <select name="classesId" id="classesId" class="form-control" style="height: 31px;">
+        <option value="">全部</option>
         {@each data as item, index}
         <option value="\${item.id}">\${item.name}</option>
         {@/each}

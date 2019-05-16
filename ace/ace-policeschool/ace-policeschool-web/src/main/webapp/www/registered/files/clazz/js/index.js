@@ -270,5 +270,8 @@ function addFiles() {
  * @param id
  */
 function downloadFile(id) {
-    window.location.href = contextPath + "/www/download/file?id=" + id;
+    var url=contextPath + "/www/download/file";
+    $.getJSON(url,{id:id},function (s) {
+        console.log(s);
+    })
 }

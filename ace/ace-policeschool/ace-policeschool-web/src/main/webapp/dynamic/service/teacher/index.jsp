@@ -21,12 +21,24 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-8 toolbar">
+                <div class="col-md-4 toolbar">
 
                     <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
 
                 </div>
-                <div class="col-md-4">
+
+                <div class="col-md-8">
+                    <div class="btn-group" role="group" style="float:left;padding-right:15px">
+                        <button type="button"
+                                authority="false" class="btn btn-default " onclick="setParams('status','1');">正常
+                        </button>
+                        <button type="button"
+                                authority="false" class="btn btn-default" onclick="setParams('status','0');">注销
+                        </button>
+                        <button type="button"
+                                authority="false" class="btn btn-default active" onclick="setParams('status','');">全部
+                        </button>
+                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyWord"
@@ -66,10 +78,9 @@
                 <h4 class="modal-title">图片上传</h4>
             </div>
             <div class="modal-body">
-
                 <div id="uploader">
-                </div>
 
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>

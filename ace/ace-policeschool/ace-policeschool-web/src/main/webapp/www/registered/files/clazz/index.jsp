@@ -71,7 +71,7 @@
                     {@if fileType(item.url)=='img'}
                     <a href="\${item.url}" class="download">\${item.title}</a>
                     {@else}
-                    <a class="download" onclick="downloadFile('\${item.id}');">\${item.title}</a>
+                    <a class="download" href="/policeschool/www/download/file?id=\${item.id}">\${item.title}</a>
                     {@/if}
                 </div>
             </div>

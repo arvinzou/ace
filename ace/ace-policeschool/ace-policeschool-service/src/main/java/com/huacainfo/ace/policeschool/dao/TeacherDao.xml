@@ -98,7 +98,7 @@
         left join policeschool.card_data cd on t.id = cd.userId
     </sql>
     <sql id="Where_Condition">
-        where t.status <![CDATA[ <> ]]> 0
+        where 1=1
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
@@ -171,6 +171,9 @@
         t.status <![CDATA[ <> ]]> 0
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status like concat('%',#{condition.status,jdbcType=VARCHAR},'%')
         </if>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
