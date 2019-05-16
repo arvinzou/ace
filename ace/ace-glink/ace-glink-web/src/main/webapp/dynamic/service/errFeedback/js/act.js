@@ -53,7 +53,7 @@ function getPageList() {
     params['name'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
-        console.log(JSON.stringify(rst));
+        // console.log(JSON.stringify(rst));
         stopLoad();
         if (rst.status == 0) {
             if (params.initType == "init") {
@@ -199,7 +199,7 @@ function initPreview(id) {
             id: id
         },
         success: function (result) {
-            console.log(JSON.stringify(result));
+            // console.log(JSON.stringify(result));
             stopLoad();
             if (result.status == 0) {
                 var data = {};
@@ -210,8 +210,7 @@ function initPreview(id) {
                     lng = data['o'].longitude;
                 console.log("lat=" + lat + ",lng=" + lng);
                 if (lat != null) {
-                    initCustomMapMarker(lat, lng, 'map-container'
-                        , 'https://lbs.qq.com/javascript_v2/img/center.gif');
+                    addCustomMapMarker(lat, lng, 'map-container', './img/center.gif');
                 }
             } else {
                 alert(result.errorMessage);
@@ -251,7 +250,41 @@ function initForm(id) {
 }
 
 //初始化自定义地图标记
-function initCustomMapMarker(lat, lng, container, img) {
+function addCustomMapMarker(lat, lng, container, img) {
+    //腾讯地图描点
+    // qqMapMarker(lat, lng, container, img);
+
+    //百度离线地图描点
+    setTimeout(function () {
+        baiduMapMarker(lat, lng, container, img);
+    }, 1000 * 0.5);
+
+}
+
+function baiduMapMarker(lat, lng, container, img) {
+    //坐标转换
+    var location = MapConvert.Convert_GCJ02_To_BD09({lat: lat, lng: lng});
+    console.log(JSON.stringify(location));
+    //初始化地图
+    // 限定缩放比例，15-17
+    var map = new BMap.Map(container, {minZoom: 15, maxZoom: 18});
+    // 创建点坐标 -- 武汉西北湖总控室
+    var point = new BMap.Point(location.lng, location.lat);
+    // 初始化地图，设置中心点坐标和地图级别
+    map.centerAndZoom(point, 18);
+    //开启鼠标滚轮缩放
+    map.enableScrollWheelZoom(true);
+
+    //地图描点功能
+    // 定义标示图片
+    var icon = new BMap.Icon(img, new BMap.Size(25, 25));
+    // 设置标示
+    var marker = new BMap.Marker(point, {icon: icon});
+    map.addOverlay(marker);
+
+}
+
+function qqMapMarker(lat, lng, container, img) {
     var center = new qq.maps.LatLng(lat, lng);
     var map = new qq.maps.Map(document.getElementById(container), {
         center: center,
