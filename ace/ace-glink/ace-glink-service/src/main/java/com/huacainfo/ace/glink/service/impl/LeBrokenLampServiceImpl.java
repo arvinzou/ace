@@ -13,7 +13,6 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.glink.api.LeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
 import com.huacainfo.ace.glink.api.pojo.le.GetBrokenLampDetailOut;
-import com.huacainfo.ace.glink.constant.CommConstant;
 import com.huacainfo.ace.glink.dao.LeBrokenLampDao;
 import com.huacainfo.ace.glink.model.LeBrokenLamp;
 import com.huacainfo.ace.glink.service.LeBrokenLampService;
@@ -23,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -186,14 +186,12 @@ public class LeBrokenLampServiceImpl implements LeBrokenLampService {
 
     /**
      * 每天凌晨[1]点,调用一次弱电接口：   获取 武汉设备故障情况
+     *
+     * @param date 20190416
      */
     @Override
-    public MessageResponse getBrokenLampDetail() {
+    public MessageResponse getBrokenLampDetail(String date) {
 
-        //获取前一天数据
-        //DateUtil.toDate("2019-04-16 00:00:00");//
-        Date yesterday = DateUtil.getDateByDay(DateUtil.getNowDate(), -1);
-        String date = DateUtil.toStr(yesterday, CommConstant.DATE_REGEX_LE);
         GetBrokenLampDetailOut rst;
         try {
             rst = LeApiToolKit.getBrokenLampDetail(date);
@@ -202,12 +200,19 @@ public class LeBrokenLampServiceImpl implements LeBrokenLampService {
             return new MessageResponse(ResultCode.FAIL, "接口获取数据异常");
         }
         if (rst.getCode() == LeBaseOut.SUCCESS) {
+            //清空该日期原有数据
+            leBrokenLampDao.deleteByDate(date);
+            //存储新数据
             List<GetBrokenLampDetailOut.BrokenLamp> list = rst.getData();
+            if (CollectionUtils.isEmpty(list)) {
+                return new MessageResponse(ResultCode.FAIL, "[日期：" + date + "]未获取故障数据!");
+            }
             LeBrokenLamp record;
             for (GetBrokenLampDetailOut.BrokenLamp item : list) {
                 record = new LeBrokenLamp();
                 record.setId(GUIDUtil.getGUID());
                 record.setCheckDate(date);
+                record.setBuildingNo(item.getBuildingNo());
                 record.setMediaArea(item.getMediaArea());
                 record.setController(item.getController());
                 record.setChannelNo(item.getChannelNo());
@@ -217,7 +222,7 @@ public class LeBrokenLampServiceImpl implements LeBrokenLampService {
                 leBrokenLampDao.insert(record);
             }
 
-            return new MessageResponse(ResultCode.SUCCESS, "更新成功!");
+            return new MessageResponse(ResultCode.SUCCESS, "数据同步成功");
         } else {
 
             logger.error("[弱电接口失败]-[武汉设备故障情况接口（getBrokenLampDetail）]=>{}", rst.toString());

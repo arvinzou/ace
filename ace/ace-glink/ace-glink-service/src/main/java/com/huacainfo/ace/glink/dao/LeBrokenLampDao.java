@@ -1,12 +1,12 @@
 package com.huacainfo.ace.glink.dao;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.glink.model.LeBrokenLamp;
 import com.huacainfo.ace.glink.vo.LeBrokenLampQVo;
 import com.huacainfo.ace.glink.vo.LeBrokenLampVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface LeBrokenLampDao {
 
@@ -40,4 +40,5 @@ public interface LeBrokenLampDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    int deleteByDate(String date);
 }

@@ -82,7 +82,8 @@ public interface LeBrokenLampService {
     MessageResponse deleteLeBrokenLampByLeBrokenLampId(String id, UserProp userProp) throws Exception;
 
     /**
-     * 每天凌晨[1]点,调用一次弱电接口：   获取 武汉设备故障情况
+     * 按指定日期,调用一次弱电接口：   获取 武汉设备故障情况
+     * @param date 20190416
      */
-    MessageResponse getBrokenLampDetail();
+    MessageResponse getBrokenLampDetail(String date);
 }

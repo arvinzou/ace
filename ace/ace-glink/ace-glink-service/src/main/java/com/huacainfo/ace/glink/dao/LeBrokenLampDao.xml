@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.glink.model.LeBrokenLamp">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="checkDate" jdbcType="VARCHAR" property="checkDate"/>
+        <result column="buildingNo" jdbcType="VARCHAR" property="buildingNo"/>
         <result column="mediaArea" jdbcType="VARCHAR" property="mediaArea"/>
         <result column="controller" jdbcType="VARCHAR" property="controller"/>
         <result column="channelNo" jdbcType="VARCHAR" property="channelNo"/>
@@ -13,7 +14,7 @@
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, checkDate, mediaArea, controller, channelNo, lampNo, remark, status, createDate
+    id, checkDate, buildingNo, mediaArea, controller, channelNo, lampNo, remark, status, createDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -26,11 +27,11 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.glink.model.LeBrokenLamp">
-    insert into le_broken_lamp (id, checkDate, mediaArea, 
+    insert into le_broken_lamp (id, checkDate, buildingNo, mediaArea,
       controller, channelNo, lampNo, 
       remark, status, createDate
       )
-    values (#{id,jdbcType=VARCHAR}, #{checkDate,jdbcType=VARCHAR}, #{mediaArea,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=VARCHAR}, #{checkDate,jdbcType=VARCHAR}, #{buildingNo,jdbcType=VARCHAR}, #{mediaArea,jdbcType=VARCHAR},
       #{controller,jdbcType=VARCHAR}, #{channelNo,jdbcType=VARCHAR}, #{lampNo,jdbcType=VARCHAR},
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}
       )
@@ -38,6 +39,7 @@
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.glink.model.LeBrokenLamp">
     update le_broken_lamp
     set checkDate = #{checkDate,jdbcType=VARCHAR},
+      buildingNo = #{buildingNo,jdbcType=VARCHAR},
       mediaArea = #{mediaArea,jdbcType=VARCHAR},
       controller = #{controller,jdbcType=VARCHAR},
       channelNo = #{channelNo,jdbcType=VARCHAR},
@@ -52,23 +54,35 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.glink.vo.LeBrokenLampVo">
         <result column="ctrlName" jdbcType="VARCHAR" property="ctrlName"/>
         <result column="buildingName" jdbcType="VARCHAR" property="buildingName"/>
-
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
-        t.lampNo, t.channelNo, t.controller, t.checkDate,
-        IFNULL(m.ctrlName, CONCAT('控制器',t.lampNo)) as ctrlName,
-        IFNULL(b.`name`, '未知') as buildingName
+        t.id,
+        t.checkDate,
+        IFNULL(b.`name`, '未知') as buildingName,
+        b.longitude, b.latitude,
+        CONCAT('控制器-',t.controller) as ctrlName,
+        t.channelNo,
+        t.lampNo,
+        t.controller,
+        t.`status`, t.remark, t.createDate
     </sql>
     <sql id="From_Statement">
         from le_broken_lamp t
-        left join map_ctrl_building m on t.controller = m.ctrlCode
-        left join top_building b on m.buildingCode = b.`code`
+        left join top_building b on t.buildingNo = b.`code`
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
         <if test="condition.checkDate !=null and condition.checkDate !=&quot;&quot;">
             and t.checkDate like concat(#{condition.checkDate,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+            and b.buildingName like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
     </sql>
 
@@ -89,7 +103,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY t.controller , t.lampNo
+                ORDER BY t.buildingNo , t.controller
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
@@ -100,4 +114,9 @@
         <include refid="From_Statement"/>
         <include refid="Where_Condition"/>
     </select>
+
+    <delete id="deleteByDate" parameterType="java.lang.String">
+        delete from le_broken_lamp
+        where checkDate = #{date,jdbcType=VARCHAR}
+    </delete>
 </mapper>

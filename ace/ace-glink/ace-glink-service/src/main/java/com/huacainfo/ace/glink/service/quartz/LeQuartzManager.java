@@ -1,6 +1,8 @@
 package com.huacainfo.ace.glink.service.quartz;
 
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.glink.constant.CommConstant;
 import com.huacainfo.ace.glink.service.LeBrokenLampService;
 import com.huacainfo.ace.glink.service.LeLampStatusService;
 import com.huacainfo.ace.glink.service.PagePortalService;
@@ -9,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 /**
  * @ClassName LeQuartzManager
@@ -42,7 +46,11 @@ public class LeQuartzManager {
      */
     @Scheduled(cron = "0 0 1 * * ?")
     public void leAutoGetBrokenLampDetail() {
-        MessageResponse ms = leBrokenLampService.getBrokenLampDetail();
+        //获取前一天数据
+        Date yesterday = DateUtil.getDateByDay(DateUtil.getNowDate(), -1);
+        String date = DateUtil.toStr(yesterday, CommConstant.DATE_REGEX_LE);
+        //
+        MessageResponse ms = leBrokenLampService.getBrokenLampDetail(date);
         logger.info(ms.getErrorMessage());
     }
 }

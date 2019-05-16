@@ -3,9 +3,12 @@ package com.huacainfo.ace.glink.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.glink.constant.CommConstant;
 import com.huacainfo.ace.glink.model.LeBrokenLamp;
 import com.huacainfo.ace.glink.service.LeBrokenLampService;
 import com.huacainfo.ace.glink.vo.LeBrokenLampQVo;
@@ -125,10 +128,22 @@ public class LeBrokenLampController extends GLinkBaseController {
         return this.leBrokenLampService.deleteLeBrokenLampByLeBrokenLampId(id, this.getCurUserProp());
     }
 
+    /**
+     * 同步弱电故障数据
+     *
+     * @param date 2019-04-16
+     * @return MessageResponse
+     */
     @ResponseBody
     @RequestMapping(value = "/syncData")
-    public MessageResponse syncData() {
-        return leBrokenLampService.getBrokenLampDetail();
+    public MessageResponse syncData(String date) {
+        if (StringUtil.isEmpty(date)) {
+            date = DateUtil.toStr(DateUtil.getNowDate(), CommConstant.DATE_REGEX_LE);
+        } else {
+            date = DateUtil.toStr(DateUtil.toDate(date, DateUtil.DEFAULT_DATE_REGEX), CommConstant.DATE_REGEX_LE);
+        }
+
+        return leBrokenLampService.getBrokenLampDetail(date);
     }
 
 }

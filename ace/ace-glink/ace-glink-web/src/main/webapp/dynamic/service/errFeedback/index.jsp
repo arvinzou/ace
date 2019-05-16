@@ -29,58 +29,58 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
-                <%--<a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>--%>
+            <div class="col-md-7">
+                <a href="javascript:syncData();" class="btn green">数据同步</a>
             </div>
 
-            <div class="col-md-9" style="float: right;">
+            <div class="col-md-5" style="float: right;">
 
                 <form id="fm-search">
-                    <%--分区--%>
-                    <div class="input-group" style="float:left;padding-right:5px">
-                    </div>
-                    <%--站点--%>
-                    <div class="input-group" style="float:left;padding-right:5px">
-                        <label style="float:left;padding-right:5px;line-height: 31px;">站点：</label>
-                        <div class="btn-group" role="group" style="float:left;padding-right:10px;">
-                            <select id="subStation" name="stationCode" class="form-control" style="height: 31px;"
-                                    onchange="setParams('stationCode',this.value)">
-                            </select>
-                        </div>
-                    </div>
-                    <%--节点--%>
-                    <div class="input-group" style="float:left;padding-right:5px">
-                        <label style="float:left;padding-right:5px;line-height: 31px;">节点：</label>
-                        <div class="btn-group" role="group" style="float:left;padding-right:10px;">
-                            <select name="nodeCode" id="nodeCode" class="form-control"
-                                    onchange="setParams('nodeCode',this.value)">
+                    <%--&lt;%&ndash;分区&ndash;%&gt;--%>
+                    <%--<div class="input-group" style="float:left;padding-right:5px">--%>
+                    <%--</div>--%>
+                    <%--&lt;%&ndash;站点&ndash;%&gt;--%>
+                    <%--<div class="input-group" style="float:left;padding-right:5px">--%>
+                    <%--<label style="float:left;padding-right:5px;line-height: 31px;">站点：</label>--%>
+                    <%--<div class="btn-group" role="group" style="float:left;padding-right:10px;">--%>
+                    <%--<select id="subStation" name="stationCode" class="form-control" style="height: 31px;"--%>
+                    <%--onchange="setParams('stationCode',this.value)">--%>
+                    <%--</select>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
+                    <%--&lt;%&ndash;节点&ndash;%&gt;--%>
+                    <%--<div class="input-group" style="float:left;padding-right:5px">--%>
+                    <%--<label style="float:left;padding-right:5px;line-height: 31px;">节点：</label>--%>
+                    <%--<div class="btn-group" role="group" style="float:left;padding-right:10px;">--%>
+                    <%--<select name="nodeCode" id="nodeCode" class="form-control"--%>
+                    <%--onchange="setParams('nodeCode',this.value)">--%>
 
-                            </select>
-                        </div>
-                    </div>
+                    <%--</select>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
 
                     <%--故障类型--%>
-                    <div class="input-group" style="float:left;padding-right:5px">
-                    <label style="float:left;padding-right:5px;line-height: 31px;">故障类型：</label>
-                        <div class="btn-group" role="group" style="float:left;padding-right:10px;height: 36px;">
-                        <select name="errType" id="errType" class="form-control"
-                                onchange="setParams('errType',this.value)">
+                    <%--<div class="input-group" style="float:left;padding-right:5px">--%>
+                    <%--<label style="float:left;padding-right:5px;line-height: 31px;">故障类型：</label>--%>
+                    <%--<div class="btn-group" role="group" style="float:left;padding-right:10px;height: 36px;">--%>
+                    <%--<select name="errType" id="errType" class="form-control"--%>
+                    <%--onchange="setParams('errType',this.value)">--%>
 
-                        </select>
-                    </div>
-                    </div>
+                    <%--</select>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
                     <%--处理状态--%>
-                    <div class="input-group" style="float:left;padding-right:5px">
-                        <label style="float:left;padding-right:5px;line-height: 31px;">状态：</label>
-                        <div class="btn-group" role="group" style="float:left;padding-right:10px;height: 36px;">
-                        <select name="status" id="status" class="form-control"
-                                onchange="setParams('status',this.value)">
-                            <option value="">全部</option>
-                            <option value="0">未读</option>
-                            <option value="1">已读</option>
-                        </select>
-                    </div>
-                    </div>
+                    <%--<div class="input-group" style="float:left;padding-right:5px">--%>
+                    <%--<label style="float:left;padding-right:5px;line-height: 31px;">状态：</label>--%>
+                    <%--<div class="btn-group" role="group" style="float:left;padding-right:10px;height: 36px;">--%>
+                    <%--<select name="status" id="status" class="form-control"--%>
+                    <%--onchange="setParams('status',this.value)">--%>
+                    <%--<option value="">全部</option>--%>
+                    <%--<option value="0">未读</option>--%>
+                    <%--<option value="1">已读</option>--%>
+                    <%--</select>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
                     <%--搜索--%>
                     <div class="input-group">
                         <input type="text"
@@ -104,15 +104,11 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 故障编号</th>
-                    <th width="10%"> 分区名称</th>
-                    <th width="10%"> 站点名称</th>
-                    <th width="10%"> 节点名称</th>
-                    <th width="10%"> 建筑名称</th>
-                    <th width="10%"> 故障类型</th>
-                    <th width="10%"> 故障时间</th>
-                    <th width="10%"> 故障内容</th>
-                    <th width="10%"> 故障回路数</th>
+                    <th width="15%"> 故障日期</th>
+                    <th width="30%"> 建筑名称</th>
+                    <th width="15%"> 控制器编号</th>
+                    <th width="15%"> 通道编号</th>
+                    <th width="15%"> 灯组编号</th>
                     <th width="10%">操作</th>
                 </tr>
                 </thead>
@@ -148,12 +144,7 @@
 </script>
 ﻿
 <script id="tpl-errType" type="text/template">
-    <%-- <button type="button" class="btn btn-default" onclick="setParams('errType','');">故障类型</button>
-     {@each data['180'] as item, index}
-     {@if item.CODE!=''}
-     <button type="button" class="btn btn-default" onclick="setParams('errType','\${item.CODE}');">\${item.NAME}</button>
-     {@/if}
-     {@/each}--%>
+
     <option value="">全部</option>
     {@each data['180'] as item, index}
     {@if item.CODE!=''}
@@ -167,21 +158,17 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \${item.errCode}</td>
-        <td> \${item.subareaName}</td>
-        <td> \${item.stationName}</td>
-        <td> \${item.nodeName}</td>
+        <td> \${item.checkDate}</td>
         <td> \${item.buildingName}</td>
-        <td> \${rsd(item.errType,'180')}</td>
-        <td> \${item.errDate}</td>
-        <td> \${item.errContent}</td>
-        <td> \${item.errLoopNum}</td>
+        <td> \${item.controller}</td>
+        <td> \${item.channelNo}</td>
+        <td> \${item.lampNo}</td>
         <td>
-            {@if item.status == '0'}
-            <a href="javascript:updateStatus('\${item.id}','1');">未读</a>
-            {@else}
-            <a href="javascript:updateStatus('\${item.id}','0');">已读</a>
-            {@/if}
+            <%--{@if item.status == '0'}--%>
+            <%--<a href="javascript:updateStatus('\${item.id}','1');">未读</a>--%>
+            <%--{@else}--%>
+            <%--<a href="javascript:updateStatus('\${item.id}','0');">已读</a>--%>
+            <%--{@/if}--%>
 
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
@@ -214,73 +201,37 @@
 <script id="tpl-preview" type="text/template">
     <div class="portlet light">
 
-                <span class="caption-subject bold uppercase"> 基本信息</span>
+        <span class="caption-subject bold uppercase"> 基本信息</span>
 
         <div class="portlet-body">
-            <div class="form-group hide">
-                <label class="col-md-2 view-label"> 主键:</label>
+            <div class="form-group">
+                <label class="col-md-2 view-label"> 故障日期:</label>
                 <div class="col-md-10">
-                    \${data.o.id}
+                    \${data.o.checkDate}
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 view-label"> 故障编号:</label>
-                <div class="col-md-10">
-                    \${data.o.errCode}
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 分区名称:</label>
-                <div class="col-md-10">
-                    \${data.o.subareaName}
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 站点名称:</label>
-                <div class="col-md-10">
-                    \${data.o.stationName}
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 节点名称:</label>
-                <div class="col-md-10">
-                    \${data.o.nodeName}
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 建筑物名称:</label>
+                <label class="col-md-2 view-label"> 建筑名称:</label>
                 <div class="col-md-10">
                     \${data.o.buildingName}
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 view-label"> 故障类型:</label>
+                <label class="col-md-2 view-label"> 控制器编号:</label>
                 <div class="col-md-10">
-                    \${rsd(data.o.errType,'180')}
+                    \${data.o.controller}
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 view-label"> 故障时间:</label>
+                <label class="col-md-2 view-label"> 通道编号:</label>
                 <div class="col-md-10">
-                    \${data.o.errDate}
+                    \${data.o.channelNo}
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 view-label"> 故障内容:</label>
+                <label class="col-md-2 view-label"> 灯组编号:</label>
                 <div class="col-md-10">
-                    \${data.o.errContent}
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 view-label"> 故障回路数:</label>
-                <div class="col-md-10">
-                    \${data.o.errLoopNum}
-                </div>
-            </div>
-            <div class="row hide">
-                <label class="col-md-2 view-label"> 状态:</label>
-                <div class="col-md-10">
-                    \${parseStatus(data.o.status)}
+                    \${data.o.lampNo}
                 </div>
             </div>
         </div>

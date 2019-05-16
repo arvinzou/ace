@@ -9,6 +9,8 @@ public class LeBrokenLamp extends BaseModel {
 
     private String checkDate;
 
+    private String buildingNo;
+
     private String mediaArea;
 
     private String controller;
@@ -22,6 +24,14 @@ public class LeBrokenLamp extends BaseModel {
     private String status;
 
     private Date createDate;
+
+    public String getBuildingNo() {
+        return buildingNo;
+    }
+
+    public void setBuildingNo(String buildingNo) {
+        this.buildingNo = buildingNo;
+    }
 
     public String getId() {
         return id;
