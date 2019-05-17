@@ -8,6 +8,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.*;
+import com.huacainfo.ace.glink.api.LeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
 import com.huacainfo.ace.glink.api.pojo.le.LightStrategyIn;
 import com.huacainfo.ace.glink.dao.LtStrategyDao;
@@ -372,9 +373,7 @@ public class LtStrategyServiceImpl implements LtStrategyService {
         String json;
         Map<String, Object> rtnMap;
         try {
-//            json = LeApiToolKit.lightStrategy(in);
-
-            json = "{\"code\":\"200\",\"message\":\"ok\"}";
+            json = LeApiToolKit.lightStrategy(in);
         } catch (Exception e) {
             rtnMap = new HashMap<>();
             rtnMap.put("code", LeBaseOut.FAILED);

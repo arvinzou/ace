@@ -364,9 +364,8 @@ public class LeSceneServiceImpl implements LeSceneService {
         if (out == null || CollectionUtils.isEmpty(out.getData())) {
             return new MessageResponse(ResultCode.FAIL, "接口数据获取异常");
         }
-        //
-
-
+        //清空数据库数据
+        this.leSceneDao.clearAll();
         //
         LeScene r;
         for (StrategysDetailOut.Strategy i : out.getData()) {
