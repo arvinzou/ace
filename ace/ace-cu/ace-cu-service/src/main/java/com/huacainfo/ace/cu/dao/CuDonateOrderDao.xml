@@ -441,7 +441,7 @@
     <!-- 检查当天是否获取善行积分 -->
     <select id="checkDayPoint">
         SELECT COUNT(1) FROM cu_donate_order 
-        WHERE dayDonatePoint = 1 AND status = 2 AND TO_DAYS(donateDate) = TO_DAYS(now()) AND projectId = #{projectId} AND userId = #{userId} 
+        WHERE dayDonatePoint = 1 AND status = 2 AND TO_DAYS(donateDate) = TO_DAYS(now()) AND projectId = #{projectId} AND userId = #{userId}
     </select>
     
     <!-- 根据用户获取“日行一善”积分明细 -->

@@ -287,18 +287,20 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
                         data.getCity(), data.getDistrict(), data.getAddress(), data.getConsigneeMobileNumber())) {
             return new ResultResponse(ResultCode.FAIL, "收货信息不全！");
         }
-
         data.setDayDonatePoint(0);
+        data.setUserId(userVo.getId());
         /**
          * 1-慈善一日捐
          * 2-日行一善
          */
 		switch (data.getDonateType()) {
 			case 1:
-				data.setPoints(new BigDecimal(data.getDonateAmount().intValue()));//1块钱=1积分,无小数
+			    /**1块钱=1积分,无小数*/
+				data.setPoints(new BigDecimal(data.getDonateAmount().intValue()));
 				break;
 			case 2:
-				data.setPoints(new BigDecimal(data.getDonateAmount().intValue() / 10));// 10块钱=1积分,无小数
+			    /**10块钱=1积分,无小数*/
+				data.setPoints(new BigDecimal(data.getDonateAmount().intValue() / 10));
 				int todayActionPoint = cuDonateOrderDao.checkDayPoint(data.getProjectId(), data.getUserId());
 				if (todayActionPoint == 0 && data.getDonateAmount().doubleValue() >= 1) {
 					data.setDayDonatePoint(1);
@@ -307,7 +309,6 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
 			default:
 				return new ResultResponse(ResultCode.FAIL, "非法的捐款类型");
 		}
-        
         data.setOrderNo(generateOrderNo());
         data.setUserId(userVo.getId());
         data.setAnonymity(StringUtil.isEmpty(data.getAnonymity()) ? "0" : data.getAnonymity());
