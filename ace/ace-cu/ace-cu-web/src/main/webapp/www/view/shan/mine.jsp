@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/mine.css"/>
     <script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
     <title></title>
+    <script src="js/vconsole.min.js"></script>
 </head>
 
 <body>

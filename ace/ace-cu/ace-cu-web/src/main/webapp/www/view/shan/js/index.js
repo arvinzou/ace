@@ -19,6 +19,7 @@ var projectId;
 var status;
 var totalPoint=0;
 $(function () {
+    var vConsole = new VConsole();
     getProject();
     $('.menu .menuBtn').on('click','.href2',goRank);
 })
@@ -68,6 +69,7 @@ function getInit() {
         if (rst.status == 0) {
             var datas = JSON.parse(rst.data);
             totalPoint=datas.totalHeartPoint+datas.totalActionPoint;
+            console.log('totalPoint',totalPoint);
             $('#point').text(totalPoint);
             barragerList=datas.bulletScreen;
             openBarrager();

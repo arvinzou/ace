@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/jifen.css?v=<%=System.currentTimeMillis()%>"/>
     <link rel="stylesheet" href="css/common.css">
     <script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/vconsole.min.js"></script>
 </head>
 <body>
 <div class="content">

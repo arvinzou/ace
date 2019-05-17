@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/barrager.css"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/vconsole.min.js"></script>
 </head>
 
 <body>

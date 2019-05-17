@@ -26,7 +26,6 @@ window.onload = function(){
     $("#onoffswitch").on('click', function() {
         clickSwitch()
     });
-
     var clickSwitch = function() {
         if($("#onoffswitch").is(':checked')) {
             $(".testswitch-switch").removeClass("switchoff").addClass("switchon");
@@ -119,6 +118,7 @@ function donateMoney1 (){
         }
     }
 
+    var donateType=paramsObj.donateType?paramsObj.donateType:"1";
     $.ajax({
         url: "/cu/www/project/createDonateOrder",
         type:"post",
@@ -140,7 +140,7 @@ function donateMoney1 (){
                 "remark": message,
                 "consigneeMobileNumber":billphoneNumber,
                 "donatePostName": donatePostName,
-                "donateType": paramsObj.donateType	//	1慈善一日捐 ，2日行一善
+                "donateType":donateType//	1慈善一日捐 ，2日行一善
             })
         },
         success:function(result){
@@ -163,7 +163,6 @@ function donateMoney1 (){
                                  $scope.$apply();
                              }*/
                             var url = decodeURIComponent(result.data);
-                            console.log(url);
                             window.location.href = url;
 
                         }else {
@@ -236,7 +235,6 @@ function selectMoney(obj, amount) {
     $("#amountMoney").removeClass("lightborder");
 	$(obj).addClass("lightborder");
     donateMoney = amount;
-    console.log(donateMoney);
     isCustom = false;
 }
 
