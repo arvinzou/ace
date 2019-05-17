@@ -48,7 +48,7 @@ public interface CuDonateOrderDao {
 	/**
 	 * @description:根据用户获取“日行一善”捐赠明细
 	 */
-	List<CuDonateOrderVo> getDayDonateDetails(@Param("projectId") String projectId, @Param("userId") String userId);
+	List<CuDonateOrderVo> getDayDonateDetails(@Param("projectId") String projectId, @Param("openId") String openId);
 	
 	/**
 	 * @description:捐款总量

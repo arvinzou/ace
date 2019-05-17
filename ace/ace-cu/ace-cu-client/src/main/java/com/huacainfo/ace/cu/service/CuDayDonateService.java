@@ -11,9 +11,9 @@ import com.huacainfo.ace.common.result.ResultResponse;
  *
  */
 public interface CuDayDonateService {
-	ResultResponse initDayDonateData(String userId, String projectId);
+	ResultResponse initDayDonateData(String openId, String projectId);
 	
-	ResultResponse personalDonateDataDetails(String userId, String projectId);
+	ResultResponse personalDonateDataDetails(String openId, String projectId);
 	
-	ResultResponse pointsRank(String userId,String projectId);
+	ResultResponse pointsRank(String openId,String projectId);
 }

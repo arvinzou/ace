@@ -267,7 +267,7 @@
                 #{donatePostName,jdbcType=VARCHAR},
             </if>
             <if test="dayDonatePoint != null">
-                #{dayDonatePoint,jdbcType=VARCHAR}
+                #{dayDonatePoint,jdbcType=TINYINT}
             </if>
         </trim>
     </insert>
@@ -447,7 +447,7 @@
     <!-- 根据用户获取“日行一善”积分明细 -->
     <select id="getDayDonateDetails" resultType="com.huacainfo.ace.cu.vo.CuDonateOrderVo">
         SELECT o.donateDate , o.donateAmount , o.points , o.dayDonatePoint FROM cu.cu_donate_order o 
-        WHERE status=2 AND projectId = #{projectId} AND userId = #{userId}
+        WHERE status=2 AND projectId = #{projectId} AND openId = #{openId}
     </select>
     
     <!-- 捐款总量 -->
@@ -463,7 +463,7 @@
         	(SELECT (SELECT u.nickname FROM portal.wx_user u WHERE u.openId = o.openId) AS nickname, 
         	(SELECT u.avatarUrl FROM portal.wx_user u WHERE u.openId = o.openId) AS avatarUrl,
         	FLOOR(SUM(donateAmount)/10) AS totalPoints,
-        	(SELECT u.unionId FROM portal.wx_user u WHERE u.openId = o.openId) AS unionId
+        	(SELECT u.openId FROM portal.wx_user u WHERE u.openId = o.openId) AS openId
         FROM cu_donate_order o WHERE status = 2 AND projectId = #{projectId} GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
     </select>
     
@@ -473,7 +473,7 @@
         	(SELECT (SELECT u.nickname FROM portal.wx_user u WHERE u.openId = o.openId) AS nickname, 
         	(SELECT u.avatarUrl FROM portal.wx_user u WHERE u.openId = o.openId) AS avatarUrl,
         	SUM(dayDonatePoint) AS totalPoints,
-        	(SELECT u.unionId FROM portal.wx_user u WHERE u.openId = o.openId) AS unionId
+        	(SELECT u.openId FROM portal.wx_user u WHERE u.openId = o.openId) AS openId
         FROM cu_donate_order o WHERE status = 2 AND projectId = #{projectId} GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
     </select>
     
@@ -483,7 +483,7 @@
         	(SELECT (SELECT u.nickname FROM portal.wx_user u WHERE u.openId = o.openId) AS nickname, 
         	(SELECT u.avatarUrl FROM portal.wx_user u WHERE u.openId = o.openId) AS avatarUrl,
         	FLOOR(SUM(donateAmount)/10) + SUM(dayDonatePoint) AS totalPoints,
-        	(SELECT u.unionId FROM portal.wx_user u WHERE u.openId = o.openId) AS unionId 
+        	(SELECT u.openId FROM portal.wx_user u WHERE u.openId = o.openId) AS openId
         FROM cu_donate_order o WHERE status = 2 AND projectId = #{projectId} GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
     </select>
 </mapper>

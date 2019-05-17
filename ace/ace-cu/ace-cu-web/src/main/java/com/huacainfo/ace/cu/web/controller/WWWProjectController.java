@@ -229,7 +229,7 @@ public class WWWProjectController extends CuBaseController {
         if (null == userinfo) {
             return new ResultResponse(ResultCode.FAIL, "微信授权失败");
         }
-        return cuDayDonateService.initDayDonateData(userinfo.getUnionid(), projectId);
+        return cuDayDonateService.initDayDonateData(userinfo.getOpenid(), projectId);
     }
 	
 	/**
@@ -246,7 +246,7 @@ public class WWWProjectController extends CuBaseController {
             return new ResultResponse(ResultCode.FAIL, "微信授权失败");
         }
 		
-		return cuDayDonateService.personalDonateDataDetails(userinfo.getUnionid(),projectId);
+		return cuDayDonateService.personalDonateDataDetails(userinfo.getOpenid(),projectId);
 	}
 	
 	/**
@@ -261,6 +261,6 @@ public class WWWProjectController extends CuBaseController {
         if (null == userinfo) {
             return new ResultResponse(ResultCode.FAIL, "微信授权失败");
         }
-		return cuDayDonateService.pointsRank(userinfo.getUnionid(),projectId);
+		return cuDayDonateService.pointsRank(userinfo.getOpenid(),projectId);
 	}
 }

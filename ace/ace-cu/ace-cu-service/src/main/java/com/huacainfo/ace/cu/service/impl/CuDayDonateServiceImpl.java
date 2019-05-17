@@ -23,7 +23,7 @@ public class CuDayDonateServiceImpl implements CuDayDonateService {
 	@Autowired
 	private CuDonateOrderDao cuDonateOrderDao;
 
-	public ResultResponse initDayDonateData(String userId, String projectId) {
+	public ResultResponse initDayDonateData(String openId, String projectId) {
 		JSONObject data = new JSONObject();
 
 		List<Map<String, Object>> bsList = this.cuDonateOrderDao.bulletScreenData(projectId,0, 50);
@@ -33,7 +33,7 @@ public class CuDayDonateServiceImpl implements CuDayDonateService {
 		data.put("dayAmount", totalMap.get("dayAmount"));
 		data.put("totalAmount", totalMap.get("totalAmount"));
 
-		List<CuDonateOrderVo> detailList = this.cuDonateOrderDao.getDayDonateDetails(projectId, userId);
+		List<CuDonateOrderVo> detailList = this.cuDonateOrderDao.getDayDonateDetails(projectId, openId);
 		BigDecimal totalHeartPoints = new BigDecimal(0);
 		int totalActionPoints = 0;
 		BigDecimal todayPoints = new BigDecimal(0);
@@ -56,10 +56,11 @@ public class CuDayDonateServiceImpl implements CuDayDonateService {
 		return new ResultResponse(0, "获取初始化数据成功！", data.toString());
 	}
 
-	public ResultResponse personalDonateDataDetails(String userId, String projectId) {
+	@Override
+	public ResultResponse personalDonateDataDetails(String openId, String projectId) {
 		JSONArray data = new JSONArray();
 		JSONObject obj = new JSONObject();
-		List<CuDonateOrderVo> detailList = this.cuDonateOrderDao.getDayDonateDetails(projectId, userId);
+		List<CuDonateOrderVo> detailList = this.cuDonateOrderDao.getDayDonateDetails(projectId, openId);
 		for (CuDonateOrderVo vo : detailList) {
 			int amount = vo.getDonateAmount().intValue();
 			obj.put("date", new SimpleDateFormat("yyyy-MM-dd").format(vo.getDonateDate()));
@@ -71,7 +72,8 @@ public class CuDayDonateServiceImpl implements CuDayDonateService {
 		return new ResultResponse(0, "获取个人捐赠明细数据成功！", data.toString());
 	}
 
-	public ResultResponse pointsRank(String userId,String projectId) {
+	@Override
+	public ResultResponse pointsRank(String openId,String projectId) {
 		JSONObject data = new JSONObject();
 		List<Map<String, Object>> totalPoints = this.cuDonateOrderDao.getTotalPointsRank(projectId);
 		List<Map<String, Object>> actionPoints = this.cuDonateOrderDao.getActionPointsRank(projectId);
@@ -79,7 +81,7 @@ public class CuDayDonateServiceImpl implements CuDayDonateService {
 
 		JSONObject temp = new JSONObject();
 		for (Map<String, Object> map : totalPoints) {
-			if (userId.equals(map.get("unionId"))) {
+			if (openId.equals(map.get("openId"))) {
 				temp.put("userRank", JSONObject.fromObject(map));
 				break;
 			}
@@ -89,7 +91,7 @@ public class CuDayDonateServiceImpl implements CuDayDonateService {
 
 		for (Map<String, Object> map : actionPoints) {
 			temp.clear();
-			if (userId.equals(map.get("unionId"))) {
+			if (openId.equals(map.get("openId"))) {
 				temp.put("userRank", JSONObject.fromObject(map));
 				break;
 			}
@@ -98,7 +100,7 @@ public class CuDayDonateServiceImpl implements CuDayDonateService {
 		data.put("actionRank", temp);
 		for (Map<String, Object> map : heartPoints) {
 			temp.clear();
-			if (userId.equals(map.get("unionId"))) {
+			if (openId.equals(map.get("openId"))) {
 				temp.put("userRank", JSONObject.fromObject(map));
 				break;
 			}
