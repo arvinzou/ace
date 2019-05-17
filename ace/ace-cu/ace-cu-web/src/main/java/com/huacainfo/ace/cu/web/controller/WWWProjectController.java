@@ -212,7 +212,6 @@ public class WWWProjectController extends CuBaseController {
         if (StringUtil.isEmpty(projectId)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
-
         return cuProjectService.findDonateListToday(projectId, start, limit, orderBy);
     }
     
