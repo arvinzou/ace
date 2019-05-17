@@ -439,7 +439,7 @@
     </select>
     
     <!-- 检查当天是否获取善行积分 -->
-    <select id="checkDayPoint">
+    <select id="checkDayPoint" resultType="int">
         SELECT COUNT(1) FROM cu_donate_order 
         WHERE dayDonatePoint = 1 AND status = 2 AND TO_DAYS(donateDate) = TO_DAYS(now()) AND projectId = #{projectId} AND userId = #{userId}
     </select>
