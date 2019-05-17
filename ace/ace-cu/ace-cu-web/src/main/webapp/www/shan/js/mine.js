@@ -7,7 +7,7 @@ function getUserInfo() {
     var url="/cu/www/user/findByOpenId";
     $.getJSON(url,function (result) {
         if(result.status == 0) {
-            $('.head .headImg img').prop('src',result.data.headimgurl);
+            $('.head .headImg img').prop('src',result.data.headimgurl?result.data.headimgurl:"img/people.png");
             $('.head .name').text(result.data.nickname);
         }else {
             alert(result.info);
