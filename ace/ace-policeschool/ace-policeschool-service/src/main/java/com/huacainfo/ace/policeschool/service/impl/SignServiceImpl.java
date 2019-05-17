@@ -339,6 +339,9 @@ public class SignServiceImpl implements SignService {
         newPwd = CommonUtils.getMd5(newPwd);
         //数据更新
         int i = signDao.updatePwd(account, newPwd);
+        if (StringUtil.isNotEmpty(mobile)) {
+            signDao.updateMobile(account, mobile);
+        }
 
         return new ResultResponse(ResultCode.SUCCESS, "密码变更成功");
     }

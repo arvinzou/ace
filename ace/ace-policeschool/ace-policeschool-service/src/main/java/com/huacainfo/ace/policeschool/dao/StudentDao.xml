@@ -219,5 +219,10 @@
     <select id="selectTeacherClasses" resultType="map">
         select t.clsId as classId from teacher_cls_ship t where t.teacherId=#{id}
     </select>
-
+    <select id="findByBadgeNum" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+        where badgeNum = #{badgeNum,jdbcType=VARCHAR}
+    </select>
 </mapper>
