@@ -64,7 +64,7 @@ public class CuDayDonateServiceImpl implements CuDayDonateService {
 		for (CuDonateOrderVo vo : detailList) {
 			int amount = vo.getDonateAmount().intValue();
 			obj.put("date", new SimpleDateFormat("yyyy-MM-dd").format(vo.getDonateDate()));
-			obj.put("amount", Integer.valueOf(amount));
+			obj.put("amount", String.valueOf(amount));
 			obj.put("heartPoint", Integer.valueOf(amount / 10));
 			obj.put("actionPoint", Integer.valueOf(vo.getDayDonatePoint()));
 			data.add(obj);
