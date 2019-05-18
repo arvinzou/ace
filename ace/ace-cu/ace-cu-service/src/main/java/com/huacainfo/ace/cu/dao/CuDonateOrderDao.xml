@@ -431,7 +431,14 @@
     <!-- 获取弹幕数据 -->
     <select id="bulletScreenData" resultType="java.util.Map">
         SELECT 
-        	o.remark ,(SELECT u.avatarUrl FROM portal.wx_user u WHERE u.openId = o.openId) AS avatarUrl 
+        	o.remark ,(
+        	            SELECT
+        	              u.avatarUrl
+        	            FROM
+        	              portal.wx_user u
+        	            WHERE u.openId = o.openId
+        	          )
+        	            AS avatarUrl
         FROM 
         	cu.cu_donate_order o 
         WHERE 

@@ -1,7 +1,7 @@
 var barragerList = [
     {
-        message: " IK hou van jou",
-        headimg: "http://www.w3school.com.cn/i/eg_tulip.jpg"
+        remark: " IK hou van jou",
+        avatarUrl: "http://www.w3school.com.cn/i/eg_tulip.jpg"
     }
 ]
 
@@ -19,6 +19,7 @@ var projectId;
 var status;
 var totalPoint=0;
 $(function () {
+    openBarrager();
     getProject();
     $('.menu .menuBtn').on('click','.href2',goRank);
 })
