@@ -224,5 +224,6 @@
         <include refid="Base_Column_List"/>
         from enroll_roster
         where badgeNum = #{badgeNum,jdbcType=VARCHAR}
+        limit 1
     </select>
 </mapper>

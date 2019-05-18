@@ -392,4 +392,9 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         return new MessageResponse(ResultCode.SUCCESS, "删除成功");
     }
 
+    @Override
+    public EnrollRoster findByBadgeNum(String acct) {
+        return enrollRosterDao.findByBadgeNum(acct);
+    }
+
 }

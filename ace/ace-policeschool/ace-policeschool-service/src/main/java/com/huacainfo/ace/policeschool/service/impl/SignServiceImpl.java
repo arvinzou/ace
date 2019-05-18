@@ -12,6 +12,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.policeschool.constant.CommConstant;
 import com.huacainfo.ace.policeschool.dao.SignDao;
+import com.huacainfo.ace.policeschool.model.EnrollRoster;
 import com.huacainfo.ace.policeschool.service.EnrollRosterService;
 import com.huacainfo.ace.policeschool.service.SignService;
 import com.huacainfo.ace.policeschool.service.StudentService;
@@ -224,13 +225,18 @@ public class SignServiceImpl implements SignService {
     public ResultResponse acctLogin(String acct, String pwd) {
         Users syUser = systemService.selectUsersByAccount(acct);
         if (null == syUser) {
-            return new ResultResponse(ResultCode.FAIL, "账户不存在");
+            EnrollRoster roster = enrollRosterService.findByBadgeNum(acct);
+            if (roster != null) {
+                return new ResultResponse(ResultCode.FAIL, "该警员尚未报到分班，请注册完成报到分班再登录使用！");
+            } else {
+                return new ResultResponse(ResultCode.FAIL, "该账号尚未注册！");
+            }
         }
         if (!CommonUtils.getMd5(pwd).equals(syUser.getPassword())) {
-            return new ResultResponse(ResultCode.FAIL, "密码不正确");
+            return new ResultResponse(ResultCode.FAIL, "账号和密码不匹配！");
         }
         if (syUser.getStauts().equals(ACCOUNT_INVALID)) {
-            return new ResultResponse(ResultCode.FAIL, "账户已注销，请联系管理员");
+            return new ResultResponse(ResultCode.FAIL, "账户已注销，请联系管理员！");
         }
 
 
