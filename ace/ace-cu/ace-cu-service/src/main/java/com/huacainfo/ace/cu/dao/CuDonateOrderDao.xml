@@ -435,7 +435,9 @@
         FROM 
         	cu.cu_donate_order o 
         WHERE 
-        	o.projectId=#{projectId} AND o.status=2 and o.remark is not null and o.remark <![CDATA[ <> ]]> '' LIMIT 0,50
+        	o.projectId=#{projectId} AND o.status=2 and o.remark is not null and o.remark <![CDATA[ <> ]]> ''
+        order by o.createDate desc
+        LIMIT 0,50
     </select>
     
     <!-- 检查当天是否获取善行积分 -->
