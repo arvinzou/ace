@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" /><meta httpwebapp-equiv="Expires" content="0" />
     <title>登录</title>
     <jsp:include page="../common/common.jsp"/>
     <link rel="stylesheet" type="text/css" href="css/login.css"/>
@@ -15,7 +17,7 @@
 <div class="index">
     <div class="logo">
         <div class="logo-img"><img src="img/login-logo.png"/></div>
-        <div class="logo-title">常德市警官培训中心</div>
+        <div class="logo-title">常德市公安局警官培训中心</div>
     </div>
     <div class="login-form">
         <div class="form-row">
@@ -29,8 +31,6 @@
     <div class="login-btn loginActive" onclick="login();">登录</div>
     <div class="regist-box"><a href="${pageContext.request.contextPath}/www/sign/index.jsp" class="regist">立即注册</a>
     </div>
-
-
     <div class="footer-box">
         <form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post">
             <div class="footer" onclick="wxLogin();">

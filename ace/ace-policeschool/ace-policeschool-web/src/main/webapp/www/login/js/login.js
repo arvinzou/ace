@@ -18,30 +18,30 @@ $(function () {
     }
 
 
-    /**
-     * 检测到有缓存就自动登录
-     */
-    var acct = localStorage.getItem("username");
-    var pwd = localStorage.getItem("password");
-    if(acct == undefined || acct == null || pwd == undefined || pwd == null){
-        return;
-    }
-    $.ajax({
-        url: contextPath+ "/www/sign/acctLogin",
-        type:"post",
-        async:false,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data:{
-            acct:  acct,
-            pwd: pwd
-        },
-        success:function(result){
-            window.location.href = contextPath + '/www/registered/person/index.jsp';
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+    // /**
+    //  * 检测到有缓存就自动登录
+    //  */
+    // var acct = localStorage.getItem("username");
+    // var pwd = localStorage.getItem("password");
+    // if(acct == undefined || acct == null || pwd == undefined || pwd == null){
+    //     return;
+    // }
+    // $.ajax({
+    //     url: contextPath+ "/www/sign/acctLogin",
+    //     type:"post",
+    //     async:false,
+    //     contentType: "application/x-www-form-urlencoded; charset=utf-8",
+    //     data:{
+    //         acct:  acct,
+    //         pwd: pwd
+    //     },
+    //     success:function(result){
+    //         window.location.href = contextPath + '/www/registered/person/index.jsp';
+    //     },
+    //     error:function(){
+    //         alert("系统服务内部异常！");
+    //     }
+    // });
 });
 
 function login() {
