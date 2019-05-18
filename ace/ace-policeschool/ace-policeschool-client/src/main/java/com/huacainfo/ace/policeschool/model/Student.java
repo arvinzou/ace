@@ -27,6 +27,8 @@ public class Student extends BaseModel {
      */
     private String political;
 
+    private String dorm;
+
     private String workUnitName;
 
     private String postName;
@@ -70,6 +72,14 @@ public class Student extends BaseModel {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getDorm() {
+        return dorm;
+    }
+
+    public void setDorm(String dorm) {
+        this.dorm = dorm;
+    }
 
     public String getId() {
         return id;

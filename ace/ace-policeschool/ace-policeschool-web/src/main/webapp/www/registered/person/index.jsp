@@ -72,6 +72,11 @@
         <span>\${data.teacher.name}</span>
         {@/if}
     </div>
+    <div class="dorm">
+        {@if data.regType == 'student'&&data.student.dorm}
+        <span>宿舍房号：\${data.student.dorm}</span>
+        {@/if}
+    </div>
    <%-- <div class="show-card" onclick="toConsumption();">
         <span>查询一卡通</span>
         <img src="img/icon_select.png"/>
