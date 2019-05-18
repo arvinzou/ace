@@ -116,4 +116,7 @@
         from le_scene
         where id = #{id,jdbcType=VARCHAR}
   </select>
+    <delete id="clearAll" parameterType="java.lang.String">
+    delete from le_scene
+  </delete>
 </mapper>

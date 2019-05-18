@@ -43,6 +43,16 @@ public class AccountVo extends BaseModel {
      */
     private String lCardNo;
 
+    private String areaName;
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
+
     public String getlCardNo() {
         return lCardNo;
     }

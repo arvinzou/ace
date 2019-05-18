@@ -40,4 +40,5 @@ public interface LeSceneDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    int clearAll();
 }

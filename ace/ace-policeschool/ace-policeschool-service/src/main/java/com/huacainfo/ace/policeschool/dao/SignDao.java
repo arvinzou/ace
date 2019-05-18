@@ -39,4 +39,7 @@ public interface SignDao {
 
     Users findUsersByMobile(@Param("mobile") String mobile,
                             @Param("sysId") String sysId);
+
+    int updateMobile(@Param("account") String account,
+                     @Param("mobile") String mobile);
 }

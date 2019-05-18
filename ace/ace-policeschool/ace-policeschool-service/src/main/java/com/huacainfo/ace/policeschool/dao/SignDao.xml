@@ -229,4 +229,10 @@
     where t.cur_syid = #{sysId,jdbcType=VARCHAR}
     and t.mobile = #{mobile,jdbcType=VARCHAR}
     </select>
+
+    <update id="updateMobile" parameterType="java.lang.String">
+        update portal.users
+        set mobile = #{mobile,jdbcType=CHAR}
+        where account = #{account,jdbcType=VARCHAR}
+    </update>
 </mapper>

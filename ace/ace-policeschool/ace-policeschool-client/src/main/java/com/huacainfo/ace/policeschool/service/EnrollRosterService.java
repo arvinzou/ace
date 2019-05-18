@@ -194,4 +194,6 @@ public interface EnrollRosterService {
      * @return MessageResponse
      */
     MessageResponse batchDel(String clsId);
+
+    EnrollRoster findByBadgeNum(String acct);
 }

@@ -7,6 +7,7 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.policeschool.constant.CommConstant;
@@ -143,14 +144,14 @@ public class StudentServiceImpl implements StudentService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(ResultCode.FAIL, "主键不能为空！");
         }
-        String IdCard=o.getIdCard();
-        Boolean check= IDCardUtil.isIDCard(IdCard);
-        if(!check||CommonUtils.isBlank(check)){
-            new MessageResponse(ResultCode.FAIL,"身份证号码错误");
+        String IdCard = o.getIdCard();
+        Boolean check = IDCardUtil.isIDCard(IdCard);
+        if (!check || CommonUtils.isBlank(check)) {
+            new MessageResponse(ResultCode.FAIL, "身份证号码错误");
         }
         o.setNativePlace(IDCardUtil.getNativeCode(IdCard));
         o.setSex(IDCardUtil.getSexCode(IdCard));
-        o.setBirthDate(IDCardUtil.getbirthDay(IdCard,"-"));
+        o.setBirthDate(IDCardUtil.getbirthDay(IdCard, "-"));
 
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(ResultCode.FAIL, "姓名不能为空！");
@@ -266,14 +267,14 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
     public MessageResponse addStudent(Student data, UserProp userProp) throws Exception {
-        String IdCard=data.getIdCard();
-        Boolean check= IDCardUtil.isIDCard(IdCard);
-        if(!check&&CommonUtils.isBlank(check)){
-            new MessageResponse(ResultCode.FAIL,"身份证号码错误");
+        String IdCard = data.getIdCard();
+        Boolean check = IDCardUtil.isIDCard(IdCard);
+        if (!check && CommonUtils.isBlank(check)) {
+            new MessageResponse(ResultCode.FAIL, "身份证号码错误");
         }
         data.setNativePlace(IDCardUtil.getNativeCode(IdCard));
         data.setSex(IDCardUtil.getSexCode(IdCard));
-        data.setBirthDate(IDCardUtil.getbirthDay(IdCard,"-"));
+        data.setBirthDate(IDCardUtil.getbirthDay(IdCard, "-"));
         String uid = GUIDUtil.getGUID();
         //主键
         data.setId(uid);
@@ -343,9 +344,13 @@ public class StudentServiceImpl implements StudentService {
                 }
             }
 
-            int t = studentDao.isExist(o);
-            if (t > 0) {
-                return new MessageResponse(1, "序号[" + o.getIndex() + "],该学员已被导入系统！");
+            Student t = studentDao.findByBadgeNum(o.getBadgeNum());
+            if (t != null) {
+                //增加更新功能 党校项目同理
+                iMs = updateStudentInfo(t, o);
+                if (ResultCode.FAIL == iMs.getStatus()) {
+                    return iMs;
+                }
             } else {
                 try {
                     iMs = addStudent(o, userProp);
@@ -362,6 +367,34 @@ public class StudentServiceImpl implements StudentService {
 
         dataBaseLogService.log("批量导入学员", "批量导入学员", "", "rs.xls", "rs.xls", userProp);
         return new MessageResponse(ResultCode.SUCCESS, "导入成功！");
+    }
+
+
+    private MessageResponse updateStudentInfo(Student t, Student o) {
+        String pwd = o.getIdCard().substring(o.getIdCard().length() - 6);
+        //修改登录密码
+        ResultResponse rs = signService.updatePwd(o.getBadgeNum(), o.getMobile(), pwd);
+        if (rs.getStatus() == ResultCode.FAIL) {
+            return new MessageResponse(ResultCode.FAIL, rs.getInfo());
+        }
+        //变更账户为有效
+        signService.updateUsersStatus(t.getId(), SignServiceImpl.ACCOUNT_VALID);
+
+        //修改
+        t.setName(o.getName());
+        t.setClassId(o.getClassId());
+        t.setIdCard(o.getIdCard());
+        //次要信息
+        t.setPolitical(o.getPolitical());
+        t.setCollege(o.getCollege());
+        t.setMobile(o.getMobile());
+        t.setPostName(o.getPostName());
+        t.setWorkUnitName(o.getWorkUnitName());
+        t.setStatus("1");
+        t.setLastModifyDate(DateUtil.getNowDate());
+        studentDao.updateByPrimaryKey(t);
+
+        return new MessageResponse(ResultCode.SUCCESS, "更新成功");
     }
 
     /**
