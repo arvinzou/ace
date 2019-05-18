@@ -41,7 +41,7 @@
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="name"
                                    maxlength="50"
-                                   placeholder="请输入名称（建议字数在14个字以内，不超过50个字)">
+                                   placeholder="请输入名称">
                             <span class="help-block"></span>
                         </div>
                     </div>
