@@ -1,135 +1,70 @@
 var map = null;
 var markers = [];
 var params = {
-    limit: 99,
-    subareaCode:'',
-    stationCode:'',
+    limit: 9999,
 };
-function rsd(value, kernelKey, staticDictObjects) {
-    try {
-        if (!staticDictObjects) {
-            staticDictObjects = parent.staticDictObject;
-        }
-        var name = value;
-
-        if ((value + "") && ("" + value).indexOf(',') < 0) {
-            if (staticDictObjects && kernelKey && staticDictObjects[kernelKey]) {
-                for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
-                    if (staticDictObjects[kernelKey][i].CODE == value) {
-                        name = staticDictObjects[kernelKey][i].NAME;
-                        break;
-                    }
-                }
-            }
-        } else {
-            if (value) {
-                var nameArray = [];
-                var v = (value + "").split(',');
-                for (var j = 0; j < v.length; j++) {
-                    for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
-                        if (staticDictObjects[kernelKey][i].CODE == v[j]) {
-                            nameArray.push(staticDictObjects[kernelKey][i].NAME);
-                            break;
-                        }
-                    }
-                }
-                name = nameArray.join(',');
-            }
-        }
-    } catch (err) {
-        console.log("渲染错误", value + ":" + kernelKey + ":" + err);
-    }
-    return name;
-}
+x_pi=3.14159265358979324 * 3000.0 / 180.0;
 
 var rst = null;
 
+/**坐标转换*/
+function bd_encrypt(gcjLat, gcjLon) {
+    // console.log(gcjLat);
+    var x = gcjLon, y = gcjLat;
+    var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * this.x_pi);
+    // console.log(z);
+    var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * this.x_pi);
+    bdLon = z * Math.cos(theta) + 0.0065;
+    bdLat = z * Math.sin(theta) + 0.006;
+    return {'lat': bdLat, 'lon': bdLon};
+};
+
+$(function () {
+    $('#Map').click(cancelActive)
+    $('.detailBar').on('click', '.b', changeview);
+    initMap();
+    findTopBuildingList();
+})
+
+/**初始化地图*/
+function initMap() {
+    map = new BMap.Map("Map" /*{minZoom: 12, maxZoom: 17}*/);
+    var point = new BMap.Point(114.270730,30.601090);  // 创建点坐标
+    map.centerAndZoom(point, 13);
+//    启动滚轮缩放
+    map.enableScrollWheelZoom();
+}
+
+/**查询建筑列表*/
 function findTopBuildingList() {
     var url = contextPath + '/topBuilding/findTopBuildingList';
     var data = params;
     $.getJSON(url, data, function (rst) {
-        if (rst.status==0){
-                var marker;
-                while (marker = markers.pop()) {
-                    marker.setMap(null);
-                }
-                var list=rst.rows;
-                if (list.length) {
-                    for (var i=0;i<list.length;i++) {
-                        var o = list[i];
-                        var imgUrl;
-                        var font;
-                        if(!(o.latitude&&o.longitude)){
-                            continue
-                        }
-                        imgUrl = "img/icon0.png"
-                        font = "<font style='font-weight: bold;color:#fff;font-size:10px'>" + 0 + "</font>"
-                        var marker = new qq.maps.Marker({
-                            //设置Marker的位置坐标
-                            position: new qq.maps.LatLng(o.latitude, o.longitude),
-                            //设置Marker被添加到Map上时的动画效果为落下
-                            animation: qq.maps.MarkerAnimation.DOWN,
-                            //设置Marker被添加到Map上时的动画效果为反复弹跳
-                            //animation:qq.maps.MarkerAnimation.BOUNCE
-                            //设置Marker被添加到Map上时的动画效果为从天而降
-                            animation: qq.maps.MarkerAnimation.DROP,
-                            //设置Marker被添加到Map上时的动画效果为升起
-                            //animation:qq.maps.MarkerAnimation.UP
-                            //设置显示Marker的地图
-                            map: map,
-                            //设置Marker可拖动
-                            draggable: true,
-                            //Marker的覆盖内容
-                            decoration: new qq.maps.MarkerDecoration(font, new qq.maps.Point(0, -4)),
-                            // decoration: new qq.maps.MarkerDecoration('<span class="demoSpan1">1</span>'),
-                            //自定义Marker图标为大头针样式
-                            icon: new qq.maps.MarkerImage(imgUrl),
-                            //自定义Marker图标的阴影
-                            // shadow: new qq.maps.MarkerImage("https://open.map.qq.com/doc/img/nilb.png"),
-                            //设置Marker标题，鼠标划过Marker时显示
-                            title: o.name,
-                            //设置Marker的可见性，为true时可见,false时不可见
-                            visible: true,
-                            o: o
-
-                        });
-                        qq.maps.event.addListener(marker, 'click', function (event) {
-                            $('.detailBar').removeClass('active');
-                            initPreview(event.target.o.id);
-                            return false;
-                        });
-                        markers.push(marker);
+        if (rst.status == 0) {
+            var marker;
+            while (marker = markers.pop()) {
+                marker.setMap(null);
+            }
+            var list = rst.rows;
+            if (list.length) {
+                for (var i = 0; i < list.length; i++) {
+                    var o = list[i];
+                    var imgUrl;
+                    if (!(o.latitude && o.longitude)) {
+                        continue
                     }
+                    imgUrl = "img/icon0.png";
+                    var lalo=bd_encrypt(o.latitude,o.longitude)
+                    var point = new BMap.Point(lalo.lon,lalo.lat);
+                    addMarker(point,o);
                 }
-                //$("#modal-preview").modal("show");
+            }
+            //$("#modal-preview").modal("show");
         } else {
             alert(rst.errorMessage);
         }
     })
 }
-
-
-jQuery(function ($) {
-    $(".info").hide();
-    $(".RightDiv").css("height", (window.innerHeight - 45) + "px");
-    $("#FullScreen").click(function () {
-        var ml = $("#TextViewPanel").css("margin-left");
-        if (ml == '0px') {
-            $("#TextViewPanel").css("margin-left", "-380px");
-            $("#FullScreen").css('background-position', '-44px 0px');
-            $("#FullScreen").css('left', '-1px');
-        } else {
-            $("#TextViewPanel").css("margin-left", "0px");
-            $("#FullScreen").css('background-position', '-22px 0px');
-            $("#FullScreen").css('left', '299px');
-        }
-    })
-    $('#Map').click(cancelActive)
-    $('.detailBar').on('click', '.b', changeview);
-    $('.searchBar').on('click', '.rst', showSelect);
-    getAreas();
-    initJuicerMethod();
-});
 
 
 function cancelActive(event) {
@@ -162,49 +97,35 @@ function changeview() {
 }
 
 
-function initMap(la,lo) {
-    map = new qq.maps.Map(document.getElementById("Map"), {
-        center: new qq.maps.LatLng(la, lo),
-        zoom: 14,
-        //mapTypeId: "coordinate",
-        resizeKeepCenter: true,
-        mapTypeControl: true,
-        panControl: false,
-        zoomControl: false,
-        scaleControl: false,
-        minZoom: 4,
-        maxZoom: 18,
-        //设置平移控件的位置
-        panControlOptions: {
-            //设置平移控件的位置为相对右方中间位置对齐.
-            position: qq.maps.ControlPosition.RIGHT_CENTER
-        },
-        zoomControlOptions: {
-            //设置缩放控件的位置为相对左方中间位置对齐.
-            position: qq.maps.ControlPosition.RIGHT_CENTER,
-            //设置缩放控件样式为仅包含放大缩小两个按钮
-            style: qq.maps.ZoomControlStyle.SMALL
+// 编写自定义函数,创建标注
+function addMarker(point,o){
+    var myIcon = new BMap.Icon("./img/icon0.png", new BMap.Size(30,30),{imageSize:new BMap.Size(30,30)});
+    var marker = new BMap.Marker(point,{icon:myIcon});
+    marker.setTitle(o.name);
+    marker.onclick=(function(o) {
+        var clickLi = function() {
+            console.log(o);
         }
-
-    });
+        return clickLi
+    })(o);
+    map.addOverlay(marker);
 }
-
 function render(obj, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;
     var html = juicer(tpl, {
-        data: data,
+        data: data
     });
     $(obj).html(html);
 }
 
 
 function initPreview(id) {
-    var url=contextPath + "/topBuilding/selectTopBuildingByPrimaryKey";
-    var data={
+    var url = contextPath + "/topBuilding/selectTopBuildingByPrimaryKey";
+    var data = {
         id: id
     };
-    $.getJSON(url,data,function (rst) {
-        if(rst.status==0){
+    $.getJSON(url, data, function (rst) {
+        if (rst.status == 0) {
             $('.detailBar').addClass('active');
         }
     })
@@ -239,83 +160,4 @@ function render(obj, data, tplId) {
         data: data,
     });
     $(obj).html(html);
-}
-
-
-function getAreas(){
-   var url=contextPath+'/topSubarea/findTopSubareaList';
-   var data={
-       start:0,
-       limit:100,
-   }
-   $.getJSON(url,data,function (rst) {
-      if(rst.status==0){
-          data=rst.rows[0];
-          if(data&&data.longitude&&data.latitude){
-              initMap(data.latitude,data.longitude);
-          }else{
-              initMap(30.601090,114.270730);
-          };
-          params.subareaCode=data.code;
-          findTopBuildingList();
-          getStations(data.code);
-          $('.rst .area').text(data.name);
-          render('#areaList',rst.rows,'tpl-areaList');
-      }
-   })
-}
-
-function areaChange(that) {
-   var $t=$(that);
-   var name=$t.data('name');
-   var code=$t.data('code');
-   var la=$t.data('la');
-   var lo=$t.data('lo');
-    params.subareaCode=code;
-    params.stationCode='';
-    findTopBuildingList();
-    getStations(code);
-    if(la&&lo){
-        map.panTo(new qq.maps.LatLng(la, lo));
-    }
-    $('.rst .area').text(name);
-    $('.rst .station .text').text('全部');
-}
-
-
-function stationChange(that) {
-    var $t=$(that);
-    var name=$t.data('name');
-    var code=$t.data('code');
-    var la=$t.data('la');
-    var lo=$t.data('lo');
-    params.stationCode=code;
-    findTopBuildingList();
-    if(la&&lo){
-        map.panTo(new qq.maps.LatLng(la, lo));
-    }
-    $('.rst .station .text').text(name);
-}
-
-function getStations(code) {
-    var url=contextPath+'/topStation/findTopStationList';
-    var data={
-        subareaCode:code,
-        start:0,
-        limit:200,
-    }
-    $.getJSON(url,data,function (rst) {
-        if(rst.status==0){
-            render('#stationList',rst.rows,'tpl-stationList');
-        }
-    })
-}
-
-
-var timeOut;
-
-
-//juicer自定义函数
-function initJuicerMethod() {
-    juicer.register('rsd', rsd);
 }
