@@ -518,10 +518,13 @@ function initScenario() {
 
 function setScenario() {
     var that = $(this);
+    console.log(that.data(are));
     scenarioPostData.presetNo = that.data('presetno');
     var url = contextPath + '/seCustomArea/executePreset';
     $.post(url, scenarioPostData, function (rst) {
+
         console.log(rst);
+        alert(rst.value.Status);
     })
 }
 
@@ -692,5 +695,3 @@ function mGetDate(m) {
     var d = new Date(year, m, 0);
     return d.getDate();
 }
-
-
