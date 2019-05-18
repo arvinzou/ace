@@ -1,8 +1,21 @@
 $(function () {
-    initData();
+    initData(queryURL().dorm);
 });
 
-function initData() {
+/**url参数解析为对象*/
+function queryURL(){
+    var url=window.location.href;
+    var arr1 = url.split("?");
+    var params = arr1[1].split("&");
+    var obj = {};//声明对象
+    for(var i=0;i<params.length;i++){
+        var param = params[i].split("=");
+        obj[param[0]] = param[1];//为对象赋值
+    }
+    return obj;
+}
+
+function initData(dorm) {
     $.ajax({
         url: contextPath + "/www/classes/getClassesInfo",
         type: "post",
@@ -15,6 +28,7 @@ function initData() {
                 var index02 = fileName.lastIndexOf(".");
                 fileName = fileName.substring(index01 + 9, index02);
                 result.data.list.fileName = fileName;
+                result.data.dorm=dorm;
                 renderPage('classNotice', result.data, 'class-tpl');
             } else {
                 if (result.info) {
