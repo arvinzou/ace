@@ -1,11 +1,15 @@
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.canvas.ImageKit;
 import com.huacainfo.ace.glink.api.LeApiToolKit;
 import com.huacainfo.ace.glink.api.SeApiToolKit;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 /**
  * @Auther: Arvin
@@ -20,13 +24,35 @@ public class CommonTest {
     public void test() throws IOException {
 
 //        seApiInvoke();      //强电联调
-//        leApiInvoke();        //弱电联调
+        leApiInvoke();        //弱电联调
+
 
     }
 
-    private void leApiInvoke() {
+    private void urlToLocal() {
+        System.out.println("****************download begin****************");
 
-        System.out.println(LeApiToolKit.stats(2, "JH068"));
+        String url = "http://online3.map.bdimg.com/tile/?qt=tile&x=191&y=52&z=10&styles=pl&scaler=1&udt=20160202";
+        String path = "e:\\demo.png";
+        BufferedImage image = null;
+        try {
+            image = ImageKit.getImageURL(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        ImageKit.outputImage(image, path);
+
+        System.out.println("****************download finish****************");
+    }
+
+    private void leApiInvoke() {
+        //500错误
+        String date = DateUtil.toStr(DateUtil.getNowDate(), "yyyyMMdd");
+        date = "20190416";
+        System.out.println("date=" + date);
+        System.out.println(LeApiToolKit.getBrokenLampDetail(date));
+
+//        System.out.println(LeApiToolKit.getBuildingDetail(""));
 
         //分区灯光启动仪式
 //        System.out.println(LeApiToolKit.completionCeremony(1));

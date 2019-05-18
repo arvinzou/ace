@@ -518,10 +518,13 @@ function initScenario() {
 
 function setScenario() {
     var that = $(this);
+    console.log(that.data(are));
     scenarioPostData.presetNo = that.data('presetno');
     var url = contextPath + '/seCustomArea/executePreset';
     $.post(url, scenarioPostData, function (rst) {
+
         console.log(rst);
+        alert(rst.value.Status);
     })
 }
 
