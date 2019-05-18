@@ -1,4 +1,5 @@
 var regType = null;
+var dorm;
 $(function () {
 
     $.ajax({
@@ -10,6 +11,10 @@ $(function () {
         success: function (result) {
             if (result.status == 0) {
                 regType = result.data.regType;
+                if(result.data.student){
+                    var i=result.data.student.dorm;
+                    dorm=i?i:'';
+                }
                 renderPage('userInfo', result.data, 'userinfo-tpl');
             } else {
                 if (result.info) {
@@ -98,7 +103,7 @@ function showPersonInfo() {
     }
 }
 function classNotice() {
-    window.location.href = contextPath + '/www/registered/classnotice/index.jsp';
+    window.location.href = contextPath + '/www/registered/classnotice/index.jsp?dorm='+dorm;
 }
 function attendtion() {
     window.location.href = contextPath + '/www/registered/attendance/index.jsp';

@@ -149,7 +149,9 @@ public class StudentServiceImpl implements StudentService {
         if (!check || CommonUtils.isBlank(check)) {
             new MessageResponse(ResultCode.FAIL, "身份证号码错误");
         }
-        o.setNativePlace(IDCardUtil.getNativeCode(IdCard));
+        if(CommonUtils.isBlank(o.getNativePlace())){
+            o.setNativePlace(IDCardUtil.getNativeCode(IdCard));
+        }
         o.setSex(IDCardUtil.getSexCode(IdCard));
         o.setBirthDate(IDCardUtil.getbirthDay(IdCard, "-"));
 
@@ -185,6 +187,7 @@ public class StudentServiceImpl implements StudentService {
         oldData.setPolitical(o.getPolitical());
         oldData.setWorkUnitName(o.getWorkUnitName());
         oldData.setPostName(o.getPostName());
+        oldData.setDorm(o.getDorm());
         if (StringUtil.isNotEmpty(o.getClassId())) {
             oldData.setClassId(o.getClassId());
             oldData.setPid("0");//影响学员分组
@@ -272,7 +275,9 @@ public class StudentServiceImpl implements StudentService {
         if (!check && CommonUtils.isBlank(check)) {
             new MessageResponse(ResultCode.FAIL, "身份证号码错误");
         }
-        data.setNativePlace(IDCardUtil.getNativeCode(IdCard));
+        if(CommonUtils.isBlank(data.getNativePlace())){
+            data.setNativePlace(IDCardUtil.getNativeCode(IdCard));
+        }
         data.setSex(IDCardUtil.getSexCode(IdCard));
         data.setBirthDate(IDCardUtil.getbirthDay(IdCard, "-"));
         String uid = GUIDUtil.getGUID();
@@ -326,7 +331,7 @@ public class StudentServiceImpl implements StudentService {
                 return new MessageResponse(1, "序号[" + o.getIndex() + "],姓名不能为空！");
             }
             if (CommonUtils.isBlank(o.getMobile())) {
-                return new MessageResponse(1, "序号[" + o.getIndex() + "],籍贯不能为空！");
+                return new MessageResponse(1, "序号[" + o.getIndex() + "],手机不能为空！");
             }
             if (StringUtil.isNotEmpty(o.getPolitical())) {
                 switch (o.getPolitical()) {

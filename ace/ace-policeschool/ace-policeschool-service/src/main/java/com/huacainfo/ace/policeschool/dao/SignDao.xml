@@ -65,6 +65,7 @@
             <result column="college" jdbcType="VARCHAR" property="college"/>
             <result column="birthDate" jdbcType="TIMESTAMP" property="birthDate"/>
             <result column="nativePlace" jdbcType="VARCHAR" property="nativePlace"/>
+            <result column="dorm" jdbcType="VARCHAR" property="dorm"/>
         </association>
         <association property="teacher" column="tid" javaType="com.huacainfo.ace.policeschool.vo.TeacherVo">
             <id property="id" jdbcType="VARCHAR" column="tid"/>
@@ -90,7 +91,7 @@
         s.pid as sPid, s.name as sName, s.mobile as sMobile, s.idCard as sIdCard,
         s.political as sPolitical, s.workUnitName as sWUName, s.postName as sPostName,
         s.classId as sClsId, '' as sClsName,
-        s.nativePlace, s.badgeNum, s.college, s.birthDate,
+        s.nativePlace, s.badgeNum, s.college, s.birthDate,s.dorm,
 
         t.id as tid,
         t.category as tType, t.name as tName,

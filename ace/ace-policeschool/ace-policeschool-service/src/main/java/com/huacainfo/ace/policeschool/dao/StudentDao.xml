@@ -14,6 +14,7 @@
         <result column="postName" jdbcType="VARCHAR" property="postName"/>
         <result column="classId" jdbcType="VARCHAR" property="classId"/>
         <result column="badgeNum" jdbcType="VARCHAR" property="badgeNum"/>
+        <result column="dorm" jdbcType="VARCHAR" property="dorm"/>
         <result column="college" jdbcType="VARCHAR" property="college"/>
         <result column="birthDate" jdbcType="TIMESTAMP" property="birthDate"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -27,7 +28,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         id, pid, name, sex, nativePlace, mobile, idCard, political, workUnitName, postName,
-        classId, badgeNum, college, birthDate, remark, status, createUserId, createUserName,
+        classId, badgeNum, dorm, college, birthDate, remark, status, createUserId, createUserName,
         createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -44,7 +45,7 @@
         insert into student (id, pid, name,
           sex, nativePlace, mobile,
           idCard, political, workUnitName,
-          postName, classId, badgeNum,
+          postName, classId, badgeNum,dorm,
           college, birthDate, remark,
           status, createUserId, createUserName,
           createDate, lastModifyUserId, lastModifyUserName,
@@ -52,7 +53,7 @@
         values (#{id,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
           #{sex,jdbcType=CHAR}, #{nativePlace,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
           #{idCard,jdbcType=CHAR}, #{political,jdbcType=VARCHAR}, #{workUnitName,jdbcType=VARCHAR},
-          #{postName,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR}, #{badgeNum,jdbcType=VARCHAR},
+          #{postName,jdbcType=VARCHAR}, #{classId,jdbcType=VARCHAR}, #{badgeNum,jdbcType=VARCHAR},#{dorm,jdbcType=VARCHAR},
           #{college,jdbcType=VARCHAR}, #{birthDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR},
           #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
           #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
@@ -72,6 +73,7 @@
           postName = #{postName,jdbcType=VARCHAR},
           classId = #{classId,jdbcType=VARCHAR},
           badgeNum = #{badgeNum,jdbcType=VARCHAR},
+          dorm = #{dorm,jdbcType=VARCHAR},
           college = #{college,jdbcType=VARCHAR},
           birthDate = #{birthDate,jdbcType=TIMESTAMP},
           remark = #{remark,jdbcType=VARCHAR},
@@ -96,7 +98,7 @@
 
         c.`name` as clsName,
         t.id, t.pid, t.name, t.sex, t.nativePlace, t.mobile, t.idCard, t.political, t.workUnitName, t.postName,
-        t.classId, t.badgeNum, t.college, t.birthDate, t.remark, t.status, t.createUserId, t.createUserName,
+        t.classId, t.badgeNum,t.dorm, t.college, t.birthDate, t.remark, t.status, t.createUserId, t.createUserName,
         t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
     <sql id="From_Statement">

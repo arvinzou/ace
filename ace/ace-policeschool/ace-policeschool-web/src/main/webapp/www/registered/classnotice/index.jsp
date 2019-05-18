@@ -48,6 +48,15 @@
             <div class="content bd">\${data.list.classroom.introduce}</div>
         </div>
     </div>
+
+    <div class="box">
+        <div class="title02 br">住宿安排</div>
+        <div class="content-box br">
+            <div class="content-title">房间号</div>
+            <div class="content bd">\${data.dorm?data.dorm:''}</div>
+        </div>
+    </div>
+
     <div class="box">
         <div class="title02 br">班级成员</div>
         <div class="content-box br">

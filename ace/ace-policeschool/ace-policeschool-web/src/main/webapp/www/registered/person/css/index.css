@@ -77,6 +77,12 @@ body {
     float: left;
     padding-left: 0.333333rem;
 }
+.dorm{
+    font-size: 0.48rem;
+    height: 1.6rem;
+    line-height: 1.6rem;
+    text-align: right;
+}
 
 .show-card {
     width: auto;
