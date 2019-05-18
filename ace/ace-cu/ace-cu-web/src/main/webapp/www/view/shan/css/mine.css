@@ -111,6 +111,7 @@
 	border-radius: 50%;
 	border: 0.08rem solid #fff;
 	margin: auto;
+	overflow: hidden;
 }
 
 .head .headImg  img{

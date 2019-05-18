@@ -5,6 +5,7 @@
 				background: url(../img/cover.png) no-repeat;
 				background-size: 89%;
 				background-position: 50% 50%;
+				overflow: hidden;
 			}
 			
 			#message .btn {
