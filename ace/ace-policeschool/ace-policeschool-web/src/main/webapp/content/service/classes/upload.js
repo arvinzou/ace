@@ -105,7 +105,7 @@ function appendUploadFileBtn(id) {
         function (e) {
             e.preventDefault();
             var config = {
-                extensions: "xls,xlsx,doc,docx,ppt,pptx,pdf",
+                extensions: "pdf",
                 url: portalPath + '/files/uploadImage.do',
                 target: id,
                 multipart_params: {}
