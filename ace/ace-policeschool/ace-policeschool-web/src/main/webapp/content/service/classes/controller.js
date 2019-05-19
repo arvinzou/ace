@@ -70,6 +70,11 @@ function initEvents() {
         console.log(relatedTarget);
         initPreview(id);
     })
+    $(".btn-group .btn").bind('click', function (event) {
+        $(event.target).siblings().removeClass("active");
+        console.log(event);
+        $(event.target).addClass("active");
+    });
 }
 
 function initPreview(id) {
@@ -173,6 +178,7 @@ function del(rowid) {
     }
 }
 
+var params={};
 function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");

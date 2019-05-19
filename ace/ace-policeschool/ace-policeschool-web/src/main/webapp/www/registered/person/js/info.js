@@ -44,6 +44,7 @@ var aCity = {
 $(function () {
     initUserinfo();
 });
+
 function initUserinfo() {
     $.ajax({
         url: contextPath + "/www/sign/getAcctInfo",
@@ -81,6 +82,7 @@ function initUserinfo() {
         }
     });
 }
+
 function renderPage(IDom, data, tempId) {
     var tpl = document.getElementById(tempId).innerHTML;
     var html = juicer(tpl, {
@@ -127,7 +129,10 @@ function bindWx() {
 }
 
 function initPolitical() {
-    var politicalArr = [{"id": "public", "value": "群众"}, {"id": "party", "value": "党员"}, {"id": "member", "value": "团员"}];
+    var politicalArr = [{"id": "public", "value": "群众"}, {"id": "party", "value": "党员"}, {
+        "id": "member",
+        "value": "团员"
+    }];
     var politicalSelect = new MobileSelect({
         trigger: '#political',
         title: '政治面貌选择',
@@ -191,7 +196,7 @@ function isCardNo(sId) {
     if (aCity[parseInt(sId.substr(0, 2))] == null) return "你的身份证地区非法";
     sBirthday = sId.substr(6, 4) + "-" + Number(sId.substr(10, 2)) + "-" + Number(sId.substr(12, 2));
     var d = new Date(sBirthday.replace(/-/g, "/"));
-    if (sBirthday != (d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate()))return "身份证上的出生日期非法";
+    if (sBirthday != (d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate())) return "身份证上的出生日期非法";
     for (var i = 17; i >= 0; i--) iSum += (Math.pow(2, i) % 11) * parseInt(sId.charAt(17 - i), 11);
     if (iSum % 11 != 1) return "你输入的身份证号非法";
     return true;
@@ -217,7 +222,7 @@ function editStudent() {
         alert("手机号码不能为空！");
         return;
     }
-    if(nativePlace == "" || nativePlace == undefined || nativePlace == null){
+    if (nativePlace == "" || nativePlace == undefined || nativePlace == null) {
         alert("籍贯不能为空！");
         return;
     }

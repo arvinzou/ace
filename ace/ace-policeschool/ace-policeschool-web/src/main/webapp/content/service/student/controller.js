@@ -81,9 +81,13 @@ function initEvents() {
         console.log(relatedTarget);
         initPreview(id);
     });
-
     //班级下拉筛选列表 -- 查询班级列表
     initClassList('s-cls-list');
+    $(".btn-group .btn").bind('click', function (event) {
+        $(event.target).siblings().removeClass("active");
+        console.log(event);
+        $(event.target).addClass("active");
+    });
 }
 
 function initImportClassList(ctrlId) {

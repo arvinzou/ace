@@ -45,6 +45,14 @@ function initData(dorm) {
     });
 }
 
+function viewPdf(url){
+    if(url){
+        window.location.href="./pdf/web/viewer.html?file="+encodeURI(url);
+        return;
+    }
+    alert("文件地址确实");
+}
+
 function renderPage(IDom, data, tempId) {
     var tpl = document.getElementById(tempId).innerHTML;
     var html = juicer(tpl, {

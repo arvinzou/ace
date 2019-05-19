@@ -22,12 +22,26 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-8 ">
+                <div class="col-md-4 ">
 
                     <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
 
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-8">
+                    <div class="btn-group" role="group" style="float:left;padding-right:15px">
+                        <button type="button"
+                                authority="false" class="btn btn-default active" onclick="setParams('status','1');">授课中
+                        </button>
+                        <button type="button"
+                                authority="false" class="btn btn-default" onclick="setParams('status','2');">毕业
+                        </button>
+                        <button type="button"
+                                authority="false" class="btn btn-default " onclick="setParams('status','0');">注销
+                        </button>
+                        <button type="button"
+                                authority="false" class="btn btn-default " onclick="setParams('status','');">全部
+                        </button>
+                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"

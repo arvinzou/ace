@@ -31,6 +31,17 @@
                     </button>
                 </div>
                 <div class="col-md-9">
+                    <div class="btn-group" role="group" style="float:left;padding-right:15px">
+                        <button type="button"
+                                authority="false" class="btn btn-default active" onclick="setParams('status','1');">正常
+                        </button>
+                        <button type="button"
+                                authority="false" class="btn btn-default" onclick="setParams('status','0');">注销
+                        </button>
+                        <button type="button"
+                                authority="false" class="btn btn-default " onclick="setParams('status','');">全部
+                        </button>
+                    </div>
                     <div class="input-group" role="group" style="float:left;padding-right:5px">
                         籍贯 <input id="p-areaCode" name="areaCode"
                                   class="easyui-combotree" style='width: 200px;height:30px'
