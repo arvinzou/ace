@@ -63,7 +63,7 @@ function initUserinfo() {
                 }
                 sex = result.data.sex;
                 if (result.data.regType == 'student') {
-                    account = result.data.student.mobile;
+                    account = result.data.student.badgeNum;
                 } else {
                     account = result.data.teacher.mobile;
                 }
