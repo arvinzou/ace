@@ -239,7 +239,7 @@ public class SeApiToolKit {
     public static Map<String, Object> executePreset(String AreaNO, String PresetNo, String AreaNodeID) {
 
         String requestURL = apiURLStr(12);
-        requestURL += "&AreaNO=" + AreaNO + "&PresetNo=" + PresetNo + "&AreaNodeID=" + AreaNodeID;
+        requestURL += "&AreaNo=" + AreaNO + "&PresetNo=" + PresetNo + "&AreaNodeID=" + AreaNodeID;
         String rstJson = post(requestURL, "");
         logger.debug(" [SeApiToolKit.executePreset], response={}", rstJson);
 
@@ -256,7 +256,7 @@ public class SeApiToolKit {
     public static Map<String, Object> executeTask(String TaskNO) {
 
         String requestURL = apiURLStr(13);
-        requestURL += "&TaskNO=" + TaskNO;
+        requestURL += "&TaskNo=" + TaskNO;
         String rstJson = post(requestURL, "");
         logger.debug(" [SeApiToolKit.executeTask], response={}", rstJson);
 
