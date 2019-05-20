@@ -2,7 +2,9 @@ package com.huacainfo.ace.policeschool.web.filter;
 
 import com.huacainfo.ace.common.security.spring.BasicUsers;
 import com.huacainfo.ace.common.tools.CommonKeys;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.common.tools.SpringUtils;
+import com.huacainfo.ace.common.tools.TimestampKit;
 import com.huacainfo.ace.common.web.tools.WebUtils;
 import com.huacainfo.ace.policeschool.constant.CommConstant;
 import org.apache.commons.lang.StringUtils;
@@ -55,6 +57,12 @@ public class WebLoginSecurityFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
+
+        logger.info("*******************************in WebLoginSecurityFilter*******************************");
+        String domain = PropertyUtil.getProperty("fastdfs_server");
+        if (domain.endsWith("/")) {
+            domain = domain.substring(0, domain.length() - 1);
+        }
         HttpServletRequest httpReq = (HttpServletRequest) request;
         HttpSession session = httpReq.getSession();
         Object object = session.getAttribute(CommonKeys.SESSION_USERPROP_KEY);
@@ -69,7 +77,22 @@ public class WebLoginSecurityFilter implements Filter {
         if (accessable) {
             chain.doFilter(request, response);
         } else {
-            ((HttpServletResponse) response).sendRedirect(redirectPage);
+            String uri = domain + redirectPage;
+            if (uri.lastIndexOf("?") == -1) {
+                uri += "?timestamp=" + TimestampKit.getTimestamp13();
+            } else if (uri.lastIndexOf("?") != uri.length() - 1) {
+                uri += "&timestamp=" + TimestampKit.getTimestamp13();
+            } else {
+                uri += "timestamp=" + TimestampKit.getTimestamp13();
+            }
+            logger.info("WebLoginSecurityFilter.sendRedirect.uri-> {}", uri);
+            try {
+                ((HttpServletResponse) response).sendRedirect(uri);
+                return;
+            } catch (IOException e) {
+                logger.error("WebLoginSecurityFilter.error-> {}", e);
+            }
+
         }
     }
 
