@@ -311,7 +311,6 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
 		}
         data.setOrderNo(generateOrderNo());
         data.setUserId(userVo.getId());
-        data.setAnonymity(StringUtil.isEmpty(data.getAnonymity()) ? "0" : data.getAnonymity());
         data.setId(GUIDUtil.getGUID());
         data.setStatus("1");
         data.setLastModifyDate(new Date());

@@ -6,6 +6,7 @@ var orderResultData = null;
 var payData = null;
 var isName = false;
 var paramsObj;
+var anonymity='0';
 
 
 /**url参数解析为对象*/
@@ -56,12 +57,14 @@ window.onload = function(){
         $(this).siblings().show();
         isName = true;
         $("#userInfo").hide();
+        anonymity="1";
     });
     $("#yes").click(function(){
         $(this).hide();
         $(this).siblings().show();
         isName = false;
         $("#userInfo").show();
+        anonymity="0";
     });
 
 
@@ -140,6 +143,7 @@ function donateMoney1 (){
                 "remark": message,
                 "consigneeMobileNumber":billphoneNumber,
                 "donatePostName": donatePostName,
+                'anonymity':anonymity,
                 "donateType":donateType//	1慈善一日捐 ，2日行一善
             })
         },
