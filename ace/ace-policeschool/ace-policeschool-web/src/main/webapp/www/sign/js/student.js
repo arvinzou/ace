@@ -257,7 +257,7 @@ function searchByName() {
 
                 var classesSelect= new MobileSelect({
                     trigger: '#classes',
-                    title: '党校班级选择',
+                    title: '警校班级选择',
                     wheels: [
                         {data: classesArr}
                     ],

@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="title" id="title">
-    <p>党史讲座：学党史、知党情</p>
+    <p></p>
 </div>
 <div class="testContent" id="test">
 </div>

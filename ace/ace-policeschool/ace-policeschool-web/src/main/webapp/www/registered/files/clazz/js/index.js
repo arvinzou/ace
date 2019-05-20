@@ -152,7 +152,7 @@ function initClasses() {
                     fileList();
                     var classesSelect = new MobileSelect({
                         trigger: '#clazz',
-                        title: '党校班级选择',
+                        title: '警校班级选择',
                         wheels: [
                             {data: classesArr}
                         ],

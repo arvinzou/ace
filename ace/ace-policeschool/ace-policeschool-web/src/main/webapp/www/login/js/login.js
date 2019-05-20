@@ -1,21 +1,21 @@
 var errorInfo = null;
 $(function () {
-    var locaUrl = decodeURIComponent(window.location.href);
-    var url = locaUrl.substring(locaUrl.indexOf("?") + 1);
-    var paramArr = url.split("&");
-    for (var i = 0; i < paramArr.length; i++) {
-        num = paramArr[i].indexOf("=");
-        if (num > 0) {
-            name = paramArr[i].substring(0, num);
-            value = paramArr[i].substr(num + 1);
-            if (name == "error") {
-                errorInfo = value;
-            }
-        }
-    }
-    if (errorInfo != null) {
-        alert(errorInfo);
-    }
+    // var locaUrl = decodeURIComponent(window.location.href);
+    // var url = locaUrl.substring(locaUrl.indexOf("?") + 1);
+    // var paramArr = url.split("&");
+    // for (var i = 0; i < paramArr.length; i++) {
+    //     num = paramArr[i].indexOf("=");
+    //     if (num > 0) {
+    //         name = paramArr[i].substring(0, num);
+    //         value = paramArr[i].substr(num + 1);
+    //         if (name == "error") {
+    //             errorInfo = value;
+    //         }
+    //     }
+    // }
+    // if (errorInfo != null) {
+    //     alert(errorInfo);
+    // }
 
 
     // /**

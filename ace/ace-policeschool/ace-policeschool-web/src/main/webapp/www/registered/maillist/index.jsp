@@ -23,11 +23,6 @@
     </div>
     <div class="box">
         <li class="list" id="treeList">
-            <%--<div class="row rb">
-                <div class="title01">中共常德市委党校全体教职工</div>
-                <div class="option" onclick="dorpAndDown(this,'oneMenu')"><img src="img/icon_up.png" class="icon-up" name="up"/></div>
-            </div>--%>
-
         </li>
     </div>
     <div class="box" id="otherList">
