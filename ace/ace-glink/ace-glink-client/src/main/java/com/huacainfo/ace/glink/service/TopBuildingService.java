@@ -3,6 +3,7 @@ package com.huacainfo.ace.glink.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.glink.model.TopBuilding;
 import com.huacainfo.ace.glink.vo.TopBuildingQVo;
@@ -133,4 +134,12 @@ public interface TopBuildingService {
      * @return MessageResponse
      */
     MessageResponse syncData(UserProp curUserProp);
+
+    /**
+     * 获取GIS地图建筑物信息
+     *
+     * @param buildingCode 建筑物编码
+     * @return SingleResult<TopBuildingGISVo>
+     */
+    ResultResponse getGISInfo(String buildingCode);
 }

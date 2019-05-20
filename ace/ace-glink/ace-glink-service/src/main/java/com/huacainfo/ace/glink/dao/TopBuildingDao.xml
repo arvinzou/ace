@@ -170,4 +170,17 @@
     <update id="clearAll">
       delete from top_building
     </update>
+
+    <select id="findByCode" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    b.id, b.code, b.name, b.type, b.depict, b.address, b.longitude, b.latitude, b.mainTag, b.state, b.subareaCode,
+    b.remark, b.status, b.createUserId, b.createUserName, b.createDate, b.lastModifyUserId, b.lastModifyUserName,
+    b.lastModifyDate, b.stationCode, t.id as t_id, t.code as stationCode, t.subareaCode, t.name as stationName, t.depict, t.address, t.latitude,t.longitude,
+    s.name as subareaName
+    from top_building b
+    LEFT JOIN top_station t ON  t.code = b.stationCode
+    LEFT JOIN top_subarea s ON t.subareaCode = s.`code`
+    where b.code = #{buildingCode,jdbcType=VARCHAR}
+    limit 1
+  </select>
 </mapper>

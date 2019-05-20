@@ -385,4 +385,9 @@ public class LeSceneServiceImpl implements LeSceneService {
         return new MessageResponse(ResultCode.SUCCESS, "数据同步完成");
     }
 
+    @Override
+    public LeScene findBySceneNum(String sceneNum) {
+        return this.leSceneDao.findBySceneNum(sceneNum);
+    }
+
 }

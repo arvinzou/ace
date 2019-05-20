@@ -1,4 +1,3 @@
-import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.canvas.ImageKit;
 import com.huacainfo.ace.glink.api.LeApiToolKit;
@@ -47,12 +46,12 @@ public class CommonTest {
 
     private void leApiInvoke() {
         //500错误
-        String date = DateUtil.toStr(DateUtil.getNowDate(), "yyyyMMdd");
-        date = "20190416";
-        System.out.println("date=" + date);
-        System.out.println(LeApiToolKit.getBrokenLampDetail(date));
+//        String date = DateUtil.toStr(DateUtil.getNowDate(), "yyyyMMdd");
+//        date = "20190416";
+//        System.out.println("date=" + date);
+//        System.out.println(LeApiToolKit.getBrokenLampDetail(date));
 
-//        System.out.println(LeApiToolKit.getBuildingDetail(""));
+        System.out.println(LeApiToolKit.getBuildingDetail("JH001"));
 
         //分区灯光启动仪式
 //        System.out.println(LeApiToolKit.completionCeremony(1));
