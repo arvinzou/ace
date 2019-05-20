@@ -51,7 +51,7 @@ function renderPage(IDom, data, tempId) {
 function init() {
     var paramObj=queryURL();
     $('#point').text(paramObj.point);
-    $('#xunzhang').text(whichOne(paramObj.point));
+    $('#xunzhang').text(whichOne(parseInt(paramObj.point)));
     showWhich(paramObj.type);
     renderPage('aaa',paramObj, 'tpl-aaa');
     getOrderList(paramObj.projectId);
