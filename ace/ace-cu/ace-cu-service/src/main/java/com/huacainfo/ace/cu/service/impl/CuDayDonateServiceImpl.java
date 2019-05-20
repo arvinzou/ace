@@ -62,10 +62,10 @@ public class CuDayDonateServiceImpl implements CuDayDonateService {
 		JSONObject obj = new JSONObject();
 		List<CuDonateOrderVo> detailList = this.cuDonateOrderDao.getDayDonateDetails(projectId, openId);
 		for (CuDonateOrderVo vo : detailList) {
-			int amount = vo.getDonateAmount().intValue();
+			BigDecimal amount = vo.getDonateAmount();
 			obj.put("date", new SimpleDateFormat("yyyy-MM-dd").format(vo.getDonateDate()));
 			obj.put("amount", String.valueOf(amount));
-			obj.put("heartPoint", Integer.valueOf(amount / 10));
+			obj.put("heartPoint", Integer.valueOf(amount.intValue() / 10));
 			obj.put("actionPoint", Integer.valueOf(vo.getDayDonatePoint()));
 			data.add(obj);
 		}
