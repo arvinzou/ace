@@ -457,8 +457,10 @@ LIMIT 0,50
 
     <!-- 根据用户获取“日行一善”积分明细 -->
     <select id="getDayDonateDetails" resultType="com.huacainfo.ace.cu.vo.CuDonateOrderVo">
-        SELECT o.donateDate , o.donateAmount , o.points , o.dayDonatePoint FROM cu.cu_donate_order o 
+        SELECT o.donateDate , o.donateAmount , o.points , o.dayDonatePoint
+        FROM cu.cu_donate_order o
         WHERE status=2 AND projectId = #{projectId} AND openId = #{openId}
+        order by o.createDate desc
     </select>
 
     <!-- 捐款总量 -->
