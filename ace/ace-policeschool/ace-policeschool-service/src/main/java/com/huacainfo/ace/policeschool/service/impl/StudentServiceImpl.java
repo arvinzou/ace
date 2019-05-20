@@ -438,17 +438,13 @@ public class StudentServiceImpl implements StudentService {
             e.put("role", o.get("role"));
             rst.setValue(e);
         } else {
-            String classId = this.studentDao.selectTeacherClassInfoById(userProp.getUserId());
-            e.put("classId", classId);
-            e.put("role", "teacher");
-            List<Map<String, String>> list = this.studentDao.selectTeacherClasses(userProp.getUserId());
-            if (list.size() == 0) {
-                Map<String, String> t = new HashMap();
-                e.put("classId", "c000000999800009");
-                list.add(t);
+            List<String> classId = this.studentDao.selectTeacherClassInfoById(userProp.getUserId());
+            StringBuilder s=new StringBuilder();
+            for(int i=0;i<classId.size();i++){
+                s.append(classId.get(i)+'-');
             }
-            e.put("list", list);
-
+            e.put("classId", s.toString());
+            e.put("role", "teacher");
             rst.setValue(e);
         }
         return rst;
