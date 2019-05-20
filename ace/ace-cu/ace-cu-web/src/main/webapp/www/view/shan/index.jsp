@@ -70,7 +70,7 @@
 <script id="tpl-sss" type="text/template">
     <div class="shanxing progress">
         <div class="title help" data-message="善行积分：每天一次性捐款金额超过1元即可获得1积分，每日获得积分上限为1积分">善行积分
-            <span class="icon help" data-message="善行积分：每天一次性捐款金额超过1元即可获得1积分，每日获得积分上限为1积分">?</span></div>
+            <span class="icon">?</span></div>
         <div>
             <div class="status \${data.todayActionPoint==0?'active':''}"></div>
             <div class="text">
@@ -80,7 +80,7 @@
     </div>
     <div class="shanxin progress">
         <div class="title help" data-message="善心积分：捐款总金额每增加10元，即可获得1积分。">
-            善心积分<span class="icon help" data-message="善心积分：捐款总金额每增加10元，即可获得1积分。">?</span></div>
+            善心积分<span class="icon">?</span></div>
         <div>
             <div class="status \${data.todayHeartPoint==0?'active':''}"></div>
             <div class="text">
