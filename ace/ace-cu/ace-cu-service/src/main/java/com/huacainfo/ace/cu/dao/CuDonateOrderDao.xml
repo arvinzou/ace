@@ -427,45 +427,47 @@
                   GROUP BY a.openId) c on c.openId = t.openid
         where t.id = #{orderId,jdbcType=VARCHAR}
     </select>
-    
+
     <!-- 获取弹幕数据 -->
     <select id="bulletScreenData" resultType="java.util.Map">
-        SELECT 
-        	o.remark ,(
-        	            SELECT
-        	              u.avatarUrl
-        	            FROM
-        	              portal.wx_user u
-        	            WHERE u.openId = o.openId
-        	          )
-        	            AS avatarUrl
-        FROM 
-        	cu.cu_donate_order o 
-        WHERE 
-        	o.projectId=#{projectId} AND o.status=2 and o.remark is not null and o.remark <![CDATA[ <> ]]> ''
-        order by o.createDate desc
-        LIMIT 0,50
+        SELECT
+case when o.anonymity = '0' then  (
+ SELECT
+	 u.headimgurl
+ FROM
+	 portal.userinfo u
+ WHERE u.openId = o.openId
+)
+else '' END    AS avatarUrl,
+   o.remark
+FROM cu.cu_donate_order o
+WHERE
+   o.projectId= #{projectId} AND o.status=2 and o.remark is not null and o.remark != ''
+
+order by o.createDate desc
+LIMIT 0,50
+
     </select>
-    
+
     <!-- 检查当天是否获取善行积分 -->
     <select id="checkDayPoint" resultType="int">
         SELECT COUNT(1) FROM cu_donate_order 
         WHERE dayDonatePoint = 1 AND status = 2 AND TO_DAYS(donateDate) = TO_DAYS(now()) AND projectId = #{projectId} AND userId = #{userId}
     </select>
-    
+
     <!-- 根据用户获取“日行一善”积分明细 -->
     <select id="getDayDonateDetails" resultType="com.huacainfo.ace.cu.vo.CuDonateOrderVo">
         SELECT o.donateDate , o.donateAmount , o.points , o.dayDonatePoint FROM cu.cu_donate_order o 
         WHERE status=2 AND projectId = #{projectId} AND openId = #{openId}
     </select>
-    
+
     <!-- 捐款总量 -->
     <select id="getTotalMoney" resultType="java.util.Map">
         SELECT IFNULL(a.dayAmount,0) AS dayAmount, IFNULL(b.totalAmount,0)  AS totalAmount FROM 
         (SELECT SUM(donateAmount) AS dayAmount , projectId FROM cu_donate_order WHERE status = 2 AND projectId = #{projectId} AND TO_DAYS(donateDate) = TO_DAYS(now())) a,
 		(SELECT SUM(donateAmount) AS totalAmount , projectId FROM cu_donate_order WHERE status = 2 AND projectId = #{projectId}) b 
     </select>
-    
+
     <!-- 善心积分排行 -->
     <select id="getHeartPointsRank" resultType="java.util.Map">
         SELECT * FROM 
@@ -475,7 +477,7 @@
         	(SELECT u.openId FROM portal.wx_user u WHERE u.openId = o.openId) AS openId
         FROM cu_donate_order o WHERE status = 2 AND projectId = #{projectId} GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
     </select>
-    
+
     <!-- 善行积分排行 -->
     <select id="getActionPointsRank" resultType="java.util.Map">
         SELECT * FROM 
@@ -485,7 +487,7 @@
         	(SELECT u.openId FROM portal.wx_user u WHERE u.openId = o.openId) AS openId
         FROM cu_donate_order o WHERE status = 2 AND projectId = #{projectId} GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
     </select>
-    
+
     <!-- 总积分排行 -->
     <select id="getTotalPointsRank" resultType="java.util.Map">
         SELECT * FROM 
