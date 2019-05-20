@@ -470,31 +470,52 @@ LIMIT 0,50
 
     <!-- 善心积分排行 -->
     <select id="getHeartPointsRank" resultType="java.util.Map">
-        SELECT * FROM 
-        	(SELECT (SELECT u.nickname FROM portal.userinfo u WHERE u.openId = o.openId) AS nickname,
-        	(SELECT u.headimgurl FROM portal.userinfo u WHERE u.openId = o.openId) AS avatarUrl,
-        	FLOOR(SUM(donateAmount)/10) AS totalPoints,
-        	(SELECT u.openId FROM portal.userinfo u WHERE u.openId = o.openId) AS openId
-        FROM cu_donate_order o WHERE status = 2 AND projectId = #{projectId} GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
+        SELECT * FROM (
+    SELECT
+    u.nickname, u.headimgurl AS avatarUrl, u.openId ,
+   FLOOR(SUM(donateAmount)/10) AS totalPoints
+    FROM cu_donate_order o
+    left join portal.userinfo u on o.openId = u.openid
+    WHERE status = 2
+    AND projectId = #{projectId}
+    GROUP BY userId
+    ORDER BY totalPoints DESC
+    ) t
+    WHERE t.totalPoints != 0
     </select>
+
+
 
     <!-- 善行积分排行 -->
     <select id="getActionPointsRank" resultType="java.util.Map">
-        SELECT * FROM 
-        	(SELECT (SELECT u.nickname FROM portal.userinfo u WHERE u.openId = o.openId) AS nickname,
-        	(SELECT u.headimgurl FROM portal.userinfo u WHERE u.openId = o.openId) AS avatarUrl,
-        	SUM(dayDonatePoint) AS totalPoints,
-        	(SELECT u.openId FROM portal.userinfo u WHERE u.openId = o.openId) AS openId
-        FROM cu_donate_order o WHERE status = 2 AND projectId = #{projectId} GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
+        SELECT * FROM (
+	                      SELECT
+	                              u.nickname, u.headimgurl AS avatarUrl, u.openId ,
+	                              SUM(dayDonatePoint) AS totalPoints
+	                              FROM cu_donate_order o
+	                              left join portal.userinfo u on o.openId = u.openid
+	                              WHERE status = 2
+	                                    AND projectId =#{projectId}
+	                                    GROUP BY userId
+	                              ORDER BY totalPoints DESC
+                      ) t
+        WHERE t.totalPoints != 0
+LIMIT 0,100
     </select>
 
     <!-- 总积分排行 -->
     <select id="getTotalPointsRank" resultType="java.util.Map">
-        SELECT * FROM 
-        	(SELECT (SELECT u.nickname FROM portal.userinfo u WHERE u.openId = o.openId) AS nickname,
-        	(SELECT u.headimgurl FROM portal.userinfo u WHERE u.openId = o.openId) AS avatarUrl,
-        	FLOOR(SUM(donateAmount)/10) + SUM(dayDonatePoint) AS totalPoints,
-        	(SELECT u.openId FROM portal.userinfo u WHERE u.openId = o.openId) AS openId
-        FROM cu_donate_order o WHERE status = 2 AND projectId = #{projectId} GROUP BY userId ORDER BY totalPoints DESC) t WHERE t.totalPoints != 0 LIMIT 0,100
+        SELECT * FROM (
+	                      SELECT
+	                              u.nickname, u.headimgurl AS avatarUrl, u.openId ,
+	                             FLOOR(SUM(donateAmount)/10) + SUM(dayDonatePoint) AS totalPoints
+	                              FROM cu_donate_order o
+	                              left join portal.userinfo u on o.openId = u.openid
+	                              WHERE status = 2
+	                                    AND projectId = #{projectId}
+	                                    GROUP BY userId
+	                              ORDER BY totalPoints DESC
+                      ) t
+        WHERE t.totalPoints != 0
     </select>
 </mapper>
