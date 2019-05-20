@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <title>常德警官培训中心</title>
+    <title>常德市公安局警官培训中心</title>
     <jsp:include page="../../common/common.jsp"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
 </head>
