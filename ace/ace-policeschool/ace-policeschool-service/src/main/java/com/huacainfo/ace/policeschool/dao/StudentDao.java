@@ -45,7 +45,7 @@ public interface StudentDao {
 
     Map<String, String> selectUserClassInfo(String id);
 
-    String selectTeacherClassInfoById(String id);
+    List<String> selectTeacherClassInfoById(String id);
 
 
     List<Map<String, String>> selectTeacherClasses(String id);
