@@ -152,7 +152,7 @@ public class CourseServiceImpl implements CourseService {
         course.setLastModifyUserId(userProp.getUserId());
         course.setName(o.getName());
         course.setCategory(o.getCategory());
-        course.setEvaluatingId(o.getEvaluatingId());
+        course.setEvaluatingId(CommonUtils.isBlank(o.getEvaluatingId())?null:o.getEvaluatingId());
         course.setTeacherId(o.getTeacherId());
         this.courseDao.updateByPrimaryKey(course);
         this.dataBaseLogService.log("变更课程管理", "课程管理", "",
