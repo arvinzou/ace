@@ -2,7 +2,14 @@ $(function () {
     var vConsole = new VConsole();
     getUserInfo();
     init();
+    $('.aaa').on('click','li',alertHelp)
 })
+/**显示提示信息*/
+function alertHelp() {
+    var that =$(this);
+    var message=that.data('type');
+    alert(message+'积分获得此勋章')
+}
 
 function getUserInfo() {
     var url="/cu/www/user/findByOpenId";

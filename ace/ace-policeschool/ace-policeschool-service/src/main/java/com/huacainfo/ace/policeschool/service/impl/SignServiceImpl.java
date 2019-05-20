@@ -306,7 +306,7 @@ public class SignServiceImpl implements SignService {
             return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
         }
         if (StringUtil.isNotEmpty(users.getOpenId())) {
-            return new ResultResponse(ResultCode.FAIL, "该账户已绑定过其他微信号");
+            return new ResultResponse(ResultCode.FAIL, "该微信号已绑定过其他账户");
         }
         if (users.getStauts().equals(ACCOUNT_INVALID)) {
             return new ResultResponse(ResultCode.FAIL, "账户已注销，请联系管理员");

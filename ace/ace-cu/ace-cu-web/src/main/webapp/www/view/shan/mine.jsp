@@ -80,27 +80,27 @@
 </script>
 
 <script id="tpl-aaa" type="text/template">
-    <li class="\${data.point >1?'':'gray'}">
+    <li data-type="1" class="\${data.point >0?'':'gray'}">
         <img src="img/zhu.png" alt=""/>
         <div>助人为乐</div>
     </li>
-    <li class="\${data.point>10?'':'gray'}">
+    <li data-type="10" class="\${data.point>9?'':'gray'}">
         <img src="img/chi.png" alt=""/>
         <div>持之以恒</div>
     </li>
-    <li class="\${data.point>50?'':'gray'}">
+    <li data-type="50" class="\${data.point>49?'':'gray'}">
         <img src="img/ai.png" alt=""/>
         <div>爱的奉献</div>
     </li>
-    <li class="\${data.point>100?'':'gray'}">
+    <li data-type="100" class="\${data.point>99?'':'gray'}">
         <img src="img/zhi.png" alt=""/>
         <div>挚爱之心</div>
     </li>
-    <li class="\${data.point>500?'':'gray'}">
+    <li data-type="499" class="\${data.point>499?'':'gray'}">
         <img src="img/man.png" alt=""/>
         <div>爱满人间</div>
     </li>
-    <li class="\${data.point>1000?'':'gray'}">
+    <li data-type="999" class="\${data.point>999?'':'gray'}">
         <img src="img/ren.png" alt=""/>
         <div>仁爱无敌</div>
     </li>

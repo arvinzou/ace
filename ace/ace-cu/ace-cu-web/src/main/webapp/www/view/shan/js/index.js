@@ -22,8 +22,15 @@ $(function () {
     var vConsole = new VConsole();
     getProject();
     $('.menu .menuBtn').on('click','.href2',goRank);
+    $('#sss').on('click','.help',alertHelp)
 })
 
+/**显示提示信息*/
+function alertHelp(){
+    var that=$(this);
+    var message=that.data('message');
+    alert(message);
+}
 
 /**查看排名*/
 function goRank() {
