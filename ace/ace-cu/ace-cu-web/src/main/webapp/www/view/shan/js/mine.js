@@ -2,7 +2,7 @@ $(function () {
     var vConsole = new VConsole();
     getUserInfo();
     init();
-    $('.aaa').on('click','li',alertHelp)
+    $('#aaa').on('click','li',alertHelp)
 })
 /**显示提示信息*/
 function alertHelp() {

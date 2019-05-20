@@ -96,7 +96,10 @@ function openBarrager() {
         }
         var s = barragerList[i];
         if(s.remark){
-            item.info = s.remark.substring(0,16)+'…';
+            if(s.remark.length>16){
+                item.info = s.remark.substring(0,16)+'…';
+            }
+            item.info = s.remark;
             item.img = s.avatarUrl?s.avatarUrl:"img/people.png";
             $('#message').barrager(item);
         }
