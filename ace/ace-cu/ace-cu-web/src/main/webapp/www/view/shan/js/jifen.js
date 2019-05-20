@@ -40,7 +40,6 @@
 var rankObjcet;
 
 $(function(){
-    var vConsole = new VConsole();
     var data=queryURL();
     getRankingList(data.projectId);
     $('.rankType .typeList').on('click','li',changeRankType)

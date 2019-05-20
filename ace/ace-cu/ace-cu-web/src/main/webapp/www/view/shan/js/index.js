@@ -19,7 +19,6 @@ var projectId;
 var status;
 var totalPoint=0;
 $(function () {
-    var vConsole = new VConsole();
     getProject();
     $('.menu .menuBtn').on('click','.href2',goRank);
     $('#sss').on('click','.help',alertHelp)

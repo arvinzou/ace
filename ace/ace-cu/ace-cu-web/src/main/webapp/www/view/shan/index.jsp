@@ -33,7 +33,6 @@
 
     </script>
     <script src="js/flexible.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/vconsole.min.js"></script>
 </head>
 
 <body>

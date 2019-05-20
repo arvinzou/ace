@@ -31,7 +31,6 @@
             return result;
         };
     </script>
-    <script src="js/vconsole.min.js"></script>
 </head>
 
 <body>

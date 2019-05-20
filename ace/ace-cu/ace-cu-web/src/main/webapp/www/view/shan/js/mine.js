@@ -1,5 +1,4 @@
 $(function () {
-    var vConsole = new VConsole();
     getUserInfo();
     init();
     $('#aaa').on('click','li',alertHelp)
