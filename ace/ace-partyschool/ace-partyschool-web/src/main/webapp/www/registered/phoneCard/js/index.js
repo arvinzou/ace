@@ -19,6 +19,7 @@ function getSystemConfig() {
     $.getJSON(url, function (rst) {
         if (rst.status == 0) {
             mapConfigData=rst.data;
+            return;
         }
         alert("获取配置信息失败，将使用默认配置");
     })
