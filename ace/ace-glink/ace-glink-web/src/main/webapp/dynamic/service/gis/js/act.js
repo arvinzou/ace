@@ -20,11 +20,22 @@ function bd_encrypt(gcjLat, gcjLon) {
 };
 
 $(function () {
+    //juicer自定义函数
+    initJuicerMethod();
     $('#Map').click(cancelActive)
     $('.detailBar').on('click', '.b', changeview);
     initMap();
     findTopBuildingList();
 })
+
+function initJuicerMethod() {
+    juicer.register('parseTime', parseTime);
+}
+
+
+function parseTime(val) {
+    return val.substring(11,19);
+}
 
 /**初始化地图*/
 function initMap() {
@@ -105,6 +116,17 @@ function addMarker(point,o){
     marker.onclick=(function(o) {
         var clickLi = function() {
             console.log(o);
+            var url = contextPath + '/topBuilding/getGISInfo';
+            var data={buildingCode:o.code}
+            $.getJSON(url, data, function (rst) {
+                 if(rst.status==0){
+                     render('#buildInfo',rst.data,'tpl-buildInfo');
+                     render('#guzhang',rst.data,'tpl-guzhang');
+                     $('.detailBar').addClass('active');
+                 }else{
+                     alert(rst.info);
+                 }
+            })
         }
         return clickLi
     })(o);

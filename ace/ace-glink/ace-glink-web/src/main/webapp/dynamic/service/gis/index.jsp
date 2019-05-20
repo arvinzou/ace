@@ -85,345 +85,15 @@
                         <div class="tftables">
                             <table class="tftable" border="1">
                                 <tr>
-                                    <th>故障等级</th>
-                                    <th>故障设备</th>
-                                    <th>故障类型</th>
+                                    <th>分控器编号</th>
+                                    <th>通道编号</th>
+                                    <th>灯组编号</th>
                                     <th>故障时间</th>
                                 </tr>
                             </table>
                         </div>
                         <div class="tableList">
-                            <table class="tftable" border="1">
-                                <tr>
-                                    <th>故障等级</th>
-                                    <th>故障设备</th>
-                                    <th>故障类型</th>
-                                    <th>故障时间</th>
-                                </tr>
-                                <tr>
-                                    <td>Row:1 Cell:1</td>
-                                    <td>Row:1 Cell:2</td>
-                                    <td>Row:1 Cell:3</td>
-                                    <td>Row:1 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:2 Cell:1</td>
-                                    <td>Row:2 Cell:2</td>
-                                    <td>Row:2 Cell:3</td>
-                                    <td>Row:2 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:3 Cell:1</td>
-                                    <td>Row:3 Cell:2</td>
-                                    <td>Row:3 Cell:3</td>
-                                    <td>Row:3 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:4 Cell:1</td>
-                                    <td>Row:4 Cell:2</td>
-                                    <td>Row:4 Cell:3</td>
-                                    <td>Row:4 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:5 Cell:1</td>
-                                    <td>Row:5 Cell:2</td>
-                                    <td>Row:5 Cell:3</td>
-                                    <td>Row:5 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
-                                <tr>
-                                    <td>Row:6 Cell:1</td>
-                                    <td>Row:6 Cell:2</td>
-                                    <td>Row:6 Cell:3</td>
-                                    <td>Row:6 Cell:4</td>
-                                </tr>
+                            <table class="tftable" border="1" id="guzhang">
 
                             </table>
 
@@ -435,23 +105,8 @@
                         </div>
 
                     </div>
-                    <div class="swiper-slide build">
-                        <p>当前正在播放场景/已暂停</p>
-                        <p>34265885.avi</p>
-                        <video class="video" src="">
+                    <div class="swiper-slide build" id="buildInfo">
 
-                        </video>
-                        <div class="list">
-                            <p>建筑物名称：沌口四标万达广场2#</p>
-                            <p>建筑物类型：联机建筑</p>
-                            <p>所在地：湖北省武汉市江汉区</p>
-                            <p>建筑物编号：L0038</p>
-                            <p>是否重点建筑：重点建筑</p>
-                            <p> 建筑物状态：在线</p>
-                            <p>回路故障数量:6</p>
-                            <p>联机控制器数量：1</p>
-                            <p>开关控制器数量：1</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -468,6 +123,44 @@
 </div>
 
 
+<script id="tpl-buildInfo" type="text/template">
+    <p>当前正在播放场景/\${data.isPlaying==1?'已暂停':'播放中'}</p>
+    <p>\${data.sceneNum}</p>
+    <video class="video" src="\${data.coverURL}">
+    </video>
+    <div class="list">
+        <p>建筑物名称：\${data.buildingName}</p>
+        <p>建筑物类型：联机建筑</p>
+        <p>所在地：\${data.address}</p>
+        <p>建筑物编号：\${data.buildingNo}</p>
+        <p>是否重点建筑：重点建筑</p>
+        <p> 建筑物状态：\${data.status==1?'在线':'离线'}</p>
+        <p>回路故障数量:6</p>
+        <p>设备总数：\${data.lampCount}</p>
+        <p>控制器数量：\${data.ctrlCount}</p>
+    </div>
+</script>
+
+<script id="tpl-guzhang" type="text/template">
+
+    <tr>
+        <th>分控器编号</th>
+        <th>通道编号</th>
+        <th>灯组编号</th>
+        <th>故障时间</th>
+    </tr>
+    {@each data.le as item, index}
+    <tr>
+        <th>\${item.controller}</th>
+        <th>\${item.channelNo}</th>
+        <th>\${item.lampNo}</th>
+        <th>\${parseTime(item.createDate)}</th>
+    </tr>
+    {@/each}
+</script>
+
+
+
 <script id="tpl-areaList" type="text/template">
     {@each data as item, index}
     <li>
@@ -479,6 +172,8 @@
     </li>
     {@/each}
 </script>
+
+
 
 <script id="tpl-stationList" type="text/template">
     <li>
