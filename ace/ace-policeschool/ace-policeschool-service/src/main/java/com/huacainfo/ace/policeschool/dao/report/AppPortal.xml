@@ -10,7 +10,7 @@
         FROM
         class_schedule a
         WHERE
-        a.classesId = #{classId}
+        a.classesId like concat('%',#{classId},'%')
         <![CDATA[
         AND a.startTime <= NOW()
          ]]>
@@ -38,14 +38,14 @@
         VALUE
         FROM
         student t WHERE t.STATUS = '1'
-        and t.classId=#{classId}
+        and t.classId like concat('%',#{classId},'%')
         UNION ALL
 
         SELECT
         'test' id, COUNT(1)
         FROM class_schedule cs
         WHERE cs.startTime <![CDATA[ < ]]> NOW()
-        AND cs.classesId = #{classId}
+        AND cs.classesId like concat('%',#{classId},'%')
         AND cs.ifTest ='1'
         AND cs.id NOT IN
         (
@@ -61,17 +61,7 @@
         FROM
         files t
         WHERE t.STATUS = '1'
-
-        <if test='role="student"'>
-            and t.classesId=#{classId}
-        </if>
-        <if test='list!=null'>
-            and t.classesId in
-            <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
-                #{item.classId}
-            </foreach>
-        </if>
-
+        and t.classesId like concat('%',#{classId},'%')
 
     </select>
 </mapper>
