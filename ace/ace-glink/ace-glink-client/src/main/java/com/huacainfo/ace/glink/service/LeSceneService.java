@@ -178,4 +178,6 @@ public interface LeSceneService {
      * @throws Exception
      */
     MessageResponse syncData(UserProp curUserProp);
+
+    LeScene findBySceneNum(String sceneNum);
 }

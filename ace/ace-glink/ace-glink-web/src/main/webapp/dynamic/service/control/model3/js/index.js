@@ -505,11 +505,8 @@ var scenarioParams = {
 
 /*任务初始化管理*/
 function initScenario() {
-    /**点击执行按钮*/
     $('#scenarioList').on('click', 'button', selectPreset);
-    /**搜索模式*/
     $('.scenario-modal').on('click', '.submit', searchPreset);
-    /**选择模式*/
     $('.scenario-modal #presets').on('click', 'li', setScenario);
     $("#areaNodeID1").combotree({
         onChange: function (newValue, oldValue) {
@@ -524,7 +521,8 @@ function setScenario() {
     scenarioPostData.presetNo = that.data('presetno');
     var url = contextPath + '/seCustomArea/executePreset';
     $.post(url, scenarioPostData, function (rst) {
-        alert(rst.value.Status);
+
+        console.log(rst);
     })
 }
 
@@ -564,7 +562,7 @@ function initPageScenario() {
 }
 
 
-/**ajax获取数据列表*/
+/*ajax获取数据列表*/
 function getScenarioList(key, value) {
     if (key) {
         scenarioParams[key] = value;
@@ -612,7 +610,6 @@ function selectPreset() {
 
 function searchPreset() {
     presetMap.start = 0;
-    /**查询模式*/
     selectPreset();
 }
 
@@ -696,3 +693,5 @@ function mGetDate(m) {
     var d = new Date(year, m, 0);
     return d.getDate();
 }
+
+

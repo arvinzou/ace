@@ -1,9 +1,18 @@
 package com.huacainfo.ace.glink.web.controller;
 
-import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.glink.api.LeApiToolKit;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.result.*;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.glink.api.SeApiToolKit;
-import com.huacainfo.ace.glink.api.pojo.le.LightStrategyIn;
+import com.huacainfo.ace.glink.model.SeCustomArea;
+import com.huacainfo.ace.glink.service.SeCustomAreaService;
+import com.huacainfo.ace.glink.vo.SeCustomAreaQVo;
+import com.huacainfo.ace.glink.vo.SeCustomAreaVo;
+import com.huacainfo.ace.portal.vo.MongoFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,24 +20,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.ExcelUtils;
-import com.huacainfo.ace.glink.model.SeCustomArea;
-import com.huacainfo.ace.glink.service.SeCustomAreaService;
-import com.huacainfo.ace.glink.vo.SeCustomAreaVo;
-import com.huacainfo.ace.glink.vo.SeCustomAreaQVo;
 import org.springframework.web.multipart.MultipartFile;
-import com.huacainfo.ace.portal.vo.MongoFile;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/seCustomArea")
@@ -288,11 +284,19 @@ public class SeCustomAreaController extends GLinkBaseController {
      */
     @RequestMapping(value = "/executePreset")
     @ResponseBody
-    public SingleResult executePreset(String areaNO, String presetNo, String areaNodeID) throws Exception {
-        Map<String, Object> map = SeApiToolKit.executePreset(areaNO,presetNo,areaNodeID);
-        SingleResult<Map> rst = new SingleResult<>();
-        rst.setValue(map);
-        return rst;
+    public ResultResponse executePreset(String areaNO, String presetNo, String areaNodeID) throws Exception {
+        if (CommonUtils.isBlank(areaNO)) {
+            return new ResultResponse(ResultCode.FAIL, "逻辑区编码不能为空");
+        }
+        if (CommonUtils.isBlank(presetNo)) {
+            return new ResultResponse(ResultCode.FAIL, "场景编号不能为空");
+        }
+        if (CommonUtils.isBlank(presetNo)) {
+            return new ResultResponse(ResultCode.FAIL, "区域编码不能为空");
+        }
+
+        Map<String, Object> map = SeApiToolKit.executePreset(areaNO, presetNo, areaNodeID);
+        return new ResultResponse(ResultCode.SUCCESS, "接口推送完成", map);
     }
 
 }

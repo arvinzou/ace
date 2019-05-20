@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.ExcelUtils;
@@ -232,5 +233,18 @@ public class TopBuildingController extends GLinkBaseController {
     @RequestMapping(value = "/syncData")
     public MessageResponse syncData() {
         return this.topBuildingService.syncData(getCurUserProp());
+    }
+
+    /**
+     * 获取GIS地图建筑物信息
+     *
+     * @param buildingCode 建筑物编码
+     * @return SingleResult<TopBuildingGISVo>
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getGISInfo")
+    public ResultResponse getGISInfo(String buildingCode) {
+
+        return topBuildingService.getGISInfo(buildingCode);
     }
 }

@@ -6,13 +6,20 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.*;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.glink.api.LeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
 import com.huacainfo.ace.glink.api.pojo.le.GetBulidingDetailOut;
+import com.huacainfo.ace.glink.api.pojo.le.StrategysDetailOut;
 import com.huacainfo.ace.glink.dao.TopBuildingDao;
+import com.huacainfo.ace.glink.model.LeScene;
 import com.huacainfo.ace.glink.model.TopBuilding;
+import com.huacainfo.ace.glink.service.LeSceneService;
 import com.huacainfo.ace.glink.service.TopBuildingService;
 import com.huacainfo.ace.glink.vo.TopBuildingQVo;
 import com.huacainfo.ace.glink.vo.TopBuildingVo;
@@ -29,6 +36,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +55,8 @@ public class TopBuildingServiceImpl implements TopBuildingService {
 
     @Autowired
     private SqlSessionTemplate sqlSession;
+    @Override
+    private LeSceneService leSceneService;
 
     /**
      * @throws
@@ -360,6 +370,100 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         }
 
         return new MessageResponse(ResultCode.SUCCESS, "同步数据成功");
+    }
+
+    /**
+     * 获取GIS地图建筑物信息
+     *
+     * @param buildingCode 建筑物编码
+     * @return SingleResult<TopBuildingGISVo>
+     */
+    @Override
+    public ResultResponse getGISInfo(String buildingCode) {
+        //建筑物主体信息
+        TopBuildingVo b = this.topBuildingDao.findByCode(buildingCode);
+        if (b == null) {
+            return new ResultResponse(ResultCode.FAIL, "建筑物信息不存在");
+        }
+        //通过弱电接口，获取建筑物状态
+        GetBulidingDetailOut out = LeApiToolKit.getBuildingDetail(buildingCode);
+        GetBulidingDetailOut.BulidingDetail onlineBuilding = out.getData().get(0);
+        //
+        String isPlaying = "0";
+        String sceneNum = "";
+        String ctrlCount = "0";
+        String lampCount = "0";
+        String buildingName = b.getName();
+        String address = b.getAddress();
+        String buildingNo = buildingCode;
+        String status = "0";
+        if (onlineBuilding != null) {
+            isPlaying = onlineBuilding.getIsPlaying();
+            sceneNum = onlineBuilding.getIsPlayingStrategy();
+            ctrlCount = onlineBuilding.getControllerCount();
+            lampCount = onlineBuilding.getLampCount();
+            buildingName = onlineBuilding.getBuildingName();
+            address = onlineBuilding.getBuildingAddress();
+            buildingNo = onlineBuilding.getBuildingNo();
+            status = onlineBuilding.getStatus();
+        }
+        //策略播放预览文件
+        String playURL = "";
+        String coverURL = "";
+        if (StringUtil.isNotEmpty(sceneNum)) {
+            LeScene scene = leSceneService.findBySceneNum(sceneNum);
+            playURL = scene == null ? "" : scene.getPlayUrl();
+            coverURL = scene == null ? "" : scene.getViewUrl();
+        }
+
+        //返回数据体
+        Map<String, Object> rst = new HashMap<>();
+        //是否正在播放 1：正在播放，0：未播放，
+        rst.put("isPlaying", isPlaying);
+        //正在播放的文件 策略编号
+        rst.put("sceneNum", sceneNum);
+        //视频封面地址
+        rst.put("coverURL", coverURL);
+        //视频播放地址
+        rst.put("playURL", playURL);
+        //控制器数量
+        rst.put("ctrlCount", ctrlCount);
+        //设备总数
+        rst.put("lampCount", lampCount);
+        //建筑物名称
+        rst.put("buildingName", buildingName);
+        //所在地
+        rst.put("address", address);
+        //建筑物编号
+        rst.put("buildingNo", buildingNo);
+        //建筑物状态 1：在线，0：离线
+        rst.put("status", status);
+
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
+    }
+
+    /***
+     * 获取当前播放策略
+     *
+     * @return 策略编号
+     */
+    private String getCurrentSceneNum() {
+        StrategysDetailOut out;
+        try {
+            out = LeApiToolKit.strategysDetail();
+        } catch (Exception e) {
+            return "error";
+        }
+        if (out == null || CollectionUtils.isEmpty(out.getData())) {
+            return "error";
+        }
+        for (StrategysDetailOut.Strategy item : out.getData()) {
+            if (1 == item.getIsPlaying()) {
+                return item.getStrategyNum();
+            }
+        }
+
+        return "error";
     }
 
 }
