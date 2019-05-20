@@ -58,21 +58,21 @@ function init() {
 }
 /**查询勋章个数*/
 function whichOne(num) {
-    if(num>1000){
+    if(num>999){
         return 6;
-    }else if(num>500){
+    }else if(num>499){
         return 5;
     }
-    else if(num>100){
+    else if(num>99){
         return 4;
     }
-    else if(num>50){
+    else if(num>49){
         return 3;
     }
-    else if(num>10){
+    else if(num>9){
         return 2;
     }
-    else if(num>1){
+    else if(num>0){
         return 1;
     }else{
         return 0;

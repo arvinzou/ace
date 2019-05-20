@@ -4,15 +4,15 @@ $(function () {
 })
 
 function getUserInfo() {
-    var url="/cu/www/user/findByOpenId";
-    $.getJSON(url,function (result) {
-        if(result.status == 0) {
-            $('.head .headImg img').prop('src',result.data.headimgurl?result.data.headimgurl:"img/people.png");
-            $('.head .name').text(result.data.nickname);
-        }else {
-            alert(result.info);
-        }
-    })
+    // var url="/cu/www/user/findByOpenId";
+    // $.getJSON(url,function (result) {
+    //     if(result.status == 0) {
+    //         $('.head .headImg img').prop('src',result.data.headimgurl?result.data.headimgurl:"img/people.png");
+    //         $('.head .name').text(result.data.nickname);
+    //     }else {
+    //         alert(result.info);
+    //     }
+    // })
 }
 
 /**查看捐赠记录*/
@@ -42,8 +42,8 @@ function renderPage(IDom, data, tempId) {
 
 function init() {
     var paramObj=queryURL();
-    $('#point').text(data.point);
-    $('#xunzhang').text(whichOne(data.point));
+    $('#point').text(paramObj.point);
+    $('#xunzhang').text(whichOne(parseInt(paramObj.point)));
     showWhich(paramObj.type);
     renderPage('aaa',paramObj, 'tpl-aaa');
     getOrderList(paramObj.projectId);
@@ -52,19 +52,19 @@ function init() {
 function whichOne(num) {
     if(num>1000){
         return 6;
-    }else if(num>500){
+    }else if(num>499){
         return 5;
     }
-    else if(num>100){
+    else if(num>99){
         return 4;
     }
-    else if(num>50){
+    else if(num>49){
         return 3;
     }
-    else if(num>10){
+    else if(num>9){
         return 2;
     }
-    else if(num>1){
+    else if(num>0){
         return 1;
     }else{
         return 0;

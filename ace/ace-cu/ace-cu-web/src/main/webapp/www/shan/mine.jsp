@@ -57,27 +57,27 @@
 </script>
 
 <script id="tpl-aaa" type="text/template">
-    <li class="\${data.point >1?'':'gray'}">
+    <li class="\${+data.point >0?'':'gray'}">
         <img src="img/zhu.png" alt=""/>
         <div>助人为乐</div>
     </li>
-    <li class="\${data.point>10?'':'gray'}">
+    <li class="\${+data.point>9?'':'gray'}">
         <img src="img/chi.png" alt=""/>
         <div>持之以恒</div>
     </li>
-    <li class="\${data.point>50?'':'gray'}">
+    <li class="\${+data.point>50?'':'gray'}">
         <img src="img/ai.png" alt=""/>
         <div>爱的奉献</div>
     </li>
-    <li class="\${data.point>100?'':'gray'}">
+    <li class="\${+data.point>100?'':'gray'}">
         <img src="img/zhi.png" alt=""/>
         <div>挚爱之心</div>
     </li>
-    <li class="\${data.point>500?'':'gray'}">
+    <li class="\${+data.point>500?'':'gray'}">
         <img src="img/man.png" alt=""/>
         <div>爱满人间</div>
     </li>
-    <li class="\${data.point>1000?'':'gray'}">
+    <li class="\${+data.point>1000?'':'gray'}">
         <img src="img/ren.png" alt=""/>
         <div>仁爱无敌</div>
     </li>
