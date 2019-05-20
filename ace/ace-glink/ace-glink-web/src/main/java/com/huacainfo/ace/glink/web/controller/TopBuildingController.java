@@ -244,7 +244,6 @@ public class TopBuildingController extends GLinkBaseController {
     @ResponseBody
     @RequestMapping(value = "/getGISInfo")
     public ResultResponse getGISInfo(String buildingCode) {
-
         return topBuildingService.getGISInfo(buildingCode);
     }
 }

@@ -10,6 +10,17 @@ public class LeBrokenLampQVo extends LeBrokenLamp {
      */
     private String keyword;
 
+/**查询标志*/
+    private String today;
+
+    public String getToday() {
+        return today;
+    }
+
+    public void setToday(String today) {
+        this.today = today;
+    }
+
     public String getKeyword() {
         return keyword;
     }

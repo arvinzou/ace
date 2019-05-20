@@ -16,11 +16,15 @@ import com.huacainfo.ace.glink.api.LeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.base.LeBaseOut;
 import com.huacainfo.ace.glink.api.pojo.le.GetBulidingDetailOut;
 import com.huacainfo.ace.glink.api.pojo.le.StrategysDetailOut;
+import com.huacainfo.ace.glink.dao.LeBrokenLampDao;
 import com.huacainfo.ace.glink.dao.TopBuildingDao;
+import com.huacainfo.ace.glink.model.LeBrokenLamp;
 import com.huacainfo.ace.glink.model.LeScene;
 import com.huacainfo.ace.glink.model.TopBuilding;
 import com.huacainfo.ace.glink.service.LeSceneService;
 import com.huacainfo.ace.glink.service.TopBuildingService;
+import com.huacainfo.ace.glink.vo.LeBrokenLampQVo;
+import com.huacainfo.ace.glink.vo.LeBrokenLampVo;
 import com.huacainfo.ace.glink.vo.TopBuildingQVo;
 import com.huacainfo.ace.glink.vo.TopBuildingVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -55,8 +59,10 @@ public class TopBuildingServiceImpl implements TopBuildingService {
 
     @Autowired
     private SqlSessionTemplate sqlSession;
-    @Override
+    @Autowired
     private LeSceneService leSceneService;
+    @Autowired
+    private LeBrokenLampDao leBrokenLampDao;
 
     /**
      * @throws
@@ -385,6 +391,10 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         if (b == null) {
             return new ResultResponse(ResultCode.FAIL, "建筑物信息不存在");
         }
+        LeBrokenLampQVo leBrokenLampQVo=new LeBrokenLampQVo();
+        leBrokenLampQVo.setBuildingNo(buildingCode);
+        leBrokenLampQVo.setToday("yes");
+        List<LeBrokenLampVo> list=leBrokenLampDao.findList(leBrokenLampQVo,0,100, "createDate desc");
         //通过弱电接口，获取建筑物状态
         GetBulidingDetailOut out = LeApiToolKit.getBuildingDetail(buildingCode);
         GetBulidingDetailOut.BulidingDetail onlineBuilding = out.getData().get(0);
@@ -438,7 +448,8 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         rst.put("buildingNo", buildingNo);
         //建筑物状态 1：在线，0：离线
         rst.put("status", status);
-
+        //错误列表
+        rst.put("le",list);
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
     }
 

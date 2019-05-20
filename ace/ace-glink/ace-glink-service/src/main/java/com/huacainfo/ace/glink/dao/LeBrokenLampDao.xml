@@ -75,11 +75,17 @@
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
+        <if test="condition.buildingNo !=null and condition.buildingNo !=&quot;&quot;">
+            and t.buildingNo like concat(#{condition.buildingNo,jdbcType=VARCHAR},'%')
+        </if>
         <if test="condition.checkDate !=null and condition.checkDate !=&quot;&quot;">
             and t.checkDate like concat(#{condition.checkDate,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
             and b.buildingName like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.today !=null and condition.today !=&quot;&quot;">
+            and t.createDate BETWEEN CONCAT(CURDATE(),' 00:00:00') AND CONCAT(CURDATE(),' 23:59:59')
         </if>
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
