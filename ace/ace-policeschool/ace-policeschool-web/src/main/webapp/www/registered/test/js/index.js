@@ -51,7 +51,7 @@ function getDoneTests() {
 
 /**时间截取*/
 function dateTimeToDate(Str) {
-    return Str.substring(0, 11);
+    return Str.substring(0, 16);
 }
 
 /**获取用户信息*/

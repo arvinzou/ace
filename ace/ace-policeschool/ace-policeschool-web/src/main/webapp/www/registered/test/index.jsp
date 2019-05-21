@@ -14,7 +14,7 @@
     <div class="content">
         <div class="userInfo" id="userInfo">
             <div class="headImg">
-                <img src="http://suo.im/4C98Qc">
+                <img src="">
             </div>
             <div class="name">
                 你的名字
@@ -53,7 +53,7 @@
             <p class="title">\${item.course.name}</p>
             <p class="otherInfo">
                 <img class="icon" src="img/icon_time.png" alt="">
-                <span class="margin30">\${item.startTime|dateTimeToDate} \${item.courseIndex=='am'?'上午':'下午'}</span>
+                <span class="margin30">\${item.startTime|dateTimeToDate}</span>
                 <img class="icon" src="img/icon_person.png" alt="">
                 <span>\${item.teacher.name}</span></p>
         </div>

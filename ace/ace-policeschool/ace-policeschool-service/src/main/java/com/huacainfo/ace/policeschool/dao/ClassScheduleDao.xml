@@ -163,6 +163,7 @@
         WHERE cs.startTime <![CDATA[ < ]]> NOW()
         AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
         AND cs.ifTest ='1'
+        And c.evaluatingId is not null
         AND cs.id NOT IN
         (
         SELECT t.classScheduleId
@@ -219,9 +220,11 @@
     <select id="notDoneTestSize" resultType="int">
         SELECT COUNT(*)
         FROM class_schedule cs
+        LEFT JOIN policeschool.course c ON cs.courseId =c.id
         WHERE cs.startTime <![CDATA[ < ]]> NOW()
         AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
         AND cs.ifTest ='1'
+        And c.evaluatingId is not null
         AND cs.id NOT IN
         (
         SELECT distinct classScheduleId
