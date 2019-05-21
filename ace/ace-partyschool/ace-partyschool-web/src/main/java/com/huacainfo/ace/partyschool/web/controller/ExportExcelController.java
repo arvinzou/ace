@@ -13,14 +13,15 @@ import com.huacainfo.ace.partyschool.service.AttRecordService;
 import com.huacainfo.ace.partyschool.vo.AttRecordExport;
 import com.huacainfo.ace.partyschool.vo.AttRecordQVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName ExportExcelController
@@ -28,9 +29,14 @@ import java.util.List;
  * @Author Arvin Zou
  * @Date 2019/3/22 14:52
  */
-@Controller
+@RestController
 @RequestMapping("/exportExcel/")
 public class ExportExcelController extends BisBaseController {
+    /**
+     * 最大查询天数
+     */
+    private static final int MAX_QRY_DAY = 7;
+
     @Autowired
     private AttRecordService attRecordService;
 
@@ -81,5 +87,58 @@ public class ExportExcelController extends BisBaseController {
         util.exportExcel(fileName, fileName, columnNames, list, response, ExportExcelKit.EXCEL_FILE_2003);
 
         return new ResultResponse(ResultCode.SUCCESS, "导出成功");
+    }
+
+    /**
+     * 教职工考勤报表
+     *
+     * @param queryDate 日期列表，多个日期用英文逗号隔开,最多支持7个；
+     *                  2019/05/21,2019/05/22,2019/05/23,2019/05/24...
+     * @return ResultResponse
+     */
+    @RequestMapping("/teacherReport")
+    public ResultResponse teacherReport(String queryDate) {
+        if (StringUtil.isEmpty(queryDate)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少查询日期");
+        }
+        String[] dateArray = queryDate.replace("/", "-").split(",");
+        if (dateArray.length > MAX_QRY_DAY) {
+            return new ResultResponse(ResultCode.FAIL, "‘查询日期’最多支持7天");
+        }
+        //数据集合
+        List<Map<String, Object>> rst = attRecordService.teacherAttReport(dateArray);
+
+        return new ResultResponse(ResultCode.SUCCESS, "导出成功", rst);
+    }
+
+    /**
+     * 学员考勤报表
+     *
+     * @param queryDate  日期列表，多个日期用英文逗号隔开,最多支持7个；
+     *                   2019/05/21,2019/05/22,2019/05/23,2019/05/24...
+     * @param classId    班次ID
+     * @param stuAttType 考勤类别;0-上课考勤，1-住宿考勤
+     * @return ResultResponse
+     */
+    @RequestMapping("/studentReport")
+    public ResultResponse studentReport(String classId, String stuAttType, String queryDate) {
+
+        if (StringUtil.isEmpty(queryDate)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少查询日期");
+        }
+        if (StringUtil.isEmpty(stuAttType)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少考勤类别");
+        }
+        if (StringUtil.isEmpty(classId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少班次ID");
+        }
+        String[] dateArray = queryDate.replace("/", "-").split(",");
+        if (dateArray.length > MAX_QRY_DAY) {
+            return new ResultResponse(ResultCode.FAIL, "‘查询日期’最多支持7天");
+        }
+        //数据集合
+        List<Map<String, Object>> rst = attRecordService.studentReport(classId, stuAttType, dateArray);
+
+        return new ResultResponse(ResultCode.SUCCESS, "导出成功", rst);
     }
 }

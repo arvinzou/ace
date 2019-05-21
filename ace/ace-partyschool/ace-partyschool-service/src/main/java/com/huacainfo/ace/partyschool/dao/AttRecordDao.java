@@ -52,4 +52,12 @@ public interface AttRecordDao {
                                      @Param("start") int start,
                                      @Param("limit") int limit,
                                      @Param("orderBy") String orderBy);
+
+    List<Map<String, Object>> findAllTeacherList();
+
+    List<AttRecord> findOneDayDate(@Param("userId") String userId,
+                                   @Param("startTime") String startTime,
+                                   @Param("endTime") String endTime);
+
+    List<Map<String, Object>> findStudetnList(String classId);
 }

@@ -44,6 +44,7 @@ public interface AttRecordService {
      * @version: 2019-02-20
      */
     MessageResponse insertAttRecord(AttRecord obj, UserProp userProp) throws Exception;
+
     ResultResponse location(UserProp userProp) throws Exception;
 
     /**
@@ -121,7 +122,7 @@ public interface AttRecordService {
      * @param: @param p
      * @param: @return
      * @param: @throws Exception
-     * @return: ListResult<Map<String,Object>>
+     * @return: ListResult<Map < String, Object>>
      * @author: Arvin
      * @version: 2019-02-20
      */
@@ -134,7 +135,7 @@ public interface AttRecordService {
      * @Description: TODO(用于控件数据获取)
      * @param: @param params
      * @param: @return
-     * @return: Map<String,Object>
+     * @return: Map<String, Object>
      * @author: Arvin
      * @version: 2019-02-20
      */
@@ -144,7 +145,7 @@ public interface AttRecordService {
     /**
      * @throws
      * @Title:deleteRoadSectionByRoadSectionIds
-     * @Description: TODO(批量删除学员考勤）
+     * @Description: TODO(批量删除学员考勤 ）
      * @param: @param ids
      * @param: @param userProp
      * @param: @throws Exception
@@ -186,4 +187,24 @@ public interface AttRecordService {
     ResultResponse findList(String userId, String dateTimeStr);
 
     List<AttRecordExport> exportAttRecord(AttRecordQVo condition);
+
+    /**
+     * 教职工考勤报表
+     *
+     * @param dateArray 日期列表，多个日期用英文逗号隔开,最多支持7个；
+     *                  2019/05/21,2019/05/22,2019/05/23,2019/05/24...
+     */
+    List<Map<String, Object>> teacherAttReport(String[] dateArray);
+
+
+    /**
+     * 学员考勤报表
+     *
+     * @param dateArray  日期列表，多个日期用英文逗号隔开,最多支持7个；
+     *                   2019/05/21,2019/05/22,2019/05/23,2019/05/24...
+     * @param classId    班次ID
+     * @param stuAttType 考勤类别;0-上课考勤，1-住宿考勤
+     * @return ResultResponse
+     */
+    List<Map<String, Object>> studentReport(String classId, String stuAttType, String[] dateArray);
 }
