@@ -148,6 +148,9 @@ function renderPage(IDom, data, tempId) {
  * 点击签到
  */
 function record() {
+    if (!lat||!longt) {
+        alert("微信获取当前位置失败！请打开GPS进行重新定位");
+    }
     var con = confirm("是否确定提交?");
     if (con == true) {
         $.ajax({
