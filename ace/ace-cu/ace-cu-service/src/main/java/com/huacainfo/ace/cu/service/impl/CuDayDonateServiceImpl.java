@@ -80,8 +80,10 @@ public class CuDayDonateServiceImpl implements CuDayDonateService {
 		List<Map<String, Object>> heartPoints = this.cuDonateOrderDao.getHeartPointsRank(projectId);
 
 		JSONObject temp = new JSONObject();
-		for (Map<String, Object> map : totalPoints) {
+		for (int i=0;i<totalPoints.size();i++) {
+			Map<String,Object> map=totalPoints.get(i);
 			if (openId.equals(map.get("openId"))) {
+				map.put("self",i+1);
 				temp.put("userRank", JSONObject.fromObject(map));
 				break;
 			}
@@ -89,25 +91,26 @@ public class CuDayDonateServiceImpl implements CuDayDonateService {
 		temp.put("rank", JSONArray.fromObject(totalPoints));
 		data.put("totalRank", temp);
 
-		for (Map<String, Object> map : actionPoints) {
-			temp.clear();
+		for (int i=0;i<actionPoints.size();i++) {
+			Map<String,Object> map=actionPoints.get(i);
 			if (openId.equals(map.get("openId"))) {
+				map.put("self",i+1);
 				temp.put("userRank", JSONObject.fromObject(map));
 				break;
 			}
 		}
 		temp.put("rank", JSONArray.fromObject(actionPoints));
 		data.put("actionRank", temp);
-		for (Map<String, Object> map : heartPoints) {
-			temp.clear();
+		for (int i=0;i<heartPoints.size();i++) {
+			Map<String,Object> map=heartPoints.get(i);
 			if (openId.equals(map.get("openId"))) {
+				map.put("self",i+1);
 				temp.put("userRank", JSONObject.fromObject(map));
 				break;
 			}
 		}
 		temp.put("rank", JSONArray.fromObject(heartPoints));
 		data.put("heartRank", temp);
-
 		return new ResultResponse(0, "获取积分排名信息成功！", data.toString());
 	}
 }
