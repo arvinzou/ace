@@ -159,7 +159,9 @@ function initInputDate() {
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
     var checkin = $('input[name=startTime]').fdatepicker({
-        format: 'yyyy-mm-dd',
+        format: 'yyyy-mm-dd hh:ii',
+        pickTime: true,
+        disableDblClickSelection: true,
         onRender: function (date) {
             return date.valueOf() < now.valueOf() ? 'disabled' : '';
         }
@@ -169,16 +171,16 @@ function initInputDate() {
             newDate.setDate(newDate.getDate() + 1);
             checkout.update(newDate);
         }
-        checkin.hide();
-        $('input[name=stopTime]')[0].focus();
     }).data('datepicker');
     var checkout = $('input[name=stopTime]').fdatepicker({
-        format: 'yyyy-mm-dd',
+        format: 'yyyy-mm-dd hh:ii',
+        pickTime: true,
+        disableDblClickSelection: true,
         onRender: function (date) {
             return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
         }
     }).on('changeDate', function (ev) {
-        checkout.hide();
+
     }).data('datepicker');
 }
 
