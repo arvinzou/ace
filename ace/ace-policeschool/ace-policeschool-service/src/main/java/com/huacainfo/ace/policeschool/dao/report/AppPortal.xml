@@ -44,8 +44,10 @@
         SELECT
         'test' id, COUNT(1)
         FROM class_schedule cs
+        LEFT JOIN policeschool.course c ON cs.courseId =c.id
         WHERE cs.startTime <![CDATA[ < ]]> NOW()
         AND cs.classesId like concat('%',#{classId},'%')
+        And c.evaluatingId is not null
         AND cs.ifTest ='1'
         AND cs.id NOT IN
         (
