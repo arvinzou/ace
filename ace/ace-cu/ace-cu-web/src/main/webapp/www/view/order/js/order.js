@@ -24,6 +24,9 @@ function queryURL(){
 
 window.onload = function(){
     paramsObj=queryURL();
+    if(paramsObj.donateType){
+        $('#message').prop('placeholder','您的暖心留言会弹在屏幕上～');
+    }
     $("#onoffswitch").on('click', function() {
         clickSwitch()
     });

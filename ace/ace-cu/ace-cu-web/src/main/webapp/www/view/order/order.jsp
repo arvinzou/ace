@@ -56,7 +56,7 @@
 					<div class="form_max">
 						<p style="padding-top: 0.3rem;padding-bottom: 0.3rem;">留言</p>
 						<p>
-							<textarea id="message" placeholder="请填写留言内容" onfocus="this.placeholder=''" onblur="this.placeholder='请填写留言内容'"></textarea>
+							<textarea id="message" placeholder="请填写留言内容"></textarea>
 						</p>
 					</div>
 					<div class="form">
