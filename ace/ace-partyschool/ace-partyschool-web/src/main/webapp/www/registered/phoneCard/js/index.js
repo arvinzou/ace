@@ -18,7 +18,7 @@ function getSystemConfig() {
     $.ajaxSettings.async = false;
     $.getJSON(url, function (rst) {
         if (rst.status == 0) {
-            mapConfigData=rst.data;
+            mapConfigData = rst.data;
             return;
         }
         alert("获取配置信息失败，将使用默认配置");
@@ -94,41 +94,41 @@ function locate(data) {
             success: function (res) {
                 lat = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                 longt = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                if (!lat) {
+                    alert("微信获取当前位置失败！请打开GPS进行重新定位");
+                }
+                var center = new qq.maps.LatLng(mapConfigData.pointLat, mapConfigData.pointLng);  //默认以常德市委党校为中心
+                // var center = new qq.maps.LatLng(29.047770,111.598520);  //默认以常德市委党校为中心
                 if (lat) {
-                    var center = new qq.maps.LatLng(mapConfigData.pointLat, mapConfigData.pointLng);  //默认以常德市委党校为中心
-                    // var center = new qq.maps.LatLng(29.047770,111.598520);  //默认以常德市委党校为中心
                     var locate = new qq.maps.LatLng(lat, longt);
-                    var map = new qq.maps.Map(document.getElementById("mapBox"), {
-                        // 地图的中心地理坐标。
-                        center: center,
-                        zoom: 14
-                    });
-                    var marker = new qq.maps.Marker({
-                        position: center,
-                        map: map,
-                        content: '常德市委党校'
-                    });
-                    var cirle = new qq.maps.Circle({
-                        map: map,
-                        center: center,
-                        radius: parseInt(mapConfigData.radius),
-                        strokeWeight: 1
-                    });
+                }
+                var map = new qq.maps.Map(document.getElementById("mapBox"), {
+                    // 地图的中心地理坐标。
+                    center: center,
+                    zoom: 14
+                });
+                var marker = new qq.maps.Marker({
+                    position: center,
+                    map: map,
+                    content: '常德市委党校'
+                });
+                var cirle = new qq.maps.Circle({
+                    map: map,
+                    center: center,
+                    radius: parseInt(mapConfigData.radius),
+                    strokeWeight: 1
+                });
+                if (lat) {
                     var marker = new qq.maps.Marker({
                         position: locate,
                         map: map,
                         content: '我'
                     });
-
-                    findList();
-                } else {
-                    alert("微信获取当前位置失败！");
-                    return;
                 }
-
+                findList();
             },
             fail: function () {
-                alert("微信获取当前位置失败！");
+                alert("微信获取当前位置失败！请打开GPS进行重新定位");
                 return;
             }
         });
