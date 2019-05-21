@@ -70,8 +70,7 @@
     <li>
         <div class="info">
             <p class="time">\${item.date}</p>
-            为“日行一善”项目捐赠\${item.amount}元，获得善心\${item.heartPoint}积分,善
-            行\${item.actionPoint}积分
+            为“日行一善”项目捐赠\${item.amount}元，获得善心\${item.heartPoint}积分,善行\${item.actionPoint}积分
         </div>
     </li>
     {@/each}
@@ -94,11 +93,11 @@
         <img src="img/zhi.png" alt=""/>
         <div>挚爱之心</div>
     </li>
-    <li data-type="499" class="\${+data.point>499?'':'gray'}">
+    <li data-type="500" class="\${+data.point>499?'':'gray'}">
         <img src="img/man.png" alt=""/>
         <div>爱满人间</div>
     </li>
-    <li data-type="999" class="\${+data.point>999?'':'gray'}">
+    <li data-type="1000" class="\${+data.point>999?'':'gray'}">
         <img src="img/ren.png" alt=""/>
         <div>仁爱无敌</div>
     </li>
