@@ -1,4 +1,5 @@
 var timer;
+var nowPage = 'tasks';
 $(window).resize(function () {   //当浏览器大小变化时
     clearTimeout(timer);
     timer = setTimeout(function () {
@@ -25,11 +26,15 @@ function closeModal() {
 function changePage() {
     var that = $(this);
     var type = that.data('type');
-    var flag = judgeUpdate();
-    if (flag == true) {
-        $('.modals').hide();
-        $('.modals.' + type).show();
+    if (nowPage == 'Control'&&type!='Control') {
+        var flag = judgeUpdate();
+        if (!flag) {
+            return;
+        }
     }
+    nowPage=type;
+    $('.modals').hide();
+    $('.modals.' + type).show();
 }
 
 
