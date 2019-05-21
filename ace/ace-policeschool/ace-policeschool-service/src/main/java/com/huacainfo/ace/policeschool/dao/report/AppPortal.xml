@@ -64,6 +64,5 @@
         files t
         WHERE t.STATUS = '1'
         and t.classesId like concat('%',#{classId},'%')
-
     </select>
 </mapper>
