@@ -159,7 +159,7 @@ function initEvents() {
         $(event.target).addClass("active");
     });
     //查询条件
-    initClassList('s-cls-list');
+    initClassList('s-cls-list', '全部');
     //
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
@@ -174,12 +174,100 @@ function initEvents() {
         var p = {};
         reset_uploader(p);
     });
-    //
+
+    //原始记录导出
     initExportModal();
+    //教职工报表
+    initTeacherModal();
+    //学员报表
+    initStudentModal();
+}
+
+function initTeacherModal() {
+    //按钮弹窗事件监听
+    $('#btn-export-tea').on('click', function () {
+        $('#modal-export-tea').modal('show');
+    });
+    //
+    $('#modal-export-tea').on('show.bs.modal', function (event) {
+        console.log("modal-export-tea.show()")
+    });
+    //form submit
+    $('#modal-export-tea .btn-primary').on('click', function () {
+        //查询日期必选
+        var queryDate = $('#ext-date-stu').val();
+        if (strIsEmpty(queryDate)) {
+            alert('请选择查询日期！');
+            return false;
+        }
+        //submit
+        $('#modal-export-tea form').submit();
+    });
+    //submit response
+    $('#modal-export-tea form').form({
+        beforeSubmit: function (formData, jqForm, options) {
+        },
+        success: function (rst) {
+            var obj = jQuery.parseJSON(rst);
+            var htmlTxt = "导出成功";
+            if (obj.status == 1) {
+                htmlTxt = "<font style='color: red;'>" + obj.info + "</font>"
+            } else {
+                htmlTxt = "<font style='color: green;'>" + obj.info + "</font>"
+            }
+            $('#resp-msg-tea').removeClass("hide").html(htmlTxt);
+        }
+    });
+}
+
+function initStudentModal() {
+    //按钮弹窗事件监听
+    $('#btn-export-stu').on('click', function () {
+        $('#modal-export-stu').modal('show');
+    });
+    //班次下拉选框
+    initClassList('ext-cls-list-stu', '请选择班次');
+
+    //
+    $('#modal-export-stu').on('show.bs.modal', function (event) {
+        console.log("modal-export-stu.show()")
+    });
+    //form submit
+    $('#modal-export-stu .btn-primary').on('click', function () {
+        //班次必选
+        var clsId = $('#ext-cls-list-stu option:selected').val();
+        if (strIsEmpty(clsId)) {
+            alert('请选择班次信息！');
+            return false;
+        }
+        //查询日期必选
+        var queryDate = $('#ext-date-stu').val();
+        if (strIsEmpty(queryDate)) {
+            alert('请选择查询日期！');
+            return false;
+        }
+        //submit
+        $('#modal-export-stu form').submit();
+    });
+    //submit response
+    $('#modal-export-stu form').form({
+        beforeSubmit: function (formData, jqForm, options) {
+        },
+        success: function (rst) {
+            var obj = jQuery.parseJSON(rst);
+            var htmlTxt = "导出成功";
+            if (obj.status == 1) {
+                htmlTxt = "<font style='color: red;'>" + obj.info + "</font>"
+            } else {
+                htmlTxt = "<font style='color: green;'>" + obj.info + "</font>"
+            }
+            $('#resp-msg-stu').removeClass("hide").html(htmlTxt);
+        }
+    });
 }
 
 function initExportModal() {
-    initClassList('ext-cls-list');
+    initClassList('ext-cls-list', '请选择班次');
 
     //导出模态框
     $('#modal-export').on('show.bs.modal', function (event) {
@@ -226,7 +314,7 @@ function initExportModal() {
     });
 }
 
-function initClassList(ctrlId) {
+function initClassList(ctrlId, blankName) {
     startLoad();
     $.ajax({
         url: contextPath + "/classes/getClassList",
@@ -237,7 +325,7 @@ function initClassList(ctrlId) {
             stopLoad();
             if (result.status == 0) {
                 var data = result.value;
-                var all = {id: "", name: "全部"};
+                var all = {id: "", name: blankName};
                 data.unshift(all);
                 render('#' + ctrlId, data, 'tpl-cls-option');
                 initJQGrid();

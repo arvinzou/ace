@@ -198,4 +198,38 @@
         ORDER BY t.attTime desc, v.userType, v.userName
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
+
+    <select id="findAllTeacherList" parameterType="java.lang.String" resultType="map">
+        select
+            t.id, t.sort, t.`name`, d.`name` as unitName
+        from teacher t
+        left join portal.dict d on d.category_id='156' and d.`code` = t.workUnitName
+        where t.`status`= '1'
+        order by t.sort
+    </select>
+
+    <select id="findOneDayDate" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from att_record
+        where userId = #{userId,jdbcType=VARCHAR}
+        and attTime BETWEEN #{startTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
+        order by attTime asc
+    </select>
+
+    <select id="findStudetnList" parameterType="java.lang.String" resultType="map">
+        SELECT
+            @rank:=@rank + 1 AS sort, a.*
+        FROM (
+
+            select
+                t.`name` as studentName,c.`name` as clasName
+            from student t
+            left join classes c on t.classId = c.id
+            where t.classId = #{classId,jdbcType=VARCHAR}
+            and t.`status` = '1'
+            order by t.`name`
+
+        ) a, (SELECT @rank:= 0) b
+    </select>
 </mapper>

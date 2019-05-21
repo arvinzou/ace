@@ -23,13 +23,14 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-2 toolbar">
+                <div class="col-md-4 toolbar">
 
-                    <button type="button" class="btn  green" id="btn-view-export"
-                            authority="${pageContext.request.contextPath}/attRecord/insertAttRecord">导出工具
-                    </button>
+                    <button type="button" class="btn  green" id="btn-view-export" authority="false"> 导出工具</button>
+                    <button type="button" class="btn  green" id="btn-export-tea" authority="false"> 教职工报表</button>
+                    <button type="button" class="btn  green" id="btn-export-stu" authority="false"> 学员报表</button>
+
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-8">
 
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" authority="false"
@@ -64,7 +65,8 @@
                         <input type="text" name="name" class="form-control" style="height: 31px;" placeholder="请输入姓名">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn" id="btn-search"
-                                    authority="${pageContext.request.contextPath}/attRecord/findAttRecordList">
+                                    authority="false">
+                                <%--${pageContext.request.contextPath}/attRecord/findAttRecordList--%>
                                 搜索
                             </button>
                         </span>
@@ -85,9 +87,109 @@
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 
+<%--学员报表--%>
+<div class="modal fade" role="dialog" id="modal-export-stu">
+    <div class="modal-dialog" role="document" style="width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">学员报表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm-export-stu">
+                        <form method="post" class="form-horizontal" role="form"
+                              action="${pageContext.request.contextPath}/exportExcel/studentReport">
+                            <label id="resp-msg-stu" class="view-label hide"></label>
+                            <div class="form-group cls-select">
+                                <label class="col-md-3 view-label">
+                                    考勤类别<span style='color:red;font-size:16px;font-weight:800'>*</span>
+                                </label>
+                                <div class="col-md-9">
+                                    <div class="radio-group-container">
+                                        <label>
+                                            <input type="radio" name="stuAttType" value="0" checked><span
+                                                style="padding:10px">上课考勤</span>
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="stuAttType" value="1"><span style="padding:10px">住宿考勤</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group cls-select">
+                                <label class="col-md-3 view-label">
+                                    班次<span style='color:red;font-size:16px;font-weight:800'>*</span>
+                                </label>
+                                <div class="col-md-9">
+                                    <select id="ext-cls-list-stu" name="clsId" class="form-control"
+                                            style="width:275px;height: 31px;">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 view-label">
+                                    查询日期<span style='color:red;font-size:16px;font-weight:800'>*</span>
+                                </label>
+                                <div class="col-md-9">
+                                    <input id="ext-date-stu" name="queryDate" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+                <button type="button" class="btn btn-primary" authority="false">下载excel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--教职工报表--%>
+<div class="modal fade" role="dialog" id="modal-export-tea">
+    <div class="modal-dialog" role="document" style="width: 45%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">教职工报表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm-export-tea">
+                        <form method="post" class="form-horizontal" role="form"
+                              action="${pageContext.request.contextPath}/exportExcel/teacherReport">
+
+                            <label id="resp-msg-tea" class="view-label hide"></label>
+
+                            <div class="form-group">
+                                <label class="col-md-3 view-label">
+                                    查询日期<span style='color:red;font-size:16px;font-weight:800'>*</span>
+                                </label>
+                                <div class="col-md-9">
+                                    <input id="ext-date-tea" name="queryDate" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+                <button type="button" class="btn btn-primary" authority="false">下载excel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%--数据导出--%>
 <div class="modal fade" role="dialog" id="modal-export">
-    <div class="modal-dialog" role="document" style="width: 75%;">
+    <div class="modal-dialog" role="document" style="width: 60%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">

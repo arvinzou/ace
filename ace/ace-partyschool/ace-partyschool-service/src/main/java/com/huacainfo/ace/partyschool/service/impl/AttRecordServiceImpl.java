@@ -154,11 +154,11 @@ public class AttRecordServiceImpl implements AttRecordService {
         double cLng = Double.parseDouble(centerArray[1]);
         //参考半径
         Config radius = configService.findByKey(CommConstant.SYS_ID, "att_radius");
-        Map<String,String> map=new HashMap<String,String>();
-        map.put("pointLat",String.valueOf(cLat));
-        map.put("pointLng",String.valueOf(cLng));
-        map.put("radius",radius.getConfigValue());
-        return new ResultResponse(ResultCode.SUCCESS,"成功",map);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("pointLat", String.valueOf(cLat));
+        map.put("pointLng", String.valueOf(cLng));
+        map.put("radius", radius.getConfigValue());
+        return new ResultResponse(ResultCode.SUCCESS, "成功", map);
     }
 
     private String setState(boolean isStudent, Date attTime,
@@ -649,13 +649,8 @@ public class AttRecordServiceImpl implements AttRecordService {
         String userType = condition.getUserType();
         Date startDate = DateUtil.getDate(condition.getStartDate(), DateUtil.DEFAULT_DATE_REGEX);
         Date endDate = DateUtil.getDate(condition.getEndDate(), DateUtil.DEFAULT_DATE_REGEX);
-        //获取区间配置
-        boolean isStudent = userType.equals(CommConstant.STUDENT);
-        String cfgKey = isStudent ? "STU" : "TEA";
-        Map<String, String> config = getConfigMap(isStudent, cfgKey);
-        if (CollectionUtils.isEmpty(config)) {
-            throw new CustomException("考勤配置参数有误");
-        }
+        //考勤配置参数
+        Map<String, String> config = getAttConfig(CommConstant.TEACHER);
         //返回参数
         List<AttRecordExport> rst = new LinkedList<>();
         //循环日期
@@ -679,6 +674,181 @@ public class AttRecordServiceImpl implements AttRecordService {
         return rst;
 
 
+    }
+
+    /**
+     * 教职工考勤报表
+     *
+     * @param dateArray 日期列表，多个日期用英文逗号隔开,最多支持7个；
+     *                  2019/05/21,2019/05/22,2019/05/23,2019/05/24...
+     * @return List<Map < String, Object>>
+     */
+    @Override
+    public List<Map<String, Object>> teacherAttReport(String[] dateArray) {
+        //1、获取所有教职工列表
+        List<Map<String, Object>> rst = this.attRecordDao.findAllTeacherList();
+        //2、遍历所有教职工和所选日期，挨个统计当天考勤结果
+        String attDayResult;
+        List<AttRecord> list;
+        String startTime;
+        String endTime;
+        for (Map<String, Object> item : rst) {
+            for (String date : dateArray) {
+                startTime = date + " 00:00:00";
+                endTime = date + " 23:59:59";
+                list = attRecordDao.findOneDayDate(String.valueOf(item.get("id")), startTime, endTime);
+                attDayResult = teacherAttDayResult(list);
+                item.put(date, attDayResult);
+            }
+        }
+
+        return rst;
+    }
+
+    /**
+     * 学员考勤报表
+     *
+     * @param classId    班次ID
+     * @param stuAttType 考勤类别;0-上课考勤，1-住宿考勤
+     * @param dateArray  日期列表，多个日期用英文逗号隔开,最多支持7个；
+     *                   2019/05/21,2019/05/22,2019/05/23,2019/05/24...
+     * @return ResultResponse
+     */
+    @Override
+    public List<Map<String, Object>> studentReport(String classId, String stuAttType, String[] dateArray) {
+        //1、获取班次所有学员列表
+        List<Map<String, Object>> studentList = this.attRecordDao.findStudetnList(classId);
+        //2、遍历所有学员和所选日期，挨个统计当天考勤结果
+        String attDayResult;
+        List<AttRecord> list;
+        String startTime;
+        String endTime;
+        for (Map<String, Object> item : studentList) {
+            for (String date : dateArray) {
+                startTime = "0".equals(stuAttType) ? date + " 00:00:00" : date + " 21:00:00";
+                endTime = "0".equals(stuAttType) ? date + " 13:00:00" : date + " 23:59:59";
+                list = attRecordDao.findOneDayDate(String.valueOf(item.get("id")), startTime, endTime);
+                attDayResult = studentAttDayResult(stuAttType, list);
+                item.put(date, attDayResult);
+            }
+        }
+
+        return studentList;
+    }
+
+    /**
+     * 结算学员某天的考勤结果
+     *
+     * @param stuAttType 考勤类别;0-上课考勤，1-住宿考勤
+     * @param list       当天所有考勤数据
+     * @return String 考勤结果
+     */
+    private String studentAttDayResult(String stuAttType, List<AttRecord> list) {
+        if ("0".equals(stuAttType)) {
+            /**
+             * 上午签到正常+上午签退正常=正常
+             * 上午迟到    +上午签退正常=迟到
+             * 上午签到正常+上午早退    =早退
+             * 其它情况                 =缺勤
+             */
+            String start = "";
+            String end = "";
+            String hour;
+            for (AttRecord r : list) {
+                hour = DateUtil.toStr(r.getAttTime(), "HH");
+                if (Integer.parseInt(hour) < 10) {
+                    start = r.getAttState();
+                } else {
+                    end = r.getAttState();
+                }
+            }
+            if (start.equals(CommConstant.ATT_STATE_ON_TIME)
+                    && end.equals(CommConstant.ATT_STATE_ON_TIME)) {
+                return "正常";
+            } else if (start.equals(CommConstant.ATT_STATE_BE_LATE)
+                    && end.equals(CommConstant.ATT_STATE_ON_TIME)) {
+                return "迟到";
+            } else if (start.equals(CommConstant.ATT_STATE_ON_TIME)
+                    && end.equals(CommConstant.ATT_STATE_LEAVE_EARLY)) {
+                return "早退";
+            } else {
+                return "缺勤";
+            }
+
+        } else {
+            /**
+             * 学员就寝：
+             * 规定时间内签到正常=正常
+             * 其它情况=缺寝
+             */
+            String state = "";
+            for (AttRecord r : list) {
+                state = r.getAttState();
+            }
+            if (state.equals(CommConstant.ATT_STATE_ON_TIME)) {
+                return "正常";
+            } else {
+                return "缺寝";
+            }
+        }
+    }
+
+    /**
+     * 结算教职工某天的考勤结果
+     *
+     * @param list 当天所有考勤数据
+     * @return String 考勤结果
+     */
+    private String teacherAttDayResult(List<AttRecord> list) {
+        String am = "";
+        String pm = "";
+        String hour;
+        for (AttRecord r : list) {
+            hour = DateUtil.toStr(r.getAttTime(), "HH");
+            if (Integer.parseInt(hour) < 12) {
+                am = r.getAttState();
+            } else {
+                pm = r.getAttState();
+            }
+        }
+        /**
+         * 上午签到（设定时间范围）、下午签退（设定时间范围）一天两次
+         * 上午签到正常 + 下午签退正常 = 正常
+         * 上午迟到     + 下午签退正常 = 迟到
+         * 上午签到正常 + 下午早退     = 早退
+         * 其它情况                  = 缺勤
+         */
+        String rst = "缺勤";
+        if (am.equals(CommConstant.ATT_STATE_ON_TIME)
+                && pm.equals(CommConstant.ATT_STATE_ON_TIME)) {
+            rst = "正常";
+        } else if (am.equals(CommConstant.ATT_STATE_BE_LATE)
+                && pm.equals(CommConstant.ATT_STATE_ON_TIME)) {
+            rst = "迟到";
+        } else if (am.equals(CommConstant.ATT_STATE_ON_TIME)
+                && pm.equals(CommConstant.ATT_STATE_LEAVE_EARLY)) {
+            rst = "早退";
+        }
+
+        return rst;
+    }
+
+    /**
+     * 获取区间配置
+     *
+     * @param userType 身份类别
+     * @return Map<String, String>
+     */
+    private Map<String, String> getAttConfig(String userType) {
+
+        boolean isStudent = userType.equals(CommConstant.STUDENT);
+        String cfgKey = isStudent ? "STU" : "TEA";
+        Map<String, String> config = getConfigMap(isStudent, cfgKey);
+        if (CollectionUtils.isEmpty(config)) {
+            throw new CustomException("考勤配置参数有误");
+        }
+
+        return config;
     }
 
     private List<AttRecordExport> getOneDayList(String userType, Map<String, String> config, AttRecordQVo condition) {
