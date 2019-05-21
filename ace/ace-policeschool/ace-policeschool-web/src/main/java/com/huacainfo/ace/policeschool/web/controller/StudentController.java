@@ -71,6 +71,21 @@ public class StudentController extends BisBaseController {
         return rst;
     }
 
+
+    @RequestMapping(value = "/selectStudentList")
+    @ResponseBody
+    public PageResult<StudentVo> selectStudentList(StudentQVo condition,
+                                                 PageParamNoChangeSord page, String q) throws Exception {
+        condition.setName(CommonUtils.isBlank(q) ? condition.getName() : q);
+        condition.setStatus("1");
+        PageResult<StudentVo> rst = this.studentService.selectStudentList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:insertStudent

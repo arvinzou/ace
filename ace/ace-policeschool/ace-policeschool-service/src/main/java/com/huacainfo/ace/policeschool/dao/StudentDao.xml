@@ -111,6 +111,9 @@
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
         <if test="condition.mobile !=null and condition.mobile !=&quot;&quot;">
             and t.mobile like concat(#{condition.mobile,jdbcType=VARCHAR},'%')
         </if>
@@ -125,9 +128,6 @@
         </if>
         <if test="condition.classId !=null and condition.classId !=&quot;&quot;">
             and t.classId = #{condition.classId,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.name !=null and condition.name !=&quot;&quot;">
-            and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.keyWord !=null and condition.keyWord !=&quot;&quot;">
             and (
@@ -163,6 +163,55 @@
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="selectStudentList" parameterType="java.lang.String" resultMap="VoResultMap">
+        SELECT m.* FROM
+        (
+        select
+        t.id, t.pid, t.name, t.sex, t.nativePlace, t.mobile, t.idCard, t.political, t.workUnitName, t.postName,
+        t.classId, t.badgeNum,t.dorm, t.college, t.birthDate, t.remark, t.status, t.createUserId, t.createUserName,
+        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        from student t
+        where
+        1=1
+        <choose>
+            <when test="condition.id !=null and condition.id !=&quot;&quot;">
+                AND t.id = #{condition.id,jdbcType=VARCHAR}
+            </when>
+            <otherwise>
+                AND 1=0
+            </otherwise>
+        </choose>
+        limit 0, 1) m
+        UNION
+        SELECT n.* FROM
+        (
+        select
+        t.id, t.pid, t.name, t.sex, t.nativePlace, t.mobile, t.idCard, t.political, t.workUnitName, t.postName,
+        t.classId, t.badgeNum,t.dorm, t.college, t.birthDate, t.remark, t.status, t.createUserId, t.createUserName,
+        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        FROM student t
+        WHERE 1=1
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.mobile !=null and condition.mobile !=&quot;&quot;">
+            and t.mobile like concat(#{condition.mobile,jdbcType=VARCHAR},'%')
+        </if>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc, t.`name`
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}) n
     </select>
 
     <select id="findCount" resultType="int">

@@ -22,11 +22,8 @@
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
                 <div class="col-md-4 toolbar">
-
                     <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
-
                 </div>
-
                 <div class="col-md-8">
                     <div class="btn-group" role="group" style="float:left;padding-right:15px">
                         <button type="button"
@@ -43,6 +40,7 @@
                         <input type="text"
                                name="keyWord"
                                class="form-control"
+                               <%--onkeypress="searchEnter(event.keyCode)"--%>
                                placeholder="请输入姓名/身份证号/手机号">
                         <span class="input-group-btn">
 							<button class="btn  btn-default search_btn" id="btn-search"
@@ -198,11 +196,11 @@
 <script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
 <%--导出--%>
-<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
+<%--<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>--%>
 
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>

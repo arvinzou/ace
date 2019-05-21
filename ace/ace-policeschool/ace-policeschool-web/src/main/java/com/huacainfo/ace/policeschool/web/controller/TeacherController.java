@@ -83,6 +83,7 @@ public class TeacherController extends BisBaseController {
             condition.setId("");
             condition.setName(CommonUtils.isBlank(q) ? condition.getName() : q);
         }
+        condition.setStatus("1");
         PageResult<TeacherVo> rst = this.teacherService
                 .findHeadmasterList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {

@@ -153,10 +153,15 @@
         t.introduce, t.workUnitName, t.postName
         from teacher t
         where
-        t.status <![CDATA[ <> ]]> 0
-        <if test="condition.id !=null and condition.id !=&quot;&quot;">
-            AND t.id = #{condition.id,jdbcType=VARCHAR}
-        </if>
+        1=1
+        <choose>
+            <when test="condition.id !=null and condition.id !=&quot;&quot;">
+                AND t.id = #{condition.id,jdbcType=VARCHAR}
+            </when>
+            <otherwise>
+                AND 1=0
+            </otherwise>
+        </choose>
         limit 0, 1) m
         UNION
         SELECT n.* FROM
@@ -168,7 +173,7 @@
         t.introduce, t.workUnitName, t.postName
         from teacher t
         where
-        t.status <![CDATA[ <> ]]> 0
+        1=1
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>

@@ -190,6 +190,7 @@ function imgChange(fileUrl) {
 function cancel() {
     $("#bindModal").hide();
     $("body").removeClass("modalhide");
+    window.history.go(-1);
 }
 function bindWx() {
     var o = {};

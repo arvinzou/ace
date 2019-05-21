@@ -1,22 +1,7 @@
 jQuery(function ($) {
     //查询
     $('#btn-search').on('click', function () {
-        $('#fm-search').ajaxForm({
-            beforeSubmit: function (formData, jqForm, options) {
-                // var params = {};
-                $.each(formData, function (n, obj) {
-                    params[obj.name] = obj.value;
-                });
-                $.extend(params, {
-                    time: new Date()
-                });
-                jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                    page: 1,
-                    postData: params
-                }).trigger("reloadGrid");
-                return false;
-            }
-        });
+        chaxun();
     });
     //添加
     $('#btn-view-add').on('click', function () {
@@ -40,6 +25,28 @@ jQuery(function ($) {
     //
     initJuicerMethod();
 });
+
+
+function chaxun() {
+    console.log(111111111);
+    $('#fm-search').ajaxForm({
+        beforeSubmit: function (formData, jqForm, options) {
+            // var params = {};
+            $.each(formData, function (n, obj) {
+                params[obj.name] = obj.value;
+            });
+            $.extend(params, {
+                time: new Date()
+            });
+            jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+                page: 1,
+                postData: params
+            }).trigger("reloadGrid");
+            return false;
+        }
+    });
+}
+
 
 /*页面渲染*/
 function render(obj, data, tplId) {
@@ -91,6 +98,15 @@ function initPreview(id) {
             alert("对不起出错了！");
         }
     });
+}
+
+
+function searchEnter(a) {
+    console.log(a);
+    if (a == 13) {
+
+        chaxun();
+    }
 }
 
 

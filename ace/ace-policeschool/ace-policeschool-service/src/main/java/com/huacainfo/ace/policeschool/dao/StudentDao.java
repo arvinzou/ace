@@ -26,6 +26,11 @@ public interface StudentDao {
                              @Param("limit") int limit,
                              @Param("orderBy") String orderBy);
 
+    List<StudentVo> selectStudentList(@Param("condition") StudentQVo condition,
+                             @Param("start") int start,
+                             @Param("limit") int limit,
+                             @Param("orderBy") String orderBy);
+
     int findCount(@Param("condition") StudentQVo condition);
 
     int findStudentCount(String classId);

@@ -77,6 +77,15 @@ public class StudentServiceImpl implements StudentService {
         return rst;
     }
 
+    @Override
+    public PageResult<StudentVo> selectStudentList(StudentQVo condition, int start,
+                                                 int limit, String orderBy) throws Exception {
+        PageResult<StudentVo> rst = new PageResult<>();
+        List<StudentVo> list = this.studentDao.selectStudentList(condition, start, limit, orderBy);
+        rst.setRows(list);
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:insertStudent

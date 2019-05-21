@@ -31,8 +31,8 @@ public interface StudentService {
      * @author: Arvin
      * @version: 2018-12-29
      */
-    PageResult<StudentVo> findStudentList(StudentQVo condition,
-                                          int start, int limit, String orderBy) throws Exception;
+    PageResult<StudentVo> findStudentList(StudentQVo condition, int start, int limit, String orderBy) throws Exception;
+    PageResult<StudentVo> selectStudentList(StudentQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
