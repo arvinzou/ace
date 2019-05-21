@@ -284,8 +284,8 @@ public class SeCustomAreaController extends GLinkBaseController {
      */
     @RequestMapping(value = "/executePreset")
     @ResponseBody
-    public ResultResponse executePreset(String areaNO, String presetNo, String areaNodeID) throws Exception {
-        if (CommonUtils.isBlank(areaNO)) {
+    public ResultResponse executePreset(String areaNo, String presetNo, String areaNodeID) throws Exception {
+        if (CommonUtils.isBlank(areaNo)) {
             return new ResultResponse(ResultCode.FAIL, "逻辑区编码不能为空");
         }
         if (CommonUtils.isBlank(presetNo)) {
@@ -295,7 +295,7 @@ public class SeCustomAreaController extends GLinkBaseController {
             return new ResultResponse(ResultCode.FAIL, "区域编码不能为空");
         }
 
-        Map<String, Object> map = SeApiToolKit.executePreset(areaNO, presetNo, areaNodeID);
+        Map<String, Object> map = SeApiToolKit.executePreset(areaNo, presetNo, areaNodeID);
         return new ResultResponse(ResultCode.SUCCESS, "接口推送完成", map);
     }
 
