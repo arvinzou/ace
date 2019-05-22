@@ -107,7 +107,7 @@
             and v.clsId = #{condition.clsId,jdbcType=VARCHAR}
         </if>
         <if test="condition.dateTimeStr !=null and condition.dateTimeStr !=&quot;&quot;">
-            and t.attTime like concat(#{condition.dateTimeStr,jdbcType=VARCHAR},'%')
+            and date_format(t.attTime, '%Y-%m-%d') like concat(#{condition.dateTimeStr,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 

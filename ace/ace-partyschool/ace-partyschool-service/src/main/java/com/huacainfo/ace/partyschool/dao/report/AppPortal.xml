@@ -40,12 +40,13 @@
         student t  WHERE t.STATUS = '1'
         and t.classId=#{classId}
         UNION ALL
-
         SELECT
         'test' id, COUNT(1)
         FROM class_schedule cs
+        LEFT JOIN policeschool.course c ON cs.courseId =c.id
         WHERE cs.courseDate <![CDATA[ < ]]> NOW()
         AND cs.classesId = #{classId}
+        AND (c.evaluatingId IS NOT NULL OR c.evaluatingId <![CDATA[ <> ]]>'')
         AND cs.ifTest ='1'
         AND cs.id NOT IN
         (
