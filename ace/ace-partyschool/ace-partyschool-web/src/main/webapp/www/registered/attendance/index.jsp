@@ -67,6 +67,52 @@
 
 		</script>
 
+
+
+		<script id="list-tplTwo" type="text/template">
+			<div class="item">
+				<div class="item-left">
+					<img src="img/circle.png" class="circle"/>
+					<span>上午</span>
+				</div>
+				<div class="item-right">
+					<div class="inner">
+						{@each data.am as item_am, index01}
+						<p class="row">\${item_am.attTime}</p>
+						{@/each}
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<div class="item-left">
+					<img src="img/circle.png" class="circle"/>
+					<span>下午</span>
+				</div>
+				<div class="item-right">
+					<div class="inner">
+						{@each data.pm as item_pm, index01}
+						<p class="row">\${item_pm.attTime}</p>
+						{@/each}
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<div class="item-left">
+					<img src="img/circle.png" class="circle"/>
+					<span>晚上</span>
+				</div>
+				<div class="item-right">
+					<div class="inner">
+						{@each data.night as item_night, index01}
+						<p class="row">\${item_night.attTime}</p>
+						{@/each}
+					</div>
+				</div>
+			</div>
+
+		</script>
+
+
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 		<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>

@@ -6,9 +6,8 @@
 		<meta charset="utf-8">
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/test.css" />
-
-		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/flexible.js"></script>
 		<jsp:include page="../../common/common.jsp"/>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/flexible.js"></script>
 	</head>
 
 	<body>

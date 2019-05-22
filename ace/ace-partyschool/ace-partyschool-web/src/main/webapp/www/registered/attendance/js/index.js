@@ -1,91 +1,98 @@
-var server = "https://www.cdswdx.top";
-$(function(){
-	$('#calendar').calendar({
-        data: [
-			
-		],
+var staticParameter={
+    server : "https://www.cdswdx.top",
+    lCardNo:'',
+    flag:''
+}
+$(function () {
+    $('#calendar').calendar({
+        data: [],
         onSelected: function (view, date, data) {
-            console.log(formatDate(date));
-            initData(formatDate(date));
+            if (staticParameter.flag == 'MOBILE') {
+                getPhoneData(formatDate(date));
+            } else {
+                findAttDataByDay(formatDate(date));
+            }
         }
     });
 
-	var nowDate =formatDate(new Date());
+    var nowDate = formatDate(new Date());
     initData(nowDate);
 });
 
-function initData(date){
-    $.ajax({
-        url:  contextPath+ "/www/sign/getAcctInfo",
-        type:"post",
-        async:false,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data:{
-        },
-        success:function(result){
-            if(result.status == 0) {
-                lCardNo = result.data.lCardNo;
-                if(lCardNo){
-                    findAttDataByDay(date, lCardNo);
-                }else{
-                    alert("您还没有绑定卡的信息！");
-                }
-
-            }else {
-                if(result.info){
-                    alert(result.info);
-                }else{
-                    alert(result.errorMessage);
-                }
-                return;
+function initData(date) {
+    var url = contextPath + "/www/att/getAttSrc";
+    $.getJSON(url, function (rst) {
+        if (rst.status == 0) {
+            staticParameter.flag=rst.data.config_value;
+            if (staticParameter.flag == 'MOBILE') {
+                getPhoneData(date);
+            } else {
+                getUserInfo(date);
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
+            return;
         }
-    });
-
+        alert(rst.info ? rst.info : rst.errorMessage);
+    })
 }
 
-function  findAttDataByDay(date, cardId) {
-    $.ajax({
-        url: server+"/api/www/api/findAttDataByDay",
-        type:"post",
-        async:false,
-        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data:{
-            lCardNo: cardId,
-            dateTimeStr: date
-        },
-        success:function(result){
-            if(result.status == 0) {
-                renderPage('list', result.data, 'list-tpl');
-            }else {
-                if(result.info){
-                    alert(result.info);
-                }else{
-                    alert(result.errorMessage);
-                }
-                return;
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
+/**获取手机端打卡数据*/
+
+function getPhoneData(date){
+    var url = contextPath + "/www/att/findList";
+    var data={
+        dateTimeStr:date
+    }
+    $.getJSON(url,data, function (rst) {
+        if (rst.status == 0) {
+            renderPage('list', rst.data, 'list-tplTwo');
+            return
         }
-    });
+        alert(rst.info ? rst.info : rst.errorMessage);
+    })
 }
 
-function formatDate(date){
+function getUserInfo(date) {
+    var url = contextPath + "/www/sign/getAcctInfo";
+    $.getJSON(url, function (result) {
+        if (result.status == 0) {
+            staticParameter.lCardNo = result.data.lCardNo;
+            if (staticParameter.lCardNo) {
+                findAttDataByDay(date);
+            } else {
+                alert("您还没有绑定卡的信息！");
+            }
+            return
+        }
+        alert(result.info ? result.info : result.errorMessage);
+    })
+}
+
+function findAttDataByDay(date) {
+    var url = staticParameter.server + "/api/www/api/findAttDataByDay";
+    var data = {
+        lCardNo: staticParameter.lCardNo,
+        dateTimeStr: date
+    };
+    $.getJSON(url,data,function(result){
+        if (result.status == 0) {
+            renderPage('list', result.data, 'list-tpl');
+            return;
+        }
+        alert(result.info ? result.info : result.errorMessage);
+    })
+}
+
+function formatDate(date) {
     var year = date.getFullYear();
-    var month = date.getMonth() +1;
-    if(month <10){
-        month = "0"+month;
+    var month = date.getMonth() + 1;
+    if (month < 10) {
+        month = "0" + month;
     }
     var day = date.getDate();
-    if(day < 10){
-        day = "0"+day;
+    if (day < 10) {
+        day = "0" + day;
     }
-    return year+"-"+month+"-"+day;
+    return year + "-" + month + "-" + day;
 }
 
 function renderPage(IDom, data, tempId) {
