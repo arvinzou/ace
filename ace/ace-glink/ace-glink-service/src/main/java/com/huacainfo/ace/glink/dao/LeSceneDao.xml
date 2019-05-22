@@ -69,6 +69,7 @@
                 and (
                 t.sceneNum like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
                 or t.sceneName like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
+                or t.sceneDepict like concat('%',#{condition.keyword,jdbcType=VARCHAR},'%')
                 )
             </if>
             <if test="condition.sceneNum != null and condition.sceneNum !=&quot;&quot;">

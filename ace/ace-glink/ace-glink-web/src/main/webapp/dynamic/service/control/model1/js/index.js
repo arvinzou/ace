@@ -89,14 +89,12 @@ function initPage() {
     $('#checked').on('click', 'li', removeStation);
     $('.sceneControl .btns').on('click', '.colorful img', controllPlay);
     $('#s6').change(switchNow);
-
-
     $('#strategyList').on('click', 'button', selectPreset);
     $('.strategyPart').on('click', '.addStrategy', addStrategy);
     $('.strategyPart').on('click', '.searchBtn', searchByName);
     $('.stations').on('click', '.searchStations', searchStations);
     $('.scenario-modal #presets').on('click', 'li', setStrategy);
-
+    $('.scenario-modal').on('click', 'button', getsceneList);
 
     initInputDate();
     $('#strategyInfo').ajaxForm({
@@ -605,17 +603,27 @@ function clearParam() {
 var jsonData = '';
 
 
-/**点击下发按钮*/
+/**点击下发按钮，显示场景列表模态框*/
 function selectPreset(data) {
+    $('.scenario-modal  input[name="keyword"]').val('');
     jsonData = data;
     $('.scenario-modal').show();
+    getsceneList();
+}
+/**查询场景列表*/
+function getsceneList() {
+    var val = $('.scenario-modal  input[name="keyword"]').val();
+    var data={
+        keyword:val
+    }
     var url = contextPath + "/ltStrategy/strategysDetail";
-    $.getJSON(url, function (rst) {
+    $.getJSON(url,data, function (rst) {
         if (rst.status == 0) {
             render($("#presets"), rst.rows, "tpl-presets");
         }
     });
 }
+
 /**开始下发*/
 function setStrategy() {
     var that = $(this);

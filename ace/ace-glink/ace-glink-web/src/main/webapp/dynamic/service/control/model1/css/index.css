@@ -1151,4 +1151,16 @@ body {
 	cursor: pointer ;
 }
 
+
+.scenario-modal .presetList .top {
+    height: 0.3rem;
+    width: 100%;
+    display: flex;
+    font-size: 0.104166rem;
+    font-family: MicrosoftYaHei;
+    color: rgba(0, 214, 217, 1);
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.05rem;
+}
 /*****************************************************************************************************************************************************************/

@@ -243,9 +243,18 @@
             </div>
         </div>
         <div class="modal-body">
-            <div class="ulList">
-                <ul id="presets">
-                </ul>
+            <div class="presetList">
+                <div class="top">
+                    <span class="title">场景列表</span>
+                    <div class="inputGroup">
+                        <input class="sceneNum" name="keyword" type="text" placeholder="输入场景名称"/>
+                        <button class="submit"></button>
+                    </div>
+                </div>
+                <div class="ulList">
+                    <ul id="presets">
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="modal-close">
