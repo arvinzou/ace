@@ -614,7 +614,9 @@ function selectPreset(data) {
 function getsceneList() {
     var val = $('.scenario-modal  input[name="keyword"]').val();
     var data={
-        keyword:val
+        keyword:val,
+        start:0,
+        limit:30
     }
     var url = contextPath + "/ltStrategy/strategysDetail";
     $.getJSON(url,data, function (rst) {
