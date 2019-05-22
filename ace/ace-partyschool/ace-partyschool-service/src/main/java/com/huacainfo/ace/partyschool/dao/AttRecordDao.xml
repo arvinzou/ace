@@ -200,12 +200,16 @@
     </select>
 
     <select id="findAllTeacherList" parameterType="java.lang.String" resultType="map">
-        select
-            t.id, t.sort, t.`name`, d.`name` as unitName
-        from teacher t
-        left join portal.dict d on d.category_id='156' and d.`code` = t.workUnitName
-        where t.`status`= '1'
-        order by t.sort
+        SELECT
+            @rank:=@rank + 1 AS sort, a.*
+        FROM (
+            select
+                t.id, t.`name`, d.`name` as unitName
+            from teacher t
+            left join portal.dict d on d.category_id='156' and d.`code` = t.workUnitName
+            where t.`status`= '1'
+            order by t.sort
+        ) a, (SELECT @rank:= 0) b
     </select>
 
     <select id="findOneDayDate" parameterType="java.lang.String" resultMap="BaseResultMap">

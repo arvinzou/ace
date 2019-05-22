@@ -157,7 +157,7 @@
                                         </div>
                                         <span class="input-group-btn" style="float: left;">
                                             <button id="stu-report-search" class="btn  btn-default search_btn"
-                                                    authority="false" type="submit"> 搜索</button>
+                                                    authority="false" type="submit"> 查询</button>
                                         </span>
                                     </div>
 
@@ -219,7 +219,7 @@
 
                                     <span class="input-group-btn" style="float: left;">
                                         <button id="tea-report-search" class="btn  btn-default search_btn"
-                                                authority="false" type="submit"> 搜索</button>
+                                                authority="false" type="submit"> 查询</button>
                                     </span>
                                 </form>
                             </div>
