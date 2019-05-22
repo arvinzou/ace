@@ -26,13 +26,13 @@ function closeModal() {
 function changePage() {
     var that = $(this);
     var type = that.data('type');
-    if (nowPage == 'Control'&&type!='Control') {
+    if (nowPage == 'Control' && type != 'Control') {
         var flag = judgeUpdate();
         if (!flag) {
             return;
         }
     }
-    nowPage=type;
+    nowPage = type;
     $('.modals').hide();
     $('.modals.' + type).show();
 }
@@ -521,6 +521,7 @@ function initScenario() {
     initPageScenario();
 }
 
+
 function setScenario() {
     var that = $(this);
     scenarioPostData.presetNo = that.data('presetno');
@@ -528,6 +529,15 @@ function setScenario() {
     $.post(url, scenarioPostData, function (rst) {
 
         console.log(rst);
+        if (rst.status == 0) {
+            if (rst.data.Status == 'ok') {
+                alert("场景下发成功！");
+            } else {
+                alert("场景下发失败！");
+            }
+        } else {
+            alert(rst.info);
+        }
     })
 }
 

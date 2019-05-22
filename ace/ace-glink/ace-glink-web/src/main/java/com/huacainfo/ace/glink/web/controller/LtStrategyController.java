@@ -8,11 +8,8 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
-import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.glink.api.LeApiToolKit;
 import com.huacainfo.ace.glink.api.pojo.le.LightStrategyIn;
-import com.huacainfo.ace.glink.api.pojo.le.StrategysDetailOut;
-import com.huacainfo.ace.glink.model.LeScene;
 import com.huacainfo.ace.glink.model.LtLnkObject;
 import com.huacainfo.ace.glink.model.LtStrategy;
 import com.huacainfo.ace.glink.service.LeSceneService;
@@ -296,7 +293,7 @@ public class LtStrategyController extends GLinkBaseController {
     @RequestMapping(value = "/strategysDetail")
     @ResponseBody
     public  PageResult<LeSceneVo> getSceneList(LeSceneQVo condition) throws Exception {
-        PageResult<LeSceneVo> list =leSceneService.findLeSceneList(condition,0,100,null);
+        PageResult<LeSceneVo> list = leSceneService.findLeSceneList(condition, 0, 5, null);
         return list;
     }
     /**
