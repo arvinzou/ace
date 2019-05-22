@@ -558,7 +558,7 @@ public class AttRecordServiceImpl implements AttRecordService {
      */
     @Override
     public ResultResponse findList(String userId, String dateTimeStr) {
-        Map<String, Object> config = attRecordDao.getAttSrc();
+        Map<String, Object> config = getAttSrc();
         if (config == null) {
             return new ResultResponse(ResultCode.FAIL, "未配置考勤数据来源");
         }
@@ -570,6 +570,16 @@ public class AttRecordServiceImpl implements AttRecordService {
         else {
             return getMobileAttData(userId, dateTimeStr);
         }
+    }
+
+    /**
+     * 获取系统考勤数据配置
+     *
+     * @return Map<String, Object>
+     */
+    @Override
+    public Map<String, Object> getAttSrc() {
+        return attRecordDao.getAttSrc();
     }
 
     private ResultResponse getMobileAttData(String userId, String dateTimeStr) {
