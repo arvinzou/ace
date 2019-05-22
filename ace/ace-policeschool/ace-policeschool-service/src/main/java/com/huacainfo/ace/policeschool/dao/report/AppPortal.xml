@@ -45,7 +45,7 @@
         LEFT JOIN policeschool.course c ON cs.courseId =c.id
         WHERE cs.startTime <![CDATA[ < ]]> NOW()
         AND cs.classesId like concat('%',#{classId},'%')
-        And c.evaluatingId is not null
+        AND (c.evaluatingId IS NOT NULL OR c.evaluatingId <![CDATA[ <> ]]>'')
         AND cs.ifTest ='1'
         AND cs.id NOT IN
         (
