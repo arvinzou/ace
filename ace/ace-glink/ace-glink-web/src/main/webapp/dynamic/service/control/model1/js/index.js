@@ -68,7 +68,7 @@ function isChecked(val, idex) {
 function formatObject(data) {
     for (var item in data) {
         if (item.indexOf('Date') > -1 || item.indexOf('Time') > -1) {
-            data[item] = data[item].substring(0, 10).split('-').join('');
+            data[item] = data[item].substring(11, 19).split(':').join('');
         }
     }
     data.strategy = data.code;
@@ -142,7 +142,7 @@ function changePart() {
     window['init' + type]();
 }
 
-/*菜单显示*/
+/**菜单显示*/
 function showMenu() {
     if ($('.menu-wrap').css("display") == "none") {
         $('.menu-wrap').show();
@@ -159,7 +159,7 @@ function initInputDate() {
     var nowTemp = new Date();
     var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
     var checkin = $('input[name=startTime]').fdatepicker({
-        format: 'yyyy-mm-dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii:ss',
         pickTime: true,
         disableDblClickSelection: true,
         onRender: function (date) {
@@ -173,7 +173,7 @@ function initInputDate() {
         }
     }).data('datepicker');
     var checkout = $('input[name=stopTime]').fdatepicker({
-        format: 'yyyy-mm-dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii:ss',
         pickTime: true,
         disableDblClickSelection: true,
         onRender: function (date) {
@@ -555,6 +555,7 @@ function setTimerWeek(weeks) {
     render('#inputList', data, 'tpl-weeks');
 }
 
+/**点击月份设置*/
 function setTimerMonth(mons) {
     var months = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
     var data = {};
@@ -603,18 +604,19 @@ function clearParam() {
 
 var jsonData = '';
 
+
+/**点击下发按钮*/
 function selectPreset(data) {
     jsonData = data;
     $('.scenario-modal').show();
     var url = contextPath + "/ltStrategy/strategysDetail";
     $.getJSON(url, function (rst) {
-
         if (rst.status == 0) {
             render($("#presets"), rst.rows, "tpl-presets");
         }
     });
 }
-
+/**开始下发*/
 function setStrategy() {
     var that = $(this);
     var strategyNum = that.data('strategynum');
@@ -628,8 +630,8 @@ function setStrategy() {
     }
     var url = contextPath + "/ltStrategy/lightStrategy";
     $.post(url, data, function (rst) {
-        console.log(JSON.stringify(rst));
-        if (rst.code == '200') {
+        var result=JSON.parse(rst.value);
+        if (result.code == '200') {
             $('.modal').hide();
             alert("下发成功");
             getStrategyList();

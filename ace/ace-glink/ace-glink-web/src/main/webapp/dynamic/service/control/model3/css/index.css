@@ -243,6 +243,22 @@ body {
 	float: left;
 	display: flex;
 	color: rgba(167,233,234,1);
+	position: relative;
+	overflow: hidden;
+}
+
+.Control .right .table .days li .todaySet{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	background: rgba(88, 88, 88, 0.28);
+	left: -76%;
+	transition: left 0.4s ease-in-out;
+}
+
+.Control .right .table .days li .todaySet:hover{
+	left: 0%;
 }
 
 .Control .right .table .days li:hover{

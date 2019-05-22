@@ -8,6 +8,11 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
+import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.glink.api.LeApiToolKit;
+import com.huacainfo.ace.glink.api.pojo.le.LightStrategyIn;
+import com.huacainfo.ace.glink.api.pojo.le.StrategysDetailOut;
+import com.huacainfo.ace.glink.model.LeScene;
 import com.huacainfo.ace.glink.model.LtLnkObject;
 import com.huacainfo.ace.glink.model.LtStrategy;
 import com.huacainfo.ace.glink.service.LeSceneService;
@@ -62,10 +67,11 @@ public class LtStrategyController extends GLinkBaseController {
      */
     @RequestMapping(value = "/findLtStrategyList")
     @ResponseBody
-    public PageResult<LtStrategyVo>
+    public PageResult
+            <LtStrategyVo>
     findLtStrategyList(LtStrategyQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<LtStrategyVo> rst = this.ltStrategyService.findLtStrategyList(condition, page.getStart(),
-                page.getLimit(), page.getOrderBy());
+                        page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -172,7 +178,7 @@ public class LtStrategyController extends GLinkBaseController {
     /**
      * @throws
      * @Title:importXls
-     * @Description: TODO(导入 ! { bean.tableChineseName })
+     * @Description: TODO(导入!{bean.tableChineseName})
      * @param: @param file
      * @param: @param jsons
      * @param: @return
@@ -274,29 +280,25 @@ public class LtStrategyController extends GLinkBaseController {
      */
     @RequestMapping(value = "/updateStatus")
     @ResponseBody
-    public MessageResponse updateStatus(String id, String lnkCode, String lnkType, String aiCode) throws Exception {
-        LtLnkObject ltLnkObject = new LtLnkObject();
+    public MessageResponse updateStatus(String id, String lnkCode,String lnkType,String aiCode) throws Exception {
+        LtLnkObject ltLnkObject =new LtLnkObject();
         ltLnkObject.setLnkCode(lnkCode);
         ltLnkObject.setLnkType(lnkType);
         ltLnkObject.setAiCode(aiCode);
-        return this.ltStrategyService.updateStatus(id, ltLnkObject, this.getCurUserProp());
+        return this.ltStrategyService.updateStatus(id,  ltLnkObject, this.getCurUserProp());
     }
 
     /**
-     * 下发场景列表
+     * 策略信息详情
      *
-     * @param condition keyword -- 用于检索sceneNum||sceneName
      * @throws Exception
      */
     @RequestMapping(value = "/strategysDetail")
     @ResponseBody
-    public PageResult<LeSceneVo> getSceneList(LeSceneQVo condition) throws Exception {
-
-        PageResult<LeSceneVo> list = leSceneService.findLeSceneList(condition, 0, 100, "");
-
+    public  PageResult<LeSceneVo> getSceneList(LeSceneQVo condition) throws Exception {
+        PageResult<LeSceneVo> list =leSceneService.findLeSceneList(condition,0,100,null);
         return list;
     }
-
     /**
      * 策略下发
      *
@@ -304,9 +306,17 @@ public class LtStrategyController extends GLinkBaseController {
      */
     @RequestMapping(value = "/lightStrategy")
     @ResponseBody
-    public Map<String, Object> lightStrategy(String jsons) throws Exception {
-
-        return this.ltStrategyService.lightStrategy(jsons);
+    public SingleResult lightStrategy(String jsons) throws Exception {
+        LightStrategyIn lightStrategyIn=JSON.parseObject(jsons,LightStrategyIn.class);
+        String json = LeApiToolKit.lightStrategy(lightStrategyIn);
+        SingleResult<String> rst = new SingleResult<>();
+        rst.setValue(json);
+        return rst;
     }
+
+
+
+
+
 
 }
