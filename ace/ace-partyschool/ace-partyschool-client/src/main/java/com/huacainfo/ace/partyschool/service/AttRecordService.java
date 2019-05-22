@@ -207,4 +207,11 @@ public interface AttRecordService {
      * @return ResultResponse
      */
     List<Map<String, Object>> studentReport(String classId, String stuAttType, String[] dateArray);
+
+    /**
+     * 获取系统考勤数据配置
+     *
+     * @return Map<String, Object>
+     */
+    Map<String, Object> getAttSrc();
 }

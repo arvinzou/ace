@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 /**
  * @Auther: Arvin
  * @Date: 2019/2/21 15:23
@@ -22,9 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class WAttRecordController extends BisBaseController {
     @Autowired
     private AttRecordService attRecordService;
-
-
-
 
 
     /**
@@ -83,5 +82,21 @@ public class WAttRecordController extends BisBaseController {
         }
 
         return attRecordService.findList(userProp.getUserId(), dateTimeStr);
+    }
+
+    /**
+     * 获取系统考勤数据配置
+     *
+     * @return ResultResponse
+     */
+    @RequestMapping("/getAttSrc")
+    public ResultResponse getAttSrc() {
+
+        Map<String, Object> config = attRecordService.getAttSrc();
+        if (config == null) {
+            return new ResultResponse(ResultCode.FAIL, "未配置考勤数据来源");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", config);
     }
 }

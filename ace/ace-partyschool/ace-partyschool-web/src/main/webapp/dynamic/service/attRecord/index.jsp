@@ -14,7 +14,12 @@
 <link rel="stylesheet" type="text/css" media="screen"
       href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"/>
 <link rel="stylesheet" type="text/css"
-      href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+      href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/plugins/kalendae/kalendae.css"
+      type="text/css" charset="utf-8">
+<script src="${pageContext.request.contextPath}/content/common/plugins/kalendae/kalendae.standalone.js"
+        type="text/javascript" charset="utf-8"></script>
+
 />
 <body>
 
@@ -89,7 +94,7 @@
 
 <%--学员报表--%>
 <div class="modal fade" role="dialog" id="modal-export-stu">
-    <div class="modal-dialog" role="document" style="width: 60%;">
+    <div class="modal-dialog" role="document" style="width: 95%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
@@ -98,52 +103,81 @@
                 <h4 class="modal-title">学员报表</h4>
             </div>
             <div class="modal-body">
-                <div class="form-horizontal" role="form">
-                    <div class="form-body" id="fm-export-stu">
-                        <form method="post" class="form-horizontal" role="form"
-                              action="${pageContext.request.contextPath}/exportExcel/studentReport">
-                            <label id="resp-msg-stu" class="view-label hide"></label>
-                            <div class="form-group cls-select">
-                                <label class="col-md-3 view-label">
-                                    考勤类别<span style='color:red;font-size:16px;font-weight:800'>*</span>
-                                </label>
-                                <div class="col-md-9">
-                                    <div class="radio-group-container">
-                                        <label>
-                                            <input type="radio" name="stuAttType" value="0" checked><span
-                                                style="padding:10px">上课考勤</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="stuAttType" value="1"><span style="padding:10px">住宿考勤</span>
-                                        </label>
+
+                <%--学员考勤报表查询窗体--%>
+                <div class="portlet light ">
+                    <div class="portlet-body">
+                        <div class="row custom-toolbar">
+                            <div class="col-md-3">
+                                <button id="stu-page-export" type="button" class="btn green hide" authority="false">
+                                    导出报表
+                                </button>
+                            </div>
+
+                            <div class="col-md-9">
+                                <form id="fm-search-stu">
+                                    <div class="row">
+                                        <div class="col-md-3" style="float:left;line-height:30px;">
+                                            班次<span style='color:red;font-size:16px;'>*</span>
+                                        </div>
+                                        <div class="col-md-9 input-group" style="width: 75%;float:left;">
+                                            <select id="ext-cls-list-stu" name="classId" class="form-control"
+                                                    style="width:275px;height: 31px;">
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
+
+                                    <div class="row" style="padding-top: 2px">
+                                        <div class="col-md-3" style="float:left;line-height:30px">
+                                            考勤类别<span style='color:red;font-size:16px;'>*</span>
+                                        </div>
+                                        <div class="col-md-9 input-group" style="width: 75%;float:left;">
+                                            <div class="radio-group-container">
+                                                <label>
+                                                    <input type="radio" name="stuAttType" value="0" checked>
+                                                    <span style="padding:10px">上课考勤</span>
+                                                </label>
+                                                <label>
+                                                    <input type="radio" name="stuAttType" value="1">
+                                                    <span style="padding:10px">住宿考勤</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row" style="padding-top: 2px">
+                                        <div class="col-md-3" style="float:left;line-height:30px">
+                                            查询日期<span style='color:red;font-size:16px;'>*</span>
+                                        </div>
+                                        <div class="col-md-9 input-group" style="width: 75%;float:left;">
+                                            <input name="queryDate" type="text" autocomplete="off"
+                                                   class="auto-kal form-control" style="line-height:30px"
+                                                   data-kal="mode:'multiple',format:'YYYY-MM-DD',months: 1"/>
+                                        </div>
+                                        <span class="input-group-btn" style="float: left;">
+                                            <button id="stu-report-search" class="btn  btn-default search_btn"
+                                                    authority="false" type="submit"> 查询</button>
+                                        </span>
+                                    </div>
+
+                                </form>
                             </div>
-                            <div class="form-group cls-select">
-                                <label class="col-md-3 view-label">
-                                    班次<span style='color:red;font-size:16px;font-weight:800'>*</span>
-                                </label>
-                                <div class="col-md-9">
-                                    <select id="ext-cls-list-stu" name="clsId" class="form-control"
-                                            style="width:275px;height: 31px;">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-3 view-label">
-                                    查询日期<span style='color:red;font-size:16px;font-weight:800'>*</span>
-                                </label>
-                                <div class="col-md-9">
-                                    <input id="ext-date-stu" name="queryDate" type="text" class="form-control">
-                                </div>
-                            </div>
-                        </form>
+
+                        </div>
+
+                        <div class="table-scrollable">
+                            <table class="table table-hover" id="student-report-table">
+
+                            </table>
+                        </div>
+
                     </div>
                 </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-                <button type="button" class="btn btn-primary" authority="false">下载excel</button>
             </div>
         </div>
     </div>
@@ -151,7 +185,7 @@
 
 <%--教职工报表--%>
 <div class="modal fade" role="dialog" id="modal-export-tea">
-    <div class="modal-dialog" role="document" style="width: 45%;">
+    <div class="modal-dialog" role="document" style="width: 95%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
@@ -160,28 +194,49 @@
                 <h4 class="modal-title">教职工报表</h4>
             </div>
             <div class="modal-body">
-                <div class="form-horizontal" role="form">
-                    <div class="form-body" id="fm-export-tea">
-                        <form method="post" class="form-horizontal" role="form"
-                              action="${pageContext.request.contextPath}/exportExcel/teacherReport">
-
-                            <label id="resp-msg-tea" class="view-label hide"></label>
-
-                            <div class="form-group">
-                                <label class="col-md-3 view-label">
-                                    查询日期<span style='color:red;font-size:16px;font-weight:800'>*</span>
-                                </label>
-                                <div class="col-md-9">
-                                    <input id="ext-date-tea" name="queryDate" type="text" class="form-control">
-                                </div>
+                <%--教职工报表查询窗体--%>
+                <div class="portlet light ">
+                    <div class="portlet-body">
+                        <div class="row custom-toolbar">
+                            <div class="col-md-3">
+                                <button id="tea-page-export" type="button" class="btn green hide" authority="false">
+                                    导出报表
+                                </button>
                             </div>
-                        </form>
+
+                            <div class="col-md-9">
+                                <form id="fm-search-tea">
+                                    <div style="float:left;line-height:30px">
+                                        查询日期<span style='color:red;font-size:16px;'>*</span>
+                                    </div>
+
+
+                                    <div class="input-group" style="width: 75%;float:left;">
+                                        <input id="ext-date-tea" name="queryDate" type="text" autocomplete="off"
+                                               class="auto-kal form-control" style="line-height:30px"
+                                               data-kal="mode:'multiple',format:'YYYY-MM-DD',months: 1"/>
+                                    </div>
+
+                                    <span class="input-group-btn" style="float: left;">
+                                        <button id="tea-report-search" class="btn  btn-default search_btn"
+                                                authority="false" type="submit"> 查询</button>
+                                    </span>
+                                </form>
+                            </div>
+
+                        </div>
+
+                        <div class="table-scrollable">
+                            <table class="table table-hover" id="teacher-report-table">
+
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-                <button type="button" class="btn btn-primary" authority="false">下载excel</button>
             </div>
         </div>
     </div>
@@ -257,6 +312,60 @@
     </div>
 </div>
 
+<script id="tpl-student-report" type="text/template">
+    <thead>
+    <tr>
+        <th width="10%"> 序号</th>
+        <th width="10%"> 姓名</th>
+        {@each data.dateArray as date, index}
+        <th width="10%"> \${parseDate(date)}</th>
+        {@/each}
+    </tr>
+    </thead>
+    <tbody>
+    {@each data.report as item, index}
+    <tr>
+        <td width="10%">\${item.sort}</td>
+        <td width="10%">\${item.studentName}</td>
+        {@each data.dateArray as date, index}
+        <td width="10%">\${item[date]}</td>
+        {@/each}
+
+    </tr>
+    {@/each}
+    </tbody>
+
+
+</script>
+
+<script id="tpl-teacher-report" type="text/template">
+    <thead>
+    <tr>
+        <th width="10%"> 序号</th>
+        <th width="10%"> 姓名</th>
+        <th width="10%"> 处室</th>
+        {@each data.dateArray as date, index}
+        <th width="10%"> \${parseDate(date)}</th>
+        {@/each}
+    </tr>
+    </thead>
+    <tbody>
+    {@each data.report as item, index}
+    <tr>
+        <td width="10%">\${item.sort}</td>
+        <td width="10%">\${item.name}</td>
+        <td width="10%">\${item.unitName}</td>
+        {@each data.dateArray as date, index}
+        <td width="10%">\${item[date]}</td>
+        {@/each}
+
+    </tr>
+    {@/each}
+    </tbody>
+
+
+</script>
+
 <script id="tpl-cls-option" type="text/template">
     {@each data as item, index}
     <option value="\${item.id}">\${item.name}</option>
@@ -286,6 +395,7 @@
         </div>
     </div>
 </div>
+
 <%--详情juicer模板--%>
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
@@ -331,6 +441,7 @@
         </div>
     </div>
 </script>
+
 <%--导入--%>
 <div class="modal fade" role="dialog" id="modal-upload">
     <div class="modal-dialog" role="document" style="width: 75%;">
@@ -352,6 +463,7 @@
         </div>
     </div>
 </div>
+
 
 <script type="text/javascript"
         src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
@@ -384,6 +496,11 @@
 <script src="${pageContext.request.contextPath}/content/service/attRecord/upload.js?version=${cfg.version}"></script>
 <%--权限管理--%>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
+<%--page excel export--%>
+<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
 
 <script type="text/javascript">
 
