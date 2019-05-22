@@ -34,10 +34,8 @@ jQuery(function ($) {
             }
         })
     });
-    //中控数据导入
-    $('#btn-view-import').on('click', function () {
-        $('#modal-upload').modal('show');
-    });
+
+
     //数据导出
     $('#btn-view-export').on('click', function () {
         $('#modal-export').modal('show');
@@ -84,6 +82,8 @@ function initCondition() {
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
     juicer.register('rsd', rsd);
+    juicer.register('parseDate', parseDate);
+
 }
 
 function parseAttState(val) {
@@ -183,7 +183,62 @@ function initEvents() {
     initStudentModal();
 }
 
+
 function initTeacherModal() {
+    // tea-page-export
+    $('#tea-page-export').on('click', function () {
+        $("#teacher-report-table").tableExport({type: 'excel', fileName: '教职工考勤报表v' + getNowFormatDate()});
+    });
+
+    //教职工考勤报表数据查询
+    $('#tea-report-search').on('click', function () {
+        $('#fm-search-tea').ajaxForm({
+            beforeSubmit: function (formData, jqForm, options) {
+                var args = {};
+                $.each(formData, function (n, obj) {
+                    args[obj.name] = obj.value;
+                });
+                //参数验证
+                if (isEmpty(args.queryDate)) {
+                    alert("请选择查询日期！");
+                    return false;
+                }
+                //去空格
+                args.queryDate = replaceBlank(args.queryDate);
+                // console.log(replaceChar(args.queryDate,"-",""));
+                // return false;
+
+                //ajax 查询
+                startLoad();
+                $.ajax({
+                    url: contextPath + "/exportExcel/teacherReport",
+                    type: "post",
+                    async: false,
+                    data: args,
+                    success: function (rst) {
+                        // console.log(JSON.stringify(rst));
+                        stopLoad();
+                        if (rst.status == 0) {
+                            var data = {};
+                            data['report'] = rst.data;
+                            data['dateArray'] = args.queryDate.split(",");
+                            render('#teacher-report-table', data, 'tpl-teacher-report');
+
+                            $('#tea-page-export').removeClass("hide");
+                        } else {
+                            alert(rst.info);
+                        }
+                    },
+                    error: function () {
+                        stopLoad();
+                        alert("对不起出错了！");
+                    }
+                });
+                return false;
+            }
+        });
+    });
+
     //按钮弹窗事件监听
     $('#btn-export-tea').on('click', function () {
         $('#modal-export-tea').modal('show');
@@ -192,77 +247,86 @@ function initTeacherModal() {
     $('#modal-export-tea').on('show.bs.modal', function (event) {
         console.log("modal-export-tea.show()")
     });
-    //form submit
-    $('#modal-export-tea .btn-primary').on('click', function () {
-        //查询日期必选
-        var queryDate = $('#ext-date-stu').val();
-        if (strIsEmpty(queryDate)) {
-            alert('请选择查询日期！');
-            return false;
-        }
-        //submit
-        $('#modal-export-tea form').submit();
-    });
-    //submit response
-    $('#modal-export-tea form').form({
-        beforeSubmit: function (formData, jqForm, options) {
-        },
-        success: function (rst) {
-            var obj = jQuery.parseJSON(rst);
-            var htmlTxt = "导出成功";
-            if (obj.status == 1) {
-                htmlTxt = "<font style='color: red;'>" + obj.info + "</font>"
-            } else {
-                htmlTxt = "<font style='color: green;'>" + obj.info + "</font>"
-            }
-            $('#resp-msg-tea').removeClass("hide").html(htmlTxt);
-        }
-    });
+
 }
 
+
 function initStudentModal() {
+
+    // tea-page-export
+    $('#stu-page-export').on('click', function () {
+        var clsName = $('#ext-cls-list-stu').find("option:selected").text();
+
+        $("#student-report-table").tableExport({
+            type: 'excel',
+            fileName: '【' + clsName + '】学员考勤报表v' + getNowFormatDate()
+        });
+    });
+
+    //教职工考勤报表数据查询
+    $('#stu-report-search').on('click', function () {
+        $('#fm-search-stu').ajaxForm({
+            beforeSubmit: function (formData, jqForm, options) {
+                var args = {};
+                $.each(formData, function (n, obj) {
+                    args[obj.name] = obj.value;
+                });
+                //参数验证
+                if (isEmpty(args.classId)) {
+                    alert("请选择班次！");
+                    return false;
+                }
+                if (isEmpty(args.stuAttType)) {
+                    alert("请选择考勤类别！");
+                    return false;
+                }
+                if (isEmpty(args.queryDate)) {
+                    alert("请选择查询日期！");
+                    return false;
+                }
+                //去空格
+                args.queryDate = replaceBlank(args.queryDate);
+
+                //ajax 查询
+                startLoad();
+                $.ajax({
+                    url: contextPath + "/exportExcel/studentReport",
+                    type: "post",
+                    async: false,
+                    data: args,
+                    success: function (rst) {
+                        // console.log(JSON.stringify(rst));
+                        stopLoad();
+                        if (rst.status == 0) {
+                            var data = {};
+                            data['report'] = rst.data;
+                            data['dateArray'] = args.queryDate.split(",");
+                            render('#student-report-table', data, 'tpl-student-report');
+
+                            $('#stu-page-export').removeClass("hide");
+                        } else {
+                            alert(rst.info);
+                        }
+                    },
+                    error: function () {
+                        stopLoad();
+                        alert("对不起出错了！");
+                    }
+                });
+                return false;
+            }
+        });
+    });
+
     //按钮弹窗事件监听
     $('#btn-export-stu').on('click', function () {
         $('#modal-export-stu').modal('show');
     });
     //班次下拉选框
     initClassList('ext-cls-list-stu', '请选择班次');
-
     //
     $('#modal-export-stu').on('show.bs.modal', function (event) {
         console.log("modal-export-stu.show()")
-    });
-    //form submit
-    $('#modal-export-stu .btn-primary').on('click', function () {
-        //班次必选
-        var clsId = $('#ext-cls-list-stu option:selected').val();
-        if (strIsEmpty(clsId)) {
-            alert('请选择班次信息！');
-            return false;
-        }
-        //查询日期必选
-        var queryDate = $('#ext-date-stu').val();
-        if (strIsEmpty(queryDate)) {
-            alert('请选择查询日期！');
-            return false;
-        }
-        //submit
-        $('#modal-export-stu form').submit();
-    });
-    //submit response
-    $('#modal-export-stu form').form({
-        beforeSubmit: function (formData, jqForm, options) {
-        },
-        success: function (rst) {
-            var obj = jQuery.parseJSON(rst);
-            var htmlTxt = "导出成功";
-            if (obj.status == 1) {
-                htmlTxt = "<font style='color: red;'>" + obj.info + "</font>"
-            } else {
-                htmlTxt = "<font style='color: green;'>" + obj.info + "</font>"
-            }
-            $('#resp-msg-stu').removeClass("hide").html(htmlTxt);
-        }
     });
 }
 
@@ -419,3 +483,63 @@ function parser(s) {
         return new Date(s + ":00:00");
     }
 }
+
+function parseDate(str) {
+    // var s = replaceChar(str, '-', '');
+    return str.substr(5, str.length);
+}
+
+/**
+ * 去掉字符串中的空格
+ * @param str 字符串源
+ * @returns str
+ */
+function replaceBlank(str) {
+    return str.replace(/\s+/g, "");
+}
+
+/**
+ * 字符串替换所有指定字符
+ * @param str 字符串源
+ * @param oldChar 被搜索的子字符串。
+ * @param newChar 用于替换的子字符串
+ * @returns str
+ */
+function replaceChar(str, oldChar, newChar) {
+    return str.replace(new RegExp(oldChar, 'g'), newChar);
+}
+
+/**
+ * 字符串判空
+ * @param str 字符串
+ * @returns {boolean}
+ */
+function isEmpty(str) {
+    if (str == '' || str == undefined || str == null) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "";
+    var seperator2 = "";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+        + "" + date.getHours() + seperator2 + date.getMinutes()
+        + seperator2 + date.getSeconds();
+    return currentdate;
+}
+
+
+
+
