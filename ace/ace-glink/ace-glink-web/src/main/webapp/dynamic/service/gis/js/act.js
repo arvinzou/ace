@@ -39,7 +39,7 @@ function parseTime(val) {
 
 /**初始化地图*/
 function initMap() {
-    map = new BMap.Map("Map" /*{minZoom: 12, maxZoom: 17}*/);
+    map = new BMap.Map("Map", {minZoom: 13, maxZoom: 17});
     var point = new BMap.Point(114.270730,30.601090);  // 创建点坐标
     map.centerAndZoom(point, 13);
 //    启动滚轮缩放

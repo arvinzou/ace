@@ -260,9 +260,9 @@
                 <div class="ulList">
                     <ul id="presets">
                     </ul>
-                    <div class="paginationbar">
-                        <ul class="pagination" id="pagination4"></ul>
-                    </div>
+                    <%--<div class="paginationbar">--%>
+                    <%--<ul class="pagination" id="pagination4"></ul>--%>
+                    <%--</div>--%>
                 </div>
             </div>
         </div>

@@ -18,7 +18,6 @@ import com.huacainfo.ace.glink.api.pojo.le.GetBulidingDetailOut;
 import com.huacainfo.ace.glink.api.pojo.le.StrategysDetailOut;
 import com.huacainfo.ace.glink.dao.LeBrokenLampDao;
 import com.huacainfo.ace.glink.dao.TopBuildingDao;
-import com.huacainfo.ace.glink.model.LeBrokenLamp;
 import com.huacainfo.ace.glink.model.LeScene;
 import com.huacainfo.ace.glink.model.TopBuilding;
 import com.huacainfo.ace.glink.service.LeSceneService;
@@ -391,11 +390,11 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         if (b == null) {
             return new ResultResponse(ResultCode.FAIL, "建筑物信息不存在");
         }
-        LeBrokenLampQVo leBrokenLampQVo=new LeBrokenLampQVo();
+        LeBrokenLampQVo leBrokenLampQVo = new LeBrokenLampQVo();
         leBrokenLampQVo.setBuildingNo(buildingCode);
         leBrokenLampQVo.setToday("yes");
-        List<LeBrokenLampVo> list=leBrokenLampDao.findList(leBrokenLampQVo,0,100, "createDate desc");
-        //通过弱电接口，获取建筑物状态
+        List<LeBrokenLampVo> list = leBrokenLampDao.findList(leBrokenLampQVo, 0, 100, "createDate desc");
+        //通过弱电接口，获取建筑物状态；
         GetBulidingDetailOut out = LeApiToolKit.getBuildingDetail(buildingCode);
         GetBulidingDetailOut.BulidingDetail onlineBuilding = out.getData().get(0);
         //
@@ -449,7 +448,7 @@ public class TopBuildingServiceImpl implements TopBuildingService {
         //建筑物状态 1：在线，0：离线
         rst.put("status", status);
         //错误列表
-        rst.put("le",list);
+        rst.put("le", list);
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
     }
 
