@@ -558,22 +558,22 @@ function initPageScenario() {
         }
     });
 
-    $.jqPaginator('#pagination4', {
-        totalCounts: 1,
-        pageSize: scenarioParams.limit,
-        visiblePages: 10,
-        currentPage: 1,
-        prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
-        next: '<li class="next"><a href="javascript:;">下一页</a></li>',
-        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
-        onPageChange: function (num, type) {
-            presetMap['start'] = (num - 1) * scenarioParams.limit;
-            presetMap['initType'] = type;
-            if (type != 'init') {
-                selectPreset();
-            }
-        }
-    });
+    // $.jqPaginator('#pagination4', {
+    //     totalCounts: 1,
+    //     pageSize: scenarioParams.limit,
+    //     visiblePages: 10,
+    //     currentPage: 1,
+    //     prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+    //     next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+    //     page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+    //     onPageChange: function (num, type) {
+    //         presetMap['start'] = (num - 1) * scenarioParams.limit;
+    //         presetMap['initType'] = type;
+    //         if (type != 'init') {
+    //             selectPreset();
+    //         }
+    //     }
+    // });
 }
 
 

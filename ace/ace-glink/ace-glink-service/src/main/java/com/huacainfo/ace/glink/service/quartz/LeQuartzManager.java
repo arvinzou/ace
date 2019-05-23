@@ -1,11 +1,12 @@
 package com.huacainfo.ace.glink.service.quartz;
 
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.glink.constant.CommConstant;
 import com.huacainfo.ace.glink.service.LeBrokenLampService;
 import com.huacainfo.ace.glink.service.LeLampStatusService;
-import com.huacainfo.ace.glink.service.PagePortalService;
+import com.huacainfo.ace.glink.service.TopBuildingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +27,18 @@ public class LeQuartzManager {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private PagePortalService pagePortalService;
-    @Autowired
     private LeBrokenLampService leBrokenLampService;
     @Autowired
     private LeLampStatusService leLampStatusService;
+    @Autowired
+    private TopBuildingService topBuildingService;
 
     /**
      * 每隔[10分钟,调用一次弱电接口：    获取设备总数&故障设备总数
      */
     @Scheduled(cron = "0 0/10 * * * ?")
     public void leAutoGetLampStatus() {
-        MessageResponse ms = leLampStatusService.syncData();// pagePortalService.getLampStatus();
+        MessageResponse ms = leLampStatusService.syncData();
         logger.info(ms.getErrorMessage());
     }
 
@@ -51,6 +52,21 @@ public class LeQuartzManager {
         String date = DateUtil.toStr(yesterday, CommConstant.DATE_REGEX_LE);
         //
         MessageResponse ms = leBrokenLampService.getBrokenLampDetail(date);
+        logger.info(ms.getErrorMessage());
+    }
+
+    // pagePortalService.getLampStatus();
+
+    /**
+     * 每隔[1min] 刷新获取楼宇状态信息
+     */
+    @Scheduled(cron = "0 0/1 * * * ?")
+    public void leRefreshBuildingInfo() {
+        UserProp system = new UserProp();
+        system.setUserId("system");
+        system.setName("system");
+        MessageResponse ms = topBuildingService.syncData(system);
+        // pagePortalService.getLampStatus();
         logger.info(ms.getErrorMessage());
     }
 }
