@@ -124,16 +124,15 @@
 
 
 <script id="tpl-buildInfo" type="text/template">
-    <p>当前正在播放场景/\${data.isPlaying==1?'已暂停':'播放中'}</p>
+    <p>当前正在播放场景/\${data.isPlaying==1?'播放中':'未播放'}</p>
     <p>\${data.sceneNum}</p>
-    <video class="video" src="\${data.coverURL}">
+    <video class="video" poster="\${data.coverURL}" src="\${data.playURL}">
     </video>
     <div class="list">
         <p>建筑物名称：\${data.buildingName}</p>
         <p>所在地：\${data.address}</p>
         <p>建筑物编号：\${data.buildingNo}</p>
         <p> 建筑物状态：\${data.state==1?'在线':'离线'}</p>
-        <p>回路故障数量:6</p>
         <p>设备总数：\${data.lampCount}</p>
         <p>控制器数量：\${data.ctrlCount}</p>
     </div>
