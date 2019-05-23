@@ -260,10 +260,12 @@ function initForm(id) {
 }
 
 function  del(id) {
-    var url = contextPath + "/evaluating/softdel";
-    $.getJSON(url, {id: id}, function (result) {
-        if (result.status == 0) {
-            getPageList();
-        }
-    })
+    if(confirm("确定删除吗？")){
+        var url = contextPath + "/evaluating/softdel";
+        $.getJSON(url, {id: id}, function (result) {
+            if (result.status == 0) {
+                getPageList();
+            }
+        })
+    }
 }

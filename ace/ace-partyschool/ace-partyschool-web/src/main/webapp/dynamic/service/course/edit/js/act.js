@@ -38,7 +38,9 @@ function initEvents() {
             $(element).valid();
         },
         rules: {
-            name: {required: true, maxlength: 50}, category: {required: true, maxlength: 50}
+            name: {required: true, maxlength: 50},
+            category: {required: true, maxlength: 50},
+            teacherId: {required: true, maxlength: 50}
         },
         messages: {
             name: {
@@ -46,6 +48,9 @@ function initEvents() {
                 maxlength: "名称字符长度不能超过50"
             }, category: {
                 required: "请输入类别",
+                maxlength: "类别字符长度不能超过50"
+            }, teacherId: {
+                required: "请输入授课人",
                 maxlength: "类别字符长度不能超过50"
             }
         }
@@ -61,7 +66,7 @@ function initEvents() {
                 time: new Date(),
                 id: urlParams.did
             });
-            params.teacherIds=$(".js-example-basic-single2").select2("val");
+            params.teacherIds = $(".js-example-basic-single2").select2("val");
             save(params);
             return false;
         }
@@ -94,7 +99,7 @@ function save(params) {
 }
 
 function initSelect(data) {
-    var select2=$(".js-example-basic-single1").select2({
+    var select2 = $(".js-example-basic-single1").select2({
         ajax: {
             url: contextPath + "/evaluating/findEvaluatingList",
             dataType: 'json',
@@ -133,14 +138,14 @@ function initSelect(data) {
         }, // let our custom formatter work
     });
 
-    var select3=$(".js-example-basic-single2").select2({
+    var select3 = $(".js-example-basic-single2").select2({
         ajax: {
             url: contextPath + '/teacher/findTeacherList',
             dataType: 'json',
             delay: 250,
             data: function (params) {
                 return {
-                    status:1,
+                    status: 1,
                     name: params.term, // search term
                     page: params.page
                 };
@@ -167,8 +172,8 @@ function initSelect(data) {
             },
             cache: true
         },
-        multiple:true,
-        maximumSelectionLength:5,
+        multiple: true,
+        maximumSelectionLength: 5,
         placeholder: '选择授课人',
         escapeMarkup: function (markup) {
             return markup;
@@ -189,12 +194,12 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                data['dict154']=staticDictObject['154'];
+                data['dict154'] = staticDictObject['154'];
                 render('#fm-edit', data, 'tpl-fm');
                 initSelect(data);
-                var list=result.value.courseTeacherVoList;
-                var ids=[];
-                for(var i=0;i<list.length;i++){
+                var list = result.value.courseTeacherVoList;
+                var ids = [];
+                for (var i = 0; i < list.length; i++) {
                     ids.push(list[i].teacher_id);
                 }
                 $('.js-example-basic-single2').val(ids).trigger('change');

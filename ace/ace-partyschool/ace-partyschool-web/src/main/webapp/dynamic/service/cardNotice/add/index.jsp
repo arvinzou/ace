@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
     <meta charset="utf-8"/>
     <title>${cfg.sys_name}</title>
@@ -39,12 +37,8 @@
     </div>
 </div>
 <!-- END SAMPLE TABLE PORTLET-->
-
-
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-
 </body>
-
 <jsp:include page="/dynamic/common/footer.jsp"/>
 
 <script type="text/javascript"
@@ -53,14 +47,10 @@
         src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
-
-
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
-
-
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
 <script type="text/javascript"
@@ -76,12 +66,10 @@
     }
 </style>
 <script id="tpl-fm-add" type="text/template">
-
     <input type="hidden" name="id" value="">
     <div class="form-body">
         <div class="form-group">
             <label class="col-md-1 control-label">
-
                 标题
                 <span class="required" aria-required="true"> * </span>
             </label>
@@ -93,7 +81,6 @@
         </div>
         <div class="form-group">
             <label class="col-md-1 control-label">
-
                 类型
                 <span class="required" aria-required="true"> * </span>
             </label>
@@ -103,15 +90,12 @@
                 </label>
                 <label>
                     <input type="radio" name="category" value="2" onclick="setClassGroup()"><span style="padding:10px">班次</span>
-
                 </label>
                 <div class="error-category"></div>
             </div>
         </div>
-
         <div class="form-group hide" id="classGroup">
             <label class="col-md-1 control-label">
-
                 班次
                 <span class="required" aria-required="true"> * </span>
             </label>
@@ -123,19 +107,17 @@
                 </select>
                 <div class="error-classesId"></div>
             </div>
-
         </div>
-
         <div class="form-group">
             <label class="col-md-1 control-label">
                 内容
             </label>
             <div class="col-md-10">
-                <textarea rows="5" cols="100" class="form-control" name="content" maxlength="500" placeholder="优先显示附件内容"></textarea>
+                <textarea rows="5" cols="100" class="form-control" name="content" maxlength="500"
+                          placeholder="优先显示附件内容"></textarea>
                 <div class="error-content"></div>
             </div>
         </div>
-
         <div class="form-group">
             <label class="col-md-1 control-label">
                 附件
@@ -150,8 +132,6 @@
                 <div id="console"></div>
             </div>
         </div>
-
-
     </div>
     <div class="form-actions">
         <div class="row">

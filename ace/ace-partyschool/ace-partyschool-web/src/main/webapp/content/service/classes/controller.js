@@ -153,8 +153,7 @@ function edit(rowid) {
 var show = false;
 
 function del(rowid) {
-
-    if (confirm("确认注销么？")) {
+    if (confirm("确认该班级毕业么？(不可恢复)")) {
         var jsons = {id: rowid};
         startLoad();
         $.ajax({

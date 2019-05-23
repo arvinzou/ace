@@ -168,7 +168,7 @@ public class ClassesServiceImpl implements ClassesService {
         }
         int temp = this.classesDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "班级管理名称重复！");
+            return new MessageResponse(1, "班级名称或所属教室重复！");
         }
 
         o.setStatus("1");

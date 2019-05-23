@@ -76,24 +76,24 @@ function initEvents() {
             }
         }
     });
+    /*监听表单提交*/
+    $('#fm-add').ajaxForm({
+        beforeSubmit: function (formData, jqForm, options) {
+            var params = {};
+            $.each(formData, function (n, obj) {
+                params[obj.name] = obj.value;
+            });
+            $.extend(params, {
+                time: new Date(),
+                status: '1'
+            });
+            console.log(params);
+            save(params);
+            return false;
+        }
+    });
 }
 
-/*监听表单提交*/
-$('#fm-add').ajaxForm({
-    beforeSubmit: function (formData, jqForm, options) {
-        var params = {};
-        $.each(formData, function (n, obj) {
-            params[obj.name] = obj.value;
-        });
-        $.extend(params, {
-            time: new Date(),
-            status: '1'
-        });
-        console.log(params);
-        save(params);
-        return false;
-    }
-});
 
 
 /*保存表单**/

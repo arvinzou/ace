@@ -255,7 +255,7 @@
             <div class="modal-body">
                 <div class="form-horizontal" role="form">
                     <div class="form-body" id="fm-export">
-                        <form method="post" class="form-horizontal" role="form"
+                        <form enctype="application/x-www-form-urlencoded" method="post" class="form-horizontal" role="form"
                               action="${pageContext.request.contextPath}/exportExcel/exportAttRecord">
                             <label id="export_info" class="view-label hide"></label>
                             <div class="form-group">

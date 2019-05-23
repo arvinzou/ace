@@ -260,8 +260,10 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Classes">
         select count(*)
         from classes
-        where name=#{name}
+        where
+        (name=#{name} or classroomId=#{classroomId})
         and id != #{id,jdbcType=VARCHAR}
+        and status='1'
     </select>
 
     <update id="updateStatus" parameterType="java.lang.String">

@@ -660,7 +660,12 @@ public class AttRecordServiceImpl implements AttRecordService {
         Date startDate = DateUtil.getDate(condition.getStartDate(), DateUtil.DEFAULT_DATE_REGEX);
         Date endDate = DateUtil.getDate(condition.getEndDate(), DateUtil.DEFAULT_DATE_REGEX);
         //考勤配置参数
-        Map<String, String> config = getAttConfig(CommConstant.TEACHER);
+        Map<String, String> config =new HashMap<>();
+        if (CommConstant.STUDENT.equals(userType)){
+            config = getAttConfig(CommConstant.STUDENT);
+        } else if (CommConstant.TEACHER.equals(userType)) {
+             config = getAttConfig(CommConstant.TEACHER);
+        }
         //返回参数
         List<AttRecordExport> rst = new LinkedList<>();
         //循环日期
@@ -682,8 +687,6 @@ public class AttRecordServiceImpl implements AttRecordService {
         }
 
         return rst;
-
-
     }
 
     /**

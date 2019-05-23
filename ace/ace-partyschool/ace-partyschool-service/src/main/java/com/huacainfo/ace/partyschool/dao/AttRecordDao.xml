@@ -136,8 +136,32 @@
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
-        <include refid="From_Statement"/>
+        from (
+        select
+        v.userId, v.userName, v.userType, v.clsId, v.clsName
+        from (
+        SELECT
+        t.id as userId, 'student' as userType, t.`name` as userName,
+        c.id as clsId, c.`name` as clsName
+        from student t , classes c
+        where c.id = t.classId
+        and t.`status` = '1'
+        UNION ALL
+        select
+        t.id as userId, 'teacher' as userType, t.`name` as userName,
+        '' as clsId, '' as clsName
+        from teacher t
+        where t.`status` = '1'
+        ) v
+        LEFT JOIN att_record t ON v.userId = t.userId
         <include refid="Where_Condition"/>
+        <if test="condition.startDate !=null and condition.startDate !=&quot;&quot;">
+            and t.attTime >= str_to_date( #{condition.startDate} , '%Y-%m-%d %H:%i:%S')
+        </if>
+        <if test="condition.endDate !=null and condition.endDate !=&quot;&quot;">
+            and t.attTime <![CDATA[<=]]> str_to_date( #{condition.endDate} , '%Y-%m-%d %H:%i:%S')
+        </if>
+        ) w
     </select>
 
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.AttRecord">
@@ -167,7 +191,7 @@
     <select id="findRecordList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         IFNULL(left(t.attTime,10), '') as attDate,
-        t.attTime, IFNULL(t.attState,'NO_SIGN') as attState,
+        t.attTime,t.id, IFNULL(t.attState,'NO_SIGN') as attState,
         v.userId, v.userName, v.userType, v.clsId, v.clsName,
         case
         when v.userType= 'student' then '学员'

@@ -167,7 +167,8 @@ function setParams(key, value) {
 /*课程表管理加载表格数据*/
 function getPageList() {
     var url = contextPath + "/classSchedule/LearnedCourses";
-    params['cName'] = $("input[name=keyword]").val();
+    params['classesId'] = $("input[name=classesId]").val();
+    params['teacherId'] = $("input[name=teacherId]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();

@@ -139,7 +139,9 @@ function initEvents() {
             $(element).valid();
         },
         rules: {
-            name: {required: true, maxlength: 50}, category: {required: true, maxlength: 50}
+            name: {required: true, maxlength: 50},
+            category: {required: true, maxlength: 50},
+            teacherId: {required: true, maxlength: 50},
         },
         messages: {
             name: {
@@ -147,6 +149,9 @@ function initEvents() {
                 maxlength: "名称字符长度不能超过50"
             }, category: {
                 required: "请输入类别",
+                maxlength: "类别字符长度不能超过50"
+            }, teacherId: {
+                required: "请输入授课人",
                 maxlength: "类别字符长度不能超过50"
             }
         }

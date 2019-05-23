@@ -90,12 +90,11 @@ public class CardDataServiceImpl implements CardDataService {
         if (CommonUtils.isBlank(o.getUserId())) {
             return new MessageResponse(1, "用户Id不能为空！");
         }
+        o.setId(GUIDUtil.getGUID());
         int temp = this.cardDataDao.isExist(o);
         if (temp > 0) {
             return new MessageResponse(1, "绑定关系重复,请核对！");
         }
-
-        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         this.cardDataDao.insert(o);
@@ -128,7 +127,10 @@ public class CardDataServiceImpl implements CardDataService {
         if (CommonUtils.isBlank(o.getUserId())) {
             return new MessageResponse(1, "用户不能为空！");
         }
-
+        int temp = this.cardDataDao.isExist(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "绑定关系重复,请核对！");
+        }
         o.setStatus("1");
         o.setCreateDate(DateUtil.getNowDate());
         cardDataDao.updateByPrimaryKey(o);

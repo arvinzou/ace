@@ -85,7 +85,6 @@ function initEvents() {
             return false;
         }
     });
-	
 }
 /*保存表单**/
 function save(params) {

@@ -120,8 +120,9 @@
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.CardData">
         select count(1)
         from card_data
-        where userId = #{userId,jdbcType=VARCHAR}
-        or cardData = #{cardData,jdbcType=VARCHAR}
+        where (userId = #{userId,jdbcType=VARCHAR}
+        or cardData = #{cardData,jdbcType=VARCHAR})
+        and id !=#{id,jdbcType=VARCHAR}
     </select>
 
     <update id="updateStatus" parameterType="java.lang.String">
