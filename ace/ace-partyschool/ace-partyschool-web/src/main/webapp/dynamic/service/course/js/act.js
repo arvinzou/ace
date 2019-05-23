@@ -27,11 +27,13 @@ function initPage() {
 
 /*课程管理条件查询*/
 function t_query() {
+    params['start']=0;
     getPageList();
     return false;
 }
 
 function setParams(key, value) {
+    params['start']=0;
     params[key] = value;
     getPageList();
 }

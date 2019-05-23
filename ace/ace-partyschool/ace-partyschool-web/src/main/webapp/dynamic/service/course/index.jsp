@@ -31,7 +31,7 @@
 
                 <form onsubmit="return t_query()">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
+                        <button type="button" class="btn btn-default active" onclick="setParams('category','');">全部</button>
                         <button type="button" class="btn btn-default" onclick="setParams('category','1');">现场教学</button>
                         <button type="button" class="btn btn-default" onclick="setParams('category','2');">室内教学</button>
                     </div>

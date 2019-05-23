@@ -161,6 +161,7 @@
         SELECT COUNT(*)
         from student
         WHERE classId = #{classId,jdbcType=VARCHAR}
+        and status='1'
     </select>
 
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">

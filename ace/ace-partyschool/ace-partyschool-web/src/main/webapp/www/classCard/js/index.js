@@ -46,7 +46,8 @@ function viewStudent() {
     var data = {
         classId: classId,
         start: 0,
-        limit: 500
+        limit: 500,
+        status:'1'
     }
     $.getJSON(url, data, function (rst) {
         if (rst.status == 0) {

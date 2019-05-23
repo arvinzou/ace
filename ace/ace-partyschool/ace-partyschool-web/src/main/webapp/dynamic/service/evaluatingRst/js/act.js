@@ -6,11 +6,11 @@ window.onload = function () {
     initEvents();
     initSelect();
     $(".js-example-basic-single2").on('change',teacherSearch);
+    $(".js-example-basic-single1").on('change',teacherSearch);
 }
 
 
 function teacherSearch() {
-    params['cTeacherId'] = $("select[name=teacherId]").val();
     getPageList();
 }
 
@@ -166,9 +166,10 @@ function setParams(key, value) {
 
 /*课程表管理加载表格数据*/
 function getPageList() {
+    params['cTeacherId'] = $("select[name=teacherId]").val();
+    params['classesId'] = $("select[name=classesId]").val();
+    params['cName'] = $("input[name=keyword]").val();
     var url = contextPath + "/classSchedule/LearnedCourses";
-    params['classesId'] = $("input[name=classesId]").val();
-    params['teacherId'] = $("input[name=teacherId]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();

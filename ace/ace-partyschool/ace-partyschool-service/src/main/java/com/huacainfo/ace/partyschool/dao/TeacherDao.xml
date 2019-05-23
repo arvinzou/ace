@@ -151,18 +151,41 @@
     </select>
 
     <select id="findHeadmasterList" parameterType="java.lang.String" resultMap="VoResultMap">
+        SELECT m.* FROM
+        (
         select
         t.id, t.category, t.name, t.sex, t.political, t.mobile, t.idCard, t.photoUrl, t.remark,
         t.status, t.createUserId, t.createUserName, t.createDate,
         t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
         t.introduce, t.workUnitName, t.postName
         from teacher t
-        where 1=1
-        <if test="condition.id!=null and condition.id!=&quot;&quot;">
-            and t.id = #{condition.id,jdbcType=VARCHAR}
-        </if>
+        where
+        1=1
+        <choose>
+            <when test="condition.id !=null and condition.id !=&quot;&quot;">
+                AND t.id = #{condition.id,jdbcType=VARCHAR}
+            </when>
+            <otherwise>
+                AND 1=0
+            </otherwise>
+        </choose>
+        limit 0, 1) m
+        UNION
+        SELECT n.* FROM
+        (
+        select
+        t.id, t.category, t.name, t.sex, t.political, t.mobile, t.idCard, t.photoUrl, t.remark,
+        t.status, t.createUserId, t.createUserName, t.createDate,
+        t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
+        t.introduce, t.workUnitName, t.postName
+        from teacher t
+        where
+        1=1
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status like concat('%',#{condition.status,jdbcType=VARCHAR},'%')
         </if>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -172,7 +195,7 @@
                 ORDER BY t.createDate desc
             </otherwise>
         </choose>
-        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}) n
     </select>
 
     <select id="findCount" resultType="int">

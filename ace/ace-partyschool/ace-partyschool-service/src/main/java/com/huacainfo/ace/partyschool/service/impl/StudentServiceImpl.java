@@ -321,9 +321,14 @@ public class StudentServiceImpl implements StudentService {
                 o.setSex("男".equals(o.getSex().trim()) ? "1" : "2");
             }
             if (StringUtil.isNotEmpty(o.getPolitical())) {
-                o.setPolitical("党员".equals(o.getPolitical().trim()) ? "party" : "normal");
+                if("党员".equals(o.getPolitical().trim())){
+                    o.setPolitical("party");
+                }else if("非党员".equals(o.getPolitical().trim())){
+                    o.setPolitical("normal");
+                }else{
+                    o.setPolitical("mzdp");
+                }
             }
-
             int t = studentDao.isExist(o);
             if (t > 0) {
                 return new MessageResponse(1, "行" + i + ",该学员已被导入系统！");
