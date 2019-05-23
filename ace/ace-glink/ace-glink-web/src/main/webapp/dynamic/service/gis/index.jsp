@@ -75,11 +75,11 @@
                             </table>
 
                         </div>
-                        <div class="status">
-                            <span class="red color"></span> <span class="text">严重</span>
-                            <span class="orange color"></span> <span class="text">一般问题</span>
-                            <span class="yellow color"></span> <span class="text">轻度问题</span>
-                        </div>
+                        <%--<div class="status">--%>
+                            <%--<span class="red color"></span> <span class="text">严重</span>--%>
+                            <%--<span class="orange color"></span> <span class="text">一般问题</span>--%>
+                            <%--<span class="yellow color"></span> <span class="text">轻度问题</span>--%>
+                        <%--</div>--%>
 
                     </div>
                     <div class="swiper-slide build" id="buildInfo">
@@ -109,7 +109,7 @@
         <p>建筑物名称：\${data.buildingName}</p>
         <p>所在地：\${data.address}</p>
         <p>建筑物编号：\${data.buildingNo}</p>
-        <p> 建筑物状态：\${data.state==1?'在线':'离线'}</p>
+        <p> 建筑物状态：\${data.status==1?'在线':'离线'}</p>
         <p>设备总数：\${data.lampCount}</p>
         <p>控制器数量：\${data.ctrlCount}</p>
     </div>
