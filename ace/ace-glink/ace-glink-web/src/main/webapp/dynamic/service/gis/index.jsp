@@ -38,29 +38,6 @@
 <div id="Map">
 
 </div>
-
-<%--<div class="searchBar">--%>
-    <%--<div class="rst"><span class="area">全部</span> <span class="station">>><span class="text">全部</span></span></div>--%>
-    <%--<div class="select">--%>
-        <%--<div class="options">--%>
-            <%--<form>--%>
-                <%--<p>分区</p>--%>
-                <%--<div class="area ulstyle">--%>
-                    <%--<ul id="areaList">--%>
-
-                    <%--</ul>--%>
-                <%--</div>--%>
-                <%--<p>站点</p>--%>
-                <%--<div class="station ulstyle">--%>
-                    <%--<ul id="stationList" class="stationList">--%>
-
-                    <%--</ul>--%>
-                <%--</div>--%>
-            <%--</form>--%>
-        <%--</div>--%>
-    <%--</div>--%>
-<%--</div>--%>
-
 <div class="rightBar">
     <div class="statusBar">
         <div class="data data1">全部</div>
@@ -188,58 +165,17 @@
     </li>
     {@/each}
 </script>
-
-<!--[if lt IE 9]>
-<!--<script src="${portalPath}/content/common/assets/global/plugins/respond.min.js"></script>-->
-<%--<script src="${portalPath}/content/common/assets/global/plugins/excanvas.min.js"></script>--%>
-<%--<script src="${portalPath}/content/common/assets/global/plugins/ie8.fix.min.js"></script>--%>
 <![endif]-->
 <script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"
         type="text/javascript"></script>
-<%--<script src="${portalPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js?v=${cfg.version}" type="text/javascript"></script>--%>
-<%--<script src="${portalPath}/content/common/assets/global/plugins/js.cookie.min.js?v=${cfg.version}"--%>
-        <%--type="text/javascript"></script>--%>
-<%--<script src="${portalPath}/content/common/js/init-rem.js?v=${cfg.version}" type="text/javascript"></script>--%>
-<%--<script src="${portalPath}/content/common/js/loading.js?v=${cfg.version}" type="text/javascript"></script>--%>
 <script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}"></script>
-
-<%--<script src="js/swiper.min.js"></script>--%>
-
-<%--<link rel="stylesheet" type="text/css"--%>
-      <%--href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">--%>
-<%--<link rel="stylesheet" type="text/css"--%>
-      <%--href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">--%>
-<%--<script type="text/javascript"--%>
-        <%--src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>--%>
-<%--<script type="text/javascript"--%>
-        <%--src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>--%>
-<%--<script type="text/javascript"--%>
-        <%--src="${pageContext.request.contextPath}/content/common/js/datetimepicker/bootstrap-datetimepicker.js"></script>--%>
-<%--<script type="text/javascript"--%>
-        <%--src="${pageContext.request.contextPath}/content/common/js/datetimepicker/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>--%>
 <script src="js/Concurrent.Thread.js"></script>
 <script src="js/act.js?version=${cfg.version}"></script>
 
 <script>
-    //
-//    var map = new BMap.Map("Map", {});//限定缩放比例，13-15
-//    var point = new BMap.Point(114.275923, 30.603137);  // 创建点坐标
-//    map.centerAndZoom(point, 13);                 // 初始化地图，设置中心点坐标和地图级别
-//    //添加地图类型控件
-//    map.addControl(new BMap.MapTypeControl({
-//        mapTypes: [
-//            BMAP_NORMAL_MAP,
-//            BMAP_HYBRID_MAP
-//        ]
-//    }));
-//    map.setCurrentCity("武汉");          // 设置地图显示的城市 此项是必须设置的
-//    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-//    //单击获取点击的经纬度
-//    map.addEventListener("click", function (e) {
-//        alert(e.point.lng + "," + e.point.lat);
-//    });
+
 </script>
 
 </body>
