@@ -64,11 +64,11 @@
 <div class="rightBar">
     <div class="statusBar">
         <div class="data data1">全部</div>
-        <div class="data data2">正常
-            <span>2300</span>
+        <div class="data data2">在线
+            <span id="onlineNum">0</span>
         </div>
-        <div class="data data3">故障
-            <span>2300</span>
+        <div class="data data3">离线
+            <span id="offlineNum">0</span>
         </div>
     </div>
 
@@ -130,11 +130,9 @@
     </video>
     <div class="list">
         <p>建筑物名称：\${data.buildingName}</p>
-        <p>建筑物类型：联机建筑</p>
         <p>所在地：\${data.address}</p>
         <p>建筑物编号：\${data.buildingNo}</p>
-        <p>是否重点建筑：重点建筑</p>
-        <p> 建筑物状态：\${data.status==1?'在线':'离线'}</p>
+        <p> 建筑物状态：\${data.state==1?'在线':'离线'}</p>
         <p>回路故障数量:6</p>
         <p>设备总数：\${data.lampCount}</p>
         <p>控制器数量：\${data.ctrlCount}</p>

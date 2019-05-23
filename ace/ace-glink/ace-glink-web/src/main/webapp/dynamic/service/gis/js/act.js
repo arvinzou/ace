@@ -57,14 +57,24 @@ function findTopBuildingList() {
                 marker.setMap(null);
             }
             var list = rst.rows;
+            var online=0;
+            var offline=0;
             if (list.length) {
                 for (var i = 0; i < list.length; i++) {
                     var o = list[i];
-                    var imgUrl;
                     if (!(o.latitude && o.longitude)) {
                         continue
                     }
-                    imgUrl = "img/icon0.png";
+                    if(o.state=='1'){
+                        o.imgUrl="img/icon0.png";
+                        online++;
+                        $('#onlineNum').text(online);
+                    }
+                    else {
+                        o.imgUrl="img/icon1.png";
+                        offline++;
+                        $('#offlineNum').text(offline);
+                    }
                     var lalo=bd_encrypt(o.latitude,o.longitude)
                     var point = new BMap.Point(lalo.lon,lalo.lat);
                     addMarker(point,o);
@@ -110,7 +120,7 @@ function changeview() {
 
 // 编写自定义函数,创建标注
 function addMarker(point,o){
-    var myIcon = new BMap.Icon("./img/icon0.png", new BMap.Size(30,30),{imageSize:new BMap.Size(30,30)});
+    var myIcon = new BMap.Icon(o.imgUrl, new BMap.Size(30,30),{imageSize:new BMap.Size(30,30)});
     var marker = new BMap.Marker(point,{icon:myIcon});
     marker.setTitle(o.name);
     marker.onclick=(function(o) {
