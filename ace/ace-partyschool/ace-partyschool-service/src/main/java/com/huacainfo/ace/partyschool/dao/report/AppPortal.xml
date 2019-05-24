@@ -43,7 +43,7 @@
         SELECT
         'test' id, COUNT(1)
         FROM class_schedule cs
-        LEFT JOIN policeschool.course c ON cs.courseId =c.id
+        LEFT JOIN partyschool.course c ON cs.courseId =c.id
         WHERE cs.courseDate <![CDATA[ < ]]> NOW()
         AND cs.classesId = #{classId}
         AND (c.evaluatingId IS NOT NULL OR c.evaluatingId <![CDATA[ <> ]]>'')
