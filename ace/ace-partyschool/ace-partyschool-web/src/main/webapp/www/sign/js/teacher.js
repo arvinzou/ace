@@ -219,6 +219,7 @@ function imgChange(fileUrl) {
 function cancel(){
     $("#bindModal").hide();
     $("body").removeClass("modalhide");
+    window.location.href = contextPath+"/www/login/index.jsp";
 }
 
 function bindWx(){
