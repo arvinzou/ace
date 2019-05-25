@@ -3,6 +3,7 @@ package com.huacainfo.ace.partyschool.service;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.partyschool.vo.AccountVo;
 import com.huacainfo.ace.partyschool.vo.StudentVo;
 import com.huacainfo.ace.partyschool.vo.TeacherVo;
 
@@ -156,4 +157,12 @@ public interface SignService {
      * @return int
      */
     MessageResponse updateAccount(String userId, String newAccount);
+
+    /**
+     * 通过UserId获取账户信息
+     *
+     * @param userId 用户ID
+     * @return AccountVo
+     */
+    AccountVo getAcctByUserId(String userId);
 }

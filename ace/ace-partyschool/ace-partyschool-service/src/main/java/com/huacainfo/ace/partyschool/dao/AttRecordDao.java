@@ -59,5 +59,8 @@ public interface AttRecordDao {
                                    @Param("startTime") String startTime,
                                    @Param("endTime") String endTime);
 
-    List<Map<String, Object>> findStudetnList(String classId);
+    List<Map<String, Object>> findStudentList(String classId);
+
+    List<AttRecordVo> findStudentRecord(@Param("userId") String userId,
+                                        @Param("dateTimeStr") String dateTimeStr);
 }

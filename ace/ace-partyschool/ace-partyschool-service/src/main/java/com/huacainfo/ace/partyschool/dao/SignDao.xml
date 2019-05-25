@@ -92,6 +92,7 @@
         left join partyschool.card_data cd on u.user_id = cd.userId
         LEFT JOIN portal.dict d on d.category_id ='156' and t.workUnitName = d.code
         where u.account = #{acct,jdbcType=VARCHAR}
+        or u.user_id = #{acct,jdbcType=VARCHAR}
     </select>
 
 

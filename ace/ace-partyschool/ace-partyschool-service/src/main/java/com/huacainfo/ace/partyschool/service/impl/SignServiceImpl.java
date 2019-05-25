@@ -248,22 +248,18 @@ public class SignServiceImpl implements SignService {
 
         try {
             //用户资料
-            AccountVo accountVo = signDao.findByAcct(acct);
+            AccountVo accountVo = dao.findByAcct(acct);
             if (accountVo != null) {
                 return new ResultResponse(ResultCode.SUCCESS, "success", accountVo);
             }
+            return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
         } catch (Exception e) {
             logger.error("{}", e);
             if (session != null) {
                 session.close();
             }
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+            return new ResultResponse(ResultCode.FAIL, "sorry！系统异常啦");
         }
-
-        return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
     }
 
     /**
@@ -474,6 +470,22 @@ public class SignServiceImpl implements SignService {
         return map;
     }
 
+    @Override
+    public AccountVo getAcctByUserId(String userId) {
+
+        SqlSession session = getSqlSession();
+        SignDao dao = session.getMapper(SignDao.class);
+
+        try {
+            return dao.findByAcct(userId);
+        } catch (Exception e) {
+            logger.error("{}", e);
+            if (session != null) {
+                session.close();
+            }
+            return null;
+        }
+    }
 
     private UserProp sysUser() {
         UserProp u = new UserProp();
