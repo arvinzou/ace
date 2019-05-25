@@ -70,14 +70,18 @@ function getNotices() {
             var temp;
             for (var i = 0; i < datas.length; i++) {
                 var item = datas[i];
-                if (item.fileUrl) {
-                    if (item.fileUrl.lastIndexOf('.pdf') != -1) {
+                var url=item.fileUrl;
+                if (url) {
+                    if (url.lastIndexOf('.pdf') != -1) {
+                        if(url.indexOf('https://')<0){
+                            url=url.replace('http://','https://')
+                        }
                         temp = pdfTemp.replace('#index#', i);
                         mySwiper.appendSlide(temp);
-                        initpdf(item.fileUrl, i);
+                        initpdf(url, i);
                         continue;
-                    } else if (item.fileUrl.lastIndexOf('.jpg') != -1 || item.fileUrl.lastIndexOf('.png') != -1 || item.fileUrl.lastIndexOf('gif') != -1) {
-                        temp = imgTemps.replace('#url#', item.fileUrl);
+                    } else if (url.lastIndexOf('.jpg') != -1 || url.lastIndexOf('.png') != -1 || url.lastIndexOf('gif') != -1) {
+                        temp = imgTemps.replace('#url#', url);
                         mySwiper.appendSlide(temp);
                         continue;
                     }
