@@ -7,6 +7,7 @@ var mapConfigData = {
     pointLng: "111.598359",
     radius: "50000000"
 };
+
 $(function () {
     getSystemConfig();
     initUserData();

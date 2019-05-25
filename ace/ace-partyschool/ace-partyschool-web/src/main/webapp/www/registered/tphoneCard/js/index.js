@@ -1,19 +1,39 @@
 var regType = null;
 var lat = null;
 var longt = null;
-var btnName = "上午签到"
+var btnName = "上午签到";
+var mapConfigData = {
+    pointLat: "29.047335",
+    pointLng: "111.598359",
+    radius: "50000000"
+};
+
 $(function(){
+    getSystemConfig();
     initUserData();
     getConfig();
 });
+
+function getSystemConfig() {
+    var url = contextPath + "/www/att/location";
+    $.ajaxSettings.async = false;
+    $.getJSON(url, function (rst) {
+        if (rst.status == 0) {
+            mapConfigData = rst.data;
+            return;
+        }
+        alert("获取配置信息失败，将使用默认配置");
+    })
+    $.ajaxSettings.async = true;
+}
+
 function initUserData(){
     $.ajax({
         url: contextPath+ "/www/sign/getAcctInfo",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        data:{
-        },
+        data:{},
         success:function(result){
             if(result.status == 0) {
                 regType = result.data.regType;
@@ -76,8 +96,8 @@ function locate(data){
             success: function (res) {
                 lat = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                 longt = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-
-                var center = new qq.maps.LatLng(29.047770,111.598520);  //默认以常德市委党校为中心
+                var center = new qq.maps.LatLng(mapConfigData.pointLat, mapConfigData.pointLng);
+                // var center = new qq.maps.LatLng(29.047770,111.598520);  //默认以常德市委党校为中心
                 var locate = new qq.maps.LatLng(lat, longt);
                 var map = new qq.maps.Map(document.getElementById("mapBox"), {
                     // 地图的中心地理坐标。
@@ -92,7 +112,7 @@ function locate(data){
                 var cirle = new qq.maps.Circle({
                     map: map,
                     center: center,
-                    radius: 500,
+                    radius: parseInt(mapConfigData.radius),
                     strokeWeight:1
                 });
                 var marker = new qq.maps.Marker({
