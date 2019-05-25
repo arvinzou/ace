@@ -7,33 +7,12 @@ $(function () {
     $('#calendar').calendar({
         data: [],
         onSelected: function (view, date, data) {
-            if (staticParameter.flag == 'MOBILE') {
-                getPhoneData(formatDate(date));
-            } else {
-                findAttDataByDay(formatDate(date));
-            }
+            getPhoneData(formatDate(date));
         }
     });
-
     var nowDate = formatDate(new Date());
-    initData(nowDate);
+    getUserInfo(nowDate);
 });
-
-function initData(date) {
-    var url = contextPath + "/www/att/getAttSrc";
-    $.getJSON(url, function (rst) {
-        if (rst.status == 0) {
-            staticParameter.flag=rst.data.config_value;
-            if (staticParameter.flag == 'MOBILE') {
-                getPhoneData(date);
-            } else {
-                getUserInfo(date);
-            }
-            return;
-        }
-        alert(rst.info ? rst.info : rst.errorMessage);
-    })
-}
 
 /**获取手机端打卡数据*/
 
@@ -56,27 +35,11 @@ function getUserInfo(date) {
     $.getJSON(url, function (result) {
         if (result.status == 0) {
             staticParameter.lCardNo = result.data.lCardNo;
-            if (staticParameter.lCardNo) {
-                findAttDataByDay(date);
-            } else {
+            getPhoneData(date);
+            if (!staticParameter.lCardNo) {
                 alert("您还没有绑定卡的信息！");
             }
             return
-        }
-        alert(result.info ? result.info : result.errorMessage);
-    })
-}
-
-function findAttDataByDay(date) {
-    var url = staticParameter.server + "/api/www/api/findAttDataByDay";
-    var data = {
-        lCardNo: staticParameter.lCardNo,
-        dateTimeStr: date
-    };
-    $.getJSON(url,data,function(result){
-        if (result.status == 0) {
-            renderPage('list', result.data, 'list-tpl');
-            return;
         }
         alert(result.info ? result.info : result.errorMessage);
     })
