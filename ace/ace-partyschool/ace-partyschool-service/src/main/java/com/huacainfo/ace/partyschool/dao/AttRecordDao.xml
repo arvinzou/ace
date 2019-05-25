@@ -245,7 +245,7 @@
         order by attTime asc
     </select>
 
-    <select id="findStudetnList" parameterType="java.lang.String" resultType="map">
+    <select id="findStudentList" parameterType="java.lang.String" resultType="map">
         SELECT
             @rank:=@rank + 1 AS sort, a.*
         FROM (
@@ -259,5 +259,23 @@
             order by t.`name`
 
         ) a, (SELECT @rank:= 0) b
+    </select>
+
+    <select id="findStudentRecord" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+          v.userId, v.userType, v.attTime, v.attState
+        from (
+            select
+                t.userId, t.userType, t.attTime, t.attState
+            from att_record t
+            where t.userId = #{userId,jdbcType=VARCHAR}
+              and date_format(t.attTime, '%Y-%m-%d') like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+            UNION ALL
+            select
+                t.userId, 'student' as userType, t.attTime, '' as  attState
+            from zk_att_data t
+            where t.userId = #{userId,jdbcType=VARCHAR}
+              and date_format(t.attTime, '%Y-%m-%d') like concat(#{dateTimeStr,jdbcType=VARCHAR},'%')
+        )v
     </select>
 </mapper>

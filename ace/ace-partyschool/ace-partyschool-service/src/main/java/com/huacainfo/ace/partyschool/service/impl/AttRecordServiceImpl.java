@@ -5,15 +5,18 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.access.AccessHelper;
+import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.*;
+import com.huacainfo.ace.partyschool.AttResultVo;
 import com.huacainfo.ace.partyschool.constant.CommConstant;
 import com.huacainfo.ace.partyschool.dao.AttRecordDao;
 import com.huacainfo.ace.partyschool.dao.ZkAttDataDao;
 import com.huacainfo.ace.partyschool.model.AttRecord;
 import com.huacainfo.ace.partyschool.model.ZkAttData;
 import com.huacainfo.ace.partyschool.service.AttRecordService;
+import com.huacainfo.ace.partyschool.service.SignService;
 import com.huacainfo.ace.partyschool.vo.*;
 import com.huacainfo.ace.portal.model.Config;
 import com.huacainfo.ace.portal.model.Users;
@@ -47,6 +50,8 @@ public class AttRecordServiceImpl implements AttRecordService {
     private UsersService usersService;
     @Autowired
     private ConfigService configService;
+    @Autowired
+    private SignService signService;
 
     /**
      * @throws
@@ -558,6 +563,89 @@ public class AttRecordServiceImpl implements AttRecordService {
      */
     @Override
     public ResultResponse findList(String userId, String dateTimeStr) {
+        //老版代码
+//        return findListOld(userId, dateTimeStr);
+
+        //new version
+        AccountVo act = signService.getAcctByUserId(userId);
+        if (act == null) {
+            return new ResultResponse(ResultCode.FAIL, "用户信息丢失");
+        }
+        //分身份类型获取考勤数据
+        if (act.getRegType().equals(CommConstant.STUDENT)) {
+            //学生考勤
+            return getStudentAttRecord(userId, dateTimeStr);
+        } else {
+            //教职工考勤
+            return getTeacherAttRecord(userId, act.getlCardNo(), dateTimeStr);
+        }
+    }
+
+    /**
+     * 获取教职工考勤
+     *
+     * @param userId      我方系统用户ID
+     * @param cardNo      考勤借阅证号
+     * @param dateTimeStr 查询时间
+     * @return ResultResponse
+     */
+    private ResultResponse getTeacherAttRecord(String userId, String cardNo, String dateTimeStr) {
+
+        //mysql 考勤数据
+        Map<String, List<AttRecordVo>> rst = (Map<String, List<AttRecordVo>>) getMobileAttData(userId, dateTimeStr).getData();
+        //oracle 考勤数据
+        if (StringUtil.isNotEmpty(cardNo)) {
+            StringBuilder apiURL = new StringBuilder();
+            apiURL.append("https://www.cdswdx.top/api/www/api/findAttDataByDay")
+                    .append("?lCardNo=").append(cardNo)
+                    .append("&dateTimeStr=").append(dateTimeStr);
+
+            String apiRstStr = HttpKit.get(apiURL.toString());
+            ResultResponse orcl = JsonUtil.toObject(apiRstStr, ResultResponse.class);
+            if (ResultCode.SUCCESS == orcl.getStatus()) {
+                //json解析
+                Map<String, Object> rst2 = JsonUtil.toMap(String.valueOf(orcl.getData()));
+                String key;
+                List<AttRecordVo> value;
+                List<AttResultVo> tempOrcl;
+                AttRecordVo tempItem;
+                for (Map.Entry<String, List<AttRecordVo>> iter1 : rst.entrySet()) {
+                    key = iter1.getKey();
+                    value = iter1.getValue();
+                    tempOrcl = JsonUtil.toList(String.valueOf(rst2.get(key)), AttResultVo.class);
+                    for (AttResultVo item : tempOrcl) {
+                        tempItem = new AttRecordVo();
+                        tempItem.setUserId(userId);
+                        tempItem.setUserType(CommConstant.TEACHER);
+                        tempItem.setAttTime(item.getDealTime());
+                        tempItem.setAttState("");
+                        value.add(tempItem);
+                    }
+                    rst.put(key, value);
+                }
+            }
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
+    }
+
+    /**
+     * 获取学员考勤
+     *
+     * @param userId      我方系统用户ID
+     * @param dateTimeStr 查询时间
+     * @return ResultResponse
+     */
+    private ResultResponse getStudentAttRecord(String userId, String dateTimeStr) {
+        //获取考勤数据
+        List<AttRecordVo> list = attRecordDao.findStudentRecord(userId, dateTimeStr);
+        //数据分组
+        Map<String, List<AttRecordVo>> view = parseRecordView(list);
+
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", view);
+    }
+
+    private ResultResponse findListOld(String userId, String dateTimeStr) {
         Map<String, Object> config = getAttSrc();
         if (config == null) {
             return new ResultResponse(ResultCode.FAIL, "未配置考勤数据来源");
@@ -588,6 +676,13 @@ public class AttRecordServiceImpl implements AttRecordService {
         condition.setUserId(userId);
         List<AttRecordVo> list = attRecordDao.findRecordList(condition, 0, 100, "");
         //解析分组
+        Map<String, List<AttRecordVo>> view = parseRecordView(list);
+
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", view);
+    }
+
+    private Map<String, List<AttRecordVo>> parseRecordView(List<AttRecordVo> list) {
+
         Map<String, List<AttRecordVo>> view = new HashMap<>();
         List<AttRecordVo> am = new LinkedList<>();
         List<AttRecordVo> pm = new LinkedList<>();
@@ -615,7 +710,8 @@ public class AttRecordServiceImpl implements AttRecordService {
                 }
             }
         }
-        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", view);
+
+        return view;
     }
 
     private ResultResponse getZkData(String userId, String dateTimeStr) {
@@ -660,11 +756,11 @@ public class AttRecordServiceImpl implements AttRecordService {
         Date startDate = DateUtil.getDate(condition.getStartDate(), DateUtil.DEFAULT_DATE_REGEX);
         Date endDate = DateUtil.getDate(condition.getEndDate(), DateUtil.DEFAULT_DATE_REGEX);
         //考勤配置参数
-        Map<String, String> config =new HashMap<>();
-        if (CommConstant.STUDENT.equals(userType)){
+        Map<String, String> config = new HashMap<>();
+        if (CommConstant.STUDENT.equals(userType)) {
             config = getAttConfig(CommConstant.STUDENT);
         } else if (CommConstant.TEACHER.equals(userType)) {
-             config = getAttConfig(CommConstant.TEACHER);
+            config = getAttConfig(CommConstant.TEACHER);
         }
         //返回参数
         List<AttRecordExport> rst = new LinkedList<>();
@@ -730,7 +826,7 @@ public class AttRecordServiceImpl implements AttRecordService {
     @Override
     public List<Map<String, Object>> studentReport(String classId, String stuAttType, String[] dateArray) {
         //1、获取班次所有学员列表
-        List<Map<String, Object>> studentList = this.attRecordDao.findStudetnList(classId);
+        List<Map<String, Object>> studentList = this.attRecordDao.findStudentList(classId);
         //2、遍历所有学员和所选日期，挨个统计当天考勤结果
         String attDayResult;
         List<AttRecord> list;
