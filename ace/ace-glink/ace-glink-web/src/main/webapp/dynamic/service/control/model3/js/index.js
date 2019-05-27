@@ -515,7 +515,9 @@ function initScenario() {
     $('.scenario-modal #presets').on('click', 'li', setScenario);
     $("#areaNodeID1").combotree({
         onChange: function (newValue, oldValue) {
-            getScenarioList("areaNodeID", newValue);
+            scenarioParams.start=0;
+            scenarioParams['areaNodeID'] = newValue;
+            getScenarioList();
         }
     });
     initPageScenario();
@@ -577,11 +579,15 @@ function initPageScenario() {
 }
 
 
+function getOnkeyPress(key,value) {
+    scenarioParams.start=0;
+    scenarioParams[key] = value;
+    getScenarioList();
+}
+
+
 /*ajax获取数据列表*/
-function getScenarioList(key, value) {
-    if (key) {
-        scenarioParams[key] = value;
-    }
+function getScenarioList() {
     var url = contextPath + "/seCustomArea/findSeCustomAreaList";
     $.getJSON(url, scenarioParams, function (rst) {
         if (rst.status == 0) {

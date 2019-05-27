@@ -156,9 +156,17 @@
     <div class="modals task scenario">
         <div class="modals-head">
             <span class="title">场景执行</span>
-            <input placeholder="请选择分区" id="areaNodeID1" class="easyui-combotree"
-                   data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
-                lines:true," style='min-width:225px;height:0.260416rem;'>
+            <div style="min-width: 360px;
+    display: flex;
+    justify-content: space-between;">
+                <input placeholder="请选择分区" id="areaNodeID1" class="easyui-combotree"
+                       data-options="url:'${pageContext.request.contextPath}/seProjectArea/selectTreeList?id=01',method:'get',animate: true,
+                lines:true," style='height:0.260416rem;'>
+                <input name="areaName" placeholder="按区域名称搜索" type="text" style="border:1px solid rgba(14,228,230,1)!important;
+    background-color: transparent!important;
+padding:0 10px;margin-left: 20px" onkeyup="getOnkeyPress('areaName',this.value)">
+            </div>
+            
         </div>
         <div class="modals-body">
             <ul class="taskList" id="scenarioList">
