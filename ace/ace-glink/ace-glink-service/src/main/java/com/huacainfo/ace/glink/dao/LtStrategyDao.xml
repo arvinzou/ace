@@ -163,7 +163,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY l.createDate desc
+                ORDER BY l.name
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

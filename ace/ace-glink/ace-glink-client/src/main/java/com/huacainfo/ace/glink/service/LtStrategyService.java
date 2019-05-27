@@ -33,9 +33,8 @@ public interface LtStrategyService {
      * @author: huacai003
      * @version: 2019-04-10
      */
-    PageResult
-            <LtStrategyVo> findLtStrategyList(LtStrategyQVo condition,
-                                              int start, int limit, String orderBy) throws Exception;
+    PageResult<LtStrategyVo> findLtStrategyList(LtStrategyQVo condition,
+                                                int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -168,7 +167,7 @@ public interface LtStrategyService {
     /**
      * @throws
      * @Title:deleteRoadSectionByRoadSectionIds
-     * @Description: TODO(批量删除策略管理）
+     * @Description: TODO(批量删除策略管理 ）
      * @param: @param ids
      * @param: @param userProp
      * @param: @throws Exception

@@ -8,8 +8,6 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
-import com.huacainfo.ace.glink.api.LeApiToolKit;
-import com.huacainfo.ace.glink.api.pojo.le.LightStrategyIn;
 import com.huacainfo.ace.glink.model.LtLnkObject;
 import com.huacainfo.ace.glink.model.LtStrategy;
 import com.huacainfo.ace.glink.service.LeSceneService;
@@ -303,12 +301,14 @@ public class LtStrategyController extends GLinkBaseController {
      */
     @RequestMapping(value = "/lightStrategy")
     @ResponseBody
-    public SingleResult lightStrategy(String jsons) throws Exception {
-        LightStrategyIn lightStrategyIn=JSON.parseObject(jsons,LightStrategyIn.class);
-        String json = LeApiToolKit.lightStrategy(lightStrategyIn);
-        SingleResult<String> rst = new SingleResult<>();
-        rst.setValue(json);
-        return rst;
+    public Map<String, Object> lightStrategy(String jsons) throws Exception {
+
+        return this.ltStrategyService.lightStrategy(jsons);
+//        LightStrategyIn lightStrategyIn=JSON.parseObject(jsons,LightStrategyIn.class);
+//        String json = LeApiToolKit.lightStrategy(lightStrategyIn);
+//        SingleResult<String> rst = new SingleResult<>();
+//        rst.setValue(json);
+//        return rst;
     }
 
 
