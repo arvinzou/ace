@@ -7,6 +7,7 @@ var payData = null;
 var isName = false;
 var paramsObj;
 var anonymity='0';
+var placeholder="您的暖心留言会弹在屏幕上～";
 
 
 /**url参数解析为对象*/
@@ -22,11 +23,16 @@ function queryURL(){
     return obj;
 }
 
+
+function placeholderChange() {
+    if(paramsObj.donateType){
+        $('#message').prop('placeholder',placeholder);
+    }
+}
+
 window.onload = function(){
     paramsObj=queryURL();
-    if(paramsObj.donateType){
-        $('#message').prop('placeholder','您的暖心留言会弹在屏幕上～');
-    }
+    placeholderChange();
     $("#onoffswitch").on('click', function() {
         clickSwitch()
     });
@@ -61,6 +67,8 @@ window.onload = function(){
         isName = true;
         $("#userInfo").hide();
         anonymity="1";
+        placeholder="选择匿名捐赠您的头像不会显示在弹幕上哦～";
+        placeholderChange();
     });
     $("#yes").click(function(){
         $(this).hide();
@@ -68,6 +76,8 @@ window.onload = function(){
         isName = false;
         $("#userInfo").show();
         anonymity="0";
+        placeholder="您的暖心留言会弹在屏幕上～";
+        placeholderChange();
     });
 
 

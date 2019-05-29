@@ -29,6 +29,14 @@
 						常德市慈善总会宗旨是弘扬中华民族扶贫济困的传统美德，倡导人道主义精神，动员和组织社会力量为弱势群体提供各种救助，促进本市慈善公益、社会福利事业发展和社会的和谐进步。
 					</p>
 				</div>
+				<div class="item">
+					<p class="title_02">社会团体法人登记证书</p>
+					<img style="width: 100%" src="img/shttfrdjzs.jpg" alt="">
+				</div>
+				<div class="item">
+					<p class="title_02">慈善组织公开募捐资格证书</p>
+					<img style="width: 100%" src="img/cszzzgzs.jpg" alt="">
+				</div>
 			</div>
 		</div>
 	</body>
