@@ -412,6 +412,7 @@
             <a href="javascript:editStrategy('\${item.id}');" style="color: #53FDFF;">修改</a>
             <a href="javascript:setTimer('\${item.id}');" style="color: #53FDFF;">定时</a>
             <a href="javascript:selectPreset('\${formatObject(item)}');" style="color: #53FDFF;">下发</a>
+            <a href="javascript:del('\${item.id}');" style="color: #53FDFF;">删除</a>
         </td>
     </tr>
     {@/each}

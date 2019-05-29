@@ -67,12 +67,21 @@ function isChecked(val, idex) {
 
 function formatObject(data) {
     for (var item in data) {
-        if (item.indexOf('Date') > -1 || item.indexOf('Time') > -1) {
-            data[item] = data[item].substring(11, 19).split(':').join('');
+        if (item.indexOf('Time') > -1) {
+            if(!data['pattern']){
+                continue;
+            }
+            if(data['pattern']=='3'){
+                data[item] = data[item].substring(11, 19).split(':').join('');
+            }
+            else{
+                data[item] = data[item].substring(0, 10).split('-').join('');
+            }
         }
     }
     data.strategy = data.code;
     data.area = data.areaCode;
+    console.log(data);
     return JSON.stringify(data);
 }
 
@@ -400,6 +409,21 @@ function editStrategy(id) {
     });
 }
 
+/*删除策略*/
+function del(id) {
+    var url = contextPath + "/ltStrategy/deleteLtStrategyByLtStrategyId";
+    var data = {
+        jsons:JSON.stringify({id: id})
+    }
+    $.getJSON(url, data, function (rst) {
+        if (rst.status == 0) {
+            getStrategyList();
+        } else {
+            alert("删除失败");
+        }
+    });
+}
+
 function showAddStrategyModal(data) {
     render('#strategyInfo', data, 'tpl-strategyInfo');
     $('.addStrategy-modal').show();
@@ -519,7 +543,7 @@ function viewSetTime(data) {
     }
     $('.setTime-modal').show();
 }
-
+/**点击改变模式*/
 function changePattern() {
     var that = $(this);
     var pattern = that.data('type');
@@ -565,22 +589,16 @@ function setTimerMonth(mons) {
 function postTimer(param) {
     clearParam();
     for (var item in param) {
-        if (item == 'weeks') {
-            mateData.isWeek = 1;
-        }
-        if (item == 'months') {
-            mateData.isMonth = 1;
-        }
         mateData[item] = param[item];
     }
 
-    if (mateData.pattern == '2') {
+    // if (mateData.pattern == '2') {
         mateData.startDate = mateData.startTime;
         mateData.stopDate = mateData.stopTime;
-    }
-    if (mateData.pattern == '3') {
+    // }
+    // if (mateData.pattern == '3') {
         mateData.specialDate = mateData.startTime;
-    }
+    // }
     var url = contextPath + "/ltStrategy/updateLtStrategyVo";
     var data = {
         jsons: JSON.stringify(mateData)
@@ -607,6 +625,10 @@ var jsonData = '';
 function selectPreset(data) {
     $('.scenario-modal  input[name="keyword"]').val('');
     jsonData = data;
+    if(!JSON.parse(data).pattern){
+        alert("还没有设置定时");
+        return;
+    }
     $('.scenario-modal').show();
     getsceneList();
 }
