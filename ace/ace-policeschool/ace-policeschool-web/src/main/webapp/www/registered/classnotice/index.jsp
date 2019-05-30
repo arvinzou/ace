@@ -18,7 +18,7 @@
 <script id="class-tpl" type="text/template">
     <div class="banner">
         {@if data.list.photoUrl}
-        <img src="\${data.list.photoUrl}"/>
+        <img src="img/jh.jpg"/>
         {@/if}
     </div>
     <div class="container">
