@@ -256,7 +256,7 @@ public class SignServiceImpl implements SignService {
 
         try {
             //用户资料
-            AccountVo accountVo = signDao.findByAcct(acct);
+            AccountVo accountVo = dao.findByAcct(acct);
             if (accountVo != null) {
                 return new ResultResponse(ResultCode.SUCCESS, "success", accountVo);
             }

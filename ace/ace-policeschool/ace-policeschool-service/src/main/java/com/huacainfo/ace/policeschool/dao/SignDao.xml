@@ -65,6 +65,7 @@
             <result column="college" jdbcType="VARCHAR" property="college"/>
             <result column="birthDate" jdbcType="TIMESTAMP" property="birthDate"/>
             <result column="nativePlace" jdbcType="VARCHAR" property="nativePlace"/>
+            <result column="nativePlaceName" jdbcType="VARCHAR" property="areaName"/>
             <result column="dorm" jdbcType="VARCHAR" property="dorm"/>
         </association>
         <association property="teacher" column="tid" javaType="com.huacainfo.ace.policeschool.vo.TeacherVo">
@@ -92,6 +93,7 @@
         s.political as sPolitical, s.workUnitName as sWUName, s.postName as sPostName,
         s.classId as sClsId, '' as sClsName,
         s.nativePlace, s.badgeNum, s.college, s.birthDate,s.dorm,
+        p.`name` as nativePlaceName,
 
         t.id as tid,
         t.category as tType, t.name as tName,
@@ -103,6 +105,7 @@
         left join policeschool.teacher t on u.user_id = t.id
         left join policeschool.card_data cd on u.user_id = cd.userId
         LEFT JOIN portal.dict d on d.category_id ='156' and t.workUnitName = d.code
+        left join portal.province p on s.nativePlace = p.`code`
         where u.account = #{acct,jdbcType=VARCHAR}
     </select>
 
