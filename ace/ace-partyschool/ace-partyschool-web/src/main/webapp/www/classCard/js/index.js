@@ -30,7 +30,7 @@ $(function () {
 function initSwriper() {
     mySwiper = new Swiper('.swiper-container', {
         autoplay: {
-            delay: 10000
+            delay: 60000
         },
         // 如果需要前进后退按钮
         navigation: {
