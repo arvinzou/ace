@@ -29,7 +29,8 @@
         </div>
     </div>
     <div class="login-btn loginActive" onclick="login();">登录</div>
-    <div class="regist-box"><a href="${pageContext.request.contextPath}/www/sign/index.jsp" class="regist">注册报到</a>
+    <div class="regist-box"><a href="${pageContext.request.contextPath}/www/sign/index.jsp" class="regist"
+                               style="display: none">注册报到</a>
     </div>
     <div class="footer-box">
         <form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post">

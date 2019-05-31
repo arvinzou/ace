@@ -90,7 +90,7 @@
     <div class="info">
         <div class="ititle br">籍贯</div>
         <div class="icontent br">
-            <input type="text" name="nativePlace" value="\${data.student.nativePlace}"/>
+            <input type="text" name="nativePlace" value="\${data.student.areaName}"/>
         </div>
     </div>
     <div class="info">
