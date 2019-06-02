@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Map;
@@ -112,6 +113,8 @@ public class OAuth2Controller extends BisBaseController {
         this.logger.info("【市委党校】code->{} state -> {}", code, state);
         SingleResult<Userinfo> rst = this.oAuth2Service.saveOrUpdateUserinfo(appid, secret, code, state);
         if (rst.getState()) {
+            this.logger.info("**************OAuth2Controller 【1】 **************");
+
             //doAction
             String[] stateData = state.split("\\|");
             String action = stateData[0];
@@ -120,31 +123,12 @@ public class OAuth2Controller extends BisBaseController {
             String jsonData = stateData[2];
             Map<String, Object> pageParams = JsonUtil.toMap(jsonData);
             Userinfo userinfo = rst.getValue();//微信个人资料
-            ResultResponse rs;
             switch (action) {
                 case "WX_BIND"://绑定微信
-                    rs = signService.wxBind((String) pageParams.get("account"), userinfo.getUnionid());
-                    if (ResultCode.FAIL == rs.getStatus()) {
-                        respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
-                    } else {
-                        //微信登录
-                        rs = signService.wxLogin(userinfo.getUnionid());
-                        if (ResultCode.FAIL == rs.getStatus()) {
-                            respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
-                        } else {
-                            //登录session注册
-                            registerSession((Users) rs.getData());
-                        }
-                    }
+                    respUri = bindWx(userinfo, respUri, pageParams);
                     break;
                 case "WX_LOGIN"://微信登录
-                    rs = signService.wxLogin(userinfo.getUnionid());
-                    if (ResultCode.FAIL == rs.getStatus()) {
-                        respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
-                    } else {
-                        //登录session注册
-                        registerSession((Users) rs.getData());
-                    }
+                    respUri = wxLogin(userinfo, respUri);
                     break;
                 default:
                     respUri = LOGIN_PAGE + "error=" + URLEncoder.encode("未知处理类型", "UTF-8");//错误提醒
@@ -156,12 +140,54 @@ public class OAuth2Controller extends BisBaseController {
             respUri = LOGIN_PAGE + "error=" + URLEncoder.encode("存储微信个人资料失败", "UTF-8");//错误提醒
         }
 
+        this.logger.info("**************OAuth2Controller 【3】 **************");
+        String domain = PropertyUtil.getProperty("fastdfs_server");
+        if (domain.endsWith("/")) {
+            domain = domain.substring(0, domain.length() - 1);
+        }
+        respUri = domain + respUri;
+        logger.info("**************respUri-> {}", respUri);
+
         //返回目标请求地址
         if (StringUtil.isNotEmpty(respUri)) {
             response.sendRedirect(respUri);
         } else {
             logger.info("无返回跳转地址");
         }
+    }
+
+    private String wxLogin(Userinfo userinfo, String respUri) throws UnsupportedEncodingException {
+        ResultResponse rs = signService.wxLogin(userinfo.getUnionid());
+        if (ResultCode.FAIL == rs.getStatus()) {
+            respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
+        } else {
+            //登录session注册
+            registerSession((Users) rs.getData());
+        }
+
+        return respUri;
+    }
+
+    private String bindWx(Userinfo userinfo, String respUri, Map<String, Object> pageParams) throws UnsupportedEncodingException {
+        ResultResponse rs = signService.wxBind((String) pageParams.get("account"), userinfo.getUnionid());
+
+        if (ResultCode.FAIL == rs.getStatus()) {
+
+            respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
+
+        } else {
+            //微信登录
+            rs = signService.wxLogin(userinfo.getUnionid());
+            if (ResultCode.FAIL == rs.getStatus()) {
+                respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
+            } else {
+                //登录session注册
+                registerSession((Users) rs.getData());
+            }
+        }
+
+        return respUri;
+
     }
 
 }
