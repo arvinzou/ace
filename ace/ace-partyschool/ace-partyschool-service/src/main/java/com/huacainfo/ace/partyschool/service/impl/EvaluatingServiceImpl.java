@@ -160,6 +160,7 @@ public class EvaluatingServiceImpl implements EvaluatingService {
         evaluating.setLastModifyUserId(userProp.getUserId());
         evaluating.setIntroduce(o.getIntroduce());
         evaluating.setName(o.getName());
+        evaluating.setQuestion(o.getQuestion());
         evaluating.setTimeout(o.getTimeout());
         this.evaluatingDao.updateByPrimaryKey(evaluating);
         this.evaluationIndexDao.deleteByEvaluatingId(o.getId());

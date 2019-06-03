@@ -70,6 +70,7 @@ function formatIndex(num) {
 
 
 /**获取测试信息*/
+var question='';
 
 function getTestInfo() {
     eid=GetQueryString('eid');
@@ -81,6 +82,7 @@ function getTestInfo() {
     $.getJSON(url,data,function (rst) {
         if(rst.status==0){
             renderPage('title',rst.value.course,'tpl_title');
+            question=rst.value.course.question;
         }
         else {
             alert("获取用户信息失败！");
@@ -93,6 +95,9 @@ function getTestInfo() {
     $.getJSON(url,data,function (rst) {
         if(rst.status==0){
             renderPage('test',rst.rows,'tpl_test');
+            if(question){
+                $('#question').text(question);
+            }
         }
         else {
             alert("获取用户信息失败！");

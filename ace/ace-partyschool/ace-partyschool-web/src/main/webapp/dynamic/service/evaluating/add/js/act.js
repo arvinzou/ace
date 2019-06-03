@@ -276,6 +276,7 @@ function save(params) {
     evaluating.name = params.name;
     evaluating.timeout = params.timeout;
     evaluating.introduce = params.introduce;
+    evaluating.question = params.question;
     evaluationIndex = [];
     var index = 0;
     while (params['evaluationIndex[' + index + '].name']) {

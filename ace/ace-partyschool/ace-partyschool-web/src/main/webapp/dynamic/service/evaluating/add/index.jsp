@@ -49,9 +49,22 @@
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="introduce"
                                    maxlength="2147483647"
-                                   placeholder="请输入介绍（建议字数在100个字以内，不超过200个字)">
+                                   placeholder="请输入介绍（不超过200个字)">
                             <span class="help-block"></span>
                         </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-2 control-label">
+                                问答题
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="question"
+                                       maxlength="2147483647"
+                                       placeholder="请输入问答题">
+                                <span class="help-block"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">

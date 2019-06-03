@@ -260,6 +260,7 @@ function save(params) {
     evaluating.name = params.name;
     evaluating.timeout = params.timeout;
     evaluating.introduce = params.introduce;
+    evaluating.question = params.question;
     evaluating.id = params.id;
     evaluationIndex = [];
     var index = 0;

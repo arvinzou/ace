@@ -63,6 +63,19 @@
             </div>
         </div>
         <div class="form-group">
+            <div class="row">
+                <label class="col-md-2 control-label">
+                    问答题
+                </label>
+                <div class="col-md-6">
+                    <input type="text"  value="\${data.question}" class="form-control" name="question"
+                           maxlength="2147483647"
+                           placeholder="请输入问答题">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-md-2 control-label">
                 超时设定
                 <span class="required" aria-required="true"> * </span>

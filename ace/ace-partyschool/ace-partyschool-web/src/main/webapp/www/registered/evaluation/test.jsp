@@ -40,11 +40,11 @@
     {@/each}
     <div class="testItem">
         <div class="testTitle">
-            <span class="text">最后:您对提高培训质量和满意度有何意见</span>
+            <span class="text" id="question">最后:您对提高培训质量和满意度有何意见</span>
         </div>
         <div class="input_text">
             <textarea id="textarea" maxlength="200" class="message"
-                      placeholder="请在此输入您要填写的内容~200字以内,感谢您的支持和建议!"></textarea>
+                      placeholder="请在此输入您要填写的内容~200字以内"></textarea>
             <span class="font_number">200</span>
         </div>
     </div>
