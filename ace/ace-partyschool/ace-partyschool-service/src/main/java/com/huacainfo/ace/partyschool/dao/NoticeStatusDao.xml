@@ -165,4 +165,9 @@
             and t.noticeId = #{noticeId,jdbcType=VARCHAR}
         </if>
     </select>
+
+  <delete id="deleteByNoticeId" parameterType="java.lang.String">
+    delete from notice_status
+    where noticeId = #{noticeId,jdbcType=VARCHAR}
+  </delete>
 </mapper>
