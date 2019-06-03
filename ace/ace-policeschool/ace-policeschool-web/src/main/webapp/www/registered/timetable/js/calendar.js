@@ -19,7 +19,7 @@ function jcalendar_week(options) {
     function addDOM() {
         calendarid.html("");
         var before_btn = opts.showbtn ? '<img class="switch_month beforem_btn" src="img/icon-pre.png">' : '';
-        var after_btn = opts.showbtn ? '<img class="switch_month afterm_btn" src="img/icon-next.png">' : '';
+        var after_btn = opts.showbtn ? '<img class="switch_month afterm_btn" src="img/icon-next-active.png">' : '';
         var header_dom = '<div class="flex_i calendar_header ">' +
             before_btn +
             '<div class="flex_auto calendar_info" onclick="$(\'#pop\').show();"></div>' +
@@ -198,7 +198,7 @@ function jcalendar_week(options) {
         calendarid.find(".afterm_btn").off("click").on("click", function () {
             var todayTemp = todaydate();
             var weekdata = _this.getweeknum(todayTemp[0], todayTemp[1], todayTemp[2]);
-            if (weeknum != weekdata[1]) {
+ //           if (weeknum != weekdata[1]) {
                 var afterw = weeknum + 1;
                 var afterweekfirst = _this.weekfirstdate(year, afterw);
                 var afterweekdata = _this.getweeknum(afterweekfirst[0], afterweekfirst[1], afterweekfirst[2]);
@@ -215,10 +215,10 @@ function jcalendar_week(options) {
                     if (cMonth < 10) {
                         cMonth = "0" + cMonth;
                     }
-                    $(".afterm_btn").attr('src', 'img/icon-next.png');
+                    //$(".afterm_btn").attr('src', 'img/icon-next.png');
                     initCourseList(cYear + "-" + cMonth + "-" + cDay + " 00:00:00");
                 }
-            }
+        //    }
         })
         //day点击事件
         calendarid.find(".calendar_day").on("click", function () {
