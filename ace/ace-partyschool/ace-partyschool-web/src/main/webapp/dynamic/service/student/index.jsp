@@ -162,7 +162,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">政治面貌</label>
         <div class="col-md-10">
-            \${parsePolitical(data.o.political)}
+            \${rsd(data.o.political,'155')}
         </div>
     </div>
     <div class="form-group">
