@@ -85,11 +85,11 @@ public class SclNoticeServiceImpl implements SclNoticeService {
 
     @Override
     public ResultResponse findNoticeById(String id) throws Exception {
-        if (CommonUtils.isBlank(id)){
+        if (CommonUtils.isBlank(id)) {
             return new ResultResponse(1, "序号不能为空!");
         }
         Notice notice = this.noticeDao.selectByPrimaryKey(id);
-        return new ResultResponse(ResultCode.SUCCESS,"获取成功",notice);
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", notice);
     }
 
     @Override
@@ -108,8 +108,8 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     }
 
     @Override
-    public ResultResponse findPulicNoticeLists(String classesId,String server) throws Exception {
-        List<NoticeVo> list = this.noticeDao.findPublicNoticeList(classesId,server);
+    public ResultResponse findPulicNoticeLists(String classesId, String server) throws Exception {
+        List<NoticeVo> list = this.noticeDao.findPublicNoticeList(classesId, server);
         return new ResultResponse(0, "通知公告获取完成！", list);
     }
 
@@ -219,13 +219,15 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     @Override
     public MessageResponse deleteNoticeByNoticeId(String id, UserProp userProp) throws Exception {
 
-        int i = noticeStatusDao.findCount("", id);
-        if (i > 0) {
-            return new MessageResponse(ResultCode.FAIL, "公告存在发送记录，不允许删除");
-        }
-
+//        int i = noticeStatusDao.findCount("", id);
+//        if (i > 0) {
+//            return new MessageResponse(ResultCode.FAIL, "公告存在发送记录，不允许删除");
+//        }
+        //1、撤回已发布内容
+        noticeStatusDao.deleteByNoticeId(id);
+        //2、删除公告数据
         this.noticeDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除通知公告", "通知公告", id, id, "通知公告", userProp);
-        return new MessageResponse(0, "通知公告删除完成！");
+        return new MessageResponse(0, "删除成功！");
     }
 }

@@ -33,9 +33,10 @@ public interface NoticeStatusDao {
     int updateStatus(@Param("id") String id);
 
 
-    public List<Map<String, Object>> getPushUsersList(String id);
+    List<Map<String, Object>> getPushUsersList(String id);
 
     int findCount(@Param("userId") String userId,
                   @Param("noticeId") String noticeId);
 
+    int deleteByNoticeId(String noticeId);
 }
