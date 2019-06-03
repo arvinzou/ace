@@ -40,8 +40,8 @@
 			{@/each}
 		</script>
 		<script id="balance-tpl" type="text/template">
-			<div class="cardNo">卡号:\${data.cardNo}</div>
-			<div class="balance">\${data.curBalance}</div>
+			<div class="cardNo">卡号:\${data.lCardNo}</div>
+			<div class="balance">\${data.curBalance?data.curBalance:0}</div>
 			<div class="balance-title">一卡通余额(元)</div>
 		</script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>

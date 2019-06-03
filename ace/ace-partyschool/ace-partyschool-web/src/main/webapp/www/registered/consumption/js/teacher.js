@@ -95,7 +95,13 @@ function initCount(lCardNo){
         },
         success:function(result){
             if(result.status == 0) {
-                renderPage('balance', result.data, 'balance-tpl');
+                rst=result.data;
+
+                if(!rst){
+                    rst={};
+                    rst.lCardNo=lCardNo;
+                }
+                renderPage('balance', rst, 'balance-tpl');
             }else {
                 if(result.info){
                     alert(result.info);
