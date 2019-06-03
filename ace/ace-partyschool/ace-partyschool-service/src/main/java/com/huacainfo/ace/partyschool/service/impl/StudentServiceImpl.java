@@ -260,7 +260,8 @@ public class StudentServiceImpl implements StudentService {
         String account = data.getMobile();
         String pwd = "123456";
         String mobile = data.getMobile();
-        String sex = data.getSex();//String.valueOf(signService.getCarInfo(data.getIdCard()).get("sex"));
+        String sex = "1";
+        //String.valueOf(signService.getCarInfo(data.getIdCard()).get("sex"));
         String sysId = "partyschool";
         String deptId = "7bccdbc14dc04d6d9926656d75e3c720";
         String roleId = "510fd9f9-9612-4415-9eac-2f361f96ee40";//select * from portal.role t where t.syid='partyschool'
@@ -302,33 +303,13 @@ public class StudentServiceImpl implements StudentService {
                 continue;
 //                return new MessageResponse(1, "行" + i + ",名称不能为空！");
             }
-            if (CommonUtils.isBlank(o.getSex())) {
-                return new MessageResponse(1, "行" + i + ",性别不能为空！");
-            }
             if (CommonUtils.isBlank(o.getMobile())) {
                 return new MessageResponse(1, "行" + i + ",手机号码不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getPolitical())) {
-                return new MessageResponse(1, "行" + i + ",政治面貌不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getPostName())) {
-                return new MessageResponse(1, "行" + i + ",职务全称不能为空！");
             }
             if (CommonUtils.isBlank(o.getWorkUnitName())) {
                 return new MessageResponse(1, "行" + i + ",单位全称不能为空！");
             }
-            if (StringUtil.isNotEmpty(o.getSex())) {
-                o.setSex("男".equals(o.getSex().trim()) ? "1" : "2");
-            }
-            if (StringUtil.isNotEmpty(o.getPolitical())) {
-                if("党员".equals(o.getPolitical().trim())){
-                    o.setPolitical("party");
-                }else if("非党员".equals(o.getPolitical().trim())){
-                    o.setPolitical("normal");
-                }else{
-                    o.setPolitical("mzdp");
-                }
-            }
+
             int t = studentDao.isExist(o);
             if (t > 0) {
                 return new MessageResponse(1, "行" + i + ",该学员已被导入系统！");
@@ -403,9 +384,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public MessageResponse deleteStudents(List<String> students){
+    public MessageResponse deleteStudents(List<String> students) {
         this.studentDao.deleteStudents(students);
-        return new MessageResponse(ResultCode.SUCCESS,"成功");
+        return new MessageResponse(ResultCode.SUCCESS, "成功");
     }
 
 }
