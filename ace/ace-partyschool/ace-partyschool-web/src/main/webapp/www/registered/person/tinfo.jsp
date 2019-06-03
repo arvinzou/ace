@@ -68,11 +68,7 @@
 		<div class="info">
 			<div class="ititle br">政治面貌</div>
 			<div class="icontent br"  name="political" id="political">
-				{@if data.teacher.political == 'party'}
-				<span class="unselect">党员</span>
-				{@else}
-				<span class="unselect">非党员</span>
-				{@/if}
+				<span class="unselect">\${formatpolitical(data.teacher.political)}</span>
 			</div>
 		</div>
 		<div class="info">
