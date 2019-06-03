@@ -2,6 +2,7 @@ package com.huacainfo.ace.partyschool.web.filter;
 
 import com.huacainfo.ace.common.security.spring.BasicUsers;
 import com.huacainfo.ace.common.tools.CommonKeys;
+import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.common.tools.SpringUtils;
 import com.huacainfo.ace.common.web.tools.WebUtils;
 import org.apache.commons.lang.StringUtils;
@@ -15,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,6 +55,12 @@ public class WebLoginSecurityFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
+
+        String domain = PropertyUtil.getProperty("fastdfs_server");
+        if (domain.endsWith("/")) {
+            domain = domain.substring(0, domain.length() - 1);
+        }
+
         HttpServletRequest httpReq = (HttpServletRequest) request;
         HttpSession session = httpReq.getSession();
         Object object = session.getAttribute(CommonKeys.SESSION_USERPROP_KEY);
@@ -69,7 +75,10 @@ public class WebLoginSecurityFilter implements Filter {
         if (accessable) {
             chain.doFilter(request, response);
         } else {
-            ((HttpServletResponse) response).sendRedirect(redirectPage);
+            String uri = domain + redirectPage;
+            logger.info("[party-school]WebLoginSecurityFilter.sendRedirect.uri-> {}", uri);
+
+            ((HttpServletResponse) response).sendRedirect(uri);
         }
     }
 
