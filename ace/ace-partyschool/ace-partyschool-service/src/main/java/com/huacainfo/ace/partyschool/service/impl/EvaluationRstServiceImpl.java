@@ -100,9 +100,7 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
                 throw new Exception(mr.getErrorMessage());
             }
         }
-        if (!CommonUtils.isBlank(obj.getContent())) {
-            evaluationRstContentService.insertEvaluationRstContent(obj, userProp);
-        }
+        evaluationRstContentService.insertEvaluationRstContent(obj, userProp);
         return new ResultResponse(ResultCode.SUCCESS, "提交成功");
     }
 

@@ -15,6 +15,16 @@ public class EvaluationRstContent  implements Serializable {
 
     private String content;
 
+    private String judge;
+
+    public String getJudge() {
+        return judge;
+    }
+
+    public void setJudge(String judge) {
+        this.judge = judge;
+    }
+
     public String getId() {
         return id;
     }

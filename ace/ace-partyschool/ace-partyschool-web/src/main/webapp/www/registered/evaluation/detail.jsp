@@ -12,7 +12,7 @@
 	</head>
 	<body>
 		<div class="title" id="title">
-			<p>党史讲座：学党史、知党情</p>
+			<p></p>
 		</div>
 		<div class="testContent" id="test">
 		</div>
@@ -22,6 +22,32 @@
 		</div>
 	</body>
 	<script id="tpl_test" type="text/template">
+
+		<div class="testItem" data-name="固定题" data-introduce="本门课程设置的必要性（不考虑教师的授课水平）">
+			<div class="testTitle">
+				<span class="text">01.本门课程设置的必要性（不考虑教师的授课水平）</span>
+			</div>
+			<div class="testScore">
+				<div class="option">
+					<input value="1" \${data.rst.judge=="1"?"checked":''} type="radio" name="test_1" id="option_1"/>
+					<label for="option_1">很有必要</label>
+				</div>
+				<div class="option">
+					<input value="2" \${data.rst.judge=="2"?"checked":''} type="radio" name="test_1" id="option_2"/>
+					<label for="option_2">可以开设</label>
+				</div>
+				<div class="option">
+					<input value="3" \${data.rst.judge=="3"?"checked":''} type="radio" name="test_1" id="option_3"/>
+					<label for="option_3">可有可无</label>
+				</div>
+				<div class="option">
+					<input value="4" \${data.rst.judge=="4"?"checked":''} type="radio" name="test_1" id="option_4"/>
+					<label for="option_4">无需开设</label>
+				</div>
+			</div>
+		</div>
+
+
 		{@each data.list as item,index}
 		<div class="testItem items">
 			<div class="testTitle">
@@ -38,7 +64,7 @@
 		{@/each}
 		<div class="testItem">
 			<div class="testTitle">
-				<span class="text">最后:您对提高培训质量和满意度有何意见</span>
+				<span class="text" id="question">最后:您对提高培训质量和满意度有何意见</span>
 			</div>
 			<div class="input_text">
 				<div id="textarea" class="message" >\${data.rst.content}</div>

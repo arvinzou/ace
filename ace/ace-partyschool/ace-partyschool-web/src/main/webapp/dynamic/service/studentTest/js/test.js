@@ -43,7 +43,8 @@ function postData(datas) {
         evaluationRst:JSON.stringify(datas),
         evaluationContent:JSON.stringify({
             classScheduleId:cid,
-            content:$('#textarea').val()
+            content:$('#textarea').val(),
+            judge:$('input[name="test_1"]:checked').val(),
         })
     }
     $.post(url,data,function (rst) {
@@ -64,9 +65,12 @@ function parseIntF(num) {
 
 /**计算序列*/
 function formatIndex(num) {
-    var index=''+(parseInt(num)+1);
+    var index=''+(parseInt(num)+2);
     return index>9?index:'0'+index;
 }
+
+
+var question='';
 
 
 /**获取测试信息*/
@@ -81,6 +85,7 @@ function getTestInfo() {
     $.getJSON(url,data,function (rst) {
         if(rst.status==0){
             renderPage('title',rst.value.course,'tpl_title');
+            question=rst.value.question;
         }
         else {
             alert("获取用户信息失败！");
@@ -93,6 +98,9 @@ function getTestInfo() {
     $.getJSON(url,data,function (rst) {
         if(rst.status==0){
             renderPage('test',rst.rows,'tpl_test');
+            if(question){
+                $('#question').text(question);
+            }
         }
         else {
             alert("获取用户信息失败！");
