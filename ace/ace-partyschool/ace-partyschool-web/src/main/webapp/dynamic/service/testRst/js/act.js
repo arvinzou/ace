@@ -99,7 +99,7 @@ function initEvents() {
         var id = relatedTarget.data('id');
         var status = relatedTarget.data('status');
         var score = relatedTarget.data('score');
-        initPreview(id,status,score);
+        initPreview(id, status, score);
     })
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
@@ -131,39 +131,39 @@ function initEvents() {
         console.log(event);
         $(event.target).addClass("active");
     });
-   $('#modal-preview').on('click','.button',submitScore);
+    $('#modal-preview').on('click', '.button', submitScore);
 
 }
 
 
 function submitScore() {
-    var data=[];
-    var inputs=$('#modal-preview input[name=inputScore]');
-    if(inputs.length<1){
+    var data = [];
+    var inputs = $('#modal-preview input[name=inputScore]');
+    if (inputs.length < 1) {
         return;
     }
-    inputs.each(function(){
-        var score=$(this).val();
-        if(!score){
+    inputs.each(function () {
+        var score = $(this).val();
+        if (!score) {
             alert("还有测评没有打分。")
         }
-        var id=$(this).data('id')
+        var id = $(this).data('id')
         data.push({
-            id:id,
-            youScore:score
+            id: id,
+            youScore: score
         })
     });
-    var url= contextPath + '/topicRst/updataTopicRstScore'
-    var datas={
-        jsons:JSON.stringify({
-            testId:testId,
-            list:data
+    var url = contextPath + '/topicRst/updataTopicRstScore'
+    var datas = {
+        jsons: JSON.stringify({
+            testId: testId,
+            list: data
         })
     }
-    $.post(url,datas,function (rst) {
-        if(rst.status==0){
+    $.post(url, datas, function (rst) {
+        if (rst.status == 0) {
             window.history.back();
-        }else {
+        } else {
             alert("提交失败。")
         }
     })
@@ -192,52 +192,23 @@ function audit(params) {
     });
 }
 
-/*测试答案管理上架*/
-function online(id) {
-    if (confirm("确定要上架吗？")) {
+/*删除*/
+function del(id) {
+    var jsons = {id: id};
+    if (confirm("确定要删除？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/testRst/updateStatus",
+            url: contextPath + "/testRst/deleteTestRstByTestRstId",
             type: "post",
             async: false,
             data: {
-                id: id,
-                status: '1'
+                jsons: JSON.stringify(jsons)
             },
             success: function (rst) {
                 stopLoad();
+                alert(rst.errorMessage);
                 if (rst.status == 0) {
                     getPageList();
-                } else {
-                    alert(rst.errorMessage);
-                }
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起，出错了！");
-            }
-        });
-    }
-}
-
-/*测试答案管理下架*/
-function outline(id) {
-    if (confirm("确定要下架吗？")) {
-        startLoad();
-        $.ajax({
-            url: contextPath + "/testRst/updateStatus",
-            type: "post",
-            async: false,
-            data: {
-                id: id,
-                status: '0'
-            },
-            success: function (rst) {
-                stopLoad();
-                if (rst.status == 0) {
-                    getPageList();
-                } else {
-                    alert(rst.errorMessage);
                 }
             },
             error: function () {
@@ -280,22 +251,21 @@ function parseStatus(status) {
 
 var testId;
 
-function initPreview(id,status,score) {
-    var  url=contextPath + "/topicRst/findTopicRstFullList";
-    var data={
-        testId:id
+function initPreview(id, status, score) {
+    var url = contextPath + "/topicRst/findTopicRstFullList";
+    var data = {
+        testId: id
     }
-    $('#modal-preview .rightBar .totalScore').data('DataScore',score?score:0).text(score?score:0);
-    testId=id;
-    $.getJSON(url,data,function (rst) {
+    $('#modal-preview .rightBar .totalScore').data('DataScore', score ? score : 0).text(score ? score : 0);
+    testId = id;
+    $.getJSON(url, data, function (rst) {
         stopLoad();
-        if(rst.status==0){
-            var data={}
-            data.o=rst.data;
-            data.status=status;
-            render('#fm-preview',data,'tpl-preview');
-        }
-        else {
+        if (rst.status == 0) {
+            var data = {}
+            data.o = rst.data;
+            data.status = status;
+            render('#fm-preview', data, 'tpl-preview');
+        } else {
             alert("获取用户信息失败！");
         }
     })

@@ -110,6 +110,7 @@
         <td>
             <a href="#" data-toggle="modal" data-status="\${item.status}" data-id="\${item.id}" data-score="\${item.score}"
                data-target="#modal-preview">查看</a>
+            <a href="javascript:del('\${item.id}');">删除</a>
         </td>
     </tr>
     {@/each}
