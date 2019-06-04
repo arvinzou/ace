@@ -159,7 +159,7 @@ function initEvents() {
             },
             'evaluationIndex[1].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[1].score': {
                 required: "请输入指标分值",
@@ -171,7 +171,7 @@ function initEvents() {
             },
             'evaluationIndex[2].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[2].score': {
                 required: "请输入指标分值",
@@ -183,7 +183,7 @@ function initEvents() {
             },
             'evaluationIndex[3].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[3].score': {
                 required: "请输入指标分值",
@@ -195,7 +195,7 @@ function initEvents() {
             },
             'evaluationIndex[4].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[4].score': {
                 required: "请输入指标分值",
@@ -207,7 +207,7 @@ function initEvents() {
             },
             'evaluationIndex[5].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[5].score': {
                 required: "请输入指标分值",
@@ -219,7 +219,7 @@ function initEvents() {
             },
             'evaluationIndex[6].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[6].score': {
                 required: "请输入指标分值",
@@ -231,7 +231,7 @@ function initEvents() {
             },
             'evaluationIndex[7].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[7].score': {
                 required: "请输入指标分值",
@@ -243,7 +243,7 @@ function initEvents() {
             },
             'evaluationIndex[8].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[8].score': {
                 required: "请输入指标分值",

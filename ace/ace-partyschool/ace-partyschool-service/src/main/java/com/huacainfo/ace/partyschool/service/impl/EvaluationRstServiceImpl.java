@@ -15,6 +15,7 @@ import com.huacainfo.ace.partyschool.model.EvaluationRst;
 import com.huacainfo.ace.partyschool.model.EvaluationRstContent;
 import com.huacainfo.ace.partyschool.service.EvaluationRstContentService;
 import com.huacainfo.ace.partyschool.service.EvaluationRstService;
+import com.huacainfo.ace.partyschool.vo.EvaRstReport;
 import com.huacainfo.ace.partyschool.vo.EvaluationRstQVo;
 import com.huacainfo.ace.partyschool.vo.EvaluationRstVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -27,6 +28,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 @Service("evaluationRstService")
@@ -276,4 +279,77 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
         return new MessageResponse(0, "测评结果管理删除完成！");
     }
 
+    private static final BigDecimal AVG_90 = new BigDecimal(90);
+    private static final BigDecimal AVG_80 = new BigDecimal(80);
+
+    /**
+     * 获取编辑 课程评测统计报表
+     *
+     * @param classId 班级ID
+     * @return List
+     */
+    @Override
+    public List<EvaRstReport> report(String classId) {
+        //班级课程列表
+        List<EvaRstReport> report = evaluationRstDao.findReportList(classId);
+        LinkedList<Map<String, Object>> scoreList;
+        int total;
+        BigDecimal avg;
+        for (EvaRstReport eva : report) {
+            scoreList = evaluationRstDao.findScoreList(eva.getClassScheduleId());
+            //去掉前三，后三后；计算总分
+            total = dealScoreList(scoreList);
+            //平均分数，保留三位小数，超出三位四舍五入
+            avg = new BigDecimal(total).divide(new BigDecimal(eva.getTestNum()), 3, RoundingMode.DOWN);
+            eva.setTotal(total);
+            eva.setAvg(avg);
+            eva.setRstLevel(getRstLevel(avg));
+        }
+        //list根据avg排序
+        Collections.sort(report, new Comparator<EvaRstReport>() {
+            @Override
+            public int compare(EvaRstReport arg0, EvaRstReport arg1) {
+                return arg1.getAvg().compareTo(arg0.getAvg());
+            }
+        });
+
+        return report;
+    }
+
+    /**
+     * 获取评分等次
+     *
+     * @param avg 平均分
+     * @return 优秀；良好；一般
+     */
+    private String getRstLevel(BigDecimal avg) {
+        if (avg.compareTo(AVG_90) >= 0) {
+            return "优秀";
+        } else if (avg.compareTo(AVG_80) >= 0 && avg.compareTo(AVG_90) < 0) {
+            return "良好";
+        } else {
+            return "一般";
+        }
+    }
+
+    private int dealScoreList(LinkedList<Map<String, Object>> scoreList) {
+        LinkedList<Map<String, Object>> rst;
+        if (scoreList.size() > 6) {
+            rst = new LinkedList<>();
+            //移除前三,后三数据项
+            for (int i = 3; i < scoreList.size() - 3; i++) {
+                rst.add(scoreList.get(i));
+            }
+        } else {
+            rst = scoreList;
+        }
+
+        //计算总分
+        int total = 0;
+        for (Map<String, Object> item : rst) {
+            total += Integer.parseInt(String.valueOf(item.get("score")));
+        }
+
+        return total;
+    }
 }

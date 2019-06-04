@@ -1,29 +1,28 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.partyschool.model.EvaluationRst;
+import com.huacainfo.ace.partyschool.service.EvaluationRstService;
+import com.huacainfo.ace.partyschool.vo.EvaRstReport;
+import com.huacainfo.ace.partyschool.vo.EvaluationRstQVo;
+import com.huacainfo.ace.partyschool.vo.EvaluationRstVo;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.velocity.runtime.directive.MacroParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.partyschool.model.EvaluationRst;
-import com.huacainfo.ace.partyschool.service.EvaluationRstService;
-import com.huacainfo.ace.partyschool.vo.EvaluationRstVo;
-import com.huacainfo.ace.partyschool.vo.EvaluationRstQVo;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;
@@ -163,19 +162,18 @@ public class EvaluationRstController extends BisBaseController {
     }
 
 
-
     @RequestMapping(value = "/exportData")
     @ResponseBody
-    public ResultResponse exportData(String id,HttpServletResponse response) throws Exception {
-        SingleResult<List<Map<String,String>>> rr=evaluationRstService.exportData(id);
-        if(CommonUtils.isBlank(rr.getValue())){
+    public ResultResponse exportData(String id, HttpServletResponse response) throws Exception {
+        SingleResult<List<Map<String, String>>> rr = evaluationRstService.exportData(id);
+        if (CommonUtils.isBlank(rr.getValue())) {
             return null;
         }
-        WriteExcel(rr.getValue(),response);
+        WriteExcel(rr.getValue(), response);
         return null;
     }
 
-    public <T> void WriteExcel(List<Map<String,String>> data,HttpServletResponse response) throws Exception {
+    public <T> void WriteExcel(List<Map<String, String>> data, HttpServletResponse response) throws Exception {
         /*创建co*/
         XSSFWorkbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("测评内容");
@@ -185,16 +183,16 @@ public class EvaluationRstController extends BisBaseController {
             int j = 0;
             if (i == 0) {
                 Row row = sheet.createRow(i);
-                for (String key:set) {
+                for (String key : set) {
                     Cell cell = row.createCell(j);
                     cell.setCellValue(key);
                     j++;
                 }
-                j=0;
+                j = 0;
             }
             Row row = sheet.createRow(i + 1);
-            Map<String,String> temp=data.get(i);
-            for (String key:set) {
+            Map<String, String> temp = data.get(i);
+            for (String key : set) {
                 Cell cell = row.createCell(j);
                 cell.setCellValue(temp.get(key));
                 j++;
@@ -214,4 +212,19 @@ public class EvaluationRstController extends BisBaseController {
     }
 
 
+    /**
+     * 获取编辑 课程评测统计报表
+     *
+     * @param classId 班级ID
+     * @return List
+     */
+    @RequestMapping(value = "/report")
+    @ResponseBody
+    public List<EvaRstReport> report(String classId) {
+        if (CommonUtils.isBlank(classId)) {
+            return null;
+        }
+
+        return this.evaluationRstService.report(classId);
+    }
 }

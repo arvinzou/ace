@@ -85,31 +85,31 @@ function initEvents() {
             introduce: {required: true, maxlength: 200},
             timeout: {required: true, digits:true},
             'evaluationIndex[0].name': {required: true, maxlength: 6},
-            'evaluationIndex[0].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[0].introduce': {required: true, maxlength: 80},
             'evaluationIndex[0].score': {required: true, digits:true},
             'evaluationIndex[1].name': {required: true, maxlength: 6},
-            'evaluationIndex[1].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[1].introduce': {required: true, maxlength: 80},
             'evaluationIndex[1].score': {required: true, digits: true},
             'evaluationIndex[2].name': {required: true, maxlength: 6},
-            'evaluationIndex[2].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[2].introduce': {required: true, maxlength: 80},
             'evaluationIndex[2].score': {required: true, digits: true},
             'evaluationIndex[3].name': {required: true, maxlength: 6},
-            'evaluationIndex[3].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[3].introduce': {required: true, maxlength: 80},
             'evaluationIndex[3].score': {required: true, digits: true},
             'evaluationIndex[4].name': {required: true, maxlength: 6},
-            'evaluationIndex[4].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[4].introduce': {required: true, maxlength: 80},
             'evaluationIndex[4].score': {required: true, digits: true},
             'evaluationIndex[5].name': {required: true, maxlength: 6},
-            'evaluationIndex[5].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[5].introduce': {required: true, maxlength: 80},
             'evaluationIndex[5].score': {required: true, digits: true},
             'evaluationIndex[6].name': {required: true, maxlength: 6},
-            'evaluationIndex[6].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[6].introduce': {required: true, maxlength: 80},
             'evaluationIndex[6].score': {required: true, digits: true},
             'evaluationIndex[7].name': {required: true, maxlength: 6},
-            'evaluationIndex[7].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[7].introduce': {required: true, maxlength: 80},
             'evaluationIndex[7].score': {required: true, digits: true},
             'evaluationIndex[8].name': {required: true, maxlength: 6},
-            'evaluationIndex[8].introduce': {required: true, maxlength: 40},
+            'evaluationIndex[8].introduce': {required: true, maxlength: 80},
             'evaluationIndex[8].score': {required: true, digits: true}
         },
         messages: {
@@ -131,7 +131,7 @@ function initEvents() {
             },
             'evaluationIndex[0].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过40"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[0].score': {
                 required: "请输入指标分值",
@@ -143,7 +143,7 @@ function initEvents() {
             },
             'evaluationIndex[1].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[1].score': {
                 required: "请输入指标分值",
@@ -155,7 +155,7 @@ function initEvents() {
             },
             'evaluationIndex[2].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[2].score': {
                 required: "请输入指标分值",
@@ -167,7 +167,7 @@ function initEvents() {
             },
             'evaluationIndex[3].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[3].score': {
                 required: "请输入指标分值",
@@ -179,7 +179,7 @@ function initEvents() {
             },
             'evaluationIndex[4].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[4].score': {
                 required: "请输入指标分值",
@@ -191,7 +191,7 @@ function initEvents() {
             },
             'evaluationIndex[5].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[5].score': {
                 required: "请输入指标分值",
@@ -203,7 +203,7 @@ function initEvents() {
             },
             'evaluationIndex[6].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[6].score': {
                 required: "请输入指标分值",
@@ -215,7 +215,7 @@ function initEvents() {
             },
             'evaluationIndex[7].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[7].score': {
                 required: "请输入指标分值",
@@ -227,7 +227,7 @@ function initEvents() {
             },
             'evaluationIndex[8].introduce': {
                 required: "请输入",
-                maxlength: "字数不能超过120"
+                maxlength: "字数不能超过80"
             },
             'evaluationIndex[8].score': {
                 required: "请输入指标分值",
