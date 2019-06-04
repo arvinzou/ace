@@ -87,7 +87,7 @@ public class EvaluationRstContentServiceImpl implements EvaluationRstContentServ
         if (CommonUtils.isBlank(o.getClassScheduleId())) {
             return new MessageResponse(1, "所属课程不能为空！");
         }
-        if (CommonUtils.isBlank(o.getContent())) {
+        if (CommonUtils.isBlank(o.getContent())&&CommonUtils.isBlank(o.getJudge())) {
             return new MessageResponse(1, "建议内容不能为空！");
         }
         o.setUserId(userProp.getUserId());

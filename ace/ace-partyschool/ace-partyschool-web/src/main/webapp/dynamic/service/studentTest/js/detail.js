@@ -25,13 +25,13 @@ function parseIntF(num) {
 
 /**计算序列*/
 function formatIndex(num) {
-    var index=''+(parseInt(num)+1);
+    var index=''+(parseInt(num)+2);
     return index>9?index:'0'+index;
 }
 
 
+var question='';
 /**获取测试信息*/
-
 function getTestInfo() {
     eid=GetQueryString('eid');
     cid=GetQueryString('cid');
@@ -42,6 +42,7 @@ function getTestInfo() {
     $.getJSON(url,data,function (rst) {
         if(rst.status==0){
             renderPage('title',rst.value.course,'tpl_title');
+            question=rst.value.question;
         }
         else {
             console.log("获取用户信息失败！");
@@ -54,6 +55,9 @@ function getTestInfo() {
     $.getJSON(url,data,function (rst) {
         if(rst.status==0){
             renderPage('test',rst.data,'tpl_test');
+            if(question){
+                $('#question').text(question);
+            }
         }
         else {
             console.log("获取用户信息失败！");

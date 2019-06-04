@@ -68,7 +68,7 @@
                 <img class="icon" src="img/icon_time.png" alt="">
                 <span class="margin30">\${item.courseDate|dateTimeToDate} \${item.courseIndex=='am'?'上午':'下午'}</span>
                 <img class="icon" src="img/icon_person.png" alt="">
-                <span>\${item.teacher.name}</span></p>
+                <span>\${item.course.teacherNames}</span></p>
         </div>
         <div class="right view">测评</div>
     </div>
@@ -85,7 +85,7 @@
                 <img class="icon" src="img/icon_time.png" alt="">
                 <span class="margin30">\${item.courseDate|dateTimeToDate} \${item.courseIndex=='am'?'上午':'下午'}</span>
                 <img class="icon" src="img/icon_person.png" alt="">
-                <span>\${item.teacher.name}</span></p>
+                <span>\${item.course.teacherNames}</span></p>
         </div>
         <div class="right viewed">查看</div>
     </div>

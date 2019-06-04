@@ -43,7 +43,8 @@ function postData(datas) {
         evaluationRst:JSON.stringify(datas),
         evaluationContent:JSON.stringify({
             classScheduleId:cid,
-            content:$('#textarea').val()
+            content:$('#textarea').val(),
+            judge:$('input[name="test_1"]:checked').val(),
         })
     }
     $.post(url,data,function (rst) {
@@ -64,14 +65,14 @@ function parseIntF(num) {
 
 /**计算序列*/
 function formatIndex(num) {
-    var index=''+(parseInt(num)+1);
+    var index=''+(parseInt(num)+2);
     return index>9?index:'0'+index;
 }
 
 
-/**获取测试信息*/
 var question='';
 
+/**获取测试信息*/
 function getTestInfo() {
     eid=GetQueryString('eid');
     cid=GetQueryString('cid');
