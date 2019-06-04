@@ -129,6 +129,7 @@
         <!--<result property="nickname" column="nickname"/>-->
         <!--</association>-->
         <result column="userNum" jdbcType="DECIMAL" property="userNum"/>
+        <result column="question" jdbcType="DECIMAL" property="question"/>
         <result column="studentNum" jdbcType="DECIMAL" property="studentNum"/>
         <result column="averageScore" jdbcType="DECIMAL" property="averageScore"/>
         <collection property="course" ofType="com.huacainfo.ace.partyschool.vo.CourseVo">
@@ -168,7 +169,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
     cs.id, cs.classesId, cs.courseDate, cs.courseIndex, cs.teacherId, cs.courseId,cs.ifTest,
     c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,c.tname as ctname,
     t.id as tId ,t.name as tName,
-    cla.id as claId ,cla.name as claName
+    cla.id as claId ,cla.name as claName, ev.question
   </sql>
 
     <sql id="Where_Condition">
@@ -212,6 +213,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
         ORDER  by ct.type
     ) c ON cs.courseId =c.id
     LEFT JOIN partyschool.teacher t ON c.teacherId=t.id
+    LEFT JOIN partyschool.evaluating ev ON c.evaluatingId=ev.id
     LEFT  JOIN partyschool.classes cla on cla.id=cs.classesId
   </sql>
 

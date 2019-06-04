@@ -17,6 +17,15 @@ public class ClassScheduleVo extends ClassSchedule {
 
     private int userNum;
 
+    private String question;
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
 
     public Classes getClasses() {
         return classes;

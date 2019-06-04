@@ -82,7 +82,7 @@ function getTestInfo() {
     $.getJSON(url,data,function (rst) {
         if(rst.status==0){
             renderPage('title',rst.value.course,'tpl_title');
-            question=rst.value.course.question;
+            question=rst.value.question;
         }
         else {
             alert("获取用户信息失败！");
