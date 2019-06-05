@@ -89,41 +89,6 @@
         <h4>指标项目</h4>
         <div id="evaluatingRst">
             {@each data.evaluationIndexList as item, index}
-            <%--<div class="form-group">--%>
-                <%--<input type="text" class="hide" name="evaluationIndex[\${index}].id" value="\${item.id}">--%>
-                <%--<label class="col-md-2 control-label">--%>
-                    <%--测评指标<span class="required" aria-required="true"> * </span>--%>
-                <%--</label>--%>
-                <%--<div class="col-md-10">--%>
-                    <%--<input type="text" class="form-control" value="\${item.name}" name="evaluationIndex[\${index}].name"--%>
-                           <%--maxlength="10"--%>
-                           <%--placeholder="">--%>
-                    <%--<span class="help-block"></span>--%>
-                <%--</div>--%>
-
-                <%--<label class="col-md-2 control-label">--%>
-                    <%--指标内容--%>
-                    <%--<span class="required" aria-required="true"> * </span>--%>
-                <%--</label>--%>
-                <%--<div class="col-md-10">--%>
-                    <%--<input type="text" value="\${item.introduce}" class="form-control"--%>
-                           <%--name="evaluationIndex[\${index}].introduce"--%>
-                           <%--maxlength="40">--%>
-                    <%--<span class="help-block"></span>--%>
-                <%--</div>--%>
-                <%--<label class="col-md-2 control-label">--%>
-                    <%--指标分值<span class="required" aria-required="true"> * </span>--%>
-                <%--</label>--%>
-                <%--<div class="col-md-6">--%>
-                    <%--<input type="text" class="form-control" value="\${item.score}"--%>
-                           <%--name="evaluationIndex[\${index}].score" maxlength="10" placeholder="">--%>
-                    <%--<span class="help-block"></span>--%>
-                <%--</div>--%>
-                <%--{@if index!=0}--%>
-                <%--<button type="button" class="btn btn-success removeOption removeOption\${index} col-md-1">删除</button>--%>
-                <%--{@/if}--%>
-            <%--</div>--%>
-
             <div class="form-group">
                 <input type="text" class="hide" name="evaluationIndex[\${index}].id" value="\${item.id}">
                 <div class="row">

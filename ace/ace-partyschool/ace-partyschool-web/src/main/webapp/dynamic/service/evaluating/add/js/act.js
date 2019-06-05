@@ -53,7 +53,7 @@ var optionTemp= '                        <div class="form-group">\n' +
     '                                </label>\n' +
     '                                <div class="col-md-4">\n' +
     '                                    <input type="text" class="form-control" name="evaluationIndex[#index#].name"\n' +
-    '                                           maxlength="4"\n' +
+    '                                           maxlength="6"\n' +
     '                                           placeholder="请输入测评指标（建议字数在6个字以内)">\n' +
     '                                    <span class="help-block"></span>\n' +
     '                                </div>\n' +
