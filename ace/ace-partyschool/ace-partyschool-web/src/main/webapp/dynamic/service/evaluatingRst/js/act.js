@@ -1,12 +1,12 @@
 var loading = {};
-var params = {limit: 15,learned:'learned'};
+var params = {limit: 15, learned: 'learned'};
 window.onload = function () {
     initJuicerMethod();
     initPage();
     initEvents();
     initSelect();
-    $(".js-example-basic-single2").on('change',teacherSearch);
-    $(".js-example-basic-single1").on('change',teacherSearch);
+    $(".js-example-basic-single2").on('change', teacherSearch);
+    $(".js-example-basic-single1").on('change', teacherSearch);
 }
 
 
@@ -29,9 +29,8 @@ function initJuicerMethod() {
  * 4-审核驳回
  */
 function formatdate(date) {
-    return date.substring(0,10);
+    return date.substring(0, 10);
 }
-
 
 
 function initSelect() {
@@ -82,7 +81,8 @@ function initSelect() {
             delay: 250,
             language: "zh-CN",
             data: function (params) {
-                return {status:1,
+                return {
+                    status: 1,
                     name: params.term, // search term
                     page: params.page
                 };
@@ -117,22 +117,18 @@ function initSelect() {
     });
 }
 
-function formatState (state) {
+function formatState(state) {
     if (!state.id) {
         return state.text;
     }
-    if(!state.photoUrl){
-        state.photoUrl=contextPath+'/content/common/img/default_header.png';
+    if (!state.photoUrl) {
+        state.photoUrl = contextPath + '/content/common/img/default_header.png';
     }
     var $state = $(
-        '<div style="height: 50px; margin-bottom: 5px;"><img style="height: 50px;width: 50px;object-fit: cover; overflow: hidden;margin-right: 10px" src="'+state.photoUrl+'" class="img-flag" /> ' + state.text + '</div>'
+        '<div style="height: 50px; margin-bottom: 5px;"><img style="height: 50px;width: 50px;object-fit: cover; overflow: hidden;margin-right: 10px" src="' + state.photoUrl + '" class="img-flag" /> ' + state.text + '</div>'
     );
     return $state;
 }
-
-
-
-
 
 
 /*课程表管理初始化分页*/
@@ -193,7 +189,80 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
+function initReportEvent() {
+    //按钮点击弹框
+    $('#btn-report').on('click', function () {
+        $('#modal-report').modal('show');
+    });
+    //班级选择change事件
+    $('#modal-report select[name=classesId]').on("change", function (e) {
+        //导出按钮隐藏
+        $('#btn-ext-report').addClass("hide");
+        //班级ID
+        var clsId = $("#modal-report select[name=classesId]").val();
+        var params = {classId: clsId};
+        startLoad();
+        $.ajax({
+            url: contextPath + "/evaluationRst/report",
+            type: "post",
+            async: false,
+            data: params,
+            success: function (result) {
+                console.log(JSON.stringify(result.data));
+                stopLoad();
+                //表格渲染
+                var data = {};
+                data['report'] = result.data;
+                render('#tb-ext-report', data, 'tpl-ext-report');
+                if (result.status == 0) {
+                    //导出按钮可见
+                    $('#btn-ext-report').removeClass("hide");
+                } else {
+                    alert(result.info + "！");
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    });
+    //导出按钮事件
+    $('#btn-ext-report').on('click', function () {
+        var clsName = $("#modal-report select[name=classesId]").text();
+        //页面表格数据导出
+        $("#tb-ext-report").tableExport({
+            type: 'excel',
+            fileName: '教学测评结果(' + clsName.trim() + ')-' + getNowFormatDate()
+        });
+    });
+
+
+}
+
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "";
+    var seperator2 = "";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+        + "" + date.getHours() + seperator2 + date.getMinutes()
+        + seperator2 + date.getSeconds();
+    return currentdate;
+}
+
 function initEvents() {
+    //初始化统计报表事件
+    initReportEvent();
+
+
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
@@ -237,9 +306,8 @@ function initEvents() {
 
 /*课程管理编辑*/
 function view(did) {
-    window.location.href = 'view/index.jsp?id=' +did;
+    window.location.href = 'view/index.jsp?id=' + did;
 }
-
 
 
 function initPreview(id) {

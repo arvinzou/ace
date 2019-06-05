@@ -125,6 +125,10 @@
             or t.mobile like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
             )
         </if>
+        <if test="condition.whole !=null and condition.whole !=&quot;&quot;">
+            and t.workUnitName != 'lsjg'
+        </if>
+
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">

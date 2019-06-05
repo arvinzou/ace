@@ -7,8 +7,9 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.EvaluationRst;
 import com.huacainfo.ace.partyschool.model.EvaluationRstContent;
-import com.huacainfo.ace.partyschool.vo.EvaluationRstVo;
+import com.huacainfo.ace.partyschool.vo.EvaRstReport;
 import com.huacainfo.ace.partyschool.vo.EvaluationRstQVo;
+import com.huacainfo.ace.partyschool.vo.EvaluationRstVo;
 
 import java.util.List;
 import java.util.Map;
@@ -94,4 +95,11 @@ public interface EvaluationRstService {
      */
     MessageResponse deleteEvaluationRstByEvaluationRstId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 获取编辑 课程评测统计报表
+     *
+     * @param classId 班级ID
+     * @return List
+     */
+    List<EvaRstReport> report(String classId);
 }

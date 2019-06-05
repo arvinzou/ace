@@ -159,7 +159,8 @@ GROUP BY e.NAME) t
     </resultMap>
 
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.EvaluationRstVo"></resultMap>
+    <resultMap id="VoResultMap" extends="BaseResultMap"
+               type="com.huacainfo.ace.partyschool.vo.EvaluationRstVo"></resultMap>
 
     <sql id="Vo_Column_List">
     er.id, er.evaluatingId, er.name, er.classScheduleId, er.introduce, er.score, er.userId, er.createDate,
@@ -268,12 +269,11 @@ GROUP BY e.NAME) t
     </select>
 
 
-        <select id="getDoneSize" resultType="int">
+    <select id="getDoneSize" resultType="int">
         SELECT count(distinct classScheduleId)
         FROM partyschool.evaluation_rst er
         WHERE er.userId =#{condition.userId,jdbcType=VARCHAR}
         </select>
-
 
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
@@ -305,7 +305,6 @@ GROUP BY e.NAME) t
     </resultMap>
 
 
-
     <select id="exportData" parameterType="String" resultMap="EvaluationExportDate">
            SELECT
           er.userId,er.name AS erName,er.introduce,er.score,
@@ -322,5 +321,80 @@ GROUP BY e.NAME) t
     </select>
 
 
+    <resultMap id="ReportResultMap" type="com.huacainfo.ace.partyschool.vo.EvaRstReport">
+        <id column="classScheduleId" jdbcType="VARCHAR" property="classScheduleId"/>
+        <result column="teacherName" jdbcType="VARCHAR" property="teacherName"/>
+        <result column="testNum" jdbcType="INTEGER" property="testNum"/>
+        <result column="total" jdbcType="INTEGER" property="total"/>
+        <result column="avg" jdbcType="DECIMAL" property="avg"/>
+        <result column="rstLevel" jdbcType="VARCHAR" property="rstLevel"/>
+        <result column="rank" jdbcType="INTEGER" property="rank"/>
+        <result column="courseName" jdbcType="VARCHAR" property="courseName"/>
+        <result column="opt1" jdbcType="VARCHAR" property="opt1"/>
+        <result column="opt2" jdbcType="VARCHAR" property="opt2"/>
+        <result column="opt3" jdbcType="VARCHAR" property="opt3"/>
+        <result column="opt4" jdbcType="VARCHAR" property="opt4"/>
+    </resultMap>
+    <select id="findReportList" parameterType="String" resultMap="ReportResultMap">
+        select
+            v.classScheduleId,
+            v.teacherName, v.testNum, v.total, v.avg, v.rstLevel, v.rank, v.courseName,
+          CONCAT( FORMAT( (v.opt1/v.testNum)*100, 2) ,'%') as opt1,
+            CONCAT( FORMAT( (v.opt2/v.testNum)*100, 2) ,'%') as opt2,
+            CONCAT( FORMAT( (v.opt3/v.testNum)*100, 2) ,'%') as opt3,
+            CONCAT( FORMAT( (v.opt4/v.testNum)*100, 2) ,'%') as opt4
+        from (
+            SELECT
+                DISTINCT
+                t.classScheduleId,
+            -- 教师姓名
+                c.teacherName,
+            -- 参评人数
+                (select count(DISTINCT userId )from evaluation_rst
+                 where classScheduleId = t.classScheduleId) as testNum,
+            -- 去掉3个最高分和3个最低分后的最后总分
+                '' as total,
+            -- 去掉3个最高分和3个最低分后的最后平均分
+                '' as avg,
+            -- 等次
+                '' as rstLevel,
+            -- 名称
+                '' as rank,
+            -- 课程名称
+                c.courseName,
+            -- 很有必要
+                (select count(*) from evaluation_rst_content where classScheduleId = t.classScheduleId and judge='1') as opt1,
+            -- 可以开设
+                (select count(*) from evaluation_rst_content where classScheduleId = t.classScheduleId and judge='2') as opt2,
+            -- 可有可无
+                (select count(*) from evaluation_rst_content where classScheduleId = t.classScheduleId and judge='3') as opt3,
+            -- 无需开设
+                (select count(*) from evaluation_rst_content where classScheduleId = t.classScheduleId and judge='4') as opt4
+            FROM evaluation_rst t
+            left join (
+                    SELECT
+                        c1.id,
+                        c1.classesId,
+                        t1.name as teacherName,
+                        c2.NAME as courseName
+                    FROM class_schedule c1
+                    INNER JOIN course c2 on c1.courseId = c2.id
+                    INNER JOIN teacher t1 on c1.teacherId = t1.id
+            )c on c.id = t. classScheduleId
+            WHERE 1 = 1
+                and c.classesId = #{classId,jdbcType=VARCHAR}
+        )v
+    </select>
 
+
+    <select id="findScoreList" parameterType="String" resultType="map">
+        select v.userId, v.score from (
+            SELECT
+                 t.userId , sum(t.score) as score
+            FROM `evaluation_rst` t
+            where t.classScheduleId = #{classScheduleId,jdbcType=VARCHAR}
+            group by t.userId
+        )v
+        order by v.score
+    </select>
 </mapper>

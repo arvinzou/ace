@@ -209,7 +209,7 @@
         t.id as userId, 'teacher' as userType, t.`name` as userName,
         '' as clsId, '' as clsName
         from teacher t
-        where t.`status` = '1'
+        where t.`status` = '1' and t.workUnitName != 'lsjg'
         )v
         LEFT JOIN att_record t ON v.userId = t.userId
         <include refid="Where_Condition"/>
@@ -232,6 +232,7 @@
             from teacher t
             left join portal.dict d on d.category_id='156' and d.`code` = t.workUnitName
             where t.`status`= '1'
+              and t.workUnitName != 'lsjg'
             order by t.sort
         ) a, (SELECT @rank:= 0) b
     </select>
