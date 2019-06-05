@@ -298,7 +298,11 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
             //去掉前三，后三后；计算总分
             total = dealScoreList(scoreList);
             //平均分数，保留三位小数，超出三位四舍五入
-            avg = new BigDecimal(total).divide(new BigDecimal(eva.getTestNum()), 3, RoundingMode.DOWN);
+            if (eva.getTestNum() > 6) {
+                avg = new BigDecimal(total).divide(new BigDecimal(eva.getTestNum() - 6), 3, RoundingMode.DOWN);
+            } else {
+                avg = new BigDecimal(total).divide(new BigDecimal(eva.getTestNum()), 3, RoundingMode.DOWN);
+            }
             eva.setTotal(total);
             eva.setAvg(avg);
             eva.setRstLevel(getRstLevel(avg));
