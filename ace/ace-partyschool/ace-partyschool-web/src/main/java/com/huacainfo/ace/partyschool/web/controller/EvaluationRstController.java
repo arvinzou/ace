@@ -2,6 +2,7 @@ package com.huacainfo.ace.partyschool.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -21,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -220,11 +222,16 @@ public class EvaluationRstController extends BisBaseController {
      */
     @RequestMapping(value = "/report")
     @ResponseBody
-    public List<EvaRstReport> report(String classId) {
+    public ResultResponse report(String classId) {
         if (CommonUtils.isBlank(classId)) {
-            return null;
+            return new ResultResponse(ResultCode.FAIL, "缺少班级信息");
         }
 
-        return this.evaluationRstService.report(classId);
+        List<EvaRstReport> rst = evaluationRstService.report(classId);
+        if (CollectionUtils.isEmpty(rst)) {
+            return new ResultResponse(ResultCode.FAIL, "未找到相关数据");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "ok", rst);
     }
 }

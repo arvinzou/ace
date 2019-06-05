@@ -310,6 +310,10 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
                 return arg1.getAvg().compareTo(arg0.getAvg());
             }
         });
+        //名次处理
+        for (int i = 0; i < report.size(); i++) {
+            report.get(i).setRank(i + 1);
+        }
 
         return report;
     }

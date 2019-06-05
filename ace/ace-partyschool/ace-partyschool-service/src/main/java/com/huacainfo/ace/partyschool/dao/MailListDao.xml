@@ -82,7 +82,7 @@
         ( SELECT count(1) FROM partyschool.teacher a WHERE a.workUnitName = t.CODE ) CHILD_COUNT,
         'closed' STATE, '' ICON, t.CODE as sort
         FROM portal.dict t
-        WHERE t.category_id = '156'
+        WHERE t.category_id = '156' and t.code != 'lsjg'
         UNION ALL
 
         SELECT
@@ -91,7 +91,7 @@
         FROM teacher t
         LEFT JOIN portal.users a ON t.id = a.user_id
         LEFT JOIN portal.userinfo b ON a.openId = b.unionid
-        WHERE t.STATUS = '1'
+        WHERE t.STATUS = '1' and t.workUnitName != 'lsjg'
         <if test='name!=null and name!=""'>
             and t.name like concat(#{name,jdbcType=VARCHAR},'%')
         </if>
