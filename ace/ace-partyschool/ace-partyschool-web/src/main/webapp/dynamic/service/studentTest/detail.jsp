@@ -56,12 +56,12 @@
 	{@each data.list as item,index}
 	<div class="testItem items">
 		<div class="testTitle">
-			<span class="text">\${index|formatIndex}.\${item.name}:\${item.introduce}（0-\${item.score}分）</span>
+			<span class="text">\${index|formatIndex}.\${item.name}:\${item.introduce}</span>
 		</div>
 		<div class="testScore">
 			<div class="core">
 				<div class="score">
-					<p data-total="\${item.score}" class="number">\${item.score|parseIntF}</p>
+					<p data-total="\${item.score}" class="number">\${item.score}</p>
 				</div>
 			</div>
 		</div>
