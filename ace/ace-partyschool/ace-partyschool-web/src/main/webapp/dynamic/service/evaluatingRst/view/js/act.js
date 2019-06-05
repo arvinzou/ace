@@ -6,11 +6,27 @@ var params = {
     classScheduleId: urlParams.id,
 };
 window.onload = function () {
+    juicer.register('formatdate', formatdate);
     jQuery(function ($) {
         $(".breadcrumb").append("<li><span> 统计详情 </span></li>");
         initPage();
         initEchart();
     });
+}
+
+
+function formatdate(data) {
+    if(!data){
+        return;
+    }
+    var a="";
+    switch(data){
+        case "1":a="很有必要";break
+        case "2":a="可以开设";break
+        case "3":a="可有可无";break
+        case "4":a="无需开设";break
+    }
+    return a;
 }
 
 

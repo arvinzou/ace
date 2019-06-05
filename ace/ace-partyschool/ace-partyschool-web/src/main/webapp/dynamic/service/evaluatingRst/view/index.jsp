@@ -53,6 +53,7 @@
                 <tr>
                     <th width="10%"> 课程</th>
                     <th width="10%"> 评价</th>
+                    <th width="10%"> 固定题</th>
                     <th width="10%"> 学生</th>
                     <th width="10%"> 日期</th>
                     <th width="10%">操作</th>
@@ -83,6 +84,7 @@
     <tr>
         <td> \${item.course.name}</td>
         <td> \${item.evaluationRstContent?item.evaluationRstContent.content:''}</td>
+        <td> \${formatdate(item.evaluationRstContent.judge)}</td>
         <td> \${item.student.name}</td>
         <td> \${item.createDate}</td>
         <td>

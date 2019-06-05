@@ -151,6 +151,7 @@ GROUP BY e.NAME) t
         <collection property="evaluationRstContent" ofType="com.huacainfo.ace.partyschool.model.EvaluationRstContent">
             <id property="id" column="ercId"/>
             <result column="ercContent" property="content"/>
+            <result column="judge" property="judge"/>
         </collection>
         <collection property="student" ofType="com.huacainfo.ace.partyschool.model.Student">
             <id property="id" column="sId"/>
@@ -165,7 +166,7 @@ GROUP BY e.NAME) t
     <sql id="Vo_Column_List">
     er.id, er.evaluatingId, er.name, er.classScheduleId, er.introduce, er.score, er.userId, er.createDate,
     c.id as cId,c.name as cName,
-    erc.id as ercId,erc.content as ercContent,
+    erc.id as ercId,erc.content as ercContent, erc.judge,
     s.id as sId,s.name as sName
 
   </sql>
