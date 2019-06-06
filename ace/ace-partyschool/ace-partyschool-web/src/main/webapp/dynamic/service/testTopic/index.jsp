@@ -192,13 +192,13 @@
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
 
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 view-label">主键</label>
             <div class="col-md-10">
                 \${id}
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 view-label">测试主键</label>
             <div class="col-md-10">
                 \${testId}
@@ -234,37 +234,37 @@
                 \${analysis}
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 view-label">创建人编号</label>
             <div class="col-md-10">
                 \${createUserId}
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 view-label">创建人姓名</label>
             <div class="col-md-10">
                 \${createUserName}
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 view-label">创建日期</label>
             <div class="col-md-10">
                 \${createDate}
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 view-label">更新人编号</label>
             <div class="col-md-10">
                 \${lastModifyUserId}
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 view-label">更新人名称</label>
             <div class="col-md-10">
                 \${lastModifyUserName}
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 view-label">更新日期</label>
             <div class="col-md-10">
                 \${lastModifyDate}
@@ -299,13 +299,13 @@
 </script>
 
 <script id="tpl-preview" type="text/template">
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">主键</label>
         <div class="col-md-10">
             \${id}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">测试主键</label>
         <div class="col-md-10">
             \${testId}
@@ -341,37 +341,37 @@
             \${analysis}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">创建人编号</label>
         <div class="col-md-10">
             \${createUserId}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">创建人姓名</label>
         <div class="col-md-10">
             \${createUserName}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">
             \${createDate}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">更新人编号</label>
         <div class="col-md-10">
             \${lastModifyUserId}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">更新人名称</label>
         <div class="col-md-10">
             \${lastModifyUserName}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">更新日期</label>
         <div class="col-md-10">
             \${lastModifyDate}

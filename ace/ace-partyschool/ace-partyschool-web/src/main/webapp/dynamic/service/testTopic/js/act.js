@@ -45,7 +45,7 @@ function setParams(key, value) {
 /*试题管理加载表格数据*/
 function getPageList() {
     var url = contextPath + "/topic/findTopicList";
-    params['name'] = $("input[name=keyword]").val();
+    params['content'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
@@ -302,19 +302,22 @@ function del(id) {
         id:id,
         status:'0'
     }
-    $.getJSON(url, data, function (rst) {
-        if (rst.status == 0) {
-            getPageListNotLoad();
-            return;
-        }
-        alert("删除失败，请刷新页面重试。")
-    })
+    if (confirm("确定删除该记录么？")) {
+        $.getJSON(url, data, function (rst) {
+            if (rst.status == 0) {
+                getPageListNotLoad();
+                return;
+            }
+            alert("删除失败，请刷新页面重试。")
+        });
+    }
+
 }
 
 
 function getPageListNotLoad() {
     var url = contextPath + "/topic/findTopicList";
-    params['name'] = $("input[name=keyword]").val();
+    params['content'] = $("input[name=keyword]").val();
     $.getJSON(url, params, function (rst) {
         if (rst.status == 0) {
             render($("#page-list"), rst.rows, "tpl-list");
