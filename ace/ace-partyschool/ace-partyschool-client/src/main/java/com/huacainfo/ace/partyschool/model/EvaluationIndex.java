@@ -11,6 +11,9 @@ public class EvaluationIndex implements Serializable {
     private String name;
 
     private Integer score;
+    private Integer index;
+
+
 
     private String introduce;
 
@@ -28,6 +31,14 @@ public class EvaluationIndex implements Serializable {
 
     public void setEvaluatingId(String evaluatingId) {
         this.evaluatingId = evaluatingId == null ? null : evaluatingId.trim();
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 
     public String getName() {
