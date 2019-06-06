@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>通知公告</title>
 </head>
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet"
       href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
       type="text/css" media="screen"/>
