@@ -204,13 +204,12 @@ WHERE st.classId=cs.classesId) AS studentNum,
     <sql id="From_Statement">
     FROM class_schedule cs
     LEFT JOIN (
-        SELECT c.id,c.NAME,c.category,c.evaluatingId,c.`status`,GROUP_CONCAT(ct.teacher_id) as teacherId,GROUP_CONCAT(t.name) as tname
+        SELECT c.id,c.NAME,c.category,c.evaluatingId,c.`status`,GROUP_CONCAT(ct.teacher_id) as teacherId,GROUP_CONCAT(t.name ORDER  by ct.type) as tname
         FROM partyschool.course c
         LEFT JOIN partyschool.course_teacher ct ON c.id=ct.course_id
         left JOIN partyschool.teacher t ON ct.teacher_id = t.id
         WHERE 1=1
         GROUP BY c.id
-        ORDER  by ct.type
     ) c ON cs.courseId =c.id
     LEFT JOIN partyschool.teacher t ON c.teacherId=t.id
     LEFT JOIN partyschool.evaluating ev ON c.evaluatingId=ev.id
