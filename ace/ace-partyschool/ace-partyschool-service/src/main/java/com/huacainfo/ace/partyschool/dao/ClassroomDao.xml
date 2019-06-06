@@ -103,26 +103,24 @@
     </select>
     <select id="selectClassroomList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Vo_Column_List"/>
-        <include refid="From_Statement"/>
-        <include refid="Where_Condition"/>
-        and t.id not in(
-        SELECT ts.classroomId
-        FROM ( SELECT p.classroomId FROM partyschool.classes p WHERE p.`status`=1 ) ts
-        WHERE 1=1
-        <if test="condition.id !=null and condition.id !=&quot;&quot;">
-            and ts.classroomId <![CDATA[ <> ]]> #{condition.id,jdbcType=VARCHAR}
+        id, name, photoUrl, introduce, remark, status,
+        createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate
+        FROM classroom t
+        where t.status = 1
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name like concat('%', #{condition.name,jdbcType=VARCHAR}, '%')
         </if>
-        )
         <choose>
-            <when test="orderBy!=null and orderBy!=&quot;&quot;">
-                ORDER BY ${orderBy}
+            <when test="condition.id !=null and condition.id !=&quot;&quot;">
+                and t.id = #{condition.id,jdbcType=VARCHAR}
             </when>
             <otherwise>
-                ORDER BY t.createDate desc
+                and t.id not in ( SELECT p.classroomId FROM partyschool.classes p WHERE p.`status`=1 )
             </otherwise>
         </choose>
-        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+        ORDER BY t.createDate desc
+        limit 0, 10
     </select>
 
     <select id="findCount" resultType="int">

@@ -1,23 +1,22 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
-import com.huacainfo.ace.common.tools.CommonUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.model.Classroom;
 import com.huacainfo.ace.partyschool.service.ClassroomService;
-import com.huacainfo.ace.partyschool.vo.ClassroomVo;
 import com.huacainfo.ace.partyschool.vo.ClassroomQVo;
+import com.huacainfo.ace.partyschool.vo.ClassroomVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/classroom")
@@ -59,11 +58,12 @@ public class ClassroomController extends BisBaseController {
         return rst;
     }
 
-    @RequestMapping(value = "/selectClassroomList")
     @ResponseBody
+    @RequestMapping(value = "/selectClassroomList")
     public PageResult<ClassroomVo> selectClassroomList(ClassroomQVo condition, PageParamNoChangeSord page,String q) throws Exception {
         if(!CommonUtils.isBlank(q)){
             condition.setName(q);
+            condition.setId("");
         }
         PageResult<ClassroomVo> rst = this.classroomService.selectClassroomList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {

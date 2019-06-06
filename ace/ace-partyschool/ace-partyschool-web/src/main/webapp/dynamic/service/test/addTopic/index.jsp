@@ -152,7 +152,7 @@
     {@each data as item, index}
     <tr>
         <td> \${item.content}</td>
-        <td> \${item.type}</td>
+        <td> \${parseType(item.type)}</td>
         <td><input type="text"  onblur="setScore(this.value,'\${item.tid}')" value="\${item.tscore}"></td>
         <td>
             <a href="javascript:moveIndex('\${testTopicId(index,-1)}','\${item.tid}');">上移</a>

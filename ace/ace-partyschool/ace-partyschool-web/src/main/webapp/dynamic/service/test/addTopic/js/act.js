@@ -2,6 +2,8 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
+
+        juicer.register('parseType', parseType);
         // juicer.register('parseStatus', parseStatus);
         juicer.register('testTopicId', testTopicId);
         $(".breadcrumb").append("<li><span>添加试题</span></li>");
@@ -27,6 +29,12 @@ window.onload = function () {
 
 
     });
+}
+
+//juicer自定义函数
+function initJuicerMethod() {
+
+
 }
 
 function initEvents() {
@@ -89,7 +97,7 @@ function initForm() {
             stopLoad();
             if (result.status == 0) {
                 var data = result.data.topics;
-                topiclist=data;
+                topiclist = data;
                 render('#page-list', data, 'tpl-list');
             } else {
                 alert(result.errorMessage);
@@ -155,37 +163,36 @@ function setParams(key, value) {
 }
 
 
-function submitTopics(){
+function submitTopics() {
     var checkeds = $('#page-list-model input[type=checkbox]:checked');
-    if (checkeds.length<1) {
-      return;
+    if (checkeds.length < 1) {
+        return;
     }
-    var topics=[];
-    checkeds.each(function(i){
+    var topics = [];
+    checkeds.each(function (i) {
         topics.push($(this).val());
     });
-    var url=contextPath + "/test/inserTopics";
-    var data={
-        jsons:JSON.stringify({
-            testId:urlParams.did,
-            topics:topics
+    var url = contextPath + "/test/inserTopics";
+    var data = {
+        jsons: JSON.stringify({
+            testId: urlParams.did,
+            topics: topics
         })
     }
-    $.post(url,data,function (result) {
-        if(result.status==0){
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
             getPageList();
-        }
-        else {
+        } else {
             alert("添加失败,刷新浏览器重试。")
         }
     });
 };
 
 
-function testTopicId(index,num) {
-    var idx=parseInt(index)+num;
-    var len=topiclist.length;
-    if(-1<idx&&idx<len){
+function testTopicId(index, num) {
+    var idx = parseInt(index) + num;
+    var len = topiclist.length;
+    if (-1 < idx && idx < len) {
         return topiclist[idx].tid;
     }
     return "";
@@ -216,57 +223,72 @@ function parseStatus(status) {
     }
 }
 
-function moveIndex(tid1,tid2) {
-    if(!tid1){
+function moveIndex(tid1, tid2) {
+    if (!tid1) {
         return;
     }
-    var url=contextPath + "/test/changeTestTopicIndex";
-    var data={
-        tid1:tid1,
-        tid2:tid2
+    var url = contextPath + "/test/changeTestTopicIndex";
+    var data = {
+        tid1: tid1,
+        tid2: tid2
     }
-    $.post(url,data,function (result) {
-        if(result.status==0){
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
             initForm();
-        }
-        else {
+        } else {
             alert("设置失败,刷新浏览器重试。")
         }
     });
 }
 
 function delTestTopic(id) {
-    if(!id){
+    if (!id) {
         return;
     }
-    var url=contextPath + "/test/delTestTopic";
-    var data={
-        id:id
+    var url = contextPath + "/test/delTestTopic";
+    var data = {
+        id: id
     }
-    $.post(url,data,function (result) {
-        if(result.status==0){
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
             initForm();
-        }
-        else {
+        } else {
             alert("删除失败,刷新浏览器重试。")
         }
     });
 }
 
 
-function setScore(val,id) {
-    var url=contextPath + "/test/setScore";
-    var data={
-        score:val,
-        id:id
+function setScore(val, id) {
+    var url = contextPath + "/test/setScore";
+    var data = {
+        score: val,
+        id: id
     }
-    $.post(url,data,function (result) {
-        if(result.status==0){
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
             initForm();
-        }
-        else {
+        } else {
             // alert("删除失败,刷新浏览器重试。")
         }
     });
 
+}
+
+
+function parseType(val) {
+    switch (val) {
+        case '1':
+            return "单选题";
+        case '2':
+            return "多选题";
+        case '3':
+            return "判断题";
+        case '4':
+            return "问答题";
+        case '5':
+            return "打分题";
+        default:
+            return "";
+    }
 }
