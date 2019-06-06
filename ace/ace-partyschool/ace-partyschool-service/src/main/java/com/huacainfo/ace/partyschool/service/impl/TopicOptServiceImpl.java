@@ -67,9 +67,11 @@ public class TopicOptServiceImpl implements TopicOptService {
 
     @Override
     public MessageResponse insertTopicOptList(List<TopicOpt> options, String topicId, UserProp userProp) throws Exception {
-        for (TopicOpt item : options) {
-            item.setTopicId(topicId);
-            MessageResponse mr = insertTopicOpt(item, userProp);
+        for(int i=0;i<options.size();i++){
+            TopicOpt topicOpt=options.get(i);
+            topicOpt.setTopicId(topicId);
+            topicOpt.setIndex(i);
+            MessageResponse mr = insertTopicOpt(topicOpt, userProp);
             if (mr.getStatus() == ResultCode.FAIL) {
                 return mr;
             }
