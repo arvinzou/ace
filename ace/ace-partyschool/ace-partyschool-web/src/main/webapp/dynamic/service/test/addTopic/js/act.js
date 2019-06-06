@@ -7,6 +7,25 @@ window.onload = function () {
         $(".breadcrumb").append("<li><span>添加试题</span></li>");
         initEvents();
         initForm();
+
+
+        $('#fm-search-model').ajaxForm({
+            beforeSubmit: function (formData, jqForm, options) {
+                var params = {};
+                $.each(formData, function (n, obj) {
+                    params[obj.name] = obj.value;
+                });
+                $.extend(params, {
+                    time: new Date(),
+//coverUrl: $('#coverUrl').attr("src"),
+                });
+                console.log(params);
+                getPageList(params);
+                return false;
+            }
+        });
+
+
     });
 }
 
@@ -111,9 +130,10 @@ function initPage() {
 }
 
 
-function getPageList() {
+function getPageList(data) {
+    console.log(data);
     var url = contextPath + "/topic/findNoThisTopicList";
-    paramsModel['name'] = $("input[name=keyword]").val();
+    paramsModel['content'] = $("input[name=keyword]").val();
     // startLoad();
     $.getJSON(url, paramsModel, function (rst) {
         // stopLoad();

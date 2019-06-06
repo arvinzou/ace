@@ -31,11 +31,6 @@
             <div class="col-md-6">
 
                 <form id="fm-search">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">暂存</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">发布</button>
-                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"

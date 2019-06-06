@@ -9,43 +9,6 @@ window.onload = function () {
 }
 
 function initPage() {
-/*    $("input[name=startTime]").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii:ss',
-        language: 'zh-CN',
-        weekStart: 1,
-        todayBtn: 1, //显示‘今日’按钮
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 'hour', //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
-        clearBtn: true, //清除按钮
-        forceParse: 0
-    }).on('hide', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        var startTime = event.date;
-        $("input[name=endTime]").datetimepicker('setStartDate', startTime);
-        $("input[name=endTime]").val("");
-    });
-
-    $("input[name=endTime]").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii:ss',
-        language: 'zh-CN',
-        weekStart: 1,
-        todayBtn: 1, //显示‘今日’按钮
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        minView: 'hour', //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
-        clearBtn: true, //清除按钮
-        forceParse: 0
-    }).on('hide', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        var endTime = event.date;
-        $("input[name=startTime]").datetimepicker('setEndDate', endTime);
-    });*/
-
     $(".js-example-basic-single1").select2({
         ajax: {
             url: contextPath + "/test/findTestList",
@@ -104,13 +67,13 @@ function initEvents() {
                 maxlength: "任务名称字符长度不能超过50"
             },
             introduce: {
-                required: "请输入任务名称",
+                required: "请输入测试介绍",
                 maxlength: "任务名称字符长度不能超过200"
             },
 
             testId: {
-                required: "请输入test主键",
-                maxlength: "test主键字符长度不能超过50"
+                required: "请选择测评模板",
+                maxlength: "测评模板字符长度不能超过50"
             }
         }
     });

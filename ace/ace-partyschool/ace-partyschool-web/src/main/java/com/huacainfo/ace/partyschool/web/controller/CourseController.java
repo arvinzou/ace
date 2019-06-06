@@ -62,7 +62,7 @@ public class CourseController extends BisBaseController {
     @RequestMapping(value = "/findListClassifiedName")
     @ResponseBody
     public ResultResponse findListClassifiedName(CourseQVo condition, PageParamNoChangeSord page) throws Exception {
-        return this.courseService.findListClassifiedName(condition, 0, 100,"");
+        return this.courseService.findListClassifiedName(condition, 0, 1000,"");
     }
 
     /**

@@ -66,7 +66,7 @@
         c.id, c.name, c.category, c.teacherId, c.status, c.evaluatingId,
         c.createUserId, c.createUserName, c.createDate,
         c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,
-        e.name as evaluatingName ,s.name as codeName
+        e.name as evaluatingName ,s.name as codeName, t1.name AS teacherName
     </sql>
 
     <sql id="Where_Condition">
@@ -97,6 +97,7 @@
                 group by c.id , c.`name`
             )ct on c.id = ct.course_id
     LEFT JOIN evaluating e ON  e.id=c.evaluatingId
+    LEFT JOIN teacher t1 ON c.teacherId=t1.id
     LEFT JOIN (SELECT code,name FROM portal.dict WHERE category_id='154') s ON c.category=s.code
 
     </sql>
