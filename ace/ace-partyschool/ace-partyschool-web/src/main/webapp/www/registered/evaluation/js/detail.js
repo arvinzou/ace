@@ -25,7 +25,7 @@ function parseIntF(num) {
 
 /**计算序列*/
 function formatIndex(num) {
-    var index=''+(parseInt(num)+2);
+    var index=''+(parseInt(num)+1);
     return index>9?index:'0'+index;
 }
 
