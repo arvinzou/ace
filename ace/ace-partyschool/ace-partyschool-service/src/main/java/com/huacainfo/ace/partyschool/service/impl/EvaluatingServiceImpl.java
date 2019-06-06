@@ -117,10 +117,12 @@ public class EvaluatingServiceImpl implements EvaluatingService {
     }
 
 
-    private MessageResponse insetevaluationIndexServices(List<EvaluationIndex> evaluationIndexService, String id, UserProp userProp) throws Exception {
-        for (EvaluationIndex item : evaluationIndexService) {
-            item.setEvaluatingId(id);
-            MessageResponse messageResponse=this.evaluationIndexService.insertEvaluationIndex(item, userProp);
+    private MessageResponse insetevaluationIndexServices(List<EvaluationIndex> evaluationIndexList, String id, UserProp userProp) throws Exception {
+        for(int i=0;i<evaluationIndexList.size();i++){
+            EvaluationIndex evaluationIndex=evaluationIndexList.get(i);
+            evaluationIndex.setEvaluatingId(id);
+            evaluationIndex.setIndex(i);
+            MessageResponse messageResponse=this.evaluationIndexService.insertEvaluationIndex(evaluationIndex, userProp);
             if(messageResponse.getStatus()!=0){
                 return messageResponse;
             }
@@ -164,14 +166,9 @@ public class EvaluatingServiceImpl implements EvaluatingService {
         evaluating.setTimeout(o.getTimeout());
         this.evaluatingDao.updateByPrimaryKey(evaluating);
         this.evaluationIndexDao.deleteByEvaluatingId(o.getId());
-        for(EvaluationIndex item : o.getEvaluationIndexList()){
-            if(CommonUtils.isBlank(item.getId())){
-                item.setEvaluatingId(o.getId());
-                this.evaluationIndexService.insertEvaluationIndex(item, userProp);
-            }else{
-                item.setEvaluatingId(o.getId());
-                this.evaluationIndexDao.insert(item);
-            }
+        MessageResponse messageResponse=insetevaluationIndexServices(o.getEvaluationIndexList(), o.getId(), userProp);
+        if(messageResponse!=null){
+            throw new Exception();
         }
         this.dataBaseLogService.log("变更评测管理", "评测管理", "",
                 o.getId(), o.getId(), userProp);
