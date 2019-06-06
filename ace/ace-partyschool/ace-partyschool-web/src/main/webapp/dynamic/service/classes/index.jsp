@@ -140,7 +140,7 @@ pageEncoding="utf-8"%>
              \${data.o.sName}
          </div>
      </div>
-     <div class="form-group">
+    <div class="form-group hide">
          <label class="col-md-2 view-label">备注</label>
          <div class="col-md-10">
              \${data.o.remark}

@@ -60,6 +60,13 @@ function render(obj, data, tplId) {
 }
 
 function initEvents() {
+    //按钮active 样式
+    $(".btn-group .btn").bind('click', function (event) {
+        $(event.target).siblings().removeClass("active");
+        console.log(event);
+        $(event.target).addClass("active");
+    });
+
     $('#modal-import').on('shown.bs.modal', function (event) {
         //加载班级列表
         initClassList('d-cls-list');
@@ -83,25 +90,24 @@ function initEvents() {
 }
 
 function delStudent() {
-    var checks=$('input[type=checkbox][name=studentId]:checked');
-    var students=[]
-    for(var i=0;i<checks.length;i++){
+    var checks = $('input[type=checkbox][name=studentId]:checked');
+    var students = []
+    for (var i = 0; i < checks.length; i++) {
         students.push($(checks[i]).data('id'));
     }
-    if(students.length==0){
+    if (students.length == 0) {
         alert("没有选择删除对象")
-        return ;
+        return;
     }
-    if (confirm("你确定删除"+students.length+"位学员吗？")) {
-        var url=contextPath + "/student/deleteStudents";
-        var data={
-            students:JSON.stringify(students)
+    if (confirm("你确定删除" + students.length + "位学员吗？")) {
+        var url = contextPath + "/student/deleteStudents";
+        var data = {
+            students: JSON.stringify(students)
         }
-        $.post(url,data,function (rst) {
-            if(rst.status==0){
+        $.post(url, data, function (rst) {
+            if (rst.status == 0) {
                 jQuery("#grid-table").trigger("reloadGrid");
-            }
-            else {
+            } else {
                 alert("删除失败。")
             }
         })
@@ -183,6 +189,7 @@ function edit(rowid) {
 }
 
 var show = false;
+
 function del(rowid) {
 
     if (confirm("确认注销么？")) {
@@ -207,7 +214,9 @@ function del(rowid) {
         });
     }
 }
+
 var params = {};
+
 function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");

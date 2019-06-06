@@ -384,7 +384,7 @@ GROUP BY e.NAME) t
 						SELECT
 							c.id as course_id,
 							c.`name` as courseName,
-							GROUP_CONCAT((select name from teacher where id = ct.teacher_id) SEPARATOR ',')  as teacherName
+							GROUP_CONCAT( (select name from teacher where id = ct.teacher_id) ORDER BY ct.type )  as teacherName
 						FROM	course c,	course_teacher ct
 						WHERE	c.id = ct.course_id
 						group by c.id , c.`name`

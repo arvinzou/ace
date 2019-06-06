@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.partyschool.dao.CourseDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.Course">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="category" jdbcType="VARCHAR" property="category" />
-    <result column="teacherId" jdbcType="VARCHAR" property="teacherId" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="evaluatingId" jdbcType="VARCHAR" property="evaluatingId" />
-    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
-    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
-    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
-    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.Course">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="teacherId" jdbcType="VARCHAR" property="teacherId"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="evaluatingId" jdbcType="VARCHAR" property="evaluatingId"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, name, category, teacherId, status, evaluatingId, createUserId, createUserName, createDate,
     lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from course
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from course
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from course
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.Course">
+    <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.Course">
     insert into course (id, name, category, 
       teacherId,  status, evaluatingId, createUserId,
       createUserName, createDate, lastModifyUserId, 
@@ -42,7 +42,7 @@
   </insert>
 
 
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.Course">
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.Course">
     update course
     set name = #{name,jdbcType=VARCHAR},
       category = #{category,jdbcType=VARCHAR},
@@ -58,67 +58,75 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-<!--#################################################################################################################################################-->
-  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.CourseVo"></resultMap>
+    <!--#################################################################################################################################################-->
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.CourseVo"></resultMap>
 
-  <sql id="Vo_Column_List">
-    GROUP_CONCAT(t.NAME ORDER BY ct.`TYPE` ASC) as teacherNames,c.id, c.name, c.category, c.teacherId, c.status, c.evaluatingId, c.createUserId, c.createUserName, c.createDate,
-    c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,e.name as evaluatingName ,s.name as codeName,t1.name AS teacherName
-  </sql>
+    <sql id="Vo_Column_List">
+        ct.teacherName as teacherNames,
+        c.id, c.name, c.category, c.teacherId, c.status, c.evaluatingId,
+        c.createUserId, c.createUserName, c.createDate,
+        c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,
+        e.name as evaluatingName ,s.name as codeName
+    </sql>
 
-  <sql id="Where_Condition">
-    where c.status <![CDATA[ <> ]]> 0
-    <if test="condition.name !=null and condition.name !=&quot;&quot;">
-      and c.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
-    </if>
-    <if test="condition.category !=null and condition.category !=&quot;&quot;">
-    and c.category = #{condition.category,jdbcType=VARCHAR}
-  </if>
-    <if test="condition.tName !=null and condition.tName !=&quot;&quot;">
-      and t.name LIKE concat('%',#{condition.tName,jdbcType=VARCHAR},'%')
-    </if>
-      <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
-          and ( c.NAME LIKE concat('%' , #{condition.keyword,jdbcType=VARCHAR}, '%')
-          or t.NAME LIKE concat('%' , #{condition.keyword,jdbcType=VARCHAR}, '%') )
-      </if>
-  </sql>
+    <sql id="Where_Condition">
+        where c.status <![CDATA[ <> ]]> 0
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and c.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and c.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.tName !=null and condition.tName !=&quot;&quot;">
+            and ct.teacherName LIKE concat('%',#{condition.tName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+            and ( c.NAME LIKE concat('%' , #{condition.keyword,jdbcType=VARCHAR}, '%')
+            or t.NAME LIKE concat('%' , #{condition.keyword,jdbcType=VARCHAR}, '%') )
+        </if>
+    </sql>
 
-  <sql id="From_Statement">
+    <sql id="From_Statement">
     FROM course c
-    LEFT JOIN course_teacher ct ON ct.course_id=c.id
-    LEFT JOIN teacher t ON ct.teacher_id=t.id
-    LEFT JOIN teacher t1 ON c.teacherId=t1.id
+    LEFT JOIN (
+                SELECT
+                    c.id as course_id,
+                    GROUP_CONCAT( (select name from teacher where id = ct.teacher_id) ORDER BY ct.type )  as teacherName
+                FROM	course c,	course_teacher ct
+                WHERE	c.id = ct.course_id
+                group by c.id , c.`name`
+            )ct on c.id = ct.course_id
     LEFT JOIN evaluating e ON  e.id=c.evaluatingId
     LEFT JOIN (SELECT code,name FROM portal.dict WHERE category_id='154') s ON c.category=s.code
-  </sql>
 
-  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
-    select
-    <include refid="Vo_Column_List"/>
-    <include refid="From_Statement"/>
-    <include refid="Where_Condition"/>
-    GROUP BY c.id
-    <choose>
-      <when test="orderBy!=null and orderBy!=&quot;&quot;">
-        ORDER BY ${orderBy}
-      </when>
-      <otherwise>
-        ORDER BY t.createDate desc
-      </otherwise>
-    </choose>
-    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-  </select>
+    </sql>
 
-  <select id="findCount" resultType="int">
-    SELECT COUNT(*) FROM (
-    SELECT c.id
-    <include refid="From_Statement"/>
-    <include refid="Where_Condition"/>
-    GROUP BY c.id
-    ) r
-  </select>
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        GROUP BY c.id
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY c.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 
-  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*) FROM (
+        SELECT c.id
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        ) r
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
     select count(1)
     from course c
     where c.status <![CDATA[ <> ]]> 0
@@ -127,20 +135,19 @@
   </select>
 
 
+    <resultMap extends="VoResultMap" id="ResultMapTestTopicRst" type="com.huacainfo.ace.partyschool.vo.CourseVo">
+        <result column="evaluatingName" property="evaluatingName"/>
+        <result column="codeName" property="codeName"/>
+        <collection property="courseTeacherVoList" ofType="com.huacainfo.ace.partyschool.vo.CourseTeacherVo">
+            <id column="ctid" property="id"/>
+            <result column="teacher_id" property="teacher_id"/>
+            <result column="cttype" property="type"/>
+            <result column="ctname" property="name"/>
+        </collection>
+    </resultMap>
 
-  <resultMap extends="VoResultMap" id="ResultMapTestTopicRst" type="com.huacainfo.ace.partyschool.vo.CourseVo">
-      <result column="evaluatingName" property="evaluatingName"/>
-      <result column="codeName" property="codeName"/>
-    <collection property="courseTeacherVoList" ofType="com.huacainfo.ace.partyschool.vo.CourseTeacherVo">
-      <id column="ctid" property="id" />
-      <result column="teacher_id" property="teacher_id"/>
-      <result column="cttype" property="type"/>
-      <result column="ctname" property="name"/>
-    </collection>
-  </resultMap>
 
-
-  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapTestTopicRst">
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapTestTopicRst">
     select
     c.id, c.name, c.category, c.teacherId, c.status, c.evaluatingId, c.createUserId, c.createUserName, c.createDate,
     c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,

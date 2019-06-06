@@ -152,31 +152,31 @@
             \${data.evaluatingName}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">授课人id</label>
         <div class="col-md-10">
             \${data.teacherName}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">创建人姓名</label>
         <div class="col-md-10">
             \${data.createUserName}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">
             \${data.createDate}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">更新人名称</label>
         <div class="col-md-10">
             \${data.lastModifyUserName}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">更新日期</label>
         <div class="col-md-10">
             \${data.lastModifyDate}

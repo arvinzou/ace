@@ -36,6 +36,19 @@
                         </button>
                 </div>
                 <div class="col-md-7">
+
+                    <div class="btn-group" role="group" style="float:left;padding-right:15px">
+                        <button type="button"
+                                authority="false" class="btn btn-default active" onclick="setParams('status','1');">正常
+                        </button>
+                        <button type="button"
+                                authority="false" class="btn btn-default" onclick="setParams('status','0');">注销
+                        </button>
+                        <button type="button"
+                                authority="false" class="btn btn-default" onclick="setParams('status','');">全部
+                        </button>
+                    </div>
+
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <select name="classId" id="s-cls-list" class="form-control" style="height: 31px;"
                                 onchange="setParams('classId',this.value)">

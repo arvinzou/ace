@@ -74,6 +74,9 @@
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -105,10 +108,7 @@
         <include refid="Where_Condition"/>
         and t.id not in(
         SELECT ts.classroomId
-        FROM (SELECT p.classroomId
-        FROM partyschool.classes p
-        WHERE p.`status`=1
-        GROUP BY p.classroomId) ts
+        FROM ( SELECT p.classroomId FROM partyschool.classes p WHERE p.`status`=1 ) ts
         WHERE 1=1
         <if test="condition.id !=null and condition.id !=&quot;&quot;">
             and ts.classroomId <![CDATA[ <> ]]> #{condition.id,jdbcType=VARCHAR}

@@ -117,13 +117,13 @@
             and t.classId = #{condition.classId,jdbcType=VARCHAR}
         </if>
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
-            and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+            and t.name like concat('%', #{condition.name,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.keyWord !=null and condition.keyWord !=&quot;&quot;">
             and (
-            t.name like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
-            or t.idCard like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
-            or t.mobile like concat(#{condition.keyWord,jdbcType=VARCHAR},'%')
+            t.name like concat('%',#{condition.keyWord,jdbcType=VARCHAR},'%')
+            or t.idCard like concat('%', #{condition.keyWord,jdbcType=VARCHAR},'%')
+            or t.mobile like concat('%', #{condition.keyWord,jdbcType=VARCHAR},'%')
             )
         </if>
     </sql>
