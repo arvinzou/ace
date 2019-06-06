@@ -15,26 +15,26 @@ window.onload = function () {
         $('#classList').on('click', '.btn-default', setParams);
         $('#courseDetail').on('click', '.delete', deleteCourse);
         $('#courseDetail').on('change', '.switch_4', ifTest);
-        $(".js-example-basic-single2").on('change',classSearch2);
+        $(".js-example-basic-single2").on('change', classSearch2);
 
         // getEventData();
     })
 
-   function ifTest() {
-       var id=$(this).data('id');
-       var url = contextPath + "/classSchedule/updateIfTest"
-       var data = {
-           id: id
-       }
-       $.getJSON(url, data, function (rst) {
-           if (rst.status == 0) {
+    function ifTest() {
+        var id = $(this).data('id');
+        var url = contextPath + "/classSchedule/updateIfTest"
+        var data = {
+            id: id
+        }
+        $.getJSON(url, data, function (rst) {
+            if (rst.status == 0) {
 
-           }
-       })
-   }
-    
+            }
+        })
+    }
+
     function deleteCourse() {
-        var id=$(this).data('id');
+        var id = $(this).data('id');
         var url = contextPath + "/classSchedule/deleteClassScheduleByClassScheduleId"
         var data = {
             id: id
@@ -54,9 +54,8 @@ window.onload = function () {
     }
 
 
-
     function setParams() {
-        var that =$(this);
+        var that = $(this);
         parameter.classesId = that.data('id');
         that.siblings().removeClass('active');
         that.addClass('active');
@@ -69,15 +68,13 @@ window.onload = function () {
 
     function searchCourse() {
         var val = $('#b_container .courseNameTeacher').val();
-        var data={
-            name:val,
-            tName:val
-        }
-        getCourseList(data)
+        var data = {keyword: val};
+        getCourseList(data);
     }
+
     /** */
 
-    
+
 
     function formatDate(target) {
         var date = target.substring(0, target.indexOf(" – "));
@@ -102,7 +99,7 @@ window.onload = function () {
         var event = {
             color: '#efffe3',
             textColor: '#444',
-            className:[]
+            className: []
         };
         for (index in data) {
             var item = data[index];
@@ -295,7 +292,7 @@ window.onload = function () {
                 $.post(url, jdata, function (rst) {
                     if (rst.status == 0) {
                         formatDate($('#calendar').fullCalendar('getView').title);
-                    }else{
+                    } else {
                         alert("排课失败，请刷新后重试！");
                     }
                 })
