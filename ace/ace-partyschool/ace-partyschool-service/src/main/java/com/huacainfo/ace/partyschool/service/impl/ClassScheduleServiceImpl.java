@@ -256,7 +256,7 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
         if (CommonUtils.isBlank(o.getCourseId())) {
             return new MessageResponse(1, "课程不能为空！");
         }
-        o.setIfTest("1");
+        o.setIfTest("0");
         this.classScheduleDao.insert(o);
         this.dataBaseLogService.log("添加课程表管理", "课程表管理", "",
                 o.getId(), o.getId(), userProp);
