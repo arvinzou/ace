@@ -127,7 +127,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" authority="false" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" authority="false">确定</button>
             </div>
         </div>
     </div>
@@ -217,7 +216,7 @@
             \${data.o.postName}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
             \${parseStatus(data.o.status)}

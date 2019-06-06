@@ -6,10 +6,18 @@ import java.util.List;
 
 
 public class CourseQVo extends Course {
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-private List<String> teacherIds;
+    private List<String> teacherIds;
+    /**
+     * 搜索关键词
+     */
+    private String keyword;
+    private String tName;
 
+    public String getKeyword() {
+        return keyword;
+    }
 
     public List<String> getTeacherIds() {
         return teacherIds;
@@ -19,7 +27,9 @@ private List<String> teacherIds;
         this.teacherIds = teacherIds;
     }
 
-    private  String tName;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
     public String gettName() {
         return tName;

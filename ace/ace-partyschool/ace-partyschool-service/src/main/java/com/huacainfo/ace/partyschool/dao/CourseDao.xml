@@ -77,6 +77,10 @@
     <if test="condition.tName !=null and condition.tName !=&quot;&quot;">
       and t.name LIKE concat('%',#{condition.tName,jdbcType=VARCHAR},'%')
     </if>
+      <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
+          and ( c.NAME LIKE concat('%' , #{condition.keyword,jdbcType=VARCHAR}, '%')
+          or t.NAME LIKE concat('%' , #{condition.keyword,jdbcType=VARCHAR}, '%') )
+      </if>
   </sql>
 
   <sql id="From_Statement">

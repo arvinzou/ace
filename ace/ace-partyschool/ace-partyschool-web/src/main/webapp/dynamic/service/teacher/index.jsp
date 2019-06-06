@@ -68,7 +68,7 @@
 <jsp:include page="/dynamic/common/footer.jsp"/>
 
 <div class="modal fade" role="dialog" id="modal-sort">
-    <div class="modal-dialog" role="document" style="width: 60%;">
+    <div class="modal-dialog" role="document" style="width: 35%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" authority="false" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -85,7 +85,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-                <button type="button" class="btn green upload" authority="false">确定</button>
             </div>
         </div>
     </div>
