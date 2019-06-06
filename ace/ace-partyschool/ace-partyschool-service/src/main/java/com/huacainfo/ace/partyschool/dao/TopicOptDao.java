@@ -39,7 +39,6 @@ List<TopicOptVo> findList(@Param("condition") TopicOptQVo condition,
 
     List<Map<String, Object>> getListByCondition(@Param("params") Map<String, Object> params);
 
-
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
  }
