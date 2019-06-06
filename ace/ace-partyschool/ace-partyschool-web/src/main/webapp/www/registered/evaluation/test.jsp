@@ -22,9 +22,28 @@
 </body>
 <script id="tpl_test" type="text/template">
 
+
+    {@each data as item,index}
+    <div class="testItem items" data-name="\${item.name}" data-introduce="\${item.introduce}">
+        <div class="testTitle">
+            <span class="text">\${index|formatIndex}.\${item.name}:\${item.introduce}（0-\${item.score}分）</span>
+        </div>
+        <div class="testScore">
+            <div class="core">
+                <div class="button subBtn">
+                </div>
+                <div class="score">
+                    <p data-total="\${item.score}" class="number">\${item.score|parseIntF}</p>
+                </div>
+                <div class="button addBtn"></div>
+            </div>
+        </div>
+    </div>
+    {@/each}
+
     <div class="testItem" data-name="固定题" data-introduce="本门课程设置的必要性（不考虑教师的授课水平）">
         <div class="testTitle">
-            <span class="text">01.本门课程设置的必要性（不考虑教师的授课水平）</span>
+            <span class="text">本门课程设置的必要性（不考虑教师的授课水平）</span>
         </div>
         <div class="testScore">
             <div class="option">
@@ -46,23 +65,6 @@
         </div>
     </div>
 
-    {@each data as item,index}
-    <div class="testItem items" data-name="\${item.name}" data-introduce="\${item.introduce}">
-        <div class="testTitle">
-            <span class="text">\${index|formatIndex}.\${item.name}:\${item.introduce}（0-\${item.score}分）</span>
-        </div>
-        <div class="testScore">
-            <div class="core">
-                <div class="button subBtn">
-                </div>
-                <div class="score">
-                    <p data-total="\${item.score}" class="number">\${item.score|parseIntF}</p>
-                </div>
-                <div class="button addBtn"></div>
-            </div>
-        </div>
-    </div>
-    {@/each}
     <div class="testItem">
         <div class="testTitle">
             <span class="text" id="question">最后:您对提高培训质量和满意度有何意见</span>
