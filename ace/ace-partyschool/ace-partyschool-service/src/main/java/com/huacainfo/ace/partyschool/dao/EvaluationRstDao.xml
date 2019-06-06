@@ -340,7 +340,7 @@ GROUP BY e.NAME) t
         select
             v.classScheduleId,
             v.teacherName, v.testNum, v.total, v.avg, v.rstLevel, v.rank, v.courseName,
-          CONCAT( FORMAT( (v.opt1/v.testNum)*100, 2) ,'%') as opt1,
+            CONCAT( FORMAT( (v.opt1/v.testNum)*100, 2) ,'%') as opt1,
             CONCAT( FORMAT( (v.opt2/v.testNum)*100, 2) ,'%') as opt2,
             CONCAT( FORMAT( (v.opt3/v.testNum)*100, 2) ,'%') as opt3,
             CONCAT( FORMAT( (v.opt4/v.testNum)*100, 2) ,'%') as opt4
@@ -373,14 +373,23 @@ GROUP BY e.NAME) t
                 (select count(*) from evaluation_rst_content where classScheduleId = t.classScheduleId and judge='4') as opt4
             FROM evaluation_rst t
             left join (
-                    SELECT
-                        c1.id,
-                        c1.classesId,
-                        t1.name as teacherName,
-                        c2.NAME as courseName
-                    FROM class_schedule c1
-                    INNER JOIN course c2 on c1.courseId = c2.id
-                    INNER JOIN teacher t1 on c1.teacherId = t1.id
+				SELECT
+						c1.id,
+						c1.classesId,
+						c.courseName,
+						c.teacherName
+				FROM
+					class_schedule c1,
+					(
+						SELECT
+							c.id as course_id,
+							c.`name` as courseName,
+							GROUP_CONCAT((select name from teacher where id = ct.teacher_id) SEPARATOR ',')  as teacherName
+						FROM	course c,	course_teacher ct
+						WHERE	c.id = ct.course_id
+						group by c.id , c.`name`
+					)c
+				where c.course_id = c1.courseId
             )c on c.id = t. classScheduleId
             WHERE 1 = 1
                 and c.classesId = #{classId,jdbcType=VARCHAR}

@@ -138,7 +138,13 @@
         SELECT COUNT(*)
         from (
         select
-        v.userId, v.userName, v.userType, v.clsId, v.clsName
+        IFNULL(left(t.attTime,10), '') as attDate,
+        t.attTime,t.id, IFNULL(t.attState,'NO_SIGN') as attState,
+        v.userId, v.userName, v.userType, v.clsId, v.clsName,
+        case
+        when v.userType= 'student' then '学员'
+        when v.userType= 'teacher' then '教职工'
+        ELSE '' end userTypeName
         from (
         SELECT
         t.id as userId, 'student' as userType, t.`name` as userName,
@@ -151,8 +157,8 @@
         t.id as userId, 'teacher' as userType, t.`name` as userName,
         '' as clsId, '' as clsName
         from teacher t
-        where t.`status` = '1'
-        ) v
+        where t.`status` = '1' and t.workUnitName != 'lsjg'
+        )v
         LEFT JOIN att_record t ON v.userId = t.userId
         <include refid="Where_Condition"/>
         <if test="condition.startDate !=null and condition.startDate !=&quot;&quot;">
