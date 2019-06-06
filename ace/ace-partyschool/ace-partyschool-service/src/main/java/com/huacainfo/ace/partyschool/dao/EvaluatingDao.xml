@@ -121,7 +121,7 @@
     <include refid="Where_Condition"/>
   </select>
 
-  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
+  <select id="isExit" resultType="int">
     select count(1)
     from evaluating e
     where e.status <![CDATA[ <> ]]> 0

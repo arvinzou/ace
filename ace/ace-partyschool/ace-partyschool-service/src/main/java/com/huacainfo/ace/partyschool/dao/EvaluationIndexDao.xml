@@ -5,34 +5,27 @@
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="evaluatingId" jdbcType="VARCHAR" property="evaluatingId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="introduce" jdbcType="VARCHAR" property="introduce"/>
         <result column="score" jdbcType="INTEGER" property="score"/>
         <result column="index" jdbcType="INTEGER" property="index"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
-               type="com.huacainfo.ace.partyschool.model.EvaluationIndex">
-        <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
-    </resultMap>
+
     <sql id="Base_Column_List">
-    id, evaluatingId, name, score,index
+    id, evaluatingId,introduce, name, score,`index`
   </sql>
-    <sql id="Blob_Column_List">
-    introduce
-  </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
         from evaluation_index
         where id = #{id,jdbcType=VARCHAR}
     </select>
-    <select id="selectByEvaluatingId" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    <select id="selectByEvaluatingId" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
         from evaluation_index
         where evaluatingId = #{id,jdbcType=VARCHAR}
+        ORDER BY `index` ASC
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from evaluation_index
@@ -45,27 +38,17 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.EvaluationIndex">
     insert into evaluation_index (id, evaluatingId, name, 
-      score,index, introduce)
+      score,`index`, introduce)
     values (#{id,jdbcType=VARCHAR}, #{evaluatingId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{score,jdbcType=INTEGER}, #{index,jdbcType=INTEGER}, #{introduce,jdbcType=LONGVARCHAR})
+      #{score,jdbcType=INTEGER}, #{index,jdbcType=INTEGER}, #{introduce,jdbcType=VARCHAR})
   </insert>
-
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.partyschool.model.EvaluationIndex">
-    update evaluation_index
-    set evaluatingId = #{evaluatingId,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      score = #{score,jdbcType=INTEGER},
-      index = #{index,jdbcType=INTEGER},
-      introduce = #{introduce,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.EvaluationIndex">
     update evaluation_index
     set evaluatingId = #{evaluatingId,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       score = #{score,jdbcType=INTEGER},
-      introduce = #{introduce,jdbcType=LONGVARCHAR},
-      index = #{index,jdbcType=INTEGER}
+      introduce = #{introduce,jdbcType=VARCHAR},
+      `index` = #{index,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -74,7 +57,7 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.EvaluationIndexVo"></resultMap>
 
     <sql id="Vo_Column_List">
-           ei.id, ei.evaluatingId, ei.name, ei.score,ei.index,ei.introduce
+           ei.id, ei.evaluatingId, ei.name, ei.score,ei.`index`,ei.introduce
     </sql>
 
     <sql id="Where_Condition">
@@ -93,7 +76,7 @@
         <include refid="Vo_Column_List"/>
         <include refid="From_Statement"/>
         <include refid="Where_Condition"/>
-        ORDER BY  ei.index DESC
+        ORDER BY  ei.`index` ASC
     </select>
 
     <select id="findCount" resultType="int">
