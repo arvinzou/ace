@@ -62,7 +62,7 @@
   <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.CourseVo"></resultMap>
 
   <sql id="Vo_Column_List">
-    GROUP_CONCAT(t.NAME,'') as teacherNames,c.id, c.name, c.category, c.teacherId, c.status, c.evaluatingId, c.createUserId, c.createUserName, c.createDate,
+    GROUP_CONCAT(t.NAME ORDER BY ct.`TYPE` ASC) as teacherNames,c.id, c.name, c.category, c.teacherId, c.status, c.evaluatingId, c.createUserId, c.createUserName, c.createDate,
     c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,e.name as evaluatingName ,s.name as codeName,t1.name AS teacherName
   </sql>
 
