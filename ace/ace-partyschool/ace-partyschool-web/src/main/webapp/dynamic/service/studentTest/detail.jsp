@@ -29,9 +29,23 @@
 <script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 <script id="tpl_test" type="text/template">
 
+	{@each data.list as item,index}
+	<div class="testItem items">
+		<div class="testTitle">
+			<span class="text">\${index|formatIndex}.\${item.name}:\${item.introduce}</span>
+		</div>
+		<div class="testScore">
+			<div class="core">
+				<div class="score">
+					<p data-total="\${item.score}" class="number">\${item.score}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	{@/each}
 	<div class="testItem" data-name="固定题" data-introduce="本门课程设置的必要性（不考虑教师的授课水平）">
 		<div class="testTitle">
-			<span class="text">01.本门课程设置的必要性（不考虑教师的授课水平）</span>
+			<span class="text">本门课程设置的必要性（不考虑教师的授课水平）</span>
 		</div>
 		<div class="testScore">
 			<div class="option">
@@ -52,21 +66,6 @@
 			</div>
 		</div>
 	</div>
-
-	{@each data.list as item,index}
-	<div class="testItem items">
-		<div class="testTitle">
-			<span class="text">\${index|formatIndex}.\${item.name}:\${item.introduce}</span>
-		</div>
-		<div class="testScore">
-			<div class="core">
-				<div class="score">
-					<p data-total="\${item.score}" class="number">\${item.score}</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	{@/each}
 	<div class="testItem">
 		<div class="testTitle">
 			<span class="text" id="question">最后:您对提高培训质量和满意度有何意见</span>
