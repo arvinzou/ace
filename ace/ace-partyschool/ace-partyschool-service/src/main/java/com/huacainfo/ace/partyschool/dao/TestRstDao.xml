@@ -78,7 +78,7 @@
       score = (
         SELECT
         ((
-        SELECT SUM(tscore)
+        SELECT case when SUM(tscore) IS NULL then 0 ELSE SUM(tscore) end
         FROM partyschool.topic_rst tr
         WHERE tr.id NOT IN(
         SELECT tor.topicId
@@ -86,7 +86,7 @@
         WHERE tor.answer <![CDATA[ <> ]]> tor.youAnswer
         ) AND tr.`type` IN(1,2,3) AND tr.testRstId=#{id,jdbcType=VARCHAR})+
         (
-        SELECT SUM(youScore)
+        SELECT case when SUM(youScore) IS NULL then 0 ELSE SUM(youScore) end
         FROM partyschool.topic_rst tr
         WHERE tr.`type` IN(4,5) AND tr.testRstId=#{id,jdbcType=VARCHAR})) AS a
         FROM DUAL

@@ -164,6 +164,14 @@ public class EvaluationRstController extends BisBaseController {
     }
 
 
+    @RequestMapping(value = "/delectEvaluationRstGroup")
+    @ResponseBody
+    public MessageResponse delectEvaluationRstGroup(String jsons) throws Exception {
+        EvaluationRst obj = JSON.parseObject(jsons, EvaluationRst.class);
+        return this.evaluationRstService.delectEvaluationRstGroup(obj, this.getCurUserProp());
+    }
+
+
     @RequestMapping(value = "/exportData")
     @ResponseBody
     public ResultResponse exportData(String id, HttpServletResponse response) throws Exception {

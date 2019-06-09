@@ -16,6 +16,7 @@ public interface EvaluationRstDao {
     EvaluationRst selectByPrimaryKey(String id);
 
     int deleteByPrimaryKey(String id);
+    int delectGroup(@Param("c") String c,@Param("u") String u);
 
     int insert(EvaluationRst record);
 

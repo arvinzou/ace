@@ -33,6 +33,13 @@ GROUP BY e.NAME) t
     delete from evaluation_rst
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
+    <delete id="delectGroup" parameterType="java.lang.String">
+    delete from evaluation_rst
+    where classScheduleId = #{c,jdbcType=VARCHAR} and userId = #{u,jdbcType=VARCHAR};
+    delete from evaluation_rst_content
+    where classScheduleId = #{c,jdbcType=VARCHAR} and userId = #{u,jdbcType=VARCHAR}
+  </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.EvaluationRst">
     insert into evaluation_rst (id, evaluatingId, name, 
       classScheduleId, introduce, score, 

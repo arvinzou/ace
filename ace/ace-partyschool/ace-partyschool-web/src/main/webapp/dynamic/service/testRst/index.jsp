@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <div class="rightBar">
-                    <h2>总分:<span class="totalScore">10</span></h2>
+                    <h2>总分:<span class="totalScore"></span></h2>
                     <div>
                         <p><span class="point bluepoint"></span>正确答案</p>
                         <p><span class="point redpoint"></span>你的选择</p>

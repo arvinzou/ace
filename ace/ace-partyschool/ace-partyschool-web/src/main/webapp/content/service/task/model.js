@@ -170,6 +170,5 @@ function renderBtn(cur) {
 	opt.push('<a href="javascript:del(\'' + rowid + '\')">删除</a>  ');
 	opt.push('<a href="javascript:exports(\'' + rowid + '\')">导出成绩</a>');
 	opt.push('<a href="#" data-toggle="modal" data-id="' + rowid + '" data-title="' + title + '" ' +'data-target="#modal-preview">查看</a>');
-
 	return opt.join(' ');
 }

@@ -139,20 +139,20 @@ function initEvents() {
 function submitScore() {
     var data = [];
     var inputs = $('#modal-preview input[name=inputScore]');
-    if (inputs.length < 1) {
-        return;
+    if (inputs.length > 0) {
+        inputs.each(function () {
+            var score = $(this).val();
+            if (!score) {
+                alert("还有测评没有打分。");
+                return;
+            }
+            var id = $(this).data('id')
+            data.push({
+                id: id,
+                youScore: score
+            })
+        });
     }
-    inputs.each(function () {
-        var score = $(this).val();
-        if (!score) {
-            alert("还有测评没有打分。")
-        }
-        var id = $(this).data('id')
-        data.push({
-            id: id,
-            youScore: score
-        })
-    });
     var url = contextPath + '/topicRst/updataTopicRstScore'
     var datas = {
         jsons: JSON.stringify({
@@ -162,7 +162,8 @@ function submitScore() {
     }
     $.post(url, datas, function (rst) {
         if (rst.status == 0) {
-            window.history.back();
+            $('#modal-preview').modal('hide');
+            getPageList();
         } else {
             alert("提交失败。")
         }

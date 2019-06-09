@@ -95,6 +95,9 @@ public interface EvaluationRstService {
      */
     MessageResponse deleteEvaluationRstByEvaluationRstId(String id, UserProp userProp) throws Exception;
 
+
+    MessageResponse delectEvaluationRstGroup(EvaluationRst evaluationRst, UserProp userProp) throws Exception;
+
     /**
      * 获取编辑 课程评测统计报表
      *

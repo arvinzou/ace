@@ -88,8 +88,13 @@
         <td> \${item.student.name}</td>
         <td> \${item.createDate}</td>
         <td>
-            <a href="javascript:view('\${item.evaluatingId}','\${item.userId}');">查看</a>
+            <a href="javascript:view('\${item.classScheduleId}','\${item.userId}');">查看</a>
         </td>
+
+        <td>
+            <a href="javascript:del('\${item.classScheduleId}','\${item.userId}');">删除</a>
+        </td>
+
     </tr>
     {@/each}
 </script>

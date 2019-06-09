@@ -29,11 +29,11 @@ function formatdate(data) {
     return a;
 }
 
-
-function view(evaluatingId, userId) {
+/**查看成绩*/
+function view(classScheduleId, userId) {
     var url = contextPath + "/evaluationRst/findEvaluationRstList";
     var params = {
-        evaluatingId: evaluatingId,
+        classScheduleId: classScheduleId,
         userId: userId,
         start: 0,
         limit: 100,
@@ -46,6 +46,27 @@ function view(evaluatingId, userId) {
             $('#modal-preview').modal('show');
             data = rst.rows;
             render('#pageLists', data, 'tpl-preview');
+        } else {
+            alert(result.errorMessage);
+        }
+    })
+}
+
+
+/*删除成绩*/
+function del(classScheduleId, userId) {
+    var url = contextPath + "/evaluationRst/delectEvaluationRstGroup";
+    var params = {
+        jsons:JSON.stringify({
+            classScheduleId: classScheduleId,
+            userId: userId
+        })
+    }
+    startLoad();
+    $.getJSON(url, params, function (rst) {
+        stopLoad();
+        if (rst.status == 0) {
+            getPageList();
         } else {
             alert(result.errorMessage);
         }

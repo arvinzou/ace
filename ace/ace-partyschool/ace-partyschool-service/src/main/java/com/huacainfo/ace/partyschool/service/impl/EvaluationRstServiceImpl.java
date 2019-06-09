@@ -277,6 +277,28 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
         return new MessageResponse(0, "测评结果管理删除完成！");
     }
 
+    /**
+     * 删除所有的测试结果
+     * @param o
+     * @param userProp
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse delectEvaluationRstGroup(EvaluationRst o, UserProp userProp) throws
+            Exception {
+        if(CommonUtils.isBlank(o.getClassScheduleId())){
+            return new MessageResponse(ResultCode.FAIL, "缺少课程ID");
+        }
+        if(CommonUtils.isBlank(o.getUserId())){
+            return new MessageResponse(ResultCode.FAIL, "缺少用户ID");
+        }
+        this.evaluationRstDao.delectGroup(o.getClassScheduleId(),o.getUserId());
+        this.dataBaseLogService.log("删除测评结果管理", "测评结果管理", o.toString(), o.toString(),
+                "测评结果管理", userProp);
+        return new MessageResponse(ResultCode.SUCCESS, "测评结果管理删除完成！");
+    }
+
     private static final BigDecimal AVG_90 = new BigDecimal(90);
     private static final BigDecimal AVG_80 = new BigDecimal(80);
 
