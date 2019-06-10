@@ -17,9 +17,19 @@ public class EvaluationRst  implements Serializable {
 
     private Integer score;
 
+    private Integer index;
+
     private String userId;
 
     private Date createDate;
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
+    }
 
     public String getId() {
         return id;

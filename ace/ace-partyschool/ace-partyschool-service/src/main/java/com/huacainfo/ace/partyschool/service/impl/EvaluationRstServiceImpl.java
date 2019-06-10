@@ -97,8 +97,11 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
 
     @Override
     public ResultResponse insertEvaluationRstList(List<EvaluationRst> list, EvaluationRstContent obj, UserProp userProp) throws Exception {
-        for (EvaluationRst item : list) {
-            MessageResponse mr = insertEvaluationRst(item, userProp);
+        int len=list.size();
+        for(int i=0;i<len;i++){
+            EvaluationRst evaluationRst=list.get(i);
+            evaluationRst.setIndex(i);
+            MessageResponse mr = insertEvaluationRst(evaluationRst, userProp);
             if (mr.getStatus() == 1) {
                 throw new Exception(mr.getErrorMessage());
             }
