@@ -13,7 +13,7 @@
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, evaluatingId, name, classScheduleId, introduce, score, index, userId, createDate
+    id, evaluatingId, name, classScheduleId, introduce, score, `index`, userId, createDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -43,10 +43,9 @@ GROUP BY e.NAME) t
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.EvaluationRst">
     insert into evaluation_rst (id, evaluatingId, name, 
-      classScheduleId, introduce, score, index,
-      userId, createDate)
+      classScheduleId, introduce, score, `index`,userId, createDate)
     values (#{id,jdbcType=VARCHAR}, #{evaluatingId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{classScheduleId,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{index,jdbcType=INTEGER},
+      #{classScheduleId,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER},#{index,jdbcType=INTEGER},
       #{userId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.EvaluationRst">
@@ -56,7 +55,7 @@ GROUP BY e.NAME) t
       classScheduleId = #{classScheduleId,jdbcType=VARCHAR},
       introduce = #{introduce,jdbcType=VARCHAR},
       score = #{score,jdbcType=INTEGER},
-      index = #{index,jdbcType=INTEGER},
+      `index` = #{index,jdbcType=INTEGER},
       userId = #{userId,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
@@ -91,7 +90,7 @@ GROUP BY e.NAME) t
                type="com.huacainfo.ace.partyschool.vo.EvaluationRstVo"></resultMap>
 
     <sql id="Vo_Column_List">
-    er.id, er.evaluatingId, er.name, er.classScheduleId, er.introduce, er.score,er.index, er.userId, er.createDate,
+    er.id, er.evaluatingId, er.name, er.classScheduleId, er.introduce, er.score,er.`index`, er.userId, er.createDate,
     c.id as cId,c.name as cName,
     erc.id as ercId,erc.content as ercContent, erc.judge,
     s.id as sId,s.name as sName
@@ -145,7 +144,7 @@ GROUP BY e.NAME) t
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        er.id, er.evaluatingId, er.name, er.classScheduleId, er.introduce, er.score,er.index, er.userId, er.createDate
+        er.id, er.evaluatingId, er.name, er.classScheduleId, er.introduce, er.score,er.`index`, er.userId, er.createDate
         FROM evaluation_rst er
         where 1=1
         <if test="condition.evaluatingId !=null and condition.evaluatingId !=&quot;&quot;">
@@ -162,7 +161,7 @@ GROUP BY e.NAME) t
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY er.index desc
+                ORDER BY er.`index` desc
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
