@@ -161,7 +161,7 @@ GROUP BY e.NAME) t
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY er.`index` desc
+                ORDER BY er.`index` Asc
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
