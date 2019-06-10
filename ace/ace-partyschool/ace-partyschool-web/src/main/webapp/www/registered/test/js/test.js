@@ -49,7 +49,7 @@ function postDataMethod() {
     $.post(url, data, function (rst) {
         if (rst.status == 0) {
             alert("感谢您的评测");
-            window.history.back();
+            window.location.href = contextPath + '/www/registered/notice/index.jsp';
         }
         else {
             alert("获取用户信息失败");

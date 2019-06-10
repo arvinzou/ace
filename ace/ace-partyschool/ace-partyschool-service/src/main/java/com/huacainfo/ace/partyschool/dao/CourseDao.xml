@@ -82,7 +82,7 @@
         </if>
         <if test="condition.keyword !=null and condition.keyword !=&quot;&quot;">
             and ( c.NAME LIKE concat('%' , #{condition.keyword,jdbcType=VARCHAR}, '%')
-            or t.NAME LIKE concat('%' , #{condition.keyword,jdbcType=VARCHAR}, '%') )
+            or ct.teacherName LIKE concat('%' , #{condition.keyword,jdbcType=VARCHAR}, '%') )
         </if>
     </sql>
 
