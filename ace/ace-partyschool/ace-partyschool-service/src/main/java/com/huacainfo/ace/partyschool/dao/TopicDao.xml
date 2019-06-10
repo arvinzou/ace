@@ -148,6 +148,7 @@
         FROM partyschool.topic top
         LEFT JOIN partyschool.topic_opt too ON too.topicId=top.id
         where top.id = #{id,jdbcType=VARCHAR}
+        ORDER BY too.`index` asc
     </select>
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Topic">
