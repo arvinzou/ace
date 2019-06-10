@@ -89,9 +89,6 @@
         <td> \${item.createDate}</td>
         <td>
             <a href="javascript:view('\${item.classScheduleId}','\${item.userId}');">查看</a>
-        </td>
-
-        <td>
             <a href="javascript:del('\${item.classScheduleId}','\${item.userId}');">删除</a>
         </td>
 
