@@ -103,7 +103,7 @@ function getTestInfo() {
         }
         else {
             alert(rst.info);
-            window.history.back();
+            window.location.href = contextPath + '/www/registered/notice/index.jsp';
         }
     })
 }
