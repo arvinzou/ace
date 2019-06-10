@@ -50,6 +50,9 @@ $(function(){
         success:function(result){
             if(result.status=="0"){
                 window.location.href = contextPath + '/www/registered/person/index.jsp';
+            }else{
+                localStorage.removeItem("username");
+                localStorage.removeItem("password");
             }
         },
         error:function(){
@@ -58,6 +61,7 @@ $(function(){
     });
 
 });
+
 
 function login(){
     var acct = $("input[name='username']").val();
