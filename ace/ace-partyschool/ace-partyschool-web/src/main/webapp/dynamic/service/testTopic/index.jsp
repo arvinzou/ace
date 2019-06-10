@@ -92,8 +92,6 @@
         <td> \${parseStatus(item.type)}</td>
         <td>
             ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-preview">查看</a>
             <a href="javascript:del('\${item.id}');">删除</a>
         </td>
     </tr>

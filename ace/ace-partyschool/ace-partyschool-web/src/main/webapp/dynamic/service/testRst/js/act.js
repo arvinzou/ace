@@ -143,7 +143,7 @@ function submitScore() {
         inputs.each(function () {
             var score = $(this).val();
             if (!score) {
-                alert("还有测评没有打分。");
+                alert("还有测评没有打分");
                 return;
             }
             var id = $(this).data('id')
