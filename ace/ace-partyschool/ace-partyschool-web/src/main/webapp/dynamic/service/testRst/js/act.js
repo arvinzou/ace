@@ -139,21 +139,19 @@ function initEvents() {
 function submitScore() {
     var data = [];
     var inputs = $('#modal-preview input[name=inputScore]');
-    if (inputs.length > 0) {
-        inputs.each(function () {
-            var score = $(this).val();
-            if (!score) {
-                alert("还有测评没有打分");
-                return;
-            }
-            var id = $(this).data('id')
-            data.push({
-                id: id,
-                youScore: score
-            })
-        });
+    for(var i=0;i<inputs.length;i++){
+        var score = $(inputs[i]).val();
+        if (!score) {
+            alert("还有测评没有打分");
+            return false;
+        }
+        var id =  $(inputs[i]).data('id')
+        data.push({
+            id: id,
+            youScore: score
+        })
     }
-    var url = contextPath + '/topicRst/updataTopicRstScore'
+    var url = contextPath + '/topicRst/updataTopicRstScore';
     var datas = {
         jsons: JSON.stringify({
             testId: testId,
