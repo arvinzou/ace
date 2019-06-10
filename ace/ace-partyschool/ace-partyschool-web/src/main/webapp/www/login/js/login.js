@@ -48,7 +48,9 @@ $(function(){
             pwd: pwd
         },
         success:function(result){
-            window.location.href = contextPath + '/www/registered/person/index.jsp';
+            if(result.status=="0"){
+                window.location.href = contextPath + '/www/registered/person/index.jsp';
+            }
         },
         error:function(){
             alert("系统服务内部异常！");
