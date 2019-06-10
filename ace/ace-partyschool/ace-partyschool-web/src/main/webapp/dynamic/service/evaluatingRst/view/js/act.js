@@ -16,15 +16,23 @@ window.onload = function () {
 
 
 function formatdate(data) {
-    if(!data){
+    if (!data) {
         return;
     }
-    var a="";
-    switch(data){
-        case "1":a="很有必要";break
-        case "2":a="可以开设";break
-        case "3":a="可有可无";break
-        case "4":a="无需开设";break
+    var a = "";
+    switch (data) {
+        case "1":
+            a = "很有必要";
+            break
+        case "2":
+            a = "可以开设";
+            break
+        case "3":
+            a = "可有可无";
+            break
+        case "4":
+            a = "无需开设";
+            break
     }
     return a;
 }
@@ -57,23 +65,26 @@ function view(classScheduleId, userId) {
 function del(classScheduleId, userId) {
     var url = contextPath + "/evaluationRst/delectEvaluationRstGroup";
     var params = {
-        jsons:JSON.stringify({
+        jsons: JSON.stringify({
             classScheduleId: classScheduleId,
             userId: userId
         })
     }
-    startLoad();
-    $.getJSON(url, params, function (rst) {
-        stopLoad();
-        if (rst.status == 0) {
-            getPageList();
-        } else {
-            alert(result.errorMessage);
-        }
-    })
+    if (confirm("确认删除该记录么？")) {
+        startLoad();
+        $.getJSON(url, params, function (rst) {
+            stopLoad();
+            if (rst.status == 0) {
+                getPageList();
+            } else {
+                alert(result.errorMessage);
+            }
+        });
+    }
+
 }
 
-function exportData(){
+function exportData() {
     window.location.href = contextPath + '/evaluationRst/exportData?id=' + urlParams.id;
 }
 
