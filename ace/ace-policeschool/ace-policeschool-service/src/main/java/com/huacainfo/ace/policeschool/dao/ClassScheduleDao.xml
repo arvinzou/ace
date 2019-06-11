@@ -9,9 +9,11 @@
         <result column="teacherId" jdbcType="VARCHAR" property="teacherId"/>
         <result column="courseId" jdbcType="VARCHAR" property="courseId"/>
         <result column="ifTest" jdbcType="VARCHAR" property="ifTest"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, classesId, startTime, endTime, teacherId, courseId,ifTest
+        id, classesId, startTime, endTime, teacherId, courseId,ifTest, status, remark
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -25,11 +27,12 @@
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.policeschool.model.ClassSchedule">
         insert into class_schedule (id, classesId, startTime,endTime,
-         teacherId, courseId,ifTest
+         teacherId, courseId,ifTest, status, remark
         )
-        values (#{id,jdbcType=VARCHAR}, #{classesId,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP},#{endTime,jdbcType=TIMESTAMP},
-        #{teacherId,jdbcType=VARCHAR},
-        #{courseId,jdbcType=VARCHAR},#{ifTest,jdbcType=VARCHAR}
+        values (#{id,jdbcType=VARCHAR}, #{classesId,jdbcType=VARCHAR},
+        #{startTime,jdbcType=TIMESTAMP},#{endTime,jdbcType=TIMESTAMP},
+        #{teacherId,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR},
+        #{ifTest,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -41,22 +44,23 @@
         teacherId = #{teacherId,jdbcType=VARCHAR},
         courseId = #{courseId,jdbcType=VARCHAR},
         courseId = #{courseId,jdbcType=VARCHAR},
-        ifTest = #{ifTest,jdbcType=VARCHAR}
+        ifTest = #{ifTest,jdbcType=VARCHAR},
+        remark = #{remark,jdbcType=VARCHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
     <!--#########################################3################-->
 
     <resultMap id="VoResultMap" extends="BaseResultMap"
-               type="com.huacainfo.ace.policeschool.vo.ClassScheduleVo"></resultMap>
+               type="com.huacainfo.ace.policeschool.vo.ClassScheduleVo">
+        <result column="courseName" jdbcType="VARCHAR" property="courseName"/>
+        <result column="teacherName" jdbcType="VARCHAR" property="teacherName"/>
+        <result column="testedNum" jdbcType="INTEGER" property="testedNum"/>
+        <result column="testNum" jdbcType="INTEGER" property="testNum"/>
+    </resultMap>
 
 
     <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.policeschool.vo.ClassScheduleVo">
-        <!--<association property="rpt" column="uid" javaType="com.huacainfo.ace.policeschool.model.Classes">-->
-        <!--<id property="openid" column="openid"/>-->
-        <!--<result property="headimgurl" column="headimgurl"/>-->
-        <!--<result property="nickname" column="nickname"/>-->
-        <!--</association>-->
         <result column="userNum" jdbcType="DECIMAL" property="userNum"/>
         <result column="studentNum" jdbcType="DECIMAL" property="studentNum"/>
         <result column="averageScore" jdbcType="DECIMAL" property="averageScore"/>
@@ -94,9 +98,12 @@
         FROM policeschool.evaluation_rst er
         WHERE er.classScheduleId=cs.id)/userNum
         ) AS averageScore,
-        cs.id, cs.classesId, cs.startTime,cs.endTime,  cs.teacherId, cs.courseId,cs.ifTest,
+        cs.id, cs.classesId, cs.startTime, cs.endTime, cs.teacherId, cs.courseId,
+        cs.ifTest, cs.status, cs.remark,
+
         c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,
         t.id as tId ,t.name as tName,
+
         cla.id as claId ,cla.name as claName
     </sql>
 
@@ -126,6 +133,9 @@
             <foreach collection="condition.classList" index="index" item="item" open="(" separator="," close=")">
                 #{item}
             </foreach>
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and cs.status = #{condition.status,jdbcType=VARCHAR}
         </if>
     </sql>
 
@@ -189,7 +199,7 @@
         <include refid="Vo_Column_List"/>
         <include refid="From_Statement"/>
         WHERE 1=1
---         AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
+        -- AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
         AND cs.id IN
         (
         SELECT t.classScheduleId
@@ -248,5 +258,159 @@
         <include refid="From_Statement"/>
         where cs.id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        c.`name` as courseName,
+        t.`name` as teacherName,
+        (select COUNT(DISTINCT er.userId) from evaluation_rst er where er.classScheduleId = cs.id ) AS testedNum,
+        (select count(s.id) from student s where s.classId = cs.classesId) AS testNum,
+
+        cs.id, cs.classesId, cs.startTime, cs.endTime,
+        cs.teacherId, cs.courseId, cs.ifTest, cs.status, cs.remark
+        from class_schedule cs
+        left join course c on cs.courseId = c.id
+        left join teacher t on cs.teacherId = t.id
+        where 1 = 1
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and cs.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.teacherId !=null and condition.teacherId !=&quot;&quot;">
+            and cs.teacherId = #{condition.teacherId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <update id="updateStatus" parameterType="com.huacainfo.ace.policeschool.model.ClassSchedule">
+        update class_schedule
+        set status = #{status,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="dataReport" resultType="map">
+    select
+        -- 本周
+        (
+        select count(1)
+        from class_schedule t
+        where t.`status` = '2'
+            and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+            and ( t.endTime BETWEEN #{weekStart,jdbcType=VARCHAR} and #{weekEnd,jdbcType=VARCHAR} )
+        ) AS weekNum,
+        -- 本月
+        (
+        select count(1)
+        from class_schedule t
+        where t.`status` = '2'
+            and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+            and t.endTime like CONCAT( #{monthStr,jdbcType=VARCHAR}, '%')
+        ) AS monthNum,
+        -- 本季度
+        (
+        select count(1)
+        from class_schedule t
+        where t.`status` = '2'
+            and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+            and ( t.endTime BETWEEN #{seasonStart,jdbcType=VARCHAR} and #{seasonEnd,jdbcType=VARCHAR} )
+        ) AS seasonNum,
+        -- 本年度
+        (
+        select count(1)
+        from class_schedule t
+        where t.`status` = '2'
+            and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+            and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR}, '%')
+        -- and t.
+        ) AS yearNum
+    from dual;
+    </select>
+    <select id="chartReport" resultType="java.util.Map">
+        select
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-01%')
+            ) AS M01,
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-02%')
+            ) AS M02,
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-03%')
+            ) AS M03,
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-04%')
+            ) AS M04,
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-05%')
+            ) AS M05,
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-06%')
+            ) AS M06,
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-07%')
+            ) AS M07,
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-08%')
+            ) AS M08,
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-09%')
+            ) AS M09,
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-10%')
+            ) AS M10,
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-11%')
+            ) AS M11,
+            (
+            select count(1)
+            from class_schedule t
+            where t.`status` = '2'
+                and t.teacherId = #{teacherId,jdbcType=VARCHAR}
+                and t.endTime like CONCAT( #{yearStr,jdbcType=VARCHAR} , '-12%')
+            ) AS M12
+        from dual;
+    </select>
+
 
 </mapper>

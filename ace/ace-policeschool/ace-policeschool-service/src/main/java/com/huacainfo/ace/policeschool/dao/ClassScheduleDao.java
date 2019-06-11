@@ -6,6 +6,7 @@ import com.huacainfo.ace.policeschool.vo.ClassScheduleVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ClassScheduleDao {
 
@@ -47,6 +48,11 @@ public interface ClassScheduleDao {
 
     int isExit(ClassSchedule record);
 
-    int updateStatus(ClassSchedule record);
+    int updateStatus(@Param("id") String id,
+                     @Param("status") String status);
 
+    Map<String, Object> dataReport(Map<String, String> params);
+
+    Map<String, Object> chartReport(@Param("teacherId") String teacherId,
+                                    @Param("yearStr") String yearStr);
 }

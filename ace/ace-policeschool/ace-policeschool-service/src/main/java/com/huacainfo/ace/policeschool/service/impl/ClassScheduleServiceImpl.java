@@ -8,6 +8,8 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateCalculateKit;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.policeschool.dao.ClassScheduleDao;
 import com.huacainfo.ace.policeschool.dao.EvaluationRstDao;
@@ -28,10 +30,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("classScheduleService")
 /**
@@ -257,7 +256,8 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
         if (CommonUtils.isBlank(o.getCourseId())) {
             return new MessageResponse(1, "课程不能为空！");
         }
-        o.setIfTest("1");
+
+        o.setStatus("1");
         this.classScheduleDao.insert(o);
         this.dataBaseLogService.log("添加课程表管理", "课程表管理", "",
                 o.getId(), o.getId(), userProp);
@@ -348,5 +348,89 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
         this.dataBaseLogService.log("删除课程表管理", "课程表管理", id, id,
                 "课程表管理", userProp);
         return new MessageResponse(0, "课程表管理删除完成！");
+    }
+
+
+    /**
+     * 获取数据集合
+     *
+     * @return ResultResponse
+     */
+    @Override
+    public List<ClassScheduleVo> findList(ClassScheduleQVo condition, int start, int limit, String orderBy) {
+        start = start < 0 ? 0 : start;
+        limit = limit < 5 ? 5 : limit;
+        return this.classScheduleDao.findList(condition, start, limit, orderBy);
+    }
+
+    /**
+     * 教官结课处理
+     *
+     * @param teacherId     教官用户ID
+     * @param clsScheduleId 课程ID
+     */
+    @Override
+    public ResultResponse closeClass(String teacherId, String clsScheduleId) {
+        //
+        ClassSchedule cs = this.classScheduleDao.selectByPrimaryKey(clsScheduleId);
+        if (cs == null) {
+            return new ResultResponse(ResultCode.FAIL, "课程信息丢失");
+        }
+        if (!teacherId.equals(cs.getTeacherId())) {
+            return new ResultResponse(ResultCode.FAIL, "操作人与上课老师不符");
+        }
+        if (!"1".equals(cs.getStatus())) {
+            return new ResultResponse(ResultCode.FAIL, "课程状态有误");
+        }
+        //数据更新
+        classScheduleDao.updateStatus(clsScheduleId, "2");
+
+        return new ResultResponse(ResultCode.SUCCESS, "操作成功");
+    }
+
+    /**
+     * 教官课时统计报表
+     *
+     * @param teacherId 教官用户ID
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse classReport(String teacherId) {
+
+        //统计数据
+        Map<String, String> params = dataPack(teacherId);
+        Map<String, Object> data = classScheduleDao.dataReport(params);
+        //图表数据
+        String yearStr = DateUtil.toStr(DateUtil.getNowDate(), "yyyy");
+        Map<String, Object> chart = classScheduleDao.chartReport(teacherId, yearStr);
+
+        //结果返回
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("data", data);
+        rst.put("chart", chart);
+        return new ResultResponse(ResultCode.SUCCESS, "ok", rst);
+    }
+
+    /**
+     * 统计参数组装
+     */
+    private Map<String, String> dataPack(String teacherId) {
+        //当前系统时间
+        Date now = DateUtil.getNowDate();
+        //请求参数
+        Map<String, String> params = new HashMap<>();
+        params.put("teacherId", teacherId);
+        //本周
+        params.put("weekStart", DateCalculateKit.getWeekMorningStr(now));
+        params.put("weekEnd", DateCalculateKit.getWeekNightStr(now));
+        //本月
+        params.put("monthStr", DateUtil.toStr(now, "yyyy-MM"));
+        //本季度
+        params.put("seasonStart", DateCalculateKit.getQuarterStartStr(now));
+        params.put("seasonEnd", DateCalculateKit.getQuarterEndStr(now));
+        //本年
+        params.put("yearStr", DateUtil.toStr(now, "yyyy"));
+
+        return params;
     }
 }

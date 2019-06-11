@@ -9,6 +9,8 @@ import com.huacainfo.ace.policeschool.model.ClassSchedule;
 import com.huacainfo.ace.policeschool.vo.ClassScheduleQVo;
 import com.huacainfo.ace.policeschool.vo.ClassScheduleVo;
 
+import java.util.List;
+
 /**
  * @author: 王恩
  * @version: 2019-01-06
@@ -24,8 +26,7 @@ public interface ClassScheduleService {
      * @param: @param limit
      * @param: @param orderBy
      * @param: @throws Exception
-     * @return: PageResult
-     * <ClassScheduleVo>
+     * @return: PageResult<ClassScheduleVo>
      * @author: 王恩
      * @version: 2019-01-06
      */
@@ -92,4 +93,26 @@ public interface ClassScheduleService {
      */
     MessageResponse deleteClassScheduleByClassScheduleId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 获取数据集合
+     *
+     * @return ResultResponse
+     */
+    List<ClassScheduleVo> findList(ClassScheduleQVo condition, int start, int limit, String orderBy);
+
+    /**
+     * 教官结课处理
+     *
+     * @param teacherId     教官用户ID
+     * @param clsScheduleId 课程ID
+     */
+    ResultResponse closeClass(String teacherId, String clsScheduleId);
+
+    /**
+     * 教官课时统计报表
+     *
+     * @param teacherId 教官用户ID
+     * @return ResultResponse
+     */
+    ResultResponse classReport(String teacherId);
 }

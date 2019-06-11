@@ -1,11 +1,11 @@
 package com.huacainfo.ace.policeschool.model;
 
+import com.huacainfo.ace.common.model.BaseModel;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class ClassSchedule implements Serializable {
+public class ClassSchedule extends BaseModel {
     private static final long serialVersionUID = 1L;
     private String id;
 
@@ -22,6 +22,30 @@ public class ClassSchedule implements Serializable {
 
     /*1、*/
     private String ifTest;
+    /**
+     * 数据状态码：   1-未结课；2-已结课
+     */
+    private String status;
+    /**
+     * 其他备注
+     */
+    private String remark;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public String getIfTest() {
         return ifTest;

@@ -18,6 +18,54 @@ public class ClassScheduleVo extends ClassSchedule {
     private int userNum;
     private int studentNum;
     private int averageScore;
+    /**
+     * 测评人数
+     */
+    private int testNum;
+    /**
+     * 已测评人数
+     */
+    private int testedNum;
+    /**
+     * 课程名称
+     */
+    private String courseName;
+    /**
+     * 教官姓名
+     */
+    private String teacherName;
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public int getTestNum() {
+        return testNum;
+    }
+
+    public void setTestNum(int testNum) {
+        this.testNum = testNum;
+    }
+
+    public int getTestedNum() {
+        return testedNum;
+    }
+
+    public void setTestedNum(int testedNum) {
+        this.testedNum = testedNum;
+    }
 
     public Classes getClasses() {
         return classes;

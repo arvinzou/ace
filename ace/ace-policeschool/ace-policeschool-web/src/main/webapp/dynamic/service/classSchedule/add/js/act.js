@@ -25,6 +25,7 @@ function initEditor() {
         }
     });
 }
+
 /*页面渲染*/
 function render(obj, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;
@@ -38,6 +39,7 @@ function initPage() {
     initEditor();
 //    initUpload();
 }
+
 function initEvents() {
     /*表单验证*/
     $("#fm-add").validate({
@@ -83,8 +85,10 @@ function initEvents() {
         }
     });
 }
+
 /*保存表单**/
 function save(params) {
+    params['ifTest'] = '0';
     $.extend(params, {});
     startLoad();
     $.ajax({
